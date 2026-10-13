@@ -33,6 +33,7 @@ Colecciones de Directus para curso, módulo, unidad, asociación, medios y revis
 Administrador v0 con roles, flujo de estados, validación por tipo y vista previa como alumno.
 Sesión mínima del alumno sobre el núcleo: escuchar, asociar, recuperar sin ver, escena, estructura, ordenar, frase propia y resultado (como el prototipo de borrow), reanudable y guardada en la cuenta.
 Tubería de audio (normalizador, léxico por idioma, caché por huella, audios normal y lento) y cola de imágenes con tope diario.
+Uso sin conexión (D-022): estudiar sin conexión la sesión de hoy y la de mañana, con contenido, audio e imágenes descargados de antemano; intentos en cola local y envío idempotente al reconectar; el servidor es la fuente de verdad. Prueba en modo avión y en el iPhone del usuario.
 Despliegue en un subdominio propio, con la app actual intacta.
 Curso «Inglés» con una habitación de 10 palabras cargada solo desde el administrador. Aceptación:
 Crear el curso y la habitación sin escribir código.

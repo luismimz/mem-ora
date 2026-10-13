@@ -14,7 +14,7 @@
 | Umbral | Valor | Porqué | Cómo validarlo |
 | --- | --- | --- | --- |
 | `formatWeight` | elegir 0,2 · reconocer al escuchar 0,5 · dictado 0,75 · explicar lo oído 0,75 · con pistas 0,5 · recuperar 0,75 · producir 1 · aplicar 1 | Traduce la tabla de `CLAUDE.md` (bajo, medio, alto, muy alto) a una escala 0–1 lineal. Elegir entre 4 opciones acierta un 25 % al azar: por eso pesa poco. El dictado y la explicación libre de lo oído son recuperar sin pistas a partir del audio: pesan «alto», como recuperar. | Comparar, por formato, la probabilidad de acertar sin pista días después. Un formato cuyo acierto no predice el recuerdo posterior debe pesar menos. |
-| `hintFactor` | E0 1 · E1 0,8 · E2 0,6 · E3 0,4 · E4 0,2 · E5 0 | Cada escalón de pista quita una parte igual del mérito. E5 revela la respuesta: no es evidencia. | Ver si los aciertos con pista alta predicen recuerdos posteriores; si no, bajar esos factores. |
+| `hintFactor` | P0 1 · P1 0,8 · P2 0,6 · P3 0,4 · P4 0,2 · P5 0 | Cada escalón de pista quita una parte igual del mérito. P5 revela la respuesta: no es evidencia. | Ver si los aciertos con pista alta predicen recuerdos posteriores; si no, bajar esos factores. |
 | `slowMs` | 9 s | Heredado de la V1, donde un acierto de más de 9 s se marcaba como «dudado». | Distribución real de tiempos por formato y longitud de la respuesta. Probablemente debe depender del formato (escribir código lleva más que elegir). |
 | `slowFactor` | 0,7 | Un acierto dudado sigue siendo un acierto, pero aún no es automático. | Recuerdo posterior de los aciertos lentos frente a los rápidos. |
 | `retrievalFormats` | dictado, explicar lo oído, con pistas, sin pistas, producir, aplicar | Reconocer (elegir una opción o reconocer al escuchar) no exige recuperar de memoria. | Fijo por definición; se revisaría solo si aparece un formato nuevo. |
@@ -61,6 +61,24 @@ Cualquier intento, incluso fallido, cuenta como exposición. En escucha, volver 
 Un fallo de recuperación en «aprendida», «estable» o «dominada» la pasa a «debilitada». Recuperarla exige un
 éxito diferido (vuelve a «en consolidación») y luego volver a superar cada plazo.
 
+## Tipos de habilidad y nivel por unidad (`skillFormats`, `unitLevels`)
+
+| Tipo | Formatos que admite | ¿Puede consolidar? |
+| --- | --- | --- |
+| reconocer (`recognize`) | elegir entre opciones | No: nunca pasa de «en aprendizaje» |
+| escuchar (`listen`) | reconocer al escuchar, dictado, explicar lo oído | Sí (dictado o explicación) |
+| recordar (`recall`) | con pistas, sin pistas | Sí (sin pistas) |
+| producir (`produce`), hablar (`speak`) | producir | Sí |
+| aplicar (`apply`) | aplicar | Sí |
+
+| Umbral | Valor | Porqué | Cómo validarlo |
+| --- | --- | --- | --- |
+| `masteredMinFormats` | 3 | `ESPECIFICACION.md` §4: «se resolvió en ≥ 3 formatos distintos (recuperar, audio, producir)». Si la unidad admite menos, se exigen todos los que admite (el validador lo informa). | Recuerdo a 90 días de unidades dominadas con 2 frente a 3 formatos. |
+| `masteredMinContexts` | 2 | §4: «se usó en una frase propia en ≥ 2 contextos diferentes». Generalizado a cualquier materia: éxitos diferidos en ≥ 2 contextos (escena, frase, caso). | Transferencia: acierto en un contexto nuevo. |
+| `contextsLimit` | 10 | Se guardan los últimos 10 contextos por habilidad; basta para contar variedad sin crecer sin límite. | Fijo. |
+
+El nivel de una unidad es el de su habilidad más floja: una habilidad debilitada la deja sin nivel hasta recuperarla.
+
 ## Habilidad (`skill`)
 
 | Umbral | Valor | Porqué | Cómo validarlo |
@@ -78,7 +96,7 @@ Un fallo de recuperación en «aprendida», «estable» o «dominada» la pasa a
 | --- | --- | --- | --- |
 | `stepsMs` | 1 h · 1 d · 3 d · 7 d · 14 d · 30 d | Calendario de `VISION.md`. | Tasa de acierto al vencer cada escalón; el objetivo habitual es 85–90 %. |
 | `retryDelayMs` | 4 h | Tras un fallo, se vuelve a intentar en otra sesión, no en la misma. | Acierto en el reintento según la espera. |
-| `advanceMinWeight` | 0,5 | Abren los intervalos largos: recuperar sin pista (0,75; 0,53 si es lento) y producir o aplicar con pista hasta E2 (0,6). No los abren recuperar con pista (≤ 0,4) ni reconocer. | Comparar el recuerdo según el peso del acierto que hizo subir el escalón. |
+| `advanceMinWeight` | 0,5 | Abren los intervalos largos: recuperar sin pista (0,75; 0,53 si es lento) y producir o aplicar con pista hasta P2 (0,6). No los abren recuperar con pista (≤ 0,4) ni reconocer. | Comparar el recuerdo según el peso del acierto que hizo subir el escalón. |
 | `weakSuccessMaxStep` | 2 (3 días) | **Añadido por la simulación.** Sin este tope, lo que solo se reconoce se repasaba a diario para siempre y saturaba el día. Con él, un acierto débil espacia hasta 3 días, pero los intervalos largos siguen exigiendo recuperación. Afecta sobre todo al reconocimiento puro, que nunca se consolida. | Carga diaria real y recuerdo de habilidades de reconocimiento a 3 días. |
 | `failStepDrop` | 1 | Un fallo baja un escalón, no vuelve al principio (como en la V1). | Comparar con volver al escalón 0. |
 | `easeMin` · `easeMax` | 0,8 · 1,2 | La precisión reciente alarga o acorta los intervalos ±20 %. Rango estrecho a propósito, hasta tener datos. | Si el acierto al vencer se aleja del 85–90 %, ampliar el rango o pasar a FSRS. |
@@ -92,12 +110,12 @@ implementado: evaluarlo exige historiales reales de intentos para ajustar sus pa
 | --- | --- | --- | --- |
 | `stepsMs` | +1 d · +3 d · +7 d · +14 d · +30 d | Mandato del usuario. Es independiente del calendario de la habilidad. | Recuerdo sin pista de la asociación en cada escalón. |
 | `failStepDrop` | 2 | Fallar una asociación es más grave que fallar una habilidad: si la ayuda de memoria no evoca nada, hay que volver a cerca del principio. | Comparar recuperación con bajadas de 1 y 2. |
-| `maxRecommendedHint` | E4 | E5 es revelar la respuesta, no una pista. Si se recomendara E5, el alumno no podría volver a acertar nunca. | Fijo por diseño. |
+| `maxRecommendedHint` | P4 | P5 es revelar la respuesta, no una pista. Si se recomendara P5, el alumno no podría volver a acertar nunca. | Fijo por diseño. |
 | `failuresToReview` | 2 | Mandato del H1: tras dos fallos la asociación se marca para revisión. Se cuentan seguidos. | Proporción de asociaciones revisadas que de verdad eran malas. |
 | `losingWindow` · `losingFailureRate` | 5 · 50 % | Detecta asociaciones que fallan de forma intermitente y nunca dos veces seguidas. También activa la revisión. | Igual que el anterior. |
-| `losingHintLevel` | E3 | Necesitar la propia ayuda de memoria (E3) o más para recordar indica que no se ha interiorizado. | Recuerdo posterior de asociaciones que llegaron a E3. |
+| `losingHintLevel` | P3 | Necesitar la propia ayuda de memoria (P3) o más para recordar indica que no se ha interiorizado. | Recuerdo posterior de asociaciones que llegaron a P3. |
 | `establishedStep` | 2 (+7 d) | Fallar tras haber superado el +3 d indica pérdida, no falta de práctica. No activa la revisión por sí solo; marca «se está perdiendo». | Recuperación de esas asociaciones tras un repaso. |
-| `holdingStreak` | 2 | «Se está quedando» = dos recuperaciones diferidas sin pista seguidas y pista recomendada ≤ E1. | Recuerdo a 30 días de las marcadas «se está quedando». |
+| `holdingStreak` | 2 | «Se está quedando» = dos recuperaciones diferidas sin pista seguidas y pista recomendada ≤ P1. | Recuerdo a 30 días de las marcadas «se está quedando». |
 | `minRetrievals` | 2 | Con una sola recuperación no se diagnostica. | Fijo por prudencia. |
 
 Al resolver una revisión con una asociación nueva, la versión sube y la medición empieza de cero: no se
@@ -109,10 +127,9 @@ mezclan los resultados de dos ayudas de memoria distintas.
 | --- | --- | --- | --- |
 | `minStatus` | en consolidación | Exigir «aprendida» bloquearía días (hacen falta dos éxitos diferidos). «En consolidación» exige ya evidencia de recuperación. Una habilidad debilitada no vuelve a bloquear lo que ya se desbloqueó. | Acierto en lo desbloqueado según el estado de lo requerido. |
 
-Consecuencia de diseño: una habilidad de reconocimiento puro (`kind: recognize`) nunca llega a «en
-consolidación», así que **no debe usarse como prerrequisito**: lo bloquearía para siempre. Hoy no lo comprueba
-`validateCatalog`; es el **primer entregable del H2** (ver `HITOS.md`). Las habilidades de escuchar ya no tienen
-este problema: con dictado o explicación libre de lo oído pueden consolidar.
+Una habilidad de reconocimiento puro (`kind: recognize`) nunca llega a «en consolidación». Desde el H2.0,
+`validateCatalog` **rechaza** un prerrequisito que la exija (error `prerequisite_unreachable`), y un requisito de
+unidad solo exige las habilidades de esa unidad que pueden consolidar.
 
 ## Carga diaria (`load`)
 

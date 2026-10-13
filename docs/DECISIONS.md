@@ -73,9 +73,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Descartado:** contar `recall_cued` (tiene pista) y el reconocimiento.
 
 ## D-013 · Asociación con estado propio
-- **Qué:** `association.ts` tiene calendario (+1/+3/+7/+14/+30 d), escalera E0–E5, diagnóstico
+- **Qué:** `association.ts` tiene calendario (+1/+3/+7/+14/+30 d), escalera de pistas P0–P5, diagnóstico
   («se está quedando», «formándose», «se está perdiendo») y revisión, separado del estado de la habilidad.
-  El reconocimiento no cuenta para la asociación. La pista recomendada nunca pasa de E4.
+  El reconocimiento no cuenta para la asociación. La pista recomendada nunca pasa de P4.
 - **Por qué:** mandato del usuario; el problema original de Memora era que la asociación no se volvía a recuperar.
 - **Descartado:** derivar el estado de la asociación del de la habilidad (mezcla dos preguntas distintas).
 
@@ -127,3 +127,60 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   una unidad cuyas habilidades no puedan consolidar. Pasa a ser el primer entregable del H2.
 - **Por qué:** ese prerrequisito bloquearía para siempre lo que depende de él, y en el H2 el contenido empieza a
   crearse desde el administrador.
+
+## D-020 · Pistas del núcleo renombradas a P0–P5
+- **Qué:** la escala de pistas del núcleo se llama P0–P5 (P0 sin pista … P4 escena o ejemplo completo · P5 respuesta
+  revelada). E0–E5 queda para los **encuentros** con la asociación en el tiempo (`ESPECIFICACION.md` §24).
+- **Por qué:** los dos usos de E0–E5 significaban cosas distintas y se iban a cruzar en el H2.
+
+## D-021 · Nivel por unidad y validador del catálogo (H2.0)
+- **Nivel por unidad** (`units.ts`), derivado de sus habilidades que pueden consolidar (el reconocimiento puro no
+  cuenta): aprendida = todas al menos aprendidas; estable = todas al menos estables; dominada = todas dominadas **y**
+  éxitos diferidos en ≥ 3 formatos distintos y en ≥ 2 contextos distintos (`config.unitLevels`). Si la unidad admite
+  menos de 3 formatos, se exigen todos los que admite y el validador lo informa.
+- **Contexto:** el intento lleva un `contextId` opcional (escena, frase o caso); lo aporta el motor de experiencias.
+- **Tipos de habilidad → formatos** (`config.skillFormats`): define qué habilidades pueden consolidar.
+- **Requisito de unidad:** solo exige sus habilidades que pueden consolidar (antes, una unidad con una habilidad de
+  reconocer no se cumplía nunca).
+- **Validador:** devuelve códigos y datos con severidad `error` (impide publicar), `warning` o `info`; los mensajes
+  para el autor viven en `packages/content` por idioma (regla 15).
+- **Precedencia:** si `ESPECIFICACION.md` §4 contradice `CLAUDE.md` o `DOMINIO.md`, mandan estos. §4 pide además
+  «≥ 3 sesiones espaciadas», que ya se cumple: dominada exige al menos dos éxitos diferidos, uno tras ≥ 7 días y otro
+  tras ≥ 30 días.
+
+## D-022 · Uso sin conexión desde el H2
+- **Qué:** el alumno puede estudiar sin conexión la sesión de hoy y la de mañana (contenido, audio e imágenes
+  descargados de antemano). El cliente ejecuta `packages/core` sobre una copia local; los intentos se encolan y se
+  envían de forma idempotente al reconectar; **el servidor es la fuente de verdad** y recalcula al sincronizar.
+  El administrador sigue requiriendo conexión.
+- **Requisitos para H2.1:** versión y `updatedAt` por unidad (invalidar caché); en cada evento, id generado en el
+  cliente, `deviceId`, hora del dispositivo y hora de recepción en el servidor.
+- **iPhone:** si la PWA no está instalada, Safari puede borrar el almacenamiento local; se pide
+  `navigator.storage.persist()`, se recomienda instalarla y se prueba en el iPhone del usuario.
+- **Nota:** el usuario pidió sustituir una decisión «H2 requiere conexión»; no existía en este archivo, así que esta
+  es la primera decisión sobre conexión.
+
+## D-023 · Topes de gasto por proveedor
+- **Saldos prepago** sin recarga automática: fal 10 €, OpenRouter 5 €.
+- **Topes en la app:** OpenRouter 5 €/mes; fal 2 €/mes; imágenes (fal, modelo rápido FLUX.1 [schnell]) con
+  sublímite de 1 €/mes y tope diario. Cada imagen se aprueba aparte.
+- **Precio a verificar en el H2.3** contra la página del modelo y el coste real de una llamada. Fuentes secundarias
+  (13-oct-2026): 0,003 $/megapíxel; no está claro si 1024×1024 se factura como 1 o 2 MP (0,003–0,006 $ por imagen).
+- **Pendiente:** el usuario escribió también «dentro de los 5 €/mes»; ver la pregunta abierta sobre si los topes son
+  por proveedor o un total.
+
+## D-024 · Kokoro bajo demanda
+- **Qué:** Kokoro no está siempre encendido. El audio se genera al aprobar la unidad (cola) y se sirve desde caché.
+  En el H2.3 se mide el consumo real (CPU, RAM, tiempo por frase) y se valora generar en el Mac y subir los archivos.
+- **Por qué:** el VPS (Hetzner CX33, x86, 80 GB) se comparte con otros proyectos; los recursos reales se verifican en
+  el H2.4.
+
+## D-025 · Dominios y entorno
+- **App:** `memora.luismontalvan.com`. **Administrador:** un subdominio distinto (nombre a confirmar en el H2.4).
+  `ingles.luismontalvan.com` (V2) no se toca.
+- **Local:** Docker Desktop en el Mac para Directus, Postgres y Kokoro.
+
+## D-026 · Habitación del H2
+- **10 unidades:** las 5 de la misión «Necesitas ayuda en el trabajo» (`borrow`, `charger`, `run out of`,
+  `Can I + verbo`, `actually`) más `battery`, `receipt`, `plug`, «I can't find…» y «How much is it?».
+- Los ejemplos pasan por la revisión del usuario antes de publicarse.
