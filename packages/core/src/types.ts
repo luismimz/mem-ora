@@ -1,0 +1,82 @@
+// Tipos del dominio. Agnósticos de la materia: ningún campo sabe de qué trata la unidad.
+
+export type Id = string;
+
+/** Formatos de ejercicio según la tabla de evidencia de CLAUDE.md. */
+export const EXERCISE_FORMATS = [
+  'recognition_choice', // elegir entre opciones
+  'recognition_listening', // reconocer al escuchar
+  'recall_cued', // recuperar con pistas
+  'recall_unaided', // recuperar escribiendo o diciendo, sin pistas
+  'production', // producir (frase, comando, código)
+  'application', // aplicar en un caso o conversación
+] as const;
+export type ExerciseFormat = (typeof EXERCISE_FORMATS)[number];
+
+/**
+ * Escalera de pistas E0–E5.
+ * E0 sin pista · E1 pista mínima · E2 contexto · E3 la ayuda de memoria · E4 escena o ejemplo completo ·
+ * E5 respuesta revelada (nunca cuenta como acierto).
+ */
+export type HintLevel = 0 | 1 | 2 | 3 | 4 | 5;
+export const HINT_LEVELS: readonly HintLevel[] = [0, 1, 2, 3, 4, 5];
+
+export const SKILL_KINDS = ['recognize', 'recall', 'produce', 'apply', 'listen', 'speak'] as const;
+export type SkillKind = (typeof SKILL_KINDS)[number];
+
+export const SKILL_STATUSES = ['new', 'presented', 'learning', 'consolidating', 'consolidated', 'weakened'] as const;
+export type SkillStatus = (typeof SKILL_STATUSES)[number];
+
+/** Intento con evidencia. Guarda formato, acierto, pista y tiempo; «dudar» se deriva del tiempo. */
+export interface Attempt {
+  id: Id;
+  userId: Id;
+  skillId: Id;
+  unitId: Id;
+  associationId?: Id;
+  at: number;
+  format: ExerciseFormat;
+  correct: boolean;
+  hint: HintLevel;
+  timeMs: number;
+}
+
+/** Presentación de una habilidad (ver o escuchar el contenido). No es evidencia de aprendizaje. */
+export interface Exposure {
+  id: Id;
+  userId: Id;
+  skillId: Id;
+  unitId: Id;
+  associationId?: Id;
+  at: number;
+}
+
+export interface UnitDef {
+  id: Id;
+  courseId: Id;
+  /** Tipo de conocimiento (term, concept, command…). El núcleo no lo interpreta. */
+  type: string;
+}
+
+export interface SkillDef {
+  id: Id;
+  unitId: Id;
+  kind: SkillKind;
+  /** Asociación que esta habilidad recupera, si la hay. */
+  associationId?: Id;
+}
+
+export type Ref = { unit: Id } | { skill: Id };
+
+/** `subject` no se puede practicar hasta que `requires` esté preparado. */
+export interface Prerequisite {
+  subject: Ref;
+  requires: Ref;
+}
+
+/** Catálogo de un curso. El orden de `skills` es el orden de introducción. */
+export interface Catalog {
+  units: UnitDef[];
+  skills: SkillDef[];
+  prerequisites: Prerequisite[];
+}
