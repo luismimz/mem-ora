@@ -65,3 +65,41 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   **antes de H2** (antes del primer cambio de esquema, regla 8).
 - **Nota:** `HITOS.md` exige en H0 una copia de la base de datos y de los archivos del servidor. Queda como excepción
   explícita hasta H2, pendiente de que el usuario la apruebe al cerrar H0.
+
+## D-012 · Núcleo H1: definición de «éxito diferido»
+- **Qué:** acierto sin pista, en `recall_unaided`, `production` o `application`, tras ≥ 20 h desde la última
+  exposición (cualquier intento cuenta como exposición). Configurable en `deferred`.
+- **Por qué:** mandato del usuario; 20 h en vez de 24 h para tolerar horarios de estudio variables.
+- **Descartado:** contar `recall_cued` (tiene pista) y el reconocimiento.
+
+## D-013 · Asociación con estado propio
+- **Qué:** `association.ts` tiene calendario (+1/+3/+7/+14/+30 d), escalera E0–E5, diagnóstico
+  («se está quedando», «formándose», «se está perdiendo») y revisión, separado del estado de la habilidad.
+  El reconocimiento no cuenta para la asociación. La pista recomendada nunca pasa de E4.
+- **Por qué:** mandato del usuario; el problema original de Memora era que la asociación no se volvía a recuperar.
+- **Descartado:** derivar el estado de la asociación del de la habilidad (mezcla dos preguntas distintas).
+
+## D-014 · Las habilidades de solo reconocimiento nunca se consolidan
+- **Qué:** consecuencia directa de las reglas 11 y D-012. Se programan (hasta +3 d como máximo) pero no llegan a
+  «consolidado» ni pueden desbloquear prerrequisitos.
+- **Por qué:** «reconocer» no demuestra recuerdo sin ayuda.
+- **Riesgo:** en la interfaz habrá que presentar su progreso sin prometer dominio.
+
+## D-015 · Tope de escalón para aciertos débiles (`weakSuccessMaxStep`)
+- **Qué:** un acierto de reconocimiento o con mucha pista sube de escalón solo hasta el 2 (+3 d).
+- **Por qué:** la primera simulación mostró que, si un acierto débil repetía el escalón, todo lo reconocido se
+  repasaba a diario, saturaba el tope y bloqueaba lo nuevo.
+- **Descartado:** no espaciar nunca lo débil (satura) y espaciarlo sin límite (intervalos largos sin evidencia).
+
+## D-016 · Prerrequisitos se cumplen con «en consolidación»
+- **Qué:** `minStatus: consolidating`; «debilitada» cuenta como «en consolidación».
+- **Por qué:** exigir «consolidado» bloquearía cada dependencia al menos dos días; un fallo posterior no debe volver a
+  bloquear lo ya desbloqueado.
+
+## D-017 · Simulación con alumnos sintéticos
+- **Qué:** `tools/simulate` con un modelo de memoria simple (convenio «estabilidad = días hasta el 90 %»), semilla
+  fija y una sesión diaria a las 9:00. Cuatro perfiles: idioma, programación, olvidadizo y ausente 5 días.
+- **Por qué:** comprobar el mecanismo de punta a punta sin interfaz. No valida ningún umbral (ver
+  `NUCLEO-UMBRALES.md`).
+- **Nota:** el primer modelo (recuerdo del 37 % al cumplirse la estabilidad) era demasiado pesimista y generaba un
+  círculo de fallos; se recalibró al convenio habitual.
