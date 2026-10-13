@@ -1,0 +1,15 @@
+node_modules/
+dist/
+coverage/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+
+# Material de terceros y datos privados: nunca en git (regla 16)
+private/
+**/private/
+
+# Kit de arranque original (duplica CLAUDE.md y docs/; se conserva solo en local)
+memora-kit-claude-code-universal.md
