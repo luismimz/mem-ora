@@ -300,3 +300,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   - la frase propia («Hazla tuya») sale del recorrido normal y queda como opción oculta;
   - la sesión se organiza por habitaciones de 10 palabras.
 - Se mantiene de D-033: el servidor manda, la vista previa, ordenar cuenta como reconocimiento.
+
+## D-035 · Producto: 15 palabras por sesión y cuatro modos (14-oct-2026)
+- Sesión de asociaciones de 15 palabras; meta ≈1.000 aprendidas al mes (2–3 sesiones/día), contando solo recuperación diferida sin ayuda.
+- Asociaciones absurdas al centro, con recuerdo de la historia (reconstrucción e inversa). Gramática breve tras las 15 palabras y solo con ellas; Arcade con asociaciones directas e inversas; chat tras 3 sesiones de gramática.
+- Modos Asociaciones, Gramática, Arcade y Chat elegibles por separado sobre un único estado del alumno.
+- Sustituye la «habitación de 10» de D-034. Pendiente: cuota mínima de lo nuevo aunque haya repasos acumulados (requiere ajustar el plan del núcleo, con aprobación).

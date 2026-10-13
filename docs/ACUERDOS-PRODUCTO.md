@@ -10,6 +10,15 @@
 4. **El Arcade divierte y sella.** Sirve para consolidar lo retenido y **localizar lo que no** se ha retenido (lo fallado vuelve al circuito de repaso). No enseña contenido nuevo.
 5. **Debe ser una experiencia única**: de la calidad y la sensación del vídeo de referencia que Luis ha compartido (https://www.youtube.com/watch?v=AUZT63c8avw). Ideas adoptadas en la sección 3b. **[confirmar: Luis ha escuchado el tramo desde 23:26 y está de acuerdo]**
 
+## Decisiones del 14-oct-2026 (mandan sobre lo anterior de este documento)
+
+- **Sesión de asociaciones = 15 palabras nuevas.** Meta: unas **1.000 palabras aprendidas al mes** (≈ 33/día ⇒ 2–3 sesiones diarias). Se cuentan como aprendidas solo las recuperadas sin ayuda en un repaso diferido, no las vistas.
+- **Asociaciones inverosímiles y absurdas primero**, con la calidad de V2 y mejorada: el alumno debe **recordar la historia** (reconstrucción de la escena y asociación inversa palabra → escena), no solo la palabra.
+- **Gramática dentro de la asociación**: tras las 15 palabras, poca gramática con trucos (Espejo) usando solo esas palabras; si falla, se repite con otra frase. Crece en espiral con el vocabulario.
+- **Arcade = juego divertido** con más asociaciones y asociaciones inversas (como V1); solo lo enseñado; lo fallado vuelve al repaso.
+- **Chat** se desbloquea con al menos 3 sesiones de gramática.
+- **Cuatro modos separados pero unidos**: Asociaciones, Gramática, Arcade y Chat se eligen por separado desde el inicio, y comparten el mismo progreso (un único estado del alumno).
+
 ## 0. Cómo se trabaja (proceso)
 
 - Memora V3 se construye **desde cero** en `mem-ora`. El repositorio antiguo (V1/V2) es **solo lectura y referencia**. **Nada de parches** sobre lo anterior: se rehace mejor.
@@ -115,7 +124,7 @@ Idea tomada de la demostración del vídeo de referencia (el alumno imagina, rec
 
 ## 11. Pendiente de decidir
 
-- Ritmo exacto (misión de 4–5 / habitación de 10 / bloques de 5).
+- Ritmo dentro de las 15 palabras (escenas de 3 como V2 o misiones de 5) [confirmar].
 - Interpretación del movimiento «slide» en móvil.
 - Cuándo se activa fal y con qué guía de estilo (tras aprobar el diseño y probar 5 imágenes).
 - Modo manos libres, Anki y museo de historias: después de cerrar H2 (congelados).
