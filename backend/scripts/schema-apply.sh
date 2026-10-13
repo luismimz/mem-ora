@@ -3,4 +3,4 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 ./scripts/backup.sh
-docker compose exec -T directus npx directus schema apply --yes /directus/schema/snapshot.json
+node --env-file=.env scripts/schema-apply.mjs

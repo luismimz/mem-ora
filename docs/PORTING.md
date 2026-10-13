@@ -20,3 +20,10 @@ Cada pieza que se trae del repositorio antiguo se registra aquí. Se reescribe, 
 - Si se descubre un comportamiento oculto en el código antiguo, se anota en `DECISIONS.md`.
 - Lo que se descarta también se anota, con el motivo.
 - Todo lo que se porte debe quedar sin nada específico de inglés en el núcleo.
+
+## Notas de despliegue (Directus 12)
+
+- El repositorio antiguo usaba `directus/directus:11.17.4` y `/server/health` en sus comprobaciones; en la 12 ese
+  endpoint exige autenticación. Memora usa `/server/ping`.
+- Los guiones antiguos ejecutaban `npx directus …` dentro de la imagen; la 12 ya no trae `npx`. Memora aplica el
+  esquema por la API (D-028).
