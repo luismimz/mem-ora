@@ -1,7 +1,7 @@
 // Prueba de recorrido completo del H1: 30 días, cuatro alumnos sintéticos, dos cursos de materias distintas,
 // el mismo núcleo sin cambios.
 import { describe, expect, it } from 'vitest';
-import { resolveConfig, serializeLearner } from '@memora/core';
+import { DAY, resolveConfig, serializeLearner, type SkillStatus } from '@memora/core';
 import { languageCourse, programmingCourse } from '../src/courses';
 import { simulate } from '../src/simulate';
 import { PROFILES } from '../src/student';
@@ -16,11 +16,29 @@ const runs = {
   absent: simulate(PROFILES.absent, lang, config),
 };
 const catalogOf = (name: keyof typeof runs) => (name === 'programming' ? prog : lang);
+const LEARNED_OR_ABOVE: SkillStatus[] = ['learned', 'stable', 'mastered'];
+const final = (name: keyof typeof runs) => runs[name].rows.at(-1)!.statuses;
+const learnedOrAbove = (s: Record<SkillStatus, number>) => s.learned + s.stable + s.mastered;
 
 describe('simulación de 30 días', () => {
-  it('el mismo núcleo consolida habilidades en los dos cursos', () => {
-    expect(runs.language.rows.at(-1)!.statuses.consolidated).toBeGreaterThan(0);
-    expect(runs.programming.rows.at(-1)!.statuses.consolidated).toBeGreaterThan(0);
+  it('el mismo núcleo lleva habilidades a «aprendida» y «estable» en los dos cursos', () => {
+    for (const name of ['language', 'programming'] as const) {
+      expect(final(name).learned).toBeGreaterThan(0);
+      expect(final(name).stable).toBeGreaterThan(0);
+    }
+  });
+
+  it('en 30 días nada puede estar «dominado»: exige un acierto tras ≥ 30 días sin exposición', () => {
+    for (const name of Object.keys(runs) as Array<keyof typeof runs>) expect(final(name).mastered).toBe(0);
+  });
+
+  it('a 60 días aparecen dominadas, y cada una se presentó hace al menos 30 días', () => {
+    const long = simulate(PROFILES.languageLearner, lang, config, 60);
+    expect(long.rows.at(-1)!.statuses.mastered).toBeGreaterThan(0);
+    const end = Math.max(...Object.values(long.learner.applied));
+    for (const s of Object.values(long.learner.skills)) {
+      if (s.status === 'mastered') expect(end - (s.presentedAt ?? end)).toBeGreaterThanOrEqual(30 * DAY);
+    }
   });
 
   it('ningún día supera los topes de repaso, de lo nuevo ni el total', () => {
@@ -33,14 +51,19 @@ describe('simulación de 30 días', () => {
     }
   });
 
-  it('nada se consolida sin éxitos diferidos y lo que solo se reconoce nunca se consolida', () => {
+  it('nada es «aprendida» sin éxitos diferidos y el reconocimiento puro nunca se consolida', () => {
     for (const [name, run] of Object.entries(runs) as Array<[keyof typeof runs, (typeof runs)[keyof typeof runs]]>) {
       for (const def of catalogOf(name).skills) {
         const state = run.learner.skills[def.id];
-        if (state?.status === 'consolidated') expect(state.deferredSuccesses).toBeGreaterThanOrEqual(config.skill.deferredSuccessesToConsolidate);
-        if (def.kind === 'recognize' || def.kind === 'listen') expect(state?.status).not.toBe('consolidated');
+        if (state && LEARNED_OR_ABOVE.includes(state.status)) expect(state.deferredSuccesses).toBeGreaterThanOrEqual(config.skill.deferredSuccessesToLearn);
+        if (def.kind === 'recognize') expect(['new', 'presented', 'learning']).toContain(state?.status ?? 'new');
       }
     }
+  });
+
+  it('escuchar ya no queda bloqueado: con dictado y explicación libre llega a «aprendida» o más', () => {
+    const listened = lang.skills.filter((s) => s.kind === 'listen').map((s) => runs.language.learner.skills[s.id]?.status);
+    expect(listened.filter((s) => s && LEARNED_OR_ABOVE.includes(s)).length).toBeGreaterThan(listened.length / 2);
   });
 
   it('los prerrequisitos se respetan: nada empieza antes de que lo requerido esté preparado', () => {
@@ -67,11 +90,10 @@ describe('simulación de 30 días', () => {
     expect(recovered?.day).toBeLessThanOrEqual(20);
   });
 
-  it('el olvidadizo consolida menos y activa más revisiones de asociaciones que el alumno típico', () => {
-    const typical = runs.language.rows.at(-1)!;
-    const forgetful = runs.forgetful.rows.at(-1)!;
-    expect(forgetful.statuses.consolidated).toBeLessThan(typical.statuses.consolidated);
-    expect(forgetful.associations.reviewNeeded).toBeGreaterThan(typical.associations.reviewNeeded);
+  it('el olvidadizo aprende menos y activa más revisiones de asociaciones que el alumno típico', () => {
+    expect(learnedOrAbove(final('forgetful'))).toBeLessThan(learnedOrAbove(final('language')));
+    expect(final('forgetful').stable).toBeLessThan(final('language').stable);
+    expect(runs.forgetful.rows.at(-1)!.associations.reviewNeeded).toBeGreaterThan(runs.language.rows.at(-1)!.associations.reviewNeeded);
   });
 
   it('es determinista', () => {

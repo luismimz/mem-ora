@@ -6,7 +6,7 @@ export function formatReport(result: SimulationResult, course: string): string {
   const lines = [
     `## Alumno «${result.profile.name}» · curso ${course}`,
     '',
-    ' día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | aprend consol consolid debil | asoc: queda forma pierde revisar',
+    ' día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | en-apr consol aprend estab domin debil | asoc: queda forma pierde revisar',
   ];
   for (const r of result.rows) {
     const acc = r.attempts ? `${r.correct}/${r.attempts}` : '-';
@@ -23,7 +23,9 @@ export function formatReport(result: SimulationResult, course: string): string {
         ' |',
         pad(r.statuses.learning + r.statuses.presented, 6),
         pad(r.statuses.consolidating, 6),
-        pad(r.statuses.consolidated, 8),
+        pad(r.statuses.learned, 6),
+        pad(r.statuses.stable, 5),
+        pad(r.statuses.mastered, 5),
         pad(r.statuses.weakened, 5),
         ' |',
         pad(r.associations.holding, 11),
@@ -36,7 +38,12 @@ export function formatReport(result: SimulationResult, course: string): string {
   const last = result.rows.at(-1);
   if (last) {
     const total = Object.values(last.statuses).reduce((a, b) => a + b, 0);
-    lines.push('', `Final: ${last.statuses.consolidated}/${total} habilidades consolidadas, ${last.statuses.weakened} debilitadas, ${last.statuses.new} sin empezar.`);
+    const st = last.statuses;
+    lines.push(
+      '',
+      `Día ${last.day} (${total} habilidades): aprendidas ${st.learned} · estables ${st.stable} · dominadas ${st.mastered} · ` +
+        `en consolidación ${st.consolidating} · en aprendizaje ${st.learning + st.presented} · debilitadas ${st.weakened} · sin empezar ${st.new}.`,
+    );
   }
   return lines.join('\n');
 }

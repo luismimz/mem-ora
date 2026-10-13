@@ -62,7 +62,7 @@ export function simulate(profile: Profile, catalog: Catalog, config: CoreConfig,
           student.expose(item.skillId, at);
         }
         const hint = kind === 'recall' ? item.recommendedHint : 0;
-        const format = formatFor(kind, hint);
+        const format = formatFor(kind, hint, item.reason === 'new', learner.skills[item.skillId]?.attempts ?? 0);
         const answeredAt = at + 20_000;
         const { correct: ok, timeMs } = student.answer(item.skillId, answeredAt, format, hint);
         seq += 1;

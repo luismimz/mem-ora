@@ -29,12 +29,17 @@ interface Memory {
   lastAt: number;
 }
 
-export function formatFor(kind: SkillKind, hint: HintLevel): ExerciseFormat {
+/**
+ * Política de formatos de la simulación (en la app la decide el motor de experiencias).
+ * Escuchar: el primer día se reconoce; en los repasos se alterna dictado y explicación libre de lo oído.
+ */
+export function formatFor(kind: SkillKind, hint: HintLevel, isIntro: boolean, attemptsSoFar: number): ExerciseFormat {
   switch (kind) {
     case 'recognize':
       return 'recognition_choice';
     case 'listen':
-      return 'recognition_listening';
+      if (isIntro) return 'recognition_listening';
+      return attemptsSoFar % 2 === 0 ? 'listening_transcribe' : 'listening_explain';
     case 'recall':
       return hint > 0 ? 'recall_cued' : 'recall_unaided';
     case 'produce':
@@ -70,6 +75,10 @@ export class SyntheticStudent {
         return 0.25 + 0.75 * Math.sqrt(p);
       case 'recognition_listening':
         return 0.2 + 0.8 * p ** 0.7;
+      case 'listening_transcribe':
+        return p ** 1.1;
+      case 'listening_explain':
+        return p ** 1.2;
       case 'recall_cued':
         return p + (1 - p) * hint * 0.18;
       case 'recall_unaided':
