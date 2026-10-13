@@ -263,3 +263,28 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   - **Opción B:** la app llama directamente a `studio.luismontalvan.com`. Exige `CORS_ORIGIN` con la app,
     `CORS_CREDENTIALS=true`, cookie `Secure` y `SameSite=Lax` (los dos subdominios son el mismo «sitio»). Si se
     quisiera compartir la cookie, `SESSION_COOKIE_DOMAIN=.luismontalvan.com`, lo que también la mandaría al panel.
+
+## D-033 · Sesión mínima del H2.2a
+- **Recorrido de una unidad nueva:** escuchar → asociar (o «estructura» si es un patrón) → recuperar sin ver →
+  ordenar → frase propia → resultado. Los repasos van primero, con la pista inicial que marca la escalera de la
+  asociación.
+- **Evidencia de cada paso** (tabla de `CLAUDE.md`):
+  - recuperar escribiendo, sin pista → `recall_unaided`; con pista → `recall_cued` (P1 primera letra, P2 frase con
+    hueco, P3 palabra de apoyo, P4 escena); «ver la respuesta» → P5, nunca cuenta como acierto;
+  - **ordenar fichas → `recognition_choice` (peso bajo)**: elegir el orden entre fichas dadas no es producir;
+  - **frase propia → `production`**, corregida solo por estructura (contiene la pieza, no copia el ejemplo, al menos
+    tres palabras). Sin IA en la lección, la naturalidad de la frase no se juzga. Admite un segundo intento y los dos
+    quedan registrados;
+  - dictado en el repaso de «escuchar» → `listening_transcribe`.
+- **Patrón:** su recuperación es rellenar la pieza fija en un ejemplo. Sus habilidades por defecto son recordar y
+  producir. «Aplicar» se añadirá cuando exista una experiencia de caso o minidiálogo; antes, una habilidad imposible
+  de practicar dejaba la unidad sin poder llegar a «aprendida».
+- **Voz provisional:** en el H2.2a se usa la voz del navegador, con un aviso en pantalla. El audio de Kokoro desde
+  caché llega en el H2.3.
+- **El servidor manda:** el endpoint `memora-api` valida cada evento contra el contenido publicado (habilidad,
+  unidad, asociación, formato y pista), pone siempre el usuario de la sesión, corrige horas del futuro y recalcula el
+  estado desde todos los eventos. La posición de la sesión se guarda en el servidor tras cada paso.
+- **Vista previa como alumno:** botón en la unidad del panel (`presentation-links`), solo para autoría, revisión y
+  administración. La dirección de la app la fija `APP_URL` en `backend:access`. No guarda nada.
+- **Límite conocido:** el «día» va en UTC (`dayOriginMs: 0`), así que en España cambia a las 2:00 en verano y a la
+  1:00 en invierno. La zona horaria por alumno está en `IDEAS.md`.

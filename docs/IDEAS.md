@@ -46,3 +46,9 @@ No se implementan hasta que un hito las incluya.
   la `PUBLIC_URL`. Destruir la base (`docker compose down -v`) sin desactivar deja la activación ocupada. Las pruebas
   de reconstrucción desde la instantánea deben hacerse en una instancia aparte **sin licencia**, y las de permisos en
   el entorno persistente.
+- **Prueba de recorrido en el navegador** (H2.2b): automatizarla con Playwright, junto con el modo sin conexión. En el
+  H2.2a el recorrido se prueba por la API con el mismo motor que la app, pero la interfaz no se ha visto con pruebas
+  automáticas.
+- **Recálculo incremental** del estado del alumno: hoy se recalcula con todos sus eventos en cada envío. Basta para el
+  H2; con muchos eventos convendrá partir de la última instantánea.
+- **Experiencia «aplicar»** (caso o minidiálogo) para que los patrones vuelvan a tener esa habilidad (H7).

@@ -29,10 +29,21 @@ pnpm test:integration          # prueba de recorrido completo contra el Directus
 
 Panel: http://localhost:8055/admin · Correos: http://localhost:8025 · Guía de prueba: `docs/H2.1-PRUEBA.md`.
 
+## App del alumno (local)
+
+```bash
+pnpm backend:seed-demo   # curso de demostración con contenido de ejemplo sin revisar
+pnpm web                 # http://127.0.0.1:5173 (usa 127.0.0.1, no localhost: D-032)
+```
+
+Guía de prueba: `docs/H2.2a-PRUEBA.md`.
+
 ## Paquetes
 
 - `packages/core`: núcleo pedagógico agnóstico de la materia (H1). Sin interfaz ni servidor.
 - `packages/content`: tipos de unidad (`term`, `pattern`) y sus validadores, flujo de estados y mensajes para el autor.
+- `packages/experiences`: motor de la sesión (pasos, ejercicios, corrección sin IA y eventos).
+- `apps/web`: app del alumno (React + Vite), sesión por cookie.
 - `techniques`: técnicas pedagógicas como módulos (puente fonético, escena absurda) con sus validadores.
 - `backend`: Directus local, esquema versionado, permisos como código y la extensión `memora`.
 - `tools/simulate`: alumnos sintéticos para probar el núcleo de punta a punta.
