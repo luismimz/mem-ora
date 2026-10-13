@@ -26,3 +26,13 @@ No se implementan hasta que un hito las incluya.
 - **Lista de comprobación del revisor** por técnica (`reviewChecklist`, p. ej. «el puente es una palabra real») visible
   en el panel al aprobar una asociación.
 - **Editar lo publicado sin despublicar** con versiones de contenido de Directus (H8).
+- **Despliegue con Directus 12 (H2.4):**
+  - `IP_TRUST_PROXY=true` detrás del proxy de Coolify (el valor por defecto pasó a `false`);
+  - `PUBLIC_URL` completa (`https://studio.luismontalvan.com`), obligatoria con licencia;
+  - comprobación de vida con `/server/ping` (`/server/health` exige autenticación);
+  - la imagen no trae `npx`: nada de comandos `npx directus` en el despliegue; el esquema se aplica por la API;
+  - la licencia se revalida en línea (`offline_enabled: false`): el servidor necesita salida a Internet hacia el
+    servicio de licencias de Directus;
+  - confirmar cuántas activaciones admite la licencia antes de usarla en local y en producción a la vez.
+- **Pasar a Directus 12.5.x** cuando lleve unas semanas publicada. Revisar antes las validaciones estrictas de
+  `ip_access` y el nuevo cálculo del 2FA por políticas efectivas.

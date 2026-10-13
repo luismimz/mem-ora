@@ -17,7 +17,7 @@ await build({
 writeFileSync(
   `${out}package.json`,
   JSON.stringify(
-    { name: 'memora', version: '0.1.0', type: 'module', 'directus:extension': { type: 'hook', path: 'dist/index.js', source: 'src/index.ts', host: '^11.0.0' } },
+    { name: 'memora', version: '0.1.0', type: 'module', 'directus:extension': { type: 'hook', path: 'dist/index.js', source: 'src/index.ts', host: '^12.0.0' } },
     null,
     2,
   ),

@@ -186,20 +186,27 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   `Can I + verbo`, `actually`) más `battery`, `receipt`, `plug`, «I can't find…» y «How much is it?».
 - Los ejemplos pasan por la revisión del usuario antes de publicarse.
 
-## D-027 · Directus 11.17.4, no 12
-- **Qué:** se fija `directus/directus:11.17.4` (amd64 y arm64).
-- **Por qué:** en Directus 12 las instalaciones propias van al nivel «core» por defecto: las **reglas de permisos
-  personalizadas exigen licencia** (sin ella se ignoran) y hay un límite de colecciones. Memora usa reglas propias
-  («solo sus borradores», «curso privado del propietario») y ya tiene 13 colecciones.
-  Fuente: notas de cambios de la versión 12 (consultadas el 13-oct-2026).
-- **Riesgo:** la rama 11 dejará de recibir correcciones en algún momento. Hay que vigilar sus avisos de seguridad y
-  decidir antes del H2.4 si se compra licencia o se mantiene la 11.
-- **Alternativas descartadas:** Directus 12 sin licencia (permisos ignorados) y un panel propio (fuera de alcance).
+## D-027 · Directus 12.4.1 con licencia (sustituye a «Directus 11.17.4, no 12»; 13-oct-2026)
+- **Versión:** `directus/directus:12.4.1` fijada (amd64 y arm64), publicada el 23-sep-2026. Se descartó la 12.5.0
+  por tener solo 6 días; la 12.4.1 corrige el fallo de la 12.4.0 que las propias notas piden evitar.
+- **Licencia:** «Open Innovation Grant», leída del entorno (`LICENSE_KEY`, que el compose toma de
+  `DIRECTUS_LICENSE_KEY` en `backend/.env`, nunca en git). Estado activo, sin caducidad (`expires_at: -1`), plazas,
+  colecciones y flujos ilimitados, reglas de permisos personalizadas activadas. `LICENSE_KEY_MANAGEMENT_ENABLED=false`:
+  la licencia no se cambia desde el panel ni la API.
+- **Por qué:** Memora depende de reglas de permisos personalizadas («solo sus borradores», «solo editable en
+  borrador», curso privado). **Comprobado con pruebas, no solo con la documentación:**
+  - Con licencia: 18/18 pruebas de integración, incluidas 5 que solo pasan si la regla de permiso actúa.
+  - En una instalación aparte sin licencia: nivel Core, **25 colecciones como máximo** y reglas personalizadas
+    desactivadas. Directus **rechaza crear** los permisos con reglas (`RESOURCE_RESTRICTED`), el guion de permisos
+    falla y la batería de integración falla. Con licencia, el límite de colecciones es ilimitado.
+- **Descartado:** quedarse en la 11 (sin parches a largo plazo) y la 12 sin licencia (sin reglas propias).
 
 ## D-028 · Esquema, permisos y ajustes como código
 - **Esquema:** `backend/schema/define.mjs` crea por la API lo que falte, solo en desarrollo. Su resultado se exporta a
   `backend/schema/snapshot.json`, versionado. **Los demás entornos solo aplican la instantánea**
-  (`pnpm backend:schema:apply`), siempre con copia previa (`backend/backups/`). Comprobado: el entorno local se
+  (`pnpm backend:schema:apply`), siempre con copia previa (`backend/backups/`). Desde la 12 se aplica **por la API
+  del servidor** (`/schema/diff` + `/schema/apply`): aplicada con la CLI dentro del contenedor, el servidor en marcha
+  no veía las colecciones nuevas (403) hasta reiniciarse. Este comportamiento no figura en las notas de la 12. Comprobado: el entorno local se
   reconstruyó desde cero solo con la instantánea y la prueba de recorrido pasó.
 - **Roles, políticas, permisos y ajustes** no entran en las instantáneas de Directus; van en
   `backend/access/apply-access.mjs`, idempotente.

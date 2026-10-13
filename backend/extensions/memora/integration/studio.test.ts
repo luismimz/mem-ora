@@ -18,7 +18,7 @@ async function call(token: string, method: string, path: string, body?: unknown)
 async function login(email: string, password: string): Promise<string> {
   const res = await fetch(`${BASE}/auth/login`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ email, password }) });
   const json = await res.json();
-  if (!res.ok) throw new Error(`No se pudo iniciar sesión como ${email}: ${res.status}`);
+  if (!res.ok || !json?.data?.access_token) throw new Error(`No se pudo iniciar sesión como ${email}: ${res.status}`);
   return json.data.access_token;
 }
 

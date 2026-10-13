@@ -19,8 +19,8 @@ services:
       retries: 20
 
   directus:
-    # Directus 11: las reglas de permisos personalizadas no requieren licencia (en la 12, sí). Ver D-027.
-    image: directus/directus:11.17.4
+    # Directus 12 con licencia (D-027). Versión fijada: no usar etiquetas móviles.
+    image: directus/directus:12.4.1
     restart: unless-stopped
     depends_on:
       db:
@@ -43,6 +43,10 @@ services:
       DB_DATABASE: memora
       DB_USER: memora
       DB_PASSWORD: ${DB_PASSWORD}
+      # Licencia: Directus lee LICENSE_KEY; el valor está en backend/.env (DIRECTUS_LICENSE_KEY), nunca en git.
+      LICENSE_KEY: ${DIRECTUS_LICENSE_KEY:-}
+      # La licencia no se puede cambiar desde el panel ni la API: solo desde el entorno.
+      LICENSE_KEY_MANAGEMENT_ENABLED: "false"
       TELEMETRY: "false"
       WEBSOCKETS_ENABLED: "false"
       EXTENSIONS_AUTO_RELOAD: "true"
