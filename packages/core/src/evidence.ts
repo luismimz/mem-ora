@@ -21,6 +21,7 @@ export function validateAttempt(attempt: Attempt): string[] {
   if (!Number.isInteger(attempt.hint) || attempt.hint < 0 || attempt.hint > 5) problems.push('pista fuera de E0–E5');
   if (!Number.isFinite(attempt.timeMs) || attempt.timeMs < 0) problems.push('timeMs inválido');
   if (attempt.format === 'recall_unaided' && attempt.hint !== 0) problems.push('recall_unaided no admite pista');
+  // Volver a oír el audio no es una pista; una pista en escucha es, por ejemplo, ver la primera letra o el texto parcial.
   if (attempt.format === 'recall_cued' && attempt.hint === 0) problems.push('recall_cued exige pista');
   if (attempt.hint === 5 && attempt.correct) problems.push('E5 revela la respuesta: no puede ser acierto');
   return problems;
@@ -50,16 +51,26 @@ export function evidenceWeight(attempt: Pick<Attempt, 'format' | 'hint' | 'corre
 }
 
 /**
- * Éxito diferido: acierto sin pista (≤ `deferred.maxHint`), en formato de recuperación o producción
- * (`deferred.formats`) y tras al menos `deferred.minElapsedMs` desde la última exposición.
+ * Acierto sin pista (≤ `deferred.maxHint`), en formato de recuperación o producción (`deferred.formats`,
+ * nunca reconocimiento) y tras al menos `minElapsedMs` desde la última exposición.
  */
-export function isDeferredSuccess(
+export function isUnaidedSuccessAfter(
   attempt: Pick<Attempt, 'at' | 'format' | 'hint' | 'correct'>,
   lastExposureAt: number | null,
+  minElapsedMs: number,
   config: CoreConfig,
 ): boolean {
   if (!attempt.correct || lastExposureAt === null) return false;
   if (attempt.hint > config.deferred.maxHint) return false;
   if (!config.deferred.formats.includes(attempt.format)) return false;
-  return attempt.at - lastExposureAt >= config.deferred.minElapsedMs;
+  return attempt.at - lastExposureAt >= minElapsedMs;
+}
+
+/** Éxito diferido: acierto sin pista en recuperación o producción tras `deferred.minElapsedMs` (20 h). */
+export function isDeferredSuccess(
+  attempt: Pick<Attempt, 'at' | 'format' | 'hint' | 'correct'>,
+  lastExposureAt: number | null,
+  config: CoreConfig,
+): boolean {
+  return isUnaidedSuccessAfter(attempt, lastExposureAt, config.deferred.minElapsedMs, config);
 }

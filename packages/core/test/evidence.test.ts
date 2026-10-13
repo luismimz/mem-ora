@@ -45,6 +45,11 @@ describe('éxito diferido', () => {
     expect(isDeferredSuccess(attempt({ at: last + DAY }), null, config)).toBe(false);
   });
 
+  it('acepta el dictado y la explicación libre de lo oído', () => {
+    expect(isDeferredSuccess(attempt({ at: last + DAY, format: 'listening_transcribe' }), last, config)).toBe(true);
+    expect(isDeferredSuccess(attempt({ at: last + DAY, format: 'listening_explain' }), last, config)).toBe(true);
+  });
+
   it('nunca acepta solo reconocimiento, aunque pase el tiempo', () => {
     expect(isDeferredSuccess(attempt({ at: last + 10 * DAY, format: 'recognition_choice' }), last, config)).toBe(false);
     expect(isDeferredSuccess(attempt({ at: last + 10 * DAY, format: 'recognition_listening' }), last, config)).toBe(false);

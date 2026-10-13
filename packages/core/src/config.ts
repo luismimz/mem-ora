@@ -25,14 +25,22 @@ export interface CoreConfig {
     /** Pista máxima permitida (0 = sin pista). */
     maxHint: HintLevel;
   };
+  /**
+   * Niveles por encima de «aprendida». Exigen un acierto sin pista (`deferred.maxHint`) en un formato de
+   * `deferred.formats` tras al menos `minElapsedMs` desde la última exposición a la habilidad.
+   */
+  levels: {
+    stable: { minElapsedMs: number };
+    mastered: { minElapsedMs: number };
+  };
   skill: {
     /** Evidencia acumulada para pasar de «en aprendizaje» a «en consolidación». */
     consolidatingEvidence: number;
     /** Evidencia que resta un fallo en formato de recuperación. */
     failEvidencePenalty: number;
-    /** Éxitos diferidos necesarios para «consolidado». */
-    deferredSuccessesToConsolidate: number;
-    /** Fallos seguidos en recuperación que debilitan una habilidad en consolidación. */
+    /** Éxitos diferidos necesarios para «aprendida». */
+    deferredSuccessesToLearn: number;
+    /** Fallos seguidos en recuperación que debilitan una habilidad en consolidación (lo aprendido se debilita con uno). */
     failuresToWeakenConsolidating: number;
     /** Suavizado de la precisión reciente (media móvil exponencial). */
     accuracyAlpha: number;
@@ -116,6 +124,8 @@ export const defaultConfig: CoreConfig = {
     formatWeight: {
       recognition_choice: 0.2,
       recognition_listening: 0.5,
+      listening_transcribe: 0.75,
+      listening_explain: 0.75,
       recall_cued: 0.5,
       recall_unaided: 0.75,
       production: 1,
@@ -124,17 +134,21 @@ export const defaultConfig: CoreConfig = {
     hintFactor: [1, 0.8, 0.6, 0.4, 0.2, 0],
     slowMs: 9_000,
     slowFactor: 0.7,
-    retrievalFormats: ['recall_cued', 'recall_unaided', 'production', 'application'],
+    retrievalFormats: ['listening_transcribe', 'listening_explain', 'recall_cued', 'recall_unaided', 'production', 'application'],
   },
   deferred: {
     minElapsedMs: 20 * HOUR,
-    formats: ['recall_unaided', 'production', 'application'],
+    formats: ['listening_transcribe', 'listening_explain', 'recall_unaided', 'production', 'application'],
     maxHint: 0,
+  },
+  levels: {
+    stable: { minElapsedMs: 7 * DAY },
+    mastered: { minElapsedMs: 30 * DAY },
   },
   skill: {
     consolidatingEvidence: 1.5,
     failEvidencePenalty: 0.5,
-    deferredSuccessesToConsolidate: 2,
+    deferredSuccessesToLearn: 2,
     failuresToWeakenConsolidating: 2,
     accuracyAlpha: 0.3,
     initialAccuracy: 0.6,

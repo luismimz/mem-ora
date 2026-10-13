@@ -33,7 +33,7 @@ export interface DailyPlan {
   };
 }
 
-const ACTIVE = new Set(['presented', 'learning', 'consolidating', 'consolidated', 'weakened']);
+const ACTIVE = new Set(['presented', 'learning', 'consolidating', 'learned', 'stable', 'mastered', 'weakened']);
 
 /** Prioridad de un repaso vencido: retraso relativo (con tope) + debilitada + asociación en apuros. */
 export function reviewPriority(state: SkillState, now: number, learner: LearnerState, associationId: Id | undefined, config: CoreConfig): number {

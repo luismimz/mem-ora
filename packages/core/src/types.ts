@@ -6,6 +6,8 @@ export type Id = string;
 export const EXERCISE_FORMATS = [
   'recognition_choice', // elegir entre opciones
   'recognition_listening', // reconocer al escuchar
+  'listening_transcribe', // escuchar y reproducir lo oído por escrito (dictado)
+  'listening_explain', // escuchar y expresar el sentido con palabras propias (traducción libre, explicación)
   'recall_cued', // recuperar con pistas
   'recall_unaided', // recuperar escribiendo o diciendo, sin pistas
   'production', // producir (frase, comando, código)
@@ -24,7 +26,11 @@ export const HINT_LEVELS: readonly HintLevel[] = [0, 1, 2, 3, 4, 5];
 export const SKILL_KINDS = ['recognize', 'recall', 'produce', 'apply', 'listen', 'speak'] as const;
 export type SkillKind = (typeof SKILL_KINDS)[number];
 
-export const SKILL_STATUSES = ['new', 'presented', 'learning', 'consolidating', 'consolidated', 'weakened'] as const;
+/**
+ * Estados honestos (regla 11): «vista» (presented) no es «aprendida» (learned) y «aprendida» no es «dominada» (mastered).
+ * new → presented → learning → consolidating → learned → stable → mastered; cualquier nivel aprendido puede pasar a weakened.
+ */
+export const SKILL_STATUSES = ['new', 'presented', 'learning', 'consolidating', 'learned', 'stable', 'mastered', 'weakened'] as const;
 export type SkillStatus = (typeof SKILL_STATUSES)[number];
 
 /** Intento con evidencia. Guarda formato, acierto, pista y tiempo; «dudar» se deriva del tiempo. */

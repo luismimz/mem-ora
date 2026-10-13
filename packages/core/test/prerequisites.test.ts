@@ -28,15 +28,15 @@ describe('canPractice', () => {
     expect(check.blockedBy).toEqual([{ skill: 'a.recall' }]);
   });
 
-  it('desbloquea cuando lo requerido está en consolidación, consolidado o debilitado', () => {
-    for (const status of ['consolidating', 'consolidated', 'weakened'] as const) {
+  it('desbloquea cuando lo requerido está en consolidación, aprendido, estable, dominado o debilitado', () => {
+    for (const status of ['consolidating', 'learned', 'stable', 'mastered', 'weakened'] as const) {
       expect(canPractice({ skill: 'a.apply' }, withStatus({ 'a.recall': status }), catalog, config).allowed).toBe(true);
     }
   });
 
   it('un requisito de unidad exige todas sus habilidades', () => {
-    expect(canPractice({ unit: 'b' }, withStatus({ 'a.recall': 'consolidated', 'a.apply': 'learning' }), catalog, config).allowed).toBe(false);
-    expect(canPractice({ unit: 'b' }, withStatus({ 'a.recall': 'consolidated', 'a.apply': 'consolidating' }), catalog, config).allowed).toBe(true);
+    expect(canPractice({ unit: 'b' }, withStatus({ 'a.recall': 'learned', 'a.apply': 'learning' }), catalog, config).allowed).toBe(false);
+    expect(canPractice({ unit: 'b' }, withStatus({ 'a.recall': 'learned', 'a.apply': 'consolidating' }), catalog, config).allowed).toBe(true);
   });
 
   it('lo que no tiene prerrequisitos siempre se puede practicar', () => {

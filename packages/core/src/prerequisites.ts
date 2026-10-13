@@ -10,7 +10,9 @@ const STATUS_RANK: Record<SkillStatus, number> = {
   learning: 2,
   consolidating: 3,
   weakened: 3,
-  consolidated: 4,
+  learned: 4,
+  stable: 5,
+  mastered: 6,
 };
 
 export function statusAtLeast(status: SkillStatus, min: SkillStatus): boolean {

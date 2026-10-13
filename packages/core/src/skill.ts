@@ -1,12 +1,13 @@
 // Estado de una habilidad de un alumno y sus transiciones.
 //
-//   new → presented → learning → consolidating → consolidated
-//                                     ↑   ↓          ↓
-//                                   weakened ←───────┘
+//   new → presented → learning → consolidating → learned → stable → mastered
+//                                     ↑   ↓          ↓         ↓         ↓
+//                                   weakened ←───────┴─────────┴─────────┘
 //
-// «Presentar» no es aprender; reconocer no consolida; nada llega a «consolidado» sin éxitos diferidos.
+// «Vista» (presented) no es «aprendida»; reconocer no consolida; nada es «aprendida» sin éxitos diferidos,
+// «estable» sin un acierto sin pista tras ≥ 7 días ni «dominada» sin uno tras ≥ 30 días (configurables).
 import type { CoreConfig } from './config';
-import { evidenceWeight, isDeferredSuccess, isRetrievalFormat } from './evidence';
+import { evidenceWeight, isDeferredSuccess, isRetrievalFormat, isUnaidedSuccessAfter } from './evidence';
 import type { Scheduler } from './scheduler';
 import type { Attempt, Id, SkillStatus } from './types';
 
@@ -70,6 +71,11 @@ export function applySkillAttempt(state: SkillState, attempt: Attempt, scheduler
   const weight = evidenceWeight(attempt, config);
   const retrieval = isRetrievalFormat(attempt.format, config);
   const deferredSuccess = isDeferredSuccess(attempt, state.lastExposureAt, config);
+  const reached: Level = isUnaidedSuccessAfter(attempt, state.lastExposureAt, config.levels.mastered.minElapsedMs, config)
+    ? 'mastered'
+    : isUnaidedSuccessAfter(attempt, state.lastExposureAt, config.levels.stable.minElapsedMs, config)
+      ? 'stable'
+      : null;
   const alpha = config.skill.accuracyAlpha;
   const signal = correct ? Math.min(1, weight / (config.evidence.formatWeight[attempt.format] || 1)) : 0;
 
@@ -93,15 +99,27 @@ export function applySkillAttempt(state: SkillState, attempt: Attempt, scheduler
     if (retrieval) next.evidence = Math.max(0, next.evidence - config.skill.failEvidencePenalty);
   }
 
-  next = transition(state.status, next, { correct, retrieval, deferredSuccess }, config);
+  next = transition(state.status, next, { correct, retrieval, deferredSuccess, reached }, config);
   const decision = scheduler.next({ state: next, previousStep: state.step, correct, weight, retrieval, now: attempt.at }, config);
-  return { state: { ...next, step: decision.step, dueAt: decision.dueAt }, weight, deferredSuccess };
+  return { state: { ...next, step: decision.step, dueAt: levelGate(next.status, decision.dueAt, attempt.at, config) }, weight, deferredSuccess };
+}
+
+type Level = 'stable' | 'mastered' | null;
+
+/**
+ * Lo aprendido no se vuelve a pedir antes de que pueda demostrar el siguiente nivel: si se repasara antes,
+ * la exposición reiniciaría el plazo y nunca llegaría a «estable» ni a «dominada».
+ */
+function levelGate(status: SkillStatus, dueAt: number, at: number, config: CoreConfig): number {
+  if (status === 'learned') return Math.max(dueAt, at + config.levels.stable.minElapsedMs);
+  if (status === 'stable') return Math.max(dueAt, at + config.levels.mastered.minElapsedMs);
+  return dueAt;
 }
 
 function transition(
   before: SkillStatus,
   s: SkillState,
-  o: { correct: boolean; retrieval: boolean; deferredSuccess: boolean },
+  o: { correct: boolean; retrieval: boolean; deferredSuccess: boolean; reached: Level },
   config: CoreConfig,
 ): SkillState {
   const retrievalFailure = !o.correct && o.retrieval;
@@ -120,13 +138,17 @@ function transition(
         }
         return { ...s, deferredSuccesses };
       }
-      if (o.deferredSuccess && s.deferredSuccesses >= config.skill.deferredSuccessesToConsolidate) {
-        return { ...s, status: 'consolidated' };
-      }
+      if (o.deferredSuccess && s.deferredSuccesses >= config.skill.deferredSuccessesToLearn) return { ...s, status: 'learned' };
       return s;
-    case 'consolidated':
+    case 'learned':
+    case 'stable':
+    case 'mastered': {
       if (retrievalFailure) return { ...s, status: 'weakened', deferredSuccesses: 0, lapses: s.lapses + 1 };
+      // El nivel lo decide el plazo sin exposición que se ha superado; nunca se baja por acertar.
+      if (o.reached === 'mastered') return { ...s, status: 'mastered' };
+      if (o.reached === 'stable' && s.status === 'learned') return { ...s, status: 'stable' };
       return s;
+    }
     case 'weakened':
       // Volver a consolidación exige un éxito diferido; ese éxito ya cuenta como el primero.
       if (o.deferredSuccess) return { ...s, status: 'consolidating', deferredSuccesses: 1 };
