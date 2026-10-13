@@ -1,13 +1,13 @@
 // Todos los umbrales del núcleo. Son HIPÓTESIS a validar con uso real; el porqué de cada uno está en
 // docs/NUCLEO-UMBRALES.md. Cambiar un valor aquí no requiere tocar la lógica.
 import { DAY, HOUR } from './time';
-import type { ExerciseFormat, HintLevel, SkillStatus } from './types';
+import type { ExerciseFormat, HintLevel, SkillKind, SkillStatus } from './types';
 
 export interface CoreConfig {
   evidence: {
     /** Peso de un acierto según su formato (bajo 0,2 · medio 0,5 · alto 0,75 · muy alto 1). */
     formatWeight: Record<ExerciseFormat, number>;
-    /** Multiplicador por nivel de pista E0–E5. E5 siempre 0. */
+    /** Multiplicador por nivel de pista P0–P5. P5 siempre 0. */
     hintFactor: [number, number, number, number, number, number];
     /** Un acierto más lento que esto cuenta como «dudado». */
     slowMs: number;
@@ -32,6 +32,20 @@ export interface CoreConfig {
   levels: {
     stable: { minElapsedMs: number };
     mastered: { minElapsedMs: number };
+  };
+  /**
+   * Formatos que admite cada tipo de habilidad. Una habilidad solo puede consolidar si su tipo admite algún formato
+   * de `deferred.formats`; si no (reconocimiento puro), nunca pasa de «en aprendizaje».
+   */
+  skillFormats: Record<SkillKind, ExerciseFormat[]>;
+  /** Nivel de una unidad, derivado de sus habilidades. */
+  unitLevels: {
+    /** Formatos distintos con éxito diferido que exige «dominada» (o todos los que admita la unidad, si son menos). */
+    masteredMinFormats: number;
+    /** Contextos distintos con éxito diferido que exige «dominada». */
+    masteredMinContexts: number;
+    /** Contextos que se recuerdan por habilidad. */
+    contextsLimit: number;
   };
   skill: {
     /** Evidencia acumulada para pasar de «en aprendizaje» a «en consolidación». */
@@ -67,7 +81,7 @@ export interface CoreConfig {
     stepsMs: number[];
     /** Escalones que baja un fallo. */
     failStepDrop: number;
-    /** Pista máxima que se recomienda (E5 es revelar, no una pista). */
+    /** Pista máxima que se recomienda (P5 es revelar, no una pista). */
     maxRecommendedHint: HintLevel;
     /** Fallos seguidos que activan la revisión. */
     failuresToReview: number;
@@ -144,6 +158,19 @@ export const defaultConfig: CoreConfig = {
   levels: {
     stable: { minElapsedMs: 7 * DAY },
     mastered: { minElapsedMs: 30 * DAY },
+  },
+  skillFormats: {
+    recognize: ['recognition_choice'],
+    listen: ['recognition_listening', 'listening_transcribe', 'listening_explain'],
+    recall: ['recall_cued', 'recall_unaided'],
+    produce: ['production'],
+    apply: ['application'],
+    speak: ['production'],
+  },
+  unitLevels: {
+    masteredMinFormats: 3,
+    masteredMinContexts: 2,
+    contextsLimit: 10,
   },
   skill: {
     consolidatingEvidence: 1.5,

@@ -142,3 +142,16 @@ describe('programador adaptativo', () => {
     expect(gap(good)).toBeGreaterThan(gap(shaky));
   });
 });
+
+describe('variedad de formatos y contextos', () => {
+  it('guarda los formatos y contextos de los éxitos diferidos, no de los aciertos inmediatos', () => {
+    const s = run(start(), [
+      attempt({ at: T0 + 60_000, format: 'production', contextId: 'inmediato' }),
+      attempt({ at: T0 + DAY, contextId: 'escena-1' }),
+      attempt({ at: T0 + 3 * DAY, format: 'production', contextId: 'escena-2' }),
+      attempt({ at: T0 + 5 * DAY, format: 'recall_cued', hint: 1, contextId: 'escena-3' }),
+    ]);
+    expect(s.unaidedFormats).toEqual(['recall_unaided', 'production']);
+    expect(s.contexts).toEqual(['escena-1', 'escena-2']);
+  });
+});

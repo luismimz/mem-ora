@@ -8,3 +8,4 @@ export * from './association';
 export * from './prerequisites';
 export * from './learner';
 export * from './planner';
+export * from './units';

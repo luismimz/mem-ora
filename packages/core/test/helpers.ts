@@ -14,6 +14,7 @@ export function attempt(partial: Partial<Attempt> & { at: number }): Attempt {
     skillId: partial.skillId ?? 's1',
     unitId: partial.unitId ?? 'k1',
     associationId: partial.associationId,
+    contextId: partial.contextId,
     format,
     correct: partial.correct ?? true,
     hint,

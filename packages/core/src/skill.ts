@@ -9,7 +9,7 @@
 import type { CoreConfig } from './config';
 import { evidenceWeight, isDeferredSuccess, isRetrievalFormat, isUnaidedSuccessAfter } from './evidence';
 import type { Scheduler } from './scheduler';
-import type { Attempt, Id, SkillStatus } from './types';
+import type { Attempt, ExerciseFormat, Id, SkillStatus } from './types';
 
 export interface SkillState {
   skillId: Id;
@@ -31,6 +31,10 @@ export interface SkillState {
   presentedAt: number | null;
   lastExposureAt: number | null;
   lastAttemptAt: number | null;
+  /** Formatos en los que ha tenido algún éxito diferido. */
+  unaidedFormats: ExerciseFormat[];
+  /** Contextos (escenas, frases, casos) con éxito diferido; los últimos `unitLevels.contextsLimit`. */
+  contexts: Id[];
 }
 
 export function newSkillState(skillId: Id, unitId: Id, config: CoreConfig): SkillState {
@@ -50,6 +54,8 @@ export function newSkillState(skillId: Id, unitId: Id, config: CoreConfig): Skil
     presentedAt: null,
     lastExposureAt: null,
     lastAttemptAt: null,
+    unaidedFormats: [],
+    contexts: [],
   };
 }
 
@@ -93,7 +99,13 @@ export function applySkillAttempt(state: SkillState, attempt: Attempt, scheduler
     next.evidence += weight;
     next.consecutiveFailures = 0;
     if (retrieval) next.retrievalSuccesses += 1;
-    if (deferredSuccess) next.deferredSuccesses += 1;
+    if (deferredSuccess) {
+      next.deferredSuccesses += 1;
+      if (!next.unaidedFormats.includes(attempt.format)) next.unaidedFormats = [...next.unaidedFormats, attempt.format];
+      if (attempt.contextId && !next.contexts.includes(attempt.contextId)) {
+        next.contexts = [...next.contexts, attempt.contextId].slice(-config.unitLevels.contextsLimit);
+      }
+    }
   } else {
     next.consecutiveFailures += 1;
     if (retrieval) next.evidence = Math.max(0, next.evidence - config.skill.failEvidencePenalty);

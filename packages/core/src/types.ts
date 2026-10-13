@@ -16,9 +16,9 @@ export const EXERCISE_FORMATS = [
 export type ExerciseFormat = (typeof EXERCISE_FORMATS)[number];
 
 /**
- * Escalera de pistas E0–E5.
- * E0 sin pista · E1 pista mínima · E2 contexto · E3 la ayuda de memoria · E4 escena o ejemplo completo ·
- * E5 respuesta revelada (nunca cuenta como acierto).
+ * Escalera de pistas P0–P5.
+ * P0 sin pista · P1 pista mínima · P2 contexto · P3 la ayuda de memoria · P4 escena o ejemplo completo ·
+ * P5 respuesta revelada (nunca cuenta como acierto).
  */
 export type HintLevel = 0 | 1 | 2 | 3 | 4 | 5;
 export const HINT_LEVELS: readonly HintLevel[] = [0, 1, 2, 3, 4, 5];
@@ -40,6 +40,8 @@ export interface Attempt {
   skillId: Id;
   unitId: Id;
   associationId?: Id;
+  /** Situación concreta en la que se practicó (escena, frase, caso). Sirve para exigir variedad de contextos. */
+  contextId?: Id;
   at: number;
   format: ExerciseFormat;
   correct: boolean;

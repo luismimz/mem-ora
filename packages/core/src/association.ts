@@ -1,7 +1,7 @@
 // Estado de una asociación (ayuda de memoria) para un alumno, separado del estado de la habilidad.
 //
 // Calendario propio de recuperación: +1 d, +3 d, +7 d, +14 d, +30 d (configurable).
-// Escalera de pistas E0–E5: un fallo sube la pista recomendada, un acierto la baja.
+// Escalera de pistas P0–P5: un fallo sube la pista recomendada, un acierto la baja.
 // Responde si la asociación «se está quedando» o «se está perdiendo» y activa su revisión.
 import type { CoreConfig } from './config';
 import { isDeferredSuccess, isRetrievalFormat } from './evidence';

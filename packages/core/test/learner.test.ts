@@ -50,6 +50,6 @@ describe('serialización', () => {
 
   it('rechaza versiones desconocidas o estados incompletos', () => {
     expect(() => deserializeLearner(JSON.stringify({ ...createLearner('u1'), schemaVersion: 99 }))).toThrow(/Versión/);
-    expect(() => deserializeLearner(JSON.stringify({ schemaVersion: 1, userId: 'u1' }))).toThrow(/incompleto/);
+    expect(() => deserializeLearner(JSON.stringify({ schemaVersion: 2, userId: 'u1' }))).toThrow(/incompleto/);
   });
 });

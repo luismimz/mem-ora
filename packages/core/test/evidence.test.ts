@@ -11,7 +11,7 @@ describe('peso de la evidencia', () => {
     expect(w('production')).toBe(w('application'));
   });
 
-  it('cada nivel de pista pesa menos y E5 no pesa nada', () => {
+  it('cada nivel de pista pesa menos y P5 no pesa nada', () => {
     const weights = ([1, 2, 3, 4] as const).map((hint) => evidenceWeight(attempt({ at: T0, format: 'recall_cued', hint }), config));
     for (let i = 1; i < weights.length; i += 1) expect(weights[i]).toBeLessThan(weights[i - 1]!);
     expect(evidenceWeight(attempt({ at: T0, format: 'recall_cued', hint: 5, correct: false }), config)).toBe(0);
@@ -29,7 +29,7 @@ describe('validación del intento', () => {
   it('rechaza combinaciones imposibles', () => {
     expect(validateAttempt(attempt({ at: T0, format: 'recall_unaided', hint: 2 }))).toContain('recall_unaided no admite pista');
     expect(validateAttempt(attempt({ at: T0, format: 'recall_cued', hint: 0 }))).toContain('recall_cued exige pista');
-    expect(validateAttempt(attempt({ at: T0, format: 'recall_cued', hint: 5, correct: true }))).toContain('E5 revela la respuesta: no puede ser acierto');
+    expect(validateAttempt(attempt({ at: T0, format: 'recall_cued', hint: 5, correct: true }))).toContain('P5 revela la respuesta: no puede ser acierto');
     expect(validateAttempt(attempt({ at: T0 }))).toEqual([]);
   });
 });

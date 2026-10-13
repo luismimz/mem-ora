@@ -34,7 +34,7 @@ describe('calendario de la asociación', () => {
   });
 });
 
-describe('escalera de pistas E0–E5', () => {
+describe('escalera de pistas P0–P5', () => {
   it('sube tras un fallo y baja con el éxito', () => {
     let s = run(start(), [attempt({ at: T0 + DAY, correct: false })]);
     expect(recommendedHint(s)).toBe(1);
@@ -46,7 +46,7 @@ describe('escalera de pistas E0–E5', () => {
     expect(recommendedHint(s)).toBe(0);
   });
 
-  it('nunca recomienda E5 (revelar no es una pista)', () => {
+  it('nunca recomienda P5 (revelar no es una pista)', () => {
     const fails = Array.from({ length: 8 }, (_, i) => attempt({ at: T0 + (i + 1) * DAY, format: 'recall_cued', hint: 4, correct: false }));
     expect(recommendedHint(run(start(), fails))).toBe(config.association.maxRecommendedHint);
   });

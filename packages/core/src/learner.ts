@@ -8,7 +8,8 @@ import { applySkillAttempt, exposeSkill, newSkillState, type SkillState } from '
 import { dayOf } from './time';
 import type { Attempt, Exposure, Id } from './types';
 
-export const LEARNER_SCHEMA_VERSION = 1;
+/** 2: la habilidad guarda formatos y contextos con éxito diferido. */
+export const LEARNER_SCHEMA_VERSION = 2;
 
 export interface DayActivity {
   /** Habilidades presentadas por primera vez. */

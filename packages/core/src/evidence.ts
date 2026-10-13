@@ -18,12 +18,12 @@ export function validateAttempt(attempt: Attempt): string[] {
   if (!attempt.unitId) problems.push('unitId vacío');
   if (!Number.isFinite(attempt.at)) problems.push('at no es un instante');
   if (!(EXERCISE_FORMATS as readonly string[]).includes(attempt.format)) problems.push(`formato desconocido: ${attempt.format}`);
-  if (!Number.isInteger(attempt.hint) || attempt.hint < 0 || attempt.hint > 5) problems.push('pista fuera de E0–E5');
+  if (!Number.isInteger(attempt.hint) || attempt.hint < 0 || attempt.hint > 5) problems.push('pista fuera de P0–P5');
   if (!Number.isFinite(attempt.timeMs) || attempt.timeMs < 0) problems.push('timeMs inválido');
   if (attempt.format === 'recall_unaided' && attempt.hint !== 0) problems.push('recall_unaided no admite pista');
   // Volver a oír el audio no es una pista; una pista en escucha es, por ejemplo, ver la primera letra o el texto parcial.
   if (attempt.format === 'recall_cued' && attempt.hint === 0) problems.push('recall_cued exige pista');
-  if (attempt.hint === 5 && attempt.correct) problems.push('E5 revela la respuesta: no puede ser acierto');
+  if (attempt.hint === 5 && attempt.correct) problems.push('P5 revela la respuesta: no puede ser acierto');
   return problems;
 }
 
