@@ -137,10 +137,11 @@ export const DEFAULT_SKILLS: Record<UnitType, Array<{ suffix: string; kind: Skil
     { suffix: 'recall', kind: 'recall', carriesAssociation: true },
     { suffix: 'produce', kind: 'produce' },
   ],
+  // «Aplicar» (caso o minidiálogo) se añadirá cuando exista esa experiencia: una habilidad que la sesión no puede
+  // practicar dejaría la unidad sin poder llegar nunca a «aprendida».
   pattern: [
     { suffix: 'recall', kind: 'recall', carriesAssociation: true },
     { suffix: 'produce', kind: 'produce' },
-    { suffix: 'apply', kind: 'apply' },
   ],
 };
 
