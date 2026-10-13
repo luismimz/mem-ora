@@ -174,12 +174,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Por qué:** el VPS (Hetzner CX33, x86, 80 GB) se comparte con otros proyectos; los recursos reales se verifican en
   el H2.4.
 
-## D-025 · Dominios y entorno
-- **App:** `memora.luismontalvan.com`. **Administrador:** `studio.luismontalvan.com`, con **2FA obligatorio** en las
-  cuentas de administrador. `ingles.luismontalvan.com` (V2) no se toca.
+## D-025 · Dominios y entorno (revisada el 13-oct-2026)
+- **App:** `memora.luismontalvan.com`. **Directus (panel y API):** `studio.luismontalvan.com`. Subdominios de un solo
+  nivel, gestionados en Cloudflare. **Son las `PUBLIC_URL` definitivas:** la licencia se ata a ellas; no se cambian sin
+  avisar al usuario. `ingles.luismontalvan.com` (V2) no se toca. 2FA obligatorio en administración.
 - **Local:** Docker Desktop en el Mac (29.8, Compose 5.5, ARM). El VPS es x86: imágenes multiarquitectura.
 - **HTTPS local para el iPhone (H2.2b):** `mkcert`. La clave raíz se queda solo en el Mac y el usuario borra el perfil
   del iPhone al terminar. **Nunca túneles públicos.**
+- **Sesión entre subdominios:** ver D-032.
 
 ## D-026 · Habitación del H2
 - **10 unidades:** las 5 de la misión «Necesitas ayuda en el trabajo» (`borrow`, `charger`, `run out of`,
@@ -238,3 +240,26 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **En producción (H2.4):** configurar el 2FA en el primer acceso, antes de cualquier otra cosa, y no dejar un token
   estático (`ADMIN_TOKEN`) en la cuenta personal: usar una cuenta de servicio con permisos limitados o retirar el token
   tras el despliegue.
+
+## D-031 · Telemetría de Directus activada (13-oct-2026)
+- **Qué:** `TELEMETRY=true`. El usuario acepta la telemetría que exige la Open Innovation Grant (acuerdo de uso, §3.3),
+  para que la configuración no contradiga el acuerdo.
+- **Qué se envía:** URL pública, identificador aleatorio del proyecto, versión, tipo y tamaño de la base, recuentos
+  (colecciones, elementos, campos, archivos, usuarios por tipo, roles, flujos, extensiones), si hay claves de IA (sí o
+  no) y número de peticiones por método. **No** se envía contenido, nombres de campos, datos personales ni secretos.
+  Cada 6 horas, a `telemetry.directus.io`.
+- **Riesgo:** desactivarla o bloquearla incumple el acuerdo; Directus puede terminar la licencia si no se corrige en
+  10 días tras el aviso (§5.3), y entonces el software deja de funcionar.
+- **Alternativas:** una licencia de pago que permita desactivarla, o volver a Directus 11 (sin niveles; ver D-027).
+
+## D-032 · Sesión del alumno por cookie (H2.2a)
+- **Qué:** el alumno inicia sesión con Directus en modo `session`: cookie `httpOnly`, sin tokens en `localStorage`.
+- **Local:** la app se sirve en `http://127.0.0.1:5173` y llama a Directus a través de un proxy de Vite (`/api`), así
+  que la cookie es del mismo origen. Se usa `127.0.0.1` y no `localhost` porque las cookies no distinguen puertos:
+  con `localhost` la sesión de la app y la del panel (`localhost:8055`) se pisarían.
+- **Producción (a decidir en el H2.4):**
+  - **Opción A (recomendada):** el servidor de la app sirve también `/api` como proxy hacia Directus. Cookie del mismo
+    origen (`memora.luismontalvan.com`), sin CORS, y el service worker del H2.2b controla todo bajo un solo origen.
+  - **Opción B:** la app llama directamente a `studio.luismontalvan.com`. Exige `CORS_ORIGIN` con la app,
+    `CORS_CREDENTIALS=true`, cookie `Secure` y `SameSite=Lax` (los dos subdominios son el mismo «sitio»). Si se
+    quisiera compartir la cookie, `SESSION_COOKIE_DOMAIN=.luismontalvan.com`, lo que también la mandaría al panel.
