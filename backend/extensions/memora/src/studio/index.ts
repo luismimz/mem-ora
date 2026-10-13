@@ -21,7 +21,7 @@ import {
 } from '@memora/content';
 import { resolveConfig, validateCatalog, type CatalogIssue } from '@memora/core';
 import { validateAssociation } from '@memora/techniques';
-import { buildCatalog, type CatalogRows } from './catalog';
+import { buildCatalog, type CatalogRows } from '../catalog';
 
 type Row = Record<string, any>;
 type Accountability = { user?: string | null; role?: string | null; admin?: boolean } | null | undefined;

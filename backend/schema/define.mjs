@@ -162,6 +162,18 @@ const collections = [
       f.o2m('skills', 'Habilidades', { template: '{{key}} · {{kind}}' }),
       f.o2m('associations', 'Asociaciones', { template: '{{technique}} · {{status}}' }),
       f.o2m('media', 'Medios', { template: '{{kind}} · {{purpose}} · {{status}}' }),
+      {
+        field: 'preview',
+        type: 'alias',
+        meta: {
+          interface: 'presentation-links',
+          special: ['alias', 'no-data'],
+          options: { links: [{ label: 'Vista previa como alumno', icon: 'visibility', type: 'normal', url: 'http://127.0.0.1:5173/preview/{{id}}' }] },
+          width: 'half',
+          note: 'Abre la unidad en la app tal como la verá el alumno (sin guardar progreso). La dirección la ajusta `APP_URL`.',
+          translations: es('Vista previa'),
+        },
+      },
       f.m2o('reviewed_by', 'Revisado por', { readonly: true, template: '{{first_name}} {{last_name}}' }),
       f.timestamp('reviewed_at', 'Revisado', { readonly: true }),
       f.date('last_verified', 'Última verificación', { note: 'Contenido sensible: al caducar vuelve a revisión (H9).' }),

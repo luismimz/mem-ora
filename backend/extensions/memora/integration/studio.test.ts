@@ -128,7 +128,7 @@ describe('Studio v0: modelo de datos, roles y flujo de estados', () => {
     const bad = await call(author, 'POST', '/items/prerequisites', { course: courseId, subject_unit: unitId, requires_skill: seeSkill.data.id });
     expect(bad.status).toBe(400);
     expect(bad.message).toContain('que es solo de reconocer');
-    const recall = (await call(admin, 'GET', `/items/skills?filter[key][_eq]=charger.recall`)).data[0];
+    const recall = (await call(admin, 'GET', `/items/skills?filter[key][_eq]=charger.recall&filter[unit][course][_eq]=${courseId}`)).data[0];
     const borrowRecall = (await call(admin, 'GET', `/items/skills?filter[key][_eq]=borrow.recall&filter[unit][_eq]=${unitId}`)).data[0];
     expect((await call(author, 'POST', '/items/prerequisites', { course: courseId, subject_unit: unitId, requires_skill: recall.id })).status).toBe(200);
     const cycle = await call(author, 'POST', '/items/prerequisites', { course: courseId, subject_unit: other.data.id, requires_skill: borrowRecall.id });
@@ -142,7 +142,7 @@ describe('Studio v0: modelo de datos, roles y flujo de estados', () => {
     const ok = await call(author, 'POST', '/items/associations', { unit: charger.id, technique: 'absurd_scene', text: 'Un CARGADOR gigante CARGA con tu móvil a cuestas.' });
     expect(ok.status, ok.message).toBe(200);
     expect(ok.data.language).toBe('es');
-    const skill = (await call(admin, 'GET', `/items/skills?filter[key][_eq]=charger.recall`)).data[0];
+    const skill = (await call(admin, 'GET', `/items/skills?filter[key][_eq]=charger.recall&filter[unit][course][_eq]=${courseId}`)).data[0];
     expect(skill.association).toBe(ok.data.id);
   });
 

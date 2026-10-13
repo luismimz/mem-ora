@@ -96,3 +96,11 @@ console.log(`✓ 2FA obligatorio en ${adminPolicies.length} política(s) de admi
 // Ajustes del proyecto: registro cerrado (solo por invitación) y panel en español.
 await api('PATCH', '/settings', { project_name: 'Memora Studio', default_language: 'es-ES', public_registration: false, project_color: '#4F46E5' });
 console.log('✓ Ajustes: registro por invitación, panel en español');
+
+// Botón «Vista previa como alumno»: apunta a la app de este entorno (APP_URL). Se ejecuta después de aplicar el esquema.
+const APP_URL = (process.env.APP_URL ?? 'http://127.0.0.1:5173').replace(/\/$/, '');
+const preview = await api('GET', '/fields/units/preview').catch(() => null);
+if (preview) {
+  await api('PATCH', '/fields/units/preview', { meta: { options: { links: [{ label: 'Vista previa como alumno', icon: 'visibility', type: 'normal', url: `${APP_URL}/preview/{{id}}` }] } } });
+  console.log(`✓ Vista previa como alumno → ${APP_URL}/preview/…`);
+}

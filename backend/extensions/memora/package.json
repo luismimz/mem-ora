@@ -12,7 +12,8 @@
   "dependencies": {
     "@memora/content": "workspace:*",
     "@memora/core": "workspace:*",
-    "@memora/techniques": "workspace:*"
+    "@memora/techniques": "workspace:*",
+    "@memora/experiences": "workspace:*"
   },
   "devDependencies": {
     "@directus/errors": "2.0.4",
