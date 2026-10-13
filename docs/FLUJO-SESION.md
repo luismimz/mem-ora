@@ -1,26 +1,44 @@
 # Flujo de la sesión por habitaciones (propuesta, pendiente de aprobación)
 
-Sustituye al recorrido del H2.2a (D-033 → D-034). Solo cambia `packages/experiences` y `apps/web`. Los tres puntos
+Sustituye al recorrido del H2.2a (D-033 → D-034). Se ajusta a `docs/ACUERDOS-PRODUCTO.md`, que manda en producto. Solo cambia `packages/experiences` y `apps/web`. Los tres puntos
 que requerirían tocar el endpoint o el esquema van al final, como preguntas.
 
-## 1. Qué hacían V1 y V2, y en qué se apartaba el H2.2a
+## 1. Matriz: V1, V2, H2.2a y propuesta frente a los principios rectores
 
-| | V1 (`frontend/`) | V2 (`memora-v2/`) | H2.2a (rechazado) |
-| --- | --- | --- | --- |
-| Unidad de sesión | Ronda de 10, 25, 50 o 100 palabras, partida en **habitaciones de 10** dentro de un palacio | Escena de **3 palabras** («tres anclas por escena») en un lugar de la casa | Lista suelta de habilidades del plan, sin habitación |
-| Tarjeta de palabra | Palabra y significado grandes; caja «1 · Escucha el sonido real» con AFI, pronunciación figurada y audio; caja «2 · Crea la conexión mental» con palabra puente, imagen o emoji y escena (con botón «la escena en inglés»); objetivo de unos 45 s | Palabra, significado en mayúsculas, AFI, imagen de la escena, «Suena a» con el puente y audio; suena primero la escena en español y luego la palabra; «Esta asociación no me ayuda» | Empezaba con **un sonido sin significado**; asociación sin imagen ni pronunciación figurada |
-| Recuperación inmediata | El prototipo `borrow` (`PerfectWord`) **tecleaba** la palabra; la sesión normal no recuperaba palabra a palabra | **Elegir entre opciones** (las otras palabras de la escena), con 5 s de margen, combo y vuelta a la escena si falla | **Teclear** la palabra en la primera exposición |
-| Escena en inglés | Botón o paso propio («la misma película, ahora en inglés») con audio | Implícita en la tarjeta | No existía |
-| Frase y estructura | Frase con audio normal y lento, y piezas etiquetadas (`Can I · borrow · your charger · for a minute?`) | Construir frases eligiendo entre dos piezas por hueco | Frase solo dentro de «ordenar» |
-| Ordenar | Fichas con 2 o 3 sobrantes, «reproduce exactamente la frase modelo» | Por huecos | Fichas con distractores |
-| Frase propia | Sí, con revisión por IA | Sí, en algunas fases | En el recorrido normal, con dos intentos |
-| Ritmo | **10 seguidas** → resumen de la habitación (s/palabra) → repaso opcional → **examen tecleado** al final de la ronda | **3 seguidas** → recuperar las 3 → gramática → construir → conversación | Una habilidad tras otra, sin bloques |
+Principios de `docs/ACUERDOS-PRODUCTO.md`:
+- **P1:** enseñar primero, pedir después.
+- **P2:** las asociaciones son el centro.
+- **P3:** vocabulario primero, gramática en espiral y en menor proporción.
+- **P4:** el Arcade divierte y sella, no enseña.
+- **P5:** experiencia única.
 
-Además, `ESPECIFICACION.md` pide:
-- **§5:** sonido, significado y AFI juntos; asociación con imagen; recuperación inmediata con la escena oculta; la misma escena en inglés; frase natural con audio repetible; estructura visible; ordenar con fichas; programar el repaso.
-- **§7:** nunca el mismo formato dos veces seguidas para una palabra, y contextos nuevos en cada reaparición.
+Marcas:
+- **contradice:** el ejercicio pide algo que antes no se ha enseñado en una tarjeta (P1).
+- **incumple §x:** choca con otro acuerdo del documento.
+- **riesgo:** cumple solo si se respeta la condición indicada.
+- **falta:** el aspecto no está.
 
-## 2. Ritmo propuesto: habitación de 10 en dos bloques de 5
+Comprobado leyendo el código antiguo en solo lectura (`frontend/`, `memora-v2/`) y el nuestro.
+
+| Aspecto | Principio | V1 (`frontend/`) | V2 (`memora-v2/`) | H2.2a (rechazado) | Propuesta |
+| --- | --- | --- | --- | --- | --- |
+| Unidad de sesión | P3 | Habitaciones de 10 dentro de un palacio. Cumple | Escena de 3 palabras **con gramática en cada escena**: riesgo, proporción alta de gramática | Lista suelta de habilidades. Incumple §3 (habitación) | Habitación de 10 = 2 misiones de 5 (§2). Cumple |
+| Primera pantalla de la palabra | P1, P2 | Tarjeta completa. Cumple. **Pero** el prototipo `borrow` empieza con «Escucha. ¿Qué palabra crees que es?»: **contradice** | Asociación con audio, palabra, significado, AFI, escena y puente. Cumple | Sonido sin significado. Incumple §3.1 | Palabra, significado, audio, AFI, pronunciación figurada, escena y puente juntos. Cumple |
+| Recuperación inmediata | P1 | El prototipo pide teclear: incumple §3.2 | Opciones entre las palabras de la escena, ya enseñadas porque se recupera tras asociar las 3. Cumple | Teclear la palabra. Incumple §3.2 | Elegir o completar con fichas, sin teclear. **Riesgo:** los distractores deben ser palabras ya enseñadas; en las dos primeras de la habitación, fichas de la propia palabra |
+| Pregunta de reconstrucción de la escena (3b.2) | P1, P2 | «Recuperación final: cuéntala», tecleado libre. Incumple §3.2 el primer día | Falta | Falta | **Falta en mi boceto: la añado.** En el repaso del bloque: «¿Qué hacía el burro?» con opciones (palabra → escena). Ayudas en el orden de 3b: imagen → puente → audio |
+| Escena en inglés con audio | P1, P2 | Paso propio con audio. Cumple | Falta | Falta | Paso 4. Cumple (necesita el campo de la pregunta 3) |
+| Frase natural y estructura | P1, P3 | Frase con audio normal y lento, y piezas etiquetadas. Cumple | Construir por huecos. Cumple | La frase solo aparecía dentro de «ordenar» | Paso 5 (frase y estructura si es patrón). Cumple |
+| Ordenar con fichas | P1 | Reproduce la frase modelo, ya mostrada. Cumple | Por huecos, tras verla. Cumple | **Contradice:** se podía pedir ordenar un ejemplo distinto del mostrado en la tarjeta (cada paso elegía su ejemplo por separado) | Ordena la misma frase del paso 5. Cumple |
+| «Descubre el truco» (Espejo) y construir por piezas (§3.5–3.6) | P3 | 23 fichas aparte, «frase escalera» de una estructura al día | Transformación gramatical en cada escena | Falta | **Falta en mi boceto:** solo cuando la unidad es un patrón, con colores (sujeto, raíz, terminación). La ficha completa de 9 pasos es del H4 |
+| Bloques completos tipo LOOK FOR (3b.4) | P1, P3 | Tipos «chunk» y «phrasal» con pista | LOOK FOR como expresión inseparable (misión de las llaves). Cumple | `form: chunk / phrasal_verb` sin tratamiento propio | Se enseña como bloque en su tarjeta. **Pendiente:** limitar la explicación a las piezas que aún no conoce exige saber qué piezas se han enseñado |
+| Gramática en espiral y en menor proporción | P3 | Una estructura al día, aparte del vocabulario. Proporción cumple; espiral parcial | Gramática en cada escena: más proporción de la acordada | **Contradice:** el patrón `can-i` del ejemplo usa palabras no enseñadas («Can I take a photo?») y no hay control de proporción | Como máximo 1 patrón por misión de 5 (≤ 20 %). Cada patrón exige como prerrequisito sus palabras y vuelve en habitaciones posteriores con vocabulario nuevo ya enseñado. **Pendiente:** validador de que los ejemplos del patrón solo usan vocabulario enseñado más palabras funcionales |
+| Frase propia | P1 | «Crear otra» con IA. Fuera del recorrido normal según §3 | En algunas fases | En el recorrido normal. Incumple §3 | Fuera del recorrido; opción oculta. Producir = traducir la frase de ejemplo en los repasos, con alternativas aceptadas (§3) |
+| Conversación con corrección concreta y reintento (3b.5) | P1 | Chat con IA en directo: **contradice** (puede pedir vocabulario no enseñado y es IA en la lección) | Diálogos revisados, error contextual y nuevo intento. Cumple | Falta | H7 (§3.7 la pone en el recorrido: lo planteo como pregunta). Respuestas y errores típicos preparados en el contenido, sin IA, solo con vocabulario enseñado |
+| Recordar fuera de la historia y otro día en otra situación (3b.3, 3b.6) | P1, P2 | Examen con las mismas palabras | Repaso en Arcade | Repasos con los mismos ejemplos | Repasos que rotan contextos. **Riesgo:** una «frase nueva» solo puede usar vocabulario ya enseñado; hacen falta más ejemplos por unidad |
+| Arcade: solo lo enseñado, y lo fallado vuelve | P4, P1 | Usa palabras desbloqueadas y los fallos actualizan el repaso. **Pero el respaldo contradice:** completa la tanda con un pack fijo de 13 palabras **aunque no se hayan visto**, con un progreso inventado | `MicroArcade` (el que se usa) exige recuerdo previo y registra el fallo en el calendario. Cumple. `DailyArcade` dejaría pasar palabras sin recuerdo (**contradice**), pero no se usa en ningún sitio | Sin Arcade | H3: el selector solo toma habilidades con exposición registrada y respeta las compuertas de 7 y 30 días. Un fallo es un intento más y el núcleo lo devuelve al repaso. **Prueba obligatoria:** el selector nunca devuelve algo sin exposición |
+| «Mi evolución»: con ayuda frente a autónomo (3b) | P1 | Estadísticas por asociación | Intentos originales, ayuda y corrección. Cumple | El resultado separa «a la primera» de «con ayuda» | H6. Los datos ya existen: pista y formato de cada intento. «Autónomo» = sin pista y en recuperación o producción |
+
+## 2. Ritmo propuesto: habitación de 10 en dos misiones de 5
 
 - La **V1** presentaba 10 palabras seguidas y pedía teclearlas al final: el hueco era demasiado largo y la
   recuperación demasiado difícil el primer día.
@@ -151,7 +169,11 @@ Al acertar: «✓ borrow · vuelve mañana». El repaso queda programado y se pa
 Mezcla las palabras del bloque, sin teclear y sin repetir formato seguido:
 - imagen o escena → palabra;
 - palabra → significado;
-- audio → significado.
+- audio → significado;
+- **reconstrucción de la escena (3b.2):** «¿Qué hacía el burro?», con opciones de escena (palabra → escena). Si
+  necesita ayuda: primero la imagen, luego el puente, luego el audio.
+
+Ninguna de estas preguntas usa una palabra que no se haya enseñado ya en una tarjeta de esta sesión (P1).
 
 ### 8 · Resumen de la habitación
 ```
@@ -182,9 +204,9 @@ Mezcla las palabras del bloque, sin teclear y sin repetir formato seguido:
 
 ## 4. Lo que hay que decidir antes de escribir código
 
-1. **Habilidad «producir» sin frase propia.** Si la frase propia sale del recorrido, la habilidad «producir» solo
-   recibe «ordenar» (reconocimiento) y la unidad no podría llegar a «aprendida». Propongo que en los repasos
-   «producir» se pruebe **traduciendo la frase de ejemplo** (formato `production`, tecleado y con pistas). ¿De acuerdo?
+1. ~~Habilidad «producir» sin frase propia.~~ **Resuelta por `ACUERDOS-PRODUCTO.md` §3:** producir se practica
+   traduciendo la frase de ejemplo en los repasos, con alternativas aceptadas. Las alternativas necesitan un campo en
+   el contenido de la unidad (`packages/content`).
 2. **Habitación = módulo y tope diario.** Para que la sesión sea «una habitación de 10», hacen falta dos cosas que
    tocan el endpoint (extensión de Directus), no el núcleo:
    - enviar el módulo de cada unidad;
@@ -197,9 +219,24 @@ Mezcla las palabras del bloque, sin teclear y sin repetir formato seguido:
    - **(b)** guardarla dentro de `evidence` de la técnica, sin tocar el esquema.
 
    Recomiendo (a).
-4. **Imagen de la escena.** Las imágenes generadas llegan en el H2.3. Hasta entonces, propongo usar las que subas a
-   mano en «Medios», ya aprobadas. Requiere que el endpoint las incluya en la sesión. Sin imagen se muestra un
-   marco neutro.
+4. ~~Imagen de la escena.~~ **Resuelta por `ACUERDOS-PRODUCTO.md` §7:** emoji provisional en un hueco de
+   ilustración que admite igual un emoji o una imagen, y marco neutro si no hay. fal no se usa hasta aprobar el
+   diseño. Falta saber dónde se guarda el emoji (ver pregunta 7).
 5. **Pronunciación figurada:** ya existe en el contenido (`pronunciation.respelling`). Se mostrará si está.
-6. **Faltan `docs/PROTOTIPO.html` y las capturas de `docs/diseno/`.** No los encuentro en el repositorio. Cuando
-   estén, escribo `docs/DISENO.md` y ajusto estos bocetos.
+6. **Faltan las capturas de `docs/diseno/`.** `ACUERDOS-PRODUCTO.md` §0 dice que el prototipo HTML del chat
+   **no** es referencia y que la V2 sí lo es (para mejorarla). Cuando estén las capturas, escribo `docs/DISENO.md`.
+7. **Emoji de la escena.** La asociación no tiene un campo para el emoji provisional. Igual que en la pregunta 3:
+   **(a)** campo en el esquema o **(b)** dentro de `evidence`.
+8. **Diferencias con `ACUERDOS-PRODUCTO.md` §3** que mi boceto no cubría:
+   - el «resultado breve» tras la recuperación (¡Conexión hecha!, XP, combo);
+   - «Descubre el truco» con colores si hay patrón;
+   - construir por piezas;
+   - la conversación con Emma dentro del recorrido;
+   - la mochila de palabras;
+   - el deslizamiento en móvil («slide», a confirmar).
+
+   Propongo:
+   - incluir en esta revisión el resultado breve, «Descubre el truco» y construir por piezas, solo en patrones;
+   - dejar la conversación para el H7 y la mochila para después del H2.
+
+   ¿De acuerdo?
