@@ -27,6 +27,7 @@ H2. Probar ya
 Objetivo: tener un lugar real donde probar Memora y añadir contenido desde el administrador. Entregables:
 
 Primero: validador del catálogo que rechace prerrequisitos sobre habilidades de reconocimiento puro (nunca consolidan y bloquearían para siempre lo que depende de ellas), con mensaje comprensible para el autor (D-019).
+Nivel por unidad derivado de sus habilidades (aprendida, estable, dominada), con variedad de formatos para «dominada». Si ESPECIFICACION.md §4 contradice CLAUDE.md o DOMINIO.md, mandan estos.
 
 Colecciones de Directus para curso, módulo, unidad, asociación, medios y revisión, con instantáneas de esquema.
 Administrador v0 con roles, flujo de estados, validación por tipo y vista previa como alumno.

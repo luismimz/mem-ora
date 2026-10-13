@@ -2,6 +2,10 @@
 
 No se implementan hasta que un hito las incluya.
 
+- **Arcade respeta las compuertas de nivel** (H3): el selector del Arcade no debe sacar habilidades «aprendidas»
+  antes de 7 días ni «estables» antes de 30 días desde su última exposición. Si lo hiciera, la exposición reiniciaría
+  el plazo y la habilidad nunca podría demostrar el nivel siguiente (D-018). Aplica a cualquier modo libre.
+
 - **Nivel por unidad** (`ESPECIFICACION.md` §4): derivar «aprendida / estable / dominada» de una palabra o concepto
   combinando sus habilidades (recuperar, escuchar, producir) y sus formatos. Pendiente de decisión (D-018).
 - **Lo dominado sale de la cola diaria** y solo vuelve en tests de retención (30 y 90 días), como propone
