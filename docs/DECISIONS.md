@@ -306,3 +306,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Asociaciones absurdas al centro, con recuerdo de la historia (reconstrucción e inversa). Gramática breve tras las 15 palabras y solo con ellas; Arcade con asociaciones directas e inversas; chat tras 3 sesiones de gramática.
 - Modos Asociaciones, Gramática, Arcade y Chat elegibles por separado sobre un único estado del alumno.
 - Sustituye la «habitación de 10» de D-034. Pendiente: cuota mínima de lo nuevo aunque haya repasos acumulados (requiere ajustar el plan del núcleo, con aprobación).
+
+## D-036 · Escenas de 5 y curva del olvido (14-oct-2026)
+- Sesión de 15 palabras = 3 escenas de 5. Diseño igual al de V2 (`docs/DISENO.md`, capturas en `docs/diseno/`).
+- Intervalos de repaso: **1 h, 3 h, 24 h, 3 d, 7 d, 14 d** (y 30 d para el mantenimiento y «dominada»). Lo asumido sin
+  fallos se espacia y no vuelve cada día. Supone cambiar `scheduler.stepsMs` del núcleo (configuración) y repetir
+  pruebas y simulación: se hará al implementar, con aviso.
