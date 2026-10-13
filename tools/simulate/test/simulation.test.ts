@@ -1,7 +1,7 @@
 // Prueba de recorrido completo del H1: 30 días, cuatro alumnos sintéticos, dos cursos de materias distintas,
 // el mismo núcleo sin cambios.
 import { describe, expect, it } from 'vitest';
-import { DAY, resolveConfig, serializeLearner, type SkillStatus } from '@memora/core';
+import { DAY, resolveConfig, serializeLearner, unitLevel, validateCatalog, type SkillStatus } from '@memora/core';
 import { languageCourse, programmingCourse } from '../src/courses';
 import { simulate } from '../src/simulate';
 import { PROFILES } from '../src/student';
@@ -94,6 +94,28 @@ describe('simulación de 30 días', () => {
     expect(learnedOrAbove(final('forgetful'))).toBeLessThan(learnedOrAbove(final('language')));
     expect(final('forgetful').stable).toBeLessThan(final('language').stable);
     expect(runs.forgetful.rows.at(-1)!.associations.reviewNeeded).toBeGreaterThan(runs.language.rows.at(-1)!.associations.reviewNeeded);
+  });
+
+  it('los dos catálogos sintéticos pasan el validador sin errores', () => {
+    for (const c of [lang, prog]) expect(validateCatalog(c, config).filter((i) => i.severity === 'error')).toEqual([]);
+  });
+
+  it('el nivel de cada unidad nunca supera el de sus habilidades y «dominada» exige variedad', () => {
+    const long = simulate(PROFILES.languageLearner, lang, config, 60);
+    let mastered = 0;
+    for (const u of lang.units) {
+      const report = unitLevel(u.id, lang, long.learner.skills, config);
+      const statuses = report.counted.map((id) => long.learner.skills[id]?.status);
+      if (report.level !== 'none') expect(statuses.every((s) => s && LEARNED_OR_ABOVE.includes(s))).toBe(true);
+      if (report.level === 'mastered') {
+        mastered += 1;
+        expect(statuses.every((s) => s === 'mastered')).toBe(true);
+        expect(report.formats.length).toBeGreaterThanOrEqual(report.requiredFormats);
+        expect(report.contexts).toBeGreaterThanOrEqual(report.requiredContexts);
+      }
+    }
+    expect(runs.language.rows.at(-1)!.units.mastered).toBe(0);
+    expect(mastered).toBe(long.rows.at(-1)!.units.mastered);
   });
 
   it('es determinista', () => {

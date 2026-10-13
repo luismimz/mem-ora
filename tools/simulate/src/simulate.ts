@@ -9,6 +9,7 @@ import {
   createLearner,
   planDay,
   SKILL_STATUSES,
+  unitLevel,
   type Catalog,
   type CoreConfig,
   type LearnerState,
@@ -31,6 +32,8 @@ export interface DayRow {
   newSuppressed: boolean;
   statuses: Record<SkillStatus, number>;
   associations: { holding: number; forming: number; losing: number; reviewNeeded: number };
+  /** Unidades por nivel derivado de sus habilidades. */
+  units: { none: number; learned: number; stable: number; mastered: number };
 }
 
 export interface SimulationResult {
@@ -64,11 +67,13 @@ export function simulate(profile: Profile, catalog: Catalog, config: CoreConfig,
         const hint = kind === 'recall' ? item.recommendedHint : 0;
         const format = formatFor(kind, hint, item.reason === 'new', learner.skills[item.skillId]?.attempts ?? 0);
         const answeredAt = at + 20_000;
+        // El motor de experiencias variaría la escena o la frase; aquí se rotan tres contextos por unidad.
+        const contextId = `${item.unitId}#ctx${(learner.skills[item.skillId]?.attempts ?? 0) % 3}`;
         const { correct: ok, timeMs } = student.answer(item.skillId, answeredAt, format, hint);
         seq += 1;
         learner = applyAttempt(
           learner,
-          { id: `${profile.name}-a${seq}`, userId: learner.userId, skillId: item.skillId, unitId: item.unitId, associationId: item.associationId, at: answeredAt, format, correct: ok, hint, timeMs },
+          { id: `${profile.name}-a${seq}`, userId: learner.userId, skillId: item.skillId, unitId: item.unitId, associationId: item.associationId, contextId, at: answeredAt, format, correct: ok, hint, timeMs },
           config,
         ).learner;
         attempts += 1;
@@ -86,6 +91,8 @@ export function simulate(profile: Profile, catalog: Catalog, config: CoreConfig,
       else if (assessment.trajectory === 'losing') associations.losing += 1;
       else associations.forming += 1;
     }
+    const units = { none: 0, learned: 0, stable: 0, mastered: 0 };
+    for (const u of catalog.units) units[unitLevel(u.id, catalog, learner.skills, config).level] += 1;
     rows.push({
       day: d + 1,
       studied,
@@ -98,6 +105,7 @@ export function simulate(profile: Profile, catalog: Catalog, config: CoreConfig,
       newSuppressed: plan.stats.newSuppressedByBacklog,
       statuses,
       associations,
+      units,
     });
   }
   return { profile, rows, learner };

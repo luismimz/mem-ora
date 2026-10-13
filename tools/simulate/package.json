@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "simulate": "tsx src/cli.ts",
+    "catalog-demo": "tsx src/catalog-demo.ts",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
   },
-  "dependencies": { "@memora/core": "workspace:*" }
+  "dependencies": { "@memora/content": "workspace:*", "@memora/core": "workspace:*" }
 }

@@ -21,10 +21,19 @@ importers:
         specifier: ^3.2.7
         version: 3.2.7(@types/node@22.20.5)(tsx@4.23.15)
 
+  packages/content:
+    dependencies:
+      '@memora/core':
+        specifier: workspace:*
+        version: link:../core
+
   packages/core: {}
 
   tools/simulate:
     dependencies:
+      '@memora/content':
+        specifier: workspace:*
+        version: link:../../packages/content
       '@memora/core':
         specifier: workspace:*
         version: link:../../packages/core
