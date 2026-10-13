@@ -185,3 +185,39 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **10 unidades:** las 5 de la misión «Necesitas ayuda en el trabajo» (`borrow`, `charger`, `run out of`,
   `Can I + verbo`, `actually`) más `battery`, `receipt`, `plug`, «I can't find…» y «How much is it?».
 - Los ejemplos pasan por la revisión del usuario antes de publicarse.
+
+## D-027 · Directus 11.17.4, no 12
+- **Qué:** se fija `directus/directus:11.17.4` (amd64 y arm64).
+- **Por qué:** en Directus 12 las instalaciones propias van al nivel «core» por defecto: las **reglas de permisos
+  personalizadas exigen licencia** (sin ella se ignoran) y hay un límite de colecciones. Memora usa reglas propias
+  («solo sus borradores», «curso privado del propietario») y ya tiene 13 colecciones.
+  Fuente: notas de cambios de la versión 12 (consultadas el 13-oct-2026).
+- **Riesgo:** la rama 11 dejará de recibir correcciones en algún momento. Hay que vigilar sus avisos de seguridad y
+  decidir antes del H2.4 si se compra licencia o se mantiene la 11.
+- **Alternativas descartadas:** Directus 12 sin licencia (permisos ignorados) y un panel propio (fuera de alcance).
+
+## D-028 · Esquema, permisos y ajustes como código
+- **Esquema:** `backend/schema/define.mjs` crea por la API lo que falte, solo en desarrollo. Su resultado se exporta a
+  `backend/schema/snapshot.json`, versionado. **Los demás entornos solo aplican la instantánea**
+  (`pnpm backend:schema:apply`), siempre con copia previa (`backend/backups/`). Comprobado: el entorno local se
+  reconstruyó desde cero solo con la instantánea y la prueba de recorrido pasó.
+- **Roles, políticas, permisos y ajustes** no entran en las instantáneas de Directus; van en
+  `backend/access/apply-access.mjs`, idempotente.
+- **Descartado:** el `setup-schema.mjs` del repositorio antiguo (esquema a mano, sin instantáneas).
+
+## D-029 · Reglas de Studio en el servidor
+- La extensión `memora` (hook) aplica validación por tipo y técnica, flujo de estados por rol, bloqueo del contenido
+  en revisión/aprobado/publicado, validación de la estructura del curso, habilidades por defecto, versión al publicar,
+  copia de lo publicado e historial. Vale para el panel y para la API: un permiso amplio no se salta la revisión.
+- **Nadie salta pasos, ni administración.** Para corregir algo publicado hay que devolverlo a borrador, revisarlo y
+  publicarlo otra vez: mientras tanto desaparece para los alumnos. Editar una versión aparte sin despublicar
+  (versiones de contenido de Directus) queda para el H8.
+- **El alumno no lee colecciones:** usará los endpoints del H2.2a, que aplican la visibilidad de cursos privados.
+- **Cuentas de prueba** con dominio `example.com` (reservado para pruebas; Directus rechaza `.local`).
+
+## D-030 · 2FA de administración
+- Política de administración con `enforce_tfa`. **Matiz comprobado:** hasta que la cuenta configura el 2FA, se puede
+  iniciar sesión por la API sin código; el panel obliga a configurarlo al entrar.
+- **En producción (H2.4):** configurar el 2FA en el primer acceso, antes de cualquier otra cosa, y no dejar un token
+  estático (`ADMIN_TOKEN`) en la cuenta personal: usar una cuenta de servicio con permisos limitados o retirar el token
+  tras el despliegue.

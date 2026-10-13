@@ -11,6 +11,8 @@ Cada pieza que se trae del repositorio antiguo se registra aquí. Se reescribe, 
 | Eventos idempotentes | memora-v2/src/services/progressSync.ts, backend/.../core/progress.js | packages/core/src/learner.ts | Patrón correcto para progreso en servidor | Idempotencia por id en el núcleo; orden cronológico; serialización estable. El servidor llega en el H2 | learner.test.ts | Portado (H1, parte del núcleo) |
 | Señales de fatiga | memora-v2/src/domain/memory.ts (`shouldReduceDifficulty`) | packages/core/src/planner.ts (`newLoadFactor`) | Reducir carga ante malas rachas | Solo por precisión de días anteriores; sin tiempo ni abandono todavía | planner.test.ts | Portado (H1, parcial) |
 | Arcade, desafíos, sesión V1, `phrasal`, irregulares | varios | — | — | — | — | Fuera del H1 |
+| Esquema de Directus | backend/scripts/setup-schema.mjs | — | — | Descartado: esquema a mano. Sustituido por `backend/schema` (instantánea) y `backend/access` | — | Descartado (H2.1) |
+| Clave idempotente de eventos | backend/extensions/memora-ai/dist/core/progress.js | colección `learning_events` (`event_key`) | Patrón ya probado en la V2 | Campos para sin conexión: id del cliente, dispositivo, orden, hora del dispositivo y de recepción | studio.test.ts (esquema); endpoint en el H2.2a | Parcial (H2.1) |
 
 ## Reglas
 

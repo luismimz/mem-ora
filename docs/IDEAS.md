@@ -21,3 +21,8 @@ No se implementan hasta que un hito las incluya.
 - **Medición de retención por ventanas** de la V1 (`shared/retention.mjs`: +1 h, +24 h, +7 d, +30 d por asociación)
   para el panel de calidad de técnicas (H6/H8).
 - **Zona horaria por alumno** en `dayOriginMs` (H2).
+- **Botones de transición en el panel** (H2.2a o H8): hoy el estado es un desplegable con todos los valores y el
+  servidor rechaza los no permitidos. Mejor mostrar solo «Enviar a revisión», «Aprobar», «Publicar»… según el rol.
+- **Lista de comprobación del revisor** por técnica (`reviewChecklist`, p. ej. «el puente es una palabra real») visible
+  en el panel al aprobar una asociación.
+- **Editar lo publicado sin despublicar** con versiones de contenido de Directus (H8).
