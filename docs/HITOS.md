@@ -32,6 +32,7 @@ Nivel por unidad derivado de sus habilidades (aprendida, estable, dominada), con
 Colecciones de Directus para curso, módulo, unidad, asociación, medios y revisión, con instantáneas de esquema.
 Administrador v0 con roles, flujo de estados, validación por tipo y vista previa como alumno.
 Sesión mínima del alumno sobre el núcleo: escuchar, asociar, recuperar sin ver, escena, estructura, ordenar, frase propia y resultado (como el prototipo de borrow), reanudable y guardada en la cuenta.
+Subhitos: H2.0 validador del catálogo y nivel por unidad · H2.1 modelo de datos y administrador · H2.2a sesión con conexión (el servidor recalcula) · H2.2b sincronización y modo sin conexión · H2.3 audio e imágenes · H2.4 despliegue y habitación de 10 palabras. Cada uno con su prueba humana.
 Tubería de audio (normalizador, léxico por idioma, caché por huella, audios normal y lento) y cola de imágenes con tope diario.
 Uso sin conexión (D-022): estudiar sin conexión la sesión de hoy y la de mañana, con contenido, audio e imágenes descargados de antemano; intentos en cola local y envío idempotente al reconectar; el servidor es la fuente de verdad. Prueba en modo avión y en el iPhone del usuario.
 Despliegue en un subdominio propio, con la app actual intacta.

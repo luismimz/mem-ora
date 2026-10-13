@@ -160,14 +160,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Nota:** el usuario pidió sustituir una decisión «H2 requiere conexión»; no existía en este archivo, así que esta
   es la primera decisión sobre conexión.
 
-## D-023 · Topes de gasto por proveedor
-- **Saldos prepago** sin recarga automática: fal 10 €, OpenRouter 5 €.
-- **Topes en la app:** OpenRouter 5 €/mes; fal 2 €/mes; imágenes (fal, modelo rápido FLUX.1 [schnell]) con
-  sublímite de 1 €/mes y tope diario. Cada imagen se aprueba aparte.
+## D-023 · Topes de gasto por proveedor (revisada el 2026-10-13)
+- **Saldos prepago** sin recarga automática: fal 10 € en total (ampliable si hace falta), OpenRouter 5 €.
+- **Topes en la app, independientes:** OpenRouter 5 €/mes; fal 2 €/mes, que es el tope de imágenes (fal, modelo
+  rápido FLUX.1 [schnell]), más un **tope diario de 10 imágenes**. Cada imagen se aprueba aparte.
+- **Corte automático** al llegar al tope, contando el coste real de cada llamada.
 - **Precio a verificar en el H2.3** contra la página del modelo y el coste real de una llamada. Fuentes secundarias
   (13-oct-2026): 0,003 $/megapíxel; no está claro si 1024×1024 se factura como 1 o 2 MP (0,003–0,006 $ por imagen).
-- **Pendiente:** el usuario escribió también «dentro de los 5 €/mes»; ver la pregunta abierta sobre si los topes son
-  por proveedor o un total.
 
 ## D-024 · Kokoro bajo demanda
 - **Qué:** Kokoro no está siempre encendido. El audio se genera al aprobar la unidad (cola) y se sirve desde caché.
@@ -176,9 +175,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   el H2.4.
 
 ## D-025 · Dominios y entorno
-- **App:** `memora.luismontalvan.com`. **Administrador:** un subdominio distinto (nombre a confirmar en el H2.4).
-  `ingles.luismontalvan.com` (V2) no se toca.
-- **Local:** Docker Desktop en el Mac para Directus, Postgres y Kokoro.
+- **App:** `memora.luismontalvan.com`. **Administrador:** `studio.luismontalvan.com`, con **2FA obligatorio** en las
+  cuentas de administrador. `ingles.luismontalvan.com` (V2) no se toca.
+- **Local:** Docker Desktop en el Mac (29.8, Compose 5.5, ARM). El VPS es x86: imágenes multiarquitectura.
+- **HTTPS local para el iPhone (H2.2b):** `mkcert`. La clave raíz se queda solo en el Mac y el usuario borra el perfil
+  del iPhone al terminar. **Nunca túneles públicos.**
 
 ## D-026 · Habitación del H2
 - **10 unidades:** las 5 de la misión «Necesitas ayuda en el trabajo» (`borrow`, `charger`, `run out of`,
