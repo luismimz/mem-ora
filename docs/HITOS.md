@@ -14,7 +14,7 @@ H1. Núcleo universal (sin interfaz)
 Objetivo: el cerebro de Memora, independiente de la materia, probado de forma aislada. Entregables (packages/core):
 
 Entidades de docs/DOMINIO.md: unidad, habilidad, prerrequisito, estado por habilidad, intento con evidencia, asociación.
-Estados: nuevo, presentado, en aprendizaje, en consolidación, consolidado, debilitado.
+Estados: nuevo, presentado (vista), en aprendizaje, en consolidación, aprendida, estable, dominada, debilitado (ver D-018).
 Registro de intentos con evidencia ponderada (tabla de CLAUDE.md).
 Programador de repasos detrás de una interfaz (Scheduler), con una implementación simple adaptativa y un hueco para evaluar FSRS.
 Escalera de pistas: sube tras un fallo y baja con el éxito; tras dos fallos la asociación se marca para revisión.
@@ -25,6 +25,8 @@ La misma simulación funciona con los dos cursos sin cambiar una línea del núc
 H2. Probar ya
 
 Objetivo: tener un lugar real donde probar Memora y añadir contenido desde el administrador. Entregables:
+
+Primero: validador del catálogo que rechace prerrequisitos sobre habilidades de reconocimiento puro (nunca consolidan y bloquearían para siempre lo que depende de ellas), con mensaje comprensible para el autor (D-019).
 
 Colecciones de Directus para curso, módulo, unidad, asociación, medios y revisión, con instantáneas de esquema.
 Administrador v0 con roles, flujo de estados, validación por tipo y vista previa como alumno.

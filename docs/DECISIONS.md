@@ -79,11 +79,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Por qué:** mandato del usuario; el problema original de Memora era que la asociación no se volvía a recuperar.
 - **Descartado:** derivar el estado de la asociación del de la habilidad (mezcla dos preguntas distintas).
 
-## D-014 · Las habilidades de solo reconocimiento nunca se consolidan
-- **Qué:** consecuencia directa de las reglas 11 y D-012. Se programan (hasta +3 d como máximo) pero no llegan a
-  «consolidado» ni pueden desbloquear prerrequisitos.
-- **Por qué:** «reconocer» no demuestra recuerdo sin ayuda.
-- **Riesgo:** en la interfaz habrá que presentar su progreso sin prometer dominio.
+## D-014 · Solo el reconocimiento puro no se consolida (revisada el 2026-10-13)
+- **Qué:** las habilidades de reconocimiento puro (`recognition_choice`, `recognition_listening`) se programan
+  (hasta +3 d como máximo) pero nunca llegan a «aprendida» ni desbloquean prerrequisitos. **Escuchar sí puede
+  consolidar** mediante dos formatos de recuperación nuevos: `listening_transcribe` (dictado: escuchar y escribir
+  lo oído) y `listening_explain` (escuchar y expresar el sentido con palabras propias; en idiomas, traducción libre).
+- **Por qué:** «reconocer» no demuestra recuerdo sin ayuda (regla 11), pero dejar la escucha bloqueada para siempre
+  impedía demostrar comprensión auditiva. Los nombres de los formatos son agnósticos de la materia.
+- **Pesos:** ambos «alto» (0,75), como recuperar sin pistas. Hipótesis (ver `NUCLEO-UMBRALES.md`).
+- **Versión anterior:** «las habilidades de solo escuchar nunca se consolidan». Descartada a petición del usuario.
 
 ## D-015 · Tope de escalón para aciertos débiles (`weakSuccessMaxStep`)
 - **Qué:** un acierto de reconocimiento o con mucha pista sube de escalón solo hasta el 2 (+3 d).
@@ -93,7 +97,7 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 
 ## D-016 · Prerrequisitos se cumplen con «en consolidación»
 - **Qué:** `minStatus: consolidating`; «debilitada» cuenta como «en consolidación».
-- **Por qué:** exigir «consolidado» bloquearía cada dependencia al menos dos días; un fallo posterior no debe volver a
+- **Por qué:** exigir «aprendida» bloquearía cada dependencia al menos dos días; un fallo posterior no debe volver a
   bloquear lo ya desbloqueado.
 
 ## D-017 · Simulación con alumnos sintéticos
@@ -103,3 +107,23 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   `NUCLEO-UMBRALES.md`).
 - **Nota:** el primer modelo (recuerdo del 37 % al cumplirse la estabilidad) era demasiado pesimista y generaba un
   círculo de fallos; se recalibró al convenio habitual.
+
+## D-018 · Niveles aprendida, estable y dominada
+- **Qué:** los estados se alinean con `CLAUDE.md`: `new → presented (vista) → learning → consolidating →
+  learned (aprendida) → stable (estable) → mastered (dominada)`, más `weakened`. «Aprendida» = dos éxitos diferidos
+  (lo que antes era «consolidado»); «estable» = acierto sin pista tras ≥ 7 d sin exposición; «dominada» = tras
+  ≥ 30 d. Umbrales en `config.levels`.
+- **Plazo contado desde la última exposición**, con compuerta en el programador para no pedir antes de tiempo.
+- **Descartado:** contar desde que se alcanzó el nivel anterior permitiendo repasos intermedios (mediría «recuerda
+  con práctica», no «retiene»). Queda como alternativa si en uso real la compuerta resulta demasiado espaciada.
+- **Diferencia con `ESPECIFICACION.md` §4** (borrador): allí los niveles son **por palabra** y combinan habilidades
+  (aprendida = recuperada + reconocida al oír + usada en frase; estable = supera +7 y +14 d; dominada = 3 sesiones,
+  3 formatos y 2 frases propias, más un test a ≥ 30 d). El núcleo implementa los niveles **por habilidad**; el nivel
+  de una unidad se podría derivar combinando sus habilidades. Pendiente de decisión del usuario.
+- **Sustituye** la lista de estados de `HITOS.md` H1 (actualizada).
+
+## D-019 · Validador de prerrequisitos de reconocimiento, al principio del H2
+- **Qué:** `validateCatalog` debe rechazar un prerrequisito que apunte a una habilidad de reconocimiento puro, o a
+  una unidad cuyas habilidades no puedan consolidar. Pasa a ser el primer entregable del H2.
+- **Por qué:** ese prerrequisito bloquearía para siempre lo que depende de él, y en el H2 el contenido empieza a
+  crearse desde el administrador.

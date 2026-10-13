@@ -2,8 +2,12 @@
 
 No se implementan hasta que un hito las incluya.
 
-- **Validar prerrequisitos de reconocimiento** (H2): `validateCatalog` debería avisar si un prerrequisito apunta a
-  una habilidad de solo reconocimiento, que nunca llega a «en consolidación» y bloquearía para siempre.
+- **Nivel por unidad** (`ESPECIFICACION.md` §4): derivar «aprendida / estable / dominada» de una palabra o concepto
+  combinando sus habilidades (recuperar, escuchar, producir) y sus formatos. Pendiente de decisión (D-018).
+- **Lo dominado sale de la cola diaria** y solo vuelve en tests de retención (30 y 90 días), como propone
+  `ESPECIFICACION.md` §4. Hoy lo dominado se sigue programando con el calendario normal (+30 d).
+- **Repasos que no reinicien el plazo de nivel:** si la compuerta de 7/30 días resulta demasiado espaciada en uso
+  real, permitir repasos «de mantenimiento» que no cuenten como exposición (alternativa descartada en D-018).
 - **Estrategia de prioridad con muchos vencidos** (H6): hoy se repasa primero lo más retrasado, que es también lo
   más probablemente olvidado. Comparar con «lo más próximo a olvidarse pero aún recuperable».
 - **Evaluar FSRS** cuando haya historiales reales (detrás de la interfaz `Scheduler`).

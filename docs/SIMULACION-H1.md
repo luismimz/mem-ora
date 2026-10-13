@@ -1,6 +1,31 @@
 # Salida de la simulación del H1
 
-Generada con `pnpm simulate` (determinista: misma semilla, misma salida). Alumnos sintéticos: **no** son datos reales.
+> **Estos números no son predicciones.** Salen de cuatro alumnos sintéticos con un modelo de memoria inventado y
+> calibrado a mano. Sirven para comprobar que el mecanismo funciona (los estados avanzan, los topes diarios se
+> respetan, los vencidos se recuperan tras una ausencia), no para estimar cuánto aprenderá una persona real.
+
+Generada con `pnpm simulate` (30 días) y `pnpm simulate -- --days=60`. Es determinista: misma semilla, misma salida.
+
+## Resumen: niveles alcanzados
+
+| Alumno | Día | Aprendidas | Estables | Dominadas | En consolidación | En aprendizaje | Debilitadas | Sin empezar |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Idioma (102) | 30 | 41 | 56 | 0 | 4 | 0 | 1 | 0 |
+| Programación (66) | 30 | 8 | 25 | 0 | 0 | 16 | 0 | 17 |
+| Olvidadizo (102) | 30 | 30 | 10 | 0 | 31 | 19 | 5 | 7 |
+| Ausente 5 días (102) | 30 | 46 | 40 | 0 | 10 | 3 | 0 | 3 |
+| Idioma (102) | 60 | 8 | 60 | 23 | 11 | 0 | 0 | 0 |
+| Programación (66) | 60 | 2 | 24 | 11 | 4 | 17 | 1 | 7 |
+| Olvidadizo (102) | 60 | 27 | 55 | 2 | 15 | 0 | 3 | 0 |
+| Ausente 5 días (102) | 60 | 4 | 81 | 13 | 4 | 0 | 0 | 0 |
+
+- **A 30 días nada está dominado, por construcción:** dominar exige un acierto sin pista tras ≥ 30 días sin
+  exposición, y la primera exposición es el día 1.
+- **El reconocimiento puro no consolida:** en programación, de las 18 habilidades de reconocer conceptos, 15 siguen
+  «en aprendizaje» y 3 no han empezado; ninguna pasa de ahí, a propósito.
+- **Escuchar ya consolida:** en idioma, de las 30 habilidades de escuchar, 22 están «aprendidas», 7 «estables» y 1
+  «en consolidación», gracias al dictado y a la explicación libre de lo oído.
+- **«Sin empezar» en programación** se debe a los prerrequisitos encadenados del catálogo sintético.
 
 **Columnas:**
 - *nuevas / repasos:* elementos del plan de ese día.
@@ -8,156 +33,156 @@ Generada con `pnpm simulate` (determinista: misma semilla, misma salida). Alumno
 - *vencidas:* habilidades vencidas al empezar el día.
 - *fuera:* vencidas que no cupieron en el día.
 - *nuevo-bloq:* no entra nada nuevo por exceso de vencidas.
-- *aprend / consol / consolid / debil:* habilidades en aprendizaje (incluye presentadas), en consolidación, consolidadas y debilitadas.
+- *en-apr / consol / aprend / estab / domin / debil:* habilidades en aprendizaje (incluye vistas), en consolidación, aprendidas, estables, dominadas y debilitadas.
 - *asoc:* asociaciones que se están quedando, en formación (incluye sin datos), que se están perdiendo y marcadas para revisión.
 
-En el curso de idioma, 30 de las 102 habilidades son de solo escuchar: nunca se consolidan, por diseño (D-014).
+## Detalle día a día (30 días)
 
 ```text
 # Simulación de 30 días · topes: 8 nuevas, 30 repasos, 36 en total por día
 
 ## Alumno «idioma» · curso idioma
 
- día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | aprend consol consolid debil | asoc: queda forma pierde revisar
-   1       sí      8        0      8/8        0      0              |      8      0        0     0  |           0      4       0        0
-   2       sí      8        0      8/8        0      0              |     16      0        0     0  |           0      8       0        0
-   3       sí      8        8    15/16        8      0              |     21      3        0     0  |           0     12       0        0
-   4       sí      8        9    16/17        9      0              |     25      7        0     0  |           0     14       0        0
-   5       sí      8        9    14/17        9      0              |     30     10        0     0  |           0     16       0        0
-   6       sí      8       12    17/20       12      0              |     33     15        0     0  |           0     18       0        0
-   7       sí      8       18    23/26       18      0              |     36     17        3     0  |           3     18       0        0
-   8       sí      8       21    27/29       21      0              |     37     21        6     0  |           6     17       0        0
-   9       sí      8       18    24/26       18      0              |     40     23        9     0  |           9     16       1        1
-  10       sí      8       19    26/27       19      0              |     42     22       16     0  |          12     15       1        1
-  11       sí      8       20    26/28       20      0              |     44     24       20     0  |          14     15       1        1
-  12       sí      4       25    26/29       25      0              |     41     26       25     0  |          16     13       1        1
-  13       sí      4       25    23/29       25      0              |     40     26       30     0  |          19     10       1        1
-  14       sí      3       20    20/23       20      0              |     40     24       35     0  |          21      8       1        1
-  15       sí      1       22    22/23       22      0              |     36     23       40     1  |          24      4       2        1
-  16       sí      0       26    19/26       26      0              |     34     17       48     1  |          26      3       1        1
-  17       sí      0       27    23/27       27      0              |     32     14       53     1  |          27      2       1        1
-  18       sí      1       15    13/16       15      0              |     33     10       57     1  |          27      1       2        2
-  19       sí      0       21    17/21       21      0              |     32      8       59     2  |          27      1       2        2
-  20       sí      1       20    15/21       20      0              |     31      9       59     3  |          26      1       3        2
-  21       sí      0       26    20/26       26      0              |     31      9       59     3  |          26      2       2        2
-  22       sí      0       20    18/20       20      0              |     30     12       59     1  |          27      1       2        2
-  23       sí      0       18    14/18       18      0              |     30     11       60     1  |          26      1       3        2
-  24       sí      0       19    16/19       19      0              |     30      8       62     2  |          26      2       2        2
-  25       sí      0       20    16/20       20      0              |     30      6       65     1  |          26      2       2        2
-  26       sí      0       17    14/17       17      0              |     30      5       67     0  |          26      2       2        2
-  27       sí      0       11     9/11       11      0              |     30      5       67     0  |          27      1       2        2
-  28       sí      0       16    12/16       16      0              |     30      5       66     1  |          27      1       2        2
-  29       sí      0       15    12/15       15      0              |     30      5       67     0  |          27      1       2        2
-  30       sí      0       17    13/17       17      0              |     30      3       69     0  |          28      0       2        2
+ día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | en-apr consol aprend estab domin debil | asoc: queda forma pierde revisar
+   1       sí      8        0      8/8        0      0              |      8      0      0     0     0     0  |           0      4       0        0
+   2       sí      8        0      8/8        0      0              |     16      0      0     0     0     0  |           0      8       0        0
+   3       sí      8        8    12/16        8      0              |     21      3      0     0     0     0  |           0     12       0        0
+   4       sí      8       12    19/20       12      0              |     26      6      0     0     0     0  |           0     14       0        0
+   5       sí      8        9    14/17        9      0              |     32      8      0     0     0     0  |           0     16       0        0
+   6       sí      8       15    21/23       15      0              |     34     14      0     0     0     0  |           0     19       0        0
+   7       sí      8       15    20/23       15      0              |     37     17      2     0     0     0  |           2     20       0        0
+   8       sí      8       21    27/29       21      0              |     34     25      5     0     0     0  |           5     19       0        0
+   9       sí      8       17    24/25       17      0              |     32     33      7     0     0     0  |           7     20       0        0
+  10       sí      8       22    28/30       22      0              |     31     35     14     0     0     0  |           9     21       0        0
+  11       sí      3       19    19/22       19      0              |     28     37     18     0     0     0  |          12     18       0        0
+  12       sí      2       21    21/23       21      0              |     20     42     23     0     0     0  |          15     15       0        0
+  13       sí      5       16    19/21       16      0              |     18     44     28     0     0     0  |          17     13       0        0
+  14       sí      1       15    15/16       15      0              |     16     39     36     0     0     0  |          20     10       0        0
+  15       sí      0       16    15/16       16      0              |      6     46     37     2     0     0  |          21      9       0        0
+  16       sí      3       16    18/19       16      0              |      7     40     42     5     0     0  |          24      6       0        0
+  17       sí      0       14    13/14       14      0              |      6     31     50     7     0     0  |          25      5       0        0
+  18       sí      0       16    14/16       16      0              |      1     31     51    10     0     1  |          27      3       0        0
+  19       sí      6       18    19/24       18      0              |      7     22     55    14     0     2  |          28      2       0        0
+  20       sí      0       14    12/14       14      0              |      7     19     55    18     0     1  |          28      1       1        0
+  21       sí      0       14    13/14       14      0              |      1     24     51    23     0     1  |          28      2       0        0
+  22       sí      2       15    17/17       15      0              |      3     17     51    30     0     1  |          29      1       0        0
+  23       sí      0        9      7/9        9      0              |      3     16     48    34     0     1  |          29      1       0        0
+  24       sí      0       13     9/13       13      0              |      1     15     46    38     0     2  |          29      1       0        0
+  25       sí      0       19    14/19       19      0              |      0     11     45    44     0     2  |          29      1       0        0
+  26       sí      0       10     9/10       10      0              |      0     11     45    46     0     0  |          29      1       0        0
+  27       sí      0        6      5/6        6      0              |      0      8     44    49     0     1  |          30      0       0        0
+  28       sí      0       10     8/10       10      0              |      0      7     40    54     0     1  |          30      0       0        0
+  29       sí      0        3      3/3        3      0              |      0      7     41    54     0     0  |          30      0       0        0
+  30       sí      0        9      7/9        9      0              |      0      4     41    56     0     1  |          30      0       0        0
 
-Final: 69/102 habilidades consolidadas, 0 debilitadas, 0 sin empezar.
+Día 30 (102 habilidades): aprendidas 41 · estables 56 · dominadas 0 · en consolidación 4 · en aprendizaje 0 · debilitadas 1 · sin empezar 0.
 
 ## Alumno «programación» · curso programación
 
- día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | aprend consol consolid debil | asoc: queda forma pierde revisar
-   1       sí      8        0      8/8        0      0              |      8      0        0     0  |           0      4       0        0
-   2       sí      8        0      8/8        0      0              |     16      0        0     0  |           0      8       0        0
-   3       sí      8        8    16/16        8      0              |     20      4        0     0  |           0     12       0        0
-   4       sí      5        8    13/13        8      0              |     21      8        0     0  |           0     13       0        0
-   5       sí      2        8     8/10        8      0              |     20     11        0     0  |           0     13       0        0
-   6       sí      1        7      4/8        7      0              |     20     12        0     0  |           0     13       0        0
-   7       sí      1       14    12/15       14      0              |     20     10        3     0  |           3     10       0        0
-   8       sí      1       14    15/15       14      0              |     20      7        7     0  |           7      6       0        0
-   9       sí      1       11    10/12       11      0              |     19      6       10     0  |          10      3       0        0
-  10       sí      3        6      7/9        6      0              |     21      6       11     0  |          10      3       0        0
-  11       sí      0        7      5/7        7      0              |     21      5       12     0  |          10      3       0        0
-  12       sí      0       14    11/14       14      0              |     17      7       14     0  |          11      2       0        0
-  13       sí      3       10    13/13       10      0              |     17      8       16     0  |          12      2       0        0
-  14       sí      1        4      3/5        4      0              |     18      6       18     0  |          13      1       0        0
-  15       sí      0       12    11/12       12      0              |     16      7       19     0  |          13      1       0        0
-  16       sí      2       13    12/15       13      0              |     17      7       20     0  |          13      1       0        0
-  17       sí      0       12    12/12       12      0              |     17      6       21     0  |          13      1       0        0
-  18       sí      0        4      1/4        4      0              |     16      7       20     1  |          13      1       0        0
-  19       sí      0       12    11/12       12      0              |     15      7       22     0  |          14      0       0        0
-  20       sí      0        7      7/7        7      0              |     15      5       24     0  |          14      0       0        0
-  21       sí      0       13    12/13       13      0              |     14      3       27     0  |          14      0       0        0
-  22       sí      2        3      5/5        3      0              |     16      2       28     0  |          14      0       0        0
-  23       sí      0        5      4/5        5      0              |     16      1       29     0  |          14      0       0        0
-  24       sí      0        8      8/8        8      0              |     14      3       29     0  |          14      0       0        0
-  25       sí      2        9     8/11        9      0              |     16      3       27     2  |          14      1       0        0
-  26       sí      0        4      3/4        4      0              |     16      4       28     0  |          14      1       0        0
-  27       sí      0        8      8/8        8      0              |     15      5       28     0  |          14      1       0        0
-  28       sí      1        8      9/9        8      0              |     16      3       30     0  |          14      1       0        0
-  29       sí      0        7      5/7        7      0              |     16      3       29     1  |          14      1       0        0
-  30       sí      0        9      9/9        9      0              |     15      4       30     0  |          14      1       0        0
+ día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | en-apr consol aprend estab domin debil | asoc: queda forma pierde revisar
+   1       sí      8        0      8/8        0      0              |      8      0      0     0     0     0  |           0      4       0        0
+   2       sí      8        0      8/8        0      0              |     16      0      0     0     0     0  |           0      8       0        0
+   3       sí      8        8    16/16        8      0              |     20      4      0     0     0     0  |           0     12       0        0
+   4       sí      5        8    13/13        8      0              |     21      8      0     0     0     0  |           0     13       0        0
+   5       sí      2        8     8/10        8      0              |     20     11      0     0     0     0  |           0     13       0        0
+   6       sí      1        7      4/8        7      0              |     20     12      0     0     0     0  |           0     13       0        0
+   7       sí      1       14    12/15       14      0              |     20     10      3     0     0     0  |           3     10       0        0
+   8       sí      1       14    15/15       14      0              |     20      7      7     0     0     0  |           7      6       0        0
+   9       sí      1       11    10/12       11      0              |     19      6     10     0     0     0  |          10      3       0        0
+  10       sí      3        6      7/9        6      0              |     21      6     11     0     0     0  |          10      3       0        0
+  11       sí      0        7      5/7        7      0              |     21      5     12     0     0     0  |          10      3       0        0
+  12       sí      0       14    11/14       14      0              |     17      7     14     0     0     0  |          11      2       0        0
+  13       sí      3       10    13/13       10      0              |     17      8     16     0     0     0  |          12      2       0        0
+  14       sí      1        4      3/5        4      0              |     18      6     18     0     0     0  |          13      1       0        0
+  15       sí      0       12    11/12       12      0              |     16      7     16     3     0     0  |          13      1       0        0
+  16       sí      2       12    12/14       12      0              |     17      6     14     7     0     0  |          13      1       0        0
+  17       sí      0       11    11/11       11      0              |     17      5     12    10     0     0  |          13      1       0        0
+  18       sí      0        3      2/3        3      0              |     15      7     12    10     0     0  |          13      1       0        0
+  19       sí      2        9     9/11        9      0              |     17      5     13    11     0     0  |          14      0       0        0
+  20       sí      0        9      7/9        9      0              |     17      3     13    13     0     0  |          14      0       0        0
+  21       sí      0       14    12/14       14      0              |     16      3     11    16     0     0  |          14      0       0        0
+  22       sí      0        7      7/7        7      0              |     14      3     11    18     0     0  |          14      0       0        0
+  23       sí      2        6      7/8        6      0              |     16      3     10    19     0     0  |          14      1       0        0
+  24       sí      0        5      4/5        5      0              |     16      2     11    19     0     0  |          14      1       0        0
+  25       sí      0       12     8/12       12      0              |     15      3      8    22     0     0  |          14      1       0        0
+  26       sí      1        6      7/7        6      0              |     16      2      9    22     0     0  |          14      1       0        0
+  27       sí      0        5      4/5        5      0              |     16      2      8    23     0     0  |          14      1       0        0
+  28       sí      0        7      6/7        7      0              |     16      2      7    24     0     0  |          14      1       0        0
+  29       sí      0        7      5/7        7      0              |     16      1      7    25     0     0  |          15      0       0        0
+  30       sí      0        9      8/9        9      0              |     16      0      8    25     0     0  |          15      0       0        0
 
-Final: 30/66 habilidades consolidadas, 0 debilitadas, 17 sin empezar.
+Día 30 (66 habilidades): aprendidas 8 · estables 25 · dominadas 0 · en consolidación 0 · en aprendizaje 16 · debilitadas 0 · sin empezar 17.
 
 ## Alumno «olvidadizo» · curso idioma
 
- día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | aprend consol consolid debil | asoc: queda forma pierde revisar
-   1       sí      8        0      8/8        0      0              |      8      0        0     0  |           0      4       0        0
-   2       sí      8        0      8/8        0      0              |     16      0        0     0  |           0      8       0        0
-   3       sí      8        8    11/16        8      0              |     24      0        0     0  |           0     12       0        0
-   4       sí      8       13    13/21       13      0              |     31      1        0     0  |           0     14       2        2
-   5       sí      8       16    16/24       16      0              |     39      1        0     0  |           0     16       3        3
-   6       sí      8       20    20/28       20      0              |     46      2        0     0  |           0     19       4        4
-   7       sí      8       22    18/30       22      0              |     53      3        0     0  |           0     22       5        5
-   8       sí      6       30    23/36       33      3              |     59      3        0     0  |           0     22       7        7
-   9       sí      1       30    17/31       32      2              |     60      3        0     0  |           0     21       9        9
-  10       sí      0       30    13/30       36      6              |     58      4        0     1  |           0     16      14       14
-  11       sí      1       30    19/31       36      6              |     57      6        0     1  |           0     15      15       15
-  12       sí      0       30    20/30       40     10              |     55      7        1     1  |           2     12      16       16
-  13       sí      2       30    21/32       33      3              |     52     11        2     1  |           5      9      16       16
-  14       sí      4       30    19/34       34      4              |     56     11        2     1  |           5      7      18       18
-  15       sí      1       30    16/31       35      5              |     56     11        3     1  |           5      7      18       18
-  16       sí      1       30    19/31       38      8              |     53     15        3     1  |           6      6      18       18
-  17       sí      4       30    19/34       35      5              |     54     19        3     0  |           7      5      18       18
-  18       sí      1       30    20/31       35      5              |     53     20        3     1  |           7      5      18       18
-  19       sí      1       30    12/31       35      5              |     54     20        4     0  |           7      5      18       18
-  20       sí      0       30    17/30       45     15          sí  |     53     17        7     1  |           7      5      18       18
-  21       sí      0       30    16/30       45     15          sí  |     50     19        9     0  |           7      5      18       18
-  22       sí      0       30    14/30       46     16          sí  |     47     20        9     2  |           6      3      21       20
-  23       sí      0       30    17/30       44     14          sí  |     46     19       10     3  |           6      4      20       20
-  24       sí      0       30    16/30       45     15          sí  |     43     21        9     5  |           6      3      21       21
-  25       sí      0       30    16/30       42     12          sí  |     43     20       11     4  |           4      3      23       21
-  26       sí      0       30    16/30       42     12          sí  |     42     20       13     3  |           4      5      21       21
-  27       sí      4       30    17/34       39      9              |     44     21       13     4  |           2      5      23       21
-  28       sí      4       30    26/34       39      9              |     46     23       16     1  |           2      7      21       21
-  29       sí      0       30    15/30       41     11          sí  |     45     21       18     2  |           2      7      21       21
-  30       sí      0       30    11/30       47     17          sí  |     44     19       19     4  |           2      7      21       21
+ día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | en-apr consol aprend estab domin debil | asoc: queda forma pierde revisar
+   1       sí      8        0      8/8        0      0              |      8      0      0     0     0     0  |           0      4       0        0
+   2       sí      8        0      8/8        0      0              |     16      0      0     0     0     0  |           0      8       0        0
+   3       sí      8        8     9/16        8      0              |     24      0      0     0     0     0  |           0     12       0        0
+   4       sí      8       15    14/23       15      0              |     31      1      0     0     0     0  |           0     15       1        1
+   5       sí      8       17    17/25       17      0              |     37      3      0     0     0     0  |           0     17       2        2
+   6       sí      4       20    11/24       20      0              |     40      4      0     0     0     0  |           0     18       2        2
+   7       sí      4       27    16/31       27      0              |     42      6      0     0     0     0  |           0     18       3        3
+   8       sí      4       27    16/31       27      0              |     42     10      0     0     0     0  |           1     17       5        5
+   9       sí      4       30    20/34       32      2              |     43     13      0     0     0     0  |           1     19       5        5
+  10       sí      4       30    15/34       32      2              |     46     14      0     0     0     0  |           1     20       6        6
+  11       sí      4       30    22/34       36      6              |     48     14      1     0     0     1  |           1     20       8        8
+  12       sí      2       30    19/32       35      5              |     43     20      3     0     0     0  |           2     19       9        9
+  13       sí      2       30    14/32       36      6              |     41     24      3     0     0     0  |           2     16      12       12
+  14       sí      1       30    12/31       36      6              |     41     22      5     0     0     1  |           3     12      15       15
+  15       sí      1       30    13/31       39      9              |     40     20      5     0     0     5  |           3     10      17       17
+  16       sí      0       30    15/30       49     19          sí  |     37     21      7     0     0     5  |           3     10      17       17
+  17       sí      0       30    12/30       46     16          sí  |     35     21      9     0     0     5  |           4      8      18       18
+  18       sí      0       30    17/30       44     14          sí  |     31     24     12     0     0     3  |           4      8      18       18
+  19       sí      4       30    16/34       36      6              |     33     24     13     0     0     4  |           4      8      18       18
+  20       sí      0       30    18/30       43     13          sí  |     30     24     17     0     0     3  |           3      5      22       21
+  21       sí      2       30    16/32       38      8              |     30     23     15     1     0     7  |           3      6      21       21
+  22       sí      0       30    18/30       45     15          sí  |     28     24     17     2     0     5  |           3      6      21       21
+  23       sí      2       30    18/32       39      9              |     25     27     19     2     0     5  |           3      6      21       21
+  24       sí      3       30    23/33       39      9              |     26     26     22     2     0     5  |           3      6      21       21
+  25       sí      2       30    20/32       36      6              |     26     24     26     4     0     3  |           3      6      21       21
+  26       sí      2       30    18/32       35      5              |     23     24     28     4     0     6  |           3      6      21       21
+  27       sí      3       30    21/33       33      3              |     24     26     28     7     0     3  |           4      5      21       21
+  28       sí      0       30    16/30       30      0              |     19     31     28     8     0     2  |           5      3      22       22
+  29       sí      4       29    19/33       29      0              |     21     32     30     8     0     1  |           5      3      22       22
+  30       sí      3       27    18/30       27      0              |     19     31     30    10     0     5  |           5      3      22       22
 
-Final: 19/102 habilidades consolidadas, 4 debilitadas, 16 sin empezar.
+Día 30 (102 habilidades): aprendidas 30 · estables 10 · dominadas 0 · en consolidación 31 · en aprendizaje 19 · debilitadas 5 · sin empezar 7.
 
 ## Alumno «ausente 5 días» · curso idioma
 
- día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | aprend consol consolid debil | asoc: queda forma pierde revisar
-   1       sí      8        0      8/8        0      0              |      8      0        0     0  |           0      4       0        0
-   2       sí      8        0      8/8        0      0              |     16      0        0     0  |           0      8       0        0
-   3       sí      8        8    15/16        8      0              |     20      4        0     0  |           0     12       0        0
-   4       sí      8        9    14/17        9      0              |     25      7        0     0  |           0     14       0        0
-   5       sí      8       11    18/19       11      0              |     30     10        0     0  |           0     16       0        0
-   6       sí      8        9    14/17        9      0              |     35     13        0     0  |           0     18       0        0
-   7       sí      8       21    23/29       21      0              |     38     15        3     0  |           3     18       0        0
-   8       sí      8       21    23/29       21      0              |     41     18        5     0  |           5     20       0        0
-   9       sí      8       24    28/32       24      0              |     45     18        9     0  |           8     20       0        0
-  10       sí      6       23    27/29       23      0              |     47     18       13     0  |           9     20       1        1
-  11       no      0        0        -       22     22              |     47     18       13     0  |           9     20       1        1
-  12       no      0        0        -       38     38              |     47     18       13     0  |           9     20       1        1
-  13       no      0        0        -       51     51          sí  |     47     18       13     0  |           9     20       1        1
-  14       no      0        0        -       67     67          sí  |     47     18       13     0  |           9     20       1        1
-  15       no      0        0        -       70     70          sí  |     47     18       13     0  |           9     20       1        1
-  16       sí      0       30    15/30       72     42          sí  |     41     20       17     0  |          11     18       1        1
-  17       sí      0       30    23/30       60     30          sí  |     38     17       23     0  |          15     13       2        2
-  18       sí      4       30    26/34       40     10              |     39     17       25     1  |          20      8       2        2
-  19       sí      8       28    32/36       28      0              |     46     16       26     2  |          19      7       4        2
-  20       sí      3       23    20/26       23      0              |     47     16       28     2  |          20      8       2        2
-  21       sí      0       23    20/23       23      0              |     38     24       28     3  |          20      8       2        2
-  22       sí      2       24    21/26       24      0              |     37     27       30     1  |          20      8       2        2
-  23       sí      1       19    17/20       19      0              |     36     26       33     1  |          22      6       2        2
-  24       sí      2       17    15/19       17      0              |     36     24       38     0  |          24      4       2        2
-  25       sí      1       30    26/31       30      0              |     34     17       47     1  |          24      3       3        2
-  26       sí      0       30    27/30       30      0              |     33     11       53     2  |          25      2       3        2
-  27       sí      0       16    10/16       16      0              |     31     11       55     2  |          25      3       2        2
-  28       sí      0       17    12/17       17      0              |     31     10       57     1  |          25      3       2        2
-  29       sí      0       17    15/17       17      0              |     30      9       59     1  |          25      3       2        2
-  30       sí      2       20    17/22       20      0              |     32      8       61     0  |          25      3       2        2
+ día  estudia nuevas repasos aciertos vencidas fuera  nuevo-bloq | en-apr consol aprend estab domin debil | asoc: queda forma pierde revisar
+   1       sí      8        0      8/8        0      0              |      8      0      0     0     0     0  |           0      4       0        0
+   2       sí      8        0      8/8        0      0              |     16      0      0     0     0     0  |           0      8       0        0
+   3       sí      8        8    14/16        8      0              |     20      4      0     0     0     0  |           0     12       0        0
+   4       sí      8       10    15/18       10      0              |     25      7      0     0     0     0  |           0     14       0        0
+   5       sí      8       11    16/19       11      0              |     30     10      0     0     0     0  |           0     16       0        0
+   6       sí      8       12    16/20       12      0              |     32     16      0     0     0     0  |           0     17       1        1
+   7       sí      8       20    23/28       20      0              |     35     17      4     0     0     0  |           4     16       1        1
+   8       sí      8       22    23/30       22      0              |     34     23      7     0     0     0  |           7     15       2        2
+   9       sí      8       22    27/30       22      0              |     33     29     10     0     0     0  |          10     15       2        2
+  10       sí      8       23    27/31       23      0              |     34     28     18     0     0     0  |          12     15       2        2
+  11       no      0        0        -       22     22              |     34     28     18     0     0     0  |          12     15       2        2
+  12       no      0        0        -       38     38              |     34     28     18     0     0     0  |          12     15       2        2
+  13       no      0        0        -       46     46          sí  |     34     28     18     0     0     0  |          12     15       2        2
+  14       no      0        0        -       54     54          sí  |     34     28     18     0     0     0  |          12     15       2        2
+  15       no      0        0        -       58     58          sí  |     34     28     18     0     0     0  |          12     15       2        2
+  16       sí      0       30    11/30       63     33          sí  |     27     31     22     0     0     0  |          14     12       3        3
+  17       sí      0       30    21/30       58     28          sí  |     22     31     27     0     0     0  |          16      9       4        4
+  18       sí      0       30    24/30       46     16          sí  |     17     29     30     4     0     0  |          19      6       4        4
+  19       sí      4       30    29/34       40     10              |     14     27     30    10     0     3  |          19      5       5        5
+  20       sí      6       26    27/32       26      0              |     18     25     29    15     0     3  |          21      3       6        5
+  21       sí      0       12    11/12       12      0              |     13     31     29    15     0     2  |          21      4       5        5
+  22       sí      0       14    10/14       14      0              |      9     31     33    15     0     2  |          21      4       5        5
+  23       sí      1       16    14/17       16      0              |      7     29     40    15     0     0  |          21      4       5        5
+  24       sí      0       14    14/14       14      0              |      4     27     42    18     0     0  |          21      4       5        5
+  25       sí      4       15    17/19       15      0              |      8     18     47    22     0     0  |          22      3       5        5
+  26       sí      0       17    16/17       17      0              |      6     14     46    29     0     0  |          23      2       5        5
+  27       sí      2       15    13/17       15      0              |      5     11     49    31     0     1  |          24      1       5        5
+  28       sí      1       12    10/13       12      0              |      5     10     46    36     0     1  |          24      1       5        5
+  29       sí      0        6      5/6        6      0              |      3     12     47    36     0     0  |          24      1       5        5
+  30       sí      1        9     9/10        9      0              |      3     10     46    40     0     0  |          25      0       5        5
 
-Final: 61/102 habilidades consolidadas, 0 debilitadas, 1 sin empezar.
+Día 30 (102 habilidades): aprendidas 46 · estables 40 · dominadas 0 · en consolidación 10 · en aprendizaje 3 · debilitadas 0 · sin empezar 3.
 
 ```
