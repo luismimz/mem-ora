@@ -1,6 +1,8 @@
 packages:
   - "packages/*"
   - "tools/*"
+  - "techniques"
+  - "backend/extensions/*"
 
 allowBuilds:
   esbuild: true

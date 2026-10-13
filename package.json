@@ -8,7 +8,19 @@
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "simulate": "pnpm --filter @memora/simulate simulate",
-    "catalog-demo": "pnpm --filter @memora/simulate catalog-demo"
+    "catalog-demo": "pnpm --filter @memora/simulate catalog-demo",
+    "backend:env": "node backend/scripts/init-env.mjs",
+    "backend:build": "pnpm --filter @memora/directus-extension build",
+    "backend:up": "pnpm backend:build && docker compose -f backend/docker-compose.yml --env-file backend/.env up -d",
+    "backend:down": "docker compose -f backend/docker-compose.yml --env-file backend/.env down",
+    "backend:logs": "docker compose -f backend/docker-compose.yml --env-file backend/.env logs -f directus",
+    "backend:backup": "backend/scripts/backup.sh",
+    "backend:schema:define": "node --env-file=backend/.env backend/schema/define.mjs",
+    "backend:schema:snapshot": "backend/scripts/schema-snapshot.sh",
+    "backend:schema:apply": "backend/scripts/schema-apply.sh",
+    "backend:access": "node --env-file=backend/.env backend/access/apply-access.mjs",
+    "backend:accounts": "node --env-file=backend/.env backend/scripts/create-test-accounts.mjs",
+    "test:integration": "pnpm --filter @memora/directus-extension test:integration"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

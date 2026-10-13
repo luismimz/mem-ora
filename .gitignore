@@ -13,3 +13,9 @@ private/
 
 # Kit de arranque original (duplica CLAUDE.md y docs/; se conserva solo en local)
 memora-kit-claude-code-universal.md
+
+# Backend local
+backend/.env
+backend/.env.accounts
+backend/backups/
+backend/extensions-dist/

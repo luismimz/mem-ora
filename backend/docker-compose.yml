@@ -1,0 +1,66 @@
+# Entorno LOCAL de Memora Studio (H2.1). Producción se define en el H2.4.
+# Secretos en backend/.env (generado con `pnpm backend:env`, nunca en git).
+name: memora-local
+
+services:
+  db:
+    image: postgres:16.10-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: memora
+      POSTGRES_USER: memora
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Falta DB_PASSWORD en backend/.env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U memora -d memora"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  directus:
+    # Directus 11: las reglas de permisos personalizadas no requieren licencia (en la 12, sí). Ver D-027.
+    image: directus/directus:11.17.4
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8055:8055"
+    volumes:
+      - uploads:/directus/uploads
+      - ./extensions-dist:/directus/extensions
+      - ./schema:/directus/schema:ro
+    environment:
+      PUBLIC_URL: http://localhost:8055
+      SECRET: ${SECRET:?Falta SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Falta ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Falta ADMIN_PASSWORD}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Falta ADMIN_TOKEN}
+      DB_CLIENT: pg
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: memora
+      DB_USER: memora
+      DB_PASSWORD: ${DB_PASSWORD}
+      TELEMETRY: "false"
+      WEBSOCKETS_ENABLED: "false"
+      EXTENSIONS_AUTO_RELOAD: "true"
+      EMAIL_FROM: studio@memora.local
+      EMAIL_TRANSPORT: smtp
+      EMAIL_SMTP_HOST: mailpit
+      EMAIL_SMTP_PORT: "1025"
+      EMAIL_SMTP_IGNORE_TLS: "true"
+      USER_INVITE_URL_ALLOW_LIST: http://localhost:8055/admin/accept-invite
+      PASSWORD_RESET_URL_ALLOW_LIST: http://localhost:8055/admin/reset-password
+
+  # Captura los correos (invitaciones) en local: http://localhost:8025. No envía nada a Internet.
+  mailpit:
+    image: axllent/mailpit:v1.27
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8025:8025"
+
+volumes:
+  pgdata:
+  uploads:

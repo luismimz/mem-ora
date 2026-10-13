@@ -1,0 +1,21 @@
+{
+  "name": "@memora/directus-extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "test": "vitest run --dir test",
+    "test:integration": "vitest run --dir integration",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@memora/content": "workspace:*",
+    "@memora/core": "workspace:*",
+    "@memora/techniques": "workspace:*"
+  },
+  "devDependencies": {
+    "@directus/errors": "2.0.4",
+    "esbuild": "0.25.10"
+  }
+}
