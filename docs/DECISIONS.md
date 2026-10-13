@@ -200,6 +200,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
     desactivadas. Directus **rechaza crear** los permisos con reglas (`RESOURCE_RESTRICTED`), el guion de permisos
     falla y la batería de integración falla. Con licencia, el límite de colecciones es ilimitado.
 - **Descartado:** quedarse en la 11 (sin parches a largo plazo) y la 12 sin licencia (sin reglas propias).
+- **Condiciones de la beca (leídas el 13-oct-2026):**
+  - **Telemetría obligatoria.** El acuerdo de uso, §3.3, dice que el beneficiario no deshabilitará, bloqueará ni
+    excluirá la recogida de telemetría, y la FAQ dice que no se puede desactivar con esta licencia. Según la
+    documentación, con licencias que la exigen **Directus ignora `TELEMETRY=false`**. No se ha podido verificar en los
+    registros si ya se envía. Pendiente de la decisión del usuario.
+  - Duración: el acuerdo y la FAQ dicen que no caduca; la página de licencias dice «un año, renovable». Lo que muestra
+    la instancia es `expires_at: -1`.
+  - Activaciones: 5 por clave, cada una atada a la base de datos y a la `PUBLIC_URL`.
+  - Incumplimiento: terminación por causa si no se corrige en 10 días tras el aviso (§5.3). Al terminar, la clave
+    deja de valer y el software deja de funcionar (§2.2, §5.4); el contenido sigue siendo del beneficiario (§4.1).
 
 ## D-028 · Esquema, permisos y ajustes como código
 - **Esquema:** `backend/schema/define.mjs` crea por la API lo que falte, solo en desarrollo. Su resultado se exporta a

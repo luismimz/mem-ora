@@ -36,3 +36,13 @@ No se implementan hasta que un hito las incluya.
   - confirmar cuántas activaciones admite la licencia antes de usarla en local y en producción a la vez.
 - **Pasar a Directus 12.5.x** cuando lleve unas semanas publicada. Revisar antes las validaciones estrictas de
   `ip_access` y el nuevo cálculo del 2FA por políticas efectivas.
+- **Alerta de licencia (H2.4, obligatoria antes de abrir a la familia):** vigilar `GET /license` (estado,
+  `invalid_reason`, `token_expires_at`) y avisar al administrador si la revalidación falla. Según Directus: si la
+  instancia no llega al servidor de licencias durante más de 7 días, baja a Core; tras el periodo de gracia de 30 días
+  de una licencia caducada, **los alumnos no pueden iniciar sesión**; y si la clave va en el entorno y el servidor de
+  licencias no responde al arrancar, **Directus no arranca**. La alerta debe llegar por un canal que no dependa de
+  Directus (correo o notificación).
+- **Higiene de activaciones (desde ya):** cada licencia tiene 5 activaciones, y cada una se ata a la base de datos y a
+  la `PUBLIC_URL`. Destruir la base (`docker compose down -v`) sin desactivar deja la activación ocupada. Las pruebas
+  de reconstrucción desde la instantánea deben hacerse en una instancia aparte **sin licencia**, y las de permisos en
+  el entorno persistente.
