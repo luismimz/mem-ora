@@ -264,7 +264,7 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
     `CORS_CREDENTIALS=true`, cookie `Secure` y `SameSite=Lax` (los dos subdominios son el mismo «sitio»). Si se
     quisiera compartir la cookie, `SESSION_COOKIE_DOMAIN=.luismontalvan.com`, lo que también la mandaría al panel.
 
-## D-033 · Sesión mínima del H2.2a
+## D-033 · Sesión mínima del H2.2a · SUSTITUIDA por D-034 (13-oct-2026)
 - **Recorrido de una unidad nueva:** escuchar → asociar (o «estructura» si es un patrón) → recuperar sin ver →
   ordenar → frase propia → resultado. Los repasos van primero, con la pista inicial que marca la escalera de la
   asociación.
@@ -288,3 +288,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   administración. La dirección de la app la fija `APP_URL` en `backend:access`. No guarda nada.
 - **Límite conocido:** el «día» va en UTC (`dayOriginMs: 0`), así que en España cambia a las 2:00 en verano y a la
   1:00 en invierno. La zona horaria por alumno está en `IDEAS.md`.
+
+## D-034 · Recorrido de la palabra por habitaciones (sustituye a D-033; pendiente de aprobación)
+- **Motivo:** el usuario probó el H2.2a y lo rechazó («no es Memora»): empezaba con un sonido sin significado, pedía
+  teclear la palabra en la primera exposición y metía la frase propia en el recorrido normal.
+- **Qué cambia (propuesta en `docs/FLUJO-SESION.md`, a la espera de aprobación):**
+  - primera exposición en el orden que pidió el usuario: palabra, significado, audio y pronunciación figurada juntos;
+    escena en español con imagen y pieza clave resaltada; recuperación fácil sin teclear; escena en inglés con audio;
+    frase natural con audio (y estructura si es un patrón); ordenar con fichas; repaso programado;
+  - teclear solo llega en los repasos, con la escalera de pistas;
+  - la frase propia («Hazla tuya») sale del recorrido normal y queda como opción oculta;
+  - la sesión se organiza por habitaciones de 10 palabras.
+- Se mantiene de D-033: el servidor manda, la vista previa, ordenar cuenta como reconocimiento.
