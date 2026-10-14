@@ -496,3 +496,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   se guarda en localStorage (unos 750 KB para los tres cursos DAM); audio desactivado sin red.
 - **Probado:** descarga → modo avión → abre en «Modo avión» → 9 preguntas → vuelve la red → 19 respuestas
   sincronizadas, 0 pendientes.
+
+## D-055 · Cursos DAM visibles para todos los alumnos (14-oct-2026)
+- **Qué:** los tres cursos DAM pasan de «solo el propietario» a «todos los alumnos», en producción y en local; las
+  misiones nuevas se crean públicas.
+- **Por qué:** decisión del usuario (un alumno invitado no veía nada). El contenido es propio: los libros de ILERNA solo
+  se usan para saber qué temas tocar. Se actualiza la regla 16 de CLAUDE.md en ese sentido.
+- **Pendiente:** elegir por curso entre «todos», «solo yo» o «compartido con usuarios concretos» (ver IDEAS).

@@ -61,3 +61,5 @@ No se implementan hasta que un hito las incluya.
 - Importar contenido sensible con revisor, fecha de verificación y aviso (regla 13).
 - Corrección sensible a mayúsculas en retos de «predecir la salida»: hoy `sameAnswer` ignora mayúsculas, así que «HOLA»
   pasaría por «hola». Opción: campo `caseSensitive` en el ejercicio (detectado al generar la misión 18 de DAM).
+- Compartir cursos con usuarios concretos (D-055): visibilidad «todos / solo yo / estos usuarios», gestionada desde
+  Studio con una lista de alumnos por curso.

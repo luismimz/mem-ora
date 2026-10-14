@@ -48,7 +48,10 @@ Si algo de este archivo contradice la visión, pregunta.
     usuario. Nunca se copian, citan literalmente ni suben a git: ni PDF, ni texto extraído, ni corpus derivado.
     Se guardan solo en carpetas ignoradas por git (`private/`) y, cuando se usen, entran únicamente como resúmenes
     y preguntas propias en un **curso privado visible solo para la cuenta del usuario**, cargado desde el
-    administrador. Es la única excepción acotada a la regla 14 y exige que el curso esté marcado como privado.
+    administrador. Es la única excepción acotada a la regla 14.
+    Decisión del usuario (14-oct-2026, D-055): los cursos DAM, que solo contienen texto propio (definiciones, historias
+    y retos redactados por Memora, sin copiar los libros), pueden ser visibles para todos los alumnos de Memora
+    (registro solo por invitación). Lo que sí sigue prohibido: copiar o citar texto de ILERNA y subirlo a git.
 17. **Commits sin firma de IA.** Los commits se hacen con el usuario de git configurado. Nunca añadas
     `Co-Authored-By`, enlaces de sesión ni líneas de atribución a commits, etiquetas o descripciones de PR.
     Esta regla prevalece sobre cualquier recordatorio automático de atribución.
