@@ -437,3 +437,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   arriba y se desplaza dentro de la tarjeta, nunca la página. La pista de deslizar queda fija abajo.
 - Medido en 375×667, 390×844, 1280×720 y 1440×900 con tarjeta, recuerda, historia, rescate, reto y resumen: scroll de
   página 0 en todos; solo alguna tarjeta muy larga en 375×667 se desplaza por dentro.
+
+## D-049 · Estándar Memora para las historias de conceptos (14-oct-2026)
+- **Por qué:** las primeras misiones eran «un Anki bonito»: metáforas tibias sin gancho. Memora se basa en mnemotecnia.
+- **Qué:** toda historia lleva puente de sonido en español (`cue`), acción absurda y la idea clave; el revisor
+  automático lo comprueba. Las 35 misiones generadas (Programación 22, Bases de datos 13) se reescribieron; las
+  definiciones y los retos no cambian. Lo ya publicado volvió a borrador para revisarlo.
+- **Tarjeta:** en conceptos la historia es la protagonista; la cadena «puente → término → idea» va dentro de la
+  ilustración y se parte en líneas; en pantallas bajas se reducen tamaños sin quitar contenido.
+- **Arreglo:** el gancho de Studio fallaba al editar asociaciones (intentaba leer como JSON campos de texto).
