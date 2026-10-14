@@ -23,7 +23,7 @@ import {
 } from '@memora/experiences';
 import { api, ApiError, type Mission, type MissionRef, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
-import { audioEnabled, speak } from './speech';
+import { audioEnabled, setAudioEnabled, speak } from './speech';
 import { milestones, type Milestones } from './milestones';
 
 interface Outcome { correct: boolean; hint: number }
@@ -69,6 +69,8 @@ function Art({ unit, small = false, chain = true }: { unit: SessionUnit; small?:
 }
 
 export function AssocSession({ payload, courseId, preview: previewProp = false, staff = false, onExit, onReload, onMission }: Props) {
+  // La vista previa trae si el curso tiene audio (en sesión normal lo fija la portada).
+  if (payload.audio !== undefined) setAudioEnabled(payload.audio);
   // Modo revisión (solo equipo): saltar a cualquier paso; desde el primer salto no se guarda progreso.
   const [reviewing, setReviewing] = useState(false);
   const preview = previewProp || reviewing;
@@ -218,7 +220,7 @@ function TraceCard({ unit, position, total, onNext }: { unit: SessionUnit; posit
     <SwipeCard className="trace" onNext={part === 2 ? onNext : undefined}>
       {unit.place && <p className="place">{unit.place}</p>}
       <p className="eyebrow">ASOCIACIÓN {position}/{total} · {titles[part]}</p>
-      <div className={`word ${unit.type === 'concept' ? 'concept' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
       <div className="steps-dots" aria-hidden="true">{titles.map((t, i) => <i key={t} className={i <= part ? 'on' : ''} />)}</div>
       {part === 0 && <p className="trace-definition">{p.definition}</p>}
       {part === 1 && <><Art unit={unit} chain={false} small /><p className="scene-text"><Highlight text={a.text} /></p></>}
@@ -242,13 +244,13 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
     <SwipeCard onNext={onNext}>
       {unit.place && <p className="place">{unit.place}</p>}
       <p className="eyebrow">ASOCIACIÓN {position}/{total}</p>
-      <div className={`word ${unit.type === 'concept' ? 'concept' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       <Art unit={unit} />
       {a?.cue ? (
         <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>{a.technique === 'analogy' ? 'SE PARECE A' : 'SUENA A'}</p><div className="bridge">{a.cue}</div></div>
           {audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>
-      ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>{unit.type === 'concept' ? 'IMAGEN' : 'IMAGEN DIRECTA'}</p>{audioEnabled() && <button type="button" className="round" onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>}
+      ) : audioEnabled() ? <div className="sounds"><span /><button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button></div> : null}
       {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}
       {a?.sceneTarget && <p className="scene-en" lang={unit.language}>{a.sceneTarget} {audioEnabled() && <button type="button" className="link" aria-label="Escuchar la escena" onClick={() => speak(a.sceneTarget!, unit.language)}>🔊</button>}</p>}
       {unit.type === 'concept' && <ConceptDetails payload={unit.payload as ConceptPayload} language={unit.language} />}

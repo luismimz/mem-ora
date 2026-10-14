@@ -292,3 +292,15 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
    y la pista de deslizar queda fija abajo. */
 .stage > .card { justify-content: safe center; padding-bottom: 2.6rem; }
 .stage > .card > .foot { position: absolute; left: 0; right: 0; bottom: .5rem; text-align: center; }
+
+/* En una sesión (también al probar desde Studio) manda la barra propia del juego. */
+.app:has(.stage) > .topbar { display: none; }
+/* Nombres largos («SISTEMA DE FICHEROS»): letra más contenida para que no ocupen media tarjeta. */
+.stage .word.long strong { font-size: clamp(1.7rem, 5vh, 3.2rem); letter-spacing: -.03em; }
+/* Pantallas altas: la ilustración crece con la altura y la tarjeta tiene un tope, para no dejar huecos blancos. */
+.stage > .card > .art, .stage > .card > div > .art { max-height: min(36vh, 24rem); }
+.stage .art .emoji { font-size: clamp(2.6rem, 9vh, 7rem); }
+.stage > .card { max-height: 56rem; }
+.stage { justify-content: safe center; }
+.stage > .card > .foot { display: flex; justify-content: center; }
+.concept pre { white-space: pre-wrap; overflow-wrap: anywhere; }

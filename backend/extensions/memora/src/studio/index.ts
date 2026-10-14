@@ -79,7 +79,11 @@ export default ({ filter, action }: any, ctx: HookContext) => {
   }
 
   const one = (collection: string, id: unknown): Promise<Row | undefined> => database(collection).where({ id }).first();
-  const parseJson = (value: unknown) => (typeof value === 'string' ? JSON.parse(value) : value);
+  /** Los campos JSON pueden llegar como texto; los de texto normal («analogy») se dejan tal cual. */
+  const parseJson = (value: unknown) => {
+    if (typeof value !== 'string') return value;
+    try { return JSON.parse(value); } catch { return value; }
+  };
 
   async function courseRows(courseId: string): Promise<CatalogRows> {
     const units = await database('units').where({ course: courseId }).whereNot({ status: 'deprecated' }).select('id', 'key', 'type', 'status');

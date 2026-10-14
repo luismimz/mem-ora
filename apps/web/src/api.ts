@@ -84,6 +84,8 @@ export interface SessionPayload {
   resumed?: boolean;
   preview?: boolean;
   status?: string;
+  /** Vista previa: si el curso tiene audio. */
+  audio?: boolean;
 }
 export interface Progress {
   skills: Array<{ key: string; unit: string; kind: string; status: string; dueAt: number | null }>;

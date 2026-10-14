@@ -351,7 +351,7 @@ export default {
       const units: Record<string, SessionUnit> = sessionUnits(rows.map((u) => ({ ...u, place: mod.title })) as UnitRow[], skills, associations, course?.content_language ?? 'en');
       const items: PlanItem[] = rows.flatMap((u) => (units[u.key]?.skills ?? []).map((s) => ({ skillId: s.key, unitId: u.key, reason: 'new' as const, priority: 0, recommendedHint: 0 as const, ...(s.associationId ? { associationId: s.associationId } : {}) })));
       const plan = buildAssociationSession({ sessionId: `preview-${mod.id}`, courseId: mod.course, day: 0, createdAt: Date.now(), items, units, knownUnits: [], maxNewUnits: rows.length });
-      return { data: { state: { plan, index: 0, outcomes: {}, finished: false }, units, preview: true, status: mod.status } };
+      return { data: { state: { plan, index: 0, outcomes: {}, finished: false }, units, preview: true, status: mod.status, audio: course?.audio_enabled !== false } };
     }));
 
     // Aprobar una misión: lleva cada asociación y unidad por el flujo (borrador → revisión → aprobada → publicada) con la
@@ -404,7 +404,7 @@ export default {
       const units: Record<string, SessionUnit> = sessionUnits([unit], skills, associations, course?.content_language ?? 'en');
       const items: PlanItem[] = skills.map((s) => ({ skillId: s.key, unitId: unit.key, reason: 'new', priority: 0, recommendedHint: 0, ...(units[unit.key]?.skills.find((x) => x.key === s.key)?.associationId ? { associationId: units[unit.key]!.skills.find((x) => x.key === s.key)!.associationId! } : {}) }));
       const plan = buildAssociationSession({ sessionId: `preview-${unit.id}`, courseId: unit.course, day: 0, createdAt: Date.now(), items, units, knownUnits: [] });
-      return { data: { state: { plan, index: 0, outcomes: {}, finished: false }, units, preview: true, status: unit.status } };
+      return { data: { state: { plan, index: 0, outcomes: {}, finished: false }, units, preview: true, status: unit.status, audio: course?.audio_enabled !== false } };
     }));
   },
 };
