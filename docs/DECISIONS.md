@@ -472,3 +472,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   ancho de la tarjeta (unidades de contenedor), así que nunca se salen.
 - Comprobación automática: se recorren desde Studio → Probar todas las misiones de los 4 cursos (464 tarjetas) en
   876×1120 y 390×844, verificando cadena presente, dentro de la ilustración y sin desbordamiento. Resultado: 0 fallos.
+
+## D-053 · Producción en marcha, contenido publicado y bucle con subida automática (14-oct-2026)
+- Producción desplegada en Coolify (memora.luismontalvan.com y studio.luismontalvan.com). Fallos resueltos: build pack
+  automático («Railpack») en lugar de Docker Compose, ruta de construcción `..` (Coolify usa la raíz como directorio
+  del proyecto) y dominio de Directus sin puerto (:8055).
+- Esquema, permisos y 35 misiones (428 unidades) volcados con el conector y **publicados por decisión expresa del
+  usuario**, que es quien revisa el contenido (regla 12: la IA genera; la publicación la ordena una persona).
+- El bucle de misiones importa y publica cada misión en local y en producción al terminarla (`private/dam/run.sh`).
+- Nuevo curso en el plan: «Coolify y el sistema de Memora» (12 misiones) con fuentes oficiales.
+- Incidente: un fragmento de la clave de la API de Coolify apareció en un error de terminal (la barra «|» de la clave
+  al cargar el archivo con la shell). Se cambió a lectura sin shell; recomendado rotar la clave.
