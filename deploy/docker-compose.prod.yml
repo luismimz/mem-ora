@@ -1,5 +1,7 @@
 # PRODUCCIÓN de Memora en Coolify (H2.4). Secretos solo en las variables de entorno de Coolify, nunca en git.
 # Dominios (se asignan en Coolify): web → memora.luismontalvan.com:80 · directus → studio.luismontalvan.com:8055
+# Las rutas de construcción son relativas a la RAÍZ del repositorio (Coolify usa --project-directory = raíz).
+# En local: docker compose --project-directory . -f deploy/docker-compose.prod.yml config
 services:
   db:
     image: postgres:16.10-alpine
@@ -17,7 +19,7 @@ services:
       retries: 20
 
   directus:
-    build: { context: .., dockerfile: deploy/directus.Dockerfile }
+    build: { context: ., dockerfile: deploy/directus.Dockerfile }
     restart: unless-stopped
     depends_on:
       db: { condition: service_healthy }
@@ -56,7 +58,7 @@ services:
       retries: 30
 
   web:
-    build: { context: .., dockerfile: deploy/web.Dockerfile }
+    build: { context: ., dockerfile: deploy/web.Dockerfile }
     restart: unless-stopped
     # Puerto que Coolify enruta para memora.luismontalvan.com. No espera a Directus: nginx lo resuelve al pedirlo.
     expose: ["80"]
