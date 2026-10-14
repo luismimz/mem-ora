@@ -446,3 +446,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Tarjeta:** en conceptos la historia es la protagonista; la cadena «puente → término → idea» va dentro de la
   ilustración y se parte en líneas; en pantallas bajas se reducen tamaños sin quitar contenido.
 - **Arreglo:** el gancho de Studio fallaba al editar asociaciones (intentaba leer como JSON campos de texto).
+
+## D-050 · Corrección: la cadena y el bloque del puente, de vuelta a su sitio en todas las tarjetas (14-oct-2026)
+- Al arreglar un desbordamiento quité por error el bloque «SUENA A» de los conceptos, la etiqueta «IMAGEN DIRECTA» y
+  moví la cadena «puente → término → idea» al centro de la ilustración en todas las tarjetas. Se restaura todo como en
+  el diseño V2: la cadena al pie de la ilustración (mismo margen) y el bloque del puente bajo ella.
+- Lo único nuevo: la cadena se parte en líneas si es larga y la ilustración nunca es más pequeña que su contenido.
+- Lección: ante un desbordamiento, adaptar el elemento, nunca quitarlo ni moverlo sin preguntar.

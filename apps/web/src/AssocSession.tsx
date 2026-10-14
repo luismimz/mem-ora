@@ -247,10 +247,10 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
       <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       <Art unit={unit} />
-      {unit.type === 'concept' ? null : a?.cue ? (
+      {a?.cue ? (
         <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>{a.technique === 'analogy' ? 'SE PARECE A' : 'SUENA A'}</p><div className="bridge">{a.cue}</div></div>
           {audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>
-      ) : audioEnabled() ? <div className="sounds"><span /><button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button></div> : null}
+      ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>{unit.type === 'concept' ? 'IMAGEN' : 'IMAGEN DIRECTA'}</p>{audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>}
       {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}
       {a?.sceneTarget && <p className="scene-en" lang={unit.language}>{a.sceneTarget} {audioEnabled() && <button type="button" className="link" aria-label="Escuchar la escena" onClick={() => speak(a.sceneTarget!, unit.language)}>🔊</button>}</p>}
       {unit.type === 'concept' && <ConceptDetails payload={unit.payload as ConceptPayload} language={unit.language} />}

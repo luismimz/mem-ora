@@ -312,11 +312,12 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .stage .concept p:first-child { color: var(--muted); }
 .stage > .card > .foot { position: sticky; bottom: -2.6rem; margin: .4rem -1rem -2.6rem; padding: .5rem 0 .6rem; background: var(--surface-strong); }
 
-/* La cadena «puente → término → idea» va dentro de la ilustración, debajo del dibujo, y se parte en líneas si es larga
-   (antes flotaba encima y se apelotonaba). Se ve entera siempre. */
-.art { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .6rem; }
-.stage > .card > .art, .stage > .card > div > .art { padding-bottom: 1rem; }
-.chain { position: static; transform: none; max-width: 100%; border-radius: 1rem; padding: .4rem .9rem; }
+/* La cadena «puente → término → idea» en su sitio original, al pie de la ilustración (D-050). El dibujo se centra en el
+   espacio de arriba y la cadena se parte en líneas si es larga, sin tapar nada ni desbordar. */
+.art { display: flex; flex-direction: column; align-items: center; }
+.art .emoji { margin: auto 0; }
+.art .chain { position: static; transform: none; margin-top: .6rem; max-width: 100%; border-radius: 1rem; }
+.stage > .card > .art, .stage > .card > div > .art { padding-bottom: .9rem; }
 .stage > .card > .art, .stage > .card > div > .art { min-height: auto; } /* nunca más pequeña que su dibujo y su cadena */
 /* Pantallas bajas: todo cabe con menos tamaño, sin quitar contenido. */
 @media (max-height: 900px) {
