@@ -119,8 +119,9 @@ export default {
       const rows = await db('courses')
         .where({ status: 'published' })
         .andWhere((q: any) => q.where({ visibility: 'public' }).orWhere({ owner: userId }))
-        .select('id', 'key', 'title', 'subject', 'ui_language', 'learner_language', 'content_language', 'content_revision', 'audio_enabled', 'new_per_session');
-      return { data: rows };
+        .select('id', 'key', 'title', 'subject', 'ui_language', 'learner_language', 'content_language', 'content_revision', 'audio_enabled', 'new_per_session', 'modes');
+      // Sin configurar ⇒ todos los modos.
+      return { data: rows.map((r: Row) => ({ ...r, modes: (typeof r.modes === 'string' ? JSON.parse(r.modes) : r.modes) ?? ['associations', 'grammar', 'arcade', 'chat'] })) };
     }));
 
     router.get('/session', wrap(async (req) => {
@@ -137,7 +138,9 @@ export default {
       const learner = await learnerFor(userId, course.id);
       const cfg = courseConfig(course);
       const plan = planDay({ catalog, learner, now, config: cfg });
-      const knownUnits = [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
+      const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
+      // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
+      const knownUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
       const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, maxNewUnits: Math.max(1, Number(course.new_per_session) || 15) });
       const state: SessionState = { plan: session, index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);

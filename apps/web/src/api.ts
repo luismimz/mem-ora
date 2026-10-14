@@ -40,6 +40,7 @@ export interface Course {
   content_language: string;
   audio_enabled: boolean;
   new_per_session: number;
+  modes: Array<'associations' | 'grammar' | 'arcade' | 'chat'>;
 }
 export interface SessionState {
   plan: AssocPlan;

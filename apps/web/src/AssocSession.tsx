@@ -325,8 +325,7 @@ function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit
         <div className="xp">+{xp} XP</div>
         <div className="stats"><div><b>{first}</b>a la primera</div><div><b>{helped}</b>con ayuda</div><div><b>{minutes}</b>min</div></div>
         <p>Próximo repaso: {when}.</p>
-        {ms && <p><b>{ms.words}</b> palabras trabajadas · próximo truco de gramática en <b>{ms.grammarNext}</b> · {ms.arcadeLeft ? <>Arcade sorpresa en <b>{ms.arcadeLeft}</b></> : 'Arcade sorpresa activo'}</p>}
-        {Object.keys(units).length > 0 && <p style={{ fontSize: '.85rem' }}>La gramática con estas palabras llegará en el modo Gramática.</p>}
+        {ms && <p><b>{ms.words}</b> palabras trabajadas · {ms.arcadeLeft ? <>Arcade sorpresa en <b>{ms.arcadeLeft}</b></> : 'Arcade sorpresa activo'}</p>}
       </div>
       <button type="button" className="primary" onClick={onExit}>Terminar</button>
     </div>

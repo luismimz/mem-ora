@@ -332,3 +332,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   sesión la app se quedaba sin nada. Ahora lo vencido vuelve el mismo día (prueba en `planner.test.ts`).
 - **Ritmo:** `new_per_session` limita cada sesión; el tope diario admite 3 sesiones (meta ≈1.000 al mes).
 - **Audio por curso:** `courses.audio_enabled` (idiomas sí; Java no). Sin audio no suena ni se muestran botones.
+
+## D-040 · Modos por curso (14-oct-2026)
+- `courses.modes` (casillas en Studio): Asociaciones, Gramática, Arcade y Chat. La app solo muestra los modos y
+  contadores del curso. Idiomas: los cuatro. Otras materias (p. ej., Java): Asociaciones y Arcade; el Chat es opcional
+  (casos o preguntas sobre conceptos).
+- Sin Gramática, el Chat se abre al llevar 15 unidades trabajadas (en lugar de 3 sesiones de gramática).
+- Sin Arcade, no salta el Arcade sorpresa dentro de las asociaciones.

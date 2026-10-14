@@ -71,6 +71,8 @@ export function App() {
   if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={() => void start()} onReload={() => void open('associations')} /></div>;
 
   const current = courses.find((c) => c.id === course);
+  const enabled = MODES.filter((m) => !current || current.modes.includes(m.id));
+  const has = (m: Mode) => enabled.some((x) => x.id === m);
   return (
     <div className="app home">
       <div className="top"><div className="logo">M</div>{(me?.first_name || me?.email) && <span className="pill">{me?.first_name || me?.email}</span>}<button type="button" className="link" onClick={() => void api.logout().then(() => setView({ name: 'login' }))}>Salir</button></div>
@@ -85,18 +87,20 @@ export function App() {
             <div className="hero">
               <div className="hero-art"><span aria-hidden="true">{current.title.startsWith('Java') ? '☕🧩' : '🏠🗝️'}</span><span className="tag">{current.title.replace(/\s*\(.*\)$/, '').toUpperCase()}</span></div>
               <div className="hero-body">
-                <p className="eyebrow">MODO {MODES.find((m) => m.id === mode)!.title.toUpperCase()}</p>
+                <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>
                 <p>{current.new_per_session ?? 15} nuevas por sesión, en escenas de 5. Puedes hacer varias sesiones al día; los repasos vuelven según la curva del olvido.</p>
-                <button type="button" className="primary" onClick={() => void open(mode)}>Continuar aventura →</button>
+                <button type="button" className="primary" onClick={() => void open(has(mode) ? mode : 'associations')}>Continuar aventura →</button>
               </div>
             </div>
           ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
           {ms && (
             <div className="meters" aria-label="Tu progreso">
               <Meter label="Palabras trabajadas" value={`${ms.words}/${ms.total}`} pct={ms.total ? ms.words / ms.total : 0} />
-              <Meter label="Próximo truco de gramática" value={`faltan ${ms.grammarNext}`} pct={(GRAMMAR_EVERY - ms.grammarNext) / GRAMMAR_EVERY} />
-              <Meter label="Arcade sorpresa" value={ms.arcadeLeft ? `faltan ${ms.arcadeLeft}` : '¡activo!'} pct={Math.min(1, ms.words / ARCADE_FROM)} />
-              <Meter label="Chat" value={`${ms.grammarSessions}/${CHAT_AFTER_GRAMMAR} gramáticas`} pct={ms.grammarSessions / CHAT_AFTER_GRAMMAR} />
+              {has('grammar') && <Meter label="Próximo truco de gramática" value={`faltan ${ms.grammarNext}`} pct={(GRAMMAR_EVERY - ms.grammarNext) / GRAMMAR_EVERY} />}
+              {has('arcade') && <Meter label="Arcade sorpresa" value={ms.arcadeLeft ? `faltan ${ms.arcadeLeft}` : '¡activo!'} pct={Math.min(1, ms.words / ARCADE_FROM)} />}
+              {has('chat') && (has('grammar')
+                ? <Meter label="Chat" value={`${ms.grammarSessions}/${CHAT_AFTER_GRAMMAR} gramáticas`} pct={ms.grammarSessions / CHAT_AFTER_GRAMMAR} />
+                : <Meter label="Chat" value={ms.words >= GRAMMAR_EVERY ? '¡disponible pronto!' : `faltan ${GRAMMAR_EVERY - ms.words}`} pct={Math.min(1, ms.words / GRAMMAR_EVERY)} />)}
             </div>
           )}
           {error && <p className="banner" role="status">{error}</p>}
@@ -105,16 +109,16 @@ export function App() {
           <p className="eyebrow">ELIGE TU MOMENTO</p>
           <h2 className="h2">¿Qué te apetece hacer?</h2>
           <div className="modes">
-            {MODES.map((m) => (
+            {enabled.map((m) => (
               <button key={m.id} type="button" className={`mode ${m.id === 'arcade' ? 'warm' : ''} ${m.ready ? '' : 'locked'}`} onClick={() => void open(m.id)}>
                 <span className="ico">{m.ico}</span><b>{m.title}</b><span>{m.ready ? '↗' : '🔒'}</span>
-                <small>{mode === m.id && <span className="fav">POR DEFECTO · </span>}{m.ready ? m.text : m.lock}</small>
+                <small>{mode === m.id && <span className="fav">POR DEFECTO · </span>}{m.ready ? m.text : m.id === 'chat' && !has('grammar') ? 'En este curso se abre al llevar 15 conceptos trabajados.' : m.lock}</small>
               </button>
             ))}
           </div>
           <label className="pref"><span className="eyebrow">Modo por defecto</span>
             <select value={mode} onChange={(e) => { const v = e.target.value as Mode; setMode(v); writePrefs({ mode: v }); }}>
-              {MODES.map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}
+              {enabled.map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}
             </select>
           </label>
         </section>
