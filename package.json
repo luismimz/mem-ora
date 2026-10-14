@@ -22,7 +22,8 @@
     "backend:accounts": "node --env-file=backend/.env backend/scripts/create-test-accounts.mjs",
     "test:integration": "pnpm --filter @memora/directus-extension test:integration",
     "backend:seed-demo": "node --env-file=backend/.env backend/scripts/seed-demo.mjs",
-    "web": "pnpm --filter @memora/web dev"
+    "web": "pnpm --filter @memora/web dev",
+    "backend:seed-examples": "node --env-file=backend/.env backend/scripts/seed-examples.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

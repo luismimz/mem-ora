@@ -3,7 +3,7 @@
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
-import { eventsForStep, exerciseFor, gradeStep, type ClientEvent, type SessionPlan, type SessionUnit, type StepAnswer } from '@memora/experiences';
+import type { AssocPlan, ClientEvent, SessionUnit } from '@memora/experiences';
 
 const BASE = process.env.DIRECTUS_URL ?? 'http://localhost:8055';
 const readEnv = (file: string): Record<string, string> =>
@@ -63,22 +63,18 @@ afterAll(async () => {
   for (const id of [courseId, privateOther]) if (id) await call(admin, 'DELETE', `/items/courses/${id}`);
 });
 
-/** Hace los pasos de la sesión con el motor real; `answers` decide qué responde el alumno en cada tipo de paso. */
-function play(plan: SessionPlan, units: Record<string, SessionUnit>, at: number, answers: Partial<Record<string, (e: any) => StepAnswer>>, from = 0, to = plan.steps.length) {
-  let seq = 0;
-  const events: ClientEvent[] = [];
-  for (const step of plan.steps.slice(from, to)) {
-    const unit = units[step.unitKey];
-    const ex = exerciseFor(step, unit, Object.values(units), plan.sessionId);
-    const answer = answers[ex.kind]?.(ex) ?? null;
-    const outcome = answer ? gradeStep(step, ex, answer) : null;
-    events.push(...eventsForStep(plan, step, ex, outcome, answer, { at: at + events.length * 1000, deviceId: 'prueba', nextSeq: () => ++seq, newId: () => crypto.randomUUID() }));
-  }
-  return events;
+let seq = 0;
+/** Eventos que genera la app al recorrer una unidad: exposición de sus habilidades e intento de recordar. */
+function unitEvents(u: SessionUnit, at: number, correct: boolean, format: ClientEvent['format'] = 'recognition_choice', hint = 0): ClientEvent[] {
+  const base = { deviceId: 'prueba', courseId, unitKey: u.key };
+  const exposures = u.skills.map((s, i): ClientEvent => ({ ...base, id: crypto.randomUUID(), kind: 'exposure', at: at + i, seq: ++seq, skillKey: s.key, ...(s.associationId ? { associationId: s.associationId } : {}) }));
+  const recall = u.skills.find((s) => s.kind === 'recall')!;
+  const attempt: ClientEvent = { ...base, id: crypto.randomUUID(), kind: 'attempt', at: at + 10, seq: ++seq, skillKey: recall.key, ...(recall.associationId ? { associationId: recall.associationId } : {}), format, correct, hint: hint as never, timeMs: 3000, contextId: `${u.key}#recall` };
+  return [...exposures, attempt];
 }
 
 describe('el alumno estudia con conexión', () => {
-  let plan: SessionPlan;
+  let plan: AssocPlan;
   let units: Record<string, SessionUnit>;
 
   it('ve los cursos publicados y públicos, pero no el privado de otra persona', async () => {
@@ -96,12 +92,12 @@ describe('el alumno estudia con conexión', () => {
     plan = res.data.state.plan;
     units = res.data.units;
     expect(Object.keys(units)).toEqual(['borrow']);
-    expect(plan.steps.map((s) => s.kind)).toEqual(['listen', 'associate', 'recall', 'order', 'produce', 'result']);
+    expect(plan.steps.map((s) => s.kind)).toEqual(['card', 'recall', 'story', 'sceneResult', 'rescue', 'summary']);
     expect(units.borrow?.association?.cue).toBe('burro');
   });
 
   it('cierra a mitad y, al volver, retoma en el mismo punto', async () => {
-    const half = play(plan, units, Date.now(), { recall: () => ({ text: 'borrow', timeMs: 3000 }) }, 0, 3);
+    const half = unitEvents(units.borrow!, Date.now(), true);
     expect((await call(learner, 'POST', '/memora/events', { course: courseId, events: half })).data.accepted).toHaveLength(half.length);
     expect((await call(learner, 'PUT', '/memora/session/position', { course: courseId, sessionId: plan.sessionId, index: 3, outcomes: { x: { correct: true, hint: 0 } }, finished: false })).status).toBe(200);
     const again = await call(learner, 'GET', `/memora/session?course=${courseId}`);
@@ -111,7 +107,7 @@ describe('el alumno estudia con conexión', () => {
   });
 
   it('reenviar los mismos eventos no los duplica, y los manipulados se rechazan', async () => {
-    const replay = play(plan, units, Date.now(), { recall: () => ({ text: 'borrow', timeMs: 3000 }) }, 0, 1);
+    const replay = unitEvents(units.borrow!, Date.now(), true).slice(0, 1);
     const first = await call(learner, 'POST', '/memora/events', { course: courseId, events: replay });
     const second = await call(learner, 'POST', '/memora/events', { course: courseId, events: replay });
     expect(first.data.accepted).toHaveLength(1);
@@ -121,7 +117,7 @@ describe('el alumno estudia con conexión', () => {
   });
 
   it('el usuario del evento lo pone el servidor, nunca el cliente', async () => {
-    const forged = { ...play(plan, units, Date.now(), {}, 0, 1)[0]!, userId: 'otra-persona' };
+    const forged = { ...unitEvents(units.borrow!, Date.now(), true)[0]!, userId: 'otra-persona' };
     await call(learner, 'POST', '/memora/events', { course: courseId, events: [forged] });
     const stored = await call(admin, 'GET', `/items/learning_events?filter[event_id][_eq]=${forged.id}&fields=user`);
     expect(stored.data[0].user).toBe(learnerId);
@@ -145,19 +141,16 @@ describe('al día siguiente', () => {
     try {
       const first = await call(learner, 'GET', `/memora/session?course=${course}`);
       const twoDaysAgo = Date.now() - 2 * DAY;
-      const events = play(first.data.state.plan, first.data.units, twoDaysAgo, {
-        recall: () => ({ text: 'socket', timeMs: 6000 }),
-        order: (e) => ({ order: e.answer, timeMs: 4000 }),
-        produce: () => ({ text: 'The plug is under my desk.', timeMs: 9000 }),
-      });
+      // Hace dos días la vio y, en un repaso tecleado sin pista, falló.
+      const events = unitEvents(first.data.units.plug, twoDaysAgo, false, 'recall_unaided', 0).map((e) => ({ ...e, courseId: course }));
       expect((await call(learner, 'POST', '/memora/events', { course, events })).data.rejected).toEqual([]);
       await call(learner, 'PUT', '/memora/session/position', { course, sessionId: first.data.state.plan.sessionId, index: first.data.state.plan.steps.length, outcomes: {}, finished: true });
 
       const next = await call(learner, 'GET', `/memora/session?course=${course}`);
       expect(next.data.resumed).toBe(false);
-      const recall = next.data.state.plan.steps.find((s: any) => s.kind === 'recall');
-      expect(recall.reason).toBe('review');
-      expect(recall.startHint).toBe(1);
+      const review = next.data.state.plan.steps.find((s: any) => s.kind === 'review');
+      expect(review.skillKey).toBe('plug.recall');
+      expect(review.startHint).toBe(1);
     } finally {
       await call(admin, 'DELETE', `/items/courses/${course}`);
     }
@@ -169,7 +162,7 @@ describe('vista previa y sesión por cookie', () => {
     const preview = await call(author, 'GET', `/memora/preview/${draftUnitId}`);
     expect(preview.status, preview.message).toBe(200);
     expect(preview.data.preview).toBe(true);
-    expect(preview.data.state.plan.steps.map((s: any) => s.kind)).toEqual(['listen', 'associate', 'recall', 'order', 'produce', 'result']);
+    expect(preview.data.state.plan.steps.map((s: any) => s.kind)).toEqual(['card', 'recall', 'story', 'sceneResult', 'rescue', 'summary']);
     expect((await call(learner, 'GET', `/memora/preview/${draftUnitId}`)).status).toBe(403);
   });
 

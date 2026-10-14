@@ -16,6 +16,10 @@ export interface SessionAssociation {
   technique: string;
   cue?: string | null;
   text: string;
+  /** La misma escena en el idioma del contenido. */
+  sceneTarget?: string | null;
+  /** Ilustración provisional (emoji) mientras no haya imagen aprobada. */
+  emoji?: string | null;
 }
 
 export interface SessionUnit {
@@ -28,6 +32,8 @@ export interface SessionUnit {
   association?: SessionAssociation | null;
   /** Versión publicada: sirve para invalidar la caché (H2.2b). */
   version: number;
+  /** Lugar o módulo donde vive la unidad (por ejemplo, «Dormitorio»). */
+  place?: string | null;
 }
 
 export type StepKind = 'listen' | 'associate' | 'structure' | 'recall' | 'order' | 'produce' | 'dictation' | 'result';

@@ -44,7 +44,7 @@ const config = resolveConfig();
 const KEY_PATTERN = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
 const CONTENT_FIELDS: Record<'units' | 'associations', string[]> = {
   units: ['course', 'module', 'key', 'type', 'language', 'payload', 'license', 'sources', 'risk_level'],
-  associations: ['unit', 'technique', 'cue', 'text', 'evidence', 'language', 'license', 'sources', 'origin'],
+  associations: ['unit', 'technique', 'cue', 'text', 'scene_target', 'emoji', 'evidence', 'language', 'license', 'sources', 'origin'],
 };
 const ROLE_NAMES: Record<string, ContentRole> = { Autor: 'author', Revisor: 'reviewer' };
 

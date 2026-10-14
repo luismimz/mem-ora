@@ -1,75 +1,101 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type SessionPayload } from './api';
-import { setLanguage, t } from './i18n';
-import { SessionView } from './SessionView';
+import { AssocSession } from './AssocSession';
+import { setLanguage } from './i18n';
 
-type View = { name: 'loading' } | { name: 'login' } | { name: 'courses' } | { name: 'session'; course: Course; payload: SessionPayload } | { name: 'preview'; unitId: string; payload: SessionPayload | null; error?: string };
+type Mode = 'associations' | 'grammar' | 'arcade' | 'chat';
+type View = { name: 'loading' } | { name: 'login' } | { name: 'home' } | { name: 'session'; course: Course; payload: SessionPayload } | { name: 'preview'; payload: SessionPayload | null; error?: string };
 
 const previewId = () => window.location.pathname.match(/^\/preview\/([\w-]+)/)?.[1] ?? null;
+const PREF = 'memora.preferences';
+/** Preferencias de la interfaz en este dispositivo (curso y modo por defecto). No es progreso: el progreso vive en el servidor. */
+function readPrefs(): { course?: string; mode?: Mode } {
+  try { return JSON.parse(localStorage.getItem(PREF) ?? '{}'); } catch { return {}; }
+}
+function writePrefs(p: { course?: string; mode?: Mode }) {
+  try { localStorage.setItem(PREF, JSON.stringify({ ...readPrefs(), ...p })); } catch { /* sin almacenamiento */ }
+}
+
+const MODES: Array<{ id: Mode; ico: string; title: string; text: string; ready: boolean; lock?: string }> = [
+  { id: 'associations', ico: '◈', title: 'Asociaciones', text: 'Historias absurdas que se quedan contigo.', ready: true },
+  { id: 'grammar', ico: '▣', title: 'Gramática', text: 'Trucos para pasar del español al inglés.', ready: false, lock: 'Llega en el siguiente paso: un truco tras cada 15 palabras.' },
+  { id: 'arcade', ico: '✦', title: 'Arcade', text: 'Recuerda jugando. Ya salta por sorpresa desde las 20 palabras.', ready: false, lock: 'El modo libre llega en el H3.' },
+  { id: 'chat', ico: '◌', title: 'Chat', text: 'Conversa con personajes.', ready: false, lock: 'Se abre tras 3 sesiones de gramática.' },
+];
 
 export function App() {
   const [view, setView] = useState<View>({ name: 'loading' });
   const [me, setMe] = useState<Me | null>(null);
   const [courses, setCourses] = useState<Course[]>([]);
+  const [course, setCourse] = useState<string | null>(readPrefs().course ?? null);
+  const [mode, setMode] = useState<Mode>(readPrefs().mode ?? 'associations');
   const [error, setError] = useState<string | null>(null);
 
   const start = useCallback(async () => {
-    try {
-      setMe(await api.me());
-    } catch {
-      setView({ name: 'login' });
-      return;
-    }
+    try { setMe(await api.me()); } catch { setView({ name: 'login' }); return; }
     const unitId = previewId();
     if (unitId) {
-      try {
-        setView({ name: 'preview', unitId, payload: await api.preview(unitId) });
-      } catch (e) {
-        setView({ name: 'preview', unitId, payload: null, error: e instanceof Error ? e.message : t('error.generic') });
-      }
+      try { setView({ name: 'preview', payload: await api.preview(unitId) }); } catch (e) { setView({ name: 'preview', payload: null, error: e instanceof Error ? e.message : 'Error' }); }
       return;
     }
-    setCourses(await api.courses());
-    setView({ name: 'courses' });
+    const list = await api.courses();
+    setCourses(list);
+    setCourse((c) => (c && list.some((x) => x.id === c) ? c : list[0]?.id ?? null));
+    setView({ name: 'home' });
   }, []);
-
   useEffect(() => void start(), [start]);
 
-  async function openCourse(course: Course) {
-    setLanguage(course.ui_language);
+  async function open(selected: Mode) {
+    const c = courses.find((x) => x.id === course);
+    if (!c) return;
+    const info = MODES.find((m) => m.id === selected)!;
+    if (!info.ready) { setError(info.lock ?? 'Próximamente.'); return; }
+    setLanguage(c.ui_language);
     setError(null);
-    try {
-      setView({ name: 'session', course, payload: await api.session(course.id) });
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : t('error.generic'));
-    }
+    try { setView({ name: 'session', course: c, payload: await api.session(c.id) }); } catch (e) { setError(e instanceof ApiError ? e.message : 'Algo ha fallado.'); }
   }
 
-  async function logout() {
-    await api.logout();
-    setMe(null);
-    setView({ name: 'login' });
-  }
+  if (view.name === 'loading') return <div className="app"><p style={{ paddingTop: '30vh', textAlign: 'center' }}>Preparando tu aventura…</p></div>;
+  if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
+  if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
+  if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={() => void start()} onReload={() => void open('associations')} /></div>;
 
+  const current = courses.find((c) => c.id === course);
   return (
     <div className="app">
-      <header>
-        <strong>{t('app.name')}</strong>
-        {me && <span className="who">{me.first_name ?? me.email} · <button type="button" className="link" onClick={() => void logout()}>{t('logout')}</button></span>}
-      </header>
-      {view.name === 'loading' && <p>{t('session.loading')}</p>}
-      {view.name === 'login' && <Login onDone={() => void start()} />}
-      {view.name === 'courses' && (
-        <main>
-          <h1>{t('courses.title')}</h1>
-          {error && <p className="banner warn">{error}</p>}
-          {courses.length === 0 ? <p>{t('courses.empty')}</p> : (
-            <ul className="courses">{courses.map((c) => <li key={c.id}><span>{c.title}</span><button type="button" onClick={() => void openCourse(c)}>{t('courses.study')}</button></li>)}</ul>
-          )}
-        </main>
-      )}
-      {view.name === 'session' && <SessionView key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={() => void start()} onReload={() => void openCourse(view.course)} />}
-      {view.name === 'preview' && (view.payload ? <SessionView payload={view.payload} courseId={view.payload.state.plan.courseId} preview onExit={() => window.close()} onReload={() => void start()} /> : <main><p className="banner warn">{view.error}</p></main>)}
+      <div className="top"><div className="logo">M</div>{(me?.first_name || me?.email) && <span className="pill">{me?.first_name || me?.email}</span>}<button type="button" className="link" onClick={() => void api.logout().then(() => setView({ name: 'login' }))}>Salir</button></div>
+      <div className="courses" role="tablist" aria-label="Cursos">
+        {courses.map((c) => <button key={c.id} type="button" role="tab" aria-selected={c.id === course} className={c.id === course ? 'on' : ''} onClick={() => { setCourse(c.id); writePrefs({ course: c.id }); }}>{c.title.replace(/\s*\(.*\)$/, '')}</button>)}
+      </div>
+      <p className="eyebrow">TU AVENTURA</p>
+      <h1>La historia sigue contigo.</h1>
+      {current ? (
+        <section className="hero">
+          <div className="hero-art"><span aria-hidden="true">{current.content_language === 'en' && current.title.startsWith('Java') ? '☕🧩' : '🏠🗝️'}</span><span className="tag">{current.title.replace(/\s*\(.*\)$/, '').toUpperCase()}</span></div>
+          <div className="hero-body">
+            <p className="eyebrow">MODO {MODES.find((m) => m.id === mode)!.title.toUpperCase()}</p>
+            <p>Historias absurdas en escenas de 5. Teclear solo llega en los repasos.</p>
+            <button type="button" className="primary" onClick={() => void open(mode)}>Continuar aventura →</button>
+          </div>
+        </section>
+      ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
+      {error && <p className="banner" role="status">{error}</p>}
+      <p className="eyebrow">ELIGE TU MOMENTO</p>
+      <h1 style={{ fontSize: '1.4rem' }}>¿Qué te apetece hacer?</h1>
+      <div className="modes">
+        {MODES.map((m) => (
+          <button key={m.id} type="button" className={`mode ${m.id === 'arcade' ? 'warm' : ''} ${m.ready ? '' : 'locked'}`} onClick={() => void open(m.id)}>
+            <span className="ico">{m.ico}</span><b>{m.title} {mode === m.id && <span className="fav">· POR DEFECTO</span>}</b><span>{m.ready ? '↗' : '🔒'}</span>
+            <small>{m.ready ? m.text : m.lock}</small>
+          </button>
+        ))}
+      </div>
+      <p style={{ marginTop: '1rem' }}>
+        <label className="eyebrow" htmlFor="pref">Modo por defecto </label>
+        <select id="pref" value={mode} onChange={(e) => { const v = e.target.value as Mode; setMode(v); writePrefs({ mode: v }); }}>
+          {MODES.map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}
+        </select>
+      </p>
     </div>
   );
 }
@@ -79,13 +105,14 @@ function Login({ onDone }: { onDone: () => void }) {
   const [password, setPassword] = useState('');
   const [failed, setFailed] = useState(false);
   return (
-    <main>
-      <h1>{t('login.title')}</h1>
+    <main style={{ paddingTop: '12vh' }}>
+      <div className="logo" style={{ marginBottom: '1rem' }}>M</div>
+      <h1>Aprende hoy. Recuérdalo mañana.</h1>
       <form className="login" onSubmit={(e) => { e.preventDefault(); api.login(email, password).then(onDone, () => setFailed(true)); }}>
-        <label>{t('login.email')}<input type="email" autoComplete="username" value={email} onChange={(e) => setEmail(e.target.value)} required /></label>
-        <label>{t('login.password')}<input type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} required /></label>
-        {failed && <p className="banner warn">{t('login.error')}</p>}
-        <button type="submit">{t('login.submit')}</button>
+        <input type="email" autoComplete="username" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} required aria-label="Correo" />
+        <input type="password" autoComplete="current-password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required aria-label="Contraseña" />
+        {failed && <p className="banner">No se ha podido entrar. Revisa el correo y la contraseña.</p>}
+        <button type="submit" className="primary">Entrar</button>
       </form>
     </main>
   );

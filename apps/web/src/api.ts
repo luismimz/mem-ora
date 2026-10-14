@@ -1,5 +1,5 @@
 // Cliente de la API. La sesión va en una cookie httpOnly de Directus (modo `session`): no hay tokens en el navegador.
-import type { ClientEvent, SessionPlan, SessionUnit } from '@memora/experiences';
+import type { AssocPlan, ClientEvent, SessionUnit } from '@memora/experiences';
 
 export class ApiError extends Error {
   constructor(readonly status: number, readonly code: string, message: string) {
@@ -40,7 +40,7 @@ export interface Course {
   content_language: string;
 }
 export interface SessionState {
-  plan: SessionPlan;
+  plan: AssocPlan;
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;

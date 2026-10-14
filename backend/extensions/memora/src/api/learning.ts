@@ -105,6 +105,8 @@ export interface UnitRow {
   language: string | null;
   payload: unknown;
   version: number | null;
+  /** Título del módulo (lugar), si lo tiene. */
+  place?: string | null;
 }
 export interface SkillRow {
   id: string;
@@ -121,6 +123,8 @@ export interface AssociationRow {
   cue: string | null;
   text: string | null;
   status: string;
+  scene_target?: string | null;
+  emoji?: string | null;
 }
 
 /** Unidades publicadas listas para la sesión. Solo se usan asociaciones publicadas. */
@@ -136,8 +140,9 @@ export function sessionUnits(units: UnitRow[], skills: SkillRow[], associations:
       language: u.language ?? courseLanguage,
       payload: (typeof u.payload === 'string' ? JSON.parse(u.payload) : u.payload) as SessionUnit['payload'],
       version: u.version ?? 0,
+      place: u.place ?? null,
       skills: mine.map((s) => ({ key: s.key, kind: s.kind, associationId: s.association && published.has(s.association) ? s.association : null })),
-      association: linked ? { id: linked.id, technique: linked.technique, cue: linked.cue, text: linked.text! } : null,
+      association: linked ? { id: linked.id, technique: linked.technique, cue: linked.cue, text: linked.text!, sceneTarget: linked.scene_target ?? null, emoji: linked.emoji ?? null } : null,
     };
   }
   return out;

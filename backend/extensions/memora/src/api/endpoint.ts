@@ -9,7 +9,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
 import { assessAssociation, dayOf, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
-import { buildSession, type SessionPlan, type SessionUnit } from '@memora/experiences';
+import { buildAssociationSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { effectiveTime, MAX_EVENTS_PER_BATCH, recompute, rejectReason, sessionUnits, skillIndex, type AssociationRow, type SkillRow, type StoredEvent, type UnitRow } from './learning';
 
@@ -23,8 +23,14 @@ class HttpError extends Error {
   }
 }
 
+/** Ritmo del curso: N unidades nuevas por sesión (cada una con unas 3 habilidades). Configuración, no lógica (D-037). */
+function courseConfig(course: Row) {
+  const perSession = Math.max(1, Number(course.new_per_session) || 15);
+  return resolveConfig({ load: { newCap: perSession * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 40, totalCap: perSession * 3 + 40 } });
+}
+
 export interface SessionState {
-  plan: SessionPlan;
+  plan: SessionPlan | AssocPlan;
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -55,13 +61,20 @@ export default {
     }
 
     async function publishedContent(course: Row) {
-      const units: UnitRow[] = await db('units').where({ course: course.id, status: 'published' }).select('id', 'key', 'type', 'language', 'payload', 'version', 'status');
+      const units: UnitRow[] = await db('units')
+        .leftJoin('modules', 'units.module', 'modules.id')
+        .where({ 'units.course': course.id, 'units.status': 'published' })
+        .orderBy([{ column: 'modules.sort', order: 'asc' }, { column: 'units.sort', order: 'asc' }, { column: 'units.date_created', order: 'asc' }])
+        .select('units.id', 'units.key', 'units.type', 'units.language', 'units.payload', 'units.version', 'units.status', 'modules.title as place');
       const ids = units.map((u) => u.id);
       const skills: SkillRow[] = ids.length ? await db('skills').whereIn('unit', ids).select('id', 'key', 'kind', 'unit', 'association', 'sort') : [];
-      const associations: AssociationRow[] = ids.length ? await db('associations').whereIn('unit', ids).select('id', 'unit', 'technique', 'cue', 'text', 'status') : [];
+      const associations: AssociationRow[] = ids.length ? await db('associations').whereIn('unit', ids).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji') : [];
       const prerequisites = await db('prerequisites').where({ course: course.id }).select('id', 'subject_unit', 'subject_skill', 'requires_unit', 'requires_skill');
       const sUnits = sessionUnits(units, skills, associations, course.content_language);
       const publishedAssoc = new Set(associations.filter((a) => a.status === 'published').map((a) => a.id));
+      // Las habilidades siguen el orden de sus unidades (módulo y orden): así lo nuevo entra escena a escena.
+      const unitOrder = new Map(units.map((u, i) => [u.id, i]));
+      skills.sort((a, b) => (unitOrder.get(a.unit)! - unitOrder.get(b.unit)!) || (a.sort ?? 0) - (b.sort ?? 0));
       const catalog = buildCatalog({
         units: units.map((u: Row) => ({ id: u.id, key: u.key, type: u.type, status: 'published' })),
         skills: skills.map((s) => ({ id: s.id, key: s.key, kind: s.kind, unit: s.unit, association: s.association && publishedAssoc.has(s.association) ? s.association : null })),
@@ -110,12 +123,14 @@ export default {
       const today = dayOf(now, config.load.dayOriginMs, config.load.dayLengthMs);
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first();
       const savedState: SessionState | null = saved ? parse(saved.state) : null;
-      if (savedState && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s) => !s.unitKey || units[s.unitKey])) {
+      if (savedState && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
-      const plan = planDay({ catalog, learner, now, config });
-      const session = buildSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units });
+      const cfg = courseConfig(course);
+      const plan = planDay({ catalog, learner, now, config: cfg });
+      const knownUnits = [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
+      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits });
       const state: SessionState = { plan: session, index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
       return { data: { state, units, resumed: false, stats: plan.stats } };
@@ -206,10 +221,10 @@ export default {
       const course = await db('courses').where({ id: unit.course }).first();
       const skills: SkillRow[] = await db('skills').where({ unit: unit.id }).select('id', 'key', 'kind', 'unit', 'association', 'sort');
       // En la vista previa se muestran también asociaciones en borrador, marcadas como tales.
-      const associations: AssociationRow[] = (await db('associations').where({ unit: unit.id }).select('id', 'unit', 'technique', 'cue', 'text', 'status')).map((a: Row) => ({ ...a, status: 'published' }));
+      const associations: AssociationRow[] = (await db('associations').where({ unit: unit.id }).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji')).map((a: Row) => ({ ...a, status: 'published' }));
       const units: Record<string, SessionUnit> = sessionUnits([unit], skills, associations, course?.content_language ?? 'en');
       const items: PlanItem[] = skills.map((s) => ({ skillId: s.key, unitId: unit.key, reason: 'new', priority: 0, recommendedHint: 0, ...(units[unit.key]?.skills.find((x) => x.key === s.key)?.associationId ? { associationId: units[unit.key]!.skills.find((x) => x.key === s.key)!.associationId! } : {}) }));
-      const plan = buildSession({ sessionId: `preview-${unit.id}`, courseId: unit.course, day: 0, createdAt: Date.now(), items, units });
+      const plan = buildAssociationSession({ sessionId: `preview-${unit.id}`, courseId: unit.course, day: 0, createdAt: Date.now(), items, units, knownUnits: [] });
       return { data: { state: { plan, index: 0, outcomes: {}, finished: false }, units, preview: true, status: unit.status } };
     }));
   },
