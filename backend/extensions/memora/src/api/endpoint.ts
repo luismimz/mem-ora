@@ -107,6 +107,13 @@ export default {
       else await db('session_positions').insert({ id: randomUUID(), user: userId, course: courseId, ...row });
     }
 
+    // Quién soy: el alumno no lee roles; la app solo necesita saber si puede usar el modo revisión.
+    router.get('/me', wrap(async (req) => {
+      const acc = req.accountability;
+      const role = acc.role ? await db('directus_roles').where({ id: acc.role }).first('name') : null;
+      return { data: { staff: Boolean(acc.admin || (role && STAFF_ROLES.has(role.name))) } };
+    }));
+
     router.get('/courses', wrap(async (req) => {
       const userId = req.accountability.user;
       const rows = await db('courses')

@@ -18,9 +18,10 @@ import {
 import { api, ApiError, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { audioEnabled, speak } from './speech';
+import { milestones, type Milestones } from './milestones';
 
 interface Outcome { correct: boolean; hint: number }
-interface Props { payload: SessionPayload; courseId: string; preview?: boolean; onExit: () => void; onReload: () => void }
+interface Props { payload: SessionPayload; courseId: string; preview?: boolean; staff?: boolean; onExit: () => void; onReload: () => void }
 
 /** Resalta las palabras en MAYÚSCULAS de una escena. */
 function Highlight({ text }: { text: string }) {
@@ -61,7 +62,10 @@ function Art({ unit, small = false, chain = true }: { unit: SessionUnit; small?:
   );
 }
 
-export function AssocSession({ payload, courseId, preview = false, onExit, onReload }: Props) {
+export function AssocSession({ payload, courseId, preview: previewProp = false, staff = false, onExit, onReload }: Props) {
+  // Modo revisión (solo equipo): saltar a cualquier paso; desde el primer salto no se guarda progreso.
+  const [reviewing, setReviewing] = useState(false);
+  const preview = previewProp || reviewing;
   const plan = payload.state.plan as unknown as AssocPlan;
   const units = payload.units;
   const [index, setIndex] = useState(payload.state.index);
@@ -122,7 +126,15 @@ export function AssocSession({ payload, courseId, preview = false, onExit, onRel
         <span className="pill">{progress}%</span>
       </div>
       <div className="bar"><i style={{ width: `${progress}%` }} /></div>
-      {preview && <p className="banner">Vista previa como alumno: no se guarda ningún progreso.</p>}
+      {staff && (
+        <div className="banner review">
+          <label>Revisar paso <select value={index} onChange={(e) => { setReviewing(true); setIndex(Number(e.target.value)); }}>
+            {plan.steps.map((s, i) => <option key={s.id} value={i}>{i + 1}. {stepLabel(s, units)}</option>)}
+          </select></label>
+          {preview && <small>No guarda progreso</small>}
+        </div>
+      )}
+      {preview && !staff && <p className="banner">Vista previa como alumno: no se guarda ningún progreso.</p>}
       {warning && <p className="banner" role="status">{warning}</p>}
 
       {step?.kind === 'card' && unit && <Card key={step.id} unit={unit} position={plan.scenes[step.scene]!.indexOf(unit.key) + 1} total={plan.scenes[step.scene]!.length} onNext={() => { expose(unit); void advance(); }} />}
@@ -299,9 +311,10 @@ function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit
   const first = recalls.filter((s) => outcomes[s.id]?.correct && !outcomes[s.id]?.hint).length;
   const helped = recalls.filter((s) => outcomes[s.id]?.correct && outcomes[s.id]?.hint).length;
   const [next, setNext] = useState<number | null>(null);
+  const [ms, setMs] = useState<Milestones | null>(null);
   useEffect(() => {
     if (preview) return;
-    api.progress(courseId).then((p) => { const due = p.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now()); setNext(due.length ? Math.min(...due) : null); }).catch(() => undefined);
+    api.progress(courseId).then((p) => { setMs(milestones(p)); const due = p.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now()); setNext(due.length ? Math.min(...due) : null); }).catch(() => undefined);
   }, [courseId, preview]);
   const when = next ? new Date(next).toLocaleString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' }) : 'según la curva del olvido';
   return (
@@ -312,6 +325,7 @@ function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit
         <div className="xp">+{xp} XP</div>
         <div className="stats"><div><b>{first}</b>a la primera</div><div><b>{helped}</b>con ayuda</div><div><b>{minutes}</b>min</div></div>
         <p>Próximo repaso: {when}.</p>
+        {ms && <p><b>{ms.words}</b> palabras trabajadas · próximo truco de gramática en <b>{ms.grammarNext}</b> · {ms.arcadeLeft ? <>Arcade sorpresa en <b>{ms.arcadeLeft}</b></> : 'Arcade sorpresa activo'}</p>}
         {Object.keys(units).length > 0 && <p style={{ fontSize: '.85rem' }}>La gramática con estas palabras llegará en el modo Gramática.</p>}
       </div>
       <button type="button" className="primary" onClick={onExit}>Terminar</button>
@@ -337,4 +351,10 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
       <p>{when ? <>Tu próximo repaso vuelve el <b>{when}</b>, según la curva del olvido.</> : 'Tus repasos volverán según la curva del olvido (1 h, 3 h, 24 h…).'}</p>
     </div><button type="button" className="primary next" onClick={onExit}>Volver al inicio</button></div></main>
   );
+}
+
+const STEP_NAMES: Record<AssocStep['kind'], string> = { review: 'Repaso', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'Rescate', summary: 'Resumen' };
+function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
+  const u = s.unitKey ? units[s.unitKey] : undefined;
+  return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;
 }

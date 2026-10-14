@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
+import { ARCADE_FROM, CHAT_AFTER_GRAMMAR, GRAMMAR_EVERY, milestones, type Milestones } from './milestones';
 import { setLanguage } from './i18n';
 import { setAudioEnabled } from './speech';
 
@@ -31,9 +32,12 @@ export function App() {
   const [course, setCourse] = useState<string | null>(readPrefs().course ?? null);
   const [mode, setMode] = useState<Mode>(readPrefs().mode ?? 'associations');
   const [error, setError] = useState<string | null>(null);
+  const [staff, setStaff] = useState(false);
+  const [ms, setMs] = useState<Milestones | null>(null);
 
   const start = useCallback(async () => {
     try { setMe(await api.me()); } catch { setView({ name: 'login' }); return; }
+    api.whoami().then((w) => setStaff(w.staff)).catch(() => setStaff(false));
     const unitId = previewId();
     if (unitId) {
       try { setView({ name: 'preview', payload: await api.preview(unitId) }); } catch (e) { setView({ name: 'preview', payload: null, error: e instanceof Error ? e.message : 'Error' }); }
@@ -45,6 +49,10 @@ export function App() {
     setView({ name: 'home' });
   }, []);
   useEffect(() => void start(), [start]);
+  useEffect(() => {
+    if (!course || view.name !== 'home') return;
+    api.progress(course).then((p) => setMs(milestones(p))).catch(() => setMs(null));
+  }, [course, view.name]);
 
   async function open(selected: Mode) {
     const c = courses.find((x) => x.id === course);
@@ -60,7 +68,7 @@ export function App() {
   if (view.name === 'loading') return <div className="app"><p style={{ paddingTop: '30vh', textAlign: 'center' }}>Preparando tu aventura…</p></div>;
   if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
-  if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={() => void start()} onReload={() => void open('associations')} /></div>;
+  if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={() => void start()} onReload={() => void open('associations')} /></div>;
 
   const current = courses.find((c) => c.id === course);
   return (
@@ -83,6 +91,14 @@ export function App() {
               </div>
             </div>
           ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
+          {ms && (
+            <div className="meters" aria-label="Tu progreso">
+              <Meter label="Palabras trabajadas" value={`${ms.words}/${ms.total}`} pct={ms.total ? ms.words / ms.total : 0} />
+              <Meter label="Próximo truco de gramática" value={`faltan ${ms.grammarNext}`} pct={(GRAMMAR_EVERY - ms.grammarNext) / GRAMMAR_EVERY} />
+              <Meter label="Arcade sorpresa" value={ms.arcadeLeft ? `faltan ${ms.arcadeLeft}` : '¡activo!'} pct={Math.min(1, ms.words / ARCADE_FROM)} />
+              <Meter label="Chat" value={`${ms.grammarSessions}/${CHAT_AFTER_GRAMMAR} gramáticas`} pct={ms.grammarSessions / CHAT_AFTER_GRAMMAR} />
+            </div>
+          )}
           {error && <p className="banner" role="status">{error}</p>}
         </section>
         <section className="home-side">
@@ -105,6 +121,10 @@ export function App() {
       </div>
     </div>
   );
+}
+
+function Meter({ label, value, pct }: { label: string; value: string; pct: number }) {
+  return <div className="meter"><div className="row"><span>{label}</span><b>{value}</b></div><div className="bar"><i style={{ width: `${Math.round(pct * 100)}%` }} /></div></div>;
 }
 
 function Login({ onDone }: { onDone: () => void }) {

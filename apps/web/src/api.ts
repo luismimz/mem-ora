@@ -64,6 +64,7 @@ export const api = {
   logout: () => request<unknown>('POST', '/auth/logout', { mode: 'session' }).catch(() => undefined),
   me: () => request<Me>('GET', '/users/me?fields=id,first_name,email'),
   courses: () => request<Course[]>('GET', '/memora/courses'),
+  whoami: () => request<{ staff: boolean }>('GET', '/memora/me'),
   session: (course: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}`),
   preview: (unitId: string) => request<SessionPayload>('GET', `/memora/preview/${encodeURIComponent(unitId)}`),
   events: (course: string, events: ClientEvent[]) => request<{ accepted: string[]; duplicates: string[]; rejected: Array<{ id: string; reason: string }> }>('POST', '/memora/events', { course, events }),

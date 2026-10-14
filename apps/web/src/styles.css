@@ -122,3 +122,10 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
   .stage .foot { font-size: .95rem; }
   .stage .answer-input { font-size: 1.8rem; }
 }
+
+.meters { display: grid; grid-template-columns: 1fr 1fr; gap: .6rem; margin-top: 1rem; }
+.meter { background: var(--surface-strong); border-radius: 1rem; padding: .7rem .9rem; font-size: .85rem; }
+.meter span { color: var(--muted); } .meter .bar { margin: .45rem 0 0; background: var(--surface-soft); }
+.banner.review { display: flex; align-items: center; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+.banner.review select { font: inherit; max-width: 100%; padding: .35rem .5rem; border-radius: .5rem; border: 1px solid var(--line); background: var(--surface-soft); color: var(--ink); }
+@media (min-width: 900px) { .home .meters { margin-top: 1rem; } }
