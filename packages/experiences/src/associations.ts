@@ -2,7 +2,7 @@
 // nuevas + cierre con rescate inverso. Sin teclear en la primera exposición; teclear solo en los repasos, con pistas.
 // Agnóstico de la materia: funciona con palabras de un idioma o con conceptos de Java.
 import type { ExerciseFormat, HintLevel, PlanItem } from '@memora/core';
-import type { ConceptExercise, ConceptPayload, PatternPayload, TermPayload } from '@memora/content';
+import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPayload, TermPayload } from '@memora/content';
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
@@ -124,16 +124,18 @@ export function buildAssociationSession(input: {
 
 /** Texto principal de la unidad: la palabra (term), el nombre (concepto) o la pieza fija (patrón). */
 export function unitText(u: SessionUnit): string {
+  if (u.type === 'memory_challenge') return (u.payload as MemoryChallengePayload).title;
   if (u.type === 'concept') return (u.payload as ConceptPayload).name;
   return u.type === 'term' ? (u.payload as TermPayload).text : (u.payload as PatternPayload).pieces.filter((p) => p.role === 'fixed').map((p) => p.text).join(' ');
 }
 /** Lo que significa, en corto: el significado (term), la idea clave (concepto) o la meta (patrón). */
 export function unitMeaning(u: SessionUnit): string {
+  if (u.type === 'memory_challenge') return 'reto de memoria';
   if (u.type === 'concept') return (u.payload as ConceptPayload).gist;
   return u.type === 'term' ? (u.payload as TermPayload).meaning : (u.payload as PatternPayload).goal;
 }
 export function unitExample(u: SessionUnit): { text: string; translation?: string; explanation?: string } | undefined {
-  return u.payload.examples[0];
+  return 'examples' in u.payload ? u.payload.examples[0] : undefined;
 }
 /** Respuestas que se dan por buenas al recordar la unidad (el nombre y, en conceptos, sus alternativas). */
 export function acceptedAnswers(u: SessionUnit): string[] {
@@ -220,4 +222,28 @@ export function gradeChallenge(ex: ConceptExercise, answer: string | string[], t
     ? answer.length === (ex.steps ?? []).length && answer.every((s, i) => s === ex.steps![i])
     : [ex.answer ?? '', ...(ex.accepted ?? [])].some((a) => a && sameAnswer(norm(answer), norm(a)));
   return { correct, format, hint: 0 };
+}
+
+// ─── Retos de memoria (D-056) ────────────────────────────────────────────────────────────────────────────
+
+const plain = (t: string) => t.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+
+export interface RecallScore {
+  /** Palabras de la lista que ha recordado (en cualquier orden). */
+  remembered: number;
+  /** Cuántas seguidas desde la primera ha dicho en el orden exacto. */
+  inOrder: number;
+  /** Palabras falsas elegidas. */
+  wrong: number;
+  total: number;
+}
+
+/** Puntúa un intento: lo recordado en cualquier orden y la racha en orden exacto desde el principio. */
+export function scoreRecall(words: string[], answer: string[], reverse = false): RecallScore {
+  const target = (reverse ? [...words].reverse() : words).map(plain);
+  const given = answer.map(plain);
+  const set = new Set(target);
+  let inOrder = 0;
+  while (inOrder < given.length && given[inOrder] === target[inOrder]) inOrder++;
+  return { remembered: new Set(given.filter((g) => set.has(g))).size, inOrder, wrong: given.filter((g) => !set.has(g)).length, total: words.length };
 }

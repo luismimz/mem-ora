@@ -10,6 +10,10 @@ const FIELD_ES: Record<string, string> = {
   meaning: 'significado',
   name: 'nombre',
   gist: 'idea clave',
+  words: 'palabras',
+  decoys: 'palabras falsas',
+  scenes: 'escenas',
+  emojis: 'emojis',
   exercises: 'ejercicios',
   prompt: 'pregunta',
   code: 'código',
@@ -62,7 +66,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -121,6 +125,11 @@ const es: Record<string, Template> = {
   distractor_is_answer: (_p, f) => `${f}: una opción falsa coincide con la respuesta.`,
   story_too_long: (p, f) => `${f}: la historia tiene ${p.words} palabras; el máximo es ${p.max}.`,
   note_not_in_story: (_p, f) => `${f}: nombra en MAYÚSCULAS un elemento que aparezca en la historia (así la línea queda atada a ella).`,
+  duplicate_word: (p, f) => `${f}: «${p.word}» está repetida en la lista.`,
+  decoy_in_list: (p, f) => `${f}: «${p.word}» es una palabra falsa pero también está en la lista.`,
+  word_not_in_story: (p, f) => `${f}: «${p.word}» no aparece en la historia.`,
+  word_out_of_order: (p, f) => `${f}: «${p.word}» aparece en la historia, pero no en el orden de la lista.`,
+  max_items: (p, f) => `${f}: como máximo ${p.max} (hay ${p.count}).`,
   scene_too_long: (p, f) => `${f}: la escena tiene ${p.words} palabras; el máximo es ${p.max}.`,
   scene_without_highlight: (_, f) => `${f}: resalta la pieza clave en MAYÚSCULAS (por ejemplo, «Un BURRO te PIDE PRESTADO el móvil»).`,
   scene_without_cue: (p, f) => `${f}: la escena debe incluir la palabra de apoyo «${p.cue}».`,

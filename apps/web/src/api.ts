@@ -42,7 +42,7 @@ export interface Course {
   content_language: string;
   audio_enabled: boolean;
   new_per_session: number;
-  modes: Array<'associations' | 'grammar' | 'arcade' | 'chat'>;
+  modes: Array<'associations' | 'grammar' | 'arcade' | 'chat' | 'memory'>;
 }
 export interface MissionRef {
   key: string;
@@ -93,6 +93,15 @@ export interface Progress {
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
 }
 
+export interface Reto {
+  key: string;
+  skillKey: string | null;
+  payload: import('@memora/content').MemoryChallengePayload;
+  best: { before: number; after: number; reverse: number; tries: number } | null;
+  status: string;
+  dueAt: number | null;
+}
+
 export interface ImportResult {
   ok: boolean;
   problems: Array<{ path: string; where: string; message: string }>;
@@ -111,6 +120,7 @@ export const api = {
   session: (course: string, mission?: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}`),
   missions: (course: string) => request<{ missions: Mission[]; current: string | null }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
   studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),
+  retos: (course: string) => request<{ retos: Reto[] }>('GET', `/memora/retos?course=${encodeURIComponent(course)}`),
   offline: (course: string) => request<import('./offline').OfflineBundle>('GET', `/memora/offline?course=${encodeURIComponent(course)}`),
   previewMission: (id: string) => request<SessionPayload>('GET', `/memora/preview/mission/${encodeURIComponent(id)}`),
   approveMission: (id: string) => request<{ published: number; failed: Array<{ key: string; message: string }> }>('POST', `/memora/studio/approve/${encodeURIComponent(id)}`),

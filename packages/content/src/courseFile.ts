@@ -1,10 +1,10 @@
 // Archivo de curso en JSON (importar y exportar). Un curso completo: datos del curso, módulos y unidades con su
 // asociación. Lo que se importa entra SIEMPRE como borrador (regla 12: nadie publica sin revisión).
 import { checkChoice, checkText, checkUnknownFields, isRecord, issue, type ContentIssue } from './issues';
-import { validateUnitPayload, type ConceptExercise, type ConceptPayload, type PatternPayload, type TermPayload } from './unitTypes';
+import { validateUnitPayload, type ConceptExercise, type ConceptPayload, type MemoryChallengePayload, type PatternPayload, type TermPayload } from './unitTypes';
 
 export const COURSE_FILE_VERSION = 1;
-export const COURSE_MODES = ['associations', 'grammar', 'arcade', 'chat'] as const;
+export const COURSE_MODES = ['associations', 'grammar', 'arcade', 'chat', 'memory'] as const;
 const KEY = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
 
 export interface AssociationEntry {
@@ -18,7 +18,7 @@ export interface AssociationEntry {
 
 export interface UnitEntry {
   key: string;
-  type: 'term' | 'pattern' | 'concept';
+  type: 'term' | 'pattern' | 'concept' | 'memory_challenge';
   // term
   form?: TermPayload['form'];
   text?: string;
@@ -38,6 +38,13 @@ export interface UnitEntry {
   answers?: string[];
   contrast?: string;
   exercises?: ConceptExercise[];
+  // memory_challenge
+  title?: string;
+  words?: string[];
+  emojis?: string[];
+  decoys?: string[];
+  scenes?: MemoryChallengePayload['scenes'];
+  seconds?: number;
   // común (idiomas: `translation`; conceptos: `explanation`, opcional)
   examples: Array<{ text: string; translation?: string; explanation?: string; source?: string }>;
   association?: AssociationEntry;
@@ -69,7 +76,10 @@ export interface CourseFile {
 }
 
 /** Convierte una unidad del archivo en el `payload` validado por su tipo. */
-export function unitPayload(u: UnitEntry): TermPayload | PatternPayload | ConceptPayload {
+export function unitPayload(u: UnitEntry): TermPayload | PatternPayload | ConceptPayload | MemoryChallengePayload {
+  if (u.type === 'memory_challenge') {
+    return { title: u.title ?? '', words: u.words ?? [], decoys: u.decoys ?? [], scenes: u.scenes ?? [], ...(u.emojis ? { emojis: u.emojis } : {}), ...(u.seconds ? { seconds: u.seconds } : {}) };
+  }
   if (u.type === 'concept') {
     return {
       name: u.name ?? '', gist: u.gist ?? '', definition: u.definition ?? '', examples: (u.examples ?? []) as ConceptPayload['examples'],
@@ -137,11 +147,11 @@ export function validateCourseFile(data: unknown): ContentIssue[] {
     m.units.forEach((u, ui) => {
       const up = `${mp}.units.${ui}`;
       if (!isRecord(u)) return void issues.push(issue('not_object', up));
-      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'examples', 'association', 'license', 'sources']);
+      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'title', 'words', 'emojis', 'decoys', 'scenes', 'seconds', 'examples', 'association', 'license', 'sources']);
       if (typeof u.key !== 'string' || !KEY.test(u.key)) issues.push(issue('key_format', `${up}.key`));
       else if (unitKeys.has(u.key)) issues.push(issue('key_taken', `${up}.key`, { key: u.key }));
       else unitKeys.add(u.key);
-      if (u.type !== 'term' && u.type !== 'pattern' && u.type !== 'concept') return void issues.push(issue('invalid_choice', `${up}.type`, { choices: 'term, pattern, concept' }));
+      if (u.type !== 'term' && u.type !== 'pattern' && u.type !== 'concept' && u.type !== 'memory_challenge') return void issues.push(issue('invalid_choice', `${up}.type`, { choices: 'term, pattern, concept, memory_challenge' }));
       issues.push(...prefix(validateUnitPayload(u.type, unitPayload(u as unknown as UnitEntry)), up));
       if (u.association !== undefined) {
         const a = u.association;

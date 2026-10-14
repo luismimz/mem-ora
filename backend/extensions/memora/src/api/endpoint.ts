@@ -7,6 +7,7 @@
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación
 //   GET  /memora/missions?course=…       misiones (módulos) del curso con el avance del alumno y la actual
 //   GET  /memora/offline?course=…        paquete para jugar sin conexión: sesiones listas (repasos + misiones pendientes)
+//   GET  /memora/retos?course=…          retos de memoria del curso con el mejor resultado del alumno y su repaso
 //   GET  /memora/studio/missions?course=… misiones con el estado de revisión de sus unidades (autoría)
 //   GET  /memora/preview/mission/:id     prueba una misión entera como alumno, borradores incluidos (autoría)
 //   POST /memora/studio/approve/:id      revisa, aprueba y publica una misión entera con la cuenta que la pide
@@ -234,7 +235,7 @@ export default {
         if (plan.steps.length) sessions.push({ id: plan.sessionId, title: 'Repasos pendientes', state: { plan, index: 0, outcomes: {}, finished: false } });
       }
       for (const m of missions) {
-        const pending = m.units.filter((u) => !progress.worked.has(u) && units[u]);
+        const pending = m.units.filter((u) => !progress.worked.has(u) && units[u] && units[u]!.type !== 'memory_challenge');
         for (let i = 0; i < pending.length; i += perSession) {
           const chunk = pending.slice(i, i + perSession);
           const items: PlanItem[] = chunk.flatMap((u) => units[u]!.skills.map((s) => ({ skillId: s.key, unitId: u, reason: 'new' as const, priority: 0, recommendedHint: 0 as const, ...(s.associationId ? { associationId: s.associationId } : {}) })));
@@ -247,6 +248,34 @@ export default {
       const used = new Set(sessions.flatMap((x) => x.state.plan.steps.flatMap((st: { unitKey: string; arcadeUnits?: string[] }) => [st.unitKey, ...(st.arcadeUnits ?? [])])).filter(Boolean));
       const slim = Object.fromEntries(Object.entries(units).filter(([k]) => used.has(k)));
       return { data: { course: { id: course.id, title: course.title, ui_language: course.ui_language, audio_enabled: course.audio_enabled }, generatedAt: now, sessions, units: slim } };
+    }));
+
+    // Retos de memoria (D-056). El resultado de cada intento llega como evento de aprendizaje sobre la habilidad del reto,
+    // con contextId «reto:<fase>:<en orden>/<total>»; de ahí sale el mejor resultado antes y después de la historia.
+    router.get('/retos', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.query.course, userId);
+      const { units, missions } = await publishedContent(course);
+      const learner = await learnerFor(userId, course.id);
+      const events = await storedEvents(userId, course.id);
+      const best: Record<string, { before: number; after: number; reverse: number; tries: number }> = {};
+      for (const e of events) {
+        const ctx = (e.payload as { contextId?: string; unitKey?: string }).contextId ?? '';
+        const m = ctx.match(/^reto:(before|after|reverse):(\d+)\/(\d+)$/);
+        const key = (e.payload as { unitKey?: string }).unitKey;
+        if (!m || !key) continue;
+        const b = (best[key] ??= { before: 0, after: 0, reverse: 0, tries: 0 });
+        b[m[1] as 'before' | 'after' | 'reverse'] = Math.max(b[m[1] as 'before' | 'after' | 'reverse'], Number(m[2]));
+        if (m[1] === 'after') b.tries += 1;
+      }
+      const order = missions.flatMap((m) => m.units);
+      const retos = order.filter((k) => units[k]?.type === 'memory_challenge').map((k) => {
+        const u = units[k]!;
+        const skill = u.skills[0];
+        const st = skill ? learner.skills[skill.key] : undefined;
+        return { key: k, skillKey: skill?.key ?? null, payload: u.payload, best: best[k] ?? null, status: st?.status ?? 'new', dueAt: st?.dueAt ?? null };
+      });
+      return { data: { retos } };
     }));
 
     router.get('/missions', wrap(async (req) => {

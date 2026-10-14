@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -131,5 +131,17 @@ describe('retos de aplicación', () => {
     expect(gradeChallenge(predict, '', true, true)).toMatchObject({ correct: false, hint: 5 });
     expect(shuffledSteps(order, 'x')).not.toEqual(order.steps);
     expect(challengeChoices(predict, 'x').map((c) => c.label).sort()).toEqual(['11', '2', 'error']);
+  });
+});
+
+describe('retos de memoria: puntuación', () => {
+  const w = ['Pingüino', 'Sartén', 'Cactus', 'Semáforo', 'Dinosaurio'];
+  it('cuenta lo recordado, la racha en orden y las falsas (sin tildes ni mayúsculas)', () => {
+    expect(scoreRecall(w, ['pinguino', 'sarten', 'semáforo', 'cactus', 'Pato'])).toEqual({ remembered: 4, inOrder: 2, wrong: 1, total: 5 });
+    expect(scoreRecall(w, w)).toMatchObject({ remembered: 5, inOrder: 5, wrong: 0 });
+  });
+  it('al revés: la racha se cuenta desde la última palabra', () => {
+    expect(scoreRecall(w, ['Dinosaurio', 'Semáforo', 'Cactus'], true).inOrder).toBe(3);
+    expect(scoreRecall(w, ['Pingüino'], true).inOrder).toBe(0);
   });
 });

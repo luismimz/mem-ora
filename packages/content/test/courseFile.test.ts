@@ -76,3 +76,17 @@ describe('ejercicios de concepto', () => {
     expect(msgs.join(' ')).toContain('marca el hueco con ___');
   });
 });
+
+describe('retos de memoria', () => {
+  const reto = { title: 'Prueba', words: ['Pingüino', 'Sartén', 'Cactus', 'Semáforo', 'Dinosaurio', 'Espaguetis', 'Submarino', 'Paraguas'], decoys: ['Pato', 'Olla', 'Rosa'],
+    scenes: [{ text: 'Un pingüino patina sobre una sartén y cae en un cactus.' }, { text: 'Salta contra un semáforo, que cae sobre un dinosaurio que vomita espaguetis; por ellos navega un submarino que abre un paraguas.' }] };
+  it('acepta un reto con las palabras en la historia y en orden (sin importar tildes ni mayúsculas)', () => {
+    expect(validateUnitPayload('memory_challenge', reto)).toEqual([]);
+    expect(skillsFor('memory_challenge', reto).map((s) => s.kind)).toEqual(['recall']);
+  });
+  it('detecta palabras ausentes, desordenadas, repetidas y falsas que están en la lista', () => {
+    const bad = { ...reto, words: [...reto.words.slice(0, 7), 'Cactus', 'Helado'], decoys: ['Pato', 'Sartén', 'Rosa'], scenes: [{ text: reto.scenes[1]!.text + ' ' + reto.scenes[0]!.text }] };
+    const codes = validateUnitPayload('memory_challenge', bad).map((i) => `${i.code}@${i.path}`);
+    expect(codes).toEqual(expect.arrayContaining(['word_out_of_order@words.3', 'duplicate_word@words.7', 'word_not_in_story@words.8', 'decoy_in_list@decoys.1']));
+  });
+});

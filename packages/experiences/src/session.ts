@@ -2,7 +2,7 @@
 // los eventos (exposiciones e intentos) que recalcula el servidor. Sin IA y sin nada específico de una materia: usa
 // los tipos de unidad (`term`, `pattern`) y sus campos. Las recetas en JSON llegarán en el H4.
 import type { ExerciseFormat, HintLevel, PlanItem, SkillKind } from '@memora/core';
-import type { ConceptPayload, Example, PatternPayload, TermPayload, UnitType } from '@memora/content';
+import type { ConceptPayload, Example, MemoryChallengePayload, PatternPayload, TermPayload, UnitType } from '@memora/content';
 import { checkOwnSentence, containsPhrase, firstLetterHint, normalizeAnswer, orderTiles, sameAnswer, type OwnSentenceProblem } from './answers';
 
 export interface SessionSkill {
@@ -29,7 +29,7 @@ export interface SessionUnit {
   type: UnitType;
   /** Idioma del contenido (para la voz). */
   language: string;
-  payload: TermPayload | PatternPayload | ConceptPayload;
+  payload: TermPayload | PatternPayload | ConceptPayload | MemoryChallengePayload;
   skills: SessionSkill[];
   association?: SessionAssociation | null;
   /** Versión publicada: sirve para invalidar la caché (H2.2b). */
@@ -170,7 +170,7 @@ export function exerciseFor(step: SessionStep, unit: SessionUnit | undefined, ot
         };
       }
       case 'order': {
-        const distractors = others.filter((o) => o.key !== unit.key).flatMap((o) => o.payload.examples.flatMap((e) => e.text.split(/\s+/))).slice(0, 2);
+        const distractors = others.filter((o) => o.key !== unit.key).flatMap((o) => (('examples' in o.payload ? o.payload.examples : []) as Example[]).flatMap((e) => e.text.split(/\s+/))).slice(0, 2);
         return { kind: 'order', translation: example.translation, ...orderTiles(example.text, distractors), speak: example.text, language: unit.language, contextId: `${unit.key}#example${exampleIndex}` };
       }
       case 'produce':
@@ -197,7 +197,7 @@ export function exerciseFor(step: SessionStep, unit: SessionUnit | undefined, ot
         return { kind: 'recall', mode: 'blank', prompt: `${blank}\n(${example.translation})`, expected: piece, hints: [firstLetterHint(piece), p.goal, p.rule, other.text], contextId: `${unit.key}#example${exampleIndex}` };
       }
       case 'order': {
-        const distractors = others.filter((o) => o.key !== unit.key).flatMap((o) => o.payload.examples.flatMap((e) => e.text.split(/\s+/))).slice(0, 2);
+        const distractors = others.filter((o) => o.key !== unit.key).flatMap((o) => (('examples' in o.payload ? o.payload.examples : []) as Example[]).flatMap((e) => e.text.split(/\s+/))).slice(0, 2);
         return { kind: 'order', translation: example.translation, ...orderTiles(example.text, distractors), speak: example.text, language: unit.language, contextId: `${unit.key}#example${exampleIndex}` };
       }
       case 'produce':

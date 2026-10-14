@@ -6,7 +6,7 @@
 import type { SkillKind } from '@memora/core';
 import { checkChoice, checkText, checkUnknownFields, isRecord, issue, type ContentIssue } from './issues';
 
-export const UNIT_TYPES = ['term', 'pattern', 'concept'] as const;
+export const UNIT_TYPES = ['term', 'pattern', 'concept', 'memory_challenge'] as const;
 export type UnitType = (typeof UNIT_TYPES)[number];
 
 export const TERM_FORMS = ['word', 'chunk', 'phrasal_verb', 'expression'] as const;
@@ -93,6 +93,22 @@ export interface ConceptPayload {
   notes?: string;
   /** Ejercicios para aplicarlo (código, casos, pasos). Si hay, el concepto tiene también la habilidad «aplicar». */
   exercises?: ConceptExercise[];
+}
+
+/**
+ * Reto de memoria (D-056): una lista de palabras para memorizar en orden y la historia absurda que las encadena,
+ * contada por escenas. Cada palabra debe aparecer en la historia y en el mismo orden que en la lista.
+ */
+export interface MemoryChallengePayload {
+  title: string;
+  words: string[];
+  /** Un emoji por palabra (opcional), para la tarjeta de estudio. */
+  emojis?: string[];
+  /** Palabras falsas para la fase de recuerdo (que no estén en la lista). */
+  decoys: string[];
+  scenes: Array<{ text: string; emoji?: string }>;
+  /** Segundos para estudiar la lista (por defecto 60). */
+  seconds?: number;
 }
 
 export const PAYLOAD_LIMITS = {
@@ -233,7 +249,44 @@ function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void 
   }
 }
 
-const VALIDATORS: Record<UnitType, (p: Record<string, unknown>) => ContentIssue[]> = { term: validateTerm, pattern: validatePattern, concept: validateConcept };
+const norm = (t: string) => t.toLocaleLowerCase('es').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+function validateMemoryChallenge(p: Record<string, unknown>): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  checkUnknownFields(issues, p, '', ['title', 'words', 'emojis', 'decoys', 'scenes', 'seconds']);
+  checkText(issues, p.title, 'title', { max: 80 });
+  const list = (v: unknown, path: string, min: number, max: number) => {
+    if (!Array.isArray(v)) { issues.push(issue(v === undefined ? 'required' : 'not_list', path)); return [] as string[]; }
+    if (v.length < min) issues.push(issue('min_items', path, { min, count: v.length }));
+    if (v.length > max) issues.push(issue('max_items', path, { max, count: v.length }));
+    v.forEach((t, i) => checkText(issues, t, `${path}.${i}`, { max: 40 }));
+    return v.filter((t): t is string => typeof t === 'string');
+  };
+  const words = list(p.words, 'words', 8, 30);
+  const decoys = list(p.decoys, 'decoys', 3, 15);
+  if (p.emojis !== undefined) { const e = list(p.emojis, 'emojis', words.length, words.length); if (e.length !== words.length) issues.push(issue('min_items', 'emojis', { min: words.length, count: e.length })); }
+  const seen = new Set<string>();
+  words.forEach((w, i) => { if (seen.has(norm(w))) issues.push(issue('duplicate_word', `words.${i}`, { word: w })); seen.add(norm(w)); });
+  decoys.forEach((d, i) => { if (seen.has(norm(d))) issues.push(issue('decoy_in_list', `decoys.${i}`, { word: d })); });
+  if (!Array.isArray(p.scenes) || !p.scenes.length) { issues.push(issue(p.scenes === undefined ? 'required' : 'min_items', 'scenes', { min: 1, count: 0 })); return issues; }
+  p.scenes.forEach((sc, i) => {
+    if (!isRecord(sc)) return void issues.push(issue('not_object', `scenes.${i}`));
+    checkUnknownFields(issues, sc, `scenes.${i}`, ['text', 'emoji']);
+    checkText(issues, sc.text, `scenes.${i}.text`, { max: 700 });
+    checkText(issues, sc.emoji, `scenes.${i}.emoji`, { required: false, max: 32 });
+  });
+  // Cada palabra aparece en la historia, en el mismo orden que en la lista.
+  const story = norm(p.scenes.map((sc) => (isRecord(sc) && typeof sc.text === 'string' ? sc.text : '')).join(' '));
+  let at = 0;
+  words.forEach((w, i) => {
+    const found = story.indexOf(norm(w), at);
+    if (found < 0) issues.push(issue(story.includes(norm(w)) ? 'word_out_of_order' : 'word_not_in_story', `words.${i}`, { word: w }));
+    else at = found + norm(w).length;
+  });
+  return issues;
+}
+
+const VALIDATORS: Record<UnitType, (p: Record<string, unknown>) => ContentIssue[]> = { term: validateTerm, pattern: validatePattern, concept: validateConcept, memory_challenge: validateMemoryChallenge };
 
 /** Problemas del `payload` de una unidad según su tipo. Vacío si es válido. */
 export function validateUnitPayload(type: unknown, payload: unknown): ContentIssue[] {
@@ -257,6 +310,8 @@ export const DEFAULT_SKILLS: Record<UnitType, Array<{ suffix: string; kind: Skil
   ],
   // Concepto: recordar el nombre a partir de la idea. Producir o aplicar llegarán con sus ejercicios (código, casos).
   concept: [{ suffix: 'recall', kind: 'recall', carriesAssociation: true }],
+  // Reto de memoria: recordar la lista entera en orden (se repasa con la curva del olvido).
+  memory_challenge: [{ suffix: 'recall', kind: 'recall' }],
 };
 
 /**
@@ -270,7 +325,8 @@ export function skillsFor(type: UnitType, payload: unknown): Array<{ suffix: str
 }
 
 /** Plantilla vacía para empezar a escribir una unidad desde el administrador. */
-export function emptyPayload(type: UnitType): TermPayload | PatternPayload | ConceptPayload {
+export function emptyPayload(type: UnitType): TermPayload | PatternPayload | ConceptPayload | MemoryChallengePayload {
+  if (type === 'memory_challenge') return { title: '', words: [], decoys: [], scenes: [{ text: '' }] };
   if (type === 'concept') return { name: '', gist: '', definition: '', examples: [{ text: '' }] };
   return type === 'term'
     ? { form: 'word', text: '', meaning: '', examples: [{ text: '', translation: '' }] }

@@ -503,3 +503,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Por qué:** decisión del usuario (un alumno invitado no veía nada). El contenido es propio: los libros de ILERNA solo
   se usan para saber qué temas tocar. Se actualiza la regla 16 de CLAUDE.md en ese sentido.
 - **Pendiente:** elegir por curso entre «todos», «solo yo» o «compartido con usuarios concretos» (ver IDEAS).
+
+## D-056 · Retos de memoria (juego familiar) (14-oct-2026)
+- **Qué:** tipo de unidad `memory_challenge` (lista de palabras, emojis, palabras falsas e historia por escenas) con
+  validador: cada palabra debe aparecer en la historia y en el mismo orden. Modo de curso `memory`: la portada muestra
+  los retos en lugar de la sesión. Curso «Retos de memoria» con 22 retos (el del usuario, uno de ejemplo y 20 nuevos).
+- **Juego:** 1) un minuto con la lista; 2) tocar en orden lo que recuerdas (con palabras falsas mezcladas); 3) la
+  historia escena a escena; 4) recordar otra vez; 5) comparar «antes → después»; extra: al revés.
+- **Progreso en la cuenta (regla 10):** cada intento es un evento de aprendizaje sobre la habilidad del reto
+  (`contextId` «reto:<fase>:<en orden>/<total>»); el mejor resultado sale de ahí y el reto vuelve con la curva del olvido.
+- **Pendiente:** varios jugadores en el mismo móvil (marcador familiar) y crear retos desde Studio con vista previa.

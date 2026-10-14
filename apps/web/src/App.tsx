@@ -1,4 +1,5 @@
 import { Studio } from './Studio';
+import { RetosHome } from './Retos';
 import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pendingCount, sessionProgress, type OfflineBundle, type OfflineSession } from './offline';
 import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type Mission, type SessionPayload } from './api';
@@ -185,10 +186,11 @@ export function App() {
     onCourse={(id) => { setCourse(id); writePrefs({ course: id }); }} onMode={(m) => { setMode(m); writePrefs({ mode: m }); }} onLogout={() => void logout()} /></div>;
 
   const current = courses.find((c) => c.id === course);
-  const enabled = MODES.filter((m) => !current || current.modes.includes(m.id));
+  const enabled = MODES.filter((m) => !current || current.modes.includes(m.id as Mode));
   const has = (m: Mode) => enabled.some((x) => x.id === m);
   const currentMission = missions?.missions.find((m) => m.key === missions.current);
   const words = unitsWord(current);
+  const isMem = Boolean(current?.modes.includes('memory'));
   return (
     <div className="app home">
       {bar}
@@ -202,7 +204,7 @@ export function App() {
           )}
           <p className="eyebrow">TU AVENTURA</p>
           <h1>La historia sigue contigo.</h1>
-          {current ? (
+          {current && isMem ? <RetosHome courseId={current.id} /> : current ? (
             <div className="hero">
               <div className="hero-art"><span aria-hidden="true">{courseArt(current)}</span><span className="tag">{cleanTitle(current.title).toUpperCase()}</span></div>
               <div className="hero-body">
@@ -219,8 +221,8 @@ export function App() {
               </div>
             </div>
           ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
-          {!ms && current && <div className="meters" aria-hidden="true">{[0, 1].map((i) => <div key={i} className="meter skeleton" />)}</div>}
-          {ms && (
+          {!ms && current && !isMem && <div className="meters" aria-hidden="true">{[0, 1].map((i) => <div key={i} className="meter skeleton" />)}</div>}
+          {ms && !isMem && (
             <div className="meters" aria-label="Tu progreso">
               <Meter label={`${words[0]!.toUpperCase()}${words.slice(1)} trabajad${isLanguage(current) ? 'as' : 'os'}`} value={`${ms.words}/${ms.total}`} pct={ms.total ? ms.words / ms.total : 0} />
               {has('grammar') && <Meter label="Próximo truco de gramática" value={`faltan ${ms.grammarNext}`} pct={(GRAMMAR_EVERY - ms.grammarNext) / GRAMMAR_EVERY} />}
@@ -243,11 +245,11 @@ export function App() {
               </button>
             ))}
           </div>
-          {current && <FlightCard course={current} onOpen={() => go({ name: 'offline' })} />}
+          {current && !isMem && <FlightCard course={current} onOpen={() => go({ name: 'offline' })} />}
           <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>
         </section>
       </div>
-      {current && (missions
+      {current && !isMem && (missions
         ? missions.missions.length > 0 && <Missions list={missions.missions} current={missions.current} onOpen={(key) => open('associations', key)} />
         : <section className="missions" aria-hidden="true"><div className="missions-head"><div><p className="eyebrow">TUS MISIONES</p><h2 className="h2 skeleton-text">&nbsp;</h2></div></div><ol className="mission-grid">{[0, 1, 2].map((i) => <li key={i}><span className="mission skeleton" /></li>)}</ol></section>)}
     </div>
