@@ -148,3 +148,10 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .concept p { margin: 0; }
 .concept pre { margin: 0; padding: .6rem .75rem; border-radius: .7rem; background: var(--surface-soft); overflow-x: auto; font-size: .82rem; }
 .concept .contrast { color: var(--accent-ink); font-weight: 600; }
+.order-picked { margin: .2rem 0 .6rem; padding-left: 1.4rem; display: grid; gap: .25rem; font-weight: 600; min-height: 1rem; }
+.order-pool .choice:disabled { opacity: .45; }
+.feedback ol { margin: .3rem 0; padding-left: 1.3rem; text-align: left; }
+.order-pool { grid-template-columns: 1fr; }
+.order-pool .choice { text-transform: none; font-size: .92rem; padding: .6rem .8rem; min-height: 0; letter-spacing: 0; }
+.concept + .choices, .concept + form { margin-top: .7rem; }
+.challenge .question { font-size: 1.3rem; margin: .5rem 0; }

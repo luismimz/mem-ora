@@ -41,7 +41,20 @@ Si algo falla a mitad de la creación, se borra lo creado: no quedan cursos a me
 `units[]` de tipo `concept` (Java, redes, temarios…): `name` (lo que se recuerda: «class»), `gist` (idea clave
 corta, ≤ 60 caracteres: «molde»; la usan la historia y los juegos), `definition` (completa, en la tarjeta),
 `examples[]` (`text` —código, caso, cifra— y `explanation` opcional; **sin traducción**) y, opcionales,
-`answers` (otras respuestas válidas al repasar: «clase»), `contrast` (con qué no confundirlo) y `notes`.
+`answers` (otras respuestas válidas al repasar: «clase»), `contrast` (con qué no confundirlo), `notes` y `exercises`.
+
+`exercises[]` (retos de aplicación; si hay al menos uno, el concepto gana la habilidad «aplicar»):
+| `kind` | Qué pide | Campos |
+| --- | --- | --- |
+| `predict_output` | ¿Qué imprime este código? | `prompt`, `code`, `answer`, `distractors` (≥ 2) |
+| `fill_gap` | Completa el hueco | `prompt`, `code` con `___`, `answer`, `distractors` |
+| `find_bug` | ¿Qué falla? (mejor respuesta corta: la línea o la palabra) | `prompt`, `code`, `answer`, `distractors` |
+| `apply_case` | Aplica el concepto a un caso | `prompt`, `answer`, `distractors` |
+| `order_steps` | Ordena los pasos | `prompt`, `steps` (≥ 3, en el orden correcto) |
+
+Opcionales: `accepted` (otras respuestas válidas al escribir) y `explanation` (se muestra al corregir).
+El primer día el reto se responde **con opciones** (evidencia baja); en el repaso, **escribiendo** u ordenando sin
+ayuda (aplicación, evidencia muy alta). Por eso conviene que `answer` sea corta y escribible.
 
 `association` (opcional): `technique` (`absurd_scene`, `phonetic_bridge` solo en términos, o `analogy` en conceptos y patrones), `scene` (máximo 14 palabras, pieza clave
 en MAYÚSCULAS), `cue`, `sceneTarget` (la escena en el idioma del contenido), `emoji`, `evidence`.

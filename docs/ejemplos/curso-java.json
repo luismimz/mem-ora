@@ -48,7 +48,19 @@
               "mapping": "molde = clase; cada galleta = un objeto",
               "breaksWhere": "cada objeto guarda sus propios datos y puede cambiarlos"
             }
-          }
+          },
+          "exercises": [
+            {
+              "kind": "fill_gap",
+              "prompt": "¿Qué palabra falta para declarar el molde Dog?",
+              "code": "public ___ Dog { }",
+              "answer": "class",
+              "distractors": [
+                "object",
+                "new"
+              ]
+            }
+          ]
         },
         {
           "key": "object",
@@ -70,7 +82,23 @@
             "technique": "absurd_scene",
             "scene": "Cada galleta que sale del molde es un OBJETO con su propio sabor.",
             "emoji": "🍪✨"
-          }
+          },
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "En «Coche miCoche = new Coche();», ¿qué es miCoche?",
+              "answer": "un objeto",
+              "accepted": [
+                "objeto",
+                "instancia"
+              ],
+              "distractors": [
+                "una clase",
+                "un método"
+              ],
+              "explanation": "Coche es la clase; miCoche es un objeto concreto."
+            }
+          ]
         }
       ]
     }

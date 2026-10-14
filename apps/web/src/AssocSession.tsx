@@ -2,15 +2,20 @@
 // resultado, en escenas de 5; Arcade sorpresa; rescate inverso; resumen. Teclear solo en repasos.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload } from '@memora/content';
+import type { ConceptExercise, ConceptPayload } from '@memora/content';
 import {
   choicesFor,
   gradeReview,
   reviewHints,
   storyGap,
   unitMeaning,
+  challengeChoices,
+  exercisesOf,
+  gradeChallenge,
+  shuffledSteps,
   unitText,
   type AssocPlan,
+  type AssocOutcome,
   type AssocStep,
   type Choice,
   type ClientEvent,
@@ -123,7 +128,7 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
     <main className="stage">
       <div className="top">
         <button type="button" className="link" onClick={onExit}>← Inicio</button>
-        <span className="eyebrow">{preview ? 'VISTA PREVIA' : step ? sceneOf(step) || (step.kind === 'review' ? 'REPASO' : '') : ''}</span>
+        <span className="eyebrow">{preview ? 'VISTA PREVIA' : step ? sceneOf(step) || (step.kind === 'review' ? 'REPASO' : step.kind === 'challenge' ? 'RETO' : '') : ''}</span>
         <span className="pill">{progress}%</span>
       </div>
       <div className="bar"><i style={{ width: `${progress}%` }} /></div>
@@ -165,15 +170,22 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
       {step?.kind === 'review' && unit && <Review key={step.id} unit={unit} startHint={(step.startHint ?? 0) as HintLevel}
         onAnswer={(ok, hint, ms, format) => { attempt(unit, ok, `${unit.key}#review`, ms, format, hint); scored(ok && hint === 0); }} onDone={(ok, hint) => void advance({ correct: ok, hint })} />}
 
+      {step?.kind === 'challenge' && unit && exercisesOf(unit)[step.exercise ?? 0] && (
+        <Challenge key={step.id} unit={unit} exercise={exercisesOf(unit)[step.exercise ?? 0]!} typed={Boolean(step.typed)} seed={step.id} combo={combo}
+          onAnswer={(outcome, ms) => { queue.current.push(event(unit, step.skillKey!, { format: outcome.format, correct: outcome.correct, hint: outcome.hint, timeMs: ms, contextId: `${unit.key}#challenge-${step.exercise ?? 0}` })); scored(outcome.correct); }}
+          onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
+      )}
+
       {step?.kind === 'summary' && <Summary plan={plan} outcomes={outcomes} units={units} xp={xp} minutes={Math.max(1, Math.round((Date.now() - startedAt.current) / 60000))} preview={preview} courseId={courseId} onExit={onExit} />}
     </main>
   );
 }
 
-/** Concepto: definición, un ejemplo (código o caso) y con qué no confundirlo. */
 /** Las preguntas dicen «palabra» en idiomas y «concepto» en el resto de materias. */
 const askName = (u: SessionUnit) => (u.type === 'concept' ? '¿Qué concepto es' : '¿Cómo se dice');
 const hiddenName = (u: SessionUnit) => (u.type === 'concept' ? '¿Qué concepto esconde?' : '¿Qué palabra esconde esta escena?');
+
+/** Concepto: definición, un ejemplo (código o caso) y con qué no confundirlo. */
 
 function ConceptDetails({ payload, language }: { payload: ConceptPayload; language: string }) {
   const ex = payload.examples[0];
@@ -324,6 +336,75 @@ function Review({ unit, startHint, onAnswer, onDone }: { unit: SessionUnit; star
   );
 }
 
+/** «palabras nuevas» en idiomas; «conceptos nuevos» en el resto. */
+const noun = (u: SessionUnit | undefined, n: number) => (u?.type === 'concept' ? (n === 1 ? 'concepto nuevo' : 'conceptos nuevos') : n === 1 ? 'palabra nueva' : 'palabras nuevas');
+
+const CHALLENGE_TITLES: Record<ConceptExercise['kind'], string> = {
+  predict_output: 'RETO · PREDICE LA SALIDA',
+  fill_gap: 'RETO · COMPLETA EL CÓDIGO',
+  find_bug: 'RETO · ENCUENTRA EL ERROR',
+  apply_case: 'RETO · APLÍCALO',
+  order_steps: 'RETO · ORDENA LOS PASOS',
+};
+
+/**
+ * Reto de aplicación de un concepto. El primer día, con opciones (u ordenando); en el repaso, escribiendo la respuesta
+ * sin opciones. Ordenar pasos se hace tocándolos en orden.
+ */
+function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { unit: SessionUnit; exercise: ConceptExercise; typed: boolean; seed: string; combo: number; onAnswer: (o: AssocOutcome, ms: number) => void; onDone: (ok: boolean) => void }) {
+  const t0 = useRef(performance.now());
+  const [result, setResult] = useState<AssocOutcome | null>(null);
+  const [text, setText] = useState('');
+  const [picked, setPicked] = useState<string | null>(null);
+  const [order, setOrder] = useState<string[]>([]);
+  const isOrder = exercise.kind === 'order_steps';
+  const pool = useMemo(() => (isOrder ? shuffledSteps(exercise, seed) : []), [exercise, seed, isOrder]);
+  const choices = useMemo(() => challengeChoices(exercise, seed), [exercise, seed]);
+
+  function finish(answer: string | string[], revealed = false) {
+    const o = gradeChallenge(exercise, answer, typed, revealed);
+    setResult(o);
+    onAnswer(o, Math.round(performance.now() - t0.current));
+  }
+  function tapStep(s: string) {
+    if (result || order.includes(s)) return;
+    const next = [...order, s];
+    setOrder(next);
+    if (next.length === pool.length) finish(next);
+  }
+
+  return (
+    <SwipeCard className="challenge" onNext={result ? () => onDone(result.correct) : undefined}>
+      <div className="row"><p className="eyebrow">{CHALLENGE_TITLES[exercise.kind]}</p><span key={combo} className={`combo ${combo > 1 ? 'hot' : ''}`}>COMBO x{Math.max(1, combo)}</span></div>
+      <p className="place">{unitText(unit)} · {unitMeaning(unit)}</p>
+      <div className="question">{exercise.prompt}</div>
+      {exercise.code && <div className="concept"><pre lang={unit.language}><code>{exercise.code}</code></pre></div>}
+      {isOrder ? (
+        <>
+          <ol className="order-picked">{order.map((s) => <li key={s}>{s}</li>)}</ol>
+          <div className="choices order-pool">{pool.map((s) => <button type="button" key={s} className="choice" disabled={order.includes(s) || Boolean(result)} onClick={() => tapStep(s)}>{s}</button>)}</div>
+          {!result && order.length > 0 && <button type="button" className="link" onClick={() => setOrder([])}>Empezar de nuevo</button>}
+        </>
+      ) : typed ? (
+        <form onSubmit={(e) => { e.preventDefault(); if (!result && text.trim()) finish(text); }}>
+          <input className="answer-input" lang={unit.language} autoFocus autoCapitalize="off" autoComplete="off" spellCheck={false} value={text} disabled={Boolean(result)} onChange={(e) => setText(e.target.value)} aria-label="Tu respuesta" />
+          {!result && <div className="actions"><button type="submit" className="go" disabled={!text.trim()}>Comprobar</button><button type="button" onClick={() => finish(text, true)}>Ver</button></div>}
+        </form>
+      ) : (
+        <div className="choices">{choices.map((c) => <button type="button" key={c.label} className={`choice ${result && c.correct ? 'right' : ''} ${picked === c.label && !c.correct ? 'wrong' : ''}`} disabled={Boolean(result)} onClick={() => { setPicked(c.label); finish(c.label); }}>{c.label}</button>)}</div>
+      )}
+      {result && (
+        <div className={`feedback ${result.correct ? 'ok' : 'ko'}`}>
+          <p>{result.correct ? '¡Correcto! +10 XP' : isOrder ? 'El orden era:' : <>Era <b>{exercise.answer}</b>.</>}</p>
+          {!result.correct && isOrder && <ol>{exercise.steps!.map((s) => <li key={s}>{s}</li>)}</ol>}
+          {exercise.explanation && <p>{exercise.explanation}</p>}
+          <button type="button" className="primary" onClick={() => onDone(result.correct)}>Seguir →</button>
+        </div>
+      )}
+    </SwipeCard>
+  );
+}
+
 function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit }: { plan: AssocPlan; outcomes: Record<string, Outcome>; units: Record<string, SessionUnit>; xp: number; minutes: number; preview: boolean; courseId: string; onExit: () => void }) {
   const fresh = plan.scenes.flat().length;
   const recalls = plan.steps.filter((s) => s.kind === 'recall' || s.kind === 'review');
@@ -340,7 +421,7 @@ function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit
     <div className="card enter">
       <div className="reward">
         <p className="eyebrow">SESIÓN COMPLETADA</p>
-        <div className="big">{fresh ? `¡${fresh} ${fresh === 1 ? 'palabra nueva' : 'palabras nuevas'}!` : '¡Repaso hecho!'}</div>
+        <div className="big">{fresh ? `¡${fresh} ${noun(Object.values(units)[0], fresh)}!` : '¡Repaso hecho!'}</div>
         <div className="xp">+{xp} XP</div>
         <div className="stats"><div><b>{first}</b>a la primera</div><div><b>{helped}</b>con ayuda</div><div><b>{minutes}</b>min</div></div>
         <p>Próximo repaso: {when}.</p>
@@ -371,7 +452,7 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
   );
 }
 
-const STEP_NAMES: Record<AssocStep['kind'], string> = { review: 'Repaso', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'Rescate', summary: 'Resumen' };
+const STEP_NAMES: Record<AssocStep['kind'], string> = { review: 'Repaso', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'Rescate', challenge: 'Reto', summary: 'Resumen' };
 function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
   const u = s.unitKey ? units[s.unitKey] : undefined;
   return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;

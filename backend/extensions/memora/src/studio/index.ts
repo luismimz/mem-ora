@@ -9,6 +9,7 @@ import { createError } from '@directus/errors';
 import {
   checkTransition,
   DEFAULT_SKILLS,
+  skillsFor,
   describeCatalogIssue,
   describeContentIssue,
   issue,
@@ -210,10 +211,25 @@ export default ({ filter, action }: any, ctx: HookContext) => {
   // Al crear una unidad, sus habilidades por defecto; al crear una asociación, se vincula a la habilidad que la recupera.
   action('units.items.create', async ({ key, payload }: { key: string; payload: Row }) => {
     const unit = await one('units', key);
-    const template = unit ? DEFAULT_SKILLS[unit.type as keyof typeof DEFAULT_SKILLS] : undefined;
-    if (!unit || !template || payload.skills?.length) return;
+    if (!unit || payload.skills?.length) return;
+    const template = skillsFor(unit.type, parseJson(unit.payload));
+    if (!template.length) return;
     const service = new services.ItemsService('skills', { schema: await getSchema() });
     await service.createMany(template.map((t, sort) => ({ unit: unit.id, key: `${unit.key}.${t.suffix}`, kind: t.kind, sort })));
+  });
+
+  // Si a un concepto se le añaden ejercicios después, gana la habilidad «aplicar» (nunca se quita sola: puede tener historial).
+  action('units.items.update', async ({ keys, payload }: { keys: string[]; payload: Row }) => {
+    if (!payload || !('payload' in payload)) return;
+    for (const id of keys) {
+      const unit = await one('units', id);
+      if (!unit) continue;
+      const existing: Row[] = await database('skills').where({ unit: unit.id }).select('key', 'sort');
+      const missing = skillsFor(unit.type, parseJson(unit.payload)).filter((t) => !existing.some((e) => e.key === `${unit.key}.${t.suffix}`));
+      if (!missing.length) continue;
+      const sort = Math.max(-1, ...existing.map((e) => Number(e.sort) || 0)) + 1;
+      await new services.ItemsService('skills', { schema: await getSchema() }).createMany(missing.map((t, i) => ({ unit: unit.id, key: `${unit.key}.${t.suffix}`, kind: t.kind, sort: sort + i })));
+    }
   });
 
   action('associations.items.create', async ({ key }: { key: string }) => {

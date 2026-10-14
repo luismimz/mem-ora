@@ -54,6 +54,29 @@ export interface ConceptExample {
   source?: string;
 }
 
+export const EXERCISE_KINDS = ['predict_output', 'fill_gap', 'find_bug', 'apply_case', 'order_steps'] as const;
+export type ConceptExerciseKind = (typeof EXERCISE_KINDS)[number];
+
+/**
+ * Ejercicio de aplicación de un concepto. Con `answer` (y opciones falsas en `distractors`) para predecir la salida,
+ * completar el hueco (`___` en el código), encontrar el error o aplicar a un caso; con `steps` (en orden correcto)
+ * para ordenar pasos.
+ */
+export interface ConceptExercise {
+  kind: ConceptExerciseKind;
+  /** La pregunta: «¿Qué imprime?», «¿Qué palabra falta?». */
+  prompt: string;
+  code?: string;
+  answer?: string;
+  /** Otras respuestas válidas al escribir. */
+  accepted?: string[];
+  /** Respuestas falsas plausibles (para el primer día, con opciones). */
+  distractors?: string[];
+  steps?: string[];
+  /** Por qué es así: se muestra al corregir. */
+  explanation?: string;
+}
+
 /** Concepto de cualquier materia: «class», «subred», «TCP». */
 export interface ConceptPayload {
   /** Nombre que el alumno debe recordar. */
@@ -68,6 +91,8 @@ export interface ConceptPayload {
   /** Con qué no confundirlo («≠ objeto: el objeto es lo que sale del molde»). */
   contrast?: string;
   notes?: string;
+  /** Ejercicios para aplicarlo (código, casos, pasos). Si hay, el concepto tiene también la habilidad «aplicar». */
+  exercises?: ConceptExercise[];
 }
 
 export const PAYLOAD_LIMITS = {
@@ -151,7 +176,7 @@ function validatePattern(p: Record<string, unknown>): ContentIssue[] {
 
 function validateConcept(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes']);
+  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes', 'exercises']);
   checkText(issues, p.name, 'name', { max: PAYLOAD_LIMITS.conceptName });
   checkText(issues, p.gist, 'gist', { max: PAYLOAD_LIMITS.gist });
   checkText(issues, p.definition, 'definition', { max: PAYLOAD_LIMITS.definition });
@@ -173,7 +198,39 @@ function validateConcept(p: Record<string, unknown>): ContentIssue[] {
       checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });
     });
   }
+  if (p.exercises !== undefined) {
+    if (!Array.isArray(p.exercises)) issues.push(issue('not_list', 'exercises'));
+    else p.exercises.forEach((ex, i) => checkExercise(issues, ex, `exercises.${i}`));
+  }
   return issues;
+}
+
+function checkTextList(issues: ContentIssue[], value: unknown, path: string, min: number, max: number): void {
+  if (value === undefined && min === 0) return;
+  if (!Array.isArray(value)) return void issues.push(issue(value === undefined ? 'required' : 'not_list', path));
+  if (value.length < min) issues.push(issue('min_items', path, { min, count: value.length }));
+  value.forEach((t, i) => checkText(issues, t, `${path}.${i}`, { max }));
+}
+
+function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void {
+  if (!isRecord(ex)) return void issues.push(issue('not_object', path));
+  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation']);
+  checkChoice(issues, ex.kind, `${path}.kind`, EXERCISE_KINDS);
+  checkText(issues, ex.prompt, `${path}.prompt`, { max: 200 });
+  checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 300 });
+  const needsCode = ex.kind === 'predict_output' || ex.kind === 'fill_gap' || ex.kind === 'find_bug';
+  checkText(issues, ex.code, `${path}.code`, { required: needsCode, max: 800 });
+  if (ex.kind === 'fill_gap' && typeof ex.code === 'string' && !ex.code.includes('___')) issues.push(issue('gap_missing', `${path}.code`));
+  if (ex.kind === 'order_steps') {
+    checkTextList(issues, ex.steps, `${path}.steps`, 3, 160);
+    return;
+  }
+  checkText(issues, ex.answer, `${path}.answer`, { max: 160 });
+  checkTextList(issues, ex.accepted, `${path}.accepted`, 0, 160);
+  checkTextList(issues, ex.distractors, `${path}.distractors`, 2, 160);
+  if (typeof ex.answer === 'string' && Array.isArray(ex.distractors) && ex.distractors.some((d) => typeof d === 'string' && d.trim().toLowerCase() === ex.answer!.toString().trim().toLowerCase())) {
+    issues.push(issue('distractor_is_answer', `${path}.distractors`));
+  }
 }
 
 const VALIDATORS: Record<UnitType, (p: Record<string, unknown>) => ContentIssue[]> = { term: validateTerm, pattern: validatePattern, concept: validateConcept };
@@ -201,6 +258,16 @@ export const DEFAULT_SKILLS: Record<UnitType, Array<{ suffix: string; kind: Skil
   // Concepto: recordar el nombre a partir de la idea. Producir o aplicar llegarán con sus ejercicios (código, casos).
   concept: [{ suffix: 'recall', kind: 'recall', carriesAssociation: true }],
 };
+
+/**
+ * Habilidades de una unidad concreta: las de su tipo y, si es un concepto con ejercicios, «aplicar». Una habilidad que
+ * la sesión no puede practicar dejaría la unidad sin llegar nunca a «aprendida»; por eso «aplicar» solo existe con ejercicios.
+ */
+export function skillsFor(type: UnitType, payload: unknown): Array<{ suffix: string; kind: SkillKind; carriesAssociation?: boolean }> {
+  const base = DEFAULT_SKILLS[type] ?? [];
+  const exercises = isRecord(payload) && Array.isArray(payload.exercises) ? payload.exercises : [];
+  return type === 'concept' && exercises.length ? [...base, { suffix: 'apply', kind: 'apply' }] : base;
+}
 
 /** Plantilla vacía para empezar a escribir una unidad desde el administrador. */
 export function emptyPayload(type: UnitType): TermPayload | PatternPayload | ConceptPayload {

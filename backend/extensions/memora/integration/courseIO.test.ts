@@ -102,4 +102,21 @@ describe('importar y exportar un curso', () => {
     const out = (await call(author, 'GET', `/memora/export/${r.data.courseId}`)).data;
     expect(out.modules[0].units[0]).toMatchObject({ type: 'concept', gist: 'molde', answers: ['clase'], association: { technique: 'analogy' } });
   });
+
+  it('con ejercicios, el concepto gana la habilidad «aplicar» (al importarlo y si se añaden después)', async () => {
+    const ex = { kind: 'fill_gap', prompt: '¿Qué falta?', code: 'Dog rex = ___ Dog();', answer: 'new', distractors: ['class', 'this'] };
+    const unit = (key: string, exercises?: unknown[]) => ({ key, type: 'concept', name: key, gist: 'crear', definition: 'Crea un objeto.', examples: [{ text: 'new Dog()' }], ...(exercises ? { exercises } : {}) });
+    const file = { schemaVersion: 1, course: { key: `imp-ex-${run}`, title: 'Java · retos', contentLanguage: 'en', audio: false, modes: ['associations'] }, modules: [{ key: 'm', title: 'M', units: [unit('new', [ex]), unit('late')] }] };
+    const r = await call(author, 'POST', '/memora/import', file);
+    expect(r.data.ok).toBe(true);
+    created.push(r.data.courseId);
+    const kinds = async () => Object.fromEntries((await call(admin, 'GET', `/items/units?filter[course][_eq]=${r.data.courseId}&fields=id,key,skills.kind`)).data.map((u: any) => [u.key, { id: u.id, kinds: u.skills.map((s: any) => s.kind).sort() }]));
+    let k = await kinds();
+    expect(k.new.kinds).toEqual(['apply', 'recall']);
+    expect(k.late.kinds).toEqual(['recall']);
+    const late = (await call(admin, 'GET', `/items/units/${k.late.id}?fields=payload`)).data.payload;
+    expect((await call(author, 'PATCH', `/items/units/${k.late.id}`, { payload: { ...late, exercises: [ex] } })).status).toBe(200);
+    k = await kinds();
+    expect(k.late.kinds).toEqual(['apply', 'recall']);
+  });
 });

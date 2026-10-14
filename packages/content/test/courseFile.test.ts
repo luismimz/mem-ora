@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { describeContentIssue, unitPayload, validateCourseFile } from '../src';
+import { describeContentIssue, skillsFor, unitPayload, validateCourseFile, validateUnitPayload } from '../src';
 
 const file = {
   schemaVersion: 1,
@@ -50,5 +50,29 @@ describe('conceptos (materias que no son idiomas)', () => {
     bad.modules[0].units[0].definition = '';
     const msgs = validateCourseFile(bad).map((i) => describeContentIssue(i));
     expect(msgs).toEqual(expect.arrayContaining(['Módulo 1 › Unidad 1 › idea clave: es obligatorio.', 'Módulo 1 › Unidad 1 › definición: es obligatorio.']));
+  });
+});
+
+describe('ejercicios de concepto', () => {
+  const base = { name: 'static', gist: 'compartido', definition: 'Pertenece a la clase.', examples: [{ text: 'static int count;' }] };
+  const predict = { kind: 'predict_output', prompt: '¿Qué imprime?', code: 'Dog.count = 2;\nSystem.out.println(new Dog().count);', answer: '2', distractors: ['0', 'error'] };
+  const order = { kind: 'order_steps', prompt: 'Ordena', steps: ['Declarar la clase', 'Escribir el constructor', 'Crear el objeto con new'] };
+
+  it('acepta ejercicios bien formados y añade la habilidad «aplicar» solo si los hay', () => {
+    expect(validateUnitPayload('concept', { ...base, exercises: [predict, order] })).toEqual([]);
+    expect(skillsFor('concept', base).map((s) => s.kind)).toEqual(['recall']);
+    expect(skillsFor('concept', { ...base, exercises: [predict] }).map((s) => s.kind)).toEqual(['recall', 'apply']);
+    expect(skillsFor('term', { exercises: [predict] }).map((s) => s.kind)).toEqual(['listen', 'recall', 'produce']);
+  });
+
+  it('explica cada problema del ejercicio', () => {
+    const issues = validateUnitPayload('concept', { ...base, exercises: [
+      { kind: 'fill_gap', prompt: 'Completa', code: 'int count;', answer: 'static', distractors: ['final', 'static'] },
+      { ...order, steps: ['solo uno'] },
+      { kind: 'karaoke', prompt: 'x', answer: 'y', distractors: ['a', 'b'] },
+    ] });
+    const msgs = issues.map((i) => describeContentIssue(i));
+    expect(issues.map((i) => `${i.code}@${i.path}`)).toEqual(expect.arrayContaining(['gap_missing@exercises.0.code', 'distractor_is_answer@exercises.0.distractors', 'min_items@exercises.1.steps', 'invalid_choice@exercises.2.kind']));
+    expect(msgs.join(' ')).toContain('marca el hueco con ___');
   });
 });

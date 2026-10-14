@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -95,5 +95,41 @@ describe('conceptos (Java, redes, temarios)', () => {
   it('acepta las respuestas alternativas al repasar', () => {
     expect(gradeReview(cls, 'Clase', 0, 0, false).correct).toBe(true);
     expect(gradeReview(cls, 'objeto', 0, 0, false).correct).toBe(false);
+  });
+});
+
+describe('retos de aplicación', () => {
+  const predict = { kind: 'predict_output' as const, prompt: '¿Qué imprime?', code: 'System.out.println(1 + 1);', answer: '2', accepted: ['dos'], distractors: ['11', 'error'] };
+  const order = { kind: 'order_steps' as const, prompt: 'Ordena', steps: ['a', 'b', 'c'] };
+  const concept = (key: string, exercises: unknown[]): SessionUnit => ({
+    key, type: 'concept', language: 'en',
+    payload: { name: key, gist: `idea ${key}`, definition: 'd', examples: [{ text: 'x' }], exercises },
+    skills: [{ key: `${key}.recall`, kind: 'recall', associationId: `a-${key}` }, ...(exercises.length ? [{ key: `${key}.apply`, kind: 'apply' }] : [])],
+    association: { id: `a-${key}`, technique: 'absurd_scene', text: `Una IDEA ${key}.` },
+  } as SessionUnit);
+  const cu = { c1: concept('c1', [predict]), c2: concept('c2', []), c3: concept('c3', [order]) };
+  const newItems = (keys: string[]): PlanItem[] => keys.flatMap((k) => cu[k as keyof typeof cu].skills.map((s) => ({ skillId: s.key, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const })));
+
+  it('el primer día hay un reto con opciones solo para los conceptos con ejercicios', () => {
+    const plan = buildAssociationSession({ sessionId: 's', courseId: 'c', day: 0, createdAt: 0, items: newItems(['c1', 'c2', 'c3']), units: cu, knownUnits: [] });
+    const challenges = plan.steps.filter((s) => s.kind === 'challenge');
+    expect(challenges.map((s) => [s.unitKey, s.typed])).toEqual([['c1', false], ['c3', false]]);
+    expect(plan.steps.at(-1)!.kind).toBe('summary');
+  });
+
+  it('en el repaso, «aplicar» vence y se responde sin opciones', () => {
+    const plan = buildAssociationSession({ sessionId: 's', courseId: 'c', day: 3, createdAt: 0, items: [{ skillId: 'c1.apply', unitId: 'c1', reason: 'review', priority: 0, recommendedHint: 0 }], units: cu, knownUnits: [] });
+    expect(plan.steps[0]).toMatchObject({ kind: 'challenge', unitKey: 'c1', skillKey: 'c1.apply', typed: true });
+  });
+
+  it('corrige con peso honesto: opciones = reconocimiento; escrito u ordenado en repaso = aplicación', () => {
+    expect(gradeChallenge(predict, '2', false)).toEqual({ correct: true, format: 'recognition_choice', hint: 0 });
+    expect(gradeChallenge(predict, ' Dos ', true)).toEqual({ correct: true, format: 'application', hint: 0 });
+    expect(gradeChallenge(predict, '11', true).correct).toBe(false);
+    expect(gradeChallenge(order, ['a', 'b', 'c'], true)).toMatchObject({ correct: true, format: 'application' });
+    expect(gradeChallenge(order, ['b', 'a', 'c'], false)).toMatchObject({ correct: false, format: 'recognition_choice' });
+    expect(gradeChallenge(predict, '', true, true)).toMatchObject({ correct: false, hint: 5 });
+    expect(shuffledSteps(order, 'x')).not.toEqual(order.steps);
+    expect(challengeChoices(predict, 'x').map((c) => c.label).sort()).toEqual(['11', '2', 'error']);
   });
 });

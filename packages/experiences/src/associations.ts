@@ -2,11 +2,11 @@
 // nuevas + cierre con rescate inverso. Sin teclear en la primera exposición; teclear solo en los repasos, con pistas.
 // Agnóstico de la materia: funciona con palabras de un idioma o con conceptos de Java.
 import type { ExerciseFormat, HintLevel, PlanItem } from '@memora/core';
-import type { ConceptPayload, PatternPayload, TermPayload } from '@memora/content';
+import type { ConceptExercise, ConceptPayload, PatternPayload, TermPayload } from '@memora/content';
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'review' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'summary';
+export type AssocStepKind = 'review' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -19,6 +19,9 @@ export interface AssocStep {
   startHint?: HintLevel;
   /** Arcade sorpresa: unidades que entran en la ronda. */
   arcadeUnits?: string[];
+  /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
+  exercise?: number;
+  typed?: boolean;
 }
 
 export interface AssocPlan {
@@ -75,13 +78,16 @@ export function buildAssociationSession(input: {
   const add = (s: Omit<AssocStep, 'id'>) => steps.push({ ...s, id: `${steps.length + 1}-${s.kind}-${s.unitKey || 'x'}` });
 
   // 1. Repasos vencidos: uno por habilidad de recuperación (escuchar se repasa al oír la tarjeta; producir, en Gramática).
+  //    Los conceptos con ejercicios repasan también «aplicar» con un reto sin opciones.
   const seen = new Set<string>();
   for (const item of items.filter((i) => i.reason === 'review')) {
     const unit = units[item.unitId];
     const kind = unit?.skills.find((s) => s.key === item.skillId)?.kind;
-    if (!unit || kind !== 'recall' || seen.has(item.skillId)) continue;
+    if (!unit || seen.has(item.skillId)) continue;
+    if (kind === 'recall') add({ kind: 'review', unitKey: unit.key, scene: -1, skillKey: item.skillId, startHint: item.recommendedHint });
+    else if (kind === 'apply' && exercisesOf(unit).length) add({ kind: 'challenge', unitKey: unit.key, scene: -1, skillKey: item.skillId, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: true });
+    else continue;
     seen.add(item.skillId);
-    add({ kind: 'review', unitKey: unit.key, scene: -1, skillKey: item.skillId, startHint: item.recommendedHint });
   }
 
   // 2. Escenas de 5 unidades nuevas.
@@ -104,6 +110,12 @@ export function buildAssociationSession(input: {
 
   // 3. Cierre: rescate inverso (escena → unidad) mezclando todo lo de hoy.
   if (fresh.length) for (const u of shuffle(fresh, rand)) add({ kind: 'rescue', unitKey: u, scene: scenes.length });
+  // 4. Retos de aplicación de los conceptos nuevos: con opciones el primer día (sin teclear en la primera exposición).
+  for (const u of fresh) {
+    const unit = units[u]!;
+    const apply = unit.skills.find((s) => s.kind === 'apply');
+    if (apply && exercisesOf(unit).length) add({ kind: 'challenge', unitKey: u, scene: scenes.length, skillKey: apply.key, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: false });
+  }
   if (steps.length) add({ kind: 'summary', unitKey: '', scene: scenes.length });
   return { mode: 'associations', sessionId, courseId: input.courseId, day: input.day, createdAt: input.createdAt, steps, scenes };
 }
@@ -173,4 +185,39 @@ export interface AssocOutcome {
 export function gradeReview(u: SessionUnit, answer: string, startHint: HintLevel, hintUsed: HintLevel, revealed: boolean): AssocOutcome {
   const hint = (revealed ? 5 : Math.max(startHint, hintUsed)) as HintLevel;
   return { correct: hint < 5 && acceptedAnswers(u).some((a) => sameAnswer(answer, a)), format: hint > 0 ? 'recall_cued' : 'recall_unaided', hint };
+}
+
+// ─── Retos de aplicación (conceptos con ejercicios) ─────────────────────────────────────────────────────────
+
+export function exercisesOf(u: SessionUnit): ConceptExercise[] {
+  return u.type === 'concept' ? ((u.payload as ConceptPayload).exercises ?? []) : [];
+}
+
+/** Opciones del reto (primer día): la respuesta y sus opciones falsas, en orden estable. */
+export function challengeChoices(ex: ConceptExercise, seed: string): Choice[] {
+  if (!ex.answer) return [];
+  return shuffle([{ label: ex.answer, correct: true }, ...(ex.distractors ?? []).map((label) => ({ label, correct: false }))], seeded(seed));
+}
+
+/** Pasos desordenados para «ordenar pasos» (nunca en el orden correcto si se puede evitar). */
+export function shuffledSteps(ex: ConceptExercise, seed: string): string[] {
+  const steps = ex.steps ?? [];
+  let out = shuffle(steps, seeded(seed));
+  if (steps.length > 1 && out.every((s, i) => s === steps[i])) out = [...out.slice(1), out[0]!];
+  return out;
+}
+
+/**
+ * Corrige un reto. El primer día (opciones u ordenar) es reconocimiento, peso bajo; en el repaso, escrito u ordenado sin
+ * ayuda, es aplicación, peso muy alto.
+ * El código se compara sin tener en cuenta espacios de más ni mayúsculas.
+ */
+export function gradeChallenge(ex: ConceptExercise, answer: string | string[], typed: boolean, revealed = false): AssocOutcome {
+  const format: ExerciseFormat = typed ? 'application' : 'recognition_choice';
+  if (revealed) return { correct: false, format, hint: 5 };
+  const norm = (t: string) => t.replace(/\s+/g, ' ').trim();
+  const correct = Array.isArray(answer)
+    ? answer.length === (ex.steps ?? []).length && answer.every((s, i) => s === ex.steps![i])
+    : [ex.answer ?? '', ...(ex.accepted ?? [])].some((a) => a && sameAnswer(norm(answer), norm(a)));
+  return { correct, format, hint: 0 };
 }

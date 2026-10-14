@@ -10,6 +10,13 @@ const FIELD_ES: Record<string, string> = {
   meaning: 'significado',
   name: 'nombre',
   gist: 'idea clave',
+  exercises: 'ejercicios',
+  prompt: 'pregunta',
+  code: 'código',
+  answer: 'respuesta',
+  accepted: 'otras respuestas',
+  distractors: 'opciones falsas',
+  steps: 'pasos',
   mapping: 'qué corresponde a qué',
   breaksWhere: 'dónde deja de valer',
   definition: 'definición',
@@ -53,7 +60,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -107,6 +114,8 @@ const es: Record<string, Template> = {
   pattern_without_slot: (_, f) => `${f}: al menos una pieza debe ser un hueco («slot») que el alumno rellene.`,
   unknown_unit_type: (p, f) => `${f}: tipo de unidad desconocido. Tipos disponibles: ${p.types}.`,
   analogy_too_long: (p, f) => `${f}: la analogía tiene ${p.words} palabras; el máximo es ${p.max}.`,
+  gap_missing: (_p, f) => `${f}: marca el hueco con ___ (tres guiones bajos).`,
+  distractor_is_answer: (_p, f) => `${f}: una opción falsa coincide con la respuesta.`,
   scene_too_long: (p, f) => `${f}: la escena tiene ${p.words} palabras; el máximo es ${p.max}.`,
   scene_without_highlight: (_, f) => `${f}: resalta la pieza clave en MAYÚSCULAS (por ejemplo, «Un BURRO te PIDE PRESTADO el móvil»).`,
   scene_without_cue: (p, f) => `${f}: la escena debe incluir la palabra de apoyo «${p.cue}».`,

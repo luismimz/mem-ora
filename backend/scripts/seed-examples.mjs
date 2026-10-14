@@ -88,6 +88,22 @@ async function makeCourse(key, title, subject, perSession, contentLanguage, modu
   console.log(`✓ ${title}: ${rows.length} unidades, ${perSession} por sesión`);
 }
 
+// Retos de aplicación por concepto (D-043). El primer día se responden con opciones; en el repaso, escribiendo.
+const javaExercises = {
+  class: [{ kind: 'fill_gap', prompt: '¿Qué palabra falta para declarar el molde Dog?', code: 'public ___ Dog { }', answer: 'class', distractors: ['object', 'new'] }],
+  object: [{ kind: 'apply_case', prompt: 'En «Coche miCoche = new Coche();», ¿qué es miCoche?', answer: 'un objeto', accepted: ['objeto', 'una instancia', 'instancia'], distractors: ['una clase', 'un método'], explanation: 'Coche es la clase (el molde); miCoche es un objeto concreto.' }],
+  new: [{ kind: 'fill_gap', prompt: '¿Qué palabra crea el objeto?', code: 'Dog rex = ___ Dog();', answer: 'new', distractors: ['class', 'this'] }],
+  extends: [{ kind: 'fill_gap', prompt: '¿Qué palabra hace que Puppy herede de Dog?', code: 'class Puppy ___ Dog { }', answer: 'extends', distractors: ['implements', 'inherits'], explanation: 'implements es para interfaces; inherits no existe en Java.' }],
+  abstract: [{ kind: 'find_bug', prompt: '¿Qué línea no compila (1 o 2)?', code: 'abstract class Animal { }\nAnimal a = new Animal();', answer: '2', distractors: ['1', 'ninguna'], explanation: 'No se puede crear un objeto de una clase abstracta.' }],
+  private: [{ kind: 'find_bug', prompt: '¿Qué palabra hace que la última línea no compile?', code: 'class Dog { private int age; }\n// en otra clase:\nDog d = new Dog();\nd.age = 3;', answer: 'private', distractors: ['int', 'new'], explanation: 'age es privado: solo se usa dentro de Dog.' }],
+  public: [{ kind: 'apply_case', prompt: '¿Qué modificador pones a un método que deben poder usar todas las clases?', answer: 'public', distractors: ['private', 'static'] }],
+  override: [{ kind: 'predict_output', prompt: '¿Qué imprime?', code: 'class Dog { String sound() { return "guau"; } }\nclass Puppy extends Dog {\n  @Override String sound() { return "yip"; }\n}\nDog d = new Puppy();\nSystem.out.println(d.sound());', answer: 'yip', distractors: ['guau', 'error'], explanation: 'Se ejecuta el método del objeto real (Puppy), que sobrescribe al de Dog.' }],
+  polymorphism: [{ kind: 'predict_output', prompt: '¿Qué imprime?', code: 'class Animal { String speak() { return "..."; } }\nclass Cat extends Animal {\n  @Override String speak() { return "miau"; }\n}\nAnimal a = new Cat();\nSystem.out.println(a.speak());', answer: 'miau', distractors: ['...', 'error'], explanation: 'La variable es Animal, pero el objeto es un Cat: responde a su manera.' }],
+  interface: [{ kind: 'fill_gap', prompt: '¿Qué palabra hace que Dog cumpla el contrato Pet?', code: 'class Dog ___ Pet { }', answer: 'implements', distractors: ['extends', 'interface'] }],
+  constructor: [{ kind: 'order_steps', prompt: 'Ordena lo que pasa al hacer new Dog("Rex"):', steps: ['Se reserva memoria para el objeto', 'Se ejecuta el constructor con "Rex"', 'new devuelve la referencia al objeto'] }],
+  static: [{ kind: 'predict_output', prompt: '¿Qué imprime?', code: 'class Dog {\n  static int count = 0;\n  Dog() { count++; }\n}\nnew Dog(); new Dog(); new Dog();\nSystem.out.println(Dog.count);', answer: '3', distractors: ['1', '0'], explanation: 'count es compartido: los tres perros suman en el mismo contador.' }],
+};
+
 async function makeConceptCourse(key, title, subject, perSession, contentLanguage, moduleNames, rows, audio, modes) {
   for (const c of await api('GET', `/items/courses?filter[key][_eq]=${key}&fields=id`)) await api('DELETE', `/items/courses/${c.id}`);
   const course = await api('POST', '/items/courses', { key, title, subject, status: 'published', visibility: 'public', ui_language: 'es', learner_language: 'es', content_language: contentLanguage, new_per_session: perSession, audio_enabled: audio, modes });
@@ -96,7 +112,7 @@ async function makeConceptCourse(key, title, subject, perSession, contentLanguag
   for (const [i, [k, name, gist, definition, answers, code, explanation, contrast, assoc]] of rows.entries()) {
     const unit = await api('POST', '/items/units', {
       course: course.id, module: modules[Math.min(modules.length - 1, Math.floor(i / 5))].id, key: k, type: 'concept', sort: i, sources, license,
-      payload: { name, gist, definition, examples: [{ text: code, explanation }], ...(answers.length ? { answers } : {}), ...(contrast ? { contrast } : {}) },
+      payload: { name, gist, definition, examples: [{ text: code, explanation }], ...(answers.length ? { answers } : {}), ...(contrast ? { contrast } : {}), ...(javaExercises[k] ? { exercises: javaExercises[k] } : {}) },
     });
     const a = await api('POST', '/items/associations', { unit: unit.id, ...assoc, cue: assoc.cue || null, sources, license });
     await publish('associations', a.id);

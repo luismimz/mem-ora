@@ -54,8 +54,7 @@ No se implementan hasta que un hito las incluya.
 - **Experiencia «aplicar»** (caso o minidiálogo) para que los patrones vuelvan a tener esa habilidad (H7).
 
 ## Materias que no son idiomas (siguientes pasos tras D-042)
-- Ejercicios de concepto: predecir la salida de un código, completar un hueco, ordenar pasos, encontrar el error y
-  aplicar a un caso (evidencia «producir/aplicar», peso muy alto). Requieren habilidades `produce`/`apply` en `concept`.
+- ~~Ejercicios de concepto~~ hecho en D-043.
 - Tipos `procedure` (pasos ordenados: subredes) y `comparison` (TCP frente a UDP), si los conceptos no bastan.
 - Prerrequisitos en el archivo de curso JSON (`requires: ["class"]`).
 - Hueco de la espiral configurable por curso: Gramática en idiomas, mini-reto de código en Java, caso en redes (recetas, H4).

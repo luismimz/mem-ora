@@ -366,3 +366,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   («¿Qué concepto es…?», «SE PARECE A»). Esquema: solo se añaden opciones a `units.type` y `associations.technique`
   (instantánea aplicada con copia previa).
 - **Descartado:** reutilizar `term` con la traducción opcional (mezclaba reglas de idiomas y de conceptos en un validador).
+
+## D-043 · Retos de aplicación en los conceptos (14-oct-2026)
+- **Qué:** `concept.exercises` con cinco tipos (predecir la salida, completar el hueco, encontrar el error, aplicar a un
+  caso, ordenar pasos) y paso `challenge` en la sesión de Asociaciones. El ejemplo de Java trae un reto por concepto.
+- **Habilidad «aplicar» solo con ejercicios** (`skillsFor`): un concepto sin retos sigue con solo «recordar», y si se le
+  añaden retos después, el gancho crea la habilidad. Nunca se borra sola (puede tener historial).
+- **Evidencia honesta:** el primer día, opciones u ordenar = `recognition_choice` (bajo; regla de no teclear en la
+  primera exposición). En el repaso, escribir u ordenar sin ayuda = `application` (muy alto); «Ver» = P5, nunca acierto.
+- **Idiomas intactos:** los retos solo existen en `concept`; `term` y `pattern` no generan pasos nuevos.
+- **Vista previa:** el selector «Revisar paso» también aparece en la vista previa (solo autoría), para ver cada paso.
+- **Riesgo anotado:** con 10 conceptos nuevos la sesión suma 10 retos al final; si resulta larga, limitar los del
+  primer día es un ajuste de configuración.

@@ -1,7 +1,7 @@
 // Archivo de curso en JSON (importar y exportar). Un curso completo: datos del curso, módulos y unidades con su
 // asociación. Lo que se importa entra SIEMPRE como borrador (regla 12: nadie publica sin revisión).
 import { checkChoice, checkText, checkUnknownFields, isRecord, issue, type ContentIssue } from './issues';
-import { validateUnitPayload, type ConceptPayload, type PatternPayload, type TermPayload } from './unitTypes';
+import { validateUnitPayload, type ConceptExercise, type ConceptPayload, type PatternPayload, type TermPayload } from './unitTypes';
 
 export const COURSE_FILE_VERSION = 1;
 export const COURSE_MODES = ['associations', 'grammar', 'arcade', 'chat'] as const;
@@ -37,6 +37,7 @@ export interface UnitEntry {
   definition?: string;
   answers?: string[];
   contrast?: string;
+  exercises?: ConceptExercise[];
   // común (idiomas: `translation`; conceptos: `explanation`, opcional)
   examples: Array<{ text: string; translation?: string; explanation?: string; source?: string }>;
   association?: AssociationEntry;
@@ -71,6 +72,7 @@ export function unitPayload(u: UnitEntry): TermPayload | PatternPayload | Concep
     return {
       name: u.name ?? '', gist: u.gist ?? '', definition: u.definition ?? '', examples: (u.examples ?? []) as ConceptPayload['examples'],
       ...(u.answers ? { answers: u.answers } : {}), ...(u.contrast ? { contrast: u.contrast } : {}), ...(u.notes ? { notes: u.notes } : {}),
+      ...(u.exercises ? { exercises: u.exercises } : {}),
     };
   }
   if (u.type === 'pattern') {
@@ -132,7 +134,7 @@ export function validateCourseFile(data: unknown): ContentIssue[] {
     m.units.forEach((u, ui) => {
       const up = `${mp}.units.${ui}`;
       if (!isRecord(u)) return void issues.push(issue('not_object', up));
-      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'name', 'gist', 'definition', 'answers', 'contrast', 'examples', 'association', 'license', 'sources']);
+      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'examples', 'association', 'license', 'sources']);
       if (typeof u.key !== 'string' || !KEY.test(u.key)) issues.push(issue('key_format', `${up}.key`));
       else if (unitKeys.has(u.key)) issues.push(issue('key_taken', `${up}.key`, { key: u.key }));
       else unitKeys.add(u.key);
