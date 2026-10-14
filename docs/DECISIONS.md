@@ -429,3 +429,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   animación si el sistema pide menos movimiento). Medido con CLS del navegador: Inicio 0,000 (escritorio) y 0,008
   (móvil); Perfil y Studio 0,000.
 - La sección de misiones aparece desde la primera misión (antes, solo con dos o más).
+
+## D-048 · Pantalla de juego ajustada a la altura (14-oct-2026)
+- La sesión ocupa exactamente la altura de la pantalla (100dvh): cabecera, barra y una tarjeta que llena el resto. La
+  ilustración absorbe el espacio libre (crece o se encoge) y los tamaños de letra dependen de la altura (clamp con vh).
+- El contenido se centra dentro de la tarjeta con «safe center»: si no cabe (móvil pequeño e historia larga), empieza
+  arriba y se desplaza dentro de la tarjeta, nunca la página. La pista de deslizar queda fija abajo.
+- Medido en 375×667, 390×844, 1280×720 y 1440×900 con tarjeta, recuerda, historia, rescate, reto y resumen: scroll de
+  página 0 en todos; solo alguna tarjeta muy larga en 375×667 se desplaza por dentro.

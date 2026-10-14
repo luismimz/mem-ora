@@ -267,3 +267,28 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
   .studio-grid { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; gap: 1.4rem; }
 }
 .progress-list .row { display: grid; gap: .15rem; } .progress-list .row .muted { min-height: 1.3em; }
+
+/* ─── Pantalla de juego ajustada a la altura (D-048): sin huecos arriba/abajo y sin scroll de página ─── */
+.app:has(.stage) { padding-bottom: 0; }
+.stage { display: flex; flex-direction: column; height: 100dvh; min-height: 0; padding: .4rem 0 .8rem; justify-content: flex-start; }
+.stage > * { flex: none; }
+.stage > .card { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; margin-bottom: 0; }
+.stage > .card > * { flex: none; }
+/* La ilustración absorbe el espacio libre: crece si sobra, se encoge si la historia es larga. */
+.stage > .card > .art, .stage > .card > div > .art { flex: 1 1 7rem; min-height: 5.5rem; max-height: 15rem; padding-bottom: 3rem; }
+.stage > .card > .art.small { flex-basis: 5rem; min-height: 4.5rem; max-height: 10rem; padding-bottom: 1rem; }
+.stage .art .emoji { font-size: clamp(2.6rem, 8vh, 5.5rem); }
+.stage .word strong { font-size: clamp(2.2rem, 7vh, 5rem); }
+.stage .word span { font-size: clamp(1rem, 2.6vh, 1.6rem); }
+.stage .scene-text { font-size: clamp(1rem, 2.5vh, 1.45rem); line-height: 1.35; }
+.stage .question { font-size: clamp(1.25rem, 3.8vh, 2.2rem); margin: clamp(.4rem, 1.5vh, 1rem) 0; }
+.stage .story { font-size: clamp(1.05rem, 2.8vh, 1.55rem); }
+.stage .choice { min-height: clamp(3.2rem, 7vh, 5rem); font-size: clamp(1rem, 2.4vh, 1.3rem); padding: .6rem; }
+.stage .sounds .bridge { font-size: clamp(1.6rem, 5vh, 2.6rem); }
+.stage .concept { font-size: clamp(.85rem, 2vh, 1rem); }
+.stage .reward .big { font-size: clamp(2rem, 6vh, 3.2rem); } .stage .reward .xp { font-size: clamp(2rem, 6vh, 3.4rem); }
+@media (min-width: 900px) { .stage { padding: .6rem 0 1.2rem; } .stage > .card { padding: clamp(1.2rem, 3vh, 2.2rem) clamp(1.4rem, 3vw, 2.4rem) 1.2rem; } }
+/* El contenido se centra dentro de la tarjeta («safe»: si no cabe, empieza arriba y se desplaza dentro),
+   y la pista de deslizar queda fija abajo. */
+.stage > .card { justify-content: safe center; padding-bottom: 2.6rem; }
+.stage > .card > .foot { position: absolute; left: 0; right: 0; bottom: .5rem; text-align: center; }

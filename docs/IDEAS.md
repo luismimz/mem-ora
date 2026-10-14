@@ -59,3 +59,5 @@ No se implementan hasta que un hito las incluya.
 - Prerrequisitos en el archivo de curso JSON (`requires: ["class"]`).
 - Hueco de la espiral configurable por curso: Gramática en idiomas, mini-reto de código en Java, caso en redes (recetas, H4).
 - Importar contenido sensible con revisor, fecha de verificación y aviso (regla 13).
+- Corrección sensible a mayúsculas en retos de «predecir la salida»: hoy `sameAnswer` ignora mayúsculas, así que «HOLA»
+  pasaría por «hola». Opción: campo `caseSensitive` en el ejercicio (detectado al generar la misión 18 de DAM).
