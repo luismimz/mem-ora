@@ -246,8 +246,8 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
       <p className="eyebrow">ASOCIACIÓN {position}/{total}</p>
       <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
-      <Art unit={unit} />
-      {a?.cue ? (
+      <Art unit={unit} chain={unit.type !== 'concept'} />
+      {unit.type === 'concept' ? null : a?.cue ? (
         <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>{a.technique === 'analogy' ? 'SE PARECE A' : 'SUENA A'}</p><div className="bridge">{a.cue}</div></div>
           {audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>
       ) : audioEnabled() ? <div className="sounds"><span /><button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button></div> : null}

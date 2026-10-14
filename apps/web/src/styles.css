@@ -304,3 +304,11 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .stage { justify-content: safe center; }
 .stage > .card > .foot { display: flex; justify-content: center; }
 .concept pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+/* La cadena «puente → término → idea» se parte en varias líneas si no cabe; la tarjeta nunca se desplaza en horizontal. */
+.chain { max-width: calc(100% - 1.6rem); white-space: normal; flex-wrap: wrap; justify-content: center; text-align: center; row-gap: .1rem; line-height: 1.25; }
+.stage > .card { overflow-x: hidden; }
+/* Concepto: la historia es la protagonista; definición y código, debajo y más pequeños. */
+.stage .card:has(.concept) .scene-text { font-size: clamp(1.1rem, 2.9vh, 1.6rem); }
+.stage .concept p:first-child { color: var(--muted); }
+.stage > .card > .foot { position: sticky; bottom: -2.6rem; margin: .4rem -1rem -2.6rem; padding: .5rem 0 .6rem; background: var(--surface-strong); }
+@media (max-height: 900px) { .stage .concept p.muted { display: none; } }
