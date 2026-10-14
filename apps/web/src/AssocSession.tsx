@@ -109,15 +109,13 @@ export function AssocSession({ payload, courseId, preview = false, onExit, onRel
     if (correct) setXp((x) => x + 10 + Math.min(combo, 5) * 2);
   }
 
-  if (!plan.steps.length) {
-    return <main><div className="card enter"><div className="reward"><p className="eyebrow">TODO AL DÍA</p><div className="big">Ahora no hay nada pendiente.</div><p>Has completado lo de esta sesión. Tus repasos volverán según la curva del olvido (1 h, 3 h, 24 h…) y podrás empezar otra sesión de palabras nuevas.</p></div><button type="button" className="primary next" onClick={onExit}>Volver al inicio</button></div></main>;
-  }
+  if (!plan.steps.length) return <Empty courseId={courseId} onExit={onExit} />;
 
   const progress = Math.round((index / plan.steps.length) * 100);
   const sceneOf = (s: AssocStep) => (s.scene >= 0 && s.scene < plan.scenes.length ? `ESCENA ${s.scene + 1}/${plan.scenes.length}` : '');
 
   return (
-    <main>
+    <main className="stage">
       <div className="top">
         <button type="button" className="link" onClick={onExit}>← Inicio</button>
         <span className="eyebrow">{preview ? 'VISTA PREVIA' : step ? sceneOf(step) || (step.kind === 'review' ? 'REPASO' : '') : ''}</span>
@@ -318,5 +316,25 @@ function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit
       </div>
       <button type="button" className="primary" onClick={onExit}>Terminar</button>
     </div>
+  );
+}
+
+/** Nada pendiente: explica cuándo vuelve el primer repaso y si ya no quedan palabras nuevas en el curso. */
+function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
+  const [info, setInfo] = useState<{ next: number | null; left: number } | null>(null);
+  useEffect(() => {
+    api.progress(courseId).then((p) => {
+      const due = p.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d));
+      setInfo({ next: due.length ? Math.min(...due) : null, left: p.skills.filter((s) => s.status === 'new').length });
+    }).catch(() => setInfo({ next: null, left: 0 }));
+  }, [courseId]);
+  const when = info?.next ? new Date(info.next).toLocaleString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' }) : null;
+  return (
+    <main className="stage"><div className="card enter"><div className="reward">
+      <p className="eyebrow">TODO AL DÍA</p>
+      <div className="big">Ahora no hay nada pendiente.</div>
+      {info && info.left === 0 && <p>Ya has empezado todas las palabras de este curso. Lo que toca ahora es repasarlas.</p>}
+      <p>{when ? <>Tu próximo repaso vuelve el <b>{when}</b>, según la curva del olvido.</> : 'Tus repasos volverán según la curva del olvido (1 h, 3 h, 24 h…).'}</p>
+    </div><button type="button" className="primary next" onClick={onExit}>Volver al inicio</button></div></main>
   );
 }

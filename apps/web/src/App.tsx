@@ -64,40 +64,45 @@ export function App() {
 
   const current = courses.find((c) => c.id === course);
   return (
-    <div className="app">
+    <div className="app home">
       <div className="top"><div className="logo">M</div>{(me?.first_name || me?.email) && <span className="pill">{me?.first_name || me?.email}</span>}<button type="button" className="link" onClick={() => void api.logout().then(() => setView({ name: 'login' }))}>Salir</button></div>
-      <div className="courses" role="tablist" aria-label="Cursos">
-        {courses.map((c) => <button key={c.id} type="button" role="tab" aria-selected={c.id === course} className={c.id === course ? 'on' : ''} onClick={() => { setCourse(c.id); writePrefs({ course: c.id }); }}>{c.title.replace(/\s*\(.*\)$/, '')}</button>)}
-      </div>
-      <p className="eyebrow">TU AVENTURA</p>
-      <h1>La historia sigue contigo.</h1>
-      {current ? (
-        <section className="hero">
-          <div className="hero-art"><span aria-hidden="true">{current.content_language === 'en' && current.title.startsWith('Java') ? '☕🧩' : '🏠🗝️'}</span><span className="tag">{current.title.replace(/\s*\(.*\)$/, '').toUpperCase()}</span></div>
-          <div className="hero-body">
-            <p className="eyebrow">MODO {MODES.find((m) => m.id === mode)!.title.toUpperCase()}</p>
-            <p>{current.new_per_session ?? 15} nuevas por sesión, en escenas de 5. Puedes hacer varias sesiones al día; los repasos vuelven según la curva del olvido.</p>
-            <button type="button" className="primary" onClick={() => void open(mode)}>Continuar aventura →</button>
+      <div className="home-grid">
+        <section className="home-main">
+          <div className="courses" role="tablist" aria-label="Cursos">
+            {courses.map((c) => <button key={c.id} type="button" role="tab" aria-selected={c.id === course} className={c.id === course ? 'on' : ''} onClick={() => { setCourse(c.id); writePrefs({ course: c.id }); }}>{c.title.replace(/\s*\(.*\)$/, '')}</button>)}
           </div>
+          <p className="eyebrow">TU AVENTURA</p>
+          <h1>La historia sigue contigo.</h1>
+          {current ? (
+            <div className="hero">
+              <div className="hero-art"><span aria-hidden="true">{current.title.startsWith('Java') ? '☕🧩' : '🏠🗝️'}</span><span className="tag">{current.title.replace(/\s*\(.*\)$/, '').toUpperCase()}</span></div>
+              <div className="hero-body">
+                <p className="eyebrow">MODO {MODES.find((m) => m.id === mode)!.title.toUpperCase()}</p>
+                <p>{current.new_per_session ?? 15} nuevas por sesión, en escenas de 5. Puedes hacer varias sesiones al día; los repasos vuelven según la curva del olvido.</p>
+                <button type="button" className="primary" onClick={() => void open(mode)}>Continuar aventura →</button>
+              </div>
+            </div>
+          ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
+          {error && <p className="banner" role="status">{error}</p>}
         </section>
-      ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
-      {error && <p className="banner" role="status">{error}</p>}
-      <p className="eyebrow">ELIGE TU MOMENTO</p>
-      <h1 style={{ fontSize: '1.4rem' }}>¿Qué te apetece hacer?</h1>
-      <div className="modes">
-        {MODES.map((m) => (
-          <button key={m.id} type="button" className={`mode ${m.id === 'arcade' ? 'warm' : ''} ${m.ready ? '' : 'locked'}`} onClick={() => void open(m.id)}>
-            <span className="ico">{m.ico}</span><b>{m.title} {mode === m.id && <span className="fav">· POR DEFECTO</span>}</b><span>{m.ready ? '↗' : '🔒'}</span>
-            <small>{m.ready ? m.text : m.lock}</small>
-          </button>
-        ))}
+        <section className="home-side">
+          <p className="eyebrow">ELIGE TU MOMENTO</p>
+          <h2 className="h2">¿Qué te apetece hacer?</h2>
+          <div className="modes">
+            {MODES.map((m) => (
+              <button key={m.id} type="button" className={`mode ${m.id === 'arcade' ? 'warm' : ''} ${m.ready ? '' : 'locked'}`} onClick={() => void open(m.id)}>
+                <span className="ico">{m.ico}</span><b>{m.title}</b><span>{m.ready ? '↗' : '🔒'}</span>
+                <small>{mode === m.id && <span className="fav">POR DEFECTO · </span>}{m.ready ? m.text : m.lock}</small>
+              </button>
+            ))}
+          </div>
+          <label className="pref"><span className="eyebrow">Modo por defecto</span>
+            <select value={mode} onChange={(e) => { const v = e.target.value as Mode; setMode(v); writePrefs({ mode: v }); }}>
+              {MODES.map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}
+            </select>
+          </label>
+        </section>
       </div>
-      <p style={{ marginTop: '1rem' }}>
-        <label className="eyebrow" htmlFor="pref">Modo por defecto </label>
-        <select id="pref" value={mode} onChange={(e) => { const v = e.target.value as Mode; setMode(v); writePrefs({ mode: v }); }}>
-          {MODES.map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}
-        </select>
-      </p>
     </div>
   );
 }

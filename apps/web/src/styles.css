@@ -83,3 +83,42 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .login { background: var(--surface-strong); border-radius: 1.6rem; padding: 1.4rem; box-shadow: var(--shadow); display: grid; gap: .8rem; }
 .login input { font: inherit; padding: .85rem; border-radius: .8rem; border: 1px solid var(--line); background: var(--surface-soft); color: var(--ink); width: 100%; }
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; margin: 1rem 0; } .stats div { background: var(--surface-soft); border-radius: 1rem; padding: .8rem; text-align: center; } .stats b { display: block; font-size: 1.6rem; }
+
+.h2 { font-size: 1.4rem; letter-spacing: -.02em; margin: .2rem 0 .8rem; }
+.pref { display: flex; align-items: center; gap: .6rem; margin-top: 1rem; }
+.pref select { font: inherit; padding: .45rem .6rem; border-radius: .6rem; border: 1px solid var(--line); background: var(--surface-strong); color: var(--ink); }
+.home-grid { display: grid; gap: 1.4rem; }
+
+/* ─── Escritorio: más grande, centrado y sin scroll en el inicio ─────────────────────────────────── */
+@media (min-width: 900px) {
+  .app { max-width: 76rem; padding: 0 2.5rem 2rem; }
+  .home { min-height: 100vh; display: flex; flex-direction: column; padding-bottom: 0; }
+  .home-grid { flex: 1; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 3rem; align-items: center; padding-bottom: 2rem; }
+  .home h1 { font-size: 2.8rem; }
+  .home .hero { margin-bottom: 0; }
+  .home .hero-art { height: 15rem; font-size: 5rem; }
+  .home .hero-body { padding: 1.6rem 1.8rem 1.8rem; font-size: 1.1rem; }
+  .home .modes { grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .home .mode { grid-template-columns: 2rem 1fr auto; min-height: 9.5rem; align-content: start; padding: 1.3rem; }
+  .home .mode small { grid-column: 1 / -1; margin-top: .4rem; font-size: .95rem; }
+  .home .mode b { font-size: 1.25rem; }
+  .h2 { font-size: 1.9rem; }
+
+  .app:has(.stage) { padding-bottom: 0; }
+  .stage { max-width: 48rem; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 1rem 0; }
+  .stage .card { min-height: 0; padding: 2.2rem 2.4rem 1.6rem; border-radius: 2.2rem; }
+  .stage .word strong { font-size: 5.2rem; }
+  .stage .word span { font-size: 1.7rem; }
+  .stage .ipa { font-size: 1.15rem; }
+  .stage .art { min-height: 14rem; } .stage .art .emoji { font-size: 6rem; } .stage .art.small { min-height: 11rem; } .stage .art.small .emoji { font-size: 4.5rem; }
+  .stage .chain { font-size: 1.1rem; padding: .55rem 1.3rem; }
+  .stage .sounds .bridge { font-size: 2.8rem; }
+  .stage .scene-text { font-size: 1.5rem; }
+  .stage .scene-en { font-size: 1.15rem; }
+  .stage .question { font-size: 2.3rem; }
+  .stage .story { font-size: 1.6rem; }
+  .stage .choice { font-size: 1.35rem; min-height: 5.2rem; }
+  .stage .reward .big { font-size: 3.2rem; } .stage .reward .xp { font-size: 3.4rem; }
+  .stage .foot { font-size: .95rem; }
+  .stage .answer-input { font-size: 1.8rem; }
+}
