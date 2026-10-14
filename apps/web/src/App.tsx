@@ -1,5 +1,5 @@
 import { Studio } from './Studio';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type Mission, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { ARCADE_FROM, CHAT_AFTER_GRAMMAR, GRAMMAR_EVERY, milestones, type Milestones } from './milestones';
@@ -114,7 +114,6 @@ export function App() {
                 : <Meter label="Chat" value={ms.words >= GRAMMAR_EVERY ? '¡disponible pronto!' : `faltan ${GRAMMAR_EVERY - ms.words}`} pct={Math.min(1, ms.words / GRAMMAR_EVERY)} />)}
             </div>
           )}
-          {missions && missions.missions.length > 1 && <Missions list={missions.missions} current={missions.current} onOpen={(key) => void open('associations', key)} />}
           {error && <p className="banner" role="status">{error}</p>}
         </section>
         <section className="home-side">
@@ -135,6 +134,7 @@ export function App() {
           </label>
         </section>
       </div>
+      {missions && missions.missions.length > 1 && <Missions list={missions.missions} current={missions.current} onOpen={(key) => void open('associations', key)} />}
     </div>
   );
 }
@@ -144,29 +144,47 @@ function Meter({ label, value, pct }: { label: string; value: string; pct: numbe
 }
 
 /**
- * Las misiones del curso, como un mapa de juego: una fila que se desliza, centrada en la actual. Cada misión se puede
- * hacer por separado; «Continuar aventura» sigue por la actual.
+ * Las misiones del curso, como un mapa de juego, a todo el ancho y en filas (sin desplazamiento lateral). Tres estados
+ * bien distintos: completada (✓), la actual (resaltada, «Continuar») y pendiente. Cada misión se puede abrir por separado.
  */
 function Missions({ list, current, onOpen }: { list: Mission[]; current: string | null; onOpen: (key: string) => void }) {
-  const row = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const el = row.current?.querySelector<HTMLElement>('[data-current="true"]');
-    if (el && row.current) row.current.scrollLeft = el.offsetLeft - row.current.clientWidth / 2 + el.clientWidth / 2;
-  }, [list, current]);
   const done = list.filter((m) => m.status === 'done').length;
+  const active = list.filter((m) => m.status === 'active').length;
+  const pending = list.length - done - active;
+  const clean = (t: string) => t.replace(/^Misión \d+ · /, '');
   return (
     <section className="missions" aria-label="Misiones">
-      <div className="row"><p className="eyebrow">TUS MISIONES</p><span className="pill">{done}/{list.length} completadas</span></div>
-      <div className="mission-row" ref={row}>
-        {list.map((m) => (
-          <button key={m.key} type="button" data-current={m.key === current} className={`mission ${m.status} ${m.key === current ? 'current' : ''}`} onClick={() => onOpen(m.key)}>
-            <span className="mission-n">{m.status === 'done' ? '✓' : m.index}</span>
-            <b>{m.title.replace(/^Misión \d+ · /, '')}</b>
-            <i className="mission-bar"><i style={{ width: `${m.total ? (m.worked / m.total) * 100 : 0}%` }} /></i>
-            <small>{m.status === 'done' ? 'completada' : m.status === 'active' ? `${m.worked}/${m.total} · en curso` : `${m.total} por aprender`}</small>
-          </button>
-        ))}
+      <div className="missions-head">
+        <div><p className="eyebrow">TUS MISIONES</p><h2 className="h2">{done}/{list.length} completadas</h2></div>
+        <ul className="missions-legend" aria-label="Leyenda">
+          <li className="done">{done} completadas</li>
+          <li className="active">{active} en curso</li>
+          <li className="pending">{pending} pendientes</li>
+        </ul>
       </div>
+      <i className="missions-total" aria-hidden="true"><i style={{ width: `${(done / list.length) * 100}%` }} /></i>
+      <ol className="mission-grid">
+        {list.map((m) => {
+          const isCurrent = m.key === current;
+          const pct = m.total ? Math.round((m.worked / m.total) * 100) : 0;
+          return (
+            <li key={m.key}>
+              <button type="button" className={`mission ${m.status} ${isCurrent ? 'current' : ''}`} onClick={() => onOpen(m.key)}
+                aria-label={`Misión ${m.index}: ${clean(m.title)}. ${m.status === 'done' ? 'Completada' : m.status === 'active' ? `En curso, ${m.worked} de ${m.total}` : 'Pendiente'}`}>
+                <span className="mission-top">
+                  <span className="mission-n">{m.status === 'done' ? '✓' : m.index}</span>
+                  <span className="mission-state">{isCurrent ? 'CONTINUAR →' : m.status === 'done' ? 'COMPLETADA' : m.status === 'active' ? 'EN CURSO' : 'PENDIENTE'}</span>
+                </span>
+                <b>{clean(m.title)}</b>
+                <span className="mission-foot">
+                  <i className="mission-bar"><i style={{ width: `${pct}%` }} /></i>
+                  <small>{m.worked}/{m.total}</small>
+                </span>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
     </section>
   );
 }
