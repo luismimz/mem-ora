@@ -6,11 +6,15 @@
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación
 //   GET  /memora/preview/:unitId         vista previa como alumno (solo autoría, revisión y administración)
+//   POST /memora/import?check=1          importa un curso completo en JSON como borrador (o solo lo comprueba)
+//   GET  /memora/export/:courseId        exporta un curso al mismo formato
+//   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
 import { assessAssociation, dayOf, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
 import { buildAssociationSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
+import { checkCourseFile, exportCourse, importCourse } from './courseIO';
 import { effectiveTime, MAX_EVENTS_PER_BATCH, recompute, rejectReason, sessionUnits, skillIndex, type AssociationRow, type SkillRow, type StoredEvent, type UnitRow } from './learning';
 
 type Row = Record<string, any>;
@@ -39,8 +43,8 @@ export interface SessionState {
 
 export default {
   id: 'memora',
-  handler: (router: any, ctx: { database: any; logger: any }) => {
-    const { database: db, logger } = ctx;
+  handler: (router: any, ctx: { database: any; logger: any; services: any; getSchema: () => Promise<any> }) => {
+    const { database: db, logger, services, getSchema } = ctx;
     const parse = (v: unknown) => (typeof v === 'string' ? JSON.parse(v) : v);
 
     const wrap = (fn: (req: any) => Promise<unknown>) => async (req: any, res: any) => {
@@ -221,10 +225,40 @@ export default {
       };
     }));
 
-    router.get('/preview/:unitId', wrap(async (req) => {
-      const acc = req.accountability;
+    async function requireStaff(acc: Row, what: string) {
       const role = acc.role ? await db('directus_roles').where({ id: acc.role }).first('name') : null;
-      if (!acc.admin && !(role && STAFF_ROLES.has(role.name))) throw new HttpError(403, 'FORBIDDEN', 'La vista previa es solo para autoría, revisión y administración.');
+      if (!acc.admin && !(role && STAFF_ROLES.has(role.name))) throw new HttpError(403, 'FORBIDDEN', `${what} es solo para autoría, revisión y administración.`);
+    }
+
+    router.post('/import', wrap(async (req) => {
+      await requireStaff(req.accountability, 'Importar');
+      const problems = await checkCourseFile(db, req.body);
+      if (problems.length) return { data: { ok: false, problems } };
+      if (req.query.check) return { data: { ok: true, problems: [] } };
+      try {
+        const result = await importCourse(services, await getSchema(), req.accountability, req.body);
+        return { data: { ok: true, problems: [], ...result } };
+      } catch (e: any) {
+        // Lo que rechace Studio (ganchos o permisos) se devuelve como problema; no queda nada a medias.
+        const message = e?.extensions?.issues?.map((i: Row) => i.message).join(' ') || e?.message || 'Error al crear.';
+        return { data: { ok: false, problems: [{ path: '', where: 'Studio', message }] } };
+      }
+    }));
+
+    router.get('/studio/courses', wrap(async (req) => {
+      await requireStaff(req.accountability, 'Exportar');
+      return { data: await db('courses').orderBy('title').select('id', 'key', 'title', 'status') };
+    }));
+
+    router.get('/export/:courseId', wrap(async (req) => {
+      await requireStaff(req.accountability, 'Exportar');
+      const file = await exportCourse(db, req.params.courseId);
+      if (!file) throw new HttpError(404, 'NOT_FOUND', 'Curso no encontrado.');
+      return { data: file };
+    }));
+
+    router.get('/preview/:unitId', wrap(async (req) => {
+      await requireStaff(req.accountability, 'La vista previa');
       const unit = await db('units').where({ id: req.params.unitId }).first();
       if (!unit) throw new HttpError(404, 'NOT_FOUND', 'Unidad no encontrada.');
       const issues = validateUnitPayload(unit.type, parse(unit.payload));

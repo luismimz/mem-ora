@@ -32,9 +32,20 @@ const FIELD_ES: Record<string, string> = {
   soundRelation: 'parecido sonoro',
   differences: 'diferencias',
   technique: 'técnica',
+  course: 'curso',
+  title: 'título',
+  association: 'asociación',
+  scene: 'escena',
+  sceneTarget: 'escena en el idioma del contenido',
+  emoji: 'ilustración',
+  contentLanguage: 'idioma del contenido',
+  newPerSession: 'nuevas por sesión',
+  modes: 'modos',
+  schemaVersion: 'versión del archivo',
+  visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -92,6 +103,8 @@ const es: Record<string, Template> = {
   scene_without_cue: (p, f) => `${f}: la escena debe incluir la palabra de apoyo «${p.cue}».`,
   unknown_technique: (p, f) => `${f}: técnica desconocida. Disponibles: ${p.techniques}.`,
   technique_not_for_unit_type: (p, f) => `${f}: la técnica «${p.technique}» no sirve para unidades de tipo «${p.unitType}» (sí para: ${p.unitTypes}).`,
+  file_version: (p, f) => `${f}: debe ser ${p.expected}.`,
+  course_exists: (p) => `Ya existe un curso con el identificador «${p.key}». Cambia «course.key» o borra el anterior.`,
   key_taken: (p, f) => `${f}: ya hay otro elemento con el identificador «${p.key}» en este curso.`,
   key_format: (_, f) => `${f}: usa solo minúsculas, números y guiones (por ejemplo, «run-out-of»).`,
   transition_not_allowed: (p) =>

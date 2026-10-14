@@ -23,7 +23,7 @@ const PARENT_EDITABLE = { unit: { status: { _in: ['draft', 'rejected'] } } };
 const all = (collection, actions, extra = {}) => actions.map((action) => ({ collection, action, fields: ['*'], permissions: extra[action] ?? null }));
 
 const authorPermissions = [
-  ...all('courses', ['read']),
+  ...all('courses', ['create', 'read']),
   ...all('modules', ['create', 'read', 'update']),
   ...all('units', ['create', 'read', 'update', 'delete'], { update: EDITABLE, delete: OWN_DRAFT }),
   ...all('skills', ['create', 'read', 'update', 'delete'], { update: PARENT_EDITABLE, delete: PARENT_EDITABLE }),

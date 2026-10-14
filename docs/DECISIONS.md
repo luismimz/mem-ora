@@ -339,3 +339,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   (casos o preguntas sobre conceptos).
 - Sin Gramática, el Chat se abre al llevar 15 unidades trabajadas (en lugar de 3 sesiones de gramática).
 - Sin Arcade, no salta el Arcade sorpresa dentro de las asociaciones.
+
+## D-041 · Importar y exportar cursos en JSON (14-oct-2026)
+- **Qué:** formato de curso v1 (`docs/FORMATO-CURSO.md`, validador en `packages/content/src/courseFile.ts`), página
+  «Studio» en la app (autoría y administración) y endpoints `/memora/import`, `/memora/export/:id`,
+  `/memora/studio/courses`. Guion `pnpm backend:export` con cursos y eventos de alumnos.
+- **Todo o nada:** se comprueba todo antes de escribir (forma, contenido, técnica y clave repetida). La creación usa los
+  servicios de Directus, así que pasan los mismos ganchos de Studio y los permisos del rol. Si algo falla, se borra el
+  curso creado (cascada). Descartado: una transacción, porque los ganchos leen con la conexión global y no verían lo
+  creado dentro de ella.
+- **Siempre borrador** y visibilidad privada por defecto (regla 12).
+- **Permiso nuevo:** el rol Autor puede crear cursos (antes solo leerlos), coherente con la regla 3. El propietario lo
+  pone el gancho.
+- **Exportación:** incluye borradores (es una copia de contenido); excluye unidades obsoletas y asociaciones rechazadas.

@@ -1,3 +1,4 @@
+import { Studio } from './Studio';
 import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
@@ -6,7 +7,7 @@ import { setLanguage } from './i18n';
 import { setAudioEnabled } from './speech';
 
 type Mode = 'associations' | 'grammar' | 'arcade' | 'chat';
-type View = { name: 'loading' } | { name: 'login' } | { name: 'home' } | { name: 'session'; course: Course; payload: SessionPayload } | { name: 'preview'; payload: SessionPayload | null; error?: string };
+type View = { name: 'loading' } | { name: 'login' } | { name: 'home' } | { name: 'session'; course: Course; payload: SessionPayload } | { name: 'studio' } | { name: 'preview'; payload: SessionPayload | null; error?: string };
 
 const previewId = () => window.location.pathname.match(/^\/preview\/([\w-]+)/)?.[1] ?? null;
 const PREF = 'memora.preferences';
@@ -68,6 +69,7 @@ export function App() {
   if (view.name === 'loading') return <div className="app"><p style={{ paddingTop: '30vh', textAlign: 'center' }}>Preparando tu aventura…</p></div>;
   if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
+  if (view.name === 'studio') return <div className="app"><Studio onExit={() => void start()} /></div>;
   if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={() => void start()} onReload={() => void open('associations')} /></div>;
 
   const current = courses.find((c) => c.id === course);
@@ -75,7 +77,7 @@ export function App() {
   const has = (m: Mode) => enabled.some((x) => x.id === m);
   return (
     <div className="app home">
-      <div className="top"><div className="logo">M</div>{(me?.first_name || me?.email) && <span className="pill">{me?.first_name || me?.email}</span>}<button type="button" className="link" onClick={() => void api.logout().then(() => setView({ name: 'login' }))}>Salir</button></div>
+      <div className="top"><div className="logo">M</div>{(me?.first_name || me?.email) && <span className="pill">{me?.first_name || me?.email}</span>}{staff && <button type="button" className="link" onClick={() => setView({ name: 'studio' })}>Studio</button>}<button type="button" className="link" onClick={() => void api.logout().then(() => setView({ name: 'login' }))}>Salir</button></div>
       <div className="home-grid">
         <section className="home-main">
           <div className="courses" role="tablist" aria-label="Cursos">

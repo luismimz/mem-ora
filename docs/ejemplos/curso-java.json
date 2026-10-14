@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "course": {
+    "key": "java-basico",
+    "title": "Java · Clases y objetos",
+    "subject": "programación",
+    "contentLanguage": "en",
+    "newPerSession": 10,
+    "audio": false,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Propio"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "key": "clases",
+      "title": "Clases y objetos",
+      "units": [
+        {
+          "key": "class",
+          "type": "term",
+          "text": "class",
+          "meaning": "molde para crear objetos",
+          "examples": [
+            {
+              "text": "public class Perro { }",
+              "translation": "Declara el molde Perro."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una fábrica de MOLDES escupe perros idénticos sin parar.",
+            "emoji": "🏭🐕"
+          }
+        }
+      ]
+    }
+  ]
+}

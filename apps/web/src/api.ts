@@ -60,6 +60,15 @@ export interface Progress {
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
 }
 
+export interface ImportResult {
+  ok: boolean;
+  problems: Array<{ path: string; where: string; message: string }>;
+  courseId?: string;
+  modules?: number;
+  units?: number;
+  associations?: number;
+}
+
 export const api = {
   login: (email: string, password: string) => request<unknown>('POST', '/auth/login', { email, password, mode: 'session' }),
   logout: () => request<unknown>('POST', '/auth/logout', { mode: 'session' }).catch(() => undefined),
@@ -67,6 +76,9 @@ export const api = {
   courses: () => request<Course[]>('GET', '/memora/courses'),
   whoami: () => request<{ staff: boolean }>('GET', '/memora/me'),
   session: (course: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}`),
+  importCourse: (file: unknown, check: boolean) => request<ImportResult>('POST', `/memora/import${check ? '?check=1' : ''}`, file),
+  studioCourses: () => request<Array<{ id: string; key: string; title: string; status: string }>>('GET', '/memora/studio/courses'),
+  exportCourse: (id: string) => request<unknown>('GET', `/memora/export/${encodeURIComponent(id)}`),
   preview: (unitId: string) => request<SessionPayload>('GET', `/memora/preview/${encodeURIComponent(unitId)}`),
   events: (course: string, events: ClientEvent[]) => request<{ accepted: string[]; duplicates: string[]; rejected: Array<{ id: string; reason: string }> }>('POST', '/memora/events', { course, events }),
   position: (course: string, body: { sessionId: string; index: number; outcomes: SessionState['outcomes']; finished: boolean; deviceId: string }) =>

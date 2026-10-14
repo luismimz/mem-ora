@@ -15,6 +15,7 @@
     "backend:down": "docker compose -f backend/docker-compose.yml --env-file backend/.env down",
     "backend:logs": "docker compose -f backend/docker-compose.yml --env-file backend/.env logs -f directus",
     "backend:backup": "backend/scripts/backup.sh",
+    "backend:export": "node backend/scripts/export-json.mjs",
     "backend:schema:define": "node --env-file=backend/.env backend/schema/define.mjs",
     "backend:schema:snapshot": "backend/scripts/schema-snapshot.sh",
     "backend:schema:apply": "backend/scripts/schema-apply.sh",

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "course": {
+    "key": "frances-cocina",
+    "title": "Francés · La cocina",
+    "subject": "idioma",
+    "contentLanguage": "fr",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "grammar",
+      "arcade",
+      "chat"
+    ],
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Propio"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "key": "cocina",
+      "title": "La cocina",
+      "units": [
+        {
+          "key": "pain",
+          "type": "term",
+          "text": "pain",
+          "meaning": "pan",
+          "pronunciation": "PAN",
+          "examples": [
+            {
+              "text": "Je mange du pain.",
+              "translation": "Como pan."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un PAN gigante se sienta a la mesa y pide más PAN.",
+            "sceneTarget": "Un PAIN géant demande du PAIN.",
+            "emoji": "🥖🪑"
+          }
+        },
+        {
+          "key": "lait",
+          "type": "term",
+          "text": "lait",
+          "meaning": "leche",
+          "examples": [
+            {
+              "text": "Du lait.",
+              "translation": "Leche."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
