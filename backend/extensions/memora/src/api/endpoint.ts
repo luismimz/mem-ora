@@ -5,16 +5,21 @@
 //   POST /memora/events                  eventos idempotentes; devuelve el estado recalculado
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación
+//   GET  /memora/missions?course=…       misiones (módulos) del curso con el avance del alumno y la actual
+//   GET  /memora/studio/missions?course=… misiones con el estado de revisión de sus unidades (autoría)
+//   GET  /memora/preview/mission/:id     prueba una misión entera como alumno, borradores incluidos (autoría)
+//   POST /memora/studio/approve/:id      revisa, aprueba y publica una misión entera con la cuenta que la pide
 //   GET  /memora/preview/:unitId         vista previa como alumno (solo autoría, revisión y administración)
 //   POST /memora/import?check=1&append=1 importa un curso en JSON como borrador, o añade módulos a uno existente
 //   GET  /memora/export/:courseId        exporta un curso al mismo formato
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, focusCatalog, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
 import { buildAssociationSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
+import type { Catalog, LearnerState as Learner } from '@memora/core';
 import { effectiveTime, MAX_EVENTS_PER_BATCH, recompute, rejectReason, sessionUnits, skillIndex, type AssociationRow, type SkillRow, type StoredEvent, type UnitRow } from './learning';
 
 type Row = Record<string, any>;
@@ -34,8 +39,19 @@ function courseConfig(course: Row) {
   return resolveConfig({ load: { newCap: perSession * 3 * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 120, totalCap: perSession * 3 * 3 + 120 } });
 }
 
+export interface MissionRef {
+  key: string;
+  title: string;
+  /** Posición (1, 2…) y total de misiones del curso. */
+  index: number;
+  total: number;
+  next: { key: string; title: string } | null;
+}
+
 export interface SessionState {
   plan: SessionPlan | AssocPlan;
+  /** Misión de la sesión: solo entra contenido nuevo de ella (los repasos vencidos, de todo el curso). */
+  mission?: MissionRef;
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -70,7 +86,7 @@ export default {
         .leftJoin('modules', 'units.module', 'modules.id')
         .where({ 'units.course': course.id, 'units.status': 'published' })
         .orderBy([{ column: 'modules.sort', order: 'asc' }, { column: 'units.sort', order: 'asc' }, { column: 'units.date_created', order: 'asc' }])
-        .select('units.id', 'units.key', 'units.type', 'units.language', 'units.payload', 'units.version', 'units.status', 'modules.title as place');
+        .select('units.id', 'units.key', 'units.type', 'units.language', 'units.payload', 'units.version', 'units.status', 'modules.title as place', 'modules.key as module_key');
       const ids = units.map((u) => u.id);
       const skills: SkillRow[] = ids.length ? await db('skills').whereIn('unit', ids).select('id', 'key', 'kind', 'unit', 'association', 'sort') : [];
       const associations: AssociationRow[] = ids.length ? await db('associations').whereIn('unit', ids).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji', 'evidence') : [];
@@ -85,8 +101,35 @@ export default {
         skills: skills.map((s) => ({ id: s.id, key: s.key, kind: s.kind, unit: s.unit, association: s.association && publishedAssoc.has(s.association) ? s.association : null })),
         prerequisites,
       });
-      return { units: sUnits, catalog };
+      // Misiones = módulos con unidades publicadas, en su orden. Las unidades sin módulo forman una misión aparte.
+      const missions: Array<{ key: string; title: string; units: string[] }> = [];
+      for (const u of units as Array<UnitRow & { module_key?: string | null; place?: string | null }>) {
+        const key = u.module_key ?? 'sin-mision';
+        let m = missions.find((x) => x.key === key);
+        if (!m) missions.push((m = { key, title: u.place ?? 'Sin misión', units: [] }));
+        m.units.push(u.key);
+      }
+      return { units: sUnits, catalog, missions };
     }
+
+    type Mission = { key: string; title: string; units: string[] };
+    /** Avance del alumno en cada misión: unidades trabajadas (alguna habilidad empezada) y aprendidas. */
+    function missionProgress(missions: Mission[], catalog: Catalog, learner: Learner) {
+      const worked = new Set(Object.values(learner.skills).filter((x) => x.status !== 'new').map((x) => x.unitId));
+      const list = missions.map((m, i) => {
+        const learned = m.units.filter((u) => ['learned', 'stable', 'mastered'].includes(unitLevel(u, catalog, learner.skills, config).level)).length;
+        const done = m.units.filter((u) => worked.has(u)).length;
+        return { key: m.key, title: m.title, index: i + 1, total: m.units.length, worked: done, learned, status: done === 0 ? 'pending' : done === m.units.length ? 'done' : 'active' };
+      });
+      const current = list.find((m) => m.status !== 'done') ?? list[list.length - 1] ?? null;
+      return { list, current, worked };
+    }
+    const missionRef = (missions: Mission[], key: string): MissionRef | undefined => {
+      const i = missions.findIndex((m) => m.key === key);
+      if (i < 0) return undefined;
+      const next = missions[i + 1];
+      return { key, title: missions[i]!.title, index: i + 1, total: missions.length, next: next ? { key: next.key, title: next.title } : null };
+    };
 
     async function storedEvents(userId: string, courseId: string): Promise<StoredEvent[]> {
       const rows = await db('learning_events').where({ user: userId, course: courseId }).select('event_id', 'kind', 'payload', 'device_time', 'received_at');
@@ -131,24 +174,47 @@ export default {
     router.get('/session', wrap(async (req) => {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
-      const { units, catalog } = await publishedContent(course);
+      const wanted = typeof req.query.mission === 'string' && req.query.mission ? req.query.mission : null;
+      const { units, catalog, missions } = await publishedContent(course);
+      if (wanted && !missions.some((m) => m.key === wanted)) throw new HttpError(404, 'NOT_FOUND', 'Misión no disponible.');
       const now = Date.now();
       const today = dayOf(now, config.load.dayOriginMs, config.load.dayLengthMs);
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first();
       const savedState: SessionState | null = saved ? parse(saved.state) : null;
-      if (savedState && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
+      // «Continuar aventura» (sin misión) retoma la sesión empezada; elegir una misión la retoma solo si es la misma.
+      const sameMission = !wanted || savedState?.mission?.key === wanted;
+      if (savedState && sameMission && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
+      const progress = missionProgress(missions, catalog, learner);
+      const target = wanted ?? progress.current?.key ?? null;
+      const focus = missions.find((m) => m.key === target);
+      // Solo entra contenido nuevo de la misión; los repasos vencidos llegan de todo lo ya trabajado.
+      const planCatalog = focus ? focusCatalog(catalog, new Set(focus.units), progress.worked) : catalog;
       const cfg = courseConfig(course);
-      const plan = planDay({ catalog, learner, now, config: cfg });
+      const plan = planDay({ catalog: planCatalog, learner, now, config: cfg });
       const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
       // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
       const knownUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
       const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, maxNewUnits: Math.max(1, Number(course.new_per_session) || 15) });
-      const state: SessionState = { plan: session, index: 0, outcomes: {}, finished: session.steps.length === 0 };
+      const mission = target ? missionRef(missions, target) : undefined;
+      const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
       return { data: { state, units, resumed: false, stats: plan.stats } };
+    }));
+
+    router.get('/missions', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.query.course, userId);
+      const { catalog, missions } = await publishedContent(course);
+      const { list, current } = missionProgress(missions, catalog, await learnerFor(userId, course.id));
+      // Si hay una sesión empezada hoy, «Continuar aventura» la retoma: esa es la misión actual para el alumno.
+      const saved = await db('session_positions').where({ user: userId, course: course.id }).first('state');
+      const state: SessionState | null = saved ? parse(saved.state) : null;
+      const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
+      const resume = state && !state.finished && state.plan.day === today && state.mission && list.some((m) => m.key === state.mission!.key) ? state.mission.key : null;
+      return { data: { missions: list, current: resume ?? current?.key ?? null } };
     }));
 
     router.post('/events', wrap(async (req) => {
@@ -256,6 +322,73 @@ export default {
       const file = await exportCourse(db, req.params.courseId);
       if (!file) throw new HttpError(404, 'NOT_FOUND', 'Curso no encontrado.');
       return { data: file };
+    }));
+
+    router.get('/studio/missions', wrap(async (req) => {
+      await requireStaff(req.accountability, 'Studio');
+      const courseId = typeof req.query.course === 'string' ? req.query.course : '';
+      const modules: Row[] = await db('modules').where({ course: courseId }).orderBy('sort').select('id', 'key', 'title', 'status');
+      const units: Row[] = await db('units').where({ course: courseId }).select('module', 'status');
+      return {
+        data: modules.map((m) => {
+          const own = units.filter((u) => u.module === m.id);
+          const count = (st: string) => own.filter((u) => u.status === st).length;
+          return { id: m.id, key: m.key, title: m.title, status: m.status, total: own.length, draft: count('draft'), review: count('needs_review'), approved: count('approved'), published: count('published'), rejected: count('rejected') };
+        }),
+      };
+    }));
+
+    // Probar una misión entera como alumno: todas sus unidades (también borradores) en una sesión que no guarda nada.
+    router.get('/preview/mission/:moduleId', wrap(async (req) => {
+      await requireStaff(req.accountability, 'La vista previa');
+      const mod = await db('modules').where({ id: req.params.moduleId }).first();
+      if (!mod) throw new HttpError(404, 'NOT_FOUND', 'Misión no encontrada.');
+      const course = await db('courses').where({ id: mod.course }).first();
+      const rows: Row[] = (await db('units').where({ module: mod.id }).whereNotIn('status', ['rejected', 'deprecated']).orderBy('sort')).filter((u: Row) => !validateUnitPayload(u.type, parse(u.payload)).length);
+      const ids = rows.map((u) => u.id);
+      const skills: SkillRow[] = ids.length ? await db('skills').whereIn('unit', ids).select('id', 'key', 'kind', 'unit', 'association', 'sort') : [];
+      const associations: AssociationRow[] = ids.length ? (await db('associations').whereIn('unit', ids).whereNot({ status: 'rejected' }).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji', 'evidence')).map((a: Row) => ({ ...a, status: 'published' })) : [];
+      const units: Record<string, SessionUnit> = sessionUnits(rows.map((u) => ({ ...u, place: mod.title })) as UnitRow[], skills, associations, course?.content_language ?? 'en');
+      const items: PlanItem[] = rows.flatMap((u) => (units[u.key]?.skills ?? []).map((s) => ({ skillId: s.key, unitId: u.key, reason: 'new' as const, priority: 0, recommendedHint: 0 as const, ...(s.associationId ? { associationId: s.associationId } : {}) })));
+      const plan = buildAssociationSession({ sessionId: `preview-${mod.id}`, courseId: mod.course, day: 0, createdAt: Date.now(), items, units, knownUnits: [], maxNewUnits: rows.length });
+      return { data: { state: { plan, index: 0, outcomes: {}, finished: false }, units, preview: true, status: mod.status } };
+    }));
+
+    // Aprobar una misión: lleva cada asociación y unidad por el flujo (borrador → revisión → aprobada → publicada) con la
+    // cuenta que lo pide, así que valen los mismos permisos y comprobaciones que en el panel. Informa de lo que falle.
+    router.post('/studio/approve/:moduleId', wrap(async (req) => {
+      // Solo revisión y administración pueden aprobar: se comprueba antes de mover nada, para no dejar la misión a medias.
+      const acc = req.accountability;
+      const role = acc.role ? await db('directus_roles').where({ id: acc.role }).first('name') : null;
+      if (!acc.admin && role?.name !== 'Revisor') throw new HttpError(403, 'FORBIDDEN', 'Aprobar es solo para revisión y administración.');
+      const mod = await db('modules').where({ id: req.params.moduleId }).first();
+      if (!mod) throw new HttpError(404, 'NOT_FOUND', 'Misión no encontrada.');
+      const schema = await getSchema();
+      const svc = (c: string) => new services.ItemsService(c, { schema, accountability: req.accountability });
+      const PATH: Record<string, string[]> = { draft: ['needs_review', 'approved', 'published'], needs_review: ['approved', 'published'], approved: ['published'] };
+      const advance = async (collection: string, id: string, status: string) => {
+        for (const next of PATH[status] ?? []) await svc(collection).updateOne(id, { status: next });
+      };
+      const message = (e: any) => e?.extensions?.issues?.map((i: Row) => i.message).join(' ') || e?.message || 'Error.';
+      const units: Row[] = await db('units').where({ module: mod.id }).orderBy('sort').select('id', 'key', 'status');
+      const failed: Array<{ key: string; message: string }> = [];
+      let published = 0;
+      for (const u of units) {
+        if (u.status === 'rejected' || u.status === 'deprecated') continue;
+        try {
+          for (const a of await db('associations').where({ unit: u.id }).whereIn('status', Object.keys(PATH)).select('id', 'status')) await advance('associations', a.id, a.status);
+          await advance('units', u.id, u.status);
+          published += 1;
+        } catch (e) {
+          failed.push({ key: u.key, message: message(e) });
+        }
+      }
+      if (!failed.length) {
+        await svc('modules').updateOne(mod.id, { status: 'published' });
+        const course = await db('courses').where({ id: mod.course }).first('status');
+        if (course?.status === 'draft') await svc('courses').updateOne(mod.course, { status: 'published' });
+      }
+      return { data: { published, failed } };
     }));
 
     router.get('/preview/:unitId', wrap(async (req) => {

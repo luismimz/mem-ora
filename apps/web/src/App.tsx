@@ -1,13 +1,13 @@
 import { Studio } from './Studio';
-import { useCallback, useEffect, useState } from 'react';
-import { api, ApiError, type Course, type Me, type SessionPayload } from './api';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { api, ApiError, type Course, type Me, type Mission, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { ARCADE_FROM, CHAT_AFTER_GRAMMAR, GRAMMAR_EVERY, milestones, type Milestones } from './milestones';
 import { setLanguage } from './i18n';
 import { setAudioEnabled } from './speech';
 
 type Mode = 'associations' | 'grammar' | 'arcade' | 'chat';
-type View = { name: 'loading' } | { name: 'login' } | { name: 'home' } | { name: 'session'; course: Course; payload: SessionPayload } | { name: 'studio' } | { name: 'preview'; payload: SessionPayload | null; error?: string };
+type View = { name: 'loading' } | { name: 'login' } | { name: 'home' } | { name: 'session'; course: Course; payload: SessionPayload; mission?: string } | { name: 'studio' } | { name: 'preview'; payload: SessionPayload | null; error?: string };
 
 const previewId = () => window.location.pathname.match(/^\/preview\/([\w-]+)/)?.[1] ?? null;
 const PREF = 'memora.preferences';
@@ -35,6 +35,7 @@ export function App() {
   const [error, setError] = useState<string | null>(null);
   const [staff, setStaff] = useState(false);
   const [ms, setMs] = useState<Milestones | null>(null);
+  const [missions, setMissions] = useState<{ missions: Mission[]; current: string | null } | null>(null);
 
   const start = useCallback(async () => {
     try { setMe(await api.me()); } catch { setView({ name: 'login' }); return; }
@@ -52,10 +53,12 @@ export function App() {
   useEffect(() => void start(), [start]);
   useEffect(() => {
     if (!course || view.name !== 'home') return;
+    setMissions(null);
     api.progress(course).then((p) => setMs(milestones(p))).catch(() => setMs(null));
+    api.missions(course).then(setMissions).catch(() => setMissions(null));
   }, [course, view.name]);
 
-  async function open(selected: Mode) {
+  async function open(selected: Mode, mission?: string) {
     const c = courses.find((x) => x.id === course);
     if (!c) return;
     const info = MODES.find((m) => m.id === selected)!;
@@ -63,18 +66,19 @@ export function App() {
     setLanguage(c.ui_language);
     setAudioEnabled(c.audio_enabled !== false);
     setError(null);
-    try { setView({ name: 'session', course: c, payload: await api.session(c.id) }); } catch (e) { setError(e instanceof ApiError ? e.message : 'Algo ha fallado.'); }
+    try { setView({ name: 'session', course: c, payload: await api.session(c.id, mission), ...(mission ? { mission } : {}) }); } catch (e) { setError(e instanceof ApiError ? e.message : 'Algo ha fallado.'); }
   }
 
   if (view.name === 'loading') return <div className="app"><p style={{ paddingTop: '30vh', textAlign: 'center' }}>Preparando tu aventura…</p></div>;
   if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview staff={staff} onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
   if (view.name === 'studio') return <div className="app"><Studio onExit={() => void start()} /></div>;
-  if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={() => void start()} onReload={() => void open('associations')} /></div>;
+  if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={() => void start()} onReload={() => void open('associations', view.mission)} onMission={(key) => void open('associations', key)} /></div>;
 
   const current = courses.find((c) => c.id === course);
   const enabled = MODES.filter((m) => !current || current.modes.includes(m.id));
   const has = (m: Mode) => enabled.some((x) => x.id === m);
+  const currentMission = missions?.missions.find((m) => m.key === missions.current);
   return (
     <div className="app home">
       <div className="top"><div className="logo">M</div>{(me?.first_name || me?.email) && <span className="pill">{me?.first_name || me?.email}</span>}{staff && <button type="button" className="link" onClick={() => setView({ name: 'studio' })}>Studio</button>}<button type="button" className="link" onClick={() => void api.logout().then(() => setView({ name: 'login' }))}>Salir</button></div>
@@ -90,7 +94,12 @@ export function App() {
               <div className="hero-art"><span aria-hidden="true">{current.title.startsWith('Java') ? '☕🧩' : '🏠🗝️'}</span><span className="tag">{current.title.replace(/\s*\(.*\)$/, '').toUpperCase()}</span></div>
               <div className="hero-body">
                 <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>
-                <p>{current.new_per_session ?? 15} nuevas por sesión, en escenas de 5. Puedes hacer varias sesiones al día; los repasos vuelven según la curva del olvido.</p>
+                {currentMission ? (
+                  <>
+                    <h3 className="hero-mission">Misión {currentMission.index} · {currentMission.title.replace(/^Misión \d+ · /, '')}</h3>
+                    <p>{currentMission.worked}/{currentMission.total} trabajadas · {currentMission.status === 'pending' ? 'empieza aquí' : 'sigues por donde lo dejaste'}. Los repasos vuelven solos según la curva del olvido.</p>
+                  </>
+                ) : <p>{current.new_per_session ?? 15} nuevas por sesión, en escenas de 5. Puedes hacer varias sesiones al día; los repasos vuelven según la curva del olvido.</p>}
                 <button type="button" className="primary" onClick={() => void open(has(mode) ? mode : 'associations')}>Continuar aventura →</button>
               </div>
             </div>
@@ -105,6 +114,7 @@ export function App() {
                 : <Meter label="Chat" value={ms.words >= GRAMMAR_EVERY ? '¡disponible pronto!' : `faltan ${GRAMMAR_EVERY - ms.words}`} pct={Math.min(1, ms.words / GRAMMAR_EVERY)} />)}
             </div>
           )}
+          {missions && missions.missions.length > 1 && <Missions list={missions.missions} current={missions.current} onOpen={(key) => void open('associations', key)} />}
           {error && <p className="banner" role="status">{error}</p>}
         </section>
         <section className="home-side">
@@ -131,6 +141,34 @@ export function App() {
 
 function Meter({ label, value, pct }: { label: string; value: string; pct: number }) {
   return <div className="meter"><div className="row"><span>{label}</span><b>{value}</b></div><div className="bar"><i style={{ width: `${Math.round(pct * 100)}%` }} /></div></div>;
+}
+
+/**
+ * Las misiones del curso, como un mapa de juego: una fila que se desliza, centrada en la actual. Cada misión se puede
+ * hacer por separado; «Continuar aventura» sigue por la actual.
+ */
+function Missions({ list, current, onOpen }: { list: Mission[]; current: string | null; onOpen: (key: string) => void }) {
+  const row = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = row.current?.querySelector<HTMLElement>('[data-current="true"]');
+    if (el && row.current) row.current.scrollLeft = el.offsetLeft - row.current.clientWidth / 2 + el.clientWidth / 2;
+  }, [list, current]);
+  const done = list.filter((m) => m.status === 'done').length;
+  return (
+    <section className="missions" aria-label="Misiones">
+      <div className="row"><p className="eyebrow">TUS MISIONES</p><span className="pill">{done}/{list.length} completadas</span></div>
+      <div className="mission-row" ref={row}>
+        {list.map((m) => (
+          <button key={m.key} type="button" data-current={m.key === current} className={`mission ${m.status} ${m.key === current ? 'current' : ''}`} onClick={() => onOpen(m.key)}>
+            <span className="mission-n">{m.status === 'done' ? '✓' : m.index}</span>
+            <b>{m.title.replace(/^Misión \d+ · /, '')}</b>
+            <i className="mission-bar"><i style={{ width: `${m.total ? (m.worked / m.total) * 100 : 0}%` }} /></i>
+            <small>{m.status === 'done' ? 'completada' : m.status === 'active' ? `${m.worked}/${m.total} · en curso` : `${m.total} por aprender`}</small>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 function Login({ onDone }: { onDone: () => void }) {

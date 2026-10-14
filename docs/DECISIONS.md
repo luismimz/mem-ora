@@ -390,3 +390,19 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Rescate:** al acertar ya no hay cuadro de confirmación, solo borde verde con brillo y rebote, y avanza solo. La
   respuesta se oculta si la escena o la analogía la nombra («Un atributo ___ es…»).
 - **Ejemplo de Java:** static, constructor y override pasan a trazado de código.
+
+## D-045 · Misiones en la portada y revisión de misiones en Studio (14-oct-2026)
+- **Misiones = módulos** del curso, en su orden. La portada las muestra como un mapa de juego (una fila deslizable,
+  centrada en la actual) con su avance (unidades trabajadas / total). Cada misión se puede hacer por separado.
+- **Sesión enfocada** (`/session?mission=`): solo entra contenido nuevo de esa misión (`focusCatalog` en el núcleo);
+  los repasos vencidos llegan de todo lo ya trabajado. Los prerrequisitos que apuntan fuera de la misión se omiten.
+- **«Continuar aventura»** retoma la sesión empezada hoy (y su misión); si no hay, abre la primera misión sin terminar.
+  El héroe muestra siempre la misión que abrirá.
+- **Al terminar**, el resumen se desliza (sin botones): si a la misión le quedan unidades, sigue en ella; si está
+  completa, pasa a la siguiente. Sin misión siguiente, botón «Terminar».
+- **Studio en la app:** «Revisar misiones» lista las misiones con su estado; «Probar» abre la misión entera como
+  alumno (borradores incluidos, no guarda nada); «Aprobar y publicar» lleva asociaciones y unidades por el flujo con la
+  cuenta que lo pide (mismas comprobaciones que el panel) y publica la misión y el curso. Solo revisión y
+  administración; se comprueba antes de mover nada. Lo que falle se informa por unidad.
+- **Por qué:** en Directus hay que pasar estado a estado y unidad a unidad; con misiones de 15–20 unidades era
+  inviable. Y empezar siempre «desde el principio» del curso generaba fricción.

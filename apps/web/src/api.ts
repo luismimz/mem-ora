@@ -42,8 +42,37 @@ export interface Course {
   new_per_session: number;
   modes: Array<'associations' | 'grammar' | 'arcade' | 'chat'>;
 }
+export interface MissionRef {
+  key: string;
+  title: string;
+  index: number;
+  total: number;
+  next: { key: string; title: string } | null;
+}
+export interface Mission {
+  key: string;
+  title: string;
+  index: number;
+  total: number;
+  worked: number;
+  learned: number;
+  status: 'pending' | 'active' | 'done';
+}
+export interface StudioMission {
+  id: string;
+  key: string;
+  title: string;
+  status: string;
+  total: number;
+  draft: number;
+  review: number;
+  approved: number;
+  published: number;
+  rejected: number;
+}
 export interface SessionState {
   plan: AssocPlan;
+  mission?: MissionRef;
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -75,7 +104,11 @@ export const api = {
   me: () => request<Me>('GET', '/users/me?fields=id,first_name,email'),
   courses: () => request<Course[]>('GET', '/memora/courses'),
   whoami: () => request<{ staff: boolean }>('GET', '/memora/me'),
-  session: (course: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}`),
+  session: (course: string, mission?: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}`),
+  missions: (course: string) => request<{ missions: Mission[]; current: string | null }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
+  studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),
+  previewMission: (id: string) => request<SessionPayload>('GET', `/memora/preview/mission/${encodeURIComponent(id)}`),
+  approveMission: (id: string) => request<{ published: number; failed: Array<{ key: string; message: string }> }>('POST', `/memora/studio/approve/${encodeURIComponent(id)}`),
   importCourse: (file: unknown, check: boolean) => request<ImportResult>('POST', `/memora/import${check ? '?check=1' : ''}`, file),
   studioCourses: () => request<Array<{ id: string; key: string; title: string; status: string }>>('GET', '/memora/studio/courses'),
   exportCourse: (id: string) => request<unknown>('GET', `/memora/export/${encodeURIComponent(id)}`),

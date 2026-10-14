@@ -21,13 +21,13 @@ import {
   type ClientEvent,
   type SessionUnit,
 } from '@memora/experiences';
-import { api, ApiError, type SessionPayload } from './api';
+import { api, ApiError, type Mission, type MissionRef, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { audioEnabled, speak } from './speech';
 import { milestones, type Milestones } from './milestones';
 
 interface Outcome { correct: boolean; hint: number }
-interface Props { payload: SessionPayload; courseId: string; preview?: boolean; staff?: boolean; onExit: () => void; onReload: () => void }
+interface Props { payload: SessionPayload; courseId: string; preview?: boolean; staff?: boolean; onExit: () => void; onReload: () => void; /** Abre una sesión de esa misión (al deslizar el resumen). */ onMission?: (key: string) => void }
 
 /** Resalta las palabras en MAYÚSCULAS de una escena. */
 function Highlight({ text }: { text: string }) {
@@ -63,12 +63,12 @@ function Art({ unit, small = false, chain = true }: { unit: SessionUnit; small?:
   return (
     <div className={`art ${small ? 'small' : ''}`}>
       <span className="emoji" aria-hidden="true">{a?.emoji ?? '✨'}</span>
-      {chain && a?.cue && <div className="chain">{a.cue}<em>→</em><b>{unitText(unit).toUpperCase()}</b><em>→</em>{unitMeaning(unit).toUpperCase()}</div>}
+      {chain && a?.cue && <div className="chain">{a.cue}<em>→</em><b>{unitText(unit).toUpperCase()}</b><em>→</em>{unit.type === 'concept' ? unitMeaning(unit) : unitMeaning(unit).toUpperCase()}</div>}
     </div>
   );
 }
 
-export function AssocSession({ payload, courseId, preview: previewProp = false, staff = false, onExit, onReload }: Props) {
+export function AssocSession({ payload, courseId, preview: previewProp = false, staff = false, onExit, onReload, onMission }: Props) {
   // Modo revisión (solo equipo): saltar a cualquier paso; desde el primer salto no se guarda progreso.
   const [reviewing, setReviewing] = useState(false);
   const preview = previewProp || reviewing;
@@ -176,7 +176,7 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
           onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
       )}
 
-      {step?.kind === 'summary' && <Summary plan={plan} outcomes={outcomes} units={units} xp={xp} minutes={Math.max(1, Math.round((Date.now() - startedAt.current) / 60000))} preview={preview} courseId={courseId} onExit={onExit} />}
+      {step?.kind === 'summary' && <Summary plan={plan} outcomes={outcomes} units={units} xp={xp} minutes={Math.max(1, Math.round((Date.now() - startedAt.current) / 60000))} preview={preview} courseId={courseId} mission={payload.state.mission} onMission={onMission} onExit={onExit} />}
     </main>
   );
 }
@@ -215,7 +215,7 @@ function TraceCard({ unit, position, total, onNext }: { unit: SessionUnit; posit
     <SwipeCard className="trace" onNext={part === 2 ? onNext : undefined}>
       {unit.place && <p className="place">{unit.place}</p>}
       <p className="eyebrow">ASOCIACIÓN {position}/{total} · {titles[part]}</p>
-      <div className="word"><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className={`word ${unit.type === 'concept' ? 'concept' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
       <div className="steps-dots" aria-hidden="true">{titles.map((t, i) => <i key={t} className={i <= part ? 'on' : ''} />)}</div>
       {part === 0 && <p className="trace-definition">{p.definition}</p>}
       {part === 1 && <><Art unit={unit} chain={false} small /><p className="scene-text"><Highlight text={a.text} /></p></>}
@@ -239,7 +239,7 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
     <SwipeCard onNext={onNext}>
       {unit.place && <p className="place">{unit.place}</p>}
       <p className="eyebrow">ASOCIACIÓN {position}/{total}</p>
-      <div className="word"><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className={`word ${unit.type === 'concept' ? 'concept' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       <Art unit={unit} />
       {a?.cue ? (
@@ -437,32 +437,48 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
   );
 }
 
-function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, onExit }: { plan: AssocPlan; outcomes: Record<string, Outcome>; units: Record<string, SessionUnit>; xp: number; minutes: number; preview: boolean; courseId: string; onExit: () => void }) {
+function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, mission, onMission, onExit }: { plan: AssocPlan; outcomes: Record<string, Outcome>; units: Record<string, SessionUnit>; xp: number; minutes: number; preview: boolean; courseId: string; mission?: MissionRef; onMission?: (key: string) => void; onExit: () => void }) {
   const fresh = plan.scenes.flat().length;
   const recalls = plan.steps.filter((s) => s.kind === 'recall' || s.kind === 'review');
   const first = recalls.filter((s) => outcomes[s.id]?.correct && !outcomes[s.id]?.hint).length;
   const helped = recalls.filter((s) => outcomes[s.id]?.correct && outcomes[s.id]?.hint).length;
   const [next, setNext] = useState<number | null>(null);
   const [ms, setMs] = useState<Milestones | null>(null);
+  const [here, setHere] = useState<Mission | null>(null);
+  useEffect(() => {
+    // Solo lee el avance (no guarda nada), así que también vale al revisar pasos.
+    if (!mission) return;
+    api.missions(courseId).then((r) => setHere(r.missions.find((m) => m.key === mission.key) ?? null)).catch(() => undefined);
+  }, [courseId, mission]);
+  // Al deslizar: si a la misión le quedan conceptos, se sigue en ella; si está completa, se pasa a la siguiente.
+  const left = here ? here.total - here.worked : 0;
+  const target = !mission || !onMission || !here ? null : left > 0 ? { key: mission.key, label: `Desliza para seguir · quedan ${left}` } : mission.next ? { key: mission.next.key, label: `Desliza · Misión ${mission.index + 1}` } : null;
   useEffect(() => {
     if (preview) return;
     api.progress(courseId).then((p) => { setMs(milestones(p)); const due = p.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now()); setNext(due.length ? Math.min(...due) : null); }).catch(() => undefined);
   }, [courseId, preview]);
   const when = next ? new Date(next).toLocaleString('es-ES', { weekday: 'long', hour: '2-digit', minute: '2-digit' }) : 'según la curva del olvido';
+  const reward = (
+    <div className="reward">
+      <p className="eyebrow">{mission ? `MISIÓN ${mission.index} · ${here && left === 0 ? 'COMPLETADA' : 'SESIÓN COMPLETADA'}` : 'SESIÓN COMPLETADA'}</p>
+      <div className="big">{fresh ? `¡${fresh} ${noun(Object.values(units)[0], fresh)}!` : '¡Repaso hecho!'}</div>
+      <div className="xp">+{xp} XP</div>
+      <div className="stats"><div><b>{first}</b>a la primera</div><div><b>{helped}</b>con ayuda</div><div><b>{minutes}</b>min</div></div>
+      {here && <p>{mission!.title.replace(/^Misión \d+ · /, '')}: <b>{here.worked}/{here.total}</b> trabajadas{left === 0 && mission!.next ? <> · siguiente: <b>{mission!.next.title.replace(/^Misión \d+ · /, '')}</b></> : ''}</p>}
+      <p>Próximo repaso: {when}.</p>
+      {ms && !mission && <p><b>{ms.words}</b> {Object.values(units)[0]?.type === 'concept' ? 'conceptos trabajados' : 'palabras trabajadas'} · {ms.arcadeLeft ? <>Arcade sorpresa en <b>{ms.arcadeLeft}</b></> : 'Arcade sorpresa activo'}</p>}
+    </div>
+  );
+  // Con una misión por delante, se sigue deslizando (sin botones); si no, se termina.
+  if (target) return <SwipeCard className="summary" label={target.label} onNext={() => onMission!(target.key)}>{reward}</SwipeCard>;
   return (
     <div className="card enter">
-      <div className="reward">
-        <p className="eyebrow">SESIÓN COMPLETADA</p>
-        <div className="big">{fresh ? `¡${fresh} ${noun(Object.values(units)[0], fresh)}!` : '¡Repaso hecho!'}</div>
-        <div className="xp">+{xp} XP</div>
-        <div className="stats"><div><b>{first}</b>a la primera</div><div><b>{helped}</b>con ayuda</div><div><b>{minutes}</b>min</div></div>
-        <p>Próximo repaso: {when}.</p>
-        {ms && <p><b>{ms.words}</b> palabras trabajadas · {ms.arcadeLeft ? <>Arcade sorpresa en <b>{ms.arcadeLeft}</b></> : 'Arcade sorpresa activo'}</p>}
-      </div>
+      {reward}
       <button type="button" className="primary" onClick={onExit}>Terminar</button>
     </div>
   );
 }
+
 
 /** Nada pendiente: explica cuándo vuelve el primer repaso y si ya no quedan palabras nuevas en el curso. */
 function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {

@@ -168,3 +168,25 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .trace-code { white-space: normal; overflow-x: visible; }
 .trace-line > span:first-child { white-space: pre-wrap; overflow-wrap: anywhere; }
 .trace-note mark { background: none; color: var(--accent); font-weight: 800; }
+.mission-review li { align-items: flex-start; }
+.mission-review .approval { display: block; margin-top: .25rem; color: var(--accent-ink); }
+.actions-inline { display: flex; gap: .6rem; flex-shrink: 0; }
+.studio select { font: inherit; padding: .45rem .6rem; border-radius: .6rem; border: 1px solid var(--line); background: var(--surface-soft); color: var(--ink); max-width: 100%; }
+
+/* Misiones en la portada: una fila deslizable, centrada en la actual */
+.missions { margin-top: 1rem; }
+.mission-row { display: flex; gap: .6rem; overflow-x: auto; scroll-snap-type: x mandatory; padding: .2rem .1rem .6rem; scrollbar-width: thin; }
+.mission { flex: 0 0 9.5rem; scroll-snap-align: center; text-align: left; border: 0; border-radius: 1.1rem; padding: .75rem; background: var(--surface-strong); color: var(--ink); display: grid; gap: .35rem; box-shadow: 0 2px 10px rgba(72,54,39,.06); font: inherit; cursor: pointer; }
+.mission b { font-size: .9rem; line-height: 1.2; min-height: 2.2em; }
+.mission small { color: var(--muted); font-size: .75rem; }
+.mission-n { width: 1.8rem; height: 1.8rem; border-radius: 50%; display: grid; place-items: center; font-weight: 900; background: var(--surface-soft); }
+.mission.done .mission-n { background: var(--ok-soft); color: var(--ok); }
+.mission.current { box-shadow: 0 0 0 2px var(--accent), 0 6px 18px rgba(72,54,39,.12); }
+.mission.current .mission-n { background: var(--accent); color: var(--surface-strong); }
+.mission-bar { display: block; height: .3rem; border-radius: 1rem; background: var(--line); overflow: hidden; } .mission-bar i { display: block; height: 100%; background: var(--accent); }
+.hero-mission { margin: .2rem 0 .3rem; font-size: 1.15rem; }
+/* Con misiones en la portada, el héroe se reduce para que todo quepa sin desplazar en escritorio. */
+@media (min-width: 900px) { .home-main:has(.missions) .hero-art { height: 7.5rem; font-size: 3rem; } .home-main:has(.missions) h1 { font-size: 2.3rem; margin-bottom: .6rem; } }
+/* En conceptos, la idea clave es una frase: sin mayúsculas. */
+.word.concept span { text-transform: none; font-size: 1.05rem; }
+.stage .word.concept span { font-size: 1.25rem; }

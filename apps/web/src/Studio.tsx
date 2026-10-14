@@ -1,7 +1,8 @@
 // Studio · importar y exportar cursos en JSON (D-041). Solo autoría y administración. Lo importado entra como
 // borrador: se revisa y se publica en el panel de Studio.
 import { useEffect, useState } from 'react';
-import { api, ApiError, type ImportResult } from './api';
+import { api, ApiError, type ImportResult, type SessionPayload, type StudioMission } from './api';
+import { AssocSession } from './AssocSession';
 
 const STATUS: Record<string, string> = { draft: 'borrador', published: 'publicado', archived: 'archivado' };
 const n = (count = 0, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
@@ -13,8 +14,32 @@ export function Studio({ onExit }: { onExit: () => void }) {
   const [busy, setBusy] = useState(false);
   const [courses, setCourses] = useState<Array<{ id: string; key: string; title: string; status: string }>>([]);
 
-  const loadCourses = () => api.studioCourses().then(setCourses).catch(() => setCourses([]));
+  const [reviewCourse, setReviewCourse] = useState<string>('');
+  const [missions, setMissions] = useState<StudioMission[]>([]);
+  const [trying, setTrying] = useState<SessionPayload | null>(null);
+  const [approval, setApproval] = useState<Record<string, string>>({});
+
+  const loadCourses = () => api.studioCourses().then((list) => { setCourses(list); setReviewCourse((c) => c || list[0]?.id || ''); }).catch(() => setCourses([]));
   useEffect(() => void loadCourses(), []);
+  const loadMissions = (id: string) => (id ? api.studioMissions(id).then(setMissions).catch(() => setMissions([])) : setMissions([]));
+  useEffect(() => void loadMissions(reviewCourse), [reviewCourse]);
+
+  async function tryMission(m: StudioMission) {
+    try { setTrying(await api.previewMission(m.id)); } catch (e) { setApproval((a) => ({ ...a, [m.id]: e instanceof ApiError ? e.message : 'No se ha podido abrir.' })); }
+  }
+  async function approve(m: StudioMission) {
+    setApproval((a) => ({ ...a, [m.id]: 'Aprobando…' }));
+    try {
+      const r = await api.approveMission(m.id);
+      setApproval((a) => ({ ...a, [m.id]: r.failed.length ? `Publicadas ${r.published}. No se han podido publicar: ${r.failed.map((f) => `${f.key} (${f.message})`).join('; ')}` : `✓ Publicadas ${r.published}. La misión ya está en la app.` }));
+      void loadMissions(reviewCourse);
+      void loadCourses();
+    } catch (e) {
+      setApproval((a) => ({ ...a, [m.id]: e instanceof ApiError ? e.message : 'Algo ha fallado.' }));
+    }
+  }
+
+  if (trying) return <AssocSession key={trying.state.plan.sessionId} payload={trying} courseId={trying.state.plan.courseId} preview staff onExit={() => setTrying(null)} onReload={() => setTrying(null)} />;
 
   async function pick(f: File | undefined) {
     setResult(null);
@@ -53,6 +78,26 @@ export function Studio({ onExit }: { onExit: () => void }) {
   return (
     <div className="studio">
       <div className="top"><div className="logo">M</div><span className="pill">Studio</span><button type="button" className="link" onClick={onExit}>Volver</button></div>
+      <section className="card-panel">
+        <h2>Revisar misiones</h2>
+        <p className="muted">Prueba cada misión como la verá el alumno (no guarda progreso) y, si está bien, apruébala: se publican sus unidades y asociaciones con tu cuenta, con las mismas comprobaciones que en el panel.</p>
+        <select aria-label="Curso a revisar" value={reviewCourse} onChange={(e) => setReviewCourse(e.target.value)}>
+          {courses.map((c) => <option key={c.id} value={c.id}>{c.title} · {STATUS[c.status] ?? c.status}</option>)}
+        </select>
+        <ul className="export-list mission-review">
+          {missions.map((m) => (
+            <li key={m.id}>
+              <span><b>{m.title}</b> <small className="muted">· {m.published === m.total ? 'publicada' : `${m.total - m.published} por publicar`}{m.rejected ? ` · ${m.rejected} rechazadas` : ''}</small>
+                {approval[m.id] && <small className="approval">{approval[m.id]}</small>}</span>
+              <span className="actions-inline">
+                <button type="button" className="link" onClick={() => void tryMission(m)}>Probar</button>
+                {m.published < m.total - m.rejected && <button type="button" className="link" onClick={() => void approve(m)}>Aprobar y publicar</button>}
+              </span>
+            </li>
+          ))}
+          {!missions.length && <li className="muted">Este curso no tiene misiones.</li>}
+        </ul>
+      </section>
       <section className="card-panel">
         <h2>Importar un curso</h2>
         <p className="muted">Sube un archivo JSON con el curso completo. Primero se comprueba; si todo está bien, se crea como <b>borrador</b> para revisarlo y publicarlo en el panel de Studio. Si hay errores no se crea nada.</p>
