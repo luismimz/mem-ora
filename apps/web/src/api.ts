@@ -100,7 +100,7 @@ export interface ImportResult {
 }
 
 export const api = {
-  login: (email: string, password: string) => request<unknown>('POST', '/auth/login', { email, password, mode: 'session' }),
+  login: (email: string, password: string, otp?: string) => request<unknown>('POST', '/auth/login', { email, password, mode: 'session', ...(otp ? { otp } : {}) }),
   logout: () => request<unknown>('POST', '/auth/logout', { mode: 'session' }).catch(() => undefined),
   me: () => request<Me>('GET', '/users/me?fields=id,first_name,email'),
   courses: () => request<Course[]>('GET', '/memora/courses'),

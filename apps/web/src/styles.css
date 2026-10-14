@@ -242,3 +242,4 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .banner.review label { display: grid; gap: .3rem; width: 100%; min-width: 0; } .banner.review select { width: 100%; }
 .hero-art .tag { max-width: calc(100% - 1.8rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .app { overflow-x: clip; } /* las tarjetas entran deslizándose: sin barra lateral momentánea */
+.login-page { padding-top: 12vh; max-width: 26rem; margin: 0 auto; width: 100%; }

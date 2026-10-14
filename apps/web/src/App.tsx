@@ -349,16 +349,43 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
 function Login({ onDone }: { onDone: () => void }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [failed, setFailed] = useState(false);
+  const [otp, setOtp] = useState('');
+  // Las cuentas con verificación en dos pasos (2FA) piden además el código de la app de autenticación.
+  const [needsOtp, setNeedsOtp] = useState(false);
+  const [failed, setFailed] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  async function submit() {
+    setBusy(true);
+    setFailed(null);
+    try {
+      await api.login(email, password, needsOtp ? otp.replace(/\s/g, '') : undefined);
+      onDone();
+    } catch (e) {
+      const code = e instanceof ApiError ? e.code : '';
+      if (code === 'INVALID_OTP') {
+        if (needsOtp) setFailed('El código no es correcto o ha caducado. Prueba con el que muestra ahora tu app de autenticación.');
+        setNeedsOtp(true);
+      } else setFailed('No se ha podido entrar. Revisa el correo y la contraseña.');
+    } finally {
+      setBusy(false);
+    }
+  }
   return (
-    <main style={{ paddingTop: '12vh' }}>
+    <main className="login-page">
       <div className="logo" style={{ marginBottom: '1rem' }}>M</div>
       <h1>Aprende hoy. Recuérdalo mañana.</h1>
-      <form className="login" onSubmit={(e) => { e.preventDefault(); api.login(email, password).then(onDone, () => setFailed(true)); }}>
-        <input type="email" autoComplete="username" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} required aria-label="Correo" />
-        <input type="password" autoComplete="current-password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required aria-label="Contraseña" />
-        {failed && <p className="banner">No se ha podido entrar. Revisa el correo y la contraseña.</p>}
-        <button type="submit" className="primary">Entrar</button>
+      <form className="login" onSubmit={(e) => { e.preventDefault(); void submit(); }}>
+        <input type="email" autoComplete="username" placeholder="Correo" value={email} onChange={(e) => setEmail(e.target.value)} required aria-label="Correo" disabled={needsOtp} />
+        <input type="password" autoComplete="current-password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)} required aria-label="Contraseña" disabled={needsOtp} />
+        {needsOtp && (
+          <>
+            <p className="muted">Tu cuenta tiene verificación en dos pasos. Escribe el código de 6 cifras de tu app de autenticación.</p>
+            <input inputMode="numeric" autoComplete="one-time-code" placeholder="Código de verificación" value={otp} onChange={(e) => setOtp(e.target.value)} required aria-label="Código de verificación" autoFocus maxLength={8} />
+          </>
+        )}
+        {failed && <p className="banner" role="alert">{failed}</p>}
+        <button type="submit" className="primary" disabled={busy}>{busy ? 'Entrando…' : needsOtp ? 'Verificar y entrar' : 'Entrar'}</button>
+        {needsOtp && <button type="button" className="link" onClick={() => { setNeedsOtp(false); setOtp(''); setFailed(null); }}>Usar otra cuenta</button>}
       </form>
     </main>
   );
