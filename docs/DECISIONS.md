@@ -463,3 +463,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Seguridad:** secretos solo en Coolify; `.dockerignore` excluye `private/`, copias y `.env*`; cookies seguras e
   `IP_TRUST_PROXY` detrás del proxy de Coolify. nginx resuelve Directus por petición para arrancar aunque tarde.
 - **Descartado:** restaurar la copia local (arrastraría cuentas y progreso de prueba).
+
+## D-052 · Revisión global de tarjetas (14-oct-2026)
+- La cadena «puente → término → idea» se muestra siempre en las tarjetas de presentación (con puente o sin él:
+  «TÉRMINO → idea»), también en el paso 2 de los trazados de código. En los pasos de pregunta sigue oculta (daría la
+  respuesta), como en V2.
+- Títulos: se parten en los puntos naturales (tras «/», «_», «.») y su tamaño se limita por la palabra más larga y el
+  ancho de la tarjeta (unidades de contenedor), así que nunca se salen.
+- Comprobación automática: se recorren desde Studio → Probar todas las misiones de los 4 cursos (464 tarjetas) en
+  876×1120 y 390×844, verificando cadena presente, dentro de la ilustración y sin desbordamiento. Resultado: 0 fallos.

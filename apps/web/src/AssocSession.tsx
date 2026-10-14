@@ -1,6 +1,6 @@
 // Modo Asociaciones: historias absurdas en el centro (D-038). Tarjeta → recordar → completar la historia →
 // resultado, en escenas de 5; Arcade sorpresa; rescate inverso; resumen. Teclear solo en repasos.
-import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import React, { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { HintLevel } from '@memora/core';
 import type { ConceptExercise, ConceptPayload } from '@memora/content';
 import {
@@ -28,6 +28,12 @@ import { milestones, type Milestones } from './milestones';
 
 interface Outcome { correct: boolean; hint: number }
 interface Props { payload: SessionPayload; courseId: string; preview?: boolean; staff?: boolean; onExit: () => void; onReload: () => void; /** Abre una sesión de esa misión (al deslizar el resumen). */ onMission?: (key: string) => void }
+
+/** Nombres largos (GENERALIZACIÓN/ESPECIALIZACIÓN, DBMS_OUTPUT.PUT_LINE) se parten tras «/», «_» o «.», no a mitad. */
+function Breakable({ text }: { text: string }) {
+  const parts = text.split(/(?<=[/_.])/);
+  return <>{parts.map((part, i) => <Fragment key={i}>{part}{i < parts.length - 1 && <wbr />}</Fragment>)}</>;
+}
 
 /** Resalta las palabras en MAYÚSCULAS de una escena. */
 function Highlight({ text }: { text: string }) {
@@ -63,7 +69,7 @@ function Art({ unit, small = false, chain = true }: { unit: SessionUnit; small?:
   return (
     <div className={`art ${small ? 'small' : ''}`}>
       <span className="emoji" aria-hidden="true">{a?.emoji ?? '✨'}</span>
-      {chain && a?.cue && <div className="chain">{a.cue}<em>→</em><b>{unitText(unit).toUpperCase()}</b><em>→</em>{unit.type === 'concept' ? unitMeaning(unit) : unitMeaning(unit).toUpperCase()}</div>}
+      {chain && <div className="chain">{a?.cue && <>{a.cue}<em>→</em></>}<b>{unitText(unit).toUpperCase()}</b><em>→</em>{unit.type === 'concept' ? unitMeaning(unit) : unitMeaning(unit).toUpperCase()}</div>}
     </div>
   );
 }
@@ -220,10 +226,10 @@ function TraceCard({ unit, position, total, onNext }: { unit: SessionUnit; posit
     <SwipeCard className="trace" onNext={part === 2 ? onNext : undefined}>
       {unit.place && <p className="place">{unit.place}</p>}
       <p className="eyebrow">ASOCIACIÓN {position}/{total} · {titles[part]}</p>
-      <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 20 ? 'xlong' : unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language} style={{ '--n': Math.max(...unitText(unit).split(/[\s/_.]+/).map((w) => w.length)) } as React.CSSProperties}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
       <div className="steps-dots" aria-hidden="true">{titles.map((t, i) => <i key={t} className={i <= part ? 'on' : ''} />)}</div>
       {part === 0 && <p className="trace-definition">{p.definition}</p>}
-      {part === 1 && <><Art unit={unit} chain={false} small /><p className="scene-text"><Highlight text={a.text} /></p></>}
+      {part === 1 && <><Art unit={unit} small /><p className="scene-text"><Highlight text={a.text} /></p></>}
       {part === 2 && (
         <>
           <pre className="trace-code" lang={unit.language}><code>{(a.trace ?? []).map((l, i) => <span key={i} className="trace-line"><span>{l.code}</span><span className="trace-note">{'// '}<Highlight text={l.note} /></span></span>)}</code></pre>
@@ -244,7 +250,7 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
     <SwipeCard onNext={onNext}>
       {unit.place && <p className="place">{unit.place}</p>}
       <p className="eyebrow">ASOCIACIÓN {position}/{total}</p>
-      <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 20 ? 'xlong' : unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language} style={{ '--n': Math.max(...unitText(unit).split(/[\s/_.]+/).map((w) => w.length)) } as React.CSSProperties}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       <Art unit={unit} />
       {a?.cue ? (

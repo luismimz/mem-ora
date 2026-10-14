@@ -329,3 +329,19 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
   .stage .card:has(.concept) .place, .stage .card:has(.concept) .eyebrow { margin-bottom: .1rem; }
   .stage .concept { font-size: .82rem; gap: .25rem; }
 }
+/* Revisión global (D-052): nombres largos sin espacios (GENERALIZACIÓN/ESPECIALIZACIÓN, DBMS_OUTPUT.PUT_LINE) se parten
+   en vez de salirse de la tarjeta; y la ilustración pequeña de los trazados crece lo necesario para su cadena. */
+.word strong, .bridge, .scene-text, .scene-en, .chain, .concept, .question, .place { overflow-wrap: anywhere; }
+.word strong { hyphens: manual; }
+.stage > .card > .art.small, .stage .trace .art.small { max-height: none; }
+.word strong { overflow-wrap: normal; word-break: normal; } /* se parte en los puntos naturales (wbr) */
+.stage .word.xlong strong { font-size: clamp(1.3rem, 4vh, 2.1rem); letter-spacing: -.02em; }
+.stage .card:has(.concept) .word.xlong strong { font-size: clamp(1.2rem, 3.6vh, 1.9rem); }
+/* El título nunca es más ancho que la tarjeta: su tamaño se limita por la palabra más larga (--n letras) y el ancho
+   de la tarjeta (unidades de contenedor). Último recurso: partir la palabra. */
+.stage > .card { container-type: inline-size; }
+.stage .word strong { font-size: min(clamp(2.2rem, 7vh, 5rem), calc(100cqi / (var(--n, 8) * .66))); overflow-wrap: break-word; }
+.stage .word.long strong { font-size: min(clamp(1.7rem, 5vh, 3.2rem), calc(100cqi / (var(--n, 8) * .66))); }
+.stage .word.xlong strong { font-size: min(clamp(1.3rem, 4vh, 2.1rem), calc(100cqi / (var(--n, 8) * .66))); }
+.stage .card:has(.concept) .word strong { font-size: min(clamp(1.6rem, 5vh, 2.6rem), calc(100cqi / (var(--n, 8) * .66))); }
+.stage .card:has(.concept) .word.long strong, .stage .card:has(.concept) .word.xlong strong { font-size: min(clamp(1.2rem, 3.6vh, 2.2rem), calc(100cqi / (var(--n, 8) * .66))); }
