@@ -406,3 +406,18 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   administración; se comprueba antes de mover nada. Lo que falle se informa por unidad.
 - **Por qué:** en Directus hay que pasar estado a estado y unidad a unidad; con misiones de 15–20 unidades era
   inviable. Y empezar siempre «desde el principio» del curso generaba fricción.
+
+## D-046 · Navegación y orientación (14-oct-2026)
+- **Direcciones propias:** `/` (Inicio), `/perfil`, `/studio`, `/sesion?curso=…&mision=…`, `/preview/:unidad`. El botón
+  «atrás» del navegador y recargar funcionan (la sesión se reanuda), y el título de la pestaña dice dónde estás.
+- **Barra común** en Inicio, Perfil y Studio: el logo vuelve a Inicio, la sección actual se marca y el avatar abre el
+  perfil. Dentro de una sesión hay una barra propia para concentrarse: «← Inicio» (el avance se guarda en cada paso) y la
+  misión y la escena en el centro.
+- **Perfil:** datos, progreso por curso (misiones y unidades), preferencias del dispositivo (curso al entrar y modo por
+  defecto) y «Cerrar sesión», lejos de los botones de uso diario (antes «Salir» estaba junto al nombre).
+- **Al salir de una sesión**, Inicio confirma «Tu avance está guardado. Sigues en la Misión N».
+- **Modos bloqueados:** ya no muestran un aviso lejano; la propia tarjeta explica por qué y se resalta al tocarla.
+- **Vocabulario por materia:** «palabras» en idiomas y «conceptos» en el resto; la ilustración del héroe sale de la
+  materia, no del título. «Empezar aventura» la primera vez, «Continuar» después.
+- **Móvil:** sin desplazamiento lateral (pestañas de curso que no rompían la columna, selector de revisión, animación de
+  entrada de tarjetas).

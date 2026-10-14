@@ -7,7 +7,7 @@ import { AssocSession } from './AssocSession';
 const STATUS: Record<string, string> = { draft: 'borrador', published: 'publicado', archived: 'archivado' };
 const n = (count = 0, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 
-export function Studio({ onExit }: { onExit: () => void }) {
+export function Studio() {
   const [file, setFile] = useState<{ name: string; data: unknown } | null>(null);
   const [result, setResult] = useState<(ImportResult & { checked: boolean }) | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -15,13 +15,13 @@ export function Studio({ onExit }: { onExit: () => void }) {
   const [courses, setCourses] = useState<Array<{ id: string; key: string; title: string; status: string }>>([]);
 
   const [reviewCourse, setReviewCourse] = useState<string>('');
-  const [missions, setMissions] = useState<StudioMission[]>([]);
+  const [missions, setMissions] = useState<StudioMission[] | null>(null);
   const [trying, setTrying] = useState<SessionPayload | null>(null);
   const [approval, setApproval] = useState<Record<string, string>>({});
 
   const loadCourses = () => api.studioCourses().then((list) => { setCourses(list); setReviewCourse((c) => c || list[0]?.id || ''); }).catch(() => setCourses([]));
   useEffect(() => void loadCourses(), []);
-  const loadMissions = (id: string) => (id ? api.studioMissions(id).then(setMissions).catch(() => setMissions([])) : setMissions([]));
+  const loadMissions = (id: string) => { if (!id) return; setMissions(null); void api.studioMissions(id).then(setMissions).catch(() => setMissions([])); };
   useEffect(() => void loadMissions(reviewCourse), [reviewCourse]);
 
   async function tryMission(m: StudioMission) {
@@ -40,6 +40,7 @@ export function Studio({ onExit }: { onExit: () => void }) {
   }
 
   if (trying) return <AssocSession key={trying.state.plan.sessionId} payload={trying} courseId={trying.state.plan.courseId} preview staff onExit={() => setTrying(null)} onReload={() => setTrying(null)} />;
+
 
   async function pick(f: File | undefined) {
     setResult(null);
@@ -76,8 +77,8 @@ export function Studio({ onExit }: { onExit: () => void }) {
   }
 
   return (
-    <div className="studio">
-      <div className="top"><div className="logo">M</div><span className="pill">Studio</span><button type="button" className="link" onClick={onExit}>Volver</button></div>
+    <main className="studio">
+      <header className="page-head"><p className="eyebrow">STUDIO</p><h1>Contenido</h1><p className="muted">Revisa y publica misiones, importa cursos y descarga copias.</p></header>
       <section className="card-panel">
         <h2>Revisar misiones</h2>
         <p className="muted">Prueba cada misión como la verá el alumno (no guarda progreso) y, si está bien, apruébala: se publican sus unidades y asociaciones con tu cuenta, con las mismas comprobaciones que en el panel.</p>
@@ -85,7 +86,8 @@ export function Studio({ onExit }: { onExit: () => void }) {
           {courses.map((c) => <option key={c.id} value={c.id}>{c.title} · {STATUS[c.status] ?? c.status}</option>)}
         </select>
         <ul className="export-list mission-review">
-          {missions.map((m) => (
+          {missions === null && <li className="muted" role="status">Cargando misiones…</li>}
+          {(missions ?? []).map((m) => (
             <li key={m.id}>
               <span><b>{m.title}</b> <small className="muted">· {m.published === m.total ? 'publicada' : `${m.total - m.published} por publicar`}{m.rejected ? ` · ${m.rejected} rechazadas` : ''}</small>
                 {approval[m.id] && <small className="approval">{approval[m.id]}</small>}</span>
@@ -95,7 +97,7 @@ export function Studio({ onExit }: { onExit: () => void }) {
               </span>
             </li>
           ))}
-          {!missions.length && <li className="muted">Este curso no tiene misiones.</li>}
+          {missions?.length === 0 && <li className="muted">Este curso no tiene misiones.</li>}
         </ul>
       </section>
       <section className="card-panel">
@@ -121,6 +123,6 @@ export function Studio({ onExit }: { onExit: () => void }) {
           {courses.map((c) => <li key={c.id}><span>{c.title} <small className="muted">· {STATUS[c.status] ?? c.status}</small></span><button type="button" className="link" onClick={() => void download(c.id, c.key)}>Descargar JSON</button></li>)}
         </ul>
       </section>
-    </div>
+    </main>
   );
 }

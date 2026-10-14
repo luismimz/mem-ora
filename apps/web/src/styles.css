@@ -204,3 +204,41 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .home-grid > * { min-width: 0; }
 .courses { flex-wrap: wrap; } .courses button { white-space: normal; text-align: left; }
 @media (max-width: 899px) { .mission-grid { grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: .6rem; } .mission { min-height: 8rem; padding: .85rem; } }
+
+/* ─── Navegación común (D-046): misma barra en Inicio, Perfil y Studio ─── */
+.topbar { display: flex; align-items: center; gap: .8rem; padding: 1rem 0 .6rem; margin-bottom: .8rem; }
+.topbar .logo { border: 0; cursor: pointer; font: inherit; font-weight: 900; }
+.nav { display: flex; gap: .3rem; flex: 1; }
+.nav-link { border: 0; background: none; font: inherit; font-weight: 700; color: var(--muted); padding: .5rem .8rem; border-radius: 99px; cursor: pointer; }
+.nav-link:hover { color: var(--ink); background: var(--surface-soft); }
+.nav-link.on { color: var(--ink); background: var(--surface-strong); box-shadow: 0 2px 8px rgba(72,54,39,.08); }
+.avatar { display: flex; align-items: center; gap: .5rem; border: 1px solid var(--line); background: var(--surface-strong); border-radius: 99px; padding: .25rem .8rem .25rem .25rem; font: inherit; font-weight: 700; color: var(--ink); cursor: pointer; max-width: 50%; }
+.avatar.on { box-shadow: 0 0 0 2px var(--accent); }
+.avatar-n { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.avatar-i { width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--surface-strong); font-weight: 900; flex-shrink: 0; }
+.avatar-i.big { width: 4rem; height: 4rem; font-size: 1.6rem; }
+.topbar button:focus-visible, .mode:focus-visible, .primary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (max-width: 520px) { .avatar-n { display: none; } .avatar { padding: .25rem; } }
+
+.page-head { margin-bottom: .4rem; } .page-head h1 { margin: .1rem 0 .2rem; }
+.banner.notice { display: flex; align-items: center; justify-content: space-between; gap: .6rem; background: var(--ok-soft); }
+.loading { padding-top: 30vh; text-align: center; color: var(--muted); }
+.hint { margin: .8rem 0 0; font-size: .88rem; color: var(--muted); } .hint .link { padding: 0; font-size: inherit; }
+.mode.nudge { animation: shake .32s ease; box-shadow: 0 0 0 2px var(--accent); }
+.mode[aria-disabled="true"] { cursor: not-allowed; }
+
+/* Perfil */
+.profile { display: grid; gap: 1rem; max-width: 760px; margin: 0 auto; width: 100%; }
+.profile-head { display: flex; align-items: center; gap: 1rem; } .profile-head h1 { margin: 0; font-size: 1.6rem; }
+.progress-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .9rem; } .progress-list .row { display: flex; justify-content: space-between; gap: .6rem; flex-wrap: wrap; margin-bottom: .35rem; }
+.field { display: grid; gap: .3rem; font-weight: 700; font-size: .9rem; }
+.field select, .profile select { font: inherit; padding: .55rem .7rem; border-radius: .7rem; border: 1px solid var(--line); background: var(--surface-soft); color: var(--ink); }
+.danger { justify-self: start; border: 1px solid var(--ko); color: var(--ko); background: none; border-radius: 99px; padding: .6rem 1.1rem; font: inherit; font-weight: 800; cursor: pointer; }
+.danger:hover { background: var(--ko-soft); }
+
+/* Sesión: dónde estás y cómo volver */
+.session-where { display: grid; justify-items: center; text-align: center; min-width: 0; } .session-where b { font-size: .85rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 60vw; }
+.link.back { white-space: nowrap; }
+.banner.review label { display: grid; gap: .3rem; width: 100%; min-width: 0; } .banner.review select { width: 100%; }
+.hero-art .tag { max-width: calc(100% - 1.8rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.app { overflow-x: clip; } /* las tarjetas entran deslizándose: sin barra lateral momentánea */

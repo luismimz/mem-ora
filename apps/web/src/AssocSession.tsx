@@ -127,8 +127,11 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
   return (
     <main className="stage">
       <div className="top">
-        <button type="button" className="link" onClick={onExit}>← Inicio</button>
-        <span className="eyebrow">{preview ? 'VISTA PREVIA' : step ? sceneOf(step) || (step.kind === 'review' ? 'REPASO' : step.kind === 'challenge' ? 'RETO' : '') : ''}</span>
+        <button type="button" className="link back" onClick={onExit} title="Tu avance se guarda en cada paso">← {previewProp ? 'Volver' : 'Inicio'}</button>
+        <span className="session-where">
+          {payload.state.mission && <b>Misión {payload.state.mission.index} · {payload.state.mission.title.replace(/^Misión \d+ · /, '')}</b>}
+          <span className="eyebrow">{preview ? 'VISTA PREVIA' : step ? sceneOf(step) || (step.kind === 'review' ? 'REPASO' : step.kind === 'challenge' ? 'RETO' : step.kind === 'summary' ? 'RESUMEN' : '') : ''}</span>
+        </span>
         <span className="pill">{progress}%</span>
       </div>
       <div className="bar"><i style={{ width: `${progress}%` }} /></div>

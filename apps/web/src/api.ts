@@ -36,6 +36,7 @@ export interface Course {
   id: string;
   key: string;
   title: string;
+  subject?: string | null;
   ui_language: string;
   content_language: string;
   audio_enabled: boolean;
