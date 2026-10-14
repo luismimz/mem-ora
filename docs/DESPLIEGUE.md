@@ -5,8 +5,11 @@ se vuelca desde el Mac con el conector `backend/.env.production` (ignorado por g
 
 ## 1. En Coolify (una vez)
 1. **Nuevo recurso → Docker Compose** desde el repositorio `mem-ora` (rama `main`), archivo `deploy/docker-compose.prod.yml`.
-2. **Dominios:** servicio `web` → `https://memora.luismontalvan.com` (puerto 80); servicio `directus` →
-   `https://studio.luismontalvan.com` (puerto 8055). Coolify gestiona HTTPS.
+2. **Dominios** (en cada servicio del recurso, campo «Domains»), **con el puerto del contenedor al final**:
+   - `web` → `https://memora.luismontalvan.com:80`
+   - `directus` → `https://studio.luismontalvan.com:8055`
+   El puerto no se publica en internet: le dice a Coolify a qué puerto interno enviar el tráfico (HTTPS lo pone él).
+   Si falta, Coolify usa el 80 y Directus responde «no available server».
 3. **Variables de entorno** (secretas; generarlas largas y aleatorias):
    `DB_PASSWORD`, `SECRET`, `ADMIN_TOKEN`, `ADMIN_EMAIL` (tu correo), `ADMIN_PASSWORD`, `DIRECTUS_LICENSE_KEY`.
    Opcional: `STUDIO_URL` (por defecto `https://studio.luismontalvan.com`).
@@ -27,6 +30,13 @@ Se puede repetir sin duplicar: lo que ya existe se omite. Después, revisa y pub
 ## 3. Copias de seguridad
 - El servicio `backup` hace un `pg_dump` diario y guarda 14 días en el volumen `backups`.
 - `pnpm prod:export` guarda en el Mac un JSON de cursos y eventos de alumnos (independiente de Directus).
+
+## Si sale «no available server»
+Es el proxy de Coolify diciendo que no hay un contenedor sano para ese dominio. Revisa, en este orden:
+1. Que cada servicio tenga su dominio con el puerto (paso 2) y que, tras cambiarlo, se haya vuelto a desplegar.
+2. El estado de los contenedores en Coolify: todos «running (healthy)». Si `directus` está reiniciándose, mira sus
+   logs (suele ser `DIRECTUS_LICENSE_KEY` o alguna variable vacía).
+3. Que los registros DNS apunten a la IP del VPS.
 
 ## Notas
 - La licencia de Directus consume una activación en esta instancia.

@@ -21,6 +21,8 @@ services:
     restart: unless-stopped
     depends_on:
       db: { condition: service_healthy }
+    # Puerto que Coolify enruta para studio.luismontalvan.com (en el dominio: https://studio.luismontalvan.com:8055).
+    expose: ["8055"]
     volumes:
       - uploads:/directus/uploads
     environment:
@@ -56,8 +58,8 @@ services:
   web:
     build: { context: .., dockerfile: deploy/web.Dockerfile }
     restart: unless-stopped
-    depends_on:
-      directus: { condition: service_healthy }
+    # Puerto que Coolify enruta para memora.luismontalvan.com. No espera a Directus: nginx lo resuelve al pedirlo.
+    expose: ["80"]
 
   # Copia diaria de la base (antes del H2.4, D-027): se guardan 14 días en el volumen «backups».
   backup:
