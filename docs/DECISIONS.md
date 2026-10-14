@@ -421,3 +421,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   materia, no del título. «Empezar aventura» la primera vez, «Continuar» después.
 - **Móvil:** sin desplazamiento lateral (pestañas de curso que no rompían la columna, selector de revisión, animación de
   entrada de tarjetas).
+
+## D-047 · Sin saltos de diseño y el centro solo para el juego (14-oct-2026)
+- Inicio, Perfil y Studio se alinean arriba (antes Inicio se centraba en vertical y se movía según el contenido) y usan
+  todo el ancho del contenedor, en dos columnas en escritorio. Solo la sesión de juego se centra.
+- Mientras llegan contadores, misión actual y misiones se muestran huecos del mismo tamaño (con brillo suave, sin
+  animación si el sistema pide menos movimiento). Medido con CLS del navegador: Inicio 0,000 (escritorio) y 0,008
+  (móvil); Perfil y Studio 0,000.
+- La sección de misiones aparece desde la primera misión (antes, solo con dos o más).

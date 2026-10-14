@@ -184,7 +184,9 @@ export function App() {
               <div className="hero-art"><span aria-hidden="true">{courseArt(current)}</span><span className="tag">{cleanTitle(current.title).toUpperCase()}</span></div>
               <div className="hero-body">
                 <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>
-                {currentMission ? (
+                {!missions ? (
+                  <><h3 className="hero-mission skeleton-text">&nbsp;</h3><p className="skeleton-text">&nbsp;<br />&nbsp;</p></>
+                ) : currentMission ? (
                   <>
                     <h3 className="hero-mission">Misión {currentMission.index} · {cleanMission(currentMission.title)}</h3>
                     <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}. Los repasos vuelven solos según la curva del olvido.</p>
@@ -194,6 +196,7 @@ export function App() {
               </div>
             </div>
           ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
+          {!ms && current && <div className="meters" aria-hidden="true">{[0, 1].map((i) => <div key={i} className="meter skeleton" />)}</div>}
           {ms && (
             <div className="meters" aria-label="Tu progreso">
               <Meter label={`${words[0]!.toUpperCase()}${words.slice(1)} trabajad${isLanguage(current) ? 'as' : 'os'}`} value={`${ms.words}/${ms.total}`} pct={ms.total ? ms.words / ms.total : 0} />
@@ -220,7 +223,9 @@ export function App() {
           <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>
         </section>
       </div>
-      {missions && missions.missions.length > 1 && <Missions list={missions.missions} current={missions.current} onOpen={(key) => open('associations', key)} />}
+      {current && (missions
+        ? missions.missions.length > 0 && <Missions list={missions.missions} current={missions.current} onOpen={(key) => open('associations', key)} />
+        : <section className="missions" aria-hidden="true"><div className="missions-head"><div><p className="eyebrow">TUS MISIONES</p><h2 className="h2 skeleton-text">&nbsp;</h2></div></div><ol className="mission-grid">{[0, 1, 2].map((i) => <li key={i}><span className="mission skeleton" /></li>)}</ol></section>)}
     </div>
   );
 }
@@ -259,6 +264,7 @@ function Profile({ me, courses, course, mode, staff, onCourse, onMode, onLogout 
   const name = me?.first_name || me?.email?.split('@')[0] || 'Tú';
   return (
     <main className="profile">
+      <div className="profile-col">
       <section className="card-panel profile-head">
         <span className="avatar-i big" aria-hidden="true">{name[0]!.toUpperCase()}</span>
         <div><h1>{name}</h1><p className="muted">{me?.email}{staff ? ' · autoría y revisión' : ''}</p></div>
@@ -278,6 +284,8 @@ function Profile({ me, courses, course, mode, staff, onCourse, onMode, onLogout 
           {!courses.length && <li className="muted">Todavía no tienes cursos.</li>}
         </ul>
       </section>
+      </div>
+      <div className="profile-col">
       <section className="card-panel">
         <h2>Preferencias</h2>
         <p className="muted">Se guardan en este dispositivo. Tu progreso está siempre en tu cuenta.</p>
@@ -292,6 +300,7 @@ function Profile({ me, courses, course, mode, staff, onCourse, onMode, onLogout 
         <h2>Cuenta</h2>
         <button type="button" className="danger" onClick={onLogout}>Cerrar sesión</button>
       </section>
+      </div>
     </main>
   );
 }

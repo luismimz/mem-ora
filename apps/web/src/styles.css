@@ -243,3 +243,27 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .hero-art .tag { max-width: calc(100% - 1.8rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .app { overflow-x: clip; } /* las tarjetas entran deslizándose: sin barra lateral momentánea */
 .login-page { padding-top: 12vh; max-width: 26rem; margin: 0 auto; width: 100%; }
+
+/* ─── Sin saltos (D-047): arriba, no centrado en vertical; el centro de la pantalla es solo para el juego ─── */
+@media (min-width: 900px) {
+  .home { display: block; min-height: 100vh; }
+  .home-grid { flex: none; align-items: start; padding-bottom: 0; }
+  .home-side { padding-top: 2.9rem; }
+}
+/* Huecos reservados mientras llega el contenido: misma altura, sin empujar nada. */
+.skeleton, .skeleton-text { background: linear-gradient(90deg, var(--surface-soft), var(--surface-strong), var(--surface-soft)); background-size: 200% 100%; animation: shimmer 1.4s ease infinite; border-radius: .6rem; color: transparent; }
+.meter.skeleton { min-height: 3.4rem; border: 0; box-shadow: none; }
+.mission.skeleton { display: block; min-height: 8.5rem; border: 0; box-shadow: none; }
+.skeleton-text { display: block; } h2.skeleton-text { width: 10rem; } .hero-mission.skeleton-text { width: 60%; }
+@keyframes shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton, .skeleton-text { animation: none; } }
+
+/* Perfil y Studio: a todo el ancho del contenedor, en dos columnas en escritorio */
+.profile, .studio { max-width: none; margin: 0; }
+.profile-col, .studio-side { display: grid; gap: 1rem; align-content: start; }
+.studio-grid { display: grid; gap: 1rem; }
+@media (min-width: 900px) {
+  .profile { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); align-items: start; gap: 1.4rem; }
+  .studio-grid { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; gap: 1.4rem; }
+}
+.progress-list .row { display: grid; gap: .15rem; } .progress-list .row .muted { min-height: 1.3em; }

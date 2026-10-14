@@ -79,7 +79,8 @@ export function Studio() {
   return (
     <main className="studio">
       <header className="page-head"><p className="eyebrow">STUDIO</p><h1>Contenido</h1><p className="muted">Revisa y publica misiones, importa cursos y descarga copias.</p></header>
-      <section className="card-panel">
+      <div className="studio-grid">
+      <section className="card-panel studio-review">
         <h2>Revisar misiones</h2>
         <p className="muted">Prueba cada misión como la verá el alumno (no guarda progreso) y, si está bien, apruébala: se publican sus unidades y asociaciones con tu cuenta, con las mismas comprobaciones que en el panel.</p>
         <select aria-label="Curso a revisar" value={reviewCourse} onChange={(e) => setReviewCourse(e.target.value)}>
@@ -100,6 +101,7 @@ export function Studio() {
           {missions?.length === 0 && <li className="muted">Este curso no tiene misiones.</li>}
         </ul>
       </section>
+      <div className="studio-side">
       <section className="card-panel">
         <h2>Importar un curso</h2>
         <p className="muted">Sube un archivo JSON con el curso completo. Primero se comprueba; si todo está bien, se crea como <b>borrador</b> para revisarlo y publicarlo en el panel de Studio. Si hay errores no se crea nada.</p>
@@ -123,6 +125,8 @@ export function Studio() {
           {courses.map((c) => <li key={c.id}><span>{c.title} <small className="muted">· {STATUS[c.status] ?? c.status}</small></span><button type="button" className="link" onClick={() => void download(c.id, c.key)}>Descargar JSON</button></li>)}
         </ul>
       </section>
+      </div>
+      </div>
     </main>
   );
 }
