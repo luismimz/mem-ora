@@ -39,8 +39,9 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .card { position: relative; background: var(--surface-strong); border-radius: 1.8rem; box-shadow: var(--shadow); padding: 1.3rem 1.25rem 1.1rem; touch-action: pan-y; user-select: none; transition: transform .25s ease, opacity .25s ease; min-height: 33rem; display: flex; flex-direction: column; }
 .card.enter { animation: enter .32s ease both; }
 @keyframes enter { from { opacity: 0; transform: translateX(40px) rotate(1.5deg); } to { opacity: 1; transform: none; } }
-.card.ok { box-shadow: 0 0 0 3px var(--ok), var(--shadow); } .card.ko { box-shadow: 0 0 0 3px var(--ko), var(--shadow); animation: shake .32s ease; }
+.card.ok { box-shadow: 0 0 0 3px var(--ok), 0 0 28px var(--ok), var(--shadow); animation: approve .45s ease; } .card.ko { box-shadow: 0 0 0 3px var(--ko), var(--shadow); animation: shake .32s ease; }
 @keyframes shake { 25% { transform: translateX(-7px); } 75% { transform: translateX(7px); } }
+@keyframes approve { 0% { transform: scale(1); } 40% { transform: scale(1.025); } 100% { transform: scale(1); } }
 .place { color: var(--muted); font-size: .9rem; margin: 0 0 .9rem; }
 .row { display: flex; justify-content: space-between; align-items: center; gap: .5rem; }
 .word { display: flex; align-items: baseline; flex-wrap: wrap; gap: .2rem .8rem; margin: .4rem 0 .1rem; }
@@ -139,7 +140,7 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .problems { background: var(--ko-soft); border-radius: 12px; padding: 12px; color: var(--ink); }
 .problems p { margin: 0; }
 .problems ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
-.ok { background: var(--ok-soft); border-radius: 12px; padding: 12px; color: var(--ink); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.studio .ok { background: var(--ok-soft); border-radius: 12px; padding: 12px; color: var(--ink); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .export-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .export-list li { display: flex; justify-content: space-between; gap: 10px; align-items: center; border-top: 1px solid var(--line); padding-top: 6px; }
 

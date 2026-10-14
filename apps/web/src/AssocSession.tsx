@@ -162,9 +162,9 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
 
       {step?.kind === 'rescue' && unit && (
         <Choose key={step.id} title={`RESCATE · ${sessionUnits.indexOf(unit.key) + 1}/${sessionUnits.length}`} combo={combo}
-          art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={unit.association?.text ?? unitMeaning(unit)} /><br /><small>{hiddenName(unit)}</small></span>}
+          art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={masked(unit.association?.text ?? unitMeaning(unit), unitText(unit))} /><br /><small>{hiddenName(unit)}</small></span>}
           choices={choicesFor(unitText(unit).toUpperCase(), sessionUnits.map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
-          reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#rescue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
+          reveal={unit} quiet onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#rescue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
       )}
 
       {step?.kind === 'review' && unit && <Review key={step.id} unit={unit} startHint={(step.startHint ?? 0) as HintLevel}
@@ -180,6 +180,9 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
     </main>
   );
 }
+
+/** Oculta la respuesta si la escena o la analogía la nombra («Un atributo static es…» → «Un atributo ___ es…»). */
+const masked = (text: string, answer: string) => (answer ? text.replace(new RegExp(`\\b${answer.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'gi'), '___') : text);
 
 /** Las preguntas dicen «palabra» en idiomas y «concepto» en el resto de materias. */
 const askName = (u: SessionUnit) => (u.type === 'concept' ? '¿Qué concepto es' : '¿Cómo se dice');
@@ -221,7 +224,7 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
   );
 }
 
-function Choose({ title, combo, art, question, choices, reveal, onAnswer, onDone }: { title: string; combo: number; art: ReactNode; question: ReactNode; choices: Choice[]; reveal: SessionUnit; onAnswer: (ok: boolean, ms: number) => void; onDone: (ok: boolean) => void }) {
+function Choose({ title, combo, art, question, choices, reveal, quiet = false, onAnswer, onDone }: { title: string; quiet?: boolean; combo: number; art: ReactNode; question: ReactNode; choices: Choice[]; reveal: SessionUnit; onAnswer: (ok: boolean, ms: number) => void; onDone: (ok: boolean) => void }) {
   const [picked, setPicked] = useState<number | null>(null);
   const t0 = useRef(performance.now());
   const ok = picked !== null && choices[picked]!.correct;
@@ -240,7 +243,7 @@ function Choose({ title, combo, art, question, choices, reveal, onAnswer, onDone
       <div className="question">{question}</div>
       <div className="choices">{choices.map((c, i) => <button type="button" key={c.label} className={`choice ${picked !== null && c.correct ? 'right' : ''} ${picked === i && !c.correct ? 'wrong' : ''}`} onClick={() => pick(i)}>{c.label}</button>)}</div>
       {picked !== null && !ok && <div className="feedback ko"><p>Vuelve a la escena:</p><p className="scene-text"><Highlight text={reveal.association?.text ?? ''} /></p><p>{reveal.association?.cue ? `${reveal.association.cue} → ` : ''}{unitText(reveal).toUpperCase()} · {unitMeaning(reveal)}</p><p style={{ color: 'var(--muted)' }}>Volverá en tu repaso.</p></div>}
-      {ok && <div className="feedback ok">¡CLAC! +{10} XP</div>}
+      {ok && !quiet && <div className="feedback ok">¡CLAC! +{10} XP</div>}
     </SwipeCard>
   );
 }
