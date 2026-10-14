@@ -125,6 +125,14 @@ export interface AssociationRow {
   status: string;
   scene_target?: string | null;
   emoji?: string | null;
+  evidence?: unknown;
+}
+
+/** Líneas del trazado de código (solo eso se envía al alumno de la evidencia). */
+function traceOf(evidence: unknown): Array<{ code: string; note: string }> {
+  const e = typeof evidence === 'string' ? JSON.parse(evidence) : evidence;
+  const lines = e && typeof e === 'object' && Array.isArray((e as { lines?: unknown }).lines) ? (e as { lines: unknown[] }).lines : [];
+  return lines.filter((l): l is { code: string; note: string } => Boolean(l) && typeof (l as { code?: unknown }).code === 'string').map((l) => ({ code: l.code, note: typeof l.note === 'string' ? l.note : '' }));
 }
 
 /** Unidades publicadas listas para la sesión. Solo se usan asociaciones publicadas. */
@@ -142,7 +150,7 @@ export function sessionUnits(units: UnitRow[], skills: SkillRow[], associations:
       version: u.version ?? 0,
       place: u.place ?? null,
       skills: mine.map((s) => ({ key: s.key, kind: s.kind, associationId: s.association && published.has(s.association) ? s.association : null })),
-      association: linked ? { id: linked.id, technique: linked.technique, cue: linked.cue, text: linked.text!, sceneTarget: linked.scene_target ?? null, emoji: linked.emoji ?? null } : null,
+      association: linked ? { id: linked.id, technique: linked.technique, cue: linked.cue, text: linked.text!, sceneTarget: linked.scene_target ?? null, emoji: linked.emoji ?? null, ...(linked.technique === 'code_trace' ? { trace: traceOf(linked.evidence) } : {}) } : null,
     };
   }
   return out;

@@ -73,7 +73,7 @@ export default {
         .select('units.id', 'units.key', 'units.type', 'units.language', 'units.payload', 'units.version', 'units.status', 'modules.title as place');
       const ids = units.map((u) => u.id);
       const skills: SkillRow[] = ids.length ? await db('skills').whereIn('unit', ids).select('id', 'key', 'kind', 'unit', 'association', 'sort') : [];
-      const associations: AssociationRow[] = ids.length ? await db('associations').whereIn('unit', ids).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji') : [];
+      const associations: AssociationRow[] = ids.length ? await db('associations').whereIn('unit', ids).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji', 'evidence') : [];
       const prerequisites = await db('prerequisites').where({ course: course.id }).select('id', 'subject_unit', 'subject_skill', 'requires_unit', 'requires_skill');
       const sUnits = sessionUnits(units, skills, associations, course.content_language);
       const publishedAssoc = new Set(associations.filter((a) => a.status === 'published').map((a) => a.id));
@@ -266,7 +266,7 @@ export default {
       const course = await db('courses').where({ id: unit.course }).first();
       const skills: SkillRow[] = await db('skills').where({ unit: unit.id }).select('id', 'key', 'kind', 'unit', 'association', 'sort');
       // En la vista previa se muestran también asociaciones en borrador, marcadas como tales.
-      const associations: AssociationRow[] = (await db('associations').where({ unit: unit.id }).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji')).map((a: Row) => ({ ...a, status: 'published' }));
+      const associations: AssociationRow[] = (await db('associations').where({ unit: unit.id }).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji', 'evidence')).map((a: Row) => ({ ...a, status: 'published' }));
       const units: Record<string, SessionUnit> = sessionUnits([unit], skills, associations, course?.content_language ?? 'en');
       const items: PlanItem[] = skills.map((s) => ({ skillId: s.key, unitId: unit.key, reason: 'new', priority: 0, recommendedHint: 0, ...(units[unit.key]?.skills.find((x) => x.key === s.key)?.associationId ? { associationId: units[unit.key]!.skills.find((x) => x.key === s.key)!.associationId! } : {}) }));
       const plan = buildAssociationSession({ sessionId: `preview-${unit.id}`, courseId: unit.course, day: 0, createdAt: Date.now(), items, units, knownUnits: [] });

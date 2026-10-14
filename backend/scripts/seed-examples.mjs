@@ -42,6 +42,7 @@ const english = [
 
 // Java: conceptos (D-042). [clave, nombre, idea clave, definición, otras respuestas, ejemplo, qué muestra, no confundir con, asociación]
 const scene = (cue, text, sceneTarget, emoji) => ({ technique: 'absurd_scene', cue, text, scene_target: sceneTarget, emoji });
+const trace = (text, lines, emoji) => ({ technique: 'code_trace', text, emoji, evidence: { lines: lines.map(([code, note]) => ({ code, note })) } });
 const analogy = (cue, text, mapping, breaksWhere, emoji) => ({ technique: 'analogy', cue, text, emoji, evidence: { mapping, breaksWhere } });
 const java = [
   ['class', 'class', 'molde', 'Plantilla que define qué datos y qué comportamiento tendrán los objetos que se creen a partir de ella.', ['clase'], 'public class Dog { }', 'Una clase Perro: el molde de todos los perros.', '≠ objeto: el objeto es lo que sale del molde.',
@@ -59,15 +60,29 @@ const java = [
   ['public', 'public', 'visible para todos', 'Modificador de acceso: se puede usar desde cualquier clase.', ['público'], 'public void bark() { }', 'bark se puede usar desde cualquier clase.', '',
     scene('PÚBLICO', 'Un estadio lleno de PÚBLICO: lo que haces es VISIBLE para todos.', 'A stadium full of PUBLIC: what you do is VISIBLE to everyone.', '🏟️👀')],
   ['override', 'override', 'sobrescribir', 'Redefinir en una clase hija un método heredado, con la misma firma.', ['@Override', 'sobrescritura'], '@Override void bark() { }', 'El hijo sobrescribe el método del padre.', '≠ sobrecarga (overload): mismo nombre, distintos parámetros.',
-    scene('OVEROL', 'Un hijo con OVEROL tacha la receta del padre para SOBRESCRIBIR la suya.', 'A son in OVERALLS crosses out dad’s recipe to OVERRIDE it.', '👨‍🍳✍️')],
+    trace('El PADRE canta «guau»; su HIJO se levanta, TACHA la letra para SOBRESCRIBIR la canción y grita «yip».', [
+      ['class Dog { String sound() { return "guau"; } }', 'el PADRE y su canción'],
+      ['class Puppy extends Dog {', 'el HIJO de la familia'],
+      ['  @Override String sound() { return "yip"; }', 'el HIJO TACHA la letra y grita la suya'],
+      ['}', 'el HIJO ya canta lo suyo'],
+    ], '👨‍🎤✍️')],
   ['polymorphism', 'polymorphism', 'muchas formas', 'Una misma referencia puede apuntar a objetos de distintas clases y cada uno responde a su manera.', ['polimorfismo'], 'Animal a = new Dog();', 'Una variable Animal guarda un Perro.', '',
     scene('POLLO', 'Un POLLO adopta MUCHAS FORMAS: pato, pavo o águila, pero siempre cacarea.', 'A CHICKEN takes MANY FORMS: duck, turkey or eagle, but always clucks.', '🐔🦅')],
   ['interface', 'interface', 'contrato', 'Conjunto de métodos que una clase se compromete a implementar.', ['interfaz'], 'class Dog implements Pet { }', 'Perro cumple el contrato Pet.', '≠ clase abstracta: una clase puede implementar varias interfaces.',
     analogy('enchufe', 'Una interfaz es un ENCHUFE estándar: cualquier aparato que lo cumpla, encaja.', 'forma del enchufe = métodos de la interfaz; aparato = clase que la implementa', 'la interfaz no da corriente: no trae el código, solo lo exige', '🔌📜')],
   ['constructor', 'constructor', 'inicializar', 'Método especial que se ejecuta al crear un objeto para darle sus valores iniciales.', [], 'Dog(String name) { this.name = name; }', 'El constructor inicializa el nombre.', '',
-    scene('CONSTRUCTOR', 'Un CONSTRUCTOR con casco monta cada objeto al nacer para INICIALIZAR sus piezas.', 'A BUILDER in a helmet assembles each object at birth to INITIALIZE it.', '👷🧱')],
+    trace('Cada perro nace en una CAJA vacía; un OBRERO con casco le cose su NOMBRE al collar para INICIALIZAR al perro.', [
+      ['Dog(String name) {', 'llega el OBRERO con casco'],
+      ['  this.name = name;', 'cose el NOMBRE al collar: INICIALIZAR'],
+      ['}', 'el perro sale de la CAJA listo'],
+      ['Dog rex = new Dog("Rex");', 'nace en su CAJA y el OBRERO trabaja'],
+    ], '👷📦')],
   ['static', 'static', 'compartido', 'Pertenece a la clase, no a cada objeto: todos los objetos comparten el mismo valor.', ['estático'], 'static int count;', 'count es compartido por todos los perros.', '≠ atributo normal: cada objeto tiene el suyo.',
-    analogy('pizarra de clase', 'Un atributo static es la PIZARRA del aula: una sola, COMPARTIDA por todos.', 'pizarra = atributo static; alumnos = objetos', 'cualquiera puede borrarla: un cambio afecta a todos a la vez', '🧑‍🏫📋')],
+    trace('En el pueblo hay una sola PIZARRA COMPARTIDA; cada PERRO que nace corre a SUMAR una raya y todos ven el mismo número.', [
+      ['static int count = 0;', 'la PIZARRA del pueblo: una sola, COMPARTIDA'],
+      ['Dog() { count++; }', 'cada PERRO que nace corre a SUMAR una raya'],
+      ['System.out.println(Dog.count);', 'todos miran la misma PIZARRA'],
+    ], '🧑‍🏫🐕')],
 ];
 
 async function makeCourse(key, title, subject, perSession, contentLanguage, moduleNames, rows, audio = true, modes = ['associations', 'grammar', 'arcade', 'chat']) {

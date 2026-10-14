@@ -63,6 +63,14 @@ en MAYÚSCULAS), `cue`, `sceneTarget` (la escena en el idioma del contenido), `e
 - Analogía: `cue` es la cosa cotidiana («molde de galletas»), `scene` la comparación (≤ 25 palabras, pieza clave en
   MAYÚSCULAS) y `evidence` = `mapping` (qué corresponde a qué) y `breaksWhere` (dónde deja de valer). Las dos son
   obligatorias: una analogía sin límite declarado enseña cosas falsas.
+- Trazado de código (solo conceptos): `scene` es una historia absurda y muy visual (≤ 30 palabras, elementos en
+  MAYÚSCULAS) y `evidence.lines` el código, línea a línea (≥ 2), cada una con `note`: el comentario, que debe nombrar
+  en MAYÚSCULAS un elemento de la historia. La tarjeta se recorre en tres toques: definición → historia → código.
+  ```json
+  { "technique": "code_trace", "scene": "En el pueblo hay una sola PIZARRA COMPARTIDA; cada PERRO que nace corre a SUMAR una raya.",
+    "evidence": { "lines": [ { "code": "static int count = 0;", "note": "la PIZARRA del pueblo: una sola" },
+                             { "code": "  Dog() { count++; }", "note": "cada PERRO que nace corre a SUMAR una raya" } ] } }
+  ```
 
 ## Copia completa
 

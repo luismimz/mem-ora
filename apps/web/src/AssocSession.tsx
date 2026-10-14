@@ -202,8 +202,37 @@ function ConceptDetails({ payload, language }: { payload: ConceptPayload; langua
   );
 }
 
+/**
+ * Trazado de código (D-044): la tarjeta se recorre en tres toques. 1) la definición en una frase; 2) la historia absurda;
+ * 3) el código corto con cada línea comentada con un elemento de esa historia.
+ */
+function TraceCard({ unit, position, total, onNext }: { unit: SessionUnit; position: number; total: number; onNext: () => void }) {
+  const [part, setPart] = useState(0);
+  const a = unit.association!;
+  const p = unit.payload as ConceptPayload;
+  const titles = ['1 · LA DEFINICIÓN', '2 · LA HISTORIA', '3 · EL CÓDIGO'];
+  return (
+    <SwipeCard className="trace" onNext={part === 2 ? onNext : undefined}>
+      {unit.place && <p className="place">{unit.place}</p>}
+      <p className="eyebrow">ASOCIACIÓN {position}/{total} · {titles[part]}</p>
+      <div className="word"><strong lang={unit.language}>{unitText(unit).toUpperCase()}</strong><span>{unitMeaning(unit)}</span></div>
+      <div className="steps-dots" aria-hidden="true">{titles.map((t, i) => <i key={t} className={i <= part ? 'on' : ''} />)}</div>
+      {part === 0 && <p className="trace-definition">{p.definition}</p>}
+      {part === 1 && <><Art unit={unit} chain={false} small /><p className="scene-text"><Highlight text={a.text} /></p></>}
+      {part === 2 && (
+        <>
+          <pre className="trace-code" lang={unit.language}><code>{(a.trace ?? []).map((l, i) => <span key={i} className="trace-line"><span>{l.code}</span><span className="trace-note">{'// '}<Highlight text={l.note} /></span></span>)}</code></pre>
+          {p.contrast && <p className="contrast">{p.contrast}</p>}
+        </>
+      )}
+      {part < 2 && <button type="button" className="primary" onClick={() => setPart((x) => x + 1)}>{part === 0 ? 'Ver la historia →' : 'Ver el código →'}</button>}
+    </SwipeCard>
+  );
+}
+
 function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: number; total: number; onNext: () => void }) {
   const a = unit.association;
+  if (a?.technique === 'code_trace' && unit.type === 'concept') return <TraceCard unit={unit} position={position} total={total} onNext={onNext} />;
   const respelling = unit.type === 'term' ? (unit.payload as { pronunciation?: { respelling?: string; ipa?: string } }).pronunciation : undefined;
   useEffect(() => { speak(unitText(unit), unit.language); }, [unit]);
   return (

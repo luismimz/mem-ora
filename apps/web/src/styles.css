@@ -156,3 +156,15 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .order-pool .choice { text-transform: none; font-size: .92rem; padding: .6rem .8rem; min-height: 0; letter-spacing: 0; }
 .concept + .choices, .concept + form { margin-top: .7rem; }
 .challenge .question { font-size: 1.3rem; margin: .5rem 0; }
+
+/* Trazado de código: definición → historia → código comentado */
+.steps-dots { display: flex; gap: .35rem; margin: .2rem 0 .8rem; } .steps-dots i { width: 1.6rem; height: .3rem; border-radius: 1rem; background: var(--line); } .steps-dots i.on { background: var(--accent); }
+.trace-definition { font-size: 1.2rem; font-weight: 700; line-height: 1.45; margin: .4rem 0 1rem; }
+.trace-code { margin: 0 0 .8rem; padding: .8rem .9rem; border-radius: .8rem; background: var(--surface-soft); overflow-x: auto; font-size: .82rem; line-height: 1.5; }
+.trace-line { display: grid; gap: .1rem; padding: .3rem 0; border-bottom: 1px dashed var(--line); } .trace-line:last-child { border-bottom: 0; }
+.trace-note { color: var(--accent-ink); font-family: inherit; white-space: normal; }
+.trace .primary { margin-top: .4rem; }
+.trace .contrast { color: var(--accent-ink); font-weight: 600; margin: 0; }
+.trace-code { white-space: normal; overflow-x: visible; }
+.trace-line > span:first-child { white-space: pre-wrap; overflow-wrap: anywhere; }
+.trace-note mark { background: none; color: var(--accent); font-weight: 800; }

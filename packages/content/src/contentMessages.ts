@@ -18,6 +18,8 @@ const FIELD_ES: Record<string, string> = {
   distractors: 'opciones falsas',
   steps: 'pasos',
   mapping: 'qué corresponde a qué',
+  lines: 'líneas de código',
+  note: 'comentario',
   breaksWhere: 'dónde deja de valer',
   definition: 'definición',
   answers: 'respuestas aceptadas',
@@ -60,7 +62,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -111,11 +113,14 @@ const es: Record<string, Template> = {
   min_items: (p, f) => `${f}: hay ${p.count} y hacen falta al menos ${p.min}.`,
   duplicate_example: (_, f) => `${f}: este ejemplo está repetido.`,
   rule_multiline: (_, f) => `${f}: la regla debe caber en una sola línea.`,
+  code_multiline: (_, f) => `${f}: una línea de código por elemento (sin saltos de línea).`,
   pattern_without_slot: (_, f) => `${f}: al menos una pieza debe ser un hueco («slot») que el alumno rellene.`,
   unknown_unit_type: (p, f) => `${f}: tipo de unidad desconocido. Tipos disponibles: ${p.types}.`,
   analogy_too_long: (p, f) => `${f}: la analogía tiene ${p.words} palabras; el máximo es ${p.max}.`,
   gap_missing: (_p, f) => `${f}: marca el hueco con ___ (tres guiones bajos).`,
   distractor_is_answer: (_p, f) => `${f}: una opción falsa coincide con la respuesta.`,
+  story_too_long: (p, f) => `${f}: la historia tiene ${p.words} palabras; el máximo es ${p.max}.`,
+  note_not_in_story: (_p, f) => `${f}: nombra en MAYÚSCULAS un elemento que aparezca en la historia (así la línea queda atada a ella).`,
   scene_too_long: (p, f) => `${f}: la escena tiene ${p.words} palabras; el máximo es ${p.max}.`,
   scene_without_highlight: (_, f) => `${f}: resalta la pieza clave en MAYÚSCULAS (por ejemplo, «Un BURRO te PIDE PRESTADO el móvil»).`,
   scene_without_cue: (p, f) => `${f}: la escena debe incluir la palabra de apoyo «${p.cue}».`,

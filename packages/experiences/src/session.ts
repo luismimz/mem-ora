@@ -20,6 +20,8 @@ export interface SessionAssociation {
   sceneTarget?: string | null;
   /** Ilustración provisional (emoji) mientras no haya imagen aprobada. */
   emoji?: string | null;
+  /** Trazado de código: líneas comentadas con los elementos de la historia. */
+  trace?: Array<{ code: string; note: string }> | null;
 }
 
 export interface SessionUnit {

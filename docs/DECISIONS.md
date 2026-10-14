@@ -378,3 +378,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Vista previa:** el selector «Revisar paso» también aparece en la vista previa (solo autoría), para ver cada paso.
 - **Riesgo anotado:** con 10 conceptos nuevos la sesión suma 10 retos al final; si resulta larga, limitar los del
   primer día es un ajuste de configuración.
+
+## D-044 · Trazado de código: definición, historia y código comentado (14-oct-2026)
+- **Qué:** técnica `code_trace` (solo conceptos). La tarjeta se recorre en tres toques: 1) la definición en una frase,
+  2) una historia absurda y muy visual, 3) un código corto con cada línea comentada con un elemento de la historia.
+- **Validación:** la historia tiene como máximo 30 palabras y elementos en MAYÚSCULAS; al menos 2 líneas; cada
+  comentario nombra en MAYÚSCULAS un elemento que aparece en la historia (si no, la línea no está atada a ella). El
+  código conserva su sangría. Los datos van en `evidence.lines`, sin columnas nuevas; al alumno solo le llegan las líneas.
+- **Excepción a las 14 palabras** (decisión del usuario, opción 1): solo en esta técnica, anotada en CLAUDE.md. Con
+  14 palabras la historia no da para comentar 3 o 4 líneas.
+- **Rescate:** al acertar ya no hay cuadro de confirmación, solo borde verde con brillo y rebote, y avanza solo. La
+  respuesta se oculta si la escena o la analogía la nombra («Un atributo ___ es…»).
+- **Ejemplo de Java:** static, constructor y override pasan a trazado de código.
