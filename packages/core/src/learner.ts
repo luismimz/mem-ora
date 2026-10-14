@@ -14,7 +14,7 @@ export const LEARNER_SCHEMA_VERSION = 2;
 export interface DayActivity {
   /** Habilidades presentadas por primera vez. */
   introduced: number;
-  /** Habilidades ya practicadas otro día y repasadas hoy (una vez por habilidad y día). */
+  /** Repasos hechos hoy: intentos sobre habilidades ya practicadas y vencidas. */
   reviews: number;
   attempts: number;
   correct: number;
@@ -97,7 +97,8 @@ export function applyAttempt(learner: LearnerState, attempt: Attempt, config: Co
   }
 
   const { dayOriginMs, dayLengthMs } = config.load;
-  const isReview = before.lastAttemptAt !== null && dayOf(before.lastAttemptAt, dayOriginMs, dayLengthMs) < dayOf(attempt.at, dayOriginMs, dayLengthMs);
+  // Es repaso si la habilidad ya se practicó antes y el intento llega después de su vencimiento (también el mismo día).
+  const isReview = before.lastAttemptAt !== null && before.dueAt !== null && attempt.at >= before.dueAt;
   const correct = attempt.correct && attempt.hint < 5;
   return {
     learner: {

@@ -55,6 +55,12 @@ describe('plan del día', () => {
     expect(plan.items.filter((i) => i.reason === 'new')).toHaveLength(1);
   });
 
+  it('lo practicado hoy vuelve el mismo día cuando vence (curva de 1 h y 3 h)', () => {
+    const learner = learn(createLearner('u1'), 2, T0, cfg);
+    expect(planDay({ catalog: catalogOf(5), learner, now: T0 + 10 * 60_000, config: cfg }).items.filter((i) => i.reason === 'review')).toHaveLength(0);
+    expect(planDay({ catalog: catalogOf(5), learner, now: T0 + 4 * 3_600_000, config: cfg }).items.filter((i) => i.reason === 'review')).toHaveLength(2);
+  });
+
   it('prioriza lo más retrasado', () => {
     let learner = learn(createLearner('u1'), 1, T0 - 5 * DAY, cfg, 0);
     learner = learn(learner, 1, T0 - DAY, cfg, 1);

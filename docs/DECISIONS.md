@@ -326,3 +326,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Arcade sorpresa al azar a partir de 20 palabras aprendidas.
 - Espiral: asociaciones → truco → asociaciones → construir frase → frases absurdas en inglés → Arcade sorpresa → más
   gramática; siempre con vocabulario ya aprendido. Secuencias configurables como recetas desde Studio (H4).
+
+## D-039 · Repasos del mismo día, varias sesiones al día y audio por curso (14-oct-2026)
+- **Fallo corregido:** el plan diario descartaba lo practicado hoy, contradiciendo la curva de 1 h y 3 h; tras una
+  sesión la app se quedaba sin nada. Ahora lo vencido vuelve el mismo día (prueba en `planner.test.ts`).
+- **Ritmo:** `new_per_session` limita cada sesión; el tope diario admite 3 sesiones (meta ≈1.000 al mes).
+- **Audio por curso:** `courses.audio_enabled` (idiomas sí; Java no). Sin audio no suena ni se muestran botones.

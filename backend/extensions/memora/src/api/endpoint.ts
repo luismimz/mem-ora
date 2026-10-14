@@ -26,7 +26,8 @@ class HttpError extends Error {
 /** Ritmo del curso: N unidades nuevas por sesión (cada una con unas 3 habilidades). Configuración, no lógica (D-037). */
 function courseConfig(course: Row) {
   const perSession = Math.max(1, Number(course.new_per_session) || 15);
-  return resolveConfig({ load: { newCap: perSession * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 40, totalCap: perSession * 3 + 40 } });
+  // El tope diario admite varias sesiones (meta de ≈1.000 al mes ⇒ 2–3 sesiones al día); cada sesión trae como mucho perSession.
+  return resolveConfig({ load: { newCap: perSession * 3 * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 120, totalCap: perSession * 3 * 3 + 120 } });
 }
 
 export interface SessionState {
@@ -111,7 +112,7 @@ export default {
       const rows = await db('courses')
         .where({ status: 'published' })
         .andWhere((q: any) => q.where({ visibility: 'public' }).orWhere({ owner: userId }))
-        .select('id', 'key', 'title', 'subject', 'ui_language', 'learner_language', 'content_language', 'content_revision');
+        .select('id', 'key', 'title', 'subject', 'ui_language', 'learner_language', 'content_language', 'content_revision', 'audio_enabled', 'new_per_session');
       return { data: rows };
     }));
 
@@ -130,7 +131,7 @@ export default {
       const cfg = courseConfig(course);
       const plan = planDay({ catalog, learner, now, config: cfg });
       const knownUnits = [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
-      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits });
+      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, maxNewUnits: Math.max(1, Number(course.new_per_session) || 15) });
       const state: SessionState = { plan: session, index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
       return { data: { state, units, resumed: false, stats: plan.stats } };

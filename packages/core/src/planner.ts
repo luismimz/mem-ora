@@ -82,7 +82,7 @@ export function planDay(input: { catalog: Catalog; learner: LearnerState; now: n
       const associationDue = association?.dueAt !== null && association?.dueAt !== undefined && association.dueAt <= now;
       return skillDue || associationDue;
     })
-    .filter((x) => x.state.lastAttemptAt === null || dayOf(x.state.lastAttemptAt, load.dayOriginMs, load.dayLengthMs) < day)
+    // Lo practicado hoy también vuelve si ya ha vencido (la curva empieza en 1 h y 3 h).
     .map((x) => ({ ...x, priority: reviewPriority(x.state, now, learner, x.def.associationId, config) }))
     .sort((a, b) => b.priority - a.priority || (a.def.id < b.def.id ? -1 : 1));
 

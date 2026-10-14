@@ -38,6 +38,8 @@ export interface Course {
   title: string;
   ui_language: string;
   content_language: string;
+  audio_enabled: boolean;
+  new_per_session: number;
 }
 export interface SessionState {
   plan: AssocPlan;

@@ -17,7 +17,7 @@ import {
 } from '@memora/experiences';
 import { api, ApiError, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
-import { speak } from './speech';
+import { audioEnabled, speak } from './speech';
 
 interface Outcome { correct: boolean; hint: number }
 interface Props { payload: SessionPayload; courseId: string; preview?: boolean; onExit: () => void; onReload: () => void }
@@ -110,7 +110,7 @@ export function AssocSession({ payload, courseId, preview = false, onExit, onRel
   }
 
   if (!plan.steps.length) {
-    return <main><div className="card enter"><div className="reward"><p className="eyebrow">TODO AL DÍA</p><div className="big">Hoy no hay nada pendiente.</div><p>Vuelve más tarde: tus repasos llegarán según la curva del olvido.</p></div><button type="button" className="primary next" onClick={onExit}>Volver al inicio</button></div></main>;
+    return <main><div className="card enter"><div className="reward"><p className="eyebrow">TODO AL DÍA</p><div className="big">Ahora no hay nada pendiente.</div><p>Has completado lo de esta sesión. Tus repasos volverán según la curva del olvido (1 h, 3 h, 24 h…) y podrás empezar otra sesión de palabras nuevas.</p></div><button type="button" className="primary next" onClick={onExit}>Volver al inicio</button></div></main>;
   }
 
   const progress = Math.round((index / plan.steps.length) * 100);
@@ -172,10 +172,10 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
       <Art unit={unit} />
       {a?.cue ? (
         <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>SUENA A</p><div className="bridge">{a.cue}</div></div>
-          <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button></div>
-      ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>IMAGEN DIRECTA</p><button type="button" className="round" onClick={() => speak(unitText(unit), unit.language)}>🔊</button></div>}
+          {audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>
+      ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>IMAGEN DIRECTA</p>{audioEnabled() && <button type="button" className="round" onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>}
       {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}
-      {a?.sceneTarget && <p className="scene-en" lang={unit.language}>{a.sceneTarget} <button type="button" className="link" aria-label="Escuchar la escena" onClick={() => speak(a.sceneTarget!, unit.language)}>🔊</button></p>}
+      {a?.sceneTarget && <p className="scene-en" lang={unit.language}>{a.sceneTarget} {audioEnabled() && <button type="button" className="link" aria-label="Escuchar la escena" onClick={() => speak(a.sceneTarget!, unit.language)}>🔊</button>}</p>}
     </SwipeCard>
   );
 }

@@ -55,9 +55,9 @@ const java = [
   ['static', 'static', 'compartido', 'STÁ-tik', 'ESTATUA', 'Una ESTATUA en un banco COMPARTIDO por todo el pueblo.', 'A STATUE on a bench SHARED by the whole town.', '🗽🪑', 'static int count;', 'count es compartido por todos los perros.'],
 ];
 
-async function makeCourse(key, title, subject, perSession, contentLanguage, moduleNames, rows) {
+async function makeCourse(key, title, subject, perSession, contentLanguage, moduleNames, rows, audio = true) {
   for (const c of await api('GET', `/items/courses?filter[key][_eq]=${key}&fields=id`)) await api('DELETE', `/items/courses/${c.id}`);
-  const course = await api('POST', '/items/courses', { key, title, subject, status: 'published', visibility: 'public', ui_language: 'es', learner_language: 'es', content_language: contentLanguage, new_per_session: perSession });
+  const course = await api('POST', '/items/courses', { key, title, subject, status: 'published', visibility: 'public', ui_language: 'es', learner_language: 'es', content_language: contentLanguage, new_per_session: perSession, audio_enabled: audio });
   const modules = [];
   for (const [i, name] of moduleNames.entries()) modules.push(await api('POST', '/items/modules', { course: course.id, key: `m${i + 1}`, title: name, sort: i, status: 'published' }));
   for (const [i, [k, text, meaning, respelling, cue, scene, sceneTarget, emoji, ex, tr]] of rows.entries()) {
@@ -75,4 +75,4 @@ async function makeCourse(key, title, subject, perSession, contentLanguage, modu
 
 for (const c of await api('GET', '/items/courses?filter[key][_eq]=demo-h22a&fields=id')) await api('DELETE', `/items/courses/${c.id}`);
 await makeCourse('ejemplo-ingles', 'Inglés · La Casa Viva (ejemplo sin revisar)', 'idioma', 15, 'en', ['Dormitorio', 'Necesitas ayuda en el trabajo', 'La cocina', 'La tienda', 'Más'], english);
-await makeCourse('ejemplo-java', 'Java · Programación orientada a objetos (ejemplo sin revisar)', 'programación', 10, 'en', ['Clases y objetos', 'Herencia y polimorfismo', 'Visibilidad y más'], java);
+await makeCourse('ejemplo-java', 'Java · Programación orientada a objetos (ejemplo sin revisar)', 'programación', 10, 'en', ['Clases y objetos', 'Herencia y polimorfismo', 'Visibilidad y más'], java, false);

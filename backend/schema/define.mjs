@@ -121,6 +121,7 @@ const collections = [
       f.string('license', 'Licencia', { width: 'half', choices: LICENSE_CHOICES }),
       f.json('sources', 'Fuentes', { note: SOURCES_NOTE }),
       f.text('description', 'Descripción'),
+      { field: 'audio_enabled', type: 'boolean', meta: { interface: 'boolean', width: 'half', note: 'Audio de pronunciación (idiomas). Desactívalo en materias donde no aporta (p. ej., Java).', translations: es('Audio activado') }, schema: { is_nullable: false, default_value: true } },
       f.int('new_per_session', 'Unidades nuevas por sesión', { default: 15, note: 'Ritmo del curso: inglés 15 palabras; un temario puede usar menos.' }),
       f.int('content_revision', 'Revisión del contenido', { default: 0, readonly: true, note: 'Sube cada vez que se publica algo del curso (caché sin conexión).' }),
       f.o2m('modules', 'Módulos', { template: '{{title}}' }),

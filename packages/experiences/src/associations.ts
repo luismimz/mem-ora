@@ -65,6 +65,8 @@ export function buildAssociationSession(input: {
   /** Unidades que el alumno ya ha trabajado antes de esta sesión (para el Arcade sorpresa). */
   knownUnits: string[];
   sceneSize?: number;
+  /** Unidades nuevas como máximo en esta sesión (el ritmo del curso). */
+  maxNewUnits?: number;
 }): AssocPlan {
   const { items, units, sessionId } = input;
   const size = input.sceneSize ?? SCENE_SIZE;
@@ -83,7 +85,7 @@ export function buildAssociationSession(input: {
   }
 
   // 2. Escenas de 5 unidades nuevas.
-  const fresh = [...new Set(items.filter((i) => i.reason === 'new').map((i) => i.unitId))].filter((k) => units[k]);
+  const fresh = [...new Set(items.filter((i) => i.reason === 'new').map((i) => i.unitId))].filter((k) => units[k]).slice(0, input.maxNewUnits ?? Infinity);
   const scenes: string[][] = [];
   for (let i = 0; i < fresh.length; i += size) scenes.push(fresh.slice(i, i + size));
   const known = new Set(input.knownUnits);

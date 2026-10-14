@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { setLanguage } from './i18n';
+import { setAudioEnabled } from './speech';
 
 type Mode = 'associations' | 'grammar' | 'arcade' | 'chat';
 type View = { name: 'loading' } | { name: 'login' } | { name: 'home' } | { name: 'session'; course: Course; payload: SessionPayload } | { name: 'preview'; payload: SessionPayload | null; error?: string };
@@ -51,6 +52,7 @@ export function App() {
     const info = MODES.find((m) => m.id === selected)!;
     if (!info.ready) { setError(info.lock ?? 'Próximamente.'); return; }
     setLanguage(c.ui_language);
+    setAudioEnabled(c.audio_enabled !== false);
     setError(null);
     try { setView({ name: 'session', course: c, payload: await api.session(c.id) }); } catch (e) { setError(e instanceof ApiError ? e.message : 'Algo ha fallado.'); }
   }
@@ -74,7 +76,7 @@ export function App() {
           <div className="hero-art"><span aria-hidden="true">{current.content_language === 'en' && current.title.startsWith('Java') ? '☕🧩' : '🏠🗝️'}</span><span className="tag">{current.title.replace(/\s*\(.*\)$/, '').toUpperCase()}</span></div>
           <div className="hero-body">
             <p className="eyebrow">MODO {MODES.find((m) => m.id === mode)!.title.toUpperCase()}</p>
-            <p>Historias absurdas en escenas de 5. Teclear solo llega en los repasos.</p>
+            <p>{current.new_per_session ?? 15} nuevas por sesión, en escenas de 5. Puedes hacer varias sesiones al día; los repasos vuelven según la curva del olvido.</p>
             <button type="button" className="primary" onClick={() => void open(mode)}>Continuar aventura →</button>
           </div>
         </section>
