@@ -35,7 +35,7 @@ Sesión mínima del alumno sobre el núcleo: escuchar, asociar, recuperar sin ve
 Subhitos: H2.0 validador del catálogo y nivel por unidad · H2.1 modelo de datos y administrador · H2.2a sesión con conexión (el servidor recalcula) · H2.2b sincronización y modo sin conexión · H2.3 audio e imágenes · H2.4 despliegue y habitación de 10 palabras. Cada uno con su prueba humana.
 Tubería de audio (normalizador, léxico por idioma, caché por huella, audios normal y lento) y cola de imágenes con tope diario.
 Uso sin conexión (D-022): estudiar sin conexión la sesión de hoy y la de mañana, con contenido, audio e imágenes descargados de antemano; intentos en cola local y envío idempotente al reconectar; el servidor es la fuente de verdad. Prueba en modo avión y en el iPhone del usuario.
-Despliegue en un subdominio propio, con la app actual intacta. Antes del H2.4: script de exportación del contenido y de los eventos de los alumnos a JSON, independiente de Directus, y copia periódica de la base. *(Exportación hecha: `pnpm backend:export`, D-041; el JSON resultante no depende de Directus, aunque el guion lo lee por su API. Falta la copia periódica.)*
+Despliegue en un subdominio propio, con la app actual intacta. Antes del H2.4: script de exportación del contenido y de los eventos de los alumnos a JSON, independiente de Directus, y copia periódica de la base. *(Exportación hecha: `pnpm backend:export` / `pnpm prod:export`, D-041. Copia periódica: servicio `backup` diario en producción, D-051. Guía: `docs/DESPLIEGUE.md`.)*
 Curso «Inglés» con una habitación de 10 palabras cargada solo desde el administrador. Aceptación:
 Crear el curso y la habitación sin escribir código.
 10 palabras en ≤25 minutos (medido); el audio empieza en <300 ms desde caché; sin IA en vivo.

@@ -1,0 +1,85 @@
+# PRODUCCIÓN de Memora en Coolify (H2.4). Secretos solo en las variables de entorno de Coolify, nunca en git.
+# Dominios (se asignan en Coolify): web → memora.luismontalvan.com:80 · directus → studio.luismontalvan.com:8055
+services:
+  db:
+    image: postgres:16.10-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: memora
+      POSTGRES_USER: memora
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Falta DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U memora -d memora"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  directus:
+    build: { context: .., dockerfile: deploy/directus.Dockerfile }
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    volumes:
+      - uploads:/directus/uploads
+    environment:
+      PUBLIC_URL: ${STUDIO_URL:-https://studio.luismontalvan.com}
+      SECRET: ${SECRET:?Falta SECRET}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:?Falta ADMIN_EMAIL}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Falta ADMIN_PASSWORD}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:?Falta ADMIN_TOKEN}
+      DB_CLIENT: pg
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_DATABASE: memora
+      DB_USER: memora
+      DB_PASSWORD: ${DB_PASSWORD}
+      LICENSE_KEY: ${DIRECTUS_LICENSE_KEY:?Falta DIRECTUS_LICENSE_KEY}
+      LICENSE_KEY_MANAGEMENT_ENABLED: "false"
+      TELEMETRY: "true"
+      WEBSOCKETS_ENABLED: "false"
+      # Detrás del proxy de Coolify: la IP real del usuario y cookies seguras (HTTPS).
+      IP_TRUST_PROXY: "true"
+      SESSION_COOKIE_SECURE: "true"
+      SESSION_COOKIE_SAME_SITE: lax
+      REFRESH_TOKEN_COOKIE_SECURE: "true"
+      AUTH_LOGIN_STALL_TIME: "500"
+      USER_INVITE_URL_ALLOW_LIST: ${STUDIO_URL:-https://studio.luismontalvan.com}/admin/accept-invite
+      PASSWORD_RESET_URL_ALLOW_LIST: ${STUDIO_URL:-https://studio.luismontalvan.com}/admin/reset-password
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8055/server/ping || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+
+  web:
+    build: { context: .., dockerfile: deploy/web.Dockerfile }
+    restart: unless-stopped
+    depends_on:
+      directus: { condition: service_healthy }
+
+  # Copia diaria de la base (antes del H2.4, D-027): se guardan 14 días en el volumen «backups».
+  backup:
+    image: postgres:16.10-alpine
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    environment:
+      PGPASSWORD: ${DB_PASSWORD}
+    volumes:
+      - backups:/backups
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        while true; do
+          f=/backups/memora-$$(date +%Y%m%d-%H%M).sql.gz
+          pg_dump -h db -U memora -d memora --no-owner | gzip > $$f && echo "copia $$f"
+          find /backups -name 'memora-*.sql.gz' -mtime +14 -delete
+          sleep 86400
+        done
+
+volumes:
+  pgdata:
+  uploads:
+  backups:

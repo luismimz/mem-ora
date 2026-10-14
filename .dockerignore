@@ -1,0 +1,10 @@
+# Nunca entra en una imagen: dependencias locales, secretos, copias, material privado.
+**/node_modules
+**/dist
+.git
+private
+backend/backups
+backend/.env*
+backend/extensions-dist
+**/.env
+**/.env.*

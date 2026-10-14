@@ -1,0 +1,33 @@
+# Despliegue en producción (Coolify)
+
+Producción = código desde GitHub + base de datos limpia. **En GitHub no hay datos.** El contenido (cursos, misiones)
+se vuelca desde el Mac con el conector `backend/.env.production` (ignorado por git), por la API de producción.
+
+## 1. En Coolify (una vez)
+1. **Nuevo recurso → Docker Compose** desde el repositorio `mem-ora` (rama `main`), archivo `deploy/docker-compose.prod.yml`.
+2. **Dominios:** servicio `web` → `https://memora.luismontalvan.com` (puerto 80); servicio `directus` →
+   `https://studio.luismontalvan.com` (puerto 8055). Coolify gestiona HTTPS.
+3. **Variables de entorno** (secretas; generarlas largas y aleatorias):
+   `DB_PASSWORD`, `SECRET`, `ADMIN_TOKEN`, `ADMIN_EMAIL` (tu correo), `ADMIN_PASSWORD`, `DIRECTUS_LICENSE_KEY`.
+   Opcional: `STUDIO_URL` (por defecto `https://studio.luismontalvan.com`).
+4. **DNS:** registros A de `memora` y `studio` apuntando a la IP del VPS.
+5. **Desplegar.** La primera vez Directus crea las tablas del sistema y tu cuenta de administración.
+6. Entra en `https://studio.luismontalvan.com/admin`, cambia la contraseña si quieres y **activa la verificación en
+   dos pasos (2FA)**.
+
+## 2. Desde el Mac (el conector)
+```bash
+cp backend/env.production.example backend/.env.production   # y pon ADMIN_TOKEN (el mismo de Coolify)
+pnpm prod:schema    # aplica el esquema versionado y apunta la vista previa a la app de producción
+pnpm prod:access    # roles, permisos y ajustes (registro por invitación, panel en español)
+pnpm prod:content   # vuelca los cursos de private/dam/misiones (todo en borrador, privado y a tu nombre)
+```
+Se puede repetir sin duplicar: lo que ya existe se omite. Después, revisa y publica en **Studio → Revisar misiones**.
+
+## 3. Copias de seguridad
+- El servicio `backup` hace un `pg_dump` diario y guarda 14 días en el volumen `backups`.
+- `pnpm prod:export` guarda en el Mac un JSON de cursos y eventos de alumnos (independiente de Directus).
+
+## Notas
+- La licencia de Directus consume una activación en esta instancia.
+- No hay cuentas de prueba en producción. Para más usuarios: invitación desde Studio (registro cerrado).

@@ -453,3 +453,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   el diseño V2: la cadena al pie de la ilustración (mismo margen) y el bloque del puente bajo ella.
 - Lo único nuevo: la cadena se parte en líneas si es larga y la ilustración nunca es más pequeña que su contenido.
 - Lección: ante un desbordamiento, adaptar el elemento, nunca quitarlo ni moverlo sin preguntar.
+
+## D-051 · Producción en Coolify con base limpia y conector de contenido (14-oct-2026)
+- **Qué:** `deploy/docker-compose.prod.yml` con Postgres, Directus (imagen con extensiones y esquema), la app web
+  (nginx sirviendo la PWA y reenviando /api a Directus en el mismo origen) y un servicio de copia diaria (14 días).
+- **Datos:** GitHub solo lleva código. La base de producción nace limpia; el esquema y los permisos se aplican con
+  `pnpm prod:schema` y `pnpm prod:access`, y el contenido se vuelca con `pnpm prod:content` desde el Mac, usando
+  `backend/.env.production` (ignorado por git). Repetible sin duplicar. Sin cuentas de prueba.
+- **Seguridad:** secretos solo en Coolify; `.dockerignore` excluye `private/`, copias y `.env*`; cookies seguras e
+  `IP_TRUST_PROXY` detrás del proxy de Coolify. nginx resuelve Directus por petición para arrancar aunque tarde.
+- **Descartado:** restaurar la copia local (arrastraría cuentas y progreso de prueba).
