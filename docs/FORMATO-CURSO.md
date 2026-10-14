@@ -38,8 +38,18 @@ Si algo falla a mitad de la creación, se borra lo creado: no quedan cursos a me
 
 `units[]` de tipo `pattern` (estructura): `goal`, `rule`, `pieces[]`, `examples[]`, `pitfalls[]`.
 
-`association` (opcional): `technique` (`absurd_scene` o `phonetic_bridge`), `scene` (máximo 14 palabras, pieza clave
-en MAYÚSCULAS), `cue`, `sceneTarget` (la escena en el idioma del contenido), `emoji`, `evidence` (puente fonético).
+`units[]` de tipo `concept` (Java, redes, temarios…): `name` (lo que se recuerda: «class»), `gist` (idea clave
+corta, ≤ 60 caracteres: «molde»; la usan la historia y los juegos), `definition` (completa, en la tarjeta),
+`examples[]` (`text` —código, caso, cifra— y `explanation` opcional; **sin traducción**) y, opcionales,
+`answers` (otras respuestas válidas al repasar: «clase»), `contrast` (con qué no confundirlo) y `notes`.
+
+`association` (opcional): `technique` (`absurd_scene`, `phonetic_bridge` solo en términos, o `analogy` en conceptos y patrones), `scene` (máximo 14 palabras, pieza clave
+en MAYÚSCULAS), `cue`, `sceneTarget` (la escena en el idioma del contenido), `emoji`, `evidence`.
+
+- Puente fonético: `evidence` = `familiarMeaning`, `soundRelation`, `differences`.
+- Analogía: `cue` es la cosa cotidiana («molde de galletas»), `scene` la comparación (≤ 25 palabras, pieza clave en
+  MAYÚSCULAS) y `evidence` = `mapping` (qué corresponde a qué) y `breaksWhere` (dónde deja de valer). Las dos son
+  obligatorias: una analogía sin límite declarado enseña cosas falsas.
 
 ## Copia completa
 

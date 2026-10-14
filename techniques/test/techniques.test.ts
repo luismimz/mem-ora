@@ -37,4 +37,14 @@ describe('técnicas', () => {
     const [problem] = validateAssociation({ ...bridge, text: 'Un burro te pide prestado el móvil.' }, 'term');
     expect(describeContentIssue(problem!)).toMatch(/^Texto: resalta la pieza clave en MAYÚSCULAS/);
   });
+
+  it('analogía para conceptos: cotidiana, breve, con correspondencia y límite', () => {
+    const molde = { technique: 'analogy', cue: 'molde de galletas', text: 'Una clase es un MOLDE: con él haces muchas galletas (objetos) iguales.',
+      evidence: { mapping: 'molde = clase; galleta = objeto', breaksWhere: 'cada objeto puede cambiar sus datos; una galleta no' } };
+    expect(validateAssociation(molde, 'concept')).toEqual([]);
+    expect(codes({ ...molde, evidence: { mapping: 'molde = clase' } }, 'concept')).toContain('required@evidence.breaksWhere');
+    expect(codes({ ...molde, text: 'Una clase es un MOLDE ' + 'muy '.repeat(25) }, 'concept')).toContain('analogy_too_long@text');
+    expect(codes(molde, 'term')).toEqual(['technique_not_for_unit_type@technique']);
+    expect(codes({ technique: 'absurd_scene', text: 'Una fábrica de MOLDES escupe perros iguales.' }, 'concept')).toEqual([]);
+  });
 });

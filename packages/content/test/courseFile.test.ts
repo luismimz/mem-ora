@@ -33,3 +33,22 @@ describe('archivo de curso', () => {
     expect(validateCourseFile({ schemaVersion: 1, course: file.course }).map((i) => i.code)).toContain('required');
   });
 });
+
+describe('conceptos (materias que no son idiomas)', () => {
+  const concept = { key: 'class', type: 'concept', name: 'class', gist: 'molde de objetos', definition: 'Plantilla que define datos y comportamiento; de ella se crean objetos.', answers: ['clase'],
+    examples: [{ text: 'public class Perro { }', explanation: 'Declara el molde Perro.' }], contrast: '≠ objeto: el objeto sale del molde.' };
+  const javaFile = { schemaVersion: 1, course: { key: 'java', title: 'Java', contentLanguage: 'en', audio: false, modes: ['associations', 'arcade'] }, modules: [{ key: 'm1', title: 'Clases', units: [concept] }] };
+
+  it('un concepto no necesita traducción en los ejemplos', () => {
+    expect(validateCourseFile(javaFile)).toEqual([]);
+    expect(unitPayload(concept as never)).toMatchObject({ name: 'class', gist: 'molde de objetos', answers: ['clase'] });
+  });
+
+  it('sin idea clave ni definición se explica', () => {
+    const bad = JSON.parse(JSON.stringify(javaFile));
+    delete bad.modules[0].units[0].gist;
+    bad.modules[0].units[0].definition = '';
+    const msgs = validateCourseFile(bad).map((i) => describeContentIssue(i));
+    expect(msgs).toEqual(expect.arrayContaining(['Módulo 1 › Unidad 1 › idea clave: es obligatorio.', 'Módulo 1 › Unidad 1 › definición: es obligatorio.']));
+  });
+});

@@ -2,7 +2,7 @@
 // nuevas + cierre con rescate inverso. Sin teclear en la primera exposición; teclear solo en los repasos, con pistas.
 // Agnóstico de la materia: funciona con palabras de un idioma o con conceptos de Java.
 import type { ExerciseFormat, HintLevel, PlanItem } from '@memora/core';
-import type { Example, PatternPayload, TermPayload } from '@memora/content';
+import type { ConceptPayload, PatternPayload, TermPayload } from '@memora/content';
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
@@ -110,15 +110,22 @@ export function buildAssociationSession(input: {
 
 // ─── Lo que se muestra en cada paso ─────────────────────────────────────────────────────────────────────
 
-/** Texto principal de la unidad: la palabra (term) o la pieza fija (patrón). */
+/** Texto principal de la unidad: la palabra (term), el nombre (concepto) o la pieza fija (patrón). */
 export function unitText(u: SessionUnit): string {
+  if (u.type === 'concept') return (u.payload as ConceptPayload).name;
   return u.type === 'term' ? (u.payload as TermPayload).text : (u.payload as PatternPayload).pieces.filter((p) => p.role === 'fixed').map((p) => p.text).join(' ');
 }
+/** Lo que significa, en corto: el significado (term), la idea clave (concepto) o la meta (patrón). */
 export function unitMeaning(u: SessionUnit): string {
+  if (u.type === 'concept') return (u.payload as ConceptPayload).gist;
   return u.type === 'term' ? (u.payload as TermPayload).meaning : (u.payload as PatternPayload).goal;
 }
-export function unitExample(u: SessionUnit): Example | undefined {
+export function unitExample(u: SessionUnit): { text: string; translation?: string; explanation?: string } | undefined {
   return u.payload.examples[0];
+}
+/** Respuestas que se dan por buenas al recordar la unidad (el nombre y, en conceptos, sus alternativas). */
+export function acceptedAnswers(u: SessionUnit): string[] {
+  return [unitText(u), ...(u.type === 'concept' ? ((u.payload as ConceptPayload).answers ?? []) : [])];
 }
 
 export interface Choice {
@@ -165,5 +172,5 @@ export interface AssocOutcome {
 /** Corrige un repaso tecleado. */
 export function gradeReview(u: SessionUnit, answer: string, startHint: HintLevel, hintUsed: HintLevel, revealed: boolean): AssocOutcome {
   const hint = (revealed ? 5 : Math.max(startHint, hintUsed)) as HintLevel;
-  return { correct: hint < 5 && sameAnswer(answer, unitText(u)), format: hint > 0 ? 'recall_cued' : 'recall_unaided', hint };
+  return { correct: hint < 5 && acceptedAnswers(u).some((a) => sameAnswer(answer, a)), format: hint > 0 ? 'recall_cued' : 'recall_unaided', hint };
 }

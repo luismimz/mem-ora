@@ -111,6 +111,7 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
   .stage .word span { font-size: 1.7rem; }
   .stage .ipa { font-size: 1.15rem; }
   .stage .art { min-height: 14rem; } .stage .art .emoji { font-size: 6rem; } .stage .art.small { min-height: 11rem; } .stage .art.small .emoji { font-size: 4.5rem; }
+  .stage .art:has(~ .concept) { min-height: 10rem; } .stage .art:has(~ .concept) .emoji { font-size: 4.5rem; }
   .stage .chain { font-size: 1.1rem; padding: .55rem 1.3rem; }
   .stage .sounds .bridge { font-size: 2.8rem; }
   .stage .scene-text { font-size: 1.5rem; }
@@ -141,3 +142,9 @@ h1 { font-size: 1.85rem; letter-spacing: -.03em; margin: .2rem 0 .8rem; line-hei
 .ok { background: var(--ok-soft); border-radius: 12px; padding: 12px; color: var(--ink); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .export-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
 .export-list li { display: flex; justify-content: space-between; gap: 10px; align-items: center; border-top: 1px solid var(--line); padding-top: 6px; }
+
+/* Conceptos (materias que no son idiomas) */
+.concept { display: grid; gap: .4rem; text-align: left; font-size: .92rem; }
+.concept p { margin: 0; }
+.concept pre { margin: 0; padding: .6rem .75rem; border-radius: .7rem; background: var(--surface-soft); overflow-x: auto; font-size: .82rem; }
+.concept .contrast { color: var(--accent-ink); font-weight: 600; }

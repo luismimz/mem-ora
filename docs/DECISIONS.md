@@ -352,3 +352,17 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Permiso nuevo:** el rol Autor puede crear cursos (antes solo leerlos), coherente con la regla 3. El propietario lo
   pone el gancho.
 - **Exportación:** incluye borradores (es una copia de contenido); excluye unidades obsoletas y asociaciones rechazadas.
+
+## D-042 · Conceptos y analogía para materias que no son idiomas (14-oct-2026)
+- **Qué:** tipo de unidad `concept` (`name`, `gist`, `definition`, `answers`, `examples` sin traducción, `contrast`) y
+  técnica `analogy` (cosa cotidiana + comparación ≤ 25 palabras + evidencia `mapping`/`breaksWhere`). La escena absurda
+  también vale para conceptos. El ejemplo de Java pasa a conceptos (3 con analogía).
+- **Por qué:** `term` exigía traducción en los ejemplos y comparaba el repaso con un solo texto exacto; en Java eso
+  forzaba el contenido. `gist` (idea clave corta) permite que historia, Arcade y rescate funcionen igual que con palabras
+  sin textos largos en mayúsculas; la definición completa se ve en la tarjeta.
+- **Habilidades del concepto:** solo `recall` (lleva la asociación). Producir y aplicar llegarán con sus ejercicios; una
+  habilidad que la sesión no practica dejaría la unidad sin poder llegar a «aprendida».
+- **Idiomas intactos:** `term` y `pattern` no cambian; los textos de la app solo cambian para `concept`
+  («¿Qué concepto es…?», «SE PARECE A»). Esquema: solo se añaden opciones a `units.type` y `associations.technique`
+  (instantánea aplicada con copia previa).
+- **Descartado:** reutilizar `term` con la traducción opcional (mezclaba reglas de idiomas y de conceptos en un validador).

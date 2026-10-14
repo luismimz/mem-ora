@@ -39,7 +39,7 @@ function checkScene(issues: ContentIssue[], text: unknown): void {
 
 const absurdScene: Technique = {
   id: 'absurd_scene',
-  unitTypes: ['term', 'pattern'],
+  unitTypes: ['term', 'pattern', 'concept'],
   evidenceFields: [],
   reviewChecklist: ['review_scene_visual_action', 'review_scene_shows_meaning'],
   validate(input) {
@@ -76,7 +76,40 @@ const phoneticBridge: Technique = {
   },
 };
 
-export const TECHNIQUES: Record<string, Technique> = { [absurdScene.id]: absurdScene, [phoneticBridge.id]: phoneticBridge };
+/** Máximo de palabras de una analogía: es una explicación breve, no una escena. */
+export const ANALOGY_MAX_WORDS = 25;
+const ANALOGY_EVIDENCE = ['mapping', 'breaksWhere'] as const;
+
+/**
+ * Analogía: el concepto se parece a algo cotidiano («una clase es un MOLDE de galletas»). Exige decir qué corresponde a
+ * qué y dónde deja de valer la comparación, para que no enseñe algo falso.
+ */
+const analogy: Technique = {
+  id: 'analogy',
+  unitTypes: ['concept', 'pattern'],
+  evidenceFields: ANALOGY_EVIDENCE,
+  reviewChecklist: ['review_analogy_familiar', 'review_analogy_mapping_true', 'review_analogy_limit_stated'],
+  validate(input) {
+    const issues: ContentIssue[] = [];
+    checkText(issues, input.cue, 'cue', { max: 60 });
+    checkText(issues, input.text, 'text', { max: 240 });
+    if (typeof input.text === 'string' && input.text.trim()) {
+      const words = wordCount(input.text);
+      if (words > ANALOGY_MAX_WORDS) issues.push(issue('analogy_too_long', 'text', { words, max: ANALOGY_MAX_WORDS }));
+      if (!hasHighlight(input.text)) issues.push(issue('scene_without_highlight', 'text'));
+    }
+    if (!isRecord(input.evidence)) {
+      issues.push(issue(input.evidence === undefined || input.evidence === null ? 'required' : 'not_object', 'evidence'));
+      return issues;
+    }
+    checkUnknownFields(issues, input.evidence, 'evidence', ANALOGY_EVIDENCE);
+    checkText(issues, input.evidence.mapping, 'evidence.mapping', { max: 300 });
+    checkText(issues, input.evidence.breaksWhere, 'evidence.breaksWhere', { max: 300 });
+    return issues;
+  },
+};
+
+export const TECHNIQUES: Record<string, Technique> = { [absurdScene.id]: absurdScene, [phoneticBridge.id]: phoneticBridge, [analogy.id]: analogy };
 
 /** Problemas de una asociación para una unidad de cierto tipo. */
 export function validateAssociation(input: AssociationInput, unitType: string): ContentIssue[] {

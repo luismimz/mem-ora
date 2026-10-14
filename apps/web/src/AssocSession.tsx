@@ -2,6 +2,7 @@
 // resultado, en escenas de 5; Arcade sorpresa; rescate inverso; resumen. Teclear solo en repasos.
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { HintLevel } from '@memora/core';
+import type { ConceptPayload } from '@memora/content';
 import {
   choicesFor,
   gradeReview,
@@ -141,7 +142,7 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
 
       {step?.kind === 'recall' && unit && (
         <Choose key={step.id} title={`RECUERDA · ${plan.scenes[step.scene]!.indexOf(unit.key) + 1}/${plan.scenes[step.scene]!.length}`} combo={combo}
-          art={<Art unit={unit} chain={false} />} question={<>¿Cómo se dice <em>{unitMeaning(unit)}</em>?</>}
+          art={<Art unit={unit} chain={false} />} question={<>{askName(unit)} <em>{unitMeaning(unit)}</em>?</>}
           choices={choicesFor(unitText(unit).toUpperCase(), plan.scenes[step.scene]!.map((k) => unitText(units[k]!).toUpperCase()), step.id)}
           reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#recall`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
       )}
@@ -156,7 +157,7 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
 
       {step?.kind === 'rescue' && unit && (
         <Choose key={step.id} title={`RESCATE · ${sessionUnits.indexOf(unit.key) + 1}/${sessionUnits.length}`} combo={combo}
-          art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={unit.association?.text ?? unitMeaning(unit)} /><br /><small>¿Qué palabra esconde esta escena?</small></span>}
+          art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={unit.association?.text ?? unitMeaning(unit)} /><br /><small>{hiddenName(unit)}</small></span>}
           choices={choicesFor(unitText(unit).toUpperCase(), sessionUnits.map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
           reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#rescue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
       )}
@@ -166,6 +167,23 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
 
       {step?.kind === 'summary' && <Summary plan={plan} outcomes={outcomes} units={units} xp={xp} minutes={Math.max(1, Math.round((Date.now() - startedAt.current) / 60000))} preview={preview} courseId={courseId} onExit={onExit} />}
     </main>
+  );
+}
+
+/** Concepto: definición, un ejemplo (código o caso) y con qué no confundirlo. */
+/** Las preguntas dicen «palabra» en idiomas y «concepto» en el resto de materias. */
+const askName = (u: SessionUnit) => (u.type === 'concept' ? '¿Qué concepto es' : '¿Cómo se dice');
+const hiddenName = (u: SessionUnit) => (u.type === 'concept' ? '¿Qué concepto esconde?' : '¿Qué palabra esconde esta escena?');
+
+function ConceptDetails({ payload, language }: { payload: ConceptPayload; language: string }) {
+  const ex = payload.examples[0];
+  return (
+    <div className="concept">
+      <p>{payload.definition}</p>
+      {ex && <pre lang={language}><code>{ex.text}</code></pre>}
+      {ex?.explanation && <p className="muted">{ex.explanation}</p>}
+      {payload.contrast && <p className="contrast">{payload.contrast}</p>}
+    </div>
   );
 }
 
@@ -181,11 +199,12 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       <Art unit={unit} />
       {a?.cue ? (
-        <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>SUENA A</p><div className="bridge">{a.cue}</div></div>
+        <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>{a.technique === 'analogy' ? 'SE PARECE A' : 'SUENA A'}</p><div className="bridge">{a.cue}</div></div>
           {audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>
-      ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>IMAGEN DIRECTA</p>{audioEnabled() && <button type="button" className="round" onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>}
+      ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>{unit.type === 'concept' ? 'IMAGEN' : 'IMAGEN DIRECTA'}</p>{audioEnabled() && <button type="button" className="round" onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>}
       {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}
       {a?.sceneTarget && <p className="scene-en" lang={unit.language}>{a.sceneTarget} {audioEnabled() && <button type="button" className="link" aria-label="Escuchar la escena" onClick={() => speak(a.sceneTarget!, unit.language)}>🔊</button>}</p>}
+      {unit.type === 'concept' && <ConceptDetails payload={unit.payload as ConceptPayload} language={unit.language} />}
     </SwipeCard>
   );
 }
@@ -273,7 +292,7 @@ function Arcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; seed:
       <div className="row"><p className="eyebrow">ARCADE · {i + 1}/{units.length}</p><span className="combo hot">{score} PTS</span></div>
       <div className="timer"><i style={{ width: `${(left / 5) * 100}%` }} /></div>
       <Art unit={u} small chain={false} />
-      <div className="question">{inverse ? <>¿Qué significa <em>{unitText(u)}</em>?</> : <>¿Qué palabra esconde esta escena?</>}</div>
+      <div className="question">{inverse ? <>¿Qué significa <em>{unitText(u)}</em>?</> : <>{hiddenName(u)}</>}</div>
       <div className="choices">{choices.map((c, k) => <button type="button" key={c.label} className={`choice ${picked !== null && c.correct ? 'right' : ''} ${picked === k && !c.correct ? 'wrong' : ''}`} onClick={() => answer(k)}>{c.label}</button>)}</div>
     </div>
   );
@@ -294,7 +313,7 @@ function Review({ unit, startHint, onAnswer, onDone }: { unit: SessionUnit; star
   return (
     <SwipeCard className={result ? (result.ok ? 'ok' : 'ko') : ''} onNext={result ? () => onDone(result.ok, result.hint) : undefined} label="Seguir">
       <p className="eyebrow">REPASO</p>
-      <div className="question">¿Cómo se dice <em>{unitMeaning(unit)}</em>?</div>
+      <div className="question">{askName(unit)} <em>{unitMeaning(unit)}</em>?</div>
       <form onSubmit={(e) => { e.preventDefault(); if (!result) check(); }}>
         <input className="answer-input" lang={unit.language} autoFocus autoCapitalize="off" autoComplete="off" spellCheck={false} value={text} disabled={Boolean(result)} onChange={(e) => setText(e.target.value)} aria-label="Tu respuesta" />
         {!result && <div className="actions"><button type="submit" className="go" disabled={!text.trim()}>Comprobar</button><button type="button" disabled={hint >= 4} onClick={() => setHint((h) => Math.min(4, h + 1) as HintLevel)}>💡 Pista</button><button type="button" onClick={() => check(true)}>Ver</button></div>}

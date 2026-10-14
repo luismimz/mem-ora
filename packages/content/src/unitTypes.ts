@@ -1,11 +1,12 @@
 // Tipos de conocimiento con su esquema de `payload`, su validador y sus habilidades por defecto.
-// El H2 solo necesita `term` y `pattern`; añadir un tipo es el único cambio que puede requerir código (regla 3).
+// `term` y `pattern` (idiomas) y `concept` (cualquier materia: Java, redes, temarios). Añadir un tipo es el único cambio
+// que puede requerir código (regla 3).
 // Los campos de texto van en el idioma que declara el curso: `text` en el del contenido; `meaning` y
 // `translation`, en el del alumno.
 import type { SkillKind } from '@memora/core';
 import { checkChoice, checkText, checkUnknownFields, isRecord, issue, type ContentIssue } from './issues';
 
-export const UNIT_TYPES = ['term', 'pattern'] as const;
+export const UNIT_TYPES = ['term', 'pattern', 'concept'] as const;
 export type UnitType = (typeof UNIT_TYPES)[number];
 
 export const TERM_FORMS = ['word', 'chunk', 'phrasal_verb', 'expression'] as const;
@@ -45,11 +46,38 @@ export interface PatternPayload {
   pitfalls?: string[];
 }
 
+export interface ConceptExample {
+  /** Ejemplo: código, caso, cifra… */
+  text: string;
+  /** Qué muestra el ejemplo (opcional: un concepto no tiene «traducción»). */
+  explanation?: string;
+  source?: string;
+}
+
+/** Concepto de cualquier materia: «class», «subred», «TCP». */
+export interface ConceptPayload {
+  /** Nombre que el alumno debe recordar. */
+  name: string;
+  /** La idea en pocas palabras («molde para crear objetos»): la usan la historia y los juegos. */
+  gist: string;
+  /** Definición completa, en la tarjeta. */
+  definition: string;
+  /** Otras respuestas que se dan por buenas al recordar el nombre («clase», «Class»). */
+  answers?: string[];
+  examples: ConceptExample[];
+  /** Con qué no confundirlo («≠ objeto: el objeto es lo que sale del molde»). */
+  contrast?: string;
+  notes?: string;
+}
+
 export const PAYLOAD_LIMITS = {
   termText: 80,
   meaning: 120,
   exampleText: 160,
   ruleLength: 140,
+  conceptName: 80,
+  gist: 60,
+  definition: 400,
   patternMinExamples: 3,
   patternMinPieces: 2,
 } as const;
@@ -121,7 +149,34 @@ function validatePattern(p: Record<string, unknown>): ContentIssue[] {
   return issues;
 }
 
-const VALIDATORS: Record<UnitType, (p: Record<string, unknown>) => ContentIssue[]> = { term: validateTerm, pattern: validatePattern };
+function validateConcept(p: Record<string, unknown>): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes']);
+  checkText(issues, p.name, 'name', { max: PAYLOAD_LIMITS.conceptName });
+  checkText(issues, p.gist, 'gist', { max: PAYLOAD_LIMITS.gist });
+  checkText(issues, p.definition, 'definition', { max: PAYLOAD_LIMITS.definition });
+  checkText(issues, p.contrast, 'contrast', { required: false, max: 200 });
+  checkText(issues, p.notes, 'notes', { required: false, max: 500 });
+  if (p.answers !== undefined) {
+    if (!Array.isArray(p.answers)) issues.push(issue('not_list', 'answers'));
+    else p.answers.forEach((a, i) => checkText(issues, a, `answers.${i}`, { max: PAYLOAD_LIMITS.conceptName }));
+  }
+  if (!Array.isArray(p.examples)) issues.push(issue(p.examples === undefined ? 'required' : 'not_list', 'examples'));
+  else {
+    if (p.examples.length < 1) issues.push(issue('min_items', 'examples', { min: 1, count: 0 }));
+    p.examples.forEach((ex, i) => {
+      const path = `examples.${i}`;
+      if (!isRecord(ex)) return void issues.push(issue('not_object', path));
+      checkUnknownFields(issues, ex, path, ['text', 'explanation', 'source']);
+      checkText(issues, ex.text, `${path}.text`, { max: 600 });
+      checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 200 });
+      checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });
+    });
+  }
+  return issues;
+}
+
+const VALIDATORS: Record<UnitType, (p: Record<string, unknown>) => ContentIssue[]> = { term: validateTerm, pattern: validatePattern, concept: validateConcept };
 
 /** Problemas del `payload` de una unidad según su tipo. Vacío si es válido. */
 export function validateUnitPayload(type: unknown, payload: unknown): ContentIssue[] {
@@ -143,10 +198,13 @@ export const DEFAULT_SKILLS: Record<UnitType, Array<{ suffix: string; kind: Skil
     { suffix: 'recall', kind: 'recall', carriesAssociation: true },
     { suffix: 'produce', kind: 'produce' },
   ],
+  // Concepto: recordar el nombre a partir de la idea. Producir o aplicar llegarán con sus ejercicios (código, casos).
+  concept: [{ suffix: 'recall', kind: 'recall', carriesAssociation: true }],
 };
 
 /** Plantilla vacía para empezar a escribir una unidad desde el administrador. */
-export function emptyPayload(type: UnitType): TermPayload | PatternPayload {
+export function emptyPayload(type: UnitType): TermPayload | PatternPayload | ConceptPayload {
+  if (type === 'concept') return { name: '', gist: '', definition: '', examples: [{ text: '' }] };
   return type === 'term'
     ? { form: 'word', text: '', meaning: '', examples: [{ text: '', translation: '' }] }
     : { goal: '', rule: '', pieces: [{ text: '', role: 'fixed' }, { text: '', role: 'slot' }], examples: [{ text: '', translation: '' }, { text: '', translation: '' }, { text: '', translation: '' }] };

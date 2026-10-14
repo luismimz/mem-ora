@@ -2,7 +2,7 @@
 // los eventos (exposiciones e intentos) que recalcula el servidor. Sin IA y sin nada específico de una materia: usa
 // los tipos de unidad (`term`, `pattern`) y sus campos. Las recetas en JSON llegarán en el H4.
 import type { ExerciseFormat, HintLevel, PlanItem, SkillKind } from '@memora/core';
-import type { Example, PatternPayload, TermPayload, UnitType } from '@memora/content';
+import type { ConceptPayload, Example, PatternPayload, TermPayload, UnitType } from '@memora/content';
 import { checkOwnSentence, containsPhrase, firstLetterHint, normalizeAnswer, orderTiles, sameAnswer, type OwnSentenceProblem } from './answers';
 
 export interface SessionSkill {
@@ -27,7 +27,7 @@ export interface SessionUnit {
   type: UnitType;
   /** Idioma del contenido (para la voz). */
   language: string;
-  payload: TermPayload | PatternPayload;
+  payload: TermPayload | PatternPayload | ConceptPayload;
   skills: SessionSkill[];
   association?: SessionAssociation | null;
   /** Versión publicada: sirve para invalidar la caché (H2.2b). */

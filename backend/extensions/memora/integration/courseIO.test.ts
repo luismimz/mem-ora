@@ -80,4 +80,26 @@ describe('importar y exportar un curso', () => {
     expect(round.data.ok).toBe(true);
     created.push(round.data.courseId);
   });
+
+  it('un curso de conceptos (Java) con analogía se importa y su habilidad queda ligada a la asociación', async () => {
+    const java = {
+      schemaVersion: 1,
+      course: { key: `imp-java-${run}`, title: 'Java · prueba', subject: 'programación', contentLanguage: 'en', audio: false, modes: ['associations', 'arcade'], sources: [{ title: 'Propio' }] },
+      modules: [{ key: 'clases', title: 'Clases', units: [{
+        key: 'class', type: 'concept', name: 'class', gist: 'molde', definition: 'Plantilla de la que se crean objetos.', answers: ['clase'],
+        examples: [{ text: 'public class Dog { }', explanation: 'El molde Perro.' }],
+        association: { technique: 'analogy', cue: 'molde de galletas', scene: 'Una clase es un MOLDE de galletas.', evidence: { mapping: 'molde = clase', breaksWhere: 'los objetos cambian sus datos' } },
+      }] }],
+    };
+    const r = await call(author, 'POST', '/memora/import', java);
+    expect(r.data).toMatchObject({ ok: true, units: 1, associations: 1 });
+    created.push(r.data.courseId);
+    const [unit] = (await call(admin, 'GET', `/items/units?filter[course][_eq]=${r.data.courseId}&fields=type,skills.key,skills.kind,skills.association`)).data;
+    expect(unit.type).toBe('concept');
+    expect(unit.skills).toHaveLength(1);
+    expect(unit.skills[0]).toMatchObject({ key: 'class.recall', kind: 'recall' });
+    expect(unit.skills[0].association).toBeTruthy();
+    const out = (await call(author, 'GET', `/memora/export/${r.data.courseId}`)).data;
+    expect(out.modules[0].units[0]).toMatchObject({ type: 'concept', gist: 'molde', answers: ['clase'], association: { technique: 'analogy' } });
+  });
 });

@@ -52,3 +52,11 @@ No se implementan hasta que un hito las incluya.
 - **Recálculo incremental** del estado del alumno: hoy se recalcula con todos sus eventos en cada envío. Basta para el
   H2; con muchos eventos convendrá partir de la última instantánea.
 - **Experiencia «aplicar»** (caso o minidiálogo) para que los patrones vuelvan a tener esa habilidad (H7).
+
+## Materias que no son idiomas (siguientes pasos tras D-042)
+- Ejercicios de concepto: predecir la salida de un código, completar un hueco, ordenar pasos, encontrar el error y
+  aplicar a un caso (evidencia «producir/aplicar», peso muy alto). Requieren habilidades `produce`/`apply` en `concept`.
+- Tipos `procedure` (pasos ordenados: subredes) y `comparison` (TCP frente a UDP), si los conceptos no bastan.
+- Prerrequisitos en el archivo de curso JSON (`requires: ["class"]`).
+- Hueco de la espiral configurable por curso: Gramática en idiomas, mini-reto de código en Java, caso en redes (recetas, H4).
+- Importar contenido sensible con revisor, fecha de verificación y aviso (regla 13).

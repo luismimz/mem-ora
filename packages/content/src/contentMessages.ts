@@ -8,6 +8,14 @@ const FIELD_ES: Record<string, string> = {
   form: 'forma',
   text: 'texto',
   meaning: 'significado',
+  name: 'nombre',
+  gist: 'idea clave',
+  mapping: 'qué corresponde a qué',
+  breaksWhere: 'dónde deja de valer',
+  definition: 'definición',
+  answers: 'respuestas aceptadas',
+  contrast: 'no confundir con',
+  explanation: 'explicación',
   partOfSpeech: 'categoría',
   pronunciation: 'pronunciación',
   ipa: 'AFI',
@@ -45,7 +53,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -98,6 +106,7 @@ const es: Record<string, Template> = {
   rule_multiline: (_, f) => `${f}: la regla debe caber en una sola línea.`,
   pattern_without_slot: (_, f) => `${f}: al menos una pieza debe ser un hueco («slot») que el alumno rellene.`,
   unknown_unit_type: (p, f) => `${f}: tipo de unidad desconocido. Tipos disponibles: ${p.types}.`,
+  analogy_too_long: (p, f) => `${f}: la analogía tiene ${p.words} palabras; el máximo es ${p.max}.`,
   scene_too_long: (p, f) => `${f}: la escena tiene ${p.words} palabras; el máximo es ${p.max}.`,
   scene_without_highlight: (_, f) => `${f}: resalta la pieza clave en MAYÚSCULAS (por ejemplo, «Un BURRO te PIDE PRESTADO el móvil»).`,
   scene_without_cue: (p, f) => `${f}: la escena debe incluir la palabra de apoyo «${p.cue}».`,

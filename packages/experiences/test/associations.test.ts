@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -75,5 +75,25 @@ describe('ejercicios', () => {
     expect(gradeReview(play, 'Play', 0, 0, false)).toEqual({ correct: true, format: 'recall_unaided', hint: 0 });
     expect(gradeReview(play, 'play', 0, 3, false)).toEqual({ correct: true, format: 'recall_cued', hint: 3 });
     expect(gradeReview(play, 'play', 0, 0, true)).toMatchObject({ correct: false, hint: 5 });
+  });
+});
+
+describe('conceptos (Java, redes, temarios)', () => {
+  const cls: SessionUnit = {
+    key: 'class', type: 'concept', language: 'en',
+    payload: { name: 'class', gist: 'molde', definition: 'Plantilla de la que se crean objetos.', answers: ['clase'], examples: [{ text: 'public class Perro { }' }] },
+    skills: [{ key: 'class.recall', kind: 'recall', associationId: 'a1' }],
+    association: { id: 'a1', technique: 'analogy', cue: 'molde de galletas', text: 'Una clase es un MOLDE: de él salen galletas iguales.' },
+  } as SessionUnit;
+
+  it('el nombre es la respuesta y la idea clave hace de significado', () => {
+    expect(unitText(cls)).toBe('class');
+    expect(unitMeaning(cls)).toBe('molde');
+    expect(storyGap(cls)).toEqual({ text: 'Una clase es un ______: de él salen galletas iguales.', answer: 'MOLDE' });
+  });
+
+  it('acepta las respuestas alternativas al repasar', () => {
+    expect(gradeReview(cls, 'Clase', 0, 0, false).correct).toBe(true);
+    expect(gradeReview(cls, 'objeto', 0, 0, false).correct).toBe(false);
   });
 });

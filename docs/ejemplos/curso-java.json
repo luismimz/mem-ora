@@ -25,19 +25,51 @@
       "units": [
         {
           "key": "class",
-          "type": "term",
-          "text": "class",
-          "meaning": "molde para crear objetos",
+          "type": "concept",
+          "name": "class",
+          "gist": "molde",
+          "definition": "Plantilla que define qué datos y qué comportamiento tendrán los objetos que se creen a partir de ella.",
+          "answers": [
+            "clase"
+          ],
           "examples": [
             {
-              "text": "public class Perro { }",
-              "translation": "Declara el molde Perro."
+              "text": "public class Dog { }",
+              "explanation": "Una clase Perro: el molde de todos los perros."
+            }
+          ],
+          "contrast": "≠ objeto: el objeto es lo que sale del molde.",
+          "association": {
+            "technique": "analogy",
+            "cue": "molde de galletas",
+            "scene": "Una clase es un MOLDE de galletas: con él haces muchas galletas iguales.",
+            "emoji": "🍪🧁",
+            "evidence": {
+              "mapping": "molde = clase; cada galleta = un objeto",
+              "breaksWhere": "cada objeto guarda sus propios datos y puede cambiarlos"
+            }
+          }
+        },
+        {
+          "key": "object",
+          "type": "concept",
+          "name": "object",
+          "gist": "objeto",
+          "definition": "Ejemplar concreto creado a partir de una clase, con sus propios valores.",
+          "answers": [
+            "objeto",
+            "instancia"
+          ],
+          "examples": [
+            {
+              "text": "Dog rex = new Dog();",
+              "explanation": "rex es un perro concreto."
             }
           ],
           "association": {
             "technique": "absurd_scene",
-            "scene": "Una fábrica de MOLDES escupe perros idénticos sin parar.",
-            "emoji": "🏭🐕"
+            "scene": "Cada galleta que sale del molde es un OBJETO con su propio sabor.",
+            "emoji": "🍪✨"
           }
         }
       ]
