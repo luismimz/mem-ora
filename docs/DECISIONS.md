@@ -312,3 +312,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Intervalos de repaso: **1 h, 3 h, 24 h, 3 d, 7 d, 14 d** (y 30 d para el mantenimiento y «dominada»). Lo asumido sin
   fallos se espacia y no vuelve cada día. Supone cambiar `scheduler.stepsMs` del núcleo (configuración) y repetir
   pruebas y simulación: se hará al implementar, con aviso.
+
+## D-037 · Mínimo diario de contenido nuevo y curva aplicada (14-oct-2026)
+- `scheduler.stepsMs` = 1 h, 3 h, 1 d, 3 d, 7 d, 14 d, 30 d (D-036) y `weakSuccessMaxStep` = 3 (sigue siendo 3 días).
+- `load.minNewPerDay` (3 por defecto): con atasco de repasos o mala racha entra igualmente ese mínimo. Antes no entraba
+  nada con más de 10 vencidos fuera del día. Simulación (no es predicción): el olvidadizo pasa de casi tres semanas sin
+  nada nuevo a tener contenido nuevo 25 de 30 días.
+- **Agnóstico de la materia:** son ajustes de configuración del núcleo, iguales para idiomas, Java, redes o un temario.
+  Cada curso podrá fijar los suyos (por ejemplo, 15 palabras por sesión en inglés). El núcleo sigue sin conocer la materia.

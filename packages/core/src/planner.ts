@@ -88,15 +88,17 @@ export function planDay(input: { catalog: Catalog; learner: LearnerState; now: n
 
   const usedToday = done.introduced + done.reviews;
   const remaining = Math.max(0, load.totalCap - usedToday);
-  const reviewSlots = Math.min(Math.max(0, load.reviewCap - done.reviews), remaining, due.length);
+  // Siempre entra un mínimo de contenido nuevo, aunque haya repasos acumulados: un atasco de repasos no debe
+  // impedir avanzar indefinidamente. Ese hueco se reserva antes de repartir los repasos.
+  const minimumNew = Math.min(Math.max(0, load.minNewPerDay - done.introduced), remaining);
+  const reviewSlots = Math.min(Math.max(0, load.reviewCap - done.reviews), Math.max(0, remaining - minimumNew), due.length);
   const reviews = due.slice(0, reviewSlots);
   const backlog = due.length - reviews.length;
 
   const factor = newLoadFactor(learner, day, config);
   const suppressed = backlog > load.backlogSuppressNew;
-  const newSlots = suppressed
-    ? 0
-    : Math.min(Math.floor(Math.max(0, load.newCap - done.introduced) * factor), remaining - reviews.length);
+  const regular = suppressed ? 0 : Math.floor(Math.max(0, load.newCap - done.introduced) * factor);
+  const newSlots = Math.min(Math.max(regular, minimumNew), remaining - reviews.length);
 
   const fresh: PlanItem[] = [];
   for (const def of catalog.skills) {

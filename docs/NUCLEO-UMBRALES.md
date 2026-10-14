@@ -94,10 +94,10 @@ El nivel de una unidad es el de su habilidad más floja: una habilidad debilitad
 
 | Umbral | Valor | Porqué | Cómo validarlo |
 | --- | --- | --- | --- |
-| `stepsMs` | 1 h · 1 d · 3 d · 7 d · 14 d · 30 d | Calendario de `VISION.md`. | Tasa de acierto al vencer cada escalón; el objetivo habitual es 85–90 %. |
+| `stepsMs` | 1 h · 3 h · 1 d · 3 d · 7 d · 14 d · 30 d | Curva del olvido decidida por el usuario (D-036); 30 d como mantenimiento. | Tasa de acierto al vencer cada escalón; el objetivo habitual es 85–90 %. |
 | `retryDelayMs` | 4 h | Tras un fallo, se vuelve a intentar en otra sesión, no en la misma. | Acierto en el reintento según la espera. |
 | `advanceMinWeight` | 0,5 | Abren los intervalos largos: recuperar sin pista (0,75; 0,53 si es lento) y producir o aplicar con pista hasta P2 (0,6). No los abren recuperar con pista (≤ 0,4) ni reconocer. | Comparar el recuerdo según el peso del acierto que hizo subir el escalón. |
-| `weakSuccessMaxStep` | 2 (3 días) | **Añadido por la simulación.** Sin este tope, lo que solo se reconoce se repasaba a diario para siempre y saturaba el día. Con él, un acierto débil espacia hasta 3 días, pero los intervalos largos siguen exigiendo recuperación. Afecta sobre todo al reconocimiento puro, que nunca se consolida. | Carga diaria real y recuerdo de habilidades de reconocimiento a 3 días. |
+| `weakSuccessMaxStep` | 3 (3 días) | **Añadido por la simulación.** Sin este tope, lo que solo se reconoce se repasaba a diario para siempre y saturaba el día. Con él, un acierto débil espacia hasta 3 días, pero los intervalos largos siguen exigiendo recuperación. Afecta sobre todo al reconocimiento puro, que nunca se consolida. | Carga diaria real y recuerdo de habilidades de reconocimiento a 3 días. |
 | `failStepDrop` | 1 | Un fallo baja un escalón, no vuelve al principio (como en la V1). | Comparar con volver al escalón 0. |
 | `easeMin` · `easeMax` | 0,8 · 1,2 | La precisión reciente alarga o acorta los intervalos ±20 %. Rango estrecho a propósito, hasta tener datos. | Si el acierto al vencer se aleja del 85–90 %, ampliar el rango o pasar a FSRS. |
 
@@ -140,6 +140,7 @@ unidad solo exige las habilidades de esa unidad que pueden consolidar.
 | `totalCap` | 36 | Repaso + lo nuevo, sin pasar de una sesión razonable. | Abandono de sesiones largas. |
 | `adaptWindowDays` · `adaptMinAttempts` | 3 días · 10 intentos | Ventana corta para reaccionar a una mala racha, con un mínimo para no reaccionar al ruido. | Estabilidad de la carga día a día. |
 | `lowAccuracy` · `veryLowAccuracy` | 65 % · 45 % | Por debajo del 65 % se reduce lo nuevo a la mitad; por debajo del 45 % no entra nada nuevo. | Precisión real frente a la sensación de frustración (encuesta breve). |
+| `minNewPerDay` | 3 | Siempre entra un mínimo de contenido nuevo, aunque haya atasco de repasos o mala racha: el atasco no puede impedir avanzar (D-037). Se reserva antes de repartir los repasos. Cada curso lo ajustará (inglés: 15 palabras por sesión). | Días sin contenido nuevo y retención de lo nuevo introducido con atasco. |
 | `backlogSuppressNew` | 10 | Si quedan más de 10 vencidas fuera del día, no se añade nada nuevo: primero se recupera. | Simulación: tras 5 días de ausencia, 70 vencidas se recuperan en 3 días sin superar el tope. Falta confirmarlo con uso real. |
 | `overdueCapRatio` | 3 | El retraso relativo prioriza, pero con tope, para que lo muy antiguo no acapare todo el día. | Comparar estrategias de prioridad (ver `IDEAS.md`). |
 | `weakenedBonus` · `associationLosingBonus` | 1 · 0,5 | Lo debilitado y las asociaciones en apuros pasan delante de un vencido normal. | Recuperación de lo debilitado. |

@@ -122,7 +122,9 @@ export interface CoreConfig {
     lowAccuracy: number;
     /** Por debajo de esta precisión no se introduce nada nuevo. */
     veryLowAccuracy: number;
-    /** Repasos vencidos que quedan fuera del día a partir de los cuales no entra nada nuevo. */
+    /** Habilidades nuevas que entran cada día pase lo que pase (con atasco de repasos o mala racha). */
+    minNewPerDay: number;
+    /** Repasos vencidos que quedan fuera del día a partir de los cuales solo entra el mínimo de lo nuevo. */
     backlogSuppressNew: number;
     /** Tope del retraso relativo al priorizar (evita que lo muy antiguo lo acapare todo). */
     overdueCapRatio: number;
@@ -181,10 +183,10 @@ export const defaultConfig: CoreConfig = {
     initialAccuracy: 0.6,
   },
   scheduler: {
-    stepsMs: [1 * HOUR, 1 * DAY, 3 * DAY, 7 * DAY, 14 * DAY, 30 * DAY],
+    stepsMs: [1 * HOUR, 3 * HOUR, 1 * DAY, 3 * DAY, 7 * DAY, 14 * DAY, 30 * DAY],
     retryDelayMs: 4 * HOUR,
     advanceMinWeight: 0.5,
-    weakSuccessMaxStep: 2,
+    weakSuccessMaxStep: 3,
     failStepDrop: 1,
     easeMin: 0.8,
     easeMax: 1.2,
@@ -215,6 +217,7 @@ export const defaultConfig: CoreConfig = {
     adaptMinAttempts: 10,
     lowAccuracy: 0.65,
     veryLowAccuracy: 0.45,
+    minNewPerDay: 3,
     backlogSuppressNew: 10,
     overdueCapRatio: 3,
     weakenedBonus: 1,

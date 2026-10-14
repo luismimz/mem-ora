@@ -35,16 +35,24 @@ describe('plan del día', () => {
   it('respeta los topes de repaso, de lo nuevo y total', () => {
     const learner = learn(createLearner('u1'), 15, T0 - DAY, cfg);
     const plan = planDay({ catalog: catalogOf(40), learner, now: T0 + DAY, config: cfg });
-    expect(plan.items.filter((i) => i.reason === 'review')).toHaveLength(10);
+    // Se reserva el mínimo de lo nuevo (3) antes de repartir los repasos: 12 − 3 = 9 repasos.
+    expect(plan.items.filter((i) => i.reason === 'review')).toHaveLength(9);
     expect(plan.items.length).toBeLessThanOrEqual(12);
-    expect(plan.stats.backlog).toBe(5);
+    expect(plan.stats.backlog).toBe(6);
   });
 
-  it('con demasiados vencidos fuera del día no introduce nada nuevo', () => {
+  it('con demasiados vencidos fuera del día solo entra el mínimo de lo nuevo, nunca cero', () => {
     const learner = learn(createLearner('u1'), 15, T0 - DAY, cfg);
     const plan = planDay({ catalog: catalogOf(40), learner, now: T0 + DAY, config: cfg });
     expect(plan.stats.newSuppressedByBacklog).toBe(true);
-    expect(plan.items.some((i) => i.reason === 'new')).toBe(false);
+    expect(plan.items.filter((i) => i.reason === 'new')).toHaveLength(cfg.load.minNewPerDay);
+  });
+
+  it('el mínimo de lo nuevo descuenta lo ya introducido hoy', () => {
+    const learner = learn(createLearner('u1'), 15, T0 - DAY, cfg);
+    const today = learn(learner, 2, T0 + DAY - 60_000, cfg, 20);
+    const plan = planDay({ catalog: catalogOf(40), learner: today, now: T0 + DAY, config: cfg });
+    expect(plan.items.filter((i) => i.reason === 'new')).toHaveLength(1);
   });
 
   it('prioriza lo más retrasado', () => {
@@ -72,6 +80,7 @@ describe('plan del día', () => {
     }
     const plan = planDay({ catalog: catalogOf(20), learner, now: T0, config: cfg });
     expect(plan.stats.newLoadFactor).toBe(0);
-    expect(plan.items.filter((i) => i.reason === 'new')).toHaveLength(0);
+    // Con mala racha se frena lo nuevo, pero entra el mínimo.
+    expect(plan.items.filter((i) => i.reason === 'new')).toHaveLength(cfg.load.minNewPerDay);
   });
 });
