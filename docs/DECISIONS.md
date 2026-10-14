@@ -320,3 +320,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   nada nuevo a tener contenido nuevo 25 de 30 días.
 - **Agnóstico de la materia:** son ajustes de configuración del núcleo, iguales para idiomas, Java, redes o un temario.
   Cada curso podrá fijar los suyos (por ejemplo, 15 palabras por sesión en inglés). El núcleo sigue sin conocer la materia.
+
+## D-038 · Boceto de Asociaciones aprobado y espiral (14-oct-2026)
+- Boceto aprobado (`docs/BOCETO-ASOCIACIONES.md`) con la reconstrucción corregida: la historia lleva al significado.
+- Arcade sorpresa al azar a partir de 20 palabras aprendidas.
+- Espiral: asociaciones → truco → asociaciones → construir frase → frases absurdas en inglés → Arcade sorpresa → más
+  gramática; siempre con vocabulario ya aprendido. Secuencias configurables como recetas desde Studio (H4).

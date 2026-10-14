@@ -19,6 +19,20 @@
 - **Chat** se desbloquea con al menos 3 sesiones de gramática.
 - **Cuatro modos separados pero unidos**: Asociaciones, Gramática, Arcade y Chat se eligen por separado desde el inicio, y comparten el mismo progreso (un único estado del alumno).
 
+## La espiral (14-oct-2026, manda sobre lo anterior)
+
+El centro son **las historias absurdas**: leerlas divierte y acertar engancha. Asociaciones absurdas **que conectan con el
+significado** (PLAYA → PLAY → JUGAR: la historia lleva a JUGAR, no a «playa»). Sobre ellas crece una espiral:
+
+1. Asociaciones (escenas de 5).
+2. Un **truco** de gramática: cómo pasar del español al inglés para una frase. Vuelta a asociaciones.
+3. Más adelante, **construir una frase** con palabras ya aprendidas. Vuelta a asociaciones.
+4. **Frases absurdas en inglés** con las palabras dadas, como doble recordatorio.
+5. **Arcade sorpresa** al azar a partir de 20 palabras, para romper la rutina.
+6. Más gramática, siempre con vocabulario ya aprendido y usándolo. Todo crece poco a poco.
+
+Estas secuencias deben poder **crearse desde Studio** (recetas, H4). Objetivo: diversión máxima.
+
 ## 0. Cómo se trabaja (proceso)
 
 - Memora V3 se construye **desde cero** en `mem-ora`. El repositorio antiguo (V1/V2) es **solo lectura y referencia**. **Nada de parches** sobre lo anterior: se rehace mejor.
