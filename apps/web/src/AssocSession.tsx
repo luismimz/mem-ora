@@ -24,10 +24,11 @@ import {
 import { api, ApiError, type Mission, type MissionRef, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { audioEnabled, setAudioEnabled, speak } from './speech';
+import { enqueue, isNetworkError, saveSessionProgress } from './offline';
 import { milestones, type Milestones } from './milestones';
 
 interface Outcome { correct: boolean; hint: number }
-interface Props { payload: SessionPayload; courseId: string; preview?: boolean; staff?: boolean; onExit: () => void; onReload: () => void; /** Abre una sesión de esa misión (al deslizar el resumen). */ onMission?: (key: string) => void }
+interface Props { payload: SessionPayload; courseId: string; preview?: boolean; staff?: boolean; onExit: () => void; onReload: () => void; /** Abre una sesión de esa misión (al deslizar el resumen). */ onMission?: (key: string) => void; /** Sesión descargada: se juega sin red. */ offline?: boolean }
 
 /** Nombres largos (GENERALIZACIÓN/ESPECIALIZACIÓN, DBMS_OUTPUT.PUT_LINE) se parten tras «/», «_» o «.», no a mitad. */
 function Breakable({ text }: { text: string }) {
@@ -74,7 +75,7 @@ function Art({ unit, small = false, chain = true }: { unit: SessionUnit; small?:
   );
 }
 
-export function AssocSession({ payload, courseId, preview: previewProp = false, staff = false, onExit, onReload, onMission }: Props) {
+export function AssocSession({ payload, courseId, preview: previewProp = false, staff = false, onExit, onReload, onMission, offline = false }: Props) {
   // La vista previa trae si el curso tiene audio (en sesión normal lo fija la portada).
   if (payload.audio !== undefined) setAudioEnabled(payload.audio);
   // Modo revisión (solo equipo): saltar a cualquier paso; desde el primer salto no se guarda progreso.
@@ -112,10 +113,22 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
     setIndex(nextIndex);
     if (preview) { queue.current = []; return; }
     const batch = queue.current.splice(0);
+    // Sin conexión: las respuestas van a la cola del móvil y el punto de la sesión se guarda en el dispositivo.
+    if (offline) {
+      enqueue(courseId, batch);
+      saveSessionProgress(plan.sessionId, { index: nextIndex, outcomes: nextOutcomes, finished: nextIndex >= plan.steps.length - 1 });
+      return;
+    }
     try {
       if (batch.length) await api.events(courseId, batch);
       await api.position(courseId, { sessionId: plan.sessionId, index: nextIndex, outcomes: nextOutcomes, finished: nextIndex >= plan.steps.length - 1, deviceId: deviceId() });
     } catch (e) {
+      if (isNetworkError(e)) {
+        // Se cayó la red a mitad: nada se pierde, se guarda en el móvil y se enviará al volver la cobertura.
+        enqueue(courseId, batch);
+        setWarning('Sin conexión: tus respuestas se guardan en el móvil y se enviarán al volver la red.');
+        return;
+      }
       queue.current.unshift(...batch);
       if (e instanceof ApiError && e.code === 'SESSION_CHANGED') onReload();
       else setWarning('No se ha podido guardar el último paso; se reintentará en el siguiente.');

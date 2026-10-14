@@ -483,3 +483,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Nuevo curso en el plan: «Coolify y el sistema de Memora» (12 misiones) con fuentes oficiales.
 - Incidente: un fragmento de la clave de la API de Coolify apareció en un error de terminal (la barra «|» de la clave
   al cargar el archivo con la shell). Se cambió a lectura sin shell; recomendado rotar la clave.
+
+## D-054 · Modo sin conexión mínimo (H2.2b adelantado, 14-oct-2026)
+- **Por qué:** el usuario quiere estudiar en un vuelo. Una app nativa no hace falta: la web instalada en la pantalla de
+  inicio (PWA) funciona sin red con un service worker.
+- **Qué:** `GET /memora/offline` devuelve sesiones ya construidas (repasos que vencen en 24 h + lo pendiente de cada
+  misión). La app las guarda en el dispositivo («Descargar para el vuelo»), las juega sin red con el mismo motor, guarda
+  el punto de cada sesión y una cola de respuestas, y la envía al volver la red (eventos idempotentes: no duplica).
+  Si la red cae a mitad de una sesión normal, las respuestas también van a la cola.
+- **Service worker:** guarda la app (index.html y /assets) para abrirla sin red; nunca guarda la API.
+- **Límites (pendiente del H2.2b completo):** sin red no se recalcula el plan (las sesiones descargadas son fijas);
+  se guarda en localStorage (unos 750 KB para los tres cursos DAM); audio desactivado sin red.
+- **Probado:** descarga → modo avión → abre en «Modo avión» → 9 preguntas → vuelve la red → 19 respuestas
+  sincronizadas, 0 pendientes.

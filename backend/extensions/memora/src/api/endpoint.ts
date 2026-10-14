@@ -6,6 +6,7 @@
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación
 //   GET  /memora/missions?course=…       misiones (módulos) del curso con el avance del alumno y la actual
+//   GET  /memora/offline?course=…        paquete para jugar sin conexión: sesiones listas (repasos + misiones pendientes)
 //   GET  /memora/studio/missions?course=… misiones con el estado de revisión de sus unidades (autoría)
 //   GET  /memora/preview/mission/:id     prueba una misión entera como alumno, borradores incluidos (autoría)
 //   POST /memora/studio/approve/:id      revisa, aprueba y publica una misión entera con la cuenta que la pide
@@ -202,6 +203,50 @@ export default {
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
       return { data: { state, units, resumed: false, stats: plan.stats } };
+    }));
+
+    // Paquete sin conexión (H2.2b mínimo, D-054): sesiones ya construidas para jugar en el móvil sin red. Los eventos se
+    // guardan en el dispositivo y se envían al volver la conexión (son idempotentes). Primero los repasos que vencen
+    // en las próximas 24 h; después, por misión, lo que aún no se ha trabajado, en sesiones del tamaño del curso.
+    router.get('/offline', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.query.course, userId);
+      const { units, catalog, missions } = await publishedContent(course);
+      const learner = await learnerFor(userId, course.id);
+      const progress = missionProgress(missions, catalog, learner);
+      const now = Date.now();
+      const today = dayOf(now, config.load.dayOriginMs, config.load.dayLengthMs);
+      const perSession = Math.max(1, Number(course.new_per_session) || 15);
+      const sessions: Array<{ id: string; title: string; mission?: MissionRef; state: SessionState }> = [];
+      // Repasos: lo trabajado que vence de aquí a mañana (se adelanta, porque en el vuelo no habrá red).
+      const soon = now + 24 * 3600 * 1000;
+      const reviewItems: PlanItem[] = [];
+      for (const s of catalog.skills) {
+        const st = learner.skills[s.id];
+        if (!st || st.status === 'new' || !st.dueAt || st.dueAt > soon) continue;
+        const unit = units[s.unitId];
+        const skill = unit?.skills.find((x) => x.key === s.id);
+        if (!unit || !skill) continue;
+        reviewItems.push({ skillId: s.id, unitId: s.unitId, reason: 'review', priority: 0, recommendedHint: 0, ...(skill.associationId ? { associationId: skill.associationId } : {}) });
+      }
+      if (reviewItems.length) {
+        const plan = buildAssociationSession({ sessionId: `offline-${course.id}-repasos-${today}`, courseId: course.id, day: today, createdAt: now, items: reviewItems, units, knownUnits: [] });
+        if (plan.steps.length) sessions.push({ id: plan.sessionId, title: 'Repasos pendientes', state: { plan, index: 0, outcomes: {}, finished: false } });
+      }
+      for (const m of missions) {
+        const pending = m.units.filter((u) => !progress.worked.has(u) && units[u]);
+        for (let i = 0; i < pending.length; i += perSession) {
+          const chunk = pending.slice(i, i + perSession);
+          const items: PlanItem[] = chunk.flatMap((u) => units[u]!.skills.map((s) => ({ skillId: s.key, unitId: u, reason: 'new' as const, priority: 0, recommendedHint: 0 as const, ...(s.associationId ? { associationId: s.associationId } : {}) })));
+          const plan = buildAssociationSession({ sessionId: `offline-${course.id}-${m.key}-${i / perSession + 1}`, courseId: course.id, day: today, createdAt: now, items, units, knownUnits: [], maxNewUnits: chunk.length });
+          const ref = missionRef(missions, m.key);
+          sessions.push({ id: plan.sessionId, title: `${m.title}${pending.length > perSession ? ` (${i / perSession + 1})` : ''}`, ...(ref ? { mission: ref } : {}), state: { plan, ...(ref ? { mission: ref } : {}), index: 0, outcomes: {}, finished: false } });
+        }
+      }
+      // Solo las unidades que aparecen en alguna sesión.
+      const used = new Set(sessions.flatMap((x) => x.state.plan.steps.flatMap((st: { unitKey: string; arcadeUnits?: string[] }) => [st.unitKey, ...(st.arcadeUnits ?? [])])).filter(Boolean));
+      const slim = Object.fromEntries(Object.entries(units).filter(([k]) => used.has(k)));
+      return { data: { course: { id: course.id, title: course.title, ui_language: course.ui_language, audio_enabled: course.audio_enabled }, generatedAt: now, sessions, units: slim } };
     }));
 
     router.get('/missions', wrap(async (req) => {

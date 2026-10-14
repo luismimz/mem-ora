@@ -8,12 +8,13 @@ export class ApiError extends Error {
 }
 
 async function request<T>(method: string, path: string, body?: unknown, retry = true): Promise<T> {
+  // Sin cobertura, fetch lanza TypeError: se convierte en un error reconocible («OFFLINE»).
   const res = await fetch(`/api${path}`, {
     method,
     credentials: 'same-origin',
     headers: body ? { 'content-type': 'application/json' } : {},
     body: body ? JSON.stringify(body) : undefined,
-  });
+  }).catch(() => { throw new ApiError(0, 'OFFLINE', 'Sin conexión.'); });
   if (res.status === 401 && retry && path !== '/auth/refresh' && path !== '/auth/login') {
     const refreshed = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ mode: 'session' }) });
     if (refreshed.ok) return request<T>(method, path, body, false);
@@ -110,6 +111,7 @@ export const api = {
   session: (course: string, mission?: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}`),
   missions: (course: string) => request<{ missions: Mission[]; current: string | null }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
   studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),
+  offline: (course: string) => request<import('./offline').OfflineBundle>('GET', `/memora/offline?course=${encodeURIComponent(course)}`),
   previewMission: (id: string) => request<SessionPayload>('GET', `/memora/preview/mission/${encodeURIComponent(id)}`),
   approveMission: (id: string) => request<{ published: number; failed: Array<{ key: string; message: string }> }>('POST', `/memora/studio/approve/${encodeURIComponent(id)}`),
   importCourse: (file: unknown, check: boolean) => request<ImportResult>('POST', `/memora/import${check ? '?check=1' : ''}`, file),

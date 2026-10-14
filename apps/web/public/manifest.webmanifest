@@ -1,0 +1,11 @@
+{
+  "name": "Memora",
+  "short_name": "Memora",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#eae5dc",
+  "theme_color": "#eae5dc",
+  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

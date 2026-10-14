@@ -11,4 +11,11 @@ export default defineConfig({
     strictPort: true,
     proxy: { '/api': { target: 'http://localhost:8055', changeOrigin: true, rewrite: (p) => p.replace(/^\/api/, '') } },
   },
+  // `vite preview` sirve la versión de producción (con service worker) para probar el modo sin conexión en local.
+  preview: {
+    host: '127.0.0.1',
+    port: 4173,
+    strictPort: true,
+    proxy: { '/api': { target: 'http://localhost:8055', changeOrigin: true, rewrite: (p) => p.replace(/^\/api/, '') } },
+  },
 });

@@ -1,4 +1,5 @@
 import { Studio } from './Studio';
+import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pendingCount, sessionProgress, type OfflineBundle, type OfflineSession } from './offline';
 import { useCallback, useEffect, useState } from 'react';
 import { api, ApiError, type Course, type Me, type Mission, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
@@ -12,6 +13,8 @@ type View =
   | { name: 'login' }
   | { name: 'home' }
   | { name: 'profile' }
+  | { name: 'offline' }
+  | { name: 'offlineSession'; bundle: OfflineBundle; session: OfflineSession }
   | { name: 'studio' }
   | { name: 'session'; course: Course; payload: SessionPayload; mission?: string }
   | { name: 'preview'; payload: SessionPayload | null; error?: string };
@@ -40,25 +43,27 @@ const cleanTitle = (t: string) => t.replace(/\s*\(.*\)$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
-type Route = { name: 'home' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string } | { name: 'preview'; unit: string };
+type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string } | { name: 'preview'; unit: string };
 function readRoute(): Route {
   const { pathname, search } = window.location;
   const q = new URLSearchParams(search);
   const preview = pathname.match(/^\/preview\/([\w-]+)/);
   if (preview) return { name: 'preview', unit: preview[1]! };
   if (pathname === '/perfil') return { name: 'profile' };
+  if (pathname === '/sin-conexion') return { name: 'offline' };
   if (pathname === '/studio') return { name: 'studio' };
   if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}) };
   return { name: 'home' };
 }
 function routePath(r: Route): string {
   if (r.name === 'profile') return '/perfil';
+  if (r.name === 'offline') return '/sin-conexion';
   if (r.name === 'studio') return '/studio';
   if (r.name === 'preview') return `/preview/${r.unit}`;
   if (r.name === 'session') return `/sesion?curso=${encodeURIComponent(r.course)}${r.mission ? `&mision=${encodeURIComponent(r.mission)}` : ''}`;
   return '/';
 }
-const TITLES: Record<string, string> = { home: 'Inicio', profile: 'Tu perfil', studio: 'Studio', session: 'Sesión', preview: 'Vista previa', login: 'Entrar', loading: 'Memora' };
+const TITLES: Record<string, string> = { offline: 'Sin conexión', offlineSession: 'Sesión sin conexión', home: 'Inicio', profile: 'Tu perfil', studio: 'Studio', session: 'Sesión', preview: 'Vista previa', login: 'Entrar', loading: 'Memora' };
 
 export function App() {
   const [view, setView] = useState<View>({ name: 'loading' });
@@ -107,7 +112,16 @@ export function App() {
   }
 
   const start = useCallback(async () => {
-    try { setMe(await api.me()); } catch { setView({ name: 'login' }); return; }
+    let who: Me;
+    try { who = await api.me(); } catch (e) {
+      // Sin cobertura y con algo descargado: se abre directamente el modo sin conexión.
+      const saved = cachedMe();
+      if (isNetworkError(e) && saved && Object.keys(bundles()).length) { setMe(saved); setView({ name: 'offline' }); return; }
+      setView({ name: 'login' }); return;
+    }
+    setMe(who); cacheMe(who);
+    // Si quedaron respuestas guardadas en el móvil, se envían ya.
+    if (pendingCount()) flush().then((n) => n && setNotice(`Sincronizadas ${n} respuestas que hiciste sin conexión.`)).catch(() => undefined);
     api.whoami().then((w) => setStaff(w.staff)).catch(() => setStaff(false));
     const list = await api.courses().catch(() => [] as Course[]);
     setCourses(list);
@@ -118,8 +132,10 @@ export function App() {
   useEffect(() => void start(), [start]);
   useEffect(() => {
     const onPop = () => void show(readRoute());
+    const onOnline = () => { if (pendingCount()) flush().then((n) => n && setNotice(`Sincronizadas ${n} respuestas que hiciste sin conexión.`)).catch(() => undefined); };
     window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    window.addEventListener('online', onOnline);
+    return () => { window.removeEventListener('popstate', onPop); window.removeEventListener('online', onOnline); };
   });
   useEffect(() => {
     if (!course || view.name !== 'home') return;
@@ -156,7 +172,14 @@ export function App() {
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview staff={staff} onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
   if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={leaveSession} onReload={() => void openSession(view.course, view.mission)} onMission={(key) => go({ name: 'session', course: view.course.id, mission: key })} /></div>;
 
+  if (view.name === 'offlineSession') {
+    const p = sessionProgress(view.session.id);
+    const payload = { state: { ...view.session.state, ...(p ?? {}) }, units: view.bundle.units };
+    setAudioEnabled(false);
+    return <div className="app"><AssocSession key={view.session.id} payload={payload as SessionPayload} courseId={view.bundle.course.id} offline onExit={() => go({ name: 'offline' })} onReload={() => go({ name: 'offline' })} /></div>;
+  }
   const bar = <TopBar me={me} staff={staff} active={view.name} onNav={(name) => go({ name })} />;
+  if (view.name === 'offline') return <div className="app">{bar}<OfflineHome online={navigator.onLine} onPlay={(bundle, session) => setView({ name: 'offlineSession', bundle, session })} /></div>;
   if (view.name === 'studio') return <div className="app">{bar}<Studio /></div>;
   if (view.name === 'profile') return <div className="app">{bar}<Profile me={me} courses={courses} course={course} mode={mode} staff={staff}
     onCourse={(id) => { setCourse(id); writePrefs({ course: id }); }} onMode={(m) => { setMode(m); writePrefs({ mode: m }); }} onLogout={() => void logout()} /></div>;
@@ -220,6 +243,7 @@ export function App() {
               </button>
             ))}
           </div>
+          {current && <FlightCard course={current} onOpen={() => go({ name: 'offline' })} />}
           <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>
         </section>
       </div>
@@ -234,14 +258,15 @@ export function App() {
  * Barra superior, igual en todas las pantallas (menos dentro de una sesión, que tiene la suya para concentrarse):
  * el logo vuelve a Inicio, la sección actual se marca, y el avatar lleva a tu perfil.
  */
-function TopBar({ me, staff, active, onNav }: { me: Me | null; staff: boolean; active: string; onNav: (name: 'home' | 'profile' | 'studio') => void }) {
+function TopBar({ me, staff, active, onNav }: { me: Me | null; staff: boolean; active: string; onNav: (name: 'home' | 'profile' | 'studio' | 'offline') => void }) {
   const name = me?.first_name || me?.email?.split('@')[0] || 'Tú';
-  const link = (id: 'home' | 'studio', label: string) => <button type="button" className={`nav-link ${active === id ? 'on' : ''}`} aria-current={active === id ? 'page' : undefined} onClick={() => onNav(id)}>{label}</button>;
+  const link = (id: 'home' | 'studio' | 'offline', label: string) => <button type="button" className={`nav-link ${active === id ? 'on' : ''}`} aria-current={active === id ? 'page' : undefined} onClick={() => onNav(id)}>{label}</button>;
   return (
     <header className="topbar">
       <button type="button" className="logo" aria-label="Memora · ir a Inicio" onClick={() => onNav('home')}>M</button>
       <nav aria-label="Principal" className="nav">
         {link('home', 'Inicio')}
+        {link('offline', 'Sin conexión')}
         {staff && link('studio', 'Studio')}
       </nav>
       <button type="button" className={`avatar ${active === 'profile' ? 'on' : ''}`} aria-current={active === 'profile' ? 'page' : undefined} aria-label={`Tu perfil (${name})`} onClick={() => onNav('profile')}>
@@ -352,6 +377,60 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
         })}
       </ol>
     </section>
+  );
+}
+
+/** Preparar un curso para jugar sin conexión (avión, metro): descarga sus sesiones al móvil. */
+function FlightCard({ course, onOpen }: { course: Course; onOpen: () => void }) {
+  const [state, setState] = useState<{ busy: boolean; msg: string | null }>({ busy: false, msg: null });
+  const saved = bundles()[course.id];
+  async function download() {
+    setState({ busy: true, msg: null });
+    try {
+      const b = await downloadBundle(course.id);
+      setState({ busy: false, msg: `✓ Listo: ${b.sessions.length} sesiones guardadas en este dispositivo.` });
+    } catch (e) {
+      setState({ busy: false, msg: e instanceof Error ? e.message : 'No se ha podido descargar.' });
+    }
+  }
+  return (
+    <section className="flight card-panel">
+      <div className="row"><b>✈️ Sin conexión</b>{saved && <button type="button" className="link" onClick={onOpen}>Abrir</button>}</div>
+      <p className="muted">{saved ? `Descargado el ${new Date(saved.generatedAt).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}: ${saved.sessions.length} sesiones.` : 'Descarga este curso para estudiar sin cobertura. Tus respuestas se guardan en el móvil y se envían al volver la red.'}</p>
+      <button type="button" className="primary" disabled={state.busy} onClick={() => void download()}>{state.busy ? 'Descargando…' : saved ? 'Actualizar descarga' : 'Descargar para el vuelo'}</button>
+      {state.msg && <p className="muted" role="status">{state.msg}</p>}
+    </section>
+  );
+}
+
+/** Lo descargado, listo para jugar sin red: sesiones por curso con su estado. */
+function OfflineHome({ online, onPlay }: { online: boolean; onPlay: (b: OfflineBundle, s: OfflineSession) => void }) {
+  const all = Object.values(bundles());
+  const pending = pendingCount();
+  return (
+    <main className="offline">
+      <header className="page-head"><p className="eyebrow">{online ? 'CON CONEXIÓN' : 'SIN CONEXIÓN'}</p><h1>Modo avión</h1>
+        <p className="muted">{pending ? `${pending} respuestas guardadas en el móvil: se enviarán solas al volver la red.` : 'Todo sincronizado.'}</p></header>
+      {!all.length && <p className="banner">Aún no has descargado ningún curso. Con conexión, ve a Inicio y pulsa «Descargar para el vuelo».</p>}
+      {all.map((b) => (
+        <section key={b.course.id} className="card-panel">
+          <h2>{b.course.title.replace(/\s*\(.*\)$/, '')}</h2>
+          <ul className="offline-list">
+            {b.sessions.map((s) => {
+              const p = sessionProgress(s.id);
+              const st = p?.finished ? 'hecha' : p && p.index > 0 ? `en curso · ${Math.round((p.index / s.state.plan.steps.length) * 100)} %` : 'pendiente';
+              return (
+                <li key={s.id}>
+                  <button type="button" className={`offline-item ${p?.finished ? 'done' : ''}`} onClick={() => onPlay(b, s)}>
+                    <span>{p?.finished ? '✓' : '▶'}</span><b>{s.title.replace(/^Misión (\d+) · /, 'M$1 · ')}</b><small>{st}</small>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+      ))}
+    </main>
   );
 }
 
