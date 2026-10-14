@@ -127,6 +127,7 @@ const es: Record<string, Template> = {
   unknown_technique: (p, f) => `${f}: técnica desconocida. Disponibles: ${p.techniques}.`,
   technique_not_for_unit_type: (p, f) => `${f}: la técnica «${p.technique}» no sirve para unidades de tipo «${p.unitType}» (sí para: ${p.unitTypes}).`,
   file_version: (p, f) => `${f}: debe ser ${p.expected}.`,
+  course_missing: (p) => `No existe el curso «${p.key}» al que añadir. Impórtalo primero sin «añadir».`,
   course_exists: (p) => `Ya existe un curso con el identificador «${p.key}». Cambia «course.key» o borra el anterior.`,
   key_taken: (p, f) => `${f}: ya hay otro elemento con el identificador «${p.key}» en este curso.`,
   key_format: (_, f) => `${f}: usa solo minúsculas, números y guiones (por ejemplo, «run-out-of»).`,

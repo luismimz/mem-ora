@@ -119,4 +119,22 @@ describe('importar y exportar un curso', () => {
     k = await kinds();
     expect(k.late.kinds).toEqual(['apply', 'recall']);
   });
+
+  it('modo «añadir»: agrega una misión a un curso existente, marca el origen IA y no repite claves', async () => {
+    const key = `imp-mis-${run}`;
+    const u = (k: string) => ({ key: k, type: 'concept', name: k, gist: 'idea', definition: 'Definición.', examples: [{ text: 'x' }],
+      association: { technique: 'absurd_scene', scene: `Una ESCENA de ${k}.` } });
+    const base = { schemaVersion: 1, origin: 'ai', course: { key, title: 'Java DAM', contentLanguage: 'en', audio: false, modes: ['associations'], sources: [{ title: 'dev.java' }] } };
+    const first = await call(author, 'POST', '/memora/import', { ...base, modules: [{ key: 'mision-1', title: 'Misión 1', units: [u('var')] }] });
+    expect(first.data.ok).toBe(true);
+    created.push(first.data.courseId);
+    expect((await call(author, 'POST', '/memora/import?append=1&check=1', { ...base, course: { ...base.course, key: `${key}-no` }, modules: [{ key: 'm', title: 'M', units: [u('a')] }] })).data.problems[0].message).toContain('No existe el curso');
+    const dup = await call(author, 'POST', '/memora/import?append=1', { ...base, modules: [{ key: 'mision-1', title: 'Otra', units: [u('var')] }] });
+    expect(dup.data.problems.map((p: any) => p.path)).toEqual(['modules.0.key', 'modules.0.units.0.key']);
+    const second = await call(author, 'POST', '/memora/import?append=1', { ...base, modules: [{ key: 'mision-2', title: 'Misión 2', units: [u('int'), u('if')] }] });
+    expect(second.data).toMatchObject({ ok: true, courseId: first.data.courseId, units: 2 });
+    const units = (await call(admin, 'GET', `/items/units?filter[course][_eq]=${first.data.courseId}&sort=sort&fields=key,sort,status,module.key,associations.origin`)).data;
+    expect(units.map((x: any) => `${x.module.key}/${x.key}#${x.sort}`)).toEqual(['mision-1/var#0', 'mision-2/int#1', 'mision-2/if#2']);
+    expect(units.every((x: any) => x.status === 'draft' && x.associations[0].origin === 'ai')).toBe(true);
+  });
 });

@@ -24,8 +24,11 @@ function where(file: Row, path: string): string {
   return `${base} › Unidad ${Number(m[2]) + 1}${unit?.key ? ` (${unit.key})` : ''}`;
 }
 
-/** Comprueba el archivo completo, incluida la técnica de cada asociación y que el curso no exista ya. */
-export async function checkCourseFile(db: any, file: unknown): Promise<ImportProblem[]> {
+/**
+ * Comprueba el archivo completo, incluida la técnica de cada asociación. Modo normal: el curso no debe existir.
+ * Modo «añadir» (`append`): el curso debe existir y sus módulos y unidades nuevos no pueden repetir claves.
+ */
+export async function checkCourseFile(db: any, file: unknown, append = false): Promise<ImportProblem[]> {
   const issues: ContentIssue[] = validateCourseFile(file);
   const f = file as Row;
   const isObj = (v: unknown): v is Row => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -38,42 +41,67 @@ export async function checkCourseFile(db: any, file: unknown): Promise<ImportPro
       }
     }),
   );
-  if (isObj(f?.course) && typeof f.course.key === 'string' && (await db('courses').where({ key: f.course.key }).first('id'))) {
-    issues.push(issue('course_exists', 'course.key', { key: f.course.key }));
+  const existing = isObj(f?.course) && typeof f.course.key === 'string' ? await db('courses').where({ key: f.course.key }).first('id') : undefined;
+  if (!append && existing) issues.push(issue('course_exists', 'course.key', { key: f.course.key }));
+  if (append && isObj(f?.course) && !existing) issues.push(issue('course_missing', 'course.key', { key: f.course.key }));
+  if (append && existing) {
+    const moduleKeys = new Set((await db('modules').where({ course: existing.id }).select('key')).map((r: Row) => r.key));
+    const unitKeys = new Set((await db('units').where({ course: existing.id }).select('key')).map((r: Row) => r.key));
+    (Array.isArray(f.modules) ? f.modules : []).forEach((m: unknown, mi: number) => {
+      if (!isObj(m)) return;
+      if (moduleKeys.has(m.key)) issues.push(issue('key_taken', `modules.${mi}.key`, { key: m.key }));
+      (Array.isArray(m.units) ? m.units : []).forEach((u: unknown, ui: number) => {
+        if (isObj(u) && unitKeys.has(u.key)) issues.push(issue('key_taken', `modules.${mi}.units.${ui}.key`, { key: u.key }));
+      });
+    });
   }
   // El «dónde» ya nombra el módulo y la unidad; el mensaje usa solo el resto de la ruta (p. ej., «significado»).
   const rest = (path: string) => path.replace(/^modules\.\d+(?:\.units\.\d+)?\.?/, '').replace(/^course\./, '');
   return issues.map((i) => ({ path: i.path, where: where(f ?? {}, i.path), message: describeContentIssue({ ...i, path: rest(i.path) }) }));
 }
 
-/** Crea el curso como borrador. Devuelve el id del curso y los recuentos. Lanza si algo falla (y deshace lo creado). */
-export async function importCourse(services: any, schema: any, accountability: any, file: CourseFile) {
+/**
+ * Crea el curso como borrador o, en modo «añadir», agrega sus módulos al curso existente (también como borrador).
+ * Devuelve el id del curso y los recuentos. Lanza si algo falla y deshace lo creado.
+ */
+export async function importCourse(services: any, schema: any, accountability: any, file: CourseFile, db?: any, append = false) {
   const svc = (c: string) => new services.ItemsService(c, { schema, accountability });
   const c = file.course;
-  const courseId = await svc('courses').createOne({
-    key: c.key, title: c.title, subject: c.subject ?? null, status: 'draft',
-    ui_language: c.uiLanguage ?? 'es', learner_language: c.learnerLanguage ?? 'es', content_language: c.contentLanguage,
-    visibility: c.visibility ?? 'private', risk_level: c.riskLevel ?? 'low', license: c.license ?? null, sources: c.sources ?? null,
-    description: c.description ?? null, new_per_session: c.newPerSession ?? 15, audio_enabled: c.audio ?? true,
-    modes: c.modes ?? ['associations', 'grammar', 'arcade', 'chat'],
-  });
-  let units = 0;
+  const origin = file.origin === 'ai' ? 'ai' : 'human';
+  let courseId: string;
+  let sort = 0;
+  let moduleSort = 0;
+  if (append) {
+    courseId = (await db('courses').where({ key: c.key }).first('id')).id;
+    sort = Number((await db('units').where({ course: courseId }).max('sort as m').first())?.m ?? -1) + 1;
+    moduleSort = Number((await db('modules').where({ course: courseId }).max('sort as m').first())?.m ?? -1) + 1;
+  } else {
+    courseId = await svc('courses').createOne({
+      key: c.key, title: c.title, subject: c.subject ?? null, status: 'draft',
+      ui_language: c.uiLanguage ?? 'es', learner_language: c.learnerLanguage ?? 'es', content_language: c.contentLanguage,
+      visibility: c.visibility ?? 'private', risk_level: c.riskLevel ?? 'low', license: c.license ?? null, sources: c.sources ?? null,
+      description: c.description ?? null, new_per_session: c.newPerSession ?? 15, audio_enabled: c.audio ?? true,
+      modes: c.modes ?? ['associations', 'grammar', 'arcade', 'chat'],
+    });
+  }
+  const createdModules: string[] = [];
+  const createdUnits: string[] = [];
   let associations = 0;
   try {
-    let sort = 0;
     for (const [mi, m] of file.modules.entries()) {
-      const moduleId = await svc('modules').createOne({ course: courseId, key: m.key, title: m.title, sort: mi, status: 'draft' });
+      const moduleId = await svc('modules').createOne({ course: courseId, key: m.key, title: m.title, sort: moduleSort + mi, status: 'draft' });
+      createdModules.push(moduleId);
       for (const u of m.units) {
         const unitId = await svc('units').createOne({
           course: courseId, module: moduleId, key: u.key, type: u.type, sort: sort++, payload: unitPayload(u),
           license: u.license ?? c.license ?? null, sources: u.sources ?? c.sources ?? null,
         });
-        units += 1;
+        createdUnits.push(unitId);
         if (u.association) {
           const a = u.association;
           await svc('associations').createOne({
             unit: unitId, technique: a.technique, cue: a.cue ?? null, text: a.scene, scene_target: a.sceneTarget ?? null,
-            emoji: a.emoji ?? null, evidence: a.evidence ?? null, origin: 'human',
+            emoji: a.emoji ?? null, evidence: a.evidence ?? null, origin,
             license: u.license ?? c.license ?? null, sources: u.sources ?? c.sources ?? null,
           });
           associations += 1;
@@ -81,10 +109,14 @@ export async function importCourse(services: any, schema: any, accountability: a
       }
     }
   } catch (e) {
-    await new services.ItemsService('courses', { schema }).deleteOne(courseId);
+    const admin = (col: string) => new services.ItemsService(col, { schema });
+    if (append) {
+      if (createdUnits.length) await admin('units').deleteMany(createdUnits);
+      if (createdModules.length) await admin('modules').deleteMany(createdModules);
+    } else await admin('courses').deleteOne(courseId);
     throw e;
   }
-  return { courseId, modules: file.modules.length, units, associations };
+  return { courseId, modules: file.modules.length, units: createdUnits.length, associations };
 }
 
 /** Exporta un curso al mismo formato que se importa (cualquier estado: es una copia del contenido). */

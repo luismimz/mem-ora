@@ -47,6 +47,8 @@ export interface UnitEntry {
 
 export interface CourseFile {
   schemaVersion: number;
+  /** Quién lo ha escrito: `ai` marca las asociaciones como borrador de IA (regla 12). Por defecto, `human`. */
+  origin?: 'human' | 'ai';
   course: {
     key: string;
     title: string;
@@ -100,7 +102,8 @@ const prefix = (issues: ContentIssue[], path: string) => issues.map((i) => ({ ..
 export function validateCourseFile(data: unknown): ContentIssue[] {
   if (!isRecord(data)) return [issue('not_object', '')];
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, data, '', ['schemaVersion', 'course', 'modules']);
+  checkUnknownFields(issues, data, '', ['schemaVersion', 'origin', 'course', 'modules']);
+  checkChoice(issues, data.origin, 'origin', ['human', 'ai'], false);
   if (data.schemaVersion !== COURSE_FILE_VERSION) issues.push(issue('file_version', 'schemaVersion', { expected: COURSE_FILE_VERSION }));
 
   const c = data.course;

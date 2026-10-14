@@ -6,7 +6,7 @@
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación
 //   GET  /memora/preview/:unitId         vista previa como alumno (solo autoría, revisión y administración)
-//   POST /memora/import?check=1          importa un curso completo en JSON como borrador (o solo lo comprueba)
+//   POST /memora/import?check=1&append=1 importa un curso en JSON como borrador, o añade módulos a uno existente
 //   GET  /memora/export/:courseId        exporta un curso al mismo formato
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
@@ -232,11 +232,12 @@ export default {
 
     router.post('/import', wrap(async (req) => {
       await requireStaff(req.accountability, 'Importar');
-      const problems = await checkCourseFile(db, req.body);
+      const append = Boolean(req.query.append);
+      const problems = await checkCourseFile(db, req.body, append);
       if (problems.length) return { data: { ok: false, problems } };
       if (req.query.check) return { data: { ok: true, problems: [] } };
       try {
-        const result = await importCourse(services, await getSchema(), req.accountability, req.body);
+        const result = await importCourse(services, await getSchema(), req.accountability, req.body, db, append);
         return { data: { ok: true, problems: [], ...result } };
       } catch (e: any) {
         // Lo que rechace Studio (ganchos o permisos) se devuelve como problema; no queda nada a medias.
