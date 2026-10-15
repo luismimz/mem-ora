@@ -76,7 +76,7 @@ export function App() {
   const [notice, setNotice] = useState<string | null>(null);
   const [staff, setStaff] = useState(false);
   const [ms, setMs] = useState<Milestones | null>(null);
-  const [missions, setMissions] = useState<{ missions: Mission[]; current: string | null } | null>(null);
+  const [missions, setMissions] = useState<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number } | null>(null);
   const [nudge, setNudge] = useState<Mode | null>(null);
 
   useEffect(() => { document.title = `${TITLES[view.name] ?? 'Memora'} · Memora`; }, [view.name]);
@@ -214,9 +214,11 @@ export function App() {
                 ) : currentMission ? (
                   <>
                     <h3 className="hero-mission">Misión {currentMission.index} · {cleanMission(currentMission.title)}</h3>
-                    <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}. Los repasos vuelven solos según la curva del olvido.</p>
+                    <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}.{' '}
+                      {missions.newToday ? <>Hoy entran <b>{Math.min(missions.newToday, currentMission.total - currentMission.worked) || missions.newToday} nuev{isLanguage(current) ? 'as' : 'os'}</b>{missions.newTarget && missions.newToday < missions.newTarget ? `; con buenos aciertos sube hasta ${missions.newTarget}` : ''}. </> : null}
+                      Los repasos vuelven solos según la curva del olvido.</p>
                   </>
-                ) : <p>{current.new_per_session ?? 15} {words} nuevas por sesión, en escenas de 5. Los repasos vuelven solos según la curva del olvido.</p>}
+                ) : <p>{missions.newToday ?? current.new_per_session ?? 15} {words} nuev{isLanguage(current) ? 'as' : 'os'} hoy, en escenas de 5. Los repasos vuelven solos según la curva del olvido.</p>}
                 <button type="button" className="primary" onClick={() => open(has(mode) ? mode : 'associations')}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar aventura →' : 'Continuar aventura →'}</button>
               </div>
             </div>

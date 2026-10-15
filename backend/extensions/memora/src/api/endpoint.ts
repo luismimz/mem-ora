@@ -284,13 +284,18 @@ export default {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
       const { catalog, missions } = await publishedContent(course);
-      const { list, current } = missionProgress(missions, catalog, await learnerFor(userId, course.id));
+      const learner = await learnerFor(userId, course.id);
+      const { list, current } = missionProgress(missions, catalog, learner);
       // Si hay una sesión empezada hoy, «Continuar aventura» la retoma: esa es la misión actual para el alumno.
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first('state');
       const state: SessionState | null = saved ? parse(saved.state) : null;
       const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
       const resume = state && !state.finished && state.plan.day === today && state.mission && list.some((m) => m.key === state.mission!.key) ? state.mission.key : null;
-      return { data: { missions: list, current: resume ?? current?.key ?? null } };
+      // Cuántas nuevas trae la sesión de hoy (rampa D-057): la ya empezada manda; si no, la rampa según los aciertos.
+      const target = Math.max(1, Number(course.new_per_session) || 15);
+      const startedNew = resume && state ? new Set(state.plan.steps.filter((x: { kind: string; unitKey: string }) => x.kind === 'card' && x.unitKey).map((x: { unitKey: string }) => x.unitKey)).size : 0;
+      const newToday = startedNew || newUnitsFor(learner.activity, target);
+      return { data: { missions: list, current: resume ?? current?.key ?? null, newToday, newTarget: target } };
     }));
 
     router.post('/events', wrap(async (req) => {

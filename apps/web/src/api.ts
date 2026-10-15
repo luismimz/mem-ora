@@ -118,7 +118,7 @@ export const api = {
   courses: () => request<Course[]>('GET', '/memora/courses'),
   whoami: () => request<{ staff: boolean }>('GET', '/memora/me'),
   session: (course: string, mission?: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}`),
-  missions: (course: string) => request<{ missions: Mission[]; current: string | null }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
+  missions: (course: string) => request<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
   studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),
   retos: (course: string) => request<{ retos: Reto[] }>('GET', `/memora/retos?course=${encodeURIComponent(course)}`),
   offline: (course: string) => request<import('./offline').OfflineBundle>('GET', `/memora/offline?course=${encodeURIComponent(course)}`),
