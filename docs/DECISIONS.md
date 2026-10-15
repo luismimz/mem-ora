@@ -529,3 +529,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   esté en la historia y, si no hay, la pieza clave en MAYÚSCULAS (mejor si no es el puente). Coincidencia por palabra
   completa con Unicode (tildes). El revisor de misiones (`lint`) exige al menos una palabra con contenido.
 - **Además:** el paquete sin conexión usa la misma rampa que la sesión en línea (D-057).
+
+## D-059 · Retos de memoria: los primeros suben de 8 a 14 palabras (15-oct-2026)
+- **Qué:** cuatro retos nuevos al principio del curso, de 8, 10, 12 y 14 palabras, con historias cortas, visuales y
+  sin repetir palabras de otros retos; después vienen los 22 retos de 15. Misma idea de rampa que D-057.
+- **Corrección:** en 9 retos la lista decía una palabra en singular y la historia en plural («Huevo» / «huevos»); la
+  lista usa ahora la misma forma que la historia.
