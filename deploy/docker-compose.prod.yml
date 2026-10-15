@@ -51,6 +51,14 @@ services:
       AUTH_LOGIN_STALL_TIME: "500"
       USER_INVITE_URL_ALLOW_LIST: ${STUDIO_URL:-https://studio.luismontalvan.com}/admin/accept-invite
       PASSWORD_RESET_URL_ALLOW_LIST: ${STUDIO_URL:-https://studio.luismontalvan.com}/admin/reset-password
+      # Correo saliente (restablecer contraseña, invitaciones) por SMTP de IONOS. La contraseña solo en Coolify.
+      EMAIL_TRANSPORT: smtp
+      EMAIL_FROM: ${EMAIL_FROM:-hola@luismontalvan.com}
+      EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-smtp.ionos.es}
+      EMAIL_SMTP_PORT: ${EMAIL_SMTP_PORT:-587}
+      EMAIL_SMTP_SECURE: ${EMAIL_SMTP_SECURE:-false}
+      EMAIL_SMTP_USER: ${EMAIL_SMTP_USER:-hola@luismontalvan.com}
+      EMAIL_SMTP_PASSWORD: ${EMAIL_SMTP_PASSWORD:-}
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8055/server/ping || exit 1"]
       interval: 10s

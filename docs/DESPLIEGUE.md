@@ -27,6 +27,14 @@ pnpm prod:content   # vuelca los cursos de private/dam/misiones (todo en borrado
 ```
 Se puede repetir sin duplicar: lo que ya existe se omite. Después, revisa y publica en **Studio → Revisar misiones**.
 
+## Correo saliente (IONOS)
+Directus envía los correos de restablecer contraseña e invitaciones por SMTP. En Coolify → mem-ora → Environment Variables:
+- `EMAIL_SMTP_PASSWORD` = la contraseña del buzón `hola@luismontalvan.com` en IONOS (obligatoria; solo en Coolify).
+- Opcionales (ya tienen valor por defecto): `EMAIL_FROM` y `EMAIL_SMTP_USER` (`hola@luismontalvan.com`),
+  `EMAIL_SMTP_HOST` (`smtp.ionos.es`), `EMAIL_SMTP_PORT` (`587`), `EMAIL_SMTP_SECURE` (`false`, STARTTLS).
+  Con el puerto `465`, poner `EMAIL_SMTP_SECURE=true`.
+Después, **Redeploy**. Prueba: «¿Olvidaste la contraseña?» en studio.luismontalvan.com.
+
 ## 3. Copias de seguridad
 - El servicio `backup` hace un `pg_dump` diario y guarda 14 días en el volumen `backups`.
 - `pnpm prod:export` guarda en el Mac un JSON de cursos y eventos de alumnos (independiente de Directus).
