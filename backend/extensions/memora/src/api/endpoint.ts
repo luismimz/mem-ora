@@ -218,7 +218,8 @@ export default {
       const progress = missionProgress(missions, catalog, learner);
       const now = Date.now();
       const today = dayOf(now, config.load.dayOriginMs, config.load.dayLengthMs);
-      const perSession = Math.max(1, Number(course.new_per_session) || 15);
+      // Misma rampa que en línea (D-057).
+      const perSession = newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15));
       const sessions: Array<{ id: string; title: string; mission?: MissionRef; state: SessionState }> = [];
       // Repasos: lo trabajado que vence de aquí a mañana (se adelanta, porque en el vuelo no habrá red).
       const soon = now + 24 * 3600 * 1000;

@@ -92,6 +92,14 @@ describe('conceptos (Java, redes, temarios)', () => {
     expect(storyGap(cls)).toEqual({ text: 'Una clase es un ______: de él salen galletas iguales.', answer: 'MOLDE' });
   });
 
+  it('el hueco nunca es un artículo: busca una palabra con contenido o la pieza en MAYÚSCULAS', () => {
+    const mk = (gist: string, text: string, cue?: string) => ({ ...cls, payload: { ...cls.payload, gist }, association: { ...cls.association!, text, ...(cue ? { cue } : { cue: undefined }) } }) as SessionUnit;
+    expect(storyGap(mk('la mesa pequeña donde manejas datos', 'Una MESA de camping diminuta: la quinta cae.')).answer).toBe('MESA');
+    expect(storyGap(mk('el almacén enorme', 'Un ALMACÉN infinito donde todo cabe.')).answer).toBe('ALMACÉN');
+    expect(storyGap(mk('sin repasar, olvidas rápido', 'EBBINGHAUS baja en un tobogán: cae RÁPIDO al principio.', 'EBBINGHAUS')).answer).toBe('RÁPIDO');
+    expect(storyGap(mk('el recuerdo se asienta', 'Un ALBAÑIL echa cemento mientras duermes.', 'ALBAÑIL')).answer).toBe('ALBAÑIL');
+  });
+
   it('acepta las respuestas alternativas al repasar', () => {
     expect(gradeReview(cls, 'Clase', 0, 0, false).correct).toBe(true);
     expect(gradeReview(cls, 'objeto', 0, 0, false).correct).toBe(false);

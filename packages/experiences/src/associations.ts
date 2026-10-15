@@ -161,11 +161,20 @@ export function choicesFor(correct: string, taught: string[], seed: string, coun
 export function storyGap(u: SessionUnit): { text: string; answer: string } {
   const meaning = unitMeaning(u);
   const scene = u.association?.text ?? '';
-  const pieces = [meaning, meaning.split(/\s+/)[0] ?? meaning];
+  const esc = (x: string) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  // Una palabra con contenido: nunca «la», «el», «sin»… (el hueco debe ser algo que se aprende).
+  const word = (x: string) => new RegExp(`(?<![\\p{L}\\p{N}])${esc(x)}(?![\\p{L}\\p{N}])`, 'iu');
+  const content = meaning.split(/[\s,.;:()«»"¿?¡!]+/).filter((w) => [...w].length >= 4);
+  // 1) el significado entero, 2) su primera palabra con contenido que esté en la historia,
+  // 3) la pieza clave en MAYÚSCULAS (mejor si no es el puente), 4) sin hueco posible: el significado.
+  const caps = [...scene.matchAll(/(?<![\p{L}])\p{Lu}{3,}(?![\p{L}])/gu)].map((m) => m[0]);
+  const cue = u.association?.cue?.toUpperCase();
+  const pieces = [meaning, ...content, ...caps.filter((c) => c !== cue), ...caps];
   for (const piece of pieces) {
-    const re = new RegExp(`\\b${piece.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i');
+    if (!piece) continue;
+    const re = word(piece);
     const m = scene.match(re);
-    if (piece && m) return { text: scene.replace(re, '______'), answer: m[0].toUpperCase() };
+    if (m) return { text: scene.replace(re, '______'), answer: m[0].toUpperCase() };
   }
   return { text: scene || meaning, answer: meaning.toUpperCase() };
 }

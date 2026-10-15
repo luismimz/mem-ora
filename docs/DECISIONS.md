@@ -521,3 +521,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   vive en el servidor; la sesión lo usa como tope de nuevas. Vale para todos los cursos.
 - **Por qué:** empezar con menos carga y más éxito, y adaptarse a cada alumno. Descartado: escalera fija por número
   de sesión (no se adapta) y misiones más cortas en el contenido (obligaría a reescribir cursos).
+
+## D-058 · «Completa la historia»: el hueco siempre es una palabra con contenido (15-oct-2026)
+- **Fallo:** el hueco era la primera palabra de la idea clave aunque fuera un artículo («la», «el», «sin»). En 144 de
+  645 unidades salían opciones como «LA / EL / UN» o la frase entera mezclada con palabras sueltas.
+- **Arreglo:** `storyGap` busca el significado entero, después la primera palabra de ≥ 4 letras de la idea clave que
+  esté en la historia y, si no hay, la pieza clave en MAYÚSCULAS (mejor si no es el puente). Coincidencia por palabra
+  completa con Unicode (tildes). El revisor de misiones (`lint`) exige al menos una palabra con contenido.
+- **Además:** el paquete sin conexión usa la misma rampa que la sesión en línea (D-057).
