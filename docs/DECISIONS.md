@@ -513,3 +513,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Progreso en la cuenta (regla 10):** cada intento es un evento de aprendizaje sobre la habilidad del reto
   (`contextId` «reto:<fase>:<en orden>/<total>»); el mejor resultado sale de ahí y el reto vuelve con la curva del olvido.
 - **Pendiente:** varios jugadores en el mismo móvil (marcador familiar) y crear retos desde Studio con vista previa.
+
+## D-057 · Rampa de unidades nuevas según los aciertos (15-oct-2026)
+- **Qué:** cada sesión trae al principio 8 unidades nuevas; cada día con al menos 5 intentos y ≥ 80 % de aciertos sube 2,
+  y con < 60 % baja 2, entre 8 y el objetivo del curso (`newPerSession`). Si el objetivo es menor que 8, manda el objetivo.
+- **Dónde:** `newUnitsFor` en `packages/core` (agnóstico, probado) a partir de la actividad diaria del alumno, que ya
+  vive en el servidor; la sesión lo usa como tope de nuevas. Vale para todos los cursos.
+- **Por qué:** empezar con menos carga y más éxito, y adaptarse a cada alumno. Descartado: escalera fija por número
+  de sesión (no se adapta) y misiones más cortas en el contenido (obligaría a reescribir cursos).

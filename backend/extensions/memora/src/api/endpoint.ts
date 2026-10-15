@@ -17,7 +17,7 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, focusCatalog, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, focusCatalog, newUnitsFor, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
 import { buildAssociationSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
@@ -199,7 +199,8 @@ export default {
       const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
       // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
       const knownUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
-      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, maxNewUnits: Math.max(1, Number(course.new_per_session) || 15) });
+      // Rampa (D-057): empieza con 8 nuevas y sube según los aciertos hasta el objetivo del curso.
+      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
