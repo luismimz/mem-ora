@@ -44,3 +44,8 @@ persona la revisa antes de publicarla (regla 12).
     "sources": [{ "title": "Currículo oficial DAM (RD 450/2010)" }, { "title": "dev.java — Learn Java", "url": "https://dev.java/learn/" }] },
   "modules": [{ "key": "01-que-es-programar", "title": "Misión 1 · Qué es programar", "units": [ … ] }] }
 ```
+
+## Cursos de preparación de examen oficial (D-060)
+Sin historia absurda: la unidad se crea con `E()` (sin `association`), cita en `notes` el apartado oficial del temario
+(«Temario oficial · NC.3.4 · …») y lleva al menos dos retos tipo examen, a ser posible sobre un texto o problema propio.
+Para reescribir una misión ya publicada sin perder progreso: `private/dam/update-units.mjs` y después `publish-course.mjs`.
