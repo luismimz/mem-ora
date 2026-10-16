@@ -24,6 +24,13 @@ describe('sesión de asociaciones', () => {
     expect(kinds).not.toContain('arcade');
   });
 
+  it('sin historia (temario de examen) no hay «Completa la historia» ni rescate: tarjeta, recordar y resultado', () => {
+    const bare = Object.fromEntries(words.slice(0, 5).map((w) => { const { association: _a, ...rest } = w; return [w.key, rest as SessionUnit]; }));
+    const items = newItems.filter((i) => bare[i.unitId]);
+    const kinds = buildAssociationSession({ ...base, units: bare, items, knownUnits: [] }).steps.map((s) => s.kind);
+    expect(kinds).toEqual([...Array(5).fill('card'), ...Array(5).fill('recall'), 'sceneResult', 'summary']);
+  });
+
   it('nunca recuerda una unidad antes de su tarjeta (principio 1)', () => {
     const plan = buildAssociationSession({ ...base, items: newItems, knownUnits: [] });
     for (const [i, step] of plan.steps.entries()) {

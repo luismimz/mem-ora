@@ -535,3 +535,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   sin repetir palabras de otros retos; después vienen los 22 retos de 15. Misma idea de rampa que D-057.
 - **Corrección:** en 9 retos la lista decía una palabra en singular y la historia en plural («Huevo» / «huevos»); la
   lista usa ahora la misma forma que la historia.
+
+## D-060 · Temarios de examen sin historias absurdas (16-oct-2026)
+- **Qué:** un concepto puede ir sin asociación. La sesión entonces no tiene «Completa la historia» ni rescate: tarjeta
+  (definición, ejemplo, contraste y apartado oficial del temario en `notes`), recordar y retos tipo examen.
+- **Por qué:** en la preparación de un examen oficial (Acceso a Grado Medio · Madrid) el usuario pide ceñirse al temario;
+  una historia por concepto despista. Coincide con CLAUDE.md: si no hay asociación defendible, se enseña por otra vía.
+- **Contenido:** cada unidad cita su descriptor del RD 86/2025 (anexo I, nivel 3) y lleva al menos dos retos, muchos
+  sobre un texto o problema propio. El revisor exige esos dos retos en lugar de la historia.
+- **Descartado:** borrar y reimportar el curso (perdería el progreso ya guardado en producción); se reescriben las
+  mismas unidades con `private/dam/update-units.mjs`.

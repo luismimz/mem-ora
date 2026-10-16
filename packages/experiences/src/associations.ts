@@ -98,7 +98,8 @@ export function buildAssociationSession(input: {
   scenes.forEach((scene, n) => {
     for (const u of scene) add({ kind: 'card', unitKey: u, scene: n });
     for (const u of shuffle(scene, rand)) add({ kind: 'recall', unitKey: u, scene: n });
-    for (const u of shuffle(scene, rand)) add({ kind: 'story', unitKey: u, scene: n });
+    // Sin historia (D-060: temarios de examen), no hay «Completa la historia».
+    for (const u of shuffle(scene, rand)) if (units[u]!.association) add({ kind: 'story', unitKey: u, scene: n });
     add({ kind: 'sceneResult', unitKey: '', scene: n });
     for (const u of scene) known.add(u);
     // Arcade sorpresa: al azar, con 20 o más unidades ya trabajadas, y nunca tras la última escena.
@@ -109,7 +110,7 @@ export function buildAssociationSession(input: {
   });
 
   // 3. Cierre: rescate inverso (escena → unidad) mezclando todo lo de hoy.
-  if (fresh.length) for (const u of shuffle(fresh, rand)) add({ kind: 'rescue', unitKey: u, scene: scenes.length });
+  if (fresh.length) for (const u of shuffle(fresh, rand)) if (units[u]!.association) add({ kind: 'rescue', unitKey: u, scene: scenes.length });
   // 4. Retos de aplicación de los conceptos nuevos: con opciones el primer día (sin teclear en la primera exposición).
   for (const u of fresh) {
     const unit = units[u]!;

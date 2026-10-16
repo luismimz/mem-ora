@@ -219,9 +219,11 @@ function ConceptDetails({ payload, language }: { payload: ConceptPayload; langua
   return (
     <div className="concept">
       <p>{payload.definition}</p>
-      {ex && <pre lang={language}><code>{ex.text}</code></pre>}
+      {/* Código en bloque; en materias en español (lengua, matemáticas…) el ejemplo es texto normal. */}
+      {ex && (language === 'es' ? <blockquote className="example">{ex.text}</blockquote> : <pre lang={language}><code>{ex.text}</code></pre>)}
       {ex?.explanation && <p className="muted">{ex.explanation}</p>}
       {payload.contrast && <p className="contrast">{payload.contrast}</p>}
+      {payload.notes && <p className="muted">📘 {payload.notes}</p>}
     </div>
   );
 }
@@ -262,11 +264,11 @@ function Card({ unit, position, total, onNext }: { unit: SessionUnit; position: 
   return (
     <SwipeCard onNext={onNext}>
       {unit.place && <p className="place">{unit.place}</p>}
-      <p className="eyebrow">ASOCIACIÓN {position}/{total}</p>
+      <p className="eyebrow">{a ? 'ASOCIACIÓN' : 'CONCEPTO'} {position}/{total}</p>
       <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 20 ? 'xlong' : unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language} style={{ '--n': Math.max(...unitText(unit).split(/[\s/_.]+/).map((w) => w.length)) } as React.CSSProperties}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
-      <Art unit={unit} />
-      {a?.cue ? (
+      {a && <Art unit={unit} />}
+      {!a ? null : a.cue ? (
         <div className="sounds"><div><p className="eyebrow" style={{ color: 'var(--muted)' }}>{a.technique === 'analogy' ? 'SE PARECE A' : 'SUENA A'}</p><div className="bridge">{a.cue}</div></div>
           {audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>
       ) : <div className="sounds"><p className="eyebrow" style={{ color: 'var(--muted)' }}>{unit.type === 'concept' ? 'IMAGEN' : 'IMAGEN DIRECTA'}</p>{audioEnabled() && <button type="button" className="round" aria-label={`Escuchar ${unitText(unit)}`} onClick={() => speak(unitText(unit), unit.language)}>🔊</button>}</div>}
