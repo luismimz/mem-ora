@@ -15,7 +15,7 @@ describe('técnicas', () => {
     expect(validateAssociation(bridge, 'term')).toEqual([]);
   });
 
-  it('la escena tiene como máximo 14 palabras, resalta la pieza clave e incluye el puente', () => {
+  it('la escena tiene como máximo 10 palabras, resalta la pieza clave e incluye el puente', () => {
     expect(codes({ ...bridge, text: 'Un BURRO ' + 'muy '.repeat(14) + 'grande' })).toContain('scene_too_long@text');
     expect(codes({ ...bridge, text: 'Un burro te pide prestado el móvil.' })).toContain('scene_without_highlight@text');
     expect(codes({ ...bridge, text: 'Un ASNO te PIDE PRESTADO el móvil.' })).toContain('scene_without_cue@text');
@@ -48,13 +48,13 @@ describe('técnicas', () => {
     expect(codes({ technique: 'absurd_scene', text: 'Una fábrica de MOLDES escupe perros iguales.' }, 'concept')).toEqual([]);
   });
 
-  it('trazado de código: historia de hasta 30 palabras y cada línea atada a un elemento de la historia', () => {
-    const trace = { technique: 'code_trace', text: 'En el pueblo hay una sola PIZARRA gigante; cada PERRO que nace corre a SUMAR una raya y todos la ven a la vez.',
+  it('trazado de código: historia de hasta 20 palabras y cada línea atada a un elemento de la historia', () => {
+    const trace = { technique: 'code_trace', text: 'Una sola PIZARRA en el pueblo: cada PERRO que nace va a SUMAR una raya.',
       evidence: { lines: [{ code: 'static int count = 0;', note: 'la PIZARRA: una sola para todos' }, { code: '  Dog() { count++; }', note: 'cada PERRO que nace va a SUMAR una raya' }] } };
     expect(validateAssociation(trace, 'concept')).toEqual([]);
     expect(codes({ ...trace, evidence: { lines: [{ code: 'x', note: 'un MOLDE' }, { code: 'y', note: 'sin elemento' }] } }, 'concept')).toEqual(['note_not_in_story@evidence.lines.0.note', 'note_not_in_story@evidence.lines.1.note']);
     expect(codes({ ...trace, evidence: { lines: [trace.evidence.lines[0]] } }, 'concept')).toContain('min_items@evidence.lines');
-    expect(codes({ ...trace, text: 'Una PIZARRA ' + 'enorme '.repeat(30) }, 'concept')).toContain('story_too_long@text');
+    expect(codes({ ...trace, text: 'Una PIZARRA ' + 'enorme '.repeat(20) }, 'concept')).toContain('story_too_long@text');
     expect(codes(trace, 'term')).toEqual(['technique_not_for_unit_type@technique']);
   });
 });

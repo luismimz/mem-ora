@@ -66,9 +66,9 @@ Si algo de este archivo contradice la visión, pregunta.
 - Idiomas: el puente es una palabra real y familiar de la lengua del alumno, nunca inventada. El espejo es
   específico de cada par de idiomas y se reescribe para cada uno.
 - Si no hay una asociación defendible, la unidad se enseña por otra vía; no se inventa una para completar.
-- Frases de escena: máximo 14 palabras, con una acción visual y la pieza clave resaltada.
-  Excepción: en la técnica de trazado de código la historia admite hasta 30 palabras, porque cada línea del código
-  se comenta con un elemento de ella (D-044).
+- Frases de escena: máximo 10 palabras, con una sola acción visual y la pieza clave resaltada (D-061).
+  Excepción: en la técnica de trazado de código la historia admite hasta 20 palabras, porque cada línea del código
+  se comenta con un elemento de ella (D-044, D-061).
 - Imágenes: se generan después de aprobar el texto, mediante una cola con tope diario, y se guardan.
 
 ## Voz

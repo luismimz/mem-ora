@@ -545,3 +545,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   sobre un texto o problema propio. El revisor exige esos dos retos en lugar de la historia.
 - **Descartado:** borrar y reimportar el curso (perdería el progreso ya guardado en producción); se reescriben las
   mismas unidades con `private/dam/update-units.mjs`.
+
+## D-061 · Historias de 10 palabras como máximo y auditoría de todo el contenido (17-oct-2026)
+- **Qué:** escena ≤ 10 palabras (antes 14), analogía ≤ 15 (antes 25) y trazado de código ≤ 20 (antes 30), en la regla
+  de CLAUDE.md, en los validadores de `techniques` y en el revisor de misiones. Decisión del usuario.
+- **Por qué:** las historias deben ser cortas para recordarlas y cumplir su función: una sola acción visual, el puente
+  suena como la sílaba tónica del término y actúa sobre la idea clave, que aparece en la historia.
+- **Auditoría:** `private/dam/audit.py` marcó 529 de 657 unidades. Se reescriben curso a curso (Inglés, Aprender a
+  aprender, Programación, Bases de datos, Acceso a datos) conservando las unidades y el progreso, y se publican misión a
+  misión en producción. El bucle de contenido nuevo queda parado hasta terminar.

@@ -24,7 +24,7 @@ export interface Technique {
 }
 
 /** Máximo de palabras de una escena (CLAUDE.md). */
-export const SCENE_MAX_WORDS = 14;
+export const SCENE_MAX_WORDS = 10;
 
 /** La pieza clave va resaltada en MAYÚSCULAS («Un BURRO te PIDE PRESTADO el móvil»). */
 export const hasHighlight = (text: string): boolean => /\p{Lu}{2,}/u.test(text);
@@ -77,7 +77,7 @@ const phoneticBridge: Technique = {
 };
 
 /** Máximo de palabras de una analogía: es una explicación breve, no una escena. */
-export const ANALOGY_MAX_WORDS = 25;
+export const ANALOGY_MAX_WORDS = 15;
 const ANALOGY_EVIDENCE = ['mapping', 'breaksWhere'] as const;
 
 /**
@@ -109,8 +109,8 @@ const analogy: Technique = {
   },
 };
 
-/** Máximo de palabras de la historia del trazado de código (excepción a las 14 de las escenas, D-044). */
-export const CODE_TRACE_MAX_WORDS = 30;
+/** Máximo de palabras de la historia del trazado de código (excepción a las 10 de las escenas, D-044, D-061). */
+export const CODE_TRACE_MAX_WORDS = 20;
 export const CODE_TRACE_MIN_LINES = 2;
 const highlights = (text: string): string[] => text.match(/\p{Lu}{2,}/gu) ?? [];
 
