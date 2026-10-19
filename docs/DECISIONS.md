@@ -576,3 +576,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   nuevo) mostraba la secuencia elegir → escribir. Ahora todos los cursos la siguen. Pesos honestos: la elección cuenta
   como reconocimiento (bajo); escribir sin pistas, como recuperación (alto).
 
+## D-064 · Proceso de enseñanza acordado: asociación → clave → historia → pregunta; repesca (19-oct-2026)
+- **Lo nuevo, por escena:** 1) las asociaciones (ficha con la mnemotecnia); 2) «La clave»: ¿qué palabra te hace
+  recordar cada concepto? (se elige entre las claves de la escena); 3) «La historia»: se muestra la historia sin la
+  palabra y se elige de qué habla; resultado de la escena. Después, «La pregunta» (retos tipo examen, con opciones).
+- **Escribir solo en idiomas** (unidades `term`): al final de lo nuevo y en los repasos. En el resto se elige siempre.
+- **Repasos:** pista de la mnemotecnia («se parece a ETIQUETA») → elegir; la pista se retira repaso a repaso (D-063).
+- **Repesca:** al final de la sesión, lo fallado se vuelve a enseñar (ficha) y se comprueba otra vez; lo acertado se
+  salta solo (pasos `retry` en el plan; la app los omite si no hubo fallo de esa unidad en la sesión).
+- Sustituye en lo nuevo a «Recuerda (significado → nombre)» y «Completa la historia». Validado primero en Acceso a
+  Grado Medio (recorrido local paso a paso) antes de replicar el contenido en el resto.
+

@@ -146,6 +146,15 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
     if (correct) setXp((x) => x + 10 + Math.min(combo, 5) * 2);
   }
 
+  // Repesca (D-064): solo para lo fallado antes en esta sesión; lo demás se salta solo.
+  const failedBefore = useMemo(() => {
+    const f = new Set<string>();
+    plan.steps.slice(0, index).forEach((s) => { if (s.unitKey && outcomes[s.id] && outcomes[s.id]!.correct === false) f.add(s.unitKey); });
+    return f;
+  }, [plan, index, outcomes]);
+  const skipRetry = Boolean(step?.retry && !failedBefore.has(step.unitKey));
+  useEffect(() => { if (skipRetry) void advance(); }, [skipRetry, index]); // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!plan.steps.length) return <Empty courseId={courseId} onExit={onExit} />;
 
   const progress = Math.round((index / plan.steps.length) * 100);
@@ -173,7 +182,7 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
       {preview && !staff && <p className="banner">Vista previa como alumno: no se guarda ningún progreso.</p>}
       {warning && <p className="banner" role="status">{warning}</p>}
 
-      {step?.kind === 'card' && unit && <Card key={step.id} unit={unit} position={step.scene < 0 ? 1 : plan.scenes[step.scene]!.indexOf(unit.key) + 1} total={step.scene < 0 ? 1 : plan.scenes[step.scene]!.length} refresh={step.scene < 0} onNext={() => { expose(unit); void advance(); }} />}
+      {step?.kind === 'card' && unit && <Card key={step.id} unit={unit} position={step.scene < 0 ? 1 : plan.scenes[step.scene]!.indexOf(unit.key) + 1} total={step.scene < 0 ? 1 : plan.scenes[step.scene]!.length} refresh={step.scene === -1} retry={Boolean(step.retry)} onNext={() => { expose(unit); void advance(); }} />}
 
       {step?.kind === 'recall' && unit && (
         <Choose key={step.id} title={`RECUERDA · ${plan.scenes[step.scene]!.indexOf(unit.key) + 1}/${plan.scenes[step.scene]!.length}`} combo={combo}
@@ -190,7 +199,23 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
       {step?.kind === 'arcade' && <Arcade key={step.id} units={step.arcadeUnits!.map((k) => units[k]!).filter(Boolean)} seed={step.id}
         onAnswer={(u, ok, ms) => { attempt(u, ok, `${u.key}#arcade`, ms); scored(ok); }} onDone={() => void advance()} />}
 
-      {step?.kind === 'rescue' && unit && (
+      {step?.kind === 'cue' && unit && (
+        // D-064: ¿qué clave (puente) te hace recordar cada asociación?
+        <Choose key={step.id} title={`LA CLAVE · ${plan.scenes[step.scene]!.indexOf(unit.key) + 1}/${plan.scenes[step.scene]!.length}`} combo={combo}
+          art={<Art unit={unit} small chain={false} />} question={<>¿Qué te hace recordar <em>{unitText(unit).toUpperCase()}</em>?</>}
+          choices={choicesFor((unit.association?.cue ?? '').toUpperCase(), plan.scenes[step.scene]!.map((k) => (units[k]!.association?.cue ?? '').toUpperCase()).filter(Boolean), step.id, 4)}
+          reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#cue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
+      )}
+
+      {step?.kind === 'rescue' && unit && step.scene >= 0 && step.scene < plan.scenes.length && (
+        // D-064: se muestra la historia (sin la palabra) y se elige de qué habla.
+        <Choose key={step.id} title={`LA HISTORIA · ${plan.scenes[step.scene]!.indexOf(unit.key) + 1}/${plan.scenes[step.scene]!.length}`} combo={combo}
+          art={<Art unit={unit} small chain={false} />} question={<span className="scene-text"><Highlight text={masked(unit.association?.text ?? (unit.type === 'concept' ? (unit.payload as ConceptPayload).definition : unitMeaning(unit)), unitText(unit))} /><br /><small>{hiddenName(unit)}</small></span>}
+          choices={choicesFor(unitText(unit).toUpperCase(), plan.scenes[step.scene]!.map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
+          reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#story`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
+      )}
+
+      {step?.kind === 'rescue' && unit && !(step.scene >= 0 && step.scene < plan.scenes.length) && (
         <Choose key={step.id} title={`RESCATE · ${sessionUnits.indexOf(unit.key) + 1}/${sessionUnits.length}`} combo={combo}
           art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={masked(unit.association?.text ?? unitMeaning(unit), unitText(unit))} /><br /><small>{hiddenName(unit)}</small></span>}
           choices={choicesFor(unitText(unit).toUpperCase(), sessionUnits.map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
@@ -199,8 +224,8 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
 
       {step?.kind === 'check' && unit && (
         // Comprobación selectiva (D-063): elegir antes de escribir; la ayuda se retira repaso a repaso.
-        <Choose key={step.id} title={`COMPRUEBA · ${['CON LA ASOCIACIÓN', 'CON LA IMAGEN', 'SOLO LA IDEA'][step.startHint ?? 0] ?? ''}`} combo={combo}
-          art={(step.startHint ?? 0) === 0 ? <><Art unit={unit} chain={false} />{unit.association?.text && <p className="scene-text"><Highlight text={masked(unit.association.text, unitText(unit))} /></p>}</> : (step.startHint ?? 0) === 1 ? <Art unit={unit} small chain={false} /> : null}
+        <Choose key={step.id} title={step.retry ? 'REPESCA · ¿AHORA SÍ?' : `RECUERDA · ${['CON LA PISTA', 'CON LA IMAGEN', 'SOLO LA IDEA', 'SIN AYUDA'][step.startHint ?? 0] ?? ''}`} combo={combo}
+          art={(step.startHint ?? 0) === 0 ? <><Art unit={unit} small chain={false} />{unit.association?.cue && <p className="hint-cue">Pista: {unit.association.technique === 'analogy' ? 'se parece a' : 'suena a'} <b>{unit.association.cue}</b></p>}</> : (step.startHint ?? 0) === 1 ? <Art unit={unit} small chain={false} /> : null}
           question={<>{askName(unit)} <em>{unitMeaning(unit)}</em>?</>}
           choices={choicesFor(unitText(unit).toUpperCase(), checkPool(unit.key).map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
           reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#check`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: step.startHint ?? 0 })} />
@@ -271,7 +296,7 @@ function TraceCard({ unit, position, total, onNext }: { unit: SessionUnit; posit
   );
 }
 
-function Card({ unit, position, total, onNext, refresh = false }: { unit: SessionUnit; position: number; total: number; onNext: () => void; refresh?: boolean }) {
+function Card({ unit, position, total, onNext, refresh = false, retry = false }: { unit: SessionUnit; position: number; total: number; onNext: () => void; refresh?: boolean; retry?: boolean }) {
   const a = unit.association;
   if (a?.technique === 'code_trace' && unit.type === 'concept') return <TraceCard unit={unit} position={position} total={total} onNext={onNext} />;
   const respelling = unit.type === 'term' ? (unit.payload as { pronunciation?: { respelling?: string; ipa?: string } }).pronunciation : undefined;
@@ -279,7 +304,7 @@ function Card({ unit, position, total, onNext, refresh = false }: { unit: Sessio
   return (
     <SwipeCard onNext={onNext}>
       {unit.place && <p className="place">{unit.place}</p>}
-      <p className="eyebrow">{refresh ? 'FICHA RENOVADA · REPÁSALA ANTES' : `${a ? 'ASOCIACIÓN' : 'CONCEPTO'} ${position}/${total}`}</p>
+      <p className="eyebrow">{retry ? 'REPESCA · VUELVE A VERLA' : refresh ? 'FICHA RENOVADA · REPÁSALA ANTES' : `${a ? 'ASOCIACIÓN' : 'CONCEPTO'} ${position}/${total}`}</p>
       <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 20 ? 'xlong' : unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language} style={{ '--n': Math.max(...unitText(unit).split(/[\s/_.]+/).map((w) => w.length)) } as React.CSSProperties}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       {a && <Art unit={unit} />}
@@ -451,7 +476,7 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
       <div className="row"><p className="eyebrow">{CHALLENGE_TITLES[exercise.kind]}</p><span key={combo} className={`combo ${combo > 1 ? 'hot' : ''}`}>COMBO x{Math.max(1, combo)}</span></div>
       <p className="place">{unitText(unit)} · {unitMeaning(unit)}</p>
       <div className="question">{exercise.prompt}</div>
-      {exercise.code && <div className="concept"><pre lang={unit.language}><code>{exercise.code}</code></pre></div>}
+      {exercise.code && <div className="concept">{unit.language === 'es' ? <blockquote className="example reading">{exercise.code}</blockquote> : <pre lang={unit.language}><code>{exercise.code}</code></pre>}</div>}
       {isOrder ? (
         <>
           <ol className="order-picked">{order.map((s) => <li key={s}>{s}</li>)}</ol>
@@ -464,7 +489,7 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
           {!result && <div className="actions"><button type="submit" className="go" disabled={!text.trim()}>Comprobar</button><button type="button" onClick={() => finish(text, true)}>Ver</button></div>}
         </form>
       ) : (
-        <div className="choices">{choices.map((c) => <button type="button" key={c.label} className={`choice ${result && c.correct ? 'right' : ''} ${picked === c.label && !c.correct ? 'wrong' : ''}`} disabled={Boolean(result)} onClick={() => { setPicked(c.label); finish(c.label); }}>{c.label}</button>)}</div>
+        <div className="choices">{choices.map((c) => <button type="button" key={c.label} className={`choice ${c.label.length > 22 ? 'long' : ''} ${result && c.correct ? 'right' : ''} ${picked === c.label && !c.correct ? 'wrong' : ''}`} disabled={Boolean(result)} onClick={() => { setPicked(c.label); finish(c.label); }}>{c.label}</button>)}</div>
       )}
       {result && (
         <div className={`feedback ${result.correct ? 'ok' : 'ko'}`}>
@@ -541,7 +566,7 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
   );
 }
 
-const STEP_NAMES: Record<AssocStep['kind'], string> = { check: 'Comprueba', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'Rescate', challenge: 'Reto', summary: 'Resumen' };
+const STEP_NAMES: Record<AssocStep['kind'], string> = { check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', summary: 'Resumen' };
 function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
   const u = s.unitKey ? units[s.unitKey] : undefined;
   return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;

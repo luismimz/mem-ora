@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'review' | 'check' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
+export type AssocStepKind = 'review' | 'check' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -22,6 +22,8 @@ export interface AssocStep {
   /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
   exercise?: number;
   typed?: boolean;
+  /** Repesca (D-064): solo se hace si el alumno falló esa unidad antes en la sesión; si no, se salta. */
+  retry?: boolean;
 }
 
 export interface AssocPlan {
@@ -88,6 +90,7 @@ export function buildAssociationSession(input: {
   //    Los conceptos con ejercicios repasan también «aplicar» con un reto sin opciones.
   // Agrupados por unidad, en el orden de prioridad: [ficha si cambió] → comprobación → escribir → reto (D-062, D-063).
   const refresh = new Set(input.refreshUnits ?? []);
+  const reviewed: string[] = [];
   const byUnit = new Map<string, PlanItem[]>();
   for (const item of items.filter((i) => i.reason === 'review')) {
     if (!units[item.unitId]) continue;
@@ -99,13 +102,15 @@ export function buildAssociationSession(input: {
     const recall = list.find((i) => kinds.get(i.skillId) === 'recall');
     const apply = list.find((i) => kinds.get(i.skillId) === 'apply' && exercisesOf(unit).length);
     if (!recall && !apply) continue; // escuchar se repasa al oír la tarjeta; producir, en Gramática.
+    const writes = unit.type === 'term'; // D-064: se escribe solo en idiomas; el resto se responde eligiendo.
     // Enseñar antes de evaluar: si la ficha cambió, primero se vuelve a mostrar.
     if (refresh.has(key)) add({ kind: 'card', unitKey: key, scene: -1 });
-    // Comprobación selectiva: elegir entre opciones con una ayuda que se retira repaso a repaso.
+    // Pista e intento: elegir con una pista de la mnemotecnia que se retira repaso a repaso (D-063).
     const help = Math.max(0, Math.min(3, input.reviewHelp?.[key] ?? 0));
-    if (help < 3) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel });
-    if (recall) add({ kind: 'review', unitKey: key, scene: -1, skillKey: recall.skillId, startHint: recall.recommendedHint });
-    if (apply) add({ kind: 'challenge', unitKey: key, scene: -1, skillKey: apply.skillId, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: true });
+    if (help < 3 || !writes) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel });
+    if (recall && writes) add({ kind: 'review', unitKey: key, scene: -1, skillKey: recall.skillId, startHint: recall.recommendedHint });
+    if (apply) add({ kind: 'challenge', unitKey: key, scene: -1, skillKey: apply.skillId, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: writes });
+    reviewed.push(key);
   }
 
   // 2. Escenas de 5 unidades nuevas.
@@ -114,10 +119,11 @@ export function buildAssociationSession(input: {
   for (let i = 0; i < fresh.length; i += size) scenes.push(fresh.slice(i, i + size));
   const known = new Set(input.knownUnits);
   scenes.forEach((scene, n) => {
+    // D-064: 1) las asociaciones; 2) ¿qué clave te recuerda cada una?; 3) la historia → elegir de qué habla.
     for (const u of scene) add({ kind: 'card', unitKey: u, scene: n });
-    for (const u of shuffle(scene, rand)) add({ kind: 'recall', unitKey: u, scene: n });
-    // Sin historia (D-060: temarios de examen), no hay «Completa la historia».
-    for (const u of shuffle(scene, rand)) if (units[u]!.association) add({ kind: 'story', unitKey: u, scene: n });
+    const withCue = scene.filter((u) => units[u]!.association?.cue);
+    if (withCue.length >= 2) for (const u of shuffle(withCue, rand)) add({ kind: 'cue', unitKey: u, scene: n });
+    for (const u of shuffle(scene, rand)) add({ kind: 'rescue', unitKey: u, scene: n });
     add({ kind: 'sceneResult', unitKey: '', scene: n });
     for (const u of scene) known.add(u);
     // Arcade sorpresa: al azar, con 20 o más unidades ya trabajadas, y nunca tras la última escena.
@@ -127,16 +133,22 @@ export function buildAssociationSession(input: {
     }
   });
 
-  // 3. Retos de aplicación de los conceptos nuevos: con opciones el primer día (sin teclear en la primera exposición).
+  // 3. La pregunta: retos con opciones de lo nuevo (el primer día nunca se teclea).
   for (const u of fresh) {
     const unit = units[u]!;
     const apply = unit.skills.find((s) => s.kind === 'apply');
     if (apply && exercisesOf(unit).length) add({ kind: 'challenge', unitKey: u, scene: scenes.length, skillKey: apply.key, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: false });
   }
-  // 4. Cierre: escribir sin opciones lo de hoy, con pistas si hacen falta (D-063: ficha → elegir → escribir).
-  if (fresh.length) for (const u of shuffle(fresh, rand)) {
-    const recall = units[u]!.skills.find((s) => s.kind === 'recall');
-    if (recall) add({ kind: 'review', unitKey: u, scene: scenes.length, skillKey: recall.key, startHint: 0 });
+  // 4. Solo en idiomas: escribir la palabra al final, con pistas si hacen falta.
+  for (const u of shuffle(fresh, rand)) {
+    const unit = units[u]!;
+    const recall = unit.skills.find((s) => s.kind === 'recall');
+    if (recall && unit.type === 'term') add({ kind: 'review', unitKey: u, scene: scenes.length, skillKey: recall.key, startHint: 0 });
+  }
+  // 5. Repesca: lo fallado hoy se vuelve a enseñar y se comprueba otra vez (se salta si no hubo fallo).
+  for (const u of [...reviewed, ...fresh]) {
+    add({ kind: 'card', unitKey: u, scene: -2, retry: true });
+    add({ kind: 'check', unitKey: u, scene: -2, startHint: 0, retry: true });
   }
   if (steps.length) add({ kind: 'summary', unitKey: '', scene: scenes.length });
   return { mode: 'associations', sessionId, courseId: input.courseId, day: input.day, createdAt: input.createdAt, steps, scenes };
