@@ -14,7 +14,7 @@ const newItems: PlanItem[] = words.flatMap((w) => w.skills.map((s) => ({ skillId
 const base = { sessionId: 's1', courseId: 'c', day: 1, createdAt: 0, units };
 
 describe('sesión de asociaciones', () => {
-  const main = (plan: { steps: Array<{ kind: string; unitKey: string; retry?: boolean }> }) => plan.steps.filter((s) => !s.retry);
+  const main = (plan: { steps: Array<{ kind: string; unitKey: string; scene: number; retry?: boolean }> }) => plan.steps.filter((s) => !s.retry);
 
   it('lo nuevo: asociaciones → historia (elegir de qué habla) → resultado; en idiomas se escribe al final; repesca (D-064)', () => {
     const plan = buildAssociationSession({ ...base, items: newItems, knownUnits: [] });
@@ -47,7 +47,7 @@ describe('sesión de asociaciones', () => {
   it('enseñar antes de evaluar: todo repaso empieza por su asociación; renovada si cambió (D-062, D-065)', () => {
     const review: PlanItem[] = [{ skillId: 'w0.recall', unitId: 'w0', reason: 'review', priority: 0, recommendedHint: 0 }, { skillId: 'w1.recall', unitId: 'w1', reason: 'review', priority: 0, recommendedHint: 0 }];
     const plan0 = buildAssociationSession({ ...base, items: review, knownUnits: [], refreshUnits: ['w1'] });
-    expect(main(plan0).filter((s) => s.kind === 'card').map((s) => (s as { scene: number }).scene)).toEqual([-3, -1]);
+    expect(main(plan0).filter((s) => s.kind === 'card').map((s) => s.scene)).toEqual([-3, -1]);
     const kinds = main(plan0).map((s) => `${s.kind}:${s.unitKey}`);
     expect(kinds).toEqual(['card:w0', 'check:w0', 'review:w0', 'card:w1', 'check:w1', 'review:w1', 'summary:']);
   });
