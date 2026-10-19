@@ -182,7 +182,7 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
       {preview && !staff && <p className="banner">Vista previa como alumno: no se guarda ningún progreso.</p>}
       {warning && <p className="banner" role="status">{warning}</p>}
 
-      {step?.kind === 'card' && unit && <Card key={step.id} unit={unit} position={step.scene < 0 ? 1 : plan.scenes[step.scene]!.indexOf(unit.key) + 1} total={step.scene < 0 ? 1 : plan.scenes[step.scene]!.length} refresh={step.scene === -1} retry={Boolean(step.retry)} onNext={() => { expose(unit); void advance(); }} />}
+      {step?.kind === 'card' && unit && <Card key={step.id} unit={unit} position={step.scene < 0 ? 1 : plan.scenes[step.scene]!.indexOf(unit.key) + 1} total={step.scene < 0 ? 1 : plan.scenes[step.scene]!.length} refresh={step.scene === -1} review={step.scene === -3} retry={Boolean(step.retry)} onNext={() => { expose(unit); void advance(); }} />}
 
       {step?.kind === 'recall' && unit && (
         <Choose key={step.id} title={`RECUERDA · ${plan.scenes[step.scene]!.indexOf(unit.key) + 1}/${plan.scenes[step.scene]!.length}`} combo={combo}
@@ -296,7 +296,7 @@ function TraceCard({ unit, position, total, onNext }: { unit: SessionUnit; posit
   );
 }
 
-function Card({ unit, position, total, onNext, refresh = false, retry = false }: { unit: SessionUnit; position: number; total: number; onNext: () => void; refresh?: boolean; retry?: boolean }) {
+function Card({ unit, position, total, onNext, refresh = false, review = false, retry = false }: { unit: SessionUnit; position: number; total: number; onNext: () => void; refresh?: boolean; review?: boolean; retry?: boolean }) {
   const a = unit.association;
   if (a?.technique === 'code_trace' && unit.type === 'concept') return <TraceCard unit={unit} position={position} total={total} onNext={onNext} />;
   const respelling = unit.type === 'term' ? (unit.payload as { pronunciation?: { respelling?: string; ipa?: string } }).pronunciation : undefined;
@@ -304,7 +304,7 @@ function Card({ unit, position, total, onNext, refresh = false, retry = false }:
   return (
     <SwipeCard onNext={onNext}>
       {unit.place && <p className="place">{unit.place}</p>}
-      <p className="eyebrow">{retry ? 'REPESCA · VUELVE A VERLA' : refresh ? 'FICHA RENOVADA · REPÁSALA ANTES' : `${a ? 'ASOCIACIÓN' : 'CONCEPTO'} ${position}/${total}`}</p>
+      <p className="eyebrow">{retry ? 'REPESCA · VUELVE A VERLA' : refresh ? 'FICHA RENOVADA · REPÁSALA ANTES' : review ? 'REPASO · PRIMERO, LA ASOCIACIÓN' : `${a ? 'ASOCIACIÓN' : 'CONCEPTO'} ${position}/${total}`}</p>
       <div className={`word ${unit.type === 'concept' ? 'concept' : ''} ${unitText(unit).length > 20 ? 'xlong' : unitText(unit).length > 11 ? 'long' : ''}`}><strong lang={unit.language} style={{ '--n': Math.max(...unitText(unit).split(/[\s/_.]+/).map((w) => w.length)) } as React.CSSProperties}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
       <p className="ipa">{respelling?.ipa ? `${respelling.ipa} · ` : ''}{respelling?.respelling ? `≈ ${respelling.respelling}` : ''}</p>
       {a && <Art unit={unit} />}

@@ -587,3 +587,9 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Sustituye en lo nuevo a «Recuerda (significado → nombre)» y «Completa la historia». Validado primero en Acceso a
   Grado Medio (recorrido local paso a paso) antes de replicar el contenido en el resto.
 
+## D-065 · Todo repaso empieza por su asociación (20-oct-2026)
+- **Qué:** en los repasos, cada concepto empieza por su ficha con la asociación («Repaso · primero, la asociación») y
+  después la comprobación con pista y la pregunta. Si la ficha cambió, se marca «Ficha renovada» (D-062).
+- **Por qué:** decisión del usuario como profesor: enseñar siempre antes de preguntar. Coste asumido: el intento de
+  recuperación es más fácil (menos efecto de prueba); la repesca y los repasos espaciados siguen midiendo lo retenido.
+

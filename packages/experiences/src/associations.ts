@@ -103,8 +103,8 @@ export function buildAssociationSession(input: {
     const apply = list.find((i) => kinds.get(i.skillId) === 'apply' && exercisesOf(unit).length);
     if (!recall && !apply) continue; // escuchar se repasa al oír la tarjeta; producir, en Gramática.
     const writes = unit.type === 'term'; // D-064: se escribe solo en idiomas; el resto se responde eligiendo.
-    // Enseñar antes de evaluar: si la ficha cambió, primero se vuelve a mostrar.
-    if (refresh.has(key)) add({ kind: 'card', unitKey: key, scene: -1 });
+    // Enseñar antes de evaluar (D-065): todo repaso empieza por su asociación; «renovada» si la ficha cambió.
+    add({ kind: 'card', unitKey: key, scene: refresh.has(key) ? -1 : -3 });
     // Pista e intento: elegir con una pista de la mnemotecnia que se retira repaso a repaso (D-063).
     const help = Math.max(0, Math.min(3, input.reviewHelp?.[key] ?? 0));
     if (help < 3 || !writes) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel });
