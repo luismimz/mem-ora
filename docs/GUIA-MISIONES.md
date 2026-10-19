@@ -46,6 +46,6 @@ persona la revisa antes de publicarla (regla 12).
 ```
 
 ## Cursos de preparación de examen oficial (D-060)
-Sin historia absurda: la unidad se crea con `E()` (sin `association`), cita en `notes` el apartado oficial del temario
+Sin historia absurda pero con mnemotecnia ligada al significado (D-062): la unidad se crea con `E(..., assoc=analogy(...))`, cita en `notes` el apartado oficial del temario
 («Temario oficial · NC.3.4 · …») y lleva al menos dos retos tipo examen, a ser posible sobre un texto o problema propio.
 Para reescribir una misión ya publicada sin perder progreso: `private/dam/update-units.mjs` y después `publish-course.mjs`.
