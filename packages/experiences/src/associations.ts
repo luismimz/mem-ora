@@ -70,6 +70,8 @@ export function buildAssociationSession(input: {
   sceneSize?: number;
   /** Unidades nuevas como máximo en esta sesión (el ritmo del curso). */
   maxNewUnits?: number;
+  /** Unidades cuyo contenido cambió desde que el alumno las vio: se vuelven a enseñar antes de repasarlas (D-062). */
+  refreshUnits?: string[];
 }): AssocPlan {
   const { items, units, sessionId } = input;
   const size = input.sceneSize ?? SCENE_SIZE;
@@ -80,8 +82,12 @@ export function buildAssociationSession(input: {
   // 1. Repasos vencidos: uno por habilidad de recuperación (escuchar se repasa al oír la tarjeta; producir, en Gramática).
   //    Los conceptos con ejercicios repasan también «aplicar» con un reto sin opciones.
   const seen = new Set<string>();
+  const refresh = new Set(input.refreshUnits ?? []);
+  const retaught = new Set<string>();
   for (const item of items.filter((i) => i.reason === 'review')) {
     const unit = units[item.unitId];
+    // Enseñar antes de evaluar: si la ficha cambió, primero se vuelve a mostrar.
+    if (unit && refresh.has(unit.key) && !retaught.has(unit.key)) { add({ kind: 'card', unitKey: unit.key, scene: -1 }); retaught.add(unit.key); }
     const kind = unit?.skills.find((s) => s.key === item.skillId)?.kind;
     if (!unit || seen.has(item.skillId)) continue;
     if (kind === 'recall') add({ kind: 'review', unitKey: unit.key, scene: -1, skillKey: item.skillId, startHint: item.recommendedHint });

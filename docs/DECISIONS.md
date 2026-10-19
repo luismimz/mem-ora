@@ -554,3 +554,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Auditoría:** `private/dam/audit.py` marcó 529 de 657 unidades. Se reescriben curso a curso (Inglés, Aprender a
   aprender, Programación, Bases de datos, Acceso a datos) conservando las unidades y el progreso, y se publican misión a
   misión en producción. El bucle de contenido nuevo queda parado hasta terminar.
+
+## D-062 · Enseñar antes de evaluar y mnemotecnia útil en los temarios de examen (19-oct-2026)
+- **Fallo:** tras reescribir el curso de Acceso a Grado Medio, la sesión del alumno empezaba con 14 preguntas de repaso
+  sobre fichas que nunca había visto en su versión nueva: evaluaba sin enseñar.
+- **Motor:** el servidor compara la última modificación de cada unidad con la última vez que el alumno la vio
+  (`lastExposureAt`/`presentedAt`); si cambió después, la sesión muestra la ficha («Ficha renovada») justo antes de su
+  repaso (`refreshUnits` en `buildAssociationSession`). Vale para todos los cursos y para la auditoría D-061.
+- **Contenido de examen:** corrige D-060. Sin escenas absurdas, pero sí con mnemotecnia ligada al significado
+  (analogía con correspondencia y límite, acrónimo o regla: «DE-ductiva: la idea va DE-lante», «método LÁSER»), además
+  de la definición, el apartado oficial y los retos tipo examen.
+

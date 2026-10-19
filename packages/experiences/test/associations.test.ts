@@ -31,6 +31,12 @@ describe('sesión de asociaciones', () => {
     expect(kinds).toEqual([...Array(5).fill('card'), ...Array(5).fill('recall'), 'sceneResult', 'summary']);
   });
 
+  it('enseñar antes de evaluar: si la ficha cambió, la tarjeta va antes de su repaso (D-062)', () => {
+    const review: PlanItem[] = [{ skillId: 'w0.recall', unitId: 'w0', reason: 'review', priority: 0, recommendedHint: 0 }, { skillId: 'w1.recall', unitId: 'w1', reason: 'review', priority: 0, recommendedHint: 0 }];
+    const kinds = buildAssociationSession({ ...base, items: review, knownUnits: [], refreshUnits: ['w1'] }).steps.map((s) => `${s.kind}:${s.unitKey}`);
+    expect(kinds).toEqual(['review:w0', 'card:w1', 'review:w1', 'summary:']);
+  });
+
   it('nunca recuerda una unidad antes de su tarjeta (principio 1)', () => {
     const plan = buildAssociationSession({ ...base, items: newItems, knownUnits: [] });
     for (const [i, step] of plan.steps.entries()) {

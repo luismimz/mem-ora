@@ -88,7 +88,7 @@ export default {
         .leftJoin('modules', 'units.module', 'modules.id')
         .where({ 'units.course': course.id, 'units.status': 'published' })
         .orderBy([{ column: 'modules.sort', order: 'asc' }, { column: 'units.sort', order: 'asc' }, { column: 'units.date_created', order: 'asc' }])
-        .select('units.id', 'units.key', 'units.type', 'units.language', 'units.payload', 'units.version', 'units.status', 'modules.title as place', 'modules.key as module_key');
+        .select('units.id', 'units.key', 'units.type', 'units.language', 'units.payload', 'units.version', 'units.status', 'units.date_updated', 'modules.title as place', 'modules.key as module_key');
       const ids = units.map((u) => u.id);
       const skills: SkillRow[] = ids.length ? await db('skills').whereIn('unit', ids).select('id', 'key', 'kind', 'unit', 'association', 'sort') : [];
       const associations: AssociationRow[] = ids.length ? await db('associations').whereIn('unit', ids).select('id', 'unit', 'technique', 'cue', 'text', 'status', 'scene_target', 'emoji', 'evidence') : [];
@@ -111,7 +111,20 @@ export default {
         if (!m) missions.push((m = { key, title: u.place ?? 'Sin misión', units: [] }));
         m.units.push(u.key);
       }
-      return { units: sUnits, catalog, missions };
+      // Última modificación de cada unidad (contenido o asociación republicada): sirve para volver a enseñarla (D-062).
+      const changedAt: Record<string, number> = {};
+      for (const u of units as Array<UnitRow & { date_updated?: string | Date | null }>) if (u.date_updated) changedAt[u.key] = new Date(u.date_updated).getTime();
+      return { units: sUnits, catalog, missions, changedAt };
+    }
+
+    /** Unidades ya vistas cuya ficha cambió después de la última vez que el alumno la vio. */
+    function staleUnits(changedAt: Record<string, number>, learner: Learner): string[] {
+      const seen: Record<string, number> = {};
+      for (const s of Object.values(learner.skills)) {
+        const at = Math.max(s.lastExposureAt ?? 0, s.presentedAt ?? 0);
+        if (at) seen[s.unitId] = Math.max(seen[s.unitId] ?? 0, at);
+      }
+      return Object.keys(seen).filter((k) => (changedAt[k] ?? 0) > seen[k]!);
     }
 
     type Mission = { key: string; title: string; units: string[] };
@@ -177,7 +190,7 @@ export default {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
       const wanted = typeof req.query.mission === 'string' && req.query.mission ? req.query.mission : null;
-      const { units, catalog, missions } = await publishedContent(course);
+      const { units, catalog, missions, changedAt } = await publishedContent(course);
       if (wanted && !missions.some((m) => m.key === wanted)) throw new HttpError(404, 'NOT_FOUND', 'Misión no disponible.');
       const now = Date.now();
       const today = dayOf(now, config.load.dayOriginMs, config.load.dayLengthMs);
@@ -200,7 +213,7 @@ export default {
       // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
       const knownUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
       // Rampa (D-057): empieza con 8 nuevas y sube según los aciertos hasta el objetivo del curso.
-      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
+      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
