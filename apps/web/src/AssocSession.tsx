@@ -92,6 +92,12 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
   const step = plan.steps[index];
   const unit = step?.unitKey ? units[step.unitKey] : undefined;
   const sessionUnits = useMemo(() => [...new Set(plan.steps.map((s) => s.unitKey).filter(Boolean))], [plan]);
+  // Opciones de la comprobación: las unidades de la sesión del mismo tipo y, si faltan, otras ya publicadas del curso.
+  const checkPool = (key: string) => {
+    const type = units[key]?.type;
+    const same = sessionUnits.filter((k) => units[k]?.type === type);
+    return same.length >= 4 ? same : [...same, ...Object.keys(units).filter((k) => units[k]!.type === type && !same.includes(k)).slice(0, 6)];
+  };
   const startedAt = useRef(plan.createdAt);
 
   const skillOf = (u: SessionUnit, kind: string) => u.skills.find((s) => s.kind === kind);
@@ -189,6 +195,15 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
           art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={masked(unit.association?.text ?? unitMeaning(unit), unitText(unit))} /><br /><small>{hiddenName(unit)}</small></span>}
           choices={choicesFor(unitText(unit).toUpperCase(), sessionUnits.map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
           reveal={unit} quiet onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#rescue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
+      )}
+
+      {step?.kind === 'check' && unit && (
+        // Comprobación selectiva (D-063): elegir antes de escribir; la ayuda se retira repaso a repaso.
+        <Choose key={step.id} title={`COMPRUEBA · ${['CON LA ASOCIACIÓN', 'CON LA IMAGEN', 'SOLO LA IDEA'][step.startHint ?? 0] ?? ''}`} combo={combo}
+          art={(step.startHint ?? 0) === 0 ? <><Art unit={unit} chain={false} />{unit.association?.text && <p className="scene-text"><Highlight text={masked(unit.association.text, unitText(unit))} /></p>}</> : (step.startHint ?? 0) === 1 ? <Art unit={unit} small chain={false} /> : null}
+          question={<>{askName(unit)} <em>{unitMeaning(unit)}</em>?</>}
+          choices={choicesFor(unitText(unit).toUpperCase(), checkPool(unit.key).map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
+          reveal={unit} onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#check`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: step.startHint ?? 0 })} />
       )}
 
       {step?.kind === 'review' && unit && <Review key={step.id} unit={unit} startHint={(step.startHint ?? 0) as HintLevel}
@@ -297,7 +312,7 @@ function Choose({ title, combo, art, question, choices, reveal, quiet = false, o
       <div style={{ marginTop: '.8rem' }}>{art}</div>
       <div className="question">{question}</div>
       <div className="choices">{choices.map((c, i) => <button type="button" key={c.label} className={`choice ${picked !== null && c.correct ? 'right' : ''} ${picked === i && !c.correct ? 'wrong' : ''}`} onClick={() => pick(i)}>{c.label}</button>)}</div>
-      {picked !== null && !ok && <div className="feedback ko"><p>Vuelve a la escena:</p><p className="scene-text"><Highlight text={reveal.association?.text ?? ''} /></p><p>{reveal.association?.cue ? `${reveal.association.cue} → ` : ''}{unitText(reveal).toUpperCase()} · {unitMeaning(reveal)}</p><p style={{ color: 'var(--muted)' }}>Volverá en tu repaso.</p></div>}
+      {picked !== null && !ok && <div className="feedback ko"><p>{reveal.association?.text ? 'Vuelve a la escena:' : 'Repasa la ficha:'}</p><p className="scene-text"><Highlight text={reveal.association?.text ?? (reveal.type === 'concept' ? (reveal.payload as ConceptPayload).definition : '')} /></p><p>{reveal.association?.cue ? `${reveal.association.cue} → ` : ''}{unitText(reveal).toUpperCase()} · {unitMeaning(reveal)}</p><p style={{ color: 'var(--muted)' }}>Volverá en tu repaso.</p></div>}
       {ok && !quiet && <div className="feedback ok">¡CLAC! +{10} XP</div>}
     </SwipeCard>
   );
@@ -526,7 +541,7 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
   );
 }
 
-const STEP_NAMES: Record<AssocStep['kind'], string> = { review: 'Repaso', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'Rescate', challenge: 'Reto', summary: 'Resumen' };
+const STEP_NAMES: Record<AssocStep['kind'], string> = { check: 'Comprueba', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'Rescate', challenge: 'Reto', summary: 'Resumen' };
 function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
   const u = s.unitKey ? units[s.unitKey] : undefined;
   return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;

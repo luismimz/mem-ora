@@ -117,6 +117,16 @@ export default {
       return { units: sUnits, catalog, missions, changedAt };
     }
 
+    /**
+     * Ayuda de la comprobación selectiva por unidad (D-063): cuántos repasos espaciados ha superado (éxitos diferidos
+     * desde la última vez que se debilitó). 0 → asociación completa, 1 → imagen, 2 → solo la idea, 3 → escribir directo.
+     */
+    function reviewHelp(learner: Learner): Record<string, number> {
+      const help: Record<string, number> = {};
+      for (const s of Object.values(learner.skills)) help[s.unitId] = Math.max(help[s.unitId] ?? 0, s.deferredSuccesses ?? 0);
+      return help;
+    }
+
     /** Unidades ya vistas cuya ficha cambió después de la última vez que el alumno la vio. */
     function staleUnits(changedAt: Record<string, number>, learner: Learner): string[] {
       const seen: Record<string, number> = {};
@@ -213,7 +223,7 @@ export default {
       // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
       const knownUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
       // Rampa (D-057): empieza con 8 nuevas y sube según los aciertos hasta el objetivo del curso.
-      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
+      const session = buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
@@ -226,7 +236,7 @@ export default {
     router.get('/offline', wrap(async (req) => {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
-      const { units, catalog, missions } = await publishedContent(course);
+      const { units, catalog, missions, changedAt } = await publishedContent(course);
       const learner = await learnerFor(userId, course.id);
       const progress = missionProgress(missions, catalog, learner);
       const now = Date.now();
@@ -246,7 +256,7 @@ export default {
         reviewItems.push({ skillId: s.id, unitId: s.unitId, reason: 'review', priority: 0, recommendedHint: 0, ...(skill.associationId ? { associationId: skill.associationId } : {}) });
       }
       if (reviewItems.length) {
-        const plan = buildAssociationSession({ sessionId: `offline-${course.id}-repasos-${today}`, courseId: course.id, day: today, createdAt: now, items: reviewItems, units, knownUnits: [] });
+        const plan = buildAssociationSession({ sessionId: `offline-${course.id}-repasos-${today}`, courseId: course.id, day: today, createdAt: now, items: reviewItems, units, knownUnits: [], refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner) });
         if (plan.steps.length) sessions.push({ id: plan.sessionId, title: 'Repasos pendientes', state: { plan, index: 0, outcomes: {}, finished: false } });
       }
       for (const m of missions) {

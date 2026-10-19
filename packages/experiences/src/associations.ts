@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'review' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
+export type AssocStepKind = 'review' | 'check' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -72,6 +72,11 @@ export function buildAssociationSession(input: {
   maxNewUnits?: number;
   /** Unidades cuyo contenido cambió desde que el alumno las vio: se vuelven a enseñar antes de repasarlas (D-062). */
   refreshUnits?: string[];
+  /**
+   * Ayuda de la comprobación selectiva en los repasos, por unidad (D-063): 0 = asociación completa, 1 = solo la imagen,
+   * 2 = solo el significado, 3 o más = sin comprobación (recuperación directa). Sin dato, 0.
+   */
+  reviewHelp?: Record<string, number>;
 }): AssocPlan {
   const { items, units, sessionId } = input;
   const size = input.sceneSize ?? SCENE_SIZE;
@@ -84,10 +89,17 @@ export function buildAssociationSession(input: {
   const seen = new Set<string>();
   const refresh = new Set(input.refreshUnits ?? []);
   const retaught = new Set<string>();
+  const checked = new Set<string>();
   for (const item of items.filter((i) => i.reason === 'review')) {
     const unit = units[item.unitId];
     // Enseñar antes de evaluar: si la ficha cambió, primero se vuelve a mostrar.
     if (unit && refresh.has(unit.key) && !retaught.has(unit.key)) { add({ kind: 'card', unitKey: unit.key, scene: -1 }); retaught.add(unit.key); }
+    // Comprobación selectiva: antes de escribir, elegir entre opciones con una ayuda que se retira repaso a repaso.
+    if (unit && !checked.has(unit.key)) {
+      checked.add(unit.key);
+      const help = Math.max(0, Math.min(3, input.reviewHelp?.[unit.key] ?? 0));
+      if (help < 3) add({ kind: 'check', unitKey: unit.key, scene: -1, startHint: help as HintLevel });
+    }
     const kind = unit?.skills.find((s) => s.key === item.skillId)?.kind;
     if (!unit || seen.has(item.skillId)) continue;
     if (kind === 'recall') add({ kind: 'review', unitKey: unit.key, scene: -1, skillKey: item.skillId, startHint: item.recommendedHint });
@@ -115,13 +127,16 @@ export function buildAssociationSession(input: {
     }
   });
 
-  // 3. Cierre: rescate inverso (escena → unidad) mezclando todo lo de hoy.
-  if (fresh.length) for (const u of shuffle(fresh, rand)) if (units[u]!.association) add({ kind: 'rescue', unitKey: u, scene: scenes.length });
-  // 4. Retos de aplicación de los conceptos nuevos: con opciones el primer día (sin teclear en la primera exposición).
+  // 3. Retos de aplicación de los conceptos nuevos: con opciones el primer día (sin teclear en la primera exposición).
   for (const u of fresh) {
     const unit = units[u]!;
     const apply = unit.skills.find((s) => s.kind === 'apply');
     if (apply && exercisesOf(unit).length) add({ kind: 'challenge', unitKey: u, scene: scenes.length, skillKey: apply.key, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: false });
+  }
+  // 4. Cierre: escribir sin opciones lo de hoy, con pistas si hacen falta (D-063: ficha → elegir → escribir).
+  if (fresh.length) for (const u of shuffle(fresh, rand)) {
+    const recall = units[u]!.skills.find((s) => s.kind === 'recall');
+    if (recall) add({ kind: 'review', unitKey: u, scene: scenes.length, skillKey: recall.key, startHint: 0 });
   }
   if (steps.length) add({ kind: 'summary', unitKey: '', scene: scenes.length });
   return { mode: 'associations', sessionId, courseId: input.courseId, day: input.day, createdAt: input.createdAt, steps, scenes };

@@ -565,3 +565,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   (analogía con correspondencia y límite, acrónimo o regla: «DE-ductiva: la idea va DE-lante», «método LÁSER»), además
   de la definición, el apartado oficial y los retos tipo examen.
 
+## D-063 · Comprobación selectiva antes de escribir, con ayuda que se retira (19-oct-2026)
+- **Qué:** en los repasos, antes de escribir la respuesta, un paso «Comprueba» para elegir entre 4 opciones. La ayuda
+  depende de los repasos espaciados superados (éxitos diferidos): 0 → asociación completa a la vista, 1 → solo la imagen,
+  2 → solo la idea; desde 3 se escribe directamente (especificación §6: «la ayuda desaparece con los encuentros»).
+- **Lo nuevo:** ficha → recordar (elegir) → completar la clave → retos con opciones → **escribir** sin opciones al
+  final (con pistas si hacen falta). Sustituye al «rescate» de opciones del cierre.
+- **Al fallar** una comprobación se muestra la explicación (la escena o, sin escena, la definición del concepto).
+- **Por qué:** el usuario detectó que los repasos iban directos a la pregunta difícil; solo Bases de datos (con contenido
+  nuevo) mostraba la secuencia elegir → escribir. Ahora todos los cursos la siguen. Pesos honestos: la elección cuenta
+  como reconocimiento (bajo); escribir sin pistas, como recuperación (alto).
+
