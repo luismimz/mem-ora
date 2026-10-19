@@ -86,26 +86,26 @@ export function buildAssociationSession(input: {
 
   // 1. Repasos vencidos: uno por habilidad de recuperación (escuchar se repasa al oír la tarjeta; producir, en Gramática).
   //    Los conceptos con ejercicios repasan también «aplicar» con un reto sin opciones.
-  const seen = new Set<string>();
+  // Agrupados por unidad, en el orden de prioridad: [ficha si cambió] → comprobación → escribir → reto (D-062, D-063).
   const refresh = new Set(input.refreshUnits ?? []);
-  const retaught = new Set<string>();
-  const checked = new Set<string>();
+  const byUnit = new Map<string, PlanItem[]>();
   for (const item of items.filter((i) => i.reason === 'review')) {
-    const unit = units[item.unitId];
+    if (!units[item.unitId]) continue;
+    byUnit.set(item.unitId, [...(byUnit.get(item.unitId) ?? []), item]);
+  }
+  for (const [key, list] of byUnit) {
+    const unit = units[key]!;
+    const kinds = new Map(list.map((i) => [i.skillId, unit.skills.find((s) => s.key === i.skillId)?.kind]));
+    const recall = list.find((i) => kinds.get(i.skillId) === 'recall');
+    const apply = list.find((i) => kinds.get(i.skillId) === 'apply' && exercisesOf(unit).length);
+    if (!recall && !apply) continue; // escuchar se repasa al oír la tarjeta; producir, en Gramática.
     // Enseñar antes de evaluar: si la ficha cambió, primero se vuelve a mostrar.
-    if (unit && refresh.has(unit.key) && !retaught.has(unit.key)) { add({ kind: 'card', unitKey: unit.key, scene: -1 }); retaught.add(unit.key); }
-    // Comprobación selectiva: antes de escribir, elegir entre opciones con una ayuda que se retira repaso a repaso.
-    if (unit && !checked.has(unit.key)) {
-      checked.add(unit.key);
-      const help = Math.max(0, Math.min(3, input.reviewHelp?.[unit.key] ?? 0));
-      if (help < 3) add({ kind: 'check', unitKey: unit.key, scene: -1, startHint: help as HintLevel });
-    }
-    const kind = unit?.skills.find((s) => s.key === item.skillId)?.kind;
-    if (!unit || seen.has(item.skillId)) continue;
-    if (kind === 'recall') add({ kind: 'review', unitKey: unit.key, scene: -1, skillKey: item.skillId, startHint: item.recommendedHint });
-    else if (kind === 'apply' && exercisesOf(unit).length) add({ kind: 'challenge', unitKey: unit.key, scene: -1, skillKey: item.skillId, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: true });
-    else continue;
-    seen.add(item.skillId);
+    if (refresh.has(key)) add({ kind: 'card', unitKey: key, scene: -1 });
+    // Comprobación selectiva: elegir entre opciones con una ayuda que se retira repaso a repaso.
+    const help = Math.max(0, Math.min(3, input.reviewHelp?.[key] ?? 0));
+    if (help < 3) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel });
+    if (recall) add({ kind: 'review', unitKey: key, scene: -1, skillKey: recall.skillId, startHint: recall.recommendedHint });
+    if (apply) add({ kind: 'challenge', unitKey: key, scene: -1, skillKey: apply.skillId, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: true });
   }
 
   // 2. Escenas de 5 unidades nuevas.

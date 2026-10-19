@@ -69,6 +69,12 @@ describe('sesión de asociaciones', () => {
     expect(plan.steps[1]).toMatchObject({ skillKey: 'w3.recall', startHint: 2 });
   });
 
+  it('cada comprobación va pegada a su pregunta aunque el plan mezcle habilidades', () => {
+    const items: PlanItem[] = ['w0', 'w1'].flatMap((u) => [`${u}.listen`, `${u}.recall`].map((skillId) => ({ skillId, unitId: u, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
+    const kinds = buildAssociationSession({ ...base, items, knownUnits: [] }).steps.map((s) => `${s.kind}:${s.unitKey}`);
+    expect(kinds).toEqual(['check:w0', 'review:w0', 'check:w1', 'review:w1', 'summary:']);
+  });
+
   it('comprobación selectiva: la ayuda se retira repaso a repaso y desde el 4.º se escribe directamente (D-063)', () => {
     const items: PlanItem[] = ['w0', 'w1', 'w2', 'w3'].map((u) => ({ skillId: `${u}.recall`, unitId: u, reason: 'review' as const, priority: 1, recommendedHint: 0 as const }));
     const plan = buildAssociationSession({ ...base, items, knownUnits: [], reviewHelp: { w0: 0, w1: 1, w2: 2, w3: 3 } });
