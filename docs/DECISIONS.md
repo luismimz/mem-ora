@@ -691,3 +691,17 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   interfaces, Sistemas de gestión empresarial, Bases de datos B, Programación B e Inteligencia Artificial, con mapa de
   cobertura apartado a apartado del índice de cada libro.
 
+
+## D-076 · Temario del semestre completo y auditoría de todo lo publicado (21-oct-2026)
+- **Contenido nuevo:** Programación B 23–26 (genericidad y estructuras, grafos y árboles, conectar Java con SQLite,
+  MySQL y PostgreSQL y la BD en Docker, CRUD con JDBC y db4o) y Bases de datos B 14–15 (MongoDB en la práctica,
+  SQLite a fondo). Con esto los seis módulos del semestre quedan cubiertos apartado a apartado.
+- **Auditoría:** las ~470 historias antiguas que pasaban de 10 palabras o no contenían la idea clave se reescribieron
+  a mano una a una (no se recortaron automáticamente), se quitaron los puentes repetidos dentro de un curso (cada
+  palabra de apoyo lleva a un solo concepto) y las fichas enseñan ahora todo lo que después se pregunta.
+  Resultado: 0 avisos en los ocho cursos de conceptos y 0 retos sobre algo no enseñado.
+- **Cómo:** `private/dam/fix/<curso>.py` (historia, palabra de apoyo, idea clave o frase de la definición por clave de
+  unidad) se aplica a los JSON con `apply_fix.py` y también al regenerar una misión (`save`), así que no se pierde.
+  `fixpub.sh` lo sube a local y producción con `update-units` y `update-assoc`, que conservan el progreso.
+- **Regla aprendida:** una analogía necesita palabra de apoyo (el validador la exige); a una escena absurda se le
+  puede quitar si repetía la de otro concepto.
