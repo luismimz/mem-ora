@@ -448,12 +448,12 @@ function FlowCard({ children, onNext, className = '', auto }: { children: ReactN
   );
 }
 
-/** Reel: la asociación en grande, para verla y pasar (avanza sola). */
+/** Reel: la asociación en grande; sin cuenta atrás: se pasa al tocar o deslizar cuando se ha leído (D-069). */
 function Reel({ unit, onNext }: { unit: SessionUnit; onNext: () => void }) {
   const a = unit.association;
   useEffect(() => { speak(unitText(unit), unit.language); }, [unit]);
   return (
-    <FlowCard onNext={onNext} auto={6500} className="reel">
+    <FlowCard onNext={onNext} className="reel">
       <p className="eyebrow">NUEVO</p>
       <div className="reel-emoji" aria-hidden="true">{a?.emoji ?? '✨'}</div>
       <div className="word concept"><strong lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
@@ -465,7 +465,9 @@ function Reel({ unit, onNext }: { unit: SessionUnit; onNext: () => void }) {
 
 /** Relámpago: 3 opciones con tiempo; si se falla, la asociación aparece en ese momento (se enseña en el error). */
 function Quick({ unit, reverse, retry, pool, combo, onAnswer, onDone }: { unit: SessionUnit; reverse: boolean; retry: boolean; pool: SessionUnit[]; combo: number; onAnswer: (ok: boolean, ms: number) => void; onDone: (ok: boolean) => void }) {
-  const SECONDS = 7;
+  // Tiempo según lo que hay que leer (D-069): 7 s base + 1 s por cada 35 caracteres de pregunta y opciones (máx. 15 s).
+  const reading = (reverse ? unitText(unit) : unitMeaning(unit)).length + pool.slice(0, 3).map((u) => (reverse ? unitMeaning(u) : unitText(u)).length).reduce((x, y) => x + y, 0);
+  const SECONDS = Math.min(15, 7 + Math.round(reading / 35));
   const [picked, setPicked] = useState<number | null>(null);
   const [left, setLeft] = useState(SECONDS);
   const t0 = useRef(performance.now());

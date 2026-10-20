@@ -623,3 +623,8 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   siguen con el proceso por escenas (D-064/D-067) hasta que el usuario apruebe replicarlo.
 - **Además:** el desplegable «Revisar paso» solo aparece en la vista previa de Studio o con `#revisar`.
 
+## D-069 · Flujo: la asociación sin cuenta atrás; la pregunta, con tiempo según lo que hay que leer (20-oct-2026)
+- **Qué:** el reel de la asociación ya no avanza solo: se pasa al tocar o deslizar. La pregunta relámpago da 7 s más
+  1 s por cada 35 caracteres de pregunta y opciones (máximo 15 s).
+- **Por qué:** el usuario no tenía tiempo de leer la asociación en 6,5 s.
+
