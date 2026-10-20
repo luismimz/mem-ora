@@ -208,7 +208,10 @@ export default {
       const savedState: SessionState | null = saved ? parse(saved.state) : null;
       // «Continuar aventura» (sin misión) retoma la sesión empezada; elegir una misión la retoma solo si es la misma.
       const sameMission = !wanted || savedState?.mission?.key === wanted;
-      if (savedState && sameMission && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
+      const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
+      // D-075: si el curso cambió de experiencia (escenas ↔ Flujo), la sesión guardada no se retoma: se crea una nueva.
+      const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations');
+      if (savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
@@ -219,7 +222,6 @@ export default {
       const planCatalog = focus ? focusCatalog(catalog, new Set(focus.units), progress.worked) : catalog;
       const cfg = courseConfig(course);
       const plan = planDay({ catalog: planCatalog, learner, now, config: cfg });
-      const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
       // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
       const knownUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0).map((x) => x.unitId))];
       // Rampa (D-057): empieza con 8 nuevas y sube según los aciertos hasta el objetivo del curso.
