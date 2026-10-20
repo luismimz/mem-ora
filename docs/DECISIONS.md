@@ -638,3 +638,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   (empieza por asociación, ninguna pregunta sin asociación, la asociación y la pregunta no avanzan solas, al fallar se
   enseña y hay repesca, sesión corta, no se escribe fuera de idiomas). Las pruebas del motor fijan la regla de oro.
 
+## D-071 · Recordar el inicio de sesión en el dispositivo (20-oct-2026)
+- **Causas:** Directus mantiene la sesión 1 día por defecto (con 2FA, eso es pedir el código cada día), y la app mandaba
+  a «Entrar» ante cualquier error al abrirse, también durante un despliegue (servidor arrancando).
+- **Arreglo:** `SESSION_COOKIE_TTL` y `REFRESH_TOKEN_TTL` a 30 días, renovados en cada uso (configurables en Coolify).
+  La app solo pide entrar con 401/403; otros fallos se reintentan unos segundos. La cookie es de la propia web (misma
+  origen vía `/api`), con `HttpOnly`, `Secure` y `SameSite=Lax`.
+- **Riesgo asumido:** quien tenga el dispositivo desbloqueado entra sin código durante 30 días; «Salir» cierra la sesión.
+

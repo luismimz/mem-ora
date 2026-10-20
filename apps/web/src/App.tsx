@@ -113,13 +113,20 @@ export function App() {
   }
 
   const start = useCallback(async () => {
-    let who: Me;
-    try { who = await api.me(); } catch (e) {
-      // Sin cobertura y con algo descargado: se abre directamente el modo sin conexión.
-      const saved = cachedMe();
-      if (isNetworkError(e) && saved && Object.keys(bundles()).length) { setMe(saved); setView({ name: 'offline' }); return; }
-      setView({ name: 'login' }); return;
+    let who: Me | undefined;
+    // D-071: solo se pide entrar si la sesión caducó de verdad (401/403). Un fallo pasajero del servidor (p. ej. al
+    // desplegar) se reintenta unos segundos en vez de sacar al alumno.
+    for (let attempt = 0; attempt < 5 && !who; attempt += 1) {
+      try { who = await api.me(); } catch (e) {
+        const saved = cachedMe();
+        // Sin cobertura y con algo descargado: se abre directamente el modo sin conexión.
+        if (isNetworkError(e) && saved && Object.keys(bundles()).length) { setMe(saved); setView({ name: 'offline' }); return; }
+        const status = e instanceof ApiError ? e.status : 0;
+        if (status === 401 || status === 403 || (!saved && !isNetworkError(e))) { setView({ name: 'login' }); return; }
+        await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
+      }
     }
+    if (!who) { setView({ name: 'login' }); return; }
     setMe(who); cacheMe(who);
     // Si quedaron respuestas guardadas en el móvil, se envían ya.
     if (pendingCount()) flush().then((n) => n && setNotice(`Sincronizadas ${n} respuestas que hiciste sin conexión.`)).catch(() => undefined);

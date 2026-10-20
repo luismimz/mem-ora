@@ -49,3 +49,6 @@ Es el proxy de Coolify diciendo que no hay un contenedor sano para ese dominio. 
 ## Notas
 - La licencia de Directus consume una activación en esta instancia.
 - No hay cuentas de prueba en producción. Para más usuarios: invitación desde Studio (registro cerrado).
+
+## Duración de la sesión
+`SESSION_COOKIE_TTL` y `REFRESH_TOKEN_TTL` (por defecto 30d en el compose, D-071). Para pedir el código más a menudo, bájalos en Coolify y redespliega.

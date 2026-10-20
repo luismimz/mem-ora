@@ -45,6 +45,9 @@ services:
       WEBSOCKETS_ENABLED: "false"
       # Detrás del proxy de Coolify: la IP real del usuario y cookies seguras (HTTPS).
       IP_TRUST_PROXY: "true"
+      # Recordar el inicio de sesión en el dispositivo (D-071): 30 días, renovados en cada uso. Por defecto, 1 día.
+      SESSION_COOKIE_TTL: ${SESSION_COOKIE_TTL:-30d}
+      REFRESH_TOKEN_TTL: ${REFRESH_TOKEN_TTL:-30d}
       SESSION_COOKIE_SECURE: "true"
       SESSION_COOKIE_SAME_SITE: lax
       REFRESH_TOKEN_COOKIE_SECURE: "true"
