@@ -484,3 +484,17 @@ blockquote.reading { font-size: .92rem; }
 .party { position: fixed; z-index: 5; left: 50%; top: 18%; transform: translateX(-50%); background: #ff7a29; color: #fff; font-weight: 950; font-size: 1.4rem; padding: .7rem 1.2rem; border-radius: 1.4rem; box-shadow: 0 14px 40px rgba(255,122,41,.45); animation: pop .5s cubic-bezier(.2, 1.4, .3, 1); }
 @media (prefers-reduced-motion: reduce) { .slide, .face-emoji, .end-xp, .party, .floater, .slide-hint { animation: none !important; } }
 @media (min-width: 760px) { .slide { padding-left: calc(50vw - 15rem); padding-right: calc(50vw - 15rem); } }
+/* D-073: la ficha enseña (qué es + ejemplo); el contenido largo se desplaza y «Siguiente» queda al final */
+.slide { overflow-y: auto; touch-action: pan-y; justify-content: flex-start; }
+.slide > :first-child { margin-top: auto; } .slide > :last-child { margin-bottom: auto; }
+.slide .go.next { width: 100%; margin-top: .4rem; background: rgba(255,255,255,.92); }
+.face-learn { width: 100%; max-width: 34rem; margin-top: .4rem; text-align: left; background: rgba(0,0,0,.24); border-radius: 1.2rem; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .3rem; }
+.learn-label { margin: .3rem 0 0; font-size: .68rem; letter-spacing: .14em; font-weight: 900; color: #ffd76a; }
+.learn-text { margin: 0; font-size: .98rem; line-height: 1.45; }
+.learn-note { margin: 0; font-size: .88rem; opacity: .8; }
+.learn-contrast { margin: .2rem 0 0; font-size: .9rem; font-weight: 700; opacity: .9; }
+.learn-code { margin: .2rem 0; padding: .6rem .7rem; border-radius: .7rem; background: rgba(0,0,0,.35); font-size: .82rem; white-space: pre-wrap; overflow-wrap: anywhere; }
+.concept-face .face-emoji { font-size: 4.6rem; }
+/* Los puntos suben junto al contador de XP, sin tapar el texto */
+.floater { left: auto; right: 4.4rem; top: max(3.4rem, calc(env(safe-area-inset-top) + 2.8rem)); transform: none; font-size: 1.1rem; animation: float-xp .8s ease forwards; }
+@keyframes float-xp { from { opacity: 1; transform: translateY(8px); } to { opacity: 0; transform: translateY(-18px); } }

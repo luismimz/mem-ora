@@ -77,6 +77,8 @@ const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms); } catch
 function Slide({ children, onNext, tone, className = '' }: { children: ReactNode; onNext?: () => void; tone: number; className?: string }) {
   const [dy, setDy] = useState(0);
   const start = useRef<number | null>(null);
+  const box = useRef<HTMLElement>(null);
+  const atEnd = () => { const el = box.current; return !el || el.scrollTop + el.clientHeight >= el.scrollHeight - 4; };
   useEffect(() => {
     if (!onNext) return;
     const key = (e: KeyboardEvent) => { if (['ArrowUp', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); onNext(); } };
@@ -84,25 +86,39 @@ function Slide({ children, onNext, tone, className = '' }: { children: ReactNode
     return () => window.removeEventListener('keydown', key);
   }, [onNext]);
   return (
-    <section className={`slide ${className}`} style={{ '--tone': tone, transform: dy ? `translateY(${dy}px)` : undefined } as React.CSSProperties}
-      onPointerDown={(e) => { if (!onNext || (e.target as HTMLElement).closest('button, input')) return; start.current = e.clientY; }}
+    <section ref={box} className={`slide ${className}`} style={{ '--tone': tone, transform: dy ? `translateY(${dy}px)` : undefined } as React.CSSProperties}
+      onPointerDown={(e) => { if (!onNext || (e.target as HTMLElement).closest('button, input, pre')) return; start.current = atEnd() ? e.clientY : null; }}
       onPointerMove={(e) => { if (start.current !== null) setDy(Math.min(0, e.clientY - start.current)); }}
-      onPointerUp={() => { if (start.current !== null && (dy < -60 || Math.abs(dy) < 6)) onNext?.(); start.current = null; setDy(0); }}>
+      onPointerUp={() => { if (start.current !== null && dy < -60) onNext?.(); start.current = null; setDy(0); }}>
       {children}
-      {onNext && <p className="slide-hint">desliza ↑</p>}
+      {onNext && <button type="button" className="go next" onClick={onNext}>Siguiente ↑</button>}
     </section>
   );
 }
 
-function Concept({ unit, big = true }: { unit: SessionUnit; big?: boolean }) {
+/**
+ * La ficha completa (D-073): primero la mnemotecnia (para recordar) y después «Qué es» y «Ejemplo» (para entender).
+ * Todo lo que se pregunte después está aquí: se evalúa lo que se enseña.
+ */
+function Concept({ unit, full = true }: { unit: SessionUnit; full?: boolean }) {
   const a = unit.association;
+  const p = unit.payload as Partial<ConceptPayload> & { examples?: Array<{ text: string; explanation?: string; translation?: string }> };
+  const ex = p.examples?.[0];
+  const code = ex && unit.language !== 'es' && /[;{}()=<>]|\w+\.\w+\(/.test(ex.text);
   return (
-    <div className={`concept-face ${big ? 'big' : ''}`}>
+    <div className="concept-face">
       <div className="face-emoji" aria-hidden="true">{a?.emoji ?? '✨'}</div>
       <h2 lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></h2>
       <p className="face-meaning">{unitMeaning(unit)}</p>
       {a?.cue && <p className="face-cue">{a.technique === 'analogy' ? 'como' : 'suena a'} <b>{a.cue}</b></p>}
       {a?.text && <p className="face-story"><Marked text={a.text} /></p>}
+      {full && (p.definition || ex) && (
+        <div className="face-learn">
+          {p.definition && <><p className="learn-label">QUÉ ES</p><p className="learn-text">{p.definition}</p></>}
+          {p.contrast && <p className="learn-contrast">{p.contrast}</p>}
+          {ex && <><p className="learn-label">EJEMPLO</p>{code ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text">{ex.text}</p>}{(ex.explanation || ex.translation) && <p className="learn-note">{ex.explanation ?? ex.translation}</p>}</>}
+        </div>
+      )}
     </div>
   );
 }
@@ -111,12 +127,10 @@ function Concept({ unit, big = true }: { unit: SessionUnit; big?: boolean }) {
 
 function Reel({ unit, onNext }: { unit: SessionUnit; onNext: () => void }) {
   useEffect(() => { if (audioEnabled()) speak(unitText(unit), unit.language); }, [unit]);
-  const p = unit.payload as Partial<ConceptPayload>;
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className="reel">
       <p className="tag">NUEVO PARA TU MEMORIA</p>
       <Concept unit={unit} />
-      {p.examples?.[0]?.text && <p className="face-example">{p.examples[0].text}</p>}
     </Slide>
   );
 }

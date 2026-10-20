@@ -658,3 +658,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   de ≤ 10 palabras ligadas al significado y retos de código Java correcto. Contenido propio (regla 16).
 - **Revisión antes de entregar:** `private/shots/feed.cjs` recorre la ronda en la app real y comprueba el método.
 
+## D-073 · Se evalúa lo que se enseña: la ficha del Flujo enseña la definición y el ejemplo (20-oct-2026)
+- **Fallo:** el reel solo mostraba idea clave y mnemotecnia; la definición (donde están TextField, BorderLayout…) no
+  se veía, y algunas preguntas pedían cosas no explicadas.
+- **Arreglo:** la ficha (y «Recuérdalo así») muestra la mnemotecnia y debajo «Qué es», el contraste y «Ejemplo» (con
+  código si lo hay). Si es larga se desplaza; «Siguiente» al final. Los +XP suben junto al contador, sin tapar texto.
+- **Revisor (bloqueante al generar):** `private/dam/taught.py` comprueba que la respuesta de cada reto aparece en lo
+  enseñado (su ficha o una anterior del curso). Desarrollo de interfaces: 0 incumplimientos. Resto: 42 por corregir
+  en la auditoría (Acceso 8, Aprender 14, Acceso a datos 5, Bases de datos 11, Programación 4).
+
