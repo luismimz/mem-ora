@@ -673,4 +673,8 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Arreglo:** `index.html`, `sw.js` y el manifiesto con `no-cache`; solo `/assets/` (con huella) un año. El service
   worker pide la página sin caché (`cache: 'no-store'`, `updateViaCache: 'none'`, caché v2). La app comprueba la
   versión al volver a primer plano y cada 5 minutos y se recarga sola; en mitad de una ronda espera a que salgas.
+- **Además (mismo día):** Cloudflare servía el `sw.js` antiguo desde su caché (30 días); el service worker pasa a
+  `sw-v2.js` y nginx no guarda en caché ningún `sw*.js`. Si vuelve a pasar, se sube el número en `main.tsx`.
+- **Desbordamiento:** en el Flujo, el código y las palabras largas se parten (`overflow-wrap: anywhere`) y ninguna
+  tarjeta se sale de la pantalla; el recorrido de revisión (`feed.cjs`) lo comprueba en cada tarjeta.
 

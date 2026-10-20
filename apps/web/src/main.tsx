@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
 
 // Guardar la app en el dispositivo para abrirla sin conexión (solo en producción; en desarrollo molestaría a Vite).
 if ('serviceWorker' in navigator && import.meta.env.PROD) {
-  window.addEventListener('load', () => void navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).catch(() => undefined));
+  window.addEventListener('load', () => void navigator.serviceWorker.register('/sw-v2.js', { updateViaCache: 'none' }).catch(() => undefined));
 }
 
 // D-074: si hay una versión nueva publicada, se carga sola al volver a la app, sin cortar una ronda en marcha.

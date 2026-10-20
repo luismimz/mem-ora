@@ -1,4 +1,5 @@
-// Service worker de Memora (D-054): guarda la app en el dispositivo para abrirla sin conexión.
+// Service worker de Memora (D-054). Se llama sw-v2.js porque Cloudflare guardó el antiguo /sw.js 30 días (D-074).
+// Si vuelve a pasar, sube el número (sw-v3.js) en main.tsx.: guarda la app en el dispositivo para abrirla sin conexión.
 // - Páginas: primero la red; sin red, la copia guardada de index.html (todas las rutas son la misma app).
 // - Recursos de /assets (con huella en el nombre): de la caché, y si no están, de la red y se guardan.
 // - La API (/api) nunca se guarda aquí: el progreso es del servidor y lo offline va por la cola de la app.
