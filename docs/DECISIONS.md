@@ -667,3 +667,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   enseñado (su ficha o una anterior del curso). Desarrollo de interfaces: 0 incumplimientos. Resto: 42 por corregir
   en la auditoría (Acceso 8, Aprender 14, Acceso a datos 5, Bases de datos 11, Programación 4).
 
+## D-074 · La app se actualiza sola en el móvil (20-oct-2026)
+- **Fallo:** el móvil seguía con la versión vieja: nginx guardaba 30 días cualquier `.js` (también `sw.js`, el service
+  worker) y la página principal no llevaba `Cache-Control`; con la app abierta, nada comprobaba si había versión nueva.
+- **Arreglo:** `index.html`, `sw.js` y el manifiesto con `no-cache`; solo `/assets/` (con huella) un año. El service
+  worker pide la página sin caché (`cache: 'no-store'`, `updateViaCache: 'none'`, caché v2). La app comprueba la
+  versión al volver a primer plano y cada 5 minutos y se recarga sola; en mitad de una ronda espera a que salgas.
+

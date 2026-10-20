@@ -2,7 +2,7 @@
 // - Páginas: primero la red; sin red, la copia guardada de index.html (todas las rutas son la misma app).
 // - Recursos de /assets (con huella en el nombre): de la caché, y si no están, de la red y se guardan.
 // - La API (/api) nunca se guarda aquí: el progreso es del servidor y lo offline va por la cola de la app.
-const CACHE = 'memora-app-v1';
+const CACHE = 'memora-app-v2';
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -30,7 +30,7 @@ self.addEventListener('fetch', (event) => {
   if (event.request.mode === 'navigate') {
     event.respondWith((async () => {
       try {
-        const res = await fetch(event.request);
+        const res = await fetch(event.request, { cache: 'no-store' });
         const cache = await caches.open(CACHE);
         cache.put('/index.html', res.clone());
         return res;
