@@ -4,7 +4,7 @@ import { checkChoice, checkText, checkUnknownFields, isRecord, issue, type Conte
 import { validateUnitPayload, type ConceptExercise, type ConceptPayload, type MemoryChallengePayload, type PatternPayload, type TermPayload } from './unitTypes';
 
 export const COURSE_FILE_VERSION = 1;
-export const COURSE_MODES = ['associations', 'grammar', 'arcade', 'chat', 'memory'] as const;
+export const COURSE_MODES = ['associations', 'grammar', 'arcade', 'chat', 'memory', 'flow'] as const;
 const KEY = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
 
 export interface AssociationEntry {

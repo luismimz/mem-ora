@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
+export type AssocStepKind = 'reel' | 'quick' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -24,10 +24,12 @@ export interface AssocStep {
   typed?: boolean;
   /** Repesca (D-064): solo se hace si el alumno falló esa unidad antes en la sesión; si no, se salta. */
   retry?: boolean;
+  /** Flujo (D-068): la pregunta relámpago va del término al significado (true) o al revés. */
+  reverse?: boolean;
 }
 
 export interface AssocPlan {
-  mode: 'associations';
+  mode: 'associations' | 'flow';
   sessionId: string;
   courseId: string;
   day: number;

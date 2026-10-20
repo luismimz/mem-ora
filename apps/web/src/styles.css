@@ -401,3 +401,20 @@ blockquote.reading { font-size: .92rem; }
 .think-answer .scene-text { margin: .5rem 0; }
 .choices.grade { grid-template-columns: repeat(3, 1fr); }
 .choices.grade .choice { text-transform: none; font-size: 1rem; min-height: 3.4rem; }
+
+/* Modo Flujo (D-068): tarjetas a pantalla completa, deslizar hacia arriba, sin fricción */
+.card.flow { min-height: min(78vh, 680px); display: flex; flex-direction: column; justify-content: center; gap: .6rem; touch-action: pan-x; user-select: none; }
+.enter-up { animation: enter-up .32s cubic-bezier(.2, .8, .2, 1); }
+@keyframes enter-up { from { opacity: 0; transform: translateY(40px) scale(.98); } to { opacity: 1; transform: none; } }
+.reel-emoji { font-size: 5.2rem; text-align: center; line-height: 1.1; }
+.reel-emoji.small { font-size: 3.2rem; }
+.reel-cue { text-align: center; color: var(--muted); margin: 0; }
+.reel-cue b { color: var(--accent-ink); font-size: 1.6rem; }
+.reel-text { text-align: center; font-size: 1.15rem; }
+.flow-hint { text-align: center; color: var(--muted); font-size: .8rem; margin: .4rem 0 0; }
+.flow-timer { height: 3px; background: var(--line); border-radius: 3px; overflow: hidden; }
+.flow-timer i { display: block; height: 100%; background: var(--accent); animation: flow-fill linear forwards; }
+@keyframes flow-fill { from { width: 0; } to { width: 100%; } }
+.choices.quick { grid-template-columns: 1fr; }
+.flash { display: flex; flex-direction: column; gap: .5rem; text-align: center; }
+@media (prefers-reduced-motion: reduce) { .enter-up { animation: none; } .flow-timer i { animation: none; width: 100%; } }

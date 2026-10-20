@@ -612,3 +612,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   explícita del usuario. Lección: una decisión pedagógica del usuario no se cambia sin preguntarle.
 - **Prueba:** «nunca se pregunta por una unidad sin mostrar antes su asociación en la sesión» (motor de experiencias).
 
+## D-068 · Modo Flujo: aprender deslizando, al estilo de las redes sociales y del Arcade (20-oct-2026)
+- **Qué (aprobado por el usuario):** un deslizar continuo de tarjetas cortas. Lo nuevo entra en parejas: dos
+  asociaciones rápidas («reel», avanzan solas en ~6 s o al tocar) y sus dos preguntas relámpago (7 s, 3 opciones,
+  término → significado o al revés). Los repasos van como relámpago. **Se enseña en el error:** si fallas o se acaba el
+  tiempo, aparece la asociación completa y esa unidad vuelve 3 tarjetas después en sentido contrario. Cada 8
+  tarjetas, una pregunta tipo examen de algo ya visto. Solo en idiomas se escribe al final. Sin pantallas intermedias.
+- **Por qué:** el proceso por escenas era correcto pero lento y con fricción; el usuario quiere fluidez y engancharse.
+- **Cómo se activa:** modo de curso `flow` (de momento solo Acceso a Grado Medio, para validarlo). Los demás cursos
+  siguen con el proceso por escenas (D-064/D-067) hasta que el usuario apruebe replicarlo.
+- **Además:** el desplegable «Revisar paso» solo aparece en la vista previa de Studio o con `#revisar`.
+

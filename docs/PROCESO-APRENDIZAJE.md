@@ -1,5 +1,9 @@
 # Proceso de aprendizaje de Memora
 
+> **Modo Flujo (D-068)**, en prueba en Acceso a Grado Medio: lo nuevo, en parejas: dos asociaciones (reel) → dos
+> preguntas relámpago. Los repasos son relámpago. Si fallas, aparece la asociación y vuelve 3 tarjetas después. Cada 8
+> tarjetas, una pregunta tipo examen. El resto de cursos sigue el proceso por escenas descrito abajo.
+
 Aprobado por el usuario (D-067). Cualquier cambio de este proceso necesita su aprobación explícita.
 
 ## Regla de oro

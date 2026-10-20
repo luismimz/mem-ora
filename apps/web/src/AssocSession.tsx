@@ -171,7 +171,8 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
         <span className="pill">{progress}%</span>
       </div>
       <div className="bar"><i style={{ width: `${progress}%` }} /></div>
-      {staff && (
+      {/* Revisar paso: solo en la vista previa de Studio o con #revisar en la dirección (sin fricción al estudiar). */}
+      {staff && (previewProp || window.location.hash === '#revisar') && (
         <div className="banner review">
           <label>Revisar paso <select value={index} onChange={(e) => { setReviewing(true); setIndex(Number(e.target.value)); }}>
             {plan.steps.map((s, i) => <option key={s.id} value={i}>{i + 1}. {stepLabel(s, units)}</option>)}
@@ -220,6 +221,15 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
           art={<Art unit={unit} chain={false} />} question={<span className="scene-text"><Highlight text={masked(unit.association?.text ?? unitMeaning(unit), unitText(unit))} /><br /><small>{hiddenName(unit)}</small></span>}
           choices={choicesFor(unitText(unit).toUpperCase(), sessionUnits.map((k) => unitText(units[k]!).toUpperCase()), step.id, 4)}
           reveal={unit} quiet onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#rescue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
+      )}
+
+      {step?.kind === 'reel' && unit && <Reel key={step.id} unit={unit} onNext={() => { expose(unit); void advance(); }} />}
+
+      {step?.kind === 'quick' && unit && !skipRetry && (
+        <Quick key={step.id} unit={unit} reverse={Boolean(step.reverse)} retry={Boolean(step.retry)} combo={combo}
+          pool={checkPool(unit.key).map((k) => units[k]!)}
+          onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#quick${step.reverse ? '-inv' : ''}`, ms); scored(ok); }}
+          onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
       )}
 
       {step?.kind === 'think' && unit && (
@@ -415,6 +425,92 @@ function Arcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; seed:
   );
 }
 
+/** Flujo (D-068): tarjeta a pantalla completa que se pasa deslizando hacia arriba o tocando. */
+function FlowCard({ children, onNext, className = '', auto }: { children: ReactNode; onNext?: () => void; className?: string; auto?: number }) {
+  const [dy, setDy] = useState(0);
+  const start = useRef<number | null>(null);
+  useEffect(() => {
+    if (!onNext) return;
+    const key = (e: KeyboardEvent) => { if (['ArrowUp', 'ArrowLeft', 'Enter', ' '].includes(e.key)) onNext(); };
+    window.addEventListener('keydown', key);
+    const t = auto ? setTimeout(onNext, auto) : undefined;
+    return () => { window.removeEventListener('keydown', key); if (t) clearTimeout(t); };
+  }, [onNext, auto]);
+  return (
+    <div className={`card flow enter-up ${className}`} style={{ transform: dy ? `translateY(${dy}px)` : undefined }}
+      onPointerDown={(e) => { if (!onNext || (e.target as HTMLElement).closest('button')) return; start.current = e.clientY; }}
+      onPointerMove={(e) => { if (start.current !== null) setDy(Math.min(0, e.clientY - start.current)); }}
+      onPointerUp={() => { if (start.current !== null && (dy < -70 || Math.abs(dy) < 6)) onNext?.(); start.current = null; setDy(0); }}>
+      {children}
+      {auto && <div className="flow-timer"><i style={{ animationDuration: `${auto}ms` }} /></div>}
+      {onNext && <p className="flow-hint">desliza ↑ o toca</p>}
+    </div>
+  );
+}
+
+/** Reel: la asociación en grande, para verla y pasar (avanza sola). */
+function Reel({ unit, onNext }: { unit: SessionUnit; onNext: () => void }) {
+  const a = unit.association;
+  useEffect(() => { speak(unitText(unit), unit.language); }, [unit]);
+  return (
+    <FlowCard onNext={onNext} auto={6500} className="reel">
+      <p className="eyebrow">NUEVO</p>
+      <div className="reel-emoji" aria-hidden="true">{a?.emoji ?? '✨'}</div>
+      <div className="word concept"><strong lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
+      {a?.cue && <p className="reel-cue">{a.technique === 'analogy' ? 'se parece a' : 'suena a'} <b>{a.cue}</b></p>}
+      {a?.text && <p className="scene-text reel-text"><Highlight text={a.text} /></p>}
+    </FlowCard>
+  );
+}
+
+/** Relámpago: 3 opciones con tiempo; si se falla, la asociación aparece en ese momento (se enseña en el error). */
+function Quick({ unit, reverse, retry, pool, combo, onAnswer, onDone }: { unit: SessionUnit; reverse: boolean; retry: boolean; pool: SessionUnit[]; combo: number; onAnswer: (ok: boolean, ms: number) => void; onDone: (ok: boolean) => void }) {
+  const SECONDS = 7;
+  const [picked, setPicked] = useState<number | null>(null);
+  const [left, setLeft] = useState(SECONDS);
+  const t0 = useRef(performance.now());
+  const label = (u: SessionUnit) => (reverse ? unitMeaning(u) : unitText(u).toUpperCase());
+  const choices = useMemo(() => choicesFor(label(unit), pool.map(label), `${unit.key}-${reverse}-${retry}`, 3), [unit, pool, reverse, retry]); // eslint-disable-line react-hooks/exhaustive-deps
+  const ok = picked !== null && picked >= 0 && choices[picked]!.correct;
+  useEffect(() => {
+    if (picked !== null) return;
+    const tick = setInterval(() => setLeft((l) => Math.max(0, l - 0.1)), 100);
+    return () => clearInterval(tick);
+  }, [picked]);
+  useEffect(() => { if (picked === null && left <= 0) answer(-1); });
+  function answer(k: number) {
+    if (picked !== null) return;
+    const right = k >= 0 && choices[k]!.correct;
+    setPicked(k);
+    onAnswer(right, Math.round(performance.now() - t0.current));
+    if (right) setTimeout(() => onDone(true), 550);
+  }
+  const a = unit.association;
+  return (
+    <div className={`card flow enter-up ${picked === null ? '' : ok ? 'ok' : 'ko'}`}>
+      <div className="row"><p className="eyebrow">{retry ? 'OTRA VEZ' : 'RELÁMPAGO'}</p><span key={combo} className={`combo ${combo > 1 ? 'hot' : ''}`}>{combo > 1 ? `🔥 x${combo}` : 'COMBO x1'}</span></div>
+      <div className="timer"><i style={{ width: `${(left / SECONDS) * 100}%` }} /></div>
+      {picked !== null && !ok ? (
+        // Se enseña en el error: la asociación completa, y vuelve unas tarjetas después.
+        <div className="flash">
+          <p className="eyebrow">{picked < 0 ? '¡TIEMPO!' : 'CASI'} · RECUÉRDALO ASÍ</p>
+          <div className="reel-emoji small" aria-hidden="true">{a?.emoji ?? '✨'}</div>
+          <div className="word concept"><strong lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
+          {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}
+          <button type="button" className="primary" onClick={() => onDone(false)}>Entendido · vuelve luego</button>
+        </div>
+      ) : (
+        <>
+          <div className="reel-emoji small" aria-hidden="true">{a?.emoji ?? '✨'}</div>
+          <div className="question">{reverse ? <>¿Qué es <em>{unitText(unit).toUpperCase()}</em>?</> : <>{askName(unit)} <em>{unitMeaning(unit)}</em>?</>}</div>
+          <div className="choices quick">{choices.map((c, k) => <button type="button" key={c.label} className={`choice ${c.label.length > 22 ? 'long' : ''} ${picked !== null && c.correct ? 'right' : ''}`} onClick={() => answer(k)}>{c.label}</button>)}</div>
+          {ok && <div className="feedback ok">¡Bien! +{10 + Math.round(left * 3)} XP</div>}
+        </>
+      )}
+    </div>
+  );
+}
+
 /**
  * Recordar sin escribir (D-066): piensa la respuesta → «Ver la respuesta» → ¿la sabías? Sí / Casi / No.
  * En lo nuevo, la pista es la historia sin la palabra; en el repaso, la clave, la imagen o solo la idea (se retira).
@@ -560,8 +656,8 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
 }
 
 function Summary({ plan, outcomes, units, xp, minutes, preview, courseId, mission, onMission, onExit }: { plan: AssocPlan; outcomes: Record<string, Outcome>; units: Record<string, SessionUnit>; xp: number; minutes: number; preview: boolean; courseId: string; mission?: MissionRef; onMission?: (key: string) => void; onExit: () => void }) {
-  const fresh = plan.scenes.flat().length;
-  const recalls = plan.steps.filter((s) => s.kind === 'recall' || s.kind === 'review');
+  const fresh = plan.mode === 'flow' ? plan.steps.filter((s) => s.kind === 'reel').length : plan.scenes.flat().length;
+  const recalls = plan.steps.filter((s) => s.kind === 'recall' || s.kind === 'review' || (s.kind === 'quick' && !s.retry));
   const first = recalls.filter((s) => outcomes[s.id]?.correct && !outcomes[s.id]?.hint).length;
   const helped = recalls.filter((s) => outcomes[s.id]?.correct && outcomes[s.id]?.hint).length;
   const [next, setNext] = useState<number | null>(null);
@@ -622,7 +718,7 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
   );
 }
 
-const STEP_NAMES: Record<AssocStep['kind'], string> = { think: 'Piensa', check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', summary: 'Resumen' };
+const STEP_NAMES: Record<AssocStep['kind'], string> = { reel: 'Asociación', quick: 'Relámpago', think: 'Piensa', check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', summary: 'Resumen' };
 function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
   const u = s.unitKey ? units[s.unitKey] : undefined;
   return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;
