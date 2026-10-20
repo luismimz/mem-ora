@@ -593,3 +593,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Por qué:** decisión del usuario como profesor: enseñar siempre antes de preguntar. Coste asumido: el intento de
   recuperación es más fácil (menos efecto de prueba); la repesca y los repasos espaciados siguen midiendo lo retenido.
 
+## D-066 · Recordar sin escribir, repasos «intento primero» y sesiones cortas (20-oct-2026)
+- **Recordar sin escribir:** paso «Piensa»: se muestra la pista (en lo nuevo, la historia sin la palabra; en el repaso,
+  la clave, la imagen o solo la idea), el alumno piensa la respuesta, pulsa «Ver la respuesta» y se califica: Sí / Casi
+  / No. Al ver la respuesta se vuelve a enseñar la ficha. Cuenta como recuperación (con pista P4/P1 o sin pista);
+  «Casi» y «No» llevan a la repesca. Sustituye a elegir de qué habla la historia (reconocimiento) en lo nuevo.
+- **Repasos (revierte D-065):** intento primero, con pista que se retira; si fallas, la ficha reenseña y repesca. La
+  ficha va antes solo si cambió (D-062). Motivo: práctica de recuperación (Roediger y Karpicke 2006) y error con
+  corrección (Kornell, Hays y Bjork 2009); ver la respuesta antes convierte el repaso en releer.
+- **Sesiones cortas:** bloques de 4 conceptos nuevos y como mucho 10 repasos por sesión (5–10 minutos).
+- **Idiomas:** se mantiene elegir y escribir (D-064). Primero se valida en Acceso a Grado Medio.
+- **Siguiente:** medir la retención a 7 y 30 días y cambiar el programador por FSRS.
+

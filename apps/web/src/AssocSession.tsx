@@ -222,6 +222,13 @@ export function AssocSession({ payload, courseId, preview: previewProp = false, 
           reveal={unit} quiet onAnswer={(ok, ms) => { attempt(unit, ok, `${unit.key}#rescue`, ms); scored(ok); }} onDone={(ok) => void advance({ correct: ok, hint: 0 })} />
       )}
 
+      {step?.kind === 'think' && unit && (
+        <Think key={step.id} unit={unit} combo={combo} help={(step.startHint ?? 0) as number} retry={Boolean(step.retry)}
+          scene={step.scene >= 0 && step.scene < plan.scenes.length ? { index: plan.scenes[step.scene]!.indexOf(unit.key) + 1, total: plan.scenes[step.scene]!.length } : null}
+          onAnswer={(ok, hint, ms) => { attempt(unit, ok, `${unit.key}#think`, ms, hint ? 'recall_cued' : 'recall_unaided', hint); scored(ok && hint === 0); }}
+          onDone={(ok, hint) => void advance({ correct: ok, hint })} />
+      )}
+
       {step?.kind === 'check' && unit && (
         // Comprobación selectiva (D-063): elegir antes de escribir; la ayuda se retira repaso a repaso.
         <Choose key={step.id} title={step.retry ? 'REPESCA · ¿AHORA SÍ?' : `RECUERDA · ${['CON LA PISTA', 'CON LA IMAGEN', 'SOLO LA IDEA', 'SIN AYUDA'][step.startHint ?? 0] ?? ''}`} combo={combo}
@@ -408,6 +415,55 @@ function Arcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; seed:
   );
 }
 
+/**
+ * Recordar sin escribir (D-066): piensa la respuesta → «Ver la respuesta» → ¿la sabías? Sí / Casi / No.
+ * En lo nuevo, la pista es la historia sin la palabra; en el repaso, la clave, la imagen o solo la idea (se retira).
+ * Al ver la respuesta se vuelve a enseñar la ficha (respuesta, asociación y definición). «Casi» y «No» van a la repesca.
+ */
+function Think({ unit, help, retry, scene, combo, onAnswer, onDone }: { unit: SessionUnit; help: number; retry: boolean; scene: { index: number; total: number } | null; combo: number; onAnswer: (ok: boolean, hint: number, ms: number) => void; onDone: (ok: boolean, hint: number) => void }) {
+  const [shown, setShown] = useState(false);
+  const t0 = useRef(performance.now());
+  const a = unit.association;
+  const definition = unit.type === 'concept' ? (unit.payload as ConceptPayload).definition : undefined;
+  // Pista usada (escalera P0–P5): historia o clave = puente (P4); imagen = situación (P1); solo la idea = sin pista.
+  const hint = scene || retry || help === 0 ? (a ? 4 : 1) : help === 1 ? 1 : 0;
+  const title = scene ? `LA HISTORIA · ${scene.index}/${scene.total}` : retry ? 'REPESCA · ¿AHORA SÍ?' : `RECUERDA · ${['CON LA PISTA', 'CON LA IMAGEN', 'SOLO LA IDEA'][help] ?? 'SIN AYUDA'}`;
+  function grade(g: 'yes' | 'almost' | 'no') {
+    const ms = Math.round(performance.now() - t0.current);
+    const h = g === 'almost' ? Math.min(4, Math.max(hint, 1) + 1) : hint;
+    onAnswer(g !== 'no', h, ms);
+    onDone(g === 'yes', h);
+  }
+  return (
+    <SwipeCard className={shown ? 'ok' : ''} onNext={undefined} label="Seguir">
+      <div className="row"><p className="eyebrow">{title}</p><span key={combo} className={`combo ${combo > 1 ? 'hot' : ''}`}>COMBO x{Math.max(1, combo)}</span></div>
+      {(scene || retry || help <= 1) && <div style={{ marginTop: '.8rem' }}><Art unit={unit} small chain={false} /></div>}
+      {shown ? null : scene ? (
+        <div className="question"><span className="scene-text"><Highlight text={masked(a?.text ?? definition ?? unitMeaning(unit), unitText(unit))} /></span><br /><small>Piensa: ¿de qué {unit.type === 'concept' ? 'concepto' : 'palabra'} habla?</small></div>
+      ) : (
+        <div className="question">{askName(unit)} <em>{unitMeaning(unit)}</em>?
+          {(retry || help === 0) && a?.cue && <p className="hint-cue">Pista: {a.technique === 'analogy' ? 'se parece a' : 'suena a'} <b>{a.cue}</b></p>}
+          <br /><small>Piénsalo antes de mirar.</small></div>
+      )}
+      {!shown ? (
+        <button type="button" className="primary think-reveal" onClick={() => { setShown(true); speak(unitText(unit), unit.language); }}>Ver la respuesta</button>
+      ) : (
+        <div className="think-answer">
+          <div className="word concept"><strong lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
+          {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}
+          {definition && <p className="muted">{definition}</p>}
+          <p className="eyebrow" style={{ marginTop: '.6rem' }}>¿La sabías?</p>
+          <div className="choices grade">
+            <button type="button" className="choice" onClick={() => grade('yes')}>✅ Sí</button>
+            <button type="button" className="choice" onClick={() => grade('almost')}>🤏 Casi</button>
+            <button type="button" className="choice" onClick={() => grade('no')}>❌ No</button>
+          </div>
+        </div>
+      )}
+    </SwipeCard>
+  );
+}
+
 function Review({ unit, startHint, onAnswer, onDone }: { unit: SessionUnit; startHint: HintLevel; onAnswer: (ok: boolean, hint: number, ms: number, format: ClientEvent['format']) => void; onDone: (ok: boolean, hint: number) => void }) {
   const [text, setText] = useState('');
   const [hint, setHint] = useState<HintLevel>(startHint);
@@ -566,7 +622,7 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
   );
 }
 
-const STEP_NAMES: Record<AssocStep['kind'], string> = { check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', summary: 'Resumen' };
+const STEP_NAMES: Record<AssocStep['kind'], string> = { think: 'Piensa', check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', summary: 'Resumen' };
 function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
   const u = s.unitKey ? units[s.unitKey] : undefined;
   return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;

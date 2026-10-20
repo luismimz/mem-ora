@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'review' | 'check' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
+export type AssocStepKind = 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -37,7 +37,9 @@ export interface AssocPlan {
   scenes: string[][];
 }
 
-export const SCENE_SIZE = 5;
+export const SCENE_SIZE = 4;
+/** Repasos por sesión como máximo: sesiones de 5–10 minutos (D-066). */
+export const MAX_REVIEW_UNITS = 10;
 /** A partir de cuántas unidades aprendidas puede saltar un Arcade sorpresa. */
 export const ARCADE_MIN_KNOWN = 20;
 
@@ -79,6 +81,8 @@ export function buildAssociationSession(input: {
    * 2 = solo el significado, 3 o más = sin comprobación (recuperación directa). Sin dato, 0.
    */
   reviewHelp?: Record<string, number>;
+  /** Repasos como máximo por sesión (sesiones cortas, D-066); los demás esperan a la siguiente. */
+  maxReviewUnits?: number;
 }): AssocPlan {
   const { items, units, sessionId } = input;
   const size = input.sceneSize ?? SCENE_SIZE;
@@ -96,18 +100,19 @@ export function buildAssociationSession(input: {
     if (!units[item.unitId]) continue;
     byUnit.set(item.unitId, [...(byUnit.get(item.unitId) ?? []), item]);
   }
-  for (const [key, list] of byUnit) {
+  for (const [key, list] of [...byUnit].slice(0, input.maxReviewUnits ?? MAX_REVIEW_UNITS)) {
     const unit = units[key]!;
     const kinds = new Map(list.map((i) => [i.skillId, unit.skills.find((s) => s.key === i.skillId)?.kind]));
     const recall = list.find((i) => kinds.get(i.skillId) === 'recall');
     const apply = list.find((i) => kinds.get(i.skillId) === 'apply' && exercisesOf(unit).length);
     if (!recall && !apply) continue; // escuchar se repasa al oír la tarjeta; producir, en Gramática.
     const writes = unit.type === 'term'; // D-064: se escribe solo en idiomas; el resto se responde eligiendo.
-    // Enseñar antes de evaluar (D-065): todo repaso empieza por su asociación; «renovada» si la ficha cambió.
-    add({ kind: 'card', unitKey: key, scene: refresh.has(key) ? -1 : -3 });
-    // Pista e intento: elegir con una pista de la mnemotecnia que se retira repaso a repaso (D-063).
+    // D-066 (revierte D-065): pista → intento → si fallas, la ficha reenseña. La ficha va antes solo si cambió (D-062).
+    if (refresh.has(key)) add({ kind: 'card', unitKey: key, scene: -1 });
+    // La ayuda se retira repaso a repaso (D-063): 0 pista (clave), 1 imagen, 2 solo la idea.
     const help = Math.max(0, Math.min(3, input.reviewHelp?.[key] ?? 0));
-    if (help < 3 || !writes) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel });
+    if (writes) { if (help < 3) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel }); }
+    else add({ kind: 'think', unitKey: key, scene: -1, startHint: Math.min(help, 2) as HintLevel });
     if (recall && writes) add({ kind: 'review', unitKey: key, scene: -1, skillKey: recall.skillId, startHint: recall.recommendedHint });
     if (apply) add({ kind: 'challenge', unitKey: key, scene: -1, skillKey: apply.skillId, exercise: Math.floor(rand() * exercisesOf(unit).length), typed: writes });
     reviewed.push(key);
@@ -123,7 +128,8 @@ export function buildAssociationSession(input: {
     for (const u of scene) add({ kind: 'card', unitKey: u, scene: n });
     const withCue = scene.filter((u) => units[u]!.association?.cue);
     if (withCue.length >= 2) for (const u of shuffle(withCue, rand)) add({ kind: 'cue', unitKey: u, scene: n });
-    for (const u of shuffle(scene, rand)) add({ kind: 'rescue', unitKey: u, scene: n });
+    // 3) La historia sin la palabra: piensa de qué habla → ver → ¿la sabías? (recordar sin escribir, D-066).
+    for (const u of shuffle(scene, rand)) add({ kind: 'think', unitKey: u, scene: n });
     add({ kind: 'sceneResult', unitKey: '', scene: n });
     for (const u of scene) known.add(u);
     // Arcade sorpresa: al azar, con 20 o más unidades ya trabajadas, y nunca tras la última escena.
@@ -148,7 +154,7 @@ export function buildAssociationSession(input: {
   // 5. Repesca: lo fallado hoy se vuelve a enseñar y se comprueba otra vez (se salta si no hubo fallo).
   for (const u of [...reviewed, ...fresh]) {
     add({ kind: 'card', unitKey: u, scene: -2, retry: true });
-    add({ kind: 'check', unitKey: u, scene: -2, startHint: 0, retry: true });
+    add({ kind: units[u]!.type === 'term' ? 'check' : 'think', unitKey: u, scene: -2, startHint: 0, retry: true });
   }
   if (steps.length) add({ kind: 'summary', unitKey: '', scene: scenes.length });
   return { mode: 'associations', sessionId, courseId: input.courseId, day: input.day, createdAt: input.createdAt, steps, scenes };
