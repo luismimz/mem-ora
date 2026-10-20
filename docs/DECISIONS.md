@@ -678,3 +678,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Desbordamiento:** en el Flujo, el código y las palabras largas se parten (`overflow-wrap: anywhere`) y ninguna
   tarjeta se sale de la pantalla; el recorrido de revisión (`feed.cjs`) lo comprueba en cada tarjeta.
 
+## D-075 · Estándar congelado, puerta de calidad única y Flujo para todos los cursos de conceptos (21-oct-2026)
+- **Por qué:** el usuario, cansado de arreglos que rompían otras cosas, pide establecer de una vez cada parte.
+- **Estándar:** `docs/ESTANDAR.md` (experiencia, reglas de enseñanza, qué técnica de memoria para cada cosa, diseño,
+  calidad, contenido de ILERNA). Solo se cambia con aprobación del usuario.
+- **Puerta de calidad:** `private/release.sh` es la única forma de publicar: tipos, pruebas, compilación, recorrido
+  real de cada curso en Flujo, revisores de contenido (cursos auditados a 0 avisos), despliegue y verificación en
+  producción (versión servida, caché y reglas del plan). Si algo falla, no se publica.
+- **Flujo único** para los cursos de conceptos (Programación, Bases de datos, Acceso a datos, Desarrollo de interfaces,
+  Aprender a aprender, Acceso a Grado Medio). Inglés y Retos de memoria siguen como están hasta que el usuario decida.
+- **Contenido:** prioridad a los módulos del semestre en curso (guías 1s 26/27): Acceso a datos, Desarrollo de
+  interfaces, Sistemas de gestión empresarial, Bases de datos B, Programación B e Inteligencia Artificial, con mapa de
+  cobertura apartado a apartado del índice de cada libro.
+
