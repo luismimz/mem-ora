@@ -107,8 +107,8 @@ export function buildAssociationSession(input: {
     const apply = list.find((i) => kinds.get(i.skillId) === 'apply' && exercisesOf(unit).length);
     if (!recall && !apply) continue; // escuchar se repasa al oír la tarjeta; producir, en Gramática.
     const writes = unit.type === 'term'; // D-064: se escribe solo en idiomas; el resto se responde eligiendo.
-    // D-066 (revierte D-065): pista → intento → si fallas, la ficha reenseña. La ficha va antes solo si cambió (D-062).
-    if (refresh.has(key)) add({ kind: 'card', unitKey: key, scene: -1 });
+    // D-067 (decisión del usuario): todo empieza por la asociación, también el repaso; «renovada» si la ficha cambió.
+    add({ kind: 'card', unitKey: key, scene: refresh.has(key) ? -1 : -3 });
     // La ayuda se retira repaso a repaso (D-063): 0 pista (clave), 1 imagen, 2 solo la idea.
     const help = Math.max(0, Math.min(3, input.reviewHelp?.[key] ?? 0));
     if (writes) { if (help < 3) add({ kind: 'check', unitKey: key, scene: -1, startHint: help as HintLevel }); }

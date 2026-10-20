@@ -605,3 +605,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Idiomas:** se mantiene elegir y escribir (D-064). Primero se valida en Acceso a Grado Medio.
 - **Siguiente:** medir la retención a 7 y 30 días y cambiar el programador por FSRS.
 
+## D-067 · Se enseña antes de preguntar, siempre (decisión del usuario, 20-oct-2026)
+- **Qué:** se restaura D-065. Todo repaso empieza por la asociación y después el intento; vale también al empezar la
+  sesión. El proceso completo queda en `docs/PROCESO-APRENDIZAJE.md` y solo se cambia con aprobación del usuario.
+- **Error corregido:** en D-066 se revirtió D-065 por criterio técnico (práctica de recuperación) sin confirmación
+  explícita del usuario. Lección: una decisión pedagógica del usuario no se cambia sin preguntarle.
+- **Prueba:** «nunca se pregunta por una unidad sin mostrar antes su asociación en la sesión» (motor de experiencias).
+

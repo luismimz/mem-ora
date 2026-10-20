@@ -42,14 +42,30 @@ describe('sesión de asociaciones', () => {
     expect(plan.steps.filter((s) => s.retry).map((s) => s.kind)).toEqual(Array(5).fill(['card', 'think']).flat());
     const reviewItems: PlanItem[] = [{ skillId: 'w0.recall', unitId: 'w0', reason: 'review', priority: 0, recommendedHint: 0 }];
     const r = main(buildAssociationSession({ ...base, units: cpt, items: reviewItems, knownUnits: [], reviewHelp: { w0: 1 } }));
-    expect(r.map((s) => s.kind)).toEqual(['think', 'summary']);
-    expect(r[0]).toMatchObject({ startHint: 1 });
+    expect(r.map((s) => s.kind)).toEqual(['card', 'think', 'summary']);
+    expect(r[1]).toMatchObject({ startHint: 1 });
   });
 
-  it('repaso: intento primero; la ficha va antes solo si cambió (D-062, D-066)', () => {
+  it('repaso: siempre primero la asociación, renovada si cambió; después el intento (D-062, D-067)', () => {
     const review: PlanItem[] = [{ skillId: 'w0.recall', unitId: 'w0', reason: 'review', priority: 0, recommendedHint: 0 }, { skillId: 'w1.recall', unitId: 'w1', reason: 'review', priority: 0, recommendedHint: 0 }];
     const kinds = main(buildAssociationSession({ ...base, items: review, knownUnits: [], refreshUnits: ['w1'] })).map((s) => `${s.kind}:${s.unitKey}`);
-    expect(kinds).toEqual(['check:w0', 'review:w0', 'card:w1', 'check:w1', 'review:w1', 'summary:']);
+    expect(kinds).toEqual(['card:w0', 'check:w0', 'review:w0', 'card:w1', 'check:w1', 'review:w1', 'summary:']);
+  });
+
+  it('REGLA: nunca se pregunta por una unidad sin mostrar antes su asociación en la sesión (D-067)', () => {
+    const cpt = Object.fromEntries(words.map((w) => [w.key, { ...w, type: 'concept', payload: { name: w.key, gist: 'idea', definition: 'd', examples: [], exercises: [{ kind: 'apply_case', prompt: 'p', answer: 'a', distractors: ['b'] }] }, skills: [...w.skills, { key: `${w.key}.apply`, kind: 'apply' }] } as SessionUnit]));
+    for (const u of [units, cpt]) {
+      const items: PlanItem[] = [
+        ...words.slice(0, 6).flatMap((w) => [{ skillId: `${w.key}.recall`, unitId: w.key, reason: 'review' as const, priority: 0, recommendedHint: 0 as const }, { skillId: `${w.key}.apply`, unitId: w.key, reason: 'review' as const, priority: 0, recommendedHint: 0 as const }]),
+        ...words.slice(6).flatMap((w) => [`${w.key}.recall`, `${w.key}.apply`].map((skillId) => ({ skillId, unitId: w.key, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }))),
+      ];
+      const plan = buildAssociationSession({ ...base, units: u, items, knownUnits: [], reviewHelp: { w0: 2, w1: 1 } });
+      expect(plan.steps[0]!.kind).toBe('card');
+      plan.steps.forEach((step, i) => {
+        if (!step.unitKey || step.kind === 'card') return;
+        expect(plan.steps.slice(0, i).some((s) => s.kind === 'card' && s.unitKey === step.unitKey)).toBe(true);
+      });
+    }
   });
 
   it('sesiones cortas: como mucho 10 repasos por sesión', () => {
@@ -85,14 +101,14 @@ describe('sesión de asociaciones', () => {
   it('los repasos vencidos van primero y empiezan con la pista de la escalera', () => {
     const items: PlanItem[] = [{ skillId: 'w3.recall', unitId: 'w3', reason: 'review', priority: 1, recommendedHint: 2 }, { skillId: 'w3.listen', unitId: 'w3', reason: 'review', priority: 1, recommendedHint: 0 }];
     const plan = buildAssociationSession({ ...base, items, knownUnits: [] });
-    expect(main(plan).map((s) => s.kind)).toEqual(['check', 'review', 'summary']);
-    expect(plan.steps[1]).toMatchObject({ skillKey: 'w3.recall', startHint: 2 });
+    expect(main(plan).map((s) => s.kind)).toEqual(['card', 'check', 'review', 'summary']);
+    expect(plan.steps[2]).toMatchObject({ skillKey: 'w3.recall', startHint: 2 });
   });
 
   it('cada comprobación va pegada a su pregunta aunque el plan mezcle habilidades', () => {
     const items: PlanItem[] = ['w0', 'w1'].flatMap((u) => [`${u}.listen`, `${u}.recall`].map((skillId) => ({ skillId, unitId: u, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
     const kinds = main(buildAssociationSession({ ...base, items, knownUnits: [] })).map((s) => `${s.kind}:${s.unitKey}`);
-    expect(kinds).toEqual(['check:w0', 'review:w0', 'check:w1', 'review:w1', 'summary:']);
+    expect(kinds).toEqual(['card:w0', 'check:w0', 'review:w0', 'card:w1', 'check:w1', 'review:w1', 'summary:']);
   });
 
   it('comprobación selectiva: la ayuda se retira repaso a repaso y desde el 4.º se escribe directamente (D-063)', () => {
@@ -174,8 +190,9 @@ describe('retos de aplicación', () => {
 
   it('en el repaso, «aplicar» vence; en conceptos se responde con opciones (D-064)', () => {
     const plan = buildAssociationSession({ sessionId: 's', courseId: 'c', day: 3, createdAt: 0, items: [{ skillId: 'c1.apply', unitId: 'c1', reason: 'review', priority: 0, recommendedHint: 0 }], units: cu, knownUnits: [] });
-    expect(plan.steps[0]).toMatchObject({ kind: 'think', unitKey: 'c1' });
-    expect(plan.steps[1]).toMatchObject({ kind: 'challenge', unitKey: 'c1', skillKey: 'c1.apply', typed: false });
+    expect(plan.steps[0]).toMatchObject({ kind: 'card', unitKey: 'c1' });
+    expect(plan.steps[1]).toMatchObject({ kind: 'think', unitKey: 'c1' });
+    expect(plan.steps[2]).toMatchObject({ kind: 'challenge', unitKey: 'c1', skillKey: 'c1.apply', typed: false });
   });
 
   it('corrige con peso honesto: opciones = reconocimiento; escrito u ordenado en repaso = aplicación', () => {
