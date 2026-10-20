@@ -628,3 +628,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   1 s por cada 35 caracteres de pregunta y opciones (máximo 15 s).
 - **Por qué:** el usuario no tenía tiempo de leer la asociación en 6,5 s.
 
+## D-070 · Flujo: toda unidad se enseña antes de preguntarla; la pregunta no se cierra sola; revisión antes de entregar (20-oct-2026)
+- **Fallos:** en el Flujo, los repasos entraban como pregunta sin su asociación (incumplía la regla de oro D-067) y la
+  pregunta relámpago se daba por fallada al acabarse el tiempo («me salta la pregunta»).
+- **Arreglo:** toda unidad, nueva o de repaso, entra en parejas reel → relámpago (repasos y nuevas alternando de dos en
+  dos). La barra de tiempo solo da puntos por rapidez; la pregunta espera a que respondas.
+- **Repaso escrito (idiomas):** «Comprobar» a todo el ancho bajo la respuesta; «Pista» y «Ver», secundarias debajo.
+- **Revisión obligatoria antes de entregar:** `private/shots/verify.cjs` comprueba en la app real 10 puntos del método
+  (empieza por asociación, ninguna pregunta sin asociación, la asociación y la pregunta no avanzan solas, al fallar se
+  enseña y hay repesca, sesión corta, no se escribe fuera de idiomas). Las pruebas del motor fijan la regla de oro.
+

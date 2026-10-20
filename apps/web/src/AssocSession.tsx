@@ -463,7 +463,7 @@ function Reel({ unit, onNext }: { unit: SessionUnit; onNext: () => void }) {
   );
 }
 
-/** Relámpago: 3 opciones con tiempo; si se falla, la asociación aparece en ese momento (se enseña en el error). */
+/** Relámpago: 3 opciones; la barra da puntos por rapidez pero nunca cierra la pregunta. Si se falla, la asociación aparece en ese momento. */
 function Quick({ unit, reverse, retry, pool, combo, onAnswer, onDone }: { unit: SessionUnit; reverse: boolean; retry: boolean; pool: SessionUnit[]; combo: number; onAnswer: (ok: boolean, ms: number) => void; onDone: (ok: boolean) => void }) {
   // Tiempo según lo que hay que leer (D-069): 7 s base + 1 s por cada 35 caracteres de pregunta y opciones (máx. 15 s).
   const reading = (reverse ? unitText(unit) : unitMeaning(unit)).length + pool.slice(0, 3).map((u) => (reverse ? unitMeaning(u) : unitText(u)).length).reduce((x, y) => x + y, 0);
@@ -473,16 +473,16 @@ function Quick({ unit, reverse, retry, pool, combo, onAnswer, onDone }: { unit: 
   const t0 = useRef(performance.now());
   const label = (u: SessionUnit) => (reverse ? unitMeaning(u) : unitText(u).toUpperCase());
   const choices = useMemo(() => choicesFor(label(unit), pool.map(label), `${unit.key}-${reverse}-${retry}`, 3), [unit, pool, reverse, retry]); // eslint-disable-line react-hooks/exhaustive-deps
-  const ok = picked !== null && picked >= 0 && choices[picked]!.correct;
+  const ok = picked !== null && choices[picked]!.correct;
   useEffect(() => {
     if (picked !== null) return;
     const tick = setInterval(() => setLeft((l) => Math.max(0, l - 0.1)), 100);
     return () => clearInterval(tick);
   }, [picked]);
-  useEffect(() => { if (picked === null && left <= 0) answer(-1); });
+  // D-070: la pregunta nunca se cierra sola; la barra solo da puntos extra por rapidez.
   function answer(k: number) {
     if (picked !== null) return;
-    const right = k >= 0 && choices[k]!.correct;
+    const right = choices[k]!.correct;
     setPicked(k);
     onAnswer(right, Math.round(performance.now() - t0.current));
     if (right) setTimeout(() => onDone(true), 550);
@@ -491,11 +491,11 @@ function Quick({ unit, reverse, retry, pool, combo, onAnswer, onDone }: { unit: 
   return (
     <div className={`card flow enter-up ${picked === null ? '' : ok ? 'ok' : 'ko'}`}>
       <div className="row"><p className="eyebrow">{retry ? 'OTRA VEZ' : 'RELÁMPAGO'}</p><span key={combo} className={`combo ${combo > 1 ? 'hot' : ''}`}>{combo > 1 ? `🔥 x${combo}` : 'COMBO x1'}</span></div>
-      <div className="timer"><i style={{ width: `${(left / SECONDS) * 100}%` }} /></div>
+      <div className="timer" title="Bonus por rapidez"><i style={{ width: `${(left / SECONDS) * 100}%` }} /></div>
       {picked !== null && !ok ? (
         // Se enseña en el error: la asociación completa, y vuelve unas tarjetas después.
         <div className="flash">
-          <p className="eyebrow">{picked < 0 ? '¡TIEMPO!' : 'CASI'} · RECUÉRDALO ASÍ</p>
+          <p className="eyebrow">CASI · RECUÉRDALO ASÍ</p>
           <div className="reel-emoji small" aria-hidden="true">{a?.emoji ?? '✨'}</div>
           <div className="word concept"><strong lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></strong><span>{unitMeaning(unit)}</span></div>
           {a?.text && <p className="scene-text"><Highlight text={a.text} /></p>}

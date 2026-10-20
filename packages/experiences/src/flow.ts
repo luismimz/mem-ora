@@ -27,19 +27,21 @@ export function buildFlowSession(input: {
   const reviews = [...new Set(items.filter((i) => i.reason === 'review').map((i) => i.unitId))].filter(has).slice(0, input.maxReviewUnits ?? MAX_REVIEW_UNITS);
   const fresh = [...new Set(items.filter((i) => i.reason === 'new').map((i) => i.unitId))].filter((k) => has(k) && !reviews.includes(k)).slice(0, input.maxNewUnits ?? Infinity);
 
-  // 1. Secuencia base: parejas de lo nuevo (reel A, reel B, relámpago A, relámpago B) intercaladas con repasos relámpago.
+  // 1. Secuencia base (regla de oro, D-067): TODA unidad se enseña (reel) antes de su primera pregunta, también los
+  //    repasos. Parejas: reel A, reel B, relámpago A, relámpago B. Primero lo que toca repasar y luego lo nuevo,
+  //    alternando para que no se acumule.
   type Draft = Omit<AssocStep, 'id'>;
   const base: Draft[] = [];
-  const pendingReviews = shuffle(reviews, rand);
   const quick = (u: string): Draft => ({ kind: 'quick', unitKey: u, scene: -4, reverse: rand() < 0.5 });
-  for (let i = 0; i < fresh.length; i += 2) {
-    const pair = fresh.slice(i, i + 2);
+  const order: string[] = [];
+  const rv = shuffle(reviews, rand);
+  const nw = [...fresh];
+  while (rv.length || nw.length) { if (rv.length) order.push(...rv.splice(0, 2)); if (nw.length) order.push(...nw.splice(0, 2)); }
+  for (let i = 0; i < order.length; i += 2) {
+    const pair = order.slice(i, i + 2);
     for (const u of pair) base.push({ kind: 'reel', unitKey: u, scene: -4 });
     for (const u of pair) base.push(quick(u));
-    const r = pendingReviews.shift();
-    if (r) base.push(quick(r));
   }
-  for (const r of pendingReviews) base.push(quick(r));
 
   // 2. Repesca intercalada: tras cada relámpago, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).
   const withRetry: Draft[] = [];

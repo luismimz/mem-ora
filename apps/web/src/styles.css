@@ -418,3 +418,8 @@ blockquote.reading { font-size: .92rem; }
 .choices.quick { grid-template-columns: 1fr; }
 .flash { display: flex; flex-direction: column; gap: .5rem; text-align: center; }
 @media (prefers-reduced-motion: reduce) { .enter-up { animation: none; } .flow-timer i { animation: none; width: 100%; } }
+/* Repaso escrito: «Comprobar» principal a todo el ancho; pista y ver, secundarias debajo (D-070) */
+.actions { flex-wrap: wrap; }
+.actions .go { flex: 1 0 100%; padding: 1rem; font-size: 1.05rem; order: -1; }
+.actions button:not(.go) { flex: 1; padding: .6rem; font-weight: 700; font-size: .92rem; background: transparent; border: 1px solid var(--line); }
+.actions .go:disabled { opacity: .45; }
