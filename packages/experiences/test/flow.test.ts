@@ -20,7 +20,7 @@ describe('modo Flujo (D-068)', () => {
   it('todo entra en parejas: dos asociaciones y sus dos preguntas relámpago', () => {
     for (let i = 0; i < 8; i += 4) {
       const four = main.filter((s) => s.kind !== 'challenge').slice(i, i + 4);
-      expect(four.map((s) => s.kind)).toEqual(['reel', 'reel', 'quick', 'quick']);
+      expect(four.map((s) => s.kind)).toEqual(['reel', 'reel', 'quick', 'judge']);
       expect([four[2]!.unitKey, four[3]!.unitKey]).toEqual([four[0]!.unitKey, four[1]!.unitKey]);
     }
   });
@@ -34,13 +34,21 @@ describe('modo Flujo (D-068)', () => {
     expect(plan.steps.filter((s) => s.kind === 'reel').map((s) => s.unitKey).sort()).toEqual(keys.slice(0, 12).sort());
   });
 
-  it('cada relámpago tiene su repesca al menos 3 tarjetas después, en sentido contrario', () => {
+  it('cada pregunta tiene su repesca (relámpago) al menos 3 tarjetas después', () => {
     for (const [i, s] of plan.steps.entries()) {
-      if (s.kind !== 'quick' || s.retry) continue;
+      if ((s.kind !== 'quick' && s.kind !== 'judge') || s.retry) continue;
       const j = plan.steps.findIndex((x, k) => k > i && x.retry && x.unitKey === s.unitKey);
       expect(j - i).toBeGreaterThanOrEqual(FLOW_RETRY_GAP);
-      expect(plan.steps[j]!.reverse).toBe(!s.reverse);
+      expect(plan.steps[j]!.kind).toBe('quick');
     }
+  });
+
+  it('¿verdad o mentira?: el significado mostrado es el suyo (verdad) o el de otra unidad de la sesión (mentira)', () => {
+    const judges = plan.steps.filter((s) => s.kind === 'judge');
+    expect(judges.length).toBeGreaterThan(3);
+    for (const j of judges) expect(keys).toContain(j.statementOf);
+    expect(judges.some((j) => j.statementOf === j.unitKey)).toBe(true);
+    expect(judges.some((j) => j.statementOf !== j.unitKey)).toBe(true);
   });
 
   it('cada 8 tarjetas, una pregunta tipo examen de algo ya visto; termina en resumen y nunca se escribe en conceptos', () => {

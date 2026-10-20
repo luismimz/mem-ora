@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'reel' | 'quick' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
+export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -26,6 +26,8 @@ export interface AssocStep {
   retry?: boolean;
   /** Flujo (D-068): la pregunta relámpago va del término al significado (true) o al revés. */
   reverse?: boolean;
+  /** Flujo, «¿verdad o mentira?»: de qué unidad es el significado que se muestra junto al término (D-072). */
+  statementOf?: string;
 }
 
 export interface AssocPlan {

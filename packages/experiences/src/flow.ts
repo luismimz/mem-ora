@@ -33,6 +33,13 @@ export function buildFlowSession(input: {
   type Draft = Omit<AssocStep, 'id'>;
   const base: Draft[] = [];
   const quick = (u: string): Draft => ({ kind: 'quick', unitKey: u, scene: -4, reverse: rand() < 0.5 });
+  // «¿Verdad o mentira?» (D-072): el término con su significado (verdad) o con el de otra unidad (mentira), al 50 %.
+  const all = [...reviews, ...fresh];
+  const judge = (u: string): Draft => {
+    const others = all.filter((k) => k !== u);
+    const lie = others.length > 0 && rand() < 0.5;
+    return { kind: 'judge', unitKey: u, scene: -4, statementOf: lie ? others[Math.floor(rand() * others.length)]! : u };
+  };
   const order: string[] = [];
   const rv = shuffle(reviews, rand);
   const nw = [...fresh];
@@ -40,7 +47,8 @@ export function buildFlowSession(input: {
   for (let i = 0; i < order.length; i += 2) {
     const pair = order.slice(i, i + 2);
     for (const u of pair) base.push({ kind: 'reel', unitKey: u, scene: -4 });
-    for (const u of pair) base.push(quick(u));
+    // Variedad: la primera de la pareja, relámpago; la segunda, ¿verdad o mentira?
+    pair.forEach((u, j) => base.push(j === 0 ? quick(u) : judge(u)));
   }
 
   // 2. Repesca intercalada: tras cada relámpago, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).
@@ -48,7 +56,7 @@ export function buildFlowSession(input: {
   const pending: Array<{ at: number; step: Draft }> = [];
   for (const d of base) {
     withRetry.push(d);
-    if (d.kind === 'quick') pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { ...d, retry: true, reverse: !d.reverse } });
+    if (d.kind === 'quick' || d.kind === 'judge') pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });
     for (let j = pending.length - 1; j >= 0; j -= 1) if (pending[j]!.at <= withRetry.length) withRetry.push(pending.splice(j, 1)[0]!.step);
   }
   for (const p of pending) withRetry.push(p.step);
@@ -64,11 +72,13 @@ export function buildFlowSession(input: {
     if (d.unitKey && !seenUnits.includes(d.unitKey)) seenUnits.push(d.unitKey);
     if (!d.retry) sinceBoss += 1;
     if (sinceBoss >= FLOW_BOSS_EVERY) {
-      const u = seenUnits.find((k) => !bossDone.has(k) && exercisesOf(units[k]!).length && units[k]!.skills.some((s) => s.kind === 'apply'));
+      const answerable = (k: string) => exercisesOf(units[k]!).map((e, n) => ({ e, n })).filter(({ e }) => e.kind !== 'order_steps');
+      const u = seenUnits.find((k) => !bossDone.has(k) && answerable(k).length && units[k]!.skills.some((s) => s.kind === 'apply'));
       if (u) {
         bossDone.add(u);
         const apply = units[u]!.skills.find((s) => s.kind === 'apply')!;
-        push({ kind: 'challenge', unitKey: u, scene: -4, skillKey: apply.key, exercise: Math.floor(rand() * exercisesOf(units[u]!).length), typed: false });
+        const options = answerable(u);
+        push({ kind: 'challenge', unitKey: u, scene: -4, skillKey: apply.key, exercise: options[Math.floor(rand() * options.length)]!.n, typed: false });
       }
       sinceBoss = 0;
     }

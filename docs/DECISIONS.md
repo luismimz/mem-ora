@@ -646,3 +646,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   origen vía `/api`), con `HttpOnly`, `Secure` y `SameSite=Lax`.
 - **Riesgo asumido:** quien tenga el dispositivo desbloqueado entra sin código durante 30 días; «Salir» cierra la sesión.
 
+## D-072 · Flujo como experiencia propia, al estilo de una red social; Desarrollo de interfaces lo estrena (20-oct-2026)
+- **Qué:** la sesión en modo `flow` se pinta con un componente nuevo (`Feed.tsx`), no con la sesión por escenas:
+  pantalla completa, una tarjeta cada vez, deslizar hacia arriba; color propio por concepto; barra de progreso arriba,
+  XP y combo 🔥 siempre visibles; vibración y sonido breves; celebración a 3, 5, 10… aciertos seguidos; puntos que
+  flotan. Tarjetas: asociación (reel, sin cuenta atrás), relámpago, **¿verdad o mentira?** (deslizar → / ← o botones),
+  pregunta jefe 👑 tipo examen y, solo en idiomas, escribir. Al fallar: «Recuérdalo así» con la asociación y la unidad
+  vuelve 3 tarjetas después. Final: XP, **racha de días** (calculada en el servidor), aciertos, mejor combo, nuevos y
+  próximo repaso, con «⚡ Una ronda más» sin salir.
+- **Curso:** Desarrollo de interfaces (DAM M07) se crea en modo Flujo; misión 1 «Componentes y eventos» con analogías
+  de ≤ 10 palabras ligadas al significado y retos de código Java correcto. Contenido propio (regla 16).
+- **Revisión antes de entregar:** `private/shots/feed.cjs` recorre la ronda en la app real y comprueba el método.
+

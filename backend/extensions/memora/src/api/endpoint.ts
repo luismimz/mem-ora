@@ -387,8 +387,15 @@ export default {
       const course = await visibleCourse(req.query.course, userId);
       const { catalog } = await publishedContent(course);
       const learner = await learnerFor(userId, course.id);
+      // Racha (D-072): días seguidos con alguna respuesta, contando hoy o, si hoy aún no, desde ayer.
+      const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
+      const active = (d: number) => (learner.activity[String(d)]?.attempts ?? 0) > 0;
+      let streak = 0;
+      for (let d = active(today) ? today : today - 1; active(d); d -= 1) streak += 1;
       return {
         data: {
+          streak,
+          todayAttempts: learner.activity[String(today)]?.attempts ?? 0,
           skills: catalog.skills.map((s) => ({ key: s.id, unit: s.unitId, kind: s.kind, status: learner.skills[s.id]?.status ?? 'new', dueAt: learner.skills[s.id]?.dueAt ?? null })),
           units: catalog.units.map((u) => {
             const r = unitLevel(u.id, catalog, learner.skills, config);

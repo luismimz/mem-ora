@@ -89,6 +89,9 @@ export interface SessionPayload {
   audio?: boolean;
 }
 export interface Progress {
+  /** Días seguidos con actividad (D-072). */
+  streak?: number;
+  todayAttempts?: number;
   skills: Array<{ key: string; unit: string; kind: string; status: string; dueAt: number | null }>;
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
 }
