@@ -2,7 +2,7 @@ import { Studio } from './Studio';
 import { RetosHome } from './Retos';
 import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pendingCount, sessionProgress, type OfflineBundle, type OfflineSession } from './offline';
 import { useCallback, useEffect, useState } from 'react';
-import { api, ApiError, type Course, type Me, type Mission, type SessionPayload } from './api';
+import { api, ApiError, type Course, type Me, type Mission, type Progress, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { Feed } from './Feed';
 import { ARCADE_FROM, CHAT_AFTER_GRAMMAR, GRAMMAR_EVERY, milestones, type Milestones } from './milestones';
@@ -77,6 +77,7 @@ export function App() {
   const [notice, setNotice] = useState<string | null>(null);
   const [staff, setStaff] = useState(false);
   const [ms, setMs] = useState<Milestones | null>(null);
+  const [prog, setProg] = useState<Progress | null>(null);
   const [missions, setMissions] = useState<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number } | null>(null);
   const [nudge, setNudge] = useState<Mode | null>(null);
 
@@ -149,7 +150,8 @@ export function App() {
   useEffect(() => {
     if (!course || view.name !== 'home') return;
     setMissions(null);
-    api.progress(course).then((p) => setMs(milestones(p))).catch(() => setMs(null));
+    setProg(null);
+    api.progress(course).then((p) => { setMs(milestones(p)); setProg(p); }).catch(() => { setMs(null); setProg(null); });
     api.missions(course).then(setMissions).catch(() => setMissions(null));
   }, [course, view.name]);
 
@@ -201,6 +203,11 @@ export function App() {
   const currentMission = missions?.missions.find((m) => m.key === missions.current);
   const words = unitsWord(current);
   const isMem = Boolean(current?.modes.includes('memory'));
+  // Repasos vencidos ahora; el total del curso sale de las misiones (el progreso solo lista lo ya practicado).
+  const due = prog ? prog.skills.filter((s) => s.dueAt !== null && s.dueAt <= Date.now()).length : null;
+  const worked = missions?.missions.length
+    ? missions.missions.reduce((a, m) => ({ done: a.done + m.worked, total: a.total + m.total }), { done: 0, total: 0 })
+    : { done: ms?.words ?? 0, total: ms?.total ?? 0 };
   return (
     <div className="app home">
       {bar}
@@ -212,31 +219,34 @@ export function App() {
               {courses.map((c) => <button key={c.id} type="button" role="tab" aria-selected={c.id === course} className={c.id === course ? 'on' : ''} onClick={() => { setCourse(c.id); writePrefs({ course: c.id }); }}>{cleanTitle(c.title)}</button>)}
             </div>
           )}
-          <p className="eyebrow">TU AVENTURA</p>
-          <h1>La historia sigue contigo.</h1>
+          <p className="eyebrow">{isMem ? 'TU AVENTURA' : 'HOY'}</p>
+          <h1>{isMem ? 'La historia sigue contigo.' : me?.first_name ? `Hola, ${me.first_name}.` : 'Hola.'}</h1>
           {current && isMem ? <RetosHome courseId={current.id} /> : current ? (
             <div className="hero">
               <div className="hero-art"><span aria-hidden="true">{courseArt(current)}</span><span className="tag">{cleanTitle(current.title).toUpperCase()}</span></div>
               <div className="hero-body">
-                <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>
+                {enabled.length > 1 && <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>}
+                <ul className="today" aria-label="Tu día">
+                  <li><b>{prog?.streak ?? '—'}</b><span>🔥 {prog?.streak === 1 ? 'día' : 'días'} de racha</span></li>
+                  <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>
+                  <li><b>{missions?.newToday ?? '—'}</b><span>✨ {isLanguage(current) ? 'nuevas' : 'nuevos'} hoy</span></li>
+                </ul>
                 {!missions ? (
                   <><h3 className="hero-mission skeleton-text">&nbsp;</h3><p className="skeleton-text">&nbsp;<br />&nbsp;</p></>
                 ) : currentMission ? (
                   <>
                     <h3 className="hero-mission">Misión {currentMission.index} · {cleanMission(currentMission.title)}</h3>
-                    <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}.{' '}
-                      {missions.newToday ? <>Hoy entran <b>{Math.min(missions.newToday, currentMission.total - currentMission.worked) || missions.newToday} nuev{isLanguage(current) ? 'as' : 'os'}</b>{missions.newTarget && missions.newToday < missions.newTarget ? `; con buenos aciertos sube hasta ${missions.newTarget}` : ''}. </> : null}
-                      Los repasos vuelven solos según la curva del olvido.</p>
+                    <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}.</p>
                   </>
-                ) : <p>{missions.newToday ?? current.new_per_session ?? 15} {words} nuev{isLanguage(current) ? 'as' : 'os'} hoy, en escenas de 5. Los repasos vuelven solos según la curva del olvido.</p>}
-                <button type="button" className="primary" onClick={() => open(has(mode) ? mode : 'associations')}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar aventura →' : 'Continuar aventura →'}</button>
+                ) : <p>Desliza para aprender. Los repasos vuelven solos, justo antes de que se te olviden.</p>}
+                <button type="button" className="primary" onClick={() => open(has(mode) ? mode : 'associations')}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
               </div>
             </div>
           ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
           {!ms && current && !isMem && <div className="meters" aria-hidden="true">{[0, 1].map((i) => <div key={i} className="meter skeleton" />)}</div>}
           {ms && !isMem && (
             <div className="meters" aria-label="Tu progreso">
-              <Meter label={`${words[0]!.toUpperCase()}${words.slice(1)} trabajad${isLanguage(current) ? 'as' : 'os'}`} value={`${ms.words}/${ms.total}`} pct={ms.total ? ms.words / ms.total : 0} />
+              <Meter label={`${words[0]!.toUpperCase()}${words.slice(1)} trabajad${isLanguage(current) ? 'as' : 'os'}`} value={`${worked.done}/${worked.total}`} pct={worked.total ? worked.done / worked.total : 0} />
               {has('grammar') && <Meter label="Próximo truco de gramática" value={`faltan ${ms.grammarNext}`} pct={(GRAMMAR_EVERY - ms.grammarNext) / GRAMMAR_EVERY} />}
               {has('arcade') && <Meter label="Arcade sorpresa" value={ms.arcadeLeft ? `faltan ${ms.arcadeLeft}` : '¡activo!'} pct={Math.min(1, ms.words / ARCADE_FROM)} />}
               {has('chat') && (has('grammar')
@@ -247,6 +257,7 @@ export function App() {
           {error && <p className="banner" role="alert">{error}</p>}
         </section>
         <section className="home-side">
+          {enabled.length > 1 && <>
           <p className="eyebrow">ELIGE TU MOMENTO</p>
           <h2 className="h2">¿Qué te apetece hacer?</h2>
           <div className="modes">
@@ -257,8 +268,9 @@ export function App() {
               </button>
             ))}
           </div>
+          </>}
           {current && !isMem && <FlightCard course={current} onOpen={() => go({ name: 'offline' })} />}
-          <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>
+          {enabled.length > 1 && <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>}
         </section>
       </div>
       {current && !isMem && (missions
