@@ -120,13 +120,20 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
     api.clarify(courseId, unit.key, step ?? 'reel').catch(() => undefined);
   }
   const extra = Boolean(a?.analogy || a?.trace?.length);
+  // Idiomas (D-078): 🔊 para oír la palabra, sus ejemplos y la escena en el idioma que se aprende.
+  const voice = unit.type === 'term' && audioEnabled();
+  const say = (text: string) => (voice ? <button type="button" className="say" aria-label={`Escuchar «${text}»`} onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button> : null);
+  const rawPron = (unit.payload as { pronunciation?: string | { respelling?: string } }).pronunciation;
+  const pron = typeof rawPron === 'string' ? rawPron : rawPron?.respelling;
   return (
     <div className="concept-face">
       <div className="face-emoji" aria-hidden="true">{a?.emoji ?? '✨'}</div>
-      <h2 lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></h2>
+      <h2 lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} />{say(unitText(unit))}</h2>
+      {voice && pron && <p className="face-pron">se pronuncia <b>{pron}</b></p>}
       <p className="face-meaning">{unitMeaning(unit)}</p>
       {a?.cue && <p className="face-cue">{a.technique === 'analogy' ? 'como' : 'suena a'} <b>{a.cue}</b></p>}
       {a?.text && <p className="face-story"><Marked text={a.text} /></p>}
+      {voice && a?.sceneTarget && <p className="face-target" lang={unit.language}>{a.sceneTarget} {say(a.sceneTarget)}</p>}
       {full && (p.definition || examples.length > 0) && (
         <div className="face-learn">
           {p.definition && <><p className="learn-label">QUÉ ES</p><p className="learn-text">{p.definition}</p></>}
@@ -134,7 +141,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
           {examples.length > 0 && <p className="learn-label">{examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>}
           {examples.map((ex, i) => (
             <div key={i} className="learn-example">
-              {isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text">{ex.text}</p>}
+              {isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{ex.text} {voice && say(ex.text)}</p>}
               {(ex.explanation || ex.translation) && <p className="learn-note">{ex.explanation ?? ex.translation}</p>}
             </div>
           ))}

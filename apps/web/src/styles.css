@@ -490,6 +490,10 @@ blockquote.reading { font-size: .92rem; }
 .slide .slide-hint { margin-top: .2rem; }
 /* D-077: «Explícame más», nota del fallo, ejemplos y completar escribiendo */
 .more-btn { margin-top: .5rem; border: 1px dashed rgba(255,255,255,.4); border-radius: .9rem; padding: .6rem .8rem; background: transparent; color: #fff; font-weight: 800; font-size: .9rem; }
+.say { margin-left: .4rem; border: 0; background: rgba(255,255,255,.16); color: #fff; border-radius: 50%; width: 2.1rem; height: 2.1rem; font-size: 1rem; vertical-align: middle; }
+h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
+.face-pron { margin: 0; font-size: .9rem; opacity: .8; } .face-pron b { color: #ffd76a; }
+.face-target { margin: 0; font-size: .98rem; font-style: italic; opacity: .85; max-width: 30ch; }
 .learn-asked { margin: .5rem 0 0; font-size: .85rem; font-weight: 800; color: #43d68b; }
 .learn-example { display: flex; flex-direction: column; gap: .15rem; }
 .learn-example + .learn-example { margin-top: .35rem; }
