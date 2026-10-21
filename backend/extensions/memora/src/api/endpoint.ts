@@ -4,7 +4,8 @@
 //   GET  /memora/session?course=…        sesión de hoy (la reanuda si ya estaba empezada)
 //   POST /memora/events                  eventos idempotentes; devuelve el estado recalculado
 //   PUT  /memora/session/position        punto exacto de la sesión
-//   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación
+//   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación, racha y protectores
+//   POST /memora/clarify                 «Explícame más»: pide ampliar una ficha (D-077)
 //   GET  /memora/missions?course=…       misiones (módulos) del curso con el avance del alumno y la actual
 //   GET  /memora/offline?course=…        paquete para jugar sin conexión: sesiones listas (repasos + misiones pendientes)
 //   GET  /memora/retos?course=…          retos de memoria del curso con el mejor resultado del alumno y su repaso
@@ -17,7 +18,7 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, focusCatalog, newUnitsFor, planDay, resolveConfig, unitLevel, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, errorUnits, focusCatalog, newUnitsFor, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
 import { buildAssociationSession, buildFlowSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
@@ -227,8 +228,18 @@ export default {
       // Rampa (D-057): empieza con 8 nuevas y sube según los aciertos hasta el objetivo del curso.
       // Modo Flujo (D-068) si el curso lo tiene; si no, el de asociaciones por escenas.
       const newMax = newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15));
+      // Flujo infinito (D-077): cada ronda trae como mucho newMax nuevas y, al día, tres rondas de nuevas; después sigue
+      // con repasos, «tus errores» y refuerzo de lo más débil, sin fin.
+      const dayStart = config.load.dayOriginMs + today * config.load.dayLengthMs;
+      const firstSeen: Record<string, number> = {};
+      for (const sk of Object.values(learner.skills)) if (sk.presentedAt) firstSeen[sk.unitId] = Math.min(firstSeen[sk.unitId] ?? Infinity, sk.presentedAt);
+      const newToday = Object.values(firstSeen).filter((t) => t >= dayStart).length;
+      const flowNew = Math.max(0, Math.min(newMax, newMax * 3 - newToday));
+      const reviewKeys = (plan.items as PlanItem[]).filter((i) => i.reason === 'review').map((i) => i.unitId);
+      const errors = errorUnits(learner.skills, 4, reviewKeys).filter((k) => units[k]);
       const session = modes.includes('flow')
-        ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, maxNewUnits: newMax })
+        ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, maxNewUnits: flowNew,
+            errorUnits: errors, practiceUnits: weakUnits(learner.skills, 8, [...reviewKeys, ...errors]).filter((k) => units[k]), levels: reviewHelp(learner) })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
@@ -389,14 +400,14 @@ export default {
       const course = await visibleCourse(req.query.course, userId);
       const { catalog } = await publishedContent(course);
       const learner = await learnerFor(userId, course.id);
-      // Racha (D-072): días seguidos con alguna respuesta, contando hoy o, si hoy aún no, desde ayer.
+      // Racha con protector (D-072, D-077): días seguidos con alguna respuesta; cada 7 días se gana un protector que
+      // salva un día perdido. Hoy, mientras no acabe, no rompe la racha.
       const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
-      const active = (d: number) => (learner.activity[String(d)]?.attempts ?? 0) > 0;
-      let streak = 0;
-      for (let d = active(today) ? today : today - 1; active(d); d -= 1) streak += 1;
+      const streak = streakOf(learner.activity, today);
       return {
         data: {
-          streak,
+          streak: streak.days,
+          shields: streak.shields,
           todayAttempts: learner.activity[String(today)]?.attempts ?? 0,
           skills: catalog.skills.map((s) => ({ key: s.id, unit: s.unitId, kind: s.kind, status: learner.skills[s.id]?.status ?? 'new', dueAt: learner.skills[s.id]?.dueAt ?? null })),
           units: catalog.units.map((u) => {
@@ -406,6 +417,23 @@ export default {
           associations: Object.values(learner.associations).map((a) => ({ id: a.associationId, hintLevel: a.hintLevel, dueAt: a.dueAt, status: a.status, ...assessAssociation(a, config) })),
         },
       };
+    }));
+
+    // «Explícame más» (D-077): el alumno pide más explicación de una ficha; queda anotado para ampliarla en Studio.
+    router.post('/clarify', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.body?.course, userId);
+      const unitKey = String(req.body?.unit ?? '').slice(0, 120);
+      if (!unitKey) throw new HttpError(400, 'BAD_REQUEST', 'Falta la unidad.');
+      const unit = await db('units').where({ course: course.id, key: unitKey }).first('id');
+      if (!unit) throw new HttpError(404, 'NOT_FOUND', 'Unidad no disponible.');
+      const step = String(req.body?.step ?? '').slice(0, 32) || null;
+      const note = typeof req.body?.note === 'string' ? req.body.note.trim().slice(0, 500) || null : null;
+      // Una petición abierta por alumno y unidad: si ya la pidió, solo se suma una vez más.
+      const open = await db('content_requests').where({ user: userId, unit: unit.id, status: 'open' }).first('id', 'times');
+      if (open) await db('content_requests').where({ id: open.id }).update({ times: (open.times ?? 1) + 1, step, ...(note ? { note } : {}), date_updated: new Date() });
+      else await db('content_requests').insert({ id: randomUUID(), user: userId, course: course.id, unit: unit.id, step, note, times: 1, status: 'open', date_created: new Date(), date_updated: new Date() });
+      return { data: { saved: true } };
     }));
 
     async function requireStaff(acc: Row, what: string) {

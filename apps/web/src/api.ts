@@ -91,6 +91,8 @@ export interface SessionPayload {
 export interface Progress {
   /** Días seguidos con actividad (D-072). */
   streak?: number;
+  /** Protectores de racha guardados (D-077). */
+  shields?: number;
   todayAttempts?: number;
   skills: Array<{ key: string; unit: string; kind: string; status: string; dueAt: number | null }>;
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
@@ -135,4 +137,5 @@ export const api = {
   position: (course: string, body: { sessionId: string; index: number; outcomes: SessionState['outcomes']; finished: boolean; deviceId: string }) =>
     request<{ saved: boolean }>('PUT', '/memora/session/position', { course, ...body }),
   progress: (course: string) => request<Progress>('GET', `/memora/progress?course=${encodeURIComponent(course)}`),
+  clarify: (course: string, unit: string, step: string, note?: string) => request<{ saved: boolean }>('POST', '/memora/clarify', { course, unit, step, ...(note ? { note } : {}) }),
 };

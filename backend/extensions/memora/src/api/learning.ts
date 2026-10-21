@@ -135,6 +135,14 @@ function traceOf(evidence: unknown): Array<{ code: string; note: string }> {
   return lines.filter((l): l is { code: string; note: string } => Boolean(l) && typeof (l as { code?: unknown }).code === 'string').map((l) => ({ code: l.code, note: typeof l.note === 'string' ? l.note : '' }));
 }
 
+/** Analogía: correspondencias y límite, para «Explícame más» (D-077). */
+function analogyOf(evidence: unknown): { mapping: string; breaksWhere: string } | null {
+  const e = typeof evidence === 'string' ? JSON.parse(evidence) : evidence;
+  if (!e || typeof e !== 'object') return null;
+  const { mapping, breaksWhere } = e as { mapping?: unknown; breaksWhere?: unknown };
+  return typeof mapping === 'string' && typeof breaksWhere === 'string' ? { mapping, breaksWhere } : null;
+}
+
 /** Unidades publicadas listas para la sesión. Solo se usan asociaciones publicadas. */
 export function sessionUnits(units: UnitRow[], skills: SkillRow[], associations: AssociationRow[], courseLanguage: string): Record<string, SessionUnit> {
   const published = new Map(associations.filter((a) => a.status === 'published' && a.text).map((a) => [a.id, a]));
@@ -150,7 +158,7 @@ export function sessionUnits(units: UnitRow[], skills: SkillRow[], associations:
       version: u.version ?? 0,
       place: u.place ?? null,
       skills: mine.map((s) => ({ key: s.key, kind: s.kind, associationId: s.association && published.has(s.association) ? s.association : null })),
-      association: linked ? { id: linked.id, technique: linked.technique, cue: linked.cue, text: linked.text!, sceneTarget: linked.scene_target ?? null, emoji: linked.emoji ?? null, ...(linked.technique === 'code_trace' ? { trace: traceOf(linked.evidence) } : {}) } : null,
+      association: linked ? { id: linked.id, technique: linked.technique, cue: linked.cue, text: linked.text!, sceneTarget: linked.scene_target ?? null, emoji: linked.emoji ?? null, ...(linked.technique === 'code_trace' ? { trace: traceOf(linked.evidence) } : {}), ...(linked.technique === 'analogy' ? { analogy: analogyOf(linked.evidence) } : {}) } : null,
     };
   }
   return out;

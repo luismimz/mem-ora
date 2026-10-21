@@ -180,7 +180,7 @@ export function App() {
   if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview staff={staff} onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
   // Modo Flujo (D-072): pantalla completa propia, sin la estructura de la sesión por escenas.
-  if (view.name === 'session' && (view.payload.state.plan as { mode?: string }).mode === 'flow') return <Feed key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={leaveSession} onAgain={() => void openSession(view.course, view.mission)} />;
+  if (view.name === 'session' && (view.payload.state.plan as { mode?: string }).mode === 'flow') return <Feed key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={leaveSession} onAgain={() => void openSession(view.course, view.mission)} next={() => api.session(view.course.id)} />;
   if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={leaveSession} onReload={() => void openSession(view.course, view.mission)} onMission={(key) => go({ name: 'session', course: view.course.id, mission: key })} /></div>;
 
   if (view.name === 'offlineSession') {

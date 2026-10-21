@@ -28,6 +28,10 @@ export interface AssocStep {
   reverse?: boolean;
   /** Flujo, «¿verdad o mentira?»: de qué unidad es el significado que se muestra junto al término (D-072). */
   statementOf?: string;
+  /** Flujo infinito (D-077): la unidad entra como «tus errores» o como refuerzo de lo más débil. */
+  focus?: 'errors' | 'practice';
+  /** Flujo (D-077): pregunta que sube de nivel; en vez de elegir, se completa escribiendo. */
+  levelUp?: boolean;
 }
 
 export interface AssocPlan {

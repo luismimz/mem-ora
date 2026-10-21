@@ -22,6 +22,8 @@ export interface SessionAssociation {
   emoji?: string | null;
   /** Trazado de código: líneas comentadas con los elementos de la historia. */
   trace?: Array<{ code: string; note: string }> | null;
+  /** Analogía (D-077, «Explícame más»): qué corresponde a qué y dónde deja de valer la comparación. */
+  analogy?: { mapping: string; breaksWhere: string } | null;
 }
 
 export interface SessionUnit {

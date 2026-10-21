@@ -487,7 +487,16 @@ blockquote.reading { font-size: .92rem; }
 /* D-073: la ficha enseña (qué es + ejemplo); el contenido largo se desplaza y «Siguiente» queda al final */
 .slide { overflow-y: auto; touch-action: pan-y; justify-content: flex-start; }
 .slide > :first-child { margin-top: auto; } .slide > :last-child { margin-bottom: auto; }
-.slide .go.next { width: 100%; margin-top: .4rem; background: rgba(255,255,255,.92); }
+.slide .slide-hint { margin-top: .2rem; }
+/* D-077: «Explícame más», nota del fallo, ejemplos y completar escribiendo */
+.more-btn { margin-top: .5rem; border: 1px dashed rgba(255,255,255,.4); border-radius: .9rem; padding: .6rem .8rem; background: transparent; color: #fff; font-weight: 800; font-size: .9rem; }
+.learn-asked { margin: .5rem 0 0; font-size: .85rem; font-weight: 800; color: #43d68b; }
+.learn-example { display: flex; flex-direction: column; gap: .15rem; }
+.learn-example + .learn-example { margin-top: .35rem; }
+.teach-note { margin: 0 auto; max-width: 34rem; padding: .7rem .9rem; border-radius: 1rem; background: rgba(255,107,91,.18); font-weight: 800; text-align: center; overflow-wrap: anywhere; }
+.complete { display: flex; gap: .5rem; align-items: stretch; }
+.complete input.write { margin: 0; flex: 1; min-width: 0; font-size: 1.3rem; }
+.complete .go { min-width: 3.6rem; font-size: 1.4rem; }
 .face-learn { width: 100%; max-width: 34rem; margin-top: .4rem; text-align: left; background: rgba(0,0,0,.24); border-radius: 1.2rem; padding: .9rem 1rem; display: flex; flex-direction: column; gap: .3rem; }
 .learn-label { margin: .3rem 0 0; font-size: .68rem; letter-spacing: .14em; font-weight: 900; color: #ffd76a; }
 .learn-text { margin: 0; font-size: .98rem; line-height: 1.45; }

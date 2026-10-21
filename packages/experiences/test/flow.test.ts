@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, FLOW_RETRY_GAP, type SessionUnit } from '../src';
+import { buildFlowSession, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -58,5 +58,46 @@ describe('modo Flujo (D-068)', () => {
     expect(plan.steps.at(-1)!.kind).toBe('summary');
     expect(plan.steps.some((s) => s.kind === 'review')).toBe(false);
     expect(plan.mode).toBe('flow');
+  });
+});
+
+describe('Flujo infinito (D-077)', () => {
+  const golden = (plan: AssocPlan) => plan.steps.forEach((s, i) => {
+    if (!s.unitKey || s.kind === 'reel') return;
+    expect(plan.steps.slice(0, i).some((x) => x.kind === 'reel' && x.unitKey === s.unitKey)).toBe(true);
+  });
+
+  it('«tus errores» entran en la ronda marcados, y también se enseñan antes de preguntar', () => {
+    const plan = buildFlowSession({ ...base, items: [item('c0', 'review'), item('c5', 'new')], errorUnits: ['c3', 'c0'] });
+    expect(plan.steps.filter((s) => s.kind === 'reel').map((s) => s.unitKey).sort()).toEqual(['c0', 'c3', 'c5']);
+    expect(plan.steps.find((s) => s.kind === 'reel' && s.unitKey === 'c3')!.focus).toBe('errors');
+    expect(plan.steps.find((s) => s.kind === 'reel' && s.unitKey === 'c0')!.focus).toBeUndefined();
+    golden(plan);
+  });
+
+  it('sin nada nuevo ni repasos, la ronda es refuerzo de lo más débil (nunca vacía si hay algo trabajado)', () => {
+    const plan = buildFlowSession({ ...base, items: [], practiceUnits: ['c1', 'c2', 'c3'] });
+    const reels = plan.steps.filter((s) => s.kind === 'reel');
+    expect(reels.map((s) => s.unitKey)).toEqual(expect.arrayContaining(['c1', 'c2', 'c3']));
+    expect(reels.every((s) => s.focus === 'practice')).toBe(true);
+    expect(plan.steps.at(-1)!.kind).toBe('summary');
+    golden(plan);
+    const busy = buildFlowSession({ ...base, items: [item('c0', 'review')], practiceUnits: ['c1'] });
+    expect(busy.steps.some((s) => s.unitKey === 'c1')).toBe(false);
+  });
+
+  it('las preguntas suben de nivel: con 2 repasos superados, se completa escribiendo (tras su ficha)', () => {
+    const plan = buildFlowSession({ ...base, items: [item('c0', 'review'), item('c1', 'review'), item('c6', 'new')], levels: { c0: 2, c1: 1, c6: 5 } });
+    const c0 = plan.steps.filter((s) => s.unitKey === 'c0' && !s.retry && s.kind !== 'reel');
+    expect(c0[0]).toMatchObject({ kind: 'challenge', typed: true, levelUp: true });
+    expect(plan.steps.some((s) => s.unitKey === 'c1' && s.levelUp)).toBe(false);
+    expect(plan.steps.some((s) => s.unitKey === 'c6' && s.levelUp)).toBe(false);
+    golden(plan);
+  });
+
+  it('en idiomas, subir de nivel es escribir la palabra', () => {
+    const term = { key: 't1', type: 'term', language: 'en', payload: { text: 'play', meaning: 'jugar' }, skills: [{ key: 't1.recall', kind: 'recall' }], association: null } as unknown as SessionUnit;
+    const plan = buildFlowSession({ ...base, units: { ...units, t1: term }, items: [item('t1', 'review')], levels: { t1: 3 } });
+    expect(plan.steps.find((s) => s.unitKey === 't1' && s.levelUp)).toMatchObject({ kind: 'review', skillKey: 't1.recall' });
   });
 });
