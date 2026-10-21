@@ -37,6 +37,10 @@ services:
       ADMIN_EMAIL: ${ADMIN_EMAIL:?Falta ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Falta ADMIN_PASSWORD}
       ADMIN_TOKEN: ${ADMIN_TOKEN:?Falta ADMIN_TOKEN}
+      # Aviso de repaso en el móvil (D-077): claves VAPID solo en el entorno (regla 9).
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:hola@luismontalvan.com}
       DB_CLIENT: pg
       DB_HOST: db
       DB_PORT: "5432"

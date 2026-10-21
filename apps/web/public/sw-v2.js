@@ -51,3 +51,27 @@ self.addEventListener('fetch', (event) => {
     })());
   }
 });
+
+// Aviso de repaso en el móvil (D-077): el servidor solo «toca el timbre» (sin contenido); aquí se pide el texto con la
+// sesión del alumno y se muestra. Si no hay red, un texto genérico. Tocar el aviso abre (o enfoca) Memora.
+self.addEventListener('push', (event) => {
+  event.waitUntil((async () => {
+    let m = { title: 'Memora', body: 'Tienes repasos listos: unos minutos y no se te olvida.', url: '/' };
+    try {
+      const r = await fetch('/api/memora/push/message', { credentials: 'include', cache: 'no-store' });
+      if (r.ok) m = { ...m, ...((await r.json()).data ?? {}) };
+    } catch { /* sin red: texto genérico */ }
+    await self.registration.showNotification(m.title, { body: m.body, icon: '/icon.svg', badge: '/icon.svg', tag: 'memora-repaso', renotify: true, data: { url: m.url } });
+  })());
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = event.notification.data?.url ?? '/';
+  event.waitUntil((async () => {
+    const open = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    const mine = open.find((c) => new URL(c.url).origin === location.origin);
+    if (mine) { await mine.focus(); return; }
+    await self.clients.openWindow(url);
+  })());
+});

@@ -494,6 +494,9 @@ blockquote.reading { font-size: .92rem; }
 h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .face-pron { margin: 0; font-size: .9rem; opacity: .8; } .face-pron b { color: #ffd76a; }
 .face-target { margin: 0; font-size: .98rem; font-style: italic; opacity: .85; max-width: 30ch; }
+.push-ask { display: flex; flex-direction: column; align-items: center; gap: .3rem; }
+.push-no { border: 0; background: transparent; color: #fff; opacity: .65; font-size: .85rem; text-decoration: underline; }
+.push-tip b { color: #ffd76a; }
 .learn-asked { margin: .5rem 0 0; font-size: .85rem; font-weight: 800; color: #43d68b; }
 .learn-example { display: flex; flex-direction: column; gap: .15rem; }
 .learn-example + .learn-example { margin-top: .35rem; }

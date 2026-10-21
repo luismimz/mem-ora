@@ -1,6 +1,7 @@
 // Empaqueta las dos extensiones de Directus (y los paquetes del monorepo que usan) en archivos sueltos:
 //   memora      → hook de Studio (validación, flujo de estados, historial)
 //   memora-api  → endpoint /memora para la app del alumno
+//   memora-push → aviso de repaso en el móvil (D-077)
 import { build } from 'esbuild';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -8,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 const targets = [
   { name: 'memora', type: 'hook', entry: './src/studio/index.ts' },
   { name: 'memora-api', type: 'endpoint', entry: './src/api/endpoint.ts' },
+  { name: 'memora-push', type: 'hook', entry: './src/push/index.ts' },
 ];
 for (const t of targets) {
   const out = fileURLToPath(new URL(`../../extensions-dist/${t.name}/`, import.meta.url));

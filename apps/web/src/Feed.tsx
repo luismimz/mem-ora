@@ -23,6 +23,7 @@ import { api, ApiError, type Progress, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
 import { audioEnabled, speak } from './speech';
+import { enablePush, pushState, type PushState } from './push';
 
 interface Outcome { correct: boolean; hint: number }
 interface Props { payload: SessionPayload; courseId: string; offline?: boolean; onExit: () => void; onAgain: () => void; next?: () => Promise<SessionPayload> }
@@ -317,6 +318,23 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
   );
 }
 
+/** En el hito (D-077): ofrecer el aviso de repaso una sola vez; nunca tapa nada y se puede ignorar deslizando. */
+function PushOptIn() {
+  const [state, setState] = useState<PushState | 'busy' | null>(null);
+  const [hidden, setHidden] = useState(() => { try { return localStorage.getItem('memora.push.ask') === 'no'; } catch { return false; } });
+  useEffect(() => { pushState().then(setState).catch(() => setState('unsupported')); }, []);
+  if (hidden || state === null || state === 'unsupported' || state === 'denied') return null;
+  if (state === 'on') return <p className="end-next">🔔 Te avisaré en el móvil cuando toque repasar.</p>;
+  if (state === 'ios-install') return <p className="end-next push-tip">🔔 Para que te avise cuando toque repasar: en Safari, <b>Compartir → Añadir a pantalla de inicio</b>, y abre Memora desde su icono.</p>;
+  const no = () => { setHidden(true); try { localStorage.setItem('memora.push.ask', 'no'); } catch { /* sin almacenamiento */ } };
+  return (
+    <div className="push-ask">
+      <button type="button" className="more-btn" disabled={state === 'busy'} onClick={() => { setState('busy'); enablePush().then(setState).catch(() => setState('off')); }}>🔔 Avísame cuando toque repasar</button>
+      <button type="button" className="push-no" onClick={no}>Ahora no</button>
+    </div>
+  );
+}
+
 // ─── El flujo ─────────────────────────────────────────────────────────────────────────────────────────────
 
 export function Feed({ payload, courseId, offline = false, onExit, onAgain, next }: Props) {
@@ -455,6 +473,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
         </div>
         {shields > 0 && <p className="end-next">🛡️ {shields === 1 ? 'Tienes 1 protector' : `Tienes ${shields} protectores`}: si un día no puedes estudiar, tu racha no se rompe.</p>}
         {when && <p className="end-next">Tu próximo repaso: {when}, justo antes de que se te olvide.</p>}
+        {!offline && <PushOptIn />}
         <p className="end-next">{offline ? 'Sin conexión: la siguiente ronda llegará al volver la red.' : ready ? 'La siguiente ronda está lista.' : 'Preparando la siguiente ronda…'}</p>
       </Slide>
     );

@@ -137,5 +137,8 @@ export const api = {
   position: (course: string, body: { sessionId: string; index: number; outcomes: SessionState['outcomes']; finished: boolean; deviceId: string }) =>
     request<{ saved: boolean }>('PUT', '/memora/session/position', { course, ...body }),
   progress: (course: string) => request<Progress>('GET', `/memora/progress?course=${encodeURIComponent(course)}`),
+  pushKey: () => request<{ publicKey: string | null }>('GET', '/memora/push/key'),
+  pushSubscribe: (subscription: unknown, deviceId: string) => request<{ saved: boolean }>('POST', '/memora/push/subscribe', { subscription, deviceId }),
+  pushTest: () => request<{ sent: number }>('POST', '/memora/push/test'),
   clarify: (course: string, unit: string, step: string, note?: string) => request<{ saved: boolean }>('POST', '/memora/clarify', { course, unit, step, ...(note ? { note } : {}) }),
 };

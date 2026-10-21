@@ -6,6 +6,9 @@
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación, racha y protectores
 //   POST /memora/clarify                 «Explícame más»: pide ampliar una ficha (D-077)
+//   GET  /memora/push/key                clave pública para el aviso de repaso en el móvil (D-077)
+//   POST /memora/push/subscribe|unsubscribe|test   suscripción de este dispositivo y aviso de prueba
+//   GET  /memora/push/message            texto del aviso (lo pide el service worker al recibirlo)
 //   GET  /memora/missions?course=…       misiones (módulos) del curso con el avance del alumno y la actual
 //   GET  /memora/offline?course=…        paquete para jugar sin conexión: sesiones listas (repasos + misiones pendientes)
 //   GET  /memora/retos?course=…          retos de memoria del curso con el mejor resultado del alumno y su repaso
@@ -21,6 +24,8 @@ import { describeContentIssue, validateUnitPayload } from '@memora/content';
 import { assessAssociation, dayOf, errorUnits, focusCatalog, newUnitsFor, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
 import { buildAssociationSession, buildFlowSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
+import { reminderForUser } from '../push/data';
+import { ring, vapidFromEnv } from '../push/lib';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
 import type { Catalog, LearnerState as Learner } from '@memora/core';
 import { effectiveTime, MAX_EVENTS_PER_BATCH, recompute, rejectReason, sessionUnits, skillIndex, type AssociationRow, type SkillRow, type StoredEvent, type UnitRow } from './learning';
@@ -434,6 +439,36 @@ export default {
       if (open) await db('content_requests').where({ id: open.id }).update({ times: (open.times ?? 1) + 1, step, ...(note ? { note } : {}), date_updated: new Date() });
       else await db('content_requests').insert({ id: randomUUID(), user: userId, course: course.id, unit: unit.id, step, note, times: 1, status: 'open', date_created: new Date(), date_updated: new Date() });
       return { data: { saved: true } };
+    }));
+
+    // Aviso de repaso en el móvil (D-077). La clave pública no es secreta; la privada solo vive en el entorno.
+    router.get('/push/key', wrap(async () => ({ data: { publicKey: vapidFromEnv(process.env)?.publicKey ?? null } })));
+    router.post('/push/subscribe', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const sub = req.body?.subscription;
+      const endpoint = typeof sub?.endpoint === 'string' ? sub.endpoint : '';
+      if (!/^https:\/\//.test(endpoint) || endpoint.length > 1000) throw new HttpError(400, 'BAD_REQUEST', 'Suscripción no válida.');
+      const row = { user: userId, endpoint, keys: JSON.stringify(sub.keys ?? {}), device_id: String(req.body?.deviceId ?? '').slice(0, 64) || null, date_updated: new Date() };
+      const existing = await db('push_subscriptions').where({ endpoint }).first('id');
+      if (existing) await db('push_subscriptions').where({ id: existing.id }).update(row);
+      else await db('push_subscriptions').insert({ id: randomUUID(), ...row, date_created: new Date() });
+      return { data: { saved: true } };
+    }));
+    router.post('/push/unsubscribe', wrap(async (req) => {
+      await db('push_subscriptions').where({ user: req.accountability.user, endpoint: String(req.body?.endpoint ?? '') }).delete();
+      return { data: { saved: true } };
+    }));
+    router.post('/push/test', wrap(async (req) => {
+      const keys = vapidFromEnv(process.env);
+      if (!keys) throw new HttpError(503, 'PUSH_OFF', 'Los avisos aún no están activados en el servidor.');
+      const subs = await db('push_subscriptions').where({ user: req.accountability.user }).select('id', 'endpoint');
+      let ok = 0;
+      for (const s of subs) { const r = await ring(s.endpoint, keys); if (r === 'gone') await db('push_subscriptions').where({ id: s.id }).delete(); if (r === 'ok') ok += 1; }
+      return { data: { sent: ok } };
+    }));
+    router.get('/push/message', wrap(async (req) => {
+      const r = await reminderForUser(db, req.accountability.user);
+      return { data: r ?? { title: 'Memora', body: 'Unos minutos de repaso y no se te olvida.', url: '/' } };
     }));
 
     async function requireStaff(acc: Row, what: string) {

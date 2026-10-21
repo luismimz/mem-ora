@@ -55,6 +55,10 @@ services:
       USER_INVITE_URL_ALLOW_LIST: ${STUDIO_URL:-https://studio.luismontalvan.com}/admin/accept-invite
       PASSWORD_RESET_URL_ALLOW_LIST: ${STUDIO_URL:-https://studio.luismontalvan.com}/admin/reset-password
       # Correo saliente (restablecer contraseña, invitaciones) por SMTP de IONOS. La contraseña solo en Coolify.
+      # Aviso de repaso en el móvil (D-077): claves VAPID solo en el entorno (regla 9).
+      VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
+      VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
+      VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:hola@luismontalvan.com}
       EMAIL_TRANSPORT: smtp
       EMAIL_FROM: ${EMAIL_FROM:-hola@luismontalvan.com}
       EMAIL_SMTP_HOST: ${EMAIL_SMTP_HOST:-smtp.ionos.es}
