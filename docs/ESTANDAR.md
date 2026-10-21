@@ -66,4 +66,6 @@ despliegue y verificación en producción (cabeceras de caché y reglas del plan
 
 ## 7. Contenido de ILERNA
 Contenido propio (definiciones, mnemotecnias y preguntas redactadas por Memora); los libros solo indican qué temas
-cubrir (regla 16). Prioridad: los módulos del semestre en curso, libro a libro y apartado a apartado.
+cubrir. Los exámenes de práctica y PAC de ILERNA se usan tal cual en una misión privada del usuario y como patrón de
+preguntas nuevas (regla 13 de `CLAUDE.md`). Prioridad: los módulos del semestre en curso, libro a libro y apartado a
+apartado.
