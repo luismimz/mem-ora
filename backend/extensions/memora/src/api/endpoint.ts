@@ -21,7 +21,7 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, errorUnits, focusCatalog, newUnitsFor, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
 import { buildAssociationSession, buildFlowSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
@@ -239,12 +239,23 @@ export default {
       const firstSeen: Record<string, number> = {};
       for (const sk of Object.values(learner.skills)) if (sk.presentedAt) firstSeen[sk.unitId] = Math.min(firstSeen[sk.unitId] ?? Infinity, sk.presentedAt);
       const newToday = Object.values(firstSeen).filter((t) => t >= dayStart).length;
-      const flowNew = Math.max(0, Math.min(newMax, newMax * 3 - newToday));
+      // Idiomas (inglés intensivo, decisión del usuario 22-oct-2026): sin tope diario; sigue con nuevas mientras la
+      // ronda anterior pase del 80 % de aciertos. El resto de cursos mantiene el tope de tres rondas de nuevas al día.
+      const isLanguage = Boolean(course.content_language) && course.content_language !== (course.learner_language ?? course.ui_language);
+      const prevRound = savedState && savedState.plan.day === today && (savedState.plan as { mode?: string }).mode === 'flow' ? savedState : null;
+      const prevOutcomes = Object.values(prevRound?.outcomes ?? {});
+      const flowNew = flowNewUnits({ perRound: newMax, newToday, dailyRounds: isLanguage ? null : 3,
+        ...(prevRound ? { lastRound: { answered: prevOutcomes.length, correct: prevOutcomes.filter((o) => o.correct).length } } : {}) });
       const reviewKeys = (plan.items as PlanItem[]).filter((i) => i.reason === 'review').map((i) => i.unitId);
       const errors = errorUnits(learner.skills, 4, reviewKeys).filter((k) => units[k]);
+      // Refuerzo que rota: si se puede, no repite las unidades de la ronda anterior (antes salían siempre las mismas 8).
+      const prevUnits = new Set((prevRound?.plan.steps ?? []).map((st: { unitKey: string }) => st.unitKey).filter(Boolean));
+      const weakAll = weakUnits(learner.skills, 8, [...reviewKeys, ...errors]).filter((k) => units[k]);
+      const weakFresh = weakUnits(learner.skills, 8, [...reviewKeys, ...errors, ...prevUnits]).filter((k) => units[k]);
+      const practice = weakFresh.length >= 2 ? weakFresh : weakAll;
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, maxNewUnits: flowNew,
-            errorUnits: errors, practiceUnits: weakUnits(learner.skills, 8, [...reviewKeys, ...errors]).filter((k) => units[k]), levels: reviewHelp(learner) })
+            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner) })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
