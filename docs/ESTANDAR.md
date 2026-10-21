@@ -57,7 +57,9 @@ hay que leer nunca avanza ni se cierra solo; solo pasa sola la tarjeta que ya ha
 dispositivo 30 días. La app se actualiza sola (sin quedarse en una versión vieja).
 
 ## 6. Calidad: nada se publica sin pasar la puerta
-`private/release.sh` es **la única forma de publicar**. Ejecuta: tipos, todas las pruebas, compilación, recorrido real
+Dos vías (cambio del 21-oct-2026, pendiente de aprobación en su PR): en el **modo mejora continua**, un PR solo se
+abre con tipos, pruebas, compilación y recorrido en móvil emulado **con toques táctiles reales**, y el usuario lo
+fusiona (fusionar en `main` despliega). Desde el Mac, `private/release.sh` es la puerta completa. Ejecuta: tipos, todas las pruebas, compilación, recorrido real
 de cada curso en Flujo (empieza enseñando, ninguna pregunta sin ficha, nada avanza solo, al fallar enseña, sin
 desbordamientos, sin botones de avance, el hito encadena la ronda siguiente), revisor de contenido (longitud, puente, idea clave, «se evalúa lo que se enseña»),
 despliegue y verificación en producción (cabeceras de caché y reglas del plan de sesión). Si algo falla, no se publica.
