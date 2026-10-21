@@ -705,3 +705,35 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   `fixpub.sh` lo sube a local y producción con `update-units` y `update-assoc`, que conservan el progreso.
 - **Regla aprendida:** una analogía necesita palabra de apoyo (el validador la exige); a una escena absurda se le
   puede quitar si repetía la de otro concepto.
+
+## D-077 · Flujo infinito sin botones, cada pregunta con su ejemplo visto (21-oct-2026)
+- **Por qué:** el usuario encontró una pregunta jefe («¿qué método de Files comprueba si un fichero está en disco?»)
+  cuya respuesta solo aparecía en una lista de la ficha, sin explicar; no quiere botones de más y quiere el efecto
+  red social: deslizar y que no acabe. Aprobado por el usuario (respuestas del 21-oct).
+- **Contenido:** el revisor exige ahora que la respuesta esté en la ficha de **su** unidad (no en cualquier parte del
+  curso) y que el código salga en un ejemplo que diga qué hace. Se arreglaron 70 retos (ejemplos y frases nuevas).
+- **Experiencia:** sin «Siguiente», «Entendido» ni «Una ronda más»: se desliza; al acertar pasa sola; al fallar, «Recuérdalo
+  así» (con la respuesta si venía de una pregunta). La ficha muestra todos sus ejemplos y «🤔 Explícame más» abre la
+  letra pequeña (correspondencias y límite de la analogía, el código línea a línea) y anota la petición
+  (`content_requests`) para ampliar la ficha.
+- **Infinito:** cada ronda acaba en un hito; la siguiente se pide en ese momento y se encadena al deslizar. Orden:
+  repasos, «tus errores» (fallado u olvidado), lo nuevo (rampa D-057; como mucho tres rondas de nuevas al día) y, si no
+  queda nada, refuerzo de lo más débil (`weakUnits`). Las preguntas suben de nivel: con 2 repasos superados se completa
+  escribiendo (respuesta corta); en idiomas, se escribe la palabra.
+- **Racha con protector:** cada 7 días de racha, un protector (máximo 2) que salva un día perdido (`streakOf`).
+- **Aviso de repaso en el móvil:** Web Push (`push_subscriptions`), en un segundo paso.
+- **Descartado:** vidas o corazones (castigan el error, que en Memora es el momento de enseñar); avanzar solo en las
+  fichas (el usuario necesita tiempo para leer, D-070).
+
+## D-078 · Inglés intensivo: Flujo con audio, escribir y conversación con IA con guion (21-oct-2026)
+- **Situación del usuario:** nivel A2, 2 horas o más al día, quiere hablar en inglés lo antes posible (objetivo B2
+  conversacional). Se le dijo con honestidad que B2 en 30 días no es realista; el plan busca el mayor salto posible
+  hacia la conversación fluida y sigue después hacia B2.
+- **Formato:** el inglés pasa al Flujo (deslizar, infinito), con ▶ para oír cada palabra y ejemplo y escribir solo en
+  idiomas.
+- **Contenido:** vocabulario frecuente (las 1.000 primeras y más), frases hechas para conversar, gramática clave del
+  A2 al B2 y escucha.
+- **Conversación con IA (cambia la regla 12 solo para esto, aprobado por el usuario):** situaciones preparadas
+  (restaurante, entrevista, viaje…) en las que la IA hace de interlocutor y corrige. Lleva guion y objetivo por
+  situación, tope de gasto global y por usuario y día, y un proveedor que no guarda ni entrena con los mensajes. La
+  corrección se valida con esquema; el resto de la lección sigue usando solo contenido preparado y revisado.

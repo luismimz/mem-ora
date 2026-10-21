@@ -38,6 +38,9 @@ Si algo de este archivo contradice la visión, pregunta.
     reconocimiento no pesa como una recuperación sin ayuda (ver tabla de evidencia).
 12. **La IA trabaja fuera de la lección.** Genera borradores, nunca publica, y toda salida se valida. La lección
     solo usa contenido ya preparado y revisado.
+    Única excepción (decisión del usuario, 21-oct-2026, D-078): la **conversación de idiomas**, en situaciones con
+    guion y objetivo preparados, donde la IA hace de interlocutor y corrige, con tope de gasto, salida validada y un
+    proveedor que no guarda ni entrena con los mensajes.
 13. **Contenido con fuente, licencia y revisión.** Toda unidad tiene origen, licencia y estado de revisión.
     El contenido sensible (medicina, ciberseguridad, derecho) exige fuente, revisor humano, fecha de verificación
     y aviso de que Memora es una herramienta de estudio, no un consejo profesional.
