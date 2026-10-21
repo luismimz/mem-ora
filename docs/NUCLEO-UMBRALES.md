@@ -4,7 +4,7 @@
 > reales. Viven en `packages/core/src/config.ts` (`defaultConfig`) y se cambian sin tocar la lógica.
 > Cada uno indica qué dato real lo confirmaría o lo corregiría.
 >
-> **Los números de la simulación (`tools/simulate`, `docs/SIMULACION-H1.md`) no son predicciones.** Salen de
+> **Los números de la simulación (`tools/simulate`, `docs/archivo/SIMULACION-H1.md`) no son predicciones.** Salen de
 > alumnos sintéticos con un modelo de memoria inventado y calibrado a mano. Demuestran que el mecanismo funciona
 > (los estados avanzan, los topes se respetan, los vencidos se recuperan), no cuántas palabras o conceptos
 > aprenderá una persona real ni en cuánto tiempo.

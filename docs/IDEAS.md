@@ -1,6 +1,25 @@
-# Ideas fuera del hito en curso
+# Cola de mejoras (modo mejora continua)
 
-No se implementan hasta que un hito las incluya.
+Cada vuelta toma **una** de aquí, por la prioridad de `CLAUDE.md` (roto → experiencia y Home → contenido DAM → inglés →
+lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
+
+## Prioritario (21-oct-2026)
+
+- **[roto] La puerta de calidad desliza con la tecla ↑** (`private/shots/feed.cjs`): por eso el deslizar estuvo roto en
+  el iPhone sin que la puerta lo viera. Debe deslizar con toques táctiles reales (CDP `Input.dispatchTouchEvent`).
+- **[roto] Prueba del gesto en el repositorio:** un recorrido del Flujo con datos de prueba y toques reales en móvil
+  emulado (ficha corta, ficha larga que se desplaza, pregunta, hito) que se ejecute con las pruebas, sin Directus.
+- **[experiencia] Revisión de la Home en el móvil:** qué ve el alumno al entrar, qué hace después y si se entiende.
+- **[experiencia] Audio:** confirmar en el iPhone del usuario que la voz suena; después, Kokoro pregenerado.
+- **[contenido] Exámenes de práctica y PAC de ILERNA** tal cual, en una misión privada del usuario (regla 13), y
+  **preguntas nuevas con su mismo patrón** por módulo del semestre (Programación, Bases de datos, Acceso a datos,
+  Interfaces, SGE…). Necesita que el usuario deje los PDF en `private/`.
+- **[contenido] Explicaciones más claras** en las fichas DAM, ampliadas con fuentes abiertas redactadas con palabras
+  propias y con su fuente (regla 11).
+- **[inglés] Calidad de las asociaciones e historias:** el usuario las ve malas. Revisar con él ejemplos concretos
+  antes de reescribir en masa; una asociación mala es peor que ninguna.
+
+## Ideas anteriores (de la etapa por hitos)
 
 - **Arcade respeta las compuertas de nivel** (H3): el selector del Arcade no debe sacar habilidades «aprendidas»
   antes de 7 días ni «estables» antes de 30 días desde su última exposición. Si lo hiciera, la exposición reiniciaría

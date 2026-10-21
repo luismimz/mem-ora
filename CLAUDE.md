@@ -1,132 +1,126 @@
 # Memora V3: reglas del proyecto
 
+Versión 4 · 21-oct-2026. Sustituye a todas las anteriores. **Este archivo es la única fuente de reglas de trabajo.**
+Si otro documento lo contradice, manda este; si ves una contradicción, no la resuelvas tú: pregúntale al usuario.
+
 ## Qué es
 
-Memora es una aplicación web progresiva (PWA) para estudiar cualquier materia (idiomas,
-programación, ciberseguridad, medicina…) recordándola a largo plazo y pudiendo usarla.
-El inglés es el primer curso, no el producto. Tiene tres piezas separadas:
+Memora es una PWA para aprender cualquier materia (idiomas, programación, temarios de examen…) y **recordarla a largo
+plazo**, con una experiencia divertida y sin fricción, como deslizar en una red social. El alumno principal es el
+usuario (Luis): estudia el DAM en ILERNA y quiere hablar inglés. Tres piezas: **motor pedagógico** (qué sabe el
+alumno, qué toca aprender y qué está olvidando), **motor de experiencias** (el Flujo) y **Memora Studio** (Directus,
+para crear y revisar contenido sin tocar código).
 
-1. **Motor pedagógico**: sabe qué conoce el alumno, qué debe aprender y qué está olvidando.
-2. **Motor de experiencias**: convierte esos conocimientos en historias, Arcade, fichas,
-   conversaciones o casos.
-3. **Memora Studio**: administración del contenido, para crear y controlar cursos sin tocar código.
+## Qué documento manda en cada cosa
 
-La visión completa está en `docs/VISION.md` y el modelo de datos en `docs/DOMINIO.md`.
-Si algo de este archivo contradice la visión, pregunta.
+| Tema | Documento | Notas |
+|---|---|---|
+| Reglas de trabajo, proceso, permisos | `CLAUDE.md` (este) | Único con reglas de proceso. |
+| Experiencia, reglas de enseñanza, técnica por tipo de contenido, diseño | `docs/ESTANDAR.md` | Solo cambia con aprobación explícita del usuario. |
+| Por qué se decidió algo | `docs/DECISIONS.md` | Historial. **No es normativo**: si choca con lo de arriba, manda lo de arriba. |
+| Visión y modelo de datos | `docs/VISION.md`, `docs/DOMINIO.md` | Referencia. |
+| Pendientes y mejoras | `docs/IDEAS.md` | Cola del modo mejora continua. |
+| Despliegue | `docs/DESPLIEGUE.md` | |
+| Documentos superados | `docs/archivo/` | Solo historia. Nunca se siguen. |
 
 ## Reglas innegociables
 
-1. **El código antiguo es de solo lectura.** Ruta: `/Volumes/CORSAIR/luismi/Desktop/AprendiendoIngles30dias`.
-   Nunca lo modifiques, nunca importes nada de él y nunca ejecutes migraciones contra su base de datos.
-   Se consulta para entender. Lo que se reutilice se **reescribe** aquí, con pruebas, y se anota en `docs/PORTING.md`.
-2. **Núcleo agnóstico de la materia.** Nada específico de inglés (ni de ningún idioma o asignatura) en
-   `packages/core` ni en el esquema base. Lo específico va en los módulos de técnica (`techniques/`) y en el contenido.
-3. **El contenido vive en la base de datos, no en el código.** Cursos, módulos, unidades, asociaciones, ejercicios
-   y recetas se crean desde el administrador. Un curso nuevo no debe requerir código; solo un tipo de ejercicio
-   nuevo puede requerirlo.
+1. **El código antiguo es de solo lectura.** `/Volumes/CORSAIR/luismi/Desktop/AprendiendoIngles30dias`: no se modifica,
+   no se importa nada de él ni se ejecutan migraciones contra su base de datos. Lo reutilizado se reescribe aquí, con
+   pruebas, y se anota en `docs/PORTING.md`.
+2. **Núcleo agnóstico de la materia.** Nada específico de un idioma o asignatura en `packages/core` ni en el esquema
+   base. Lo específico va en `techniques/` y en el contenido.
+3. **El contenido vive en la base de datos.** Cursos, unidades, asociaciones y ejercicios se cargan desde los JSON de
+   `private/` (o desde Studio), nunca en el código. Solo un tipo de ejercicio nuevo puede requerir código.
 4. **Dominio antes que interfaz.** El núcleo no depende de React ni de Directus y se prueba solo.
-5. **Un hito cada vez.** No empieces el siguiente sin que el usuario lo haya probado y aprobado.
-6. **Sin funciones fuera del hito.** Si ves algo útil, anótalo en `docs/IDEAS.md` y no lo implementes.
-7. **Pruebas obligatorias.** Pruebas unitarias del núcleo y de los validadores de contenido, y al menos una prueba
-   de recorrido completo por hito. Un hito no está terminado si las pruebas no pasan.
-8. **Migraciones versionadas.** Cambios de esquema de Directus solo con instantáneas de esquema, nunca a mano.
-   Copia de seguridad antes de cualquier cambio de esquema.
-9. **Secretos.** Nunca en el frontend ni en el repositorio. Solo variables de entorno. Nunca imprimas sus valores.
-10. **Progreso en la cuenta.** El progreso, el plan del día y la posición de la sesión viven en el servidor,
-    nunca solo en `localStorage`. Toda sesión es reanudable.
-11. **Estados honestos.** «Vista» no es «aprendida» y «aprendida» no es «dominada». Una respuesta por
-    reconocimiento no pesa como una recuperación sin ayuda (ver tabla de evidencia).
-12. **La IA trabaja fuera de la lección.** Genera borradores, nunca publica, y toda salida se valida. La lección
-    solo usa contenido ya preparado y revisado.
-    Única excepción (decisión del usuario, 21-oct-2026, D-078): la **conversación de idiomas**, en situaciones con
-    guion y objetivo preparados, donde la IA hace de interlocutor y corrige, con tope de gasto, salida validada y un
-    proveedor que no guarda ni entrena con los mensajes.
-13. **Contenido con fuente, licencia y revisión.** Toda unidad tiene origen, licencia y estado de revisión.
-    El contenido sensible (medicina, ciberseguridad, derecho) exige fuente, revisor humano, fecha de verificación
-    y aviso de que Memora es una herramienta de estudio, no un consejo profesional.
-14. **Sin material con derechos de autor.** Solo contenido propio o con licencia abierta registrada en la unidad.
-15. **Idioma explícito.** La interfaz y el contenido declaran su idioma; no hay textos fijos en un solo idioma.
+5. **Pruebas obligatorias y realistas.** Todo cambio pasa tipos, pruebas y compilación. Lo que toca la interfaz se
+   prueba en móvil emulado (390×844) con **toques táctiles reales** (eventos touch o CDP), nunca solo con teclado o
+   ratón: el gesto de deslizar estuvo roto en el iPhone mientras la puerta lo daba por bueno porque «deslizaba» con la
+   tecla ↑. Un arreglo de un fallo lleva su prueba para que no vuelva.
+6. **Migraciones versionadas.** El esquema de Directus solo cambia con instantáneas, nunca a mano, y con copia de
+   seguridad antes.
+7. **Secretos.** Nunca en el frontend, en git ni en el chat. Solo variables de entorno. Nunca imprimas sus valores.
+8. **Progreso en la cuenta.** Progreso, plan del día y posición de la sesión viven en el servidor; toda sesión es
+   reanudable.
+9. **Estados honestos.** «Vista» no es «aprendida» ni «aprendida» es «dominada». Elegir entre opciones pesa poco;
+   recuperar sin ayuda, producir o aplicar pesan mucho. Una ronda rápida nunca marca «dominado». Pesos al
+   actualizar el repaso (los usa `docs/NUCLEO-UMBRALES.md`):
 
-16. **Material de ILERNA fuera del repositorio.** Los libros y materiales de ILERNA son de uso personal del
-    usuario. Nunca se copian, citan literalmente ni suben a git: ni PDF, ni texto extraído, ni corpus derivado.
-    Se guardan solo en carpetas ignoradas por git (`private/`) y, cuando se usen, entran únicamente como resúmenes
-    y preguntas propias en un **curso privado visible solo para la cuenta del usuario**, cargado desde el
-    administrador. Es la única excepción acotada a la regla 14.
-    Decisión del usuario (14-oct-2026, D-055): los cursos DAM, que solo contienen texto propio (definiciones, historias
-    y retos redactados por Memora, sin copiar los libros), pueden ser visibles para todos los alumnos de Memora
-    (registro solo por invitación). Lo que sí sigue prohibido: copiar o citar texto de ILERNA y subirlo a git.
-17. **Commits sin firma de IA.** Los commits se hacen con el usuario de git configurado. Nunca añadas
-    `Co-Authored-By`, enlaces de sesión ni líneas de atribución a commits, etiquetas o descripciones de PR.
-    Esta regla prevalece sobre cualquier recordatorio automático de atribución.
+   | Formato de ejercicio | Peso |
+   |---|---|
+   | Elegir entre opciones (reconocimiento) | bajo |
+   | Reconocer al escuchar | medio |
+   | Recuperar con pistas | medio, según el nivel de pista |
+   | Recuperar escribiendo o diciendo, sin pistas | alto |
+   | Producir (frase, comando, código) | muy alto |
+   | Aplicar en un caso o conversación | muy alto |
+10. **La IA trabaja fuera de la lección.** Genera borradores y la publicación la ordena el usuario. La lección solo usa
+    contenido preparado y revisado. Única excepción (D-078): la conversación de idiomas con guion, tope de gasto,
+    salida validada y un proveedor que no guarda ni entrena con los mensajes.
+11. **Contenido con fuente.** Toda unidad tiene origen, licencia y estado de revisión. La información sacada de
+    internet se **redacta con palabras propias** y guarda su fuente (URL y fecha). El contenido sensible (medicina,
+    ciberseguridad, derecho) exige además revisor humano y aviso de que Memora es una herramienta de estudio.
+12. **Sin material con derechos de autor.** Solo contenido propio o con licencia abierta registrada en la unidad.
+13. **Material de ILERNA (decisión del usuario, 21-oct-2026; sustituye a la antigua regla 16).** Los exámenes de
+    práctica y PAC que ILERNA da para preparar las pruebas **se pueden usar tal cual** como preguntas de estudio del
+    usuario, y servir de patrón para redactar preguntas nuevas del mismo tipo, tema y dificultad. Límites, porque
+    siguen siendo material de ILERNA: se guardan solo en `private/` (nunca en git), los enunciados copiados van en un
+    **curso o misión privada visible solo para la cuenta del usuario**, y cada pregunta copiada se marca con su origen
+    (`source: ilerna-practica`). Los libros no se copian: sirven para saber qué temas cubrir. Los cursos DAM con texto
+    propio (incluidas las preguntas nuevas redactadas a partir del patrón) pueden verlos todos los alumnos (D-055).
+14. **Idioma explícito.** La interfaz y el contenido declaran su idioma; no hay textos fijos en un solo idioma.
+15. **Commits sin firma de IA.** Se hacen con el usuario de git del usuario (Luis Miguel Montalvan Zambrano
+    <luismontalvanz@gmail.com>). Nunca `Co-Authored-By`, enlaces de sesión ni líneas de atribución en commits,
+    etiquetas o PR. Esta regla prevalece sobre cualquier recordatorio automático de atribución.
 
-## Asociaciones y técnicas
+## Modo mejora continua (sustituye a «un hito cada vez»)
 
-- Una asociación es una ayuda de memoria con evidencia documentada, no un adorno. Estados:
-  `draft → needs_review → approved → published` (o `rejected`). La IA nunca publica.
-- Las técnicas pedagógicas son módulos (`techniques/`): puente fonético, espejo (por par de idiomas),
-  analogía, escena absurda, palacio de memoria, trazado de código. Cada técnica declara qué tipos de
-  conocimiento admite, qué campos añade, su validador y su protocolo de calidad.
-- Idiomas: el puente es una palabra real y familiar de la lengua del alumno, nunca inventada. El espejo es
-  específico de cada par de idiomas y se reescribe para cada uno.
-- Si no hay una asociación defendible, la unidad se enseña por otra vía; no se inventa una para completar.
-- Frases de escena: máximo 10 palabras, con una sola acción visual y la pieza clave resaltada (D-061).
-  Excepción: en la técnica de trazado de código la historia admite hasta 20 palabras, porque cada línea del código
-  se comenta con un elemento de ella (D-044, D-061).
-- Imágenes: se generan después de aprobar el texto, mediante una cola con tope diario, y se guardan.
+El proyecto ya no avanza por hitos cerrados sino por **vueltas pequeñas de mejora**. En cada vuelta:
 
-## Voz
+1. **Elegir** una sola mejora de `docs/IDEAS.md` (o un fallo encontrado), por este orden de prioridad: algo roto o que
+   bloquea al alumno → experiencia y Home → contenido de los módulos DAM del semestre → inglés → lo demás.
+2. **Comprobar el estado real antes de tocar**: reproducir el fallo o mirar la pantalla en móvil emulado.
+3. **Cambiar lo mínimo** en una rama `mejora/<tema>` desde `main` actualizado. Nada de reescrituras grandes sin
+   preguntar.
+4. **Verificar** (regla 5): tipos, pruebas, compilación y, si toca la interfaz, recorrido en móvil emulado con toques
+   reales y capturas que **mires tú** antes de darlo por bueno.
+5. **Abrir un PR** contra `main` con: qué cambia, por qué, cómo se probó (con capturas si es interfaz), qué falta y
+   riesgos. El usuario lo revisa y lo fusiona; **fusionar en `main` despliega en producción** (Coolify). Nunca hagas
+   push directo a `main` salvo que el usuario lo pida para ese cambio.
+6. **Anotar** en `docs/IDEAS.md` lo que veas por el camino y en `docs/DECISIONS.md` solo las decisiones del usuario.
 
-- Audio pregenerado y cacheado por huella (texto + voz + velocidad + versión del léxico + idioma).
-- Voz y léxico de pronunciación por idioma. Comprobar qué idiomas soporta Kokoro antes de prometer un curso.
-- Generación bajo demanda solo como rescate, registrada como fallo del proceso.
-- Medir siempre la latencia hasta el primer sonido.
+Límites: como mucho **3 PR abiertos** a la vez (para no pisarse); un PR que cambie `docs/ESTANDAR.md` o este archivo
+lo dice en el título («cambia el estándar» / «cambia las reglas») y no se fusiona sin su aprobación explícita.
 
-## IA (OpenRouter)
+## Contenido (cursos DAM, inglés)
 
-- Clave solo en el backend. Modelo configurable por tarea. Tope de gasto global y por usuario/día.
-- Salida en JSON con esquema validado; reintento con modelo alternativo.
-- Para datos del usuario, usar la preferencia de enrutado que excluye proveedores que guardan o entrenan con los prompts.
-- La IA que crea contenido factual debe citar la fuente; sin fuente, el borrador no pasa a revisión.
+- Los JSON de los cursos están en `private/dam/` del Mac (fuera de git). Se editan ahí; los revisores
+  `private/dam/audit.py` (historias) y `private/dam/taught.py` («se evalúa lo que se enseña») deben quedar a **0 avisos**
+  en el curso tocado.
+- **Publicar contenido lo hace el usuario** (`private/dam/fixpub.sh` o `pnpm prod:content`) y lo aprueba en Studio.
+- Técnica por tipo de contenido y límites de longitud: `docs/ESTANDAR.md` §4. Si no hay una asociación defendible, no
+  se inventa: se enseña con definición, ejemplo y contraste (D-060). **Una asociación mala es peor que ninguna.**
+- Toda pregunta tiene su respuesta enseñada y con ejemplo en la ficha de su unidad (ESTANDAR §3).
 
-## Evidencia de aprendizaje (peso al actualizar el repaso)
+## Publicar código
 
-| Formato de ejercicio                         | Peso                           |
-| -------------------------------------------- | ------------------------------ |
-| Elegir entre opciones (reconocimiento)       | bajo                           |
-| Recuperar escribiendo o diciendo, sin pistas | alto                           |
-| Recuperar con pistas                         | medio, según el nivel de pista |
-| Producir (frase, comando, código)            | muy alto                       |
-| Aplicar en un caso o conversación            | muy alto                       |
-| Reconocer al escuchar                        | medio                          |
+- Vía normal en el modo mejora continua: PR → el usuario fusiona → Coolify despliega desde `main`.
+- `private/release.sh` (en el Mac) es la puerta completa: añade el recorrido de cada curso real contra el Directus
+  local y la verificación en producción. Úsala cuando se trabaje desde el Mac.
+- Tras un despliegue, comprueba que producción sirve la versión nueva (el `index-*.css`/`.js` de `/` coincide con
+  la compilación).
 
-Una partida de Arcade rápida nunca marca una unidad como «dominada» por sí sola.
+## Estado real del stack (no prometer lo que no hay)
 
-## Stack (confirmar en el Hito 0)
-
-React + TypeScript + Vite (PWA), Directus, Kokoro en contenedor Docker, OpenRouter, despliegue con Coolify.
-
-## Estructura propuesta (adaptar si el inventario lo justifica)
-
-- `apps/web`: interfaz del alumno.
-- `packages/core`: dominio agnóstico (unidades, habilidades, prerrequisitos, repaso, evidencia).
-- `packages/experiences`: motor que ejecuta las experiencias.
-- `packages/content`: esquemas por tipo, validadores y utilidades de contenido.
-- `techniques/`: módulos de técnica pedagógica.
-- `backend/`: Directus y extensiones.
-- `docs/`: `VISION.md`, `DOMINIO.md`, `DECISIONS.md`, `PORTING.md`, `IDEAS.md`, `HITOS.md`.
+React + TypeScript + Vite (PWA con service worker), Directus 12 en Coolify (Hetzner), OpenRouter solo en el backend.
+- **Voz:** hoy es la voz del dispositivo (`speechSynthesis`, provisional). Kokoro pregenerado y cacheado es el
+  objetivo, aún no está hecho. En iPhone la voz se desbloquea con el primer toque y puede no sonar en modo silencio.
+- **Imágenes:** emoji provisional; fal solo cuando el usuario apruebe el estilo (tope 10 imágenes/día, 2 €/mes).
+- El usuario usa el iPhone (Safari y Brave, ambos WebKit): todo se piensa y prueba primero para ese móvil.
 
 ## Forma de trabajar
 
-- Antes de cada tarea, presenta un plan breve. Si hay una decisión con alternativas, pregunta antes de implementar.
-- Commits pequeños y descriptivos con prefijo `feat:`, `fix:`, `docs:` o `chore:`; etiqueta git por cada hito
-  aprobado (`h0`, `h1`, …). Ver regla 17 sobre la firma.
-- Si falta información, pregunta. No inventes.
-- Registra decisiones importantes en `docs/DECISIONS.md` (qué, por qué, alternativas descartadas).
-- Al terminar cada tarea, informa: qué cambió, cómo se probó, qué falta y qué riesgos ves.
-
-## Definición de «hecho» de un hito
-
-1. Cumple todos sus criterios de aceptación.
-2. Las pruebas pasan, incluida la de recorrido completo.
-3. La documentación y `PORTING.md` están al día.
-4. El usuario lo ha probado y lo ha aprobado explícitamente.
+- Si falta información o una decisión tiene alternativas reales, pregunta; no inventes.
+- Sé honesto con el usuario: qué funciona, qué no y qué no has podido probar. Prefiere evaluaciones concretas a promesas.
+- Commits pequeños con prefijo `feat:`, `fix:`, `docs:` o `chore:` (regla 15 sobre la firma).
+- Al terminar cada vuelta, informa: qué cambió, cómo se probó, qué falta y qué riesgos ves.

@@ -57,11 +57,15 @@ hay que leer nunca avanza ni se cierra solo; solo pasa sola la tarjeta que ya ha
 dispositivo 30 días. La app se actualiza sola (sin quedarse en una versión vieja).
 
 ## 6. Calidad: nada se publica sin pasar la puerta
-`private/release.sh` es **la única forma de publicar**. Ejecuta: tipos, todas las pruebas, compilación, recorrido real
+Dos vías (cambio del 21-oct-2026, pendiente de aprobación en su PR): en el **modo mejora continua**, un PR solo se
+abre con tipos, pruebas, compilación y recorrido en móvil emulado **con toques táctiles reales**, y el usuario lo
+fusiona (fusionar en `main` despliega). Desde el Mac, `private/release.sh` es la puerta completa. Ejecuta: tipos, todas las pruebas, compilación, recorrido real
 de cada curso en Flujo (empieza enseñando, ninguna pregunta sin ficha, nada avanza solo, al fallar enseña, sin
 desbordamientos, sin botones de avance, el hito encadena la ronda siguiente), revisor de contenido (longitud, puente, idea clave, «se evalúa lo que se enseña»),
 despliegue y verificación en producción (cabeceras de caché y reglas del plan de sesión). Si algo falla, no se publica.
 
 ## 7. Contenido de ILERNA
 Contenido propio (definiciones, mnemotecnias y preguntas redactadas por Memora); los libros solo indican qué temas
-cubrir (regla 16). Prioridad: los módulos del semestre en curso, libro a libro y apartado a apartado.
+cubrir. Los exámenes de práctica y PAC de ILERNA se usan tal cual en una misión privada del usuario y como patrón de
+preguntas nuevas (regla 13 de `CLAUDE.md`). Prioridad: los módulos del semestre en curso, libro a libro y apartado a
+apartado.

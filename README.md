@@ -1,6 +1,6 @@
 # Memora V3
 
-Aplicación para estudiar cualquier materia y retenerla a largo plazo. Reglas: `CLAUDE.md`. Visión, dominio e hitos: `docs/`.
+Aplicación para estudiar cualquier materia y retenerla a largo plazo. Reglas: `CLAUDE.md` (única fuente). Experiencia: `docs/ESTANDAR.md`. Visión, dominio y decisiones: `docs/`.
 
 ## Requisitos
 
@@ -10,7 +10,7 @@ Node 22 y pnpm 11.
 pnpm install
 pnpm test        # pruebas de todos los paquetes
 pnpm typecheck   # comprobación de tipos
-pnpm simulate    # simulación de 30 días del núcleo (ver docs/SIMULACION-H1.md); --days=60 para más
+pnpm simulate    # simulación de 30 días del núcleo (ver docs/archivo/SIMULACION-H1.md); --days=60 para más
 pnpm catalog-demo  # cómo explica el validador los problemas de varios catálogos
 ```
 
@@ -27,7 +27,7 @@ pnpm backend:accounts          # cuentas de prueba (contraseñas en backend/.env
 pnpm test:integration          # prueba de recorrido completo contra el Directus local
 ```
 
-Panel: http://localhost:8055/admin · Correos: http://localhost:8025 · Guía de prueba: `docs/H2.1-PRUEBA.md`.
+Panel: http://localhost:8055/admin · Correos: http://localhost:8025 · Guía de prueba: `docs/archivo/H2.1-PRUEBA.md`.
 
 ## App del alumno (local)
 
@@ -36,7 +36,7 @@ pnpm backend:seed-demo   # curso de demostración con contenido de ejemplo sin r
 pnpm web                 # http://127.0.0.1:5173 (usa 127.0.0.1, no localhost: D-032)
 ```
 
-Guía de prueba: `docs/H2.2a-PRUEBA.md`.
+Guía de prueba: `docs/archivo/H2.2a-PRUEBA.md`.
 
 Prueba táctil del modo Flujo (móvil emulado, toques reales, sin servidor):
 
