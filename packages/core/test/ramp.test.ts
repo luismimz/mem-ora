@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { newUnitsFor, type DayActivity } from '../src';
+import { flowNewUnits, newUnitsFor, type DayActivity } from '../src';
 
 const day = (attempts: number, correct: number): DayActivity => ({ introduced: 0, reviews: 0, attempts, correct });
 
@@ -32,3 +32,25 @@ describe('rampa de unidades nuevas', () => {
     expect(newUnitsFor({ 10: day(10, 2), 2: day(10, 10) }, 15)).toBe(8);
   });
 });
+
+describe('flowNewUnits', () => {
+  it('con tope diario, deja de traer nuevas al agotar las rondas del día', () => {
+    expect(flowNewUnits({ perRound: 8, newToday: 0, dailyRounds: 3 })).toBe(8);
+    expect(flowNewUnits({ perRound: 8, newToday: 20, dailyRounds: 3 })).toBe(4);
+    expect(flowNewUnits({ perRound: 8, newToday: 24, dailyRounds: 3 })).toBe(0);
+  });
+
+  it('sin tope, sigue trayendo nuevas aunque ya se hayan visto muchas hoy', () => {
+    expect(flowNewUnits({ perRound: 8, newToday: 200, dailyRounds: null })).toBe(8);
+    expect(flowNewUnits({ perRound: 8, newToday: 200, dailyRounds: null, lastRound: { answered: 10, correct: 8 } })).toBe(8);
+  });
+
+  it('sin tope, una ronda anterior con menos del 80 % de aciertos da una ronda de repaso', () => {
+    expect(flowNewUnits({ perRound: 8, newToday: 40, dailyRounds: null, lastRound: { answered: 10, correct: 7 } })).toBe(0);
+  });
+
+  it('una ronda anterior con muy pocas respuestas no cuenta', () => {
+    expect(flowNewUnits({ perRound: 8, newToday: 40, dailyRounds: null, lastRound: { answered: 3, correct: 0 } })).toBe(8);
+  });
+});
+

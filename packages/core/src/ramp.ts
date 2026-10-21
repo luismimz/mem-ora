@@ -31,3 +31,29 @@ export function newUnitsFor(activity: Record<string, DayActivity>, target: numbe
   }
   return n;
 }
+
+export interface FlowNewInput {
+  /** Nuevas por ronda según la rampa (`newUnitsFor`). */
+  perRound: number;
+  /** Unidades vistas por primera vez hoy. */
+  newToday: number;
+  /** Rondas de nuevas al día como mucho; `null` = sin tope diario (lo decide la ronda anterior). */
+  dailyRounds: number | null;
+  /** Respuestas de la ronda anterior de hoy (si la hubo). */
+  lastRound?: { answered: number; correct: number };
+}
+/** Aciertos mínimos en la ronda anterior para seguir con nuevas cuando no hay tope diario. */
+export const FLOW_NEW_IF = 0.8;
+/** Respuestas mínimas de la ronda anterior para que cuente. */
+export const FLOW_NEW_MIN_ANSWERS = 4;
+
+/**
+ * Nuevas para la siguiente ronda del Flujo. Con tope diario (D-077), `perRound` hasta agotar `dailyRounds` rondas.
+ * Sin tope (cursos intensivos, decisión del usuario 22-oct-2026): siempre `perRound`, salvo que la ronda anterior
+ * bajara del 80 % de aciertos; entonces esa ronda es de repaso (0 nuevas) y la siguiente vuelve a traer nuevas.
+ */
+export function flowNewUnits({ perRound, newToday, dailyRounds, lastRound }: FlowNewInput): number {
+  if (dailyRounds !== null) return Math.max(0, Math.min(perRound, perRound * dailyRounds - newToday));
+  if (lastRound && lastRound.answered >= FLOW_NEW_MIN_ANSWERS && lastRound.correct / lastRound.answered < FLOW_NEW_IF) return 0;
+  return perRound;
+}
