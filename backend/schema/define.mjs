@@ -338,6 +338,36 @@ const collections = [
     ],
   },
   {
+    collection: 'content_requests',
+    meta: { icon: 'help', note: '«Explícame más»: fichas que un alumno pidió ampliar (D-077). Se atienden en Studio.', translations: [{ language: 'es-ES', translation: 'Peticiones de explicación', singular: 'Petición de explicación', plural: 'Peticiones de explicación' }] },
+    fields: [
+      f.id(),
+      f.m2o('user', 'Alumno', { required: true, readonly: true, template: '{{email}}' }),
+      f.m2o('course', 'Curso', { required: true, readonly: true, template: '{{title}}' }),
+      f.m2o('unit', 'Unidad', { required: true, readonly: true, template: '{{key}}' }),
+      f.string('step', 'Tarjeta', { readonly: true, width: 'half', max: 32 }),
+      f.text('note', 'Qué no se entiende'),
+      f.int('times', 'Veces pedida', { readonly: true }),
+      f.string('status', 'Estado', { required: true, default: 'open', width: 'half', choices: [['open', 'Pendiente'], ['done', 'Ampliada'], ['dismissed', 'Descartada']] }),
+      f.dateCreated(),
+      f.dateUpdated(),
+    ],
+  },
+  {
+    collection: 'push_subscriptions',
+    meta: { icon: 'notifications', note: 'Aviso de repaso en el móvil (D-077): suscripción Web Push de cada dispositivo.', translations: [{ language: 'es-ES', translation: 'Avisos en el móvil', singular: 'Aviso en el móvil', plural: 'Avisos en el móvil' }] },
+    fields: [
+      f.id(),
+      f.m2o('user', 'Alumno', { required: true, readonly: true, template: '{{email}}' }),
+      f.text('endpoint', 'Dirección del servicio de avisos', { required: true }),
+      f.json('keys', 'Claves de la suscripción', { readonly: true }),
+      f.string('device_id', 'Dispositivo', { readonly: true, width: 'half', max: 64 }),
+      f.timestamp('last_sent_at', 'Último aviso', { readonly: true }),
+      f.dateCreated(),
+      f.dateUpdated(),
+    ],
+  },
+  {
     collection: 'daily_plans',
     meta: { icon: 'event_note', note: 'Plan del día calculado por el servidor (H2.2a).', translations: [{ language: 'es-ES', translation: 'Planes del día', singular: 'Plan del día', plural: 'Planes del día' }] },
     fields: [
@@ -381,6 +411,10 @@ const relations = [
   ['learner_states', 'course', 'courses', 'CASCADE'],
   ['session_positions', 'user', 'directus_users', 'CASCADE'],
   ['session_positions', 'course', 'courses', 'CASCADE'],
+  ['content_requests', 'user', 'directus_users', 'CASCADE'],
+  ['content_requests', 'course', 'courses', 'CASCADE'],
+  ['content_requests', 'unit', 'units', 'CASCADE'],
+  ['push_subscriptions', 'user', 'directus_users', 'CASCADE'],
   ['daily_plans', 'user', 'directus_users', 'CASCADE'],
   ['daily_plans', 'course', 'courses', 'CASCADE'],
 ];
