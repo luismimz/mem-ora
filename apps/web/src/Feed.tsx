@@ -75,10 +75,17 @@ function whenLabel(at: number) {
 }
 const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms); } catch { /* sin vibración */ } };
 
-/** Tarjeta a pantalla completa: se pasa deslizando hacia arriba (o con ↑ / espacio). Sin botones de avance (D-077). */
+/**
+ * Tarjeta a pantalla completa: se pasa deslizando hacia arriba (o con ↑ / espacio). Sin botones de avance (D-077).
+ * En el móvil el gesto va por eventos táctiles: la tarjeta tiene `touch-action: pan-y` para poder desplazar las fichas
+ * largas, y con eso el navegador cancela los pointer events (pointercancel) en cuanto el dedo se mueve en vertical, así
+ * que el deslizar nunca llegaba a dispararse. Los touch events siguen llegando aunque el navegador haga scroll.
+ * El ratón y el lápiz siguen usando pointer events. Solo cuenta como «siguiente» si el gesto empieza con la ficha ya
+ * leída hasta abajo (si no, el deslizar sirve para leerla).
+ */
 function Slide({ children, onNext, tone, className = '' }: { children: ReactNode; onNext?: () => void; tone: number; className?: string }) {
   const [dy, setDy] = useState(0);
-  const start = useRef<number | null>(null);
+  const start = useRef<{ x: number; y: number } | null>(null);
   const box = useRef<HTMLElement>(null);
   const atEnd = () => { const el = box.current; return !el || el.scrollTop + el.clientHeight >= el.scrollHeight - 4; };
   useEffect(() => {
@@ -87,12 +94,34 @@ function Slide({ children, onNext, tone, className = '' }: { children: ReactNode
     window.addEventListener('keydown', key);
     return () => window.removeEventListener('keydown', key);
   }, [onNext]);
+  const begin = (target: EventTarget | null, x: number, y: number) => {
+    start.current = onNext && !(target as HTMLElement | null)?.closest?.('button, input, textarea, a') && atEnd() ? { x, y } : null;
+  };
+  const move = (x: number, y: number) => {
+    const s = start.current;
+    if (!s) return;
+    const ddy = y - s.y;
+    if (Math.abs(ddy) > Math.abs(x - s.x)) setDy(Math.min(0, ddy));
+  };
+  const finish = (x: number, y: number) => {
+    const s = start.current;
+    start.current = null;
+    setDy(0);
+    if (!s || !onNext) return;
+    const ddy = y - s.y;
+    if (ddy < -50 && Math.abs(ddy) > Math.abs(x - s.x)) onNext();
+  };
+  const cancel = () => { start.current = null; setDy(0); };
   return (
     <section ref={box} className={`slide ${className}`} style={{ '--tone': tone, transform: dy ? `translateY(${dy}px)` : undefined } as React.CSSProperties}
-      onPointerDown={(e) => { if (!onNext || (e.target as HTMLElement).closest('button, input, a')) return; start.current = atEnd() ? e.clientY : null; }}
-      onPointerMove={(e) => { if (start.current !== null) setDy(Math.min(0, e.clientY - start.current)); }}
-      onPointerUp={() => { if (start.current !== null && dy < -50) onNext?.(); start.current = null; setDy(0); }}
-      onPointerCancel={() => { start.current = null; setDy(0); }}>
+      onTouchStart={(e) => { const t = e.touches[0]; if (e.touches.length !== 1 || !t) { cancel(); return; } begin(e.target, t.clientX, t.clientY); }}
+      onTouchMove={(e) => { const t = e.touches[0]; if (t) move(t.clientX, t.clientY); }}
+      onTouchEnd={(e) => { const t = e.changedTouches[0]; if (t) finish(t.clientX, t.clientY); else cancel(); }}
+      onTouchCancel={cancel}
+      onPointerDown={(e) => { if (e.pointerType !== 'touch') begin(e.target, e.clientX, e.clientY); }}
+      onPointerMove={(e) => { if (e.pointerType !== 'touch') move(e.clientX, e.clientY); }}
+      onPointerUp={(e) => { if (e.pointerType !== 'touch') finish(e.clientX, e.clientY); }}
+      onPointerCancel={(e) => { if (e.pointerType !== 'touch') cancel(); }}>
       {children}
       {onNext && <p className="slide-hint" aria-hidden="true">↑ desliza para seguir</p>}
     </section>

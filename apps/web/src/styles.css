@@ -485,7 +485,9 @@ blockquote.reading { font-size: .92rem; }
 @media (prefers-reduced-motion: reduce) { .slide, .face-emoji, .end-xp, .party, .floater, .slide-hint { animation: none !important; } }
 @media (min-width: 760px) { .slide { padding-left: calc(50vw - 15rem); padding-right: calc(50vw - 15rem); } }
 /* D-073: la ficha enseña (qué es + ejemplo); el contenido largo se desplaza y «Siguiente» queda al final */
-.slide { overflow-y: auto; touch-action: pan-y; justify-content: flex-start; }
+.slide { overflow-y: auto; touch-action: pan-y; justify-content: flex-start; min-height: 0; }
+/* Sin min-height: 0 la tarjeta crece más que la pantalla, .feed la recorta y la ficha larga no se puede desplazar. */
+.feed-stage { min-height: 0; }
 .slide > :first-child { margin-top: auto; } .slide > :last-child { margin-bottom: auto; }
 .slide .slide-hint { margin-top: .2rem; }
 /* D-077: «Explícame más», nota del fallo, ejemplos y completar escribiendo */
