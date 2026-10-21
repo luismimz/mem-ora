@@ -12,7 +12,7 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[experiencia] Revisión de la Home en el móvil:** qué ve el alumno al entrar, qué hace después y si se entiende.
 - **[experiencia] Audio:** confirmar en el iPhone del usuario que la voz suena; después, Kokoro pregenerado.
 - **[contenido] Preguntas tipo examen y tipo PAC propias** por módulo del semestre (Programación, Bases de datos,
-  Acceso a datos, Interfaces, SGE…), redactadas nuevas a partir de los temas y el nivel exigidos (regla 13).
+  Acceso a datos, Interfaces, SGE…).
 - **[contenido] Explicaciones más claras** en las fichas DAM, ampliadas con fuentes abiertas redactadas con palabras
   propias y con su fuente (regla 11).
 - **[inglés] Calidad de las asociaciones e historias:** el usuario las ve malas. Revisar con él ejemplos concretos

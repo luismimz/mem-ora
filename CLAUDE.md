@@ -61,11 +61,13 @@ para crear y revisar contenido sin tocar código).
     internet se **redacta con palabras propias** y guarda su fuente (URL y fecha). El contenido sensible (medicina,
     ciberseguridad, derecho) exige además revisor humano y aviso de que Memora es una herramienta de estudio.
 12. **Sin material con derechos de autor.** Solo contenido propio o con licencia abierta registrada en la unidad.
-13. **ILERNA fuera del repositorio.** Libros, PAC y exámenes de ILERNA son de uso personal del usuario: nunca se
-    copian, se citan literalmente ni se suben a git (ni PDF, ni texto extraído, ni corpus derivado). Se guardan en
-    `private/` (ignorado por git) y solo sirven para saber **qué temas y qué nivel** se exigen. Las preguntas «tipo
-    examen» y «tipo PAC» se **redactan nuevas**: mismo tema, formato y dificultad, nunca el enunciado original. Los
-    cursos DAM con texto propio pueden verlos todos los alumnos (registro por invitación, D-055).
+13. **Material de ILERNA (decisión del usuario, 21-oct-2026; sustituye a la antigua regla 16).** Los exámenes de
+    práctica y PAC que ILERNA da para preparar las pruebas **se pueden usar tal cual** como preguntas de estudio del
+    usuario, y servir de patrón para redactar preguntas nuevas del mismo tipo, tema y dificultad. Límites, porque
+    siguen siendo material de ILERNA: se guardan solo en `private/` (nunca en git), los enunciados copiados van en un
+    **curso o misión privada visible solo para la cuenta del usuario**, y cada pregunta copiada se marca con su origen
+    (`source: ilerna-practica`). Los libros no se copian: sirven para saber qué temas cubrir. Los cursos DAM con texto
+    propio (incluidas las preguntas nuevas redactadas a partir del patrón) pueden verlos todos los alumnos (D-055).
 14. **Idioma explícito.** La interfaz y el contenido declaran su idioma; no hay textos fijos en un solo idioma.
 15. **Commits sin firma de IA.** Se hacen con el usuario de git del usuario (Luis Miguel Montalvan Zambrano
     <luismontalvanz@gmail.com>). Nunca `Co-Authored-By`, enlaces de sesión ni líneas de atribución en commits,
