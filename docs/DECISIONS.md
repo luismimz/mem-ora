@@ -721,7 +721,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   queda nada, refuerzo de lo más débil (`weakUnits`). Las preguntas suben de nivel: con 2 repasos superados se completa
   escribiendo (respuesta corta); en idiomas, se escribe la palabra.
 - **Racha con protector:** cada 7 días de racha, un protector (máximo 2) que salva un día perdido (`streakOf`).
-- **Aviso de repaso en el móvil:** Web Push (`push_subscriptions`), en un segundo paso.
+- **Aviso de repaso en el móvil:** Web Push sin contenido cifrado: el servidor (hook `memora-push`, cada 15 min) solo
+  «toca el timbre» firmado con VAPID y el service worker pide el texto a `/memora/push/message` con la sesión. Se avisa
+  de 9:00 a 22:00 (Madrid), como mucho cada 12 h y solo si hay repasos vencidos. Claves solo en el entorno
+  (`VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, `VAPID_SUBJECT`; `private/qa/vapid-setup.mjs` las crea sin mostrarlas). El hito
+  ofrece «🔔 Avísame» una vez; en iPhone exige tener Memora en la pantalla de inicio (iOS 16.4+).
 - **Descartado:** vidas o corazones (castigan el error, que en Memora es el momento de enseñar); avanzar solo en las
   fichas (el usuario necesita tiempo para leer, D-070).
 
