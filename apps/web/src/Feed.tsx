@@ -99,7 +99,8 @@ function Slide({ children, onNext, tone, className = '' }: { children: ReactNode
 }
 
 type Example = { text: string; explanation?: string; translation?: string };
-const isCode = (unit: SessionUnit, text: string) => unit.language !== 'es' || /[;{}()=<>]|\w+\.\w+\(|^\s*(docker|mongo|sqlite|pg_|cp |npm|git )/.test(text);
+// Código: contenido que no es español y parece código (en inglés, una frase normal se queda como texto).
+const isCode = (unit: SessionUnit, text: string) => unit.language !== 'es' && /[;{}()=<>\[\]]|\w+\.\w+|^\s*(docker|mongo|sqlite|pg_|cp |npm|git |-)/m.test(text);
 
 /**
  * La ficha completa (D-073, D-077): primero la mnemotecnia (para recordar) y después «Qué es» y los ejemplos (para
