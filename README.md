@@ -38,6 +38,13 @@ pnpm web                 # http://127.0.0.1:5173 (usa 127.0.0.1, no localhost: D
 
 Guía de prueba: `docs/H2.2a-PRUEBA.md`.
 
+Prueba táctil del modo Flujo (móvil emulado, toques reales, sin servidor):
+
+```bash
+npx playwright install chromium        # una vez
+pnpm --filter @memora/web e2e          # o PW_CHROMIUM=/ruta/a/chromium pnpm --filter @memora/web e2e
+```
+
 ## Paquetes
 
 - `packages/core`: núcleo pedagógico agnóstico de la materia (H1). Sin interfaz ni servidor.
