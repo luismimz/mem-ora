@@ -1,0 +1,802 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "54-verbos-7",
+      "title": "Misión 54 · Verbos de cada día",
+      "units": [
+        {
+          "key": "g-ago",
+          "type": "pattern",
+          "goal": "Hace dos años = two years AGO",
+          "rule": "Para decir cuánto hace: tiempo + AGO, al final y con el verbo en pasado. I met her two years ago.",
+          "pieces": [
+            {
+              "text": "two years",
+              "role": "slot",
+              "hint": "dos años"
+            },
+            {
+              "text": "ago",
+              "role": "fixed",
+              "hint": "hace"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I started two months ago.",
+              "translation": "Empecé hace dos meses.",
+              "mirror": {
+                "say": "Empecé hace dos meses",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "empecé",
+                    "en": "started",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dos meses",
+                    "en": "two months",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "She called five minutes ago.",
+              "translation": "Llamó hace cinco minutos.",
+              "mirror": {
+                "say": "Llamó hace cinco minutos",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llamó",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cinco minutos",
+                    "en": "five minutes",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A long time ago.",
+              "translation": "Hace mucho tiempo."
+            },
+            {
+              "text": "How long ago?",
+              "translation": "¿Hace cuánto?"
+            }
+          ],
+          "pitfalls": [
+            "«Ago two years» está mal: AGO va al final.",
+            "«Hace dos años que vivo aquí» no es ago: I have lived here for two years."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "AGO llega TARDE y se sienta al FINAL.",
+            "emoji": "⏳"
+          }
+        },
+        {
+          "key": "decide",
+          "type": "term",
+          "text": "decide",
+          "meaning": "decidir",
+          "pronunciation": "diSÁID",
+          "examples": [
+            {
+              "text": "I can't decide.",
+              "translation": "No me decido.",
+              "mirror": {
+                "say": "No me decido",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "decidir",
+                    "en": "decide",
+                    "role": "verb",
+                    "from": "me decido",
+                    "why": "«No me decido» es «no puedo decidir»: I can't decide."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We decided to stay.",
+              "translation": "Decidimos quedarnos."
+            }
+          ]
+        },
+        {
+          "key": "promise",
+          "type": "term",
+          "text": "promise",
+          "meaning": "prometer; promesa",
+          "pronunciation": "PRÓmis",
+          "examples": [
+            {
+              "text": "I promise I will call you.",
+              "translation": "Te prometo que te llamaré.",
+              "mirror": {
+                "say": "Te prometo que te llamaré",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prometo",
+                    "en": "promise",
+                    "role": "verb",
+                    "from": "Te prometo"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I will",
+                    "role": "helper",
+                    "from": "que… llamaré",
+                    "why": "-RÉ = WILL: I will call."
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That's a promise.",
+              "translation": "Es una promesa."
+            }
+          ]
+        },
+        {
+          "key": "save",
+          "type": "term",
+          "text": "save",
+          "meaning": "ahorrar; guardar; salvar",
+          "pronunciation": "SÉIV",
+          "examples": [
+            {
+              "text": "I'm saving money for a car.",
+              "translation": "Estoy ahorrando para un coche.",
+              "mirror": {
+                "say": "Estoy ahorrando para un coche",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ahorrando",
+                    "en": "saving",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "DINERO",
+                    "en": "money",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "para un coche",
+                    "en": "for a car",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't forget to save the file.",
+              "translation": "No olvides guardar el archivo."
+            }
+          ]
+        },
+        {
+          "key": "fill",
+          "type": "term",
+          "text": "fill",
+          "meaning": "llenar; rellenar",
+          "pronunciation": "FIL",
+          "examples": [
+            {
+              "text": "Fill the glass with water.",
+              "translation": "Llena el vaso de agua.",
+              "mirror": {
+                "say": "Llena el vaso de agua",
+                "pieces": [
+                  {
+                    "es": "Llena",
+                    "en": "Fill",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el vaso",
+                    "en": "the glass",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con agua",
+                    "en": "with water",
+                    "role": "word",
+                    "from": "de agua",
+                    "why": "Llenar DE algo es fill WITH."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fill in the form.",
+              "translation": "Rellena el formulario."
+            }
+          ]
+        },
+        {
+          "key": "offer",
+          "type": "term",
+          "text": "offer",
+          "meaning": "ofrecer; oferta",
+          "pronunciation": "ÓFer",
+          "examples": [
+            {
+              "text": "Can I offer you a drink?",
+              "translation": "¿Te puedo ofrecer algo de beber?",
+              "mirror": {
+                "say": "¿Te puedo ofrecer algo de beber?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ofrecer",
+                    "en": "offer",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una bebida",
+                    "en": "a drink",
+                    "role": "word",
+                    "from": "algo de beber"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A special offer.",
+              "translation": "Una oferta especial."
+            }
+          ]
+        },
+        {
+          "key": "refuse",
+          "type": "term",
+          "text": "refuse",
+          "meaning": "negarse a",
+          "pronunciation": "riFIÚS",
+          "examples": [
+            {
+              "text": "He refused to help.",
+              "translation": "Se negó a ayudar.",
+              "mirror": {
+                "say": "Se negó a ayudar",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se negó",
+                    "en": "refused",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a ayudar",
+                    "en": "to help",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I refuse to answer.",
+              "translation": "Me niego a contestar."
+            }
+          ]
+        },
+        {
+          "key": "pretend",
+          "type": "term",
+          "text": "pretend",
+          "meaning": "fingir, hacer como que",
+          "pronunciation": "priTÉND",
+          "examples": [
+            {
+              "text": "Don't pretend you're sick.",
+              "translation": "No finjas que estás enfermo.",
+              "mirror": {
+                "say": "No finjas que estás enfermo",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "finjas",
+                    "en": "pretend",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) estás",
+                    "en": "you're",
+                    "role": "helper",
+                    "from": "que estás"
+                  },
+                  {
+                    "es": "enfermo",
+                    "en": "sick",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He pretended to sleep.",
+              "translation": "Hizo como que dormía."
+            }
+          ],
+          "notes": "Falso amigo: pretender es intend o try."
+        },
+        {
+          "key": "allow",
+          "type": "term",
+          "text": "allow",
+          "meaning": "permitir, dejar",
+          "pronunciation": "aLÁU",
+          "examples": [
+            {
+              "text": "Dogs are not allowed.",
+              "translation": "No se admiten perros.",
+              "mirror": {
+                "say": "No se admiten perros",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "not",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "«No se admiten» es pasiva: are not allowed."
+                  },
+                  {
+                    "es": "permitidos",
+                    "en": "allowed",
+                    "role": "word",
+                    "from": "admiten"
+                  },
+                  {
+                    "es": "perros",
+                    "en": "Dogs",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  3,
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "My parents allow me to go out.",
+              "translation": "Mis padres me dejan salir."
+            }
+          ]
+        },
+        {
+          "key": "invite",
+          "type": "term",
+          "text": "invite",
+          "meaning": "invitar",
+          "pronunciation": "inVÁIT",
+          "examples": [
+            {
+              "text": "They invited me to the party.",
+              "translation": "Me invitaron a la fiesta.",
+              "mirror": {
+                "say": "Me invitaron a la fiesta",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "invitaron",
+                    "en": "invited",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la fiesta",
+                    "en": "to the party",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Thanks for inviting me.",
+              "translation": "Gracias por invitarme."
+            }
+          ],
+          "notes": "Para invitar a pagar: it's on me (no «I invite you»)."
+        },
+        {
+          "key": "deliver",
+          "type": "term",
+          "text": "deliver",
+          "meaning": "entregar, repartir",
+          "pronunciation": "diLÍver",
+          "examples": [
+            {
+              "text": "They deliver pizza until midnight.",
+              "translation": "Reparten pizza hasta medianoche.",
+              "mirror": {
+                "say": "Reparten pizza hasta medianoche",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "reparten",
+                    "en": "deliver",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pizza",
+                    "en": "pizza",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hasta medianoche",
+                    "en": "until midnight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The package was delivered.",
+              "translation": "Entregaron el paquete."
+            }
+          ]
+        },
+        {
+          "key": "grow",
+          "type": "term",
+          "text": "grow",
+          "meaning": "crecer; cultivar",
+          "pronunciation": "GRÓU",
+          "examples": [
+            {
+              "text": "Children grow so fast.",
+              "translation": "Los niños crecen muy rápido.",
+              "mirror": {
+                "say": "Los niños crecen muy rápido",
+                "pieces": [
+                  {
+                    "es": "niños",
+                    "en": "Children",
+                    "role": "who",
+                    "from": "Los niños",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "crecen",
+                    "en": "grow",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tan rápido",
+                    "en": "so fast",
+                    "role": "word",
+                    "from": "muy rápido"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We grow tomatoes.",
+              "translation": "Cultivamos tomates."
+            }
+          ]
+        },
+        {
+          "key": "steal",
+          "type": "term",
+          "text": "steal",
+          "meaning": "robar (algo)",
+          "pronunciation": "STIIL",
+          "examples": [
+            {
+              "text": "Someone stole my bike.",
+              "translation": "Alguien me robó la bici.",
+              "mirror": {
+                "say": "Alguien me robó la bici",
+                "pieces": [
+                  {
+                    "es": "Alguien",
+                    "en": "Someone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "robó",
+                    "en": "stole",
+                    "role": "verb",
+                    "from": "me robó"
+                  },
+                  {
+                    "es": "MI bici",
+                    "en": "my bike",
+                    "role": "word",
+                    "from": "la bici",
+                    "why": "En inglés la bici es MÍA: my bike."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They steal phones.",
+              "translation": "Roban móviles."
+            }
+          ],
+          "notes": "Irregular: steal, stole, stolen."
+        },
+        {
+          "key": "mention",
+          "type": "term",
+          "text": "mention",
+          "meaning": "mencionar",
+          "pronunciation": "MÉNshon",
+          "examples": [
+            {
+              "text": "He mentioned your name.",
+              "translation": "Mencionó tu nombre.",
+              "mirror": {
+                "say": "Mencionó tu nombre",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "mencionó",
+                    "en": "mentioned",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu nombre",
+                    "en": "your name",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Thanks! Don't mention it.",
+              "translation": "¡Gracias! De nada."
+            }
+          ]
+        },
+        {
+          "key": "wash",
+          "type": "term",
+          "text": "wash",
+          "meaning": "lavar(se)",
+          "pronunciation": "UOSH",
+          "examples": [
+            {
+              "text": "Wash your hands.",
+              "translation": "Lávate las manos.",
+              "mirror": {
+                "say": "Lávate las manos",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb",
+                    "from": "Lávate"
+                  },
+                  {
+                    "es": "TUS manos",
+                    "en": "your hands",
+                    "role": "word",
+                    "from": "las manos",
+                    "why": "En inglés las manos son TUYAS: your hands."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need to wash my car.",
+              "translation": "Tengo que lavar el coche."
+            }
+          ]
+        },
+        {
+          "key": "iron",
+          "type": "term",
+          "text": "iron",
+          "meaning": "planchar; plancha",
+          "pronunciation": "ÁIern",
+          "examples": [
+            {
+              "text": "I hate ironing shirts.",
+              "translation": "Odio planchar camisas.",
+              "mirror": {
+                "say": "Odio planchar camisas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "odio",
+                    "en": "hate",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "planch-ANDO",
+                    "en": "ironing",
+                    "role": "verb",
+                    "from": "planchar",
+                    "why": "Detrás de hate, el verbo en -ING: ironing."
+                  },
+                  {
+                    "es": "camisas",
+                    "en": "shirts",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The iron is hot.",
+              "translation": "La plancha está caliente."
+            }
+          ],
+          "notes": "La r no suena: ÁIern."
+        }
+      ]
+    }
+  ]
+}
