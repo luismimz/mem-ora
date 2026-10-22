@@ -767,3 +767,12 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .exam-review .exam-q { font-size: 1rem; }
 .exam-mine { margin: 0; color: var(--ko); font-weight: 650; } .exam-right { margin: 0; color: var(--ok); font-weight: 800; } .exam-why { margin: 0; color: var(--muted); }
 .exam-card-best { margin: 0; font-weight: 650; } .exam-card-best .pass { color: var(--ok); } .exam-card-best .fail { color: var(--ko); }
+
+/* Barra superior en el móvil: los enlaces nunca se parten en dos líneas (con Studio, «Sin conexión» se partía). */
+.nav-link { white-space: nowrap; }
+.nav { min-width: 0; }
+@media (max-width: 440px) {
+  .topbar { gap: .45rem; }
+  .nav { gap: 0; }
+  .nav-link { padding: .5rem .55rem; font-size: .92rem; }
+}

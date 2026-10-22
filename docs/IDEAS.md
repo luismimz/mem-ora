@@ -5,10 +5,10 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 
 ## Prioritario (21-oct-2026)
 
-- **[roto] La puerta de calidad desliza con la tecla ↑** (`private/shots/feed.cjs`): por eso el deslizar estuvo roto en
-  el iPhone sin que la puerta lo viera. Debe deslizar con toques táctiles reales (CDP `Input.dispatchTouchEvent`).
-- **[roto] Prueba del gesto en el repositorio:** un recorrido del Flujo con datos de prueba y toques reales en móvil
-  emulado (ficha corta, ficha larga que se desplaza, pregunta, hito) que se ejecute con las pruebas, sin Directus.
+- **[roto → arreglado sin ejecutar, 22-oct]** `private/shots/feed.cjs` (en el Mac, fuera de git) ya desliza con el dedo
+  (CDP), entra por «Seguir aprendiendo» (buscaba «aventura», que ya no existe) y sabe pasar Escucha, Construye la frase y
+  Ráfaga. Falta ejecutarlo con la app y el Directus locales arrancados (`private/release.sh`).
+- ✓ **Prueba del gesto en el repositorio:** `apps/web/e2e/*-touch.mjs` (Flujo, Inicio y simulacro, con toques reales).
 - **[experiencia] Revisión de la Home en el móvil:** qué ve el alumno al entrar, qué hace después y si se entiende.
 - **[experiencia] Audio:** confirmar en el iPhone del usuario que la voz suena; después, Kokoro pregenerado.
 - **[contenido] Exámenes de práctica y PAC de ILERNA** tal cual, en una misión privada del usuario (regla 13), y

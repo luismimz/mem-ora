@@ -14,7 +14,7 @@ const url = `${server.resolvedUrls.local[0]}e2e/harness-home.html`;
 const results = [];
 const check = (ok, text) => { results.push(ok); console.log(`${ok ? '✓' : '✗'} ${text}`); };
 
-const course = { id: 'c1', key: 'ingles', title: 'Inglés', ui_language: 'es', content_language: 'en', learner_language: 'es', audio_enabled: false, new_per_session: 15, modes: ['flow'] };
+const course = { id: 'c1', key: 'ingles', title: 'Inglés', subject: 'idioma', ui_language: 'es', content_language: 'en', learner_language: 'es', audio_enabled: false, new_per_session: 15, modes: ['flow', 'associations', 'grammar', 'arcade', 'chat'] };
 const missions = [
   { key: '01', title: 'Misión 1 · Saludos', index: 1, total: 10, worked: 10, learned: 8, due: 4, status: 'done' },
   { key: '02', title: 'Misión 2 · Familia', index: 2, total: 10, worked: 6, learned: 3, due: 0, status: 'active' },
@@ -46,7 +46,7 @@ try {
     if (route.request().method() === 'POST') posted.push({ path, body: route.request().postDataJSON() });
     const data =
       path === '/users/me' ? { id: 'u1', first_name: 'Luis', email: 'luis@example.com' }
-      : path === '/memora/me' ? { staff: false }
+      : path === '/memora/me' ? { staff: true }
       : path === '/memora/courses' ? [course]
       : path === '/memora/missions' ? { missions, current: '02', newToday: 15, newTarget: 15 }
       : path === '/memora/progress' ? { streak: 3, bestStreak: 8, shields: 0, todayAttempts: 12, failures, today: { newUnits: 10, goal: 35 }, calendar: Array.from({ length: 84 }, (_, i) => (i % 3 === 0 ? 0 : (i * 7) % 70)), skills: [],
@@ -78,9 +78,17 @@ try {
   });
   const wd = (new Date().getDay() + 6) % 7;
   check(cons.days === 84 && cons.row === wd && cons.right <= 390, `el calendario tiene 12 semanas y hoy cae en su día de la semana (fila ${cons.row}, esperado ${wd})`);
-  check(cons.tracks[0].includes('10 conceptos en tu memoria') && cons.tracks[0].includes('faltan 38') && cons.tracks[0].includes('1/6'), `memoria: cuenta solo lo aprendido (12 de 20) → ${cons.tracks[0]}`);
+  check(cons.tracks[0].includes('10 palabras en tu memoria') && cons.tracks[0].includes('faltan 38') && cons.tracks[0].includes('1/6'), `memoria: cuenta solo lo aprendido (12 de 20) → ${cons.tracks[0]}`);
   check(cons.tracks[1].includes('7 días seguidos') && cons.tracks[1].includes('2/5') && cons.tracks[1].includes('faltan 11'), `racha: el logro con la mejor (8); lo que falta, desde la actual (3) → ${cons.tracks[1]}`);
   check(cons.tracks[2].includes('1 misión completada'), `misiones → ${cons.tracks[2]}`);
+
+  // Barra superior y modos: con Studio (cuenta de autoría) todo cabe en una línea; en un curso con Flujo no hay
+  // selector de modos ni contadores de modos bloqueados (Arcade, Chat, truco).
+  const bar = await page.evaluate(() => ({ right: Math.round(document.querySelector('.topbar .avatar')?.getBoundingClientRect().right ?? 999), links: [...document.querySelectorAll('.topbar .nav-link')].map((l) => Math.round(l.getBoundingClientRect().height)), text: document.querySelector('.topbar')?.textContent }));
+  check(bar.text.includes('Studio') && bar.links.every((h) => h <= 40) && bar.right <= 390, `la barra de arriba cabe en una línea también con Studio (enlaces de ${bar.links.join('/')}px, avatar hasta ${bar.right}px)`);
+  const stale = await page.evaluate(() => ({ modes: document.querySelectorAll('.modes .mode').length, meters: [...document.querySelectorAll('.meters')].map((m) => m.textContent).join(' ') }));
+  check(stale.modes === 0 && !/Arcade|Chat|truco/.test(stale.meters), `curso con Flujo: sin modos bloqueados ni sus contadores (${stale.modes} modos; ${stale.meters})`);
+  await page.screenshot({ path: process.env.E2E_SHOTS ? `${process.env.E2E_SHOTS}/barra.png` : '/dev/null', clip: { x: 0, y: 0, width: 390, height: 120 } }).catch(() => undefined);
 
   const btn = await page.$eval('.fails-btn', (e) => ({ text: e.textContent ?? '', w: e.getBoundingClientRect().width, h: e.getBoundingClientRect().height }));
   check(btn.text.includes('5') && btn.text.includes('Vacía tus fallos') && btn.h >= 44, `«Vacía tus fallos» muestra cuántos quedan y se puede tocar con el dedo (${Math.round(btn.h)}px de alto)`);
