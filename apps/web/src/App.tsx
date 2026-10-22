@@ -209,7 +209,10 @@ export function App() {
     onCourse={(id) => { setCourse(id); writePrefs({ course: id }); }} onMode={(m) => { setMode(m); writePrefs({ mode: m }); }} onLogout={() => void logout()} /></div>;
 
   const current = courses.find((c) => c.id === course);
-  const enabled = MODES.filter((m) => !current || current.modes.includes(m.id as Mode));
+  // En un curso con Flujo (D-068) todo va dentro del Flujo (la gramática entra como «truco»): el selector de modos y
+  // sus contadores (truco, Arcade, Chat) serían modos bloqueados que ya no existen.
+  const flowCourse = Boolean((current?.modes as string[] | undefined)?.includes('flow'));
+  const enabled = flowCourse ? [] : MODES.filter((m) => !current || current.modes.includes(m.id as Mode));
   const has = (m: Mode) => enabled.some((x) => x.id === m);
   const currentMission = missions?.missions.find((m) => m.key === missions.current);
   const words = unitsWord(current);
