@@ -123,15 +123,10 @@ try {
     if (/CONSTRUYE/.test(tag)) {
       seen.add('construye');
       if (await en.locator('.train-help').count()) {
-        // La ayuda «¿Cómo se construye?» abre el tren compacto dentro de la tarjeta.
-        await en.locator('.train-help').tap(); await en.waitForTimeout(300);
-        for (let k = 0; k < 6 && !(await en.locator('.train-final').count()); k++) {
-          if (await en.locator('.chip.ghost').count()) await en.locator('.chip.ghost').first().tap({ force: true });
-          else if (await en.locator('.chip.swap').count()) await en.locator('.chip.swap').first().tap({ force: true });
-          else if (await en.locator('.train-go').count()) await en.locator('.train-go').tap();
-          await en.waitForTimeout(400);
-        }
-        if (await en.locator('.train-final').count()) seen.add('ayuda-tren');
+        // La ayuda «¿Cómo se construye?» reproduce el espejo en movimiento dentro de la tarjeta, sin más toques.
+        await en.locator('.train-help').tap();
+        await en.locator('.morph-end').waitFor({ timeout: 9000 }).catch(() => undefined);
+        if (await en.locator('.morph-end').count()) seen.add('ayuda-tren');
       }
       const es = (await en.locator('.build-es').textContent()).replace(/[«»]/g, '');
       const u = Object.values(units).find((x) => x.payload.examples.some((e) => e.translation === es));
@@ -140,18 +135,6 @@ try {
       await en.waitForTimeout(200);
       if (await en.locator('.slide.build.right').count()) builtOk = true;
       await en.waitForTimeout(1600); continue;
-    }
-    if (/TREN DE LA FRASE/.test(tag)) {
-      // D-082: despertar al fantasma, cambiar la ficha, darle la vuelta y hacer saltar al ayudante, con el dedo.
-      for (let k = 0; k < 8 && !(await en.locator('.train-final').count()); k++) {
-        if (await en.locator('.chip.ghost').count()) { await en.locator('.chip.ghost').first().tap({ force: true }); seen.add('fantasma'); }
-        else if (await en.locator('.chip.swap').count()) { await en.locator('.chip.swap').first().tap({ force: true }); seen.add('cambio'); }
-        else if (await en.locator('.train-go').count()) { const t = await en.locator('.train-go').textContent(); if (/Salta/.test(t)) seen.add('salto'); await en.locator('.train-go').tap(); }
-        await en.waitForTimeout(450);
-      }
-      const english = (await en.locator('.w3 .chip b').allTextContents()).join(' ');
-      if (english === 'are you hungry' || english === 'is she tired') seen.add('orden-pregunta');
-      await en.waitForTimeout(500); await swipeEn(); continue;
     }
     if (/🎮/.test(tag)) {
       // Ráfaga (D-081): con dos respuestas se desliza la tarjeta (← la primera, la segunda →); con tres, botones.
@@ -180,7 +163,16 @@ try {
       }
       await en.waitForTimeout(800); continue;
     }
-    if (/TRUCO/.test(tag)) seen.add('truco');
+    if (/TRUCO/.test(tag)) {
+      seen.add('truco');
+      // D-082: el espejo en movimiento va solo, sin tocar nada: termina en el orden inglés y con la frase.
+      if (await en.locator('.morph').count()) {
+        await en.locator('.morph-end').waitFor({ timeout: 9000 }).catch(() => undefined);
+        const english = (await en.locator('.morph-row .chip b').allTextContents()).join(' ');
+        if (await en.locator('.morph-end').count()) seen.add('espejo-solo');
+        if (english === 'are you hungry') seen.add('orden-pregunta');
+      }
+    }
     if (/VERDAD/.test(tag)) { await en.locator('.option.yes').tap(); await en.waitForTimeout(1300); continue; }
     if (/RELÁMPAGO|AL REVÉS/.test(tag)) { await en.locator('.option').first().tap(); await en.waitForTimeout(1300); continue; }
     if (/ESCRÍBELO/.test(tag)) {
@@ -194,9 +186,9 @@ try {
   check(seen.has('escucha'), 'inglés: aparece «Escucha» y se responde tocando lo que se ha oído');
   check(seen.has('construye') && builtOk, 'inglés: «Construye la frase» se completa tocando las palabras en orden');
   check(seen.has('truco'), 'inglés: la gramática entra con su «Truco»');
-  check(seen.has('fantasma') && seen.has('cambio'), 'Tren de la frase: se despierta al fantasma (TÚ) y se cambia la ficha (tienes → estás) tocándolos');
-  check(seen.has('salto') && seen.has('orden-pregunta'), 'Tren de la frase: el ayudante salta y queda «are you hungry» (orden de pregunta)');
-  check(seen.has('ayuda-tren'), '«Construye la frase» ofrece ver cómo se construye (el tren compacto)');
+  check(seen.has('espejo-solo'), 'Espejo en movimiento: se reproduce solo dentro del truco, sin toques, y acaba en la frase');
+  check(seen.has('orden-pregunta'), 'Espejo en movimiento: el ayudante salta y queda «are you hungry» (orden de pregunta)');
+  check(seen.has('ayuda-tren'), '«Construye la frase» ofrece ver cómo se construye (el espejo animado)');
   check(seen.has('rafaga-desliza'), 'Ráfaga de dos respuestas («Toco o cuento»): se responde deslizando la tarjeta con el dedo');
   check(seen.has('rafaga-botones'), 'Ráfaga de tres respuestas («Semáforos»): se responde golpeando los botones');
   check(seen.has('confeti'), 'Ráfaga: al acertar sale confeti');
