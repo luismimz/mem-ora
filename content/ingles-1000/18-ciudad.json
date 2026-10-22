@@ -1,0 +1,753 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "18-ciudad",
+      "title": "Misión 18 · La ciudad",
+      "units": [
+        {
+          "key": "g-there-is",
+          "type": "pattern",
+          "goal": "Decir lo que HAY: there is / there are",
+          "rule": "«Hay» es THERE IS (uno) o THERE ARE (varios). Para preguntar, el ayudante salta: Is there a bank near here?",
+          "pieces": [
+            {
+              "text": "There",
+              "role": "fixed",
+              "hint": "ahí"
+            },
+            {
+              "text": "is",
+              "role": "fixed",
+              "hint": "hay (uno)"
+            },
+            {
+              "text": "a bank",
+              "role": "slot",
+              "hint": "un banco"
+            }
+          ],
+          "examples": [
+            {
+              "text": "There is a bank near here.",
+              "translation": "Hay un banco cerca de aquí.",
+              "mirror": {
+                "say": "Hay un banco cerca de aquí",
+                "pieces": [
+                  {
+                    "es": "hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un banco",
+                    "en": "a bank",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cerca de aquí",
+                    "en": "near here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There are two parks in my city.",
+              "translation": "Hay dos parques en mi ciudad.",
+              "mirror": {
+                "say": "Hay dos parques en mi ciudad",
+                "pieces": [
+                  {
+                    "es": "hay (varios)",
+                    "en": "There are",
+                    "role": "helper",
+                    "from": "hay",
+                    "why": "Si hay varios, THERE ARE: there are two parks."
+                  },
+                  {
+                    "es": "dos parques",
+                    "en": "two parks",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en mi ciudad",
+                    "en": "in my city",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Is there a hotel near here?",
+              "translation": "¿Hay un hotel cerca de aquí?"
+            },
+            {
+              "text": "There isn't any milk.",
+              "translation": "No hay leche."
+            }
+          ],
+          "pitfalls": [
+            "«There is two parks» está mal: con varios, THERE ARE.",
+            "«Hay» nunca es HAVE: «Have a bank here?» está mal."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Señalas AHÍ con el dedo y gritas: ¡THERE IS!",
+            "emoji": "👉"
+          }
+        },
+        {
+          "key": "city",
+          "type": "term",
+          "text": "city",
+          "meaning": "ciudad",
+          "pronunciation": "SÍti",
+          "examples": [
+            {
+              "text": "I live in a big city.",
+              "translation": "Vivo en una ciudad grande.",
+              "mirror": {
+                "say": "Vivo en una ciudad grande",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en",
+                    "en": "in",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ciudad",
+                    "en": "city",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Madrid is a beautiful city.",
+              "translation": "Madrid es una ciudad bonita."
+            }
+          ]
+        },
+        {
+          "key": "street",
+          "type": "term",
+          "text": "street",
+          "meaning": "calle",
+          "pronunciation": "STRIIT",
+          "examples": [
+            {
+              "text": "I live on this street.",
+              "translation": "Vivo en esta calle.",
+              "mirror": {
+                "say": "Vivo en esta calle",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en esta calle",
+                    "en": "on this street",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cross the street.",
+              "translation": "Cruza la calle."
+            }
+          ]
+        },
+        {
+          "key": "shop",
+          "type": "term",
+          "text": "shop",
+          "meaning": "tienda",
+          "pronunciation": "SHOP",
+          "examples": [
+            {
+              "text": "The shop opens at nine.",
+              "translation": "La tienda abre a las nueve.",
+              "mirror": {
+                "say": "La tienda abre a las nueve",
+                "pieces": [
+                  {
+                    "es": "La tienda",
+                    "en": "The shop",
+                    "role": "who"
+                  },
+                  {
+                    "es": "abre",
+                    "en": "opens",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las nueve",
+                    "en": "at nine",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Is there a shop near here?",
+              "translation": "¿Hay una tienda cerca de aquí?"
+            }
+          ]
+        },
+        {
+          "key": "bank",
+          "type": "term",
+          "text": "bank",
+          "meaning": "banco (de dinero)",
+          "pronunciation": "BANK",
+          "examples": [
+            {
+              "text": "The bank is closed today.",
+              "translation": "El banco está cerrado hoy.",
+              "mirror": {
+                "say": "El banco está cerrado hoy",
+                "pieces": [
+                  {
+                    "es": "El banco",
+                    "en": "The bank",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerrado",
+                    "en": "closed",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hoy",
+                    "en": "today",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need to go to the bank.",
+              "translation": "Tengo que ir al banco."
+            }
+          ]
+        },
+        {
+          "key": "station",
+          "type": "term",
+          "text": "station",
+          "meaning": "estación",
+          "pronunciation": "STÉIshon",
+          "examples": [
+            {
+              "text": "The station is near here.",
+              "translation": "La estación está cerca de aquí.",
+              "mirror": {
+                "say": "La estación está cerca de aquí",
+                "pieces": [
+                  {
+                    "es": "La estación",
+                    "en": "The station",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerca de aquí",
+                    "en": "near here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm at the train station.",
+              "translation": "Estoy en la estación de tren."
+            }
+          ]
+        },
+        {
+          "key": "hospital",
+          "type": "term",
+          "text": "hospital",
+          "meaning": "hospital",
+          "pronunciation": "JÓSpital",
+          "examples": [
+            {
+              "text": "She works in a hospital.",
+              "translation": "Trabaja en un hospital.",
+              "mirror": {
+                "say": "Trabaja en un hospital",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabaja",
+                    "en": "works",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en un hospital",
+                    "en": "in a hospital",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take me to the hospital!",
+              "translation": "¡Llévame al hospital!"
+            }
+          ]
+        },
+        {
+          "key": "school",
+          "type": "term",
+          "text": "school",
+          "meaning": "colegio, escuela",
+          "pronunciation": "SKUUL",
+          "examples": [
+            {
+              "text": "My son goes to school.",
+              "translation": "Mi hijo va al colegio.",
+              "mirror": {
+                "say": "Mi hijo va al colegio",
+                "pieces": [
+                  {
+                    "es": "Mi hijo",
+                    "en": "My son",
+                    "role": "who"
+                  },
+                  {
+                    "es": "va",
+                    "en": "goes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a colegio",
+                    "en": "to school",
+                    "role": "word",
+                    "from": "al colegio",
+                    "why": "Ir al colegio: go to school, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The school is next to the park.",
+              "translation": "El colegio está al lado del parque."
+            }
+          ]
+        },
+        {
+          "key": "park",
+          "type": "term",
+          "text": "park",
+          "meaning": "parque",
+          "pronunciation": "PARK",
+          "examples": [
+            {
+              "text": "We walk in the park.",
+              "translation": "Paseamos por el parque.",
+              "mirror": {
+                "say": "Paseamos por el parque",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "paseamos",
+                    "en": "walk",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por el parque",
+                    "en": "in the park",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The park is very green.",
+              "translation": "El parque está muy verde."
+            }
+          ]
+        },
+        {
+          "key": "restaurant",
+          "type": "term",
+          "text": "restaurant",
+          "meaning": "restaurante",
+          "pronunciation": "RÉStront",
+          "examples": [
+            {
+              "text": "Let's go to a restaurant.",
+              "translation": "Vamos a un restaurante.",
+              "mirror": {
+                "say": "Vamos a un restaurante",
+                "pieces": [
+                  {
+                    "es": "Vayamos",
+                    "en": "Let's go",
+                    "role": "verb",
+                    "from": "Vamos",
+                    "why": "Para proponer algo: LET'S + verbo. Let's go."
+                  },
+                  {
+                    "es": "a un restaurante",
+                    "en": "to a restaurant",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This restaurant is expensive.",
+              "translation": "Este restaurante es caro."
+            }
+          ]
+        },
+        {
+          "key": "hotel",
+          "type": "term",
+          "text": "hotel",
+          "meaning": "hotel",
+          "pronunciation": "jouTÉL",
+          "examples": [
+            {
+              "text": "Our hotel is near the beach.",
+              "translation": "Nuestro hotel está cerca de la playa.",
+              "mirror": {
+                "say": "Nuestro hotel está cerca de la playa",
+                "pieces": [
+                  {
+                    "es": "Nuestro hotel",
+                    "en": "Our hotel",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerca de la playa",
+                    "en": "near the beach",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I booked a hotel.",
+              "translation": "He reservado un hotel."
+            }
+          ]
+        },
+        {
+          "key": "museum",
+          "type": "term",
+          "text": "museum",
+          "meaning": "museo",
+          "pronunciation": "miuSÍam",
+          "examples": [
+            {
+              "text": "The museum is free on Sundays.",
+              "translation": "El museo es gratis los domingos.",
+              "mirror": {
+                "say": "El museo es gratis los domingos",
+                "pieces": [
+                  {
+                    "es": "El museo",
+                    "en": "The museum",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gratis",
+                    "en": "free",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "los domingos",
+                    "why": "Los días llevan ON: on Sundays, on Saturdays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We visited the museum.",
+              "translation": "Visitamos el museo."
+            }
+          ]
+        },
+        {
+          "key": "bridge",
+          "type": "term",
+          "text": "bridge",
+          "meaning": "puente",
+          "pronunciation": "BRICH",
+          "examples": [
+            {
+              "text": "The old bridge is beautiful.",
+              "translation": "El puente viejo es precioso.",
+              "mirror": {
+                "say": "El puente viejo es precioso",
+                "pieces": [
+                  {
+                    "es": "El",
+                    "en": "The",
+                    "role": "word"
+                  },
+                  {
+                    "es": "puente",
+                    "en": "bridge",
+                    "role": "word"
+                  },
+                  {
+                    "es": "viejo",
+                    "en": "old",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "precioso",
+                    "en": "beautiful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Cross the bridge.",
+              "translation": "Cruza el puente."
+            }
+          ]
+        },
+        {
+          "key": "market",
+          "type": "term",
+          "text": "market",
+          "meaning": "mercado",
+          "pronunciation": "MÁRket",
+          "examples": [
+            {
+              "text": "I buy fruit at the market.",
+              "translation": "Compro fruta en el mercado.",
+              "mirror": {
+                "say": "Compro fruta en el mercado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compro",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fruta",
+                    "en": "fruit",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el mercado",
+                    "en": "at the market",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The market opens on Saturdays.",
+              "translation": "El mercado abre los sábados."
+            }
+          ]
+        },
+        {
+          "key": "library",
+          "type": "term",
+          "text": "library",
+          "meaning": "biblioteca",
+          "pronunciation": "LÁIbreri",
+          "examples": [
+            {
+              "text": "I study in the library.",
+              "translation": "Estudio en la biblioteca.",
+              "mirror": {
+                "say": "Estudio en la biblioteca",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estudio",
+                    "en": "study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la biblioteca",
+                    "en": "in the library",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The library is quiet.",
+              "translation": "La biblioteca es tranquila."
+            }
+          ],
+          "notes": "Ojo: library es BIBLIOTECA. Una librería (donde se compran libros) es a bookshop."
+        },
+        {
+          "key": "near",
+          "type": "term",
+          "text": "near",
+          "meaning": "cerca",
+          "pronunciation": "NÍAR",
+          "examples": [
+            {
+              "text": "Is it near here?",
+              "translation": "¿Está cerca de aquí?",
+              "mirror": {
+                "say": "¿Está cerca de aquí?",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "Is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerca de aquí",
+                    "en": "near here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I live near the station.",
+              "translation": "Vivo cerca de la estación."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

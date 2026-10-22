@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "20-viajes",
+      "title": "Misión 20 · De viaje",
+      "units": [
+        {
+          "key": "g-going-to",
+          "type": "pattern",
+          "goal": "Contar tus planes: voy a = I'M GOING TO",
+          "rule": "«Voy a + verbo» casi igual en inglés: I'm going to + verbo. Para planes ya decididos: I'm going to travel.",
+          "pieces": [
+            {
+              "text": "I'm",
+              "role": "fixed",
+              "hint": "YO estoy"
+            },
+            {
+              "text": "going to",
+              "role": "fixed",
+              "hint": "voy a"
+            },
+            {
+              "text": "travel",
+              "role": "slot",
+              "hint": "viajar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'm going to travel to Italy.",
+              "translation": "Voy a viajar a Italia.",
+              "mirror": {
+                "say": "Voy a viajar a Italia",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "voy",
+                    "why": "«Voy a» se dice «estoy yendo a»: I'm going to."
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "viajar",
+                    "en": "travel",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Italia",
+                    "en": "to Italy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Are you going to come?",
+              "translation": "¿Vas a venir?",
+              "mirror": {
+                "say": "¿Vas a venir?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "Are",
+                    "role": "helper",
+                    "from": "vas",
+                    "why": "Para preguntar, el ayudante salta: ARE you going to…?"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "It's going to rain.",
+              "translation": "Va a llover."
+            },
+            {
+              "text": "We're going to buy a car.",
+              "translation": "Vamos a comprar un coche."
+            }
+          ],
+          "pitfalls": [
+            "«I going to…» está mal: falta el ayudante (I'M going to).",
+            "Detrás de going to, el verbo tal cual: going to eat."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un TREN llamado GOING TO te lleva a tus planes.",
+            "emoji": "🚆"
+          }
+        },
+        {
+          "key": "travel",
+          "type": "term",
+          "text": "travel",
+          "meaning": "viajar",
+          "pronunciation": "TRÁvel",
+          "examples": [
+            {
+              "text": "I love to travel.",
+              "translation": "Me encanta viajar.",
+              "mirror": {
+                "say": "Me encanta viajar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "me encanta",
+                    "why": "Encantar se da la vuelta: YO love to travel."
+                  },
+                  {
+                    "es": "viajar",
+                    "en": "to travel",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We travel by train.",
+              "translation": "Viajamos en tren."
+            }
+          ]
+        },
+        {
+          "key": "trip",
+          "type": "term",
+          "text": "trip",
+          "meaning": "viaje (corto)",
+          "pronunciation": "TRIP",
+          "examples": [
+            {
+              "text": "Have a good trip!",
+              "translation": "¡Buen viaje!",
+              "mirror": {
+                "say": "¡Buen viaje!",
+                "pieces": [
+                  {
+                    "es": "Ten",
+                    "en": "Have",
+                    "role": "verb",
+                    "ghost": true
+                  },
+                  {
+                    "es": "un buen viaje",
+                    "en": "a good trip",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How was your trip?",
+              "translation": "¿Qué tal el viaje?"
+            }
+          ]
+        },
+        {
+          "key": "ticket",
+          "type": "term",
+          "text": "ticket",
+          "meaning": "billete, entrada",
+          "pronunciation": "TÍket",
+          "examples": [
+            {
+              "text": "Two tickets, please.",
+              "translation": "Dos billetes, por favor.",
+              "mirror": {
+                "say": "Dos billetes, por favor",
+                "pieces": [
+                  {
+                    "es": "Dos billetes",
+                    "en": "Two tickets",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I lost my ticket.",
+              "translation": "He perdido el billete."
+            }
+          ]
+        },
+        {
+          "key": "plane",
+          "type": "term",
+          "text": "plane",
+          "meaning": "avión",
+          "pronunciation": "PLÉIN",
+          "examples": [
+            {
+              "text": "The plane is late.",
+              "translation": "El avión llega tarde.",
+              "mirror": {
+                "say": "El avión llega tarde",
+                "pieces": [
+                  {
+                    "es": "El avión",
+                    "en": "The plane",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "llega",
+                    "why": "Llegar con retraso es «estar tarde»: the plane IS late."
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't like planes.",
+              "translation": "No me gustan los aviones."
+            }
+          ]
+        },
+        {
+          "key": "train",
+          "type": "term",
+          "text": "train",
+          "meaning": "tren",
+          "pronunciation": "TRÉIN",
+          "examples": [
+            {
+              "text": "The train leaves at ten.",
+              "translation": "El tren sale a las diez.",
+              "mirror": {
+                "say": "El tren sale a las diez",
+                "pieces": [
+                  {
+                    "es": "El tren",
+                    "en": "The train",
+                    "role": "who"
+                  },
+                  {
+                    "es": "sale",
+                    "en": "leaves",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las diez",
+                    "en": "at ten",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I go to work by train.",
+              "translation": "Voy al trabajo en tren."
+            }
+          ]
+        },
+        {
+          "key": "airport",
+          "type": "term",
+          "text": "airport",
+          "meaning": "aeropuerto",
+          "pronunciation": "ÉRport",
+          "examples": [
+            {
+              "text": "Take me to the airport, please.",
+              "translation": "Lléveme al aeropuerto, por favor.",
+              "mirror": {
+                "say": "Lléveme al aeropuerto, por favor",
+                "pieces": [
+                  {
+                    "es": "Lleve",
+                    "en": "Take",
+                    "role": "verb",
+                    "from": "Lléveme",
+                    "why": "Lo pegado se separa: take ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "al aeropuerto",
+                    "en": "to the airport",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The airport is far from the city.",
+              "translation": "El aeropuerto está lejos de la ciudad."
+            }
+          ]
+        },
+        {
+          "key": "passport",
+          "type": "term",
+          "text": "passport",
+          "meaning": "pasaporte",
+          "pronunciation": "PÁSport",
+          "examples": [
+            {
+              "text": "Can I see your passport?",
+              "translation": "¿Puedo ver su pasaporte?",
+              "mirror": {
+                "say": "¿Puedo ver su pasaporte?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "su pasaporte",
+                    "en": "your passport",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Don't forget your passport.",
+              "translation": "No olvides el pasaporte."
+            }
+          ]
+        },
+        {
+          "key": "suitcase",
+          "type": "term",
+          "text": "suitcase",
+          "meaning": "maleta",
+          "pronunciation": "SÚTkeis",
+          "examples": [
+            {
+              "text": "My suitcase is very heavy.",
+              "translation": "Mi maleta pesa mucho.",
+              "mirror": {
+                "say": "Mi maleta pesa mucho",
+                "pieces": [
+                  {
+                    "es": "Mi maleta",
+                    "en": "My suitcase",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "pesa",
+                    "why": "«Pesa mucho» se dice «es muy pesada»: is very heavy."
+                  },
+                  {
+                    "es": "muy pesada",
+                    "en": "very heavy",
+                    "role": "word",
+                    "from": "mucho"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where is my suitcase?",
+              "translation": "¿Dónde está mi maleta?"
+            }
+          ]
+        },
+        {
+          "key": "map",
+          "type": "term",
+          "text": "map",
+          "meaning": "mapa",
+          "pronunciation": "MAP",
+          "examples": [
+            {
+              "text": "I need a map of the city.",
+              "translation": "Necesito un mapa de la ciudad.",
+              "mirror": {
+                "say": "Necesito un mapa de la ciudad",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un mapa de la ciudad",
+                    "en": "a map of the city",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Look at the map.",
+              "translation": "Mira el mapa."
+            }
+          ]
+        },
+        {
+          "key": "beach",
+          "type": "term",
+          "text": "beach",
+          "meaning": "playa",
+          "pronunciation": "BIICH",
+          "examples": [
+            {
+              "text": "Let's go to the beach!",
+              "translation": "¡Vamos a la playa!",
+              "mirror": {
+                "say": "¡Vamos a la playa!",
+                "pieces": [
+                  {
+                    "es": "Vayamos",
+                    "en": "Let's go",
+                    "role": "verb",
+                    "from": "Vamos",
+                    "why": "Para proponer algo: LET'S + verbo. Let's go."
+                  },
+                  {
+                    "es": "a la playa",
+                    "en": "to the beach",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The beach is full of people.",
+              "translation": "La playa está llena de gente."
+            }
+          ]
+        },
+        {
+          "key": "holiday",
+          "type": "term",
+          "text": "holiday",
+          "meaning": "vacaciones",
+          "pronunciation": "JÓlidei",
+          "examples": [
+            {
+              "text": "We are on holiday.",
+              "translation": "Estamos de vacaciones.",
+              "mirror": {
+                "say": "Estamos de vacaciones",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en vacaciones",
+                    "en": "on holiday",
+                    "role": "word",
+                    "from": "de vacaciones",
+                    "why": "Estar de vacaciones es ON holiday."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where did you go on holiday?",
+              "translation": "¿Adónde fuiste de vacaciones?"
+            }
+          ]
+        },
+        {
+          "key": "flight",
+          "type": "term",
+          "text": "flight",
+          "meaning": "vuelo",
+          "pronunciation": "FLÁIT",
+          "examples": [
+            {
+              "text": "My flight is at six.",
+              "translation": "Mi vuelo es a las seis.",
+              "mirror": {
+                "say": "Mi vuelo es a las seis",
+                "pieces": [
+                  {
+                    "es": "Mi vuelo",
+                    "en": "My flight",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "a las seis",
+                    "en": "at six",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The flight was cancelled.",
+              "translation": "Cancelaron el vuelo."
+            }
+          ]
+        },
+        {
+          "key": "arrive",
+          "type": "term",
+          "text": "arrive",
+          "meaning": "llegar",
+          "pronunciation": "aRÁIV",
+          "examples": [
+            {
+              "text": "We arrive at the hotel at eight.",
+              "translation": "Llegamos al hotel a las ocho.",
+              "mirror": {
+                "say": "Llegamos al hotel a las ocho",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegamos",
+                    "en": "arrive",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el hotel",
+                    "en": "at the hotel",
+                    "role": "word",
+                    "from": "al hotel",
+                    "why": "Llegar a un sitio: arrive AT the hotel (IN una ciudad)."
+                  },
+                  {
+                    "es": "a las ocho",
+                    "en": "at eight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "When does the train arrive?",
+              "translation": "¿Cuándo llega el tren?"
+            }
+          ]
+        },
+        {
+          "key": "stay",
+          "type": "term",
+          "text": "stay",
+          "meaning": "quedarse, alojarse",
+          "pronunciation": "STÉI",
+          "examples": [
+            {
+              "text": "We stayed at a small hotel.",
+              "translation": "Nos alojamos en un hotel pequeño.",
+              "mirror": {
+                "say": "Nos alojamos en un hotel pequeño",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "alojamos",
+                    "en": "stayed",
+                    "role": "verb",
+                    "from": "nos alojamos"
+                  },
+                  {
+                    "es": "en",
+                    "en": "at",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hotel",
+                    "en": "hotel",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pequeño",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "How long are you staying?",
+              "translation": "¿Cuánto tiempo te quedas?"
+            }
+          ]
+        },
+        {
+          "key": "visit",
+          "type": "term",
+          "text": "visit",
+          "meaning": "visitar",
+          "pronunciation": "VÍsit",
+          "examples": [
+            {
+              "text": "I want to visit Rome.",
+              "translation": "Quiero visitar Roma.",
+              "mirror": {
+                "say": "Quiero visitar Roma",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "visitar",
+                    "en": "to visit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "Roma",
+                    "en": "Rome",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Come and visit us!",
+              "translation": "¡Ven a vernos!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

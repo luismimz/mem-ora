@@ -1,0 +1,844 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "21-trabajo",
+      "title": "Misión 21 · En el trabajo",
+      "units": [
+        {
+          "key": "g-comparatives",
+          "type": "pattern",
+          "goal": "Comparar: más grande que = BIGGER THAN",
+          "rule": "Palabra corta: + -ER THAN (bigger than). Larga: MORE … THAN (more expensive than). Ojo: better, worse.",
+          "pieces": [
+            {
+              "text": "Madrid",
+              "role": "fixed",
+              "hint": "Madrid"
+            },
+            {
+              "text": "is",
+              "role": "fixed",
+              "hint": "es"
+            },
+            {
+              "text": "bigger",
+              "role": "slot",
+              "hint": "más grande"
+            },
+            {
+              "text": "than",
+              "role": "fixed",
+              "hint": "que"
+            },
+            {
+              "text": "Toledo",
+              "role": "fixed",
+              "hint": "Toledo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Madrid is bigger than Toledo.",
+              "translation": "Madrid es más grande que Toledo.",
+              "mirror": {
+                "say": "Madrid es más grande que Toledo",
+                "pieces": [
+                  {
+                    "es": "Madrid",
+                    "en": "Madrid",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "grande-ER",
+                    "en": "big-GER",
+                    "role": "word",
+                    "from": "más grande",
+                    "why": "Palabra corta: -ER al final. Big → bigger."
+                  },
+                  {
+                    "es": "que",
+                    "en": "than",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Toledo",
+                    "en": "Toledo",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This phone is more expensive than that one.",
+              "translation": "Este móvil es más caro que ese.",
+              "mirror": {
+                "say": "Este móvil es más caro que ese",
+                "pieces": [
+                  {
+                    "es": "Este móvil",
+                    "en": "This phone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "más caro",
+                    "en": "more expensive",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "than",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ese",
+                    "en": "that one",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My new job is better than my old job.",
+              "translation": "Mi trabajo nuevo es mejor que el anterior."
+            },
+            {
+              "text": "Today is worse than yesterday.",
+              "translation": "Hoy es peor que ayer."
+            }
+          ],
+          "pitfalls": [
+            "«More big» está mal: palabra corta → bigger.",
+            "Mejor y peor no siguen la regla: better, worse."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Las palabras CORTAS crecen con -ER; las LARGAS piden MORE.",
+            "emoji": "📏"
+          }
+        },
+        {
+          "key": "job",
+          "type": "term",
+          "text": "job",
+          "meaning": "trabajo, empleo",
+          "pronunciation": "YOB",
+          "examples": [
+            {
+              "text": "I have a new job.",
+              "translation": "Tengo un trabajo nuevo.",
+              "mirror": {
+                "say": "Tengo un trabajo nuevo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "job",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "What's your job?",
+              "translation": "¿A qué te dedicas?"
+            }
+          ]
+        },
+        {
+          "key": "boss",
+          "type": "term",
+          "text": "boss",
+          "meaning": "jefe, jefa",
+          "pronunciation": "BOS",
+          "examples": [
+            {
+              "text": "My boss is very nice.",
+              "translation": "Mi jefe es muy majo.",
+              "mirror": {
+                "say": "Mi jefe es muy majo",
+                "pieces": [
+                  {
+                    "es": "Mi jefe",
+                    "en": "My boss",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy majo",
+                    "en": "very nice",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Ask your boss.",
+              "translation": "Pregúntale a tu jefe."
+            }
+          ]
+        },
+        {
+          "key": "office",
+          "type": "term",
+          "text": "office",
+          "meaning": "oficina",
+          "pronunciation": "ÓFis",
+          "examples": [
+            {
+              "text": "The office is on the fifth floor.",
+              "translation": "La oficina está en el quinto piso.",
+              "mirror": {
+                "say": "La oficina está en el quinto piso",
+                "pieces": [
+                  {
+                    "es": "La oficina",
+                    "en": "The office",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el quinto piso",
+                    "en": "on the fifth floor",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm at the office.",
+              "translation": "Estoy en la oficina."
+            }
+          ]
+        },
+        {
+          "key": "meeting",
+          "type": "term",
+          "text": "meeting",
+          "meaning": "reunión",
+          "pronunciation": "MÍIting",
+          "examples": [
+            {
+              "text": "I have a meeting at ten.",
+              "translation": "Tengo una reunión a las diez.",
+              "mirror": {
+                "say": "Tengo una reunión a las diez",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una reunión",
+                    "en": "a meeting",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a las diez",
+                    "en": "at ten",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The meeting was very long.",
+              "translation": "La reunión fue muy larga."
+            }
+          ]
+        },
+        {
+          "key": "email",
+          "type": "term",
+          "text": "email",
+          "meaning": "correo electrónico",
+          "pronunciation": "ÍImeil",
+          "examples": [
+            {
+              "text": "Send me an email.",
+              "translation": "Mándame un correo.",
+              "mirror": {
+                "say": "Mándame un correo",
+                "pieces": [
+                  {
+                    "es": "Manda",
+                    "en": "Send",
+                    "role": "verb",
+                    "from": "Mándame",
+                    "why": "Lo pegado se separa: send ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un correo",
+                    "en": "an email",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have fifty emails.",
+              "translation": "Tengo cincuenta correos."
+            }
+          ]
+        },
+        {
+          "key": "colleague",
+          "type": "term",
+          "text": "colleague",
+          "meaning": "compañero de trabajo",
+          "pronunciation": "KÓliig",
+          "examples": [
+            {
+              "text": "She is my colleague.",
+              "translation": "Es mi compañera de trabajo.",
+              "mirror": {
+                "say": "Es mi compañera de trabajo",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi compañera de trabajo",
+                    "en": "my colleague",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have lunch with my colleagues.",
+              "translation": "Como con mis compañeros."
+            }
+          ]
+        },
+        {
+          "key": "company",
+          "type": "term",
+          "text": "company",
+          "meaning": "empresa",
+          "pronunciation": "KÁMpani",
+          "examples": [
+            {
+              "text": "I work for a big company.",
+              "translation": "Trabajo para una empresa grande.",
+              "mirror": {
+                "say": "Trabajo para una empresa grande",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para",
+                    "en": "for",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "empresa",
+                    "en": "company",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "The company has two hundred workers.",
+              "translation": "La empresa tiene doscientos trabajadores."
+            }
+          ]
+        },
+        {
+          "key": "customer",
+          "type": "term",
+          "text": "customer",
+          "meaning": "cliente",
+          "pronunciation": "KÁStomer",
+          "examples": [
+            {
+              "text": "The customer is always right.",
+              "translation": "El cliente siempre tiene razón.",
+              "mirror": {
+                "say": "El cliente siempre tiene razón",
+                "pieces": [
+                  {
+                    "es": "El cliente",
+                    "en": "The customer",
+                    "role": "who"
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "«Tener razón» es «estar en lo cierto»: is right."
+                  },
+                  {
+                    "es": "en lo cierto",
+                    "en": "right",
+                    "role": "word",
+                    "from": "razón"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "We have a new customer.",
+              "translation": "Tenemos un cliente nuevo."
+            }
+          ]
+        },
+        {
+          "key": "team",
+          "type": "term",
+          "text": "team",
+          "meaning": "equipo",
+          "pronunciation": "TIIM",
+          "examples": [
+            {
+              "text": "We are a good team.",
+              "translation": "Somos un buen equipo.",
+              "mirror": {
+                "say": "Somos un buen equipo",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "somos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un buen equipo",
+                    "en": "a good team",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Which team do you support?",
+              "translation": "¿De qué equipo eres?"
+            }
+          ]
+        },
+        {
+          "key": "project",
+          "type": "term",
+          "text": "project",
+          "meaning": "proyecto",
+          "pronunciation": "PRÓyekt",
+          "examples": [
+            {
+              "text": "I'm working on a new project.",
+              "translation": "Estoy trabajando en un proyecto nuevo.",
+              "mirror": {
+                "say": "Estoy trabajando en un proyecto nuevo",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabajando",
+                    "en": "working",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en",
+                    "en": "on",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "proyecto",
+                    "en": "project",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "The project is finished.",
+              "translation": "El proyecto está terminado."
+            }
+          ]
+        },
+        {
+          "key": "interview",
+          "type": "term",
+          "text": "interview",
+          "meaning": "entrevista",
+          "pronunciation": "ÍNterviu",
+          "examples": [
+            {
+              "text": "I have a job interview tomorrow.",
+              "translation": "Mañana tengo una entrevista de trabajo.",
+              "mirror": {
+                "say": "Mañana tengo una entrevista de trabajo",
+                "pieces": [
+                  {
+                    "es": "Mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "entrevista",
+                    "en": "interview",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de trabajo",
+                    "en": "job",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  5,
+                  4,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "How was the interview?",
+              "translation": "¿Qué tal la entrevista?"
+            }
+          ]
+        },
+        {
+          "key": "salary",
+          "type": "term",
+          "text": "salary",
+          "meaning": "sueldo",
+          "pronunciation": "SÁlari",
+          "examples": [
+            {
+              "text": "The salary is good.",
+              "translation": "El sueldo es bueno.",
+              "mirror": {
+                "say": "El sueldo es bueno",
+                "pieces": [
+                  {
+                    "es": "El sueldo",
+                    "en": "The salary",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "good",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want a higher salary.",
+              "translation": "Quiero un sueldo más alto."
+            }
+          ]
+        },
+        {
+          "key": "busy",
+          "type": "term",
+          "text": "busy",
+          "meaning": "ocupado",
+          "pronunciation": "BÍsi",
+          "examples": [
+            {
+              "text": "I'm very busy today.",
+              "translation": "Hoy estoy muy ocupado.",
+              "mirror": {
+                "say": "Hoy estoy muy ocupado",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy ocupado",
+                    "en": "very busy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Are you busy?",
+              "translation": "¿Estás ocupado?"
+            }
+          ]
+        },
+        {
+          "key": "earn",
+          "type": "term",
+          "text": "earn",
+          "meaning": "ganar (dinero)",
+          "pronunciation": "ERN",
+          "examples": [
+            {
+              "text": "She earns a lot of money.",
+              "translation": "Gana mucho dinero.",
+              "mirror": {
+                "say": "Gana mucho dinero",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gana",
+                    "en": "earns",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho",
+                    "en": "a lot of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dinero",
+                    "en": "money",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much do you earn?",
+              "translation": "¿Cuánto ganas?"
+            }
+          ]
+        },
+        {
+          "key": "task",
+          "type": "term",
+          "text": "task",
+          "meaning": "tarea",
+          "pronunciation": "TASK",
+          "examples": [
+            {
+              "text": "I have three tasks for today.",
+              "translation": "Tengo tres tareas para hoy.",
+              "mirror": {
+                "say": "Tengo tres tareas para hoy",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres tareas",
+                    "en": "three tasks",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para hoy",
+                    "en": "for today",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This task is easy.",
+              "translation": "Esta tarea es fácil."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
