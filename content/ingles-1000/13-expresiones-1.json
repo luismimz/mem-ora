@@ -40,7 +40,44 @@
           "examples": [
             {
               "text": "Hi, I'm Ana. Nice to meet you.",
-              "translation": "Hola, soy Ana. Encantada de conocerte."
+              "translation": "Hola, soy Ana. Encantada de conocerte.",
+              "mirror": {
+                "say": "Hola, soy Ana. Encantada de conocerte",
+                "pieces": [
+                  {
+                    "es": "Hola",
+                    "en": "Hi",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Encantada de",
+                    "en": "Nice to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "conocer",
+                    "en": "meet",
+                    "role": "verb",
+                    "from": "conocerte",
+                    "why": "Lo pegado se separa: meet YOU."
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +97,22 @@
           "examples": [
             {
               "text": "Hey! How's it going?",
-              "translation": "¡Eh! ¿Qué tal?"
+              "translation": "¡Eh! ¿Qué tal?",
+              "mirror": {
+                "say": "¡Eh! ¿Qué tal?",
+                "pieces": [
+                  {
+                    "es": "Eh",
+                    "en": "Hey",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Qué tal",
+                    "en": "How's it going",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +132,33 @@
           "examples": [
             {
               "text": "Sorry, I don't understand.",
-              "translation": "Perdona, no entiendo."
+              "translation": "Perdona, no entiendo.",
+              "mirror": {
+                "say": "Perdona, no entiendo",
+                "pieces": [
+                  {
+                    "es": "Perdona",
+                    "en": "Sorry",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "entiendo",
+                    "en": "understand",
+                    "role": "verb"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +178,49 @@
           "examples": [
             {
               "text": "Could you repeat that, please?",
-              "translation": "¿Puedes repetirlo, por favor?"
+              "translation": "¿Puedes repetirlo, por favor?",
+              "mirror": {
+                "say": "¿Puedes repetirlo, por favor?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper",
+                    "from": "puedes",
+                    "why": "Para pedir con educación: COULD you…?"
+                  },
+                  {
+                    "es": "repetir",
+                    "en": "repeat",
+                    "role": "verb",
+                    "from": "repetirlo"
+                  },
+                  {
+                    "es": "eso",
+                    "en": "that",
+                    "role": "word",
+                    "from": "lo"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +240,38 @@
           "examples": [
             {
               "text": "What do you mean by that?",
-              "translation": "¿Qué quieres decir con eso?"
+              "translation": "¿Qué quieres decir con eso?",
+              "mirror": {
+                "say": "¿Qué quieres decir con eso?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quieres decir",
+                    "en": "mean",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con eso",
+                    "en": "by that",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +291,27 @@
           "examples": [
             {
               "text": "Never mind, it's not important.",
-              "translation": "Déjalo, no es importante."
+              "translation": "Déjalo, no es importante.",
+              "mirror": {
+                "say": "Déjalo, no es importante",
+                "pieces": [
+                  {
+                    "es": "Déjalo",
+                    "en": "Never mind",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) no es",
+                    "en": "it's not",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "importante",
+                    "en": "important",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +331,34 @@
           "examples": [
             {
               "text": "No worries, I'll help you.",
-              "translation": "Tranquilo, te ayudo."
+              "translation": "Tranquilo, te ayudo.",
+              "mirror": {
+                "say": "Tranquilo, te ayudo",
+                "pieces": [
+                  {
+                    "es": "Tranquilo",
+                    "en": "No worries",
+                    "role": "word"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) ayudaré",
+                    "en": "I'll help",
+                    "role": "verb",
+                    "from": "ayudo",
+                    "why": "Prometer algo al momento va con WILL: I'll help you."
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +378,35 @@
           "examples": [
             {
               "text": "Dinner at eight? Sounds good.",
-              "translation": "¿Cenamos a las ocho? Me parece bien."
+              "translation": "¿Cenamos a las ocho? Me parece bien.",
+              "mirror": {
+                "say": "¿Cenamos a las ocho? Me parece bien",
+                "pieces": [
+                  {
+                    "es": "Cena",
+                    "en": "Dinner",
+                    "role": "word",
+                    "from": "Cenamos"
+                  },
+                  {
+                    "es": "a las ocho",
+                    "en": "at eight",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) suena",
+                    "en": "Sounds",
+                    "role": "verb",
+                    "from": "me parece",
+                    "why": "«Me parece bien» se dice «suena bien»: sounds good."
+                  },
+                  {
+                    "es": "bien",
+                    "en": "good",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +426,40 @@
           "examples": [
             {
               "text": "I'm not sure, let me check.",
-              "translation": "No estoy seguro, déjame comprobarlo."
+              "translation": "No estoy seguro, déjame comprobarlo.",
+              "mirror": {
+                "say": "No estoy seguro, déjame comprobarlo",
+                "pieces": [
+                  {
+                    "es": "(YO) no estoy",
+                    "en": "I'm not",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "seguro",
+                    "en": "sure",
+                    "role": "word"
+                  },
+                  {
+                    "es": "deja",
+                    "en": "let",
+                    "role": "verb",
+                    "from": "déjame",
+                    "why": "Lo pegado se separa: let ME check."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "comprobar",
+                    "en": "check",
+                    "role": "verb",
+                    "from": "comprobarlo"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +479,28 @@
           "examples": [
             {
               "text": "It depends on the weather.",
-              "translation": "Depende del tiempo."
+              "translation": "Depende del tiempo.",
+              "mirror": {
+                "say": "Depende del tiempo",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "depende de",
+                    "en": "depends on",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el tiempo",
+                    "en": "the weather",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +520,28 @@
           "examples": [
             {
               "text": "Of course you can.",
-              "translation": "Claro que puedes."
+              "translation": "Claro que puedes.",
+              "mirror": {
+                "say": "Claro que puedes",
+                "pieces": [
+                  {
+                    "es": "Claro que",
+                    "en": "Of course",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "can",
+                    "role": "helper"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +561,32 @@
           "examples": [
             {
               "text": "Excuse me, where is the bank?",
-              "translation": "Disculpe, ¿dónde está el banco?"
+              "translation": "Disculpe, ¿dónde está el banco?",
+              "mirror": {
+                "say": "Disculpe, ¿dónde está el banco?",
+                "pieces": [
+                  {
+                    "es": "Disculpe",
+                    "en": "Excuse me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dónde",
+                    "en": "where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el banco",
+                    "en": "the bank",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +606,29 @@
           "examples": [
             {
               "text": "I'm sorry I'm late.",
-              "translation": "Siento llegar tarde."
+              "translation": "Siento llegar tarde.",
+              "mirror": {
+                "say": "Siento llegar tarde",
+                "pieces": [
+                  {
+                    "es": "(YO) siento",
+                    "en": "I'm sorry",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "llegar",
+                    "why": "Llegar tarde se dice «estar tarde»: I'm late."
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +648,22 @@
           "examples": [
             {
               "text": "Thanks a lot for your help.",
-              "translation": "Muchas gracias por tu ayuda."
+              "translation": "Muchas gracias por tu ayuda.",
+              "mirror": {
+                "say": "Muchas gracias por tu ayuda",
+                "pieces": [
+                  {
+                    "es": "Muchas gracias",
+                    "en": "Thanks a lot",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por tu ayuda",
+                    "en": "for your help",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +683,24 @@
           "examples": [
             {
               "text": "See you later!",
-              "translation": "¡Hasta luego!"
+              "translation": "¡Hasta luego!",
+              "mirror": {
+                "say": "¡Hasta luego!",
+                "pieces": [
+                  {
+                    "es": "Te veo",
+                    "en": "See you",
+                    "role": "verb",
+                    "from": "Hasta",
+                    "why": "Para despedirte: «te veo»… → see you."
+                  },
+                  {
+                    "es": "luego",
+                    "en": "later",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {

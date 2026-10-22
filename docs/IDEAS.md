@@ -19,7 +19,7 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Calidad de las asociaciones e historias:** el usuario las ve malas. Revisar con él ejemplos concretos
   antes de reescribir en masa; una asociación mala es peor que ninguna.
 
-- **[inglés] Espejos en el resto de ejemplos** (misiones 3–16) para la ayuda «¿Cómo se construye?» (D-082).
+- **[inglés] Espejos pendientes:** `many` (have got), `jump` y `stand` (una sola pieza); `thirteen`/`fifteen` (sin valor).
 - **[inglés] Más vocabulario hasta 1.000** (meta de 30 días): ciudad, trabajo, viajes, pasado simple, frases para conversar.
 - **[inglés] Arrastre tipo imán** para las piezas de Lego (hoy, botones).
 
@@ -27,14 +27,15 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 
 Ideas, no un cambio de formato: su base es el test de 4 opciones (reconocimiento, pesa poco en Memora).
 
-1. **[experiencia] Mapa de misiones con 4 estados** en la Home: superada, en curso, «conviene repasar» (el motor sabe
+1. ✓ (PR #12) **[experiencia] Mapa de misiones con 4 estados** en la Home: superada, en curso, «conviene repasar» (el motor sabe
    qué se olvida) y sin empezar. Que se vea el avance y lo que se apaga.
-2. **[experiencia] Contador de fallos que se vacía** («Vacía tus N fallos»): un fallo sale al acertarlo después.
-3. **[contenido] «Reportar un error»** en la ficha o la pregunta: un toque y va a la cola de revisión de Studio.
+2. ✓ (PR #12) **[experiencia] Contador de fallos que se vacía** («Vacía tus N fallos»): un fallo sale al acertarlo después.
+3. ✓ (PR #13) **[contenido] «Reportar un error»** en la ficha o la pregunta: un toque y va a la cola de revisión de Studio.
 4. **[núcleo] «Acerté, pero dudé»:** toque opcional al acertar; el acierto cuenta como poco seguro (regla 9).
 5. **[experiencia] Calendario de actividad** (días estudiados) y **logros honestos** (por memoria real, no por
    respuestas correctas).
-6. **[inglés] Inglés técnico/profesional** del módulo DAM: vocabulario de desarrollo, correos, CV, pasiva.
+6. **[inglés] Inglés técnico/profesional** del módulo DAM. Hecho: misión 17 (vocabulario de informática). Falta: correos,
+   CV y pasiva.
 7. **[DAM] Simulacro de examen:** 30 preguntas de todos los temas, 60 min, sin ayudas hasta el final, se aprueba con
    7, mejor nota. Solo mide: nunca marca «dominado». Con los exámenes de práctica de ILERNA cuando estén en `private/`.
 8. **[DAM] Código comprobado:** compilar el código de las preguntas DAM en la puerta (`private/dam/taught.py`).

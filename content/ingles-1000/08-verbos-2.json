@@ -40,7 +40,33 @@
           "examples": [
             {
               "text": "I go to work by bus.",
-              "translation": "Voy al trabajo en autobús."
+              "translation": "Voy al trabajo en autobús.",
+              "mirror": {
+                "say": "Voy al trabajo en autobús",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al trabajo",
+                    "en": "to work",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en autobús",
+                    "en": "by bus",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +86,27 @@
           "examples": [
             {
               "text": "Come here, please.",
-              "translation": "Ven aquí, por favor."
+              "translation": "Ven aquí, por favor.",
+              "mirror": {
+                "say": "Ven aquí, por favor",
+                "pieces": [
+                  {
+                    "es": "Ven",
+                    "en": "Come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +126,29 @@
           "examples": [
             {
               "text": "Give me the keys.",
-              "translation": "Dame las llaves."
+              "translation": "Dame las llaves.",
+              "mirror": {
+                "say": "Dame las llaves",
+                "pieces": [
+                  {
+                    "es": "Da",
+                    "en": "Give",
+                    "role": "verb",
+                    "from": "Dame",
+                    "why": "Lo pegado se separa: give ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "las llaves",
+                    "en": "the keys",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +168,29 @@
           "examples": [
             {
               "text": "Put it on the table.",
-              "translation": "Ponlo en la mesa."
+              "translation": "Ponlo en la mesa.",
+              "mirror": {
+                "say": "Ponlo en la mesa",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb",
+                    "from": "Ponlo",
+                    "why": "Lo pegado se separa: put IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la mesa",
+                    "en": "on the table",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +210,28 @@
           "examples": [
             {
               "text": "I leave at five.",
-              "translation": "Me voy a las cinco."
+              "translation": "Me voy a las cinco.",
+              "mirror": {
+                "say": "Me voy a las cinco",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me voy",
+                    "en": "leave",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las cinco",
+                    "en": "at five",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +251,34 @@
           "examples": [
             {
               "text": "Bring me water, please.",
-              "translation": "Tráeme agua, por favor."
+              "translation": "Tráeme agua, por favor.",
+              "mirror": {
+                "say": "Tráeme agua, por favor",
+                "pieces": [
+                  {
+                    "es": "Trae",
+                    "en": "Bring",
+                    "role": "verb",
+                    "from": "Tráeme",
+                    "why": "Lo pegado se separa: bring ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +298,36 @@
           "examples": [
             {
               "text": "I can't find my phone.",
-              "translation": "No encuentro mi móvil."
+              "translation": "No encuentro mi móvil.",
+              "mirror": {
+                "say": "No encuentro mi móvil",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "no",
+                    "why": "«No encuentro» = no PUEDO encontrar: I can't find."
+                  },
+                  {
+                    "es": "encontrar",
+                    "en": "find",
+                    "role": "verb",
+                    "from": "encuentro"
+                  },
+                  {
+                    "es": "mi móvil",
+                    "en": "my phone",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +347,24 @@
           "examples": [
             {
               "text": "Look at this!",
-              "translation": "¡Mira esto!"
+              "translation": "¡Mira esto!",
+              "mirror": {
+                "say": "¡Mira esto!",
+                "pieces": [
+                  {
+                    "es": "Mira a",
+                    "en": "Look at",
+                    "role": "verb",
+                    "from": "Mira",
+                    "why": "Mirar algo es LOOK AT: look at this."
+                  },
+                  {
+                    "es": "esto",
+                    "en": "this",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +384,30 @@
           "examples": [
             {
               "text": "I feel tired.",
-              "translation": "Me siento cansado."
+              "translation": "Me siento cansado.",
+              "mirror": {
+                "say": "Me siento cansado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siento",
+                    "en": "feel",
+                    "role": "verb",
+                    "from": "me siento",
+                    "why": "Sin «me»: YO feel tired."
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +427,35 @@
           "examples": [
             {
               "text": "She wants to become a doctor.",
-              "translation": "Quiere llegar a ser médica."
+              "translation": "Quiere llegar a ser médica.",
+              "mirror": {
+                "say": "Quiere llegar a ser médica",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiere",
+                    "en": "wants",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "llegar a ser",
+                    "en": "to become",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una médica",
+                    "en": "a doctor",
+                    "role": "word",
+                    "from": "médica",
+                    "why": "Las profesiones llevan «a»: a doctor."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +475,22 @@
           "examples": [
             {
               "text": "Keep the change.",
-              "translation": "Quédese con el cambio."
+              "translation": "Quédese con el cambio.",
+              "mirror": {
+                "say": "Quédese con el cambio",
+                "pieces": [
+                  {
+                    "es": "Quédese con",
+                    "en": "Keep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el cambio",
+                    "en": "the change",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +510,35 @@
           "examples": [
             {
               "text": "Let me help you.",
-              "translation": "Déjame ayudarte."
+              "translation": "Déjame ayudarte.",
+              "mirror": {
+                "say": "Déjame ayudarte",
+                "pieces": [
+                  {
+                    "es": "Deja",
+                    "en": "Let",
+                    "role": "verb",
+                    "from": "Déjame",
+                    "why": "Lo pegado se separa: let ME help YOU."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ayudar",
+                    "en": "help",
+                    "role": "verb",
+                    "from": "ayudarte"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +558,27 @@
           "examples": [
             {
               "text": "The class begins at nine.",
-              "translation": "La clase empieza a las nueve."
+              "translation": "La clase empieza a las nueve.",
+              "mirror": {
+                "say": "La clase empieza a las nueve",
+                "pieces": [
+                  {
+                    "es": "La clase",
+                    "en": "The class",
+                    "role": "who"
+                  },
+                  {
+                    "es": "empieza",
+                    "en": "begins",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las nueve",
+                    "en": "at nine",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +598,28 @@
           "examples": [
             {
               "text": "You seem tired.",
-              "translation": "Pareces cansado."
+              "translation": "Pareces cansado.",
+              "mirror": {
+                "say": "Pareces cansado",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pareces",
+                    "en": "seem",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +639,39 @@
           "examples": [
             {
               "text": "Can you help me?",
-              "translation": "¿Me puedes ayudar?"
+              "translation": "¿Me puedes ayudar?",
+              "mirror": {
+                "say": "¿Me puedes ayudar?",
+                "pieces": [
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ayudar",
+                    "en": "help",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  3,
+                  0
+                ]
+              }
             }
           ],
           "association": {

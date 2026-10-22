@@ -40,7 +40,35 @@
           "examples": [
             {
               "text": "I buy bread every day.",
-              "translation": "Compro pan todos los días."
+              "translation": "Compro pan todos los días.",
+              "mirror": {
+                "say": "Compro pan todos los días",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compro",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días",
+                    "why": "«Todos los días» es CADA día: every day."
+                  }
+                ]
+              }
             },
             {
               "text": "What did you buy?",
@@ -57,7 +85,39 @@
           "examples": [
             {
               "text": "They sell old books.",
-              "translation": "Venden libros viejos."
+              "translation": "Venden libros viejos.",
+              "mirror": {
+                "say": "Venden libros viejos",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "venden",
+                    "en": "sell",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "libros",
+                    "en": "books",
+                    "role": "word"
+                  },
+                  {
+                    "es": "viejos",
+                    "en": "old",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -77,7 +137,39 @@
           "examples": [
             {
               "text": "Can I pay by card?",
-              "translation": "¿Puedo pagar con tarjeta?"
+              "translation": "¿Puedo pagar con tarjeta?",
+              "mirror": {
+                "say": "¿Puedo pagar con tarjeta?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pagar",
+                    "en": "pay",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con tarjeta",
+                    "en": "by card",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -97,7 +189,33 @@
           "examples": [
             {
               "text": "How much does it cost?",
-              "translation": "¿Cuánto cuesta?"
+              "translation": "¿Cuánto cuesta?",
+              "mirror": {
+                "say": "¿Cuánto cuesta?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "does",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cuesta",
+                    "en": "cost",
+                    "role": "verb"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -117,7 +235,30 @@
           "examples": [
             {
               "text": "I read every night.",
-              "translation": "Leo todas las noches."
+              "translation": "Leo todas las noches.",
+              "mirror": {
+                "say": "Leo todas las noches",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "leo",
+                    "en": "read",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada noche",
+                    "en": "every night",
+                    "role": "word",
+                    "from": "todas las noches",
+                    "why": "«Todas las noches» es CADA noche: every night."
+                  }
+                ]
+              }
             }
           ]
         },
@@ -130,7 +271,27 @@
           "examples": [
             {
               "text": "Write your name here.",
-              "translation": "Escribe tu nombre aquí."
+              "translation": "Escribe tu nombre aquí.",
+              "mirror": {
+                "say": "Escribe tu nombre aquí",
+                "pieces": [
+                  {
+                    "es": "Escribe",
+                    "en": "Write",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu nombre",
+                    "en": "your name",
+                    "role": "word"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -143,7 +304,33 @@
           "examples": [
             {
               "text": "Do you speak English?",
-              "translation": "¿Hablas inglés?"
+              "translation": "¿Hablas inglés?",
+              "mirror": {
+                "say": "¿Hablas inglés?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hablas",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -163,7 +350,33 @@
           "examples": [
             {
               "text": "I want to learn English.",
-              "translation": "Quiero aprender inglés."
+              "translation": "Quiero aprender inglés.",
+              "mirror": {
+                "say": "Quiero aprender inglés",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aprender",
+                    "en": "to learn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -176,7 +389,28 @@
           "examples": [
             {
               "text": "I study at night.",
-              "translation": "Estudio por la noche."
+              "translation": "Estudio por la noche.",
+              "mirror": {
+                "say": "Estudio por la noche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estudio",
+                    "en": "study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por la noche",
+                    "en": "at night",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -196,7 +430,28 @@
           "examples": [
             {
               "text": "I work in an office.",
-              "translation": "Trabajo en una oficina."
+              "translation": "Trabajo en una oficina.",
+              "mirror": {
+                "say": "Trabajo en una oficina",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en una oficina",
+                    "en": "in an office",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -209,7 +464,27 @@
           "examples": [
             {
               "text": "The children play in the park.",
-              "translation": "Los niños juegan en el parque."
+              "translation": "Los niños juegan en el parque.",
+              "mirror": {
+                "say": "Los niños juegan en el parque",
+                "pieces": [
+                  {
+                    "es": "Los niños",
+                    "en": "The children",
+                    "role": "who"
+                  },
+                  {
+                    "es": "juegan",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el parque",
+                    "en": "in the park",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -229,7 +504,28 @@
           "examples": [
             {
               "text": "I sleep eight hours.",
-              "translation": "Duermo ocho horas."
+              "translation": "Duermo ocho horas.",
+              "mirror": {
+                "say": "Duermo ocho horas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "duermo",
+                    "en": "sleep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ocho horas",
+                    "en": "eight hours",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -249,7 +545,29 @@
           "examples": [
             {
               "text": "Call me tomorrow.",
-              "translation": "Llámame mañana."
+              "translation": "Llámame mañana.",
+              "mirror": {
+                "say": "Llámame mañana",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb",
+                    "from": "Llámame",
+                    "why": "Lo pegado se separa: call ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -269,7 +587,35 @@
           "examples": [
             {
               "text": "I love you.",
-              "translation": "Te quiero."
+              "translation": "Te quiero.",
+              "mirror": {
+                "say": "Te quiero",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "amo",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "quiero",
+                    "why": "Querer a alguien es LOVE: I love you."
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
             },
             {
               "text": "I love this song.",
@@ -293,7 +639,33 @@
           "examples": [
             {
               "text": "I understand you.",
-              "translation": "Te entiendo."
+              "translation": "Te entiendo.",
+              "mirror": {
+                "say": "Te entiendo",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "entiendo",
+                    "en": "understand",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
             }
           ]
         }

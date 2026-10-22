@@ -40,7 +40,30 @@
           "examples": [
             {
               "text": "I walk to work.",
-              "translation": "Voy andando al trabajo."
+              "translation": "Voy andando al trabajo.",
+              "mirror": {
+                "say": "Voy andando al trabajo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "camino",
+                    "en": "walk",
+                    "role": "verb",
+                    "from": "voy andando",
+                    "why": "Ir andando es caminar: I walk to work."
+                  },
+                  {
+                    "es": "al trabajo",
+                    "en": "to work",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +83,28 @@
           "examples": [
             {
               "text": "I run every morning.",
-              "translation": "Corro cada mañana."
+              "translation": "Corro cada mañana.",
+              "mirror": {
+                "say": "Corro cada mañana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "corro",
+                    "en": "run",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada mañana",
+                    "en": "every morning",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +144,23 @@
           "examples": [
             {
               "text": "Don't fall!",
-              "translation": "¡No te caigas!"
+              "translation": "¡No te caigas!",
+              "mirror": {
+                "say": "¡No te caigas!",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caigas",
+                    "en": "fall",
+                    "role": "verb",
+                    "from": "te caigas"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +180,28 @@
           "examples": [
             {
               "text": "We climbed the mountain.",
-              "translation": "Subimos la montaña."
+              "translation": "Subimos la montaña.",
+              "mirror": {
+                "say": "Subimos la montaña",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "subimos",
+                    "en": "climbed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la montaña",
+                    "en": "the mountain",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +221,35 @@
           "examples": [
             {
               "text": "Can you drive?",
-              "translation": "¿Sabes conducir?"
+              "translation": "¿Sabes conducir?",
+              "mirror": {
+                "say": "¿Sabes conducir?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "sabes",
+                    "why": "Saber hacer algo es CAN: can you drive?"
+                  },
+                  {
+                    "es": "conducir",
+                    "en": "drive",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +269,36 @@
           "examples": [
             {
               "text": "I ride my bike to school.",
-              "translation": "Voy en bici al colegio."
+              "translation": "Voy en bici al colegio.",
+              "mirror": {
+                "say": "Voy en bici al colegio",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "monto",
+                    "en": "ride",
+                    "role": "verb",
+                    "from": "voy en",
+                    "why": "Ir en bici es montar TU bici: I ride my bike."
+                  },
+                  {
+                    "es": "mi bici",
+                    "en": "my bike",
+                    "role": "word",
+                    "from": "bici"
+                  },
+                  {
+                    "es": "al colegio",
+                    "en": "to school",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +318,24 @@
           "examples": [
             {
               "text": "Birds fly.",
-              "translation": "Los pájaros vuelan."
+              "translation": "Los pájaros vuelan.",
+              "mirror": {
+                "say": "Los pájaros vuelan",
+                "pieces": [
+                  {
+                    "es": "pájaros",
+                    "en": "Birds",
+                    "role": "who",
+                    "from": "Los pájaros",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "vuelan",
+                    "en": "fly",
+                    "role": "verb"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +355,35 @@
           "examples": [
             {
               "text": "Can you swim?",
-              "translation": "¿Sabes nadar?"
+              "translation": "¿Sabes nadar?",
+              "mirror": {
+                "say": "¿Sabes nadar?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "sabes",
+                    "why": "Saber hacer algo es CAN: can you swim?"
+                  },
+                  {
+                    "es": "nadar",
+                    "en": "swim",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +403,29 @@
           "examples": [
             {
               "text": "We moved to Madrid.",
-              "translation": "Nos mudamos a Madrid."
+              "translation": "Nos mudamos a Madrid.",
+              "mirror": {
+                "say": "Nos mudamos a Madrid",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "mudamos",
+                    "en": "moved",
+                    "role": "verb",
+                    "from": "nos mudamos"
+                  },
+                  {
+                    "es": "a Madrid",
+                    "en": "to Madrid",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +445,22 @@
           "examples": [
             {
               "text": "Turn left.",
-              "translation": "Gira a la izquierda."
+              "translation": "Gira a la izquierda.",
+              "mirror": {
+                "say": "Gira a la izquierda",
+                "pieces": [
+                  {
+                    "es": "Gira",
+                    "en": "Turn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la izquierda",
+                    "en": "left",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +480,27 @@
           "examples": [
             {
               "text": "Stop here, please.",
-              "translation": "Pare aquí, por favor."
+              "translation": "Pare aquí, por favor.",
+              "mirror": {
+                "say": "Pare aquí, por favor",
+                "pieces": [
+                  {
+                    "es": "Pare",
+                    "en": "Stop",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +520,24 @@
           "examples": [
             {
               "text": "Wait for me!",
-              "translation": "¡Espérame!"
+              "translation": "¡Espérame!",
+              "mirror": {
+                "say": "¡Espérame!",
+                "pieces": [
+                  {
+                    "es": "Espera",
+                    "en": "Wait",
+                    "role": "verb",
+                    "from": "Espérame",
+                    "why": "Esperar a alguien es WAIT FOR: wait for me."
+                  },
+                  {
+                    "es": "por mí",
+                    "en": "for me",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +557,22 @@
           "examples": [
             {
               "text": "Sit down, please.",
-              "translation": "Siéntese, por favor."
+              "translation": "Siéntese, por favor.",
+              "mirror": {
+                "say": "Siéntese, por favor",
+                "pieces": [
+                  {
+                    "es": "Siéntese",
+                    "en": "Sit down",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {

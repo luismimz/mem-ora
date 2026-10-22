@@ -453,7 +453,7 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
   const caption = phase === 0 ? 'Lo que dices…'
     : phase === 1 ? <>Dilo completo: <b>{question ? `¿${spanishFull}?` : spanishFull}</b></>
     : phase === 2 ? 'Cada pieza, al inglés'
-    : phase === 3 ? (helperJumps ? '¡El ayudante salta delante!' : '¡En inglés, la pieza salta!')
+    : phase === 3 ? (helperJumps ? '¡El ayudante salta delante!' : jumps ? '¡En inglés, la pieza salta!' : '¡Ya lo dices en inglés!')
     : null;
   const tap = () => { if (done) { rects.current = {}; setPhase(0); setRun((r) => r + 1); } else setPhase(last + 1); };
   return (

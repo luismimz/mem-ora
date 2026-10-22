@@ -40,7 +40,39 @@
           "examples": [
             {
               "text": "I always drink coffee.",
-              "translation": "Siempre bebo café."
+              "translation": "Siempre bebo café.",
+              "mirror": {
+                "say": "Siempre bebo café",
+                "pieces": [
+                  {
+                    "es": "Siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "bebo",
+                    "en": "drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +92,39 @@
           "examples": [
             {
               "text": "I usually get up at seven.",
-              "translation": "Normalmente me levanto a las siete."
+              "translation": "Normalmente me levanto a las siete.",
+              "mirror": {
+                "say": "Normalmente me levanto a las siete",
+                "pieces": [
+                  {
+                    "es": "Normalmente",
+                    "en": "usually",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me levanto",
+                    "en": "get up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las siete",
+                    "en": "at seven",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +144,39 @@
           "examples": [
             {
               "text": "I often read at night.",
-              "translation": "A menudo leo por la noche."
+              "translation": "A menudo leo por la noche.",
+              "mirror": {
+                "say": "A menudo leo por la noche",
+                "pieces": [
+                  {
+                    "es": "A menudo",
+                    "en": "often",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "leo",
+                    "en": "read",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por la noche",
+                    "en": "at night",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +196,35 @@
           "examples": [
             {
               "text": "Sometimes I walk to work.",
-              "translation": "A veces voy andando al trabajo."
+              "translation": "A veces voy andando al trabajo.",
+              "mirror": {
+                "say": "A veces voy andando al trabajo",
+                "pieces": [
+                  {
+                    "es": "A veces",
+                    "en": "Sometimes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "camino",
+                    "en": "walk",
+                    "role": "verb",
+                    "from": "voy andando",
+                    "why": "Ir andando es caminar: I walk to work."
+                  },
+                  {
+                    "es": "al trabajo",
+                    "en": "to work",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +244,40 @@
           "examples": [
             {
               "text": "I rarely watch TV.",
-              "translation": "Casi nunca veo la tele."
+              "translation": "Casi nunca veo la tele.",
+              "mirror": {
+                "say": "Casi nunca veo la tele",
+                "pieces": [
+                  {
+                    "es": "Casi nunca",
+                    "en": "rarely",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "veo",
+                    "en": "watch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tele",
+                    "en": "TV",
+                    "role": "word",
+                    "from": "la tele"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +297,33 @@
           "examples": [
             {
               "text": "I never smoke.",
-              "translation": "Nunca fumo."
+              "translation": "Nunca fumo.",
+              "mirror": {
+                "say": "Nunca fumo",
+                "pieces": [
+                  {
+                    "es": "Nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fumo",
+                    "en": "smoke",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +343,47 @@
           "examples": [
             {
               "text": "Have you ever been to London?",
-              "translation": "¿Has estado alguna vez en Londres?"
+              "translation": "¿Has estado alguna vez en Londres?",
+              "mirror": {
+                "say": "¿Has estado alguna vez en Londres?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "alguna vez",
+                    "en": "ever",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a Londres",
+                    "en": "to London",
+                    "role": "word",
+                    "from": "en Londres",
+                    "why": "Haber estado en un sitio: been TO London."
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  3,
+                  2,
+                  4
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +403,39 @@
           "examples": [
             {
               "text": "I have already eaten.",
-              "translation": "Ya he comido."
+              "translation": "Ya he comido.",
+              "mirror": {
+                "say": "Ya he comido",
+                "pieces": [
+                  {
+                    "es": "Ya",
+                    "en": "already",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "he",
+                    "en": "have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comido",
+                    "en": "eaten",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +455,39 @@
           "examples": [
             {
               "text": "I haven't finished yet.",
-              "translation": "Todavía no he terminado."
+              "translation": "Todavía no he terminado.",
+              "mirror": {
+                "say": "Todavía no he terminado",
+                "pieces": [
+                  {
+                    "es": "Todavía",
+                    "en": "yet",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no he",
+                    "en": "haven't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "terminado",
+                    "en": "finished",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +507,39 @@
           "examples": [
             {
               "text": "I still live here.",
-              "translation": "Todavía vivo aquí."
+              "translation": "Todavía vivo aquí.",
+              "mirror": {
+                "say": "Todavía vivo aquí",
+                "pieces": [
+                  {
+                    "es": "Todavía",
+                    "en": "still",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +559,24 @@
           "examples": [
             {
               "text": "See you soon.",
-              "translation": "Hasta pronto."
+              "translation": "Hasta pronto.",
+              "mirror": {
+                "say": "Hasta pronto",
+                "pieces": [
+                  {
+                    "es": "Te veo",
+                    "en": "See you",
+                    "role": "verb",
+                    "from": "Hasta",
+                    "why": "Para despedirte: «te veo»… → see you."
+                  },
+                  {
+                    "es": "pronto",
+                    "en": "soon",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +596,34 @@
           "examples": [
             {
               "text": "Say it again, please.",
-              "translation": "Dilo otra vez, por favor."
+              "translation": "Dilo otra vez, por favor.",
+              "mirror": {
+                "say": "Dilo otra vez, por favor",
+                "pieces": [
+                  {
+                    "es": "Di",
+                    "en": "Say",
+                    "role": "verb",
+                    "from": "Dilo",
+                    "why": "Lo pegado se separa: say IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "otra vez",
+                    "en": "again",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +643,26 @@
           "examples": [
             {
               "text": "Two days ago.",
-              "translation": "Hace dos días."
+              "translation": "Hace dos días.",
+              "mirror": {
+                "say": "Hace dos días",
+                "pieces": [
+                  {
+                    "es": "Hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dos días",
+                    "en": "Two days",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +682,24 @@
           "examples": [
             {
               "text": "See you tomorrow.",
-              "translation": "Hasta mañana."
+              "translation": "Hasta mañana.",
+              "mirror": {
+                "say": "Hasta mañana",
+                "pieces": [
+                  {
+                    "es": "Te veo",
+                    "en": "See you",
+                    "role": "verb",
+                    "from": "Hasta",
+                    "why": "Para despedirte: «te veo»… → see you."
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +719,39 @@
           "examples": [
             {
               "text": "I saw her yesterday.",
-              "translation": "La vi ayer."
+              "translation": "La vi ayer.",
+              "mirror": {
+                "say": "La vi ayer",
+                "pieces": [
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vi",
+                    "en": "saw",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
             }
           ],
           "association": {

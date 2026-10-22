@@ -40,7 +40,26 @@
           "examples": [
             {
               "text": "A hundred people came.",
-              "translation": "Vinieron cien personas."
+              "translation": "Vinieron cien personas.",
+              "mirror": {
+                "say": "Vinieron cien personas",
+                "pieces": [
+                  {
+                    "es": "vinieron",
+                    "en": "came",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cien personas",
+                    "en": "A hundred people",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +79,28 @@
           "examples": [
             {
               "text": "It costs a thousand euros.",
-              "translation": "Cuesta mil euros."
+              "translation": "Cuesta mil euros.",
+              "mirror": {
+                "say": "Cuesta mil euros",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cuesta",
+                    "en": "costs",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mil euros",
+                    "en": "a thousand euros",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +120,22 @@
           "examples": [
             {
               "text": "A million thanks!",
-              "translation": "¡Un millón de gracias!"
+              "translation": "¡Un millón de gracias!",
+              "mirror": {
+                "say": "¡Un millón de gracias!",
+                "pieces": [
+                  {
+                    "es": "Un millón de",
+                    "en": "A million",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gracias",
+                    "en": "thanks",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +155,28 @@
           "examples": [
             {
               "text": "This is my first day.",
-              "translation": "Es mi primer día."
+              "translation": "Es mi primer día.",
+              "mirror": {
+                "say": "Es mi primer día",
+                "pieces": [
+                  {
+                    "es": "ESTO",
+                    "en": "This",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi primer día",
+                    "en": "my first day",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +196,22 @@
           "examples": [
             {
               "text": "Wait a second.",
-              "translation": "Espera un segundo."
+              "translation": "Espera un segundo.",
+              "mirror": {
+                "say": "Espera un segundo",
+                "pieces": [
+                  {
+                    "es": "Espera",
+                    "en": "Wait",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un segundo",
+                    "en": "a second",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +231,28 @@
           "examples": [
             {
               "text": "She lives on the third floor.",
-              "translation": "Vive en el tercer piso."
+              "translation": "Vive en el tercer piso.",
+              "mirror": {
+                "say": "Vive en el tercer piso",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vive",
+                    "en": "lives",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el tercer piso",
+                    "en": "on the third floor",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +272,27 @@
           "examples": [
             {
               "text": "This is the last bus.",
-              "translation": "Este es el último autobús."
+              "translation": "Este es el último autobús.",
+              "mirror": {
+                "say": "Este es el último autobús",
+                "pieces": [
+                  {
+                    "es": "Este",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el último autobús",
+                    "en": "the last bus",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +312,22 @@
           "examples": [
             {
               "text": "Half an hour.",
-              "translation": "Media hora."
+              "translation": "Media hora.",
+              "mirror": {
+                "say": "Media hora",
+                "pieces": [
+                  {
+                    "es": "Media",
+                    "en": "Half an",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hora",
+                    "en": "hour",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +347,40 @@
           "examples": [
             {
               "text": "What's your phone number?",
-              "translation": "¿Cuál es tu número de teléfono?"
+              "translation": "¿Cuál es tu número de teléfono?",
+              "mirror": {
+                "say": "¿Cuál es tu número de teléfono?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cuál es",
+                    "why": "Para pedir un dato se dice WHAT: what is…"
+                  },
+                  {
+                    "es": "tu",
+                    "en": "your",
+                    "role": "word"
+                  },
+                  {
+                    "es": "número",
+                    "en": "number",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de teléfono",
+                    "en": "phone",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +420,22 @@
           "examples": [
             {
               "text": "More water, please.",
-              "translation": "Más agua, por favor."
+              "translation": "Más agua, por favor.",
+              "mirror": {
+                "say": "Más agua, por favor",
+                "pieces": [
+                  {
+                    "es": "Más agua",
+                    "en": "More water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +455,22 @@
           "examples": [
             {
               "text": "Less sugar, please.",
-              "translation": "Menos azúcar, por favor."
+              "translation": "Menos azúcar, por favor.",
+              "mirror": {
+                "say": "Menos azúcar, por favor",
+                "pieces": [
+                  {
+                    "es": "Menos azúcar",
+                    "en": "Less sugar",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +490,22 @@
           "examples": [
             {
               "text": "Count to ten.",
-              "translation": "Cuenta hasta diez."
+              "translation": "Cuenta hasta diez.",
+              "mirror": {
+                "say": "Cuenta hasta diez",
+                "pieces": [
+                  {
+                    "es": "Cuenta",
+                    "en": "Count",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hasta diez",
+                    "en": "to ten",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +525,22 @@
           "examples": [
             {
               "text": "A pair of shoes.",
-              "translation": "Un par de zapatos."
+              "translation": "Un par de zapatos.",
+              "mirror": {
+                "say": "Un par de zapatos",
+                "pieces": [
+                  {
+                    "es": "Un par de",
+                    "en": "A pair of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "zapatos",
+                    "en": "shoes",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +560,24 @@
           "examples": [
             {
               "text": "A dozen eggs.",
-              "translation": "Una docena de huevos."
+              "translation": "Una docena de huevos.",
+              "mirror": {
+                "say": "Una docena de huevos",
+                "pieces": [
+                  {
+                    "es": "Una docena",
+                    "en": "A dozen",
+                    "role": "word"
+                  },
+                  {
+                    "es": "huevos",
+                    "en": "eggs",
+                    "role": "word",
+                    "from": "de huevos",
+                    "why": "Docena sin «of»: a dozen eggs."
+                  }
+                ]
+              }
             }
           ],
           "association": {

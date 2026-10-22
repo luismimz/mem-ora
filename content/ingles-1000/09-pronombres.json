@@ -40,7 +40,27 @@
           "examples": [
             {
               "text": "This is my house.",
-              "translation": "Esta es mi casa."
+              "translation": "Esta es mi casa.",
+              "mirror": {
+                "say": "Esta es mi casa",
+                "pieces": [
+                  {
+                    "es": "Esta",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi casa",
+                    "en": "my house",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +80,27 @@
           "examples": [
             {
               "text": "That car is fast.",
-              "translation": "Ese coche es rápido."
+              "translation": "Ese coche es rápido.",
+              "mirror": {
+                "say": "Ese coche es rápido",
+                "pieces": [
+                  {
+                    "es": "Ese coche",
+                    "en": "That car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rápido",
+                    "en": "fast",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +120,27 @@
           "examples": [
             {
               "text": "These shoes are new.",
-              "translation": "Estos zapatos son nuevos."
+              "translation": "Estos zapatos son nuevos.",
+              "mirror": {
+                "say": "Estos zapatos son nuevos",
+                "pieces": [
+                  {
+                    "es": "Estos zapatos",
+                    "en": "These shoes",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nuevos",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +160,27 @@
           "examples": [
             {
               "text": "Those are my friends.",
-              "translation": "Esos son mis amigos."
+              "translation": "Esos son mis amigos.",
+              "mirror": {
+                "say": "Esos son mis amigos",
+                "pieces": [
+                  {
+                    "es": "Esos",
+                    "en": "Those",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mis amigos",
+                    "en": "my friends",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +200,33 @@
           "examples": [
             {
               "text": "I want some water.",
-              "translation": "Quiero un poco de agua."
+              "translation": "Quiero un poco de agua.",
+              "mirror": {
+                "say": "Quiero un poco de agua",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de",
+                    "en": "some",
+                    "role": "word"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +246,35 @@
           "examples": [
             {
               "text": "Do you have any questions?",
-              "translation": "¿Tienes alguna pregunta?"
+              "translation": "¿Tienes alguna pregunta?",
+              "mirror": {
+                "say": "¿Tienes alguna pregunta?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "algunas preguntas",
+                    "en": "any questions",
+                    "role": "word",
+                    "from": "alguna pregunta",
+                    "why": "Con «any» se pregunta en plural: any questions."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +294,30 @@
           "examples": [
             {
               "text": "I run every day.",
-              "translation": "Corro todos los días."
+              "translation": "Corro todos los días.",
+              "mirror": {
+                "say": "Corro todos los días",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "corro",
+                    "en": "run",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días",
+                    "why": "«Todos los días» es CADA día: every day."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +337,28 @@
           "examples": [
             {
               "text": "Each room has a bath.",
-              "translation": "Cada habitación tiene baño."
+              "translation": "Cada habitación tiene baño.",
+              "mirror": {
+                "say": "Cada habitación tiene baño",
+                "pieces": [
+                  {
+                    "es": "Cada habitación",
+                    "en": "Each room",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un baño",
+                    "en": "a bath",
+                    "role": "word",
+                    "from": "baño"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +378,27 @@
           "examples": [
             {
               "text": "Both are correct.",
-              "translation": "Las dos son correctas."
+              "translation": "Las dos son correctas.",
+              "mirror": {
+                "say": "Las dos son correctas",
+                "pieces": [
+                  {
+                    "es": "Las dos",
+                    "en": "Both",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "correctas",
+                    "en": "correct",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +418,22 @@
           "examples": [
             {
               "text": "The other day.",
-              "translation": "El otro día."
+              "translation": "El otro día.",
+              "mirror": {
+                "say": "El otro día",
+                "pieces": [
+                  {
+                    "es": "El otro",
+                    "en": "The other",
+                    "role": "word"
+                  },
+                  {
+                    "es": "día",
+                    "en": "day",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +453,22 @@
           "examples": [
             {
               "text": "Another coffee, please.",
-              "translation": "Otro café, por favor."
+              "translation": "Otro café, por favor.",
+              "mirror": {
+                "say": "Otro café, por favor",
+                "pieces": [
+                  {
+                    "es": "Otro café",
+                    "en": "Another coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +488,39 @@
           "examples": [
             {
               "text": "I want to tell you something.",
-              "translation": "Quiero decirte algo."
+              "translation": "Quiero decirte algo.",
+              "mirror": {
+                "say": "Quiero decirte algo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "decir",
+                    "en": "to tell",
+                    "role": "verb",
+                    "from": "decirte"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "algo",
+                    "en": "something",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +540,33 @@
           "examples": [
             {
               "text": "Do you need anything?",
-              "translation": "¿Necesitas algo?"
+              "translation": "¿Necesitas algo?",
+              "mirror": {
+                "say": "¿Necesitas algo?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitas",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "algo",
+                    "en": "anything",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +586,34 @@
           "examples": [
             {
               "text": "There is nothing here.",
-              "translation": "Aquí no hay nada."
+              "translation": "Aquí no hay nada.",
+              "mirror": {
+                "say": "Aquí no hay nada",
+                "pieces": [
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hay",
+                    "en": "There is",
+                    "role": "helper",
+                    "from": "no hay",
+                    "why": "En inglés, una sola negación: there is NOTHING."
+                  },
+                  {
+                    "es": "nada",
+                    "en": "nothing",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +633,27 @@
           "examples": [
             {
               "text": "Everyone is here.",
-              "translation": "Todo el mundo está aquí."
+              "translation": "Todo el mundo está aquí.",
+              "mirror": {
+                "say": "Todo el mundo está aquí",
+                "pieces": [
+                  {
+                    "es": "Todo el mundo",
+                    "en": "Everyone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {

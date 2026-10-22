@@ -68,6 +68,10 @@ export function mirrorIssues(m: unknown, text: unknown, path: string): ContentIs
     checkChoice(issues, pc.role, `${pp}.role`, MIRROR_ROLES);
     checkText(issues, pc.from, `${pp}.from`, { required: false, max: 40 });
     checkText(issues, pc.why, `${pp}.why`, { required: false, max: 80 });
+    // El semáforo (DO, DID, WILL) no tiene español: la app lo pinta como 🚦. Un conector («porque») es una palabra.
+    if (pc.role === 'signal' && typeof pc.es === 'string' && pc.es.trim()) issues.push(issue('mirror_signal_es', `${pp}.role`));
+    // El «por qué» solo se ve al cambiar una pieza (con «from»): sin él no aparecería nunca.
+    if (typeof pc.why === 'string' && pc.why && !pc.from) issues.push(issue('mirror_why_without_from', `${pp}.why`));
   });
   const n = m.pieces.length;
   const order = Array.isArray(m.order) ? m.order : [...Array(n).keys()];
