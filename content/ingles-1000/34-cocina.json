@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "34-cocina",
+      "title": "Misión 34 · En la cocina",
+      "units": [
+        {
+          "key": "g-imperative",
+          "type": "pattern",
+          "goal": "Dar instrucciones: el verbo solo",
+          "rule": "Para órdenes y recetas, el verbo tal cual y sin YOU: cut the bread, add salt. Para prohibir: DON'T + verbo.",
+          "pieces": [
+            {
+              "text": "Cut",
+              "role": "slot",
+              "hint": "corta"
+            },
+            {
+              "text": "the bread",
+              "role": "fixed",
+              "hint": "el pan"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Cut the bread.",
+              "translation": "Corta el pan.",
+              "mirror": {
+                "say": "Corta el pan",
+                "pieces": [
+                  {
+                    "es": "Corta",
+                    "en": "Cut",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el pan",
+                    "en": "the bread",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't touch the oven.",
+              "translation": "No toques el horno.",
+              "mirror": {
+                "say": "No toques el horno",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "toques",
+                    "en": "touch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el horno",
+                    "en": "the oven",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Add a little salt.",
+              "translation": "Añade un poco de sal."
+            },
+            {
+              "text": "Please, sit down.",
+              "translation": "Siéntate, por favor."
+            }
+          ],
+          "pitfalls": [
+            "«You cut the bread» parece que lo cuentas; la orden es solo «Cut the bread».",
+            "Para que suene amable, añade please."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El CHEF solo grita VERBOS: ¡CUT! ¡MIX! ¡ADD!",
+            "emoji": "🧑‍🍳"
+          }
+        },
+        {
+          "key": "cut",
+          "type": "term",
+          "text": "cut",
+          "meaning": "cortar",
+          "pronunciation": "KAT",
+          "examples": [
+            {
+              "text": "Cut the onion into small pieces.",
+              "translation": "Corta la cebolla en trozos pequeños.",
+              "mirror": {
+                "say": "Corta la cebolla en trozos pequeños",
+                "pieces": [
+                  {
+                    "es": "Corta",
+                    "en": "Cut",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la cebolla",
+                    "en": "the onion",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en",
+                    "en": "into",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trozos",
+                    "en": "pieces",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pequeños",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I cut my finger.",
+              "translation": "Me corté el dedo."
+            }
+          ]
+        },
+        {
+          "key": "boil",
+          "type": "term",
+          "text": "boil",
+          "meaning": "hervir",
+          "pronunciation": "BÓIL",
+          "examples": [
+            {
+              "text": "Boil the water first.",
+              "translation": "Primero hierve el agua.",
+              "mirror": {
+                "say": "Primero hierve el agua",
+                "pieces": [
+                  {
+                    "es": "Primero",
+                    "en": "first",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hierve",
+                    "en": "Boil",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el agua",
+                    "en": "the water",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "The water is boiling.",
+              "translation": "El agua está hirviendo."
+            }
+          ]
+        },
+        {
+          "key": "fry",
+          "type": "term",
+          "text": "fry",
+          "meaning": "freír",
+          "pronunciation": "FRÁI",
+          "examples": [
+            {
+              "text": "Fry the eggs in oil.",
+              "translation": "Fríe los huevos en aceite.",
+              "mirror": {
+                "say": "Fríe los huevos en aceite",
+                "pieces": [
+                  {
+                    "es": "Fríe",
+                    "en": "Fry",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "los huevos",
+                    "en": "the eggs",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en aceite",
+                    "en": "in oil",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fried fish.",
+              "translation": "Pescado frito."
+            }
+          ]
+        },
+        {
+          "key": "bake",
+          "type": "term",
+          "text": "bake",
+          "meaning": "hornear",
+          "pronunciation": "BÉIK",
+          "examples": [
+            {
+              "text": "My mother bakes bread on Sundays.",
+              "translation": "Mi madre hace pan los domingos.",
+              "mirror": {
+                "say": "Mi madre hace pan los domingos",
+                "pieces": [
+                  {
+                    "es": "Mi madre",
+                    "en": "My mother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hornea",
+                    "en": "bakes",
+                    "role": "verb",
+                    "from": "hace",
+                    "why": "Hacer pan o pasteles en el horno es BAKE."
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "los domingos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Bake it for twenty minutes.",
+              "translation": "Hornéalo veinte minutos."
+            }
+          ]
+        },
+        {
+          "key": "mix",
+          "type": "term",
+          "text": "mix",
+          "meaning": "mezclar",
+          "pronunciation": "MIKS",
+          "examples": [
+            {
+              "text": "Mix the flour and the milk.",
+              "translation": "Mezcla la harina y la leche.",
+              "mirror": {
+                "say": "Mezcla la harina y la leche",
+                "pieces": [
+                  {
+                    "es": "Mezcla",
+                    "en": "Mix",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la harina",
+                    "en": "the flour",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la leche",
+                    "en": "the milk",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Mix well.",
+              "translation": "Mézclalo bien."
+            }
+          ]
+        },
+        {
+          "key": "add",
+          "type": "term",
+          "text": "add",
+          "meaning": "añadir, echar",
+          "pronunciation": "AD",
+          "examples": [
+            {
+              "text": "Add some sugar.",
+              "translation": "Añade un poco de azúcar.",
+              "mirror": {
+                "say": "Añade un poco de azúcar",
+                "pieces": [
+                  {
+                    "es": "Añade",
+                    "en": "Add",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de",
+                    "en": "some",
+                    "role": "word"
+                  },
+                  {
+                    "es": "azúcar",
+                    "en": "sugar",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't add salt.",
+              "translation": "No le eches sal."
+            }
+          ]
+        },
+        {
+          "key": "oven",
+          "type": "term",
+          "text": "oven",
+          "meaning": "horno",
+          "pronunciation": "Áven",
+          "examples": [
+            {
+              "text": "Put the cake in the oven.",
+              "translation": "Mete el pastel en el horno.",
+              "mirror": {
+                "say": "Mete el pastel en el horno",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb",
+                    "from": "Mete"
+                  },
+                  {
+                    "es": "el pastel",
+                    "en": "the cake",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el horno",
+                    "en": "in the oven",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The oven is very hot.",
+              "translation": "El horno está muy caliente."
+            }
+          ]
+        },
+        {
+          "key": "pan",
+          "type": "term",
+          "text": "pan",
+          "meaning": "sartén",
+          "pronunciation": "PAN",
+          "examples": [
+            {
+              "text": "Heat the oil in a pan.",
+              "translation": "Calienta el aceite en una sartén.",
+              "mirror": {
+                "say": "Calienta el aceite en una sartén",
+                "pieces": [
+                  {
+                    "es": "Calienta",
+                    "en": "Heat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el aceite",
+                    "en": "the oil",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en una sartén",
+                    "en": "in a pan",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A big pan.",
+              "translation": "Una sartén grande."
+            }
+          ],
+          "notes": "Ojo: pan es sartén; el pan es bread."
+        },
+        {
+          "key": "knife",
+          "type": "term",
+          "text": "knife",
+          "meaning": "cuchillo",
+          "pronunciation": "NÁIF",
+          "examples": [
+            {
+              "text": "Be careful with that knife.",
+              "translation": "Cuidado con ese cuchillo.",
+              "mirror": {
+                "say": "Cuidado con ese cuchillo",
+                "pieces": [
+                  {
+                    "es": "Ten cuidado",
+                    "en": "Be careful",
+                    "role": "verb",
+                    "from": "Cuidado"
+                  },
+                  {
+                    "es": "con ese cuchillo",
+                    "en": "with that knife",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A sharp knife.",
+              "translation": "Un cuchillo afilado."
+            }
+          ],
+          "notes": "La k no suena: NÁIF."
+        },
+        {
+          "key": "fork",
+          "type": "term",
+          "text": "fork",
+          "meaning": "tenedor",
+          "pronunciation": "FORK",
+          "examples": [
+            {
+              "text": "Can I have a fork, please?",
+              "translation": "¿Me das un tenedor, por favor?",
+              "mirror": {
+                "say": "¿Me das un tenedor, por favor?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "me das"
+                  },
+                  {
+                    "es": "un tenedor",
+                    "en": "a fork",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A knife and fork.",
+              "translation": "Cuchillo y tenedor."
+            }
+          ]
+        },
+        {
+          "key": "spoon",
+          "type": "term",
+          "text": "spoon",
+          "meaning": "cuchara",
+          "pronunciation": "SPUUN",
+          "examples": [
+            {
+              "text": "I need a spoon for the soup.",
+              "translation": "Necesito una cuchara para la sopa.",
+              "mirror": {
+                "say": "Necesito una cuchara para la sopa",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una cuchara",
+                    "en": "a spoon",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para la sopa",
+                    "en": "for the soup",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A spoon of sugar.",
+              "translation": "Una cucharada de azúcar."
+            }
+          ]
+        },
+        {
+          "key": "plate",
+          "type": "term",
+          "text": "plate",
+          "meaning": "plato",
+          "pronunciation": "PLÉIT",
+          "examples": [
+            {
+              "text": "Put the plates on the table.",
+              "translation": "Pon los platos en la mesa.",
+              "mirror": {
+                "say": "Pon los platos en la mesa",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "los platos",
+                    "en": "the plates",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la mesa",
+                    "en": "on the table",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A plate of pasta.",
+              "translation": "Un plato de pasta."
+            }
+          ]
+        },
+        {
+          "key": "glass",
+          "type": "term",
+          "text": "glass",
+          "meaning": "vaso; cristal",
+          "pronunciation": "GLAS",
+          "examples": [
+            {
+              "text": "A glass of milk, please.",
+              "translation": "Un vaso de leche, por favor.",
+              "mirror": {
+                "say": "Un vaso de leche, por favor",
+                "pieces": [
+                  {
+                    "es": "Un vaso de leche",
+                    "en": "A glass of milk",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The glass is broken.",
+              "translation": "El vaso está roto."
+            }
+          ]
+        },
+        {
+          "key": "salt",
+          "type": "term",
+          "text": "salt",
+          "meaning": "sal",
+          "pronunciation": "SOOLT",
+          "examples": [
+            {
+              "text": "Pass me the salt, please.",
+              "translation": "Pásame la sal, por favor.",
+              "mirror": {
+                "say": "Pásame la sal, por favor",
+                "pieces": [
+                  {
+                    "es": "Pasa",
+                    "en": "Pass",
+                    "role": "verb",
+                    "from": "Pásame",
+                    "why": "Lo pegado se separa: pass ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la sal",
+                    "en": "the salt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Too much salt.",
+              "translation": "Demasiada sal."
+            }
+          ]
+        },
+        {
+          "key": "sugar",
+          "type": "term",
+          "text": "sugar",
+          "meaning": "azúcar",
+          "pronunciation": "SHÚgar",
+          "examples": [
+            {
+              "text": "Coffee without sugar, please.",
+              "translation": "Café sin azúcar, por favor.",
+              "mirror": {
+                "say": "Café sin azúcar, por favor",
+                "pieces": [
+                  {
+                    "es": "Café",
+                    "en": "Coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "sin azúcar",
+                    "en": "without sugar",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you take sugar?",
+              "translation": "¿Tomas azúcar?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

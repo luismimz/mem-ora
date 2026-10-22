@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "32-ocio",
+      "title": "Misión 32 · Deporte y tiempo libre",
+      "units": [
+        {
+          "key": "g-like-ing",
+          "type": "pattern",
+          "goal": "Me gusta nadar = I LIKE SWIMMING",
+          "rule": "Para aficiones, detrás de like, love o hate el verbo va en -ING: I like swimming, I love dancing (como «-ando»).",
+          "pieces": [
+            {
+              "text": "I like",
+              "role": "fixed",
+              "hint": "me gusta"
+            },
+            {
+              "text": "swimming",
+              "role": "slot",
+              "hint": "nadar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I like swimming.",
+              "translation": "Me gusta nadar.",
+              "mirror": {
+                "say": "Me gusta nadar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: YO like."
+                  },
+                  {
+                    "es": "nad-ANDO",
+                    "en": "swimm-ING",
+                    "role": "verb",
+                    "from": "nadar",
+                    "why": "Aficiones: detrás de like, el verbo en -ING (como -ando)."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She loves dancing.",
+              "translation": "Le encanta bailar.",
+              "mirror": {
+                "say": "Le encanta bailar",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanta",
+                    "en": "loves",
+                    "role": "verb",
+                    "from": "le encanta"
+                  },
+                  {
+                    "es": "bail-ANDO",
+                    "en": "danc-ING",
+                    "role": "verb",
+                    "from": "bailar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I hate running.",
+              "translation": "Odio correr."
+            },
+            {
+              "text": "Do you like cooking?",
+              "translation": "¿Te gusta cocinar?"
+            }
+          ],
+          "pitfalls": [
+            "«I like swim» está mal: detrás de like, -ING (swimming).",
+            "Con «me gustaría» es distinto: I'd like TO swim."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Las AFICIONES siempre llevan cola de -ING.",
+            "emoji": "🏊"
+          }
+        },
+        {
+          "key": "sport",
+          "type": "term",
+          "text": "sport",
+          "meaning": "deporte",
+          "pronunciation": "SPORT",
+          "examples": [
+            {
+              "text": "What's your favourite sport?",
+              "translation": "¿Cuál es tu deporte favorito?",
+              "mirror": {
+                "say": "¿Cuál es tu deporte favorito?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cuál es",
+                    "why": "Para preguntar por algo: WHAT is…"
+                  },
+                  {
+                    "es": "tu",
+                    "en": "your",
+                    "role": "word"
+                  },
+                  {
+                    "es": "deporte",
+                    "en": "sport",
+                    "role": "word"
+                  },
+                  {
+                    "es": "favorito",
+                    "en": "favourite",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I do sport every day.",
+              "translation": "Hago deporte todos los días."
+            }
+          ]
+        },
+        {
+          "key": "football",
+          "type": "term",
+          "text": "football",
+          "meaning": "fútbol",
+          "pronunciation": "FÚTbol",
+          "examples": [
+            {
+              "text": "We play football on Sundays.",
+              "translation": "Jugamos al fútbol los domingos.",
+              "mirror": {
+                "say": "Jugamos al fútbol los domingos",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "jugamos",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fútbol",
+                    "en": "football",
+                    "role": "word",
+                    "from": "al fútbol",
+                    "why": "Los deportes van sin «the»: play football."
+                  },
+                  {
+                    "es": "en domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "los domingos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A football match.",
+              "translation": "Un partido de fútbol."
+            }
+          ]
+        },
+        {
+          "key": "tennis",
+          "type": "term",
+          "text": "tennis",
+          "meaning": "tenis",
+          "pronunciation": "TÉnis",
+          "examples": [
+            {
+              "text": "Do you play tennis?",
+              "translation": "¿Juegas al tenis?",
+              "mirror": {
+                "say": "¿Juegas al tenis?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juegas",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tenis",
+                    "en": "tennis",
+                    "role": "word",
+                    "from": "al tenis"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Tennis is my favourite sport.",
+              "translation": "El tenis es mi deporte favorito."
+            }
+          ]
+        },
+        {
+          "key": "gym",
+          "type": "term",
+          "text": "gym",
+          "meaning": "gimnasio",
+          "pronunciation": "YIM",
+          "examples": [
+            {
+              "text": "I go to the gym three times a week.",
+              "translation": "Voy al gimnasio tres veces por semana.",
+              "mirror": {
+                "say": "Voy al gimnasio tres veces por semana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al gimnasio",
+                    "en": "to the gym",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tres veces por semana",
+                    "en": "three times a week",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The gym is closed.",
+              "translation": "El gimnasio está cerrado."
+            }
+          ]
+        },
+        {
+          "key": "match",
+          "type": "term",
+          "text": "match",
+          "meaning": "partido",
+          "pronunciation": "MACH",
+          "examples": [
+            {
+              "text": "Did you watch the match?",
+              "translation": "¿Viste el partido?",
+              "mirror": {
+                "say": "¿Viste el partido?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ver",
+                    "en": "watch",
+                    "role": "verb",
+                    "from": "viste",
+                    "why": "Con DID el verbo vuelve a su forma: watch."
+                  },
+                  {
+                    "es": "el partido",
+                    "en": "the match",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We won the match.",
+              "translation": "Ganamos el partido."
+            }
+          ]
+        },
+        {
+          "key": "win",
+          "type": "term",
+          "text": "win",
+          "meaning": "ganar",
+          "pronunciation": "UIN",
+          "examples": [
+            {
+              "text": "I hope we win!",
+              "translation": "¡Ojalá ganemos!",
+              "mirror": {
+                "say": "¡Ojalá ganemos!",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "espero",
+                    "en": "hope",
+                    "role": "verb",
+                    "from": "ojalá",
+                    "why": "«Ojalá» se dice «espero que»: I hope…"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ganemos",
+                    "en": "win",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Who won?",
+              "translation": "¿Quién ganó?"
+            }
+          ]
+        },
+        {
+          "key": "lose",
+          "type": "term",
+          "text": "lose",
+          "meaning": "perder",
+          "pronunciation": "LUUS",
+          "examples": [
+            {
+              "text": "Don't lose your keys.",
+              "translation": "No pierdas las llaves.",
+              "mirror": {
+                "say": "No pierdas las llaves",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pierdas",
+                    "en": "lose",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS llaves",
+                    "en": "your keys",
+                    "role": "word",
+                    "from": "las llaves",
+                    "why": "Lo tuyo lleva su dueño: YOUR keys."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We lost two to one.",
+              "translation": "Perdimos dos a uno."
+            }
+          ]
+        },
+        {
+          "key": "hobby",
+          "type": "term",
+          "text": "hobby",
+          "meaning": "afición",
+          "pronunciation": "JÓbi",
+          "examples": [
+            {
+              "text": "My hobby is reading.",
+              "translation": "Mi afición es leer.",
+              "mirror": {
+                "say": "Mi afición es leer",
+                "pieces": [
+                  {
+                    "es": "Mi afición",
+                    "en": "My hobby",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "leyendo",
+                    "en": "reading",
+                    "role": "verb",
+                    "from": "leer",
+                    "why": "Una afición va en -ING: reading."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What are your hobbies?",
+              "translation": "¿Cuáles son tus aficiones?"
+            }
+          ]
+        },
+        {
+          "key": "music",
+          "type": "term",
+          "text": "music",
+          "meaning": "música",
+          "pronunciation": "MIÚsik",
+          "examples": [
+            {
+              "text": "I listen to music every day.",
+              "translation": "Escucho música todos los días.",
+              "mirror": {
+                "say": "Escucho música todos los días",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "escucho a",
+                    "en": "listen to",
+                    "role": "verb",
+                    "from": "escucho",
+                    "why": "Escuchar algo es LISTEN TO."
+                  },
+                  {
+                    "es": "música",
+                    "en": "music",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What music do you like?",
+              "translation": "¿Qué música te gusta?"
+            }
+          ]
+        },
+        {
+          "key": "film",
+          "type": "term",
+          "text": "film",
+          "meaning": "película",
+          "pronunciation": "FILM",
+          "examples": [
+            {
+              "text": "Let's watch a film tonight.",
+              "translation": "Veamos una película esta noche.",
+              "mirror": {
+                "say": "Veamos una película esta noche",
+                "pieces": [
+                  {
+                    "es": "Veamos",
+                    "en": "Let's watch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una película",
+                    "en": "a film",
+                    "role": "word"
+                  },
+                  {
+                    "es": "esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The film was boring.",
+              "translation": "La película fue aburrida."
+            }
+          ],
+          "notes": "En EE. UU. se dice movie."
+        },
+        {
+          "key": "book",
+          "type": "term",
+          "text": "book",
+          "meaning": "libro",
+          "pronunciation": "BUK",
+          "examples": [
+            {
+              "text": "I'm reading a good book.",
+              "translation": "Estoy leyendo un buen libro.",
+              "mirror": {
+                "say": "Estoy leyendo un buen libro",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "leyendo",
+                    "en": "reading",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un buen libro",
+                    "en": "a good book",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I borrow your book?",
+              "translation": "¿Me prestas tu libro?"
+            }
+          ]
+        },
+        {
+          "key": "dance",
+          "type": "term",
+          "text": "dance",
+          "meaning": "bailar; baile",
+          "pronunciation": "DANS",
+          "examples": [
+            {
+              "text": "Do you want to dance?",
+              "translation": "¿Quieres bailar?",
+              "mirror": {
+                "say": "¿Quieres bailar?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quieres",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bailar",
+                    "en": "to dance",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She dances very well.",
+              "translation": "Baila muy bien."
+            }
+          ]
+        },
+        {
+          "key": "sing",
+          "type": "term",
+          "text": "sing",
+          "meaning": "cantar",
+          "pronunciation": "SING",
+          "examples": [
+            {
+              "text": "He sings in the shower.",
+              "translation": "Canta en la ducha.",
+              "mirror": {
+                "say": "Canta en la ducha",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "canta",
+                    "en": "sings",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la ducha",
+                    "en": "in the shower",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you sing?",
+              "translation": "¿Sabes cantar?"
+            }
+          ]
+        },
+        {
+          "key": "draw",
+          "type": "term",
+          "text": "draw",
+          "meaning": "dibujar",
+          "pronunciation": "DROO",
+          "examples": [
+            {
+              "text": "My son draws very well.",
+              "translation": "Mi hijo dibuja muy bien.",
+              "mirror": {
+                "say": "Mi hijo dibuja muy bien",
+                "pieces": [
+                  {
+                    "es": "Mi hijo",
+                    "en": "My son",
+                    "role": "who"
+                  },
+                  {
+                    "es": "dibuja",
+                    "en": "draws",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "muy bien",
+                    "en": "very well",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Draw a house.",
+              "translation": "Dibuja una casa."
+            }
+          ]
+        },
+        {
+          "key": "relax",
+          "type": "term",
+          "text": "relax",
+          "meaning": "relajarse",
+          "pronunciation": "riLÁKS",
+          "examples": [
+            {
+              "text": "I relax at the weekend.",
+              "translation": "Me relajo el fin de semana.",
+              "mirror": {
+                "say": "Me relajo el fin de semana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "relajo",
+                    "en": "relax",
+                    "role": "verb",
+                    "from": "me relajo",
+                    "why": "Sin «me»: I relax."
+                  },
+                  {
+                    "es": "en el fin de semana",
+                    "en": "at the weekend",
+                    "role": "word",
+                    "from": "el fin de semana"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Relax, everything is fine.",
+              "translation": "Tranquilo, todo va bien."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
