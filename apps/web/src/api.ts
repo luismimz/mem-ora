@@ -95,6 +95,10 @@ export interface SessionPayload {
 export interface Progress {
   /** Días seguidos con actividad (D-072). */
   streak?: number;
+  /** La racha más larga que ha tenido (para los logros). */
+  bestStreak?: number;
+  /** Respuestas por día de las últimas 12 semanas (84 días; el último es hoy). */
+  calendar?: number[];
   /** Protectores de racha guardados (D-077). */
   shields?: number;
   todayAttempts?: number;
