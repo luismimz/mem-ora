@@ -1,10 +1,11 @@
 // Studio · importar y exportar cursos en JSON (D-041). Solo autoría y administración. Lo importado entra como
 // borrador: se revisa y se publica en el panel de Studio.
 import { useEffect, useState } from 'react';
-import { api, ApiError, type ImportResult, type SessionPayload, type StudioMission } from './api';
+import { api, ApiError, type ImportResult, type SessionPayload, type StudioMission, type StudioRequest } from './api';
 import { AssocSession } from './AssocSession';
 
 const STATUS: Record<string, string> = { draft: 'borrador', published: 'publicado', archived: 'archivado' };
+const REASON: Record<string, string> = { asociacion: 'La asociación no ayuda', significado: 'Significado o traducción mal', respuesta: 'La respuesta correcta está mal', audio: 'El audio suena mal', otro: 'Otra cosa' };
 const n = (count = 0, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 
 export function Studio() {
@@ -23,6 +24,13 @@ export function Studio() {
   useEffect(() => void loadCourses(), []);
   const loadMissions = (id: string) => { if (!id) return; setMissions(null); void api.studioMissions(id).then(setMissions).catch(() => setMissions([])); };
   useEffect(() => void loadMissions(reviewCourse), [reviewCourse]);
+  const [requests, setRequests] = useState<StudioRequest[] | null>(null);
+  const loadRequests = (id: string) => { if (!id) return; setRequests(null); void api.studioRequests(id).then(setRequests).catch(() => setRequests([])); };
+  useEffect(() => void loadRequests(reviewCourse), [reviewCourse]);
+  async function closeRequest(r: StudioRequest, status: 'done' | 'dismissed') {
+    setRequests((list) => (list ?? []).filter((x) => x.id !== r.id));
+    await api.closeRequest(r.id, status).catch(() => loadRequests(reviewCourse));
+  }
 
   async function tryMission(m: StudioMission) {
     try { setTrying(await api.previewMission(m.id)); } catch (e) { setApproval((a) => ({ ...a, [m.id]: e instanceof ApiError ? e.message : 'No se ha podido abrir.' })); }
@@ -102,6 +110,25 @@ export function Studio() {
         </ul>
       </section>
       <div className="studio-side">
+      <section className="card-panel studio-requests">
+        <h2>Avisos de los alumnos {requests?.length ? <small className="muted">· {requests.length}</small> : null}</h2>
+        <p className="muted">Errores que han reportado desde una tarjeta (⚑) y fichas que pidieron explicar mejor. Corrige el contenido (en <code>content/</code> o aquí) y márcalo como corregido.</p>
+        <ul className="export-list">
+          {requests === null && <li className="muted" role="status">Cargando avisos…</li>}
+          {(requests ?? []).map((r) => (
+            <li key={r.id}>
+              <span><b>{r.label}</b> <small className="muted">· {r.unit}</small><br />
+                <small className={r.kind === 'error' ? 'req-error' : 'muted'}>{r.kind === 'error' ? `⚑ ${REASON[r.reason ?? 'otro'] ?? r.reason}` : '🤔 Pide más explicación'}{r.times > 1 ? ` · ${r.times} veces` : ''}{r.note ? ` · «${r.note}»` : ''}</small></span>
+              <span className="actions-inline">
+                <a className="link" href={`/preview/${r.unitId}`} target="_blank" rel="noreferrer">Ver ficha</a>
+                <button type="button" className="link" onClick={() => void closeRequest(r, 'done')}>Corregido</button>
+                <button type="button" className="link" onClick={() => void closeRequest(r, 'dismissed')}>Descartar</button>
+              </span>
+            </li>
+          ))}
+          {requests?.length === 0 && <li className="muted">No hay avisos pendientes en este curso. 🎉</li>}
+        </ul>
+      </section>
       <section className="card-panel">
         <h2>Importar un curso</h2>
         <p className="muted">Sube un archivo JSON con el curso completo. Primero se comprueba; si todo está bien, se crea como <b>borrador</b> para revisarlo y publicarlo en el panel de Studio. Si hay errores no se crea nada.</p>

@@ -106,6 +106,9 @@ export interface Progress {
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
 }
 
+export type ReportReason = 'asociacion' | 'significado' | 'respuesta' | 'audio' | 'otro';
+/** Aviso de un alumno en Studio: un error reportado o un «Explícame más». */
+export interface StudioRequest { id: string; unitId: string; unit: string; label: string; kind: 'error' | 'explain'; reason: ReportReason | null; note: string | null; times: number; at: number }
 export interface Reto {
   key: string;
   skillKey: string | null;
@@ -150,5 +153,9 @@ export const api = {
   pushKey: () => request<{ publicKey: string | null }>('GET', '/memora/push/key'),
   pushSubscribe: (subscription: unknown, deviceId: string) => request<{ saved: boolean }>('POST', '/memora/push/subscribe', { subscription, deviceId }),
   pushTest: () => request<{ sent: number }>('POST', '/memora/push/test'),
+  /** «Reportar un error» de una tarjeta: va a la cola de avisos de Studio. */
+  report: (course: string, unit: string, reason: ReportReason, note?: string) => request<{ saved: boolean }>('POST', '/memora/report', { course, unit, reason, ...(note ? { note } : {}) }),
+  studioRequests: (course: string) => request<StudioRequest[]>('GET', `/memora/studio/requests?course=${encodeURIComponent(course)}`),
+  closeRequest: (id: string, status: 'done' | 'dismissed') => request<{ saved: boolean }>('POST', `/memora/studio/requests/${encodeURIComponent(id)}`, { status }),
   clarify: (course: string, unit: string, step: string, note?: string) => request<{ saved: boolean }>('POST', '/memora/clarify', { course, unit, step, ...(note ? { note } : {}) }),
 };

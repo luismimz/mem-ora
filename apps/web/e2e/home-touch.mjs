@@ -31,6 +31,7 @@ const failSession = {
   units: { a: term('a', 'brother', 'hermano'), b: term('b', 'sister', 'hermana') },
 };
 const requested = [];
+const posted = [];
 
 const browser = await chromium.launch(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {});
 try {
@@ -42,6 +43,7 @@ try {
     const u = new URL(route.request().url());
     const path = u.pathname.replace(/^\/api/, '');
     requested.push(`${path}${u.search}`);
+    if (route.request().method() === 'POST') posted.push({ path, body: route.request().postDataJSON() });
     const data =
       path === '/users/me' ? { id: 'u1', first_name: 'Luis', email: 'luis@example.com' }
       : path === '/memora/me' ? { staff: false }
@@ -51,6 +53,7 @@ try {
       : path === '/memora/session' ? failSession
       : path === '/memora/session/position' ? { saved: true }
       : path === '/memora/events' ? { accepted: [], duplicates: [], rejected: [] }
+      : path === '/memora/report' ? { saved: true }
       : {};
     return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ data }) });
   });
@@ -76,6 +79,24 @@ try {
   check(page.url().includes('foco=fallos'), 'la dirección guarda que es la ronda de fallos (se puede retomar)');
   const tag = await page.$eval('.slide .tag', (e) => e.textContent ?? '');
   check(tag.includes('TUS ERRORES'), `la ronda empieza por un fallo, marcado como tal (${tag})`);
+
+  // «Reportar un error»: ⚑ arriba, el motivo con un toque, y la tarjeta sigue donde estaba.
+  const header = await page.$eval('.feed-top', (e) => ({ right: e.getBoundingClientRect().right, scroll: e.scrollWidth > e.clientWidth }));
+  check(!header.scroll && header.right <= 390, 'la barra del Flujo cabe con el botón ⚑');
+  const before = await page.$eval('.slide', (e) => e.querySelector('h2, h3')?.textContent ?? '');
+  await page.locator('.feed-flag').tap();
+  await page.waitForSelector('.report-sheet');
+  await page.waitForTimeout(450); // la hoja sube con una animación corta
+  const sheet = await page.$eval('.report-sheet', (e) => ({ text: e.textContent ?? '', top: Math.round(e.getBoundingClientRect().top), bottom: Math.round(e.getBoundingClientRect().bottom), lastOption: Math.round(e.querySelector('.report-options button:last-child')?.getBoundingClientRect().bottom ?? 9999) }));
+  check(sheet.text.includes('BROTHER') || sheet.text.toLowerCase().includes('brother'), `la hoja dice de qué tarjeta es (${sheet.text.slice(0, 60)})`);
+  check(sheet.bottom >= 840 && sheet.bottom <= 845 && sheet.top > 0 && sheet.lastOption <= 844, `la hoja sale desde abajo y cabe entera, con todos los motivos a la vista (${sheet.top}–${sheet.bottom}px)`);
+  await page.screenshot({ path: process.env.E2E_SHOTS ? `${process.env.E2E_SHOTS}/reportar.png` : '/dev/null' }).catch(() => undefined);
+  await page.locator('.report-options button', { hasText: 'asociación' }).tap();
+  await page.waitForSelector('.report-toast');
+  const sent = posted.find((x) => x.path === '/memora/report');
+  check(sent?.body?.unit === 'a' && sent?.body?.reason === 'asociacion' && sent?.body?.course === 'c1', 'un toque envía el aviso con la tarjeta y el motivo');
+  check(!(await page.$('.report-sheet')) && (await page.$eval('.report-toast', (e) => e.textContent ?? '')).includes('Gracias'), 'se cierra y da las gracias');
+  check((await page.$eval('.slide', (e) => e.querySelector('h2, h3')?.textContent ?? '')) === before, 'la tarjeta sigue donde estaba (reportar no la pasa)');
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

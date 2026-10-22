@@ -21,7 +21,7 @@ import {
   type ClientEvent,
   type SessionUnit,
 } from '@memora/experiences';
-import { api, ApiError, type Mission, type Progress, type SessionPayload } from './api';
+import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
 import { audioEnabled, speak } from './speech';
@@ -709,6 +709,42 @@ function PushOptIn() {
 
 // ─── El flujo ─────────────────────────────────────────────────────────────────────────────────────────────
 
+const REPORT_OPTIONS: Array<{ id: ReportReason; text: string; audio?: boolean }> = [
+  { id: 'asociacion', text: '🧠 La asociación o la historia no ayuda' },
+  { id: 'significado', text: '🔤 El significado o la traducción está mal' },
+  { id: 'respuesta', text: '✅ La respuesta correcta está mal' },
+  { id: 'audio', text: '🔊 El audio suena mal', audio: true },
+  { id: 'otro', text: '💬 Otra cosa' },
+];
+
+/** «Reportar un error» (idea de benrios.dev): un toque elige el motivo y se envía; «Otra cosa» deja escribir. */
+function ReportSheet({ unit, audio, onClose, onSend }: { unit: SessionUnit; audio: boolean; onClose: () => void; onSend: (reason: ReportReason, note?: string) => void }) {
+  const [other, setOther] = useState(false);
+  const [note, setNote] = useState('');
+  const word = String((unit.payload as { text?: string; title?: string }).text ?? (unit.payload as { title?: string }).title ?? unit.key);
+  return (
+    <div className="report-veil" role="dialog" aria-modal="true" aria-label="Reportar un error" onClick={onClose}>
+      <div className="report-sheet" onClick={(e) => e.stopPropagation()}>
+        <p className="tag">⚑ REPORTAR UN ERROR</p>
+        <h3>¿Qué está mal en «{word}»?</h3>
+        {!other ? (
+          <div className="report-options">
+            {REPORT_OPTIONS.filter((o) => !o.audio || audio).map((o) => (
+              <button key={o.id} type="button" onClick={() => (o.id === 'otro' ? setOther(true) : onSend(o.id))}>{o.text}</button>
+            ))}
+          </div>
+        ) : (
+          <form onSubmit={(e) => { e.preventDefault(); onSend('otro', note.trim() || undefined); }}>
+            <textarea autoFocus maxLength={500} rows={3} value={note} onChange={(e) => setNote(e.target.value)} placeholder="Cuéntalo en una frase" aria-label="Qué está mal" />
+            <button type="submit" className="primary">Enviar</button>
+          </form>
+        )}
+        <button type="button" className="link report-cancel" onClick={onClose}>Cancelar</button>
+      </div>
+    </div>
+  );
+}
+
 export function Feed({ payload, courseId, offline = false, onExit, onAgain, next }: Props) {
   // Infinito (D-077): la ronda actual vive aquí; al llegar al hito se carga la siguiente y se encadena sin cortes.
   const [batch, setBatch] = useState(payload);
@@ -727,6 +763,9 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const [floater, setFloater] = useState<{ id: number; text: string } | null>(null);
   const [progress, setProgress] = useState<Progress | null>(null);
   const [map, setMap] = useState<{ missions: Mission[]; current: string | null } | null>(null);
+  const [reporting, setReporting] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+  useEffect(() => { if (!toast) return; const t = window.setTimeout(() => setToast(null), 2600); return () => window.clearTimeout(t); }, [toast]);
   const queue = useRef<ClientEvent[]>([]);
   const saving = useRef<Promise<void>>(Promise.resolve());
   const step = plan.steps[index];
@@ -891,10 +930,14 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
         <div className="feed-bar" aria-label={`Progreso ${pct} %`}><i style={{ width: `${pct}%` }} /></div>
         <span className="feed-xp">{xp} XP</span>
         <span className={`feed-combo ${combo >= 3 ? 'hot' : ''}`}>🔥{combo}</span>
+        {!offline && unit && <button type="button" className="feed-flag" aria-label="Reportar un error en esta tarjeta" onClick={() => setReporting(unit.key)}>⚑</button>}
       </header>
       <main className="feed-stage">{card}</main>
       {floater && <span key={floater.id} className="floater">{floater.text}</span>}
       {party && <div className="party" role="status">{party}</div>}
+      {reporting && units[reporting] && <ReportSheet unit={units[reporting]!} audio={audioEnabled()} onClose={() => setReporting(null)}
+        onSend={(reason, note) => { setReporting(null); api.report(courseId, reporting, reason, note).then(() => setToast('✓ Gracias. Lo revisamos y lo corregimos.')).catch(() => setToast('No se ha podido enviar. Prueba otra vez.')); }} />}
+      {toast && <p className="report-toast" role="status">{toast}</p>}
     </div>
   );
 }
