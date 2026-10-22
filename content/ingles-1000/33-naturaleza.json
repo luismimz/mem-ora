@@ -1,0 +1,781 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "33-naturaleza",
+      "title": "Misión 33 · La naturaleza",
+      "units": [
+        {
+          "key": "g-mente-ly",
+          "type": "pattern",
+          "goal": "-MENTE = -LY: rápidamente = quickly",
+          "rule": "Si en español acaba en -mente, en inglés suele acabar en -LY: lentamente = slowly, perfectamente = perfectly. Ojo: bien = well.",
+          "pieces": [
+            {
+              "text": "slow",
+              "role": "slot",
+              "hint": "lenta"
+            },
+            {
+              "text": "-ly",
+              "role": "fixed",
+              "hint": "-mente"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Drive slowly.",
+              "translation": "Conduce lentamente.",
+              "mirror": {
+                "say": "Conduce lentamente",
+                "pieces": [
+                  {
+                    "es": "Conduce",
+                    "en": "Drive",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "lenta-MENTE",
+                    "en": "slow-LY",
+                    "role": "word",
+                    "from": "lentamente",
+                    "why": "-MENTE = -LY: slowly."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She speaks English perfectly.",
+              "translation": "Habla inglés perfectamente.",
+              "mirror": {
+                "say": "Habla inglés perfectamente",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "habla",
+                    "en": "speaks",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  },
+                  {
+                    "es": "perfecta-MENTE",
+                    "en": "perfect-LY",
+                    "role": "word",
+                    "from": "perfectamente",
+                    "why": "-MENTE = -LY: perfectly."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Come quickly!",
+              "translation": "¡Ven rápido!"
+            },
+            {
+              "text": "You play very well.",
+              "translation": "Juegas muy bien."
+            }
+          ],
+          "pitfalls": [
+            "Bien no es «goodly»: es WELL (you play well).",
+            "Algunas no cambian: fast, hard (he runs fast)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada -MENTE se cambia el sombrero por un -LY.",
+            "emoji": "🎩"
+          }
+        },
+        {
+          "key": "tree",
+          "type": "term",
+          "text": "tree",
+          "meaning": "árbol",
+          "pronunciation": "TRII",
+          "examples": [
+            {
+              "text": "There is a big tree in the garden.",
+              "translation": "Hay un árbol grande en el jardín.",
+              "mirror": {
+                "say": "Hay un árbol grande en el jardín",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "árbol",
+                    "en": "tree",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el jardín",
+                    "en": "in the garden",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Apple trees.",
+              "translation": "Manzanos."
+            }
+          ]
+        },
+        {
+          "key": "flower",
+          "type": "term",
+          "text": "flower",
+          "meaning": "flor",
+          "pronunciation": "FLÁUer",
+          "examples": [
+            {
+              "text": "These flowers are for you.",
+              "translation": "Estas flores son para ti.",
+              "mirror": {
+                "say": "Estas flores son para ti",
+                "pieces": [
+                  {
+                    "es": "Estas flores",
+                    "en": "These flowers",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "para ti",
+                    "en": "for you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She loves flowers.",
+              "translation": "Le encantan las flores."
+            }
+          ]
+        },
+        {
+          "key": "river",
+          "type": "term",
+          "text": "river",
+          "meaning": "río",
+          "pronunciation": "RÍver",
+          "examples": [
+            {
+              "text": "The river is very long.",
+              "translation": "El río es muy largo.",
+              "mirror": {
+                "say": "El río es muy largo",
+                "pieces": [
+                  {
+                    "es": "El río",
+                    "en": "The river",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy largo",
+                    "en": "very long",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We swam in the river.",
+              "translation": "Nadamos en el río."
+            }
+          ]
+        },
+        {
+          "key": "sea",
+          "type": "term",
+          "text": "sea",
+          "meaning": "mar",
+          "pronunciation": "SII",
+          "examples": [
+            {
+              "text": "I live near the sea.",
+              "translation": "Vivo cerca del mar.",
+              "mirror": {
+                "say": "Vivo cerca del mar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cerca del mar",
+                    "en": "near the sea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The sea is cold today.",
+              "translation": "Hoy el mar está frío."
+            }
+          ]
+        },
+        {
+          "key": "mountain",
+          "type": "term",
+          "text": "mountain",
+          "meaning": "montaña",
+          "pronunciation": "MÁUNten",
+          "examples": [
+            {
+              "text": "We climbed a high mountain.",
+              "translation": "Subimos una montaña alta.",
+              "mirror": {
+                "say": "Subimos una montaña alta",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "subimos",
+                    "en": "climbed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "montaña",
+                    "en": "mountain",
+                    "role": "word"
+                  },
+                  {
+                    "es": "alta",
+                    "en": "high",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I love the mountains.",
+              "translation": "Me encanta la montaña."
+            }
+          ]
+        },
+        {
+          "key": "lake",
+          "type": "term",
+          "text": "lake",
+          "meaning": "lago",
+          "pronunciation": "LÉIK",
+          "examples": [
+            {
+              "text": "There is a lake near the village.",
+              "translation": "Hay un lago cerca del pueblo.",
+              "mirror": {
+                "say": "Hay un lago cerca del pueblo",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un lago",
+                    "en": "a lake",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cerca del pueblo",
+                    "en": "near the village",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A beautiful lake.",
+              "translation": "Un lago precioso."
+            }
+          ]
+        },
+        {
+          "key": "forest",
+          "type": "term",
+          "text": "forest",
+          "meaning": "bosque",
+          "pronunciation": "FÓrest",
+          "examples": [
+            {
+              "text": "Don't get lost in the forest.",
+              "translation": "No te pierdas en el bosque.",
+              "mirror": {
+                "say": "No te pierdas en el bosque",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "te pierdas",
+                    "en": "get lost",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el bosque",
+                    "en": "in the forest",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A dark forest.",
+              "translation": "Un bosque oscuro."
+            }
+          ]
+        },
+        {
+          "key": "island",
+          "type": "term",
+          "text": "island",
+          "meaning": "isla",
+          "pronunciation": "ÁIland",
+          "examples": [
+            {
+              "text": "Mallorca is a beautiful island.",
+              "translation": "Mallorca es una isla preciosa.",
+              "mirror": {
+                "say": "Mallorca es una isla preciosa",
+                "pieces": [
+                  {
+                    "es": "Mallorca",
+                    "en": "Mallorca",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "isla",
+                    "en": "island",
+                    "role": "word"
+                  },
+                  {
+                    "es": "preciosa",
+                    "en": "beautiful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "We live on an island.",
+              "translation": "Vivimos en una isla."
+            }
+          ],
+          "notes": "La s no suena: ÁIland."
+        },
+        {
+          "key": "sky",
+          "type": "term",
+          "text": "sky",
+          "meaning": "cielo",
+          "pronunciation": "SKÁI",
+          "examples": [
+            {
+              "text": "The sky is very clear tonight.",
+              "translation": "Esta noche el cielo está muy despejado.",
+              "mirror": {
+                "say": "Esta noche el cielo está muy despejado",
+                "pieces": [
+                  {
+                    "es": "Esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el cielo",
+                    "en": "The sky",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy despejado",
+                    "en": "very clear",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Look at the sky!",
+              "translation": "¡Mira el cielo!"
+            }
+          ]
+        },
+        {
+          "key": "star",
+          "type": "term",
+          "text": "star",
+          "meaning": "estrella",
+          "pronunciation": "STAR",
+          "examples": [
+            {
+              "text": "You can see many stars here.",
+              "translation": "Aquí se ven muchas estrellas.",
+              "mirror": {
+                "say": "Aquí se ven muchas estrellas",
+                "pieces": [
+                  {
+                    "es": "Aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ puedes ver",
+                    "en": "You can see",
+                    "role": "verb",
+                    "from": "se ven",
+                    "why": "«Se ven» se dice «puedes ver»: you can see."
+                  },
+                  {
+                    "es": "muchas estrellas",
+                    "en": "many stars",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A film star.",
+              "translation": "Una estrella de cine."
+            }
+          ]
+        },
+        {
+          "key": "moon",
+          "type": "term",
+          "text": "moon",
+          "meaning": "luna",
+          "pronunciation": "MUUN",
+          "examples": [
+            {
+              "text": "The moon is full tonight.",
+              "translation": "Esta noche hay luna llena.",
+              "mirror": {
+                "say": "Esta noche hay luna llena",
+                "pieces": [
+                  {
+                    "es": "Esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la luna",
+                    "en": "The moon",
+                    "role": "who",
+                    "from": "hay luna",
+                    "why": "«Hay luna llena» es «la luna está llena»."
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llena",
+                    "en": "full",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A trip to the moon.",
+              "translation": "Un viaje a la luna."
+            }
+          ]
+        },
+        {
+          "key": "world",
+          "type": "term",
+          "text": "world",
+          "meaning": "mundo",
+          "pronunciation": "UÉRLD",
+          "examples": [
+            {
+              "text": "I want to travel around the world.",
+              "translation": "Quiero viajar por el mundo.",
+              "mirror": {
+                "say": "Quiero viajar por el mundo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "viajar",
+                    "en": "to travel",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por el mundo",
+                    "en": "around the world",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The best in the world.",
+              "translation": "El mejor del mundo."
+            }
+          ]
+        },
+        {
+          "key": "field",
+          "type": "term",
+          "text": "field",
+          "meaning": "campo (terreno)",
+          "pronunciation": "FIILD",
+          "examples": [
+            {
+              "text": "The cows are in the field.",
+              "translation": "Las vacas están en el campo.",
+              "mirror": {
+                "say": "Las vacas están en el campo",
+                "pieces": [
+                  {
+                    "es": "Las vacas",
+                    "en": "The cows",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el campo",
+                    "en": "in the field",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A football field.",
+              "translation": "Un campo de fútbol."
+            }
+          ]
+        },
+        {
+          "key": "grass",
+          "type": "term",
+          "text": "grass",
+          "meaning": "hierba, césped",
+          "pronunciation": "GRAS",
+          "examples": [
+            {
+              "text": "Don't walk on the grass.",
+              "translation": "No pises el césped.",
+              "mirror": {
+                "say": "No pises el césped",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "camines sobre",
+                    "en": "walk on",
+                    "role": "verb",
+                    "from": "pises",
+                    "why": "Pisar el césped es caminar SOBRE él: walk on."
+                  },
+                  {
+                    "es": "la hierba",
+                    "en": "the grass",
+                    "role": "word",
+                    "from": "el césped"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The grass is wet.",
+              "translation": "La hierba está mojada."
+            }
+          ]
+        },
+        {
+          "key": "sunset",
+          "type": "term",
+          "text": "sunset",
+          "meaning": "puesta de sol",
+          "pronunciation": "SÁNset",
+          "examples": [
+            {
+              "text": "What a beautiful sunset!",
+              "translation": "¡Qué puesta de sol tan bonita!",
+              "mirror": {
+                "say": "¡Qué puesta de sol tan bonita!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "puesta de sol",
+                    "en": "sunset",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tan bonita",
+                    "en": "beautiful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "We watched the sunset.",
+              "translation": "Vimos la puesta de sol."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

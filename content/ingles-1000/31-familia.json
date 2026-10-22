@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "31-familia",
+      "title": "Misión 31 · La familia",
+      "units": [
+        {
+          "key": "g-possessive-s",
+          "type": "pattern",
+          "goal": "Lo de alguien: MY FATHER'S car",
+          "rule": "Para decir de quién es algo: dueño + 'S + cosa. El coche de mi padre = my father's car (al revés que en español).",
+          "pieces": [
+            {
+              "text": "my father's",
+              "role": "fixed",
+              "hint": "de mi padre"
+            },
+            {
+              "text": "car",
+              "role": "slot",
+              "hint": "coche"
+            }
+          ],
+          "examples": [
+            {
+              "text": "This is my father's car.",
+              "translation": "Este es el coche de mi padre.",
+              "mirror": {
+                "say": "Este es el coche de mi padre",
+                "pieces": [
+                  {
+                    "es": "Este",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "coche",
+                    "en": "car",
+                    "role": "word",
+                    "from": "el coche"
+                  },
+                  {
+                    "es": "mi padre + 'S",
+                    "en": "my father's",
+                    "role": "word",
+                    "from": "de mi padre",
+                    "why": "El dueño va delante con 'S: my father's car."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Ana's brother is a doctor.",
+              "translation": "El hermano de Ana es médico.",
+              "mirror": {
+                "say": "El hermano de Ana es médico",
+                "pieces": [
+                  {
+                    "es": "hermano",
+                    "en": "brother",
+                    "role": "who",
+                    "from": "El hermano"
+                  },
+                  {
+                    "es": "Ana + 'S",
+                    "en": "Ana's",
+                    "role": "who",
+                    "from": "de Ana",
+                    "why": "Dueño + 'S delante: Ana's brother."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un médico",
+                    "en": "a doctor",
+                    "role": "word",
+                    "from": "médico"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "My parents' house.",
+              "translation": "La casa de mis padres."
+            },
+            {
+              "text": "Whose phone is this? It's Luis's.",
+              "translation": "¿De quién es este móvil? Es de Luis."
+            }
+          ],
+          "pitfalls": [
+            "«The car of my father» se entiende, pero suena raro: my father's car.",
+            "Plural acabado en -s: solo el apóstrofo (my parents' house)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El DUEÑO se planta DELANTE con su 'S.",
+            "emoji": "🏷️"
+          }
+        },
+        {
+          "key": "son",
+          "type": "term",
+          "text": "son",
+          "meaning": "hijo",
+          "pronunciation": "SAN",
+          "examples": [
+            {
+              "text": "My son is ten years old.",
+              "translation": "Mi hijo tiene diez años.",
+              "mirror": {
+                "say": "Mi hijo tiene diez años",
+                "pieces": [
+                  {
+                    "es": "Mi hijo",
+                    "en": "My son",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "La edad se ES: my son IS ten."
+                  },
+                  {
+                    "es": "diez años de edad",
+                    "en": "ten years old",
+                    "role": "word",
+                    "from": "diez años"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They have two sons.",
+              "translation": "Tienen dos hijos."
+            }
+          ],
+          "notes": "Son suena igual que sun: SAN."
+        },
+        {
+          "key": "daughter",
+          "type": "term",
+          "text": "daughter",
+          "meaning": "hija",
+          "pronunciation": "DÓOter",
+          "examples": [
+            {
+              "text": "Her daughter lives in Paris.",
+              "translation": "Su hija vive en París.",
+              "mirror": {
+                "say": "Su hija vive en París",
+                "pieces": [
+                  {
+                    "es": "Su hija",
+                    "en": "Her daughter",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vive",
+                    "en": "lives",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en París",
+                    "en": "in Paris",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have a daughter.",
+              "translation": "Tengo una hija."
+            }
+          ],
+          "notes": "La gh no suena: DÓOter."
+        },
+        {
+          "key": "husband",
+          "type": "term",
+          "text": "husband",
+          "meaning": "marido",
+          "pronunciation": "JÁSband",
+          "examples": [
+            {
+              "text": "Her husband is a teacher.",
+              "translation": "Su marido es profesor.",
+              "mirror": {
+                "say": "Su marido es profesor",
+                "pieces": [
+                  {
+                    "es": "Su marido",
+                    "en": "Her husband",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un profesor",
+                    "en": "a teacher",
+                    "role": "word",
+                    "from": "profesor",
+                    "why": "Las profesiones llevan «a»: a teacher, a vet."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My husband and I.",
+              "translation": "Mi marido y yo."
+            }
+          ]
+        },
+        {
+          "key": "wife",
+          "type": "term",
+          "text": "wife",
+          "meaning": "mujer, esposa",
+          "pronunciation": "UÁIF",
+          "examples": [
+            {
+              "text": "This is my wife, Ana.",
+              "translation": "Esta es mi mujer, Ana.",
+              "mirror": {
+                "say": "Esta es mi mujer, Ana",
+                "pieces": [
+                  {
+                    "es": "Esta",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi mujer",
+                    "en": "my wife",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "His wife works at home.",
+              "translation": "Su mujer trabaja en casa."
+            }
+          ]
+        },
+        {
+          "key": "parents",
+          "type": "term",
+          "text": "parents",
+          "meaning": "padres (padre y madre)",
+          "pronunciation": "PÉrents",
+          "examples": [
+            {
+              "text": "My parents live in Seville.",
+              "translation": "Mis padres viven en Sevilla.",
+              "mirror": {
+                "say": "Mis padres viven en Sevilla",
+                "pieces": [
+                  {
+                    "es": "Mis padres",
+                    "en": "My parents",
+                    "role": "who"
+                  },
+                  {
+                    "es": "viven",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en Sevilla",
+                    "en": "in Seville",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I call my parents every day.",
+              "translation": "Llamo a mis padres todos los días."
+            }
+          ],
+          "notes": "Parents son padre y madre. «Parientes» se dice relatives."
+        },
+        {
+          "key": "grandmother",
+          "type": "term",
+          "text": "grandmother",
+          "meaning": "abuela",
+          "pronunciation": "GRÁNmader",
+          "examples": [
+            {
+              "text": "My grandmother is ninety.",
+              "translation": "Mi abuela tiene noventa años.",
+              "mirror": {
+                "say": "Mi abuela tiene noventa años",
+                "pieces": [
+                  {
+                    "es": "Mi abuela",
+                    "en": "My grandmother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "La edad se ES: she IS ninety."
+                  },
+                  {
+                    "es": "noventa",
+                    "en": "ninety",
+                    "role": "word",
+                    "from": "noventa años"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I visit my grandmother on Sundays.",
+              "translation": "Visito a mi abuela los domingos."
+            }
+          ]
+        },
+        {
+          "key": "grandfather",
+          "type": "term",
+          "text": "grandfather",
+          "meaning": "abuelo",
+          "pronunciation": "GRÁNfader",
+          "examples": [
+            {
+              "text": "My grandfather tells great stories.",
+              "translation": "Mi abuelo cuenta historias geniales.",
+              "mirror": {
+                "say": "Mi abuelo cuenta historias geniales",
+                "pieces": [
+                  {
+                    "es": "Mi abuelo",
+                    "en": "My grandfather",
+                    "role": "who"
+                  },
+                  {
+                    "es": "cuenta",
+                    "en": "tells",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "historias",
+                    "en": "stories",
+                    "role": "word"
+                  },
+                  {
+                    "es": "geniales",
+                    "en": "great",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "My grandparents live in a village.",
+              "translation": "Mis abuelos viven en un pueblo."
+            }
+          ]
+        },
+        {
+          "key": "uncle",
+          "type": "term",
+          "text": "uncle",
+          "meaning": "tío",
+          "pronunciation": "ÁNkol",
+          "examples": [
+            {
+              "text": "My uncle lives in Mexico.",
+              "translation": "Mi tío vive en México.",
+              "mirror": {
+                "say": "Mi tío vive en México",
+                "pieces": [
+                  {
+                    "es": "Mi tío",
+                    "en": "My uncle",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vive",
+                    "en": "lives",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en México",
+                    "en": "in Mexico",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Uncle Tom.",
+              "translation": "El tío Tom."
+            }
+          ]
+        },
+        {
+          "key": "aunt",
+          "type": "term",
+          "text": "aunt",
+          "meaning": "tía",
+          "pronunciation": "ANT",
+          "examples": [
+            {
+              "text": "My aunt has three children.",
+              "translation": "Mi tía tiene tres hijos.",
+              "mirror": {
+                "say": "Mi tía tiene tres hijos",
+                "pieces": [
+                  {
+                    "es": "Mi tía",
+                    "en": "My aunt",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres hijos",
+                    "en": "three children",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Say hello to your aunt.",
+              "translation": "Saluda a tu tía."
+            }
+          ]
+        },
+        {
+          "key": "cousin",
+          "type": "term",
+          "text": "cousin",
+          "meaning": "primo, prima",
+          "pronunciation": "KÁsin",
+          "examples": [
+            {
+              "text": "My cousin is my best friend.",
+              "translation": "Mi primo es mi mejor amigo.",
+              "mirror": {
+                "say": "Mi primo es mi mejor amigo",
+                "pieces": [
+                  {
+                    "es": "Mi primo",
+                    "en": "My cousin",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi mejor amigo",
+                    "en": "my best friend",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have ten cousins.",
+              "translation": "Tengo diez primos."
+            }
+          ]
+        },
+        {
+          "key": "nephew",
+          "type": "term",
+          "text": "nephew",
+          "meaning": "sobrino",
+          "pronunciation": "NÉfiu",
+          "examples": [
+            {
+              "text": "My nephew is very funny.",
+              "translation": "Mi sobrino es muy gracioso.",
+              "mirror": {
+                "say": "Mi sobrino es muy gracioso",
+                "pieces": [
+                  {
+                    "es": "Mi sobrino",
+                    "en": "My nephew",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy gracioso",
+                    "en": "very funny",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Nephews and nieces.",
+              "translation": "Sobrinos y sobrinas."
+            }
+          ]
+        },
+        {
+          "key": "niece",
+          "type": "term",
+          "text": "niece",
+          "meaning": "sobrina",
+          "pronunciation": "NIIS",
+          "examples": [
+            {
+              "text": "My niece wants to be a vet.",
+              "translation": "Mi sobrina quiere ser veterinaria.",
+              "mirror": {
+                "say": "Mi sobrina quiere ser veterinaria",
+                "pieces": [
+                  {
+                    "es": "Mi sobrina",
+                    "en": "My niece",
+                    "role": "who"
+                  },
+                  {
+                    "es": "quiere",
+                    "en": "wants",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ser",
+                    "en": "to be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una veterinaria",
+                    "en": "a vet",
+                    "role": "word",
+                    "from": "veterinaria",
+                    "why": "Las profesiones llevan «a»: a teacher, a vet."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is my niece.",
+              "translation": "Es mi sobrina."
+            }
+          ]
+        },
+        {
+          "key": "married",
+          "type": "term",
+          "text": "married",
+          "meaning": "casado",
+          "pronunciation": "MÁrid",
+          "examples": [
+            {
+              "text": "Are you married?",
+              "translation": "¿Estás casado?",
+              "mirror": {
+                "say": "¿Estás casado?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "casado",
+                    "en": "married",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "They got married last year.",
+              "translation": "Se casaron el año pasado."
+            }
+          ]
+        },
+        {
+          "key": "single",
+          "type": "term",
+          "text": "single",
+          "meaning": "soltero; individual",
+          "pronunciation": "SÍNgol",
+          "examples": [
+            {
+              "text": "I'm single.",
+              "translation": "Estoy soltero.",
+              "mirror": {
+                "say": "Estoy soltero",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "soltero",
+                    "en": "single",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A single room, please.",
+              "translation": "Una habitación individual, por favor."
+            }
+          ]
+        },
+        {
+          "key": "wedding",
+          "type": "term",
+          "text": "wedding",
+          "meaning": "boda",
+          "pronunciation": "UÉding",
+          "examples": [
+            {
+              "text": "We are going to a wedding on Saturday.",
+              "translation": "El sábado vamos a una boda.",
+              "mirror": {
+                "say": "El sábado vamos a una boda",
+                "pieces": [
+                  {
+                    "es": "en sábado",
+                    "en": "on Saturday",
+                    "role": "word",
+                    "from": "El sábado",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "vamos"
+                  },
+                  {
+                    "es": "yendo",
+                    "en": "going",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a una boda",
+                    "en": "to a wedding",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A beautiful wedding.",
+              "translation": "Una boda preciosa."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
