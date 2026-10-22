@@ -1,0 +1,735 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "25-emociones",
+      "title": "Misión 25 · Cómo te sientes",
+      "units": [
+        {
+          "key": "g-ed-ing",
+          "type": "pattern",
+          "goal": "Aburrido: BORED o BORING",
+          "rule": "-ED: cómo te sientes tú (I'm bored). -ING: lo que provoca ese sentimiento (the film is boring).",
+          "pieces": [
+            {
+              "text": "I'm",
+              "role": "fixed",
+              "hint": "YO estoy"
+            },
+            {
+              "text": "bored",
+              "role": "slot",
+              "hint": "aburrido (tú)"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'm bored.",
+              "translation": "Estoy aburrido.",
+              "mirror": {
+                "say": "Estoy aburrido",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aburr-ido",
+                    "en": "bor-ED",
+                    "role": "word",
+                    "from": "aburrido",
+                    "why": "Cómo te sientes TÚ: -ED. I'm bored."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This film is boring.",
+              "translation": "Esta película es aburrida.",
+              "mirror": {
+                "say": "Esta película es aburrida",
+                "pieces": [
+                  {
+                    "es": "Esta película",
+                    "en": "This film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aburr-ida",
+                    "en": "bor-ING",
+                    "role": "word",
+                    "from": "aburrida",
+                    "why": "Lo que te aburre: -ING. The film is boring."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm interested in music.",
+              "translation": "Me interesa la música."
+            },
+            {
+              "text": "The news is very worrying.",
+              "translation": "La noticia es muy preocupante."
+            }
+          ],
+          "pitfalls": [
+            "«I'm boring» significa «soy aburrido» (aburres tú).",
+            "Interested / interesting, tired / tiring: la misma regla."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "-ED se SIENTE dentro; -ING lo CONTAGIA fuera.",
+            "emoji": "🎭"
+          }
+        },
+        {
+          "key": "happy",
+          "type": "term",
+          "text": "happy",
+          "meaning": "feliz, contento",
+          "pronunciation": "JÁpi",
+          "examples": [
+            {
+              "text": "I'm very happy today.",
+              "translation": "Hoy estoy muy contento.",
+              "mirror": {
+                "say": "Hoy estoy muy contento",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy contento",
+                    "en": "very happy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Happy birthday!",
+              "translation": "¡Feliz cumpleaños!"
+            }
+          ]
+        },
+        {
+          "key": "sad",
+          "type": "term",
+          "text": "sad",
+          "meaning": "triste",
+          "pronunciation": "SAD",
+          "examples": [
+            {
+              "text": "She looks sad.",
+              "translation": "Parece triste.",
+              "mirror": {
+                "say": "Parece triste",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se ve",
+                    "en": "looks",
+                    "role": "verb",
+                    "from": "parece",
+                    "why": "Parecer por cómo se ve: she LOOKS sad."
+                  },
+                  {
+                    "es": "triste",
+                    "en": "sad",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's a sad story.",
+              "translation": "Es una historia triste."
+            }
+          ]
+        },
+        {
+          "key": "angry",
+          "type": "term",
+          "text": "angry",
+          "meaning": "enfadado",
+          "pronunciation": "ÁNgri",
+          "examples": [
+            {
+              "text": "Are you angry with me?",
+              "translation": "¿Estás enfadado conmigo?",
+              "mirror": {
+                "say": "¿Estás enfadado conmigo?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enfadado",
+                    "en": "angry",
+                    "role": "word"
+                  },
+                  {
+                    "es": "conmigo",
+                    "en": "with me",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "My boss is angry.",
+              "translation": "Mi jefe está enfadado."
+            }
+          ]
+        },
+        {
+          "key": "tired",
+          "type": "term",
+          "text": "tired",
+          "meaning": "cansado",
+          "pronunciation": "TÁIerd",
+          "examples": [
+            {
+              "text": "I'm too tired to go out.",
+              "translation": "Estoy demasiado cansado para salir.",
+              "mirror": {
+                "say": "Estoy demasiado cansado para salir",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado cansado",
+                    "en": "too tired",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para salir",
+                    "en": "to go out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You look tired.",
+              "translation": "Pareces cansado."
+            }
+          ]
+        },
+        {
+          "key": "worried",
+          "type": "term",
+          "text": "worried",
+          "meaning": "preocupado",
+          "pronunciation": "UÁrid",
+          "examples": [
+            {
+              "text": "Don't be worried.",
+              "translation": "No te preocupes.",
+              "mirror": {
+                "say": "No te preocupes",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estés",
+                    "en": "be",
+                    "role": "helper",
+                    "from": "te",
+                    "why": "«No te preocupes» se dice «no estés preocupado»."
+                  },
+                  {
+                    "es": "preocupado",
+                    "en": "worried",
+                    "role": "word",
+                    "from": "preocupes"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm worried about the exam.",
+              "translation": "Estoy preocupado por el examen."
+            }
+          ]
+        },
+        {
+          "key": "scared",
+          "type": "term",
+          "text": "scared",
+          "meaning": "asustado",
+          "pronunciation": "SKÉRD",
+          "examples": [
+            {
+              "text": "I'm scared of dogs.",
+              "translation": "Me dan miedo los perros.",
+              "mirror": {
+                "say": "Me dan miedo los perros",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "me dan",
+                    "why": "«Me dan miedo» se dice «estoy asustado de»: I'm scared of."
+                  },
+                  {
+                    "es": "asustado de",
+                    "en": "scared of",
+                    "role": "word",
+                    "from": "miedo"
+                  },
+                  {
+                    "es": "perros",
+                    "en": "dogs",
+                    "role": "word",
+                    "from": "los perros"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't be scared.",
+              "translation": "No tengas miedo."
+            }
+          ]
+        },
+        {
+          "key": "excited",
+          "type": "term",
+          "text": "excited",
+          "meaning": "ilusionado, emocionado",
+          "pronunciation": "ekSÁIted",
+          "examples": [
+            {
+              "text": "We are very excited.",
+              "translation": "Estamos muy ilusionados.",
+              "mirror": {
+                "say": "Estamos muy ilusionados",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy ilusionados",
+                    "en": "very excited",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm excited about the trip.",
+              "translation": "Me hace mucha ilusión el viaje."
+            }
+          ],
+          "notes": "Ojo: excited no es «excitado»: es ilusionado, emocionado."
+        },
+        {
+          "key": "nervous",
+          "type": "term",
+          "text": "nervous",
+          "meaning": "nervioso",
+          "pronunciation": "NÉRvus",
+          "examples": [
+            {
+              "text": "I'm nervous before exams.",
+              "translation": "Me pongo nervioso antes de los exámenes.",
+              "mirror": {
+                "say": "Me pongo nervioso antes de los exámenes",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "me pongo"
+                  },
+                  {
+                    "es": "nervioso",
+                    "en": "nervous",
+                    "role": "word"
+                  },
+                  {
+                    "es": "antes de los exámenes",
+                    "en": "before exams",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't be nervous.",
+              "translation": "No te pongas nervioso."
+            }
+          ]
+        },
+        {
+          "key": "bored",
+          "type": "term",
+          "text": "bored",
+          "meaning": "aburrido (tú)",
+          "pronunciation": "BORD",
+          "examples": [
+            {
+              "text": "The children are bored.",
+              "translation": "Los niños están aburridos.",
+              "mirror": {
+                "say": "Los niños están aburridos",
+                "pieces": [
+                  {
+                    "es": "Los niños",
+                    "en": "The children",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aburridos",
+                    "en": "bored",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I get bored at home.",
+              "translation": "Me aburro en casa."
+            }
+          ]
+        },
+        {
+          "key": "surprised",
+          "type": "term",
+          "text": "surprised",
+          "meaning": "sorprendido",
+          "pronunciation": "surPRÁISD",
+          "examples": [
+            {
+              "text": "I was surprised to see you.",
+              "translation": "Me sorprendió verte.",
+              "mirror": {
+                "say": "Me sorprendió verte",
+                "pieces": [
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper",
+                    "from": "me",
+                    "why": "«Me sorprendió» se dice «estaba sorprendido»."
+                  },
+                  {
+                    "es": "sorprendido",
+                    "en": "surprised",
+                    "role": "word",
+                    "from": "sorprendió"
+                  },
+                  {
+                    "es": "de ver",
+                    "en": "to see",
+                    "role": "verb",
+                    "from": "ver"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She looked surprised.",
+              "translation": "Parecía sorprendida."
+            }
+          ]
+        },
+        {
+          "key": "proud",
+          "type": "term",
+          "text": "proud",
+          "meaning": "orgulloso",
+          "pronunciation": "PRÁUD",
+          "examples": [
+            {
+              "text": "I'm proud of you.",
+              "translation": "Estoy orgulloso de ti.",
+              "mirror": {
+                "say": "Estoy orgulloso de ti",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "orgulloso de",
+                    "en": "proud of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ti",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Her parents are very proud.",
+              "translation": "Sus padres están muy orgullosos."
+            }
+          ]
+        },
+        {
+          "key": "calm",
+          "type": "term",
+          "text": "calm",
+          "meaning": "tranquilo",
+          "pronunciation": "KAAM",
+          "examples": [
+            {
+              "text": "Keep calm.",
+              "translation": "Mantén la calma.",
+              "mirror": {
+                "say": "Mantén la calma",
+                "pieces": [
+                  {
+                    "es": "Mantén",
+                    "en": "Keep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tranquilo",
+                    "en": "calm",
+                    "role": "word",
+                    "from": "la calma",
+                    "why": "«Mantén la calma» es «mantente tranquilo»: keep calm."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The sea is calm today.",
+              "translation": "Hoy el mar está tranquilo."
+            }
+          ]
+        },
+        {
+          "key": "lonely",
+          "type": "term",
+          "text": "lonely",
+          "meaning": "solo (sentirse solo)",
+          "pronunciation": "LÓUNli",
+          "examples": [
+            {
+              "text": "I feel lonely here.",
+              "translation": "Aquí me siento solo.",
+              "mirror": {
+                "say": "Aquí me siento solo",
+                "pieces": [
+                  {
+                    "es": "Aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siento",
+                    "en": "feel",
+                    "role": "verb",
+                    "from": "me siento"
+                  },
+                  {
+                    "es": "solo",
+                    "en": "lonely",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "He's a lonely man.",
+              "translation": "Es un hombre solitario."
+            }
+          ],
+          "notes": "Lonely es sentirse solo. Estar solo (sin nadie) es alone."
+        },
+        {
+          "key": "upset",
+          "type": "term",
+          "text": "upset",
+          "meaning": "disgustado, molesto",
+          "pronunciation": "apSÉT",
+          "examples": [
+            {
+              "text": "She is upset with me.",
+              "translation": "Está disgustada conmigo.",
+              "mirror": {
+                "say": "Está disgustada conmigo",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "disgustada",
+                    "en": "upset",
+                    "role": "word"
+                  },
+                  {
+                    "es": "conmigo",
+                    "en": "with me",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't get upset.",
+              "translation": "No te disgustes."
+            }
+          ]
+        },
+        {
+          "key": "glad",
+          "type": "term",
+          "text": "glad",
+          "meaning": "contento; me alegro",
+          "pronunciation": "GLAD",
+          "examples": [
+            {
+              "text": "I'm glad you came.",
+              "translation": "Me alegro de que hayas venido.",
+              "mirror": {
+                "say": "Me alegro de que hayas venido",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "me alegro",
+                    "why": "«Me alegro» se dice «estoy contento»: I'm glad."
+                  },
+                  {
+                    "es": "contento",
+                    "en": "glad",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ viniste",
+                    "en": "you came",
+                    "role": "who",
+                    "from": "de que hayas venido"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Glad to meet you.",
+              "translation": "Encantado de conocerte."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
