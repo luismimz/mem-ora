@@ -2,7 +2,7 @@
 // vez y sin botones de avance: se desliza hacia arriba para seguir y, al acertar, pasa sola. Asociación → relámpago /
 // ¿verdad o mentira? → pregunta jefe. Se enseña en el error y lo fallado vuelve unas tarjetas después. Infinito: cada
 // ronda acaba en un hito y la siguiente ya está cargada. Puntos, racha con protector, combos, vibración y sonido.
-import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { HintLevel } from '@memora/core';
 import type { ConceptPayload, Mirror, PatternPayload } from '@memora/content';
 import {
@@ -50,11 +50,11 @@ function hue(key: string) {
 const sfx = (() => {
   let ctx: AudioContext | null = null;
   const on = () => { try { return localStorage.getItem('memora.sfx') !== 'off'; } catch { return true; } };
-  return (kind: 'ok' | 'ko' | 'party' | 'pop') => {
+  return (kind: 'ok' | 'ko' | 'party' | 'pop' | 'whoosh' | 'boing') => {
     if (!on()) return;
     try {
       ctx ??= new AudioContext();
-      const notes = kind === 'ok' ? [660, 880] : kind === 'pop' ? [988, 1319] : kind === 'party' ? [523, 659, 784, 1047] : [220, 165];
+      const notes = kind === 'ok' ? [660, 880] : kind === 'pop' ? [988, 1319] : kind === 'whoosh' ? [1047, 784, 587] : kind === 'boing' ? [392, 784, 523] : kind === 'party' ? [523, 659, 784, 1047] : [220, 165];
       notes.forEach((f, i) => {
         const o = ctx!.createOscillator(); const g = ctx!.createGain();
         o.frequency.value = f; o.type = 'sine';
@@ -250,10 +250,13 @@ function Reel({ unit, focus, courseId, onNext }: { unit: SessionUnit; focus?: As
 
 /** Aviso al fallar: la asociación completa (se enseña en el error). */
 function Teach({ unit, note, courseId, onNext }: { unit: SessionUnit; note?: string; courseId: string; onNext: () => void }) {
+  // D-082: al fallar una palabra cuya frase tiene espejo, se ve cómo se construye (en el momento en que más sirve).
+  const mirrored = unit.type === 'term' ? (unit.payload as { examples?: Array<{ text: string; mirror?: Mirror }> }).examples?.find((e) => e.mirror) : undefined;
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className="teach">
       <p className="tag ko">RECUÉRDALO ASÍ · VUELVE EN UN MOMENTO</p>
       {note && <p className="teach-note">{note}</p>}
+      {mirrored && <MirrorAnim unit={unit} m={mirrored.mirror!} text={mirrored.text} compact />}
       {unit.type === 'pattern' ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="teach" />}
     </Slide>
   );
@@ -378,53 +381,95 @@ type TrainStage = 'say' | 'ghost' | 'swap' | 'flip' | 'jump' | 'done';
  * ayudante naranja, acción verde, semáforo rojo), en toda la app. Lo hace el alumno con el dedo, paso a paso.
  */
 /** Tiempos de la animación del espejo (ms): lo que dices → en español completo → en inglés → el salto. */
-const MORPH_MS = [1100, 1700, 1500, 1200];
+const MORPH_MS = [1000, 1700, 1500, 1300];
 
 /**
- * El espejo en movimiento (D-082, simplificado): UNA fila de fichas que se transforma sola, sin toques. Primero lo que
- * dices («¿Tienes hambre?»); después la misma frase completa en español, con el pronombre que se esconde (👻 TÚ) y la
- * ficha cambiada (tienes → estás); las fichas se dan la vuelta al inglés con su color; y, si el orden cambia, la pieza
- * salta (el ayudante delante en las preguntas). Termina con la frase, su voz y «↻» para verlo otra vez.
+ * El espejo en movimiento (D-082). UNA fila de fichas que se transforma sola, sin toques:
+ * 1) lo que dices («¿Tienes hambre?»); 2) la misma frase completa en español: el 👻 TÚ entra volando y la ficha
+ * cambiada lleva lo que se dice tachado encima (tienes → estás); 3) cada ficha GIRA en 3D y por detrás está su pareja
+ * inglesa, con el español pequeño debajo para no perder la relación; 4) si el orden cambia, las fichas se MUEVEN de
+ * verdad: el ayudante sale de su sitio y pasa por encima del quién en un arco. Al final, la frase con su voz y las
+ * fichas iluminándose una a una. Un toque salta al final o lo repite. Sonidos cortos en cada paso.
  */
 function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: Mirror; text: string; compact?: boolean }) {
-  const order = m.order ?? m.pieces.map((_, i) => i);
+  const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
   const jumps = order.some((v, i) => v !== i);
   const last = jumps ? 3 : 2;
   const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   const [phase, setPhase] = useState(reduced ? last + 1 : 0);
   const [run, setRun] = useState(0);
+  const [lit, setLit] = useState(-1);
+  const done = phase > last;
+  const chips = useRef<Record<number, HTMLElement | null>>({});
+  const rects = useRef<Record<number, DOMRect>>({});
+
   useEffect(() => {
-    if (phase > last) return;
+    if (done) return;
     const t = setTimeout(() => setPhase((p) => p + 1), MORPH_MS[phase]);
     return () => clearTimeout(t);
-  }, [phase, last, run]);
-  const done = phase > last;
-  useEffect(() => { if (done && audioEnabled()) speak(text, unit.language); }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [phase, done, run]);
+  useEffect(() => {
+    if (reduced) return;
+    if (phase === 1 && m.pieces.some((p) => p.ghost)) sfx('pop');
+    if (phase === 2) sfx('whoosh');
+    if (phase === 3 && jumps) sfx('boing');
+  }, [phase]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Al terminar: la voz y las fichas iluminándose en el orden inglés, como un karaoke.
+  useEffect(() => {
+    if (!done) { setLit(-1); return; }
+    if (audioEnabled()) speak(text, unit.language);
+    let i = 0;
+    const t = setInterval(() => { setLit(i); i += 1; if (i > order.length) clearInterval(t); }, 330);
+    return () => clearInterval(t);
+  }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Movimiento real (FLIP): solo cuando cambia el orden (fase 3), cada ficha sale de donde estaba y el ayudante que
+  // salta va en arco por encima. En el resto de cambios solo se apunta dónde está cada ficha.
+  const lastPhase = useRef(phase);
+  useLayoutEffect(() => {
+    const reorder = lastPhase.current === 2 && phase === 3;
+    lastPhase.current = phase;
+    for (const [k, el] of Object.entries(chips.current)) {
+      if (!el) continue;
+      const now = el.getBoundingClientRect();
+      const before = rects.current[Number(k)];
+      rects.current[Number(k)] = now;
+      if (!before || reduced || !reorder) continue;
+      const dx = before.left - now.left;
+      const dy = before.top - now.top;
+      if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
+      const leaps = m.pieces[Number(k)]!.role === 'helper' || dx > 0;
+      el.animate(leaps
+        ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 46}px) rotate(-8deg)`, offset: 0.5 }, { transform: 'none' }]
+        : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 750, easing: 'cubic-bezier(.3, 1.2, .5, 1)' });
+    }
+  });
+
   const english = phase >= 2;
-  const shownOrder = phase >= 3 ? order : m.pieces.map((_, i) => i);
+  const shown = phase >= 3 ? order : m.pieces.map((_, i) => i);
   const question = m.say.trim().startsWith('¿');
   const spanishFull = m.pieces.filter((p) => p.role !== 'signal').map((p) => p.es).join(' ');
   const helperJumps = jumps && order.findIndex((i) => m.pieces[i]!.role === 'helper') < order.findIndex((i) => m.pieces[i]!.role === 'who');
   const swaps = m.pieces.filter((p) => p.from);
   const caption = phase === 0 ? 'Lo que dices…'
-    : phase === 1 ? <>En español completo: <b>{question ? `¿${spanishFull}?` : spanishFull}</b></>
-    : phase === 2 ? 'Pieza a pieza al inglés'
+    : phase === 1 ? <>Dilo completo: <b>{question ? `¿${spanishFull}?` : spanishFull}</b></>
+    : phase === 2 ? 'Cada pieza, al inglés'
     : phase === 3 ? (helperJumps ? '¡El ayudante salta delante!' : '¡En inglés, la pieza salta!')
     : null;
+  const tap = () => { if (done) { rects.current = {}; setPhase(0); setRun((r) => r + 1); } else setPhase(last + 1); };
   return (
-    <div className={`morph ${compact ? 'compact' : ''}`}>
+    <div className={`morph ${compact ? 'compact' : ''}`} onClick={tap} role="button" tabIndex={0} aria-label={done ? 'Verlo otra vez' : 'Saltar al final'}>
       {phase === 0 ? <p className="morph-say">{m.say}</p> : (
         <div className="morph-row" lang={english ? unit.language : 'es'}>
-          {shownOrder.map((i) => {
+          {shown.map((i, pos) => {
             const p = m.pieces[i]!;
             if (p.role === 'signal' && !english) return null;
-            const moved = phase >= 3 && order.indexOf(i) !== i;
-            const label = english ? (p.role === 'signal' ? `🚦 ${p.en}` : p.en) : p.es;
             return (
-              <span key={`${i}-${english ? 'en' : 'es'}`} className={`chip role-${p.role} ${english ? 'flip' : p.ghost ? 'pop' : 'in'} ${moved ? 'hop' : ''}`}>
-                {!english && p.ghost && <i className="ghost-tag" aria-hidden="true">👻</i>}
+              <span key={`p${i}-${run}`} ref={(el) => { chips.current[i] = el; }} className={`mchip role-${p.role} ${p.ghost && !english ? 'ghost-in' : ''} ${p.role === 'signal' ? 'grow' : ''} ${done && order[lit] === i ? 'lit' : ''}`}>
                 {!english && p.from && <s className="was">{p.from}</s>}
-                <b>{label}</b>
+                <span className={`mface ${english ? 'flipped' : ''}`} style={{ transitionDelay: `${pos * 110}ms` }}>
+                  <span className="front">{p.ghost && <i className="ghost-tag" aria-hidden="true">👻</i>}<b>{p.role === 'signal' ? '🚦' : p.es}</b></span>
+                  <span className="back"><b>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}</small></span>
+                </span>
               </span>
             );
           })}
@@ -436,7 +481,7 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
         <div className="morph-end">
           <p className="train-final" lang={unit.language}>{text}</p>
           {audioEnabled() && <button type="button" className="say" aria-label="Escuchar" onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button>}
-          <button type="button" className="morph-again" aria-label="Verlo otra vez" onClick={(e) => { e.stopPropagation(); setPhase(0); setRun((r) => r + 1); }}>↻</button>
+          <span className="morph-again" aria-hidden="true">↻</span>
         </div>
       )}
     </div>

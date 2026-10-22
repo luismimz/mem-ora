@@ -168,7 +168,7 @@ try {
       // D-082: el espejo en movimiento va solo, sin tocar nada: termina en el orden inglés y con la frase.
       if (await en.locator('.morph').count()) {
         await en.locator('.morph-end').waitFor({ timeout: 9000 }).catch(() => undefined);
-        const english = (await en.locator('.morph-row .chip b').allTextContents()).join(' ');
+        const english = (await en.locator('.morph-row .mchip .back b').allTextContents()).join(' ');
         if (await en.locator('.morph-end').count()) seen.add('espejo-solo');
         if (english === 'are you hungry') seen.add('orden-pregunta');
       }

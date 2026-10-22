@@ -645,3 +645,27 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .morph-end { display: flex; align-items: center; gap: .5rem; }
 .morph-end .train-final { font-size: clamp(1.3rem, 6vw, 1.7rem); }
 .morph-again { border: 0; width: 2.3rem; height: 2.3rem; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; font-size: 1.15rem; font-weight: 900; }
+
+/* ═══ Espejo en movimiento 2: giro 3D con el español debajo, fantasma volando, karaoke ═══ */
+.morph { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.mchip { position: relative; display: inline-grid; perspective: 700px; }
+.mface { display: grid; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.3, 1.35, .5, 1); }
+.mface.flipped { transform: rotateY(180deg); }
+.mface .front, .mface .back { grid-area: 1 / 1; backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .05rem; padding: .5rem .75rem; border-radius: .9rem; color: #fff; min-width: 2.6rem; }
+.mface .back { transform: rotateY(180deg); }
+.mface b { font-size: 1.25rem; font-weight: 900; line-height: 1.1; }
+.mface .back small { font-size: .64rem; font-weight: 700; opacity: .85; }
+.mchip.role-who .front, .mchip.role-who .back { background: #3b82f6; }
+.mchip.role-helper .front, .mchip.role-helper .back { background: #f59e0b; }
+.mchip.role-verb .front, .mchip.role-verb .back { background: #10b981; }
+.mchip.role-word .front, .mchip.role-word .back { background: #8b5cf6; }
+.mchip.role-signal .front, .mchip.role-signal .back { background: #ef4444; }
+.mchip .front { filter: saturate(.75) brightness(.95); }
+.mchip.ghost-in { animation: ghost-fly .8s cubic-bezier(.2, 1.3, .3, 1) both; }
+@keyframes ghost-fly { 0% { transform: translate(-30px, -60px) scale(.3) rotate(-30deg); opacity: 0; } 60% { opacity: 1; } 100% { transform: none; } }
+.mchip.grow { animation: woke .6s cubic-bezier(.2, 1.6, .3, 1) both; }
+.mchip .ghost-tag { position: absolute; top: -.75rem; right: -.45rem; font-style: normal; font-size: 1rem; }
+.mchip .was { position: absolute; top: -1rem; left: 50%; transform: translateX(-50%); font-size: .72rem; font-weight: 800; color: #ffd76a; white-space: nowrap; z-index: 1; }
+.mchip.lit .back { box-shadow: 0 0 0 3px #fff, 0 0 18px rgba(255,255,255,.7); transform: rotateY(180deg) scale(1.12); transition: transform .2s ease, box-shadow .2s ease; }
+.morph { justify-content: flex-start; padding-top: 1.1rem; }
+.morph-say { margin-top: .6rem; }
