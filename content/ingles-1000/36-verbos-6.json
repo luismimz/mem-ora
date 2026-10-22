@@ -1,0 +1,793 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "36-verbos-6",
+      "title": "Misión 36 · Más verbos y el futuro",
+      "units": [
+        {
+          "key": "g-will",
+          "type": "pattern",
+          "goal": "-RÉ = WILL: iré = I'LL GO",
+          "rule": "Si en español acaba en -ré, -rás, -rá (iré, comerás), en inglés WILL delante del verbo tal cual: I'll go, you'll eat. Negativo: won't.",
+          "pieces": [
+            {
+              "text": "I'll",
+              "role": "fixed",
+              "hint": "YO …-ré"
+            },
+            {
+              "text": "call",
+              "role": "slot",
+              "hint": "llama-"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'll call you tomorrow.",
+              "translation": "Te llamaré mañana.",
+              "mirror": {
+                "say": "Te llamaré mañana",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "llamaré",
+                    "why": "-RÉ al final es WILL delante: I'll call."
+                  },
+                  {
+                    "es": "llama-",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "It will rain tomorrow.",
+              "translation": "Mañana lloverá.",
+              "mirror": {
+                "say": "Mañana lloverá",
+                "pieces": [
+                  {
+                    "es": "Mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llove-",
+                    "en": "rain",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÁ",
+                    "en": "will",
+                    "role": "helper",
+                    "from": "lloverá",
+                    "why": "-RÁ = WILL: it will rain."
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Will you help me?",
+              "translation": "¿Me ayudarás?"
+            },
+            {
+              "text": "I won't tell anyone.",
+              "translation": "No se lo diré a nadie."
+            }
+          ],
+          "pitfalls": [
+            "«I will to go» está mal: detrás de will, el verbo tal cual.",
+            "Para planes ya decididos se usa más going to; WILL, para decidir en el momento o predecir."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada -RÉ del futuro lleva un WILL de mochila.",
+            "emoji": "🔮"
+          }
+        },
+        {
+          "key": "hope",
+          "type": "term",
+          "text": "hope",
+          "meaning": "esperar (desear)",
+          "pronunciation": "JÓUP",
+          "examples": [
+            {
+              "text": "I hope you're well.",
+              "translation": "Espero que estés bien.",
+              "mirror": {
+                "say": "Espero que estés bien",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "espero",
+                    "en": "hope",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TÚ estás",
+                    "en": "you're",
+                    "role": "who",
+                    "from": "que estés",
+                    "why": "Sin «que» y con quién: I hope YOU are…"
+                  },
+                  {
+                    "es": "bien",
+                    "en": "well",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I hope so.",
+              "translation": "Eso espero."
+            }
+          ]
+        },
+        {
+          "key": "believe",
+          "type": "term",
+          "text": "believe",
+          "meaning": "creer",
+          "pronunciation": "biLÍIV",
+          "examples": [
+            {
+              "text": "I don't believe you.",
+              "translation": "No te creo.",
+              "mirror": {
+                "say": "No te creo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "creo",
+                    "en": "believe",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Believe me.",
+              "translation": "Créeme."
+            }
+          ]
+        },
+        {
+          "key": "mean",
+          "type": "term",
+          "text": "mean",
+          "meaning": "significar; querer decir",
+          "pronunciation": "MIIN",
+          "examples": [
+            {
+              "text": "What does this word mean?",
+              "translation": "¿Qué significa esta palabra?",
+              "mirror": {
+                "say": "¿Qué significa esta palabra?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "does",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "significar",
+                    "en": "mean",
+                    "role": "verb",
+                    "from": "significa",
+                    "why": "Con DOES el verbo va tal cual: mean."
+                  },
+                  {
+                    "es": "esta palabra",
+                    "en": "this word",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I didn't mean it.",
+              "translation": "No lo decía en serio."
+            }
+          ]
+        },
+        {
+          "key": "happen",
+          "type": "term",
+          "text": "happen",
+          "meaning": "pasar, ocurrir",
+          "pronunciation": "JÁpen",
+          "examples": [
+            {
+              "text": "What happened?",
+              "translation": "¿Qué pasó?",
+              "mirror": {
+                "say": "¿Qué pasó?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pasó",
+                    "en": "happened",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It happens a lot.",
+              "translation": "Pasa mucho."
+            }
+          ]
+        },
+        {
+          "key": "follow",
+          "type": "term",
+          "text": "follow",
+          "meaning": "seguir",
+          "pronunciation": "FÓlou",
+          "examples": [
+            {
+              "text": "Follow me.",
+              "translation": "Sígueme.",
+              "mirror": {
+                "say": "Sígueme",
+                "pieces": [
+                  {
+                    "es": "Sigue",
+                    "en": "Follow",
+                    "role": "verb",
+                    "from": "Sígueme",
+                    "why": "Lo pegado se separa: follow ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I follow her on Instagram.",
+              "translation": "La sigo en Instagram."
+            }
+          ]
+        },
+        {
+          "key": "choose",
+          "type": "term",
+          "text": "choose",
+          "meaning": "elegir",
+          "pronunciation": "CHUUS",
+          "examples": [
+            {
+              "text": "You can choose a colour.",
+              "translation": "Puedes elegir un color.",
+              "mirror": {
+                "say": "Puedes elegir un color",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "elegir",
+                    "en": "choose",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un color",
+                    "en": "a colour",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I chose the red one.",
+              "translation": "Elegí el rojo."
+            }
+          ]
+        },
+        {
+          "key": "break",
+          "type": "term",
+          "text": "break",
+          "meaning": "romper; descanso",
+          "pronunciation": "BRÉIK",
+          "examples": [
+            {
+              "text": "Don't break the glass.",
+              "translation": "No rompas el vaso.",
+              "mirror": {
+                "say": "No rompas el vaso",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rompas",
+                    "en": "break",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el vaso",
+                    "en": "the glass",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's take a break.",
+              "translation": "Hagamos un descanso."
+            }
+          ]
+        },
+        {
+          "key": "build",
+          "type": "term",
+          "text": "build",
+          "meaning": "construir",
+          "pronunciation": "BILD",
+          "examples": [
+            {
+              "text": "They are building a new school.",
+              "translation": "Están construyendo un colegio nuevo.",
+              "mirror": {
+                "say": "Están construyendo un colegio nuevo",
+                "pieces": [
+                  {
+                    "es": "(ELLOS) están",
+                    "en": "They are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "construyendo",
+                    "en": "building",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "colegio",
+                    "en": "school",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Build your own app.",
+              "translation": "Construye tu propia app."
+            }
+          ]
+        },
+        {
+          "key": "check",
+          "type": "term",
+          "text": "check",
+          "meaning": "comprobar, revisar",
+          "pronunciation": "CHEK",
+          "examples": [
+            {
+              "text": "Check your email.",
+              "translation": "Mira tu correo.",
+              "mirror": {
+                "say": "Mira tu correo",
+                "pieces": [
+                  {
+                    "es": "Revisa",
+                    "en": "Check",
+                    "role": "verb",
+                    "from": "Mira"
+                  },
+                  {
+                    "es": "tu correo",
+                    "en": "your email",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I check the price?",
+              "translation": "¿Puedo mirar el precio?"
+            }
+          ]
+        },
+        {
+          "key": "plan",
+          "type": "term",
+          "text": "plan",
+          "meaning": "plan; planear",
+          "pronunciation": "PLAN",
+          "examples": [
+            {
+              "text": "What are your plans for the weekend?",
+              "translation": "¿Qué planes tienes para el fin de semana?",
+              "mirror": {
+                "say": "¿Qué planes tienes para el fin de semana?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tus planes",
+                    "en": "your plans",
+                    "role": "word",
+                    "from": "planes"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "tienes",
+                    "why": "Para preguntar planes: what ARE your plans?"
+                  },
+                  {
+                    "es": "para el fin de semana",
+                    "en": "for the weekend",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "We planned everything.",
+              "translation": "Lo planeamos todo."
+            }
+          ]
+        },
+        {
+          "key": "share",
+          "type": "term",
+          "text": "share",
+          "meaning": "compartir",
+          "pronunciation": "SHÉR",
+          "examples": [
+            {
+              "text": "Let's share a pizza.",
+              "translation": "Compartamos una pizza.",
+              "mirror": {
+                "say": "Compartamos una pizza",
+                "pieces": [
+                  {
+                    "es": "Compartamos",
+                    "en": "Let's share",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una pizza",
+                    "en": "a pizza",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Share it with your friends.",
+              "translation": "Compártelo con tus amigos."
+            }
+          ]
+        },
+        {
+          "key": "borrow",
+          "type": "term",
+          "text": "borrow",
+          "meaning": "pedir prestado",
+          "pronunciation": "BÓrou",
+          "examples": [
+            {
+              "text": "Can I borrow your pen?",
+              "translation": "¿Me dejas tu boli?",
+              "mirror": {
+                "say": "¿Me dejas tu boli?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tomar prestado",
+                    "en": "borrow",
+                    "role": "verb",
+                    "from": "me dejas",
+                    "why": "Pedir algo prestado es BORROW: can I borrow…?"
+                  },
+                  {
+                    "es": "tu boli",
+                    "en": "your pen",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I borrowed a book from the library.",
+              "translation": "Saqué un libro de la biblioteca."
+            }
+          ]
+        },
+        {
+          "key": "lend",
+          "type": "term",
+          "text": "lend",
+          "meaning": "prestar",
+          "pronunciation": "LEND",
+          "examples": [
+            {
+              "text": "Can you lend me ten euros?",
+              "translation": "¿Me prestas diez euros?",
+              "mirror": {
+                "say": "¿Me prestas diez euros?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "prestar",
+                    "en": "lend",
+                    "role": "verb",
+                    "from": "prestas"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "diez euros",
+                    "en": "ten euros",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I lent him my car.",
+              "translation": "Le presté mi coche."
+            }
+          ],
+          "notes": "Borrow: pides prestado. Lend: prestas tú."
+        },
+        {
+          "key": "push",
+          "type": "term",
+          "text": "push",
+          "meaning": "empujar",
+          "pronunciation": "PUSH",
+          "examples": [
+            {
+              "text": "Push the door.",
+              "translation": "Empuja la puerta.",
+              "mirror": {
+                "say": "Empuja la puerta",
+                "pieces": [
+                  {
+                    "es": "Empuja",
+                    "en": "Push",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la puerta",
+                    "en": "the door",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't push me!",
+              "translation": "¡No me empujes!"
+            }
+          ]
+        },
+        {
+          "key": "pull",
+          "type": "term",
+          "text": "pull",
+          "meaning": "tirar (de algo)",
+          "pronunciation": "PUL",
+          "examples": [
+            {
+              "text": "Pull the door to open it.",
+              "translation": "Tira de la puerta para abrirla.",
+              "mirror": {
+                "say": "Tira de la puerta para abrirla",
+                "pieces": [
+                  {
+                    "es": "Tira de",
+                    "en": "Pull",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la puerta",
+                    "en": "the door",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para abrir",
+                    "en": "to open",
+                    "role": "verb",
+                    "from": "para abrirla",
+                    "why": "Lo pegado se separa: open IT."
+                  },
+                  {
+                    "es": "la",
+                    "en": "it",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Push or pull?",
+              "translation": "¿Empujar o tirar?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,783 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "35-verbos-5",
+      "title": "Misión 35 · Verbos para hablar de todo",
+      "units": [
+        {
+          "key": "g-object-pronouns",
+          "type": "pattern",
+          "goal": "Lo, la, le: DETRÁS del verbo",
+          "rule": "En español «lo, la, le» van delante (la veo); en inglés, detrás: I see HER, call HIM, love IT. Son me, you, him, her, it, us, them.",
+          "pieces": [
+            {
+              "text": "I see",
+              "role": "fixed",
+              "hint": "veo"
+            },
+            {
+              "text": "her",
+              "role": "slot",
+              "hint": "la"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I see her every day.",
+              "translation": "La veo todos los días.",
+              "mirror": {
+                "say": "La veo todos los días",
+                "pieces": [
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "veo",
+                    "en": "see",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días",
+                    "why": "«Todos los días» es CADA día: every day."
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Call him tomorrow.",
+              "translation": "Llámalo mañana.",
+              "mirror": {
+                "say": "Llámalo mañana",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb",
+                    "from": "Llámalo",
+                    "why": "Lo pegado se separa y va detrás: call HIM."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "him",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love them.",
+              "translation": "Los quiero."
+            },
+            {
+              "text": "Can you help us?",
+              "translation": "¿Nos puedes ayudar?"
+            }
+          ],
+          "pitfalls": [
+            "«I her see» está mal: el pronombre va DETRÁS del verbo.",
+            "Le / les se traducen según la persona: him, her o them."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "En inglés, LO, LA y LE caminan DETRÁS del verbo.",
+            "emoji": "🚶"
+          }
+        },
+        {
+          "key": "live",
+          "type": "term",
+          "text": "live",
+          "meaning": "vivir",
+          "pronunciation": "LIV",
+          "examples": [
+            {
+              "text": "I live with my parents.",
+              "translation": "Vivo con mis padres.",
+              "mirror": {
+                "say": "Vivo con mis padres",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con mis padres",
+                    "en": "with my parents",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They live in London.",
+              "translation": "Viven en Londres."
+            }
+          ]
+        },
+        {
+          "key": "start",
+          "type": "term",
+          "text": "start",
+          "meaning": "empezar",
+          "pronunciation": "START",
+          "examples": [
+            {
+              "text": "The film starts at eight.",
+              "translation": "La película empieza a las ocho.",
+              "mirror": {
+                "say": "La película empieza a las ocho",
+                "pieces": [
+                  {
+                    "es": "La película",
+                    "en": "The film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "empieza",
+                    "en": "starts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las ocho",
+                    "en": "at eight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's start!",
+              "translation": "¡Empecemos!"
+            }
+          ]
+        },
+        {
+          "key": "finish",
+          "type": "term",
+          "text": "finish",
+          "meaning": "terminar",
+          "pronunciation": "FÍnish",
+          "examples": [
+            {
+              "text": "Have you finished your homework?",
+              "translation": "¿Has terminado los deberes?",
+              "mirror": {
+                "say": "¿Has terminado los deberes?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "terminado",
+                    "en": "finished",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS deberes",
+                    "en": "your homework",
+                    "role": "word",
+                    "from": "los deberes",
+                    "why": "Lo tuyo lleva su dueño: YOUR homework."
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The class finishes at two.",
+              "translation": "La clase termina a las dos."
+            }
+          ]
+        },
+        {
+          "key": "try",
+          "type": "term",
+          "text": "try",
+          "meaning": "intentar; probar",
+          "pronunciation": "TRÁI",
+          "examples": [
+            {
+              "text": "Try again.",
+              "translation": "Inténtalo otra vez.",
+              "mirror": {
+                "say": "Inténtalo otra vez",
+                "pieces": [
+                  {
+                    "es": "Intenta",
+                    "en": "Try",
+                    "role": "verb",
+                    "from": "Inténtalo",
+                    "why": "En inglés no hace falta «lo»: try again."
+                  },
+                  {
+                    "es": "otra vez",
+                    "en": "again",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Try this cake.",
+              "translation": "Prueba este pastel."
+            }
+          ]
+        },
+        {
+          "key": "ask",
+          "type": "term",
+          "text": "ask",
+          "meaning": "preguntar; pedir",
+          "pronunciation": "ASK",
+          "examples": [
+            {
+              "text": "Can I ask you something?",
+              "translation": "¿Puedo preguntarte algo?",
+              "mirror": {
+                "say": "¿Puedo preguntarte algo?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "preguntar",
+                    "en": "ask",
+                    "role": "verb",
+                    "from": "preguntarte",
+                    "why": "Lo pegado se separa: ask YOU."
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "algo",
+                    "en": "something",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Ask the teacher.",
+              "translation": "Pregunta al profesor."
+            }
+          ]
+        },
+        {
+          "key": "answer",
+          "type": "term",
+          "text": "answer",
+          "meaning": "responder; respuesta",
+          "pronunciation": "ÁNser",
+          "examples": [
+            {
+              "text": "Answer the phone, please.",
+              "translation": "Coge el teléfono, por favor.",
+              "mirror": {
+                "say": "Coge el teléfono, por favor",
+                "pieces": [
+                  {
+                    "es": "Responde",
+                    "en": "Answer",
+                    "role": "verb",
+                    "from": "Coge",
+                    "why": "Coger el teléfono es RESPONDERLO: answer the phone."
+                  },
+                  {
+                    "es": "el teléfono",
+                    "en": "the phone",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's the answer?",
+              "translation": "¿Cuál es la respuesta?"
+            }
+          ],
+          "notes": "La w no suena: ÁNser."
+        },
+        {
+          "key": "show",
+          "type": "term",
+          "text": "show",
+          "meaning": "enseñar, mostrar",
+          "pronunciation": "SHÓU",
+          "examples": [
+            {
+              "text": "Show me your photos.",
+              "translation": "Enséñame tus fotos.",
+              "mirror": {
+                "say": "Enséñame tus fotos",
+                "pieces": [
+                  {
+                    "es": "Enseña",
+                    "en": "Show",
+                    "role": "verb",
+                    "from": "Enséñame",
+                    "why": "Lo pegado se separa: show ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tus fotos",
+                    "en": "your photos",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A TV show.",
+              "translation": "Un programa de tele."
+            }
+          ]
+        },
+        {
+          "key": "hear",
+          "type": "term",
+          "text": "hear",
+          "meaning": "oír",
+          "pronunciation": "JÍER",
+          "examples": [
+            {
+              "text": "I can't hear you.",
+              "translation": "No te oigo.",
+              "mirror": {
+                "say": "No te oigo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "no",
+                    "why": "Oír y ver se dicen con CAN: I can't hear."
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "oír",
+                    "en": "hear",
+                    "role": "verb",
+                    "from": "oigo"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Did you hear that?",
+              "translation": "¿Has oído eso?"
+            }
+          ]
+        },
+        {
+          "key": "watch",
+          "type": "term",
+          "text": "watch",
+          "meaning": "ver (tele, partido); reloj",
+          "pronunciation": "UOCH",
+          "examples": [
+            {
+              "text": "I watch TV at night.",
+              "translation": "Veo la tele por la noche.",
+              "mirror": {
+                "say": "Veo la tele por la noche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "veo",
+                    "en": "watch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tele",
+                    "en": "TV",
+                    "role": "word",
+                    "from": "la tele"
+                  },
+                  {
+                    "es": "por la noche",
+                    "en": "at night",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My watch is slow.",
+              "translation": "Mi reloj va atrasado."
+            }
+          ]
+        },
+        {
+          "key": "send",
+          "type": "term",
+          "text": "send",
+          "meaning": "enviar, mandar",
+          "pronunciation": "SEND",
+          "examples": [
+            {
+              "text": "Send me the photo.",
+              "translation": "Mándame la foto.",
+              "mirror": {
+                "say": "Mándame la foto",
+                "pieces": [
+                  {
+                    "es": "Manda",
+                    "en": "Send",
+                    "role": "verb",
+                    "from": "Mándame",
+                    "why": "Lo pegado se separa: send ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la foto",
+                    "en": "the photo",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I sent you a message.",
+              "translation": "Te mandé un mensaje."
+            }
+          ]
+        },
+        {
+          "key": "meet",
+          "type": "term",
+          "text": "meet",
+          "meaning": "quedar; conocer",
+          "pronunciation": "MIIT",
+          "examples": [
+            {
+              "text": "Let's meet at six.",
+              "translation": "Quedamos a las seis.",
+              "mirror": {
+                "say": "Quedamos a las seis",
+                "pieces": [
+                  {
+                    "es": "Quedemos",
+                    "en": "Let's meet",
+                    "role": "verb",
+                    "from": "Quedamos",
+                    "why": "Para proponer: LET'S + verbo. Quedar es MEET."
+                  },
+                  {
+                    "es": "a las seis",
+                    "en": "at six",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Nice to meet you.",
+              "translation": "Encantado de conocerte."
+            }
+          ]
+        },
+        {
+          "key": "remember",
+          "type": "term",
+          "text": "remember",
+          "meaning": "recordar, acordarse",
+          "pronunciation": "riMÉMber",
+          "examples": [
+            {
+              "text": "I don't remember his name.",
+              "translation": "No me acuerdo de su nombre.",
+              "mirror": {
+                "say": "No me acuerdo de su nombre",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "recuerdo",
+                    "en": "remember",
+                    "role": "verb",
+                    "from": "me acuerdo de",
+                    "why": "Acordarse DE algo es REMEMBER algo, sin «de»."
+                  },
+                  {
+                    "es": "su nombre",
+                    "en": "his name",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Remember to call me.",
+              "translation": "Acuérdate de llamarme."
+            }
+          ]
+        },
+        {
+          "key": "forget",
+          "type": "term",
+          "text": "forget",
+          "meaning": "olvidar",
+          "pronunciation": "forGUÉT",
+          "examples": [
+            {
+              "text": "Don't forget your keys.",
+              "translation": "No olvides las llaves.",
+              "mirror": {
+                "say": "No olvides las llaves",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "olvides",
+                    "en": "forget",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS llaves",
+                    "en": "your keys",
+                    "role": "word",
+                    "from": "las llaves",
+                    "why": "Lo tuyo lleva su dueño: YOUR keys."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I forgot!",
+              "translation": "¡Se me olvidó!"
+            }
+          ]
+        },
+        {
+          "key": "teach",
+          "type": "term",
+          "text": "teach",
+          "meaning": "enseñar (una materia)",
+          "pronunciation": "TIICH",
+          "examples": [
+            {
+              "text": "She teaches English.",
+              "translation": "Enseña inglés.",
+              "mirror": {
+                "say": "Enseña inglés",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "enseña",
+                    "en": "teaches",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you teach me?",
+              "translation": "¿Me enseñas?"
+            }
+          ],
+          "notes": "Enseñar una materia es teach; enseñar algo para que lo veas es show."
+        },
+        {
+          "key": "explain",
+          "type": "term",
+          "text": "explain",
+          "meaning": "explicar",
+          "pronunciation": "ekSPLÉIN",
+          "examples": [
+            {
+              "text": "Can you explain it again?",
+              "translation": "¿Puedes explicarlo otra vez?",
+              "mirror": {
+                "say": "¿Puedes explicarlo otra vez?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "explicar",
+                    "en": "explain",
+                    "role": "verb",
+                    "from": "explicarlo",
+                    "why": "Lo pegado se separa: explain IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "otra vez",
+                    "en": "again",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Let me explain.",
+              "translation": "Déjame que te explique."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

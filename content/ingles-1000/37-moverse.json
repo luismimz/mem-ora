@@ -1,0 +1,702 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "37-moverse",
+      "title": "Misión 37 · Moverse por la ciudad",
+      "units": [
+        {
+          "key": "g-directions",
+          "type": "pattern",
+          "goal": "Indicar el camino",
+          "rule": "Go straight on (todo recto), turn left / right (gira), take the second street (coge la segunda calle). It's on the left (a la izquierda).",
+          "pieces": [
+            {
+              "text": "Turn",
+              "role": "fixed",
+              "hint": "gira a"
+            },
+            {
+              "text": "left",
+              "role": "slot",
+              "hint": "la izquierda"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Go straight on and turn right.",
+              "translation": "Sigue todo recto y gira a la derecha.",
+              "mirror": {
+                "say": "Sigue todo recto y gira a la derecha",
+                "pieces": [
+                  {
+                    "es": "Sigue",
+                    "en": "Go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todo recto",
+                    "en": "straight on",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gira",
+                    "en": "turn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la derecha",
+                    "en": "right",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's on the left.",
+              "translation": "Está a la izquierda.",
+              "mirror": {
+                "say": "Está a la izquierda",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la izquierda",
+                    "en": "on the left",
+                    "role": "word",
+                    "from": "a la izquierda",
+                    "why": "Estar a un lado es ON the left."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take the second street on the right.",
+              "translation": "Coge la segunda calle a la derecha."
+            },
+            {
+              "text": "Excuse me, how do I get to the station?",
+              "translation": "Perdone, ¿cómo llego a la estación?"
+            }
+          ],
+          "pitfalls": [
+            "«Turn to the left» se entiende, pero se dice turn left.",
+            "Todo recto no es «all straight»: go straight on."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un GPS con ACENTO inglés: TURN LEFT, GO STRAIGHT ON.",
+            "emoji": "🧭"
+          }
+        },
+        {
+          "key": "car",
+          "type": "term",
+          "text": "car",
+          "meaning": "coche",
+          "pronunciation": "KAR",
+          "examples": [
+            {
+              "text": "My car is red.",
+              "translation": "Mi coche es rojo.",
+              "mirror": {
+                "say": "Mi coche es rojo",
+                "pieces": [
+                  {
+                    "es": "Mi coche",
+                    "en": "My car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rojo",
+                    "en": "red",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you drive a car?",
+              "translation": "¿Sabes conducir un coche?"
+            }
+          ]
+        },
+        {
+          "key": "bus",
+          "type": "term",
+          "text": "bus",
+          "meaning": "autobús",
+          "pronunciation": "BAS",
+          "examples": [
+            {
+              "text": "The bus is late again.",
+              "translation": "El autobús llega tarde otra vez.",
+              "mirror": {
+                "say": "El autobús llega tarde otra vez",
+                "pieces": [
+                  {
+                    "es": "El autobús",
+                    "en": "The bus",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "llega",
+                    "why": "Llegar con retraso es «estar tarde»: the bus IS late."
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  },
+                  {
+                    "es": "otra vez",
+                    "en": "again",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I take the bus to work.",
+              "translation": "Cojo el autobús para ir al trabajo."
+            }
+          ]
+        },
+        {
+          "key": "bike",
+          "type": "term",
+          "text": "bike",
+          "meaning": "bici",
+          "pronunciation": "BÁIK",
+          "examples": [
+            {
+              "text": "I go to work by bike.",
+              "translation": "Voy al trabajo en bici.",
+              "mirror": {
+                "say": "Voy al trabajo en bici",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al trabajo",
+                    "en": "to work",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en bici",
+                    "en": "by bike",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you ride a bike?",
+              "translation": "¿Sabes montar en bici?"
+            }
+          ]
+        },
+        {
+          "key": "taxi",
+          "type": "term",
+          "text": "taxi",
+          "meaning": "taxi",
+          "pronunciation": "TÁksi",
+          "examples": [
+            {
+              "text": "Let's take a taxi.",
+              "translation": "Cojamos un taxi.",
+              "mirror": {
+                "say": "Cojamos un taxi",
+                "pieces": [
+                  {
+                    "es": "Cojamos",
+                    "en": "Let's take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un taxi",
+                    "en": "a taxi",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Call a taxi, please.",
+              "translation": "Llama a un taxi, por favor."
+            }
+          ]
+        },
+        {
+          "key": "underground",
+          "type": "term",
+          "text": "underground",
+          "meaning": "metro",
+          "pronunciation": "ÁNdergraund",
+          "examples": [
+            {
+              "text": "The underground is faster.",
+              "translation": "El metro es más rápido.",
+              "mirror": {
+                "say": "El metro es más rápido",
+                "pieces": [
+                  {
+                    "es": "El metro",
+                    "en": "The underground",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rápid-ER",
+                    "en": "fast-ER",
+                    "role": "word",
+                    "from": "más rápido",
+                    "why": "Palabra corta: -ER al final. Fast → faster."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take the underground to the centre.",
+              "translation": "Coge el metro hasta el centro."
+            }
+          ],
+          "notes": "En Londres: the Tube. En EE. UU.: the subway."
+        },
+        {
+          "key": "traffic",
+          "type": "term",
+          "text": "traffic",
+          "meaning": "tráfico",
+          "pronunciation": "TRÁfik",
+          "examples": [
+            {
+              "text": "There is a lot of traffic today.",
+              "translation": "Hoy hay mucho tráfico.",
+              "mirror": {
+                "say": "Hoy hay mucho tráfico",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mucho tráfico",
+                    "en": "a lot of traffic",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I was stuck in traffic.",
+              "translation": "Me quedé atascado en el tráfico."
+            }
+          ]
+        },
+        {
+          "key": "road",
+          "type": "term",
+          "text": "road",
+          "meaning": "carretera",
+          "pronunciation": "RÓUD",
+          "examples": [
+            {
+              "text": "Be careful on the road.",
+              "translation": "Ten cuidado en la carretera.",
+              "mirror": {
+                "say": "Ten cuidado en la carretera",
+                "pieces": [
+                  {
+                    "es": "Ten cuidado",
+                    "en": "Be careful",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la carretera",
+                    "en": "on the road",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This road goes to the beach.",
+              "translation": "Esta carretera va a la playa."
+            }
+          ]
+        },
+        {
+          "key": "driver",
+          "type": "term",
+          "text": "driver",
+          "meaning": "conductor",
+          "pronunciation": "DRÁIver",
+          "examples": [
+            {
+              "text": "The bus driver is very nice.",
+              "translation": "El conductor del autobús es muy majo.",
+              "mirror": {
+                "say": "El conductor del autobús es muy majo",
+                "pieces": [
+                  {
+                    "es": "El conductor",
+                    "en": "driver",
+                    "role": "who"
+                  },
+                  {
+                    "es": "del autobús",
+                    "en": "The bus",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy majo",
+                    "en": "very nice",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A taxi driver.",
+              "translation": "Un taxista."
+            }
+          ]
+        },
+        {
+          "key": "corner",
+          "type": "term",
+          "text": "corner",
+          "meaning": "esquina",
+          "pronunciation": "KÓRner",
+          "examples": [
+            {
+              "text": "The shop is on the corner.",
+              "translation": "La tienda está en la esquina.",
+              "mirror": {
+                "say": "La tienda está en la esquina",
+                "pieces": [
+                  {
+                    "es": "La tienda",
+                    "en": "The shop",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la esquina",
+                    "en": "on the corner",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Turn left at the corner.",
+              "translation": "Gira a la izquierda en la esquina."
+            }
+          ]
+        },
+        {
+          "key": "left",
+          "type": "term",
+          "text": "left",
+          "meaning": "izquierda",
+          "pronunciation": "LEFT",
+          "examples": [
+            {
+              "text": "Turn left at the bank.",
+              "translation": "Gira a la izquierda en el banco.",
+              "mirror": {
+                "say": "Gira a la izquierda en el banco",
+                "pieces": [
+                  {
+                    "es": "Gira",
+                    "en": "Turn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la izquierda",
+                    "en": "left",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el banco",
+                    "en": "at the bank",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My left hand.",
+              "translation": "Mi mano izquierda."
+            }
+          ]
+        },
+        {
+          "key": "right",
+          "type": "term",
+          "text": "right",
+          "meaning": "derecha; correcto",
+          "pronunciation": "RÁIT",
+          "examples": [
+            {
+              "text": "The station is on the right.",
+              "translation": "La estación está a la derecha.",
+              "mirror": {
+                "say": "La estación está a la derecha",
+                "pieces": [
+                  {
+                    "es": "La estación",
+                    "en": "The station",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la derecha",
+                    "en": "on the right",
+                    "role": "word",
+                    "from": "a la derecha",
+                    "why": "Estar a un lado es ON the right."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You're right.",
+              "translation": "Tienes razón."
+            }
+          ]
+        },
+        {
+          "key": "straight",
+          "type": "term",
+          "text": "straight",
+          "meaning": "recto",
+          "pronunciation": "STRÉIT",
+          "examples": [
+            {
+              "text": "Go straight on.",
+              "translation": "Sigue todo recto.",
+              "mirror": {
+                "say": "Sigue todo recto",
+                "pieces": [
+                  {
+                    "es": "Sigue",
+                    "en": "Go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todo recto",
+                    "en": "straight on",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Straight hair.",
+              "translation": "Pelo liso."
+            }
+          ]
+        },
+        {
+          "key": "parking",
+          "type": "term",
+          "text": "parking",
+          "meaning": "aparcamiento",
+          "pronunciation": "PÁRking",
+          "examples": [
+            {
+              "text": "Is there parking near here?",
+              "translation": "¿Hay aparcamiento cerca?",
+              "mirror": {
+                "say": "¿Hay aparcamiento cerca?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aparcamiento",
+                    "en": "parking",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cerca de aquí",
+                    "en": "near here",
+                    "role": "word",
+                    "from": "cerca"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Parking is expensive here.",
+              "translation": "Aquí aparcar es caro."
+            }
+          ]
+        },
+        {
+          "key": "petrol",
+          "type": "term",
+          "text": "petrol",
+          "meaning": "gasolina",
+          "pronunciation": "PÉtrol",
+          "examples": [
+            {
+              "text": "We need petrol.",
+              "translation": "Necesitamos gasolina.",
+              "mirror": {
+                "say": "Necesitamos gasolina",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "gasolina",
+                    "en": "petrol",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A petrol station.",
+              "translation": "Una gasolinera."
+            }
+          ],
+          "notes": "En EE. UU. se dice gas."
+        },
+        {
+          "key": "crossing",
+          "type": "term",
+          "text": "crossing",
+          "meaning": "paso de peatones",
+          "pronunciation": "KRÓsing",
+          "examples": [
+            {
+              "text": "Cross at the crossing.",
+              "translation": "Cruza por el paso de peatones.",
+              "mirror": {
+                "say": "Cruza por el paso de peatones",
+                "pieces": [
+                  {
+                    "es": "Cruza",
+                    "en": "Cross",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el paso de peatones",
+                    "en": "at the crossing",
+                    "role": "word",
+                    "from": "por el paso de peatones"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There is a crossing here.",
+              "translation": "Aquí hay un paso de peatones."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
