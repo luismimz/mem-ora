@@ -255,7 +255,7 @@ export default {
       const practice = weakFresh.length >= 2 ? weakFresh : weakAll;
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, maxNewUnits: flowNew,
-            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner) })
+            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
