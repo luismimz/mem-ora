@@ -18,7 +18,7 @@ type View =
   | { name: 'offline' }
   | { name: 'offlineSession'; bundle: OfflineBundle; session: OfflineSession }
   | { name: 'studio' }
-  | { name: 'session'; course: Course; payload: SessionPayload; mission?: string }
+  | { name: 'session'; course: Course; payload: SessionPayload; mission?: string; focus?: 'fallos' }
   | { name: 'preview'; payload: SessionPayload | null; error?: string };
 
 const PREF = 'memora.preferences';
@@ -45,7 +45,7 @@ const cleanTitle = (t: string) => t.replace(/\s*\(.*\)$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
-type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string } | { name: 'preview'; unit: string };
+type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' } | { name: 'preview'; unit: string };
 function readRoute(): Route {
   const { pathname, search } = window.location;
   const q = new URLSearchParams(search);
@@ -54,7 +54,7 @@ function readRoute(): Route {
   if (pathname === '/perfil') return { name: 'profile' };
   if (pathname === '/sin-conexion') return { name: 'offline' };
   if (pathname === '/studio') return { name: 'studio' };
-  if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}) };
+  if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}), ...(q.get('foco') === 'fallos' ? { focus: 'fallos' as const } : {}) };
   return { name: 'home' };
 }
 function routePath(r: Route): string {
@@ -62,7 +62,7 @@ function routePath(r: Route): string {
   if (r.name === 'offline') return '/sin-conexion';
   if (r.name === 'studio') return '/studio';
   if (r.name === 'preview') return `/preview/${r.unit}`;
-  if (r.name === 'session') return `/sesion?curso=${encodeURIComponent(r.course)}${r.mission ? `&mision=${encodeURIComponent(r.mission)}` : ''}`;
+  if (r.name === 'session') return `/sesion?curso=${encodeURIComponent(r.course)}${r.mission ? `&mision=${encodeURIComponent(r.mission)}` : ''}${r.focus ? `&foco=${r.focus}` : ''}`;
   return '/';
 }
 const TITLES: Record<string, string> = { offline: 'Sin conexión', offlineSession: 'Sesión sin conexión', home: 'Inicio', profile: 'Tu perfil', studio: 'Studio', session: 'Sesión', preview: 'Vista previa', login: 'Entrar', loading: 'Memora' };
@@ -91,12 +91,12 @@ export function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courses]);
 
-  async function openSession(c: Course, mission?: string) {
+  async function openSession(c: Course, mission?: string, focus?: 'fallos') {
     setLanguage(c.ui_language);
     setAudioEnabled(c.audio_enabled !== false);
     setError(null);
     setNotice(null);
-    try { setView({ name: 'session', course: c, payload: await api.session(c.id, mission), ...(mission ? { mission } : {}) }); }
+    try { setView({ name: 'session', course: c, payload: await api.session(c.id, mission, focus), ...(mission ? { mission } : {}), ...(focus ? { focus } : {}) }); }
     catch (e) { setError(e instanceof ApiError ? e.message : 'Algo ha fallado.'); window.history.replaceState(null, '', '/'); setView({ name: 'home' }); }
   }
 
@@ -107,7 +107,7 @@ export function App() {
     }
     if (r.name === 'session') {
       const c = list.find((x) => x.id === r.course);
-      if (c) { setCourse(c.id); return openSession(c, r.mission); }
+      if (c) { setCourse(c.id); return openSession(c, r.mission, r.focus); }
       window.history.replaceState(null, '', '/');
       return setView({ name: 'home' });
     }
@@ -182,7 +182,7 @@ export function App() {
   if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview staff={staff} onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
   // Modo Flujo (D-072): pantalla completa propia, sin la estructura de la sesión por escenas.
-  if (view.name === 'session' && (view.payload.state.plan as { mode?: string }).mode === 'flow') return <Feed key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={leaveSession} onAgain={() => void openSession(view.course, view.mission)} next={() => api.session(view.course.id)} />;
+  if (view.name === 'session' && (view.payload.state.plan as { mode?: string }).mode === 'flow') return <Feed key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={leaveSession} onAgain={() => void openSession(view.course, view.mission, view.focus)} next={() => api.session(view.course.id)} />;
   if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={leaveSession} onReload={() => void openSession(view.course, view.mission)} onMission={(key) => go({ name: 'session', course: view.course.id, mission: key })} /></div>;
 
   if (view.name === 'offlineSession') {
@@ -241,6 +241,13 @@ export function App() {
                   </>
                 ) : <p>Desliza para aprender. Los repasos vuelven solos, justo antes de que se te olviden.</p>}
                 <button type="button" className="primary" onClick={() => open(has(mode) ? mode : 'associations')}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
+                {(current.modes as string[]).includes('flow') && (prog?.failures ?? 0) > 0 && (
+                  <button type="button" className="fails-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'fallos' })}>
+                    <span className="fails-n">{prog!.failures}</span>
+                    <span><b>Vacía tus fallos</b><small>{prog!.failures === 1 ? 'Te queda 1 por acertar' : `Te quedan ${prog!.failures} por acertar`}{prog!.failures! > 8 ? ' · de 8 en 8' : ''}</small></span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                )}
               </div>
             </div>
           ) : <p className="banner">Todavía no tienes cursos publicados.</p>}
@@ -396,15 +403,18 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
   const done = list.filter((m) => m.status === 'done').length;
   const active = list.filter((m) => m.status === 'active').length;
   const pending = list.length - done - active;
+  // Cuarto estado: lo ya trabajado que se está olvidando («conviene repasar»).
+  const review = list.filter((m) => m.status !== 'pending' && (m.due ?? 0) > 0).length;
   const clean = (t: string) => t.replace(/^Misión \d+ · /, '');
   return (
     <section className="missions" aria-label="Misiones">
       <div className="missions-head">
         <div><p className="eyebrow">TUS MISIONES</p><h2 className="h2">{done}/{list.length} completadas</h2></div>
         <ul className="missions-legend" aria-label="Leyenda">
-          <li className="done">{done} completadas</li>
+          <li className="done">{done} {done === 1 ? 'completada' : 'completadas'}</li>
           <li className="active">{active} en curso</li>
-          <li className="pending">{pending} pendientes</li>
+          <li className="pending">{pending} {pending === 1 ? 'pendiente' : 'pendientes'}</li>
+          {review > 0 && <li className="review">{review} por repasar</li>}
         </ul>
       </div>
       <i className="missions-total" aria-hidden="true"><i style={{ width: `${(done / list.length) * 100}%` }} /></i>
@@ -412,13 +422,14 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
         {list.map((m) => {
           const isCurrent = m.key === current;
           const pct = m.total ? Math.round((m.worked / m.total) * 100) : 0;
+          const fading = m.status !== 'pending' && (m.due ?? 0) > 0;
           return (
             <li key={m.key}>
-              <button type="button" className={`mission ${m.status} ${isCurrent ? 'current' : ''}`} onClick={() => onOpen(m.key)}
-                aria-label={`Misión ${m.index}: ${clean(m.title)}. ${m.status === 'done' ? 'Completada' : m.status === 'active' ? `En curso, ${m.worked} de ${m.total}` : 'Pendiente'}`}>
+              <button type="button" className={`mission ${m.status} ${fading ? 'fading' : ''} ${isCurrent ? 'current' : ''}`} onClick={() => onOpen(m.key)}
+                aria-label={`Misión ${m.index}: ${clean(m.title)}. ${m.status === 'done' ? 'Completada' : m.status === 'active' ? `En curso, ${m.worked} de ${m.total}` : 'Pendiente'}${fading ? `. Conviene repasar ${m.due}` : ''}`}>
                 <span className="mission-top">
                   <span className="mission-n">{m.status === 'done' ? '✓' : m.index}</span>
-                  <span className="mission-state">{isCurrent ? 'CONTINUAR →' : m.status === 'done' ? 'COMPLETADA' : m.status === 'active' ? 'EN CURSO' : 'PENDIENTE'}</span>
+                  <span className="mission-state">{isCurrent ? 'CONTINUAR →' : fading ? `REPASAR · ${m.due}` : m.status === 'done' ? 'COMPLETADA' : m.status === 'active' ? 'EN CURSO' : 'PENDIENTE'}</span>
                 </span>
                 <b>{clean(m.title)}</b>
                 <span className="mission-foot">

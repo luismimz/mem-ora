@@ -851,7 +851,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     const ready = upcoming !== 'loading';
     card = (
       <Slide tone={45} className="end" onNext={nextRound}>
-        <p className="tag">🏁 RONDA {round} COMPLETADA</p>
+        <p className="tag">{batch.state.focus === 'fallos' ? '🧹 RONDA DE FALLOS COMPLETADA' : `🏁 RONDA ${round} COMPLETADA`}</p>
         <div className="end-xp">+{roundXp} XP</div>
         <div className="end-stats">
           <div><b>{progress?.streak ?? '—'}</b><span>{progress?.streak === 1 ? 'día de racha' : 'días de racha'} 🔥</span></div>
@@ -865,6 +865,9 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
             <i><i style={{ width: `${Math.min(100, Math.round((progress.today.newUnits / Math.max(1, progress.today.goal)) * 100))}%` }} /></i>
           </div>
         )}
+        {progress?.failures !== undefined && (progress.failures > 0
+          ? <p className="end-fails">❌ Te {progress.failures === 1 ? 'queda 1 fallo' : `quedan ${progress.failures} fallos`} por acertar. Vacíalos desde Inicio.</p>
+          : batch.state.focus === 'fallos' && <p className="end-fails clean">🧹 ¡Fallos vaciados! No te queda ninguno.</p>)}
         {progress && <p className="end-memory">🧠 <b>{workedUnits}</b> trabajadas · <b>{inMemory}</b> ya en tu memoria a largo plazo</p>}
         {current && (
           <div className="end-mission">

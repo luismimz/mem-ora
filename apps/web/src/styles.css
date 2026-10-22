@@ -669,3 +669,20 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .mchip.lit .back { box-shadow: 0 0 0 3px #fff, 0 0 18px rgba(255,255,255,.7); transform: rotateY(180deg) scale(1.12); transition: transform .2s ease, box-shadow .2s ease; }
 .morph { justify-content: flex-start; padding-top: 1.1rem; }
 .morph-say { margin-top: .6rem; }
+
+/* Mapa de misiones, cuarto estado (ideas de benrios.dev): lo trabajado que se está olvidando, en ámbar y «apagándose». */
+.missions-legend .review::before { background: var(--warm); }
+.mission.fading { background: var(--warm-soft); }
+.mission.fading .mission-state { color: var(--warm); }
+.mission.fading .mission-n { background: var(--warm); color: var(--surface-strong); animation: fade-pulse 2.4s ease-in-out infinite; }
+.mission.fading .mission-bar i { background: var(--warm); opacity: .7; }
+@keyframes fade-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { .mission.fading .mission-n { animation: none; } }
+
+/* «Vacía tus fallos»: un minirreto que se vacía al acertar. */
+.fails-btn { width: 100%; margin-top: .7rem; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .8rem; text-align: left; border: 1.5px solid var(--ko); background: var(--ko-soft); color: var(--ink); border-radius: 1rem; padding: .75rem .95rem; font: inherit; cursor: pointer; }
+.fails-btn b { display: block; font-size: 1rem; } .fails-btn small { color: var(--muted); font-weight: 600; }
+.fails-n { min-width: 2.3rem; height: 2.3rem; padding: 0 .5rem; border-radius: 99px; background: var(--ko); color: var(--surface-strong); display: grid; place-items: center; font-weight: 900; font-size: 1.05rem; }
+.fails-btn:active { transform: scale(.98); }
+.end-fails { margin: .5rem 0 0; padding: .55rem .8rem; border-radius: .9rem; background: var(--ko-soft); color: var(--ink); font-weight: 700; font-size: .92rem; }
+.end-fails.clean { background: var(--ok-soft); }
