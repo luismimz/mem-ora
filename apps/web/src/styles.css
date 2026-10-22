@@ -686,3 +686,18 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .fails-btn:active { transform: scale(.98); }
 .end-fails { margin: .5rem 0 0; padding: .55rem .8rem; border-radius: .9rem; background: var(--ko-soft); color: var(--ink); font-weight: 700; font-size: .92rem; }
 .end-fails.clean { background: var(--ok-soft); }
+
+/* «Reportar un error» (idea de benrios.dev): discreto arriba; la hoja sale desde abajo, al alcance del pulgar. */
+.feed-flag { -webkit-tap-highlight-color: transparent; border: 0; background: rgba(255,255,255,.14); color: inherit; font-size: 1rem; line-height: 1; min-width: 2.2rem; height: 2.2rem; border-radius: 1rem; display: grid; place-items: center; opacity: .8; }
+.report-veil { position: fixed; inset: 0; z-index: 8; background: rgba(0,0,0,.45); display: flex; align-items: flex-end; justify-content: center; }
+.report-sheet { width: 100%; max-width: 32rem; background: var(--surface-strong); color: var(--ink); border-radius: 1.6rem 1.6rem 0 0; padding: 1.2rem 1.1rem max(1rem, env(safe-area-inset-bottom)); box-shadow: 0 -20px 50px rgba(0,0,0,.25); animation: sheet-up .22s ease-out; }
+.report-sheet h3 { margin: .4rem 0 .9rem; font-size: 1.15rem; }
+.report-options { display: grid; gap: .5rem; }
+.report-options button { text-align: left; border: 1px solid var(--line); background: var(--surface-soft); color: var(--ink); border-radius: 1rem; padding: .85rem 1rem; font: inherit; font-weight: 650; min-height: 3rem; }
+.report-options button:active { transform: scale(.98); }
+.report-sheet textarea { width: 100%; box-sizing: border-box; border: 1px solid var(--line); border-radius: 1rem; padding: .8rem; font: inherit; font-size: 16px; margin-bottom: .6rem; background: var(--surface); color: var(--ink); }
+.report-cancel { display: block; margin: .6rem auto 0; }
+.report-toast { position: fixed; z-index: 9; left: 50%; bottom: max(1.4rem, env(safe-area-inset-bottom)); transform: translateX(-50%); margin: 0; background: #2a2723; color: #fff; font-weight: 750; padding: .7rem 1.1rem; border-radius: 1rem; box-shadow: 0 10px 30px rgba(0,0,0,.3); width: max-content; max-width: calc(100vw - 2rem); }
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .report-sheet { animation: none; } }
+.req-error { color: var(--ko); font-weight: 700; }

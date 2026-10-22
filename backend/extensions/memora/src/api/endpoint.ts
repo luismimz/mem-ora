@@ -6,6 +6,9 @@
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación, racha y protectores
 //   POST /memora/clarify                 «Explícame más»: pide ampliar una ficha (D-077)
+//   POST /memora/report                  «Reportar un error» de una tarjeta (va a la cola de Studio)
+//   GET  /memora/studio/requests?course=… avisos de los alumnos pendientes (errores y «Explícame más»)
+//   POST /memora/studio/requests/:id     marcar un aviso como atendido o descartado
 //   GET  /memora/push/key                clave pública para el aviso de repaso en el móvil (D-077)
 //   POST /memora/push/subscribe|unsubscribe|test   suscripción de este dispositivo y aviso de prueba
 //   GET  /memora/push/message            texto del aviso (lo pide el service worker al recibirlo)
@@ -61,6 +64,9 @@ function newUnitsSince(learner: Learner, dayStart: number): number {
   for (const sk of Object.values(learner.skills)) if (sk.presentedAt) firstSeen[sk.unitId] = Math.min(firstSeen[sk.unitId] ?? Infinity, sk.presentedAt);
   return Object.values(firstSeen).filter((t) => t >= dayStart).length;
 }
+
+/** Motivos de «Reportar un error» (la app los muestra con su texto). */
+const REPORT_REASONS = ['asociacion', 'significado', 'respuesta', 'audio', 'otro'];
 
 /** Fallos por ronda de «Vacía tus fallos»: corta, para vaciarlos en tandas. */
 const FAILURES_PER_ROUND = 8;
@@ -507,6 +513,25 @@ export default {
       return { data: { saved: true } };
     }));
 
+    // «Reportar un error» (idea de benrios.dev, 22-oct-2026): el alumno avisa de que algo de una tarjeta está mal. Va a
+    // la misma cola que «Explícame más» (content_requests), con la tarjeta «error:<motivo>», y se atiende en Studio.
+    router.post('/report', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.body?.course, userId);
+      const unitKey = String(req.body?.unit ?? '').slice(0, 120);
+      const reason = REPORT_REASONS.includes(req.body?.reason) ? String(req.body.reason) : null;
+      if (!unitKey || !reason) throw new HttpError(400, 'BAD_REQUEST', 'Falta la unidad o el motivo.');
+      const unit = await db('units').where({ course: course.id, key: unitKey }).first('id');
+      if (!unit) throw new HttpError(404, 'NOT_FOUND', 'Unidad no disponible.');
+      const step = `error:${reason}`;
+      const note = typeof req.body?.note === 'string' ? req.body.note.trim().slice(0, 500) || null : null;
+      // Un aviso abierto por alumno, unidad y motivo: si lo repite, solo se suma una vez más.
+      const open = await db('content_requests').where({ user: userId, unit: unit.id, status: 'open', step }).first('id', 'times');
+      if (open) await db('content_requests').where({ id: open.id }).update({ times: (open.times ?? 1) + 1, ...(note ? { note } : {}), date_updated: new Date() });
+      else await db('content_requests').insert({ id: randomUUID(), user: userId, course: course.id, unit: unit.id, step, note, times: 1, status: 'open', date_created: new Date(), date_updated: new Date() });
+      return { data: { saved: true } };
+    }));
+
     // Aviso de repaso en el móvil (D-077). La clave pública no es secreta; la privada solo vive en el entorno.
     router.get('/push/key', wrap(async () => ({ data: { publicKey: vapidFromEnv(process.env)?.publicKey ?? null } })));
     router.post('/push/subscribe', wrap(async (req) => {
@@ -582,6 +607,27 @@ export default {
           return { id: m.id, key: m.key, title: m.title, status: m.status, total: own.length, draft: count('draft'), review: count('needs_review'), approved: count('approved'), published: count('published'), rejected: count('rejected') };
         }),
       };
+    }));
+
+    // Avisos de los alumnos: errores reportados y «Explícame más» pendientes de un curso, los errores primero.
+    router.get('/studio/requests', wrap(async (req) => {
+      await requireStaff(req.accountability, 'Studio');
+      const courseId = typeof req.query.course === 'string' ? req.query.course : '';
+      const rows: Row[] = await db('content_requests').where({ course: courseId, status: 'open' }).select('id', 'unit', 'step', 'note', 'times', 'date_updated');
+      const units: Row[] = rows.length ? await db('units').whereIn('id', [...new Set(rows.map((r) => r.unit))]).select('id', 'key', 'payload') : [];
+      const byId = new Map(units.map((u) => [u.id, u]));
+      const label = (u: Row | undefined) => { const p = u ? parse(u.payload) ?? {} : {}; return String(p.text ?? p.title ?? p.name ?? u?.key ?? '?').slice(0, 80); };
+      const data = rows.map((r) => ({ id: r.id, unitId: r.unit, unit: byId.get(r.unit)?.key ?? '?', label: label(byId.get(r.unit)), kind: String(r.step ?? '').startsWith('error:') ? 'error' : 'explain',
+        reason: String(r.step ?? '').startsWith('error:') ? String(r.step).slice(6) : null, note: r.note ?? null, times: r.times ?? 1, at: new Date(r.date_updated).getTime() }));
+      data.sort((a, b) => (a.kind === b.kind ? b.at - a.at : a.kind === 'error' ? -1 : 1));
+      return { data };
+    }));
+    router.post('/studio/requests/:id', wrap(async (req) => {
+      await requireStaff(req.accountability, 'Studio');
+      const status = req.body?.status === 'dismissed' ? 'dismissed' : 'done';
+      const n = await db('content_requests').where({ id: req.params.id }).update({ status, date_updated: new Date() });
+      if (!n) throw new HttpError(404, 'NOT_FOUND', 'Aviso no encontrado.');
+      return { data: { saved: true } };
     }));
 
     // Probar una misión entera como alumno: todas sus unidades (también borradores) en una sesión que no guarda nada.
