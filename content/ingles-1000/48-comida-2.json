@@ -1,0 +1,776 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "48-comida-2",
+      "title": "Misión 48 · Más comida",
+      "units": [
+        {
+          "key": "g-much-many",
+          "type": "pattern",
+          "goal": "MUCH o MANY: ¿se puede contar?",
+          "rule": "MANY con lo que se cuenta (many apples, many people). MUCH con lo que no (much water, much time). En frases normales: a lot of.",
+          "pieces": [
+            {
+              "text": "How",
+              "role": "fixed",
+              "hint": "¿cuánto"
+            },
+            {
+              "text": "much water",
+              "role": "slot",
+              "hint": "agua"
+            }
+          ],
+          "examples": [
+            {
+              "text": "How much water do you drink?",
+              "translation": "¿Cuánta agua bebes?",
+              "mirror": {
+                "say": "¿Cuánta agua bebes?",
+                "pieces": [
+                  {
+                    "es": "Cuánta agua",
+                    "en": "How much water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "bebes",
+                    "en": "drink",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How many eggs do we need?",
+              "translation": "¿Cuántos huevos necesitamos?",
+              "mirror": {
+                "say": "¿Cuántos huevos necesitamos?",
+                "pieces": [
+                  {
+                    "es": "Cuántos huevos",
+                    "en": "How many eggs",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't have much time.",
+              "translation": "No tengo mucho tiempo."
+            },
+            {
+              "text": "There are a lot of people.",
+              "translation": "Hay mucha gente."
+            }
+          ],
+          "pitfalls": [
+            "«Many water» está mal: el agua no se cuenta (much water).",
+            "En frases normales suena mejor a lot of: I have a lot of time."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "MANY cuenta MANZANAS; MUCH mide AGUA.",
+            "emoji": "🍎"
+          }
+        },
+        {
+          "key": "fruit",
+          "type": "term",
+          "text": "fruit",
+          "meaning": "fruta",
+          "pronunciation": "FRUUT",
+          "examples": [
+            {
+              "text": "I eat fruit every day.",
+              "translation": "Como fruta todos los días.",
+              "mirror": {
+                "say": "Como fruta todos los días",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fruta",
+                    "en": "fruit",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días",
+                    "why": "«Todos los días» es CADA día: every day."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fruit juice.",
+              "translation": "Zumo de frutas."
+            }
+          ]
+        },
+        {
+          "key": "vegetables",
+          "type": "term",
+          "text": "vegetables",
+          "meaning": "verduras",
+          "pronunciation": "VÉCHtabols",
+          "examples": [
+            {
+              "text": "Eat your vegetables!",
+              "translation": "¡Cómete la verdura!",
+              "mirror": {
+                "say": "¡Cómete la verdura!",
+                "pieces": [
+                  {
+                    "es": "Come",
+                    "en": "Eat",
+                    "role": "verb",
+                    "from": "Cómete"
+                  },
+                  {
+                    "es": "TUS verduras",
+                    "en": "your vegetables",
+                    "role": "word",
+                    "from": "la verdura",
+                    "why": "En inglés: TUS verduras, en plural."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fresh vegetables.",
+              "translation": "Verduras frescas."
+            }
+          ]
+        },
+        {
+          "key": "potato",
+          "type": "term",
+          "text": "potato",
+          "meaning": "patata",
+          "pronunciation": "poTÉItou",
+          "examples": [
+            {
+              "text": "I love fried potatoes.",
+              "translation": "Me encantan las patatas fritas.",
+              "mirror": {
+                "say": "Me encantan las patatas fritas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "me encantan",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "patatas",
+                    "en": "potatoes",
+                    "role": "word",
+                    "from": "las patatas"
+                  },
+                  {
+                    "es": "fritas",
+                    "en": "fried",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A baked potato.",
+              "translation": "Una patata asada."
+            }
+          ]
+        },
+        {
+          "key": "tomato",
+          "type": "term",
+          "text": "tomato",
+          "meaning": "tomate",
+          "pronunciation": "toMÁtou",
+          "examples": [
+            {
+              "text": "Add two tomatoes.",
+              "translation": "Añade dos tomates.",
+              "mirror": {
+                "say": "Añade dos tomates",
+                "pieces": [
+                  {
+                    "es": "Añade",
+                    "en": "Add",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dos tomates",
+                    "en": "two tomatoes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Tomato sauce.",
+              "translation": "Salsa de tomate."
+            }
+          ],
+          "notes": "En EE. UU. se dice toMÉItou."
+        },
+        {
+          "key": "onion",
+          "type": "term",
+          "text": "onion",
+          "meaning": "cebolla",
+          "pronunciation": "Ánion",
+          "examples": [
+            {
+              "text": "I don't like onion.",
+              "translation": "No me gusta la cebolla.",
+              "mirror": {
+                "say": "No me gusta la cebolla",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: I like…"
+                  },
+                  {
+                    "es": "cebolla",
+                    "en": "onion",
+                    "role": "word",
+                    "from": "la cebolla"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Onions make me cry.",
+              "translation": "La cebolla me hace llorar."
+            }
+          ]
+        },
+        {
+          "key": "carrot",
+          "type": "term",
+          "text": "carrot",
+          "meaning": "zanahoria",
+          "pronunciation": "KÁrot",
+          "examples": [
+            {
+              "text": "Rabbits love carrots.",
+              "translation": "A los conejos les encantan las zanahorias.",
+              "mirror": {
+                "say": "A los conejos les encantan las zanahorias",
+                "pieces": [
+                  {
+                    "es": "conejos",
+                    "en": "Rabbits",
+                    "role": "who",
+                    "from": "A los conejos",
+                    "why": "Al revés y sin «the»: rabbits love carrots."
+                  },
+                  {
+                    "es": "encantan",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "les encantan"
+                  },
+                  {
+                    "es": "zanahorias",
+                    "en": "carrots",
+                    "role": "word",
+                    "from": "las zanahorias"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Carrot cake.",
+              "translation": "Tarta de zanahoria."
+            }
+          ]
+        },
+        {
+          "key": "banana",
+          "type": "term",
+          "text": "banana",
+          "meaning": "plátano",
+          "pronunciation": "baNÁna",
+          "examples": [
+            {
+              "text": "A banana a day.",
+              "translation": "Un plátano al día.",
+              "mirror": {
+                "say": "Un plátano al día",
+                "pieces": [
+                  {
+                    "es": "Un plátano",
+                    "en": "A banana",
+                    "role": "word"
+                  },
+                  {
+                    "es": "al día",
+                    "en": "a day",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Green bananas.",
+              "translation": "Plátanos verdes."
+            }
+          ]
+        },
+        {
+          "key": "soup",
+          "type": "term",
+          "text": "soup",
+          "meaning": "sopa",
+          "pronunciation": "SUUP",
+          "examples": [
+            {
+              "text": "The soup is too hot.",
+              "translation": "La sopa está demasiado caliente.",
+              "mirror": {
+                "say": "La sopa está demasiado caliente",
+                "pieces": [
+                  {
+                    "es": "La sopa",
+                    "en": "The soup",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado caliente",
+                    "en": "too hot",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Chicken soup.",
+              "translation": "Sopa de pollo."
+            }
+          ]
+        },
+        {
+          "key": "salad",
+          "type": "term",
+          "text": "salad",
+          "meaning": "ensalada",
+          "pronunciation": "SÁlad",
+          "examples": [
+            {
+              "text": "A green salad, please.",
+              "translation": "Una ensalada verde, por favor.",
+              "mirror": {
+                "say": "Una ensalada verde, por favor",
+                "pieces": [
+                  {
+                    "es": "Una",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ensalada",
+                    "en": "salad",
+                    "role": "word"
+                  },
+                  {
+                    "es": "verde",
+                    "en": "green",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'll have a salad.",
+              "translation": "Tomaré una ensalada."
+            }
+          ]
+        },
+        {
+          "key": "sandwich",
+          "type": "term",
+          "text": "sandwich",
+          "meaning": "bocadillo, sándwich",
+          "pronunciation": "SÁNuich",
+          "examples": [
+            {
+              "text": "I'll have a cheese sandwich.",
+              "translation": "Tomaré un bocadillo de queso.",
+              "mirror": {
+                "say": "Tomaré un bocadillo de queso",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "tomaré",
+                    "why": "Al pedir: I'll have… (tomaré)."
+                  },
+                  {
+                    "es": "tomar",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "bocadillo",
+                    "en": "sandwich",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de queso",
+                    "en": "cheese",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A sandwich for lunch.",
+              "translation": "Un sándwich para comer."
+            }
+          ]
+        },
+        {
+          "key": "chicken",
+          "type": "term",
+          "text": "chicken",
+          "meaning": "pollo; gallina",
+          "pronunciation": "CHÍken",
+          "examples": [
+            {
+              "text": "Roast chicken, please.",
+              "translation": "Pollo asado, por favor.",
+              "mirror": {
+                "say": "Pollo asado, por favor",
+                "pieces": [
+                  {
+                    "es": "Pollo",
+                    "en": "chicken",
+                    "role": "word"
+                  },
+                  {
+                    "es": "asado",
+                    "en": "Roast",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "The chickens are on the farm.",
+              "translation": "Las gallinas están en la granja."
+            }
+          ]
+        },
+        {
+          "key": "butter",
+          "type": "term",
+          "text": "butter",
+          "meaning": "mantequilla",
+          "pronunciation": "BÁter",
+          "examples": [
+            {
+              "text": "Bread and butter.",
+              "translation": "Pan con mantequilla.",
+              "mirror": {
+                "say": "Pan con mantequilla",
+                "pieces": [
+                  {
+                    "es": "Pan",
+                    "en": "Bread",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word",
+                    "from": "con",
+                    "why": "Pan con mantequilla se dice «pan Y mantequilla»."
+                  },
+                  {
+                    "es": "mantequilla",
+                    "en": "butter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No butter, please.",
+              "translation": "Sin mantequilla, por favor."
+            }
+          ]
+        },
+        {
+          "key": "oil",
+          "type": "term",
+          "text": "oil",
+          "meaning": "aceite",
+          "pronunciation": "ÓIL",
+          "examples": [
+            {
+              "text": "Olive oil is very healthy.",
+              "translation": "El aceite de oliva es muy sano.",
+              "mirror": {
+                "say": "El aceite de oliva es muy sano",
+                "pieces": [
+                  {
+                    "es": "aceite",
+                    "en": "oil",
+                    "role": "word",
+                    "from": "El aceite",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "de oliva",
+                    "en": "Olive",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy sano",
+                    "en": "very healthy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Check the oil in the car.",
+              "translation": "Revisa el aceite del coche."
+            }
+          ]
+        },
+        {
+          "key": "juice",
+          "type": "term",
+          "text": "juice",
+          "meaning": "zumo",
+          "pronunciation": "YUUS",
+          "examples": [
+            {
+              "text": "An orange juice, please.",
+              "translation": "Un zumo de naranja, por favor.",
+              "mirror": {
+                "say": "Un zumo de naranja, por favor",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "An",
+                    "role": "word"
+                  },
+                  {
+                    "es": "zumo",
+                    "en": "juice",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de naranja",
+                    "en": "orange",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Fresh juice.",
+              "translation": "Zumo natural."
+            }
+          ]
+        },
+        {
+          "key": "cake",
+          "type": "term",
+          "text": "cake",
+          "meaning": "tarta, pastel",
+          "pronunciation": "KÉIK",
+          "examples": [
+            {
+              "text": "This cake is delicious.",
+              "translation": "Esta tarta está buenísima.",
+              "mirror": {
+                "say": "Esta tarta está buenísima",
+                "pieces": [
+                  {
+                    "es": "Esta tarta",
+                    "en": "This cake",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "deliciosa",
+                    "en": "delicious",
+                    "role": "word",
+                    "from": "buenísima"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's a piece of cake.",
+              "translation": "Está chupado."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
