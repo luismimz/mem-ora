@@ -22,9 +22,9 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Espejos pendientes:** `many` (have got), `jump` y `stand` (una sola pieza); `thirteen`/`fifteen` (sin valor).
 - **[inglés] Más vocabulario hasta 1.000** (meta de 30 días). Hecho: misiones 18–21 (ciudad + there is, pasado + irregulares,
   viajes + going to, trabajo + comparativos), 22 (inglés profesional) y 23–26 (tiempo, ropa, emociones, fechas) 27–30
-  (adjetivos, animales, compras, salud), 31–34 (familia, ocio, naturaleza, cocina) y 35–38 (verbos, futuro, moverse,
-  conversación): 568 palabras. Siguiente: escuela y estudios, tecnología del día a día, tiempo libre 2, partes de la
-  casa, materiales y objetos, más adjetivos, números ordinales y precios.
+  (adjetivos, animales, compras, salud), 31–34 (familia, ocio, naturaleza, cocina) , 35–38 (verbos, futuro, moverse,
+  conversación) y 39–42 (estudios, tecnología, carácter, objetos): 628 palabras. Siguiente: verbos frasales comunes,
+  lugares y viajes 2, sentimientos y opiniones, números ordinales y precios, más frases para conversar.
 - ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).
 
 ## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)

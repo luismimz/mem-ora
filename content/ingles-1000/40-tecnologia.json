@@ -1,0 +1,747 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "40-tecnologia",
+      "title": "Misión 40 · El móvil e internet",
+      "units": [
+        {
+          "key": "g-just",
+          "type": "pattern",
+          "goal": "Acabo de = I'VE JUST",
+          "rule": "«Acabo de + verbo» = I've just + participio: acabo de llegar = I've just arrived. Es el HAVE del «¿ya?» con JUST.",
+          "pieces": [
+            {
+              "text": "I've just",
+              "role": "fixed",
+              "hint": "acabo de"
+            },
+            {
+              "text": "arrived",
+              "role": "slot",
+              "hint": "llegar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I've just arrived.",
+              "translation": "Acabo de llegar.",
+              "mirror": {
+                "say": "Acabo de llegar",
+                "pieces": [
+                  {
+                    "es": "(YO) he justo",
+                    "en": "I've just",
+                    "role": "helper",
+                    "from": "acabo de",
+                    "why": "«Acabo de» se dice «he justo»: I've just…"
+                  },
+                  {
+                    "es": "llegado",
+                    "en": "arrived",
+                    "role": "verb",
+                    "from": "llegar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has just sent the email.",
+              "translation": "Acaba de mandar el correo.",
+              "mirror": {
+                "say": "Acaba de mandar el correo",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ha justo",
+                    "en": "has just",
+                    "role": "helper",
+                    "from": "acaba de"
+                  },
+                  {
+                    "es": "mandado",
+                    "en": "sent",
+                    "role": "verb",
+                    "from": "mandar"
+                  },
+                  {
+                    "es": "el correo",
+                    "en": "the email",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The film has just started.",
+              "translation": "La película acaba de empezar."
+            },
+            {
+              "text": "Have you just woken up?",
+              "translation": "¿Te acabas de despertar?"
+            }
+          ],
+          "pitfalls": [
+            "«I just arrive» está mal: con JUST va HAVE + participio (I've just arrived).",
+            "En EE. UU. también se oye «I just arrived»."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "JUST es un CRONÓMETRO que acaba de pararse.",
+            "emoji": "⏱️"
+          }
+        },
+        {
+          "key": "phone",
+          "type": "term",
+          "text": "phone",
+          "meaning": "móvil, teléfono",
+          "pronunciation": "FÓUN",
+          "examples": [
+            {
+              "text": "My phone is dead.",
+              "translation": "Mi móvil no tiene batería.",
+              "mirror": {
+                "say": "Mi móvil no tiene batería",
+                "pieces": [
+                  {
+                    "es": "Mi móvil",
+                    "en": "My phone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "no tiene",
+                    "why": "Sin batería se dice «muerto»: my phone is dead."
+                  },
+                  {
+                    "es": "muerto",
+                    "en": "dead",
+                    "role": "word",
+                    "from": "batería"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Answer your phone!",
+              "translation": "¡Contesta el móvil!"
+            }
+          ]
+        },
+        {
+          "key": "message",
+          "type": "term",
+          "text": "message",
+          "meaning": "mensaje",
+          "pronunciation": "MÉsich",
+          "examples": [
+            {
+              "text": "I sent you a message.",
+              "translation": "Te mandé un mensaje.",
+              "mirror": {
+                "say": "Te mandé un mensaje",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "mandé",
+                    "en": "sent",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un mensaje",
+                    "en": "a message",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Did you get my message?",
+              "translation": "¿Te llegó mi mensaje?"
+            }
+          ]
+        },
+        {
+          "key": "app",
+          "type": "term",
+          "text": "app",
+          "meaning": "aplicación (app)",
+          "pronunciation": "AP",
+          "examples": [
+            {
+              "text": "Download this app.",
+              "translation": "Descárgate esta app.",
+              "mirror": {
+                "say": "Descárgate esta app",
+                "pieces": [
+                  {
+                    "es": "Descarga",
+                    "en": "Download",
+                    "role": "verb",
+                    "from": "Descárgate"
+                  },
+                  {
+                    "es": "esta app",
+                    "en": "this app",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This app is free.",
+              "translation": "Esta app es gratis."
+            }
+          ]
+        },
+        {
+          "key": "internet",
+          "type": "term",
+          "text": "internet",
+          "meaning": "internet",
+          "pronunciation": "ÍNternet",
+          "examples": [
+            {
+              "text": "The internet is down.",
+              "translation": "Se ha caído internet.",
+              "mirror": {
+                "say": "Se ha caído internet",
+                "pieces": [
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "se ha"
+                  },
+                  {
+                    "es": "caído",
+                    "en": "down",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el internet",
+                    "en": "The internet",
+                    "role": "who",
+                    "from": "internet"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I read it on the internet.",
+              "translation": "Lo leí en internet."
+            }
+          ]
+        },
+        {
+          "key": "wifi",
+          "type": "term",
+          "text": "wifi",
+          "meaning": "wifi",
+          "pronunciation": "UÁIfai",
+          "examples": [
+            {
+              "text": "What's the wifi password?",
+              "translation": "¿Cuál es la contraseña del wifi?",
+              "mirror": {
+                "say": "¿Cuál es la contraseña del wifi?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cuál es"
+                  },
+                  {
+                    "es": "la contraseña",
+                    "en": "password",
+                    "role": "word"
+                  },
+                  {
+                    "es": "del wifi",
+                    "en": "the wifi",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "There's no wifi here.",
+              "translation": "Aquí no hay wifi."
+            }
+          ]
+        },
+        {
+          "key": "battery",
+          "type": "term",
+          "text": "battery",
+          "meaning": "batería",
+          "pronunciation": "BÁteri",
+          "examples": [
+            {
+              "text": "My battery is low.",
+              "translation": "Me queda poca batería.",
+              "mirror": {
+                "say": "Me queda poca batería",
+                "pieces": [
+                  {
+                    "es": "MI batería",
+                    "en": "My battery",
+                    "role": "who",
+                    "from": "me queda",
+                    "why": "«Me queda poca batería» es «mi batería está baja»."
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "baja",
+                    "en": "low",
+                    "role": "word",
+                    "from": "poca batería"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The battery lasts all day.",
+              "translation": "La batería dura todo el día."
+            }
+          ]
+        },
+        {
+          "key": "charger",
+          "type": "term",
+          "text": "charger",
+          "meaning": "cargador",
+          "pronunciation": "CHÁRyer",
+          "examples": [
+            {
+              "text": "Can I borrow your charger?",
+              "translation": "¿Me dejas tu cargador?",
+              "mirror": {
+                "say": "¿Me dejas tu cargador?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tomar prestado",
+                    "en": "borrow",
+                    "role": "verb",
+                    "from": "me dejas",
+                    "why": "Pedir algo prestado es BORROW."
+                  },
+                  {
+                    "es": "tu cargador",
+                    "en": "your charger",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I forgot my charger.",
+              "translation": "Me he dejado el cargador."
+            }
+          ]
+        },
+        {
+          "key": "photo",
+          "type": "term",
+          "text": "photo",
+          "meaning": "foto",
+          "pronunciation": "FÓUtou",
+          "examples": [
+            {
+              "text": "Can you take a photo of us?",
+              "translation": "¿Nos haces una foto?",
+              "mirror": {
+                "say": "¿Nos haces una foto?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hacer",
+                    "en": "take",
+                    "role": "verb",
+                    "from": "haces",
+                    "why": "Hacer una foto es TAKE a photo."
+                  },
+                  {
+                    "es": "una foto",
+                    "en": "a photo",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de nosotros",
+                    "en": "of us",
+                    "role": "word",
+                    "from": "nos"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Nice photo!",
+              "translation": "¡Qué foto tan bonita!"
+            }
+          ]
+        },
+        {
+          "key": "video",
+          "type": "term",
+          "text": "video",
+          "meaning": "vídeo",
+          "pronunciation": "VÍdiou",
+          "examples": [
+            {
+              "text": "Send me the video.",
+              "translation": "Mándame el vídeo.",
+              "mirror": {
+                "say": "Mándame el vídeo",
+                "pieces": [
+                  {
+                    "es": "Manda",
+                    "en": "Send",
+                    "role": "verb",
+                    "from": "Mándame",
+                    "why": "Lo pegado se separa: send ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el vídeo",
+                    "en": "the video",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A funny video.",
+              "translation": "Un vídeo gracioso."
+            }
+          ]
+        },
+        {
+          "key": "link",
+          "type": "term",
+          "text": "link",
+          "meaning": "enlace",
+          "pronunciation": "LINK",
+          "examples": [
+            {
+              "text": "Click on the link.",
+              "translation": "Haz clic en el enlace.",
+              "mirror": {
+                "say": "Haz clic en el enlace",
+                "pieces": [
+                  {
+                    "es": "Haz clic",
+                    "en": "Click",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el enlace",
+                    "en": "on the link",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Send me the link.",
+              "translation": "Pásame el enlace."
+            }
+          ]
+        },
+        {
+          "key": "account",
+          "type": "term",
+          "text": "account",
+          "meaning": "cuenta",
+          "pronunciation": "aKÁUNT",
+          "examples": [
+            {
+              "text": "Create an account.",
+              "translation": "Crea una cuenta.",
+              "mirror": {
+                "say": "Crea una cuenta",
+                "pieces": [
+                  {
+                    "es": "Crea",
+                    "en": "Create",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una cuenta",
+                    "en": "an account",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My bank account.",
+              "translation": "Mi cuenta del banco."
+            }
+          ]
+        },
+        {
+          "key": "online",
+          "type": "term",
+          "text": "online",
+          "meaning": "por internet, conectado",
+          "pronunciation": "ÓNlain",
+          "examples": [
+            {
+              "text": "I buy everything online.",
+              "translation": "Lo compro todo por internet.",
+              "mirror": {
+                "say": "Lo compro todo por internet",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compro",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todo",
+                    "en": "everything",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por internet",
+                    "en": "online",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Are you online?",
+              "translation": "¿Estás conectado?"
+            }
+          ]
+        },
+        {
+          "key": "search",
+          "type": "term",
+          "text": "search",
+          "meaning": "buscar; búsqueda",
+          "pronunciation": "SERCH",
+          "examples": [
+            {
+              "text": "Search for it on Google.",
+              "translation": "Búscalo en Google.",
+              "mirror": {
+                "say": "Búscalo en Google",
+                "pieces": [
+                  {
+                    "es": "Busca",
+                    "en": "Search for",
+                    "role": "verb",
+                    "from": "Búscalo",
+                    "why": "Buscar algo en internet: SEARCH FOR it."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en Google",
+                    "en": "on Google",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A quick search.",
+              "translation": "Una búsqueda rápida."
+            }
+          ]
+        },
+        {
+          "key": "click",
+          "type": "term",
+          "text": "click",
+          "meaning": "hacer clic",
+          "pronunciation": "KLIK",
+          "examples": [
+            {
+              "text": "Click here to start.",
+              "translation": "Haz clic aquí para empezar.",
+              "mirror": {
+                "say": "Haz clic aquí para empezar",
+                "pieces": [
+                  {
+                    "es": "Haz clic",
+                    "en": "Click",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para empezar",
+                    "en": "to start",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Double click.",
+              "translation": "Doble clic."
+            }
+          ]
+        },
+        {
+          "key": "keyboard",
+          "type": "term",
+          "text": "keyboard",
+          "meaning": "teclado",
+          "pronunciation": "KÍIbord",
+          "examples": [
+            {
+              "text": "My keyboard doesn't work.",
+              "translation": "Mi teclado no funciona.",
+              "mirror": {
+                "say": "Mi teclado no funciona",
+                "pieces": [
+                  {
+                    "es": "Mi teclado",
+                    "en": "My keyboard",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "funcionar",
+                    "en": "work",
+                    "role": "verb",
+                    "from": "funciona",
+                    "why": "Con DOESN'T el verbo va tal cual: work."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A Spanish keyboard has ñ.",
+              "translation": "Un teclado español tiene ñ."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

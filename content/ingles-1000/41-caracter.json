@@ -1,0 +1,734 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "41-caracter",
+      "title": "Misión 41 · Cómo es la gente",
+      "units": [
+        {
+          "key": "g-what-like",
+          "type": "pattern",
+          "goal": "¿Cómo es? = WHAT IS SHE LIKE?",
+          "rule": "Para preguntar cómo ES alguien (su carácter o su aspecto): What is he like? «How is he?» pregunta cómo ESTÁ.",
+          "pieces": [
+            {
+              "text": "What's",
+              "role": "fixed",
+              "hint": "¿cómo es"
+            },
+            {
+              "text": "your boss",
+              "role": "slot",
+              "hint": "tu jefe"
+            },
+            {
+              "text": "like",
+              "role": "fixed",
+              "hint": "(como)"
+            }
+          ],
+          "examples": [
+            {
+              "text": "What's your boss like?",
+              "translation": "¿Cómo es tu jefe?",
+              "mirror": {
+                "say": "¿Cómo es tu jefe?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cómo es",
+                    "why": "Para preguntar cómo ES alguien: what is he LIKE?"
+                  },
+                  {
+                    "es": "tu jefe",
+                    "en": "your boss",
+                    "role": "who"
+                  },
+                  {
+                    "es": "como",
+                    "en": "like",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's very friendly.",
+              "translation": "Es muy simpática.",
+              "mirror": {
+                "say": "Es muy simpática",
+                "pieces": [
+                  {
+                    "es": "(ELLA) es",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy simpática",
+                    "en": "very friendly",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's the weather like?",
+              "translation": "¿Qué tiempo hace?"
+            },
+            {
+              "text": "How is he? He's fine.",
+              "translation": "¿Cómo está? Bien."
+            }
+          ],
+          "pitfalls": [
+            "«How is your boss?» pregunta cómo ESTÁ (de salud), no cómo ES.",
+            "En la respuesta no se repite like: She's nice."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El LIKE espera al FINAL de la pregunta.",
+            "emoji": "🙂"
+          }
+        },
+        {
+          "key": "friendly",
+          "type": "term",
+          "text": "friendly",
+          "meaning": "simpático, amable",
+          "pronunciation": "FRÉNDli",
+          "examples": [
+            {
+              "text": "My neighbours are very friendly.",
+              "translation": "Mis vecinos son muy simpáticos.",
+              "mirror": {
+                "say": "Mis vecinos son muy simpáticos",
+                "pieces": [
+                  {
+                    "es": "Mis vecinos",
+                    "en": "My neighbours",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy simpáticos",
+                    "en": "very friendly",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A friendly dog.",
+              "translation": "Un perro cariñoso."
+            }
+          ]
+        },
+        {
+          "key": "funny",
+          "type": "term",
+          "text": "funny",
+          "meaning": "gracioso",
+          "pronunciation": "FÁni",
+          "examples": [
+            {
+              "text": "That's so funny!",
+              "translation": "¡Qué gracioso!",
+              "mirror": {
+                "say": "¡Qué gracioso!",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "That's",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word",
+                    "from": "Qué"
+                  },
+                  {
+                    "es": "gracioso",
+                    "en": "funny",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's very funny.",
+              "translation": "Es muy gracioso."
+            }
+          ]
+        },
+        {
+          "key": "kind",
+          "type": "term",
+          "text": "kind",
+          "meaning": "amable",
+          "pronunciation": "KÁIND",
+          "examples": [
+            {
+              "text": "That's very kind of you.",
+              "translation": "Muy amable por tu parte.",
+              "mirror": {
+                "say": "Muy amable por tu parte",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "That's",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "muy amable",
+                    "en": "very kind",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por tu parte",
+                    "en": "of you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's always kind to everyone.",
+              "translation": "Siempre es amable con todos."
+            }
+          ]
+        },
+        {
+          "key": "shy",
+          "type": "term",
+          "text": "shy",
+          "meaning": "tímido",
+          "pronunciation": "SHÁI",
+          "examples": [
+            {
+              "text": "Don't be shy.",
+              "translation": "No seas tímido.",
+              "mirror": {
+                "say": "No seas tímido",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "seas",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tímido",
+                    "en": "shy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's a bit shy.",
+              "translation": "Es un poco tímido."
+            }
+          ]
+        },
+        {
+          "key": "lazy",
+          "type": "term",
+          "text": "lazy",
+          "meaning": "vago, perezoso",
+          "pronunciation": "LÉIsi",
+          "examples": [
+            {
+              "text": "I'm a bit lazy on Sundays.",
+              "translation": "Los domingos soy un poco vago.",
+              "mirror": {
+                "say": "Los domingos soy un poco vago",
+                "pieces": [
+                  {
+                    "es": "en domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "Los domingos",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  },
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un poco vago",
+                    "en": "a bit lazy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A lazy cat.",
+              "translation": "Un gato perezoso."
+            }
+          ]
+        },
+        {
+          "key": "clever",
+          "type": "term",
+          "text": "clever",
+          "meaning": "listo",
+          "pronunciation": "KLÉver",
+          "examples": [
+            {
+              "text": "Your daughter is very clever.",
+              "translation": "Tu hija es muy lista.",
+              "mirror": {
+                "say": "Tu hija es muy lista",
+                "pieces": [
+                  {
+                    "es": "Tu hija",
+                    "en": "Your daughter",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy lista",
+                    "en": "very clever",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That's a clever idea.",
+              "translation": "Es una idea ingeniosa."
+            }
+          ]
+        },
+        {
+          "key": "honest",
+          "type": "term",
+          "text": "honest",
+          "meaning": "sincero, honrado",
+          "pronunciation": "Ónest",
+          "examples": [
+            {
+              "text": "To be honest, I don't like it.",
+              "translation": "Para serte sincero, no me gusta.",
+              "mirror": {
+                "say": "Para serte sincero, no me gusta",
+                "pieces": [
+                  {
+                    "es": "Para ser sincero",
+                    "en": "To be honest",
+                    "role": "word",
+                    "from": "Para serte sincero"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: I like IT."
+                  },
+                  {
+                    "es": "eso",
+                    "en": "it",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's an honest man.",
+              "translation": "Es un hombre honrado."
+            }
+          ],
+          "notes": "La h no suena: Ónest. Por eso: AN honest man."
+        },
+        {
+          "key": "polite",
+          "type": "term",
+          "text": "polite",
+          "meaning": "educado",
+          "pronunciation": "poLÁIT",
+          "examples": [
+            {
+              "text": "Be polite to your grandparents.",
+              "translation": "Sé educado con tus abuelos.",
+              "mirror": {
+                "say": "Sé educado con tus abuelos",
+                "pieces": [
+                  {
+                    "es": "Sé",
+                    "en": "Be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "educado",
+                    "en": "polite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con tus abuelos",
+                    "en": "to your grandparents",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's not polite to shout.",
+              "translation": "Gritar no es de buena educación."
+            }
+          ]
+        },
+        {
+          "key": "rude",
+          "type": "term",
+          "text": "rude",
+          "meaning": "maleducado, grosero",
+          "pronunciation": "RUUD",
+          "examples": [
+            {
+              "text": "Don't be rude!",
+              "translation": "¡No seas maleducado!",
+              "mirror": {
+                "say": "¡No seas maleducado!",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "seas",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "maleducado",
+                    "en": "rude",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That was very rude.",
+              "translation": "Eso fue muy grosero."
+            }
+          ]
+        },
+        {
+          "key": "quiet",
+          "type": "term",
+          "text": "quiet",
+          "meaning": "tranquilo, callado",
+          "pronunciation": "KUÁIet",
+          "examples": [
+            {
+              "text": "Be quiet, please.",
+              "translation": "Silencio, por favor.",
+              "mirror": {
+                "say": "Silencio, por favor",
+                "pieces": [
+                  {
+                    "es": "Estad callados",
+                    "en": "Be quiet",
+                    "role": "verb",
+                    "from": "Silencio",
+                    "why": "«Silencio» se dice «estad callados»: be quiet."
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A quiet street.",
+              "translation": "Una calle tranquila."
+            }
+          ]
+        },
+        {
+          "key": "generous",
+          "type": "term",
+          "text": "generous",
+          "meaning": "generoso",
+          "pronunciation": "YÉnerus",
+          "examples": [
+            {
+              "text": "My grandmother is very generous.",
+              "translation": "Mi abuela es muy generosa.",
+              "mirror": {
+                "say": "Mi abuela es muy generosa",
+                "pieces": [
+                  {
+                    "es": "Mi abuela",
+                    "en": "My grandmother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy generosa",
+                    "en": "very generous",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A generous tip.",
+              "translation": "Una propina generosa."
+            }
+          ]
+        },
+        {
+          "key": "patient",
+          "type": "term",
+          "text": "patient",
+          "meaning": "paciente",
+          "pronunciation": "PÉIshent",
+          "examples": [
+            {
+              "text": "You have to be patient.",
+              "translation": "Tienes que tener paciencia.",
+              "mirror": {
+                "say": "Tienes que tener paciencia",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ser",
+                    "en": "be",
+                    "role": "verb",
+                    "from": "tener",
+                    "why": "«Tener paciencia» se dice «ser paciente»: be patient."
+                  },
+                  {
+                    "es": "paciente",
+                    "en": "patient",
+                    "role": "word",
+                    "from": "paciencia"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The doctor has a lot of patients.",
+              "translation": "El médico tiene muchos pacientes."
+            }
+          ]
+        },
+        {
+          "key": "serious",
+          "type": "term",
+          "text": "serious",
+          "meaning": "serio",
+          "pronunciation": "SÍrius",
+          "examples": [
+            {
+              "text": "Are you serious?",
+              "translation": "¿Lo dices en serio?",
+              "mirror": {
+                "say": "¿Lo dices en serio?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "Are",
+                    "role": "helper",
+                    "from": "lo dices"
+                  },
+                  {
+                    "es": "serio",
+                    "en": "serious",
+                    "role": "word",
+                    "from": "en serio"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A serious problem.",
+              "translation": "Un problema serio."
+            }
+          ]
+        },
+        {
+          "key": "nice",
+          "type": "term",
+          "text": "nice",
+          "meaning": "majo, agradable",
+          "pronunciation": "NÁIS",
+          "examples": [
+            {
+              "text": "Your sister is really nice.",
+              "translation": "Tu hermana es muy maja.",
+              "mirror": {
+                "say": "Tu hermana es muy maja",
+                "pieces": [
+                  {
+                    "es": "Tu hermana",
+                    "en": "Your sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy maja",
+                    "en": "really nice",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have a nice day!",
+              "translation": "¡Que tengas un buen día!"
+            }
+          ]
+        },
+        {
+          "key": "smart",
+          "type": "term",
+          "text": "smart",
+          "meaning": "listo; elegante",
+          "pronunciation": "SMART",
+          "examples": [
+            {
+              "text": "You look very smart today.",
+              "translation": "Hoy vas muy elegante.",
+              "mirror": {
+                "say": "Hoy vas muy elegante",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pareces",
+                    "en": "look",
+                    "role": "verb",
+                    "from": "vas",
+                    "why": "Ir elegante es «parecer elegante»: you look smart."
+                  },
+                  {
+                    "es": "muy elegante",
+                    "en": "very smart",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A smart phone.",
+              "translation": "Un teléfono inteligente."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,704 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "42-objetos",
+      "title": "Misión 42 · Cosas de casa",
+      "units": [
+        {
+          "key": "g-place",
+          "type": "pattern",
+          "goal": "¿Dónde está? IN, ON, UNDER, NEXT TO",
+          "rule": "IN dentro (in the box), ON encima (on the table), UNDER debajo (under the bed), NEXT TO al lado (next to the door).",
+          "pieces": [
+            {
+              "text": "It's",
+              "role": "fixed",
+              "hint": "está"
+            },
+            {
+              "text": "under",
+              "role": "slot",
+              "hint": "debajo de"
+            },
+            {
+              "text": "the bed",
+              "role": "fixed",
+              "hint": "la cama"
+            }
+          ],
+          "examples": [
+            {
+              "text": "The cat is under the bed.",
+              "translation": "El gato está debajo de la cama.",
+              "mirror": {
+                "say": "El gato está debajo de la cama",
+                "pieces": [
+                  {
+                    "es": "El gato",
+                    "en": "The cat",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "debajo de",
+                    "en": "under",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la cama",
+                    "en": "the bed",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Your keys are on the table.",
+              "translation": "Tus llaves están en la mesa.",
+              "mirror": {
+                "say": "Tus llaves están en la mesa",
+                "pieces": [
+                  {
+                    "es": "Tus llaves",
+                    "en": "Your keys",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sobre la mesa",
+                    "en": "on the table",
+                    "role": "word",
+                    "from": "en la mesa",
+                    "why": "«En» la mesa es ENCIMA: ON the table."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The milk is in the fridge.",
+              "translation": "La leche está en la nevera."
+            },
+            {
+              "text": "The lamp is next to the sofa.",
+              "translation": "La lámpara está al lado del sofá."
+            }
+          ],
+          "pitfalls": [
+            "«En» puede ser IN (dentro) u ON (encima): in the box, on the table.",
+            "«Al lado de» es NEXT TO, sin «of»."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una CAJA, una MESA y una CAMA: IN, ON, UNDER.",
+            "emoji": "🛋️"
+          }
+        },
+        {
+          "key": "sofa",
+          "type": "term",
+          "text": "sofa",
+          "meaning": "sofá",
+          "pronunciation": "SÓUfa",
+          "examples": [
+            {
+              "text": "Let's sit on the sofa.",
+              "translation": "Sentémonos en el sofá.",
+              "mirror": {
+                "say": "Sentémonos en el sofá",
+                "pieces": [
+                  {
+                    "es": "Sentémonos",
+                    "en": "Let's sit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre el sofá",
+                    "en": "on the sofa",
+                    "role": "word",
+                    "from": "en el sofá"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A comfortable sofa.",
+              "translation": "Un sofá cómodo."
+            }
+          ]
+        },
+        {
+          "key": "lamp",
+          "type": "term",
+          "text": "lamp",
+          "meaning": "lámpara",
+          "pronunciation": "LAMP",
+          "examples": [
+            {
+              "text": "Turn on the lamp.",
+              "translation": "Enciende la lámpara.",
+              "mirror": {
+                "say": "Enciende la lámpara",
+                "pieces": [
+                  {
+                    "es": "Enciende",
+                    "en": "Turn on",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la lámpara",
+                    "en": "the lamp",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A new lamp for the living room.",
+              "translation": "Una lámpara nueva para el salón."
+            }
+          ]
+        },
+        {
+          "key": "mirror",
+          "type": "term",
+          "text": "mirror",
+          "meaning": "espejo",
+          "pronunciation": "MÍrror",
+          "examples": [
+            {
+              "text": "Look in the mirror.",
+              "translation": "Mírate en el espejo.",
+              "mirror": {
+                "say": "Mírate en el espejo",
+                "pieces": [
+                  {
+                    "es": "Mira",
+                    "en": "Look",
+                    "role": "verb",
+                    "from": "Mírate"
+                  },
+                  {
+                    "es": "en el espejo",
+                    "en": "in the mirror",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The mirror is broken.",
+              "translation": "El espejo está roto."
+            }
+          ]
+        },
+        {
+          "key": "shelf",
+          "type": "term",
+          "text": "shelf",
+          "meaning": "estante, balda",
+          "pronunciation": "SHELF",
+          "examples": [
+            {
+              "text": "The books are on the shelf.",
+              "translation": "Los libros están en la estantería.",
+              "mirror": {
+                "say": "Los libros están en la estantería",
+                "pieces": [
+                  {
+                    "es": "Los libros",
+                    "en": "The books",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sobre el estante",
+                    "en": "on the shelf",
+                    "role": "word",
+                    "from": "en la estantería"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The top shelf.",
+              "translation": "La balda de arriba."
+            }
+          ],
+          "notes": "Plural: shelves."
+        },
+        {
+          "key": "towel",
+          "type": "term",
+          "text": "towel",
+          "meaning": "toalla",
+          "pronunciation": "TÁUel",
+          "examples": [
+            {
+              "text": "Can I have a clean towel?",
+              "translation": "¿Me da una toalla limpia?",
+              "mirror": {
+                "say": "¿Me da una toalla limpia?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "me da"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "toalla",
+                    "en": "towel",
+                    "role": "word"
+                  },
+                  {
+                    "es": "limpia",
+                    "en": "clean",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A beach towel.",
+              "translation": "Una toalla de playa."
+            }
+          ]
+        },
+        {
+          "key": "soap",
+          "type": "term",
+          "text": "soap",
+          "meaning": "jabón",
+          "pronunciation": "SÓUP",
+          "examples": [
+            {
+              "text": "Wash your hands with soap.",
+              "translation": "Lávate las manos con jabón.",
+              "mirror": {
+                "say": "Lávate las manos con jabón",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb",
+                    "from": "Lávate"
+                  },
+                  {
+                    "es": "TUS manos",
+                    "en": "your hands",
+                    "role": "word",
+                    "from": "las manos",
+                    "why": "Lo tuyo lleva su dueño: YOUR hands."
+                  },
+                  {
+                    "es": "con jabón",
+                    "en": "with soap",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There's no soap.",
+              "translation": "No hay jabón."
+            }
+          ]
+        },
+        {
+          "key": "toothbrush",
+          "type": "term",
+          "text": "toothbrush",
+          "meaning": "cepillo de dientes",
+          "pronunciation": "TÚZbrash",
+          "examples": [
+            {
+              "text": "I forgot my toothbrush.",
+              "translation": "Me he olvidado el cepillo de dientes.",
+              "mirror": {
+                "say": "Me he olvidado el cepillo de dientes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "olvidé",
+                    "en": "forgot",
+                    "role": "verb",
+                    "from": "me he olvidado"
+                  },
+                  {
+                    "es": "MI cepillo de dientes",
+                    "en": "my toothbrush",
+                    "role": "word",
+                    "from": "el cepillo de dientes"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A new toothbrush.",
+              "translation": "Un cepillo de dientes nuevo."
+            }
+          ]
+        },
+        {
+          "key": "pillow",
+          "type": "term",
+          "text": "pillow",
+          "meaning": "almohada",
+          "pronunciation": "PÍlou",
+          "examples": [
+            {
+              "text": "This pillow is too hard.",
+              "translation": "Esta almohada es demasiado dura.",
+              "mirror": {
+                "say": "Esta almohada es demasiado dura",
+                "pieces": [
+                  {
+                    "es": "Esta almohada",
+                    "en": "This pillow",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado dura",
+                    "en": "too hard",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Two pillows, please.",
+              "translation": "Dos almohadas, por favor."
+            }
+          ]
+        },
+        {
+          "key": "blanket",
+          "type": "term",
+          "text": "blanket",
+          "meaning": "manta",
+          "pronunciation": "BLÁNket",
+          "examples": [
+            {
+              "text": "I need another blanket.",
+              "translation": "Necesito otra manta.",
+              "mirror": {
+                "say": "Necesito otra manta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "otra manta",
+                    "en": "another blanket",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A warm blanket.",
+              "translation": "Una manta calentita."
+            }
+          ]
+        },
+        {
+          "key": "fridge",
+          "type": "term",
+          "text": "fridge",
+          "meaning": "nevera, frigorífico",
+          "pronunciation": "FRICH",
+          "examples": [
+            {
+              "text": "Put the milk in the fridge.",
+              "translation": "Mete la leche en la nevera.",
+              "mirror": {
+                "say": "Mete la leche en la nevera",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb",
+                    "from": "Mete"
+                  },
+                  {
+                    "es": "la leche",
+                    "en": "the milk",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la nevera",
+                    "en": "in the fridge",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The fridge is empty.",
+              "translation": "La nevera está vacía."
+            }
+          ]
+        },
+        {
+          "key": "washing-machine",
+          "type": "term",
+          "text": "washing machine",
+          "meaning": "lavadora",
+          "pronunciation": "UÓshing maSHIIN",
+          "examples": [
+            {
+              "text": "The washing machine is broken.",
+              "translation": "La lavadora está rota.",
+              "mirror": {
+                "say": "La lavadora está rota",
+                "pieces": [
+                  {
+                    "es": "La lavadora",
+                    "en": "The washing machine",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rota",
+                    "en": "broken",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Put the clothes in the washing machine.",
+              "translation": "Mete la ropa en la lavadora."
+            }
+          ]
+        },
+        {
+          "key": "rubbish",
+          "type": "term",
+          "text": "rubbish",
+          "meaning": "basura",
+          "pronunciation": "RÁbish",
+          "examples": [
+            {
+              "text": "Take out the rubbish, please.",
+              "translation": "Saca la basura, por favor.",
+              "mirror": {
+                "say": "Saca la basura, por favor",
+                "pieces": [
+                  {
+                    "es": "Saca",
+                    "en": "Take out",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la basura",
+                    "en": "the rubbish",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't throw rubbish on the floor.",
+              "translation": "No tires basura al suelo."
+            }
+          ],
+          "notes": "En EE. UU. se dice trash o garbage."
+        },
+        {
+          "key": "light",
+          "type": "term",
+          "text": "light",
+          "meaning": "luz",
+          "pronunciation": "LÁIT",
+          "examples": [
+            {
+              "text": "Turn off the light.",
+              "translation": "Apaga la luz.",
+              "mirror": {
+                "say": "Apaga la luz",
+                "pieces": [
+                  {
+                    "es": "Apaga",
+                    "en": "Turn off",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la luz",
+                    "en": "the light",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There's a lot of light in this room.",
+              "translation": "Esta habitación tiene mucha luz."
+            }
+          ]
+        },
+        {
+          "key": "stairs",
+          "type": "term",
+          "text": "stairs",
+          "meaning": "escaleras",
+          "pronunciation": "STÉRS",
+          "examples": [
+            {
+              "text": "Take the stairs.",
+              "translation": "Sube por las escaleras.",
+              "mirror": {
+                "say": "Sube por las escaleras",
+                "pieces": [
+                  {
+                    "es": "Coge",
+                    "en": "Take",
+                    "role": "verb",
+                    "from": "Sube por",
+                    "why": "Usar las escaleras es TAKE the stairs."
+                  },
+                  {
+                    "es": "las escaleras",
+                    "en": "the stairs",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Be careful on the stairs.",
+              "translation": "Cuidado en las escaleras."
+            }
+          ]
+        },
+        {
+          "key": "box",
+          "type": "term",
+          "text": "box",
+          "meaning": "caja",
+          "pronunciation": "BOKS",
+          "examples": [
+            {
+              "text": "The toys are in the box.",
+              "translation": "Los juguetes están en la caja.",
+              "mirror": {
+                "say": "Los juguetes están en la caja",
+                "pieces": [
+                  {
+                    "es": "Los juguetes",
+                    "en": "The toys",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la caja",
+                    "en": "in the box",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A big box.",
+              "translation": "Una caja grande."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
