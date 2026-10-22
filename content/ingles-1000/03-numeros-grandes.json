@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "03-numeros-grandes",
+      "title": "Misión 3 · Números grandes, orden y cantidades",
+      "units": [
+        {
+          "key": "hundred",
+          "type": "term",
+          "text": "hundred",
+          "meaning": "cien",
+          "pronunciation": "JÁNdred",
+          "examples": [
+            {
+              "text": "A hundred people came.",
+              "translation": "Vinieron cien personas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HONDA",
+            "scene": "Con una HONDA disparas CIEN piedras a un globo.",
+            "sceneTarget": "You fire a HUNDRED stones with a sling.",
+            "emoji": "💯🪃"
+          }
+        },
+        {
+          "key": "thousand",
+          "type": "term",
+          "text": "thousand",
+          "meaning": "mil",
+          "pronunciation": "ZÁUsand",
+          "examples": [
+            {
+              "text": "It costs a thousand euros.",
+              "translation": "Cuesta mil euros."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAUCE",
+            "scene": "Un SAUCE llorón suelta MIL lágrimas sobre ti.",
+            "sceneTarget": "A willow drops a THOUSAND tears on you.",
+            "emoji": "🌳💧"
+          }
+        },
+        {
+          "key": "million",
+          "type": "term",
+          "text": "million",
+          "meaning": "millón",
+          "pronunciation": "MÍlion",
+          "examples": [
+            {
+              "text": "A million thanks!",
+              "translation": "¡Un millón de gracias!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MELÓN",
+            "scene": "Te pagan un MILLÓN escondido dentro de un MELÓN.",
+            "sceneTarget": "They pay you a MILLION inside a melon.",
+            "emoji": "💰🍈"
+          }
+        },
+        {
+          "key": "first",
+          "type": "term",
+          "text": "first",
+          "meaning": "primero",
+          "pronunciation": "FERST",
+          "examples": [
+            {
+              "text": "This is my first day.",
+              "translation": "Es mi primer día."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIESTA",
+            "scene": "El PRIMERO en la FIESTA se come la tarta.",
+            "sceneTarget": "The FIRST at the party eats the cake.",
+            "emoji": "🥇🎉"
+          }
+        },
+        {
+          "key": "second",
+          "type": "term",
+          "text": "second",
+          "meaning": "segundo",
+          "pronunciation": "SÉcond",
+          "examples": [
+            {
+              "text": "Wait a second.",
+              "translation": "Espera un segundo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SECADOR",
+            "scene": "El SEGUNDO corre la carrera con un SECADOR encendido.",
+            "sceneTarget": "The SECOND runner races with a hairdryer.",
+            "emoji": "🥈💨"
+          }
+        },
+        {
+          "key": "third",
+          "type": "term",
+          "text": "third",
+          "meaning": "tercero",
+          "pronunciation": "ZERD",
+          "examples": [
+            {
+              "text": "She lives on the third floor.",
+              "translation": "Vive en el tercer piso."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CERDO",
+            "scene": "El TERCERO del podio es un CERDO con bronce.",
+            "sceneTarget": "The THIRD on the podium is a pig.",
+            "emoji": "🥉🐷"
+          }
+        },
+        {
+          "key": "last",
+          "type": "term",
+          "text": "last",
+          "meaning": "último",
+          "pronunciation": "LAST",
+          "examples": [
+            {
+              "text": "This is the last bus.",
+              "translation": "Este es el último autobús."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LASTRE",
+            "scene": "El ÚLTIMO vagón arrastra un LASTRE que echa chispas.",
+            "sceneTarget": "The LAST carriage drags sparking ballast.",
+            "emoji": "🚃⛓️"
+          }
+        },
+        {
+          "key": "half",
+          "type": "term",
+          "text": "half",
+          "meaning": "mitad",
+          "pronunciation": "JAF",
+          "examples": [
+            {
+              "text": "Half an hour.",
+              "translation": "Media hora."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GAFAS",
+            "scene": "Tus GAFAS se parten por la MITAD.",
+            "sceneTarget": "Your glasses snap in HALF.",
+            "emoji": "👓✂️"
+          }
+        },
+        {
+          "key": "number",
+          "type": "term",
+          "text": "number",
+          "meaning": "número",
+          "pronunciation": "NÁMber",
+          "examples": [
+            {
+              "text": "What's your phone number?",
+              "translation": "¿Cuál es tu número de teléfono?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÁMBAR",
+            "scene": "Un mosquito en ÁMBAR lleva tu NÚMERO de móvil.",
+            "sceneTarget": "A mosquito in amber has your phone NUMBER.",
+            "emoji": "🔢🦟"
+          }
+        },
+        {
+          "key": "many",
+          "type": "term",
+          "text": "many",
+          "meaning": "muchos",
+          "pronunciation": "MÉni",
+          "examples": [
+            {
+              "text": "How many brothers have you got?",
+              "translation": "¿Cuántos hermanos tienes?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MENÚ",
+            "scene": "Un MENÚ con MUCHOS platos ocupa todo el restaurante.",
+            "sceneTarget": "A menu with MANY dishes fills the room.",
+            "emoji": "📜🍽️"
+          }
+        },
+        {
+          "key": "more",
+          "type": "term",
+          "text": "more",
+          "meaning": "más",
+          "pronunciation": "MOR",
+          "examples": [
+            {
+              "text": "More water, please.",
+              "translation": "Más agua, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MORSA",
+            "scene": "Una MORSA golosa pide MÁS helado a gritos.",
+            "sceneTarget": "A walrus shouts for MORE ice cream.",
+            "emoji": "🦭🍦"
+          }
+        },
+        {
+          "key": "less",
+          "type": "term",
+          "text": "less",
+          "meaning": "menos",
+          "pronunciation": "LES",
+          "examples": [
+            {
+              "text": "Less sugar, please.",
+              "translation": "Menos azúcar, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LESIÓN",
+            "scene": "Con cada LESIÓN, el futbolista corre MENOS.",
+            "sceneTarget": "With each injury, the player runs LESS.",
+            "emoji": "🩹⚽"
+          }
+        },
+        {
+          "key": "count",
+          "type": "term",
+          "text": "count",
+          "meaning": "contar",
+          "pronunciation": "KÁUNT",
+          "examples": [
+            {
+              "text": "Count to ten.",
+              "translation": "Cuenta hasta diez."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUENTA",
+            "scene": "Un vampiro lleva la CUENTA: debe CONTAR cada gota.",
+            "sceneTarget": "A vampire must COUNT every drop.",
+            "emoji": "🧛🔢"
+          }
+        },
+        {
+          "key": "pair",
+          "type": "term",
+          "text": "pair",
+          "meaning": "par",
+          "pronunciation": "PER",
+          "examples": [
+            {
+              "text": "A pair of shoes.",
+              "translation": "Un par de zapatos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PERA",
+            "scene": "Un PAR de PERAS con zapatos baila tango.",
+            "sceneTarget": "A PAIR of pears in shoes dance tango.",
+            "emoji": "🍐🍐"
+          }
+        },
+        {
+          "key": "dozen",
+          "type": "term",
+          "text": "dozen",
+          "meaning": "docena",
+          "pronunciation": "DÁsen",
+          "examples": [
+            {
+              "text": "A dozen eggs.",
+              "translation": "Una docena de huevos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DOCE",
+            "scene": "DOCE huevos: una DOCENA salta de la caja.",
+            "sceneTarget": "A DOZEN eggs jump out of the box.",
+            "emoji": "🥚🔟"
+          }
+        },
+        {
+          "key": "g-plural",
+          "type": "pattern",
+          "goal": "Hablar de más de uno (plural con -s)",
+          "rule": "Más de uno: añade -s al nombre. El número no cambia: two cats, three coffees.",
+          "pieces": [
+            {
+              "text": "three",
+              "role": "slot",
+              "hint": "tres"
+            },
+            {
+              "text": "cat",
+              "role": "fixed",
+              "hint": "gato"
+            },
+            {
+              "text": "-s",
+              "role": "fixed",
+              "hint": "-s"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I have three cats.",
+              "translation": "Tengo tres gatos."
+            },
+            {
+              "text": "Two coffees, please.",
+              "translation": "Dos cafés, por favor."
+            },
+            {
+              "text": "I have two brothers.",
+              "translation": "Tengo dos hermanos."
+            },
+            {
+              "text": "A thousand books.",
+              "translation": "Mil libros."
+            }
+          ],
+          "pitfalls": [
+            "Irregulares: one child → two children; one man → two men; one woman → two women.",
+            "«People» ya es plural: many people (no «peoples»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada NÚMERO arrastra un vagón -S detrás.",
+            "emoji": "🚂"
+          }
+        }
+      ]
+    }
+  ]
+}

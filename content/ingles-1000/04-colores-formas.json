@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "04-colores-formas",
+      "title": "Misión 4 · Colores y formas",
+      "units": [
+        {
+          "key": "red",
+          "type": "term",
+          "text": "red",
+          "meaning": "rojo",
+          "pronunciation": "RED",
+          "examples": [
+            {
+              "text": "I like red apples.",
+              "translation": "Me gustan las manzanas rojas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RED",
+            "scene": "Sacas una RED llena de tomates ROJO chillón.",
+            "sceneTarget": "You pull up a net of bright RED tomatoes.",
+            "emoji": "🔴🎣"
+          }
+        },
+        {
+          "key": "blue",
+          "type": "term",
+          "text": "blue",
+          "meaning": "azul",
+          "pronunciation": "BLU",
+          "examples": [
+            {
+              "text": "The sky is blue.",
+              "translation": "El cielo es azul."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BLUSA",
+            "scene": "Tu BLUSA se vuelve AZUL y llueve dentro.",
+            "sceneTarget": "Your blouse turns BLUE and rains inside.",
+            "emoji": "🔵👚"
+          }
+        },
+        {
+          "key": "green",
+          "type": "term",
+          "text": "green",
+          "meaning": "verde",
+          "pronunciation": "GRIN",
+          "examples": [
+            {
+              "text": "Green tea, please.",
+              "translation": "Té verde, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRINCH",
+            "scene": "El GRINCH se pinta aún más VERDE.",
+            "sceneTarget": "The Grinch paints himself even more GREEN.",
+            "emoji": "🟢🎄"
+          }
+        },
+        {
+          "key": "yellow",
+          "type": "term",
+          "text": "yellow",
+          "meaning": "amarillo",
+          "pronunciation": "YÉlou",
+          "examples": [
+            {
+              "text": "A yellow taxi.",
+              "translation": "Un taxi amarillo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YELMO",
+            "scene": "Un caballero con YELMO AMARILLO hace de semáforo.",
+            "sceneTarget": "A knight in a YELLOW helmet directs traffic.",
+            "emoji": "🟡⛑️"
+          }
+        },
+        {
+          "key": "black",
+          "type": "term",
+          "text": "black",
+          "meaning": "negro",
+          "pronunciation": "BLAK",
+          "examples": [
+            {
+              "text": "Black coffee, no sugar.",
+              "translation": "Café solo, sin azúcar."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BLOQUE",
+            "scene": "Un BLOQUE de carbón NEGRO aplasta tu zapato.",
+            "sceneTarget": "A BLACK coal block crushes your shoe.",
+            "emoji": "⚫🧱"
+          }
+        },
+        {
+          "key": "white",
+          "type": "term",
+          "text": "white",
+          "meaning": "blanco",
+          "pronunciation": "UÁIT",
+          "examples": [
+            {
+              "text": "A white shirt.",
+              "translation": "Una camisa blanca."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUAI",
+            "scene": "¡Qué GUAI! Nieva BLANCO dentro de tu nevera.",
+            "sceneTarget": "Cool! WHITE snow falls in your fridge.",
+            "emoji": "⚪❄️"
+          }
+        },
+        {
+          "key": "brown",
+          "type": "term",
+          "text": "brown",
+          "meaning": "marrón",
+          "pronunciation": "BRÁUN",
+          "examples": [
+            {
+              "text": "She has brown eyes.",
+              "translation": "Tiene los ojos marrones."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRONCE",
+            "scene": "Una estatua de BRONCE se oxida, MARRÓN de vergüenza.",
+            "sceneTarget": "A bronze statue rusts BROWN with shame.",
+            "emoji": "🟤🗿"
+          }
+        },
+        {
+          "key": "grey",
+          "type": "term",
+          "text": "grey",
+          "meaning": "gris",
+          "pronunciation": "GRÉI",
+          "examples": [
+            {
+              "text": "A grey cat.",
+              "translation": "Un gato gris."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GREÑA",
+            "scene": "Tu abuelo arrastra una GREÑA GRIS por el suelo.",
+            "sceneTarget": "Grandpa drags his GREY hair on the floor.",
+            "emoji": "🩶👴"
+          }
+        },
+        {
+          "key": "orange",
+          "type": "term",
+          "text": "orange",
+          "meaning": "naranja",
+          "pronunciation": "ÓrinCH",
+          "examples": [
+            {
+              "text": "An orange T-shirt.",
+              "translation": "Una camiseta naranja."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ORINAL",
+            "scene": "Te sirven zumo de NARANJA en un ORINAL.",
+            "sceneTarget": "They serve ORANGE juice in a potty.",
+            "emoji": "🟠🍊"
+          }
+        },
+        {
+          "key": "pink",
+          "type": "term",
+          "text": "pink",
+          "meaning": "rosa",
+          "pronunciation": "PINK",
+          "examples": [
+            {
+              "text": "Pink flowers.",
+              "translation": "Flores rosas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PINCHO",
+            "scene": "Muerdes un PINCHO de tortilla ROSA chicle.",
+            "sceneTarget": "You bite a bubblegum-PINK tortilla skewer.",
+            "emoji": "🩷🍢"
+          }
+        },
+        {
+          "key": "colour",
+          "type": "term",
+          "text": "colour",
+          "meaning": "color",
+          "pronunciation": "KÁler",
+          "examples": [
+            {
+              "text": "What colour is your car?",
+              "translation": "¿De qué color es tu coche?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CALOR",
+            "scene": "Con tanto CALOR, cada COLOR gotea de la pared.",
+            "sceneTarget": "In the heat every COLOUR drips off the wall.",
+            "emoji": "🎨🔥"
+          }
+        },
+        {
+          "key": "circle",
+          "type": "term",
+          "text": "circle",
+          "meaning": "círculo",
+          "pronunciation": "SÉRkel",
+          "examples": [
+            {
+              "text": "Draw a circle.",
+              "translation": "Dibuja un círculo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CIRCO",
+            "scene": "En el CIRCO, un león salta un CÍRCULO de fuego.",
+            "sceneTarget": "At the circus a lion jumps a fire CIRCLE.",
+            "emoji": "⭕🦁"
+          }
+        },
+        {
+          "key": "square",
+          "type": "term",
+          "text": "square",
+          "meaning": "cuadrado",
+          "pronunciation": "SKUÉR",
+          "examples": [
+            {
+              "text": "A square table.",
+              "translation": "Una mesa cuadrada."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCUADRA",
+            "scene": "Una ESCUADRA te dibuja un CUADRADO en la frente.",
+            "sceneTarget": "A set square draws a SQUARE on your head.",
+            "emoji": "🟥📐"
+          }
+        },
+        {
+          "key": "line",
+          "type": "term",
+          "text": "line",
+          "meaning": "línea",
+          "pronunciation": "LÁIN",
+          "examples": [
+            {
+              "text": "Wait in line.",
+              "translation": "Espera en la fila."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LIANA",
+            "scene": "Tarzán estira la LIANA recta como una LÍNEA.",
+            "sceneTarget": "Tarzan pulls his vine straight as a LINE.",
+            "emoji": "📏🐒"
+          }
+        },
+        {
+          "key": "dark",
+          "type": "term",
+          "text": "dark",
+          "meaning": "oscuro",
+          "pronunciation": "DARK",
+          "examples": [
+            {
+              "text": "It's dark outside.",
+              "translation": "Fuera está oscuro."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DARDO",
+            "scene": "En un bar OSCURO, tu DARDO pincha al camarero.",
+            "sceneTarget": "In a DARK bar your dart hits the waiter.",
+            "emoji": "🌑🎯"
+          }
+        },
+        {
+          "key": "g-adjective-order",
+          "type": "pattern",
+          "goal": "Describir cosas: el color va ANTES",
+          "rule": "El adjetivo va delante del nombre y nunca lleva -s: a red car, two red cars.",
+          "pieces": [
+            {
+              "text": "a",
+              "role": "fixed",
+              "hint": "un"
+            },
+            {
+              "text": "red",
+              "role": "slot",
+              "hint": "rojo (salta delante)"
+            },
+            {
+              "text": "car",
+              "role": "fixed",
+              "hint": "coche"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I have a red car.",
+              "translation": "Tengo un coche rojo."
+            },
+            {
+              "text": "She has brown eyes.",
+              "translation": "Tiene los ojos marrones."
+            },
+            {
+              "text": "Two white shirts, please.",
+              "translation": "Dos camisas blancas, por favor."
+            },
+            {
+              "text": "A big black dog.",
+              "translation": "Un perro negro grande."
+            }
+          ],
+          "pitfalls": [
+            "«A car red» está mal: el color va delante.",
+            "El color no tiene plural: red cars (no «reds cars»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El COLOR, impaciente, adelanta al coche: A RED CAR.",
+            "emoji": "🏎️"
+          }
+        }
+      ]
+    }
+  ]
+}

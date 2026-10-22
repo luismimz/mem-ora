@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "02-numeros",
+      "title": "Misión 2 · Números del 1 al 20",
+      "units": [
+        {
+          "key": "one",
+          "type": "term",
+          "text": "one",
+          "meaning": "uno",
+          "pronunciation": "UAN",
+          "examples": [
+            {
+              "text": "I have one brother.",
+              "translation": "Tengo un hermano."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JUAN",
+            "scene": "JUAN, el número UNO, para el tráfico con un dedo.",
+            "sceneTarget": "Juan, number ONE, stops traffic with a finger.",
+            "emoji": "1️⃣☝️"
+          }
+        },
+        {
+          "key": "two",
+          "type": "term",
+          "text": "two",
+          "meaning": "dos",
+          "pronunciation": "TU",
+          "examples": [
+            {
+              "text": "Two coffees, please.",
+              "translation": "Dos cafés, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TUBO",
+            "scene": "DOS gatos pelean dentro de un TUBO.",
+            "sceneTarget": "TWO cats fight inside a tube.",
+            "emoji": "2️⃣🐱"
+          }
+        },
+        {
+          "key": "three",
+          "type": "term",
+          "text": "three",
+          "meaning": "tres",
+          "pronunciation": "ZRI",
+          "examples": [
+            {
+              "text": "I have three cats.",
+              "translation": "Tengo tres gatos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRÍO",
+            "scene": "Un TRÍO toca TRES trompetas a la vez.",
+            "sceneTarget": "A trio plays THREE trumpets at once.",
+            "emoji": "3️⃣🎺"
+          }
+        },
+        {
+          "key": "four",
+          "type": "term",
+          "text": "four",
+          "meaning": "cuatro",
+          "pronunciation": "FOR",
+          "examples": [
+            {
+              "text": "We are four.",
+              "translation": "Somos cuatro."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORO",
+            "scene": "CUATRO romanos discuten en el FORO en patinete.",
+            "sceneTarget": "FOUR Romans argue in the forum on scooters.",
+            "emoji": "4️⃣🏛️"
+          }
+        },
+        {
+          "key": "five",
+          "type": "term",
+          "text": "five",
+          "meaning": "cinco",
+          "pronunciation": "FÁIV",
+          "examples": [
+            {
+              "text": "Five minutes, please.",
+              "translation": "Cinco minutos, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAVOR",
+            "scene": "Pides un FAVOR mostrando CINCO dedos pintados.",
+            "sceneTarget": "You ask a favour showing FIVE painted fingers.",
+            "emoji": "5️⃣🖐️"
+          }
+        },
+        {
+          "key": "six",
+          "type": "term",
+          "text": "six",
+          "meaning": "seis",
+          "pronunciation": "SIKS",
+          "examples": [
+            {
+              "text": "It's six o'clock.",
+              "translation": "Son las seis."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIXTINA",
+            "scene": "En la SIXTINA bajan SEIS ángeles a bailar.",
+            "sceneTarget": "SIX angels fly down to dance in the Sistine.",
+            "emoji": "6️⃣👼"
+          }
+        },
+        {
+          "key": "seven",
+          "type": "term",
+          "text": "seven",
+          "meaning": "siete",
+          "pronunciation": "SÉven",
+          "examples": [
+            {
+              "text": "Seven days a week.",
+              "translation": "Siete días a la semana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEVILLA",
+            "scene": "En SEVILLA, SIETE flamencas bailan sobre un tejado.",
+            "sceneTarget": "In Seville, SEVEN flamenco dancers dance on a roof.",
+            "emoji": "7️⃣💃"
+          }
+        },
+        {
+          "key": "eight",
+          "type": "term",
+          "text": "eight",
+          "meaning": "ocho",
+          "pronunciation": "ÉIT",
+          "examples": [
+            {
+              "text": "I work eight hours.",
+              "translation": "Trabajo ocho horas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "Un pulpo de OCHO brazos se enrosca como un 8.",
+            "sceneTarget": "An EIGHT-armed octopus curls into an 8.",
+            "emoji": "8️⃣🐙"
+          }
+        },
+        {
+          "key": "nine",
+          "type": "term",
+          "text": "nine",
+          "meaning": "nueve",
+          "pronunciation": "NÁIN",
+          "examples": [
+            {
+              "text": "The film starts at nine.",
+              "translation": "La película empieza a las nueve."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NAIPE",
+            "scene": "NUEVE NAIPES gigantes persiguen a un mago.",
+            "sceneTarget": "NINE giant cards chase a magician.",
+            "emoji": "9️⃣🃏"
+          }
+        },
+        {
+          "key": "ten",
+          "type": "term",
+          "text": "ten",
+          "meaning": "diez",
+          "pronunciation": "TEN",
+          "examples": [
+            {
+              "text": "I have ten euros.",
+              "translation": "Tengo diez euros."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TENEDOR",
+            "scene": "Un TENEDOR de DIEZ dientes pincha la luna.",
+            "sceneTarget": "A TEN-pronged fork stabs the moon.",
+            "emoji": "🔟🍴"
+          }
+        },
+        {
+          "key": "eleven",
+          "type": "term",
+          "text": "eleven",
+          "meaning": "once",
+          "pronunciation": "iLÉven",
+          "examples": [
+            {
+              "text": "She is eleven.",
+              "translation": "Tiene once años."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEVANTE",
+            "scene": "El LEVANTE juega con ONCE jugadores en monociclo.",
+            "sceneTarget": "Levante play with ELEVEN players on unicycles.",
+            "emoji": "1️⃣1️⃣⚽"
+          }
+        },
+        {
+          "key": "twelve",
+          "type": "term",
+          "text": "twelve",
+          "meaning": "doce",
+          "pronunciation": "TUÉLV",
+          "examples": [
+            {
+              "text": "Twelve months in a year.",
+              "translation": "Doce meses en un año."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VUELVE",
+            "scene": "Lanzas DOCE bumeranes y cada uno VUELVE a tu mano.",
+            "sceneTarget": "You throw TWELVE boomerangs and each one comes back to your hand.",
+            "emoji": "1️⃣2️⃣🍇"
+          }
+        },
+        {
+          "key": "thirteen",
+          "type": "term",
+          "text": "thirteen",
+          "meaning": "trece",
+          "pronunciation": "zerTÍN",
+          "examples": [
+            {
+              "text": "Room thirteen.",
+              "translation": "Habitación trece."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SARTÉN",
+            "scene": "TRECE huevos saltan de la SARTÉN a la vez.",
+            "sceneTarget": "THIRTEEN eggs jump out of the pan.",
+            "emoji": "1️⃣3️⃣🍳"
+          }
+        },
+        {
+          "key": "fifteen",
+          "type": "term",
+          "text": "fifteen",
+          "meaning": "quince",
+          "pronunciation": "fifTÍN",
+          "examples": [
+            {
+              "text": "Fifteen minutes.",
+              "translation": "Quince minutos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIFÍ",
+            "scene": "La perra FIFÍ luce QUINCE lazos en la cola.",
+            "sceneTarget": "Fifi the dog wears FIFTEEN bows.",
+            "emoji": "1️⃣5️⃣🐩"
+          }
+        },
+        {
+          "key": "twenty",
+          "type": "term",
+          "text": "twenty",
+          "meaning": "veinte",
+          "pronunciation": "TUÉnti",
+          "examples": [
+            {
+              "text": "I am twenty years old.",
+              "translation": "Tengo veinte años."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TUERTO",
+            "scene": "Un pirata TUERTO cuenta VEINTE monedas.",
+            "sceneTarget": "A one-eyed pirate counts TWENTY coins.",
+            "emoji": "2️⃣0️⃣🏴‍☠️"
+          }
+        },
+        {
+          "key": "g-age",
+          "type": "pattern",
+          "goal": "Decir tu edad (con «be», no con «have»)",
+          "rule": "La edad se ES, no se tiene: I am 20 (years old). How old are you?",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "am",
+              "role": "fixed",
+              "hint": "tengo → SOY"
+            },
+            {
+              "text": "twenty",
+              "role": "slot",
+              "hint": "veinte"
+            },
+            {
+              "text": "years old",
+              "role": "fixed",
+              "hint": "años"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I am twenty years old.",
+              "translation": "Tengo veinte años."
+            },
+            {
+              "text": "My brother is ten.",
+              "translation": "Mi hermano tiene diez años."
+            },
+            {
+              "text": "How old are you?",
+              "translation": "¿Cuántos años tienes?"
+            },
+            {
+              "text": "The baby is one year old.",
+              "translation": "El bebé tiene un año."
+            }
+          ],
+          "pitfalls": [
+            "«I have twenty years» está mal: la edad va con am / is / are."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Tu TARTA de cumpleaños grita: ¡NO TIENES años, LOS ERES!",
+            "emoji": "🎂"
+          }
+        }
+      ]
+    }
+  ]
+}

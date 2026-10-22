@@ -30,12 +30,16 @@ export function buildTiles(text: string): string[] {
   return text.replace(/[.!?¡¿]+$/u, '').split(/\s+/).filter(Boolean);
 }
 
-/** Ejemplo de la unidad que se puede construir con fichas (idiomas y gramática); `null` si no hay ninguno. */
-export function buildableExample(u: SessionUnit): number | null {
-  if (u.type !== 'term' && u.type !== 'pattern') return null;
+/** Ejemplos de la unidad que se pueden construir con fichas (idiomas y gramática), por su posición. */
+export function buildableExamples(u: SessionUnit): number[] {
+  if (u.type !== 'term' && u.type !== 'pattern') return [];
   const examples = ((u.payload as { examples?: Array<{ text: string; translation?: string }> }).examples ?? []);
-  const i = examples.findIndex((e) => Boolean(e.translation) && buildTiles(e.text).length >= FLOW_BUILD_WORDS.min && buildTiles(e.text).length <= FLOW_BUILD_WORDS.max);
-  return i < 0 ? null : i;
+  return examples.flatMap((e, i) => (Boolean(e.translation) && buildTiles(e.text).length >= FLOW_BUILD_WORDS.min && buildTiles(e.text).length <= FLOW_BUILD_WORDS.max ? [i] : []));
+}
+
+/** Primer ejemplo que se puede construir con fichas; `null` si no hay ninguno. */
+export function buildableExample(u: SessionUnit): number | null {
+  return buildableExamples(u)[0] ?? null;
 }
 
 /** Ejercicio que se puede completar escribiendo: respuesta corta y sin «ordenar pasos». */
@@ -131,7 +135,10 @@ export function buildFlowSession(input: {
   const pending: Array<{ at: number; step: Draft }> = [];
   for (const d of base) {
     withRetry.push(d);
-    if (['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(d.kind)) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });
+    // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada).
+    const other = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? buildableExamples(units[d.unitKey]!).find((n) => n !== d.example) : undefined;
+    if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });
+    else if (['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(d.kind)) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });
     for (let j = pending.length - 1; j >= 0; j -= 1) if (pending[j]!.at <= withRetry.length) withRetry.push(pending.splice(j, 1)[0]!.step);
   }
   for (const p of pending) withRetry.push(p.step);

@@ -35,6 +35,12 @@ Directus envía los correos de restablecer contraseña e invitaciones por SMTP. 
   Con el puerto `465`, poner `EMAIL_SMTP_SECURE=true`.
 Después, **Redeploy**. Prueba: «¿Olvidaste la contraseña?» en studio.luismontalvan.com.
 
+## Contenido desde git (D-080)
+Los cursos propios de `content/<curso>/NN-*.json` van dentro de la imagen de Directus y el hook `memora-content` los
+vuelca al arrancar: misiones y unidades nuevas se importan y se publican; lo que ya existe solo se actualiza si cambió
+(conserva ids, habilidades y progreso); nunca borra. El resultado sale en los logs de Directus (`[memora-content]`).
+En local no hace nada salvo que se defina `MEMORA_CONTENT_DIR`.
+
 ## 3. Copias de seguridad
 - El servicio `backup` hace un `pg_dump` diario y guarda 14 días en el volumen `backups`.
 - `pnpm prod:export` guarda en el Mac un JSON de cursos y eventos de alumnos (independiente de Directus).

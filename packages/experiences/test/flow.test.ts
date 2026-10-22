@@ -111,7 +111,7 @@ describe('idiomas en el Flujo: escuchar, construir y gramática (D-079)', () => 
   } as unknown as SessionUnit);
   const pattern: SessionUnit = {
     key: 'p1', type: 'pattern', language: 'en',
-    payload: { goal: 'Decir lo que estás haciendo', rule: 'am/is/are + verbo-ing', pieces: [{ text: "I'm", role: 'fixed', hint: 'YO estoy' }, { text: 'reading', role: 'slot', hint: 'leyendo' }], examples: [{ text: "I'm reading a book.", translation: 'Estoy leyendo un libro.' }] },
+    payload: { goal: 'Decir lo que estás haciendo', rule: 'am/is/are + verbo-ing', pieces: [{ text: "I'm", role: 'fixed', hint: 'YO estoy' }, { text: 'reading', role: 'slot', hint: 'leyendo' }], examples: [{ text: "I'm reading a book.", translation: 'Estoy leyendo un libro.' }, { text: 'She is cooking now.', translation: 'Está cocinando ahora.' }] },
     skills: [{ key: 'p1.recall', kind: 'recall' }, { key: 'p1.produce', kind: 'produce' }],
     association: null,
   } as unknown as SessionUnit;
@@ -143,6 +143,11 @@ describe('idiomas en el Flujo: escuchar, construir y gramática (D-079)', () => 
     if (!s.unitKey || s.kind === 'reel') return;
     expect(plan.steps.slice(0, i).some((x) => x.kind === 'reel' && x.unitKey === s.unitKey)).toBe(true);
   }));
+
+  it('la gramática se repesca construyendo otra de sus frases, no eligiendo', () => {
+    const retry = plan.steps.find((s) => s.unitKey === 'p1' && s.retry);
+    expect(retry).toMatchObject({ kind: 'build', example: 1, skillKey: 'p1.produce' });
+  });
 
   it('sin audio no hay «Escucha»', () => {
     const quiet = buildFlowSession({ ...lang, items: ['w1', 'w2'].map((k) => item(k, 'new')) });

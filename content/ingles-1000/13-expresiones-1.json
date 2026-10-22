@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "13-expresiones-1",
+      "title": "Misión 13 · Expresiones para conversar I",
+      "units": [
+        {
+          "key": "nice-to-meet-you",
+          "type": "term",
+          "text": "nice to meet you",
+          "meaning": "encantado de conocerte",
+          "pronunciation": "nais tu MIIT iu",
+          "examples": [
+            {
+              "text": "Hi, I'm Ana. Nice to meet you.",
+              "translation": "Hola, soy Ana. Encantada de conocerte."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MITIN",
+            "scene": "ENCANTADO de conocerte, dice el político en su MITIN.",
+            "sceneTarget": "NICE TO MEET YOU, says the politician at his rally.",
+            "emoji": "🤝🎤"
+          }
+        },
+        {
+          "key": "hows-it-going",
+          "type": "term",
+          "text": "how's it going?",
+          "meaning": "¿qué tal va?",
+          "pronunciation": "jaus it GÓUing",
+          "examples": [
+            {
+              "text": "Hey! How's it going?",
+              "translation": "¡Eh! ¿Qué tal?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "Un caracol con prisa te pregunta: ¿QUÉ TAL VA?",
+            "sceneTarget": "A snail in a hurry asks you: HOW'S IT GOING?",
+            "emoji": "🐌💨"
+          }
+        },
+        {
+          "key": "i-dont-understand",
+          "type": "term",
+          "text": "I don't understand",
+          "meaning": "no entiendo",
+          "pronunciation": "ai dont ander STAND",
+          "examples": [
+            {
+              "text": "Sorry, I don't understand.",
+              "translation": "Perdona, no entiendo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANDÉN",
+            "scene": "En el ANDÉN, el tren habla chino: NO ENTIENDO.",
+            "sceneTarget": "On the platform the train speaks Chinese: I DON'T UNDERSTAND.",
+            "emoji": "🚉🈶"
+          }
+        },
+        {
+          "key": "could-you-repeat",
+          "type": "term",
+          "text": "could you repeat that?",
+          "meaning": "¿puedes repetirlo?",
+          "pronunciation": "kud iu riPÍIT dat",
+          "examples": [
+            {
+              "text": "Could you repeat that, please?",
+              "translation": "¿Puedes repetirlo, por favor?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PITO",
+            "scene": "Un árbitro toca el PITO: ¿PUEDES REPETIRLO, por favor?",
+            "sceneTarget": "A referee blows the whistle: COULD YOU REPEAT THAT?",
+            "emoji": "🧑‍⚖️📣"
+          }
+        },
+        {
+          "key": "what-do-you-mean",
+          "type": "term",
+          "text": "what do you mean?",
+          "meaning": "¿qué quieres decir?",
+          "pronunciation": "uot du iu MIIN",
+          "examples": [
+            {
+              "text": "What do you mean by that?",
+              "translation": "¿Qué quieres decir con eso?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MINA",
+            "scene": "En la MINA, el enano pregunta: ¿qué QUIERES DECIR?",
+            "sceneTarget": "In the mine, the dwarf asks: WHAT DO YOU MEAN?",
+            "emoji": "⛏️🧔"
+          }
+        },
+        {
+          "key": "never-mind",
+          "type": "term",
+          "text": "never mind",
+          "meaning": "no importa, déjalo",
+          "pronunciation": "never MÁIND",
+          "examples": [
+            {
+              "text": "Never mind, it's not important.",
+              "translation": "Déjalo, no es importante."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MAÍZ",
+            "scene": "NO IMPORTA, dice la NEVERA, y se come el MAÍZ.",
+            "sceneTarget": "NEVER MIND, says the fridge, and eats the corn.",
+            "emoji": "🧊🌽"
+          }
+        },
+        {
+          "key": "no-worries",
+          "type": "term",
+          "text": "no worries",
+          "meaning": "tranquilo, no pasa nada",
+          "pronunciation": "nou UÓris",
+          "examples": [
+            {
+              "text": "No worries, I'll help you.",
+              "translation": "Tranquilo, te ayudo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "Rompes el jarrón; el abuelo sonríe: TRANQUILO, NO PASA NADA.",
+            "sceneTarget": "You break the vase and grandpa smiles: NO WORRIES.",
+            "emoji": "🏺😊"
+          }
+        },
+        {
+          "key": "sounds-good",
+          "type": "term",
+          "text": "sounds good",
+          "meaning": "me parece bien",
+          "pronunciation": "SÁUNDS gud",
+          "examples": [
+            {
+              "text": "Dinner at eight? Sounds good.",
+              "translation": "¿Cenamos a las ocho? Me parece bien."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAUNA",
+            "scene": "¿Vamos a la SAUNA en pijama? —ME PARECE BIEN.",
+            "sceneTarget": "Sauna in pyjamas? SOUNDS GOOD.",
+            "emoji": "🧖👍"
+          }
+        },
+        {
+          "key": "im-not-sure",
+          "type": "term",
+          "text": "I'm not sure",
+          "meaning": "no estoy seguro",
+          "pronunciation": "aim not SHUR",
+          "examples": [
+            {
+              "text": "I'm not sure, let me check.",
+              "translation": "No estoy seguro, déjame comprobarlo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHURRO",
+            "scene": "¿Es un CHURRO o una serpiente? NO ESTOY SEGURO.",
+            "sceneTarget": "Is it a churro or a snake? I'M NOT SURE.",
+            "emoji": "🥖🐍"
+          }
+        },
+        {
+          "key": "it-depends",
+          "type": "term",
+          "text": "it depends",
+          "meaning": "depende",
+          "pronunciation": "it diPÉNDS",
+          "examples": [
+            {
+              "text": "It depends on the weather.",
+              "translation": "Depende del tiempo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "¿Pastel? DEPENDE de si el pastel te muerde antes.",
+            "sceneTarget": "Cake? IT DEPENDS on whether the cake bites you first.",
+            "emoji": "🎂😬"
+          }
+        },
+        {
+          "key": "of-course",
+          "type": "term",
+          "text": "of course",
+          "meaning": "claro, por supuesto",
+          "pronunciation": "of KÓRS",
+          "examples": [
+            {
+              "text": "Of course you can.",
+              "translation": "Claro que puedes."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CORZO",
+            "scene": "¿Me llevas? —CLARO, dice el CORZO, ¡sube!",
+            "sceneTarget": "Can you take me? OF COURSE, says the deer. Hop on!",
+            "emoji": "🦌🎒"
+          }
+        },
+        {
+          "key": "excuse-me",
+          "type": "term",
+          "text": "excuse me",
+          "meaning": "perdone, disculpe",
+          "pronunciation": "eksKIÚS mi",
+          "examples": [
+            {
+              "text": "Excuse me, where is the bank?",
+              "translation": "Disculpe, ¿dónde está el banco?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESQUÍ",
+            "scene": "PERDONE, dice el ESQUÍ al chocar con tu nariz.",
+            "sceneTarget": "EXCUSE ME, says the ski as it hits your nose.",
+            "emoji": "🎿👃"
+          }
+        },
+        {
+          "key": "im-sorry",
+          "type": "term",
+          "text": "I'm sorry",
+          "meaning": "lo siento",
+          "pronunciation": "aim SÓri",
+          "examples": [
+            {
+              "text": "I'm sorry I'm late.",
+              "translation": "Siento llegar tarde."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SORIA",
+            "scene": "LO SIENTO, llora un muñeco de nieve de SORIA.",
+            "sceneTarget": "I'M SORRY, cries a snowman from Soria.",
+            "emoji": "⛄😢"
+          }
+        },
+        {
+          "key": "thanks-a-lot",
+          "type": "term",
+          "text": "thanks a lot",
+          "meaning": "muchas gracias",
+          "pronunciation": "ZANKS a lot",
+          "examples": [
+            {
+              "text": "Thanks a lot for your help.",
+              "translation": "Muchas gracias por tu ayuda."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZANCOS",
+            "scene": "Desde unos ZANCOS gigantes gritas: ¡MUCHAS GRACIAS!",
+            "sceneTarget": "From giant stilts you shout: THANKS A LOT!",
+            "emoji": "🦿🙏"
+          }
+        },
+        {
+          "key": "see-you-later",
+          "type": "term",
+          "text": "see you later",
+          "meaning": "hasta luego",
+          "pronunciation": "sii iu LÉIter",
+          "examples": [
+            {
+              "text": "See you later!",
+              "translation": "¡Hasta luego!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "El sol se despide del mar: HASTA LUEGO.",
+            "sceneTarget": "The sun says goodbye to the sea: SEE YOU LATER.",
+            "emoji": "🌅👋"
+          }
+        },
+        {
+          "key": "g-polite-requests",
+          "type": "pattern",
+          "goal": "Pedir algo con educación (could you…?)",
+          "rule": "Could you + verbo + please? Es más amable que can. Para pedir para ti: Could I have…?",
+          "pieces": [
+            {
+              "text": "Could",
+              "role": "fixed",
+              "hint": "¿Podrías"
+            },
+            {
+              "text": "you",
+              "role": "fixed",
+              "hint": "TÚ"
+            },
+            {
+              "text": "repeat that",
+              "role": "slot",
+              "hint": "repetirlo"
+            },
+            {
+              "text": "please",
+              "role": "fixed",
+              "hint": "por favor"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Could you repeat that, please?",
+              "translation": "¿Podrías repetirlo, por favor?"
+            },
+            {
+              "text": "Could you help me?",
+              "translation": "¿Podrías ayudarme?"
+            },
+            {
+              "text": "Could I have a coffee, please?",
+              "translation": "¿Me pones un café, por favor?"
+            },
+            {
+              "text": "Could you speak slowly?",
+              "translation": "¿Podrías hablar despacio?"
+            }
+          ],
+          "pitfalls": [
+            "Sin «please» suena brusco: en inglés importa mucho."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un mayordomo inglés susurra COULD YOU antes de cada favor.",
+            "emoji": "🎩"
+          }
+        }
+      ]
+    }
+  ]
+}

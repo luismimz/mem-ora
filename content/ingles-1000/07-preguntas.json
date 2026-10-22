@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "07-preguntas",
+      "title": "Misión 7 · Palabras para preguntar",
+      "units": [
+        {
+          "key": "what",
+          "type": "term",
+          "text": "what",
+          "meaning": "qué",
+          "pronunciation": "UÓT",
+          "examples": [
+            {
+              "text": "What is this?",
+              "translation": "¿Qué es esto?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUATA",
+            "scene": "¿QUÉ hay dentro? Abres el cojín y sale GUATA.",
+            "sceneTarget": "WHAT's inside? You open the cushion: stuffing.",
+            "emoji": "🛋️❓"
+          }
+        },
+        {
+          "key": "who",
+          "type": "term",
+          "text": "who",
+          "meaning": "quién",
+          "pronunciation": "JU",
+          "examples": [
+            {
+              "text": "Who is she?",
+              "translation": "¿Quién es ella?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JUDÍA",
+            "scene": "¿QUIÉN se comió mi JUDÍA? Pregunta el gigante.",
+            "sceneTarget": "WHO ate my bean? asks the giant.",
+            "emoji": "🫘👹"
+          }
+        },
+        {
+          "key": "where",
+          "type": "term",
+          "text": "where",
+          "meaning": "dónde",
+          "pronunciation": "UÉR",
+          "examples": [
+            {
+              "text": "Where do you live?",
+              "translation": "¿Dónde vives?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HUERTA",
+            "scene": "¿DÓNDE está tu coche? Plantado en la HUERTA.",
+            "sceneTarget": "WHERE is your car? Planted in the vegetable garden.",
+            "emoji": "🥕🚗"
+          }
+        },
+        {
+          "key": "when",
+          "type": "term",
+          "text": "when",
+          "meaning": "cuándo",
+          "pronunciation": "UÉN",
+          "examples": [
+            {
+              "text": "When is the party?",
+              "translation": "¿Cuándo es la fiesta?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BUENO",
+            "scene": "¿CUÁNDO llegas? —BUENO, cuando el reloj quiera.",
+            "sceneTarget": "WHEN are you arriving? Well, when the clock decides.",
+            "emoji": "⏰🤷"
+          }
+        },
+        {
+          "key": "why",
+          "type": "term",
+          "text": "why",
+          "meaning": "por qué",
+          "pronunciation": "UÁI",
+          "examples": [
+            {
+              "text": "Why are you sad?",
+              "translation": "¿Por qué estás triste?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUAY",
+            "scene": "¿POR QUÉ eres tan GUAY?, preguntan tus gafas de sol.",
+            "sceneTarget": "WHY are you so cool? ask your sunglasses.",
+            "emoji": "😎❓"
+          }
+        },
+        {
+          "key": "how",
+          "type": "term",
+          "text": "how",
+          "meaning": "cómo",
+          "pronunciation": "JÁU",
+          "examples": [
+            {
+              "text": "How are you?",
+              "translation": "¿Cómo estás?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAULA",
+            "scene": "¿CÓMO sales de la JAULA? Con un tenedor.",
+            "sceneTarget": "HOW do you get out of the cage? With a fork.",
+            "emoji": "🐦🍴"
+          }
+        },
+        {
+          "key": "which",
+          "type": "term",
+          "text": "which",
+          "meaning": "cuál",
+          "pronunciation": "UÍCH",
+          "examples": [
+            {
+              "text": "Which one do you want?",
+              "translation": "¿Cuál quieres?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜISQUI",
+            "scene": "¿CUÁL de las tres botellas de GÜISQUI es agua?",
+            "sceneTarget": "WHICH of the three whisky bottles is water?",
+            "emoji": "🍾❓"
+          }
+        },
+        {
+          "key": "whose",
+          "type": "term",
+          "text": "whose",
+          "meaning": "de quién",
+          "pronunciation": "JUS",
+          "examples": [
+            {
+              "text": "Whose bag is this?",
+              "translation": "¿De quién es esta bolsa?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JUZGADO",
+            "scene": "En el JUZGADO preguntan: ¿de QUIÉN es este bigote?",
+            "sceneTarget": "In court they ask: WHOSE moustache is this?",
+            "emoji": "⚖️🥸"
+          }
+        },
+        {
+          "key": "how-much",
+          "type": "term",
+          "text": "how much",
+          "meaning": "cuánto (precio o cantidad)",
+          "pronunciation": "jau MACH",
+          "examples": [
+            {
+              "text": "How much is it?",
+              "translation": "¿Cuánto cuesta?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MUCHO",
+            "scene": "¿CUÁNTO cuesta? —MUCHO, dice el vendedor riendo.",
+            "sceneTarget": "HOW MUCH is it? A lot, laughs the seller.",
+            "emoji": "💶😂"
+          }
+        },
+        {
+          "key": "how-many",
+          "type": "term",
+          "text": "how many",
+          "meaning": "cuántos (se pueden contar)",
+          "pronunciation": "jau MÉni",
+          "examples": [
+            {
+              "text": "How many brothers do you have?",
+              "translation": "¿Cuántos hermanos tienes?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MENINAS",
+            "scene": "¿CUÁNTOS perros hay en Las MENINAS? Cuéntalos.",
+            "sceneTarget": "HOW MANY dogs are in Las Meninas? Count them.",
+            "emoji": "🖼️🐕"
+          }
+        },
+        {
+          "key": "how-long",
+          "type": "term",
+          "text": "how long",
+          "meaning": "cuánto tiempo",
+          "pronunciation": "jau LONG",
+          "examples": [
+            {
+              "text": "How long does it take?",
+              "translation": "¿Cuánto tiempo se tarda?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LONGANIZA",
+            "scene": "¿CUÁNTO TIEMPO tarda en asarse una LONGANIZA de un metro?",
+            "sceneTarget": "HOW LONG does a metre-long sausage take to grill?",
+            "emoji": "🌭⏳"
+          }
+        },
+        {
+          "key": "how-often",
+          "type": "term",
+          "text": "how often",
+          "meaning": "con qué frecuencia",
+          "pronunciation": "jau ÓFen",
+          "examples": [
+            {
+              "text": "How often do you study?",
+              "translation": "¿Con qué frecuencia estudias?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OFENSA",
+            "scene": "Cuentas con qué FRECUENCIA tu loro suelta una OFENSA.",
+            "sceneTarget": "You count HOW OFTEN your parrot throws an insult at you.",
+            "emoji": "🦜🗯️"
+          }
+        },
+        {
+          "key": "what-time",
+          "type": "term",
+          "text": "what time",
+          "meaning": "a qué hora",
+          "pronunciation": "uot TÁIM",
+          "examples": [
+            {
+              "text": "What time is it?",
+              "translation": "¿Qué hora es?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TAIMADO",
+            "scene": "«¿A qué HORA?», pregunta un zorro TAIMADO.",
+            "sceneTarget": "\"WHAT TIME?\" asks a sly fox.",
+            "emoji": "🦊⌚"
+          }
+        },
+        {
+          "key": "how-old",
+          "type": "term",
+          "text": "how old",
+          "meaning": "cuántos años (edad)",
+          "pronunciation": "jau ÓULD",
+          "examples": [
+            {
+              "text": "How old are you?",
+              "translation": "¿Cuántos años tienes?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÓLEO",
+            "scene": "¿Cuántos AÑOS tiene este ÓLEO?, pregunta el abuelo pintado.",
+            "sceneTarget": "HOW OLD is this oil painting? asks the painted grandpa.",
+            "emoji": "🖼️👴"
+          }
+        },
+        {
+          "key": "how-far",
+          "type": "term",
+          "text": "how far",
+          "meaning": "a qué distancia",
+          "pronunciation": "jau FAR",
+          "examples": [
+            {
+              "text": "How far is the station?",
+              "translation": "¿A qué distancia está la estación?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FARO",
+            "scene": "¿A qué DISTANCIA está el FARO? Nadas tres horas.",
+            "sceneTarget": "HOW FAR is the lighthouse? You swim for three hours.",
+            "emoji": "🗼🏊"
+          }
+        },
+        {
+          "key": "g-do-questions",
+          "type": "pattern",
+          "goal": "Hacer preguntas: el ¿ se convierte en DO",
+          "rule": "Si la frase no tiene ayudante, la pregunta lo añade: (palabra) + DO + tú + verbo. Where do you live?",
+          "pieces": [
+            {
+              "text": "Where",
+              "role": "fixed",
+              "hint": "¿Dónde"
+            },
+            {
+              "text": "do",
+              "role": "fixed",
+              "hint": "¿ → DO"
+            },
+            {
+              "text": "you",
+              "role": "fixed",
+              "hint": "TÚ"
+            },
+            {
+              "text": "live",
+              "role": "slot",
+              "hint": "vives"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Where do you live?",
+              "translation": "¿Dónde vives?"
+            },
+            {
+              "text": "Do you like coffee?",
+              "translation": "¿Te gusta el café?"
+            },
+            {
+              "text": "What do you want?",
+              "translation": "¿Qué quieres?"
+            },
+            {
+              "text": "How do you say this?",
+              "translation": "¿Cómo se dice esto?"
+            }
+          ],
+          "pitfalls": [
+            "«Where you live?» está mal: falta DO.",
+            "Con am / is / are no hace falta DO: Where are you?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El signo ¿ se disfraza de portero y grita DO.",
+            "emoji": "🚪"
+          }
+        }
+      ]
+    }
+  ]
+}

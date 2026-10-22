@@ -201,6 +201,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
     <div className="concept-face pattern-face">
       <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🪞'}</div>
       <h2 className="pattern-goal">{p.goal}</h2>
+      {unit.association?.text && <p className="face-story"><Marked text={unit.association.text} /></p>}
       <div className="mirror" role="list" aria-label="Pieza a pieza">
         {p.pieces.map((x, i) => (
           <span key={i} role="listitem" className={`piece ${x.role}`}>

@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "11-verbos-3",
+      "title": "Misión 11 · Verbos de movimiento",
+      "units": [
+        {
+          "key": "walk",
+          "type": "term",
+          "text": "walk",
+          "meaning": "caminar, andar",
+          "pronunciation": "UÓOK",
+          "examples": [
+            {
+              "text": "I walk to work.",
+              "translation": "Voy andando al trabajo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "WOK",
+            "scene": "CAMINAS por la calle con un WOK por sombrero.",
+            "sceneTarget": "You WALK down the street with a wok as a hat.",
+            "emoji": "🚶🥘"
+          }
+        },
+        {
+          "key": "run",
+          "type": "term",
+          "text": "run",
+          "meaning": "correr",
+          "pronunciation": "RAN",
+          "examples": [
+            {
+              "text": "I run every morning.",
+              "translation": "Corro cada mañana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RANA",
+            "scene": "Una RANA con zapatillas sale a CORRER la maratón.",
+            "sceneTarget": "A frog in trainers RUNS the marathon.",
+            "emoji": "🐸👟"
+          }
+        },
+        {
+          "key": "jump",
+          "type": "term",
+          "text": "jump",
+          "meaning": "saltar",
+          "pronunciation": "YAMP",
+          "examples": [
+            {
+              "text": "Jump!",
+              "translation": "¡Salta!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAMÓN",
+            "scene": "Un JAMÓN entero SALTA a la comba.",
+            "sceneTarget": "A whole ham JUMPS rope.",
+            "emoji": "🍖🪢"
+          }
+        },
+        {
+          "key": "fall",
+          "type": "term",
+          "text": "fall",
+          "meaning": "caer(se)",
+          "pronunciation": "FOOL",
+          "examples": [
+            {
+              "text": "Don't fall!",
+              "translation": "¡No te caigas!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FOLIO",
+            "scene": "Un FOLIO gigante te hace CAER por la escalera.",
+            "sceneTarget": "A giant sheet of paper makes you FALL down the stairs.",
+            "emoji": "📄🪜"
+          }
+        },
+        {
+          "key": "climb",
+          "type": "term",
+          "text": "climb",
+          "meaning": "subir, escalar",
+          "pronunciation": "KLÁIM",
+          "examples": [
+            {
+              "text": "We climbed the mountain.",
+              "translation": "Subimos la montaña."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLIMA",
+            "scene": "Para ESCALAR el Everest, miras el CLIMA en un pepino.",
+            "sceneTarget": "To CLIMB Everest, you check the weather on a cucumber.",
+            "emoji": "🧗🥒"
+          }
+        },
+        {
+          "key": "drive",
+          "type": "term",
+          "text": "drive",
+          "meaning": "conducir",
+          "pronunciation": "DRÁIV",
+          "examples": [
+            {
+              "text": "Can you drive?",
+              "translation": "¿Sabes conducir?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRAGÓN",
+            "scene": "Un DRAGÓN CONDUCE tu coche escupiendo fuego.",
+            "sceneTarget": "A dragon DRIVES your car, breathing fire.",
+            "emoji": "🐉🚗"
+          }
+        },
+        {
+          "key": "ride",
+          "type": "term",
+          "text": "ride",
+          "meaning": "montar (en bici, a caballo)",
+          "pronunciation": "RÁID",
+          "examples": [
+            {
+              "text": "I ride my bike to school.",
+              "translation": "Voy en bici al colegio."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RAÍZ",
+            "scene": "MONTAS una RAÍZ gigante como si fuera un caballo.",
+            "sceneTarget": "You RIDE a giant root as if it were a horse.",
+            "emoji": "🌳🐎"
+          }
+        },
+        {
+          "key": "fly",
+          "type": "term",
+          "text": "fly",
+          "meaning": "volar",
+          "pronunciation": "FLÁI",
+          "examples": [
+            {
+              "text": "Birds fly.",
+              "translation": "Los pájaros vuelan."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FLAN",
+            "scene": "Un FLAN con alas VUELA por la cocina.",
+            "sceneTarget": "A flan with wings FLIES around the kitchen.",
+            "emoji": "🍮🪽"
+          }
+        },
+        {
+          "key": "swim",
+          "type": "term",
+          "text": "swim",
+          "meaning": "nadar",
+          "pronunciation": "SUÍM",
+          "examples": [
+            {
+              "text": "Can you swim?",
+              "translation": "¿Sabes nadar?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUIZO",
+            "scene": "Un SUIZO con traje NADA en la fondue.",
+            "sceneTarget": "A Swiss man in a suit SWIMS in the fondue.",
+            "emoji": "🇨🇭🫕"
+          }
+        },
+        {
+          "key": "move",
+          "type": "term",
+          "text": "move",
+          "meaning": "mover(se), mudarse",
+          "pronunciation": "MUUV",
+          "examples": [
+            {
+              "text": "We moved to Madrid.",
+              "translation": "Nos mudamos a Madrid."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MUEBLE",
+            "scene": "Para MUDARSE, el MUEBLE camina solo hasta el camión.",
+            "sceneTarget": "To MOVE house, the furniture walks to the van.",
+            "emoji": "🪑🚚"
+          }
+        },
+        {
+          "key": "turn",
+          "type": "term",
+          "text": "turn",
+          "meaning": "girar",
+          "pronunciation": "TERN",
+          "examples": [
+            {
+              "text": "Turn left.",
+              "translation": "Gira a la izquierda."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TERNERA",
+            "scene": "Una TERNERA en patines GIRA sin parar.",
+            "sceneTarget": "A calf on skates TURNS round and round.",
+            "emoji": "🐄🛼"
+          }
+        },
+        {
+          "key": "stop",
+          "type": "term",
+          "text": "stop",
+          "meaning": "parar",
+          "pronunciation": "STOP",
+          "examples": [
+            {
+              "text": "Stop here, please.",
+              "translation": "Pare aquí, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "STOP",
+            "scene": "Un semáforo con brazos te obliga a PARAR: ¡STOP!",
+            "sceneTarget": "A traffic light with arms makes you STOP.",
+            "emoji": "🚦✋"
+          }
+        },
+        {
+          "key": "wait",
+          "type": "term",
+          "text": "wait",
+          "meaning": "esperar",
+          "pronunciation": "UÉIT",
+          "examples": [
+            {
+              "text": "Wait for me!",
+              "translation": "¡Espérame!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BUEY",
+            "scene": "Un BUEY con reloj ESPERA el autobús.",
+            "sceneTarget": "An ox with a watch WAITS for the bus.",
+            "emoji": "🐂⌚"
+          }
+        },
+        {
+          "key": "sit",
+          "type": "term",
+          "text": "sit",
+          "meaning": "sentarse",
+          "pronunciation": "SIT",
+          "examples": [
+            {
+              "text": "Sit down, please.",
+              "translation": "Siéntese, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SITIO",
+            "scene": "Buscas SITIO para SENTARSE y solo queda el tejado.",
+            "sceneTarget": "You look for a place to SIT and only the roof is left.",
+            "emoji": "🪑🏠"
+          }
+        },
+        {
+          "key": "stand",
+          "type": "term",
+          "text": "stand",
+          "meaning": "estar de pie, levantarse",
+          "pronunciation": "STAND",
+          "examples": [
+            {
+              "text": "Stand up!",
+              "translation": "¡Levántate!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "STAND",
+            "scene": "En el STAND, estás DE PIE diez horas.",
+            "sceneTarget": "At the stand, you STAND for ten hours.",
+            "emoji": "🧍🏪"
+          }
+        },
+        {
+          "key": "g-present-continuous",
+          "type": "pattern",
+          "goal": "Decir lo que estás haciendo AHORA",
+          "rule": "am / is / are + verbo con -ing. El -ANDO / -IENDO español pasa a -ING: estoy camin-ANDO → I am walk-ING.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "am",
+              "role": "fixed",
+              "hint": "estoy"
+            },
+            {
+              "text": "walking",
+              "role": "slot",
+              "hint": "camin-ANDO → walk-ING"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I am walking to work.",
+              "translation": "Estoy caminando al trabajo."
+            },
+            {
+              "text": "She is running now.",
+              "translation": "Ella está corriendo ahora."
+            },
+            {
+              "text": "We are waiting for the bus.",
+              "translation": "Estamos esperando el autobús."
+            },
+            {
+              "text": "They are swimming.",
+              "translation": "Están nadando."
+            }
+          ],
+          "pitfalls": [
+            "«Am walking» está mal: falta el YO (I).",
+            "Para lo de siempre, sin -ing: I walk to work every day."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada -ANDO cambia de disfraz y sale como -ING.",
+            "emoji": "🎭"
+          }
+        }
+      ]
+    }
+  ]
+}

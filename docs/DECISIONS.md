@@ -741,3 +741,19 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   (restaurante, entrevista, viaje…) en las que la IA hace de interlocutor y corrige. Lleva guion y objetivo por
   situación, tope de gasto global y por usuario y día, y un proveedor que no guarda ni entrena con los mensajes. La
   corrección se valida con esquema; el resto de la lección sigue usando solo contenido preparado y revisado.
+
+## D-079 · Inglés que enseña de verdad: escuchar, construir frases y gramática en el Flujo (22-oct-2026)
+- **Por qué:** el usuario no sentía avance («castigado en el mismo punto») y no veía gramática. Causa: en el Flujo cada
+  palabra solo se practicaba reconociendo su significado; «escuchar» y «producir» nunca salían, así que ninguna palabra
+  llegaba a «aprendida». La gramática no existía en el Flujo ni en el curso.
+- **Qué:** tarjetas «Escucha» (oír y elegir) y «Construye la frase» (ordenar las palabras de un ejemplo real); las
+  unidades `pattern` entran con su truco Espejo y se practican y repescan construyendo. Un truco por misión del curso de
+  inglés (13), con el vocabulario de esa misión. El hito muestra lo trabajado, lo que está en la memoria y la misión.
+- **Decisión del usuario (22-oct-2026):** en idiomas, sin tope diario de nuevas mientras se acierte (≥ 80 % en la ronda).
+
+## D-080 · Contenido propio desde git, publicado al desplegar (22-oct-2026)
+- **Por qué:** el contenido solo se podía publicar desde el Mac del usuario con su clave; trabajando a distancia nada
+  llegaba a producción. **Qué:** `content/<curso>/` en el repositorio y el hook `memora-content`, que lo vuelca al
+  arrancar Directus (idempotente, conserva el progreso, nunca borra). Fusionar el PR es la orden de publicar.
+  **Descartado:** una GitHub Action con la clave de administración (exige guardar un secreto más y depende del runner).
+

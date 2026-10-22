@@ -1,0 +1,392 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "09-pronombres",
+      "title": "Misión 9 · Determinantes e indefinidos",
+      "units": [
+        {
+          "key": "this",
+          "type": "term",
+          "text": "this",
+          "meaning": "este, esta, esto",
+          "pronunciation": "DIS",
+          "examples": [
+            {
+              "text": "This is my house.",
+              "translation": "Esta es mi casa."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DISCO",
+            "scene": "ESTE DISCO de vinilo canta tu nombre.",
+            "sceneTarget": "THIS vinyl record sings your name.",
+            "emoji": "💿🎤"
+          }
+        },
+        {
+          "key": "that",
+          "type": "term",
+          "text": "that",
+          "meaning": "ese, eso, aquel",
+          "pronunciation": "DAT",
+          "examples": [
+            {
+              "text": "That car is fast.",
+              "translation": "Ese coche es rápido."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DÁTIL",
+            "scene": "AQUEL DÁTIL gigante del fondo te guiña un ojo.",
+            "sceneTarget": "THAT giant date over there winks at you.",
+            "emoji": "🌴😉"
+          }
+        },
+        {
+          "key": "these",
+          "type": "term",
+          "text": "these",
+          "meaning": "estos, estas",
+          "pronunciation": "DIIS",
+          "examples": [
+            {
+              "text": "These shoes are new.",
+              "translation": "Estos zapatos son nuevos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DIEZ",
+            "scene": "ESTOS DIEZ ratones bailan en tu mano.",
+            "sceneTarget": "THESE ten mice dance on your hand.",
+            "emoji": "🐭🖐️"
+          }
+        },
+        {
+          "key": "those",
+          "type": "term",
+          "text": "those",
+          "meaning": "esos, aquellos",
+          "pronunciation": "DÓUS",
+          "examples": [
+            {
+              "text": "Those are my friends.",
+              "translation": "Esos son mis amigos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DOS",
+            "scene": "AQUELLOS DOS elefantes del horizonte llevan tu maleta.",
+            "sceneTarget": "THOSE two elephants on the horizon carry your suitcase.",
+            "emoji": "🐘🧳"
+          }
+        },
+        {
+          "key": "some",
+          "type": "term",
+          "text": "some",
+          "meaning": "algo de, algunos",
+          "pronunciation": "SAM",
+          "examples": [
+            {
+              "text": "I want some water.",
+              "translation": "Quiero un poco de agua."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAMBA",
+            "scene": "Bailas SAMBA con ALGUNOS pingüinos en la playa.",
+            "sceneTarget": "You dance samba with SOME penguins on the beach.",
+            "emoji": "💃🐧"
+          }
+        },
+        {
+          "key": "any",
+          "type": "term",
+          "text": "any",
+          "meaning": "algún (en preguntas), ningún (en negativas)",
+          "pronunciation": "ÉNI",
+          "examples": [
+            {
+              "text": "Do you have any questions?",
+              "translation": "¿Tienes alguna pregunta?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENIGMA",
+            "scene": "¿Hay ALGÚN ENIGMA? —NINGÚN enigma, dice el detective.",
+            "sceneTarget": "Is there ANY mystery? Not ANY, says the detective.",
+            "emoji": "🕵️❓"
+          }
+        },
+        {
+          "key": "every",
+          "type": "term",
+          "text": "every",
+          "meaning": "cada, todos los",
+          "pronunciation": "ÉVri",
+          "examples": [
+            {
+              "text": "I run every day.",
+              "translation": "Corro todos los días."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÉBRIO",
+            "scene": "CADA noche, un pirata ÉBRIO canta bajo tu ventana.",
+            "sceneTarget": "EVERY night, a drunk pirate sings under your window.",
+            "emoji": "🏴‍☠️🎶"
+          }
+        },
+        {
+          "key": "each",
+          "type": "term",
+          "text": "each",
+          "meaning": "cada (uno)",
+          "pronunciation": "IICH",
+          "examples": [
+            {
+              "text": "Each room has a bath.",
+              "translation": "Cada habitación tiene baño."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "CADA niño recibe su globo, uno a uno, sin repetir.",
+            "sceneTarget": "EACH child gets a balloon, one by one.",
+            "emoji": "🎈👧"
+          }
+        },
+        {
+          "key": "both",
+          "type": "term",
+          "text": "both",
+          "meaning": "ambos, los dos",
+          "pronunciation": "BÓUZ",
+          "examples": [
+            {
+              "text": "Both are correct.",
+              "translation": "Las dos son correctas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOSQUE",
+            "scene": "AMBOS gemelos abrazan el mismo árbol del BOSQUE.",
+            "sceneTarget": "BOTH twins hug the same tree in the forest.",
+            "emoji": "🌳👯"
+          }
+        },
+        {
+          "key": "other",
+          "type": "term",
+          "text": "other",
+          "meaning": "otro, otra",
+          "pronunciation": "ÁDer",
+          "examples": [
+            {
+              "text": "The other day.",
+              "translation": "El otro día."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HADA",
+            "scene": "Un HADA cambia tu zapato por OTRO de chocolate.",
+            "sceneTarget": "A fairy swaps your shoe for the OTHER one, made of chocolate.",
+            "emoji": "🧚👟"
+          }
+        },
+        {
+          "key": "another",
+          "type": "term",
+          "text": "another",
+          "meaning": "otro más, uno distinto",
+          "pronunciation": "aNÁDer",
+          "examples": [
+            {
+              "text": "Another coffee, please.",
+              "translation": "Otro café, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NADAR",
+            "scene": "Después de NADAR, pides OTRO helado más.",
+            "sceneTarget": "After swimming, you ask for ANOTHER ice cream.",
+            "emoji": "🏊🍦"
+          }
+        },
+        {
+          "key": "something",
+          "type": "term",
+          "text": "something",
+          "meaning": "algo",
+          "pronunciation": "SÁMzing",
+          "examples": [
+            {
+              "text": "I want to tell you something.",
+              "translation": "Quiero decirte algo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAMURÁI",
+            "scene": "Un SAMURÁI esconde ALGO brillante en la manga.",
+            "sceneTarget": "A samurai hides SOMETHING shiny in his sleeve.",
+            "emoji": "🥷✨"
+          }
+        },
+        {
+          "key": "anything",
+          "type": "term",
+          "text": "anything",
+          "meaning": "algo (en preguntas), nada (en negativas)",
+          "pronunciation": "ÉNIzing",
+          "examples": [
+            {
+              "text": "Do you need anything?",
+              "translation": "¿Necesitas algo?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENEMIGO",
+            "scene": "Tu ENEMIGO pregunta: ¿quieres ALGO? —NADA, gracias.",
+            "sceneTarget": "Your enemy asks: do you want ANYTHING? Nothing, thanks.",
+            "emoji": "😈🍵"
+          }
+        },
+        {
+          "key": "nothing",
+          "type": "term",
+          "text": "nothing",
+          "meaning": "nada",
+          "pronunciation": "NÁzing",
+          "examples": [
+            {
+              "text": "There is nothing here.",
+              "translation": "Aquí no hay nada."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NATILLAS",
+            "scene": "Abres la caja de NATILLAS y no hay NADA dentro.",
+            "sceneTarget": "You open the custard box and there's NOTHING inside.",
+            "emoji": "🍮📦"
+          }
+        },
+        {
+          "key": "everyone",
+          "type": "term",
+          "text": "everyone",
+          "meaning": "todo el mundo, todos",
+          "pronunciation": "ÉVriuan",
+          "examples": [
+            {
+              "text": "Everyone is here.",
+              "translation": "Todo el mundo está aquí."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "TODO EL MUNDO aplaude y se cae el techo.",
+            "sceneTarget": "EVERYONE claps and the roof falls in.",
+            "emoji": "👏🏚️"
+          }
+        },
+        {
+          "key": "g-negative",
+          "type": "pattern",
+          "goal": "Decir que NO (don't / doesn't)",
+          "rule": "Sin ayudante, el NO es don't; con he / she / it, doesn't (y el verbo pierde la -s).",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "don't",
+              "role": "fixed",
+              "hint": "no"
+            },
+            {
+              "text": "want",
+              "role": "slot",
+              "hint": "quiero"
+            },
+            {
+              "text": "anything",
+              "role": "fixed",
+              "hint": "nada"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I don't want anything.",
+              "translation": "No quiero nada."
+            },
+            {
+              "text": "She doesn't like this.",
+              "translation": "A ella no le gusta esto."
+            },
+            {
+              "text": "We don't need those.",
+              "translation": "No necesitamos esos."
+            },
+            {
+              "text": "I don't know.",
+              "translation": "No lo sé."
+            }
+          ],
+          "pitfalls": [
+            "«I no want» está mal: el NO va con un ayudante (don't).",
+            "Con doesn't, sin -s: She doesn't like (no «likes»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un portero DON'T bloquea la puerta: NO pasa nada.",
+            "emoji": "⛔"
+          }
+        }
+      ]
+    }
+  ]
+}

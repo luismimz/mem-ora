@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "08-verbos-2",
+      "title": "Misión 8 · Verbos esenciales II",
+      "units": [
+        {
+          "key": "go",
+          "type": "term",
+          "text": "go",
+          "meaning": "ir",
+          "pronunciation": "GÓU",
+          "examples": [
+            {
+              "text": "I go to work by bus.",
+              "translation": "Voy al trabajo en autobús."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOL",
+            "scene": "Cada vez que quieres IR, gritas ¡GOL! y sales volando.",
+            "sceneTarget": "Every time you want TO GO, you shout GOAL and fly off.",
+            "emoji": "⚽🛫"
+          }
+        },
+        {
+          "key": "come",
+          "type": "term",
+          "text": "come",
+          "meaning": "venir",
+          "pronunciation": "KAM",
+          "examples": [
+            {
+              "text": "Come here, please.",
+              "translation": "Ven aquí, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMA",
+            "scene": "Silbas y tu CAMA VIENE rodando.",
+            "sceneTarget": "You whistle and your bed COMES rolling.",
+            "emoji": "🛏️💨"
+          }
+        },
+        {
+          "key": "give",
+          "type": "term",
+          "text": "give",
+          "meaning": "dar",
+          "pronunciation": "GUIV",
+          "examples": [
+            {
+              "text": "Give me the keys.",
+              "translation": "Dame las llaves."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUISANTE",
+            "scene": "Le DAS un GUISANTE gigante a tu jefe.",
+            "sceneTarget": "You GIVE your boss a giant pea.",
+            "emoji": "🫛🎁"
+          }
+        },
+        {
+          "key": "put",
+          "type": "term",
+          "text": "put",
+          "meaning": "poner",
+          "pronunciation": "PUT",
+          "examples": [
+            {
+              "text": "Put it on the table.",
+              "translation": "Ponlo en la mesa."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PUDIN",
+            "scene": "PONES un PUDIN en la cabeza del rey.",
+            "sceneTarget": "You PUT a pudding on the king's head.",
+            "emoji": "🍮👑"
+          }
+        },
+        {
+          "key": "leave",
+          "type": "term",
+          "text": "leave",
+          "meaning": "irse, dejar",
+          "pronunciation": "LIIV",
+          "examples": [
+            {
+              "text": "I leave at five.",
+              "translation": "Me voy a las cinco."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LIBRA",
+            "scene": "Al IRSE, el ladrón te DEJA una LIBRA.",
+            "sceneTarget": "When he LEAVES, the thief leaves you a pound.",
+            "emoji": "💷🏃"
+          }
+        },
+        {
+          "key": "bring",
+          "type": "term",
+          "text": "bring",
+          "meaning": "traer",
+          "pronunciation": "BRING",
+          "examples": [
+            {
+              "text": "Bring me water, please.",
+              "translation": "Tráeme agua, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRINCO",
+            "scene": "Tu perro, de un BRINCO, te TRAE la pizza.",
+            "sceneTarget": "In one leap, your dog BRINGS you the pizza.",
+            "emoji": "🐕🍕"
+          }
+        },
+        {
+          "key": "find",
+          "type": "term",
+          "text": "find",
+          "meaning": "encontrar",
+          "pronunciation": "FÁIND",
+          "examples": [
+            {
+              "text": "I can't find my phone.",
+              "translation": "No encuentro mi móvil."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAENA",
+            "scene": "Tras mucha FAENA, por fin ENCUENTRAS las llaves.",
+            "sceneTarget": "After a lot of work, you finally FIND the keys.",
+            "emoji": "🔑🔦"
+          }
+        },
+        {
+          "key": "look",
+          "type": "term",
+          "text": "look",
+          "meaning": "mirar",
+          "pronunciation": "LUK",
+          "examples": [
+            {
+              "text": "Look at this!",
+              "translation": "¡Mira esto!"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LUPA",
+            "scene": "Con una LUPA gigante MIRAS a la hormiga.",
+            "sceneTarget": "You LOOK at the ant through a giant magnifying glass.",
+            "emoji": "🔍🐜"
+          }
+        },
+        {
+          "key": "feel",
+          "type": "term",
+          "text": "feel",
+          "meaning": "sentir(se)",
+          "pronunciation": "FIIL",
+          "examples": [
+            {
+              "text": "I feel tired.",
+              "translation": "Me siento cansado."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FILETE",
+            "scene": "SIENTES un FILETE frío en la cara y gritas.",
+            "sceneTarget": "You FEEL a cold steak on your face and scream.",
+            "emoji": "🥩😆"
+          }
+        },
+        {
+          "key": "become",
+          "type": "term",
+          "text": "become",
+          "meaning": "convertirse en, llegar a ser",
+          "pronunciation": "biKÁM",
+          "examples": [
+            {
+              "text": "She wants to become a doctor.",
+              "translation": "Quiere llegar a ser médica."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMALEÓN",
+            "scene": "Un CAMALEÓN se CONVIERTE en semáforo.",
+            "sceneTarget": "A chameleon BECOMES a traffic light.",
+            "emoji": "🦎🚦"
+          }
+        },
+        {
+          "key": "keep",
+          "type": "term",
+          "text": "keep",
+          "meaning": "guardar, mantener",
+          "pronunciation": "KIIP",
+          "examples": [
+            {
+              "text": "Keep the change.",
+              "translation": "Quédese con el cambio."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUIOSCO",
+            "scene": "GUARDAS tus secretos en un QUIOSCO.",
+            "sceneTarget": "You KEEP your secrets in a kiosk.",
+            "emoji": "🏪🤫"
+          }
+        },
+        {
+          "key": "let",
+          "type": "term",
+          "text": "let",
+          "meaning": "dejar, permitir",
+          "pronunciation": "LET",
+          "examples": [
+            {
+              "text": "Let me help you.",
+              "translation": "Déjame ayudarte."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LETRERO",
+            "scene": "Un LETRERO te DEJA bailar en la biblioteca.",
+            "sceneTarget": "A sign LETS you dance in the library.",
+            "emoji": "🪧💃"
+          }
+        },
+        {
+          "key": "begin",
+          "type": "term",
+          "text": "begin",
+          "meaning": "empezar",
+          "pronunciation": "biGUÍN",
+          "examples": [
+            {
+              "text": "The class begins at nine.",
+              "translation": "La clase empieza a las nueve."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUINDA",
+            "scene": "Para EMPEZAR la fiesta, pones una GUINDA en cada nariz.",
+            "sceneTarget": "To BEGIN the party, you put a cherry on every nose.",
+            "emoji": "🍒🎉"
+          }
+        },
+        {
+          "key": "seem",
+          "type": "term",
+          "text": "seem",
+          "meaning": "parecer",
+          "pronunciation": "SIIM",
+          "examples": [
+            {
+              "text": "You seem tired.",
+              "translation": "Pareces cansado."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIMIO",
+            "scene": "Ese SIMIO con corbata PARECE tu jefe.",
+            "sceneTarget": "That monkey in a tie SEEMS like your boss.",
+            "emoji": "🐒👔"
+          }
+        },
+        {
+          "key": "help",
+          "type": "term",
+          "text": "help",
+          "meaning": "ayudar",
+          "pronunciation": "JELP",
+          "examples": [
+            {
+              "text": "Can you help me?",
+              "translation": "¿Me puedes ayudar?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GELATINA",
+            "scene": "Una GELATINA gigante AYUDA a los bomberos.",
+            "sceneTarget": "A giant jelly HELPS the firefighters.",
+            "emoji": "🍮🚒"
+          }
+        },
+        {
+          "key": "g-third-person-s",
+          "type": "pattern",
+          "goal": "Hablar de él o de ella: el verbo lleva -s",
+          "rule": "He, she, it: verbo + s. She comes, he helps, it seems. Irregulares: have → has, go → goes, do → does.",
+          "pieces": [
+            {
+              "text": "She",
+              "role": "fixed",
+              "hint": "ELLA"
+            },
+            {
+              "text": "help",
+              "role": "slot",
+              "hint": "ayuda"
+            },
+            {
+              "text": "-s",
+              "role": "fixed",
+              "hint": "la -s de él / ella"
+            }
+          ],
+          "examples": [
+            {
+              "text": "She comes at five.",
+              "translation": "Viene a las cinco."
+            },
+            {
+              "text": "My mother helps me.",
+              "translation": "Mi madre me ayuda."
+            },
+            {
+              "text": "He finds his keys.",
+              "translation": "Encuentra sus llaves."
+            },
+            {
+              "text": "It seems easy.",
+              "translation": "Parece fácil."
+            }
+          ],
+          "pitfalls": [
+            "«She come» está mal: con he / she / it, -s.",
+            "Con I / you / we / they, sin -s: I come."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "ÉL y ELLA silban como SERPIENTES: she comeSSS.",
+            "emoji": "🐍"
+          }
+        }
+      ]
+    }
+  ]
+}
