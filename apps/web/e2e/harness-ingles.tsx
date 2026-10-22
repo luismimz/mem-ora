@@ -29,6 +29,20 @@ const units: Record<string, SessionUnit> = {
     association: { id: 'a-pc', technique: 'mirror', text: 'YO ESTOY le-YENDO → I AM read-ING', emoji: '🪞' },
   } as unknown as SessionUnit,
 };
+// El tren de la frase (D-082): una pregunta con fantasma (TÚ), ficha que cambia (tienes → estás) y salto del ayudante.
+units['q-jump'] = {
+  key: 'q-jump', type: 'pattern', language: 'en', version: 1,
+  payload: {
+    goal: 'Preguntar: el ayudante salta delante', rule: 'El ayudante salta delante del quién.',
+    pieces: [{ text: 'Are', role: 'fixed', hint: '¿Estás' }, { text: 'you', role: 'fixed', hint: 'TÚ' }, { text: 'hungry', role: 'slot', hint: 'hambriento' }],
+    examples: [
+      { text: 'Are you hungry?', translation: '¿Tienes hambre?', mirror: { say: '¿Tienes hambre?', pieces: [{ es: 'TÚ', en: 'you', role: 'who', ghost: true }, { es: 'estás', en: 'are', role: 'helper', from: 'tienes', why: 'Se siente, no se toca.' }, { es: 'hambriento', en: 'hungry', role: 'word' }], order: [1, 0, 2] } },
+      { text: 'Is she tired?', translation: '¿Está cansada?', mirror: { say: '¿Está cansada?', pieces: [{ es: 'ELLA', en: 'she', role: 'who', ghost: true }, { es: 'está', en: 'is', role: 'helper' }, { es: 'cansada', en: 'tired', role: 'word' }], order: [1, 0, 2] } },
+    ],
+  },
+  skills: [{ key: 'qj.recall', kind: 'recall' }, { key: 'qj.produce', kind: 'produce' }],
+  association: { id: 'a-qj', technique: 'absurd_scene', text: 'El AYUDANTE salta como un CANGURO.', emoji: '🦘' },
+} as unknown as SessionUnit;
 // Juegos de los pilares (D-081): «Toco o cuento» (dos respuestas: se desliza) y «Semáforos» (tres: botones).
 const game = (key: string, name: string, items: Array<[string, string, string[]]>): SessionUnit => ({
   key, type: 'concept', language: 'en', version: 1,

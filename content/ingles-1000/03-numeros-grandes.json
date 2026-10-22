@@ -356,11 +356,47 @@
           "examples": [
             {
               "text": "I have three cats.",
-              "translation": "Tengo tres gatos."
+              "translation": "Tengo tres gatos.",
+              "mirror": {
+                "say": "Tengo tres gatos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres gatos",
+                    "en": "three cats",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "Two coffees, please.",
-              "translation": "Dos cafés, por favor."
+              "translation": "Dos cafés, por favor.",
+              "mirror": {
+                "say": "Dos cafés, por favor",
+                "pieces": [
+                  {
+                    "es": "Dos cafés",
+                    "en": "Two coffees",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "I have two brothers.",

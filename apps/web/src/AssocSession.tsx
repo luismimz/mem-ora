@@ -720,7 +720,7 @@ function Empty({ courseId, onExit }: { courseId: string; onExit: () => void }) {
   );
 }
 
-const STEP_NAMES: Record<AssocStep['kind'], string> = { reel: 'Asociación', quick: 'Relámpago', judge: '¿Verdad o mentira?', think: 'Piensa', check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', listen: 'Escucha', build: 'Construye la frase', burst: 'Ráfaga', summary: 'Resumen' };
+const STEP_NAMES: Record<AssocStep['kind'], string> = { reel: 'Asociación', quick: 'Relámpago', judge: '¿Verdad o mentira?', think: 'Piensa', check: 'Recuerda', cue: 'La clave', review: 'Escribe', card: 'Asociación', recall: 'Recuerda', story: 'Completa la historia', sceneResult: 'Resultado de la escena', arcade: 'Arcade sorpresa', rescue: 'La historia', challenge: 'La pregunta', listen: 'Escucha', build: 'Construye la frase', burst: 'Ráfaga', train: 'El tren de la frase', summary: 'Resumen' };
 function stepLabel(s: AssocStep, units: Record<string, SessionUnit>): string {
   const u = s.unitKey ? units[s.unitKey] : undefined;
   return `${STEP_NAMES[s.kind]}${u ? ` · ${unitText(u).toUpperCase()}` : ''}${s.scene >= 0 && s.kind !== 'summary' ? ` (escena ${s.scene + 1})` : ''}`;

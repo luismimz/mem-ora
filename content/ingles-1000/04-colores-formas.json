@@ -356,11 +356,81 @@
           "examples": [
             {
               "text": "I have a red car.",
-              "translation": "Tengo un coche rojo."
+              "translation": "Tengo un coche rojo.",
+              "mirror": {
+                "say": "Tengo un coche rojo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "coche",
+                    "en": "car",
+                    "role": "word"
+                  },
+                  {
+                    "es": "rojo",
+                    "en": "red",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
             },
             {
               "text": "She has brown eyes.",
-              "translation": "Tiene los ojos marrones."
+              "translation": "Tiene los ojos marrones.",
+              "mirror": {
+                "say": "Tiene los ojos marrones",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ojos",
+                    "en": "eyes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "marrones",
+                    "en": "brown",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
             },
             {
               "text": "Two white shirts, please.",

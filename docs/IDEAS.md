@@ -19,6 +19,10 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Calidad de las asociaciones e historias:** el usuario las ve malas. Revisar con él ejemplos concretos
   antes de reescribir en masa; una asociación mala es peor que ninguna.
 
+- **[inglés] Espejos en el resto de ejemplos** (misiones 3–16) para la ayuda «¿Cómo se construye?» (D-082).
+- **[inglés] Más vocabulario hasta 1.000** (meta de 30 días): ciudad, trabajo, viajes, pasado simple, frases para conversar.
+- **[inglés] Arrastre tipo imán** para las piezas de Lego (hoy, botones).
+
 ## Ideas anteriores (de la etapa por hitos)
 
 - **Arcade respeta las compuertas de nivel** (H3): el selector del Arcade no debe sacar habilidades «aprendidas»

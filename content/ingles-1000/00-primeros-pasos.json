@@ -1,0 +1,470 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "00-primeros-pasos",
+      "title": "Misión 0 · Primeros pasos: cómo se construye una frase",
+      "units": [
+        {
+          "key": "g-yo-fantasma",
+          "type": "pattern",
+          "goal": "El YO fantasma: en inglés siempre se dice quién",
+          "rule": "El español esconde el quién (soy, tengo, quiero). El inglés SIEMPRE lo dice: I am, I have, I want.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO 👻"
+            },
+            {
+              "text": "am",
+              "role": "fixed",
+              "hint": "soy"
+            },
+            {
+              "text": "Luis",
+              "role": "slot",
+              "hint": "Luis"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I am Luis.",
+              "translation": "Soy Luis.",
+              "mirror": {
+                "say": "Soy Luis",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "soy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "Luis",
+                    "en": "Luis",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have a dog.",
+              "translation": "Tengo un perro.",
+              "mirror": {
+                "say": "Tengo un perro",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un perro",
+                    "en": "a dog",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We want water.",
+              "translation": "Queremos agua.",
+              "mirror": {
+                "say": "Queremos agua",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "queremos",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is tired.",
+              "translation": "Está cansada.",
+              "mirror": {
+                "say": "Está cansada",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansada",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
+          "pitfalls": [
+            "«Am Luis» o «Have a dog» están mal: sin el quién no hay frase."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un FANTASMA YO vive dentro de cada verbo español.",
+            "emoji": "👻"
+          }
+        },
+        {
+          "key": "g-tengo-estoy",
+          "type": "pattern",
+          "goal": "Hambre, frío, sueño: en inglés se ESTÁ",
+          "rule": "Lo que sientes no se tiene: se ESTÁ. Tengo hambre → YO estoy hambriento → I am hungry.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "am",
+              "role": "fixed",
+              "hint": "tengo → estoy"
+            },
+            {
+              "text": "hungry",
+              "role": "slot",
+              "hint": "hambriento"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I am hungry.",
+              "translation": "Tengo hambre.",
+              "mirror": {
+                "say": "Tengo hambre",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "Se siente, no se toca: estar (TO BE)."
+                  },
+                  {
+                    "es": "hambriento",
+                    "en": "hungry",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I am cold.",
+              "translation": "Tengo frío.",
+              "mirror": {
+                "say": "Tengo frío",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "Se siente, no se toca: estar (TO BE)."
+                  },
+                  {
+                    "es": "helado",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is thirsty.",
+              "translation": "Tiene sed.",
+              "mirror": {
+                "say": "Tiene sed",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "Se siente, no se toca: estar (TO BE)."
+                  },
+                  {
+                    "es": "sedienta",
+                    "en": "thirsty",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are sleepy.",
+              "translation": "Tenemos sueño.",
+              "mirror": {
+                "say": "Tenemos sueño",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "tenemos",
+                    "why": "Se siente, no se toca: estar (TO BE)."
+                  },
+                  {
+                    "es": "con sueño",
+                    "en": "sleepy",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
+          "pitfalls": [
+            "«I have hungry» es el error más típico: el hambre se siente, no se tiene."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Tu TRIPA no TIENE hambre: ESTÁ hambrienta.",
+            "emoji": "🍔"
+          }
+        },
+        {
+          "key": "g-question-jump",
+          "type": "pattern",
+          "goal": "Preguntar: el ayudante SALTA delante",
+          "rule": "Para preguntar, el ayudante (am, are, is, can) salta delante del quién: you are → ARE YOU hungry?",
+          "pieces": [
+            {
+              "text": "Are",
+              "role": "fixed",
+              "hint": "¿Estás → salta"
+            },
+            {
+              "text": "you",
+              "role": "fixed",
+              "hint": "TÚ"
+            },
+            {
+              "text": "hungry",
+              "role": "slot",
+              "hint": "hambriento"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Are you hungry?",
+              "translation": "¿Tienes hambre?",
+              "mirror": {
+                "say": "¿Tienes hambre?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "tienes",
+                    "why": "Se siente, no se toca: estar (TO BE)."
+                  },
+                  {
+                    "es": "hambriento",
+                    "en": "hungry",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Is she tired?",
+              "translation": "¿Está cansada?",
+              "mirror": {
+                "say": "¿Está cansada?",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "she",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansada",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Can you swim?",
+              "translation": "¿Sabes nadar?",
+              "mirror": {
+                "say": "¿Sabes nadar?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "can",
+                    "role": "helper",
+                    "from": "sabes",
+                    "why": "Saber hacer algo = poder: can."
+                  },
+                  {
+                    "es": "nadar",
+                    "en": "swim",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Are we late?",
+              "translation": "¿Llegamos tarde?",
+              "mirror": {
+                "say": "¿Llegamos tarde?",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "llegamos",
+                    "why": "En inglés: ¿ESTAMOS tarde?"
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            }
+          ],
+          "pitfalls": [
+            "Sin ayudante (¿Comes?), el semáforo DO ocupa su sitio: Do you eat?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El AYUDANTE salta como un CANGURO delante del TÚ.",
+            "emoji": "🦘"
+          }
+        }
+      ]
+    }
+  ]
+}

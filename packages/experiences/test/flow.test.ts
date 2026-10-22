@@ -176,9 +176,43 @@ describe('Ráfaga: los juegos de los pilares (D-081)', () => {
     expect(burstOptions(concept('x'))).toBeNull();
   });
 
+  it('un juego nunca sale como pregunta jefe, aunque haya muchas tarjetas antes de su Ráfaga', () => {
+    const many = buildFlowSession({ ...base, units: { ...units, toco: game }, items: [...keys.slice(0, 8).map((k) => item(k, 'new')), item('toco', 'new')] });
+    expect(many.steps.filter((s) => s.unitKey === 'toco' && s.kind === 'challenge')).toEqual([]);
+  });
+
   it('tras su ficha, el juego se practica con su Ráfaga (habilidad «aplicar») y no con relámpago ni pregunta de examen', () => {
     const steps = plan.steps.filter((s) => s.unitKey === 'toco');
     expect(steps.map((s) => s.kind)).toEqual(['reel', 'burst']);
     expect(steps[1]).toMatchObject({ skillKey: 'toco.apply' });
   });
 });
+
+describe('el tren de la frase (D-082)', () => {
+  const pattern: SessionUnit = {
+    key: 'q1', type: 'pattern', language: 'en',
+    payload: { goal: 'Preguntar', rule: 'el ayudante salta', pieces: [{ text: 'Are', role: 'fixed' }, { text: 'you', role: 'slot' }], examples: [
+      { text: 'Are you hungry?', translation: '¿Tienes hambre?', mirror: { say: '¿Tienes hambre?', pieces: [{ es: 'TÚ', en: 'you', role: 'who', ghost: true }, { es: 'estás', en: 'are', role: 'helper' }, { es: 'hambriento', en: 'hungry', role: 'word' }], order: [1, 0, 2] } },
+      { text: 'Are you tired?', translation: '¿Estás cansado?' },
+    ] },
+    skills: [{ key: 'q1.recall', kind: 'recall' }, { key: 'q1.produce', kind: 'produce' }],
+    association: null,
+  } as unknown as SessionUnit;
+  const lang = { ...base, units: { ...units, q1: pattern } };
+
+  it('lo nuevo: ficha del truco → tren de la frase → construir OTRA frase', () => {
+    const plan = buildFlowSession({ ...lang, items: [item('q1', 'new')] });
+    expect(plan.steps.filter((s) => s.unitKey === 'q1' && !s.retry).map((s) => [s.kind, s.example])).toEqual([['reel', undefined], ['train', 0], ['build', 1]]);
+  });
+
+  it('en los repasos el tren ya no sale (el andamio se retira)', () => {
+    const plan = buildFlowSession({ ...lang, items: [item('q1', 'review')] });
+    expect(plan.steps.some((s) => s.kind === 'train')).toBe(false);
+  });
+
+  it('si se falló, vuelve a salir el tren (está en «tus errores»)', () => {
+    const plan = buildFlowSession({ ...lang, items: [], errorUnits: ['q1'] });
+    expect(plan.steps.some((s) => s.kind === 'train' && s.unitKey === 'q1')).toBe(true);
+  });
+});
+

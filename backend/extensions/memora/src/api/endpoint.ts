@@ -27,6 +27,7 @@ import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
 import { ring, vapidFromEnv } from '../push/lib';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
+import { resetProgress } from './reset';
 import type { Catalog, LearnerState as Learner } from '@memora/core';
 import { effectiveTime, MAX_EVENTS_PER_BATCH, recompute, rejectReason, sessionUnits, skillIndex, type AssociationRow, type SkillRow, type StoredEvent, type UnitRow } from './learning';
 
@@ -447,6 +448,24 @@ export default {
           associations: Object.values(learner.associations).map((a) => ({ id: a.associationId, hintLevel: a.hintLevel, dueAt: a.dueAt, status: a.status, ...assessAssociation(a, config) })),
         },
       };
+    }));
+
+    // «Empezar de cero» (D-082): el alumno borra su progreso de un curso. Tiene que confirmar con la clave del curso, y
+    // antes se guarda una copia en Archivos de Studio (si falla, no se borra nada).
+    router.post('/reset', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.body?.course, userId);
+      if (req.body?.confirm !== course.key) throw new HttpError(400, 'BAD_REQUEST', 'Falta confirmar con la clave del curso.');
+      const schema = await getSchema();
+      const saveBackup = async (b: unknown) => {
+        const { Readable } = await import('node:stream');
+        const files = new services.FilesService({ schema });
+        const name = `progreso-${course.key}-${userId}-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+        return files.uploadOne(Readable.from([JSON.stringify(b)]), { title: `Copia antes de empezar de cero · ${course.key}`, filename_download: name, type: 'application/json', storage: 'local' });
+      };
+      const r = await resetProgress(db, userId, course.id, saveBackup);
+      logger.info(`[memora-api] empezar de cero: ${course.key}, ${r.events} eventos (copia ${r.backup})`);
+      return { data: { events: r.events } };
     }));
 
     // «Explícame más» (D-077): el alumno pide más explicación de una ficha; queda anotado para ampliarla en Studio.

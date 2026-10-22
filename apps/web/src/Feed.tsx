@@ -4,7 +4,7 @@
 // ronda acaba en un hito y la siguiente ya está cargada. Puntos, racha con protector, combos, vibración y sonido.
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload, PatternPayload } from '@memora/content';
+import type { ConceptPayload, Mirror, PatternPayload } from '@memora/content';
 import {
   buildTiles,
   burstOptions,
@@ -317,8 +317,10 @@ const plain = (x: string) => x.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').r
  * Construye la frase (D-079): ves la frase en español y ordenas las palabras en inglés tocándolas. Usar la palabra en
  * una frase real es lo que la fija; practica la habilidad «producir» (con las piezas a la vista: pista 1).
  */
-function Build({ unit, example, onResult }: { unit: SessionUnit; example: number; onResult: (ok: boolean, ms: number, note: string) => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string }> }).examples[example]!;
+function Build({ unit, example, onResult }: { unit: SessionUnit; example: number; onResult: (ok: boolean, ms: number, note: string, hint: number) => void }) {
+  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string; mirror?: Mirror }> }).examples[example]!;
+  // D-082: si la frase tiene su tren, se puede pedir ver cómo se construye (cuenta como ayuda: pista 2).
+  const [help, setHelp] = useState(false);
   const words = useMemo(() => buildTiles(ex.text), [ex.text]);
   const bank = useMemo(() => scramble(words, `${unit.key}-${example}`).map((w, i) => ({ w, i })), [words, unit.key, example]);
   const [chosen, setChosen] = useState<number[]>([]);
@@ -330,13 +332,16 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
     const ok = plain(answer) === plain(words.join(' '));
     setDone(ok);
     if (ok && audioEnabled()) speak(ex.text, unit.language);
-    setTimeout(() => onResult(ok, Math.round(performance.now() - t0.current), `Es «${ex.text}» (${ex.translation}).`), ok ? 1100 : 1500);
+    setTimeout(() => onResult(ok, Math.round(performance.now() - t0.current), `Es «${ex.text}» (${ex.translation}).`, help ? 2 : 1), ok ? 1100 : 1500);
   }, [chosen]); // eslint-disable-line react-hooks/exhaustive-deps
   const toggle = (i: number) => { if (done !== null) return; setChosen((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i])); };
   return (
     <Slide tone={hue(unit.key)} className={`build ${done === null ? '' : done ? 'right' : 'wrong'}`}>
       <p className="tag">🧩 CONSTRUYE LA FRASE</p>
       <h3 className="ask build-es">«{ex.translation}»</h3>
+      {ex.mirror && done === null && (help
+        ? <TrainBody unit={unit} m={ex.mirror} text={ex.text} compact />
+        : <button type="button" className="train-help" onClick={() => setHelp(true)}>🚂 ¿Cómo se construye?</button>)}
       <div className="build-line" aria-label="Tu frase" lang={unit.language}>
         {chosen.length ? chosen.map((i) => <button type="button" key={i} className="tile on" onClick={() => toggle(i)}>{bank[i]!.w}</button>) : <span className="build-empty">Toca las palabras en orden</span>}
       </div>
@@ -356,6 +361,95 @@ function Confetti({ burst }: { burst: number }) {
     <div className="confetti" key={burst} aria-hidden="true">
       {Array.from({ length: 18 }, (_, i) => <i key={i} style={{ '--x': `${((i * 37) % 100) - 50}vw`, '--r': `${(i * 53) % 360}deg`, background: colors[i % colors.length], animationDelay: `${(i % 6) * 25}ms` } as React.CSSProperties} />)}
     </div>
+  );
+}
+
+const ROLE_LABEL: Record<string, string> = { who: 'quién', helper: 'ayudante', verb: 'acción', word: 'lo que dices', signal: 'semáforo' };
+type TrainStage = 'say' | 'ghost' | 'swap' | 'flip' | 'jump' | 'done';
+
+/**
+ * El tren de la frase (D-082): cómo se construye una frase desde el español, para que nadie se quede en «no lo sé».
+ * Lo que dices («¿Tienes hambre?») → tu frase completa en español: despiertas al pronombre que el español esconde
+ * (👻 TÚ) y cambias la ficha que en inglés es otra («tienes» → «estás»: el hambre se siente) → le das la vuelta pieza
+ * a pieza al inglés → y, en las preguntas, el ayudante SALTA delante. Cada papel tiene siempre su color (quién azul,
+ * ayudante naranja, acción verde, semáforo rojo), en toda la app. Lo hace el alumno con el dedo, paso a paso.
+ */
+function TrainBody({ unit, m, text, compact = false, onDone }: { unit: SessionUnit; m: Mirror; text: string; compact?: boolean; onDone?: () => void }) {
+  const order = m.order ?? m.pieces.map((_, i) => i);
+  const jumps = order.some((v, i) => v !== i);
+  const stages = useMemo<TrainStage[]>(() => [
+    ...(compact ? [] : ['say' as const]),
+    ...(m.pieces.some((p) => p.ghost) ? ['ghost' as const] : []),
+    ...(m.pieces.some((p) => p.from) ? ['swap' as const] : []),
+    'flip',
+    ...(jumps ? ['jump' as const] : []),
+    'done',
+  ], [m, jumps, compact]);
+  const [at, setAt] = useState(0);
+  const stage = stages[at]!;
+  const passed = (s: TrainStage) => stages.indexOf(s) >= 0 && at > stages.indexOf(s);
+  const go = () => setAt((a) => Math.min(stages.length - 1, a + 1));
+  useEffect(() => {
+    if (stage !== 'done') return;
+    if (audioEnabled()) speak(text, unit.language);
+    sfx('party');
+    onDone?.();
+  }, [stage]); // eslint-disable-line react-hooks/exhaustive-deps
+  const helperJumps = jumps && order.findIndex((i) => m.pieces[i]!.role === 'helper') < order.findIndex((i) => m.pieces[i]!.role === 'who');
+  const english = passed('jump') || (!jumps && passed('flip')) ? order : m.pieces.map((_, i) => i);
+  const tip: Record<TrainStage, string> = {
+    say: '¿Cómo lo dirías en inglés? Primero, dilo completo en español.',
+    ghost: '👆 Toca el hueco: el español esconde a alguien.',
+    swap: '👆 Toca la ficha ⚡: en inglés es otra.',
+    flip: '👆 Dale la vuelta: pieza a pieza al inglés.',
+    jump: helperJumps ? '👆 Es una pregunta: ¡haz saltar al ayudante delante!' : '👆 En inglés el orden cambia: ¡haz saltar la pieza!',
+    done: compact ? '¡Así se construye! Ahora, tú.' : '¡Así se construye! Desliza para practicarlo.',
+  };
+  return (
+    <div className={`train-body ${compact ? 'compact' : ''}`}>
+      <div className="wagon w1"><small>1 · LO QUE DICES</small><p className="say-line">{m.say}</p></div>
+      {(compact || at >= 1) && (
+        <div className="wagon w2"><small>2 · TU FRASE COMPLETA EN ESPAÑOL</small>
+          <div className="chips">
+            {m.pieces.map((p, i) => (p.role === 'signal' ? null : p.ghost && !passed('ghost') ? (
+              <button type="button" key={i} className={`chip ghost ${stage === 'ghost' ? 'pulse' : ''}`} onClick={() => stage === 'ghost' && go()} aria-label="Despertar al pronombre escondido">👻<b>?</b></button>
+            ) : p.from && !passed('swap') ? (
+              <button type="button" key={i} className={`chip swap role-${p.role} ${stage === 'swap' ? 'pulse' : ''}`} onClick={() => stage === 'swap' && go()}><b>{p.from}</b><small>⚡ toca</small></button>
+            ) : (
+              <span key={i} className={`chip role-${p.role} ${p.ghost ? 'woke' : ''} ${p.from ? 'swapped' : ''}`}><b>{p.es}</b><small>{p.ghost ? '👻 apareció' : p.from ? `antes «${p.from}»` : ROLE_LABEL[p.role]}</small></span>
+            )))}
+          </div>
+          {passed('swap') && m.pieces.filter((p) => p.from && p.why).map((p, i) => <p key={i} className="why">⚡ {p.from} → {p.es}: {p.why}</p>)}
+        </div>
+      )}
+      {passed('flip') && (
+        <div className="wagon w3"><small>3 · EN INGLÉS</small>
+          <div className="chips" lang={unit.language}>
+            {english.map((i, pos) => {
+              const p = m.pieces[i]!;
+              const moved = passed('jump') && order.indexOf(i) !== i;
+              return <span key={i} className={`chip en role-${p.role} ${moved ? 'hop' : 'flip'}`} style={{ animationDelay: `${moved ? 0 : pos * 120}ms` }}><b>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{ROLE_LABEL[p.role]}</small></span>;
+            })}
+          </div>
+        </div>
+      )}
+      {stage === 'done' && <p className="train-final" lang={unit.language}>{text} {audioEnabled() && <button type="button" className="say" aria-label="Escuchar" onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button>}</p>}
+      <p className="train-tip">{tip[stage]}</p>
+      {(stage === 'say' || stage === 'flip' || stage === 'jump') && <button type="button" className="train-go" onClick={go}>{stage === 'say' ? 'Empezar →' : stage === 'flip' ? '🔄 Dale la vuelta' : helperJumps ? '🦘 ¡Salta!' : '🦘 ¡Salta!'}</button>}
+      {!compact && <div className="train-dots" aria-hidden="true">{stages.slice(0, -1).map((s, i) => <i key={s} className={i < at ? 'on' : ''} />)}</div>}
+      {stage === 'done' && <Confetti burst={1} />}
+    </div>
+  );
+}
+
+function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; onNext: () => void }) {
+  const ex = (unit.payload as { examples: Array<{ text: string; mirror?: Mirror }> }).examples[example]!;
+  const [done, setDone] = useState(false);
+  return (
+    <Slide tone={hue(unit.key)} onNext={done ? onNext : undefined} className="train">
+      <p className="tag">🚂 EL TREN DE LA FRASE</p>
+      <TrainBody unit={unit} m={ex.mirror!} text={ex.text} onDone={() => setDone(true)} />
+    </Slide>
   );
 }
 
@@ -688,9 +782,10 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (!step || skip) card = null;
   else if (step.kind === 'reel' && unit) card = <Reel key={step.id} unit={unit} focus={step.focus} courseId={courseId} onNext={() => { for (const s of unit.skills) queue.current.push(event(unit, s.key, { kind: 'exposure' })); void advance(); }} />;
   else if (step.kind === 'quick' && unit) card = <Quick key={step.id} unit={unit} reverse={Boolean(step.reverse)} retry={Boolean(step.retry)} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#quick${step.reverse ? '-inv' : ''}`, 10)} />;
+  else if (step.kind === 'train' && unit && step.example !== undefined) card = <Train key={step.id} unit={unit} example={step.example} onNext={() => void advance()} />;
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
-  else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, 20, step.skillKey, 'production', 1, note)} />;
+  else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
   else if (step.kind === 'challenge' && unit && step.typed) card = <Complete key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#level-${step.exercise ?? 0}`, 30, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;

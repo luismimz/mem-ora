@@ -37,6 +37,12 @@ export function buildableExamples(u: SessionUnit): number[] {
   return examples.flatMap((e, i) => (Boolean(e.translation) && buildTiles(e.text).length >= FLOW_BUILD_WORDS.min && buildTiles(e.text).length <= FLOW_BUILD_WORDS.max ? [i] : []));
 }
 
+/** Ejemplos con su tren de la frase (D-082), por su posición. */
+export function mirrorExamples(u: SessionUnit): number[] {
+  const examples = ((u.payload as { examples?: Array<{ mirror?: unknown }> }).examples ?? []);
+  return examples.flatMap((e, i) => (e.mirror ? [i] : []));
+}
+
 /** Primer ejemplo que se puede construir con fichas; `null` si no hay ninguno. */
 export function buildableExample(u: SessionUnit): number | null {
   return buildableExamples(u)[0] ?? null;
@@ -138,6 +144,20 @@ export function buildFlowSession(input: {
     const skill = units[u]!.skills.find((s) => s.kind === 'apply') ?? units[u]!.skills.find((s) => s.kind === 'recall');
     return skill ? { kind: 'burst', unitKey: u, scene: -4, skillKey: skill.key, ...tag(u) } : null;
   };
+  // D-082: el tren de la frase — cómo se construye desde el español. Solo lo nuevo y los errores: es un andamio que
+  // se retira (en los repasos ya no sale).
+  const train = (u: string): Draft | null => {
+    if (units[u]!.type !== 'pattern' || (known.has(u) && focus(u) !== 'errors')) return null;
+    const n = mirrorExamples(units[u]!)[0];
+    return n === undefined ? null : { kind: 'train', unitKey: u, scene: -4, example: n, ...tag(u) };
+  };
+  // Construir una frase distinta de la del tren, si la hay.
+  const buildAfter = (u: string, shown?: number): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'produce');
+    const options = buildableExamples(units[u]!);
+    const n = options.find((x) => x !== shown) ?? options[0];
+    return skill && n !== undefined ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -147,7 +167,15 @@ export function buildFlowSession(input: {
     for (const u of pair) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) });
     // Variedad: la primera de la pareja, escucha (idiomas) o relámpago; la segunda, ¿verdad o mentira?; lo dominado,
     // escribiendo. La gramática se practica construyendo una de sus frases.
-    pair.forEach((u, j) => base.push(burst(u) ?? levelUp(u) ?? (units[u]!.type === 'pattern' ? (build(u) ?? quick(u)) : j === 0 ? (listen(u) ?? quick(u)) : judge(u))));
+    pair.forEach((u, j) => {
+      if (units[u]!.type === 'pattern') {
+        const t = train(u);
+        if (t) base.push(t);
+        base.push(levelUp(u) ?? buildAfter(u, t?.example) ?? quick(u));
+        return;
+      }
+      base.push(burst(u) ?? levelUp(u) ?? (j === 0 ? (listen(u) ?? quick(u)) : judge(u)));
+    });
     // Idiomas (D-079): tras cada pareja de palabras, una frase que construir con una de ellas.
     const terms = pair.filter((u) => units[u]!.type === 'term');
     const word = terms[Math.floor(rand() * terms.length)];
@@ -181,7 +209,8 @@ export function buildFlowSession(input: {
     if (!d.retry) sinceBoss += 1;
     if (sinceBoss >= FLOW_BOSS_EVERY) {
       const answerable = (k: string) => exercisesOf(units[k]!).map((e, n) => ({ e, n })).filter(({ e }) => e.kind !== 'order_steps');
-      const u = seenUnits.find((k) => !bossDone.has(k) && answerable(k).length && units[k]!.skills.some((s) => s.kind === 'apply'));
+      // Los conceptos-juego se practican con su Ráfaga, nunca como pregunta jefe (podía salir antes de jugarla).
+      const u = seenUnits.find((k) => !bossDone.has(k) && !burstOptions(units[k]!) && answerable(k).length && units[k]!.skills.some((s) => s.kind === 'apply'));
       if (u) {
         bossDone.add(u);
         const apply = units[u]!.skills.find((s) => s.kind === 'apply')!;

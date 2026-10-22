@@ -361,11 +361,64 @@
           "examples": [
             {
               "text": "I don't want anything.",
-              "translation": "No quiero nada."
+              "translation": "No quiero nada.",
+              "mirror": {
+                "say": "No quiero nada",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "nada",
+                    "en": "anything",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "She doesn't like this.",
-              "translation": "A ella no le gusta esto."
+              "translation": "A ella no le gusta esto.",
+              "mirror": {
+                "say": "A ella no le gusta esto",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gusta",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "le gusta",
+                    "why": "Al revés: ELLA no gusta esto."
+                  },
+                  {
+                    "es": "esto",
+                    "en": "this",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "We don't need those.",

@@ -109,8 +109,9 @@ try {
   const units = await en.evaluate(() => window.__units);
   const seen = new Set();
   let builtOk = false;
-  for (let n = 0; n < 60; n++) {
+  for (let n = 0; n < 80; n++) {
     const tag = (await en.locator('.slide .tag').first().textContent().catch(() => '')) ?? '';
+    if (process.env.E2E_DEBUG) console.log('  ·', n, tag);
     if (/RONDA/.test(tag)) { seen.add('hito'); break; }
     if (/ESCUCHA/.test(tag)) {
       seen.add('escucha');
@@ -121,6 +122,17 @@ try {
     }
     if (/CONSTRUYE/.test(tag)) {
       seen.add('construye');
+      if (await en.locator('.train-help').count()) {
+        // La ayuda «¿Cómo se construye?» abre el tren compacto dentro de la tarjeta.
+        await en.locator('.train-help').tap(); await en.waitForTimeout(300);
+        for (let k = 0; k < 6 && !(await en.locator('.train-final').count()); k++) {
+          if (await en.locator('.chip.ghost').count()) await en.locator('.chip.ghost').first().tap({ force: true });
+          else if (await en.locator('.chip.swap').count()) await en.locator('.chip.swap').first().tap({ force: true });
+          else if (await en.locator('.train-go').count()) await en.locator('.train-go').tap();
+          await en.waitForTimeout(400);
+        }
+        if (await en.locator('.train-final').count()) seen.add('ayuda-tren');
+      }
       const es = (await en.locator('.build-es').textContent()).replace(/[«»]/g, '');
       const u = Object.values(units).find((x) => x.payload.examples.some((e) => e.translation === es));
       const words = u.payload.examples.find((e) => e.translation === es).text.replace(/[.!?]+$/, '').split(/\s+/);
@@ -128,6 +140,18 @@ try {
       await en.waitForTimeout(200);
       if (await en.locator('.slide.build.right').count()) builtOk = true;
       await en.waitForTimeout(1600); continue;
+    }
+    if (/TREN DE LA FRASE/.test(tag)) {
+      // D-082: despertar al fantasma, cambiar la ficha, darle la vuelta y hacer saltar al ayudante, con el dedo.
+      for (let k = 0; k < 8 && !(await en.locator('.train-final').count()); k++) {
+        if (await en.locator('.chip.ghost').count()) { await en.locator('.chip.ghost').first().tap({ force: true }); seen.add('fantasma'); }
+        else if (await en.locator('.chip.swap').count()) { await en.locator('.chip.swap').first().tap({ force: true }); seen.add('cambio'); }
+        else if (await en.locator('.train-go').count()) { const t = await en.locator('.train-go').textContent(); if (/Salta/.test(t)) seen.add('salto'); await en.locator('.train-go').tap(); }
+        await en.waitForTimeout(450);
+      }
+      const english = (await en.locator('.w3 .chip b').allTextContents()).join(' ');
+      if (english === 'are you hungry' || english === 'is she tired') seen.add('orden-pregunta');
+      await en.waitForTimeout(500); await swipeEn(); continue;
     }
     if (/🎮/.test(tag)) {
       // Ráfaga (D-081): con dos respuestas se desliza la tarjeta (← la primera, la segunda →); con tres, botones.
@@ -137,6 +161,7 @@ try {
         const prompt = await en.locator('.burst-prompt').textContent().catch(() => null);
         if (!prompt) { await en.waitForTimeout(300); continue; }
         const ex = u.payload.exercises.find((e) => e.prompt === prompt);
+        if (!ex) { if (process.env.E2E_DEBUG) console.log('  ? prompt', JSON.stringify(prompt), u.key, u.payload.exercises.map((e) => e.prompt)); await en.waitForTimeout(300); continue; }
         if (two) {
           const box = await en.locator('.burst-card').boundingBox();
           const left = ex.answer === u.payload.exercises[0].answer;
@@ -169,6 +194,9 @@ try {
   check(seen.has('escucha'), 'inglés: aparece «Escucha» y se responde tocando lo que se ha oído');
   check(seen.has('construye') && builtOk, 'inglés: «Construye la frase» se completa tocando las palabras en orden');
   check(seen.has('truco'), 'inglés: la gramática entra con su «Truco»');
+  check(seen.has('fantasma') && seen.has('cambio'), 'Tren de la frase: se despierta al fantasma (TÚ) y se cambia la ficha (tienes → estás) tocándolos');
+  check(seen.has('salto') && seen.has('orden-pregunta'), 'Tren de la frase: el ayudante salta y queda «are you hungry» (orden de pregunta)');
+  check(seen.has('ayuda-tren'), '«Construye la frase» ofrece ver cómo se construye (el tren compacto)');
   check(seen.has('rafaga-desliza'), 'Ráfaga de dos respuestas («Toco o cuento»): se responde deslizando la tarjeta con el dedo');
   check(seen.has('rafaga-botones'), 'Ráfaga de tres respuestas («Semáforos»): se responde golpeando los botones');
   check(seen.has('confeti'), 'Ráfaga: al acertar sale confeti');
