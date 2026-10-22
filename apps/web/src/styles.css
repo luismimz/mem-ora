@@ -600,22 +600,22 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .wagon .say-line { margin: 0; font-size: clamp(1.35rem, 6.4vw, 1.8rem); font-weight: 950; text-align: center; }
 @keyframes wagon-in { from { transform: translateX(60px); opacity: 0; } to { transform: none; opacity: 1; } }
 .chips { display: flex; flex-wrap: wrap; gap: .45rem; justify-content: center; }
-.chip { border: 0; border-radius: .9rem; padding: .45rem .7rem; min-width: 3.4rem; display: flex; flex-direction: column; align-items: center; gap: .1rem; color: #fff; background: rgba(255,255,255,.18); font: inherit; }
-.chip b { font-size: 1.2rem; font-weight: 900; }
-.chip small { font-size: .66rem; opacity: .9; font-weight: 700; }
-.chip.role-who { background: #3b82f6; } .chip.role-helper { background: #f59e0b; } .chip.role-verb { background: #10b981; } .chip.role-word { background: #8b5cf6; } .chip.role-signal { background: #ef4444; }
-.chip.ghost { background: transparent; outline: 2px dashed rgba(255,255,255,.7); font-size: 1.3rem; }
-.chip.swap { outline: 3px solid #ffd76a; }
-.chip.pulse { animation: chip-pulse 1s ease-in-out infinite; }
+.feed .chip { border: 0; border-radius: .9rem; padding: .45rem .7rem; min-width: 3.4rem; display: flex; flex-direction: column; align-items: center; gap: .1rem; color: #fff; background: rgba(255,255,255,.18); font: inherit; }
+.feed .chip b { font-size: 1.2rem; font-weight: 900; }
+.feed .chip small { font-size: .66rem; opacity: .9; font-weight: 700; }
+.feed .chip.role-who { background: #3b82f6; } .feed .chip.role-helper { background: #f59e0b; } .feed .chip.role-verb { background: #10b981; } .feed .chip.role-word { background: #8b5cf6; } .feed .chip.role-signal { background: #ef4444; }
+.feed .chip.ghost { background: transparent; outline: 2px dashed rgba(255,255,255,.7); font-size: 1.3rem; }
+.feed .chip.swap { outline: 3px solid #ffd76a; }
+.feed .chip.pulse { animation: chip-pulse 1s ease-in-out infinite; }
 @keyframes chip-pulse { 50% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(255,215,106,.35); } }
-.chip.woke { animation: woke .6s cubic-bezier(.2, 1.6, .3, 1); }
+.feed .chip.woke { animation: woke .6s cubic-bezier(.2, 1.6, .3, 1); }
 @keyframes woke { from { transform: scale(.3) rotate(-20deg); opacity: 0; } to { transform: none; opacity: 1; } }
-.chip.swapped { animation: woke .5s ease; }
-.chip.en.flip { animation: chip-flip .5s ease both; }
+.feed .chip.swapped { animation: woke .5s ease; }
+.feed .chip.en.flip { animation: chip-flip .5s ease both; }
 @keyframes chip-flip { from { transform: rotateY(90deg); opacity: 0; } to { transform: none; opacity: 1; } }
-.chip.en.hop { animation: chip-hop .7s cubic-bezier(.3, 1.4, .5, 1) both; box-shadow: 0 0 0 3px #ffd76a; }
+.feed .chip.en.hop { animation: chip-hop .7s cubic-bezier(.3, 1.4, .5, 1) both; box-shadow: 0 0 0 3px #ffd76a; }
 @keyframes chip-hop { 0% { transform: translate(60px, 0); } 45% { transform: translate(20px, -42px) rotate(-10deg); } 100% { transform: none; } }
-.why { margin: 0; font-size: .85rem; font-weight: 700; text-align: center; color: #ffd76a; }
+.feed .why { margin: 0; font-size: .85rem; font-weight: 700; text-align: center; color: #ffd76a; }
 .train-final { margin: 0; text-align: center; font-size: clamp(1.4rem, 6.6vw, 1.9rem); font-weight: 950; animation: woke .5s ease; }
 .train-tip { margin: 0; text-align: center; font-weight: 800; font-size: .95rem; }
 .train-go { align-self: center; border: 0; border-radius: 1.2rem; padding: .9rem 1.6rem; font-size: 1.15rem; font-weight: 950; color: #1d1b18; background: #ffd76a; box-shadow: 0 5px 0 rgba(0,0,0,.3); }
@@ -623,7 +623,7 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .train-dots { display: flex; gap: .35rem; justify-content: center; }
 .train-dots i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.3); }
 .train-dots i.on { background: #ffd76a; }
-@media (prefers-reduced-motion: reduce) { .wagon, .chip { animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { .wagon, .feed .chip { animation: none !important; } }
 .train-body { display: flex; flex-direction: column; gap: .7rem; }
 .train-body.compact .wagon { padding: .45rem .6rem .55rem; }
 .train-body.compact .say-line { font-size: 1.15rem; }
