@@ -1,0 +1,722 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "47-acciones",
+      "title": "Misión 47 · Acciones y sentidos",
+      "units": [
+        {
+          "key": "g-senses",
+          "type": "pattern",
+          "goal": "Huele bien = IT SMELLS GOOD",
+          "rule": "Con los sentidos, verbo + adjetivo (no adverbio): it smells good, tastes great, sounds nice, looks tired, feels soft.",
+          "pieces": [
+            {
+              "text": "It",
+              "role": "fixed",
+              "hint": "ESO"
+            },
+            {
+              "text": "smells",
+              "role": "slot",
+              "hint": "huele"
+            },
+            {
+              "text": "good",
+              "role": "fixed",
+              "hint": "bien"
+            }
+          ],
+          "examples": [
+            {
+              "text": "This soup smells good.",
+              "translation": "Esta sopa huele bien.",
+              "mirror": {
+                "say": "Esta sopa huele bien",
+                "pieces": [
+                  {
+                    "es": "Esta sopa",
+                    "en": "This soup",
+                    "role": "who"
+                  },
+                  {
+                    "es": "huele",
+                    "en": "smells",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "good",
+                    "role": "word",
+                    "from": "bien",
+                    "why": "Con los sentidos va un adjetivo: smells GOOD (no well)."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You look tired.",
+              "translation": "Pareces cansado.",
+              "mirror": {
+                "say": "Pareces cansado",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pareces",
+                    "en": "look",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That sounds great!",
+              "translation": "¡Suena genial!"
+            },
+            {
+              "text": "It tastes like chicken.",
+              "translation": "Sabe a pollo."
+            }
+          ],
+          "pitfalls": [
+            "«It smells well» está mal: con los sentidos, adjetivo (good).",
+            "Saber A algo es TASTE LIKE: it tastes like chicken."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "NARIZ, BOCA y OJOS solo hablan con ADJETIVOS.",
+            "emoji": "👃"
+          }
+        },
+        {
+          "key": "carry",
+          "type": "term",
+          "text": "carry",
+          "meaning": "llevar (en la mano), cargar",
+          "pronunciation": "KÁri",
+          "examples": [
+            {
+              "text": "Can you carry this bag?",
+              "translation": "¿Puedes llevar esta bolsa?",
+              "mirror": {
+                "say": "¿Puedes llevar esta bolsa?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llevar",
+                    "en": "carry",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esta bolsa",
+                    "en": "this bag",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I always carry an umbrella.",
+              "translation": "Siempre llevo paraguas."
+            }
+          ],
+          "notes": "Llevar en la mano es carry; llevar puesto es wear."
+        },
+        {
+          "key": "throw",
+          "type": "term",
+          "text": "throw",
+          "meaning": "tirar, lanzar",
+          "pronunciation": "ZRÓU",
+          "examples": [
+            {
+              "text": "Throw me the ball!",
+              "translation": "¡Tírame la pelota!",
+              "mirror": {
+                "say": "¡Tírame la pelota!",
+                "pieces": [
+                  {
+                    "es": "Tira",
+                    "en": "Throw",
+                    "role": "verb",
+                    "from": "Tírame",
+                    "why": "Lo pegado se separa: throw ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la pelota",
+                    "en": "the ball",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't throw it away.",
+              "translation": "No lo tires."
+            }
+          ]
+        },
+        {
+          "key": "catch",
+          "type": "term",
+          "text": "catch",
+          "meaning": "coger (al vuelo), atrapar",
+          "pronunciation": "KACH",
+          "examples": [
+            {
+              "text": "Catch the ball!",
+              "translation": "¡Coge la pelota!",
+              "mirror": {
+                "say": "¡Coge la pelota!",
+                "pieces": [
+                  {
+                    "es": "Coge",
+                    "en": "Catch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la pelota",
+                    "en": "the ball",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I caught a cold.",
+              "translation": "Me he resfriado."
+            }
+          ]
+        },
+        {
+          "key": "hold",
+          "type": "term",
+          "text": "hold",
+          "meaning": "sostener, agarrar",
+          "pronunciation": "JÓULD",
+          "examples": [
+            {
+              "text": "Hold my hand.",
+              "translation": "Dame la mano.",
+              "mirror": {
+                "say": "Dame la mano",
+                "pieces": [
+                  {
+                    "es": "Sostén",
+                    "en": "Hold",
+                    "role": "verb",
+                    "from": "Dame",
+                    "why": "Dar la mano es «sostener mi mano»: hold my hand."
+                  },
+                  {
+                    "es": "MI mano",
+                    "en": "my hand",
+                    "role": "word",
+                    "from": "la mano"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Hold on a minute.",
+              "translation": "Espera un momento."
+            }
+          ]
+        },
+        {
+          "key": "drop",
+          "type": "term",
+          "text": "drop",
+          "meaning": "dejar caer, soltar",
+          "pronunciation": "DROP",
+          "examples": [
+            {
+              "text": "Don't drop the glass!",
+              "translation": "¡Que no se te caiga el vaso!",
+              "mirror": {
+                "say": "¡Que no se te caiga el vaso!",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper",
+                    "from": "Que no"
+                  },
+                  {
+                    "es": "sueltes",
+                    "en": "drop",
+                    "role": "verb",
+                    "from": "se te caiga",
+                    "why": "Que se te caiga algo es DROP it."
+                  },
+                  {
+                    "es": "el vaso",
+                    "en": "the glass",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I dropped my phone.",
+              "translation": "Se me cayó el móvil."
+            }
+          ]
+        },
+        {
+          "key": "hide",
+          "type": "term",
+          "text": "hide",
+          "meaning": "esconder(se)",
+          "pronunciation": "JÁID",
+          "examples": [
+            {
+              "text": "Where did you hide the keys?",
+              "translation": "¿Dónde escondiste las llaves?",
+              "mirror": {
+                "say": "¿Dónde escondiste las llaves?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "esconder",
+                    "en": "hide",
+                    "role": "verb",
+                    "from": "escondiste",
+                    "why": "Con DID el verbo va tal cual: hide."
+                  },
+                  {
+                    "es": "las llaves",
+                    "en": "the keys",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The cat is hiding.",
+              "translation": "El gato se está escondiendo."
+            }
+          ]
+        },
+        {
+          "key": "cry",
+          "type": "term",
+          "text": "cry",
+          "meaning": "llorar",
+          "pronunciation": "KRÁI",
+          "examples": [
+            {
+              "text": "Don't cry.",
+              "translation": "No llores.",
+              "mirror": {
+                "say": "No llores",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llores",
+                    "en": "cry",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The baby is crying.",
+              "translation": "El bebé está llorando."
+            }
+          ]
+        },
+        {
+          "key": "laugh",
+          "type": "term",
+          "text": "laugh",
+          "meaning": "reír(se)",
+          "pronunciation": "LAF",
+          "examples": [
+            {
+              "text": "Everybody laughed.",
+              "translation": "Todos se rieron.",
+              "mirror": {
+                "say": "Todos se rieron",
+                "pieces": [
+                  {
+                    "es": "Todos",
+                    "en": "Everybody",
+                    "role": "who"
+                  },
+                  {
+                    "es": "rieron",
+                    "en": "laughed",
+                    "role": "verb",
+                    "from": "se rieron"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't laugh at me!",
+              "translation": "¡No te rías de mí!"
+            }
+          ],
+          "notes": "La gh suena como F: LAF."
+        },
+        {
+          "key": "smile",
+          "type": "term",
+          "text": "smile",
+          "meaning": "sonreír; sonrisa",
+          "pronunciation": "SMÁIL",
+          "examples": [
+            {
+              "text": "Smile for the photo!",
+              "translation": "¡Sonríe para la foto!",
+              "mirror": {
+                "say": "¡Sonríe para la foto!",
+                "pieces": [
+                  {
+                    "es": "Sonríe",
+                    "en": "Smile",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para la foto",
+                    "en": "for the photo",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has a beautiful smile.",
+              "translation": "Tiene una sonrisa preciosa."
+            }
+          ]
+        },
+        {
+          "key": "shout",
+          "type": "term",
+          "text": "shout",
+          "meaning": "gritar",
+          "pronunciation": "SHÁUT",
+          "examples": [
+            {
+              "text": "Don't shout, I can hear you.",
+              "translation": "No grites, te oigo.",
+              "mirror": {
+                "say": "No grites, te oigo",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "grites",
+                    "en": "shout",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO puedo oír",
+                    "en": "I can hear",
+                    "role": "verb",
+                    "from": "oigo",
+                    "why": "Oír se dice con CAN: I can hear you."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Stop shouting!",
+              "translation": "¡Deja de gritar!"
+            }
+          ]
+        },
+        {
+          "key": "kiss",
+          "type": "term",
+          "text": "kiss",
+          "meaning": "besar; beso",
+          "pronunciation": "KIS",
+          "examples": [
+            {
+              "text": "Give me a kiss.",
+              "translation": "Dame un beso.",
+              "mirror": {
+                "say": "Dame un beso",
+                "pieces": [
+                  {
+                    "es": "Da",
+                    "en": "Give",
+                    "role": "verb",
+                    "from": "Dame",
+                    "why": "Lo pegado se separa: give ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un beso",
+                    "en": "a kiss",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They kissed goodbye.",
+              "translation": "Se despidieron con un beso."
+            }
+          ]
+        },
+        {
+          "key": "hug",
+          "type": "term",
+          "text": "hug",
+          "meaning": "abrazar; abrazo",
+          "pronunciation": "JAG",
+          "examples": [
+            {
+              "text": "Come here, give me a hug.",
+              "translation": "Ven, dame un abrazo.",
+              "mirror": {
+                "say": "Ven, dame un abrazo",
+                "pieces": [
+                  {
+                    "es": "Ven aquí",
+                    "en": "Come here",
+                    "role": "verb",
+                    "from": "Ven"
+                  },
+                  {
+                    "es": "da",
+                    "en": "give",
+                    "role": "verb",
+                    "from": "dame",
+                    "why": "Lo pegado se separa: give ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un abrazo",
+                    "en": "a hug",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She hugged her mother.",
+              "translation": "Abrazó a su madre."
+            }
+          ]
+        },
+        {
+          "key": "touch",
+          "type": "term",
+          "text": "touch",
+          "meaning": "tocar",
+          "pronunciation": "TACH",
+          "examples": [
+            {
+              "text": "Don't touch anything.",
+              "translation": "No toques nada.",
+              "mirror": {
+                "say": "No toques nada",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "toques",
+                    "en": "touch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cualquier cosa",
+                    "en": "anything",
+                    "role": "word",
+                    "from": "nada",
+                    "why": "Una sola negación: don't touch ANYTHING."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Keep in touch!",
+              "translation": "¡Seguimos en contacto!"
+            }
+          ]
+        },
+        {
+          "key": "smell",
+          "type": "term",
+          "text": "smell",
+          "meaning": "oler; olor",
+          "pronunciation": "SMEL",
+          "examples": [
+            {
+              "text": "What's that smell?",
+              "translation": "¿Qué es ese olor?",
+              "mirror": {
+                "say": "¿Qué es ese olor?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ese olor",
+                    "en": "that smell",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It smells like coffee.",
+              "translation": "Huele a café."
+            }
+          ]
+        },
+        {
+          "key": "taste",
+          "type": "term",
+          "text": "taste",
+          "meaning": "probar; saber (a)",
+          "pronunciation": "TÉIST",
+          "examples": [
+            {
+              "text": "Taste this, it's delicious.",
+              "translation": "Prueba esto, está buenísimo.",
+              "mirror": {
+                "say": "Prueba esto, está buenísimo",
+                "pieces": [
+                  {
+                    "es": "Prueba",
+                    "en": "Taste",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esto",
+                    "en": "this",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "it's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "delicioso",
+                    "en": "delicious",
+                    "role": "word",
+                    "from": "buenísimo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It tastes like chicken.",
+              "translation": "Sabe a pollo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

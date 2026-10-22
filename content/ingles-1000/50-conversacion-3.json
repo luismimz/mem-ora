@@ -1,0 +1,726 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "50-conversacion-3",
+      "title": "Misión 50 · Proponer, felicitar y animar",
+      "units": [
+        {
+          "key": "g-how-about",
+          "type": "pattern",
+          "goal": "¿Qué tal si…? = HOW ABOUT + -ING?",
+          "rule": "Para proponer: How about + -ING? (how about going out?) o What about…? También: Why don't we…?",
+          "pieces": [
+            {
+              "text": "How about",
+              "role": "fixed",
+              "hint": "¿qué tal si"
+            },
+            {
+              "text": "going out",
+              "role": "slot",
+              "hint": "salimos"
+            }
+          ],
+          "examples": [
+            {
+              "text": "How about going to the cinema?",
+              "translation": "¿Qué tal si vamos al cine?",
+              "mirror": {
+                "say": "¿Qué tal si vamos al cine?",
+                "pieces": [
+                  {
+                    "es": "Qué tal si",
+                    "en": "How about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "v-AMOS",
+                    "en": "go-ING",
+                    "role": "verb",
+                    "from": "vamos",
+                    "why": "Detrás de how about, el verbo en -ING: going."
+                  },
+                  {
+                    "es": "al cine",
+                    "en": "to the cinema",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Why don't we eat out?",
+              "translation": "¿Por qué no comemos fuera?",
+              "mirror": {
+                "say": "¿Por qué no comemos fuera?",
+                "pieces": [
+                  {
+                    "es": "Por qué",
+                    "en": "Why",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comemos fuera",
+                    "en": "eat out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What about you?",
+              "translation": "¿Y tú?"
+            },
+            {
+              "text": "How about tomorrow?",
+              "translation": "¿Qué tal mañana?"
+            }
+          ],
+          "pitfalls": [
+            "«How about go?» está mal: How about GOING?",
+            "«Why don't we…?» es proponer, no preguntar el motivo."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "HOW ABOUT abre la PUERTA al verbo con -ING.",
+            "emoji": "🎉"
+          }
+        },
+        {
+          "key": "how-about",
+          "type": "term",
+          "text": "how about…?",
+          "meaning": "¿qué tal…?",
+          "pronunciation": "jau aBÁUT",
+          "examples": [
+            {
+              "text": "How about a coffee?",
+              "translation": "¿Qué tal un café?",
+              "mirror": {
+                "say": "¿Qué tal un café?",
+                "pieces": [
+                  {
+                    "es": "Qué tal",
+                    "en": "How about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How about Saturday?",
+              "translation": "¿Qué tal el sábado?"
+            }
+          ]
+        },
+        {
+          "key": "what-about-you",
+          "type": "term",
+          "text": "what about you?",
+          "meaning": "¿y tú?",
+          "pronunciation": "uot abaut IU",
+          "examples": [
+            {
+              "text": "I'm fine, what about you?",
+              "translation": "Estoy bien, ¿y tú?",
+              "mirror": {
+                "say": "Estoy bien, ¿y tú?",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bien",
+                    "en": "fine",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y tú",
+                    "en": "what about you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love it. What about you?",
+              "translation": "Me encanta. ¿Y a ti?"
+            }
+          ]
+        },
+        {
+          "key": "i-dont-mind",
+          "type": "term",
+          "text": "I don't mind",
+          "meaning": "me da igual, no me importa",
+          "pronunciation": "ai dont MÁIND",
+          "examples": [
+            {
+              "text": "Tea or coffee? I don't mind.",
+              "translation": "¿Té o café? Me da igual.",
+              "mirror": {
+                "say": "¿Té o café? Me da igual",
+                "pieces": [
+                  {
+                    "es": "Té o café",
+                    "en": "Tea or coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "importa",
+                    "en": "mind",
+                    "role": "verb",
+                    "from": "me da igual",
+                    "why": "«Me da igual» es «no me importa»: I don't mind."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you mind if I sit here?",
+              "translation": "¿Te importa si me siento aquí?"
+            }
+          ]
+        },
+        {
+          "key": "it-doesnt-matter",
+          "type": "term",
+          "text": "it doesn't matter",
+          "meaning": "no importa",
+          "pronunciation": "it dasent MÁter",
+          "examples": [
+            {
+              "text": "It doesn't matter, don't worry.",
+              "translation": "No importa, no te preocupes.",
+              "mirror": {
+                "say": "No importa, no te preocupes",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "importar",
+                    "en": "matter",
+                    "role": "verb",
+                    "from": "importa",
+                    "why": "Con DOESN'T el verbo va tal cual: matter."
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "preocupes",
+                    "en": "worry",
+                    "role": "verb",
+                    "from": "te preocupes"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Money doesn't matter.",
+              "translation": "El dinero da igual."
+            }
+          ]
+        },
+        {
+          "key": "im-afraid-not",
+          "type": "term",
+          "text": "I'm afraid not",
+          "meaning": "me temo que no",
+          "pronunciation": "aim aFRÉID not",
+          "examples": [
+            {
+              "text": "Is there a bus? I'm afraid not.",
+              "translation": "¿Hay autobús? Me temo que no.",
+              "mirror": {
+                "say": "¿Hay autobús? Me temo que no",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un autobús",
+                    "en": "a bus",
+                    "role": "word",
+                    "from": "autobús"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "me"
+                  },
+                  {
+                    "es": "temeroso",
+                    "en": "afraid",
+                    "role": "word",
+                    "from": "temo"
+                  },
+                  {
+                    "es": "que no",
+                    "en": "not",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm afraid I can't come.",
+              "translation": "Me temo que no puedo ir."
+            }
+          ]
+        },
+        {
+          "key": "id-love-to",
+          "type": "term",
+          "text": "I'd love to",
+          "meaning": "me encantaría",
+          "pronunciation": "aid LAV tu",
+          "examples": [
+            {
+              "text": "Come with us! I'd love to.",
+              "translation": "¡Vente con nosotros! Me encantaría.",
+              "mirror": {
+                "say": "¡Vente con nosotros! Me encantaría",
+                "pieces": [
+                  {
+                    "es": "Ven",
+                    "en": "Come",
+                    "role": "verb",
+                    "from": "Vente"
+                  },
+                  {
+                    "es": "con nosotros",
+                    "en": "with us",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) -RÍA",
+                    "en": "I'd",
+                    "role": "helper",
+                    "from": "me encantaría",
+                    "why": "-RÍA = WOULD: I'd love to."
+                  },
+                  {
+                    "es": "encantar",
+                    "en": "love to",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'd love to visit Japan.",
+              "translation": "Me encantaría visitar Japón."
+            }
+          ]
+        },
+        {
+          "key": "sorry-to-hear-that",
+          "type": "term",
+          "text": "sorry to hear that",
+          "meaning": "lo siento (al oír algo malo)",
+          "pronunciation": "sori tu JÍER dat",
+          "examples": [
+            {
+              "text": "My dog is ill. Sorry to hear that.",
+              "translation": "Mi perro está malo. Lo siento mucho.",
+              "mirror": {
+                "say": "Mi perro está malo. Lo siento mucho",
+                "pieces": [
+                  {
+                    "es": "Mi perro",
+                    "en": "My dog",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "malo",
+                    "en": "ill",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Siento oír eso",
+                    "en": "Sorry to hear that",
+                    "role": "word",
+                    "from": "Lo siento mucho"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm so sorry to hear that.",
+              "translation": "Cuánto lo siento."
+            }
+          ]
+        },
+        {
+          "key": "congratulations",
+          "type": "term",
+          "text": "congratulations",
+          "meaning": "¡enhorabuena!, ¡felicidades!",
+          "pronunciation": "konGRAchuleishons",
+          "examples": [
+            {
+              "text": "Congratulations on your new job!",
+              "translation": "¡Enhorabuena por el trabajo nuevo!",
+              "mirror": {
+                "say": "¡Enhorabuena por el trabajo nuevo!",
+                "pieces": [
+                  {
+                    "es": "Enhorabuena",
+                    "en": "Congratulations",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por",
+                    "en": "on",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TU",
+                    "en": "your",
+                    "role": "word",
+                    "from": "el"
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "job",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Congratulations, you passed!",
+              "translation": "¡Felicidades, has aprobado!"
+            }
+          ]
+        },
+        {
+          "key": "cheers",
+          "type": "term",
+          "text": "cheers",
+          "meaning": "¡salud!; ¡gracias!",
+          "pronunciation": "CHÍERS",
+          "examples": [
+            {
+              "text": "Cheers! To our team!",
+              "translation": "¡Salud! ¡Por nuestro equipo!",
+              "mirror": {
+                "say": "¡Salud! ¡Por nuestro equipo!",
+                "pieces": [
+                  {
+                    "es": "Salud",
+                    "en": "Cheers",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por nuestro equipo",
+                    "en": "To our team",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cheers, mate!",
+              "translation": "¡Gracias, tío!"
+            }
+          ]
+        },
+        {
+          "key": "bless-you",
+          "type": "term",
+          "text": "bless you",
+          "meaning": "¡Jesús! (al estornudar)",
+          "pronunciation": "BLES iu",
+          "examples": [
+            {
+              "text": "Atchoo! Bless you!",
+              "translation": "¡Achís! ¡Jesús!",
+              "mirror": {
+                "say": "¡Achís! ¡Jesús!",
+                "pieces": [
+                  {
+                    "es": "Achís",
+                    "en": "Atchoo",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Jesús",
+                    "en": "Bless you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Bless you, and thank you.",
+              "translation": "Dios te bendiga, y gracias."
+            }
+          ]
+        },
+        {
+          "key": "have-fun",
+          "type": "term",
+          "text": "have fun",
+          "meaning": "¡pásalo bien!",
+          "pronunciation": "jav FAN",
+          "examples": [
+            {
+              "text": "Have fun at the party!",
+              "translation": "¡Pásalo bien en la fiesta!",
+              "mirror": {
+                "say": "¡Pásalo bien en la fiesta!",
+                "pieces": [
+                  {
+                    "es": "Pásalo bien",
+                    "en": "Have fun",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la fiesta",
+                    "en": "at the party",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We had a lot of fun.",
+              "translation": "Nos lo pasamos genial."
+            }
+          ]
+        },
+        {
+          "key": "enjoy-your-meal",
+          "type": "term",
+          "text": "enjoy your meal",
+          "meaning": "¡que aproveche!",
+          "pronunciation": "enYÓI ior MIIL",
+          "examples": [
+            {
+              "text": "Here's your pizza. Enjoy your meal!",
+              "translation": "Aquí tiene su pizza. ¡Que aproveche!",
+              "mirror": {
+                "say": "Aquí tiene su pizza. ¡Que aproveche!",
+                "pieces": [
+                  {
+                    "es": "Aquí está",
+                    "en": "Here's",
+                    "role": "helper",
+                    "from": "Aquí tiene"
+                  },
+                  {
+                    "es": "su pizza",
+                    "en": "your pizza",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Disfruta tu comida",
+                    "en": "Enjoy your meal",
+                    "role": "word",
+                    "from": "Que aproveche"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Enjoy!",
+              "translation": "¡Que lo disfrutes!"
+            }
+          ]
+        },
+        {
+          "key": "get-well-soon",
+          "type": "term",
+          "text": "get well soon",
+          "meaning": "¡que te mejores!",
+          "pronunciation": "guet uel SUUN",
+          "examples": [
+            {
+              "text": "Get well soon, Ana!",
+              "translation": "¡Que te mejores, Ana!",
+              "mirror": {
+                "say": "¡Que te mejores, Ana!",
+                "pieces": [
+                  {
+                    "es": "Ponte bien pronto",
+                    "en": "Get well soon",
+                    "role": "verb",
+                    "from": "Que te mejores"
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I hope you get well soon.",
+              "translation": "Espero que te mejores pronto."
+            }
+          ]
+        },
+        {
+          "key": "happy-to-help",
+          "type": "term",
+          "text": "happy to help",
+          "meaning": "un placer ayudar",
+          "pronunciation": "japi tu JELP",
+          "examples": [
+            {
+              "text": "Thanks! Happy to help.",
+              "translation": "¡Gracias! Encantado de ayudar.",
+              "mirror": {
+                "say": "¡Gracias! Encantado de ayudar",
+                "pieces": [
+                  {
+                    "es": "Gracias",
+                    "en": "Thanks",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Encantado",
+                    "en": "Happy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de ayudar",
+                    "en": "to help",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We're always happy to help.",
+              "translation": "Siempre estamos encantados de ayudar."
+            }
+          ]
+        },
+        {
+          "key": "just-a-moment",
+          "type": "term",
+          "text": "just a moment",
+          "meaning": "un momento",
+          "pronunciation": "jast a MÓUment",
+          "examples": [
+            {
+              "text": "Just a moment, please.",
+              "translation": "Un momento, por favor.",
+              "mirror": {
+                "say": "Un momento, por favor",
+                "pieces": [
+                  {
+                    "es": "Solo un momento",
+                    "en": "Just a moment",
+                    "role": "word",
+                    "from": "Un momento"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wait just a moment.",
+              "translation": "Espera un momentito."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "49-profesiones",
+      "title": "Misión 49 · Profesiones",
+      "units": [
+        {
+          "key": "g-jobs",
+          "type": "pattern",
+          "goal": "Soy médico = I'M A DOCTOR",
+          "rule": "Al decir tu trabajo, siempre A (o AN): I'm a doctor, she's an engineer. Para preguntar: What do you do?",
+          "pieces": [
+            {
+              "text": "I'm",
+              "role": "fixed",
+              "hint": "soy"
+            },
+            {
+              "text": "a",
+              "role": "fixed",
+              "hint": "(un, una)"
+            },
+            {
+              "text": "nurse",
+              "role": "slot",
+              "hint": "enfermero"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'm a programmer.",
+              "translation": "Soy programador.",
+              "mirror": {
+                "say": "Soy programador",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un programador",
+                    "en": "a programmer",
+                    "role": "word",
+                    "from": "programador",
+                    "why": "Tu trabajo siempre lleva A: a programmer."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What do you do?",
+              "translation": "¿A qué te dedicas?",
+              "mirror": {
+                "say": "¿A qué te dedicas?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word",
+                    "from": "A qué"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "haces",
+                    "en": "do",
+                    "role": "verb",
+                    "from": "te dedicas",
+                    "why": "«¿A qué te dedicas?» es «¿qué haces?»: what do you do?"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's an engineer.",
+              "translation": "Es ingeniera."
+            },
+            {
+              "text": "He works as a waiter.",
+              "translation": "Trabaja de camarero."
+            }
+          ],
+          "pitfalls": [
+            "«I'm doctor» está mal: falta A (I'm a doctor).",
+            "Trabajar DE algo es work AS: he works as a waiter."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada OFICIO lleva su CHAPA con una A.",
+            "emoji": "👷"
+          }
+        },
+        {
+          "key": "engineer",
+          "type": "term",
+          "text": "engineer",
+          "meaning": "ingeniero",
+          "pronunciation": "enyiNÍER",
+          "examples": [
+            {
+              "text": "My brother is a software engineer.",
+              "translation": "Mi hermano es ingeniero de software.",
+              "mirror": {
+                "say": "Mi hermano es ingeniero de software",
+                "pieces": [
+                  {
+                    "es": "Mi hermano",
+                    "en": "My brother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "UN",
+                    "en": "a",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ingeniero",
+                    "en": "engineer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de software",
+                    "en": "software",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Engineers build bridges.",
+              "translation": "Los ingenieros construyen puentes."
+            }
+          ]
+        },
+        {
+          "key": "lawyer",
+          "type": "term",
+          "text": "lawyer",
+          "meaning": "abogado",
+          "pronunciation": "LÓIer",
+          "examples": [
+            {
+              "text": "You need a lawyer.",
+              "translation": "Necesitas un abogado.",
+              "mirror": {
+                "say": "Necesitas un abogado",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitas",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un abogado",
+                    "en": "a lawyer",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She wants to be a lawyer.",
+              "translation": "Quiere ser abogada."
+            }
+          ]
+        },
+        {
+          "key": "waiter",
+          "type": "term",
+          "text": "waiter",
+          "meaning": "camarero",
+          "pronunciation": "UÉIter",
+          "examples": [
+            {
+              "text": "Excuse me, waiter!",
+              "translation": "¡Perdone, camarero!",
+              "mirror": {
+                "say": "¡Perdone, camarero!",
+                "pieces": [
+                  {
+                    "es": "Perdone",
+                    "en": "Excuse me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "camarero",
+                    "en": "waiter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He works as a waiter.",
+              "translation": "Trabaja de camarero."
+            }
+          ]
+        },
+        {
+          "key": "chef",
+          "type": "term",
+          "text": "chef",
+          "meaning": "cocinero, chef",
+          "pronunciation": "SHEF",
+          "examples": [
+            {
+              "text": "The chef is from Italy.",
+              "translation": "El cocinero es de Italia.",
+              "mirror": {
+                "say": "El cocinero es de Italia",
+                "pieces": [
+                  {
+                    "es": "El cocinero",
+                    "en": "The chef",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "de Italia",
+                    "en": "from Italy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A great chef.",
+              "translation": "Un gran chef."
+            }
+          ]
+        },
+        {
+          "key": "farmer",
+          "type": "term",
+          "text": "farmer",
+          "meaning": "agricultor, granjero",
+          "pronunciation": "FÁRmer",
+          "examples": [
+            {
+              "text": "My grandfather was a farmer.",
+              "translation": "Mi abuelo era agricultor.",
+              "mirror": {
+                "say": "Mi abuelo era agricultor",
+                "pieces": [
+                  {
+                    "es": "Mi abuelo",
+                    "en": "My grandfather",
+                    "role": "who"
+                  },
+                  {
+                    "es": "era",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un agricultor",
+                    "en": "a farmer",
+                    "role": "word",
+                    "from": "agricultor",
+                    "why": "Tu trabajo siempre lleva A: a farmer, a programmer."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Farmers work very hard.",
+              "translation": "Los agricultores trabajan muchísimo."
+            }
+          ]
+        },
+        {
+          "key": "police-officer",
+          "type": "term",
+          "text": "police officer",
+          "meaning": "policía (agente)",
+          "pronunciation": "poLÍIS ófiser",
+          "examples": [
+            {
+              "text": "Ask a police officer.",
+              "translation": "Pregunta a un policía.",
+              "mirror": {
+                "say": "Pregunta a un policía",
+                "pieces": [
+                  {
+                    "es": "Pregunta",
+                    "en": "Ask",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un policía",
+                    "en": "a police officer",
+                    "role": "word",
+                    "from": "a un policía",
+                    "why": "Preguntar o llevar a alguien, sin «a»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Call the police!",
+              "translation": "¡Llama a la policía!"
+            }
+          ]
+        },
+        {
+          "key": "firefighter",
+          "type": "term",
+          "text": "firefighter",
+          "meaning": "bombero",
+          "pronunciation": "FÁIerfaiter",
+          "examples": [
+            {
+              "text": "Firefighters are very brave.",
+              "translation": "Los bomberos son muy valientes.",
+              "mirror": {
+                "say": "Los bomberos son muy valientes",
+                "pieces": [
+                  {
+                    "es": "bomberos",
+                    "en": "Firefighters",
+                    "role": "who",
+                    "from": "Los bomberos",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy valientes",
+                    "en": "very brave",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He wants to be a firefighter.",
+              "translation": "Quiere ser bombero."
+            }
+          ]
+        },
+        {
+          "key": "mechanic",
+          "type": "term",
+          "text": "mechanic",
+          "meaning": "mecánico",
+          "pronunciation": "meKÁnik",
+          "examples": [
+            {
+              "text": "The mechanic fixed my car.",
+              "translation": "El mecánico arregló mi coche.",
+              "mirror": {
+                "say": "El mecánico arregló mi coche",
+                "pieces": [
+                  {
+                    "es": "El mecánico",
+                    "en": "The mechanic",
+                    "role": "who"
+                  },
+                  {
+                    "es": "arregló",
+                    "en": "fixed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mi coche",
+                    "en": "my car",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take it to a mechanic.",
+              "translation": "Llévalo a un mecánico."
+            }
+          ]
+        },
+        {
+          "key": "builder",
+          "type": "term",
+          "text": "builder",
+          "meaning": "albañil, constructor",
+          "pronunciation": "BÍLder",
+          "examples": [
+            {
+              "text": "The builders start at eight.",
+              "translation": "Los albañiles empiezan a las ocho.",
+              "mirror": {
+                "say": "Los albañiles empiezan a las ocho",
+                "pieces": [
+                  {
+                    "es": "Los albañiles",
+                    "en": "The builders",
+                    "role": "who"
+                  },
+                  {
+                    "es": "empiezan",
+                    "en": "start",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las ocho",
+                    "en": "at eight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A good builder.",
+              "translation": "Un buen albañil."
+            }
+          ]
+        },
+        {
+          "key": "shop-assistant",
+          "type": "term",
+          "text": "shop assistant",
+          "meaning": "dependiente",
+          "pronunciation": "shop aSÍStant",
+          "examples": [
+            {
+              "text": "Ask the shop assistant.",
+              "translation": "Pregunta al dependiente.",
+              "mirror": {
+                "say": "Pregunta al dependiente",
+                "pieces": [
+                  {
+                    "es": "Pregunta",
+                    "en": "Ask",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el dependiente",
+                    "en": "the shop assistant",
+                    "role": "word",
+                    "from": "al dependiente",
+                    "why": "Preguntar o llevar a alguien, sin «a»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She works as a shop assistant.",
+              "translation": "Trabaja de dependienta."
+            }
+          ]
+        },
+        {
+          "key": "programmer",
+          "type": "term",
+          "text": "programmer",
+          "meaning": "programador",
+          "pronunciation": "PRÓUgramer",
+          "examples": [
+            {
+              "text": "I want to be a programmer.",
+              "translation": "Quiero ser programador.",
+              "mirror": {
+                "say": "Quiero ser programador",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ser",
+                    "en": "to be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un programador",
+                    "en": "a programmer",
+                    "role": "word",
+                    "from": "programador",
+                    "why": "Tu trabajo siempre lleva A: a farmer, a programmer."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Programmers write code.",
+              "translation": "Los programadores escriben código."
+            }
+          ]
+        },
+        {
+          "key": "designer",
+          "type": "term",
+          "text": "designer",
+          "meaning": "diseñador",
+          "pronunciation": "diSÁIner",
+          "examples": [
+            {
+              "text": "She is a web designer.",
+              "translation": "Es diseñadora web.",
+              "mirror": {
+                "say": "Es diseñadora web",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "diseñadora",
+                    "en": "designer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "web",
+                    "en": "web",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A fashion designer.",
+              "translation": "Un diseñador de moda."
+            }
+          ]
+        },
+        {
+          "key": "scientist",
+          "type": "term",
+          "text": "scientist",
+          "meaning": "científico",
+          "pronunciation": "SÁIentist",
+          "examples": [
+            {
+              "text": "Scientists are looking for a cure.",
+              "translation": "Los científicos buscan una cura.",
+              "mirror": {
+                "say": "Los científicos buscan una cura",
+                "pieces": [
+                  {
+                    "es": "científicos",
+                    "en": "Scientists",
+                    "role": "who",
+                    "from": "Los científicos",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "están buscando",
+                    "en": "are looking for",
+                    "role": "verb",
+                    "from": "buscan"
+                  },
+                  {
+                    "es": "una cura",
+                    "en": "a cure",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A famous scientist.",
+              "translation": "Un científico famoso."
+            }
+          ]
+        },
+        {
+          "key": "journalist",
+          "type": "term",
+          "text": "journalist",
+          "meaning": "periodista",
+          "pronunciation": "YÉRnalist",
+          "examples": [
+            {
+              "text": "The journalist asked many questions.",
+              "translation": "El periodista hizo muchas preguntas.",
+              "mirror": {
+                "say": "El periodista hizo muchas preguntas",
+                "pieces": [
+                  {
+                    "es": "El periodista",
+                    "en": "The journalist",
+                    "role": "who"
+                  },
+                  {
+                    "es": "preguntó",
+                    "en": "asked",
+                    "role": "verb",
+                    "from": "hizo",
+                    "why": "Hacer preguntas es ASK questions."
+                  },
+                  {
+                    "es": "muchas preguntas",
+                    "en": "many questions",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is a journalist.",
+              "translation": "Es periodista."
+            }
+          ]
+        },
+        {
+          "key": "vet",
+          "type": "term",
+          "text": "vet",
+          "meaning": "veterinario",
+          "pronunciation": "VET",
+          "examples": [
+            {
+              "text": "Take the dog to the vet.",
+              "translation": "Lleva al perro al veterinario.",
+              "mirror": {
+                "say": "Lleva al perro al veterinario",
+                "pieces": [
+                  {
+                    "es": "Lleva",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el perro",
+                    "en": "the dog",
+                    "role": "word",
+                    "from": "al perro",
+                    "why": "Preguntar o llevar a alguien, sin «a»."
+                  },
+                  {
+                    "es": "al veterinario",
+                    "en": "to the vet",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The vet is very kind.",
+              "translation": "El veterinario es muy amable."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
