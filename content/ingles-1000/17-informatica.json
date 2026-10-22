@@ -1,0 +1,614 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "17-informatica",
+      "title": "Misión 17 · Inglés para la informática",
+      "units": [
+        {
+          "key": "computer",
+          "type": "term",
+          "text": "computer",
+          "meaning": "ordenador",
+          "pronunciation": "komPIÚter",
+          "examples": [
+            {
+              "text": "My computer is slow.",
+              "translation": "Mi ordenador va lento.",
+              "mirror": {
+                "say": "Mi ordenador va lento",
+                "pieces": [
+                  {
+                    "es": "Mi ordenador",
+                    "en": "My computer",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "va",
+                    "why": "Las cosas no «van» lentas: SON lentas. It is slow."
+                  },
+                  {
+                    "es": "lento",
+                    "en": "slow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Turn off the computer.",
+              "translation": "Apaga el ordenador."
+            }
+          ]
+        },
+        {
+          "key": "file",
+          "type": "term",
+          "text": "file",
+          "meaning": "archivo",
+          "pronunciation": "FÁIL",
+          "examples": [
+            {
+              "text": "Save the file.",
+              "translation": "Guarda el archivo.",
+              "mirror": {
+                "say": "Guarda el archivo",
+                "pieces": [
+                  {
+                    "es": "Guarda",
+                    "en": "Save",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el archivo",
+                    "en": "the file",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I can't open this file.",
+              "translation": "No puedo abrir este archivo."
+            }
+          ]
+        },
+        {
+          "key": "folder",
+          "type": "term",
+          "text": "folder",
+          "meaning": "carpeta",
+          "pronunciation": "FÓULder",
+          "examples": [
+            {
+              "text": "Create a new folder.",
+              "translation": "Crea una carpeta nueva.",
+              "mirror": {
+                "say": "Crea una carpeta nueva",
+                "pieces": [
+                  {
+                    "es": "Crea",
+                    "en": "Create",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "carpeta",
+                    "en": "folder",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nueva",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Put the files in this folder.",
+              "translation": "Pon los archivos en esta carpeta."
+            }
+          ]
+        },
+        {
+          "key": "screen",
+          "type": "term",
+          "text": "screen",
+          "meaning": "pantalla",
+          "pronunciation": "SKRIIN",
+          "examples": [
+            {
+              "text": "The screen is black.",
+              "translation": "La pantalla está negra.",
+              "mirror": {
+                "say": "La pantalla está negra",
+                "pieces": [
+                  {
+                    "es": "La pantalla",
+                    "en": "The screen",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "negra",
+                    "en": "black",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Share your screen, please.",
+              "translation": "Comparte tu pantalla, por favor."
+            }
+          ]
+        },
+        {
+          "key": "password",
+          "type": "term",
+          "text": "password",
+          "meaning": "contraseña",
+          "pronunciation": "PÁSuerd",
+          "examples": [
+            {
+              "text": "I forgot my password.",
+              "translation": "He olvidado mi contraseña.",
+              "mirror": {
+                "say": "He olvidado mi contraseña",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "olvidé",
+                    "en": "forgot",
+                    "role": "verb",
+                    "from": "he olvidado"
+                  },
+                  {
+                    "es": "mi contraseña",
+                    "en": "my password",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Change your password.",
+              "translation": "Cambia tu contraseña."
+            }
+          ]
+        },
+        {
+          "key": "download",
+          "type": "term",
+          "text": "download",
+          "meaning": "descargar",
+          "pronunciation": "DÁUNloud",
+          "examples": [
+            {
+              "text": "Download the app.",
+              "translation": "Descarga la aplicación.",
+              "mirror": {
+                "say": "Descarga la aplicación",
+                "pieces": [
+                  {
+                    "es": "Descarga",
+                    "en": "Download",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la aplicación",
+                    "en": "the app",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The download is slow.",
+              "translation": "La descarga va lenta."
+            }
+          ]
+        },
+        {
+          "key": "upload",
+          "type": "term",
+          "text": "upload",
+          "meaning": "subir (un archivo)",
+          "pronunciation": "ÁPloud",
+          "examples": [
+            {
+              "text": "Upload your photo here.",
+              "translation": "Sube tu foto aquí.",
+              "mirror": {
+                "say": "Sube tu foto aquí",
+                "pieces": [
+                  {
+                    "es": "Sube",
+                    "en": "Upload",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu foto",
+                    "en": "your photo",
+                    "role": "word"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I uploaded the video yesterday.",
+              "translation": "Subí el vídeo ayer."
+            }
+          ]
+        },
+        {
+          "key": "update",
+          "type": "term",
+          "text": "update",
+          "meaning": "actualizar",
+          "pronunciation": "apDÉIT",
+          "examples": [
+            {
+              "text": "Update the app.",
+              "translation": "Actualiza la aplicación.",
+              "mirror": {
+                "say": "Actualiza la aplicación",
+                "pieces": [
+                  {
+                    "es": "Actualiza",
+                    "en": "Update",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la aplicación",
+                    "en": "the app",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There is a new update.",
+              "translation": "Hay una actualización nueva."
+            }
+          ]
+        },
+        {
+          "key": "bug",
+          "type": "term",
+          "text": "bug",
+          "meaning": "fallo (de un programa)",
+          "pronunciation": "BAG",
+          "examples": [
+            {
+              "text": "There is a bug in the code.",
+              "translation": "Hay un fallo en el código.",
+              "mirror": {
+                "say": "Hay un fallo en el código",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un fallo",
+                    "en": "a bug",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el código",
+                    "en": "in the code",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I found a bug.",
+              "translation": "He encontrado un fallo."
+            }
+          ]
+        },
+        {
+          "key": "fix",
+          "type": "term",
+          "text": "fix",
+          "meaning": "arreglar",
+          "pronunciation": "FIKS",
+          "examples": [
+            {
+              "text": "I fixed the bug.",
+              "translation": "Arreglé el fallo.",
+              "mirror": {
+                "say": "Arreglé el fallo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "arreglé",
+                    "en": "fixed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el fallo",
+                    "en": "the bug",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you fix my computer?",
+              "translation": "¿Puedes arreglar mi ordenador?"
+            }
+          ]
+        },
+        {
+          "key": "test",
+          "type": "term",
+          "text": "test",
+          "meaning": "probar",
+          "pronunciation": "TEST",
+          "examples": [
+            {
+              "text": "We test the code every day.",
+              "translation": "Probamos el código todos los días.",
+              "mirror": {
+                "say": "Probamos el código todos los días",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "probamos",
+                    "en": "test",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el código",
+                    "en": "the code",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días",
+                    "why": "«Todos los días» es CADA día: every day."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The test failed.",
+              "translation": "La prueba ha fallado."
+            }
+          ]
+        },
+        {
+          "key": "deploy",
+          "type": "term",
+          "text": "deploy",
+          "meaning": "desplegar (publicar en un servidor)",
+          "pronunciation": "diPLÓI",
+          "examples": [
+            {
+              "text": "We deploy the app to the server.",
+              "translation": "Desplegamos la aplicación en el servidor.",
+              "mirror": {
+                "say": "Desplegamos la aplicación en el servidor",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "desplegamos",
+                    "en": "deploy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la aplicación",
+                    "en": "the app",
+                    "role": "word"
+                  },
+                  {
+                    "es": "al servidor",
+                    "en": "to the server",
+                    "role": "word",
+                    "from": "en el servidor",
+                    "why": "Se despliega HACIA el servidor: deploy TO the server."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't deploy on a Friday!",
+              "translation": "¡No despliegues un viernes!"
+            }
+          ]
+        },
+        {
+          "key": "branch",
+          "type": "term",
+          "text": "branch",
+          "meaning": "rama (en git)",
+          "pronunciation": "BRANCH",
+          "examples": [
+            {
+              "text": "I work on my branch.",
+              "translation": "Trabajo en mi rama.",
+              "mirror": {
+                "say": "Trabajo en mi rama",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre mi rama",
+                    "en": "on my branch",
+                    "role": "word",
+                    "from": "en mi rama",
+                    "why": "Se trabaja SOBRE una rama: on my branch."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Create a new branch for this change.",
+              "translation": "Crea una rama nueva para este cambio."
+            }
+          ]
+        },
+        {
+          "key": "merge",
+          "type": "term",
+          "text": "merge",
+          "meaning": "fusionar",
+          "pronunciation": "MERCH",
+          "examples": [
+            {
+              "text": "Merge the branch into main.",
+              "translation": "Fusiona la rama con main.",
+              "mirror": {
+                "say": "Fusiona la rama con main",
+                "pieces": [
+                  {
+                    "es": "Fusiona",
+                    "en": "Merge",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la rama",
+                    "en": "the branch",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dentro de main",
+                    "en": "into main",
+                    "role": "word",
+                    "from": "con main",
+                    "why": "Una rama se fusiona DENTRO de otra: merge INTO main."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I merged your changes.",
+              "translation": "He fusionado tus cambios."
+            }
+          ]
+        },
+        {
+          "key": "release",
+          "type": "term",
+          "text": "release",
+          "meaning": "versión publicada; publicar",
+          "pronunciation": "riLÍIS",
+          "examples": [
+            {
+              "text": "The new release is ready.",
+              "translation": "La nueva versión está lista.",
+              "mirror": {
+                "say": "La nueva versión está lista",
+                "pieces": [
+                  {
+                    "es": "La nueva versión",
+                    "en": "The new release",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lista",
+                    "en": "ready",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We release a new version every month.",
+              "translation": "Publicamos una versión nueva cada mes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

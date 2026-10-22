@@ -40,7 +40,35 @@
           "examples": [
             {
               "text": "I want to be a teacher.",
-              "translation": "Quiero ser profesor."
+              "translation": "Quiero ser profesor.",
+              "mirror": {
+                "say": "Quiero ser profesor",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ser",
+                    "en": "to be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un profesor",
+                    "en": "a teacher",
+                    "role": "word",
+                    "from": "profesor",
+                    "why": "Las profesiones llevan «a»: a teacher."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +88,28 @@
           "examples": [
             {
               "text": "I have two brothers.",
-              "translation": "Tengo dos hermanos."
+              "translation": "Tengo dos hermanos.",
+              "mirror": {
+                "say": "Tengo dos hermanos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dos hermanos",
+                    "en": "two brothers",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +129,35 @@
           "examples": [
             {
               "text": "I do my homework at night.",
-              "translation": "Hago los deberes por la noche."
+              "translation": "Hago los deberes por la noche.",
+              "mirror": {
+                "say": "Hago los deberes por la noche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hago",
+                    "en": "do",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MIS deberes",
+                    "en": "my homework",
+                    "role": "word",
+                    "from": "los deberes",
+                    "why": "Lo tuyo lleva su dueño: MY homework."
+                  },
+                  {
+                    "es": "por la noche",
+                    "en": "at night",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +177,27 @@
           "examples": [
             {
               "text": "She makes a cake.",
-              "translation": "Ella hace un pastel."
+              "translation": "Ella hace un pastel.",
+              "mirror": {
+                "say": "Ella hace un pastel",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un pastel",
+                    "en": "a cake",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +217,33 @@
           "examples": [
             {
               "text": "I need to get a ticket.",
-              "translation": "Necesito conseguir una entrada."
+              "translation": "Necesito conseguir una entrada.",
+              "mirror": {
+                "say": "Necesito conseguir una entrada",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "conseguir",
+                    "en": "to get",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una entrada",
+                    "en": "a ticket",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +263,22 @@
           "examples": [
             {
               "text": "Take the bus.",
-              "translation": "Coge el autobús."
+              "translation": "Coge el autobús.",
+              "mirror": {
+                "say": "Coge el autobús",
+                "pieces": [
+                  {
+                    "es": "Coge",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el autobús",
+                    "en": "the bus",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +298,35 @@
           "examples": [
             {
               "text": "What did you say?",
-              "translation": "¿Qué has dicho?"
+              "translation": "¿Qué has dicho?",
+              "mirror": {
+                "say": "¿Qué has dicho?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dicho",
+                    "en": "say",
+                    "role": "verb",
+                    "from": "has dicho",
+                    "why": "Con DID el verbo va en su forma base: say."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +346,29 @@
           "examples": [
             {
               "text": "Tell me a story.",
-              "translation": "Cuéntame una historia."
+              "translation": "Cuéntame una historia.",
+              "mirror": {
+                "say": "Cuéntame una historia",
+                "pieces": [
+                  {
+                    "es": "Cuenta",
+                    "en": "Tell",
+                    "role": "verb",
+                    "from": "Cuéntame",
+                    "why": "Lo pegado se separa: tell ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una historia",
+                    "en": "a story",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +388,30 @@
           "examples": [
             {
               "text": "I don't know.",
-              "translation": "No lo sé."
+              "translation": "No lo sé.",
+              "mirror": {
+                "say": "No lo sé",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sé",
+                    "en": "know",
+                    "role": "verb",
+                    "from": "lo sé",
+                    "why": "Sin «lo»: I don't know."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +431,36 @@
           "examples": [
             {
               "text": "I think you're right.",
-              "translation": "Creo que tienes razón."
+              "translation": "Creo que tienes razón.",
+              "mirror": {
+                "say": "Creo que tienes razón",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "creo",
+                    "en": "think",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TÚ estás",
+                    "en": "you're",
+                    "role": "who",
+                    "from": "que tienes",
+                    "why": "«Tener razón» es «estar en lo cierto»: you ARE right."
+                  },
+                  {
+                    "es": "en lo cierto",
+                    "en": "right",
+                    "role": "word",
+                    "from": "razón"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +480,28 @@
           "examples": [
             {
               "text": "I want a coffee.",
-              "translation": "Quiero un café."
+              "translation": "Quiero un café.",
+              "mirror": {
+                "say": "Quiero un café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +521,28 @@
           "examples": [
             {
               "text": "I need help.",
-              "translation": "Necesito ayuda."
+              "translation": "Necesito ayuda.",
+              "mirror": {
+                "say": "Necesito ayuda",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ayuda",
+                    "en": "help",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +562,31 @@
           "examples": [
             {
               "text": "I like music.",
-              "translation": "Me gusta la música."
+              "translation": "Me gusta la música.",
+              "mirror": {
+                "say": "Me gusta la música",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: YO like (a mí me gusta)."
+                  },
+                  {
+                    "es": "música",
+                    "en": "music",
+                    "role": "word",
+                    "from": "la música"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +606,31 @@
           "examples": [
             {
               "text": "I can't see.",
-              "translation": "No veo."
+              "translation": "No veo.",
+              "mirror": {
+                "say": "No veo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "no",
+                    "why": "Ver y oír se dicen con CAN: I can't see."
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb",
+                    "from": "veo"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +650,39 @@
           "examples": [
             {
               "text": "Can I use your phone?",
-              "translation": "¿Puedo usar tu móvil?"
+              "translation": "¿Puedo usar tu móvil?",
+              "mirror": {
+                "say": "¿Puedo usar tu móvil?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "usar",
+                    "en": "use",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu móvil",
+                    "en": "your phone",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             }
           ],
           "association": {

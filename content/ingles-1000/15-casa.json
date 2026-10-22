@@ -40,7 +40,27 @@
           "examples": [
             {
               "text": "My room is small.",
-              "translation": "Mi habitación es pequeña."
+              "translation": "Mi habitación es pequeña.",
+              "mirror": {
+                "say": "Mi habitación es pequeña",
+                "pieces": [
+                  {
+                    "es": "Mi habitación",
+                    "en": "My room",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pequeña",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +80,27 @@
           "examples": [
             {
               "text": "Close the door, please.",
-              "translation": "Cierra la puerta, por favor."
+              "translation": "Cierra la puerta, por favor.",
+              "mirror": {
+                "say": "Cierra la puerta, por favor",
+                "pieces": [
+                  {
+                    "es": "Cierra",
+                    "en": "Close",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la puerta",
+                    "en": "the door",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +120,22 @@
           "examples": [
             {
               "text": "Open the window.",
-              "translation": "Abre la ventana."
+              "translation": "Abre la ventana.",
+              "mirror": {
+                "say": "Abre la ventana",
+                "pieces": [
+                  {
+                    "es": "Abre",
+                    "en": "Open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la ventana",
+                    "en": "the window",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -93,7 +148,27 @@
           "examples": [
             {
               "text": "The kitchen is clean.",
-              "translation": "La cocina está limpia."
+              "translation": "La cocina está limpia.",
+              "mirror": {
+                "say": "La cocina está limpia",
+                "pieces": [
+                  {
+                    "es": "La cocina",
+                    "en": "The kitchen",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "limpia",
+                    "en": "clean",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -113,7 +188,27 @@
           "examples": [
             {
               "text": "Where is the bathroom?",
-              "translation": "¿Dónde está el baño?"
+              "translation": "¿Dónde está el baño?",
+              "mirror": {
+                "say": "¿Dónde está el baño?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el baño",
+                    "en": "the bathroom",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -126,7 +221,30 @@
           "examples": [
             {
               "text": "I go to bed at eleven.",
-              "translation": "Me acuesto a las once."
+              "translation": "Me acuesto a las once.",
+              "mirror": {
+                "say": "Me acuesto a las once",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy a la cama",
+                    "en": "go to bed",
+                    "role": "verb",
+                    "from": "me acuesto",
+                    "why": "Acostarse es «ir a la cama»: go to bed."
+                  },
+                  {
+                    "es": "a las once",
+                    "en": "at eleven",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -139,7 +257,29 @@
           "examples": [
             {
               "text": "Put it on the table.",
-              "translation": "Ponlo en la mesa."
+              "translation": "Ponlo en la mesa.",
+              "mirror": {
+                "say": "Ponlo en la mesa",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb",
+                    "from": "Ponlo",
+                    "why": "Lo pegado se separa: put IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la mesa",
+                    "en": "on the table",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -152,7 +292,22 @@
           "examples": [
             {
               "text": "Sit on this chair.",
-              "translation": "Siéntate en esta silla."
+              "translation": "Siéntate en esta silla.",
+              "mirror": {
+                "say": "Siéntate en esta silla",
+                "pieces": [
+                  {
+                    "es": "Siéntate",
+                    "en": "Sit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en esta silla",
+                    "en": "on this chair",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -172,7 +327,36 @@
           "examples": [
             {
               "text": "I can't find my keys.",
-              "translation": "No encuentro mis llaves."
+              "translation": "No encuentro mis llaves.",
+              "mirror": {
+                "say": "No encuentro mis llaves",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "no",
+                    "why": "«No encuentro» = no PUEDO encontrar: I can't find."
+                  },
+                  {
+                    "es": "encontrar",
+                    "en": "find",
+                    "role": "verb",
+                    "from": "encuentro"
+                  },
+                  {
+                    "es": "mis llaves",
+                    "en": "my keys",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -192,7 +376,27 @@
           "examples": [
             {
               "text": "The floor is wet.",
-              "translation": "El suelo está mojado."
+              "translation": "El suelo está mojado.",
+              "mirror": {
+                "say": "El suelo está mojado",
+                "pieces": [
+                  {
+                    "es": "El suelo",
+                    "en": "The floor",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mojado",
+                    "en": "wet",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -212,7 +416,22 @@
           "examples": [
             {
               "text": "A picture on the wall.",
-              "translation": "Un cuadro en la pared."
+              "translation": "Un cuadro en la pared.",
+              "mirror": {
+                "say": "Un cuadro en la pared",
+                "pieces": [
+                  {
+                    "es": "Un cuadro",
+                    "en": "A picture",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la pared",
+                    "en": "on the wall",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -225,7 +444,45 @@
           "examples": [
             {
               "text": "We have a small garden.",
-              "translation": "Tenemos un jardín pequeño."
+              "translation": "Tenemos un jardín pequeño.",
+              "mirror": {
+                "say": "Tenemos un jardín pequeño",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "jardín",
+                    "en": "garden",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pequeño",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -245,7 +502,27 @@
           "examples": [
             {
               "text": "The shop is open.",
-              "translation": "La tienda está abierta."
+              "translation": "La tienda está abierta.",
+              "mirror": {
+                "say": "La tienda está abierta",
+                "pieces": [
+                  {
+                    "es": "La tienda",
+                    "en": "The shop",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "abierta",
+                    "en": "open",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -265,7 +542,24 @@
           "examples": [
             {
               "text": "Close your eyes.",
-              "translation": "Cierra los ojos."
+              "translation": "Cierra los ojos.",
+              "mirror": {
+                "say": "Cierra los ojos",
+                "pieces": [
+                  {
+                    "es": "Cierra",
+                    "en": "Close",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS ojos",
+                    "en": "your eyes",
+                    "role": "word",
+                    "from": "los ojos",
+                    "why": "Lo tuyo lleva su dueño: YOUR eyes."
+                  }
+                ]
+              }
             }
           ]
         },
@@ -278,7 +572,35 @@
           "examples": [
             {
               "text": "I clean my room on Sundays.",
-              "translation": "Limpio mi habitación los domingos."
+              "translation": "Limpio mi habitación los domingos.",
+              "mirror": {
+                "say": "Limpio mi habitación los domingos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "limpio",
+                    "en": "clean",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mi habitación",
+                    "en": "my room",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "los domingos",
+                    "why": "Los días llevan ON: on Sundays."
+                  }
+                ]
+              }
             }
           ],
           "association": {

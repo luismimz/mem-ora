@@ -40,7 +40,42 @@
           "examples": [
             {
               "text": "I like red apples.",
-              "translation": "Me gustan las manzanas rojas."
+              "translation": "Me gustan las manzanas rojas.",
+              "mirror": {
+                "say": "Me gustan las manzanas rojas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gustan",
+                    "why": "Gustar se da la vuelta: YO like (a mí me gusta)."
+                  },
+                  {
+                    "es": "manzanas",
+                    "en": "apples",
+                    "role": "word",
+                    "from": "las manzanas"
+                  },
+                  {
+                    "es": "rojas",
+                    "en": "red",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +95,27 @@
           "examples": [
             {
               "text": "The sky is blue.",
-              "translation": "El cielo es azul."
+              "translation": "El cielo es azul.",
+              "mirror": {
+                "say": "El cielo es azul",
+                "pieces": [
+                  {
+                    "es": "El cielo",
+                    "en": "The sky",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "azul",
+                    "en": "blue",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +135,32 @@
           "examples": [
             {
               "text": "Green tea, please.",
-              "translation": "Té verde, por favor."
+              "translation": "Té verde, por favor.",
+              "mirror": {
+                "say": "Té verde, por favor",
+                "pieces": [
+                  {
+                    "es": "Té",
+                    "en": "tea",
+                    "role": "word"
+                  },
+                  {
+                    "es": "verde",
+                    "en": "Green",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +180,32 @@
           "examples": [
             {
               "text": "A yellow taxi.",
-              "translation": "Un taxi amarillo."
+              "translation": "Un taxi amarillo.",
+              "mirror": {
+                "say": "Un taxi amarillo",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "taxi",
+                    "en": "taxi",
+                    "role": "word"
+                  },
+                  {
+                    "es": "amarillo",
+                    "en": "yellow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +225,34 @@
           "examples": [
             {
               "text": "Black coffee, no sugar.",
-              "translation": "Café solo, sin azúcar."
+              "translation": "Café solo, sin azúcar.",
+              "mirror": {
+                "say": "Café solo, sin azúcar",
+                "pieces": [
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "negro",
+                    "en": "Black",
+                    "role": "word",
+                    "from": "solo",
+                    "why": "El café solo es «café negro»: black coffee."
+                  },
+                  {
+                    "es": "sin azúcar",
+                    "en": "no sugar",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +272,32 @@
           "examples": [
             {
               "text": "A white shirt.",
-              "translation": "Una camisa blanca."
+              "translation": "Una camisa blanca.",
+              "mirror": {
+                "say": "Una camisa blanca",
+                "pieces": [
+                  {
+                    "es": "Una",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "camisa",
+                    "en": "shirt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "blanca",
+                    "en": "white",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +317,41 @@
           "examples": [
             {
               "text": "She has brown eyes.",
-              "translation": "Tiene los ojos marrones."
+              "translation": "Tiene los ojos marrones.",
+              "mirror": {
+                "say": "Tiene los ojos marrones",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ojos",
+                    "en": "eyes",
+                    "role": "word",
+                    "from": "los ojos",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "marrones",
+                    "en": "brown",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +371,32 @@
           "examples": [
             {
               "text": "A grey cat.",
-              "translation": "Un gato gris."
+              "translation": "Un gato gris.",
+              "mirror": {
+                "say": "Un gato gris",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gato",
+                    "en": "cat",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gris",
+                    "en": "grey",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +416,32 @@
           "examples": [
             {
               "text": "An orange T-shirt.",
-              "translation": "Una camiseta naranja."
+              "translation": "Una camiseta naranja.",
+              "mirror": {
+                "say": "Una camiseta naranja",
+                "pieces": [
+                  {
+                    "es": "Una",
+                    "en": "An",
+                    "role": "word"
+                  },
+                  {
+                    "es": "camiseta",
+                    "en": "T-shirt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "naranja",
+                    "en": "orange",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +461,26 @@
           "examples": [
             {
               "text": "Pink flowers.",
-              "translation": "Flores rosas."
+              "translation": "Flores rosas.",
+              "mirror": {
+                "say": "Flores rosas",
+                "pieces": [
+                  {
+                    "es": "Flores",
+                    "en": "flowers",
+                    "role": "word"
+                  },
+                  {
+                    "es": "rosas",
+                    "en": "Pink",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +500,27 @@
           "examples": [
             {
               "text": "What colour is your car?",
-              "translation": "¿De qué color es tu coche?"
+              "translation": "¿De qué color es tu coche?",
+              "mirror": {
+                "say": "¿De qué color es tu coche?",
+                "pieces": [
+                  {
+                    "es": "De qué color",
+                    "en": "What colour",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tu coche",
+                    "en": "your car",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +540,22 @@
           "examples": [
             {
               "text": "Draw a circle.",
-              "translation": "Dibuja un círculo."
+              "translation": "Dibuja un círculo.",
+              "mirror": {
+                "say": "Dibuja un círculo",
+                "pieces": [
+                  {
+                    "es": "Dibuja",
+                    "en": "Draw",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un círculo",
+                    "en": "a circle",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +575,32 @@
           "examples": [
             {
               "text": "A square table.",
-              "translation": "Una mesa cuadrada."
+              "translation": "Una mesa cuadrada.",
+              "mirror": {
+                "say": "Una mesa cuadrada",
+                "pieces": [
+                  {
+                    "es": "Una",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mesa",
+                    "en": "table",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cuadrada",
+                    "en": "square",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +620,23 @@
           "examples": [
             {
               "text": "Wait in line.",
-              "translation": "Espera en la fila."
+              "translation": "Espera en la fila.",
+              "mirror": {
+                "say": "Espera en la fila",
+                "pieces": [
+                  {
+                    "es": "Espera",
+                    "en": "Wait",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en fila",
+                    "en": "in line",
+                    "role": "word",
+                    "from": "en la fila"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +656,32 @@
           "examples": [
             {
               "text": "It's dark outside.",
-              "translation": "Fuera está oscuro."
+              "translation": "Fuera está oscuro.",
+              "mirror": {
+                "say": "Fuera está oscuro",
+                "pieces": [
+                  {
+                    "es": "fuera",
+                    "en": "outside",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "oscuro",
+                    "en": "dark",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
             }
           ],
           "association": {

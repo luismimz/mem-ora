@@ -40,7 +40,28 @@
           "examples": [
             {
               "text": "My body hurts.",
-              "translation": "Me duele el cuerpo."
+              "translation": "Me duele el cuerpo.",
+              "mirror": {
+                "say": "Me duele el cuerpo",
+                "pieces": [
+                  {
+                    "es": "me duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI cuerpo",
+                    "en": "My body",
+                    "role": "who",
+                    "from": "el cuerpo",
+                    "why": "Lo que duele va primero y con dueño: MY body hurts."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +81,28 @@
           "examples": [
             {
               "text": "My head hurts.",
-              "translation": "Me duele la cabeza."
+              "translation": "Me duele la cabeza.",
+              "mirror": {
+                "say": "Me duele la cabeza",
+                "pieces": [
+                  {
+                    "es": "me duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI cabeza",
+                    "en": "My head",
+                    "role": "who",
+                    "from": "la cabeza",
+                    "why": "Lo que duele va primero y con dueño: MY head hurts."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +122,41 @@
           "examples": [
             {
               "text": "She has long hair.",
-              "translation": "Tiene el pelo largo."
+              "translation": "Tiene el pelo largo.",
+              "mirror": {
+                "say": "Tiene el pelo largo",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pelo",
+                    "en": "hair",
+                    "role": "word",
+                    "from": "el pelo",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "largo",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +176,25 @@
           "examples": [
             {
               "text": "Wash your face.",
-              "translation": "Lávate la cara."
+              "translation": "Lávate la cara.",
+              "mirror": {
+                "say": "Lávate la cara",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb",
+                    "from": "Lávate"
+                  },
+                  {
+                    "es": "TU cara",
+                    "en": "your face",
+                    "role": "word",
+                    "from": "la cara",
+                    "why": "Lo tuyo lleva su dueño: MY body, YOUR face."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +214,24 @@
           "examples": [
             {
               "text": "Close your eyes.",
-              "translation": "Cierra los ojos."
+              "translation": "Cierra los ojos.",
+              "mirror": {
+                "say": "Cierra los ojos",
+                "pieces": [
+                  {
+                    "es": "Cierra",
+                    "en": "Close",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS ojos",
+                    "en": "your eyes",
+                    "role": "word",
+                    "from": "los ojos",
+                    "why": "Lo tuyo lleva su dueño: MY body, YOUR face."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +251,28 @@
           "examples": [
             {
               "text": "My ear hurts.",
-              "translation": "Me duele el oído."
+              "translation": "Me duele el oído.",
+              "mirror": {
+                "say": "Me duele el oído",
+                "pieces": [
+                  {
+                    "es": "me duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI oído",
+                    "en": "My ear",
+                    "role": "who",
+                    "from": "el oído",
+                    "why": "Lo que duele va primero y con dueño: MY ear hurts."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +292,29 @@
           "examples": [
             {
               "text": "My nose is cold.",
-              "translation": "Tengo la nariz fría."
+              "translation": "Tengo la nariz fría.",
+              "mirror": {
+                "say": "Tengo la nariz fría",
+                "pieces": [
+                  {
+                    "es": "MI nariz",
+                    "en": "My nose",
+                    "role": "who",
+                    "from": "tengo la nariz",
+                    "why": "En inglés se dice «MI nariz ESTÁ fría»."
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "fría",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +334,24 @@
           "examples": [
             {
               "text": "Open your mouth.",
-              "translation": "Abre la boca."
+              "translation": "Abre la boca.",
+              "mirror": {
+                "say": "Abre la boca",
+                "pieces": [
+                  {
+                    "es": "Abre",
+                    "en": "Open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU boca",
+                    "en": "your mouth",
+                    "role": "word",
+                    "from": "la boca",
+                    "why": "Lo tuyo lleva su dueño: MY body, YOUR face."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +371,45 @@
           "examples": [
             {
               "text": "I have a bad tooth.",
-              "translation": "Tengo un diente malo."
+              "translation": "Tengo un diente malo.",
+              "mirror": {
+                "say": "Tengo un diente malo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "diente",
+                    "en": "tooth",
+                    "role": "word"
+                  },
+                  {
+                    "es": "malo",
+                    "en": "bad",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +429,31 @@
           "examples": [
             {
               "text": "I broke my arm.",
-              "translation": "Me rompí el brazo."
+              "translation": "Me rompí el brazo.",
+              "mirror": {
+                "say": "Me rompí el brazo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "rompí",
+                    "en": "broke",
+                    "role": "verb",
+                    "from": "me rompí",
+                    "why": "Sin «me»: YO rompí MI brazo."
+                  },
+                  {
+                    "es": "MI brazo",
+                    "en": "my arm",
+                    "role": "word",
+                    "from": "el brazo"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +473,29 @@
           "examples": [
             {
               "text": "My leg is tired.",
-              "translation": "Tengo la pierna cansada."
+              "translation": "Tengo la pierna cansada.",
+              "mirror": {
+                "say": "Tengo la pierna cansada",
+                "pieces": [
+                  {
+                    "es": "MI pierna",
+                    "en": "My leg",
+                    "role": "who",
+                    "from": "tengo la pierna",
+                    "why": "En inglés se dice «MI pierna ESTÁ cansada»."
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansada",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +515,33 @@
           "examples": [
             {
               "text": "I go to work on foot.",
-              "translation": "Voy al trabajo a pie."
+              "translation": "Voy al trabajo a pie.",
+              "mirror": {
+                "say": "Voy al trabajo a pie",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al trabajo",
+                    "en": "to work",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a pie",
+                    "en": "on foot",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +561,28 @@
           "examples": [
             {
               "text": "My back hurts.",
-              "translation": "Me duele la espalda."
+              "translation": "Me duele la espalda.",
+              "mirror": {
+                "say": "Me duele la espalda",
+                "pieces": [
+                  {
+                    "es": "me duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI espalda",
+                    "en": "My back",
+                    "role": "who",
+                    "from": "la espalda",
+                    "why": "Lo que duele va primero y con dueño: MY back hurts."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +602,28 @@
           "examples": [
             {
               "text": "She has a big heart.",
-              "translation": "Tiene un gran corazón."
+              "translation": "Tiene un gran corazón.",
+              "mirror": {
+                "say": "Tiene un gran corazón",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un gran corazón",
+                    "en": "a big heart",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +643,32 @@
           "examples": [
             {
               "text": "A long neck.",
-              "translation": "Un cuello largo."
+              "translation": "Un cuello largo.",
+              "mirror": {
+                "say": "Un cuello largo",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cuello",
+                    "en": "neck",
+                    "role": "word"
+                  },
+                  {
+                    "es": "largo",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             }
           ],
           "association": {

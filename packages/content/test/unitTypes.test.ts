@@ -75,4 +75,12 @@ describe('tren de la frase (D-082)', () => {
     const m = { say: '¿Dónde vives?', pieces: [{ es: 'Dónde', en: 'Where', role: 'word' }, { es: '', en: 'do', role: 'signal' }, { es: 'TÚ', en: 'you', role: 'who', ghost: true }, { es: 'vives', en: 'live', role: 'verb' }] };
     expect(mirrorIssues(m, 'Where do you live?', 'm')).toEqual([]);
   });
+  it('un conector con español no es un semáforo (la app lo pintaría como 🚦)', () => {
+    const m = { say: 'Té en lugar de café', pieces: [{ es: 'Té', en: 'Tea', role: 'word' }, { es: 'en lugar de', en: 'instead of', role: 'signal' }, { es: 'café', en: 'coffee', role: 'word' }] };
+    expect(mirrorIssues(m, 'Tea instead of coffee.', 'm').map((i) => i.code)).toEqual(['mirror_signal_es']);
+  });
+  it('un «por qué» sin pieza que cambie no se vería nunca', () => {
+    const m = { say: 'Siempre bebo café', pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'bebo', en: 'drink', role: 'verb', why: 'Sin explicación visible.' }] };
+    expect(mirrorIssues(m, 'I drink', 'm').map((i) => i.code)).toEqual(['mirror_why_without_from']);
+  });
 });

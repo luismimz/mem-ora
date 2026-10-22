@@ -40,7 +40,28 @@
           "examples": [
             {
               "text": "I eat at two.",
-              "translation": "Como a las dos."
+              "translation": "Como a las dos.",
+              "mirror": {
+                "say": "Como a las dos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las dos",
+                    "en": "at two",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "What do you want to eat?",
@@ -57,7 +78,33 @@
           "examples": [
             {
               "text": "I drink a lot of water.",
-              "translation": "Bebo mucha agua."
+              "translation": "Bebo mucha agua.",
+              "mirror": {
+                "say": "Bebo mucha agua",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "bebo",
+                    "en": "drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucha",
+                    "en": "a lot of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "Do you want a drink?",
@@ -74,7 +121,27 @@
           "examples": [
             {
               "text": "A glass of water, please.",
-              "translation": "Un vaso de agua, por favor."
+              "translation": "Un vaso de agua, por favor.",
+              "mirror": {
+                "say": "Un vaso de agua, por favor",
+                "pieces": [
+                  {
+                    "es": "Un vaso de",
+                    "en": "A glass of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -94,7 +161,33 @@
           "examples": [
             {
               "text": "I buy bread every morning.",
-              "translation": "Compro pan cada mañana."
+              "translation": "Compro pan cada mañana.",
+              "mirror": {
+                "say": "Compro pan cada mañana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compro",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada mañana",
+                    "en": "every morning",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -107,7 +200,27 @@
           "examples": [
             {
               "text": "Coffee with milk, please.",
-              "translation": "Café con leche, por favor."
+              "translation": "Café con leche, por favor.",
+              "mirror": {
+                "say": "Café con leche, por favor",
+                "pieces": [
+                  {
+                    "es": "Café",
+                    "en": "Coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con leche",
+                    "en": "with milk",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -127,7 +240,33 @@
           "examples": [
             {
               "text": "I don't eat meat.",
-              "translation": "No como carne."
+              "translation": "No como carne.",
+              "mirror": {
+                "say": "No como carne",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "carne",
+                    "en": "meat",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -140,7 +279,35 @@
           "examples": [
             {
               "text": "We eat fish on Fridays.",
-              "translation": "Comemos pescado los viernes."
+              "translation": "Comemos pescado los viernes.",
+              "mirror": {
+                "say": "Comemos pescado los viernes",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comemos",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pescado",
+                    "en": "fish",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en viernes",
+                    "en": "on Fridays",
+                    "role": "word",
+                    "from": "los viernes",
+                    "why": "Los días llevan ON: on Fridays."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +327,27 @@
           "examples": [
             {
               "text": "Two eggs and bread.",
-              "translation": "Dos huevos y pan."
+              "translation": "Dos huevos y pan.",
+              "mirror": {
+                "say": "Dos huevos y pan",
+                "pieces": [
+                  {
+                    "es": "Dos huevos",
+                    "en": "Two eggs",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -173,7 +360,22 @@
           "examples": [
             {
               "text": "An apple a day.",
-              "translation": "Una manzana al día."
+              "translation": "Una manzana al día.",
+              "mirror": {
+                "say": "Una manzana al día",
+                "pieces": [
+                  {
+                    "es": "Una manzana",
+                    "en": "An apple",
+                    "role": "word"
+                  },
+                  {
+                    "es": "al día",
+                    "en": "a day",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -186,7 +388,27 @@
           "examples": [
             {
               "text": "Rice with chicken.",
-              "translation": "Arroz con pollo."
+              "translation": "Arroz con pollo.",
+              "mirror": {
+                "say": "Arroz con pollo",
+                "pieces": [
+                  {
+                    "es": "Arroz",
+                    "en": "Rice",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con",
+                    "en": "with",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pollo",
+                    "en": "chicken",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -199,7 +421,31 @@
           "examples": [
             {
               "text": "I love cheese.",
-              "translation": "Me encanta el queso."
+              "translation": "Me encanta el queso.",
+              "mirror": {
+                "say": "Me encanta el queso",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "me encanta",
+                    "why": "Encantar se da la vuelta: YO love cheese."
+                  },
+                  {
+                    "es": "queso",
+                    "en": "cheese",
+                    "role": "word",
+                    "from": "el queso"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -219,7 +465,30 @@
           "examples": [
             {
               "text": "I have breakfast at eight.",
-              "translation": "Desayuno a las ocho."
+              "translation": "Desayuno a las ocho.",
+              "mirror": {
+                "say": "Desayuno a las ocho",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tomo el desayuno",
+                    "en": "have breakfast",
+                    "role": "verb",
+                    "from": "desayuno",
+                    "why": "Las comidas se «toman»: have breakfast, have lunch."
+                  },
+                  {
+                    "es": "a las ocho",
+                    "en": "at eight",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ]
         },
@@ -232,7 +501,24 @@
           "examples": [
             {
               "text": "Let's have lunch together.",
-              "translation": "Comamos juntos."
+              "translation": "Comamos juntos.",
+              "mirror": {
+                "say": "Comamos juntos",
+                "pieces": [
+                  {
+                    "es": "Tomemos la comida",
+                    "en": "Let's have lunch",
+                    "role": "verb",
+                    "from": "Comamos",
+                    "why": "Para proponer algo: LET'S + verbo."
+                  },
+                  {
+                    "es": "juntos",
+                    "en": "together",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -252,7 +538,29 @@
           "examples": [
             {
               "text": "Dinner is at nine.",
-              "translation": "La cena es a las nueve."
+              "translation": "La cena es a las nueve.",
+              "mirror": {
+                "say": "La cena es a las nueve",
+                "pieces": [
+                  {
+                    "es": "cena",
+                    "en": "Dinner",
+                    "role": "who",
+                    "from": "La cena",
+                    "why": "Las comidas van sin «the»: dinner is at nine."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "a las nueve",
+                    "en": "at nine",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -272,7 +580,37 @@
           "examples": [
             {
               "text": "I am very hungry.",
-              "translation": "Tengo mucha hambre."
+              "translation": "Tengo mucha hambre.",
+              "mirror": {
+                "say": "Tengo mucha hambre",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "El hambre se siente: se ESTÁ hambriento. I am hungry."
+                  },
+                  {
+                    "es": "muy",
+                    "en": "very",
+                    "role": "word",
+                    "from": "mucha"
+                  },
+                  {
+                    "es": "hambriento",
+                    "en": "hungry",
+                    "role": "word",
+                    "from": "hambre"
+                  }
+                ]
+              }
             }
           ]
         }
