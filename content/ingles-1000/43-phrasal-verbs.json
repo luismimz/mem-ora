@@ -1,0 +1,718 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "43-phrasal-verbs",
+      "title": "Misión 43 · Verbos de dos piezas",
+      "units": [
+        {
+          "key": "g-phrasal",
+          "type": "pattern",
+          "goal": "Verbos de dos piezas: GET UP, GIVE UP",
+          "rule": "Verbo + partícula (up, off, out, on) = un verbo nuevo: get up = levantarse, give up = rendirse. Se aprenden como una sola pieza.",
+          "pieces": [
+            {
+              "text": "give",
+              "role": "fixed",
+              "hint": "dar"
+            },
+            {
+              "text": "up",
+              "role": "slot",
+              "hint": "(arriba) → rendirse"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I get up at seven.",
+              "translation": "Me levanto a las siete.",
+              "mirror": {
+                "say": "Me levanto a las siete",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "levanto",
+                    "en": "get up",
+                    "role": "verb",
+                    "from": "me levanto",
+                    "why": "Levantarse es un verbo de dos piezas: GET UP."
+                  },
+                  {
+                    "es": "a las siete",
+                    "en": "at seven",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't give up!",
+              "translation": "¡No te rindas!",
+              "mirror": {
+                "say": "¡No te rindas!",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rindas",
+                    "en": "give up",
+                    "role": "verb",
+                    "from": "te rindas",
+                    "why": "Rendirse es GIVE UP: dos piezas, un significado."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Turn off the TV.",
+              "translation": "Apaga la tele."
+            },
+            {
+              "text": "We went out last night.",
+              "translation": "Salimos anoche."
+            }
+          ],
+          "pitfalls": [
+            "La partícula lo cambia todo: look AT (mirar), look FOR (buscar), look AFTER (cuidar).",
+            "Con it o them, va en medio: turn it off."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El VERBO lleva una MOCHILA: UP, OFF, OUT.",
+            "emoji": "🎒"
+          }
+        },
+        {
+          "key": "get-up",
+          "type": "term",
+          "text": "get up",
+          "meaning": "levantarse",
+          "pronunciation": "guet AP",
+          "examples": [
+            {
+              "text": "What time do you get up?",
+              "translation": "¿A qué hora te levantas?",
+              "mirror": {
+                "say": "¿A qué hora te levantas?",
+                "pieces": [
+                  {
+                    "es": "A qué hora",
+                    "en": "What time",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "levantas",
+                    "en": "get up",
+                    "role": "verb",
+                    "from": "te levantas"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Get up, it's late!",
+              "translation": "¡Levántate, que es tarde!"
+            }
+          ]
+        },
+        {
+          "key": "wake-up",
+          "type": "term",
+          "text": "wake up",
+          "meaning": "despertarse",
+          "pronunciation": "uéik AP",
+          "examples": [
+            {
+              "text": "I wake up very early.",
+              "translation": "Me despierto muy temprano.",
+              "mirror": {
+                "say": "Me despierto muy temprano",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "despierto",
+                    "en": "wake up",
+                    "role": "verb",
+                    "from": "me despierto"
+                  },
+                  {
+                    "es": "muy temprano",
+                    "en": "very early",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wake up!",
+              "translation": "¡Despierta!"
+            }
+          ]
+        },
+        {
+          "key": "turn-on",
+          "type": "term",
+          "text": "turn on",
+          "meaning": "encender",
+          "pronunciation": "tern ON",
+          "examples": [
+            {
+              "text": "Turn on the light, please.",
+              "translation": "Enciende la luz, por favor.",
+              "mirror": {
+                "say": "Enciende la luz, por favor",
+                "pieces": [
+                  {
+                    "es": "Enciende",
+                    "en": "Turn on",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la luz",
+                    "en": "the light",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Turn it on.",
+              "translation": "Enciéndelo."
+            }
+          ]
+        },
+        {
+          "key": "turn-off",
+          "type": "term",
+          "text": "turn off",
+          "meaning": "apagar",
+          "pronunciation": "tern OF",
+          "examples": [
+            {
+              "text": "Turn off your phone.",
+              "translation": "Apaga el móvil.",
+              "mirror": {
+                "say": "Apaga el móvil",
+                "pieces": [
+                  {
+                    "es": "Apaga",
+                    "en": "Turn off",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU móvil",
+                    "en": "your phone",
+                    "role": "word",
+                    "from": "el móvil",
+                    "why": "Lo tuyo lleva su dueño: YOUR phone."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Did you turn off the oven?",
+              "translation": "¿Apagaste el horno?"
+            }
+          ]
+        },
+        {
+          "key": "put-on",
+          "type": "term",
+          "text": "put on",
+          "meaning": "ponerse (ropa)",
+          "pronunciation": "put ON",
+          "examples": [
+            {
+              "text": "Put on your coat.",
+              "translation": "Ponte el abrigo.",
+              "mirror": {
+                "say": "Ponte el abrigo",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put on",
+                    "role": "verb",
+                    "from": "Ponte",
+                    "why": "Ponerse ropa es PUT ON."
+                  },
+                  {
+                    "es": "TU abrigo",
+                    "en": "your coat",
+                    "role": "word",
+                    "from": "el abrigo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She put on her glasses.",
+              "translation": "Se puso las gafas."
+            }
+          ]
+        },
+        {
+          "key": "take-off",
+          "type": "term",
+          "text": "take off",
+          "meaning": "quitarse (ropa); despegar",
+          "pronunciation": "teik OF",
+          "examples": [
+            {
+              "text": "Take off your shoes, please.",
+              "translation": "Quítate los zapatos, por favor.",
+              "mirror": {
+                "say": "Quítate los zapatos, por favor",
+                "pieces": [
+                  {
+                    "es": "Quita",
+                    "en": "Take off",
+                    "role": "verb",
+                    "from": "Quítate",
+                    "why": "Quitarse ropa es TAKE OFF."
+                  },
+                  {
+                    "es": "TUS zapatos",
+                    "en": "your shoes",
+                    "role": "word",
+                    "from": "los zapatos"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The plane takes off at ten.",
+              "translation": "El avión despega a las diez."
+            }
+          ]
+        },
+        {
+          "key": "give-up",
+          "type": "term",
+          "text": "give up",
+          "meaning": "rendirse; dejar (un hábito)",
+          "pronunciation": "guiv AP",
+          "examples": [
+            {
+              "text": "I gave up smoking.",
+              "translation": "Dejé de fumar.",
+              "mirror": {
+                "say": "Dejé de fumar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dejé de",
+                    "en": "gave up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fum-ANDO",
+                    "en": "smok-ING",
+                    "role": "verb",
+                    "from": "fumar",
+                    "why": "Detrás de give up, el verbo en -ING: smoking."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Never give up.",
+              "translation": "Nunca te rindas."
+            }
+          ]
+        },
+        {
+          "key": "find-out",
+          "type": "term",
+          "text": "find out",
+          "meaning": "enterarse, averiguar",
+          "pronunciation": "faind ÁUT",
+          "examples": [
+            {
+              "text": "I found out the truth.",
+              "translation": "Me enteré de la verdad.",
+              "mirror": {
+                "say": "Me enteré de la verdad",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "enteré de",
+                    "en": "found out",
+                    "role": "verb",
+                    "from": "me enteré de"
+                  },
+                  {
+                    "es": "la verdad",
+                    "en": "the truth",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's find out.",
+              "translation": "Vamos a averiguarlo."
+            }
+          ]
+        },
+        {
+          "key": "go-out",
+          "type": "term",
+          "text": "go out",
+          "meaning": "salir (de fiesta, a dar una vuelta)",
+          "pronunciation": "gou ÁUT",
+          "examples": [
+            {
+              "text": "Do you want to go out tonight?",
+              "translation": "¿Quieres salir esta noche?",
+              "mirror": {
+                "say": "¿Quieres salir esta noche?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quieres",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "salir",
+                    "en": "to go out",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We go out on Fridays.",
+              "translation": "Salimos los viernes."
+            }
+          ]
+        },
+        {
+          "key": "come-back",
+          "type": "term",
+          "text": "come back",
+          "meaning": "volver",
+          "pronunciation": "kam BAK",
+          "examples": [
+            {
+              "text": "Come back soon!",
+              "translation": "¡Vuelve pronto!",
+              "mirror": {
+                "say": "¡Vuelve pronto!",
+                "pieces": [
+                  {
+                    "es": "Vuelve",
+                    "en": "Come back",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pronto",
+                    "en": "soon",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "When are you coming back?",
+              "translation": "¿Cuándo vuelves?"
+            }
+          ]
+        },
+        {
+          "key": "pick-up",
+          "type": "term",
+          "text": "pick up",
+          "meaning": "recoger",
+          "pronunciation": "pik AP",
+          "examples": [
+            {
+              "text": "Can you pick up the kids?",
+              "translation": "¿Puedes recoger a los niños?",
+              "mirror": {
+                "say": "¿Puedes recoger a los niños?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "recoger",
+                    "en": "pick up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "los niños",
+                    "en": "the kids",
+                    "role": "word",
+                    "from": "a los niños",
+                    "why": "Recoger a alguien, sin «a»: pick up the kids."
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'll pick you up at eight.",
+              "translation": "Te recojo a las ocho."
+            }
+          ]
+        },
+        {
+          "key": "run-out",
+          "type": "term",
+          "text": "run out (of)",
+          "meaning": "quedarse sin, acabarse",
+          "pronunciation": "ran ÁUT",
+          "examples": [
+            {
+              "text": "We've run out of milk.",
+              "translation": "Se nos ha acabado la leche.",
+              "mirror": {
+                "say": "Se nos ha acabado la leche",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) hemos",
+                    "en": "We've",
+                    "role": "helper",
+                    "from": "se nos ha"
+                  },
+                  {
+                    "es": "quedado sin",
+                    "en": "run out of",
+                    "role": "verb",
+                    "from": "acabado",
+                    "why": "Quedarse sin algo es RUN OUT OF."
+                  },
+                  {
+                    "es": "leche",
+                    "en": "milk",
+                    "role": "word",
+                    "from": "la leche"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Time is running out.",
+              "translation": "Se acaba el tiempo."
+            }
+          ]
+        },
+        {
+          "key": "fill-in",
+          "type": "term",
+          "text": "fill in",
+          "meaning": "rellenar (un formulario)",
+          "pronunciation": "fil IN",
+          "examples": [
+            {
+              "text": "Fill in this form, please.",
+              "translation": "Rellene este formulario, por favor.",
+              "mirror": {
+                "say": "Rellene este formulario, por favor",
+                "pieces": [
+                  {
+                    "es": "Rellene",
+                    "en": "Fill in",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "este formulario",
+                    "en": "this form",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fill in the gaps.",
+              "translation": "Completa los huecos."
+            }
+          ]
+        },
+        {
+          "key": "check-in",
+          "type": "term",
+          "text": "check in",
+          "meaning": "registrarse; facturar",
+          "pronunciation": "chek IN",
+          "examples": [
+            {
+              "text": "We check in at the hotel at two.",
+              "translation": "Hacemos el check-in en el hotel a las dos.",
+              "mirror": {
+                "say": "Hacemos el check-in en el hotel a las dos",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "registramos",
+                    "en": "check in",
+                    "role": "verb",
+                    "from": "hacemos el check-in"
+                  },
+                  {
+                    "es": "en el hotel",
+                    "en": "at the hotel",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a las dos",
+                    "en": "at two",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where do I check in?",
+              "translation": "¿Dónde se factura?"
+            }
+          ]
+        },
+        {
+          "key": "calm-down",
+          "type": "term",
+          "text": "calm down",
+          "meaning": "calmarse",
+          "pronunciation": "kaam DÁUN",
+          "examples": [
+            {
+              "text": "Calm down, it's OK.",
+              "translation": "Tranquilízate, no pasa nada.",
+              "mirror": {
+                "say": "Tranquilízate, no pasa nada",
+                "pieces": [
+                  {
+                    "es": "Cálmate",
+                    "en": "Calm down",
+                    "role": "verb",
+                    "from": "Tranquilízate"
+                  },
+                  {
+                    "es": "(ESO) está bien",
+                    "en": "it's OK",
+                    "role": "helper",
+                    "from": "no pasa nada",
+                    "why": "«No pasa nada» se dice «está bien»: it's OK."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Please calm down.",
+              "translation": "Cálmate, por favor."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

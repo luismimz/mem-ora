@@ -1,0 +1,728 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "44-opiniones",
+      "title": "Misión 44 · Dar tu opinión",
+      "units": [
+        {
+          "key": "g-agree",
+          "type": "pattern",
+          "goal": "Estoy de acuerdo = I AGREE (sin am)",
+          "rule": "«Estoy de acuerdo» es solo I agree (no «I am agree»). En desacuerdo: I don't agree. Para opinar: I think…, in my opinion…",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "agree",
+              "role": "slot",
+              "hint": "estoy de acuerdo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I agree with you.",
+              "translation": "Estoy de acuerdo contigo.",
+              "mirror": {
+                "say": "Estoy de acuerdo contigo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "acuerdo",
+                    "en": "agree",
+                    "role": "verb",
+                    "from": "estoy de acuerdo",
+                    "why": "«Estar de acuerdo» es un solo verbo: AGREE (sin am)."
+                  },
+                  {
+                    "es": "contigo",
+                    "en": "with you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't agree.",
+              "translation": "No estoy de acuerdo.",
+              "mirror": {
+                "say": "No estoy de acuerdo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acuerdo",
+                    "en": "agree",
+                    "role": "verb",
+                    "from": "estoy de acuerdo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "In my opinion, it's too expensive.",
+              "translation": "En mi opinión, es demasiado caro."
+            },
+            {
+              "text": "What do you think?",
+              "translation": "¿Qué opinas?"
+            }
+          ],
+          "pitfalls": [
+            "«I am agree» está mal: AGREE ya es «estar de acuerdo».",
+            "«On my opinion» está mal: IN my opinion."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Dos manos se chocan y gritan AGREE, sin AM.",
+            "emoji": "🤝"
+          }
+        },
+        {
+          "key": "agree",
+          "type": "term",
+          "text": "agree",
+          "meaning": "estar de acuerdo",
+          "pronunciation": "aGRÍI",
+          "examples": [
+            {
+              "text": "Do you agree?",
+              "translation": "¿Estás de acuerdo?",
+              "mirror": {
+                "say": "¿Estás de acuerdo?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "acuerdas",
+                    "en": "agree",
+                    "role": "verb",
+                    "from": "estás de acuerdo",
+                    "why": "Estar de acuerdo es AGREE: do you agree?"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We all agree.",
+              "translation": "Todos estamos de acuerdo."
+            }
+          ]
+        },
+        {
+          "key": "disagree",
+          "type": "term",
+          "text": "disagree",
+          "meaning": "no estar de acuerdo",
+          "pronunciation": "disaGRÍI",
+          "examples": [
+            {
+              "text": "I disagree with him.",
+              "translation": "No estoy de acuerdo con él.",
+              "mirror": {
+                "say": "No estoy de acuerdo con él",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "desacuerdo",
+                    "en": "disagree",
+                    "role": "verb",
+                    "from": "no estoy de acuerdo"
+                  },
+                  {
+                    "es": "con él",
+                    "en": "with him",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sorry, I disagree.",
+              "translation": "Lo siento, pero no estoy de acuerdo."
+            }
+          ]
+        },
+        {
+          "key": "opinion",
+          "type": "term",
+          "text": "opinion",
+          "meaning": "opinión",
+          "pronunciation": "oPÍnion",
+          "examples": [
+            {
+              "text": "What's your opinion?",
+              "translation": "¿Qué opinas?",
+              "mirror": {
+                "say": "¿Qué opinas?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Qué"
+                  },
+                  {
+                    "es": "tu opinión",
+                    "en": "your opinion",
+                    "role": "word",
+                    "from": "opinas",
+                    "why": "«¿Qué opinas?» es «¿cuál es tu opinión?»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "In my opinion, it's fine.",
+              "translation": "En mi opinión, está bien."
+            }
+          ]
+        },
+        {
+          "key": "idea",
+          "type": "term",
+          "text": "idea",
+          "meaning": "idea",
+          "pronunciation": "aiDÍa",
+          "examples": [
+            {
+              "text": "That's a great idea!",
+              "translation": "¡Es una idea genial!",
+              "mirror": {
+                "say": "¡Es una idea genial!",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "That's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "idea",
+                    "en": "idea",
+                    "role": "word"
+                  },
+                  {
+                    "es": "genial",
+                    "en": "great",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I have no idea.",
+              "translation": "Ni idea."
+            }
+          ]
+        },
+        {
+          "key": "true",
+          "type": "term",
+          "text": "true",
+          "meaning": "verdad, cierto",
+          "pronunciation": "TRUU",
+          "examples": [
+            {
+              "text": "Is that true?",
+              "translation": "¿Es verdad?",
+              "mirror": {
+                "say": "¿Es verdad?",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "that",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "Is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "verdad",
+                    "en": "true",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "It's true.",
+              "translation": "Es cierto."
+            }
+          ]
+        },
+        {
+          "key": "wrong",
+          "type": "term",
+          "text": "wrong",
+          "meaning": "equivocado; mal",
+          "pronunciation": "RONG",
+          "examples": [
+            {
+              "text": "You're wrong.",
+              "translation": "Te equivocas.",
+              "mirror": {
+                "say": "Te equivocas",
+                "pieces": [
+                  {
+                    "es": "(TÚ) estás",
+                    "en": "You're",
+                    "role": "helper",
+                    "from": "te",
+                    "why": "«Te equivocas» se dice «estás equivocado»: you're wrong."
+                  },
+                  {
+                    "es": "equivocado",
+                    "en": "wrong",
+                    "role": "word",
+                    "from": "equivocas"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's wrong?",
+              "translation": "¿Qué pasa?"
+            }
+          ]
+        },
+        {
+          "key": "maybe",
+          "type": "term",
+          "text": "maybe",
+          "meaning": "quizás",
+          "pronunciation": "MÉIbi",
+          "examples": [
+            {
+              "text": "Maybe tomorrow.",
+              "translation": "Quizás mañana.",
+              "mirror": {
+                "say": "Quizás mañana",
+                "pieces": [
+                  {
+                    "es": "Quizás",
+                    "en": "Maybe",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Maybe you're right.",
+              "translation": "Quizás tengas razón."
+            }
+          ]
+        },
+        {
+          "key": "probably",
+          "type": "term",
+          "text": "probably",
+          "meaning": "probablemente",
+          "pronunciation": "PRÓbabli",
+          "examples": [
+            {
+              "text": "It will probably rain.",
+              "translation": "Probablemente llueva.",
+              "mirror": {
+                "say": "Probablemente llueva",
+                "pieces": [
+                  {
+                    "es": "Probablemente",
+                    "en": "probably",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÁ",
+                    "en": "will",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llover",
+                    "en": "rain",
+                    "role": "verb",
+                    "from": "llueva",
+                    "why": "Lo que pasará va con WILL: it will rain."
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "He's probably at home.",
+              "translation": "Seguramente está en casa."
+            }
+          ]
+        },
+        {
+          "key": "important",
+          "type": "term",
+          "text": "important",
+          "meaning": "importante",
+          "pronunciation": "imPÓRtant",
+          "examples": [
+            {
+              "text": "This is very important.",
+              "translation": "Esto es muy importante.",
+              "mirror": {
+                "say": "Esto es muy importante",
+                "pieces": [
+                  {
+                    "es": "Esto",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy importante",
+                    "en": "very important",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Family is important to me.",
+              "translation": "La familia es importante para mí."
+            }
+          ]
+        },
+        {
+          "key": "interesting",
+          "type": "term",
+          "text": "interesting",
+          "meaning": "interesante",
+          "pronunciation": "ÍNtresting",
+          "examples": [
+            {
+              "text": "What an interesting book!",
+              "translation": "¡Qué libro tan interesante!",
+              "mirror": {
+                "say": "¡Qué libro tan interesante!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What an",
+                    "role": "word"
+                  },
+                  {
+                    "es": "libro",
+                    "en": "book",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tan interesante",
+                    "en": "interesting",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "That's interesting.",
+              "translation": "Qué interesante."
+            }
+          ]
+        },
+        {
+          "key": "boring",
+          "type": "term",
+          "text": "boring",
+          "meaning": "aburrido (que aburre)",
+          "pronunciation": "BÓring",
+          "examples": [
+            {
+              "text": "The film was boring.",
+              "translation": "La película fue aburrida.",
+              "mirror": {
+                "say": "La película fue aburrida",
+                "pieces": [
+                  {
+                    "es": "La película",
+                    "en": "The film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aburrida",
+                    "en": "boring",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Maths is boring.",
+              "translation": "Las matemáticas son aburridas."
+            }
+          ]
+        },
+        {
+          "key": "amazing",
+          "type": "term",
+          "text": "amazing",
+          "meaning": "increíble, alucinante",
+          "pronunciation": "aMÉIsing",
+          "examples": [
+            {
+              "text": "The view is amazing!",
+              "translation": "¡Las vistas son increíbles!",
+              "mirror": {
+                "say": "¡Las vistas son increíbles!",
+                "pieces": [
+                  {
+                    "es": "La vista",
+                    "en": "The view",
+                    "role": "who",
+                    "from": "Las vistas",
+                    "why": "Las vistas de un sitio: THE VIEW, en singular."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "son"
+                  },
+                  {
+                    "es": "increíble",
+                    "en": "amazing",
+                    "role": "word",
+                    "from": "increíbles"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You're amazing.",
+              "translation": "Eres increíble."
+            }
+          ]
+        },
+        {
+          "key": "terrible",
+          "type": "term",
+          "text": "terrible",
+          "meaning": "horrible, fatal",
+          "pronunciation": "TÉribol",
+          "examples": [
+            {
+              "text": "The food was terrible.",
+              "translation": "La comida estaba malísima.",
+              "mirror": {
+                "say": "La comida estaba malísima",
+                "pieces": [
+                  {
+                    "es": "La comida",
+                    "en": "The food",
+                    "role": "who"
+                  },
+                  {
+                    "es": "estaba",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "horrible",
+                    "en": "terrible",
+                    "role": "word",
+                    "from": "malísima"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I feel terrible.",
+              "translation": "Me encuentro fatal."
+            }
+          ]
+        },
+        {
+          "key": "perfect",
+          "type": "term",
+          "text": "perfect",
+          "meaning": "perfecto",
+          "pronunciation": "PÉRfekt",
+          "examples": [
+            {
+              "text": "Nobody is perfect.",
+              "translation": "Nadie es perfecto.",
+              "mirror": {
+                "say": "Nadie es perfecto",
+                "pieces": [
+                  {
+                    "es": "Nadie",
+                    "en": "Nobody",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "perfecto",
+                    "en": "perfect",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Perfect, see you then.",
+              "translation": "Perfecto, nos vemos."
+            }
+          ]
+        },
+        {
+          "key": "prefer",
+          "type": "term",
+          "text": "prefer",
+          "meaning": "preferir",
+          "pronunciation": "priFÉR",
+          "examples": [
+            {
+              "text": "I prefer tea to coffee.",
+              "translation": "Prefiero el té al café.",
+              "mirror": {
+                "say": "Prefiero el té al café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prefiero",
+                    "en": "prefer",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "té",
+                    "en": "tea",
+                    "role": "word",
+                    "from": "el té",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "a café",
+                    "en": "to coffee",
+                    "role": "word",
+                    "from": "al café"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Which one do you prefer?",
+              "translation": "¿Cuál prefieres?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
