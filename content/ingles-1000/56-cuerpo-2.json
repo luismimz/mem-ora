@@ -1,0 +1,758 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "56-cuerpo-2",
+      "title": "Misión 56 · El cuerpo y el médico",
+      "units": [
+        {
+          "key": "g-for-since",
+          "type": "pattern",
+          "goal": "Desde hace dos días = FOR two days",
+          "rule": "FOR + cuánto tiempo (for two days). SINCE + desde cuándo (since Monday). Van con have: I've had a cough for two days.",
+          "pieces": [
+            {
+              "text": "I've had it",
+              "role": "fixed",
+              "hint": "lo tengo"
+            },
+            {
+              "text": "for",
+              "role": "fixed",
+              "hint": "desde hace"
+            },
+            {
+              "text": "two days",
+              "role": "slot",
+              "hint": "dos días"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I've had a cough for two days.",
+              "translation": "Tengo tos desde hace dos días.",
+              "mirror": {
+                "say": "Tengo tos desde hace dos días",
+                "pieces": [
+                  {
+                    "es": "(YO) he tenido",
+                    "en": "I've had",
+                    "role": "helper",
+                    "from": "Tengo",
+                    "why": "Si sigue pasando, va con HAVE: I've had."
+                  },
+                  {
+                    "es": "UNA tos",
+                    "en": "a cough",
+                    "role": "word",
+                    "from": "tos"
+                  },
+                  {
+                    "es": "durante",
+                    "en": "for",
+                    "role": "word",
+                    "from": "desde hace"
+                  },
+                  {
+                    "es": "dos días",
+                    "en": "two days",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've been here since Monday.",
+              "translation": "Estoy aquí desde el lunes.",
+              "mirror": {
+                "say": "Estoy aquí desde el lunes",
+                "pieces": [
+                  {
+                    "es": "(YO) he estado",
+                    "en": "I've been",
+                    "role": "helper",
+                    "from": "Estoy"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "desde",
+                    "en": "since",
+                    "role": "word"
+                  },
+                  {
+                    "es": "lunes",
+                    "en": "Monday",
+                    "role": "word",
+                    "from": "el lunes",
+                    "why": "Los días van sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "For a week.",
+              "translation": "Desde hace una semana."
+            },
+            {
+              "text": "Since 2020.",
+              "translation": "Desde 2020."
+            }
+          ],
+          "pitfalls": [
+            "«Since two days» está mal: FOR two days.",
+            "«I have a cough since Monday» está mal: I've HAD a cough since Monday."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "FOR mide con REGLA; SINCE señala el CALENDARIO.",
+            "emoji": "📅"
+          }
+        },
+        {
+          "key": "knee",
+          "type": "term",
+          "text": "knee",
+          "meaning": "rodilla",
+          "pronunciation": "NII",
+          "examples": [
+            {
+              "text": "My knee hurts.",
+              "translation": "Me duele la rodilla.",
+              "mirror": {
+                "say": "Me duele la rodilla",
+                "pieces": [
+                  {
+                    "es": "duele",
+                    "en": "hurts",
+                    "role": "verb",
+                    "from": "Me duele"
+                  },
+                  {
+                    "es": "MI rodilla",
+                    "en": "My knee",
+                    "role": "who",
+                    "from": "la rodilla",
+                    "why": "Al revés: MI rodilla duele."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I fell on my knees.",
+              "translation": "Me caí de rodillas."
+            }
+          ],
+          "notes": "La k no suena: NII."
+        },
+        {
+          "key": "elbow",
+          "type": "term",
+          "text": "elbow",
+          "meaning": "codo",
+          "pronunciation": "ÉLbou",
+          "examples": [
+            {
+              "text": "I hit my elbow.",
+              "translation": "Me di en el codo.",
+              "mirror": {
+                "say": "Me di en el codo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "golpeé",
+                    "en": "hit",
+                    "role": "verb",
+                    "from": "Me di"
+                  },
+                  {
+                    "es": "MI codo",
+                    "en": "my elbow",
+                    "role": "word",
+                    "from": "en el codo",
+                    "why": "La parte del cuerpo es MÍA: my elbow."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Elbows off the table!",
+              "translation": "¡Los codos fuera de la mesa!"
+            }
+          ]
+        },
+        {
+          "key": "shoulder",
+          "type": "term",
+          "text": "shoulder",
+          "meaning": "hombro",
+          "pronunciation": "SHÓULder",
+          "examples": [
+            {
+              "text": "My shoulder hurts.",
+              "translation": "Me duele el hombro.",
+              "mirror": {
+                "say": "Me duele el hombro",
+                "pieces": [
+                  {
+                    "es": "duele",
+                    "en": "hurts",
+                    "role": "verb",
+                    "from": "Me duele"
+                  },
+                  {
+                    "es": "MI hombro",
+                    "en": "My shoulder",
+                    "role": "who",
+                    "from": "el hombro",
+                    "why": "Al revés: MI hombro duele."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "You can cry on my shoulder.",
+              "translation": "Puedes llorar en mi hombro."
+            }
+          ]
+        },
+        {
+          "key": "stomach",
+          "type": "term",
+          "text": "stomach",
+          "meaning": "estómago, barriga",
+          "pronunciation": "STÁmak",
+          "examples": [
+            {
+              "text": "I've got a stomach ache.",
+              "translation": "Me duele la barriga.",
+              "mirror": {
+                "say": "Me duele la barriga",
+                "pieces": [
+                  {
+                    "es": "(YO) tengo",
+                    "en": "I've got",
+                    "role": "helper",
+                    "from": "Me duele"
+                  },
+                  {
+                    "es": "un dolor de barriga",
+                    "en": "a stomach ache",
+                    "role": "word",
+                    "from": "la barriga",
+                    "why": "Doler la barriga es «tener dolor de barriga»: a stomach ache."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "On an empty stomach.",
+              "translation": "Con el estómago vacío."
+            }
+          ],
+          "notes": "La ch suena K: STÁmak."
+        },
+        {
+          "key": "throat",
+          "type": "term",
+          "text": "throat",
+          "meaning": "garganta",
+          "pronunciation": "ZRÓUT",
+          "examples": [
+            {
+              "text": "I have a sore throat.",
+              "translation": "Me duele la garganta.",
+              "mirror": {
+                "say": "Me duele la garganta",
+                "pieces": [
+                  {
+                    "es": "(YO) tengo",
+                    "en": "I have",
+                    "role": "helper",
+                    "from": "Me duele"
+                  },
+                  {
+                    "es": "una garganta dolorida",
+                    "en": "a sore throat",
+                    "role": "word",
+                    "from": "la garganta",
+                    "why": "Doler la garganta es «tener la garganta dolorida»: a sore throat."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Clear your throat.",
+              "translation": "Aclárate la garganta."
+            }
+          ]
+        },
+        {
+          "key": "chest",
+          "type": "term",
+          "text": "chest",
+          "meaning": "pecho",
+          "pronunciation": "CHEST",
+          "examples": [
+            {
+              "text": "I have a pain in my chest.",
+              "translation": "Tengo un dolor en el pecho.",
+              "mirror": {
+                "say": "Tengo un dolor en el pecho",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un dolor",
+                    "en": "a pain",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en MI pecho",
+                    "en": "in my chest",
+                    "role": "word",
+                    "from": "en el pecho",
+                    "why": "La parte del cuerpo es MÍA: my chest."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A treasure chest.",
+              "translation": "Un cofre del tesoro."
+            }
+          ]
+        },
+        {
+          "key": "finger",
+          "type": "term",
+          "text": "finger",
+          "meaning": "dedo (de la mano)",
+          "pronunciation": "FÍNguer",
+          "examples": [
+            {
+              "text": "I cut my finger.",
+              "translation": "Me corté el dedo.",
+              "mirror": {
+                "say": "Me corté el dedo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "corté",
+                    "en": "cut",
+                    "role": "verb",
+                    "from": "Me corté"
+                  },
+                  {
+                    "es": "MI dedo",
+                    "en": "my finger",
+                    "role": "word",
+                    "from": "el dedo",
+                    "why": "La parte del cuerpo es MÍA: my finger."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Keep your fingers crossed.",
+              "translation": "Cruza los dedos."
+            }
+          ]
+        },
+        {
+          "key": "toe",
+          "type": "term",
+          "text": "toe",
+          "meaning": "dedo del pie",
+          "pronunciation": "TÓU",
+          "examples": [
+            {
+              "text": "I broke my toe.",
+              "translation": "Me rompí un dedo del pie.",
+              "mirror": {
+                "say": "Me rompí un dedo del pie",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "rompí",
+                    "en": "broke",
+                    "role": "verb",
+                    "from": "Me rompí"
+                  },
+                  {
+                    "es": "MI dedo del pie",
+                    "en": "my toe",
+                    "role": "word",
+                    "from": "un dedo del pie",
+                    "why": "La parte del cuerpo es MÍA: my toe."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Ten toes.",
+              "translation": "Diez dedos del pie."
+            }
+          ],
+          "notes": "Dedo de la mano: finger. Del pie: toe."
+        },
+        {
+          "key": "skin",
+          "type": "term",
+          "text": "skin",
+          "meaning": "piel",
+          "pronunciation": "SKIN",
+          "examples": [
+            {
+              "text": "She has very soft skin.",
+              "translation": "Tiene la piel muy suave.",
+              "mirror": {
+                "say": "Tiene la piel muy suave",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "piel",
+                    "en": "skin",
+                    "role": "word",
+                    "from": "la piel",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "muy suave",
+                    "en": "very soft",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Use sun cream to protect your skin.",
+              "translation": "Ponte crema para proteger la piel."
+            }
+          ]
+        },
+        {
+          "key": "blood",
+          "type": "term",
+          "text": "blood",
+          "meaning": "sangre",
+          "pronunciation": "BLAD",
+          "examples": [
+            {
+              "text": "There is blood on your shirt.",
+              "translation": "Hay sangre en tu camisa.",
+              "mirror": {
+                "say": "Hay sangre en tu camisa",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sangre",
+                    "en": "blood",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en tu camisa",
+                    "en": "on your shirt",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A blood test.",
+              "translation": "Un análisis de sangre."
+            }
+          ],
+          "notes": "Se dice BLAD, no BLUUD."
+        },
+        {
+          "key": "bone",
+          "type": "term",
+          "text": "bone",
+          "meaning": "hueso",
+          "pronunciation": "BÓUN",
+          "examples": [
+            {
+              "text": "The dog wants a bone.",
+              "translation": "El perro quiere un hueso.",
+              "mirror": {
+                "say": "El perro quiere un hueso",
+                "pieces": [
+                  {
+                    "es": "El perro",
+                    "en": "The dog",
+                    "role": "who"
+                  },
+                  {
+                    "es": "quiere",
+                    "en": "wants",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un hueso",
+                    "en": "a bone",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He broke a bone.",
+              "translation": "Se rompió un hueso."
+            }
+          ]
+        },
+        {
+          "key": "sneeze",
+          "type": "term",
+          "text": "sneeze",
+          "meaning": "estornudar",
+          "pronunciation": "SNIIS",
+          "examples": [
+            {
+              "text": "Pepper makes me sneeze.",
+              "translation": "La pimienta me hace estornudar.",
+              "mirror": {
+                "say": "La pimienta me hace estornudar",
+                "pieces": [
+                  {
+                    "es": "pimienta",
+                    "en": "Pepper",
+                    "role": "who",
+                    "from": "La pimienta",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "estornudar",
+                    "en": "sneeze",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Cover your mouth when you sneeze.",
+              "translation": "Tápate la boca al estornudar."
+            }
+          ]
+        },
+        {
+          "key": "pill",
+          "type": "term",
+          "text": "pill",
+          "meaning": "pastilla",
+          "pronunciation": "PIL",
+          "examples": [
+            {
+              "text": "Take one pill after lunch.",
+              "translation": "Tómate una pastilla después de comer.",
+              "mirror": {
+                "say": "Tómate una pastilla después de comer",
+                "pieces": [
+                  {
+                    "es": "Toma",
+                    "en": "Take",
+                    "role": "verb",
+                    "from": "Tómate"
+                  },
+                  {
+                    "es": "una pastilla",
+                    "en": "one pill",
+                    "role": "word"
+                  },
+                  {
+                    "es": "después de comer",
+                    "en": "after lunch",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sleeping pills.",
+              "translation": "Pastillas para dormir."
+            }
+          ]
+        },
+        {
+          "key": "sore",
+          "type": "term",
+          "text": "sore",
+          "meaning": "dolorido, irritado",
+          "pronunciation": "SÓR",
+          "examples": [
+            {
+              "text": "My legs are sore after running.",
+              "translation": "Tengo las piernas doloridas de correr.",
+              "mirror": {
+                "say": "Tengo las piernas doloridas de correr",
+                "pieces": [
+                  {
+                    "es": "MIS piernas están",
+                    "en": "My legs are",
+                    "role": "who",
+                    "from": "Tengo las piernas",
+                    "why": "«Tengo las piernas doloridas» es «mis piernas están doloridas»."
+                  },
+                  {
+                    "es": "doloridas",
+                    "en": "sore",
+                    "role": "word"
+                  },
+                  {
+                    "es": "después de correr",
+                    "en": "after running",
+                    "role": "word",
+                    "from": "de correr"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A sore throat.",
+              "translation": "Dolor de garganta."
+            }
+          ]
+        },
+        {
+          "key": "ankle",
+          "type": "term",
+          "text": "ankle",
+          "meaning": "tobillo",
+          "pronunciation": "ÁNkel",
+          "examples": [
+            {
+              "text": "I twisted my ankle.",
+              "translation": "Me torcí el tobillo.",
+              "mirror": {
+                "say": "Me torcí el tobillo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "torcí",
+                    "en": "twisted",
+                    "role": "verb",
+                    "from": "Me torcí"
+                  },
+                  {
+                    "es": "MI tobillo",
+                    "en": "my ankle",
+                    "role": "word",
+                    "from": "el tobillo",
+                    "why": "La parte del cuerpo es MÍA: my ankle."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My ankle is swollen.",
+              "translation": "Tengo el tobillo hinchado."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

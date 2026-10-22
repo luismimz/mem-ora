@@ -1,0 +1,766 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "58-tiempo-libre-2",
+      "title": "Misión 58 · Aficiones",
+      "units": [
+        {
+          "key": "g-good-at",
+          "type": "pattern",
+          "goal": "Se me da bien = I'M GOOD AT + -ING",
+          "rule": "Para lo que se te da bien: I'm good at + -ING o nombre (good at drawing, good at chess). Lo contrario: I'm bad at.",
+          "pieces": [
+            {
+              "text": "I'm good",
+              "role": "fixed",
+              "hint": "se me da bien"
+            },
+            {
+              "text": "at",
+              "role": "fixed",
+              "hint": "(en)"
+            },
+            {
+              "text": "drawing",
+              "role": "slot",
+              "hint": "dibujar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'm good at drawing.",
+              "translation": "Se me da bien dibujar.",
+              "mirror": {
+                "say": "Se me da bien dibujar",
+                "pieces": [
+                  {
+                    "es": "(YO) soy bueno",
+                    "en": "I'm good",
+                    "role": "helper",
+                    "from": "Se me da bien",
+                    "why": "«Se me da bien» es «soy bueno en»: I'm good at."
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dibuj-ANDO",
+                    "en": "drawing",
+                    "role": "verb",
+                    "from": "dibujar",
+                    "why": "Detrás de at, el verbo en -ING: drawing."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's bad at chess.",
+              "translation": "Se le da mal el ajedrez.",
+              "mirror": {
+                "say": "Se le da mal el ajedrez",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es malo",
+                    "en": "He's bad",
+                    "role": "helper",
+                    "from": "Se le da mal"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ajedrez",
+                    "en": "chess",
+                    "role": "word",
+                    "from": "el ajedrez",
+                    "why": "Los juegos van sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Are you good at sports?",
+              "translation": "¿Se te dan bien los deportes?"
+            },
+            {
+              "text": "I'm not very good at singing.",
+              "translation": "No canto muy bien."
+            }
+          ],
+          "pitfalls": [
+            "«I'm good in drawing» está mal: good AT.",
+            "«Good at draw» está mal: good at drawing."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un DIPLOMA dorado dice: GOOD AT DRAWING.",
+            "emoji": "🏅"
+          }
+        },
+        {
+          "key": "painting",
+          "type": "term",
+          "text": "painting",
+          "meaning": "pintura; cuadro",
+          "pronunciation": "PÉINting",
+          "examples": [
+            {
+              "text": "Painting relaxes me.",
+              "translation": "Pintar me relaja.",
+              "mirror": {
+                "say": "Pintar me relaja",
+                "pieces": [
+                  {
+                    "es": "Pint-ANDO",
+                    "en": "Painting",
+                    "role": "who",
+                    "from": "Pintar",
+                    "why": "Como tema de la frase, el verbo va en -ING: painting."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "relaja",
+                    "en": "relaxes",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "A famous painting.",
+              "translation": "Un cuadro famoso."
+            }
+          ]
+        },
+        {
+          "key": "drawing",
+          "type": "term",
+          "text": "drawing",
+          "meaning": "dibujo; dibujar",
+          "pronunciation": "DRÓing",
+          "examples": [
+            {
+              "text": "What a beautiful drawing!",
+              "translation": "¡Qué dibujo tan bonito!",
+              "mirror": {
+                "say": "¡Qué dibujo tan bonito!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dibujo",
+                    "en": "drawing",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un bonito",
+                    "en": "a beautiful",
+                    "role": "word",
+                    "from": "tan bonito",
+                    "why": "«¡Qué … tan bonito!» es What a beautiful …!"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I'm good at drawing.",
+              "translation": "Se me da bien dibujar."
+            }
+          ]
+        },
+        {
+          "key": "photography",
+          "type": "term",
+          "text": "photography",
+          "meaning": "fotografía (afición)",
+          "pronunciation": "foTÓgrafi",
+          "examples": [
+            {
+              "text": "I'm into photography.",
+              "translation": "Me gusta mucho la fotografía.",
+              "mirror": {
+                "say": "Me gusta mucho la fotografía",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Me"
+                  },
+                  {
+                    "es": "metido en",
+                    "en": "into",
+                    "role": "word",
+                    "from": "gusta mucho",
+                    "why": "Estar «into» algo es que te encanta: I'm into photography."
+                  },
+                  {
+                    "es": "fotografía",
+                    "en": "photography",
+                    "role": "word",
+                    "from": "la fotografía",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A photography course.",
+              "translation": "Un curso de fotografía."
+            }
+          ],
+          "notes": "Cada foto es a photo; la afición, photography."
+        },
+        {
+          "key": "chess",
+          "type": "term",
+          "text": "chess",
+          "meaning": "ajedrez",
+          "pronunciation": "CHES",
+          "examples": [
+            {
+              "text": "Let's play chess.",
+              "translation": "Juguemos al ajedrez.",
+              "mirror": {
+                "say": "Juguemos al ajedrez",
+                "pieces": [
+                  {
+                    "es": "Juguemos",
+                    "en": "Let's play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ajedrez",
+                    "en": "chess",
+                    "role": "word",
+                    "from": "al ajedrez",
+                    "why": "Los juegos van sin «al» ni «the»: play chess."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A chess player.",
+              "translation": "Un jugador de ajedrez."
+            }
+          ]
+        },
+        {
+          "key": "cards",
+          "type": "term",
+          "text": "cards",
+          "meaning": "cartas (baraja)",
+          "pronunciation": "KARDS",
+          "examples": [
+            {
+              "text": "We played cards all night.",
+              "translation": "Jugamos a las cartas toda la noche.",
+              "mirror": {
+                "say": "Jugamos a las cartas toda la noche",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "jugamos",
+                    "en": "played",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cartas",
+                    "en": "cards",
+                    "role": "word",
+                    "from": "a las cartas",
+                    "why": "Los juegos van sin «al» ni «the»: play chess."
+                  },
+                  {
+                    "es": "toda la noche",
+                    "en": "all night",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A pack of cards.",
+              "translation": "Una baraja."
+            }
+          ]
+        },
+        {
+          "key": "camping",
+          "type": "term",
+          "text": "camping",
+          "meaning": "acampada, ir de camping",
+          "pronunciation": "KÁMping",
+          "examples": [
+            {
+              "text": "We go camping in summer.",
+              "translation": "En verano vamos de acampada.",
+              "mirror": {
+                "say": "En verano vamos de acampada",
+                "pieces": [
+                  {
+                    "es": "en verano",
+                    "en": "in summer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "acampando",
+                    "en": "camping",
+                    "role": "word",
+                    "from": "de acampada",
+                    "why": "Con GO, la actividad en -ING: go camping."
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A camping trip.",
+              "translation": "Una excursión de acampada."
+            }
+          ]
+        },
+        {
+          "key": "fishing",
+          "type": "term",
+          "text": "fishing",
+          "meaning": "pesca, ir a pescar",
+          "pronunciation": "FÍshing",
+          "examples": [
+            {
+              "text": "My grandfather loves fishing.",
+              "translation": "A mi abuelo le encanta pescar.",
+              "mirror": {
+                "say": "A mi abuelo le encanta pescar",
+                "pieces": [
+                  {
+                    "es": "Mi abuelo",
+                    "en": "My grandfather",
+                    "role": "who",
+                    "from": "A mi abuelo",
+                    "why": "Al revés: mi abuelo ama pescar."
+                  },
+                  {
+                    "es": "ama",
+                    "en": "loves",
+                    "role": "verb",
+                    "from": "le encanta"
+                  },
+                  {
+                    "es": "pesc-ANDO",
+                    "en": "fishing",
+                    "role": "verb",
+                    "from": "pescar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's go fishing.",
+              "translation": "Vamos a pescar."
+            }
+          ]
+        },
+        {
+          "key": "hiking",
+          "type": "term",
+          "text": "hiking",
+          "meaning": "senderismo",
+          "pronunciation": "JÁIking",
+          "examples": [
+            {
+              "text": "We went hiking in the mountains.",
+              "translation": "Hicimos senderismo en la montaña.",
+              "mirror": {
+                "say": "Hicimos senderismo en la montaña",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fuimos",
+                    "en": "went",
+                    "role": "verb",
+                    "from": "Hicimos",
+                    "why": "Con GO, la actividad en -ING: went hiking."
+                  },
+                  {
+                    "es": "senderismo",
+                    "en": "hiking",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en las montañas",
+                    "en": "in the mountains",
+                    "role": "word",
+                    "from": "en la montaña"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Hiking boots.",
+              "translation": "Botas de montaña."
+            }
+          ]
+        },
+        {
+          "key": "concert",
+          "type": "term",
+          "text": "concert",
+          "meaning": "concierto",
+          "pronunciation": "KÓNsert",
+          "examples": [
+            {
+              "text": "Are you coming to the concert?",
+              "translation": "¿Vienes al concierto?",
+              "mirror": {
+                "say": "¿Vienes al concierto?",
+                "pieces": [
+                  {
+                    "es": "ESTÁS",
+                    "en": "Are",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viniendo",
+                    "en": "coming",
+                    "role": "verb",
+                    "from": "Vienes"
+                  },
+                  {
+                    "es": "al concierto",
+                    "en": "to the concert",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A rock concert.",
+              "translation": "Un concierto de rock."
+            }
+          ]
+        },
+        {
+          "key": "festival",
+          "type": "term",
+          "text": "festival",
+          "meaning": "festival, fiesta",
+          "pronunciation": "FÉStival",
+          "examples": [
+            {
+              "text": "The festival starts on Friday.",
+              "translation": "El festival empieza el viernes.",
+              "mirror": {
+                "say": "El festival empieza el viernes",
+                "pieces": [
+                  {
+                    "es": "El festival",
+                    "en": "The festival",
+                    "role": "who"
+                  },
+                  {
+                    "es": "empieza",
+                    "en": "starts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "EN viernes",
+                    "en": "on Friday",
+                    "role": "word",
+                    "from": "el viernes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A music festival.",
+              "translation": "Un festival de música."
+            }
+          ]
+        },
+        {
+          "key": "theatre",
+          "type": "term",
+          "text": "theatre",
+          "meaning": "teatro",
+          "pronunciation": "ZÍater",
+          "examples": [
+            {
+              "text": "Let's go to the theatre tonight.",
+              "translation": "Vamos al teatro esta noche.",
+              "mirror": {
+                "say": "Vamos al teatro esta noche",
+                "pieces": [
+                  {
+                    "es": "Vamos",
+                    "en": "Let's go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al teatro",
+                    "en": "to the theatre",
+                    "role": "word"
+                  },
+                  {
+                    "es": "esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A theatre ticket.",
+              "translation": "Una entrada de teatro."
+            }
+          ],
+          "notes": "En EE. UU. se escribe theater."
+        },
+        {
+          "key": "gallery",
+          "type": "term",
+          "text": "gallery",
+          "meaning": "galería (de arte)",
+          "pronunciation": "GÁleri",
+          "examples": [
+            {
+              "text": "The gallery is free on Sundays.",
+              "translation": "La galería es gratis los domingos.",
+              "mirror": {
+                "say": "La galería es gratis los domingos",
+                "pieces": [
+                  {
+                    "es": "La galería",
+                    "en": "The gallery",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gratis",
+                    "en": "free",
+                    "role": "word"
+                  },
+                  {
+                    "es": "EN domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "los domingos",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An art gallery.",
+              "translation": "Una galería de arte."
+            }
+          ]
+        },
+        {
+          "key": "guitar",
+          "type": "term",
+          "text": "guitar",
+          "meaning": "guitarra",
+          "pronunciation": "guiTÁR",
+          "examples": [
+            {
+              "text": "I play the guitar.",
+              "translation": "Toco la guitarra.",
+              "mirror": {
+                "say": "Toco la guitarra",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "toco",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la guitarra",
+                    "en": "the guitar",
+                    "role": "word",
+                    "from": "la guitarra",
+                    "why": "Los instrumentos SÍ llevan the: play the guitar."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An electric guitar.",
+              "translation": "Una guitarra eléctrica."
+            }
+          ]
+        },
+        {
+          "key": "piano",
+          "type": "term",
+          "text": "piano",
+          "meaning": "piano",
+          "pronunciation": "piÁnou",
+          "examples": [
+            {
+              "text": "She plays the piano very well.",
+              "translation": "Toca el piano muy bien.",
+              "mirror": {
+                "say": "Toca el piano muy bien",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "toca",
+                    "en": "plays",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el piano",
+                    "en": "the piano",
+                    "role": "word"
+                  },
+                  {
+                    "es": "muy bien",
+                    "en": "very well",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Piano lessons.",
+              "translation": "Clases de piano."
+            }
+          ]
+        },
+        {
+          "key": "board-game",
+          "type": "term",
+          "text": "board game",
+          "meaning": "juego de mesa",
+          "pronunciation": "BÓRD gueim",
+          "examples": [
+            {
+              "text": "Let's play a board game.",
+              "translation": "Juguemos a un juego de mesa.",
+              "mirror": {
+                "say": "Juguemos a un juego de mesa",
+                "pieces": [
+                  {
+                    "es": "Juguemos",
+                    "en": "Let's play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un juego de mesa",
+                    "en": "a board game",
+                    "role": "word",
+                    "from": "a un juego de mesa"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Chess is a board game.",
+              "translation": "El ajedrez es un juego de mesa."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
