@@ -47,6 +47,8 @@ export interface Attempt {
   correct: boolean;
   hint: HintLevel;
   timeMs: number;
+  /** El alumno marcó «No estoy seguro» antes de responder: un acierto así cuenta poco (regla 9). */
+  doubt?: boolean;
 }
 
 /** Presentación de una habilidad (ver o escuchar el contenido). No es evidencia de aprendizaje. */

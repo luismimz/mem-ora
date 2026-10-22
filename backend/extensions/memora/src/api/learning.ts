@@ -45,6 +45,7 @@ export function rejectReason(e: unknown, skills: Map<string, SkillRef>, courseId
     if (typeof ev.correct !== 'boolean') return 'bad_correct';
     if (!Number.isInteger(ev.hint) || (ev.hint as number) < 0 || (ev.hint as number) > 5) return 'bad_hint';
     if (typeof ev.timeMs !== 'number' || ev.timeMs < 0) return 'bad_time_ms';
+    if (ev.doubt !== undefined && typeof ev.doubt !== 'boolean') return 'bad_doubt';
     try {
       assertValidAttempt(toAttempt(ev as ClientEvent, 'u', ev.at));
     } catch {
@@ -65,6 +66,7 @@ function toAttempt(e: ClientEvent, userId: string, at: number): Attempt {
     correct: e.correct!,
     hint: e.hint as HintLevel,
     timeMs: e.timeMs ?? 0,
+    ...(e.doubt ? { doubt: true } : {}),
     ...(e.associationId ? { associationId: e.associationId } : {}),
     ...(e.contextId ? { contextId: e.contextId } : {}),
   };

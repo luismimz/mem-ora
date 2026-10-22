@@ -709,6 +709,9 @@ function PushOptIn() {
 
 // ─── El flujo ─────────────────────────────────────────────────────────────────────────────────────────────
 
+/** Tarjetas donde se puede marcar «No estoy seguro» antes de responder (la Ráfaga es un juego de velocidad: no). */
+const UNSURE_STEPS = ['quick', 'judge', 'listen', 'review', 'challenge', 'build'];
+
 const REPORT_OPTIONS: Array<{ id: ReportReason; text: string; audio?: boolean }> = [
   { id: 'asociacion', text: '🧠 La asociación o la historia no ayuda' },
   { id: 'significado', text: '🔤 El significado o la traducción está mal' },
@@ -764,12 +767,15 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const [progress, setProgress] = useState<Progress | null>(null);
   const [map, setMap] = useState<{ missions: Mission[]; current: string | null } | null>(null);
   const [reporting, setReporting] = useState<string | null>(null);
+  // «No estoy seguro» (idea de benrios.dev): se marca ANTES de responder; un acierto así cuenta poco (regla 9).
+  const [unsure, setUnsure] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   useEffect(() => { if (!toast) return; const t = window.setTimeout(() => setToast(null), 2600); return () => window.clearTimeout(t); }, [toast]);
   const queue = useRef<ClientEvent[]>([]);
   const saving = useRef<Promise<void>>(Promise.resolve());
   const step = plan.steps[index];
   const unit = step?.unitKey ? units[step.unitKey] : undefined;
+  useEffect(() => setUnsure(false), [step?.id, teaching]);
   const sessionUnits = useMemo(() => [...new Set(plan.steps.map((s) => s.unitKey).filter(Boolean))].map((k) => units[k]!).filter(Boolean), [plan, units]);
   const pool = (u: SessionUnit) => {
     const same = sessionUnits.filter((x) => x.type === u.type);
@@ -833,7 +839,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   }
   /** Respuesta de una tarjeta de pregunta: puntúa, guarda y, si es fallo, enseña la ficha antes de seguir. */
   function answered(u: SessionUnit, ok: boolean, ms: number, contextId: string, points: number, skillKey = recallKey(u), format: ClientEvent['format'] = 'recognition_choice', hint = 0, note?: string) {
-    if (skillKey) queue.current.push(event(u, skillKey, { format, correct: ok, hint: hint as HintLevel, timeMs: ms, contextId }));
+    if (skillKey) queue.current.push(event(u, skillKey, { format, correct: ok, hint: hint as HintLevel, timeMs: ms, contextId, ...(unsure ? { doubt: true } : {}) }));
     scored(ok, points);
     if (!ok) { setTeaching({ key: u.key, ...(note ? { note } : {}) }); return; }
     void advance({ correct: true, hint });
@@ -938,6 +944,11 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
       {reporting && units[reporting] && <ReportSheet unit={units[reporting]!} audio={audioEnabled()} onClose={() => setReporting(null)}
         onSend={(reason, note) => { setReporting(null); api.report(courseId, reporting, reason, note).then(() => setToast('✓ Gracias. Lo revisamos y lo corregimos.')).catch(() => setToast('No se ha podido enviar. Prueba otra vez.')); }} />}
       {toast && <p className="report-toast" role="status">{toast}</p>}
+      {!teaching && step && UNSURE_STEPS.includes(step.kind) && (
+        <button type="button" className={`unsure ${unsure ? 'on' : ''}`} aria-pressed={unsure} onClick={() => setUnsure((v) => !v)}>
+          🤔 {unsure ? 'Marcado: si aciertas, volverá pronto' : 'No estoy seguro'}
+        </button>
+      )}
     </div>
   );
 }

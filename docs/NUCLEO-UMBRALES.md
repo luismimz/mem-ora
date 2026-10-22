@@ -17,6 +17,7 @@
 | `hintFactor` | P0 1 · P1 0,8 · P2 0,6 · P3 0,4 · P4 0,2 · P5 0 | Cada escalón de pista quita una parte igual del mérito. P5 revela la respuesta: no es evidencia. | Ver si los aciertos con pista alta predicen recuerdos posteriores; si no, bajar esos factores. |
 | `slowMs` | 9 s | Heredado de la V1, donde un acierto de más de 9 s se marcaba como «dudado». | Distribución real de tiempos por formato y longitud de la respuesta. Probablemente debe depender del formato (escribir código lleva más que elegir). |
 | `slowFactor` | 0,7 | Un acierto dudado sigue siendo un acierto, pero aún no es automático. | Recuerdo posterior de los aciertos lentos frente a los rápidos. |
+| `doubtFactor` | 0,4 | «No estoy seguro» marcado por el alumno antes de responder (22-oct-2026): un acierto a suerte pesa menos que uno lento, no es éxito diferido (no sube de nivel) y no saca la unidad de sus fallos. | Recuerdo posterior de los aciertos marcados frente a los no marcados; cuánto se usa el botón. |
 | `retrievalFormats` | dictado, explicar lo oído, con pistas, sin pistas, producir, aplicar | Reconocer (elegir una opción o reconocer al escuchar) no exige recuperar de memoria. | Fijo por definición; se revisaría solo si aparece un formato nuevo. |
 
 ## Éxito diferido (`deferred`)

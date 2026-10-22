@@ -13,6 +13,11 @@ export interface CoreConfig {
     slowMs: number;
     /** Multiplicador del peso de un acierto dudado. */
     slowFactor: number;
+    /**
+     * Multiplicador de un acierto que el alumno marca «No estoy seguro» (idea de benrios.dev): pesa menos que uno lento,
+     * no cuenta como éxito sin ayuda (no sube de nivel) y no saca la unidad de sus fallos.
+     */
+    doubtFactor: number;
     /** Formatos que cuentan como recuperación (no reconocimiento). */
     retrievalFormats: ExerciseFormat[];
   };
@@ -150,6 +155,7 @@ export const defaultConfig: CoreConfig = {
     hintFactor: [1, 0.8, 0.6, 0.4, 0.2, 0],
     slowMs: 9_000,
     slowFactor: 0.7,
+    doubtFactor: 0.4,
     retrievalFormats: ['listening_transcribe', 'listening_explain', 'recall_cued', 'recall_unaided', 'production', 'application'],
   },
   deferred: {

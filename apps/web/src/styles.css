@@ -701,3 +701,7 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 @keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
 @media (prefers-reduced-motion: reduce) { .report-sheet { animation: none; } }
 .req-error { color: var(--ko); font-weight: 700; }
+
+/* «No estoy seguro»: discreto abajo; marcado, en ámbar. Se toca antes de responder. */
+.unsure { position: fixed; z-index: 4; left: 50%; bottom: max(.7rem, env(safe-area-inset-bottom)); transform: translateX(-50%); -webkit-tap-highlight-color: transparent; border: 1px solid rgba(255,255,255,.22); background: rgba(0,0,0,.35); color: #fff; font: inherit; font-size: .85rem; font-weight: 700; padding: .5rem .9rem; border-radius: 99px; white-space: nowrap; min-height: 2.4rem; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.unsure.on { background: #f59e0b; border-color: #f59e0b; color: #1c1917; }

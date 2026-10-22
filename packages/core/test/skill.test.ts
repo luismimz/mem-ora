@@ -13,6 +13,30 @@ const learned = (): SkillState =>
     attempt({ at: T0 + 3 * DAY }),
   ]);
 
+describe('«No estoy seguro» (acierto marcado como dudoso)', () => {
+  it('pesa menos que el mismo acierto seguro', () => {
+    const sure = applySkillAttempt(start(), attempt({ at: T0 + DAY }), adaptiveScheduler, config);
+    const doubt = applySkillAttempt(start(), attempt({ at: T0 + DAY, doubt: true }), adaptiveScheduler, config);
+    expect(doubt.weight).toBeLessThan(sure.weight);
+    expect(doubt.state.accuracy).toBeLessThan(sure.state.accuracy);
+  });
+  it('no cuenta como éxito diferido: nunca hace «aprendida» por sí solo', () => {
+    const r = run(start(), [attempt({ at: T0 + DAY, doubt: true }), attempt({ at: T0 + 3 * DAY, doubt: true })]);
+    expect(r.deferredSuccesses).toBe(0);
+    expect(r.status).not.toBe('learned');
+  });
+  it('no saca la unidad de tus fallos; un acierto seguro sí', () => {
+    const failed = run(start(), [attempt({ at: T0 + 60_000, correct: false })]);
+    expect(run(failed, [attempt({ at: T0 + 120_000, doubt: true })]).consecutiveFailures).toBe(1);
+    expect(run(failed, [attempt({ at: T0 + 120_000 })]).consecutiveFailures).toBe(0);
+  });
+  it('vuelve antes que un acierto seguro', () => {
+    const sure = run(start(), [attempt({ at: T0 + DAY })]);
+    const doubt = run(start(), [attempt({ at: T0 + DAY, doubt: true })]);
+    expect(doubt.dueAt!).toBeLessThanOrEqual(sure.dueAt!);
+  });
+});
+
 describe('estados de la habilidad', () => {
   it('presentar no es aprender: new → presented, y el primer intento la deja en aprendizaje', () => {
     const presented = start();

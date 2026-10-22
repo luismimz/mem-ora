@@ -273,6 +273,8 @@ export interface ClientEvent {
   correct?: boolean;
   hint?: HintLevel;
   timeMs?: number;
+  /** «No estoy seguro»: el alumno lo marcó antes de responder (un acierto así cuenta poco). */
+  doubt?: boolean;
 }
 
 export interface EventMeta {
