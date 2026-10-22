@@ -723,3 +723,47 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .track-body b { display: block; font-size: .93rem; } .track-body small { color: var(--muted); font-size: .75rem; font-weight: 600; }
 .track-bar { display: block; height: .3rem; border-radius: 1rem; background: var(--line); overflow: hidden; margin: .3rem 0 .2rem; } .track-bar i { display: block; height: 100%; background: var(--warm); }
 .track-n { font-weight: 900; font-size: .85rem; color: var(--muted); }
+
+/* Simulacro de examen: página clara y tranquila, para concentrarse. Primero móvil. */
+.exam { max-width: 40rem; margin: 0 auto; padding: max(1rem, env(safe-area-inset-top)) 1rem max(1.4rem, env(safe-area-inset-bottom)); display: grid; gap: .9rem; }
+.exam h1 { margin: .2rem 0; }
+.exam-intro p { color: var(--muted); margin: 0; }
+.exam-rules { list-style: none; margin: .3rem 0; padding: 0; display: grid; gap: .55rem; }
+.exam-rules li { background: var(--surface-strong); border-radius: 1rem; padding: .75rem .9rem; box-shadow: 0 2px 10px rgba(72,54,39,.06); }
+.exam-best { font-weight: 650; }
+.exam-top { display: flex; align-items: center; gap: .7rem; }
+.exam-x { border: 0; background: var(--surface-strong); width: 2.6rem; height: 2.6rem; border-radius: 50%; font-size: 1rem; box-shadow: 0 2px 10px rgba(72,54,39,.08); }
+.exam-leave { border: 0; background: var(--ko); color: #fff; font-weight: 800; border-radius: 1rem; padding: .6rem .9rem; }
+.exam-count { font-weight: 900; margin-left: auto; color: var(--muted); }
+.exam-clock { font-weight: 900; font-variant-numeric: tabular-nums; background: var(--surface-strong); padding: .45rem .75rem; border-radius: 99px; }
+.exam-clock.hurry { background: var(--ko-soft); color: var(--ko); }
+.exam-dots { display: flex; flex-wrap: wrap; gap: 5px; }
+.exam-dots i { width: 14px; height: 14px; border-radius: 4px; background: var(--line); cursor: pointer; }
+.exam-dots i.done { background: var(--accent); } .exam-dots i.doubt { box-shadow: inset 0 0 0 2px #f59e0b; } .exam-dots i.here { outline: 2px solid var(--ink); outline-offset: 1px; }
+.exam-q { font-size: 1.12rem; font-weight: 750; line-height: 1.35; margin: .2rem 0 0; }
+.exam-code { margin: 0; background: #1f1d1a; color: #f5f1ea; border-radius: .9rem; padding: .8rem .9rem; overflow-x: auto; font-size: .86rem; line-height: 1.45; }
+.exam-options { display: grid; gap: .55rem; }
+.exam-options button { display: grid; grid-template-columns: 1.9rem 1fr; align-items: center; gap: .6rem; text-align: left; border: 1.5px solid var(--line); background: var(--surface-strong); color: var(--ink); border-radius: 1rem; padding: .8rem .9rem; font: inherit; font-weight: 650; min-height: 3.2rem; -webkit-tap-highlight-color: transparent; }
+.exam-options button span { width: 1.9rem; height: 1.9rem; border-radius: 50%; display: grid; place-items: center; background: var(--surface-soft); font-weight: 900; font-size: .85rem; }
+.exam-options button.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface-strong)); }
+.exam-options button.on span { background: var(--accent); color: #fff; }
+.unsure-inline { justify-self: start; border: 1px dashed var(--line); background: transparent; color: var(--muted); border-radius: 99px; padding: .45rem .85rem; font: inherit; font-size: .85rem; font-weight: 700; min-height: 2.4rem; }
+.unsure-inline.on { border: 1px solid #f59e0b; background: #fef3c7; color: #78350f; }
+.exam-nav { display: grid; grid-template-columns: auto 1fr; gap: .6rem; }
+.exam-nav > button:first-child { border: 1px solid var(--line); background: var(--surface-strong); border-radius: 1rem; padding: 0 1rem; font-weight: 750; color: var(--ink); }
+.exam-nav > button:first-child:disabled { opacity: .4; }
+.exam-left { text-align: center; color: var(--muted); font-size: .85rem; margin: 0; }
+.exam-grade { display: grid; place-items: center; gap: .2rem; padding: 1.2rem; border-radius: 1.5rem; }
+.exam-grade b { font-size: 3.6rem; line-height: 1; font-weight: 950; } .exam-grade span { font-weight: 900; letter-spacing: .08em; }
+.exam-grade.pass { background: var(--ok-soft); color: var(--ok); } .exam-grade.fail { background: var(--ko-soft); color: var(--ko); }
+.exam-sum { text-align: center; color: var(--muted); margin: 0; }
+.exam-filter { display: flex; gap: .5rem; }
+.exam-filter button { flex: 1; border: 1px solid var(--line); background: var(--surface-strong); border-radius: 99px; padding: .55rem; font-weight: 750; color: var(--ink); }
+.exam-filter button.on { background: var(--ink); color: var(--page); }
+.exam-review { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+.exam-review li { background: var(--surface-strong); border-radius: 1.1rem; padding: .85rem .95rem; display: grid; gap: .4rem; border-left: 4px solid var(--ok); }
+.exam-review li.ko { border-left-color: var(--ko); }
+.exam-review small { color: var(--muted); font-weight: 650; }
+.exam-review .exam-q { font-size: 1rem; }
+.exam-mine { margin: 0; color: var(--ko); font-weight: 650; } .exam-right { margin: 0; color: var(--ok); font-weight: 800; } .exam-why { margin: 0; color: var(--muted); }
+.exam-card-best { margin: 0; font-weight: 650; } .exam-card-best .pass { color: var(--ok); } .exam-card-best .fail { color: var(--ko); }

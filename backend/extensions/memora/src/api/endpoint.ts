@@ -6,6 +6,8 @@
 //   PUT  /memora/session/position        punto exacto de la sesión
 //   GET  /memora/progress?course=…       estado por habilidad, unidad y asociación, racha y protectores
 //   POST /memora/clarify                 «Explícame más»: pide ampliar una ficha (D-077)
+//   GET  /memora/exam?course=…           simulacro: preguntas de todo lo trabajado (60 min, se aprueba con 7)
+//   POST /memora/exam/result             guarda la nota de un simulacro
 //   POST /memora/report                  «Reportar un error» de una tarjeta (va a la cola de Studio)
 //   GET  /memora/studio/requests?course=… avisos de los alumnos pendientes (errores y «Explícame más»)
 //   POST /memora/studio/requests/:id     marcar un aviso como atendido o descartado
@@ -25,7 +27,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
 import { assessAssociation, dayOf, dueUnits, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
-import { buildAssociationSession, buildFlowSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
+import { buildAssociationSession, buildExam, buildFlowSession, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
 import { ring, vapidFromEnv } from '../push/lib';
@@ -196,7 +198,8 @@ export default {
     };
 
     async function storedEvents(userId: string, courseId: string): Promise<StoredEvent[]> {
-      const rows = await db('learning_events').where({ user: userId, course: courseId }).select('event_id', 'kind', 'payload', 'device_time', 'received_at');
+      // Solo exposiciones e intentos: los resultados de simulacro (kind «exam») no son evidencia del núcleo.
+      const rows = await db('learning_events').where({ user: userId, course: courseId }).whereIn('kind', ['exposure', 'attempt']).select('event_id', 'kind', 'payload', 'device_time', 'received_at');
       return rows.map((r: Row) => ({ event_id: r.event_id, kind: r.kind, payload: parse(r.payload), device_time: new Date(r.device_time).getTime() }));
     }
 
@@ -466,6 +469,7 @@ export default {
         data: {
           streak: streak.days,
           bestStreak: streak.best,
+          exam: await examStats(userId, course.id),
           shields: streak.shields,
           // Calendario de constancia: respuestas de cada uno de los últimos 84 días (12 semanas); el último es hoy.
           calendar: Array.from({ length: CALENDAR_DAYS }, (_, i) => learner.activity[String(today - (CALENDAR_DAYS - 1) + i)]?.attempts ?? 0),
@@ -517,6 +521,43 @@ export default {
       if (open) await db('content_requests').where({ id: open.id }).update({ times: (open.times ?? 1) + 1, step, ...(note ? { note } : {}), date_updated: new Date() });
       else await db('content_requests').insert({ id: randomUUID(), user: userId, course: course.id, unit: unit.id, step, note, times: 1, status: 'open', date_created: new Date(), date_updated: new Date() });
       return { data: { saved: true } };
+    }));
+
+    /** Resultados de simulacro del alumno en un curso: la mejor nota, cuántos ha hecho y el último. */
+    async function examStats(userId: string, courseId: string) {
+      const rows: Row[] = await db('learning_events').where({ user: userId, course: courseId, kind: 'exam' }).select('payload');
+      const all = rows.map((r) => parse(r.payload) as { grade: number; correct: number; total: number; at: number });
+      const best = all.reduce<(typeof all)[number] | null>((b, x) => (!b || x.grade > b.grade ? x : b), null);
+      const last = all.reduce<(typeof all)[number] | null>((b, x) => (!b || x.at > b.at ? x : b), null);
+      return { taken: all.length, best, last };
+    }
+
+    // Simulacro de examen (idea de benrios.dev): preguntas de todos los temas YA TRABAJADOS (regla de oro, D-067: nada se
+    // pregunta sin haberse enseñado), 60 minutos y sin ayudas hasta el final. Cada vez, un examen nuevo.
+    router.get('/exam', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.query.course, userId);
+      const { units, catalog, missions } = await publishedContent(course);
+      const learner = await learnerFor(userId, course.id);
+      const { worked } = missionProgress(missions, catalog, learner);
+      const seen = missions.map((m) => ({ key: m.key, units: m.units.filter((u) => worked.has(u)) }));
+      const examId = randomUUID();
+      const questions = buildExam({ examId, units, missions: seen });
+      const used = Object.fromEntries(questions.map((q) => [q.unitKey, units[q.unitKey]]));
+      return { data: { examId, available: questions.length >= EXAM_MIN_QUESTIONS, need: EXAM_MIN_QUESTIONS, worked: worked.size, questions, units: used, minutes: EXAM_MINUTES, pass: EXAM_PASS, stats: await examStats(userId, course.id) } };
+    }));
+    router.post('/exam/result', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.body?.course, userId);
+      const examId = String(req.body?.examId ?? '');
+      const total = Number(req.body?.total), correct = Number(req.body?.correct), ms = Number(req.body?.ms);
+      if (!/^[A-Za-z0-9-]{8,64}$/.test(examId) || !Number.isInteger(total) || total < 1 || total > 100 || !Number.isInteger(correct) || correct < 0 || correct > total || !Number.isFinite(ms) || ms < 0)
+        throw new HttpError(400, 'BAD_REQUEST', 'Resultado de simulacro no válido.');
+      const at = Date.now();
+      const payload = { examId, correct, total, ms: Math.round(ms), grade: examGrade(correct, total), at };
+      await db('learning_events').insert({ event_key: createHash('sha256').update(`${userId}:exam:${examId}`).digest('hex'), event_id: examId, user: userId, course: course.id, kind: 'exam',
+        payload: JSON.stringify(payload), device_id: 'server', device_seq: 0, device_time: new Date(at), received_at: new Date(at), schema_version: 1 }).onConflict('event_key').ignore();
+      return { data: { saved: true, grade: payload.grade, stats: await examStats(userId, course.id) } };
     }));
 
     // «Reportar un error» (idea de benrios.dev, 22-oct-2026): el alumno avisa de que algo de una tarjeta está mal. Va a

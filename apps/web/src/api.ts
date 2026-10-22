@@ -1,5 +1,5 @@
 // Cliente de la API. La sesión va en una cookie httpOnly de Directus (modo `session`): no hay tokens en el navegador.
-import type { AssocPlan, ClientEvent, SessionUnit } from '@memora/experiences';
+import type { AssocPlan, ClientEvent, ExamQuestion, SessionUnit } from '@memora/experiences';
 
 export class ApiError extends Error {
   constructor(readonly status: number, readonly code: string, message: string) {
@@ -95,6 +95,8 @@ export interface SessionPayload {
 export interface Progress {
   /** Días seguidos con actividad (D-072). */
   streak?: number;
+  /** Simulacros de examen: mejor nota, cuántos y el último. */
+  exam?: ExamStats;
   /** La racha más larga que ha tenido (para los logros). */
   bestStreak?: number;
   /** Respuestas por día de las últimas 12 semanas (84 días; el último es hoy). */
@@ -110,6 +112,10 @@ export interface Progress {
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
 }
 
+/** Resultado de un simulacro guardado en el servidor. */
+export interface ExamResult { examId: string; grade: number; correct: number; total: number; ms: number; at: number }
+export interface ExamStats { taken: number; best: ExamResult | null; last: ExamResult | null }
+export interface ExamPayload { examId: string; available: boolean; need: number; worked: number; questions: ExamQuestion[]; units: Record<string, SessionUnit>; minutes: number; pass: number; stats: ExamStats }
 export type ReportReason = 'asociacion' | 'significado' | 'respuesta' | 'audio' | 'otro';
 /** Aviso de un alumno en Studio: un error reportado o un «Explícame más». */
 export interface StudioRequest { id: string; unitId: string; unit: string; label: string; kind: 'error' | 'explain'; reason: ReportReason | null; note: string | null; times: number; at: number }
@@ -157,6 +163,8 @@ export const api = {
   pushKey: () => request<{ publicKey: string | null }>('GET', '/memora/push/key'),
   pushSubscribe: (subscription: unknown, deviceId: string) => request<{ saved: boolean }>('POST', '/memora/push/subscribe', { subscription, deviceId }),
   pushTest: () => request<{ sent: number }>('POST', '/memora/push/test'),
+  exam: (course: string) => request<ExamPayload>('GET', `/memora/exam?course=${encodeURIComponent(course)}`),
+  examResult: (course: string, body: { examId: string; correct: number; total: number; ms: number }) => request<{ saved: boolean; grade: number; stats: ExamStats }>('POST', '/memora/exam/result', { course, ...body }),
   /** «Reportar un error» de una tarjeta: va a la cola de avisos de Studio. */
   report: (course: string, unit: string, reason: ReportReason, note?: string) => request<{ saved: boolean }>('POST', '/memora/report', { course, unit, reason, ...(note ? { note } : {}) }),
   studioRequests: (course: string) => request<StudioRequest[]>('GET', `/memora/studio/requests?course=${encodeURIComponent(course)}`),

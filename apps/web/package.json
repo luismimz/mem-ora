@@ -8,7 +8,7 @@
     "build": "tsc -p tsconfig.json && vite build",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json",
-    "e2e": "node e2e/flow-touch.mjs && node e2e/home-touch.mjs"
+    "e2e": "node e2e/flow-touch.mjs && node e2e/home-touch.mjs && node e2e/exam-touch.mjs"
   },
   "dependencies": {
     "@memora/content": "workspace:*",
