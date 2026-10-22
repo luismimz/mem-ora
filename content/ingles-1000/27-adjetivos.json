@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "27-adjetivos",
+      "title": "Misión 27 · Grande, pequeño, caro, barato…",
+      "units": [
+        {
+          "key": "g-too-enough",
+          "type": "pattern",
+          "goal": "Demasiado y suficiente: TOO y ENOUGH",
+          "rule": "TOO va delante: too big (demasiado grande). ENOUGH va DETRÁS del adjetivo: big enough (lo bastante grande).",
+          "pieces": [
+            {
+              "text": "too",
+              "role": "fixed",
+              "hint": "demasiado"
+            },
+            {
+              "text": "big",
+              "role": "slot",
+              "hint": "grande"
+            }
+          ],
+          "examples": [
+            {
+              "text": "This bag is too big.",
+              "translation": "Esta bolsa es demasiado grande.",
+              "mirror": {
+                "say": "Esta bolsa es demasiado grande",
+                "pieces": [
+                  {
+                    "es": "Esta bolsa",
+                    "en": "This bag",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado grande",
+                    "en": "too big",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You're old enough.",
+              "translation": "Eres lo bastante mayor.",
+              "mirror": {
+                "say": "Eres lo bastante mayor",
+                "pieces": [
+                  {
+                    "es": "(TÚ) eres",
+                    "en": "You're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lo bastante",
+                    "en": "enough",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mayor",
+                    "en": "old",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "It's too late.",
+              "translation": "Es demasiado tarde."
+            },
+            {
+              "text": "Is it big enough?",
+              "translation": "¿Es lo bastante grande?"
+            }
+          ],
+          "pitfalls": [
+            "«Enough big» está mal: ENOUGH va detrás (big enough).",
+            "TOO es «demasiado» (algo que sobra); «muy» es VERY."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "TOO empuja DELANTE; ENOUGH se sienta DETRÁS.",
+            "emoji": "⚖️"
+          }
+        },
+        {
+          "key": "big",
+          "type": "term",
+          "text": "big",
+          "meaning": "grande",
+          "pronunciation": "BIG",
+          "examples": [
+            {
+              "text": "They live in a big house.",
+              "translation": "Viven en una casa grande.",
+              "mirror": {
+                "say": "Viven en una casa grande",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viven",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en",
+                    "en": "in",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "casa",
+                    "en": "house",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "That's a big problem.",
+              "translation": "Es un problema grande."
+            }
+          ]
+        },
+        {
+          "key": "small",
+          "type": "term",
+          "text": "small",
+          "meaning": "pequeño",
+          "pronunciation": "SMOOL",
+          "examples": [
+            {
+              "text": "I have a small car.",
+              "translation": "Tengo un coche pequeño.",
+              "mirror": {
+                "say": "Tengo un coche pequeño",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "coche",
+                    "en": "car",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pequeño",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The room is too small.",
+              "translation": "La habitación es demasiado pequeña."
+            }
+          ]
+        },
+        {
+          "key": "tall",
+          "type": "term",
+          "text": "tall",
+          "meaning": "alto (persona, edificio)",
+          "pronunciation": "TOOL",
+          "examples": [
+            {
+              "text": "My brother is very tall.",
+              "translation": "Mi hermano es muy alto.",
+              "mirror": {
+                "say": "Mi hermano es muy alto",
+                "pieces": [
+                  {
+                    "es": "Mi hermano",
+                    "en": "My brother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy alto",
+                    "en": "very tall",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A tall building.",
+              "translation": "Un edificio alto."
+            }
+          ],
+          "notes": "Alto de persona o edificio es tall; una pared o un precio alto, high."
+        },
+        {
+          "key": "short",
+          "type": "term",
+          "text": "short",
+          "meaning": "bajo; corto",
+          "pronunciation": "SHORT",
+          "examples": [
+            {
+              "text": "I'm short and my sister is tall.",
+              "translation": "Yo soy bajo y mi hermana es alta.",
+              "mirror": {
+                "say": "Yo soy bajo y mi hermana es alta",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bajo",
+                    "en": "short",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mi hermana",
+                    "en": "my sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "alta",
+                    "en": "tall",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A short film.",
+              "translation": "Un cortometraje."
+            }
+          ]
+        },
+        {
+          "key": "old",
+          "type": "term",
+          "text": "old",
+          "meaning": "viejo; mayor",
+          "pronunciation": "ÓULD",
+          "examples": [
+            {
+              "text": "This is an old car.",
+              "translation": "Este es un coche viejo.",
+              "mirror": {
+                "say": "Este es un coche viejo",
+                "pieces": [
+                  {
+                    "es": "Este",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "an",
+                    "role": "word"
+                  },
+                  {
+                    "es": "coche",
+                    "en": "car",
+                    "role": "word"
+                  },
+                  {
+                    "es": "viejo",
+                    "en": "old",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "How old is your son?",
+              "translation": "¿Cuántos años tiene tu hijo?"
+            }
+          ]
+        },
+        {
+          "key": "young",
+          "type": "term",
+          "text": "young",
+          "meaning": "joven",
+          "pronunciation": "YANG",
+          "examples": [
+            {
+              "text": "She is very young.",
+              "translation": "Es muy joven.",
+              "mirror": {
+                "say": "Es muy joven",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy joven",
+                    "en": "very young",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Young people.",
+              "translation": "Los jóvenes."
+            }
+          ]
+        },
+        {
+          "key": "new",
+          "type": "term",
+          "text": "new",
+          "meaning": "nuevo",
+          "pronunciation": "NIU",
+          "examples": [
+            {
+              "text": "I have a new phone.",
+              "translation": "Tengo un móvil nuevo.",
+              "mirror": {
+                "say": "Tengo un móvil nuevo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "móvil",
+                    "en": "phone",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "What's new?",
+              "translation": "¿Qué hay de nuevo?"
+            }
+          ]
+        },
+        {
+          "key": "cheap",
+          "type": "term",
+          "text": "cheap",
+          "meaning": "barato",
+          "pronunciation": "CHIIP",
+          "examples": [
+            {
+              "text": "This shop is cheap.",
+              "translation": "Esta tienda es barata.",
+              "mirror": {
+                "say": "Esta tienda es barata",
+                "pieces": [
+                  {
+                    "es": "Esta tienda",
+                    "en": "This shop",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "barata",
+                    "en": "cheap",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cheap flights.",
+              "translation": "Vuelos baratos."
+            }
+          ]
+        },
+        {
+          "key": "expensive",
+          "type": "term",
+          "text": "expensive",
+          "meaning": "caro",
+          "pronunciation": "ekSPÉNsiv",
+          "examples": [
+            {
+              "text": "London is very expensive.",
+              "translation": "Londres es muy caro.",
+              "mirror": {
+                "say": "Londres es muy caro",
+                "pieces": [
+                  {
+                    "es": "Londres",
+                    "en": "London",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy caro",
+                    "en": "very expensive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An expensive watch.",
+              "translation": "Un reloj caro."
+            }
+          ]
+        },
+        {
+          "key": "easy",
+          "type": "term",
+          "text": "easy",
+          "meaning": "fácil",
+          "pronunciation": "ÍIsi",
+          "examples": [
+            {
+              "text": "English is easy!",
+              "translation": "¡El inglés es fácil!",
+              "mirror": {
+                "say": "¡El inglés es fácil!",
+                "pieces": [
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "who",
+                    "from": "El inglés",
+                    "why": "Los idiomas van sin «the»: English."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "fácil",
+                    "en": "easy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take it easy.",
+              "translation": "Tómatelo con calma."
+            }
+          ]
+        },
+        {
+          "key": "difficult",
+          "type": "term",
+          "text": "difficult",
+          "meaning": "difícil",
+          "pronunciation": "DÍfikalt",
+          "examples": [
+            {
+              "text": "This exam is difficult.",
+              "translation": "Este examen es difícil.",
+              "mirror": {
+                "say": "Este examen es difícil",
+                "pieces": [
+                  {
+                    "es": "Este examen",
+                    "en": "This exam",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "difícil",
+                    "en": "difficult",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's difficult to say.",
+              "translation": "Es difícil de decir."
+            }
+          ]
+        },
+        {
+          "key": "fast",
+          "type": "term",
+          "text": "fast",
+          "meaning": "rápido",
+          "pronunciation": "FAST",
+          "examples": [
+            {
+              "text": "You speak too fast.",
+              "translation": "Hablas demasiado rápido.",
+              "mirror": {
+                "say": "Hablas demasiado rápido",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hablas",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "demasiado rápido",
+                    "en": "too fast",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A fast train.",
+              "translation": "Un tren rápido."
+            }
+          ]
+        },
+        {
+          "key": "slow",
+          "type": "term",
+          "text": "slow",
+          "meaning": "lento",
+          "pronunciation": "SLÓU",
+          "examples": [
+            {
+              "text": "The internet is very slow.",
+              "translation": "Internet va muy lento.",
+              "mirror": {
+                "say": "Internet va muy lento",
+                "pieces": [
+                  {
+                    "es": "el internet",
+                    "en": "The internet",
+                    "role": "who",
+                    "from": "Internet"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "va",
+                    "why": "Las cosas no «van» lentas: SON lentas. It is slow."
+                  },
+                  {
+                    "es": "muy lento",
+                    "en": "very slow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you speak slower, please?",
+              "translation": "¿Puedes hablar más despacio, por favor?"
+            }
+          ]
+        },
+        {
+          "key": "beautiful",
+          "type": "term",
+          "text": "beautiful",
+          "meaning": "precioso, bonito",
+          "pronunciation": "BIÚtiful",
+          "examples": [
+            {
+              "text": "What a beautiful day!",
+              "translation": "¡Qué día tan bonito!",
+              "mirror": {
+                "say": "¡Qué día tan bonito!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "día",
+                    "en": "day",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tan bonito",
+                    "en": "beautiful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "She is beautiful.",
+              "translation": "Es guapísima."
+            }
+          ]
+        },
+        {
+          "key": "ugly",
+          "type": "term",
+          "text": "ugly",
+          "meaning": "feo",
+          "pronunciation": "Ágli",
+          "examples": [
+            {
+              "text": "That building is ugly.",
+              "translation": "Ese edificio es feo.",
+              "mirror": {
+                "say": "Ese edificio es feo",
+                "pieces": [
+                  {
+                    "es": "Ese edificio",
+                    "en": "That building",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "feo",
+                    "en": "ugly",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An ugly dog.",
+              "translation": "Un perro feo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
