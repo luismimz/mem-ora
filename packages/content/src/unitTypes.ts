@@ -11,11 +11,72 @@ export type UnitType = (typeof UNIT_TYPES)[number];
 
 export const TERM_FORMS = ['word', 'chunk', 'phrasal_verb', 'expression'] as const;
 
+/** Papel de cada pieza en el tren de la frase (D-082): el color es siempre el mismo en toda la app. */
+export const MIRROR_ROLES = ['who', 'helper', 'verb', 'word', 'signal'] as const;
+export type MirrorRole = (typeof MIRROR_ROLES)[number];
+
+export interface MirrorPiece {
+  /** La pieza en la frase espejo en español («TÚ», «estás»). Vacía en un semáforo (DO, DID, WILL): no se traduce. */
+  es: string;
+  /** Su pareja en inglés («you», «are»). */
+  en: string;
+  role: MirrorRole;
+  /** El español la esconde (el YO / TÚ fantasma): aparece al tocar su hueco. */
+  ghost?: boolean;
+  /** Lo que se dice de verdad antes de cambiarla («tienes» → «estás») y por qué («el hambre se siente»). */
+  from?: string;
+  why?: string;
+}
+
+/**
+ * El tren de la frase (D-082): lo que dices → tu frase completa en español (con el pronombre que se esconde y la
+ * pieza cambiada) → pieza a pieza al inglés → y, si el orden cambia (preguntas, adjetivos), el salto.
+ */
+export interface Mirror {
+  /** Lo que dices de verdad: «¿Tienes hambre?». */
+  say: string;
+  pieces: MirrorPiece[];
+  /** Orden de las piezas en inglés (posiciones), si no es el del español. */
+  order?: number[];
+}
+
 export interface Example {
   text: string;
   translation: string;
   /** De dónde sale el ejemplo si no es propio (obra, enlace, licencia). */
   source?: string;
+  /** Cómo se construye la frase desde el español (D-082). */
+  mirror?: Mirror;
+}
+
+// Los guiones marcan terminaciones para enseñarlas (walk-ING = walking): no cuentan al comparar.
+const plainWords = (x: string) => x.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').replace(/[’]/g, "'").replace(/(\p{L})-(\p{L})/gu, '$1$2').split(/\s+/).filter(Boolean).join(' ');
+
+/** Problemas del tren de una frase: piezas válidas y, en el orden inglés, exactamente la frase del ejemplo. */
+export function mirrorIssues(m: unknown, text: unknown, path: string): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  if (!isRecord(m)) return [issue('not_object', path)];
+  checkUnknownFields(issues, m, path, ['say', 'pieces', 'order']);
+  checkText(issues, m.say, `${path}.say`, { max: 160 });
+  if (!Array.isArray(m.pieces) || m.pieces.length < 2) return [...issues, issue('min_items', `${path}.pieces`, { min: 2, count: Array.isArray(m.pieces) ? m.pieces.length : 0 })];
+  m.pieces.forEach((pc, i) => {
+    const pp = `${path}.pieces.${i}`;
+    if (!isRecord(pc)) return void issues.push(issue('not_object', pp));
+    checkUnknownFields(issues, pc, pp, ['es', 'en', 'role', 'ghost', 'from', 'why']);
+    if (pc.role !== 'signal') checkText(issues, pc.es, `${pp}.es`, { max: 40 });
+    checkText(issues, pc.en, `${pp}.en`, { max: 40 });
+    checkChoice(issues, pc.role, `${pp}.role`, MIRROR_ROLES);
+    checkText(issues, pc.from, `${pp}.from`, { required: false, max: 40 });
+    checkText(issues, pc.why, `${pp}.why`, { required: false, max: 80 });
+  });
+  const n = m.pieces.length;
+  const order = Array.isArray(m.order) ? m.order : [...Array(n).keys()];
+  if (order.length !== n || [...order].sort((a, b) => a - b).some((v, i) => v !== i)) issues.push(issue('mirror_bad_order', `${path}.order`));
+  else if (typeof text === 'string' && m.pieces.every(isRecord)) {
+    const english = order.map((i) => String((m.pieces as Array<Record<string, unknown>>)[i]!.en)).join(' ');
+    if (plainWords(english) !== plainWords(text)) issues.push(issue('mirror_mismatch', `${path}.pieces`, { got: english, want: text }));
+  }
+  return issues;
 }
 
 export interface TermPayload {
@@ -133,7 +194,8 @@ function checkExamples(issues: ContentIssue[], value: unknown, min: number): voi
   value.forEach((ex, i) => {
     const path = `examples.${i}`;
     if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-    checkUnknownFields(issues, ex, path, ['text', 'translation', 'source']);
+    checkUnknownFields(issues, ex, path, ['text', 'translation', 'source', 'mirror']);
+    if (ex.mirror !== undefined) issues.push(...mirrorIssues(ex.mirror, ex.text, `${path}.mirror`));
     checkText(issues, ex.text, `${path}.text`, { max: PAYLOAD_LIMITS.exampleText });
     checkText(issues, ex.translation, `${path}.translation`, { max: PAYLOAD_LIMITS.exampleText });
     checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });

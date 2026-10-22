@@ -356,11 +356,55 @@
           "examples": [
             {
               "text": "I like music.",
-              "translation": "Me gusta la música."
+              "translation": "Me gusta la música.",
+              "mirror": {
+                "say": "Me gusta la música",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Al revés: YO gusto la música."
+                  },
+                  {
+                    "es": "la música",
+                    "en": "music",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "We need help.",
-              "translation": "Necesitamos ayuda."
+              "translation": "Necesitamos ayuda.",
+              "mirror": {
+                "say": "Necesitamos ayuda",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ayuda",
+                    "en": "help",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "They have two cars.",
@@ -406,11 +450,53 @@
           "examples": [
             {
               "text": "I want to eat.",
-              "translation": "Quiero comer."
+              "translation": "Quiero comer.",
+              "mirror": {
+                "say": "Quiero comer",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "com-ER",
+                    "en": "TO eat",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "I need to sleep.",
-              "translation": "Necesito dormir."
+              "translation": "Necesito dormir.",
+              "mirror": {
+                "say": "Necesito dormir",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dorm-IR",
+                    "en": "TO sleep",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "We like to play.",

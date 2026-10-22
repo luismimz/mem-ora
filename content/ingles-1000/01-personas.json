@@ -40,7 +40,28 @@
           "examples": [
             {
               "text": "Hello, I'm Ana.",
-              "translation": "Hola, soy Ana."
+              "translation": "Hola, soy Ana.",
+              "mirror": {
+                "say": "Hola, soy Ana",
+                "pieces": [
+                  {
+                    "es": "Hola",
+                    "en": "Hello",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO soy",
+                    "en": "I'm",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +81,27 @@
           "examples": [
             {
               "text": "Many people live here.",
-              "translation": "Mucha gente vive aquí."
+              "translation": "Mucha gente vive aquí.",
+              "mirror": {
+                "say": "Mucha gente vive aquí",
+                "pieces": [
+                  {
+                    "es": "Mucha gente",
+                    "en": "Many people",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vive",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +121,27 @@
           "examples": [
             {
               "text": "That man is my teacher.",
-              "translation": "Ese hombre es mi profesor."
+              "translation": "Ese hombre es mi profesor.",
+              "mirror": {
+                "say": "Ese hombre es mi profesor",
+                "pieces": [
+                  {
+                    "es": "Ese hombre",
+                    "en": "That man",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi profesor",
+                    "en": "my teacher",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +161,29 @@
           "examples": [
             {
               "text": "The woman is a doctor.",
-              "translation": "La mujer es médica."
+              "translation": "La mujer es médica.",
+              "mirror": {
+                "say": "La mujer es médica",
+                "pieces": [
+                  {
+                    "es": "La mujer",
+                    "en": "The woman",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una médica",
+                    "en": "a doctor",
+                    "role": "word",
+                    "from": "médica",
+                    "why": "Las profesiones llevan «a»: a doctor, a nurse."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +203,27 @@
           "examples": [
             {
               "text": "The child is happy.",
-              "translation": "El niño está contento."
+              "translation": "El niño está contento.",
+              "mirror": {
+                "say": "El niño está contento",
+                "pieces": [
+                  {
+                    "es": "El niño",
+                    "en": "The child",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "contento",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +243,28 @@
           "examples": [
             {
               "text": "She is my best friend.",
-              "translation": "Es mi mejor amiga."
+              "translation": "Es mi mejor amiga.",
+              "mirror": {
+                "say": "Es mi mejor amiga",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi mejor amiga",
+                    "en": "my best friend",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +284,24 @@
           "examples": [
             {
               "text": "What's your name?",
-              "translation": "¿Cómo te llamas?"
+              "translation": "¿Cómo te llamas?",
+              "mirror": {
+                "say": "¿Cómo te llamas?",
+                "pieces": [
+                  {
+                    "es": "¿Cuál es",
+                    "en": "What's",
+                    "role": "helper",
+                    "from": "¿Cómo te llamas",
+                    "why": "En inglés: ¿CUÁL ES tu nombre?"
+                  },
+                  {
+                    "es": "tu nombre",
+                    "en": "your name",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +321,28 @@
           "examples": [
             {
               "text": "I love my family.",
-              "translation": "Quiero a mi familia."
+              "translation": "Quiero a mi familia.",
+              "mirror": {
+                "say": "Quiero a mi familia",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "love",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a mi familia",
+                    "en": "my family",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +362,29 @@
           "examples": [
             {
               "text": "My mother is a nurse.",
-              "translation": "Mi madre es enfermera."
+              "translation": "Mi madre es enfermera.",
+              "mirror": {
+                "say": "Mi madre es enfermera",
+                "pieces": [
+                  {
+                    "es": "Mi madre",
+                    "en": "My mother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una enfermera",
+                    "en": "a nurse",
+                    "role": "word",
+                    "from": "enfermera",
+                    "why": "Las profesiones llevan «a»: a doctor, a nurse."
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +404,27 @@
           "examples": [
             {
               "text": "My father works at night.",
-              "translation": "Mi padre trabaja de noche."
+              "translation": "Mi padre trabaja de noche.",
+              "mirror": {
+                "say": "Mi padre trabaja de noche",
+                "pieces": [
+                  {
+                    "es": "Mi padre",
+                    "en": "My father",
+                    "role": "who"
+                  },
+                  {
+                    "es": "trabaja",
+                    "en": "works",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "de noche",
+                    "en": "at night",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +444,28 @@
           "examples": [
             {
               "text": "I have one brother.",
-              "translation": "Tengo un hermano."
+              "translation": "Tengo un hermano.",
+              "mirror": {
+                "say": "Tengo un hermano",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un hermano",
+                    "en": "one brother",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +485,32 @@
           "examples": [
             {
               "text": "My sister is older than me.",
-              "translation": "Mi hermana es mayor que yo."
+              "translation": "Mi hermana es mayor que yo.",
+              "mirror": {
+                "say": "Mi hermana es mayor que yo",
+                "pieces": [
+                  {
+                    "es": "Mi hermana",
+                    "en": "My sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mayor",
+                    "en": "older",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que yo",
+                    "en": "than me",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -280,7 +530,29 @@
           "examples": [
             {
               "text": "The boy is ten years old.",
-              "translation": "El chico tiene diez años."
+              "translation": "El chico tiene diez años.",
+              "mirror": {
+                "say": "El chico tiene diez años",
+                "pieces": [
+                  {
+                    "es": "El chico",
+                    "en": "The boy",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "La edad se ES."
+                  },
+                  {
+                    "es": "diez años",
+                    "en": "ten years old",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -300,7 +572,27 @@
           "examples": [
             {
               "text": "The girl reads a book.",
-              "translation": "La chica lee un libro."
+              "translation": "La chica lee un libro.",
+              "mirror": {
+                "say": "La chica lee un libro",
+                "pieces": [
+                  {
+                    "es": "La chica",
+                    "en": "The girl",
+                    "role": "who"
+                  },
+                  {
+                    "es": "lee",
+                    "en": "reads",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un libro",
+                    "en": "a book",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +612,27 @@
           "examples": [
             {
               "text": "The baby is sleeping.",
-              "translation": "El bebé está durmiendo."
+              "translation": "El bebé está durmiendo.",
+              "mirror": {
+                "say": "El bebé está durmiendo",
+                "pieces": [
+                  {
+                    "es": "El bebé",
+                    "en": "The baby",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "durm-IENDO",
+                    "en": "sleep-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -356,11 +668,53 @@
           "examples": [
             {
               "text": "I am a teacher.",
-              "translation": "Soy profesor."
+              "translation": "Soy profesor.",
+              "mirror": {
+                "say": "Soy profesor",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "soy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un profesor",
+                    "en": "a teacher",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "She is my sister.",
-              "translation": "Es mi hermana."
+              "translation": "Es mi hermana.",
+              "mirror": {
+                "say": "Es mi hermana",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi hermana",
+                    "en": "my sister",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "We are friends.",

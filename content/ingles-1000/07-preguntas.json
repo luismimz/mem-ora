@@ -361,11 +361,65 @@
           "examples": [
             {
               "text": "Where do you live?",
-              "translation": "¿Dónde vives?"
+              "translation": "¿Dónde vives?",
+              "mirror": {
+                "say": "¿Dónde vives?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vives",
+                    "en": "live",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "Do you like coffee?",
-              "translation": "¿Te gusta el café?"
+              "translation": "¿Te gusta el café?",
+              "mirror": {
+                "say": "¿Te gusta el café?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "te gusta",
+                    "why": "Al revés: ¿TÚ gustas el café?"
+                  },
+                  {
+                    "es": "el café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "What do you want?",
@@ -560,7 +614,39 @@
           "examples": [
             {
               "text": "Who are you with?",
-              "translation": "¿Con quién estás?"
+              "translation": "¿Con quién estás?",
+              "mirror": {
+                "say": "¿Con quién estás?",
+                "pieces": [
+                  {
+                    "es": "Con",
+                    "en": "with",
+                    "role": "word"
+                  },
+                  {
+                    "es": "quién",
+                    "en": "Who",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "are",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  0
+                ]
+              }
             },
             {
               "text": "What are you listening to?",
@@ -568,7 +654,39 @@
             },
             {
               "text": "What city are you in?",
-              "translation": "¿En qué ciudad estás?"
+              "translation": "¿En qué ciudad estás?",
+              "mirror": {
+                "say": "¿En qué ciudad estás?",
+                "pieces": [
+                  {
+                    "es": "En",
+                    "en": "in",
+                    "role": "word"
+                  },
+                  {
+                    "es": "qué ciudad",
+                    "en": "What city",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "are",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  0
+                ]
+              }
             },
             {
               "text": "Where are you from?",

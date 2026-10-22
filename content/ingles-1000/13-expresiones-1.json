@@ -361,11 +361,83 @@
           "examples": [
             {
               "text": "Could you repeat that, please?",
-              "translation": "¿Podrías repetirlo, por favor?"
+              "translation": "¿Podrías repetirlo, por favor?",
+              "mirror": {
+                "say": "¿Puedes repetirlo, por favor?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper",
+                    "from": "puedes",
+                    "why": "Más amable: podrías = could."
+                  },
+                  {
+                    "es": "repetir",
+                    "en": "repeat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "eso",
+                    "en": "that",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
             },
             {
               "text": "Could you help me?",
-              "translation": "¿Podrías ayudarme?"
+              "translation": "¿Podrías ayudarme?",
+              "mirror": {
+                "say": "¿Podrías ayudarme?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ayudar",
+                    "en": "help",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             },
             {
               "text": "Could I have a coffee, please?",
@@ -415,11 +487,58 @@
           "examples": [
             {
               "text": "Have you done your homework?",
-              "translation": "¿Ya hiciste tu tarea?"
+              "translation": "¿Ya hiciste tu tarea?",
+              "mirror": {
+                "say": "¿Ya hiciste tu tarea?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hiciste",
+                    "en": "done",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu tarea",
+                    "en": "your homework",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "Have you eaten?",
-              "translation": "¿Ya comiste?"
+              "translation": "¿Ya comiste?",
+              "mirror": {
+                "say": "¿Ya comiste?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comiste",
+                    "en": "eaten",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "Have you seen this film?",

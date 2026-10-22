@@ -356,11 +356,57 @@
           "examples": [
             {
               "text": "She comes at five.",
-              "translation": "Viene a las cinco."
+              "translation": "Viene a las cinco.",
+              "mirror": {
+                "say": "Viene a las cinco",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viene",
+                    "en": "comes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las cinco",
+                    "en": "at five",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "My mother helps me.",
-              "translation": "Mi madre me ayuda."
+              "translation": "Mi madre me ayuda.",
+              "mirror": {
+                "say": "Mi madre me ayuda",
+                "pieces": [
+                  {
+                    "es": "Mi madre",
+                    "en": "My mother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ayuda",
+                    "en": "helps",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
             },
             {
               "text": "He finds his keys.",

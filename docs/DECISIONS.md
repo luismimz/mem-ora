@@ -770,3 +770,18 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   dos, deslizando la tarjeta; con tres o cuatro, con botones gigantes de colores; confeti y «pop» al acertar. La
   tarjeta cae en 4 s; si toca el suelo vuelve una vez al final (la rapidez da puntos, no castiga: ESTANDAR §2).
   Arrastrar piezas tipo imán (chunks) se resolvió con botones de pieza: más fiable en el móvil.
+
+## D-082 · El tren de la frase y «Empezar de cero» (22-oct-2026)
+- **Por qué (usuario):** que alguien sin inglés (su hermana) entienda cómo se construye una frase: en español se
+  omite el pronombre y eso bloquea («no lo sé»). Primero se arma bien la frase en español y luego se pasa al inglés,
+  haciendo visible el cambio de orden en las preguntas.
+- **Qué:** tarjeta «🚂 El tren de la frase»: lo que dices → tu frase completa en español (despiertas al 👻 YO/TÚ que se
+  esconde y cambias la ficha que en inglés es otra: «tienes» → «estás») → pieza a pieza al inglés → y en las preguntas
+  el ayudante salta delante. Cada papel con su color en toda la app (quién azul, ayudante naranja, acción verde, lo que
+  dices violeta, semáforo rojo). Sale tras cada truco nuevo y en «tus errores»; en los repasos se retira (andamio). En
+  «Construye la frase», «🚂 ¿Cómo se construye?» lo abre como ayuda (cuenta como pista).
+- **Contenido:** campo `mirror` en los ejemplos (validado: las piezas inglesas en su orden dicen exactamente la
+  frase). Misión 0 «Primeros pasos» (el YO fantasma, hambre/frío = estar, la pregunta salta), espejos en los 18 trucos
+  y en los ejemplos de las misiones 1 y 2; el resto, vuelta a vuelta.
+- **Empezar de cero (usuario):** en Perfil, con dos toques, borra el progreso del alumno en un curso tras guardar una
+  copia en Archivos de Studio (si la copia falla, no borra nada).

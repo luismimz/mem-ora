@@ -40,7 +40,28 @@
           "examples": [
             {
               "text": "I have one brother.",
-              "translation": "Tengo un hermano."
+              "translation": "Tengo un hermano.",
+              "mirror": {
+                "say": "Tengo un hermano",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un hermano",
+                    "en": "one brother",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -60,7 +81,22 @@
           "examples": [
             {
               "text": "Two coffees, please.",
-              "translation": "Dos cafés, por favor."
+              "translation": "Dos cafés, por favor.",
+              "mirror": {
+                "say": "Dos cafés, por favor",
+                "pieces": [
+                  {
+                    "es": "Dos cafés",
+                    "en": "Two coffees",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -80,7 +116,28 @@
           "examples": [
             {
               "text": "I have three cats.",
-              "translation": "Tengo tres gatos."
+              "translation": "Tengo tres gatos.",
+              "mirror": {
+                "say": "Tengo tres gatos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres gatos",
+                    "en": "three cats",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -100,7 +157,28 @@
           "examples": [
             {
               "text": "We are four.",
-              "translation": "Somos cuatro."
+              "translation": "Somos cuatro.",
+              "mirror": {
+                "say": "Somos cuatro",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "somos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cuatro",
+                    "en": "four",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -120,7 +198,22 @@
           "examples": [
             {
               "text": "Five minutes, please.",
-              "translation": "Cinco minutos, por favor."
+              "translation": "Cinco minutos, por favor.",
+              "mirror": {
+                "say": "Cinco minutos, por favor",
+                "pieces": [
+                  {
+                    "es": "Cinco minutos",
+                    "en": "Five minutes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -140,7 +233,23 @@
           "examples": [
             {
               "text": "It's six o'clock.",
-              "translation": "Son las seis."
+              "translation": "Son las seis.",
+              "mirror": {
+                "say": "Son las seis",
+                "pieces": [
+                  {
+                    "es": "ESO es",
+                    "en": "It's",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "las seis",
+                    "en": "six o'clock",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -160,7 +269,22 @@
           "examples": [
             {
               "text": "Seven days a week.",
-              "translation": "Siete días a la semana."
+              "translation": "Siete días a la semana.",
+              "mirror": {
+                "say": "Siete días a la semana",
+                "pieces": [
+                  {
+                    "es": "Siete días",
+                    "en": "Seven days",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a la semana",
+                    "en": "a week",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -180,7 +304,28 @@
           "examples": [
             {
               "text": "I work eight hours.",
-              "translation": "Trabajo ocho horas."
+              "translation": "Trabajo ocho horas.",
+              "mirror": {
+                "say": "Trabajo ocho horas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ocho horas",
+                    "en": "eight hours",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -200,7 +345,27 @@
           "examples": [
             {
               "text": "The film starts at nine.",
-              "translation": "La película empieza a las nueve."
+              "translation": "La película empieza a las nueve.",
+              "mirror": {
+                "say": "La película empieza a las nueve",
+                "pieces": [
+                  {
+                    "es": "La película",
+                    "en": "The film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "empieza",
+                    "en": "starts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las nueve",
+                    "en": "at nine",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -220,7 +385,28 @@
           "examples": [
             {
               "text": "I have ten euros.",
-              "translation": "Tengo diez euros."
+              "translation": "Tengo diez euros.",
+              "mirror": {
+                "say": "Tengo diez euros",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "diez euros",
+                    "en": "ten euros",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -240,7 +426,30 @@
           "examples": [
             {
               "text": "She is eleven.",
-              "translation": "Tiene once años."
+              "translation": "Tiene once años.",
+              "mirror": {
+                "say": "Tiene once años",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "La edad se ES."
+                  },
+                  {
+                    "es": "once",
+                    "en": "eleven",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -260,7 +469,22 @@
           "examples": [
             {
               "text": "Twelve months in a year.",
-              "translation": "Doce meses en un año."
+              "translation": "Doce meses en un año.",
+              "mirror": {
+                "say": "Doce meses en un año",
+                "pieces": [
+                  {
+                    "es": "Doce meses",
+                    "en": "Twelve months",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en un año",
+                    "en": "in a year",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -320,7 +544,30 @@
           "examples": [
             {
               "text": "I am twenty years old.",
-              "translation": "Tengo veinte años."
+              "translation": "Tengo veinte años.",
+              "mirror": {
+                "say": "Tengo veinte años",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "soy",
+                    "en": "am",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "La edad se ES."
+                  },
+                  {
+                    "es": "veinte años",
+                    "en": "twenty years old",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "association": {
@@ -361,11 +608,56 @@
           "examples": [
             {
               "text": "I am twenty years old.",
-              "translation": "Tengo veinte años."
+              "translation": "Tengo veinte años.",
+              "mirror": {
+                "say": "Tengo veinte años",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "soy",
+                    "en": "am",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "La edad no se toca: se ES."
+                  },
+                  {
+                    "es": "veinte años",
+                    "en": "twenty years old",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "My brother is ten.",
-              "translation": "Mi hermano tiene diez años."
+              "translation": "Mi hermano tiene diez años.",
+              "mirror": {
+                "say": "Mi hermano tiene diez años",
+                "pieces": [
+                  {
+                    "es": "Mi hermano",
+                    "en": "My brother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "La edad se ES."
+                  },
+                  {
+                    "es": "diez",
+                    "en": "ten",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "How old are you?",

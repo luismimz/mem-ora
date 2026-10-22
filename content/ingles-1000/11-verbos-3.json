@@ -356,11 +356,63 @@
           "examples": [
             {
               "text": "I am walking to work.",
-              "translation": "Estoy caminando al trabajo."
+              "translation": "Estoy caminando al trabajo.",
+              "mirror": {
+                "say": "Estoy caminando al trabajo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "camin-ANDO",
+                    "en": "walk-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al trabajo",
+                    "en": "to work",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "She is running now.",
-              "translation": "Ella está corriendo ahora."
+              "translation": "Ella está corriendo ahora.",
+              "mirror": {
+                "say": "Está corriendo ahora",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "corr-IENDO",
+                    "en": "runn-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ahora",
+                    "en": "now",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "We are waiting for the bus.",

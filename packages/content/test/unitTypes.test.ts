@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_SKILLS, describeContentIssue, emptyPayload, fieldLabel, validateUnitPayload } from '../src';
+import { DEFAULT_SKILLS, describeContentIssue, emptyPayload, fieldLabel, mirrorIssues, validateUnitPayload } from '../src';
 import { borrow, canI } from './fixtures';
 
 const codes = (type: string, payload: unknown) => validateUnitPayload(type, payload).map((i) => `${i.code}@${i.path}`);
@@ -53,5 +53,26 @@ describe('mensajes de contenido', () => {
   it('explica un campo obligatorio vacío', () => {
     const [first] = validateUnitPayload('term', { ...borrow, meaning: '' });
     expect(describeContentIssue(first!)).toBe('Significado: es obligatorio.');
+  });
+});
+
+describe('tren de la frase (D-082)', () => {
+  const pieces = [
+    { es: 'TÚ', en: 'you', role: 'who', ghost: true },
+    { es: 'estás', en: 'are', role: 'helper', from: 'tienes', why: 'El hambre no se toca: se siente.' },
+    { es: 'hambriento', en: 'hungry', role: 'word' },
+  ];
+  it('una pregunta bien formada: el ayudante salta delante y las piezas dicen la frase', () => {
+    expect(mirrorIssues({ say: '¿Tienes hambre?', pieces, order: [1, 0, 2] }, 'Are you hungry?', 'm')).toEqual([]);
+  });
+  it('si las piezas en inglés no dicen la frase, se avisa', () => {
+    expect(mirrorIssues({ say: '¿Tienes hambre?', pieces }, 'Are you hungry?', 'm').map((i) => i.code)).toEqual(['mirror_mismatch']);
+  });
+  it('un orden que repite o salta piezas no vale', () => {
+    expect(mirrorIssues({ say: 'x', pieces, order: [0, 0, 2] }, 'you you hungry', 'm').map((i) => i.code)).toEqual(['mirror_bad_order']);
+  });
+  it('el semáforo (DO) no tiene pieza en español', () => {
+    const m = { say: '¿Dónde vives?', pieces: [{ es: 'Dónde', en: 'Where', role: 'word' }, { es: '', en: 'do', role: 'signal' }, { es: 'TÚ', en: 'you', role: 'who', ghost: true }, { es: 'vives', en: 'live', role: 'verb' }] };
+    expect(mirrorIssues(m, 'Where do you live?', 'm')).toEqual([]);
   });
 });

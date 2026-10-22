@@ -356,11 +356,66 @@
           "examples": [
             {
               "text": "I can swim.",
-              "translation": "Sé nadar."
+              "translation": "Sé nadar.",
+              "mirror": {
+                "say": "Sé nadar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "can",
+                    "role": "helper",
+                    "from": "sé",
+                    "why": "Saber hacer algo = poder: can."
+                  },
+                  {
+                    "es": "nadar",
+                    "en": "swim",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "Can you help me?",
-              "translation": "¿Me puedes ayudar?"
+              "translation": "¿Me puedes ayudar?",
+              "mirror": {
+                "say": "¿Me puedes ayudar?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ayudar",
+                    "en": "help",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
             },
             {
               "text": "She can't drive.",
@@ -406,7 +461,39 @@
           "examples": [
             {
               "text": "I would learn English.",
-              "translation": "Aprendería inglés."
+              "translation": "Aprendería inglés.",
+              "mirror": {
+                "say": "Aprendería inglés",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "aprende-",
+                    "en": "learn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
             },
             {
               "text": "She would go with you.",
@@ -418,7 +505,41 @@
             },
             {
               "text": "We would like a coffee.",
-              "translation": "Nos gustaría un café."
+              "translation": "Nos gustaría un café.",
+              "mirror": {
+                "say": "Nos gustaría un café",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusta-",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "nos gusta-",
+                    "why": "Al revés: NOSOTROS gustaría-mos."
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
             }
           ],
           "pitfalls": [
@@ -460,11 +581,88 @@
           "examples": [
             {
               "text": "If I had a car.",
-              "translation": "Si tuviera coche."
+              "translation": "Si tuviera coche.",
+              "mirror": {
+                "say": "Si tuviera coche",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuviera",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un coche",
+                    "en": "a car",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "If I had time, I would come.",
-              "translation": "Si tuviera tiempo, vendría."
+              "translation": "Si tuviera tiempo, vendría.",
+              "mirror": {
+                "say": "Si tuviera tiempo, vendría",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuviera",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tiempo",
+                    "en": "time",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vend-",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  6,
+                  5
+                ]
+              }
             },
             {
               "text": "If I were you.",

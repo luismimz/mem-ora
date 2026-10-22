@@ -356,11 +356,45 @@
           "examples": [
             {
               "text": "My head hurts.",
-              "translation": "Me duele la cabeza."
+              "translation": "Me duele la cabeza.",
+              "mirror": {
+                "say": "Me duele la cabeza",
+                "pieces": [
+                  {
+                    "es": "MI cabeza",
+                    "en": "My head",
+                    "role": "who",
+                    "from": "la cabeza",
+                    "why": "En inglés dices de quién es: MI cabeza."
+                  },
+                  {
+                    "es": "duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "Wash your face.",
-              "translation": "Lávate la cara."
+              "translation": "Lávate la cara.",
+              "mirror": {
+                "say": "Lávate la cara",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU cara",
+                    "en": "your face",
+                    "role": "word",
+                    "from": "la cara",
+                    "why": "De quién es: TU cara."
+                  }
+                ]
+              }
             },
             {
               "text": "His leg is tired.",

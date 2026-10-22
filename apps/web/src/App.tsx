@@ -348,12 +348,39 @@ function Profile({ me, courses, course, mode, staff, onCourse, onMode, onLogout 
           <select value={mode} onChange={(e) => onMode(e.target.value as Mode)}>{modes.map((m) => <option key={m.id} value={m.id}>{m.title}{m.ready ? '' : ' (próximamente)'}</option>)}</select>
         </label>
       </section>
+      {current && <ResetCourse course={current} />}
       <section className="card-panel">
         <h2>Cuenta</h2>
         <button type="button" className="danger" onClick={onLogout}>Cerrar sesión</button>
       </section>
       </div>
     </main>
+  );
+}
+
+/** Empezar de cero en un curso (D-082): dos toques para que no sea por error; se guarda una copia antes de borrar. */
+function ResetCourse({ course }: { course: Course }) {
+  const [step, setStep] = useState<'idle' | 'ask' | 'busy' | 'done' | 'error'>('idle');
+  async function reset() {
+    setStep('busy');
+    try { await api.resetProgress(course.id, course.key); setStep('done'); } catch { setStep('error'); }
+  }
+  return (
+    <section className="card-panel reset-course">
+      <h2>Empezar de cero</h2>
+      <p className="muted">Borra tu progreso en <b>{cleanTitle(course.title)}</b> para verlo todo desde la primera misión. Antes se guarda una copia. El resto de cursos no cambia.</p>
+      {step === 'idle' && <button type="button" className="danger" onClick={() => setStep('ask')}>🔄 Empezar de cero en este curso</button>}
+      {step === 'ask' && (
+        <div className="reset-ask">
+          <p><b>¿Seguro?</b> Volverás a la misión 1 con todo como nuevo.</p>
+          <button type="button" className="danger" onClick={() => void reset()}>Sí, empezar de cero</button>
+          <button type="button" className="link" onClick={() => setStep('idle')}>Cancelar</button>
+        </div>
+      )}
+      {step === 'busy' && <p className="muted">Guardando la copia y borrando…</p>}
+      {step === 'done' && <p className="notice">✓ Listo. Vuelve a Inicio y empieza la misión 1.</p>}
+      {step === 'error' && <p className="banner">No se ha podido. No se ha borrado nada; inténtalo otra vez.</p>}
+    </section>
   );
 }
 

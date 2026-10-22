@@ -361,11 +361,57 @@
           "examples": [
             {
               "text": "I always drink coffee.",
-              "translation": "Siempre bebo café."
+              "translation": "Siempre bebo café.",
+              "mirror": {
+                "say": "Siempre bebo café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "bebo",
+                    "en": "drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
             },
             {
               "text": "She never smokes.",
-              "translation": "Ella nunca fuma."
+              "translation": "Ella nunca fuma.",
+              "mirror": {
+                "say": "Ella nunca fuma",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fuma",
+                    "en": "smokes",
+                    "role": "verb"
+                  }
+                ]
+              }
             },
             {
               "text": "We often read at night.",
