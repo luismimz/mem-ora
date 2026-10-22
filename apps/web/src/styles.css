@@ -776,3 +776,12 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
   .nav { gap: 0; }
   .nav-link { padding: .5rem .55rem; font-size: .92rem; }
 }
+
+/* Arrastre tipo imán en «Construye la frase»: la pieza sigue al dedo y en la frase se abre el hueco donde caerá. */
+.build-line .tile, .build-bank .tile { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; }
+.tile.lifted { opacity: .25; }
+.tile-ghost { position: fixed; z-index: 70; pointer-events: none; transform: translate(-50%, -60%) rotate(-3deg) scale(1.08); box-shadow: 0 14px 30px rgba(0,0,0,.35); background: #ffd76a; }
+.tile-gap { display: inline-block; width: 2.6rem; min-height: 2.9rem; border-radius: .8rem; border: 2px dashed rgba(255,255,255,.75); background: rgba(255,255,255,.12); animation: gap-in .14s ease-out; }
+.build-line.magnet { outline: 2px solid rgba(255,215,106,.7); outline-offset: 3px; }
+@keyframes gap-in { from { width: 0; } to { width: 2.6rem; } }
+@media (prefers-reduced-motion: reduce) { .tile-gap { animation: none; } }

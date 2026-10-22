@@ -23,7 +23,7 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Más vocabulario hasta 1.000** (meta de 30 días). Hecho: misiones 18–21 (ciudad + there is, pasado + irregulares,
   viajes + going to, trabajo + comparativos): 315 palabras. Siguiente: tiempo atmosférico, ropa, emociones, adjetivos,
   días y meses, animales, compras, salud, frases para conversar.
-- **[inglés] Arrastre tipo imán** para las piezas de Lego (hoy, botones).
+- ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).
 
 ## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)
 
