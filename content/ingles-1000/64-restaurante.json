@@ -1,0 +1,781 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "64-restaurante",
+      "title": "Misión 64 · En el restaurante",
+      "units": [
+        {
+          "key": "g-prefer",
+          "type": "pattern",
+          "goal": "Prefiero el té al café = I prefer tea TO coffee",
+          "rule": "Para preferencias: I prefer A to B (sin «the»). Para elegir ahora: I'd rather + verbo (I'd rather stay).",
+          "pieces": [
+            {
+              "text": "I prefer",
+              "role": "fixed",
+              "hint": "prefiero"
+            },
+            {
+              "text": "tea",
+              "role": "slot",
+              "hint": "el té"
+            },
+            {
+              "text": "to coffee",
+              "role": "fixed",
+              "hint": "al café"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I prefer tea to coffee.",
+              "translation": "Prefiero el té al café.",
+              "mirror": {
+                "say": "Prefiero el té al café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prefiero",
+                    "en": "prefer",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "té",
+                    "en": "tea",
+                    "role": "word",
+                    "from": "el té",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "a café",
+                    "en": "to coffee",
+                    "role": "word",
+                    "from": "al café",
+                    "why": "Preferir A a B: prefer A TO B, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'd rather stay at home.",
+              "translation": "Prefiero quedarme en casa.",
+              "mirror": {
+                "say": "Prefiero quedarme en casa",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÍA antes",
+                    "en": "I'd rather",
+                    "role": "helper",
+                    "from": "Prefiero",
+                    "why": "Para elegir ahora: I'd rather + verbo."
+                  },
+                  {
+                    "es": "quedar",
+                    "en": "stay",
+                    "role": "verb",
+                    "from": "quedarme"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Which do you prefer?",
+              "translation": "¿Cuál prefieres?"
+            },
+            {
+              "text": "I'd rather not.",
+              "translation": "Prefiero que no."
+            }
+          ],
+          "pitfalls": [
+            "«I prefer tea than coffee» está mal: TO coffee.",
+            "Detrás de I'd rather, el verbo va tal cual: I'd rather go."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una BALANZA con TÉ arriba y CAFÉ abajo.",
+            "emoji": "⚖️"
+          }
+        },
+        {
+          "key": "menu",
+          "type": "term",
+          "text": "menu",
+          "meaning": "carta, menú",
+          "pronunciation": "MÉNiu",
+          "examples": [
+            {
+              "text": "Can I see the menu, please?",
+              "translation": "¿Me trae la carta, por favor?",
+              "mirror": {
+                "say": "¿Me trae la carta, por favor?",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Me trae",
+                    "why": "Pedir la carta es «¿puedo ver la carta?»: can I see the menu?"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la carta",
+                    "en": "the menu",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The menu of the day.",
+              "translation": "El menú del día."
+            }
+          ]
+        },
+        {
+          "key": "bill",
+          "type": "term",
+          "text": "bill",
+          "meaning": "cuenta (para pagar); factura",
+          "pronunciation": "BIL",
+          "examples": [
+            {
+              "text": "Could we have the bill, please?",
+              "translation": "¿Nos trae la cuenta, por favor?",
+              "mirror": {
+                "say": "¿Nos trae la cuenta, por favor?",
+                "pieces": [
+                  {
+                    "es": "Podríamos",
+                    "en": "Could",
+                    "role": "helper",
+                    "from": "Nos trae"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la cuenta",
+                    "en": "the bill",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The electricity bill.",
+              "translation": "La factura de la luz."
+            }
+          ],
+          "notes": "En EE. UU., la cuenta del restaurante es the check."
+        },
+        {
+          "key": "tip",
+          "type": "term",
+          "text": "tip",
+          "meaning": "propina; consejo",
+          "pronunciation": "TIP",
+          "examples": [
+            {
+              "text": "We left a tip.",
+              "translation": "Dejamos propina.",
+              "mirror": {
+                "say": "Dejamos propina",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dejamos",
+                    "en": "left",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "UNA propina",
+                    "en": "a tip",
+                    "role": "word",
+                    "from": "propina"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A useful tip.",
+              "translation": "Un consejo útil."
+            }
+          ]
+        },
+        {
+          "key": "starter",
+          "type": "term",
+          "text": "starter",
+          "meaning": "entrante, primer plato",
+          "pronunciation": "STÁRter",
+          "examples": [
+            {
+              "text": "For a starter, I'll have soup.",
+              "translation": "De primero, tomaré sopa.",
+              "mirror": {
+                "say": "De primero, tomaré sopa",
+                "pieces": [
+                  {
+                    "es": "Para un entrante",
+                    "en": "For a starter",
+                    "role": "word",
+                    "from": "De primero"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "tomaré"
+                  },
+                  {
+                    "es": "tomar",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sopa",
+                    "en": "soup",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Two starters to share.",
+              "translation": "Dos entrantes para compartir."
+            }
+          ]
+        },
+        {
+          "key": "dessert",
+          "type": "term",
+          "text": "dessert",
+          "meaning": "postre",
+          "pronunciation": "diSÉRT",
+          "examples": [
+            {
+              "text": "What do you have for dessert?",
+              "translation": "¿Qué tenéis de postre?",
+              "mirror": {
+                "say": "¿Qué tenéis de postre?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "VOSOTROS",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenéis",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para postre",
+                    "en": "for dessert",
+                    "role": "word",
+                    "from": "de postre"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No dessert, thanks.",
+              "translation": "Sin postre, gracias."
+            }
+          ],
+          "notes": "Dessert (postre) lleva dos s; desert es desierto."
+        },
+        {
+          "key": "main-course",
+          "type": "term",
+          "text": "main course",
+          "meaning": "segundo plato, plato principal",
+          "pronunciation": "mein KÓRS",
+          "examples": [
+            {
+              "text": "For my main course, the fish.",
+              "translation": "De segundo, el pescado.",
+              "mirror": {
+                "say": "De segundo, el pescado",
+                "pieces": [
+                  {
+                    "es": "Para mi plato principal",
+                    "en": "For my main course",
+                    "role": "word",
+                    "from": "De segundo"
+                  },
+                  {
+                    "es": "el pescado",
+                    "en": "the fish",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The main course was delicious.",
+              "translation": "El segundo estaba buenísimo."
+            }
+          ]
+        },
+        {
+          "key": "napkin",
+          "type": "term",
+          "text": "napkin",
+          "meaning": "servilleta",
+          "pronunciation": "NÁPkin",
+          "examples": [
+            {
+              "text": "Can I have a napkin?",
+              "translation": "¿Me da una servilleta?",
+              "mirror": {
+                "say": "¿Me da una servilleta?",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Me da"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una servilleta",
+                    "en": "a napkin",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Paper napkins.",
+              "translation": "Servilletas de papel."
+            }
+          ]
+        },
+        {
+          "key": "bottle",
+          "type": "term",
+          "text": "bottle",
+          "meaning": "botella",
+          "pronunciation": "BÓtel",
+          "examples": [
+            {
+              "text": "A bottle of water, please.",
+              "translation": "Una botella de agua, por favor.",
+              "mirror": {
+                "say": "Una botella de agua, por favor",
+                "pieces": [
+                  {
+                    "es": "Una botella",
+                    "en": "A bottle",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de agua",
+                    "en": "of water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An empty bottle.",
+              "translation": "Una botella vacía."
+            }
+          ]
+        },
+        {
+          "key": "steak",
+          "type": "term",
+          "text": "steak",
+          "meaning": "filete, bistec",
+          "pronunciation": "STÉIK",
+          "examples": [
+            {
+              "text": "How would you like your steak?",
+              "translation": "¿Cómo quiere el filete?",
+              "mirror": {
+                "say": "¿Cómo quiere el filete?",
+                "pieces": [
+                  {
+                    "es": "Cómo",
+                    "en": "How",
+                    "role": "word"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper",
+                    "from": "quiere"
+                  },
+                  {
+                    "es": "USTED",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustar",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "quiere"
+                  },
+                  {
+                    "es": "SU filete",
+                    "en": "your steak",
+                    "role": "word",
+                    "from": "el filete"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Steak and chips.",
+              "translation": "Filete con patatas."
+            }
+          ],
+          "notes": "Se dice STÉIK, no STIIK."
+        },
+        {
+          "key": "pasta",
+          "type": "term",
+          "text": "pasta",
+          "meaning": "pasta",
+          "pronunciation": "PÁsta",
+          "examples": [
+            {
+              "text": "I love pasta.",
+              "translation": "Me encanta la pasta.",
+              "mirror": {
+                "say": "Me encanta la pasta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "Me encanta",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "pasta",
+                    "en": "pasta",
+                    "role": "word",
+                    "from": "la pasta",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Pasta with tomato sauce.",
+              "translation": "Pasta con tomate."
+            }
+          ]
+        },
+        {
+          "key": "pepper",
+          "type": "term",
+          "text": "pepper",
+          "meaning": "pimienta; pimiento",
+          "pronunciation": "PÉper",
+          "examples": [
+            {
+              "text": "Salt and pepper?",
+              "translation": "¿Sal y pimienta?",
+              "mirror": {
+                "say": "¿Sal y pimienta?",
+                "pieces": [
+                  {
+                    "es": "Sal",
+                    "en": "Salt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pimienta",
+                    "en": "pepper",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A red pepper.",
+              "translation": "Un pimiento rojo."
+            }
+          ]
+        },
+        {
+          "key": "vinegar",
+          "type": "term",
+          "text": "vinegar",
+          "meaning": "vinagre",
+          "pronunciation": "VÍnegar",
+          "examples": [
+            {
+              "text": "Oil and vinegar.",
+              "translation": "Aceite y vinagre.",
+              "mirror": {
+                "say": "Aceite y vinagre",
+                "pieces": [
+                  {
+                    "es": "Aceite",
+                    "en": "Oil",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "vinagre",
+                    "en": "vinegar",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Add a little vinegar.",
+              "translation": "Añade un poco de vinagre."
+            }
+          ]
+        },
+        {
+          "key": "spicy",
+          "type": "term",
+          "text": "spicy",
+          "meaning": "picante",
+          "pronunciation": "SPÁIsi",
+          "examples": [
+            {
+              "text": "Is it very spicy?",
+              "translation": "¿Pica mucho?",
+              "mirror": {
+                "say": "¿Pica mucho?",
+                "pieces": [
+                  {
+                    "es": "Es",
+                    "en": "Is",
+                    "role": "helper",
+                    "from": "Pica"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "muy picante",
+                    "en": "very spicy",
+                    "role": "word",
+                    "from": "mucho",
+                    "why": "Picar mucho es «ser muy picante»: very spicy."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love spicy food.",
+              "translation": "Me encanta la comida picante."
+            }
+          ]
+        },
+        {
+          "key": "rare",
+          "type": "term",
+          "text": "rare",
+          "meaning": "poco hecho; raro, poco común",
+          "pronunciation": "RÉR",
+          "examples": [
+            {
+              "text": "I like my steak rare.",
+              "translation": "El filete me gusta poco hecho.",
+              "mirror": {
+                "say": "El filete me gusta poco hecho",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "MI filete",
+                    "en": "my steak",
+                    "role": "word",
+                    "from": "El filete"
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: I like…"
+                  },
+                  {
+                    "es": "poco hecho",
+                    "en": "rare",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A rare bird.",
+              "translation": "Un pájaro poco común."
+            }
+          ],
+          "notes": "Al punto: medium. Muy hecho: well done."
+        },
+        {
+          "key": "vegetarian",
+          "type": "term",
+          "text": "vegetarian",
+          "meaning": "vegetariano",
+          "pronunciation": "veyeTÉrian",
+          "examples": [
+            {
+              "text": "I'm vegetarian.",
+              "translation": "Soy vegetariano.",
+              "mirror": {
+                "say": "Soy vegetariano",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "vegetariano",
+                    "en": "vegetarian",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you have a vegetarian menu?",
+              "translation": "¿Tienen menú vegetariano?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

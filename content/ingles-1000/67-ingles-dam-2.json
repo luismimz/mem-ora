@@ -1,0 +1,767 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "67-ingles-dam-2",
+      "title": "Misión 67 · Inglés para programar",
+      "units": [
+        {
+          "key": "g-how-to",
+          "type": "pattern",
+          "goal": "Cómo se instala = HOW TO install",
+          "rule": "Para buscar instrucciones: how to + verbo. How to install Java. I don't know how to do it. Muy útil al buscar en internet.",
+          "pieces": [
+            {
+              "text": "How to",
+              "role": "fixed",
+              "hint": "cómo"
+            },
+            {
+              "text": "install Java",
+              "role": "slot",
+              "hint": "instalar Java"
+            }
+          ],
+          "examples": [
+            {
+              "text": "How to connect to a database.",
+              "translation": "Cómo conectarse a una base de datos.",
+              "mirror": {
+                "say": "Cómo conectarse a una base de datos",
+                "pieces": [
+                  {
+                    "es": "Cómo",
+                    "en": "How",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a conectar",
+                    "en": "to connect",
+                    "role": "verb",
+                    "from": "conectarse",
+                    "why": "Cómo + verbo es HOW TO + verbo."
+                  },
+                  {
+                    "es": "a una base de datos",
+                    "en": "to a database",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't know how to fix this bug.",
+              "translation": "No sé cómo arreglar este fallo.",
+              "mirror": {
+                "say": "No sé cómo arreglar este fallo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "sé",
+                    "en": "know",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cómo",
+                    "en": "how",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a arreglar",
+                    "en": "to fix",
+                    "role": "verb",
+                    "from": "arreglar"
+                  },
+                  {
+                    "es": "este fallo",
+                    "en": "this bug",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How to exit Vim?",
+              "translation": "¿Cómo se sale de Vim?"
+            },
+            {
+              "text": "She showed me how to use Git.",
+              "translation": "Me enseñó a usar Git."
+            }
+          ],
+          "pitfalls": [
+            "«How install Java» está mal: falta TO (how to install).",
+            "Para preguntar a alguien: How do I install it?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un MANUAL que se abre gritando: HOW TO!",
+            "emoji": "📖"
+          }
+        },
+        {
+          "key": "debug",
+          "type": "term",
+          "text": "debug",
+          "meaning": "depurar",
+          "pronunciation": "diBÁG",
+          "examples": [
+            {
+              "text": "I spent two hours debugging.",
+              "translation": "Me pasé dos horas depurando.",
+              "mirror": {
+                "say": "Me pasé dos horas depurando",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pasé",
+                    "en": "spent",
+                    "role": "verb",
+                    "from": "Me pasé"
+                  },
+                  {
+                    "es": "dos horas",
+                    "en": "two hours",
+                    "role": "word"
+                  },
+                  {
+                    "es": "depurando",
+                    "en": "debugging",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Debug the code step by step.",
+              "translation": "Depura el código paso a paso."
+            }
+          ]
+        },
+        {
+          "key": "server",
+          "type": "term",
+          "text": "server",
+          "meaning": "servidor",
+          "pronunciation": "SÉRver",
+          "examples": [
+            {
+              "text": "The server is down.",
+              "translation": "El servidor está caído.",
+              "mirror": {
+                "say": "El servidor está caído",
+                "pieces": [
+                  {
+                    "es": "El servidor",
+                    "en": "The server",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caído",
+                    "en": "down",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Restart the server.",
+              "translation": "Reinicia el servidor."
+            }
+          ]
+        },
+        {
+          "key": "database",
+          "type": "term",
+          "text": "database",
+          "meaning": "base de datos",
+          "pronunciation": "DÉItabeis",
+          "examples": [
+            {
+              "text": "The data is saved in the database.",
+              "translation": "Los datos se guardan en la base de datos.",
+              "mirror": {
+                "say": "Los datos se guardan en la base de datos",
+                "pieces": [
+                  {
+                    "es": "Los datos",
+                    "en": "The data",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "«Se guardan» es pasiva: is saved."
+                  },
+                  {
+                    "es": "guardado",
+                    "en": "saved",
+                    "role": "verb",
+                    "from": "guardan"
+                  },
+                  {
+                    "es": "en la base de datos",
+                    "en": "in the database",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A SQL database.",
+              "translation": "Una base de datos SQL."
+            }
+          ],
+          "notes": "Data suele ir en singular: the data is…"
+        },
+        {
+          "key": "query",
+          "type": "term",
+          "text": "query",
+          "meaning": "consulta",
+          "pronunciation": "KUÍri",
+          "examples": [
+            {
+              "text": "This query is too slow.",
+              "translation": "Esta consulta es demasiado lenta.",
+              "mirror": {
+                "say": "Esta consulta es demasiado lenta",
+                "pieces": [
+                  {
+                    "es": "Esta consulta",
+                    "en": "This query",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado lenta",
+                    "en": "too slow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Write a query to get all the users.",
+              "translation": "Escribe una consulta que saque todos los usuarios."
+            }
+          ]
+        },
+        {
+          "key": "loop",
+          "type": "term",
+          "text": "loop",
+          "meaning": "bucle",
+          "pronunciation": "LUUP",
+          "examples": [
+            {
+              "text": "The loop never ends.",
+              "translation": "El bucle no termina nunca.",
+              "mirror": {
+                "say": "El bucle no termina nunca",
+                "pieces": [
+                  {
+                    "es": "El bucle",
+                    "en": "The loop",
+                    "role": "who"
+                  },
+                  {
+                    "es": "termina",
+                    "en": "ends",
+                    "role": "verb",
+                    "from": "no termina"
+                  },
+                  {
+                    "es": "nunca",
+                    "en": "never",
+                    "role": "word",
+                    "from": "nunca",
+                    "why": "Una sola negación: the loop NEVER ends."
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "A for loop.",
+              "translation": "Un bucle for."
+            }
+          ]
+        },
+        {
+          "key": "variable",
+          "type": "term",
+          "text": "variable",
+          "meaning": "variable",
+          "pronunciation": "VÉriabol",
+          "examples": [
+            {
+              "text": "Declare the variable first.",
+              "translation": "Declara primero la variable.",
+              "mirror": {
+                "say": "Declara primero la variable",
+                "pieces": [
+                  {
+                    "es": "Declara",
+                    "en": "Declare",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "primero",
+                    "en": "first",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la variable",
+                    "en": "the variable",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "A global variable.",
+              "translation": "Una variable global."
+            }
+          ]
+        },
+        {
+          "key": "function",
+          "type": "term",
+          "text": "function",
+          "meaning": "función",
+          "pronunciation": "FÁNKshon",
+          "examples": [
+            {
+              "text": "This function returns a number.",
+              "translation": "Esta función devuelve un número.",
+              "mirror": {
+                "say": "Esta función devuelve un número",
+                "pieces": [
+                  {
+                    "es": "Esta función",
+                    "en": "This function",
+                    "role": "who"
+                  },
+                  {
+                    "es": "devuelve",
+                    "en": "returns",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un número",
+                    "en": "a number",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Call the function.",
+              "translation": "Llama a la función."
+            }
+          ]
+        },
+        {
+          "key": "array",
+          "type": "term",
+          "text": "array",
+          "meaning": "array, vector",
+          "pronunciation": "aRÉI",
+          "examples": [
+            {
+              "text": "The array is empty.",
+              "translation": "El array está vacío.",
+              "mirror": {
+                "say": "El array está vacío",
+                "pieces": [
+                  {
+                    "es": "El array",
+                    "en": "The array",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "vacío",
+                    "en": "empty",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Loop through the array.",
+              "translation": "Recorre el array."
+            }
+          ]
+        },
+        {
+          "key": "string",
+          "type": "term",
+          "text": "string",
+          "meaning": "cadena (de texto)",
+          "pronunciation": "STRING",
+          "examples": [
+            {
+              "text": "Convert the number to a string.",
+              "translation": "Convierte el número en cadena.",
+              "mirror": {
+                "say": "Convierte el número en cadena",
+                "pieces": [
+                  {
+                    "es": "Convierte",
+                    "en": "Convert",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el número",
+                    "en": "the number",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a una cadena",
+                    "en": "to a string",
+                    "role": "word",
+                    "from": "en cadena",
+                    "why": "Convertir EN algo es convert TO."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An empty string.",
+              "translation": "Una cadena vacía."
+            }
+          ]
+        },
+        {
+          "key": "boolean",
+          "type": "term",
+          "text": "boolean",
+          "meaning": "booleano",
+          "pronunciation": "BÚlian",
+          "examples": [
+            {
+              "text": "A boolean is true or false.",
+              "translation": "Un booleano es verdadero o falso.",
+              "mirror": {
+                "say": "Un booleano es verdadero o falso",
+                "pieces": [
+                  {
+                    "es": "Un booleano",
+                    "en": "A boolean",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "verdadero",
+                    "en": "true",
+                    "role": "word"
+                  },
+                  {
+                    "es": "o",
+                    "en": "or",
+                    "role": "word"
+                  },
+                  {
+                    "es": "falso",
+                    "en": "false",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Return a boolean.",
+              "translation": "Devuelve un booleano."
+            }
+          ]
+        },
+        {
+          "key": "object",
+          "type": "term",
+          "text": "object",
+          "meaning": "objeto",
+          "pronunciation": "ÓByekt",
+          "examples": [
+            {
+              "text": "Create a new object.",
+              "translation": "Crea un objeto nuevo.",
+              "mirror": {
+                "say": "Crea un objeto nuevo",
+                "pieces": [
+                  {
+                    "es": "Crea",
+                    "en": "Create",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "objeto",
+                    "en": "object",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Object-oriented programming.",
+              "translation": "Programación orientada a objetos."
+            }
+          ]
+        },
+        {
+          "key": "method",
+          "type": "term",
+          "text": "method",
+          "meaning": "método",
+          "pronunciation": "MÉzod",
+          "examples": [
+            {
+              "text": "Call the method on the object.",
+              "translation": "Llama al método del objeto.",
+              "mirror": {
+                "say": "Llama al método del objeto",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el método",
+                    "en": "the method",
+                    "role": "word",
+                    "from": "al método",
+                    "why": "Llamar A algo, sin «a»: call the method."
+                  },
+                  {
+                    "es": "sobre el objeto",
+                    "en": "on the object",
+                    "role": "word",
+                    "from": "del objeto"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A static method.",
+              "translation": "Un método estático."
+            }
+          ]
+        },
+        {
+          "key": "compile",
+          "type": "term",
+          "text": "compile",
+          "meaning": "compilar",
+          "pronunciation": "komPÁIL",
+          "examples": [
+            {
+              "text": "The code doesn't compile.",
+              "translation": "El código no compila.",
+              "mirror": {
+                "say": "El código no compila",
+                "pieces": [
+                  {
+                    "es": "El código",
+                    "en": "The code",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "compilar",
+                    "en": "compile",
+                    "role": "verb",
+                    "from": "compila",
+                    "why": "Con DOESN'T el verbo va tal cual: compile."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Compile and run.",
+              "translation": "Compila y ejecuta."
+            }
+          ]
+        },
+        {
+          "key": "repository",
+          "type": "term",
+          "text": "repository",
+          "meaning": "repositorio",
+          "pronunciation": "riPÓsitori",
+          "examples": [
+            {
+              "text": "Clone the repository.",
+              "translation": "Clona el repositorio.",
+              "mirror": {
+                "say": "Clona el repositorio",
+                "pieces": [
+                  {
+                    "es": "Clona",
+                    "en": "Clone",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el repositorio",
+                    "en": "the repository",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A public repository.",
+              "translation": "Un repositorio público."
+            }
+          ],
+          "notes": "Abreviado: repo."
+        },
+        {
+          "key": "framework",
+          "type": "term",
+          "text": "framework",
+          "meaning": "framework, marco de trabajo",
+          "pronunciation": "FRÉIMuerk",
+          "examples": [
+            {
+              "text": "Spring is a Java framework.",
+              "translation": "Spring es un framework de Java.",
+              "mirror": {
+                "say": "Spring es un framework de Java",
+                "pieces": [
+                  {
+                    "es": "Spring",
+                    "en": "Spring",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "framework",
+                    "en": "framework",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de Java",
+                    "en": "Java",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Which framework do you use?",
+              "translation": "¿Qué framework usas?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
