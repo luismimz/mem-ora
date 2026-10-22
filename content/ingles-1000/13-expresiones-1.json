@@ -384,6 +384,61 @@
             "scene": "Un mayordomo inglés susurra COULD YOU antes de cada favor.",
             "emoji": "🎩"
           }
+        },
+        {
+          "key": "g-have-ya",
+          "type": "pattern",
+          "goal": "Preguntar «¿YA…?»: HAVE al principio",
+          "rule": "HAVE al empezar una pregunta es el botón «¿YA…?»: Have you eaten? = ¿Ya comiste? Detrás, la 3.ª forma: done, eaten, seen.",
+          "pieces": [
+            {
+              "text": "Have",
+              "role": "fixed",
+              "hint": "¿YA"
+            },
+            {
+              "text": "you",
+              "role": "fixed",
+              "hint": "TÚ"
+            },
+            {
+              "text": "done",
+              "role": "slot",
+              "hint": "hiciste"
+            },
+            {
+              "text": "your homework",
+              "role": "fixed",
+              "hint": "tu tarea"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Have you done your homework?",
+              "translation": "¿Ya hiciste tu tarea?"
+            },
+            {
+              "text": "Have you eaten?",
+              "translation": "¿Ya comiste?"
+            },
+            {
+              "text": "Have you seen this film?",
+              "translation": "¿Ya has visto esta película?"
+            },
+            {
+              "text": "Has she called you?",
+              "translation": "¿Ya te ha llamado?"
+            }
+          ],
+          "pitfalls": [
+            "Con he / she: HAS (Has she called?).",
+            "Detrás no va el pasado normal: Have you eaten? (no «Have you ate?»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "HAVE es un BOTÓN rojo que grita: ¿YA?",
+            "emoji": "🔴"
+          }
         }
       ]
     }

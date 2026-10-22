@@ -384,6 +384,147 @@
             "scene": "Tu TARTA de cumpleaños grita: ¡NO TIENES años, LOS ERES!",
             "emoji": "🎂"
           }
+        },
+        {
+          "key": "toco-o-cuento",
+          "type": "concept",
+          "name": "Toco o cuento",
+          "gist": "Lo tocas o lo cuentas: HAVE. Lo sientes: I AM",
+          "definition": "En español «tener» vale para todo; en inglés hay dos. Si lo puedes TOCAR con las manos o CONTAR con números (un gato, dos coches, dinero, un hermano), es HAVE: I have a cat. Si NO se toca ni se cuenta porque lo sientes o lo eres (hambre, sed, frío, calor, sueño, miedo, la edad), es TO BE: I am hungry, I am cold, I am twenty.",
+          "examples": [
+            {
+              "text": "I have a cat.",
+              "explanation": "Tengo un gato: se toca → HAVE."
+            },
+            {
+              "text": "I am hungry.",
+              "explanation": "Tengo hambre: se siente → AM."
+            },
+            {
+              "text": "I am sleepy.",
+              "explanation": "Tengo sueño: se siente → AM."
+            },
+            {
+              "text": "I am twenty.",
+              "explanation": "Tengo veinte años: la edad se ES → AM."
+            }
+          ],
+          "contrast": "«I have hungry» y «I have twenty years» son los dos errores más típicos del hispanohablante.",
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🐱  Tengo un gato",
+              "answer": "I HAVE",
+              "distractors": [
+                "I AM"
+              ],
+              "explanation": "Se toca → I have a cat."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🍔😩  Tengo hambre",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "Se siente → I am hungry."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚗🚗  Tengo dos coches",
+              "answer": "I HAVE",
+              "distractors": [
+                "I AM"
+              ],
+              "explanation": "Se cuenta → I have two cars."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🥶  Tengo frío",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "Se siente → I am cold."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "😴🛏️  Tengo sueño",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "Se siente → I am sleepy."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "💶  Tengo dinero",
+              "answer": "I HAVE",
+              "distractors": [
+                "I AM"
+              ],
+              "explanation": "Se toca → I have money."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🎂20  Tengo veinte años",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "La edad se ES → I am twenty."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "😱👻  Tengo miedo",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "Se siente → I am scared."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🏠  Tengo una casa",
+              "answer": "I HAVE",
+              "distractors": [
+                "I AM"
+              ],
+              "explanation": "Se toca → I have a house."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🥵☀️  Tengo calor",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "Se siente → I am hot."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🥤😮‍💨  Tengo sed",
+              "answer": "I AM",
+              "distractors": [
+                "I HAVE"
+              ],
+              "explanation": "Se siente → I am thirsty."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "👦  Tengo un hermano",
+              "answer": "I HAVE",
+              "distractors": [
+                "I AM"
+              ],
+              "explanation": "Se cuenta → I have a brother."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Tus MANOS agarran HAVE; tu TRIPA ruge I AM.",
+            "emoji": "🤲"
+          }
         }
       ]
     }

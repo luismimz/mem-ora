@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -156,5 +156,29 @@ describe('idiomas en el Flujo: escuchar, construir y gramática (D-079)', () => 
 
   it('las fichas de una frase son sus palabras sin la puntuación final', () => {
     expect(buildTiles("I'm reading a book.")).toEqual(["I'm", 'reading', 'a', 'book']);
+  });
+});
+
+describe('Ráfaga: los juegos de los pilares (D-081)', () => {
+  const ex = (prompt: string, answer: string, distractors: string[]) => ({ kind: 'apply_case', prompt, answer, distractors });
+  const game: SessionUnit = {
+    key: 'toco', type: 'concept', language: 'en',
+    payload: { name: 'Toco o cuento', gist: 'HAVE si se toca; BE si se siente', definition: 'd', examples: [], exercises: [
+      ex('Tengo un gato', 'I HAVE', ['I AM']), ex('Tengo hambre', 'I AM', ['I HAVE']), ex('Tengo dos coches', 'I HAVE', ['I AM']), ex('Tengo frío', 'I AM', ['I HAVE']),
+    ] },
+    skills: [{ key: 'toco.recall', kind: 'recall' }, { key: 'toco.apply', kind: 'apply' }],
+    association: null,
+  } as unknown as SessionUnit;
+  const plan = buildFlowSession({ ...base, units: { ...units, toco: game }, items: [item('toco', 'new'), item('c0', 'new')] });
+
+  it('las opciones salen en orden estable (las de la primera pregunta) y el concepto se reconoce como juego', () => {
+    expect(burstOptions(game)).toEqual(['I HAVE', 'I AM']);
+    expect(burstOptions(concept('x'))).toBeNull();
+  });
+
+  it('tras su ficha, el juego se practica con su Ráfaga (habilidad «aplicar») y no con relámpago ni pregunta de examen', () => {
+    const steps = plan.steps.filter((s) => s.unitKey === 'toco');
+    expect(steps.map((s) => s.kind)).toEqual(['reel', 'burst']);
+    expect(steps[1]).toMatchObject({ skillKey: 'toco.apply' });
   });
 });

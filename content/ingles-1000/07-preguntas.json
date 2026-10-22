@@ -385,6 +385,204 @@
             "scene": "El signo ¿ se disfraza de portero y grita DO.",
             "emoji": "🚪"
           }
+        },
+        {
+          "key": "semaforos",
+          "type": "concept",
+          "name": "Los semáforos: DO, DID, WILL",
+          "gist": "No se traducen: avisan del tiempo de la pregunta",
+          "definition": "DO, DID y WILL no significan nada: son luces de alarma que avisan de que viene una pregunta y en qué tiempo. DO = presente (¿Comes? → Do you eat?). DID = pasado (¿Fuiste? → Did you go?). WILL = futuro (¿Irás? → Will you go?). Detrás, el verbo va siempre tal cual.",
+          "examples": [
+            {
+              "text": "Do you eat meat?",
+              "explanation": "¿Comes carne? · presente → DO."
+            },
+            {
+              "text": "Did you go?",
+              "explanation": "¿Fuiste? · pasado → DID."
+            },
+            {
+              "text": "Will you come?",
+              "explanation": "¿Vendrás? · futuro → WILL."
+            }
+          ],
+          "contrast": "Con DID el verbo no va en pasado: Did you go? (no «Did you went?»). Con he / she en presente, la alarma es DOES: Does she eat?",
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Comes?",
+              "answer": "DO",
+              "distractors": [
+                "DID",
+                "WILL"
+              ],
+              "explanation": "Presente → Do you eat?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Fuiste?",
+              "answer": "DID",
+              "distractors": [
+                "DO",
+                "WILL"
+              ],
+              "explanation": "Pasado → Did you go?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Irás?",
+              "answer": "WILL",
+              "distractors": [
+                "DO",
+                "DID"
+              ],
+              "explanation": "Futuro → Will you go?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Vives aquí?",
+              "answer": "DO",
+              "distractors": [
+                "DID",
+                "WILL"
+              ],
+              "explanation": "Presente → Do you live here?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Comiste?",
+              "answer": "DID",
+              "distractors": [
+                "DO",
+                "WILL"
+              ],
+              "explanation": "Pasado → Did you eat?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Vendrás mañana?",
+              "answer": "WILL",
+              "distractors": [
+                "DO",
+                "DID"
+              ],
+              "explanation": "Futuro → Will you come tomorrow?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Trabajas?",
+              "answer": "DO",
+              "distractors": [
+                "DID",
+                "WILL"
+              ],
+              "explanation": "Presente → Do you work?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Llamaste a tu madre?",
+              "answer": "DID",
+              "distractors": [
+                "DO",
+                "WILL"
+              ],
+              "explanation": "Pasado → Did you call your mother?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Me ayudarás?",
+              "answer": "WILL",
+              "distractors": [
+                "DO",
+                "DID"
+              ],
+              "explanation": "Futuro → Will you help me?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Te gusta?",
+              "answer": "DO",
+              "distractors": [
+                "DID",
+                "WILL"
+              ],
+              "explanation": "Presente → Do you like it?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Lo viste?",
+              "answer": "DID",
+              "distractors": [
+                "DO",
+                "WILL"
+              ],
+              "explanation": "Pasado → Did you see it?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚦  ¿Lo harás?",
+              "answer": "WILL",
+              "distractors": [
+                "DO",
+                "DID"
+              ],
+              "explanation": "Futuro → Will you do it?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un SEMÁFORO pita DO, DID o WILL antes de preguntar.",
+            "emoji": "🚦"
+          }
+        },
+        {
+          "key": "g-preposition-end",
+          "type": "pattern",
+          "goal": "Inglés al revés: la palabra pequeña va al final",
+          "rule": "En las preguntas, la preposición se queda al final: ¿CON quién estás? → Who are you WITH?",
+          "pieces": [
+            {
+              "text": "Who",
+              "role": "fixed",
+              "hint": "¿Quién"
+            },
+            {
+              "text": "are you",
+              "role": "fixed",
+              "hint": "estás TÚ"
+            },
+            {
+              "text": "with",
+              "role": "slot",
+              "hint": "CON → al final"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Who are you with?",
+              "translation": "¿Con quién estás?"
+            },
+            {
+              "text": "What are you listening to?",
+              "translation": "¿Qué estás escuchando?"
+            },
+            {
+              "text": "What city are you in?",
+              "translation": "¿En qué ciudad estás?"
+            },
+            {
+              "text": "Where are you from?",
+              "translation": "¿De dónde eres?"
+            }
+          ],
+          "pitfalls": [
+            "«With who are you?» suena a libro antiguo: en la calle, la preposición va al final."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "La palabra PEQUEÑA llega tarde y se sienta AL FINAL.",
+            "emoji": "🪑"
+          }
         }
       ]
     }

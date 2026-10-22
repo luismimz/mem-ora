@@ -229,8 +229,9 @@ export function App() {
                 <ul className="today" aria-label="Tu día">
                   <li><b>{prog?.streak ?? '—'}</b><span>🔥 {prog?.streak === 1 ? 'día' : 'días'} de racha</span></li>
                   <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>
-                  <li><b>{missions?.newToday ?? '—'}</b><span>✨ {isLanguage(current) ? 'nuevas' : 'nuevos'} hoy</span></li>
+                  <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>
                 </ul>
+                {prog?.today && <div className="goal-bar" aria-label={`Meta de hoy: ${prog.today.newUnits} de ${prog.today.goal}`}><i style={{ width: `${Math.min(100, Math.round((prog.today.newUnits / Math.max(1, prog.today.goal)) * 100))}%` }} /></div>}
                 {!missions ? (
                   <><h3 className="hero-mission skeleton-text">&nbsp;</h3><p className="skeleton-text">&nbsp;<br />&nbsp;</p></>
                 ) : currentMission ? (

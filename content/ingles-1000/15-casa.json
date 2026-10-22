@@ -1,0 +1,295 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "15-casa",
+      "title": "Misión 15 · La casa",
+      "units": [
+        {
+          "key": "room",
+          "type": "term",
+          "text": "room",
+          "meaning": "habitación",
+          "pronunciation": "RUUM",
+          "examples": [
+            {
+              "text": "My room is small.",
+              "translation": "Mi habitación es pequeña."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RUMBA",
+            "scene": "Bailas RUMBA en tu HABITACIÓN a las tres.",
+            "sceneTarget": "You dance the rumba in your ROOM at three.",
+            "emoji": "💃"
+          }
+        },
+        {
+          "key": "door",
+          "type": "term",
+          "text": "door",
+          "meaning": "puerta",
+          "pronunciation": "DOR",
+          "examples": [
+            {
+              "text": "Close the door, please.",
+              "translation": "Cierra la puerta, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DORADA",
+            "scene": "Una PUERTA DORADA te cierra el paso.",
+            "sceneTarget": "A golden DOOR blocks your way.",
+            "emoji": "🚪"
+          }
+        },
+        {
+          "key": "window",
+          "type": "term",
+          "text": "window",
+          "meaning": "ventana",
+          "pronunciation": "UÍNdou",
+          "examples": [
+            {
+              "text": "Open the window.",
+              "translation": "Abre la ventana."
+            }
+          ]
+        },
+        {
+          "key": "kitchen",
+          "type": "term",
+          "text": "kitchen",
+          "meaning": "cocina",
+          "pronunciation": "KÍchen",
+          "examples": [
+            {
+              "text": "The kitchen is clean.",
+              "translation": "La cocina está limpia."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUICHE",
+            "scene": "En la COCINA, una QUICHE gigante te persigue.",
+            "sceneTarget": "In the KITCHEN, a giant quiche chases you.",
+            "emoji": "🥧"
+          }
+        },
+        {
+          "key": "bathroom",
+          "type": "term",
+          "text": "bathroom",
+          "meaning": "baño",
+          "pronunciation": "BÁZrum",
+          "examples": [
+            {
+              "text": "Where is the bathroom?",
+              "translation": "¿Dónde está el baño?"
+            }
+          ]
+        },
+        {
+          "key": "bed",
+          "type": "term",
+          "text": "bed",
+          "meaning": "cama",
+          "pronunciation": "BED",
+          "examples": [
+            {
+              "text": "I go to bed at eleven.",
+              "translation": "Me acuesto a las once."
+            }
+          ]
+        },
+        {
+          "key": "table",
+          "type": "term",
+          "text": "table",
+          "meaning": "mesa",
+          "pronunciation": "TÉIbol",
+          "examples": [
+            {
+              "text": "Put it on the table.",
+              "translation": "Ponlo en la mesa."
+            }
+          ]
+        },
+        {
+          "key": "chair",
+          "type": "term",
+          "text": "chair",
+          "meaning": "silla",
+          "pronunciation": "CHER",
+          "examples": [
+            {
+              "text": "Sit on this chair.",
+              "translation": "Siéntate en esta silla."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHERIFF",
+            "scene": "Un SHERIFF dispara a una SILLA vacía.",
+            "sceneTarget": "A sheriff shoots an empty CHAIR.",
+            "emoji": "🤠"
+          }
+        },
+        {
+          "key": "key",
+          "type": "term",
+          "text": "key",
+          "meaning": "llave",
+          "pronunciation": "KII",
+          "examples": [
+            {
+              "text": "I can't find my keys.",
+              "translation": "No encuentro mis llaves."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "KIWI",
+            "scene": "Un KIWI se traga la LLAVE y sale rodando.",
+            "sceneTarget": "A kiwi swallows the KEY and rolls away.",
+            "emoji": "🥝"
+          }
+        },
+        {
+          "key": "floor",
+          "type": "term",
+          "text": "floor",
+          "meaning": "suelo, planta",
+          "pronunciation": "FLOR",
+          "examples": [
+            {
+              "text": "The floor is wet.",
+              "translation": "El suelo está mojado."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FLOR",
+            "scene": "Crece una FLOR en el SUELO de tu salón.",
+            "sceneTarget": "A flower grows on the FLOOR of your living room.",
+            "emoji": "🌼"
+          }
+        },
+        {
+          "key": "wall",
+          "type": "term",
+          "text": "wall",
+          "meaning": "pared",
+          "pronunciation": "UOOL",
+          "examples": [
+            {
+              "text": "A picture on the wall.",
+              "translation": "Un cuadro en la pared."
+            }
+          ]
+        },
+        {
+          "key": "garden",
+          "type": "term",
+          "text": "garden",
+          "meaning": "jardín",
+          "pronunciation": "GÁRden",
+          "examples": [
+            {
+              "text": "We have a small garden.",
+              "translation": "Tenemos un jardín pequeño."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUARDIA",
+            "scene": "Un GUARDIA vigila tu JARDÍN de noche.",
+            "sceneTarget": "A guard watches your GARDEN at night.",
+            "emoji": "💂"
+          }
+        },
+        {
+          "key": "open",
+          "type": "term",
+          "text": "open",
+          "meaning": "abrir, abierto",
+          "pronunciation": "ÓUpen",
+          "examples": [
+            {
+              "text": "The shop is open.",
+              "translation": "La tienda está abierta."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÓPERA",
+            "scene": "Una cantante de ÓPERA ABRE la puerta de un grito.",
+            "sceneTarget": "An opera singer OPENS the door with a scream.",
+            "emoji": "🎤"
+          }
+        },
+        {
+          "key": "close",
+          "type": "term",
+          "text": "close",
+          "meaning": "cerrar",
+          "pronunciation": "KLÓUS",
+          "examples": [
+            {
+              "text": "Close your eyes.",
+              "translation": "Cierra los ojos."
+            }
+          ]
+        },
+        {
+          "key": "clean",
+          "type": "term",
+          "text": "clean",
+          "meaning": "limpiar, limpio",
+          "pronunciation": "KLIIN",
+          "examples": [
+            {
+              "text": "I clean my room on Sundays.",
+              "translation": "Limpio mi habitación los domingos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLÍNICA",
+            "scene": "En la CLÍNICA LIMPIAN el suelo con champán.",
+            "sceneTarget": "In the clinic they CLEAN the floor with champagne.",
+            "emoji": "🍾"
+          }
+        }
+      ]
+    }
+  ]
+}

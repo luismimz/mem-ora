@@ -29,6 +29,15 @@ const units: Record<string, SessionUnit> = {
     association: { id: 'a-pc', technique: 'mirror', text: 'YO ESTOY le-YENDO → I AM read-ING', emoji: '🪞' },
   } as unknown as SessionUnit,
 };
+// Juegos de los pilares (D-081): «Toco o cuento» (dos respuestas: se desliza) y «Semáforos» (tres: botones).
+const game = (key: string, name: string, items: Array<[string, string, string[]]>): SessionUnit => ({
+  key, type: 'concept', language: 'en', version: 1,
+  payload: { name, gist: 'juego', definition: 'Regla del juego.', examples: [], exercises: items.map(([prompt, answer, distractors]) => ({ kind: 'apply_case', prompt, answer, distractors })) },
+  skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.apply`, kind: 'apply' }],
+  association: null,
+} as unknown as SessionUnit);
+units.toco = game('toco', 'Toco o cuento', [['Tengo un gato', 'I HAVE', ['I AM']], ['Tengo hambre', 'I AM', ['I HAVE']], ['Tengo dinero', 'I HAVE', ['I AM']], ['Tengo frío', 'I AM', ['I HAVE']]]);
+units.semaforos = game('semaforos', 'Los semáforos', [['¿Comes?', 'DO', ['DID', 'WILL']], ['¿Fuiste?', 'DID', ['DO', 'WILL']], ['¿Irás?', 'WILL', ['DO', 'DID']], ['¿Vives aquí?', 'DO', ['DID', 'WILL']]]);
 const items = Object.keys(units).map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 const plan = buildFlowSession({ sessionId: 'e2e-ingles', courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true });
 const payload = { state: { plan, index: 0, outcomes: {}, finished: false }, units } as unknown as SessionPayload;

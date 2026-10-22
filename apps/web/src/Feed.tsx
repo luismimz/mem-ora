@@ -7,6 +7,7 @@ import type { HintLevel } from '@memora/core';
 import type { ConceptPayload, PatternPayload } from '@memora/content';
 import {
   buildTiles,
+  burstOptions,
   challengeChoices,
   choicesFor,
   exercisesOf,
@@ -49,11 +50,11 @@ function hue(key: string) {
 const sfx = (() => {
   let ctx: AudioContext | null = null;
   const on = () => { try { return localStorage.getItem('memora.sfx') !== 'off'; } catch { return true; } };
-  return (kind: 'ok' | 'ko' | 'party') => {
+  return (kind: 'ok' | 'ko' | 'party' | 'pop') => {
     if (!on()) return;
     try {
       ctx ??= new AudioContext();
-      const notes = kind === 'ok' ? [660, 880] : kind === 'party' ? [523, 659, 784, 1047] : [220];
+      const notes = kind === 'ok' ? [660, 880] : kind === 'pop' ? [988, 1319] : kind === 'party' ? [523, 659, 784, 1047] : [220, 165];
       notes.forEach((f, i) => {
         const o = ctx!.createOscillator(); const g = ctx!.createGain();
         o.frequency.value = f; o.type = 'sine';
@@ -347,6 +348,95 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
   );
 }
 
+/** Confeti al acertar en la Ráfaga: piezas de colores que saltan y caen (solo CSS). */
+function Confetti({ burst }: { burst: number }) {
+  if (!burst) return null;
+  const colors = ['#ffd76a', '#43d68b', '#ff6b5b', '#6bc7ff', '#c88bff'];
+  return (
+    <div className="confetti" key={burst} aria-hidden="true">
+      {Array.from({ length: 18 }, (_, i) => <i key={i} style={{ '--x': `${((i * 37) % 100) - 50}vw`, '--r': `${(i * 53) % 360}deg`, background: colors[i % colors.length], animationDelay: `${(i % 6) * 25}ms` } as React.CSSProperties} />)}
+    </div>
+  );
+}
+
+/** Tiempo de cada pregunta de la Ráfaga hasta que la tarjeta «toca el suelo». */
+const BURST_MS = 4000;
+
+/**
+ * Ráfaga (D-081): los juegos de los pilares. Las preguntas de un concepto-juego caen una tras otra y se responden
+ * rápido: con dos respuestas, deslizando la tarjeta (← izquierda, derecha →) o con sus dos botones; con tres o cuatro,
+ * golpeando botones gigantes de colores (DO · DID · WILL). Acierto = confeti y «pop»; fallo = sonido y la respuesta.
+ * Si la tarjeta toca el suelo, «¡Tarde!»: vuelve al final una vez (la rapidez da puntos; no se castiga, ESTANDAR §2).
+ */
+function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, ms: number, points: number, note: string) => void }) {
+  const options = useMemo(() => burstOptions(unit) ?? [], [unit]);
+  const items = useMemo(() => exercisesOf(unit), [unit]);
+  const [queue, setQueue] = useState<number[]>(() => items.map((_, i) => i).sort((a, b) => ((a * 7919 + unit.key.length) % 13) - ((b * 7919 + unit.key.length) % 13)));
+  const [late, setLate] = useState<number[]>([]);
+  const [ok, setOk] = useState(0);
+  const [done, setDone] = useState(0);
+  const [fb, setFb] = useState<{ ok: boolean; late?: boolean } | null>(null);
+  const [confetti, setConfetti] = useState(0);
+  const [dx, setDx] = useState(0);
+  const start = useRef<number | null>(null);
+  const t0 = useRef(performance.now());
+  const current = queue[0];
+  const ex = current === undefined ? undefined : items[current];
+  const two = options.length === 2;
+
+  function next(after: number) {
+    setTimeout(() => {
+      setFb(null); setDx(0);
+      setQueue((q) => q.slice(1));
+    }, after);
+  }
+  useEffect(() => {
+    if (current !== undefined || !items.length) return;
+    const ratio = ok / Math.max(1, done);
+    onResult(ratio >= 0.8, Math.round(performance.now() - t0.current), 4 * ok, `Has acertado ${ok} de ${done}. Repasa la regla y vuelve a intentarlo.`);
+  }, [current]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (current === undefined || fb) return;
+    const timer = setTimeout(() => {
+      if (!late.includes(current)) { setLate((l) => [...l, current]); setFb({ ok: false, late: true }); sfx('ko'); setTimeout(() => { setFb(null); setQueue((q) => [...q.slice(1), current]); }, 700); return; }
+      answer(null);
+    }, BURST_MS);
+    return () => clearTimeout(timer);
+  }, [current, fb]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  function answer(choice: string | null) {
+    if (!ex || fb) return;
+    const right = choice === ex.answer;
+    setDone((d) => d + 1);
+    if (right) { setOk((n) => n + 1); setConfetti((c) => c + 1); sfx('pop'); buzz(12); } else { sfx('ko'); buzz([30, 30, 30]); }
+    setFb({ ok: right });
+    next(right ? 550 : 1500);
+  }
+  if (!ex) return <Slide tone={hue(unit.key)} className="burst"><p className="tag">🎮 {unitText(unit).toUpperCase()}</p><h3 className="ask">{ok}/{done}</h3></Slide>;
+  return (
+    <Slide tone={hue(unit.key)} className={`burst ${fb ? (fb.ok ? 'right' : 'wrong') : ''}`}>
+      <p className="tag">🎮 {unitText(unit).toUpperCase()} · {Math.min(done + 1, items.length + late.length)}/{items.length}</p>
+      <p className="burst-score">✅ {ok} {done - ok > 0 ? `· ❌ ${done - ok}` : ''}</p>
+      <div className="burst-sky">
+        <div key={`${current}-${late.includes(current!) ? 'b' : 'a'}`} className={`burst-card ${fb ? 'stop' : ''}`} style={{ animationDuration: `${BURST_MS}ms`, transform: dx ? `translateX(${dx}px) rotate(${dx / 14}deg)` : undefined }}
+          onPointerDown={(e) => { if (two) start.current = e.clientX; }}
+          onPointerMove={(e) => { if (start.current !== null) setDx(e.clientX - start.current); }}
+          onPointerUp={() => { if (start.current !== null && Math.abs(dx) > 70) answer(dx < 0 ? options[0]! : options[1]!); else setDx(0); start.current = null; }}
+          onPointerCancel={() => { start.current = null; setDx(0); }}>
+          <span className="burst-prompt">{ex.prompt}</span>
+          {fb && <span className="burst-fb">{fb.late ? '⏰ ¡Tarde! Vuelve al final' : fb.ok ? '¡Sí! 🎉' : <>Es <b>{ex.answer}</b>{ex.explanation ? <small>{ex.explanation}</small> : null}</>}</span>}
+        </div>
+        <div className="burst-floor" />
+      </div>
+      {two && <p className="burst-hint">← desliza a un lado o toca →</p>}
+      <div className={`burst-buttons n${options.length}`}>
+        {options.map((o, i) => <button type="button" key={o} className={`burst-btn c${i}`} onClick={() => answer(o)}>{two ? (i === 0 ? `← ${o}` : `${o} →`) : o}</button>)}
+      </div>
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
 /** ¿Verdad o mentira?: desliza → (verdad) o ← (mentira), o toca los botones. */
 function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUnit; onResult: (ok: boolean, ms: number) => void }) {
   const truth = shown.key === unit.key;
@@ -598,6 +688,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (!step || skip) card = null;
   else if (step.kind === 'reel' && unit) card = <Reel key={step.id} unit={unit} focus={step.focus} courseId={courseId} onNext={() => { for (const s of unit.skills) queue.current.push(event(unit, s.key, { kind: 'exposure' })); void advance(); }} />;
   else if (step.kind === 'quick' && unit) card = <Quick key={step.id} unit={unit} reverse={Boolean(step.reverse)} retry={Boolean(step.retry)} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#quick${step.reverse ? '-inv' : ''}`, 10)} />;
+  else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, 20, step.skillKey, 'production', 1, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
@@ -605,7 +696,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'review' && unit) card = <Write key={step.id} unit={unit} levelUp={Boolean(step.levelUp)} onResult={(ok, ms, hint, format) => answered(unit, ok, ms, `${unit.key}#write`, 20, step.skillKey, format, hint)} />;
   else if (step.kind === 'summary') {
-    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(s.kind) && outcomes[s.id]);
+    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst'].includes(s.kind) && outcomes[s.id]);
     const right = asked.filter((s) => outcomes[s.id]!.correct).length;
     const newOnes = plan.steps.filter((s) => s.kind === 'reel' && !s.focus).length;
     const soon = progress?.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now());
@@ -627,6 +718,12 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
           <div><b>{best}</b><span>mejor combo</span></div>
           <div><b>{newOnes}</b><span>nuevos en tu memoria</span></div>
         </div>
+        {progress?.today && (
+          <div className={`end-goal ${progress.today.newUnits >= progress.today.goal ? 'done' : ''}`}>
+            <div className="row"><span>{progress.today.newUnits >= progress.today.goal ? '🎯 ¡Meta de hoy cumplida!' : '🎯 Meta de hoy'}</span><b>{progress.today.newUnits}/{progress.today.goal} nuevas</b></div>
+            <i><i style={{ width: `${Math.min(100, Math.round((progress.today.newUnits / Math.max(1, progress.today.goal)) * 100))}%` }} /></i>
+          </div>
+        )}
         {progress && <p className="end-memory">🧠 <b>{workedUnits}</b> trabajadas · <b>{inMemory}</b> ya en tu memoria a largo plazo</p>}
         {current && (
           <div className="end-mission">

@@ -380,6 +380,124 @@
             "scene": "Cada -ANDO cambia de disfraz y sale como -ING.",
             "emoji": "🎭"
           }
+        },
+        {
+          "key": "chunks-verbos",
+          "type": "concept",
+          "name": "Piezas de Lego: listen to, wait for, think about, depend on",
+          "gist": "Verbos que van siempre con su pieza pegada",
+          "definition": "Muchos verbos llevan su pieza pegada y no funcionan sin ella: listen TO (escuchar), wait FOR (esperar), think ABOUT (pensar en), depend ON (depender de). Apréndelos como un solo bloque: si cambias la pieza, rebotan.",
+          "examples": [
+            {
+              "text": "Listen to the music.",
+              "explanation": "Escucha la música: listen TO."
+            },
+            {
+              "text": "Wait for me!",
+              "explanation": "¡Espérame!: wait FOR."
+            },
+            {
+              "text": "I think about you.",
+              "explanation": "Pienso en ti: think ABOUT."
+            },
+            {
+              "text": "It depends on you.",
+              "explanation": "Depende de ti: depend ON."
+            }
+          ],
+          "contrast": "La pieza no es la del español: «pensar EN» es think ABOUT, no «think in»; «depender DE» es depend ON.",
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "Escucha la música → Listen ___ the music",
+              "answer": "TO",
+              "distractors": [
+                "FOR",
+                "ABOUT",
+                "ON"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Espérame → Wait ___ me",
+              "answer": "FOR",
+              "distractors": [
+                "TO",
+                "ABOUT",
+                "ON"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Pienso en ti → I think ___ you",
+              "answer": "ABOUT",
+              "distractors": [
+                "TO",
+                "FOR",
+                "ON"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Depende de ti → It depends ___ you",
+              "answer": "ON",
+              "distractors": [
+                "TO",
+                "FOR",
+                "ABOUT"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "¿Qué escuchas? → What are you listening ___?",
+              "answer": "TO",
+              "distractors": [
+                "FOR",
+                "ABOUT",
+                "ON"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Esperamos el bus → We wait ___ the bus",
+              "answer": "FOR",
+              "distractors": [
+                "TO",
+                "ABOUT",
+                "ON"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "¿En qué piensas? → What are you thinking ___?",
+              "answer": "ABOUT",
+              "distractors": [
+                "TO",
+                "FOR",
+                "ON"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Cuenta conmigo → Count ___ me",
+              "answer": "ON",
+              "distractors": [
+                "TO",
+                "FOR",
+                "ABOUT"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Escúchame → Listen ___ me",
+              "answer": "TO",
+              "distractors": [
+                "FOR",
+                "ABOUT",
+                "ON"
+              ]
+            }
+          ]
         }
       ]
     }

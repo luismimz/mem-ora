@@ -380,6 +380,111 @@
             "scene": "ÉL y ELLA silban como SERPIENTES: she comeSSS.",
             "emoji": "🐍"
           }
+        },
+        {
+          "key": "chunks-look",
+          "type": "concept",
+          "name": "Piezas de Lego: look at, for, after",
+          "gist": "Cambia la pieza pequeña y cambia el significado",
+          "definition": "El inglés no se traduce palabra por palabra: va en bloques que no se separan. LOOK cambia según su pieza: look AT = mirar algo, look FOR = buscar, look AFTER = cuidar. Apréndelos siempre juntos, como piezas de Lego que encajan.",
+          "examples": [
+            {
+              "text": "Look at the sky.",
+              "explanation": "Mira el cielo: look AT = mirar."
+            },
+            {
+              "text": "I'm looking for my keys.",
+              "explanation": "Busco mis llaves: look FOR = buscar."
+            },
+            {
+              "text": "She looks after her baby.",
+              "explanation": "Cuida de su bebé: look AFTER = cuidar."
+            }
+          ],
+          "contrast": "La pieza no se traduce sola: «look for» no es «mirar para», es BUSCAR.",
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "Mira la foto → Look ___ the photo",
+              "answer": "AT",
+              "distractors": [
+                "FOR",
+                "AFTER"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Busco mis llaves → I'm looking ___ my keys",
+              "answer": "FOR",
+              "distractors": [
+                "AT",
+                "AFTER"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Cuida de su bebé → She looks ___ her baby",
+              "answer": "AFTER",
+              "distractors": [
+                "AT",
+                "FOR"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "¡Mírame! → Look ___ me!",
+              "answer": "AT",
+              "distractors": [
+                "FOR",
+                "AFTER"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "¿Qué buscas? → What are you looking ___?",
+              "answer": "FOR",
+              "distractors": [
+                "AT",
+                "AFTER"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Cuidamos del perro → We look ___ the dog",
+              "answer": "AFTER",
+              "distractors": [
+                "AT",
+                "FOR"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Mira esto → Look ___ this",
+              "answer": "AT",
+              "distractors": [
+                "FOR",
+                "AFTER"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "Busco trabajo → I'm looking ___ a job",
+              "answer": "FOR",
+              "distractors": [
+                "AT",
+                "AFTER"
+              ]
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "¿Quién cuida de los niños? → Who looks ___ the kids?",
+              "answer": "AFTER",
+              "distractors": [
+                "AT",
+                "FOR"
+              ]
+            }
+          ]
         }
       ]
     }

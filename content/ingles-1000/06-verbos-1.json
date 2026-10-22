@@ -380,6 +380,55 @@
             "scene": "YO manda: el GUSTO pasa a ser I LIKE.",
             "emoji": "👑"
           }
+        },
+        {
+          "key": "g-to-infinitive",
+          "type": "pattern",
+          "goal": "Verbos del diccionario: -AR, -ER, -IR = TO",
+          "rule": "-ar, -er, -ir (jugar, comer, vivir) = TO + verbo: to play, to eat, to live. Detrás de want, need, like: I want to eat.",
+          "pieces": [
+            {
+              "text": "I want",
+              "role": "fixed",
+              "hint": "YO quiero"
+            },
+            {
+              "text": "to",
+              "role": "fixed",
+              "hint": "-ar / -er / -ir"
+            },
+            {
+              "text": "eat",
+              "role": "slot",
+              "hint": "com-ER"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I want to eat.",
+              "translation": "Quiero comer."
+            },
+            {
+              "text": "I need to sleep.",
+              "translation": "Necesito dormir."
+            },
+            {
+              "text": "We like to play.",
+              "translation": "Nos gusta jugar."
+            },
+            {
+              "text": "She wants to live here.",
+              "translation": "Quiere vivir aquí."
+            }
+          ],
+          "pitfalls": [
+            "Con can, could, will y would NO hay to: I can swim (no «I can to swim»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada -AR, -ER, -IR se convierte en un TO volador.",
+            "emoji": "🛫"
+          }
         }
       ]
     }
