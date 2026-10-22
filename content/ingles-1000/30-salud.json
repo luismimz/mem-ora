@@ -1,0 +1,785 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "30-salud",
+      "title": "Misión 30 · En el médico",
+      "units": [
+        {
+          "key": "g-should",
+          "type": "pattern",
+          "goal": "Dar consejos: deberías = YOU SHOULD",
+          "rule": "Deberías + verbo = you should + verbo tal cual: you should rest. No deberías = you shouldn't.",
+          "pieces": [
+            {
+              "text": "You",
+              "role": "fixed",
+              "hint": "TÚ"
+            },
+            {
+              "text": "should",
+              "role": "fixed",
+              "hint": "deberías"
+            },
+            {
+              "text": "rest",
+              "role": "slot",
+              "hint": "descansar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "You should see a doctor.",
+              "translation": "Deberías ir al médico.",
+              "mirror": {
+                "say": "Deberías ir al médico",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "deberías",
+                    "en": "should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb",
+                    "from": "ir",
+                    "why": "Ir al médico es VER a un médico: see a doctor."
+                  },
+                  {
+                    "es": "a un médico",
+                    "en": "a doctor",
+                    "role": "word",
+                    "from": "al médico"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You shouldn't smoke.",
+              "translation": "No deberías fumar.",
+              "mirror": {
+                "say": "No deberías fumar",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no deberías",
+                    "en": "shouldn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "fumar",
+                    "en": "smoke",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Should I call the doctor?",
+              "translation": "¿Debería llamar al médico?"
+            },
+            {
+              "text": "You should drink more water.",
+              "translation": "Deberías beber más agua."
+            }
+          ],
+          "pitfalls": [
+            "«You should to rest» está mal: detrás de should, el verbo tal cual.",
+            "SHOULD es un consejo; MUST es una obligación."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un MÉDICO sabio susurra SHOULD a cada paciente.",
+            "emoji": "🩺"
+          }
+        },
+        {
+          "key": "doctor",
+          "type": "term",
+          "text": "doctor",
+          "meaning": "médico",
+          "pronunciation": "DÓKtor",
+          "examples": [
+            {
+              "text": "I need a doctor.",
+              "translation": "Necesito un médico.",
+              "mirror": {
+                "say": "Necesito un médico",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un médico",
+                    "en": "a doctor",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Go to the doctor.",
+              "translation": "Ve al médico."
+            }
+          ]
+        },
+        {
+          "key": "sick",
+          "type": "term",
+          "text": "sick",
+          "meaning": "enfermo",
+          "pronunciation": "SIK",
+          "examples": [
+            {
+              "text": "I feel sick.",
+              "translation": "Me encuentro mal.",
+              "mirror": {
+                "say": "Me encuentro mal",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siento",
+                    "en": "feel",
+                    "role": "verb",
+                    "from": "me encuentro",
+                    "why": "Encontrarse mal es SENTIRSE enfermo: I feel sick."
+                  },
+                  {
+                    "es": "enfermo",
+                    "en": "sick",
+                    "role": "word",
+                    "from": "mal"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is sick today.",
+              "translation": "Hoy está enferma."
+            }
+          ]
+        },
+        {
+          "key": "pain",
+          "type": "term",
+          "text": "pain",
+          "meaning": "dolor",
+          "pronunciation": "PÉIN",
+          "examples": [
+            {
+              "text": "I have a pain in my back.",
+              "translation": "Me duele la espalda.",
+              "mirror": {
+                "say": "Me duele la espalda",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "me duele",
+                    "why": "Un dolor se TIENE: I have a pain in my back."
+                  },
+                  {
+                    "es": "un dolor",
+                    "en": "a pain",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en MI espalda",
+                    "en": "in my back",
+                    "role": "word",
+                    "from": "la espalda"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No pain, no gain.",
+              "translation": "Sin esfuerzo no hay recompensa."
+            }
+          ]
+        },
+        {
+          "key": "headache",
+          "type": "term",
+          "text": "headache",
+          "meaning": "dolor de cabeza",
+          "pronunciation": "JÉDeik",
+          "examples": [
+            {
+              "text": "I have a headache.",
+              "translation": "Me duele la cabeza.",
+              "mirror": {
+                "say": "Me duele la cabeza",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "me duele",
+                    "why": "El dolor de cabeza se TIENE: I have a headache."
+                  },
+                  {
+                    "es": "un dolor de cabeza",
+                    "en": "a headache",
+                    "role": "word",
+                    "from": "la cabeza"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you have something for a headache?",
+              "translation": "¿Tiene algo para el dolor de cabeza?"
+            }
+          ]
+        },
+        {
+          "key": "fever",
+          "type": "term",
+          "text": "fever",
+          "meaning": "fiebre",
+          "pronunciation": "FÍIver",
+          "examples": [
+            {
+              "text": "He has a high fever.",
+              "translation": "Tiene mucha fiebre.",
+              "mirror": {
+                "say": "Tiene mucha fiebre",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fiebre",
+                    "en": "fever",
+                    "role": "word"
+                  },
+                  {
+                    "es": "alta",
+                    "en": "high",
+                    "role": "word",
+                    "from": "mucha",
+                    "why": "«Mucha fiebre» es «una fiebre alta»: a high fever."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Do you have a fever?",
+              "translation": "¿Tienes fiebre?"
+            }
+          ]
+        },
+        {
+          "key": "medicine",
+          "type": "term",
+          "text": "medicine",
+          "meaning": "medicamento; medicina",
+          "pronunciation": "MÉdsin",
+          "examples": [
+            {
+              "text": "Take this medicine twice a day.",
+              "translation": "Toma este medicamento dos veces al día.",
+              "mirror": {
+                "say": "Toma este medicamento dos veces al día",
+                "pieces": [
+                  {
+                    "es": "Toma",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "este medicamento",
+                    "en": "this medicine",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dos veces al día",
+                    "en": "twice a day",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I study medicine.",
+              "translation": "Estudio medicina."
+            }
+          ]
+        },
+        {
+          "key": "pharmacy",
+          "type": "term",
+          "text": "pharmacy",
+          "meaning": "farmacia",
+          "pronunciation": "FÁRmasi",
+          "examples": [
+            {
+              "text": "Is there a pharmacy near here?",
+              "translation": "¿Hay una farmacia cerca?",
+              "mirror": {
+                "say": "¿Hay una farmacia cerca?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una farmacia",
+                    "en": "a pharmacy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cerca de aquí",
+                    "en": "near here",
+                    "role": "word",
+                    "from": "cerca"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The pharmacy is closed.",
+              "translation": "La farmacia está cerrada."
+            }
+          ]
+        },
+        {
+          "key": "appointment",
+          "type": "term",
+          "text": "appointment",
+          "meaning": "cita (médico, trabajo)",
+          "pronunciation": "aPÓINTment",
+          "examples": [
+            {
+              "text": "I have an appointment at four.",
+              "translation": "Tengo cita a las cuatro.",
+              "mirror": {
+                "say": "Tengo cita a las cuatro",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una cita",
+                    "en": "an appointment",
+                    "role": "word",
+                    "from": "cita"
+                  },
+                  {
+                    "es": "a las cuatro",
+                    "en": "at four",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I make an appointment?",
+              "translation": "¿Puedo pedir cita?"
+            }
+          ]
+        },
+        {
+          "key": "cough",
+          "type": "term",
+          "text": "cough",
+          "meaning": "tos; toser",
+          "pronunciation": "KOF",
+          "examples": [
+            {
+              "text": "I have a bad cough.",
+              "translation": "Tengo mucha tos.",
+              "mirror": {
+                "say": "Tengo mucha tos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tos",
+                    "en": "cough",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fuerte",
+                    "en": "bad",
+                    "role": "word",
+                    "from": "mucha",
+                    "why": "«Mucha tos» es «una tos fuerte»: a bad cough."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Cover your mouth when you cough.",
+              "translation": "Tápate la boca al toser."
+            }
+          ]
+        },
+        {
+          "key": "hurt",
+          "type": "term",
+          "text": "hurt",
+          "meaning": "doler; hacer daño",
+          "pronunciation": "JERT",
+          "examples": [
+            {
+              "text": "My feet hurt.",
+              "translation": "Me duelen los pies.",
+              "mirror": {
+                "say": "Me duelen los pies",
+                "pieces": [
+                  {
+                    "es": "me duelen",
+                    "en": "hurt",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MIS pies",
+                    "en": "My feet",
+                    "role": "who",
+                    "from": "los pies",
+                    "why": "Lo que duele va primero y con dueño: MY feet hurt."
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Did you hurt yourself?",
+              "translation": "¿Te has hecho daño?"
+            }
+          ]
+        },
+        {
+          "key": "healthy",
+          "type": "term",
+          "text": "healthy",
+          "meaning": "sano",
+          "pronunciation": "JÉLzi",
+          "examples": [
+            {
+              "text": "Fruit is healthy.",
+              "translation": "La fruta es sana.",
+              "mirror": {
+                "say": "La fruta es sana",
+                "pieces": [
+                  {
+                    "es": "fruta",
+                    "en": "Fruit",
+                    "role": "who",
+                    "from": "La fruta",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sana",
+                    "en": "healthy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Eat healthy food.",
+              "translation": "Come comida sana."
+            }
+          ]
+        },
+        {
+          "key": "nurse",
+          "type": "term",
+          "text": "nurse",
+          "meaning": "enfermero, enfermera",
+          "pronunciation": "NERS",
+          "examples": [
+            {
+              "text": "My sister is a nurse.",
+              "translation": "Mi hermana es enfermera.",
+              "mirror": {
+                "say": "Mi hermana es enfermera",
+                "pieces": [
+                  {
+                    "es": "Mi hermana",
+                    "en": "My sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una enfermera",
+                    "en": "a nurse",
+                    "role": "word",
+                    "from": "enfermera",
+                    "why": "Las profesiones llevan «a»: a nurse."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Ask the nurse.",
+              "translation": "Pregunta a la enfermera."
+            }
+          ]
+        },
+        {
+          "key": "dentist",
+          "type": "term",
+          "text": "dentist",
+          "meaning": "dentista",
+          "pronunciation": "DÉNtist",
+          "examples": [
+            {
+              "text": "I'm going to the dentist tomorrow.",
+              "translation": "Mañana voy al dentista.",
+              "mirror": {
+                "say": "Mañana voy al dentista",
+                "pieces": [
+                  {
+                    "es": "Mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "voy"
+                  },
+                  {
+                    "es": "yendo",
+                    "en": "going",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al dentista",
+                    "en": "to the dentist",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I hate going to the dentist.",
+              "translation": "Odio ir al dentista."
+            }
+          ]
+        },
+        {
+          "key": "ambulance",
+          "type": "term",
+          "text": "ambulance",
+          "meaning": "ambulancia",
+          "pronunciation": "ÁMbiulans",
+          "examples": [
+            {
+              "text": "Call an ambulance!",
+              "translation": "¡Llama a una ambulancia!",
+              "mirror": {
+                "say": "¡Llama a una ambulancia!",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una ambulancia",
+                    "en": "an ambulance",
+                    "role": "word",
+                    "from": "a una ambulancia",
+                    "why": "Llamar a alguien, sin «a»: call an ambulance."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The ambulance is coming.",
+              "translation": "Viene la ambulancia."
+            }
+          ]
+        },
+        {
+          "key": "better",
+          "type": "term",
+          "text": "better",
+          "meaning": "mejor",
+          "pronunciation": "BÉter",
+          "examples": [
+            {
+              "text": "I feel better today.",
+              "translation": "Hoy me encuentro mejor.",
+              "mirror": {
+                "say": "Hoy me encuentro mejor",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siento",
+                    "en": "feel",
+                    "role": "verb",
+                    "from": "me encuentro"
+                  },
+                  {
+                    "es": "mejor",
+                    "en": "better",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Get better soon!",
+              "translation": "¡Que te mejores!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

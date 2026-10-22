@@ -1,0 +1,792 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "29-compras",
+      "title": "Misión 29 · De compras",
+      "units": [
+        {
+          "key": "g-can-i-have",
+          "type": "pattern",
+          "goal": "Pedir en una tienda: CAN I HAVE…?",
+          "rule": "Para pedir: Can I have…? o I'd like… (quisiera). Más amable que «I want». Para pagar: Can I pay by card?",
+          "pieces": [
+            {
+              "text": "Can I have",
+              "role": "fixed",
+              "hint": "¿me pones…?"
+            },
+            {
+              "text": "a coffee",
+              "role": "slot",
+              "hint": "un café"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Can I have a coffee, please?",
+              "translation": "¿Me pones un café, por favor?",
+              "mirror": {
+                "say": "¿Me pones un café, por favor?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "me pones",
+                    "why": "Para pedir: «¿puedo tener…?» = Can I have…?"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I'd like a ticket to Madrid.",
+              "translation": "Quisiera un billete a Madrid.",
+              "mirror": {
+                "say": "Quisiera un billete a Madrid",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb",
+                    "from": "quisiera",
+                    "why": "Quisiera = me gustaría: I'd like."
+                  },
+                  {
+                    "es": "un billete",
+                    "en": "a ticket",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a Madrid",
+                    "en": "to Madrid",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much is this?",
+              "translation": "¿Cuánto cuesta esto?"
+            },
+            {
+              "text": "Just looking, thanks.",
+              "translation": "Solo estoy mirando, gracias."
+            }
+          ],
+          "pitfalls": [
+            "«I want a coffee» suena brusco al pedir: mejor Can I have…? o I'd like…",
+            "«Give me» sin please suena a orden."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El CAMARERO solo sirve a quien dice CAN I HAVE.",
+            "emoji": "🛍️"
+          }
+        },
+        {
+          "key": "money",
+          "type": "term",
+          "text": "money",
+          "meaning": "dinero",
+          "pronunciation": "MÁni",
+          "examples": [
+            {
+              "text": "I don't have much money.",
+              "translation": "No tengo mucho dinero.",
+              "mirror": {
+                "say": "No tengo mucho dinero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho dinero",
+                    "en": "much money",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Time is money.",
+              "translation": "El tiempo es oro."
+            }
+          ]
+        },
+        {
+          "key": "price",
+          "type": "term",
+          "text": "price",
+          "meaning": "precio",
+          "pronunciation": "PRÁIS",
+          "examples": [
+            {
+              "text": "The price is too high.",
+              "translation": "El precio es demasiado alto.",
+              "mirror": {
+                "say": "El precio es demasiado alto",
+                "pieces": [
+                  {
+                    "es": "El precio",
+                    "en": "The price",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado alto",
+                    "en": "too high",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's the price?",
+              "translation": "¿Qué precio tiene?"
+            }
+          ]
+        },
+        {
+          "key": "cash",
+          "type": "term",
+          "text": "cash",
+          "meaning": "efectivo (dinero)",
+          "pronunciation": "KASH",
+          "examples": [
+            {
+              "text": "Can I pay in cash?",
+              "translation": "¿Puedo pagar en efectivo?",
+              "mirror": {
+                "say": "¿Puedo pagar en efectivo?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pagar",
+                    "en": "pay",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en efectivo",
+                    "en": "in cash",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I don't have any cash.",
+              "translation": "No llevo efectivo."
+            }
+          ]
+        },
+        {
+          "key": "card",
+          "type": "term",
+          "text": "card",
+          "meaning": "tarjeta",
+          "pronunciation": "KARD",
+          "examples": [
+            {
+              "text": "Do you take cards?",
+              "translation": "¿Aceptan tarjeta?",
+              "mirror": {
+                "say": "¿Aceptan tarjeta?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "USTEDES",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cogen",
+                    "en": "take",
+                    "role": "verb",
+                    "from": "aceptan",
+                    "why": "Aceptar tarjeta en una tienda es TAKE cards."
+                  },
+                  {
+                    "es": "tarjetas",
+                    "en": "cards",
+                    "role": "word",
+                    "from": "tarjeta"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My card doesn't work.",
+              "translation": "Mi tarjeta no funciona."
+            }
+          ]
+        },
+        {
+          "key": "change",
+          "type": "term",
+          "text": "change",
+          "meaning": "cambio (dinero suelto)",
+          "pronunciation": "CHÉINCH",
+          "examples": [
+            {
+              "text": "Here's your change.",
+              "translation": "Aquí tiene su cambio.",
+              "mirror": {
+                "say": "Aquí tiene su cambio",
+                "pieces": [
+                  {
+                    "es": "Aquí está",
+                    "en": "Here's",
+                    "role": "helper",
+                    "from": "Aquí tiene"
+                  },
+                  {
+                    "es": "su cambio",
+                    "en": "your change",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you have change for twenty euros?",
+              "translation": "¿Tienes cambio de veinte euros?"
+            }
+          ]
+        },
+        {
+          "key": "receipt",
+          "type": "term",
+          "text": "receipt",
+          "meaning": "tique, recibo",
+          "pronunciation": "riSÍIT",
+          "examples": [
+            {
+              "text": "Can I have the receipt, please?",
+              "translation": "¿Me da el tique, por favor?",
+              "mirror": {
+                "say": "¿Me da el tique, por favor?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "me da"
+                  },
+                  {
+                    "es": "el tique",
+                    "en": "the receipt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Keep the receipt.",
+              "translation": "Guarda el tique."
+            }
+          ],
+          "notes": "La p no se pronuncia: riSÍIT."
+        },
+        {
+          "key": "bag",
+          "type": "term",
+          "text": "bag",
+          "meaning": "bolsa; bolso",
+          "pronunciation": "BAG",
+          "examples": [
+            {
+              "text": "Do you need a bag?",
+              "translation": "¿Necesita bolsa?",
+              "mirror": {
+                "say": "¿Necesita bolsa?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "USTED",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesita",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una bolsa",
+                    "en": "a bag",
+                    "role": "word",
+                    "from": "bolsa"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My bag is very heavy.",
+              "translation": "Mi bolso pesa mucho."
+            }
+          ]
+        },
+        {
+          "key": "discount",
+          "type": "term",
+          "text": "discount",
+          "meaning": "descuento",
+          "pronunciation": "DÍSkaunt",
+          "examples": [
+            {
+              "text": "Is there a student discount?",
+              "translation": "¿Hay descuento para estudiantes?",
+              "mirror": {
+                "say": "¿Hay descuento para estudiantes?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "descuento",
+                    "en": "discount",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para estudiantes",
+                    "en": "student",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Twenty per cent discount.",
+              "translation": "Veinte por ciento de descuento."
+            }
+          ]
+        },
+        {
+          "key": "sale",
+          "type": "term",
+          "text": "sale",
+          "meaning": "rebajas; venta",
+          "pronunciation": "SÉIL",
+          "examples": [
+            {
+              "text": "These shoes are on sale.",
+              "translation": "Estos zapatos están rebajados.",
+              "mirror": {
+                "say": "Estos zapatos están rebajados",
+                "pieces": [
+                  {
+                    "es": "Estos zapatos",
+                    "en": "These shoes",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en rebajas",
+                    "en": "on sale",
+                    "role": "word",
+                    "from": "rebajados",
+                    "why": "Rebajado es estar EN rebajas: on sale."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The sales start in January.",
+              "translation": "Las rebajas empiezan en enero."
+            }
+          ]
+        },
+        {
+          "key": "queue",
+          "type": "term",
+          "text": "queue",
+          "meaning": "cola, fila",
+          "pronunciation": "KIÚ",
+          "examples": [
+            {
+              "text": "There is a long queue.",
+              "translation": "Hay mucha cola.",
+              "mirror": {
+                "say": "Hay mucha cola",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cola",
+                    "en": "queue",
+                    "role": "word"
+                  },
+                  {
+                    "es": "larga",
+                    "en": "long",
+                    "role": "word",
+                    "from": "mucha",
+                    "why": "«Mucha cola» es «una cola larga»: a long queue."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Please wait in the queue.",
+              "translation": "Espere en la cola, por favor."
+            }
+          ]
+        },
+        {
+          "key": "supermarket",
+          "type": "term",
+          "text": "supermarket",
+          "meaning": "supermercado",
+          "pronunciation": "SÚpermarket",
+          "examples": [
+            {
+              "text": "I go to the supermarket on Saturdays.",
+              "translation": "Voy al súper los sábados.",
+              "mirror": {
+                "say": "Voy al súper los sábados",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al súper",
+                    "en": "to the supermarket",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en sábados",
+                    "en": "on Saturdays",
+                    "role": "word",
+                    "from": "los sábados",
+                    "why": "Los días llevan ON: on Saturdays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Is there a supermarket near here?",
+              "translation": "¿Hay un supermercado cerca?"
+            }
+          ]
+        },
+        {
+          "key": "gift",
+          "type": "term",
+          "text": "gift",
+          "meaning": "regalo",
+          "pronunciation": "GUIFT",
+          "examples": [
+            {
+              "text": "It's a gift for my mother.",
+              "translation": "Es un regalo para mi madre.",
+              "mirror": {
+                "say": "Es un regalo para mi madre",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un regalo",
+                    "en": "a gift",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para mi madre",
+                    "en": "for my mother",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you wrap it as a gift?",
+              "translation": "¿Me lo envuelve para regalo?"
+            }
+          ]
+        },
+        {
+          "key": "refund",
+          "type": "term",
+          "text": "refund",
+          "meaning": "devolución (del dinero)",
+          "pronunciation": "RÍfand",
+          "examples": [
+            {
+              "text": "I want a refund.",
+              "translation": "Quiero que me devuelvan el dinero.",
+              "mirror": {
+                "say": "Quiero que me devuelvan el dinero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una devolución",
+                    "en": "a refund",
+                    "role": "word",
+                    "from": "que me devuelvan el dinero"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I get a refund?",
+              "translation": "¿Me pueden devolver el dinero?"
+            }
+          ]
+        },
+        {
+          "key": "spend",
+          "type": "term",
+          "text": "spend",
+          "meaning": "gastar (dinero); pasar (tiempo)",
+          "pronunciation": "SPEND",
+          "examples": [
+            {
+              "text": "I spend too much money.",
+              "translation": "Gasto demasiado dinero.",
+              "mirror": {
+                "say": "Gasto demasiado dinero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gasto",
+                    "en": "spend",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "demasiado dinero",
+                    "en": "too much money",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We spent the day at the beach.",
+              "translation": "Pasamos el día en la playa."
+            }
+          ]
+        },
+        {
+          "key": "afford",
+          "type": "term",
+          "text": "afford",
+          "meaning": "poder permitirse",
+          "pronunciation": "aFÓRD",
+          "examples": [
+            {
+              "text": "I can't afford it.",
+              "translation": "No me lo puedo permitir.",
+              "mirror": {
+                "say": "No me lo puedo permitir",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "permitirme",
+                    "en": "afford",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We can't afford a new car.",
+              "translation": "No podemos permitirnos un coche nuevo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

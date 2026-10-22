@@ -1,0 +1,711 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "28-animales",
+      "title": "Misión 28 · Animales",
+      "units": [
+        {
+          "key": "g-a-an",
+          "type": "pattern",
+          "goal": "A o AN: an delante de vocal",
+          "rule": "Un / una = A; pero si lo siguiente empieza por sonido de vocal, AN: a dog, an elephant, an hour.",
+          "pieces": [
+            {
+              "text": "an",
+              "role": "fixed",
+              "hint": "un / una"
+            },
+            {
+              "text": "elephant",
+              "role": "slot",
+              "hint": "elefante"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I saw an elephant.",
+              "translation": "Vi un elefante.",
+              "mirror": {
+                "say": "Vi un elefante",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vi",
+                    "en": "saw",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un elefante",
+                    "en": "an elephant",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A dog and an owl.",
+              "translation": "Un perro y un búho.",
+              "mirror": {
+                "say": "Un perro y un búho",
+                "pieces": [
+                  {
+                    "es": "Un perro",
+                    "en": "A dog",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un búho",
+                    "en": "an owl",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's an hour away.",
+              "translation": "Está a una hora."
+            },
+            {
+              "text": "She has a horse.",
+              "translation": "Tiene un caballo."
+            }
+          ],
+          "pitfalls": [
+            "«A elephant» suena raro: delante de vocal, AN.",
+            "Cuenta el SONIDO: an hour (la h no suena), a university (suena «iu»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "La A choca con la VOCAL y pide una N.",
+            "emoji": "🐘"
+          }
+        },
+        {
+          "key": "dog",
+          "type": "term",
+          "text": "dog",
+          "meaning": "perro",
+          "pronunciation": "DOG",
+          "examples": [
+            {
+              "text": "I have a dog.",
+              "translation": "Tengo un perro.",
+              "mirror": {
+                "say": "Tengo un perro",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un perro",
+                    "en": "a dog",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Dogs are great friends.",
+              "translation": "Los perros son grandes amigos."
+            }
+          ]
+        },
+        {
+          "key": "cat",
+          "type": "term",
+          "text": "cat",
+          "meaning": "gato",
+          "pronunciation": "KAT",
+          "examples": [
+            {
+              "text": "My cat sleeps all day.",
+              "translation": "Mi gato duerme todo el día.",
+              "mirror": {
+                "say": "Mi gato duerme todo el día",
+                "pieces": [
+                  {
+                    "es": "Mi gato",
+                    "en": "My cat",
+                    "role": "who"
+                  },
+                  {
+                    "es": "duerme",
+                    "en": "sleeps",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todo el día",
+                    "en": "all day",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you like cats?",
+              "translation": "¿Te gustan los gatos?"
+            }
+          ]
+        },
+        {
+          "key": "bird",
+          "type": "term",
+          "text": "bird",
+          "meaning": "pájaro",
+          "pronunciation": "BERD",
+          "examples": [
+            {
+              "text": "A bird is singing.",
+              "translation": "Un pájaro está cantando.",
+              "mirror": {
+                "say": "Un pájaro está cantando",
+                "pieces": [
+                  {
+                    "es": "Un pájaro",
+                    "en": "A bird",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cantando",
+                    "en": "singing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Birds fly south in winter.",
+              "translation": "Los pájaros vuelan al sur en invierno."
+            }
+          ]
+        },
+        {
+          "key": "horse",
+          "type": "term",
+          "text": "horse",
+          "meaning": "caballo",
+          "pronunciation": "JORS",
+          "examples": [
+            {
+              "text": "Can you ride a horse?",
+              "translation": "¿Sabes montar a caballo?",
+              "mirror": {
+                "say": "¿Sabes montar a caballo?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "sabes",
+                    "why": "Saber hacer algo es CAN: can you ride?"
+                  },
+                  {
+                    "es": "montar",
+                    "en": "ride",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un caballo",
+                    "en": "a horse",
+                    "role": "word",
+                    "from": "a caballo"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A white horse.",
+              "translation": "Un caballo blanco."
+            }
+          ]
+        },
+        {
+          "key": "cow",
+          "type": "term",
+          "text": "cow",
+          "meaning": "vaca",
+          "pronunciation": "KÁU",
+          "examples": [
+            {
+              "text": "Cows give milk.",
+              "translation": "Las vacas dan leche.",
+              "mirror": {
+                "say": "Las vacas dan leche",
+                "pieces": [
+                  {
+                    "es": "vacas",
+                    "en": "Cows",
+                    "role": "who",
+                    "from": "Las vacas",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "dan",
+                    "en": "give",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "leche",
+                    "en": "milk",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A big cow.",
+              "translation": "Una vaca grande."
+            }
+          ]
+        },
+        {
+          "key": "pig",
+          "type": "term",
+          "text": "pig",
+          "meaning": "cerdo",
+          "pronunciation": "PIG",
+          "examples": [
+            {
+              "text": "The pig is in the mud.",
+              "translation": "El cerdo está en el barro.",
+              "mirror": {
+                "say": "El cerdo está en el barro",
+                "pieces": [
+                  {
+                    "es": "El cerdo",
+                    "en": "The pig",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el barro",
+                    "en": "in the mud",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't eat like a pig!",
+              "translation": "¡No comas como un cerdo!"
+            }
+          ]
+        },
+        {
+          "key": "sheep",
+          "type": "term",
+          "text": "sheep",
+          "meaning": "oveja",
+          "pronunciation": "SHIIP",
+          "examples": [
+            {
+              "text": "There are many sheep here.",
+              "translation": "Aquí hay muchas ovejas.",
+              "mirror": {
+                "say": "Aquí hay muchas ovejas",
+                "pieces": [
+                  {
+                    "es": "Aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hay",
+                    "en": "There are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muchas ovejas",
+                    "en": "many sheep",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "One sheep, two sheep.",
+              "translation": "Una oveja, dos ovejas."
+            }
+          ],
+          "notes": "Sheep no cambia en plural: one sheep, two sheep."
+        },
+        {
+          "key": "mouse",
+          "type": "term",
+          "text": "mouse",
+          "meaning": "ratón",
+          "pronunciation": "MÁUS",
+          "examples": [
+            {
+              "text": "There is a mouse in the kitchen!",
+              "translation": "¡Hay un ratón en la cocina!",
+              "mirror": {
+                "say": "¡Hay un ratón en la cocina!",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un ratón",
+                    "en": "a mouse",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la cocina",
+                    "en": "in the kitchen",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Click with the mouse.",
+              "translation": "Haz clic con el ratón."
+            }
+          ],
+          "notes": "Plural irregular: one mouse, two mice."
+        },
+        {
+          "key": "rabbit",
+          "type": "term",
+          "text": "rabbit",
+          "meaning": "conejo",
+          "pronunciation": "RÁbit",
+          "examples": [
+            {
+              "text": "The rabbit is eating a carrot.",
+              "translation": "El conejo está comiendo una zanahoria.",
+              "mirror": {
+                "say": "El conejo está comiendo una zanahoria",
+                "pieces": [
+                  {
+                    "es": "El conejo",
+                    "en": "The rabbit",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comiendo",
+                    "en": "eating",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una zanahoria",
+                    "en": "a carrot",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A white rabbit.",
+              "translation": "Un conejo blanco."
+            }
+          ]
+        },
+        {
+          "key": "elephant",
+          "type": "term",
+          "text": "elephant",
+          "meaning": "elefante",
+          "pronunciation": "Élefant",
+          "examples": [
+            {
+              "text": "Elephants never forget.",
+              "translation": "Los elefantes nunca olvidan.",
+              "mirror": {
+                "say": "Los elefantes nunca olvidan",
+                "pieces": [
+                  {
+                    "es": "elefantes",
+                    "en": "Elephants",
+                    "role": "who",
+                    "from": "Los elefantes",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "olvidan",
+                    "en": "forget",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An elephant is very big.",
+              "translation": "Un elefante es muy grande."
+            }
+          ]
+        },
+        {
+          "key": "lion",
+          "type": "term",
+          "text": "lion",
+          "meaning": "león",
+          "pronunciation": "LÁIon",
+          "examples": [
+            {
+              "text": "The lion is the king of animals.",
+              "translation": "El león es el rey de los animales.",
+              "mirror": {
+                "say": "El león es el rey de los animales",
+                "pieces": [
+                  {
+                    "es": "El león",
+                    "en": "The lion",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el rey de los animales",
+                    "en": "the king of animals",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A lion at the zoo.",
+              "translation": "Un león en el zoo."
+            }
+          ]
+        },
+        {
+          "key": "monkey",
+          "type": "term",
+          "text": "monkey",
+          "meaning": "mono",
+          "pronunciation": "MÁNki",
+          "examples": [
+            {
+              "text": "The monkey is very funny.",
+              "translation": "El mono es muy gracioso.",
+              "mirror": {
+                "say": "El mono es muy gracioso",
+                "pieces": [
+                  {
+                    "es": "El mono",
+                    "en": "The monkey",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy gracioso",
+                    "en": "very funny",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Monkeys live in trees.",
+              "translation": "Los monos viven en los árboles."
+            }
+          ]
+        },
+        {
+          "key": "bear",
+          "type": "term",
+          "text": "bear",
+          "meaning": "oso",
+          "pronunciation": "BÉR",
+          "examples": [
+            {
+              "text": "Look, a bear!",
+              "translation": "¡Mira, un oso!",
+              "mirror": {
+                "say": "¡Mira, un oso!",
+                "pieces": [
+                  {
+                    "es": "Mira",
+                    "en": "Look",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un oso",
+                    "en": "a bear",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Bears sleep in winter.",
+              "translation": "Los osos duermen en invierno."
+            }
+          ]
+        },
+        {
+          "key": "snake",
+          "type": "term",
+          "text": "snake",
+          "meaning": "serpiente",
+          "pronunciation": "SNÉIK",
+          "examples": [
+            {
+              "text": "I'm scared of snakes.",
+              "translation": "Me dan miedo las serpientes.",
+              "mirror": {
+                "say": "Me dan miedo las serpientes",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "me dan",
+                    "why": "«Me dan miedo» se dice «estoy asustado de»: I'm scared of."
+                  },
+                  {
+                    "es": "asustado de",
+                    "en": "scared of",
+                    "role": "word",
+                    "from": "miedo"
+                  },
+                  {
+                    "es": "serpientes",
+                    "en": "snakes",
+                    "role": "word",
+                    "from": "las serpientes"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A long snake.",
+              "translation": "Una serpiente larga."
+            }
+          ]
+        },
+        {
+          "key": "duck",
+          "type": "term",
+          "text": "duck",
+          "meaning": "pato",
+          "pronunciation": "DAK",
+          "examples": [
+            {
+              "text": "Ducks swim in the lake.",
+              "translation": "Los patos nadan en el lago.",
+              "mirror": {
+                "say": "Los patos nadan en el lago",
+                "pieces": [
+                  {
+                    "es": "patos",
+                    "en": "Ducks",
+                    "role": "who",
+                    "from": "Los patos",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "nadan",
+                    "en": "swim",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el lago",
+                    "en": "in the lake",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A little duck.",
+              "translation": "Un patito."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
