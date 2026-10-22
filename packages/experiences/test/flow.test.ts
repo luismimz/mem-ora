@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -99,5 +99,62 @@ describe('Flujo infinito (D-077)', () => {
     const term = { key: 't1', type: 'term', language: 'en', payload: { text: 'play', meaning: 'jugar' }, skills: [{ key: 't1.recall', kind: 'recall' }], association: null } as unknown as SessionUnit;
     const plan = buildFlowSession({ ...base, units: { ...units, t1: term }, items: [item('t1', 'review')], levels: { t1: 3 } });
     expect(plan.steps.find((s) => s.unitKey === 't1' && s.levelUp)).toMatchObject({ kind: 'review', skillKey: 't1.recall' });
+  });
+});
+
+describe('idiomas en el Flujo: escuchar, construir y gramática (D-079)', () => {
+  const word = (key: string, text: string, meaning: string): SessionUnit => ({
+    key, type: 'term', language: 'en',
+    payload: { form: 'word', text, meaning, examples: [{ text: `I like my ${text} very much.`, translation: `Me gusta mucho mi ${meaning}.` }] },
+    skills: [{ key: `${key}.listen`, kind: 'listen' }, { key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }],
+    association: null,
+  } as unknown as SessionUnit);
+  const pattern: SessionUnit = {
+    key: 'p1', type: 'pattern', language: 'en',
+    payload: { goal: 'Decir lo que estás haciendo', rule: 'am/is/are + verbo-ing', pieces: [{ text: "I'm", role: 'fixed', hint: 'YO estoy' }, { text: 'reading', role: 'slot', hint: 'leyendo' }], examples: [{ text: "I'm reading a book.", translation: 'Estoy leyendo un libro.' }, { text: 'She is cooking now.', translation: 'Está cocinando ahora.' }] },
+    skills: [{ key: 'p1.recall', kind: 'recall' }, { key: 'p1.produce', kind: 'produce' }],
+    association: null,
+  } as unknown as SessionUnit;
+  const vocab = Object.fromEntries([['w1', 'dog', 'perro'], ['w2', 'cat', 'gato'], ['w3', 'house', 'casa'], ['w4', 'car', 'coche']].map(([k, t, m]) => [k, word(k!, t!, m!)]));
+  const lang = { ...base, units: { ...vocab, p1: pattern } };
+  const plan = buildFlowSession({ ...lang, items: ['w1', 'w2', 'w3', 'w4', 'p1'].map((k) => item(k, 'new')), audio: true });
+  const main = plan.steps.filter((s) => !s.retry);
+
+  it('con audio, una palabra de cada pareja se practica escuchando (habilidad «escuchar»)', () => {
+    const listens = main.filter((s) => s.kind === 'listen');
+    expect(listens.length).toBeGreaterThanOrEqual(2);
+    for (const s of listens) expect(s.skillKey).toBe(`${s.unitKey}.listen`);
+  });
+
+  it('tras cada pareja de palabras, se construye una frase real (habilidad «producir»)', () => {
+    const builds = main.filter((s) => s.kind === 'build' && s.unitKey.startsWith('w'));
+    expect(builds.length).toBeGreaterThanOrEqual(2);
+    for (const s of builds) expect(s).toMatchObject({ skillKey: `${s.unitKey}.produce`, example: 0 });
+  });
+
+  it('la gramática entra con su truco (ficha) y se practica construyendo una de sus frases', () => {
+    const i = plan.steps.findIndex((s) => s.unitKey === 'p1' && s.kind === 'reel');
+    const j = plan.steps.findIndex((s) => s.unitKey === 'p1' && s.kind === 'build');
+    expect(i).toBeGreaterThanOrEqual(0);
+    expect(j).toBeGreaterThan(i);
+  });
+
+  it('REGLA DE ORO también con las tarjetas nuevas: nada se pregunta sin su ficha antes', () => plan.steps.forEach((s, i) => {
+    if (!s.unitKey || s.kind === 'reel') return;
+    expect(plan.steps.slice(0, i).some((x) => x.kind === 'reel' && x.unitKey === s.unitKey)).toBe(true);
+  }));
+
+  it('la gramática se repesca construyendo otra de sus frases, no eligiendo', () => {
+    const retry = plan.steps.find((s) => s.unitKey === 'p1' && s.retry);
+    expect(retry).toMatchObject({ kind: 'build', example: 1, skillKey: 'p1.produce' });
+  });
+
+  it('sin audio no hay «Escucha»', () => {
+    const quiet = buildFlowSession({ ...lang, items: ['w1', 'w2'].map((k) => item(k, 'new')) });
+    expect(quiet.steps.some((s) => s.kind === 'listen')).toBe(false);
+  });
+
+  it('las fichas de una frase son sus palabras sin la puntuación final', () => {
+    expect(buildTiles("I'm reading a book.")).toEqual(["I'm", 'reading', 'a', 'book']);
   });
 });

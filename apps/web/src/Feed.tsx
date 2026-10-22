@@ -4,8 +4,9 @@
 // ronda acaba en un hito y la siguiente ya está cargada. Puntos, racha con protector, combos, vibración y sonido.
 import { Fragment, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload } from '@memora/content';
+import type { ConceptPayload, PatternPayload } from '@memora/content';
 import {
+  buildTiles,
   challengeChoices,
   choicesFor,
   exercisesOf,
@@ -19,7 +20,7 @@ import {
   type ClientEvent,
   type SessionUnit,
 } from '@memora/experiences';
-import { api, ApiError, type Progress, type SessionPayload } from './api';
+import { api, ApiError, type Mission, type Progress, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
 import { audioEnabled, speak } from './speech';
@@ -95,7 +96,9 @@ function Slide({ children, onNext, tone, className = '' }: { children: ReactNode
     return () => window.removeEventListener('keydown', key);
   }, [onNext]);
   const begin = (target: EventTarget | null, x: number, y: number) => {
-    start.current = onNext && !(target as HTMLElement | null)?.closest?.('button, input, textarea, a') && atEnd() ? { x, y } : null;
+    // Un deslizar puede empezar encima de un botón (🔊, «Explícame más»): si el dedo se mueve, el navegador no lo cuenta
+    // como toque y el botón no se pulsa. Solo se excluyen los campos de texto.
+    start.current = onNext && !(target as HTMLElement | null)?.closest?.('input, textarea') && atEnd() ? { x, y } : null;
   };
   const move = (x: number, y: number) => {
     const s = start.current;
@@ -186,16 +189,57 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
   );
 }
 
+/**
+ * Truco de gramática (D-079): el método Espejo. Arriba, cada pieza en inglés; debajo, su espejo en español (el sujeto
+ * que en español se omite, el auxiliar que se mantiene). Después, la regla en una línea, ejemplos con 🔊 y el «ojo».
+ */
+function PatternFace({ unit }: { unit: SessionUnit }) {
+  const p = unit.payload as PatternPayload;
+  const voice = audioEnabled();
+  const say = (text: string) => (voice ? <button type="button" className="say" aria-label={`Escuchar «${text}»`} onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button> : null);
+  return (
+    <div className="concept-face pattern-face">
+      <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🪞'}</div>
+      <h2 className="pattern-goal">{p.goal}</h2>
+      {unit.association?.text && <p className="face-story"><Marked text={unit.association.text} /></p>}
+      <div className="mirror" role="list" aria-label="Pieza a pieza">
+        {p.pieces.map((x, i) => (
+          <span key={i} role="listitem" className={`piece ${x.role}`}>
+            <b lang={unit.language}>{x.text}</b>
+            {x.hint && <small>{x.hint}</small>}
+          </span>
+        ))}
+      </div>
+      <p className="pattern-rule">{p.rule}</p>
+      <div className="face-learn">
+        <p className="learn-label">{p.examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>
+        {p.examples.slice(0, 4).map((ex, i) => (
+          <div key={i} className="learn-example">
+            <p className="learn-text" lang={unit.language}>{ex.text} {say(ex.text)}</p>
+            {ex.translation && <p className="learn-note">{ex.translation}</p>}
+          </div>
+        ))}
+        {p.pitfalls?.length ? <><p className="learn-label">OJO</p>{p.pitfalls.map((t, i) => <p key={i} className="learn-contrast">{t}</p>)}</> : null}
+      </div>
+    </div>
+  );
+}
+
 // ─── Tarjetas ─────────────────────────────────────────────────────────────────────────────────────────────
 
 const FOCUS_TAG = { errors: 'TUS ERRORES · RECUÉRDALO', practice: 'REFUERZO · LO QUE MÁS TE CUESTA' } as const;
 
 function Reel({ unit, focus, courseId, onNext }: { unit: SessionUnit; focus?: AssocStep['focus']; courseId: string; onNext: () => void }) {
-  useEffect(() => { if (audioEnabled()) speak(unitText(unit), unit.language); }, [unit]);
+  const isPattern = unit.type === 'pattern';
+  useEffect(() => {
+    if (!audioEnabled()) return;
+    const first = isPattern ? (unit.payload as PatternPayload).examples[0]?.text : unitText(unit);
+    if (first) speak(first, unit.language);
+  }, [unit, isPattern]);
   return (
-    <Slide tone={hue(unit.key)} onNext={onNext} className="reel">
-      <p className={`tag ${focus === 'errors' ? 'ko' : ''}`}>{focus ? FOCUS_TAG[focus] : 'NUEVO PARA TU MEMORIA'}</p>
-      <Concept unit={unit} courseId={courseId} step="reel" />
+    <Slide tone={hue(unit.key)} onNext={onNext} className={`reel ${isPattern ? 'grammar' : ''}`}>
+      <p className={`tag ${focus === 'errors' ? 'ko' : ''}`}>{focus ? FOCUS_TAG[focus] : isPattern ? '🪞 TRUCO DE GRAMÁTICA' : 'NUEVO PARA TU MEMORIA'}</p>
+      {isPattern ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="reel" />}
     </Slide>
   );
 }
@@ -206,7 +250,7 @@ function Teach({ unit, note, courseId, onNext }: { unit: SessionUnit; note?: str
     <Slide tone={hue(unit.key)} onNext={onNext} className="teach">
       <p className="tag ko">RECUÉRDALO ASÍ · VUELVE EN UN MOMENTO</p>
       {note && <p className="teach-note">{note}</p>}
-      <Concept unit={unit} courseId={courseId} step="teach" />
+      {unit.type === 'pattern' ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="teach" />}
     </Slide>
   );
 }
@@ -230,6 +274,75 @@ function Quick({ unit, reverse, pool, retry, onResult }: { unit: SessionUnit; re
       <div className="options">
         {choices.map((c, i) => <button type="button" key={c.label} className={`option ${c.label.length > 24 ? 'long' : ''} ${picked !== null && c.correct ? 'is-right' : ''} ${picked === i && !c.correct ? 'is-wrong' : ''}`} onClick={() => pick(i)}>{c.label}</button>)}
       </div>
+    </Slide>
+  );
+}
+
+/** Escucha (D-079): oyes la palabra (sin verla) y eliges qué significa. Practica la habilidad «escuchar». */
+function Listen({ unit, pool, onResult }: { unit: SessionUnit; pool: SessionUnit[]; onResult: (ok: boolean, ms: number) => void }) {
+  const choices = useMemo(() => choicesFor(unitMeaning(unit), pool.map(unitMeaning), `${unit.key}-listen`, 3), [unit, pool]);
+  const [picked, setPicked] = useState<number | null>(null);
+  const t0 = useRef(performance.now());
+  const play = () => speak(unitText(unit), unit.language, 0.8);
+  useEffect(() => { play(); }, [unit]); // eslint-disable-line react-hooks/exhaustive-deps
+  function pick(i: number) {
+    if (picked !== null) return;
+    setPicked(i);
+    const ok = choices[i]!.correct;
+    setTimeout(() => onResult(ok, Math.round(performance.now() - t0.current)), ok ? 700 : 1200);
+  }
+  return (
+    <Slide tone={hue(unit.key)} className={picked === null ? '' : choices[picked]!.correct ? 'right' : 'wrong'}>
+      <p className="tag">👂 ESCUCHA</p>
+      <button type="button" className="listen-play" aria-label="Escuchar otra vez" onClick={play}>🔊</button>
+      <h3 className="ask">{picked === null ? '¿Qué has oído?' : <><b lang={unit.language}>{unitText(unit).toUpperCase()}</b> = {unitMeaning(unit)}</>}</h3>
+      <div className="options">
+        {choices.map((c, i) => <button type="button" key={c.label} className={`option ${picked !== null && c.correct ? 'is-right' : ''} ${picked === i && !c.correct ? 'is-wrong' : ''}`} onClick={() => pick(i)}>{c.label}</button>)}
+      </div>
+    </Slide>
+  );
+}
+
+/** Orden estable que nunca deja la frase ya resuelta (si se puede). */
+function scramble(words: string[], seed: string): string[] {
+  let h = 0;
+  for (const c of seed) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const out = words.map((w, i) => ({ w, k: ((h ^ (i * 2654435761)) >>> 0) % 1000 })).sort((a, b) => a.k - b.k).map((x) => x.w);
+  return out.join(' ') === words.join(' ') && words.length > 1 ? [...out.slice(1), out[0]!] : out;
+}
+const plain = (x: string) => x.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').replace(/[’]/g, "'").replace(/\s+/g, ' ').trim();
+
+/**
+ * Construye la frase (D-079): ves la frase en español y ordenas las palabras en inglés tocándolas. Usar la palabra en
+ * una frase real es lo que la fija; practica la habilidad «producir» (con las piezas a la vista: pista 1).
+ */
+function Build({ unit, example, onResult }: { unit: SessionUnit; example: number; onResult: (ok: boolean, ms: number, note: string) => void }) {
+  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string }> }).examples[example]!;
+  const words = useMemo(() => buildTiles(ex.text), [ex.text]);
+  const bank = useMemo(() => scramble(words, `${unit.key}-${example}`).map((w, i) => ({ w, i })), [words, unit.key, example]);
+  const [chosen, setChosen] = useState<number[]>([]);
+  const [done, setDone] = useState<boolean | null>(null);
+  const t0 = useRef(performance.now());
+  useEffect(() => {
+    if (done !== null || chosen.length !== words.length) return;
+    const answer = chosen.map((i) => bank[i]!.w).join(' ');
+    const ok = plain(answer) === plain(words.join(' '));
+    setDone(ok);
+    if (ok && audioEnabled()) speak(ex.text, unit.language);
+    setTimeout(() => onResult(ok, Math.round(performance.now() - t0.current), `Es «${ex.text}» (${ex.translation}).`), ok ? 1100 : 1500);
+  }, [chosen]); // eslint-disable-line react-hooks/exhaustive-deps
+  const toggle = (i: number) => { if (done !== null) return; setChosen((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i])); };
+  return (
+    <Slide tone={hue(unit.key)} className={`build ${done === null ? '' : done ? 'right' : 'wrong'}`}>
+      <p className="tag">🧩 CONSTRUYE LA FRASE</p>
+      <h3 className="ask build-es">«{ex.translation}»</h3>
+      <div className="build-line" aria-label="Tu frase" lang={unit.language}>
+        {chosen.length ? chosen.map((i) => <button type="button" key={i} className="tile on" onClick={() => toggle(i)}>{bank[i]!.w}</button>) : <span className="build-empty">Toca las palabras en orden</span>}
+      </div>
+      <div className="build-bank" lang={unit.language}>
+        {bank.map((b, i) => <button type="button" key={i} className="tile" disabled={chosen.includes(i)} onClick={() => toggle(i)}>{b.w}</button>)}
+      </div>
+      {done === false && <p className="judge-truth">Es <b>{ex.text}</b></p>}
     </Slide>
   );
 }
@@ -383,6 +496,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const [party, setParty] = useState<string | null>(null);
   const [floater, setFloater] = useState<{ id: number; text: string } | null>(null);
   const [progress, setProgress] = useState<Progress | null>(null);
+  const [map, setMap] = useState<{ missions: Mission[]; current: string | null } | null>(null);
   const queue = useRef<ClientEvent[]>([]);
   const saving = useRef<Promise<void>>(Promise.resolve());
   const step = plan.steps[index];
@@ -393,10 +507,15 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     return same.length >= 4 ? same : [...same, ...Object.values(units).filter((x) => x.type === u.type && !same.includes(x)).slice(0, 6)];
   };
 
-  // Lo fallado antes en la sesión: la repesca solo se hace para eso; lo demás se salta solo.
+  // Pendiente de repesca: lo que se falló y aún no se ha vuelto a acertar en la sesión. En cuanto se acierta, las demás
+  // repescas de esa unidad se saltan (antes salían dos «Otra vez» seguidas de la misma palabra).
   const failed = useMemo(() => {
     const f = new Set<string>();
-    plan.steps.slice(0, index).forEach((s) => { if (s.unitKey && outcomes[s.id]?.correct === false) f.add(s.unitKey); });
+    plan.steps.slice(0, index).forEach((s) => {
+      const o = outcomes[s.id];
+      if (!s.unitKey || !o) return;
+      if (o.correct === false) f.add(s.unitKey); else if (s.retry) f.delete(s.unitKey);
+    });
     return f;
   }, [plan, index, outcomes]);
   const skip = Boolean(step?.retry && !failed.has(step.unitKey));
@@ -455,7 +574,8 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const atMilestone = step?.kind === 'summary';
   useEffect(() => {
     if (!atMilestone || offline) return;
-    api.progress(courseId).then(setProgress).catch(() => undefined);
+    // El progreso y el mapa se piden cuando ya se han guardado las respuestas de la ronda (si no, saldría el de antes).
+    saving.current.then(() => Promise.all([api.progress(courseId).then(setProgress), api.missions(courseId).then(setMap)])).catch(() => undefined);
     if (!next) return;
     setUpcoming('loading');
     saving.current.then(() => next()).then((p) => setUpcoming(p)).catch(() => setUpcoming('error'));
@@ -478,17 +598,24 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (!step || skip) card = null;
   else if (step.kind === 'reel' && unit) card = <Reel key={step.id} unit={unit} focus={step.focus} courseId={courseId} onNext={() => { for (const s of unit.skills) queue.current.push(event(unit, s.key, { kind: 'exposure' })); void advance(); }} />;
   else if (step.kind === 'quick' && unit) card = <Quick key={step.id} unit={unit} reverse={Boolean(step.reverse)} retry={Boolean(step.retry)} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#quick${step.reverse ? '-inv' : ''}`, 10)} />;
+  else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
+  else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, 20, step.skillKey, 'production', 1, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
   else if (step.kind === 'challenge' && unit && step.typed) card = <Complete key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#level-${step.exercise ?? 0}`, 30, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'review' && unit) card = <Write key={step.id} unit={unit} levelUp={Boolean(step.levelUp)} onResult={(ok, ms, hint, format) => answered(unit, ok, ms, `${unit.key}#write`, 20, step.skillKey, format, hint)} />;
   else if (step.kind === 'summary') {
-    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review'].includes(s.kind) && outcomes[s.id]);
+    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(s.kind) && outcomes[s.id]);
     const right = asked.filter((s) => outcomes[s.id]!.correct).length;
     const newOnes = plan.steps.filter((s) => s.kind === 'reel' && !s.focus).length;
     const soon = progress?.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now());
     const when = soon?.length ? whenLabel(Math.min(...soon)) : null;
     const shields = progress?.shields ?? 0;
+    // D-079: el avance que se nota. Lo que ya está en tu memoria (aprendido o más) y lo trabajado, y en qué misión vas.
+    const inMemory = progress?.units.filter((u) => u.level !== 'none').length ?? 0;
+    const workedUnits = progress ? new Set(progress.skills.filter((sk) => !['new', 'presented'].includes(sk.status)).map((sk) => sk.unit)).size : 0;
+    const current = map?.missions.find((m) => m.key === map.current);
+    const doneMissions = map?.missions.filter((m) => m.status === 'done').length ?? 0;
     const ready = upcoming !== 'loading';
     card = (
       <Slide tone={45} className="end" onNext={nextRound}>
@@ -500,6 +627,14 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
           <div><b>{best}</b><span>mejor combo</span></div>
           <div><b>{newOnes}</b><span>nuevos en tu memoria</span></div>
         </div>
+        {progress && <p className="end-memory">🧠 <b>{workedUnits}</b> trabajadas · <b>{inMemory}</b> ya en tu memoria a largo plazo</p>}
+        {current && (
+          <div className="end-mission">
+            <div className="row"><span>🗺️ Misión {current.index} · {current.title.replace(/^Misión \d+ · /, '')}</span><b>{current.worked}/{current.total}</b></div>
+            <i><i style={{ width: `${Math.round((current.worked / Math.max(1, current.total)) * 100)}%` }} /></i>
+            {doneMissions > 0 && <small>{doneMissions} {doneMissions === 1 ? 'misión completada' : 'misiones completadas'} de {map!.missions.length}</small>}
+          </div>
+        )}
         {shields > 0 && <p className="end-next">🛡️ {shields === 1 ? 'Tienes 1 protector' : `Tienes ${shields} protectores`}: si un día no puedes estudiar, tu racha no se rompe.</p>}
         {when && <p className="end-next">Tu próximo repaso: {when}, justo antes de que se te olvide.</p>}
         {!offline && <PushOptIn />}

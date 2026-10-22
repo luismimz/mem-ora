@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'summary';
+export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -32,6 +32,8 @@ export interface AssocStep {
   focus?: 'errors' | 'practice';
   /** Flujo (D-077): pregunta que sube de nivel; en vez de elegir, se completa escribiendo. */
   levelUp?: boolean;
+  /** Flujo, «Construye la frase» (D-079): qué ejemplo de la unidad se construye. */
+  example?: number;
 }
 
 export interface AssocPlan {

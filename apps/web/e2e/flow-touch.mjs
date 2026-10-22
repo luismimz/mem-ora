@@ -87,6 +87,64 @@ try {
 
   check(!c.overflowX, 'nada se sale por los lados');
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
+
+  // ── Inglés (D-079): escuchar, construir la frase y truco de gramática, con el planificador real ──
+  const en = await context.newPage();
+  await en.addInitScript(() => {
+    window.__spoken = [];
+    Object.defineProperty(window, 'speechSynthesis', { value: { speaking: false, pending: false, paused: false, speak(u) { window.__spoken.push(u.text); }, cancel() {}, resume() {}, getVoices() { return []; } } });
+    window.SpeechSynthesisUtterance = function (t) { this.text = t; };
+  });
+  const enErrors = [];
+  en.on('pageerror', (e) => enErrors.push(String(e)));
+  await en.goto(url.replace('harness.html', 'harness-ingles.html'));
+  await en.waitForSelector('.slide');
+  const cdpEn = await context.newCDPSession(en);
+  const swipeEn = async () => {
+    await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 640 }] });
+    for (let i = 1; i <= 10; i++) { await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195, y: 640 - 32 * i }] }); await en.waitForTimeout(16); }
+    await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await en.waitForTimeout(500);
+  };
+  const units = await en.evaluate(() => window.__units);
+  const seen = new Set();
+  let builtOk = false;
+  for (let n = 0; n < 40; n++) {
+    const tag = (await en.locator('.slide .tag').first().textContent().catch(() => '')) ?? '';
+    if (/RONDA/.test(tag)) { seen.add('hito'); break; }
+    if (/ESCUCHA/.test(tag)) {
+      seen.add('escucha');
+      const spoken = await en.evaluate(() => window.__spoken.at(-1));
+      const u = Object.values(units).find((x) => x.payload.text === spoken);
+      await en.locator('.option', { hasText: new RegExp(`^${u.payload.meaning}$`) }).tap();
+      await en.waitForTimeout(1400); continue;
+    }
+    if (/CONSTRUYE/.test(tag)) {
+      seen.add('construye');
+      const es = (await en.locator('.build-es').textContent()).replace(/[«»]/g, '');
+      const u = Object.values(units).find((x) => x.payload.examples.some((e) => e.translation === es));
+      const words = u.payload.examples.find((e) => e.translation === es).text.replace(/[.!?]+$/, '').split(/\s+/);
+      for (const w of words) { await en.locator('.build-bank .tile:not([disabled])', { hasText: new RegExp(`^${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`) }).first().tap(); await en.waitForTimeout(100); }
+      await en.waitForTimeout(200);
+      if (await en.locator('.slide.build.right').count()) builtOk = true;
+      await en.waitForTimeout(1600); continue;
+    }
+    if (/TRUCO/.test(tag)) seen.add('truco');
+    if (/VERDAD/.test(tag)) { await en.locator('.option.yes').tap(); await en.waitForTimeout(1300); continue; }
+    if (/RELÁMPAGO|AL REVÉS/.test(tag)) { await en.locator('.option').first().tap(); await en.waitForTimeout(1300); continue; }
+    if (/ESCRÍBELO/.test(tag)) {
+      const m = await en.locator('.ask b').textContent();
+      const u = Object.values(units).find((x) => x.payload.meaning === m);
+      await en.locator('input.write').fill(u.payload.text); await en.locator('input.write').press('Enter');
+      await en.waitForTimeout(1300); continue;
+    }
+    await swipeEn();
+  }
+  check(seen.has('escucha'), 'inglés: aparece «Escucha» y se responde tocando lo que se ha oído');
+  check(seen.has('construye') && builtOk, 'inglés: «Construye la frase» se completa tocando las palabras en orden');
+  check(seen.has('truco'), 'inglés: la gramática entra con su «Truco»');
+  check(seen.has('hito'), 'inglés: la ronda llega al hito (deslizando también desde encima de los botones 🔊)');
+  check(enErrors.length === 0, `inglés: sin errores en la página${enErrors.length ? `: ${enErrors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();
   await server.close();

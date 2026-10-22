@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "06-verbos-1",
+      "title": "Misión 6 · Verbos esenciales I",
+      "units": [
+        {
+          "key": "be",
+          "type": "term",
+          "text": "be",
+          "meaning": "ser, estar",
+          "pronunciation": "BI",
+          "examples": [
+            {
+              "text": "I want to be a teacher.",
+              "translation": "Quiero ser profesor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BICI",
+            "scene": "Una BICI quiere SER coche y ESTAR en la autopista.",
+            "sceneTarget": "A BIKE wants TO BE a car and to be on the motorway.",
+            "emoji": "🚲🚗"
+          }
+        },
+        {
+          "key": "have",
+          "type": "term",
+          "text": "have",
+          "meaning": "tener",
+          "pronunciation": "JAV",
+          "examples": [
+            {
+              "text": "I have two brothers.",
+              "translation": "Tengo dos hermanos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JABALÍ",
+            "scene": "Un JABALÍ presume de TENER cuatro coches.",
+            "sceneTarget": "A boar boasts about HAVING four cars.",
+            "emoji": "🐗🚙"
+          }
+        },
+        {
+          "key": "do",
+          "type": "term",
+          "text": "do",
+          "meaning": "hacer (una tarea)",
+          "pronunciation": "DU",
+          "examples": [
+            {
+              "text": "I do my homework at night.",
+              "translation": "Hago los deberes por la noche."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DUCHA",
+            "scene": "En la DUCHA tienes que HACER los deberes.",
+            "sceneTarget": "In the shower you have to DO your homework.",
+            "emoji": "🚿📚"
+          }
+        },
+        {
+          "key": "make",
+          "type": "term",
+          "text": "make",
+          "meaning": "fabricar, crear",
+          "pronunciation": "MÉIK",
+          "examples": [
+            {
+              "text": "She makes a cake.",
+              "translation": "Ella hace un pastel."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MEIGA",
+            "scene": "Una MEIGA FABRICA un pastel con su escoba.",
+            "sceneTarget": "A witch MAKES a cake with her broom.",
+            "emoji": "🧙‍♀️🎂"
+          }
+        },
+        {
+          "key": "get",
+          "type": "term",
+          "text": "get",
+          "meaning": "conseguir, obtener",
+          "pronunciation": "GUET",
+          "examples": [
+            {
+              "text": "I need to get a ticket.",
+              "translation": "Necesito conseguir una entrada."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUEPARDO",
+            "scene": "Un GUEPARDO corre para CONSEGUIR el último bocadillo.",
+            "sceneTarget": "A cheetah runs to GET the last sandwich.",
+            "emoji": "🐆🥪"
+          }
+        },
+        {
+          "key": "take",
+          "type": "term",
+          "text": "take",
+          "meaning": "tomar, coger",
+          "pronunciation": "TÉIK",
+          "examples": [
+            {
+              "text": "Take the bus.",
+              "translation": "Coge el autobús."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEQUILA",
+            "scene": "Para TOMAR el autobús, pagas con TEQUILA.",
+            "sceneTarget": "To TAKE the bus, you pay with tequila.",
+            "emoji": "🚌🥃"
+          }
+        },
+        {
+          "key": "say",
+          "type": "term",
+          "text": "say",
+          "meaning": "decir",
+          "pronunciation": "SÉI",
+          "examples": [
+            {
+              "text": "What did you say?",
+              "translation": "¿Qué has dicho?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEIS",
+            "scene": "SEIS loros intentan DECIR tu nombre a la vez.",
+            "sceneTarget": "Six parrots try to SAY your name at once.",
+            "emoji": "🦜🦜"
+          }
+        },
+        {
+          "key": "tell",
+          "type": "term",
+          "text": "tell",
+          "meaning": "contar (a alguien)",
+          "pronunciation": "TEL",
+          "examples": [
+            {
+              "text": "Tell me a story.",
+              "translation": "Cuéntame una historia."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TELA",
+            "scene": "Para CONTAR un secreto, lo bordas en una TELA.",
+            "sceneTarget": "To TELL a secret, you sew it on cloth.",
+            "emoji": "🧵🤫"
+          }
+        },
+        {
+          "key": "know",
+          "type": "term",
+          "text": "know",
+          "meaning": "saber, conocer",
+          "pronunciation": "NÓU",
+          "examples": [
+            {
+              "text": "I don't know.",
+              "translation": "No lo sé."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOVIO",
+            "scene": "Tu NOVIO presume de SABER todo y no sabe nada.",
+            "sceneTarget": "Your boyfriend boasts that he KNOWS everything, and he knows nothing.",
+            "emoji": "🤓💬"
+          }
+        },
+        {
+          "key": "think",
+          "type": "term",
+          "text": "think",
+          "meaning": "pensar, creer",
+          "pronunciation": "ZINK",
+          "examples": [
+            {
+              "text": "I think you're right.",
+              "translation": "Creo que tienes razón."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZINC",
+            "scene": "Para PENSAR, te pones un casco de ZINC.",
+            "sceneTarget": "To THINK, you put on a zinc helmet.",
+            "emoji": "🤔⛑️"
+          }
+        },
+        {
+          "key": "want",
+          "type": "term",
+          "text": "want",
+          "meaning": "querer",
+          "pronunciation": "UÓNT",
+          "examples": [
+            {
+              "text": "I want a coffee.",
+              "translation": "Quiero un café."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUANTERA",
+            "scene": "QUIERES una GUANTERA llena de chuches.",
+            "sceneTarget": "You WANT a glovebox full of sweets.",
+            "emoji": "🚗🍬"
+          }
+        },
+        {
+          "key": "need",
+          "type": "term",
+          "text": "need",
+          "meaning": "necesitar",
+          "pronunciation": "NÍID",
+          "examples": [
+            {
+              "text": "I need help.",
+              "translation": "Necesito ayuda."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NIDO",
+            "scene": "El pájaro NECESITA un NIDO gigante con piscina.",
+            "sceneTarget": "The bird NEEDS a giant nest with a swimming pool.",
+            "emoji": "🐦🏊"
+          }
+        },
+        {
+          "key": "like",
+          "type": "term",
+          "text": "like",
+          "meaning": "gustar",
+          "pronunciation": "LÁIK",
+          "examples": [
+            {
+              "text": "I like music.",
+              "translation": "Me gusta la música."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAIKA",
+            "scene": "A la perra LAIKA le GUSTA el espacio.",
+            "sceneTarget": "Laika the dog LIKES space.",
+            "emoji": "🐕🚀"
+          }
+        },
+        {
+          "key": "see",
+          "type": "term",
+          "text": "see",
+          "meaning": "ver",
+          "pronunciation": "SII",
+          "examples": [
+            {
+              "text": "I can't see.",
+              "translation": "No veo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIRENA",
+            "scene": "Una SIRENA con prismáticos quiere VER el barco.",
+            "sceneTarget": "A mermaid with binoculars wants to SEE the ship.",
+            "emoji": "🧜‍♀️🔭"
+          }
+        },
+        {
+          "key": "use",
+          "type": "term",
+          "text": "use",
+          "meaning": "usar",
+          "pronunciation": "IÚS",
+          "examples": [
+            {
+              "text": "Can I use your phone?",
+              "translation": "¿Puedo usar tu móvil?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YUCA",
+            "scene": "USAS una YUCA como bate de béisbol.",
+            "sceneTarget": "You USE a yucca as a baseball bat.",
+            "emoji": "🌿⚾"
+          }
+        },
+        {
+          "key": "g-present-simple",
+          "type": "pattern",
+          "goal": "Decir lo que te gusta, quieres o necesitas",
+          "rule": "Con I, you, we, they el verbo va tal cual: I like music. «Me gusta» se dice al revés: YO gusto → I like.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "like",
+              "role": "slot",
+              "hint": "gusto (me gusta)"
+            },
+            {
+              "text": "music",
+              "role": "fixed",
+              "hint": "la música"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I like music.",
+              "translation": "Me gusta la música."
+            },
+            {
+              "text": "We need help.",
+              "translation": "Necesitamos ayuda."
+            },
+            {
+              "text": "They have two cars.",
+              "translation": "Tienen dos coches."
+            },
+            {
+              "text": "I want a coffee.",
+              "translation": "Quiero un café."
+            }
+          ],
+          "pitfalls": [
+            "«Me like» está mal: es I like (YO gusto).",
+            "Sin sujeto no hay frase: «Want coffee» está mal; es I want coffee."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "YO manda: el GUSTO pasa a ser I LIKE.",
+            "emoji": "👑"
+          }
+        }
+      ]
+    }
+  ]
+}

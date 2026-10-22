@@ -1,0 +1,386 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "05-cuerpo",
+      "title": "Misión 5 · El cuerpo",
+      "units": [
+        {
+          "key": "body",
+          "type": "term",
+          "text": "body",
+          "meaning": "cuerpo",
+          "pronunciation": "BÓdi",
+          "examples": [
+            {
+              "text": "My body hurts.",
+              "translation": "Me duele el cuerpo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BODA",
+            "scene": "En su BODA, el novio se pinta el CUERPO dorado.",
+            "sceneTarget": "At his wedding, the groom paints his BODY gold.",
+            "emoji": "🧍💒"
+          }
+        },
+        {
+          "key": "head",
+          "type": "term",
+          "text": "head",
+          "meaning": "cabeza",
+          "pronunciation": "JED",
+          "examples": [
+            {
+              "text": "My head hurts.",
+              "translation": "Me duele la cabeza."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JEDI",
+            "scene": "Un JEDI se rasca la CABEZA con el sable.",
+            "sceneTarget": "A Jedi scratches his HEAD with his sabre.",
+            "emoji": "🗣️⚔️"
+          }
+        },
+        {
+          "key": "hair",
+          "type": "term",
+          "text": "hair",
+          "meaning": "pelo",
+          "pronunciation": "JER",
+          "examples": [
+            {
+              "text": "She has long hair.",
+              "translation": "Tiene el pelo largo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JERSEY",
+            "scene": "Tu PELO crece tanto que tejes un JERSEY.",
+            "sceneTarget": "Your HAIR grows so long you knit a jumper.",
+            "emoji": "💇🧶"
+          }
+        },
+        {
+          "key": "face",
+          "type": "term",
+          "text": "face",
+          "meaning": "cara",
+          "pronunciation": "FÉIS",
+          "examples": [
+            {
+              "text": "Wash your face.",
+              "translation": "Lávate la cara."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAISÁN",
+            "scene": "Un FAISÁN se posa en tu CARA y picotea.",
+            "sceneTarget": "A pheasant lands on your FACE and pecks.",
+            "emoji": "😮🐦"
+          }
+        },
+        {
+          "key": "eye",
+          "type": "term",
+          "text": "eye",
+          "meaning": "ojo",
+          "pronunciation": "ÁI",
+          "examples": [
+            {
+              "text": "Close your eyes.",
+              "translation": "Cierra los ojos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AY",
+            "scene": "¡AY! Un mosquito gigante se mete en tu OJO.",
+            "sceneTarget": "Ouch! A giant mosquito flies into your EYE.",
+            "emoji": "👁️🦟"
+          }
+        },
+        {
+          "key": "ear",
+          "type": "term",
+          "text": "ear",
+          "meaning": "oreja",
+          "pronunciation": "ÍER",
+          "examples": [
+            {
+              "text": "My ear hurts.",
+              "translation": "Me duele el oído."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HIERBA",
+            "scene": "Te sale HIERBA de la OREJA y viene una oveja.",
+            "sceneTarget": "Grass grows from your EAR; a sheep comes.",
+            "emoji": "👂🌱"
+          }
+        },
+        {
+          "key": "nose",
+          "type": "term",
+          "text": "nose",
+          "meaning": "nariz",
+          "pronunciation": "NÓUS",
+          "examples": [
+            {
+              "text": "My nose is cold.",
+              "translation": "Tengo la nariz fría."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NUEZ",
+            "scene": "Cascas una NUEZ con tu NARIZ de hierro.",
+            "sceneTarget": "You crack a walnut with your iron NOSE.",
+            "emoji": "👃🌰"
+          }
+        },
+        {
+          "key": "mouth",
+          "type": "term",
+          "text": "mouth",
+          "meaning": "boca",
+          "pronunciation": "MÁUZ",
+          "examples": [
+            {
+              "text": "Open your mouth.",
+              "translation": "Abre la boca."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MAUSOLEO",
+            "scene": "Abres la BOCA y dentro hay un MAUSOLEO.",
+            "sceneTarget": "You open your MOUTH and there is a mausoleum inside.",
+            "emoji": "👄🏛️"
+          }
+        },
+        {
+          "key": "tooth",
+          "type": "term",
+          "text": "tooth",
+          "meaning": "diente",
+          "pronunciation": "TUZ",
+          "examples": [
+            {
+              "text": "I have a bad tooth.",
+              "translation": "Tengo un diente malo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TOS",
+            "scene": "Un ataque de TOS te hace escupir un DIENTE.",
+            "sceneTarget": "A coughing fit makes you spit a TOOTH.",
+            "emoji": "🦷😷"
+          }
+        },
+        {
+          "key": "arm",
+          "type": "term",
+          "text": "arm",
+          "meaning": "brazo",
+          "pronunciation": "ARM",
+          "examples": [
+            {
+              "text": "I broke my arm.",
+              "translation": "Me rompí el brazo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARMARIO",
+            "scene": "Un ARMARIO saca un BRAZO y te roba la chaqueta.",
+            "sceneTarget": "A wardrobe's ARM steals your jacket.",
+            "emoji": "💪🚪"
+          }
+        },
+        {
+          "key": "leg",
+          "type": "term",
+          "text": "leg",
+          "meaning": "pierna",
+          "pronunciation": "LEG",
+          "examples": [
+            {
+              "text": "My leg is tired.",
+              "translation": "Tengo la pierna cansada."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEGO",
+            "scene": "Pisas un LEGO y tu PIERNA salta al techo.",
+            "sceneTarget": "You step on a Lego; your LEG hits the ceiling.",
+            "emoji": "🦵🧱"
+          }
+        },
+        {
+          "key": "foot",
+          "type": "term",
+          "text": "foot",
+          "meaning": "pie",
+          "pronunciation": "FUT",
+          "examples": [
+            {
+              "text": "I go to work on foot.",
+              "translation": "Voy al trabajo a pie."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FÚTBOL",
+            "scene": "Chutas el balón de FÚTBOL y sale volando tu PIE.",
+            "sceneTarget": "You kick the football and your FOOT flies off.",
+            "emoji": "🦶⚽"
+          }
+        },
+        {
+          "key": "back",
+          "type": "term",
+          "text": "back",
+          "meaning": "espalda",
+          "pronunciation": "BAK",
+          "examples": [
+            {
+              "text": "My back hurts.",
+              "translation": "Me duele la espalda."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BACA",
+            "scene": "Llevas una BACA con maletas en la ESPALDA.",
+            "sceneTarget": "You carry a roof rack on your BACK.",
+            "emoji": "🔙🧳"
+          }
+        },
+        {
+          "key": "heart",
+          "type": "term",
+          "text": "heart",
+          "meaning": "corazón",
+          "pronunciation": "JART",
+          "examples": [
+            {
+              "text": "She has a big heart.",
+              "translation": "Tiene un gran corazón."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HARTO",
+            "scene": "Tu CORAZÓN, HARTO, se va del pecho dando portazo.",
+            "sceneTarget": "Your fed-up HEART slams out of your chest.",
+            "emoji": "❤️🚪"
+          }
+        },
+        {
+          "key": "neck",
+          "type": "term",
+          "text": "neck",
+          "meaning": "cuello",
+          "pronunciation": "NEK",
+          "examples": [
+            {
+              "text": "A long neck.",
+              "translation": "Un cuello largo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NÉCTAR",
+            "scene": "Una jirafa estira el CUELLO para beber NÉCTAR.",
+            "sceneTarget": "A giraffe stretches its NECK for nectar.",
+            "emoji": "🦒🌙"
+          }
+        },
+        {
+          "key": "g-possessive-body",
+          "type": "pattern",
+          "goal": "Decir qué te duele (my, your, his, her)",
+          "rule": "Con el cuerpo, el inglés dice de quién es: MY head, no «the head». His = de él; her = de ella.",
+          "pieces": [
+            {
+              "text": "My",
+              "role": "fixed",
+              "hint": "MI (no «la»)"
+            },
+            {
+              "text": "head",
+              "role": "slot",
+              "hint": "cabeza"
+            },
+            {
+              "text": "hurts",
+              "role": "fixed",
+              "hint": "duele"
+            }
+          ],
+          "examples": [
+            {
+              "text": "My head hurts.",
+              "translation": "Me duele la cabeza."
+            },
+            {
+              "text": "Wash your face.",
+              "translation": "Lávate la cara."
+            },
+            {
+              "text": "His leg is tired.",
+              "translation": "Tiene la pierna cansada."
+            },
+            {
+              "text": "Her hair is long.",
+              "translation": "Tiene el pelo largo."
+            }
+          ],
+          "pitfalls": [
+            "«The head hurts» suena raro: di de quién es (my, your, his, her)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Tu CABEZA lleva una etiqueta: es MÍA, MY HEAD.",
+            "emoji": "🏷️"
+          }
+        }
+      ]
+    }
+  ]
+}

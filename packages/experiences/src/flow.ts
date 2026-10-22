@@ -5,6 +5,10 @@
 // Las preguntas suben de nivel: con dos repasos superados, en vez de elegir se completa escribiendo.
 // La ronda acaba en un hito (resumen) y la siguiente se encadena sola al deslizar. Agnóstico de la materia: en idiomas
 // (unidades `term`) también se escribe la palabra nueva; en el resto, solo se escribe al subir de nivel.
+// D-079 (idiomas): cada palabra se practica en sus tres habilidades, no solo en reconocer el significado: «Escucha»
+// (oír la palabra y elegir qué significa) y «Construye la frase» (ordenar las palabras de un ejemplo real). Sin esto
+// ninguna palabra llegaba nunca a «aprendida», porque esas habilidades no se practicaban. La gramática (unidades
+// `pattern`) entra en el Flujo con su truco y se practica construyendo frases.
 import type { PlanItem } from '@memora/core';
 import { exercisesOf, seeded, shuffle, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
 import type { SessionUnit } from './session';
@@ -17,6 +21,26 @@ export const FLOW_BOSS_EVERY = 8;
 export const FLOW_LEVEL_UP = 2;
 /** Respuestas que se pueden escribir en el móvil sin fricción. */
 export const FLOW_TYPED_MAX = 24;
+
+/** Palabras de una frase que se construye ordenando fichas: ni tan corta que sea obvia ni tan larga que agobie. */
+export const FLOW_BUILD_WORDS = { min: 3, max: 9 } as const;
+
+/** Fichas de «Construye la frase»: las palabras del ejemplo, sin la puntuación final. */
+export function buildTiles(text: string): string[] {
+  return text.replace(/[.!?¡¿]+$/u, '').split(/\s+/).filter(Boolean);
+}
+
+/** Ejemplos de la unidad que se pueden construir con fichas (idiomas y gramática), por su posición. */
+export function buildableExamples(u: SessionUnit): number[] {
+  if (u.type !== 'term' && u.type !== 'pattern') return [];
+  const examples = ((u.payload as { examples?: Array<{ text: string; translation?: string }> }).examples ?? []);
+  return examples.flatMap((e, i) => (Boolean(e.translation) && buildTiles(e.text).length >= FLOW_BUILD_WORDS.min && buildTiles(e.text).length <= FLOW_BUILD_WORDS.max ? [i] : []));
+}
+
+/** Primer ejemplo que se puede construir con fichas; `null` si no hay ninguno. */
+export function buildableExample(u: SessionUnit): number | null {
+  return buildableExamples(u)[0] ?? null;
+}
 
 /** Ejercicio que se puede completar escribiendo: respuesta corta y sin «ordenar pasos». */
 export function typeableExercise(u: SessionUnit): number | null {
@@ -39,6 +63,8 @@ export function buildFlowSession(input: {
   practiceUnits?: string[];
   /** Repasos superados por unidad: decide si la pregunta sube de nivel. */
   levels?: Record<string, number>;
+  /** El curso tiene audio (idiomas): habilita «Escucha». */
+  audio?: boolean;
 }): AssocPlan {
   const { units, items } = input;
   const rand = seeded(input.sessionId);
@@ -76,6 +102,17 @@ export function buildFlowSession(input: {
     const skill = unit.skills.find((s) => s.kind === 'apply') ?? unit.skills.find((s) => s.kind === 'recall');
     return n === null || !skill ? null : { kind: 'challenge', unitKey: u, scene: -4, skillKey: skill.key, exercise: n, typed: true, levelUp: true, ...tag(u) };
   };
+  // D-079: oír la palabra y elegir qué significa (habilidad «escuchar»), solo si el curso tiene audio.
+  const listen = (u: string): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'listen');
+    return input.audio && units[u]!.type === 'term' && skill ? { kind: 'listen', unitKey: u, scene: -4, skillKey: skill.key, ...tag(u) } : null;
+  };
+  // D-079: construir una frase real con la unidad (habilidad «producir»), en idiomas y gramática.
+  const build = (u: string): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'produce');
+    const n = buildableExample(units[u]!);
+    return skill && n !== null ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -83,8 +120,14 @@ export function buildFlowSession(input: {
   for (let i = 0; i < order.length; i += 2) {
     const pair = order.slice(i, i + 2);
     for (const u of pair) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) });
-    // Variedad: la primera de la pareja, relámpago; la segunda, ¿verdad o mentira?; lo dominado, escribiendo.
-    pair.forEach((u, j) => base.push(levelUp(u) ?? (j === 0 ? quick(u) : judge(u))));
+    // Variedad: la primera de la pareja, escucha (idiomas) o relámpago; la segunda, ¿verdad o mentira?; lo dominado,
+    // escribiendo. La gramática se practica construyendo una de sus frases.
+    pair.forEach((u, j) => base.push(levelUp(u) ?? (units[u]!.type === 'pattern' ? (build(u) ?? quick(u)) : j === 0 ? (listen(u) ?? quick(u)) : judge(u))));
+    // Idiomas (D-079): tras cada pareja de palabras, una frase que construir con una de ellas.
+    const terms = pair.filter((u) => units[u]!.type === 'term');
+    const word = terms[Math.floor(rand() * terms.length)];
+    const sentence = word ? build(word) : null;
+    if (sentence) base.push(sentence);
   }
 
   // 2. Repesca intercalada: tras cada pregunta, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).
@@ -92,7 +135,10 @@ export function buildFlowSession(input: {
   const pending: Array<{ at: number; step: Draft }> = [];
   for (const d of base) {
     withRetry.push(d);
-    if (['quick', 'judge', 'challenge', 'review'].includes(d.kind)) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });
+    // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada).
+    const other = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? buildableExamples(units[d.unitKey]!).find((n) => n !== d.example) : undefined;
+    if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });
+    else if (['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(d.kind)) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });
     for (let j = pending.length - 1; j >= 0; j -= 1) if (pending[j]!.at <= withRetry.length) withRetry.push(pending.splice(j, 1)[0]!.step);
   }
   for (const p of pending) withRetry.push(p.step);

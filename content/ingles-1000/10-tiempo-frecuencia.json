@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "10-tiempo-frecuencia",
+      "title": "Misión 10 · Frecuencia y tiempo",
+      "units": [
+        {
+          "key": "always",
+          "type": "term",
+          "text": "always",
+          "meaning": "siempre",
+          "pronunciation": "ÓLueis",
+          "examples": [
+            {
+              "text": "I always drink coffee.",
+              "translation": "Siempre bebo café."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OLÉ",
+            "scene": "SIEMPRE que entras, el público grita ¡OLÉ!",
+            "sceneTarget": "Whenever you walk in, the crowd ALWAYS shouts olé!",
+            "emoji": "🏟️🙌"
+          }
+        },
+        {
+          "key": "usually",
+          "type": "term",
+          "text": "usually",
+          "meaning": "normalmente",
+          "pronunciation": "IÚzhuali",
+          "examples": [
+            {
+              "text": "I usually get up at seven.",
+              "translation": "Normalmente me levanto a las siete."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "USUAL",
+            "scene": "Lo USUAL: NORMALMENTE tu gato desayuna en tu cabeza.",
+            "sceneTarget": "USUALLY your cat has breakfast on your head.",
+            "emoji": "🐈🥣"
+          }
+        },
+        {
+          "key": "often",
+          "type": "term",
+          "text": "often",
+          "meaning": "a menudo",
+          "pronunciation": "ÓFen",
+          "examples": [
+            {
+              "text": "I often read at night.",
+              "translation": "A menudo leo por la noche."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OFELIA",
+            "scene": "A MENUDO, OFELIA canta ópera en la bañera.",
+            "sceneTarget": "Ofelia OFTEN sings opera in the bathtub.",
+            "emoji": "🛁🎶"
+          }
+        },
+        {
+          "key": "sometimes",
+          "type": "term",
+          "text": "sometimes",
+          "meaning": "a veces",
+          "pronunciation": "SÁMtaims",
+          "examples": [
+            {
+              "text": "Sometimes I walk to work.",
+              "translation": "A veces voy andando al trabajo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAMARITANO",
+            "scene": "A VECES un buen SAMARITANO te lleva a cuestas.",
+            "sceneTarget": "SOMETIMES a good Samaritan carries you on his back.",
+            "emoji": "🧍‍♂️🎒"
+          }
+        },
+        {
+          "key": "rarely",
+          "type": "term",
+          "text": "rarely",
+          "meaning": "casi nunca, rara vez",
+          "pronunciation": "RÉRli",
+          "examples": [
+            {
+              "text": "I rarely watch TV.",
+              "translation": "Casi nunca veo la tele."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RARO",
+            "scene": "RARA vez ves un RARO pez con sombrero.",
+            "sceneTarget": "You RARELY see a strange fish in a hat.",
+            "emoji": "🐟🎩"
+          }
+        },
+        {
+          "key": "never",
+          "type": "term",
+          "text": "never",
+          "meaning": "nunca",
+          "pronunciation": "NÉver",
+          "examples": [
+            {
+              "text": "I never smoke.",
+              "translation": "Nunca fumo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NEVERA",
+            "scene": "La NEVERA dice: NUNCA más me abras de noche.",
+            "sceneTarget": "The fridge says: NEVER open me at night again.",
+            "emoji": "🧊🌙"
+          }
+        },
+        {
+          "key": "ever",
+          "type": "term",
+          "text": "ever",
+          "meaning": "alguna vez",
+          "pronunciation": "ÉVer",
+          "examples": [
+            {
+              "text": "Have you ever been to London?",
+              "translation": "¿Has estado alguna vez en Londres?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EBRO",
+            "scene": "¿Has nadado ALGUNA VEZ el EBRO entero con aletas?",
+            "sceneTarget": "Have you EVER swum the whole Ebro in flippers?",
+            "emoji": "🏞️🤿"
+          }
+        },
+        {
+          "key": "already",
+          "type": "term",
+          "text": "already",
+          "meaning": "ya",
+          "pronunciation": "olRÉdi",
+          "examples": [
+            {
+              "text": "I have already eaten.",
+              "translation": "Ya he comido."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REDES",
+            "scene": "¡YA está! Pescas tu móvil con las REDES.",
+            "sceneTarget": "ALREADY done! You fish out your phone with the nets.",
+            "emoji": "🎣📱"
+          }
+        },
+        {
+          "key": "yet",
+          "type": "term",
+          "text": "yet",
+          "meaning": "todavía (en negativas), ya (en preguntas)",
+          "pronunciation": "IET",
+          "examples": [
+            {
+              "text": "I haven't finished yet.",
+              "translation": "Todavía no he terminado."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YETI",
+            "scene": "El YETI TODAVÍA no ha llegado a la fiesta.",
+            "sceneTarget": "The yeti hasn't arrived at the party YET.",
+            "emoji": "❄️🎉"
+          }
+        },
+        {
+          "key": "still",
+          "type": "term",
+          "text": "still",
+          "meaning": "todavía, aún (sigue igual)",
+          "pronunciation": "STIL",
+          "examples": [
+            {
+              "text": "I still live here.",
+              "translation": "Todavía vivo aquí."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTILO",
+            "scene": "Tu abuelo TODAVÍA baila con ESTILO a los cien.",
+            "sceneTarget": "Your grandpa STILL dances in style at a hundred.",
+            "emoji": "👴🕺"
+          }
+        },
+        {
+          "key": "soon",
+          "type": "term",
+          "text": "soon",
+          "meaning": "pronto",
+          "pronunciation": "SUUN",
+          "examples": [
+            {
+              "text": "See you soon.",
+              "translation": "Hasta pronto."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUMO",
+            "scene": "PRONTO llega un luchador de SUMO a tu sofá.",
+            "sceneTarget": "SOON a sumo wrestler arrives on your sofa.",
+            "emoji": "🤼🛋️"
+          }
+        },
+        {
+          "key": "again",
+          "type": "term",
+          "text": "again",
+          "meaning": "otra vez, de nuevo",
+          "pronunciation": "aGUÉN",
+          "examples": [
+            {
+              "text": "Say it again, please.",
+              "translation": "Dilo otra vez, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AGUANTE",
+            "scene": "Con AGUANTE, subes OTRA VEZ la montaña en patines.",
+            "sceneTarget": "With stamina, you climb the mountain AGAIN on skates.",
+            "emoji": "⛰️🛼"
+          }
+        },
+        {
+          "key": "ago",
+          "type": "term",
+          "text": "ago",
+          "meaning": "hace (tiempo)",
+          "pronunciation": "aGÓU",
+          "examples": [
+            {
+              "text": "Two days ago.",
+              "translation": "Hace dos días."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AGOSTO",
+            "scene": "HACE tres AGOSTOS que tu vecino no se ducha.",
+            "sceneTarget": "Your neighbour last showered three Augusts AGO.",
+            "emoji": "☀️🚿"
+          }
+        },
+        {
+          "key": "tomorrow",
+          "type": "term",
+          "text": "tomorrow",
+          "meaning": "mañana",
+          "pronunciation": "tuMÓrou",
+          "examples": [
+            {
+              "text": "See you tomorrow.",
+              "translation": "Hasta mañana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MORRO",
+            "scene": "MAÑANA un cerdo de MORRO dorado te despierta.",
+            "sceneTarget": "TOMORROW a golden-snouted pig wakes you up.",
+            "emoji": "🐷⏰"
+          }
+        },
+        {
+          "key": "yesterday",
+          "type": "term",
+          "text": "yesterday",
+          "meaning": "ayer",
+          "pronunciation": "IÉSterdei",
+          "examples": [
+            {
+              "text": "I saw her yesterday.",
+              "translation": "La vi ayer."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YESO",
+            "scene": "AYER te caíste y hoy llevas YESO hasta la nariz.",
+            "sceneTarget": "YESTERDAY you fell; today you're in a cast up to your nose.",
+            "emoji": "🦴😵"
+          }
+        },
+        {
+          "key": "g-frequency",
+          "type": "pattern",
+          "goal": "Decir con qué frecuencia haces algo",
+          "rule": "La palabra de frecuencia va ANTES del verbo: I always drink coffee. Con am / is / are, detrás: I am always late.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "always",
+              "role": "slot",
+              "hint": "siempre"
+            },
+            {
+              "text": "drink",
+              "role": "fixed",
+              "hint": "bebo"
+            },
+            {
+              "text": "coffee",
+              "role": "fixed",
+              "hint": "café"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I always drink coffee.",
+              "translation": "Siempre bebo café."
+            },
+            {
+              "text": "She never smokes.",
+              "translation": "Ella nunca fuma."
+            },
+            {
+              "text": "We often read at night.",
+              "translation": "A menudo leemos por la noche."
+            },
+            {
+              "text": "He is always late.",
+              "translation": "Siempre llega tarde."
+            }
+          ],
+          "pitfalls": [
+            "Al final suena mal: «I drink coffee always»; di I always drink coffee."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "SIEMPRE se cuela entre YO y el verbo.",
+            "emoji": "⏰"
+          }
+        }
+      ]
+    }
+  ]
+}

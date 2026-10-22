@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "01-personas",
+      "title": "Misión 1 · Personas y saludos",
+      "units": [
+        {
+          "key": "hello",
+          "type": "term",
+          "text": "hello",
+          "meaning": "hola",
+          "pronunciation": "jeLÓU",
+          "examples": [
+            {
+              "text": "Hello, I'm Ana.",
+              "translation": "Hola, soy Ana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JALEO",
+            "scene": "Dices HOLA y se arma un JALEO enorme.",
+            "sceneTarget": "You say HELLO and the room goes wild.",
+            "emoji": "👋📢"
+          }
+        },
+        {
+          "key": "people",
+          "type": "term",
+          "text": "people",
+          "meaning": "gente",
+          "pronunciation": "PÍpol",
+          "examples": [
+            {
+              "text": "Many people live here.",
+              "translation": "Mucha gente vive aquí."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PIPAS",
+            "scene": "La GENTE escupe PIPAS al alcalde.",
+            "sceneTarget": "PEOPLE spit seeds at the mayor.",
+            "emoji": "👥🌻"
+          }
+        },
+        {
+          "key": "man",
+          "type": "term",
+          "text": "man",
+          "meaning": "hombre",
+          "pronunciation": "MAN",
+          "examples": [
+            {
+              "text": "That man is my teacher.",
+              "translation": "Ese hombre es mi profesor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANO",
+            "scene": "Un HOMBRE con una MANO gigante saluda.",
+            "sceneTarget": "A MAN with a giant hand waves.",
+            "emoji": "👨✋"
+          }
+        },
+        {
+          "key": "woman",
+          "type": "term",
+          "text": "woman",
+          "meaning": "mujer",
+          "pronunciation": "GÚman",
+          "examples": [
+            {
+              "text": "The woman is a doctor.",
+              "translation": "La mujer es médica."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUANTE",
+            "scene": "Una MUJER con GUANTE de boxeo tumba al ladrón.",
+            "sceneTarget": "A WOMAN in a boxing glove floors a thief.",
+            "emoji": "👩🥊"
+          }
+        },
+        {
+          "key": "child",
+          "type": "term",
+          "text": "child",
+          "meaning": "niño",
+          "pronunciation": "CHÁILD",
+          "examples": [
+            {
+              "text": "The child is happy.",
+              "translation": "El niño está contento."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHAL",
+            "scene": "Un NIÑO con CHAL de abuela marca un gol.",
+            "sceneTarget": "A CHILD in granny's shawl scores a goal.",
+            "emoji": "🧒🧣"
+          }
+        },
+        {
+          "key": "friend",
+          "type": "term",
+          "text": "friend",
+          "meaning": "amigo",
+          "pronunciation": "FREND",
+          "examples": [
+            {
+              "text": "She is my best friend.",
+              "translation": "Es mi mejor amiga."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FRENO",
+            "scene": "Tu AMIGO pisa el FRENO justo antes del charco.",
+            "sceneTarget": "Your FRIEND brakes just before the puddle.",
+            "emoji": "🧑‍🤝‍🧑🛑"
+          }
+        },
+        {
+          "key": "name",
+          "type": "term",
+          "text": "name",
+          "meaning": "nombre",
+          "pronunciation": "NÉIM",
+          "examples": [
+            {
+              "text": "What's your name?",
+              "translation": "¿Cómo te llamas?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NEMO",
+            "scene": "NEMO lleva su NOMBRE tatuado en la aleta.",
+            "sceneTarget": "Nemo has his NAME tattooed on his fin.",
+            "emoji": "🐠🏷️"
+          }
+        },
+        {
+          "key": "family",
+          "type": "term",
+          "text": "family",
+          "meaning": "familia",
+          "pronunciation": "FÁmili",
+          "examples": [
+            {
+              "text": "I love my family.",
+              "translation": "Quiero a mi familia."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAMILIA",
+            "scene": "Tu FAMILIA entera, apretujada en un ascensor.",
+            "sceneTarget": "Your whole FAMILY squeezed into a lift.",
+            "emoji": "👨‍👩‍👧‍👦🛗"
+          }
+        },
+        {
+          "key": "mother",
+          "type": "term",
+          "text": "mother",
+          "meaning": "madre",
+          "pronunciation": "MÁder",
+          "examples": [
+            {
+              "text": "My mother is a nurse.",
+              "translation": "Mi madre es enfermera."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MADERA",
+            "scene": "Tu MADRE talla MADERA y le sale una tarta.",
+            "sceneTarget": "Your MOTHER carves wood into a cake.",
+            "emoji": "👩🪵"
+          }
+        },
+        {
+          "key": "father",
+          "type": "term",
+          "text": "father",
+          "meaning": "padre",
+          "pronunciation": "FÁder",
+          "examples": [
+            {
+              "text": "My father works at night.",
+              "translation": "Mi padre trabaja de noche."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FARDO",
+            "scene": "Tu PADRE carga un FARDO de paja y estornuda.",
+            "sceneTarget": "Your FATHER carries a bale of hay and sneezes.",
+            "emoji": "👨🌾"
+          }
+        },
+        {
+          "key": "brother",
+          "type": "term",
+          "text": "brother",
+          "meaning": "hermano",
+          "pronunciation": "BRÁder",
+          "examples": [
+            {
+              "text": "I have one brother.",
+              "translation": "Tengo un hermano."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRAVO",
+            "scene": "Tu HERMANO embiste como un toro BRAVO.",
+            "sceneTarget": "Your BROTHER charges like a wild bull.",
+            "emoji": "👦🐂"
+          }
+        },
+        {
+          "key": "sister",
+          "type": "term",
+          "text": "sister",
+          "meaning": "hermana",
+          "pronunciation": "SÍSter",
+          "examples": [
+            {
+              "text": "My sister is older than me.",
+              "translation": "Mi hermana es mayor que yo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CISTERNA",
+            "scene": "Tu HERMANA se baña en la CISTERNA del váter.",
+            "sceneTarget": "Your SISTER bathes in the toilet cistern.",
+            "emoji": "👧🛁"
+          }
+        },
+        {
+          "key": "boy",
+          "type": "term",
+          "text": "boy",
+          "meaning": "chico",
+          "pronunciation": "BOI",
+          "examples": [
+            {
+              "text": "The boy is ten years old.",
+              "translation": "El chico tiene diez años."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOYA",
+            "scene": "Un CHICO duerme abrazado a una BOYA en alta mar.",
+            "sceneTarget": "A BOY sleeps hugging a buoy at sea.",
+            "emoji": "👦🛟"
+          }
+        },
+        {
+          "key": "girl",
+          "type": "term",
+          "text": "girl",
+          "meaning": "chica",
+          "pronunciation": "GUERL",
+          "examples": [
+            {
+              "text": "The girl reads a book.",
+              "translation": "La chica lee un libro."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUERRA",
+            "scene": "Una CHICA gana sola una GUERRA de almohadas.",
+            "sceneTarget": "A GIRL wins a pillow war alone.",
+            "emoji": "👧🛏️"
+          }
+        },
+        {
+          "key": "baby",
+          "type": "term",
+          "text": "baby",
+          "meaning": "bebé",
+          "pronunciation": "BÉIbi",
+          "examples": [
+            {
+              "text": "The baby is sleeping.",
+              "translation": "El bebé está durmiendo."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BEBÉ",
+            "scene": "Un BEBÉ gigante bebe un biberón como un cohete.",
+            "sceneTarget": "A giant BABY drinks a rocket-sized bottle.",
+            "emoji": "👶🍼"
+          }
+        },
+        {
+          "key": "g-to-be",
+          "type": "pattern",
+          "goal": "Decir quién eres y cómo estás",
+          "rule": "I am · you are · he/she is · we/they are. En inglés, ser y estar son lo mismo; y el sujeto nunca se omite.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "am",
+              "role": "fixed",
+              "hint": "soy / estoy"
+            },
+            {
+              "text": "a teacher",
+              "role": "slot",
+              "hint": "profesor"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I am a teacher.",
+              "translation": "Soy profesor."
+            },
+            {
+              "text": "She is my sister.",
+              "translation": "Es mi hermana."
+            },
+            {
+              "text": "We are friends.",
+              "translation": "Somos amigos."
+            },
+            {
+              "text": "My mother is happy.",
+              "translation": "Mi madre está contenta."
+            }
+          ],
+          "pitfalls": [
+            "«Soy profesor» lleva «a»: I am A teacher.",
+            "«Am a teacher» está mal: falta el YO (I)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El fantasma YO sale de SOY: I AM.",
+            "emoji": "👻"
+          }
+        }
+      ]
+    }
+  ]
+}

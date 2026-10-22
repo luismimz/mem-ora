@@ -2,6 +2,7 @@
 //   memora      → hook de Studio (validación, flujo de estados, historial)
 //   memora-api  → endpoint /memora para la app del alumno
 //   memora-push → aviso de repaso en el móvil (D-077)
+//   memora-content → vuelca los cursos de content/ al arrancar (D-080)
 import { build } from 'esbuild';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -10,6 +11,7 @@ const targets = [
   { name: 'memora', type: 'hook', entry: './src/studio/index.ts' },
   { name: 'memora-api', type: 'endpoint', entry: './src/api/endpoint.ts' },
   { name: 'memora-push', type: 'hook', entry: './src/push/index.ts' },
+  { name: 'memora-content', type: 'hook', entry: './src/content/index.ts' },
 ];
 for (const t of targets) {
   const out = fileURLToPath(new URL(`../../extensions-dist/${t.name}/`, import.meta.url));

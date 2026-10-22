@@ -1,0 +1,387 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "12-conectores",
+      "title": "Misión 12 · Conectores",
+      "units": [
+        {
+          "key": "because",
+          "type": "term",
+          "text": "because",
+          "meaning": "porque",
+          "pronunciation": "biKÓS",
+          "examples": [
+            {
+              "text": "I'm tired because I worked a lot.",
+              "translation": "Estoy cansado porque trabajé mucho."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COSA",
+            "scene": "Lloras PORQUE una COSA peluda vive en tu sopa.",
+            "sceneTarget": "You cry BECAUSE a hairy thing lives in your soup.",
+            "emoji": "🍲😭"
+          }
+        },
+        {
+          "key": "so",
+          "type": "term",
+          "text": "so",
+          "meaning": "así que, por eso",
+          "pronunciation": "SÓU",
+          "examples": [
+            {
+              "text": "It was late, so I left.",
+              "translation": "Era tarde, así que me fui."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOFÁ",
+            "scene": "Llueve, ASÍ QUE el SOFÁ se pone un chubasquero.",
+            "sceneTarget": "It's raining, SO the sofa puts on a raincoat.",
+            "emoji": "🛋️🌧️"
+          }
+        },
+        {
+          "key": "however",
+          "type": "term",
+          "text": "however",
+          "meaning": "sin embargo",
+          "pronunciation": "jauÉver",
+          "examples": [
+            {
+              "text": "It's cheap; however, it's good.",
+              "translation": "Es barato; sin embargo, es bueno."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HUEVERA",
+            "scene": "Es caro; SIN EMBARGO, compras la HUEVERA de oro.",
+            "sceneTarget": "It's expensive; HOWEVER, you buy the golden egg cup.",
+            "emoji": "🥚💰"
+          }
+        },
+        {
+          "key": "although",
+          "type": "term",
+          "text": "although",
+          "meaning": "aunque",
+          "pronunciation": "olDÓU",
+          "examples": [
+            {
+              "text": "Although it's raining, I'm going out.",
+              "translation": "Aunque llueve, voy a salir."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DORADA",
+            "scene": "AUNQUE no sabe nadar, la DORADA gana la carrera.",
+            "sceneTarget": "ALTHOUGH it can't swim, the sea bream wins the race.",
+            "emoji": "🐟🏆"
+          }
+        },
+        {
+          "key": "then",
+          "type": "term",
+          "text": "then",
+          "meaning": "luego, entonces",
+          "pronunciation": "DEN",
+          "examples": [
+            {
+              "text": "First I eat, then I study.",
+              "translation": "Primero como y luego estudio."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DENTISTA",
+            "scene": "Primero comes caramelos y LUEGO vas al DENTISTA.",
+            "sceneTarget": "First you eat sweets, THEN you go to the dentist.",
+            "emoji": "🍬🦷"
+          }
+        },
+        {
+          "key": "also",
+          "type": "term",
+          "text": "also",
+          "meaning": "también",
+          "pronunciation": "ÓLsou",
+          "examples": [
+            {
+              "text": "I also speak French.",
+              "translation": "También hablo francés."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OLLA",
+            "scene": "Tu perro TAMBIÉN quiere su OLLA de lentejas.",
+            "sceneTarget": "Your dog ALSO wants his pot of lentils.",
+            "emoji": "🐕🍲"
+          }
+        },
+        {
+          "key": "if",
+          "type": "term",
+          "text": "if",
+          "meaning": "si (condición)",
+          "pronunciation": "IF",
+          "examples": [
+            {
+              "text": "If you want, we can go.",
+              "translation": "Si quieres, podemos ir."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "SI la CONDICIÓN se cumple, la puerta te deja pasar.",
+            "sceneTarget": "IF the condition is met, the door lets you in.",
+            "emoji": "🚪✅"
+          }
+        },
+        {
+          "key": "unless",
+          "type": "term",
+          "text": "unless",
+          "meaning": "a menos que",
+          "pronunciation": "anLÉS",
+          "examples": [
+            {
+              "text": "I won't go unless you come.",
+              "translation": "No iré a menos que vengas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "No sales A MENOS QUE el perro firme el permiso.",
+            "sceneTarget": "You can't go out UNLESS the dog signs the permit.",
+            "emoji": "🐕✍️"
+          }
+        },
+        {
+          "key": "while",
+          "type": "term",
+          "text": "while",
+          "meaning": "mientras",
+          "pronunciation": "UÁIL",
+          "examples": [
+            {
+              "text": "I listen to music while I cook.",
+              "translation": "Escucho música mientras cocino."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUAYABA",
+            "scene": "MIENTRAS duermes, una GUAYABA te hace cosquillas.",
+            "sceneTarget": "WHILE you sleep, a guava tickles you.",
+            "emoji": "😴🍐"
+          }
+        },
+        {
+          "key": "before",
+          "type": "term",
+          "text": "before",
+          "meaning": "antes (de)",
+          "pronunciation": "biFÓR",
+          "examples": [
+            {
+              "text": "Wash your hands before eating.",
+              "translation": "Lávate las manos antes de comer."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORRO",
+            "scene": "ANTES de dormir, tu gato se pone un FORRO polar.",
+            "sceneTarget": "BEFORE sleeping, your cat puts on a fleece.",
+            "emoji": "🐈🧥"
+          }
+        },
+        {
+          "key": "after",
+          "type": "term",
+          "text": "after",
+          "meaning": "después (de)",
+          "pronunciation": "ÁFter",
+          "examples": [
+            {
+              "text": "After class, I go home.",
+              "translation": "Después de clase, me voy a casa."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AFTA",
+            "scene": "DESPUÉS de comer limón, te sale una AFTA gigante.",
+            "sceneTarget": "AFTER eating lemon, you get a giant mouth ulcer.",
+            "emoji": "🍋😖"
+          }
+        },
+        {
+          "key": "until",
+          "type": "term",
+          "text": "until",
+          "meaning": "hasta (que)",
+          "pronunciation": "anTÍL",
+          "examples": [
+            {
+              "text": "Wait until I call you.",
+              "translation": "Espera hasta que te llame."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TILA",
+            "scene": "Bebes TILA HASTA que el loro se calla.",
+            "sceneTarget": "You drink linden tea UNTIL the parrot shuts up.",
+            "emoji": "🍵🦜"
+          }
+        },
+        {
+          "key": "instead",
+          "type": "term",
+          "text": "instead",
+          "meaning": "en lugar de, en vez de",
+          "pronunciation": "insTÉD",
+          "examples": [
+            {
+              "text": "Tea instead of coffee.",
+              "translation": "Té en lugar de café."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "En LUGAR de llaves, abres la puerta con un pepino.",
+            "sceneTarget": "INSTEAD of keys, you open the door with a cucumber.",
+            "emoji": "🥒🚪"
+          }
+        },
+        {
+          "key": "actually",
+          "type": "term",
+          "text": "actually",
+          "meaning": "en realidad (no «actualmente»)",
+          "pronunciation": "ÁKchuali",
+          "examples": [
+            {
+              "text": "Actually, I'm from Madrid.",
+              "translation": "En realidad, soy de Madrid."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ACHÚS",
+            "scene": "¡ACHÚS! —EN REALIDAD no estoy resfriado, dice el elefante.",
+            "sceneTarget": "Achoo! ACTUALLY I don't have a cold, says the elephant.",
+            "emoji": "🐘🤧"
+          }
+        },
+        {
+          "key": "anyway",
+          "type": "term",
+          "text": "anyway",
+          "meaning": "de todas formas, en fin",
+          "pronunciation": "ÉNIuei",
+          "examples": [
+            {
+              "text": "Anyway, see you tomorrow.",
+              "translation": "En fin, hasta mañana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": null,
+            "scene": "Llueve a cántaros; DE TODAS FORMAS, sales en bañador.",
+            "sceneTarget": "It's pouring; ANYWAY, you go out in your swimsuit.",
+            "emoji": "🌧️🩱"
+          }
+        },
+        {
+          "key": "g-can",
+          "type": "pattern",
+          "goal": "Decir lo que puedes o sabes hacer (can)",
+          "rule": "can + verbo tal cual, igual para todos: I can, she can (sin -s y sin «to»). Negativo: can't.",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "can",
+              "role": "fixed",
+              "hint": "puedo / sé"
+            },
+            {
+              "text": "swim",
+              "role": "slot",
+              "hint": "nadar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I can swim.",
+              "translation": "Sé nadar."
+            },
+            {
+              "text": "Can you help me?",
+              "translation": "¿Me puedes ayudar?"
+            },
+            {
+              "text": "She can't drive.",
+              "translation": "Ella no sabe conducir."
+            },
+            {
+              "text": "We can go now.",
+              "translation": "Podemos irnos ya."
+            }
+          ],
+          "pitfalls": [
+            "Sin «to»: I can swim (no «I can to swim»).",
+            "Nunca -s: she can (no «she cans»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una LATA (CAN) mágica te da poderes: I CAN fly.",
+            "emoji": "🥫"
+          }
+        }
+      ]
+    }
+  ]
+}
