@@ -1,0 +1,796 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "60-adverbios-2",
+      "title": "Misión 60 · Matices: casi, bastante, por fin",
+      "units": [
+        {
+          "key": "g-used-to",
+          "type": "pattern",
+          "goal": "Antes jugaba = I USED TO play",
+          "rule": "Para lo que hacías antes y ya no: used to + verbo. I used to play football. Al preguntar: Did you use to…?",
+          "pieces": [
+            {
+              "text": "I used to",
+              "role": "fixed",
+              "hint": "antes (yo)…"
+            },
+            {
+              "text": "play football",
+              "role": "slot",
+              "hint": "jugaba al fútbol"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I used to live in Lima.",
+              "translation": "Antes vivía en Lima.",
+              "mirror": {
+                "say": "Antes vivía en Lima",
+                "pieces": [
+                  {
+                    "es": "Antes",
+                    "en": "used to",
+                    "role": "helper",
+                    "from": "Antes",
+                    "why": "Lo que hacías antes y ya no: used to + verbo."
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivir",
+                    "en": "live",
+                    "role": "verb",
+                    "from": "vivía",
+                    "why": "Detrás de used to, el verbo va tal cual: live."
+                  },
+                  {
+                    "es": "en Lima",
+                    "en": "in Lima",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "We used to go there every summer.",
+              "translation": "Íbamos allí cada verano.",
+              "mirror": {
+                "say": "Íbamos allí cada verano",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "solíamos ir",
+                    "en": "used to go",
+                    "role": "verb",
+                    "from": "Íbamos",
+                    "why": "-ÍAMOS de costumbre pasada: used to go."
+                  },
+                  {
+                    "es": "allí",
+                    "en": "there",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada verano",
+                    "en": "every summer",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Did you use to play football?",
+              "translation": "¿Jugabas al fútbol de pequeño?"
+            },
+            {
+              "text": "I didn't use to like coffee.",
+              "translation": "Antes no me gustaba el café."
+            }
+          ],
+          "pitfalls": [
+            "«I use to live» para el pasado está mal: used to.",
+            "Al preguntar o negar se quita la d: did you USE to…?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una FOTO VIEJA en blanco y negro: USED TO.",
+            "emoji": "📷"
+          }
+        },
+        {
+          "key": "almost",
+          "type": "term",
+          "text": "almost",
+          "meaning": "casi",
+          "pronunciation": "ÓLmoust",
+          "examples": [
+            {
+              "text": "It's almost ten.",
+              "translation": "Son casi las diez.",
+              "mirror": {
+                "say": "Son casi las diez",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Son",
+                    "why": "Las horas van con IT IS: it's ten."
+                  },
+                  {
+                    "es": "casi",
+                    "en": "almost",
+                    "role": "word"
+                  },
+                  {
+                    "es": "las diez",
+                    "en": "ten",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I almost forgot!",
+              "translation": "¡Casi se me olvida!"
+            }
+          ]
+        },
+        {
+          "key": "quite",
+          "type": "term",
+          "text": "quite",
+          "meaning": "bastante",
+          "pronunciation": "KUÁIT",
+          "examples": [
+            {
+              "text": "It's quite cold today.",
+              "translation": "Hoy hace bastante frío.",
+              "mirror": {
+                "say": "Hoy hace bastante frío",
+                "pieces": [
+                  {
+                    "es": "hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace",
+                    "why": "El tiempo va con IT IS: it's cold."
+                  },
+                  {
+                    "es": "bastante",
+                    "en": "quite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Quite good.",
+              "translation": "Bastante bien."
+            }
+          ],
+          "notes": "No confundir con quiet (tranquilo)."
+        },
+        {
+          "key": "enough",
+          "type": "term",
+          "text": "enough",
+          "meaning": "suficiente, bastante",
+          "pronunciation": "iNÁF",
+          "examples": [
+            {
+              "text": "We have enough time.",
+              "translation": "Tenemos tiempo suficiente.",
+              "mirror": {
+                "say": "Tenemos tiempo suficiente",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tiempo",
+                    "en": "time",
+                    "role": "word"
+                  },
+                  {
+                    "es": "suficiente",
+                    "en": "enough",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "That's enough!",
+              "translation": "¡Ya basta!"
+            }
+          ],
+          "notes": "Con adjetivos va detrás: old enough."
+        },
+        {
+          "key": "together",
+          "type": "term",
+          "text": "together",
+          "meaning": "juntos",
+          "pronunciation": "tuGUÉder",
+          "examples": [
+            {
+              "text": "Let's do it together.",
+              "translation": "Hagámoslo juntos.",
+              "mirror": {
+                "say": "Hagámoslo juntos",
+                "pieces": [
+                  {
+                    "es": "Hagamos",
+                    "en": "Let's do",
+                    "role": "verb",
+                    "from": "Hagámoslo",
+                    "why": "Lo pegado se separa: let's do IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "juntos",
+                    "en": "together",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We live together.",
+              "translation": "Vivimos juntos."
+            }
+          ]
+        },
+        {
+          "key": "alone",
+          "type": "term",
+          "text": "alone",
+          "meaning": "solo (sin compañía)",
+          "pronunciation": "aLÓUN",
+          "examples": [
+            {
+              "text": "I live alone.",
+              "translation": "Vivo solo.",
+              "mirror": {
+                "say": "Vivo solo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "solo",
+                    "en": "alone",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Leave me alone!",
+              "translation": "¡Déjame en paz!"
+            }
+          ]
+        },
+        {
+          "key": "suddenly",
+          "type": "term",
+          "text": "suddenly",
+          "meaning": "de repente",
+          "pronunciation": "SÁdenli",
+          "examples": [
+            {
+              "text": "Suddenly, the lights went out.",
+              "translation": "De repente, se fue la luz.",
+              "mirror": {
+                "say": "De repente, se fue la luz",
+                "pieces": [
+                  {
+                    "es": "De repente",
+                    "en": "Suddenly",
+                    "role": "word"
+                  },
+                  {
+                    "es": "las luces se fueron",
+                    "en": "the lights went out",
+                    "role": "verb",
+                    "from": "se fue la luz"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He suddenly stopped.",
+              "translation": "Se paró de repente."
+            }
+          ]
+        },
+        {
+          "key": "finally",
+          "type": "term",
+          "text": "finally",
+          "meaning": "por fin; por último",
+          "pronunciation": "FÁInali",
+          "examples": [
+            {
+              "text": "You're finally here!",
+              "translation": "¡Por fin estás aquí!",
+              "mirror": {
+                "say": "¡Por fin estás aquí!",
+                "pieces": [
+                  {
+                    "es": "por fin",
+                    "en": "finally",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(TÚ) estás",
+                    "en": "You're",
+                    "role": "helper",
+                    "from": "estás"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Finally, add the salt.",
+              "translation": "Por último, añade la sal."
+            }
+          ]
+        },
+        {
+          "key": "especially",
+          "type": "term",
+          "text": "especially",
+          "meaning": "sobre todo, especialmente",
+          "pronunciation": "esPÉshali",
+          "examples": [
+            {
+              "text": "I love fruit, especially mangoes.",
+              "translation": "Me encanta la fruta, sobre todo el mango.",
+              "mirror": {
+                "say": "Me encanta la fruta, sobre todo el mango",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "Me encanta",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "fruta",
+                    "en": "fruit",
+                    "role": "word",
+                    "from": "la fruta",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "sobre todo",
+                    "en": "especially",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mangos",
+                    "en": "mangoes",
+                    "role": "word",
+                    "from": "el mango",
+                    "why": "Hablando en general, en plural y sin «the»: mangoes."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Especially for you.",
+              "translation": "Especialmente para ti."
+            }
+          ]
+        },
+        {
+          "key": "exactly",
+          "type": "term",
+          "text": "exactly",
+          "meaning": "exactamente; ¡exacto!",
+          "pronunciation": "egSÁKtli",
+          "examples": [
+            {
+              "text": "That's exactly what I said.",
+              "translation": "Eso es justo lo que dije.",
+              "mirror": {
+                "say": "Eso es justo lo que dije",
+                "pieces": [
+                  {
+                    "es": "Eso es",
+                    "en": "That's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "exactamente",
+                    "en": "exactly",
+                    "role": "word",
+                    "from": "justo"
+                  },
+                  {
+                    "es": "lo que",
+                    "en": "what",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dije",
+                    "en": "said",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Exactly!",
+              "translation": "¡Exacto!"
+            }
+          ]
+        },
+        {
+          "key": "hardly",
+          "type": "term",
+          "text": "hardly",
+          "meaning": "apenas",
+          "pronunciation": "JÁRDli",
+          "examples": [
+            {
+              "text": "I can hardly hear you.",
+              "translation": "Apenas te oigo.",
+              "mirror": {
+                "say": "Apenas te oigo",
+                "pieces": [
+                  {
+                    "es": "Apenas",
+                    "en": "hardly",
+                    "role": "word"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) puedo",
+                    "en": "I can",
+                    "role": "helper",
+                    "from": "oigo",
+                    "why": "Oír se dice con CAN: I can hear."
+                  },
+                  {
+                    "es": "oír",
+                    "en": "hear",
+                    "role": "verb",
+                    "from": "oigo"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I hardly know him.",
+              "translation": "Apenas lo conozco."
+            }
+          ],
+          "notes": "Falso amigo: hardly NO es «duramente»."
+        },
+        {
+          "key": "else",
+          "type": "term",
+          "text": "else",
+          "meaning": "más, otro (tras quién, qué, algo…)",
+          "pronunciation": "ELS",
+          "examples": [
+            {
+              "text": "Anything else?",
+              "translation": "¿Algo más?",
+              "mirror": {
+                "say": "¿Algo más?",
+                "pieces": [
+                  {
+                    "es": "Algo",
+                    "en": "Anything",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más",
+                    "en": "else",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Someone else.",
+              "translation": "Otra persona."
+            }
+          ]
+        },
+        {
+          "key": "early",
+          "type": "term",
+          "text": "early",
+          "meaning": "temprano, pronto",
+          "pronunciation": "ÉRli",
+          "examples": [
+            {
+              "text": "I get up early.",
+              "translation": "Me levanto temprano.",
+              "mirror": {
+                "say": "Me levanto temprano",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "levanto",
+                    "en": "get up",
+                    "role": "verb",
+                    "from": "Me levanto"
+                  },
+                  {
+                    "es": "temprano",
+                    "en": "early",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An early flight.",
+              "translation": "Un vuelo a primera hora."
+            }
+          ]
+        },
+        {
+          "key": "late",
+          "type": "term",
+          "text": "late",
+          "meaning": "tarde",
+          "pronunciation": "LÉIT",
+          "examples": [
+            {
+              "text": "Sorry, I'm late.",
+              "translation": "Perdón por llegar tarde.",
+              "mirror": {
+                "say": "Perdón por llegar tarde",
+                "pieces": [
+                  {
+                    "es": "Perdón",
+                    "en": "Sorry",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "por llegar",
+                    "why": "Llegar tarde es «estar tarde»: I'm late."
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's late.",
+              "translation": "Es tarde."
+            }
+          ]
+        },
+        {
+          "key": "slowly",
+          "type": "term",
+          "text": "slowly",
+          "meaning": "despacio",
+          "pronunciation": "SLÓUli",
+          "examples": [
+            {
+              "text": "Can you speak more slowly, please?",
+              "translation": "¿Puedes hablar más despacio, por favor?",
+              "mirror": {
+                "say": "¿Puedes hablar más despacio, por favor?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hablar",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "más despacio",
+                    "en": "more slowly",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Drive slowly.",
+              "translation": "Conduce despacio."
+            }
+          ]
+        },
+        {
+          "key": "everywhere",
+          "type": "term",
+          "text": "everywhere",
+          "meaning": "por todas partes",
+          "pronunciation": "ÉVriuer",
+          "examples": [
+            {
+              "text": "I've looked everywhere.",
+              "translation": "He buscado por todas partes.",
+              "mirror": {
+                "say": "He buscado por todas partes",
+                "pieces": [
+                  {
+                    "es": "He",
+                    "en": "I've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "buscado",
+                    "en": "looked",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por todas partes",
+                    "en": "everywhere",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There are people everywhere.",
+              "translation": "Hay gente por todas partes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

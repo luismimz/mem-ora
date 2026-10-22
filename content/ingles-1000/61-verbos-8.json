@@ -1,0 +1,745 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "61-verbos-8",
+      "title": "Misión 61 · Verbos con las manos",
+      "units": [
+        {
+          "key": "g-was-ing",
+          "type": "pattern",
+          "goal": "Estaba durmiendo = I WAS sleeping",
+          "rule": "Para lo que estaba pasando en un momento del pasado: was/were + -ING. I was sleeping when you called.",
+          "pieces": [
+            {
+              "text": "I was",
+              "role": "fixed",
+              "hint": "yo estaba"
+            },
+            {
+              "text": "sleeping",
+              "role": "slot",
+              "hint": "durmiendo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I was sleeping when you called.",
+              "translation": "Estaba durmiendo cuando llamaste.",
+              "mirror": {
+                "say": "Estaba durmiendo cuando llamaste",
+                "pieces": [
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "durmiendo",
+                    "en": "sleeping",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cuando",
+                    "en": "when",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llamaste",
+                    "en": "called",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What were you doing?",
+              "translation": "¿Qué estabas haciendo?",
+              "mirror": {
+                "say": "¿Qué estabas haciendo?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estabas",
+                    "en": "were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "haciendo",
+                    "en": "doing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was raining.",
+              "translation": "Estaba lloviendo."
+            },
+            {
+              "text": "They were talking.",
+              "translation": "Estaban hablando."
+            }
+          ],
+          "pitfalls": [
+            "Con I, he, she, it: WAS. Con you, we, they: WERE.",
+            "«I was sleep» está mal: I was sleepING."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una PELÍCULA congelada a MEDIAS: WAS + -ING.",
+            "emoji": "🎞️"
+          }
+        },
+        {
+          "key": "guess",
+          "type": "term",
+          "text": "guess",
+          "meaning": "adivinar; suponer",
+          "pronunciation": "GUES",
+          "examples": [
+            {
+              "text": "Guess what!",
+              "translation": "¡Adivina qué!",
+              "mirror": {
+                "say": "¡Adivina qué!",
+                "pieces": [
+                  {
+                    "es": "Adivina",
+                    "en": "Guess",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "qué",
+                    "en": "what",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I guess so.",
+              "translation": "Supongo que sí."
+            }
+          ]
+        },
+        {
+          "key": "hang",
+          "type": "term",
+          "text": "hang",
+          "meaning": "colgar",
+          "pronunciation": "JANG",
+          "examples": [
+            {
+              "text": "Hang your coat here.",
+              "translation": "Cuelga el abrigo aquí.",
+              "mirror": {
+                "say": "Cuelga el abrigo aquí",
+                "pieces": [
+                  {
+                    "es": "Cuelga",
+                    "en": "Hang",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU abrigo",
+                    "en": "your coat",
+                    "role": "word",
+                    "from": "el abrigo",
+                    "why": "En inglés el abrigo es TUYO: your coat."
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Hang on!",
+              "translation": "¡Espera!"
+            }
+          ]
+        },
+        {
+          "key": "hit",
+          "type": "term",
+          "text": "hit",
+          "meaning": "golpear, dar",
+          "pronunciation": "JIT",
+          "examples": [
+            {
+              "text": "The ball hit me.",
+              "translation": "La pelota me dio.",
+              "mirror": {
+                "say": "La pelota me dio",
+                "pieces": [
+                  {
+                    "es": "La pelota",
+                    "en": "The ball",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "golpeó",
+                    "en": "hit",
+                    "role": "verb",
+                    "from": "dio"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "He hit his head.",
+              "translation": "Se dio en la cabeza."
+            }
+          ],
+          "notes": "No cambia: hit, hit, hit."
+        },
+        {
+          "key": "kick",
+          "type": "term",
+          "text": "kick",
+          "meaning": "dar una patada, chutar",
+          "pronunciation": "KIK",
+          "examples": [
+            {
+              "text": "Kick the ball!",
+              "translation": "¡Chuta!",
+              "mirror": {
+                "say": "¡Chuta!",
+                "pieces": [
+                  {
+                    "es": "Chuta",
+                    "en": "Kick",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "LA PELOTA",
+                    "en": "the ball",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't kick the door.",
+              "translation": "No des patadas a la puerta."
+            }
+          ]
+        },
+        {
+          "key": "knock",
+          "type": "term",
+          "text": "knock",
+          "meaning": "llamar (a la puerta)",
+          "pronunciation": "NOK",
+          "examples": [
+            {
+              "text": "Someone is knocking at the door.",
+              "translation": "Están llamando a la puerta.",
+              "mirror": {
+                "say": "Están llamando a la puerta",
+                "pieces": [
+                  {
+                    "es": "ALGUIEN",
+                    "en": "Someone",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "Están"
+                  },
+                  {
+                    "es": "llamando",
+                    "en": "knocking",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la puerta",
+                    "en": "at the door",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Knock knock!",
+              "translation": "¡Toc, toc!"
+            }
+          ],
+          "notes": "La k no suena: NOK."
+        },
+        {
+          "key": "miss",
+          "type": "term",
+          "text": "miss",
+          "meaning": "echar de menos; perder (el bus)",
+          "pronunciation": "MIS",
+          "examples": [
+            {
+              "text": "I miss you.",
+              "translation": "Te echo de menos.",
+              "mirror": {
+                "say": "Te echo de menos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "echo de menos",
+                    "en": "miss",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Hurry or we'll miss the bus!",
+              "translation": "¡Corre o perdemos el bus!"
+            }
+          ]
+        },
+        {
+          "key": "pick",
+          "type": "term",
+          "text": "pick",
+          "meaning": "elegir; recoger",
+          "pronunciation": "PIK",
+          "examples": [
+            {
+              "text": "Pick a card.",
+              "translation": "Elige una carta.",
+              "mirror": {
+                "say": "Elige una carta",
+                "pieces": [
+                  {
+                    "es": "Elige",
+                    "en": "Pick",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una carta",
+                    "en": "a card",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'll pick you up at eight.",
+              "translation": "Te recojo a las ocho."
+            }
+          ]
+        },
+        {
+          "key": "pour",
+          "type": "term",
+          "text": "pour",
+          "meaning": "echar, servir (un líquido)",
+          "pronunciation": "PÓR",
+          "examples": [
+            {
+              "text": "Pour the milk into the bowl.",
+              "translation": "Echa la leche en el cuenco.",
+              "mirror": {
+                "say": "Echa la leche en el cuenco",
+                "pieces": [
+                  {
+                    "es": "Echa",
+                    "en": "Pour",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la leche",
+                    "en": "the milk",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dentro del cuenco",
+                    "en": "into the bowl",
+                    "role": "word",
+                    "from": "en el cuenco"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's pouring!",
+              "translation": "¡Está diluviando!"
+            }
+          ]
+        },
+        {
+          "key": "reach",
+          "type": "term",
+          "text": "reach",
+          "meaning": "llegar a; alcanzar",
+          "pronunciation": "RIICH",
+          "examples": [
+            {
+              "text": "I can't reach the top shelf.",
+              "translation": "No llego a la balda de arriba.",
+              "mirror": {
+                "say": "No llego a la balda de arriba",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "alcanzar",
+                    "en": "reach",
+                    "role": "verb",
+                    "from": "llego a"
+                  },
+                  {
+                    "es": "la",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "balda",
+                    "en": "shelf",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de arriba",
+                    "en": "top",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "We reached the hotel at midnight.",
+              "translation": "Llegamos al hotel a medianoche."
+            }
+          ]
+        },
+        {
+          "key": "shake",
+          "type": "term",
+          "text": "shake",
+          "meaning": "agitar; temblar",
+          "pronunciation": "SHÉIK",
+          "examples": [
+            {
+              "text": "Shake the bottle.",
+              "translation": "Agita la botella.",
+              "mirror": {
+                "say": "Agita la botella",
+                "pieces": [
+                  {
+                    "es": "Agita",
+                    "en": "Shake",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la botella",
+                    "en": "the bottle",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's shake hands.",
+              "translation": "Démonos la mano."
+            }
+          ]
+        },
+        {
+          "key": "shut",
+          "type": "term",
+          "text": "shut",
+          "meaning": "cerrar",
+          "pronunciation": "SHAT",
+          "examples": [
+            {
+              "text": "Shut the door, please.",
+              "translation": "Cierra la puerta, por favor.",
+              "mirror": {
+                "say": "Cierra la puerta, por favor",
+                "pieces": [
+                  {
+                    "es": "Cierra",
+                    "en": "Shut",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la puerta",
+                    "en": "the door",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Shut up!",
+              "translation": "¡Cállate!"
+            }
+          ],
+          "notes": "Como close, pero más tajante."
+        },
+        {
+          "key": "spill",
+          "type": "term",
+          "text": "spill",
+          "meaning": "derramar",
+          "pronunciation": "SPIL",
+          "examples": [
+            {
+              "text": "I spilled coffee on my shirt.",
+              "translation": "Me he tirado café en la camisa.",
+              "mirror": {
+                "say": "Me he tirado café en la camisa",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "derramé",
+                    "en": "spilled",
+                    "role": "verb",
+                    "from": "Me he tirado"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "sobre MI camisa",
+                    "en": "on my shirt",
+                    "role": "word",
+                    "from": "en la camisa",
+                    "why": "En inglés la camisa es MÍA: my shirt."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't spill it!",
+              "translation": "¡Que no se te caiga!"
+            }
+          ]
+        },
+        {
+          "key": "wave",
+          "type": "term",
+          "text": "wave",
+          "meaning": "saludar con la mano; ola",
+          "pronunciation": "UÉIV",
+          "examples": [
+            {
+              "text": "She waved at me.",
+              "translation": "Me saludó con la mano.",
+              "mirror": {
+                "say": "Me saludó con la mano",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "saludó con la mano",
+                    "en": "waved",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a mí",
+                    "en": "at me",
+                    "role": "word",
+                    "from": "Me"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A big wave.",
+              "translation": "Una ola grande."
+            }
+          ]
+        },
+        {
+          "key": "whisper",
+          "type": "term",
+          "text": "whisper",
+          "meaning": "susurrar",
+          "pronunciation": "UÍSper",
+          "examples": [
+            {
+              "text": "Don't whisper, speak up.",
+              "translation": "No susurres, habla alto.",
+              "mirror": {
+                "say": "No susurres, habla alto",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "susurres",
+                    "en": "whisper",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "habla alto",
+                    "en": "speak up",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She whispered something.",
+              "translation": "Susurró algo."
+            }
+          ]
+        },
+        {
+          "key": "bite",
+          "type": "term",
+          "text": "bite",
+          "meaning": "morder; mordisco",
+          "pronunciation": "BÁIT",
+          "examples": [
+            {
+              "text": "Don't worry, the dog doesn't bite.",
+              "translation": "Tranquilo, el perro no muerde.",
+              "mirror": {
+                "say": "Tranquilo, el perro no muerde",
+                "pieces": [
+                  {
+                    "es": "No te preocupes",
+                    "en": "Don't worry",
+                    "role": "word",
+                    "from": "Tranquilo"
+                  },
+                  {
+                    "es": "el perro",
+                    "en": "the dog",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "morder",
+                    "en": "bite",
+                    "role": "verb",
+                    "from": "muerde",
+                    "why": "Con DOESN'T el verbo va tal cual: bite."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I have a bite?",
+              "translation": "¿Me das un mordisco?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
