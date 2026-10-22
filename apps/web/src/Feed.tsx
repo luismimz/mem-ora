@@ -3,6 +3,7 @@
 // ¿verdad o mentira? → pregunta jefe. Se enseña en el error y lo fallado vuelve unas tarjetas después. Infinito: cada
 // ronda acaba en un hito y la siguiente ya está cargada. Puntos, racha con protector, combos, vibración y sonido.
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
 import type { ConceptPayload, Mirror, PatternPayload } from '@memora/content';
 import {
@@ -341,6 +342,71 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
     setTimeout(() => onResult(ok, Math.round(performance.now() - t0.current), `Es «${ex.text}» (${ex.translation}).`, help ? 2 : 1), ok ? 1100 : 1500);
   }, [chosen]); // eslint-disable-line react-hooks/exhaustive-deps
   const toggle = (i: number) => { if (done !== null) return; setChosen((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i])); };
+
+  // Arrastre tipo imán: se arrastra una pieza con el dedo y, sobre la frase, se abre un hueco donde caerá (las demás se
+  // apartan). Soltar fuera de la frase la devuelve. Un toque sin mover sigue funcionando como siempre.
+  const line = useRef<HTMLDivElement>(null);
+  const lineTiles = useRef<Record<number, HTMLElement | null>>({});
+  const [drag, setDrag] = useState<{ tile: number; from: 'bank' | 'line'; x: number; y: number; moved: boolean } | null>(null);
+  const [gap, setGap] = useState<number | null>(null);
+  const origin = useRef<{ x: number; y: number } | null>(null);
+  const skipClick = useRef(false);
+  const slotAt = (x: number, y: number, dragged: number): number | null => {
+    const box = line.current?.getBoundingClientRect();
+    if (!box || x < box.left - 24 || x > box.right + 24 || y < box.top - 36 || y > box.bottom + 36) return null;
+    const others = chosen.filter((i) => i !== dragged);
+    for (const [n, i] of others.entries()) {
+      const r = lineTiles.current[i]?.getBoundingClientRect();
+      if (!r) continue;
+      if (y < r.top || (y <= r.bottom && x < r.left + r.width / 2)) return n;
+    }
+    return others.length;
+  };
+  const down = (tile: number, from: 'bank' | 'line') => (e: React.PointerEvent) => {
+    if (done !== null) return;
+    // Cada toque nuevo empieza limpio: si el arrastre anterior no generó «click», no hay que tragarse este.
+    skipClick.current = false;
+    origin.current = { x: e.clientX, y: e.clientY };
+    (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
+    setDrag({ tile, from, x: e.clientX, y: e.clientY, moved: false });
+  };
+  const moveTile = (e: React.PointerEvent) => {
+    if (!drag || !origin.current) return;
+    const moved = drag.moved || Math.hypot(e.clientX - origin.current.x, e.clientY - origin.current.y) > 8;
+    setDrag({ ...drag, x: e.clientX, y: e.clientY, moved });
+    if (moved) { const g = slotAt(e.clientX, e.clientY, drag.tile); if (g !== gap) { setGap(g); if (g !== null) buzz(6); } }
+  };
+  const up = (e: { clientX: number; clientY: number }) => {
+    if (!drag) return;
+    if (drag.moved) {
+      skipClick.current = true;
+      const g = slotAt(e.clientX, e.clientY, drag.tile);
+      setChosen((c) => {
+        const rest = c.filter((i) => i !== drag.tile);
+        if (g === null) return drag.from === 'line' ? rest : c;
+        sfx('pop');
+        return [...rest.slice(0, g), drag.tile, ...rest.slice(g)];
+      });
+    }
+    setDrag(null); setGap(null); origin.current = null;
+  };
+  // Red de seguridad: si el dedo se levanta fuera de la pieza (o el navegador pierde la captura), el arrastre acaba igual.
+  useEffect(() => {
+    if (!drag) return;
+    const end = (e: PointerEvent) => up(e);
+    window.addEventListener('pointerup', end);
+    window.addEventListener('pointercancel', end);
+    return () => { window.removeEventListener('pointerup', end); window.removeEventListener('pointercancel', end); };
+  }); // eslint-disable-line react-hooks/exhaustive-deps
+  const tap = (i: number) => () => { if (skipClick.current) { skipClick.current = false; return; } toggle(i); };
+  const dragging = drag?.moved ? drag : null;
+  // La pieza arrastrada desde la frase se queda en su sitio, apagada (si se quitara del DOM, el dedo perdería la pieza);
+  // el hueco se abre delante de la pieza donde caerá.
+  const others = chosen.filter((i) => !(dragging && dragging.tile === i));
+  const gapBefore = gap === null || !dragging ? null : gap < others.length ? others[gap]! : 'end';
+  const shown: Array<number | 'gap'> = chosen.flatMap((i) => (gapBefore === i ? ['gap' as const, i] : [i]));
+  if (gapBefore === 'end') shown.push('gap');
+  const handlers = (i: number, from: 'bank' | 'line') => ({ onPointerDown: down(i, from), onPointerMove: moveTile, onClick: tap(i) });
   return (
     <Slide tone={hue(unit.key)} className={`build ${done === null ? '' : done ? 'right' : 'wrong'}`}>
       <p className="tag">🧩 CONSTRUYE LA FRASE</p>
@@ -348,12 +414,18 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
       {ex.mirror && done === null && (help
         ? <MirrorAnim unit={unit} m={ex.mirror} text={ex.text} compact />
         : <button type="button" className="train-help" onClick={() => setHelp(true)}>🪞 ¿Cómo se construye?</button>)}
-      <div className="build-line" aria-label="Tu frase" lang={unit.language}>
-        {chosen.length ? chosen.map((i) => <button type="button" key={i} className="tile on" onClick={() => toggle(i)}>{bank[i]!.w}</button>) : <span className="build-empty">Toca las palabras en orden</span>}
+      <div ref={line} className={`build-line ${dragging && gap !== null ? 'magnet' : ''}`} aria-label="Tu frase" lang={unit.language}>
+        {shown.length
+          ? shown.map((i) => (i === 'gap'
+            ? <span key="gap" className="tile-gap" aria-hidden="true" />
+            : <button type="button" key={i} ref={(el) => { lineTiles.current[i] = el; }} className={`tile on ${dragging?.tile === i ? 'lifted' : ''}`} {...handlers(i, 'line')}>{bank[i]!.w}</button>))
+          : <span className="build-empty">Toca o arrastra las palabras en orden</span>}
       </div>
       <div className="build-bank" lang={unit.language}>
-        {bank.map((b, i) => <button type="button" key={i} className="tile" disabled={chosen.includes(i)} onClick={() => toggle(i)}>{b.w}</button>)}
+        {bank.map((b, i) => <button type="button" key={i} className={`tile ${dragging?.tile === i ? 'lifted' : ''}`} disabled={chosen.includes(i)} {...handlers(i, 'bank')}>{b.w}</button>)}
       </div>
+      {/* La pieza que sigue al dedo va fuera de la tarjeta: dentro rompería el centrado (:last-child) y movería la frase. */}
+      {dragging && createPortal(<span className="tile tile-ghost" style={{ left: dragging.x, top: dragging.y }} aria-hidden="true">{bank[dragging.tile]!.w}</span>, document.body)}
       {done === false && <p className="judge-truth">Es <b>{ex.text}</b></p>}
     </Slide>
   );

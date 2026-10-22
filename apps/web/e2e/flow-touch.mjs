@@ -108,6 +108,7 @@ try {
   };
   const units = await en.evaluate(() => window.__units);
   const seen = new Set();
+  const dragChecks = [];
   let builtOk = false;
   for (let n = 0; n < 80; n++) {
     const tag = (await en.locator('.slide .tag').first().textContent().catch(() => '')) ?? '';
@@ -131,7 +132,44 @@ try {
       const es = (await en.locator('.build-es').textContent()).replace(/[«»]/g, '');
       const u = Object.values(units).find((x) => x.payload.examples.some((e) => e.translation === es));
       const words = u.payload.examples.find((e) => e.translation === es).text.replace(/[.!?]+$/, '').split(/\s+/);
-      for (const w of words) { await en.locator('.build-bank .tile:not([disabled])', { hasText: new RegExp(`^${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`) }).first().tap(); await en.waitForTimeout(100); }
+      const esc = (w) => new RegExp(`^${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`);
+      let start = 0;
+      if (!seen.has('arrastre') && words.length >= 3) {
+        // Arrastre tipo imán con el dedo: la 2.ª palabra a la frase; la 1.ª, soltada a su izquierda (se abre el hueco y
+        // cae delante); la 3.ª, a la frase y otra vez fuera (se quita); al final, el resto tocando.
+        const center = async (loc) => { const b = await loc.boundingBox(); return { x: b.x + b.width / 2, y: b.y + b.height / 2 }; };
+        const dragTo = async (from, to, probe) => {
+          await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: from.x, y: from.y }] });
+          for (let i = 1; i <= 12; i++) { await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: from.x + ((to.x - from.x) * i) / 12, y: from.y + ((to.y - from.y) * i) / 12 }] }); await en.waitForTimeout(16); }
+          const mid = probe ? await en.evaluate(() => ({ ghost: Boolean(document.querySelector('.tile-ghost')) && Number(getComputedStyle(document.querySelector('.tile-ghost')).zIndex) > Number(getComputedStyle(document.querySelector('.feed')).zIndex), gap: Boolean(document.querySelector('.build-line .tile-gap')) })) : null;
+          if (probe && process.env.E2E_SHOTS) await en.screenshot({ path: `${process.env.E2E_SHOTS}/arrastre.png` });
+          await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+          await en.waitForTimeout(150);
+          return mid;
+        };
+        const lineWords = () => en.locator('.build-line .tile').allTextContents();
+        const lineBox = await en.locator('.build-line').boundingBox();
+        await dragTo(await center(en.locator('.build-bank .tile', { hasText: esc(words[1]) }).first()), { x: lineBox.x + lineBox.width / 2, y: lineBox.y + lineBox.height / 2 });
+        const first = await lineWords();
+        const target = await center(en.locator('.build-line .tile').first());
+        const mid = await dragTo(await center(en.locator('.build-bank .tile', { hasText: esc(words[0]) }).first()), { x: target.x - 30, y: target.y }, true);
+        const second = await lineWords();
+        await dragTo(await center(en.locator('.build-bank .tile', { hasText: esc(words[2]) }).first()), { x: lineBox.x + lineBox.width - 20, y: lineBox.y + lineBox.height / 2 });
+        const third = await lineWords();
+        const bankBox = await en.locator('.build-bank').boundingBox();
+        await dragTo(await center(en.locator('.build-line .tile', { hasText: esc(words[2]) })), { x: bankBox.x + bankBox.width / 2, y: bankBox.y + bankBox.height + 40 });
+        const fourth = await lineWords();
+        dragChecks.push(
+          [first.join(' ') === words[1], `arrastrar una palabra a la frase la coloca (${first.join(' ')})`],
+          [mid?.ghost && mid?.gap, 'mientras se arrastra, la pieza sigue al dedo por encima de todo y en la frase se abre un hueco (imán)'],
+          [second.join(' ') === `${words[0]} ${words[1]}`, `soltada a la izquierda, cae delante: ${second.join(' ')}`],
+          [third.length === 3 && fourth.join(' ') === `${words[0]} ${words[1]}`, `arrastrada fuera de la frase, la pieza se quita (${third.length} → ${fourth.length})`],
+        );
+        if (process.env.E2E_DEBUG) console.log('  arrastre', JSON.stringify({ words, first, mid, second, third, fourth }));
+        seen.add('arrastre');
+        start = 2;
+      }
+      for (const w of words.slice(start)) { await en.locator('.build-bank .tile:not([disabled])', { hasText: new RegExp(`^${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`) }).first().tap(); await en.waitForTimeout(100); }
       await en.waitForTimeout(200);
       if (await en.locator('.slide.build.right').count()) builtOk = true;
       await en.waitForTimeout(1600); continue;
@@ -185,6 +223,8 @@ try {
   }
   check(seen.has('escucha'), 'inglés: aparece «Escucha» y se responde tocando lo que se ha oído');
   check(seen.has('construye') && builtOk, 'inglés: «Construye la frase» se completa tocando las palabras en orden');
+  check(seen.has('arrastre'), 'inglés: en «Construye la frase» se puede arrastrar con el dedo');
+  for (const [ok, text] of dragChecks) check(Boolean(ok), `arrastre tipo imán: ${text}`);
   check(seen.has('truco'), 'inglés: la gramática entra con su «Truco»');
   check(seen.has('espejo-solo'), 'Espejo en movimiento: se reproduce solo dentro del truco, sin toques, y acaba en la frase');
   check(seen.has('orden-pregunta'), 'Espejo en movimiento: el ayudante salta y queda «are you hungry» (orden de pregunta)');
