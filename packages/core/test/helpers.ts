@@ -20,6 +20,7 @@ export function attempt(partial: Partial<Attempt> & { at: number }): Attempt {
     hint,
     timeMs: partial.timeMs ?? 2_000,
     at: partial.at,
+    ...(partial.doubt ? { doubt: true } : {}),
   };
 }
 

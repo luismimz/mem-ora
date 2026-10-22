@@ -97,6 +97,33 @@ try {
   check(sent?.body?.unit === 'a' && sent?.body?.reason === 'asociacion' && sent?.body?.course === 'c1', 'un toque envía el aviso con la tarjeta y el motivo');
   check(!(await page.$('.report-sheet')) && (await page.$eval('.report-toast', (e) => e.textContent ?? '')).includes('Gracias'), 'se cierra y da las gracias');
   check((await page.$eval('.slide', (e) => e.querySelector('h2, h3')?.textContent ?? '')) === before, 'la tarjeta sigue donde estaba (reportar no la pasa)');
+
+  // «No estoy seguro»: en la pregunta, abajo, sin tapar respuestas; marcado antes de responder, el acierto llega dudoso.
+  await page.waitForTimeout(2700); // se va el aviso de «Gracias»
+  check(!(await page.$('.unsure')), 'en la ficha de aprender no sale «No estoy seguro»');
+  const cdp = await context.newCDPSession(page);
+  const swipeUp = async () => {
+    const pt = (y) => [{ x: 195, y, id: 1 }];
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: pt(650) });
+    for (let k = 1; k <= 10; k++) await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: pt(650 - k * 45) });
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  };
+  for (let k = 0; k < 4 && !(await page.$('.unsure')); k++) { await swipeUp(); await page.waitForTimeout(600); }
+  const layout = await page.evaluate(() => {
+    const u = document.querySelector('.unsure')?.getBoundingClientRect();
+    const opts = [...document.querySelectorAll('.slide button')].filter((b) => !b.classList.contains('say')).map((b) => b.getBoundingClientRect());
+    const hit = u ? opts.some((r) => !(r.bottom <= u.top || r.top >= u.bottom || r.right <= u.left || r.left >= u.right)) : true;
+    return { has: Boolean(u), hit, h: u ? Math.round(u.height) : 0, right: u ? Math.round(u.right) : 0 };
+  });
+  check(layout.has && !layout.hit && layout.h >= 36 && layout.right <= 390, `en la pregunta sale «No estoy seguro» abajo, sin tapar ninguna respuesta (${layout.h}px)`);
+  await page.screenshot({ path: process.env.E2E_SHOTS ? `${process.env.E2E_SHOTS}/no-seguro.png` : '/dev/null' }).catch(() => undefined);
+  await page.locator('.unsure').tap();
+  check((await page.$eval('.unsure', (e) => e.getAttribute('aria-pressed'))) === 'true', 'un toque lo marca');
+  const right = page.locator('.slide button', { hasText: /hermano|brother/i }).first();
+  await right.tap();
+  await page.waitForTimeout(1500);
+  const attempts = posted.filter((x) => x.path === '/memora/events').flatMap((x) => x.body.events).filter((e) => e.kind === 'attempt');
+  check(attempts.length > 0 && attempts.at(-1).correct === true && attempts.at(-1).doubt === true, `el acierto llega marcado como dudoso (${JSON.stringify(attempts.at(-1) ?? null).slice(0, 80)}…)`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

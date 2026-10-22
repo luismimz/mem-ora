@@ -97,7 +97,8 @@ export function applySkillAttempt(state: SkillState, attempt: Attempt, scheduler
 
   if (correct) {
     next.evidence += weight;
-    next.consecutiveFailures = 0;
+    // «No estoy seguro»: el acierto cuenta poco y la unidad sigue en tus fallos hasta un acierto seguro.
+    if (!attempt.doubt) next.consecutiveFailures = 0;
     if (retrieval) next.retrievalSuccesses += 1;
     if (deferredSuccess) {
       next.deferredSuccesses += 1;

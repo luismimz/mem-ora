@@ -31,7 +31,7 @@ Ideas, no un cambio de formato: su base es el test de 4 opciones (reconocimiento
    qué se olvida) y sin empezar. Que se vea el avance y lo que se apaga.
 2. ✓ (PR #12) **[experiencia] Contador de fallos que se vacía** («Vacía tus N fallos»): un fallo sale al acertarlo después.
 3. ✓ (PR #13) **[contenido] «Reportar un error»** en la ficha o la pregunta: un toque y va a la cola de revisión de Studio.
-4. **[núcleo] «Acerté, pero dudé»:** toque opcional al acertar; el acierto cuenta como poco seguro (regla 9).
+4. ✓ (como «No estoy seguro», antes de responder) **[núcleo] «Acerté, pero dudé»:** toque opcional al acertar; el acierto cuenta como poco seguro (regla 9).
 5. **[experiencia] Calendario de actividad** (días estudiados) y **logros honestos** (por memoria real, no por
    respuestas correctas).
 6. **[inglés] Inglés técnico/profesional** del módulo DAM. Hecho: misión 17 (vocabulario de informática). Falta: correos,

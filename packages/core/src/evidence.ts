@@ -36,17 +36,17 @@ export function isRetrievalFormat(format: ExerciseFormat, config: CoreConfig): b
   return config.evidence.retrievalFormats.includes(format);
 }
 
-/** Acierto «dudado»: correcto pero más lento que el umbral. */
-export function isHesitant(attempt: Pick<Attempt, 'correct' | 'timeMs'>, config: CoreConfig): boolean {
-  return attempt.correct && attempt.timeMs > config.evidence.slowMs;
+/** Acierto «dudado»: correcto pero más lento que el umbral, o marcado «No estoy seguro» por el alumno. */
+export function isHesitant(attempt: Pick<Attempt, 'correct' | 'timeMs' | 'doubt'>, config: CoreConfig): boolean {
+  return attempt.correct && (Boolean(attempt.doubt) || attempt.timeMs > config.evidence.slowMs);
 }
 
 /** Peso del intento como evidencia (0–1): formato × pista × dudado. Un fallo no aporta peso. */
-export function evidenceWeight(attempt: Pick<Attempt, 'format' | 'hint' | 'correct' | 'timeMs'>, config: CoreConfig): number {
+export function evidenceWeight(attempt: Pick<Attempt, 'format' | 'hint' | 'correct' | 'timeMs' | 'doubt'>, config: CoreConfig): number {
   if (!attempt.correct || attempt.hint === 5) return 0;
   const base = config.evidence.formatWeight[attempt.format];
   const hint = config.evidence.hintFactor[attempt.hint] ?? 0;
-  const slow = isHesitant(attempt, config) ? config.evidence.slowFactor : 1;
+  const slow = attempt.doubt ? config.evidence.doubtFactor : isHesitant(attempt, config) ? config.evidence.slowFactor : 1;
   return base * hint * slow;
 }
 
@@ -55,12 +55,13 @@ export function evidenceWeight(attempt: Pick<Attempt, 'format' | 'hint' | 'corre
  * nunca reconocimiento) y tras al menos `minElapsedMs` desde la última exposición.
  */
 export function isUnaidedSuccessAfter(
-  attempt: Pick<Attempt, 'at' | 'format' | 'hint' | 'correct'>,
+  attempt: Pick<Attempt, 'at' | 'format' | 'hint' | 'correct' | 'doubt'>,
   lastExposureAt: number | null,
   minElapsedMs: number,
   config: CoreConfig,
 ): boolean {
-  if (!attempt.correct || lastExposureAt === null) return false;
+  // Un acierto con «No estoy seguro» no demuestra que se sepa sin ayuda.
+  if (!attempt.correct || attempt.doubt || lastExposureAt === null) return false;
   if (attempt.hint > config.deferred.maxHint) return false;
   if (!config.deferred.formats.includes(attempt.format)) return false;
   return attempt.at - lastExposureAt >= minElapsedMs;
@@ -68,7 +69,7 @@ export function isUnaidedSuccessAfter(
 
 /** Éxito diferido: acierto sin pista en recuperación o producción tras `deferred.minElapsedMs` (20 h). */
 export function isDeferredSuccess(
-  attempt: Pick<Attempt, 'at' | 'format' | 'hint' | 'correct'>,
+  attempt: Pick<Attempt, 'at' | 'format' | 'hint' | 'correct' | 'doubt'>,
   lastExposureAt: number | null,
   config: CoreConfig,
 ): boolean {

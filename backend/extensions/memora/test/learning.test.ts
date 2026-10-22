@@ -47,6 +47,7 @@ describe('validación de eventos', () => {
       [{ hint: 7 as never }, 'bad_hint'],
       [{ format: 'recall_unaided', hint: 2 }, 'invalid_attempt'],
       [{ seq: -1 }, 'bad_seq'],
+      [{ doubt: 'sí' as never }, 'bad_doubt'],
     ];
     for (const [patch, reason] of cases) expect(rejectReason(event(patch), skills, 'c1'), reason).toBe(reason);
     expect(rejectReason(null, skills, 'c1')).toBe('not_object');
@@ -69,5 +70,16 @@ describe('hora y recálculo', () => {
     expect(learner.skills['borrow.recall']?.status).toBe('learning');
     expect(learner.skills['borrow.recall']?.attempts).toBe(1);
     expect(skipped).toEqual(['evt-00000003']);
+  });
+
+  it('«No estoy seguro» llega al núcleo: el acierto dudoso no saca la palabra de tus fallos', () => {
+    const stored: StoredEvent[] = [
+      { event_id: 'evt-00000011', kind: 'attempt', device_time: 1000, payload: event({ id: 'evt-00000011', at: 1000, correct: false }) },
+      { event_id: 'evt-00000012', kind: 'attempt', device_time: 2000, payload: event({ id: 'evt-00000012', at: 2000, doubt: true }) },
+    ];
+    expect(rejectReason(stored[1]!.payload, skills, 'c1')).toBeNull();
+    expect(recompute('u', stored, config).learner.skills['borrow.recall']?.consecutiveFailures).toBe(1);
+    const sure = [stored[0]!, { ...stored[1]!, payload: event({ id: 'evt-00000012', at: 2000 }) }];
+    expect(recompute('u', sure, config).learner.skills['borrow.recall']?.consecutiveFailures).toBe(0);
   });
 });
