@@ -1,0 +1,716 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "38-conversacion-2",
+      "title": "Misión 38 · Frases para conversar",
+      "units": [
+        {
+          "key": "g-short-answers",
+          "type": "pattern",
+          "goal": "Contestar corto: YES, I DO / NO, I DON'T",
+          "rule": "Para contestar sí o no, repite el ayudante de la pregunta: Do you like it? Yes, I do. Are you tired? No, I'm not.",
+          "pieces": [
+            {
+              "text": "Yes,",
+              "role": "fixed",
+              "hint": "sí,"
+            },
+            {
+              "text": "I do",
+              "role": "slot",
+              "hint": "yo sí"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Yes, I do.",
+              "translation": "Sí (a «Do you…?»).",
+              "mirror": {
+                "say": "Sí",
+                "pieces": [
+                  {
+                    "es": "Sí",
+                    "en": "Yes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "(lo) hago",
+                    "en": "do",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No, I'm not.",
+              "translation": "No (a «Are you…?»)."
+            },
+            {
+              "text": "Can you swim? Yes, I can.",
+              "translation": "¿Sabes nadar? Sí."
+            },
+            {
+              "text": "Did you call her? No, I didn't.",
+              "translation": "¿La llamaste? No."
+            }
+          ],
+          "pitfalls": [
+            "Solo «Yes» o «No» suena seco: Yes, I do. / No, I don't.",
+            "«Yes, I like» está mal: se repite el ayudante (Yes, I do)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El AYUDANTE de la pregunta CONTESTA también: YES, I DO.",
+            "emoji": "💬"
+          }
+        },
+        {
+          "key": "whats-up",
+          "type": "term",
+          "text": "what's up",
+          "meaning": "¿qué pasa?, ¿qué tal?",
+          "pronunciation": "uots AP",
+          "examples": [
+            {
+              "text": "Hey Tom, what's up?",
+              "translation": "Eh, Tom, ¿qué pasa?",
+              "mirror": {
+                "say": "Eh, Tom, ¿qué pasa?",
+                "pieces": [
+                  {
+                    "es": "Eh",
+                    "en": "Hey",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Tom",
+                    "en": "Tom",
+                    "role": "word"
+                  },
+                  {
+                    "es": "qué pasa",
+                    "en": "what's up",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's up with you?",
+              "translation": "¿Qué te pasa?"
+            }
+          ]
+        },
+        {
+          "key": "by-the-way",
+          "type": "term",
+          "text": "by the way",
+          "meaning": "por cierto",
+          "pronunciation": "bai de UÉI",
+          "examples": [
+            {
+              "text": "By the way, I love your shoes.",
+              "translation": "Por cierto, me encantan tus zapatos.",
+              "mirror": {
+                "say": "Por cierto, me encantan tus zapatos",
+                "pieces": [
+                  {
+                    "es": "Por cierto",
+                    "en": "By the way",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "me encantan",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "tus zapatos",
+                    "en": "your shoes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Oh, by the way, Ana called.",
+              "translation": "Ah, por cierto, llamó Ana."
+            }
+          ]
+        },
+        {
+          "key": "i-think-so",
+          "type": "term",
+          "text": "I think so",
+          "meaning": "creo que sí",
+          "pronunciation": "ai zink SÓU",
+          "examples": [
+            {
+              "text": "I think so.",
+              "translation": "Creo que sí.",
+              "mirror": {
+                "say": "Creo que sí",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "creo",
+                    "en": "think",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "así",
+                    "en": "so",
+                    "role": "word",
+                    "from": "que sí",
+                    "why": "«Creo que sí» se dice «creo así»: I think so."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't think so.",
+              "translation": "Creo que no."
+            }
+          ]
+        },
+        {
+          "key": "let-me-see",
+          "type": "term",
+          "text": "let me see",
+          "meaning": "a ver; déjame ver",
+          "pronunciation": "let mi SII",
+          "examples": [
+            {
+              "text": "Let me see the photo.",
+              "translation": "Déjame ver la foto.",
+              "mirror": {
+                "say": "Déjame ver la foto",
+                "pieces": [
+                  {
+                    "es": "Deja",
+                    "en": "Let",
+                    "role": "verb",
+                    "from": "Déjame",
+                    "why": "Lo pegado se separa: let ME see."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la foto",
+                    "en": "the photo",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let me see... Tuesday is fine.",
+              "translation": "A ver... el martes me va bien."
+            }
+          ]
+        },
+        {
+          "key": "thats-right",
+          "type": "term",
+          "text": "that's right",
+          "meaning": "eso es, correcto",
+          "pronunciation": "dats RÁIT",
+          "examples": [
+            {
+              "text": "That's right, it's on Monday.",
+              "translation": "Eso es, es el lunes.",
+              "mirror": {
+                "say": "Eso es, es el lunes",
+                "pieces": [
+                  {
+                    "es": "Eso es",
+                    "en": "That's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "correcto",
+                    "en": "right",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en lunes",
+                    "en": "on Monday",
+                    "role": "word",
+                    "from": "el lunes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Yes, that's right.",
+              "translation": "Sí, correcto."
+            }
+          ]
+        },
+        {
+          "key": "really",
+          "type": "term",
+          "text": "really",
+          "meaning": "¿en serio?; de verdad",
+          "pronunciation": "RÍIli",
+          "examples": [
+            {
+              "text": "Really? I didn't know that.",
+              "translation": "¿En serio? No lo sabía.",
+              "mirror": {
+                "say": "¿En serio? No lo sabía",
+                "pieces": [
+                  {
+                    "es": "En serio",
+                    "en": "Really",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "didn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "eso",
+                    "en": "that",
+                    "role": "word",
+                    "from": "lo"
+                  },
+                  {
+                    "es": "saber",
+                    "en": "know",
+                    "role": "verb",
+                    "from": "sabía",
+                    "why": "Con DIDN'T el verbo va tal cual: know."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I really like it.",
+              "translation": "Me gusta muchísimo."
+            }
+          ]
+        },
+        {
+          "key": "me-too",
+          "type": "term",
+          "text": "me too",
+          "meaning": "yo también",
+          "pronunciation": "mi TUU",
+          "examples": [
+            {
+              "text": "I'm hungry. Me too!",
+              "translation": "Tengo hambre. ¡Yo también!",
+              "mirror": {
+                "say": "Tengo hambre. ¡Yo también!",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "El hambre se ESTÁ: I'm hungry."
+                  },
+                  {
+                    "es": "hambriento",
+                    "en": "hungry",
+                    "role": "word",
+                    "from": "hambre"
+                  },
+                  {
+                    "es": "Yo también",
+                    "en": "Me too",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love pizza. Me too.",
+              "translation": "Me encanta la pizza. A mí también."
+            }
+          ]
+        },
+        {
+          "key": "me-neither",
+          "type": "term",
+          "text": "me neither",
+          "meaning": "yo tampoco",
+          "pronunciation": "mi NÁIder",
+          "examples": [
+            {
+              "text": "I don't like coffee. Me neither.",
+              "translation": "No me gusta el café. A mí tampoco.",
+              "mirror": {
+                "say": "No me gusta el café. A mí tampoco",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word",
+                    "from": "el café"
+                  },
+                  {
+                    "es": "A mí tampoco",
+                    "en": "Me neither",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I can't swim. Me neither.",
+              "translation": "No sé nadar. Yo tampoco."
+            }
+          ]
+        },
+        {
+          "key": "youre-welcome",
+          "type": "term",
+          "text": "you're welcome",
+          "meaning": "de nada",
+          "pronunciation": "ior UÉLkam",
+          "examples": [
+            {
+              "text": "Thank you! You're welcome.",
+              "translation": "¡Gracias! De nada.",
+              "mirror": {
+                "say": "¡Gracias! De nada",
+                "pieces": [
+                  {
+                    "es": "Gracias",
+                    "en": "Thank you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "De nada",
+                    "en": "You're welcome",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You're welcome to stay.",
+              "translation": "Puedes quedarte cuando quieras."
+            }
+          ]
+        },
+        {
+          "key": "good-luck",
+          "type": "term",
+          "text": "good luck",
+          "meaning": "buena suerte",
+          "pronunciation": "gud LAK",
+          "examples": [
+            {
+              "text": "Good luck with the exam!",
+              "translation": "¡Suerte con el examen!",
+              "mirror": {
+                "say": "¡Suerte con el examen!",
+                "pieces": [
+                  {
+                    "es": "Buena suerte",
+                    "en": "Good luck",
+                    "role": "word",
+                    "from": "Suerte"
+                  },
+                  {
+                    "es": "con el examen",
+                    "en": "with the exam",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wish me luck!",
+              "translation": "¡Deséame suerte!"
+            }
+          ]
+        },
+        {
+          "key": "take-care",
+          "type": "term",
+          "text": "take care",
+          "meaning": "cuídate",
+          "pronunciation": "teik KÉR",
+          "examples": [
+            {
+              "text": "Bye, take care!",
+              "translation": "¡Adiós, cuídate!",
+              "mirror": {
+                "say": "¡Adiós, cuídate!",
+                "pieces": [
+                  {
+                    "es": "Adiós",
+                    "en": "Bye",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cuídate",
+                    "en": "take care",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take care of your sister.",
+              "translation": "Cuida de tu hermana."
+            }
+          ]
+        },
+        {
+          "key": "hurry-up",
+          "type": "term",
+          "text": "hurry up",
+          "meaning": "date prisa",
+          "pronunciation": "jari AP",
+          "examples": [
+            {
+              "text": "Hurry up, we're late!",
+              "translation": "¡Date prisa, llegamos tarde!",
+              "mirror": {
+                "say": "¡Date prisa, llegamos tarde!",
+                "pieces": [
+                  {
+                    "es": "Date prisa",
+                    "en": "Hurry up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "we're",
+                    "role": "helper",
+                    "from": "llegamos",
+                    "why": "Llegar tarde es «estar tarde»: we're late."
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't hurry.",
+              "translation": "No te des prisa."
+            }
+          ]
+        },
+        {
+          "key": "be-careful",
+          "type": "term",
+          "text": "be careful",
+          "meaning": "ten cuidado",
+          "pronunciation": "bi KÉRful",
+          "examples": [
+            {
+              "text": "Be careful, it's hot!",
+              "translation": "¡Cuidado, que quema!",
+              "mirror": {
+                "say": "¡Cuidado, que quema!",
+                "pieces": [
+                  {
+                    "es": "Ten cuidado",
+                    "en": "Be careful",
+                    "role": "verb",
+                    "from": "Cuidado"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "it's",
+                    "role": "helper",
+                    "from": "que"
+                  },
+                  {
+                    "es": "caliente",
+                    "en": "hot",
+                    "role": "word",
+                    "from": "quema",
+                    "why": "«Quema» se dice «está caliente»: it's hot."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Be careful with the dog.",
+              "translation": "Cuidado con el perro."
+            }
+          ]
+        },
+        {
+          "key": "well-done",
+          "type": "term",
+          "text": "well done",
+          "meaning": "¡bien hecho!",
+          "pronunciation": "uel DAN",
+          "examples": [
+            {
+              "text": "Well done, you passed!",
+              "translation": "¡Bien hecho, has aprobado!",
+              "mirror": {
+                "say": "¡Bien hecho, has aprobado!",
+                "pieces": [
+                  {
+                    "es": "Bien hecho",
+                    "en": "Well done",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "aprobaste",
+                    "en": "passed",
+                    "role": "verb",
+                    "from": "has aprobado"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A well-done steak.",
+              "translation": "Un filete muy hecho."
+            }
+          ]
+        },
+        {
+          "key": "no-way",
+          "type": "term",
+          "text": "no way",
+          "meaning": "¡ni hablar!; ¡no puede ser!",
+          "pronunciation": "nou UÉI",
+          "examples": [
+            {
+              "text": "No way! That's amazing!",
+              "translation": "¡No puede ser! ¡Es increíble!",
+              "mirror": {
+                "say": "¡No puede ser! ¡Es increíble!",
+                "pieces": [
+                  {
+                    "es": "No puede ser",
+                    "en": "No way",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Eso es",
+                    "en": "That's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "increíble",
+                    "en": "amazing",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No way, I'm not going.",
+              "translation": "Ni hablar, no voy."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
