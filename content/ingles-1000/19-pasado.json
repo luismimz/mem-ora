@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "19-pasado",
+      "title": "Misión 19 · Lo que pasó (pasado)",
+      "units": [
+        {
+          "key": "g-past-simple",
+          "type": "pattern",
+          "goal": "Contar lo que pasó: el pasado",
+          "rule": "Lo que pasó: verbo + -ED (worked). Los más usados son irregulares (went, had, saw). Con DID, el verbo va tal cual: Did you go?",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "YO"
+            },
+            {
+              "text": "worked",
+              "role": "slot",
+              "hint": "trabajé"
+            },
+            {
+              "text": "yesterday",
+              "role": "fixed",
+              "hint": "ayer"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I worked yesterday.",
+              "translation": "Trabajé ayer.",
+              "mirror": {
+                "say": "Trabajé ayer",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabaj-É",
+                    "en": "work-ED",
+                    "role": "verb",
+                    "from": "trabajé",
+                    "why": "El pasado: -É en español, -ED en inglés. Work-ED."
+                  },
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Did you go out last night?",
+              "translation": "¿Saliste anoche?",
+              "mirror": {
+                "say": "¿Saliste anoche?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "salir",
+                    "en": "go out",
+                    "role": "verb",
+                    "from": "saliste",
+                    "why": "Con DID el verbo vuelve a su forma base: go out."
+                  },
+                  {
+                    "es": "anoche",
+                    "en": "last night",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I didn't see her.",
+              "translation": "No la vi.",
+              "mirror": {
+                "say": "No la vi",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "didn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb",
+                    "from": "vi",
+                    "why": "Con DIDN'T el verbo va en su base: didn't see."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "We played football.",
+              "translation": "Jugamos al fútbol."
+            }
+          ],
+          "pitfalls": [
+            "«Did you went?» está mal: con DID, el verbo en su forma base (go).",
+            "Muchos verbos comunes no llevan -ED: go → went, have → had, see → saw."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada verbo del PASADO arrastra una cola: -ED.",
+            "emoji": "⏪"
+          }
+        },
+        {
+          "key": "went",
+          "type": "term",
+          "text": "went",
+          "meaning": "fui, fue… (pasado de go)",
+          "pronunciation": "UENT",
+          "examples": [
+            {
+              "text": "I went to London last year.",
+              "translation": "Fui a Londres el año pasado.",
+              "mirror": {
+                "say": "Fui a Londres el año pasado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fui",
+                    "en": "went",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Londres",
+                    "en": "to London",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el año pasado",
+                    "en": "last year",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where did you go?",
+              "translation": "¿Adónde fuiste?"
+            }
+          ]
+        },
+        {
+          "key": "had",
+          "type": "term",
+          "text": "had",
+          "meaning": "tuve, tenía… (pasado de have)",
+          "pronunciation": "JAD",
+          "examples": [
+            {
+              "text": "I had a dog.",
+              "translation": "Tenía un perro.",
+              "mirror": {
+                "say": "Tenía un perro",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenía",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un perro",
+                    "en": "a dog",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We had dinner at nine.",
+              "translation": "Cenamos a las nueve."
+            }
+          ]
+        },
+        {
+          "key": "did",
+          "type": "term",
+          "text": "did",
+          "meaning": "hice, hizo… (pasado de do)",
+          "pronunciation": "DID",
+          "examples": [
+            {
+              "text": "I did my homework.",
+              "translation": "Hice los deberes.",
+              "mirror": {
+                "say": "Hice los deberes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hice",
+                    "en": "did",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MIS deberes",
+                    "en": "my homework",
+                    "role": "word",
+                    "from": "los deberes",
+                    "why": "Lo tuyo lleva su dueño: MY homework."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What did you do yesterday?",
+              "translation": "¿Qué hiciste ayer?"
+            }
+          ]
+        },
+        {
+          "key": "saw",
+          "type": "term",
+          "text": "saw",
+          "meaning": "vi, vio… (pasado de see)",
+          "pronunciation": "SOO",
+          "examples": [
+            {
+              "text": "I saw a film yesterday.",
+              "translation": "Vi una película ayer.",
+              "mirror": {
+                "say": "Vi una película ayer",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vi",
+                    "en": "saw",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una película",
+                    "en": "a film",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Did you see that?",
+              "translation": "¿Viste eso?"
+            }
+          ]
+        },
+        {
+          "key": "came",
+          "type": "term",
+          "text": "came",
+          "meaning": "vine, vino… (pasado de come)",
+          "pronunciation": "KÉIM",
+          "examples": [
+            {
+              "text": "She came home late.",
+              "translation": "Llegó a casa tarde.",
+              "mirror": {
+                "say": "Llegó a casa tarde",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vino",
+                    "en": "came",
+                    "role": "verb",
+                    "from": "llegó",
+                    "why": "Llegar a casa es «venir a casa»: came home."
+                  },
+                  {
+                    "es": "casa",
+                    "en": "home",
+                    "role": "word",
+                    "from": "a casa"
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They came by bus.",
+              "translation": "Vinieron en autobús."
+            }
+          ]
+        },
+        {
+          "key": "made",
+          "type": "term",
+          "text": "made",
+          "meaning": "hice, hizo… (pasado de make)",
+          "pronunciation": "MÉID",
+          "examples": [
+            {
+              "text": "I made a cake.",
+              "translation": "Hice un pastel.",
+              "mirror": {
+                "say": "Hice un pastel",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hice",
+                    "en": "made",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un pastel",
+                    "en": "a cake",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You made a mistake.",
+              "translation": "Cometiste un error."
+            }
+          ]
+        },
+        {
+          "key": "got",
+          "type": "term",
+          "text": "got",
+          "meaning": "recibí, conseguí, llegué… (pasado de get)",
+          "pronunciation": "GOT",
+          "examples": [
+            {
+              "text": "I got your message.",
+              "translation": "Recibí tu mensaje.",
+              "mirror": {
+                "say": "Recibí tu mensaje",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "recibí",
+                    "en": "got",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu mensaje",
+                    "en": "your message",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We got home at ten.",
+              "translation": "Llegamos a casa a las diez."
+            }
+          ]
+        },
+        {
+          "key": "took",
+          "type": "term",
+          "text": "took",
+          "meaning": "cogí, tomé… (pasado de take)",
+          "pronunciation": "TUK",
+          "examples": [
+            {
+              "text": "I took the bus.",
+              "translation": "Cogí el autobús.",
+              "mirror": {
+                "say": "Cogí el autobús",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cogí",
+                    "en": "took",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el autobús",
+                    "en": "the bus",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It took two hours.",
+              "translation": "Tardó dos horas."
+            }
+          ]
+        },
+        {
+          "key": "said",
+          "type": "term",
+          "text": "said",
+          "meaning": "dije, dijo… (pasado de say)",
+          "pronunciation": "SED",
+          "examples": [
+            {
+              "text": "She said yes.",
+              "translation": "Dijo que sí.",
+              "mirror": {
+                "say": "Dijo que sí",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sí",
+                    "en": "yes",
+                    "role": "word",
+                    "from": "que sí"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What did he say?",
+              "translation": "¿Qué dijo?"
+            }
+          ]
+        },
+        {
+          "key": "ate",
+          "type": "term",
+          "text": "ate",
+          "meaning": "comí, comió… (pasado de eat)",
+          "pronunciation": "ÉIT",
+          "examples": [
+            {
+              "text": "We ate pizza.",
+              "translation": "Comimos pizza.",
+              "mirror": {
+                "say": "Comimos pizza",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comimos",
+                    "en": "ate",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pizza",
+                    "en": "pizza",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Did you eat?",
+              "translation": "¿Has comido?"
+            }
+          ]
+        },
+        {
+          "key": "bought",
+          "type": "term",
+          "text": "bought",
+          "meaning": "compré, compró… (pasado de buy)",
+          "pronunciation": "BOOT",
+          "examples": [
+            {
+              "text": "I bought a new phone.",
+              "translation": "Compré un móvil nuevo.",
+              "mirror": {
+                "say": "Compré un móvil nuevo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "móvil",
+                    "en": "phone",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "What did you buy?",
+              "translation": "¿Qué compraste?"
+            }
+          ]
+        },
+        {
+          "key": "gave",
+          "type": "term",
+          "text": "gave",
+          "meaning": "di, dio… (pasado de give)",
+          "pronunciation": "GÉIV",
+          "examples": [
+            {
+              "text": "He gave me a present.",
+              "translation": "Me dio un regalo.",
+              "mirror": {
+                "say": "Me dio un regalo",
+                "pieces": [
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dio",
+                    "en": "gave",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un regalo",
+                    "en": "a present",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She gave the book to Ana.",
+              "translation": "Le dio el libro a Ana."
+            }
+          ]
+        },
+        {
+          "key": "knew",
+          "type": "term",
+          "text": "knew",
+          "meaning": "sabía, conocía… (pasado de know)",
+          "pronunciation": "NIU",
+          "examples": [
+            {
+              "text": "I knew the answer.",
+              "translation": "Sabía la respuesta.",
+              "mirror": {
+                "say": "Sabía la respuesta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sabía",
+                    "en": "knew",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la respuesta",
+                    "en": "the answer",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I didn't know that.",
+              "translation": "No lo sabía."
+            }
+          ]
+        },
+        {
+          "key": "thought",
+          "type": "term",
+          "text": "thought",
+          "meaning": "pensé, pensaba… (pasado de think)",
+          "pronunciation": "ZOOT",
+          "examples": [
+            {
+              "text": "I thought you were at home.",
+              "translation": "Pensaba que estabas en casa.",
+              "mirror": {
+                "say": "Pensaba que estabas en casa",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pensaba",
+                    "en": "thought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TÚ estabas",
+                    "en": "you were",
+                    "role": "who",
+                    "from": "que estabas",
+                    "why": "Sin «que» y con quién: I thought YOU were…"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I thought so.",
+              "translation": "Eso pensaba."
+            }
+          ]
+        },
+        {
+          "key": "found",
+          "type": "term",
+          "text": "found",
+          "meaning": "encontré, encontró… (pasado de find)",
+          "pronunciation": "FÁUND",
+          "examples": [
+            {
+              "text": "I found my keys.",
+              "translation": "Encontré mis llaves.",
+              "mirror": {
+                "say": "Encontré mis llaves",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encontré",
+                    "en": "found",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mis llaves",
+                    "en": "my keys",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Did you find it?",
+              "translation": "¿Lo encontraste?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
