@@ -12,16 +12,18 @@ export interface Streak {
   shields: number;
   /** Días que salvó un protector en la racha actual. */
   saved: number;
+  /** La racha más larga que ha tenido nunca (para logros que no se pierden si se corta). */
+  best: number;
 }
 
 export function streakOf(activity: Record<string, DayActivity>, today: number, options: StreakOptions = DEFAULT_STREAK): Streak {
   const active = (d: number) => (activity[String(d)]?.attempts ?? 0) > 0;
   const days = Object.keys(activity).map(Number).filter((d) => active(d) && d <= today);
-  if (!days.length) return { days: 0, shields: 0, saved: 0 };
-  let streak = 0, shields = 0, saved = 0, sinceShield = 0;
+  if (!days.length) return { days: 0, shields: 0, saved: 0, best: 0 };
+  let streak = 0, shields = 0, saved = 0, sinceShield = 0, best = 0;
   for (let d = Math.min(...days); d <= today; d += 1) {
     if (active(d)) {
-      streak += 1; sinceShield += 1;
+      streak += 1; sinceShield += 1; best = Math.max(best, streak);
       if (sinceShield >= options.shieldEvery) { shields = Math.min(options.maxShields, shields + 1); sinceShield = 0; }
     } else if (d === today) {
       // Hoy aún no ha estudiado: la racha sigue viva hasta que acabe el día.
@@ -31,5 +33,5 @@ export function streakOf(activity: Record<string, DayActivity>, today: number, o
       streak = 0; saved = 0; sinceShield = 0;
     }
   }
-  return { days: streak, shields, saved };
+  return { days: streak, shields, saved, best };
 }

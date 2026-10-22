@@ -262,6 +262,7 @@ export function App() {
                 : <Meter label="Chat" value={ms.words >= GRAMMAR_EVERY ? '¡disponible pronto!' : `faltan ${GRAMMAR_EVERY - ms.words}`} pct={Math.min(1, ms.words / GRAMMAR_EVERY)} />)}
             </div>
           )}
+          {prog && !isMem && <Constancy prog={prog} missionsDone={missions?.missions.filter((m) => m.status === 'done').length ?? 0} words={words} />}
           {error && <p className="banner" role="alert">{error}</p>}
         </section>
         <section className="home-side">
@@ -441,6 +442,59 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
           );
         })}
       </ol>
+    </section>
+  );
+}
+
+/**
+ * Tu constancia (ideas de benrios.dev): los días que has estudiado en las últimas 12 semanas y logros HONESTOS. Los de
+ * memoria cuentan solo lo que ya está en tu memoria a largo plazo (aprendido o más), no lo visto ni lo acertado al
+ * elegir; los de racha usan tu mejor racha, para que no se pierdan si un día fallas.
+ */
+const TRACKS: Array<{ id: string; ico: string; steps: number[]; label: (n: number, words: string) => string }> = [
+  { id: 'memory', ico: '🧠', steps: [10, 50, 100, 250, 500, 1000], label: (n, w) => `${n} ${w} en tu memoria` },
+  { id: 'streak', ico: '🔥', steps: [3, 7, 14, 30, 60], label: (n) => `${n} días seguidos` },
+  { id: 'missions', ico: '🗺️', steps: [1, 3, 5, 10, 17], label: (n) => `${n} ${n === 1 ? 'misión completada' : 'misiones completadas'}` },
+];
+function Constancy({ prog, missionsDone, words }: { prog: Progress; missionsDone: number; words: string }) {
+  const cal = prog.calendar ?? [];
+  const studied = cal.filter((n) => n > 0).length;
+  // Lunes = 0 … domingo = 6; la última celda (hoy) cae en su fila y las semanas van en columnas.
+  const today = (new Date().getDay() + 6) % 7;
+  const pad = (today - ((cal.length - 1) % 7) + 7) % 7;
+  const level = (n: number) => (n === 0 ? 0 : n < 10 ? 1 : n < 30 ? 2 : n < 60 ? 3 : 4);
+  // Logro conseguido: con la mejor racha. Lo que falta para el siguiente: con la racha de ahora (hay que encadenar días).
+  const value: Record<string, number> = { memory: prog.units.filter((u) => u.level !== 'none').length, streak: Math.max(prog.bestStreak ?? 0, prog.streak ?? 0), missions: missionsDone };
+  const now: Record<string, number> = { ...value, streak: prog.streak ?? 0 };
+  return (
+    <section className="constancy" aria-label="Tu constancia">
+      <div className="constancy-head"><p className="eyebrow">TU CONSTANCIA</p><small>{studied} {studied === 1 ? 'día' : 'días'} estudiando en 12 semanas</small></div>
+      {cal.length > 0 && (
+        <div className="cal" role="img" aria-label={`Calendario: ${studied} días con estudio en las últimas 12 semanas`}>
+          {Array.from({ length: pad }, (_, i) => <i key={`p${i}`} className="cal-pad" />)}
+          {cal.map((n, i) => <i key={i} className={`cal-${level(n)} ${i === cal.length - 1 ? 'cal-today' : ''}`} title={`${n} respuestas`} />)}
+        </div>
+      )}
+      <ul className="tracks">
+        {TRACKS.map((t) => {
+          const v = value[t.id] ?? 0;
+          const got = t.steps.filter((x) => v >= x);
+          const next = t.steps.find((x) => v < x);
+          const prev = got[got.length - 1] ?? 0;
+          const cur = now[t.id] ?? v;
+          const base = t.id === 'streak' ? 0 : prev;
+          return (
+            <li key={t.id} className={got.length ? 'earned' : ''}>
+              <span className="track-ico" aria-hidden="true">{t.ico}</span>
+              <span className="track-body">
+                <b>{got.length ? t.label(prev, words) : `Primer logro: ${t.label(t.steps[0]!, words)}`}</b>
+                {next ? <><i className="track-bar"><i style={{ width: `${Math.round((Math.max(0, cur - base) / (next - base)) * 100)}%` }} /></i><small>Siguiente logro: {t.label(next, words)} · faltan {next - cur}</small></> : <small>¡Todos los logros de este camino! 🏆</small>}
+              </span>
+              <span className="track-n" aria-label={`${got.length} de ${t.steps.length} logros`}>{got.length}/{t.steps.length}</span>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

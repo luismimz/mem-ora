@@ -49,7 +49,8 @@ try {
       : path === '/memora/me' ? { staff: false }
       : path === '/memora/courses' ? [course]
       : path === '/memora/missions' ? { missions, current: '02', newToday: 15, newTarget: 15 }
-      : path === '/memora/progress' ? { streak: 3, shields: 0, todayAttempts: 12, failures, today: { newUnits: 10, goal: 35 }, skills: [], units: [], associations: [] }
+      : path === '/memora/progress' ? { streak: 3, bestStreak: 8, shields: 0, todayAttempts: 12, failures, today: { newUnits: 10, goal: 35 }, calendar: Array.from({ length: 84 }, (_, i) => (i % 3 === 0 ? 0 : (i * 7) % 70)), skills: [],
+          units: Array.from({ length: 20 }, (_, i) => ({ key: `u${i}`, level: i < 12 ? 'learned' : 'none', missing: [] })), associations: [] }
       : path === '/memora/session' ? failSession
       : path === '/memora/session/position' ? { saved: true }
       : path === '/memora/events' ? { accepted: [], duplicates: [], rejected: [] }
@@ -67,6 +68,19 @@ try {
   check(states[2].cls.includes('pending') && states[2].state === 'PENDIENTE', 'la misión sin empezar sale pendiente');
   const legend = await page.$eval('.missions-legend', (e) => e.textContent ?? '');
   check(legend.includes('1 por repasar') && legend.includes('1 completada') && !legend.includes('1 completadas'), `la leyenda cuenta lo que hay que repasar (${legend})`);
+
+  // Tu constancia: 84 días en 12 columnas de semana, hoy en su fila, y logros honestos (memoria, mejor racha, misiones).
+  const cons = await page.$eval('.constancy', (e) => {
+    const cells = [...e.querySelectorAll('.cal i')];
+    const today = e.querySelector('.cal .cal-today');
+    const row = Math.round((today.getBoundingClientRect().top - cells[0].getBoundingClientRect().top) / (cells[1].getBoundingClientRect().top - cells[0].getBoundingClientRect().top));
+    return { days: e.querySelectorAll('.cal i:not(.cal-pad)').length, row, right: Math.round(e.getBoundingClientRect().right), tracks: [...e.querySelectorAll('.tracks li')].map((l) => l.textContent) };
+  });
+  const wd = (new Date().getDay() + 6) % 7;
+  check(cons.days === 84 && cons.row === wd && cons.right <= 390, `el calendario tiene 12 semanas y hoy cae en su día de la semana (fila ${cons.row}, esperado ${wd})`);
+  check(cons.tracks[0].includes('10 conceptos en tu memoria') && cons.tracks[0].includes('faltan 38') && cons.tracks[0].includes('1/6'), `memoria: cuenta solo lo aprendido (12 de 20) → ${cons.tracks[0]}`);
+  check(cons.tracks[1].includes('7 días seguidos') && cons.tracks[1].includes('2/5') && cons.tracks[1].includes('faltan 11'), `racha: el logro con la mejor (8); lo que falta, desde la actual (3) → ${cons.tracks[1]}`);
+  check(cons.tracks[2].includes('1 misión completada'), `misiones → ${cons.tracks[2]}`);
 
   const btn = await page.$eval('.fails-btn', (e) => ({ text: e.textContent ?? '', w: e.getBoundingClientRect().width, h: e.getBoundingClientRect().height }));
   check(btn.text.includes('5') && btn.text.includes('Vacía tus fallos') && btn.h >= 44, `«Vacía tus fallos» muestra cuántos quedan y se puede tocar con el dedo (${Math.round(btn.h)}px de alto)`);

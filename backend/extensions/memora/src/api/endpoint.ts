@@ -65,6 +65,9 @@ function newUnitsSince(learner: Learner, dayStart: number): number {
   return Object.values(firstSeen).filter((t) => t >= dayStart).length;
 }
 
+/** Días del calendario de constancia (12 semanas). */
+const CALENDAR_DAYS = 84;
+
 /** Motivos de «Reportar un error» (la app los muestra con su texto). */
 const REPORT_REASONS = ['asociacion', 'significado', 'respuesta', 'audio', 'otro'];
 
@@ -462,7 +465,10 @@ export default {
       return {
         data: {
           streak: streak.days,
+          bestStreak: streak.best,
           shields: streak.shields,
+          // Calendario de constancia: respuestas de cada uno de los últimos 84 días (12 semanas); el último es hoy.
+          calendar: Array.from({ length: CALENDAR_DAYS }, (_, i) => learner.activity[String(today - (CALENDAR_DAYS - 1) + i)]?.attempts ?? 0),
           todayAttempts: learner.activity[String(today)]?.attempts ?? 0,
           // «Vacía tus fallos»: unidades falladas desde su último acierto.
           failures: pendingFailures(learner.skills).filter((k) => catalog.units.some((u) => u.id === k)).length,

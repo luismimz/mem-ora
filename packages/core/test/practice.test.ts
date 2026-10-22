@@ -36,17 +36,23 @@ describe('fallos pendientes y repasos que tocan (mapa de misiones)', () => {
 });
 
 describe('racha con protector (D-077)', () => {
+  it('recuerda la mejor racha aunque la actual se haya cortado', () => {
+    const days = (...d: number[]) => Object.fromEntries(d.map((x) => [String(x), { attempts: 5, correct: 4, introduced: 0, reviews: 0 }]));
+    const s = streakOf(days(1, 2, 3, 4, 5, 20, 21), 21, { shieldEvery: 99, maxShields: 0 });
+    expect(s.days).toBe(2);
+    expect(s.best).toBe(5);
+  });
   const days = (...d: number[]) => Object.fromEntries(d.map((x) => [String(x), { attempts: 5, correct: 4, introduced: 0, reviews: 0 }]));
   it('cuenta los días seguidos; hoy sin estudiar no la rompe', () => {
     expect(streakOf(days(1, 2, 3), 3).days).toBe(3);
     expect(streakOf(days(1, 2, 3), 4).days).toBe(3);
   });
   it('sin protector, un día perdido la rompe', () => {
-    expect(streakOf(days(1, 2, 4, 5), 5)).toEqual({ days: 2, shields: 0, saved: 0 });
+    expect(streakOf(days(1, 2, 4, 5), 5)).toEqual({ days: 2, shields: 0, saved: 0, best: 2 });
   });
   it('cada 7 días se gana un protector que salva un día perdido', () => {
     const r = streakOf(days(1, 2, 3, 4, 5, 6, 7, 9, 10), 10);
-    expect(r).toEqual({ days: 9, shields: 0, saved: 1 });
+    expect(r).toEqual({ days: 9, shields: 0, saved: 1, best: 9 });
     expect(streakOf(days(1, 2, 3, 4, 5, 6, 7), 7).shields).toBe(1);
   });
   it('como mucho se guardan 2 protectores', () => {
