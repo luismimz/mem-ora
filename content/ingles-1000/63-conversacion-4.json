@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "63-conversacion-4",
+      "title": "Misión 63 · Muletillas para charlar",
+      "units": [
+        {
+          "key": "g-tag",
+          "type": "pattern",
+          "goal": "…, ¿verdad? = …, ISN'T IT?",
+          "rule": "Para que te den la razón se repite el verbo al revés: It's cold, isn't it? You like it, don't you? It isn't far, is it?",
+          "pieces": [
+            {
+              "text": "It's cold",
+              "role": "slot",
+              "hint": "hace frío"
+            },
+            {
+              "text": "isn't it",
+              "role": "fixed",
+              "hint": "¿verdad"
+            }
+          ],
+          "examples": [
+            {
+              "text": "It's cold, isn't it?",
+              "translation": "Hace frío, ¿verdad?",
+              "mirror": {
+                "say": "Hace frío, ¿verdad?",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Hace",
+                    "why": "El tiempo va con IT IS: it's cold."
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no es ESO",
+                    "en": "isn't it",
+                    "role": "helper",
+                    "from": "verdad",
+                    "why": "«¿Verdad?» repite el verbo al revés: isn't it?"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You like pizza, don't you?",
+              "translation": "Te gusta la pizza, ¿verdad?",
+              "mirror": {
+                "say": "Te gusta la pizza, ¿verdad?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "Te gusta",
+                    "why": "Gustar se da la vuelta: you like…"
+                  },
+                  {
+                    "es": "pizza",
+                    "en": "pizza",
+                    "role": "word",
+                    "from": "la pizza",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "no TÚ",
+                    "en": "don't you",
+                    "role": "helper",
+                    "from": "verdad",
+                    "why": "Con like el ayudante es DO: don't you?"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's here, isn't she?",
+              "translation": "Está aquí, ¿no?"
+            },
+            {
+              "text": "You can swim, can't you?",
+              "translation": "Sabes nadar, ¿verdad?"
+            }
+          ],
+          "pitfalls": [
+            "Si la frase es afirmativa, la coletilla va en negativo (y al revés).",
+            "Si dudas, «right?» también vale: It's cold, right?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un BOOMERANG: el VERBO va y vuelve al REVÉS.",
+            "emoji": "🪃"
+          }
+        },
+        {
+          "key": "sure",
+          "type": "term",
+          "text": "sure",
+          "meaning": "¡claro!; seguro",
+          "pronunciation": "SHUR",
+          "examples": [
+            {
+              "text": "Are you sure?",
+              "translation": "¿Estás seguro?",
+              "mirror": {
+                "say": "¿Estás seguro?",
+                "pieces": [
+                  {
+                    "es": "Estás",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "seguro",
+                    "en": "sure",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sure! Why not?",
+              "translation": "¡Claro! ¿Por qué no?"
+            }
+          ]
+        },
+        {
+          "key": "no-problem",
+          "type": "term",
+          "text": "no problem",
+          "meaning": "no hay problema; de nada",
+          "pronunciation": "nóu PRÓblem",
+          "examples": [
+            {
+              "text": "Thanks a lot! No problem.",
+              "translation": "¡Muchas gracias! De nada.",
+              "mirror": {
+                "say": "¡Muchas gracias! De nada",
+                "pieces": [
+                  {
+                    "es": "Muchas gracias",
+                    "en": "Thanks a lot",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Sin problema",
+                    "en": "No problem",
+                    "role": "word",
+                    "from": "De nada",
+                    "why": "Un «de nada» muy de diario: no problem."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No problem, I'll do it.",
+              "translation": "Sin problema, lo hago yo."
+            }
+          ]
+        },
+        {
+          "key": "i-see",
+          "type": "term",
+          "text": "I see",
+          "meaning": "ya veo, entiendo",
+          "pronunciation": "ai SII",
+          "examples": [
+            {
+              "text": "Oh, I see. That's why.",
+              "translation": "Ah, ya veo. Por eso.",
+              "mirror": {
+                "say": "Ah, ya veo. Por eso",
+                "pieces": [
+                  {
+                    "es": "Ah",
+                    "en": "Oh",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "veo",
+                    "en": "see",
+                    "role": "verb",
+                    "from": "ya veo"
+                  },
+                  {
+                    "es": "Eso es por qué",
+                    "en": "That's why",
+                    "role": "word",
+                    "from": "Por eso"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I see what you mean.",
+              "translation": "Entiendo lo que dices."
+            }
+          ]
+        },
+        {
+          "key": "what-a-pity",
+          "type": "term",
+          "text": "what a pity!",
+          "meaning": "¡qué pena!",
+          "pronunciation": "uot a PÍti",
+          "examples": [
+            {
+              "text": "You can't come? What a pity!",
+              "translation": "¿No puedes venir? ¡Qué pena!",
+              "mirror": {
+                "say": "¿No puedes venir? ¡Qué pena!",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedes",
+                    "en": "can't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "Qué pena",
+                    "en": "What a pity",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's a pity you're leaving.",
+              "translation": "Es una pena que te vayas."
+            }
+          ]
+        },
+        {
+          "key": "good-idea",
+          "type": "term",
+          "text": "good idea",
+          "meaning": "¡buena idea!",
+          "pronunciation": "gud aiDÍA",
+          "examples": [
+            {
+              "text": "Let's take a taxi. Good idea!",
+              "translation": "Cojamos un taxi. ¡Buena idea!",
+              "mirror": {
+                "say": "Cojamos un taxi. ¡Buena idea!",
+                "pieces": [
+                  {
+                    "es": "Cojamos",
+                    "en": "Let's take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un taxi",
+                    "en": "a taxi",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Buena idea",
+                    "en": "Good idea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That's a good idea.",
+              "translation": "Es una buena idea."
+            }
+          ]
+        },
+        {
+          "key": "lets-go",
+          "type": "term",
+          "text": "let's go",
+          "meaning": "¡vamos!",
+          "pronunciation": "lets GÓU",
+          "examples": [
+            {
+              "text": "Are you ready? Let's go!",
+              "translation": "¿Estás listo? ¡Vamos!",
+              "mirror": {
+                "say": "¿Estás listo? ¡Vamos!",
+                "pieces": [
+                  {
+                    "es": "Estás",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "listo",
+                    "en": "ready",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Vamos",
+                    "en": "Let's go",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's go home.",
+              "translation": "Vámonos a casa."
+            }
+          ]
+        },
+        {
+          "key": "come-on",
+          "type": "term",
+          "text": "come on",
+          "meaning": "¡venga!, ¡vamos!",
+          "pronunciation": "kam ON",
+          "examples": [
+            {
+              "text": "Come on, you can do it!",
+              "translation": "¡Venga, tú puedes!",
+              "mirror": {
+                "say": "¡Venga, tú puedes!",
+                "pieces": [
+                  {
+                    "es": "Venga",
+                    "en": "Come on",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tú puedes",
+                    "en": "you can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "HACERLO",
+                    "en": "do it",
+                    "role": "verb",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Oh, come on!",
+              "translation": "¡Anda ya!"
+            }
+          ]
+        },
+        {
+          "key": "fair-enough",
+          "type": "term",
+          "text": "fair enough",
+          "meaning": "vale, me parece justo",
+          "pronunciation": "fer iNÁF",
+          "examples": [
+            {
+              "text": "That's fair enough.",
+              "translation": "Me parece razonable.",
+              "mirror": {
+                "say": "Me parece razonable",
+                "pieces": [
+                  {
+                    "es": "Eso es",
+                    "en": "That's",
+                    "role": "helper",
+                    "from": "Me parece"
+                  },
+                  {
+                    "es": "justo, bastante",
+                    "en": "fair enough",
+                    "role": "word",
+                    "from": "razonable",
+                    "why": "Para aceptar una razón: fair enough."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fair enough, you win.",
+              "translation": "Vale, ganas tú."
+            }
+          ]
+        },
+        {
+          "key": "i-hope-so",
+          "type": "term",
+          "text": "I hope so",
+          "meaning": "eso espero",
+          "pronunciation": "ai JÓUP sou",
+          "examples": [
+            {
+              "text": "I hope so.",
+              "translation": "Eso espero.",
+              "mirror": {
+                "say": "Eso espero",
+                "pieces": [
+                  {
+                    "es": "eso",
+                    "en": "so",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "espero",
+                    "en": "hope",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I hope not.",
+              "translation": "Espero que no."
+            }
+          ]
+        },
+        {
+          "key": "you-know",
+          "type": "term",
+          "text": "you know",
+          "meaning": "ya sabes; o sea",
+          "pronunciation": "iu NÓU",
+          "examples": [
+            {
+              "text": "It's, you know, a bit expensive.",
+              "translation": "Es, o sea, un poco caro.",
+              "mirror": {
+                "say": "Es, o sea, un poco caro",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "ya sabes",
+                    "en": "you know",
+                    "role": "word",
+                    "from": "o sea"
+                  },
+                  {
+                    "es": "un poco caro",
+                    "en": "a bit expensive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You know what? I agree.",
+              "translation": "¿Sabes qué? Estoy de acuerdo."
+            }
+          ]
+        },
+        {
+          "key": "no-idea",
+          "type": "term",
+          "text": "no idea",
+          "meaning": "ni idea",
+          "pronunciation": "nóu aiDÍA",
+          "examples": [
+            {
+              "text": "Where is Ana? No idea.",
+              "translation": "¿Dónde está Ana? Ni idea.",
+              "mirror": {
+                "say": "¿Dónde está Ana? Ni idea",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "who"
+                  },
+                  {
+                    "es": "Ninguna idea",
+                    "en": "No idea",
+                    "role": "word",
+                    "from": "Ni idea"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've got no idea.",
+              "translation": "No tengo ni idea."
+            }
+          ]
+        },
+        {
+          "key": "not-really",
+          "type": "term",
+          "text": "not really",
+          "meaning": "no mucho, la verdad",
+          "pronunciation": "not RÍli",
+          "examples": [
+            {
+              "text": "Do you like football? Not really.",
+              "translation": "¿Te gusta el fútbol? No mucho.",
+              "mirror": {
+                "say": "¿Te gusta el fútbol? No mucho",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "Te gusta",
+                    "why": "Gustar se da la vuelta: do you like…?"
+                  },
+                  {
+                    "es": "fútbol",
+                    "en": "football",
+                    "role": "word",
+                    "from": "el fútbol",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "No realmente",
+                    "en": "Not really",
+                    "role": "word",
+                    "from": "No mucho"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm not really hungry.",
+              "translation": "No tengo mucha hambre."
+            }
+          ]
+        },
+        {
+          "key": "same-here",
+          "type": "term",
+          "text": "same here",
+          "meaning": "yo también, igual",
+          "pronunciation": "seim JÍER",
+          "examples": [
+            {
+              "text": "I'm so tired. Same here.",
+              "translation": "Estoy muy cansado. Yo igual.",
+              "mirror": {
+                "say": "Estoy muy cansado. Yo igual",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan cansado",
+                    "en": "so tired",
+                    "role": "word",
+                    "from": "muy cansado"
+                  },
+                  {
+                    "es": "Igual aquí",
+                    "en": "Same here",
+                    "role": "word",
+                    "from": "Yo igual"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Same here, I love it.",
+              "translation": "A mí también me encanta."
+            }
+          ]
+        },
+        {
+          "key": "go-ahead",
+          "type": "term",
+          "text": "go ahead",
+          "meaning": "adelante",
+          "pronunciation": "góu aJÉD",
+          "examples": [
+            {
+              "text": "Can I ask you something? Go ahead.",
+              "translation": "¿Te puedo preguntar algo? Adelante.",
+              "mirror": {
+                "say": "¿Te puedo preguntar algo? Adelante",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "preguntar",
+                    "en": "ask",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "algo",
+                    "en": "something",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Adelante",
+                    "en": "Go ahead",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            },
+            {
+              "text": "Go ahead, start without me.",
+              "translation": "Adelante, empezad sin mí."
+            }
+          ]
+        },
+        {
+          "key": "my-pleasure",
+          "type": "term",
+          "text": "my pleasure",
+          "meaning": "un placer, no hay de qué",
+          "pronunciation": "mai PLÉYer",
+          "examples": [
+            {
+              "text": "Thank you so much! My pleasure.",
+              "translation": "¡Muchísimas gracias! Un placer.",
+              "mirror": {
+                "say": "¡Muchísimas gracias! Un placer",
+                "pieces": [
+                  {
+                    "es": "Muchísimas gracias",
+                    "en": "Thank you so much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "MI placer",
+                    "en": "My pleasure",
+                    "role": "word",
+                    "from": "Un placer"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was my pleasure.",
+              "translation": "Fue un placer."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

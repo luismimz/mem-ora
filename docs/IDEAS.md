@@ -20,13 +20,10 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   antes de reescribir en masa; una asociación mala es peor que ninguna.
 
 - **[inglés] Espejos pendientes:** `many` (have got), `jump` y `stand` (una sola pieza); `thirteen`/`fifteen` (sin valor).
-- **[inglés] Más vocabulario hasta 1.000** (meta de 30 días). Hecho: misiones 18–21 (ciudad + there is, pasado + irregulares,
-  viajes + going to, trabajo + comparativos), 22 (inglés profesional) y 23–26 (tiempo, ropa, emociones, fechas) 27–30
-  (adjetivos, animales, compras, salud), 31–34 (familia, ocio, naturaleza, cocina) , 35–38 (verbos, futuro, moverse,
-  conversación) 39–42 (estudios, tecnología, carácter, objetos), 43–46 (verbos frasales, opiniones, fechas y números, hotel) 47–50
-  (acciones y sentidos, comida 2, profesiones, proponer y felicitar) 51–54 (deporte, casa 2, emociones 2, verbos 7) 55–58
-  (aeropuerto, cuerpo 2, clase y oficina, aficiones) y 59–62 (ciudad 2, adverbios 2, verbos 8, adjetivos 2): 928
-  palabras. Siguiente (hasta 1.000): frases para conversar 4, comida y bebida 3, dinero y banco, verbos 9, inglés DAM 2.
+- ✓ **[inglés] 1.000 palabras** (meta de 30 días, 23-oct-2026): 1.003 palabras en las misiones 00–67, cada una con
+  pronunciación, dos ejemplos y espejo, y un truco de gramática por misión desde la 18. Siguiente: **repaso de
+  calidad** con el usuario (asociaciones y espejos que no le convenzan) antes de ampliar más; después, B1 (phrasal
+  verbs 2, conectores de texto, presente perfecto en uso real, inglés de entrevistas y del módulo DAM).
 - ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).
 
 ## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)

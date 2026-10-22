@@ -1,0 +1,767 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "65-dinero",
+      "title": "Misión 65 · Dinero",
+      "units": [
+        {
+          "key": "g-how-much",
+          "type": "pattern",
+          "goal": "¿Cuánto cuesta? = HOW MUCH IS it?",
+          "rule": "Para el precio: How much is it? (o How much does it cost?). En plural: How much are they? Respuesta: It's 10 euros.",
+          "pieces": [
+            {
+              "text": "How much",
+              "role": "fixed",
+              "hint": "¿cuánto"
+            },
+            {
+              "text": "is",
+              "role": "fixed",
+              "hint": "cuesta"
+            },
+            {
+              "text": "this jacket",
+              "role": "slot",
+              "hint": "esta chaqueta"
+            }
+          ],
+          "examples": [
+            {
+              "text": "How much is this jacket?",
+              "translation": "¿Cuánto cuesta esta chaqueta?",
+              "mirror": {
+                "say": "¿Cuánto cuesta esta chaqueta?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "cuesta",
+                    "why": "Para el precio basta con IS: how much is it?"
+                  },
+                  {
+                    "es": "esta chaqueta",
+                    "en": "this jacket",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much are the tickets?",
+              "translation": "¿Cuánto valen las entradas?",
+              "mirror": {
+                "say": "¿Cuánto valen las entradas?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "valen",
+                    "why": "En plural: how much ARE they?"
+                  },
+                  {
+                    "es": "las entradas",
+                    "en": "the tickets",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's ten euros.",
+              "translation": "Son diez euros."
+            },
+            {
+              "text": "How much does it cost?",
+              "translation": "¿Cuánto cuesta?"
+            }
+          ],
+          "pitfalls": [
+            "«How many is it?» está mal: el dinero se mide, how MUCH.",
+            "El precio va con IT IS: it's ten euros."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una HUCHA pregunta: HOW MUCH? y escupe MONEDAS.",
+            "emoji": "🐷"
+          }
+        },
+        {
+          "key": "coin",
+          "type": "term",
+          "text": "coin",
+          "meaning": "moneda",
+          "pronunciation": "KÓIN",
+          "examples": [
+            {
+              "text": "I need coins for the machine.",
+              "translation": "Necesito monedas para la máquina.",
+              "mirror": {
+                "say": "Necesito monedas para la máquina",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "monedas",
+                    "en": "coins",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para la máquina",
+                    "en": "for the machine",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A two-euro coin.",
+              "translation": "Una moneda de dos euros."
+            }
+          ]
+        },
+        {
+          "key": "banknote",
+          "type": "term",
+          "text": "banknote",
+          "meaning": "billete (de dinero)",
+          "pronunciation": "BÁNKnout",
+          "examples": [
+            {
+              "text": "A fifty-euro banknote.",
+              "translation": "Un billete de cincuenta euros.",
+              "mirror": {
+                "say": "Un billete de cincuenta euros",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "billete",
+                    "en": "banknote",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de cincuenta euros",
+                    "en": "fifty-euro",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I've only got banknotes.",
+              "translation": "Solo llevo billetes."
+            }
+          ],
+          "notes": "También se dice note; en EE. UU., bill."
+        },
+        {
+          "key": "cash-machine",
+          "type": "term",
+          "text": "cash machine",
+          "meaning": "cajero automático",
+          "pronunciation": "KASH maSHÍN",
+          "examples": [
+            {
+              "text": "Is there a cash machine near here?",
+              "translation": "¿Hay un cajero por aquí?",
+              "mirror": {
+                "say": "¿Hay un cajero por aquí?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un cajero",
+                    "en": "a cash machine",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cerca de aquí",
+                    "en": "near here",
+                    "role": "word",
+                    "from": "por aquí"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The cash machine kept my card.",
+              "translation": "El cajero se ha tragado la tarjeta."
+            }
+          ],
+          "notes": "También se dice ATM."
+        },
+        {
+          "key": "loan",
+          "type": "term",
+          "text": "loan",
+          "meaning": "préstamo",
+          "pronunciation": "LÓUN",
+          "examples": [
+            {
+              "text": "I asked the bank for a loan.",
+              "translation": "Pedí un préstamo al banco.",
+              "mirror": {
+                "say": "Pedí un préstamo al banco",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pedí",
+                    "en": "asked",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por un préstamo",
+                    "en": "for a loan",
+                    "role": "word",
+                    "from": "un préstamo"
+                  },
+                  {
+                    "es": "el banco",
+                    "en": "the bank",
+                    "role": "word",
+                    "from": "al banco",
+                    "why": "Pedir algo A alguien: ask someone FOR something."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A student loan.",
+              "translation": "Un préstamo de estudios."
+            }
+          ]
+        },
+        {
+          "key": "tax",
+          "type": "term",
+          "text": "tax",
+          "meaning": "impuesto",
+          "pronunciation": "TAKS",
+          "examples": [
+            {
+              "text": "Is tax included?",
+              "translation": "¿Están incluidos los impuestos?",
+              "mirror": {
+                "say": "¿Están incluidos los impuestos?",
+                "pieces": [
+                  {
+                    "es": "Están",
+                    "en": "Is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "incluidos",
+                    "en": "included",
+                    "role": "word"
+                  },
+                  {
+                    "es": "impuestos",
+                    "en": "tax",
+                    "role": "word",
+                    "from": "los impuestos",
+                    "why": "En inglés va en singular y sin «the»: is tax included?"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "We pay a lot of tax.",
+              "translation": "Pagamos muchos impuestos."
+            }
+          ]
+        },
+        {
+          "key": "wallet",
+          "type": "term",
+          "text": "wallet",
+          "meaning": "cartera",
+          "pronunciation": "UÓlet",
+          "examples": [
+            {
+              "text": "I can't find my wallet.",
+              "translation": "No encuentro la cartera.",
+              "mirror": {
+                "say": "No encuentro la cartera",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "encontrar",
+                    "en": "find",
+                    "role": "verb",
+                    "from": "encuentro"
+                  },
+                  {
+                    "es": "MI cartera",
+                    "en": "my wallet",
+                    "role": "word",
+                    "from": "la cartera",
+                    "why": "En inglés la cartera es MÍA: my wallet."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A leather wallet.",
+              "translation": "Una cartera de piel."
+            }
+          ]
+        },
+        {
+          "key": "purse",
+          "type": "term",
+          "text": "purse",
+          "meaning": "monedero",
+          "pronunciation": "PERS",
+          "examples": [
+            {
+              "text": "My purse is in my bag.",
+              "translation": "El monedero está en el bolso.",
+              "mirror": {
+                "say": "El monedero está en el bolso",
+                "pieces": [
+                  {
+                    "es": "MI monedero",
+                    "en": "My purse",
+                    "role": "who",
+                    "from": "El monedero"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en MI bolso",
+                    "en": "in my bag",
+                    "role": "word",
+                    "from": "en el bolso"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A small purse.",
+              "translation": "Un monedero pequeño."
+            }
+          ],
+          "notes": "En EE. UU., purse es el bolso."
+        },
+        {
+          "key": "budget",
+          "type": "term",
+          "text": "budget",
+          "meaning": "presupuesto",
+          "pronunciation": "BÁyet",
+          "examples": [
+            {
+              "text": "What's your budget?",
+              "translation": "¿Cuál es tu presupuesto?",
+              "mirror": {
+                "say": "¿Cuál es tu presupuesto?",
+                "pieces": [
+                  {
+                    "es": "Cuál es",
+                    "en": "What's",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tu presupuesto",
+                    "en": "your budget",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We're on a tight budget.",
+              "translation": "Vamos justos de dinero."
+            }
+          ]
+        },
+        {
+          "key": "owe",
+          "type": "term",
+          "text": "owe",
+          "meaning": "deber (dinero)",
+          "pronunciation": "ÓU",
+          "examples": [
+            {
+              "text": "You owe me ten euros.",
+              "translation": "Me debes diez euros.",
+              "mirror": {
+                "say": "Me debes diez euros",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "debes",
+                    "en": "owe",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "diez euros",
+                    "en": "ten euros",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "How much do I owe you?",
+              "translation": "¿Cuánto te debo?"
+            }
+          ]
+        },
+        {
+          "key": "waste",
+          "type": "term",
+          "text": "waste",
+          "meaning": "malgastar; desperdicio",
+          "pronunciation": "UÉIST",
+          "examples": [
+            {
+              "text": "Don't waste money.",
+              "translation": "No malgastes el dinero.",
+              "mirror": {
+                "say": "No malgastes el dinero",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "malgastes",
+                    "en": "waste",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dinero",
+                    "en": "money",
+                    "role": "word",
+                    "from": "el dinero",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's a waste of time.",
+              "translation": "Es una pérdida de tiempo."
+            }
+          ]
+        },
+        {
+          "key": "bargain",
+          "type": "term",
+          "text": "bargain",
+          "meaning": "ganga, chollo",
+          "pronunciation": "BÁRguen",
+          "examples": [
+            {
+              "text": "It's a bargain!",
+              "translation": "¡Es un chollo!",
+              "mirror": {
+                "say": "¡Es un chollo!",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "una ganga",
+                    "en": "a bargain",
+                    "role": "word",
+                    "from": "un chollo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love a good bargain.",
+              "translation": "Me encantan los chollos."
+            }
+          ]
+        },
+        {
+          "key": "fee",
+          "type": "term",
+          "text": "fee",
+          "meaning": "tarifa, cuota",
+          "pronunciation": "FII",
+          "examples": [
+            {
+              "text": "Is there a fee?",
+              "translation": "¿Hay que pagar algo?",
+              "mirror": {
+                "say": "¿Hay que pagar algo?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una tarifa",
+                    "en": "a fee",
+                    "role": "word",
+                    "from": "que pagar algo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "University fees are high.",
+              "translation": "Las tasas de la universidad son altas."
+            }
+          ]
+        },
+        {
+          "key": "pocket-money",
+          "type": "term",
+          "text": "pocket money",
+          "meaning": "paga (semanal)",
+          "pronunciation": "PÓket mani",
+          "examples": [
+            {
+              "text": "I get pocket money every week.",
+              "translation": "Me dan la paga cada semana.",
+              "mirror": {
+                "say": "Me dan la paga cada semana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "recibo",
+                    "en": "get",
+                    "role": "verb",
+                    "from": "Me dan"
+                  },
+                  {
+                    "es": "dinero de bolsillo",
+                    "en": "pocket money",
+                    "role": "word",
+                    "from": "la paga"
+                  },
+                  {
+                    "es": "cada semana",
+                    "en": "every week",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She saves her pocket money.",
+              "translation": "Ahorra su paga."
+            }
+          ]
+        },
+        {
+          "key": "credit-card",
+          "type": "term",
+          "text": "credit card",
+          "meaning": "tarjeta de crédito",
+          "pronunciation": "KRÉdit kard",
+          "examples": [
+            {
+              "text": "Can I pay by credit card?",
+              "translation": "¿Puedo pagar con tarjeta?",
+              "mirror": {
+                "say": "¿Puedo pagar con tarjeta?",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pagar",
+                    "en": "pay",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por tarjeta de crédito",
+                    "en": "by credit card",
+                    "role": "word",
+                    "from": "con tarjeta",
+                    "why": "Pagar CON tarjeta es pay BY card."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My credit card was declined.",
+              "translation": "Me han rechazado la tarjeta."
+            }
+          ]
+        },
+        {
+          "key": "broke",
+          "type": "term",
+          "text": "broke",
+          "meaning": "sin blanca, pelado",
+          "pronunciation": "BRÓUK",
+          "examples": [
+            {
+              "text": "I can't go out, I'm broke.",
+              "translation": "No puedo salir, estoy sin blanca.",
+              "mirror": {
+                "say": "No puedo salir, estoy sin blanca",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No puedo"
+                  },
+                  {
+                    "es": "salir",
+                    "en": "go out",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "estoy"
+                  },
+                  {
+                    "es": "sin blanca",
+                    "en": "broke",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm always broke at the end of the month.",
+              "translation": "A final de mes siempre estoy pelado."
+            }
+          ],
+          "notes": "Es coloquial; también es el pasado de break."
+        }
+      ]
+    }
+  ]
+}

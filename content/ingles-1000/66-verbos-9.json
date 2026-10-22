@@ -1,0 +1,761 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "66-verbos-9",
+      "title": "Misión 66 · Verbos para resolver cosas",
+      "units": [
+        {
+          "key": "g-before-ing",
+          "type": "pattern",
+          "goal": "Antes de salir = BEFORE LEAVING",
+          "rule": "Detrás de before, after, without o by, el verbo va en -ING: before leaving, after eating, without saying goodbye.",
+          "pieces": [
+            {
+              "text": "before",
+              "role": "fixed",
+              "hint": "antes de"
+            },
+            {
+              "text": "leaving",
+              "role": "slot",
+              "hint": "salir"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Wash your hands before eating.",
+              "translation": "Lávate las manos antes de comer.",
+              "mirror": {
+                "say": "Lávate las manos antes de comer",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb",
+                    "from": "Lávate"
+                  },
+                  {
+                    "es": "TUS manos",
+                    "en": "your hands",
+                    "role": "word",
+                    "from": "las manos"
+                  },
+                  {
+                    "es": "antes de",
+                    "en": "before",
+                    "role": "word"
+                  },
+                  {
+                    "es": "com-IENDO",
+                    "en": "eating",
+                    "role": "verb",
+                    "from": "comer",
+                    "why": "Detrás de before, el verbo en -ING: eating."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He left without saying goodbye.",
+              "translation": "Se fue sin despedirse.",
+              "mirror": {
+                "say": "Se fue sin despedirse",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se fue",
+                    "en": "left",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sin",
+                    "en": "without",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dic-IENDO adiós",
+                    "en": "saying goodbye",
+                    "role": "verb",
+                    "from": "despedirse",
+                    "why": "Detrás de without, -ING: without saying goodbye."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "After finishing, call me.",
+              "translation": "Cuando acabes, llámame."
+            },
+            {
+              "text": "I learn by doing.",
+              "translation": "Aprendo haciendo."
+            }
+          ],
+          "pitfalls": [
+            "«Before to leave» está mal: before leaving.",
+            "En español va infinitivo (antes de salir); en inglés, -ING."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "BEFORE y AFTER solo dejan pasar verbos con -ING.",
+            "emoji": "🚪"
+          }
+        },
+        {
+          "key": "argue",
+          "type": "term",
+          "text": "argue",
+          "meaning": "discutir (pelearse)",
+          "pronunciation": "ÁRguiu",
+          "examples": [
+            {
+              "text": "My brothers always argue.",
+              "translation": "Mis hermanos siempre discuten.",
+              "mirror": {
+                "say": "Mis hermanos siempre discuten",
+                "pieces": [
+                  {
+                    "es": "Mis hermanos",
+                    "en": "My brothers",
+                    "role": "who"
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "discuten",
+                    "en": "argue",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't argue with me.",
+              "translation": "No discutas conmigo."
+            }
+          ]
+        },
+        {
+          "key": "apologise",
+          "type": "term",
+          "text": "apologise",
+          "meaning": "pedir perdón, disculparse",
+          "pronunciation": "aPÓloyais",
+          "examples": [
+            {
+              "text": "You should apologise.",
+              "translation": "Deberías pedir perdón.",
+              "mirror": {
+                "say": "Deberías pedir perdón",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "deberías",
+                    "en": "should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pedir perdón",
+                    "en": "apologise",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I apologise for the delay.",
+              "translation": "Disculpe el retraso."
+            }
+          ],
+          "notes": "En EE. UU. se escribe apologize."
+        },
+        {
+          "key": "complain",
+          "type": "term",
+          "text": "complain",
+          "meaning": "quejarse",
+          "pronunciation": "komPLÉIN",
+          "examples": [
+            {
+              "text": "Stop complaining!",
+              "translation": "¡Deja de quejarte!",
+              "mirror": {
+                "say": "¡Deja de quejarte!",
+                "pieces": [
+                  {
+                    "es": "Deja de",
+                    "en": "Stop",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "quej-ÁNDOTE",
+                    "en": "complaining",
+                    "role": "verb",
+                    "from": "quejarte",
+                    "why": "Detrás de stop, -ING: stop complaining."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want to complain about the noise.",
+              "translation": "Quiero quejarme del ruido."
+            }
+          ]
+        },
+        {
+          "key": "describe",
+          "type": "term",
+          "text": "describe",
+          "meaning": "describir",
+          "pronunciation": "disKRÁIB",
+          "examples": [
+            {
+              "text": "Can you describe him?",
+              "translation": "¿Puedes describirlo?",
+              "mirror": {
+                "say": "¿Puedes describirlo?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "describir",
+                    "en": "describe",
+                    "role": "verb",
+                    "from": "describirlo",
+                    "why": "Lo pegado se separa: describe HIM."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "him",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Describe your house.",
+              "translation": "Describe tu casa."
+            }
+          ]
+        },
+        {
+          "key": "discuss",
+          "type": "term",
+          "text": "discuss",
+          "meaning": "hablar de, comentar",
+          "pronunciation": "disKÁS",
+          "examples": [
+            {
+              "text": "Let's discuss it tomorrow.",
+              "translation": "Lo hablamos mañana.",
+              "mirror": {
+                "say": "Lo hablamos mañana",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hablemos de",
+                    "en": "Let's discuss",
+                    "role": "verb",
+                    "from": "hablamos",
+                    "why": "Discuss va sin «about»: discuss it."
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "We discussed the project.",
+              "translation": "Hablamos del proyecto."
+            }
+          ],
+          "notes": "Discuss es hablar de algo; pelearse es argue."
+        },
+        {
+          "key": "expect",
+          "type": "term",
+          "text": "expect",
+          "meaning": "esperar (que pase algo)",
+          "pronunciation": "eksPÉKT",
+          "examples": [
+            {
+              "text": "I didn't expect that.",
+              "translation": "No me lo esperaba.",
+              "mirror": {
+                "say": "No me lo esperaba",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "didn't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "esperar",
+                    "en": "expect",
+                    "role": "verb",
+                    "from": "esperaba",
+                    "why": "Con DIDN'T el verbo va tal cual: expect."
+                  },
+                  {
+                    "es": "eso",
+                    "en": "that",
+                    "role": "word",
+                    "from": "lo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm expecting a call.",
+              "translation": "Estoy esperando una llamada."
+            }
+          ],
+          "notes": "Esperar a alguien: wait. Que pase algo: expect. Desear: hope."
+        },
+        {
+          "key": "include",
+          "type": "term",
+          "text": "include",
+          "meaning": "incluir",
+          "pronunciation": "inKLÚUD",
+          "examples": [
+            {
+              "text": "Breakfast is included.",
+              "translation": "El desayuno está incluido.",
+              "mirror": {
+                "say": "El desayuno está incluido",
+                "pieces": [
+                  {
+                    "es": "desayuno",
+                    "en": "Breakfast",
+                    "role": "who",
+                    "from": "El desayuno",
+                    "why": "Las comidas van sin «the»."
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "incluido",
+                    "en": "included",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The price includes tax.",
+              "translation": "El precio incluye impuestos."
+            }
+          ]
+        },
+        {
+          "key": "increase",
+          "type": "term",
+          "text": "increase",
+          "meaning": "aumentar; subida",
+          "pronunciation": "inKRÍIS",
+          "examples": [
+            {
+              "text": "Prices have increased.",
+              "translation": "Los precios han subido.",
+              "mirror": {
+                "say": "Los precios han subido",
+                "pieces": [
+                  {
+                    "es": "precios",
+                    "en": "Prices",
+                    "role": "who",
+                    "from": "Los precios",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "han",
+                    "en": "have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aumentado",
+                    "en": "increased",
+                    "role": "verb",
+                    "from": "subido"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A price increase.",
+              "translation": "Una subida de precios."
+            }
+          ]
+        },
+        {
+          "key": "measure",
+          "type": "term",
+          "text": "measure",
+          "meaning": "medir",
+          "pronunciation": "MÉYer",
+          "examples": [
+            {
+              "text": "Measure the window.",
+              "translation": "Mide la ventana.",
+              "mirror": {
+                "say": "Mide la ventana",
+                "pieces": [
+                  {
+                    "es": "Mide",
+                    "en": "Measure",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la ventana",
+                    "en": "the window",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A tape measure.",
+              "translation": "Una cinta métrica."
+            }
+          ]
+        },
+        {
+          "key": "prepare",
+          "type": "term",
+          "text": "prepare",
+          "meaning": "preparar",
+          "pronunciation": "priPÉR",
+          "examples": [
+            {
+              "text": "I'm preparing for the exam.",
+              "translation": "Me estoy preparando para el examen.",
+              "mirror": {
+                "say": "Me estoy preparando para el examen",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Me estoy"
+                  },
+                  {
+                    "es": "preparando",
+                    "en": "preparing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para el examen",
+                    "en": "for the exam",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Prepare the salad.",
+              "translation": "Prepara la ensalada."
+            }
+          ]
+        },
+        {
+          "key": "protect",
+          "type": "term",
+          "text": "protect",
+          "meaning": "proteger",
+          "pronunciation": "proTÉKT",
+          "examples": [
+            {
+              "text": "Sun cream protects your skin.",
+              "translation": "La crema solar protege la piel.",
+              "mirror": {
+                "say": "La crema solar protege la piel",
+                "pieces": [
+                  {
+                    "es": "crema solar",
+                    "en": "Sun cream",
+                    "role": "who",
+                    "from": "La crema solar",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "protege",
+                    "en": "protects",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU piel",
+                    "en": "your skin",
+                    "role": "word",
+                    "from": "la piel"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Protect your password.",
+              "translation": "Protege tu contraseña."
+            }
+          ]
+        },
+        {
+          "key": "provide",
+          "type": "term",
+          "text": "provide",
+          "meaning": "proporcionar, dar",
+          "pronunciation": "proVÁID",
+          "examples": [
+            {
+              "text": "We provide free wifi.",
+              "translation": "Ofrecemos wifi gratis.",
+              "mirror": {
+                "say": "Ofrecemos wifi gratis",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "proporcionamos",
+                    "en": "provide",
+                    "role": "verb",
+                    "from": "Ofrecemos"
+                  },
+                  {
+                    "es": "wifi",
+                    "en": "wifi",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gratis",
+                    "en": "free",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Food is provided.",
+              "translation": "La comida está incluida."
+            }
+          ]
+        },
+        {
+          "key": "recommend",
+          "type": "term",
+          "text": "recommend",
+          "meaning": "recomendar",
+          "pronunciation": "rekoMÉND",
+          "examples": [
+            {
+              "text": "Can you recommend a restaurant?",
+              "translation": "¿Me recomiendas un restaurante?",
+              "mirror": {
+                "say": "¿Me recomiendas un restaurante?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Me"
+                  },
+                  {
+                    "es": "recomendar",
+                    "en": "recommend",
+                    "role": "verb",
+                    "from": "recomiendas"
+                  },
+                  {
+                    "es": "un restaurante",
+                    "en": "a restaurant",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I recommend the fish.",
+              "translation": "Le recomiendo el pescado."
+            }
+          ]
+        },
+        {
+          "key": "reduce",
+          "type": "term",
+          "text": "reduce",
+          "meaning": "reducir",
+          "pronunciation": "riDIÚS",
+          "examples": [
+            {
+              "text": "Reduce the speed.",
+              "translation": "Reduce la velocidad.",
+              "mirror": {
+                "say": "Reduce la velocidad",
+                "pieces": [
+                  {
+                    "es": "Reduce",
+                    "en": "Reduce",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la velocidad",
+                    "en": "the speed",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Reduce, reuse, recycle.",
+              "translation": "Reduce, reutiliza, recicla."
+            }
+          ]
+        },
+        {
+          "key": "replace",
+          "type": "term",
+          "text": "replace",
+          "meaning": "sustituir, cambiar",
+          "pronunciation": "riPLÉIS",
+          "examples": [
+            {
+              "text": "We need to replace the battery.",
+              "translation": "Hay que cambiar la batería.",
+              "mirror": {
+                "say": "Hay que cambiar la batería",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb",
+                    "from": "Hay que",
+                    "why": "«Hay que» es «necesitamos»: we need to."
+                  },
+                  {
+                    "es": "sustituir",
+                    "en": "to replace",
+                    "role": "verb",
+                    "from": "cambiar"
+                  },
+                  {
+                    "es": "la batería",
+                    "en": "the battery",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Nobody can replace you.",
+              "translation": "Nadie puede sustituirte."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
