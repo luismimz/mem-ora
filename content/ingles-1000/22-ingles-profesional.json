@@ -1,0 +1,793 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "22-ingles-profesional",
+      "title": "Misión 22 · Inglés profesional (correos y CV)",
+      "units": [
+        {
+          "key": "g-passive",
+          "type": "pattern",
+          "goal": "La pasiva: «se hace» = IS DONE",
+          "rule": "«Se prueba», «se escribió»: el «se» se convierte en IS o WAS y el verbo va en participio. The app is tested. It was written in Java.",
+          "pieces": [
+            {
+              "text": "The app",
+              "role": "fixed",
+              "hint": "La aplicación"
+            },
+            {
+              "text": "is",
+              "role": "fixed",
+              "hint": "se → es"
+            },
+            {
+              "text": "tested",
+              "role": "slot",
+              "hint": "probada"
+            }
+          ],
+          "examples": [
+            {
+              "text": "The app is tested every day.",
+              "translation": "La aplicación se prueba todos los días.",
+              "mirror": {
+                "say": "La aplicación se prueba todos los días",
+                "pieces": [
+                  {
+                    "es": "La aplicación",
+                    "en": "The app",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "«Se prueba» se dice «es probada»: IS + participio."
+                  },
+                  {
+                    "es": "probada",
+                    "en": "tested",
+                    "role": "verb",
+                    "from": "prueba"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This program was written in Java.",
+              "translation": "Este programa se escribió en Java.",
+              "mirror": {
+                "say": "Este programa se escribió en Java",
+                "pieces": [
+                  {
+                    "es": "Este programa",
+                    "en": "This program",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "En pasado, el «se» es WAS: was written."
+                  },
+                  {
+                    "es": "escrito",
+                    "en": "written",
+                    "role": "verb",
+                    "from": "escribió"
+                  },
+                  {
+                    "es": "en Java",
+                    "en": "in Java",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bug was found by Ana.",
+              "translation": "Ana encontró el fallo."
+            },
+            {
+              "text": "English is spoken here.",
+              "translation": "Aquí se habla inglés."
+            }
+          ],
+          "pitfalls": [
+            "«The app is test» está mal: detrás de is / was va el participio (tested, written).",
+            "El «se» no se traduce: se convierte en IS o WAS."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El objeto RECIBE la acción: IS + participio.",
+            "emoji": "📦"
+          }
+        },
+        {
+          "key": "g-formal-email",
+          "type": "pattern",
+          "goal": "Escribir un correo formal",
+          "rule": "Empieza con Dear + nombre, di para qué escribes (I'm writing to…), pide con COULD y despídete con Best regards.",
+          "pieces": [
+            {
+              "text": "I'm writing to",
+              "role": "fixed",
+              "hint": "Te escribo para"
+            },
+            {
+              "text": "ask about the job",
+              "role": "slot",
+              "hint": "preguntar por el puesto"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'm writing to ask about the job.",
+              "translation": "Te escribo para preguntar por el puesto.",
+              "mirror": {
+                "say": "Te escribo para preguntar por el puesto",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy escribiendo",
+                    "en": "I'm writing",
+                    "role": "verb",
+                    "from": "te escribo",
+                    "why": "En un correo se dice «estoy escribiendo»: I'm writing to…"
+                  },
+                  {
+                    "es": "para",
+                    "en": "to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "preguntar",
+                    "en": "ask",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre el puesto",
+                    "en": "about the job",
+                    "role": "word",
+                    "from": "por el puesto"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Could you send me the report?",
+              "translation": "¿Podrías enviarme el informe?",
+              "mirror": {
+                "say": "¿Podrías enviarme el informe?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enviar",
+                    "en": "send",
+                    "role": "verb",
+                    "from": "enviarme",
+                    "why": "Lo pegado se separa: send ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el informe",
+                    "en": "the report",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Dear Ms Smith,",
+              "translation": "Estimada Sra. Smith:"
+            },
+            {
+              "text": "Best regards, Luis",
+              "translation": "Un saludo, Luis"
+            }
+          ],
+          "pitfalls": [
+            "En un correo, «Dear» no es cariñoso: es «Estimado/a».",
+            "Formal: Dear Mr / Ms + apellido; nunca «Hello Sir»."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El CARTERO solo entrega correos que empiezan con DEAR.",
+            "emoji": "✉️"
+          }
+        },
+        {
+          "key": "report",
+          "type": "term",
+          "text": "report",
+          "meaning": "informe",
+          "pronunciation": "riPÓRT",
+          "examples": [
+            {
+              "text": "I need the report by Friday.",
+              "translation": "Necesito el informe para el viernes.",
+              "mirror": {
+                "say": "Necesito el informe para el viernes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el informe",
+                    "en": "the report",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para el viernes",
+                    "en": "by Friday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She wrote a long report.",
+              "translation": "Escribió un informe largo."
+            }
+          ]
+        },
+        {
+          "key": "deadline",
+          "type": "term",
+          "text": "deadline",
+          "meaning": "fecha límite, plazo",
+          "pronunciation": "DÉDlain",
+          "examples": [
+            {
+              "text": "The deadline is tomorrow.",
+              "translation": "El plazo acaba mañana.",
+              "mirror": {
+                "say": "El plazo acaba mañana",
+                "pieces": [
+                  {
+                    "es": "El plazo",
+                    "en": "The deadline",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "acaba",
+                    "why": "En inglés el plazo «es» mañana: the deadline IS tomorrow."
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We missed the deadline.",
+              "translation": "No llegamos a tiempo."
+            }
+          ]
+        },
+        {
+          "key": "skill",
+          "type": "term",
+          "text": "skill",
+          "meaning": "habilidad, destreza",
+          "pronunciation": "SKIL",
+          "examples": [
+            {
+              "text": "Teamwork is an important skill.",
+              "translation": "Trabajar en equipo es una habilidad importante.",
+              "mirror": {
+                "say": "Trabajar en equipo es una habilidad importante",
+                "pieces": [
+                  {
+                    "es": "Trabajar en equipo",
+                    "en": "Teamwork",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "an",
+                    "role": "word"
+                  },
+                  {
+                    "es": "habilidad",
+                    "en": "skill",
+                    "role": "word"
+                  },
+                  {
+                    "es": "importante",
+                    "en": "important",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "What skills do you have?",
+              "translation": "¿Qué habilidades tienes?"
+            }
+          ]
+        },
+        {
+          "key": "experience",
+          "type": "term",
+          "text": "experience",
+          "meaning": "experiencia",
+          "pronunciation": "ekSPÍriens",
+          "examples": [
+            {
+              "text": "I have three years of experience.",
+              "translation": "Tengo tres años de experiencia.",
+              "mirror": {
+                "say": "Tengo tres años de experiencia",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres años de experiencia",
+                    "en": "three years of experience",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you have experience with Java?",
+              "translation": "¿Tienes experiencia con Java?"
+            }
+          ]
+        },
+        {
+          "key": "apply",
+          "type": "term",
+          "text": "apply",
+          "meaning": "solicitar (un puesto), presentarse",
+          "pronunciation": "aPLÁI",
+          "examples": [
+            {
+              "text": "I want to apply for this job.",
+              "translation": "Quiero solicitar este puesto.",
+              "mirror": {
+                "say": "Quiero solicitar este puesto",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "optar a",
+                    "en": "to apply for",
+                    "role": "verb",
+                    "from": "solicitar",
+                    "why": "Solicitar un puesto es APPLY FOR: apply for this job."
+                  },
+                  {
+                    "es": "este puesto",
+                    "en": "this job",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She applied for a job in London.",
+              "translation": "Solicitó un trabajo en Londres."
+            }
+          ]
+        },
+        {
+          "key": "degree",
+          "type": "term",
+          "text": "degree",
+          "meaning": "título universitario, carrera",
+          "pronunciation": "diGRÍI",
+          "examples": [
+            {
+              "text": "I have a degree in Computer Science.",
+              "translation": "Tengo un título en Informática.",
+              "mirror": {
+                "say": "Tengo un título en Informática",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un título",
+                    "en": "a degree",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en Informática",
+                    "en": "in Computer Science",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is studying for a degree.",
+              "translation": "Está estudiando una carrera."
+            }
+          ]
+        },
+        {
+          "key": "attach",
+          "type": "term",
+          "text": "attach",
+          "meaning": "adjuntar",
+          "pronunciation": "aTÁCH",
+          "examples": [
+            {
+              "text": "I attach my CV.",
+              "translation": "Adjunto mi currículum.",
+              "mirror": {
+                "say": "Adjunto mi currículum",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "adjunto",
+                    "en": "attach",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mi currículum",
+                    "en": "my CV",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Please find the file attached.",
+              "translation": "Te envío el archivo adjunto."
+            }
+          ]
+        },
+        {
+          "key": "reply",
+          "type": "term",
+          "text": "reply",
+          "meaning": "respuesta; responder",
+          "pronunciation": "riPLÁI",
+          "examples": [
+            {
+              "text": "Thank you for your reply.",
+              "translation": "Gracias por tu respuesta.",
+              "mirror": {
+                "say": "Gracias por tu respuesta",
+                "pieces": [
+                  {
+                    "es": "Gracias",
+                    "en": "Thank you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por tu respuesta",
+                    "en": "for your reply",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Please reply as soon as possible.",
+              "translation": "Responde lo antes posible, por favor."
+            }
+          ]
+        },
+        {
+          "key": "available",
+          "type": "term",
+          "text": "available",
+          "meaning": "disponible, libre",
+          "pronunciation": "aVÉIlabol",
+          "examples": [
+            {
+              "text": "I'm available from Monday.",
+              "translation": "Estoy disponible desde el lunes.",
+              "mirror": {
+                "say": "Estoy disponible desde el lunes",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "disponible",
+                    "en": "available",
+                    "role": "word"
+                  },
+                  {
+                    "es": "desde el lunes",
+                    "en": "from Monday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Is the room available?",
+              "translation": "¿Está libre la sala?"
+            }
+          ]
+        },
+        {
+          "key": "improve",
+          "type": "term",
+          "text": "improve",
+          "meaning": "mejorar",
+          "pronunciation": "imPRÚUV",
+          "examples": [
+            {
+              "text": "I want to improve my English.",
+              "translation": "Quiero mejorar mi inglés.",
+              "mirror": {
+                "say": "Quiero mejorar mi inglés",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mejorar",
+                    "en": "to improve",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mi inglés",
+                    "en": "my English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Your English has improved a lot.",
+              "translation": "Tu inglés ha mejorado mucho."
+            }
+          ]
+        },
+        {
+          "key": "develop",
+          "type": "term",
+          "text": "develop",
+          "meaning": "desarrollar",
+          "pronunciation": "diVÉlop",
+          "examples": [
+            {
+              "text": "We develop mobile apps.",
+              "translation": "Desarrollamos aplicaciones móviles.",
+              "mirror": {
+                "say": "Desarrollamos aplicaciones móviles",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "desarrollamos",
+                    "en": "develop",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aplicaciones",
+                    "en": "apps",
+                    "role": "word"
+                  },
+                  {
+                    "es": "móviles",
+                    "en": "mobile",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I'm developing a website.",
+              "translation": "Estoy desarrollando una web."
+            }
+          ]
+        },
+        {
+          "key": "manage",
+          "type": "term",
+          "text": "manage",
+          "meaning": "dirigir, gestionar; arreglárselas",
+          "pronunciation": "MÁnich",
+          "examples": [
+            {
+              "text": "She manages a team of ten people.",
+              "translation": "Dirige un equipo de diez personas.",
+              "mirror": {
+                "say": "Dirige un equipo de diez personas",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dirige",
+                    "en": "manages",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un equipo de diez personas",
+                    "en": "a team of ten people",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you manage?",
+              "translation": "¿Puedes con ello?"
+            }
+          ]
+        },
+        {
+          "key": "schedule",
+          "type": "term",
+          "text": "schedule",
+          "meaning": "agenda, horario",
+          "pronunciation": "SKÉdyul",
+          "examples": [
+            {
+              "text": "The schedule is very busy.",
+              "translation": "La agenda está muy apretada.",
+              "mirror": {
+                "say": "La agenda está muy apretada",
+                "pieces": [
+                  {
+                    "es": "La agenda",
+                    "en": "The schedule",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy apretada",
+                    "en": "very busy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are behind schedule.",
+              "translation": "Vamos con retraso."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
