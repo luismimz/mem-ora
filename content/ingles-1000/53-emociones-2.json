@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "53-emociones-2",
+      "title": "Misión 53 · Cómo me siento",
+      "units": [
+        {
+          "key": "g-makes-me",
+          "type": "pattern",
+          "goal": "Me pone nervioso = IT MAKES ME nervous",
+          "rule": "Lo que te cambia el ánimo: algo + MAKES ME + adjetivo o verbo. It makes me happy. You make me laugh.",
+          "pieces": [
+            {
+              "text": "It",
+              "role": "fixed",
+              "hint": "eso"
+            },
+            {
+              "text": "makes me",
+              "role": "fixed",
+              "hint": "me pone"
+            },
+            {
+              "text": "nervous",
+              "role": "slot",
+              "hint": "nervioso"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Exams make me nervous.",
+              "translation": "Los exámenes me ponen nervioso.",
+              "mirror": {
+                "say": "Los exámenes me ponen nervioso",
+                "pieces": [
+                  {
+                    "es": "exámenes",
+                    "en": "Exams",
+                    "role": "who",
+                    "from": "Los exámenes",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ponen",
+                    "en": "make",
+                    "role": "verb",
+                    "from": "ponen",
+                    "why": "Poner nervioso es MAKE nervous."
+                  },
+                  {
+                    "es": "nervioso",
+                    "en": "nervous",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "You make me laugh.",
+              "translation": "Me haces reír.",
+              "mirror": {
+                "say": "Me haces reír",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "haces",
+                    "en": "make",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "reír",
+                    "en": "laugh",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Rain makes me sad.",
+              "translation": "La lluvia me pone triste."
+            },
+            {
+              "text": "It makes me so angry!",
+              "translation": "¡Me da muchísima rabia!"
+            }
+          ],
+          "pitfalls": [
+            "«It makes me to laugh» está mal: sin to (makes me laugh).",
+            "«Me pone nervioso» no es put: it makes me nervous."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Cada EXAMEN aprieta un BOTÓN: MAKES ME nervous.",
+            "emoji": "😬"
+          }
+        },
+        {
+          "key": "jealous",
+          "type": "term",
+          "text": "jealous",
+          "meaning": "celoso, envidioso",
+          "pronunciation": "YÉlos",
+          "examples": [
+            {
+              "text": "Don't be jealous.",
+              "translation": "No seas celoso.",
+              "mirror": {
+                "say": "No seas celoso",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "seas",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "celoso",
+                    "en": "jealous",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is jealous of her sister.",
+              "translation": "Tiene celos de su hermana."
+            }
+          ]
+        },
+        {
+          "key": "embarrassed",
+          "type": "term",
+          "text": "embarrassed",
+          "meaning": "avergonzado, con vergüenza",
+          "pronunciation": "emBÁrast",
+          "examples": [
+            {
+              "text": "I was so embarrassed!",
+              "translation": "¡Qué vergüenza pasé!",
+              "mirror": {
+                "say": "¡Qué vergüenza pasé!",
+                "pieces": [
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word",
+                    "from": "Qué"
+                  },
+                  {
+                    "es": "avergonzado",
+                    "en": "embarrassed",
+                    "role": "word",
+                    "from": "vergüenza",
+                    "why": "Pasar vergüenza es «estar avergonzado»: be embarrassed."
+                  },
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper",
+                    "from": "pasé"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Pregnant, not embarrassed!",
+              "translation": "¡Embarazada, no avergonzada!"
+            }
+          ],
+          "notes": "Falso amigo: embarazada es pregnant."
+        },
+        {
+          "key": "relaxed",
+          "type": "term",
+          "text": "relaxed",
+          "meaning": "relajado",
+          "pronunciation": "riLÁKST",
+          "examples": [
+            {
+              "text": "I feel relaxed on holiday.",
+              "translation": "De vacaciones estoy relajado.",
+              "mirror": {
+                "say": "De vacaciones estoy relajado",
+                "pieces": [
+                  {
+                    "es": "de vacaciones",
+                    "en": "on holiday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me siento",
+                    "en": "feel",
+                    "role": "verb",
+                    "from": "estoy"
+                  },
+                  {
+                    "es": "relajado",
+                    "en": "relaxed",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A relaxed atmosphere.",
+              "translation": "Un ambiente relajado."
+            }
+          ]
+        },
+        {
+          "key": "grateful",
+          "type": "term",
+          "text": "grateful",
+          "meaning": "agradecido",
+          "pronunciation": "GRÉITful",
+          "examples": [
+            {
+              "text": "I'm very grateful.",
+              "translation": "Estoy muy agradecido.",
+              "mirror": {
+                "say": "Estoy muy agradecido",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy agradecido",
+                    "en": "very grateful",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are grateful for your help.",
+              "translation": "Te agradecemos la ayuda."
+            }
+          ]
+        },
+        {
+          "key": "disappointed",
+          "type": "term",
+          "text": "disappointed",
+          "meaning": "decepcionado",
+          "pronunciation": "disaPÓINted",
+          "examples": [
+            {
+              "text": "I'm disappointed with the result.",
+              "translation": "Estoy decepcionado con el resultado.",
+              "mirror": {
+                "say": "Estoy decepcionado con el resultado",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "decepcionado",
+                    "en": "disappointed",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con el resultado",
+                    "en": "with the result",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't be disappointed.",
+              "translation": "No te desanimes."
+            }
+          ]
+        },
+        {
+          "key": "confident",
+          "type": "term",
+          "text": "confident",
+          "meaning": "seguro de sí mismo",
+          "pronunciation": "KÓNfident",
+          "examples": [
+            {
+              "text": "She is very confident.",
+              "translation": "Tiene mucha seguridad.",
+              "mirror": {
+                "say": "Tiene mucha seguridad",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "Tiene"
+                  },
+                  {
+                    "es": "muy segura",
+                    "en": "very confident",
+                    "role": "word",
+                    "from": "mucha seguridad",
+                    "why": "Tener seguridad es «ser seguro»: be confident."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm confident we can win.",
+              "translation": "Confío en que podemos ganar."
+            }
+          ]
+        },
+        {
+          "key": "annoyed",
+          "type": "term",
+          "text": "annoyed",
+          "meaning": "molesto, mosqueado",
+          "pronunciation": "aNÓID",
+          "examples": [
+            {
+              "text": "I'm a bit annoyed.",
+              "translation": "Estoy un poco molesto.",
+              "mirror": {
+                "say": "Estoy un poco molesto",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un poco",
+                    "en": "a bit",
+                    "role": "word"
+                  },
+                  {
+                    "es": "molesto",
+                    "en": "annoyed",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The noise annoys me.",
+              "translation": "El ruido me molesta."
+            }
+          ]
+        },
+        {
+          "key": "amazed",
+          "type": "term",
+          "text": "amazed",
+          "meaning": "asombrado",
+          "pronunciation": "aMÉIST",
+          "examples": [
+            {
+              "text": "I was amazed by the view.",
+              "translation": "Me quedé asombrado con las vistas.",
+              "mirror": {
+                "say": "Me quedé asombrado con las vistas",
+                "pieces": [
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper",
+                    "from": "Me quedé"
+                  },
+                  {
+                    "es": "asombrado",
+                    "en": "amazed",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por la vista",
+                    "en": "by the view",
+                    "role": "word",
+                    "from": "con las vistas"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You'll be amazed.",
+              "translation": "Te vas a quedar alucinado."
+            }
+          ]
+        },
+        {
+          "key": "stressed",
+          "type": "term",
+          "text": "stressed",
+          "meaning": "estresado",
+          "pronunciation": "STREST",
+          "examples": [
+            {
+              "text": "I'm stressed about work.",
+              "translation": "Estoy estresado por el trabajo.",
+              "mirror": {
+                "say": "Estoy estresado por el trabajo",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estresado",
+                    "en": "stressed",
+                    "role": "word"
+                  },
+                  {
+                    "es": "sobre trabajo",
+                    "en": "about work",
+                    "role": "word",
+                    "from": "por el trabajo",
+                    "why": "Estresado POR algo es stressed ABOUT, y sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm stressed out.",
+              "translation": "Estoy muy agobiado."
+            }
+          ]
+        },
+        {
+          "key": "hopeful",
+          "type": "term",
+          "text": "hopeful",
+          "meaning": "esperanzado, optimista",
+          "pronunciation": "JÓUPful",
+          "examples": [
+            {
+              "text": "I'm hopeful about the exam.",
+              "translation": "Tengo esperanzas con el examen.",
+              "mirror": {
+                "say": "Tengo esperanzas con el examen",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Tengo"
+                  },
+                  {
+                    "es": "esperanzado",
+                    "en": "hopeful",
+                    "role": "word",
+                    "from": "esperanzas"
+                  },
+                  {
+                    "es": "sobre el examen",
+                    "en": "about the exam",
+                    "role": "word",
+                    "from": "con el examen"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A hopeful sign.",
+              "translation": "Una buena señal."
+            }
+          ]
+        },
+        {
+          "key": "curious",
+          "type": "term",
+          "text": "curious",
+          "meaning": "curioso",
+          "pronunciation": "KIÚrios",
+          "examples": [
+            {
+              "text": "I'm curious about your country.",
+              "translation": "Tengo curiosidad por tu país.",
+              "mirror": {
+                "say": "Tengo curiosidad por tu país",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Tengo"
+                  },
+                  {
+                    "es": "curioso",
+                    "en": "curious",
+                    "role": "word",
+                    "from": "curiosidad",
+                    "why": "Tener curiosidad es «estar curioso»: I'm curious."
+                  },
+                  {
+                    "es": "sobre tu país",
+                    "en": "about your country",
+                    "role": "word",
+                    "from": "por tu país"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cats are curious.",
+              "translation": "Los gatos son curiosos."
+            }
+          ]
+        },
+        {
+          "key": "fed-up",
+          "type": "term",
+          "text": "fed up",
+          "meaning": "harto",
+          "pronunciation": "fed AP",
+          "examples": [
+            {
+              "text": "I'm fed up with the rain.",
+              "translation": "Estoy harto de la lluvia.",
+              "mirror": {
+                "say": "Estoy harto de la lluvia",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "harto",
+                    "en": "fed up",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con la lluvia",
+                    "en": "with the rain",
+                    "role": "word",
+                    "from": "de la lluvia",
+                    "why": "Harto DE algo es fed up WITH."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is fed up.",
+              "translation": "Está harta."
+            }
+          ]
+        },
+        {
+          "key": "homesick",
+          "type": "term",
+          "text": "homesick",
+          "meaning": "con morriña (de casa)",
+          "pronunciation": "JÓUMsik",
+          "examples": [
+            {
+              "text": "I feel homesick.",
+              "translation": "Echo de menos mi casa.",
+              "mirror": {
+                "say": "Echo de menos mi casa",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me siento",
+                    "en": "feel",
+                    "role": "verb",
+                    "from": "Echo de menos"
+                  },
+                  {
+                    "es": "enfermo de casa",
+                    "en": "homesick",
+                    "role": "word",
+                    "from": "mi casa",
+                    "why": "Echar de menos tu casa es una sola palabra: homesick."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Students often get homesick.",
+              "translation": "Los estudiantes suelen tener morriña."
+            }
+          ]
+        },
+        {
+          "key": "thrilled",
+          "type": "term",
+          "text": "thrilled",
+          "meaning": "encantadísimo, emocionadísimo",
+          "pronunciation": "ZRILD",
+          "examples": [
+            {
+              "text": "I'm thrilled with my new job.",
+              "translation": "Estoy encantadísimo con mi trabajo nuevo.",
+              "mirror": {
+                "say": "Estoy encantadísimo con mi trabajo nuevo",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "encantadísimo",
+                    "en": "thrilled",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con mi",
+                    "en": "with my",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "job",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nuevo",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She was thrilled.",
+              "translation": "Estaba emocionadísima."
+            }
+          ]
+        },
+        {
+          "key": "lucky",
+          "type": "term",
+          "text": "lucky",
+          "meaning": "afortunado; con suerte",
+          "pronunciation": "LÁKi",
+          "examples": [
+            {
+              "text": "You're so lucky!",
+              "translation": "¡Qué suerte tienes!",
+              "mirror": {
+                "say": "¡Qué suerte tienes!",
+                "pieces": [
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word",
+                    "from": "Qué"
+                  },
+                  {
+                    "es": "afortunado",
+                    "en": "lucky",
+                    "role": "word",
+                    "from": "suerte",
+                    "why": "Tener suerte es «ser afortunado»: be lucky."
+                  },
+                  {
+                    "es": "(TÚ) eres",
+                    "en": "You're",
+                    "role": "helper",
+                    "from": "tienes"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Good luck!",
+              "translation": "¡Buena suerte!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

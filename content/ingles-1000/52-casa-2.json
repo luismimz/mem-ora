@@ -1,0 +1,715 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "52-casa-2",
+      "title": "Misión 52 · La casa por dentro",
+      "units": [
+        {
+          "key": "g-some-any",
+          "type": "pattern",
+          "goal": "SOME o ANY: ¿hay o no hay?",
+          "rule": "SOME en frases normales y al ofrecer (I've got some bread). ANY al preguntar o negar (Is there any milk? I don't have any).",
+          "pieces": [
+            {
+              "text": "Is there",
+              "role": "fixed",
+              "hint": "¿hay"
+            },
+            {
+              "text": "any",
+              "role": "fixed",
+              "hint": "(algo de)"
+            },
+            {
+              "text": "milk",
+              "role": "slot",
+              "hint": "leche"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Is there any milk?",
+              "translation": "¿Hay leche?",
+              "mirror": {
+                "say": "¿Hay leche?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ALGO DE",
+                    "en": "any",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "leche",
+                    "en": "milk",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I bought some bread.",
+              "translation": "He comprado pan.",
+              "mirror": {
+                "say": "He comprado pan",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb",
+                    "from": "He comprado"
+                  },
+                  {
+                    "es": "UN POCO DE",
+                    "en": "some",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We don't have any towels.",
+              "translation": "No tenemos toallas."
+            },
+            {
+              "text": "Would you like some tea?",
+              "translation": "¿Quieres un té?"
+            }
+          ],
+          "pitfalls": [
+            "«I don't have some» está mal: al negar, any.",
+            "Al ofrecer se usa some: would you like some tea?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "SOME llena la NEVERA; ANY pregunta si queda.",
+            "emoji": "🥛"
+          }
+        },
+        {
+          "key": "bedroom",
+          "type": "term",
+          "text": "bedroom",
+          "meaning": "dormitorio",
+          "pronunciation": "BÉDrum",
+          "examples": [
+            {
+              "text": "My bedroom is small.",
+              "translation": "Mi dormitorio es pequeño.",
+              "mirror": {
+                "say": "Mi dormitorio es pequeño",
+                "pieces": [
+                  {
+                    "es": "Mi dormitorio",
+                    "en": "My bedroom",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pequeño",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A two-bedroom flat.",
+              "translation": "Un piso de dos habitaciones."
+            }
+          ]
+        },
+        {
+          "key": "living-room",
+          "type": "term",
+          "text": "living room",
+          "meaning": "salón",
+          "pronunciation": "LÍving rum",
+          "examples": [
+            {
+              "text": "We're in the living room.",
+              "translation": "Estamos en el salón.",
+              "mirror": {
+                "say": "Estamos en el salón",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el salón",
+                    "en": "in the living room",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The TV is in the living room.",
+              "translation": "La tele está en el salón."
+            }
+          ]
+        },
+        {
+          "key": "roof",
+          "type": "term",
+          "text": "roof",
+          "meaning": "tejado",
+          "pronunciation": "RUUF",
+          "examples": [
+            {
+              "text": "There is a cat on the roof.",
+              "translation": "Hay un gato en el tejado.",
+              "mirror": {
+                "say": "Hay un gato en el tejado",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un gato",
+                    "en": "a cat",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el tejado",
+                    "en": "on the roof",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The roof is broken.",
+              "translation": "El tejado está roto."
+            }
+          ]
+        },
+        {
+          "key": "shower",
+          "type": "term",
+          "text": "shower",
+          "meaning": "ducha; ducharse",
+          "pronunciation": "SHÁUer",
+          "examples": [
+            {
+              "text": "I'm in the shower!",
+              "translation": "¡Estoy en la ducha!",
+              "mirror": {
+                "say": "¡Estoy en la ducha!",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la ducha",
+                    "en": "in the shower",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have a shower every morning.",
+              "translation": "Me ducho cada mañana."
+            }
+          ],
+          "notes": "Ducharse: have a shower (o take a shower)."
+        },
+        {
+          "key": "curtain",
+          "type": "term",
+          "text": "curtain",
+          "meaning": "cortina",
+          "pronunciation": "KÉRten",
+          "examples": [
+            {
+              "text": "Close the curtains, please.",
+              "translation": "Cierra las cortinas, por favor.",
+              "mirror": {
+                "say": "Cierra las cortinas, por favor",
+                "pieces": [
+                  {
+                    "es": "Cierra",
+                    "en": "Close",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "las cortinas",
+                    "en": "the curtains",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Blue curtains.",
+              "translation": "Cortinas azules."
+            }
+          ]
+        },
+        {
+          "key": "carpet",
+          "type": "term",
+          "text": "carpet",
+          "meaning": "alfombra, moqueta",
+          "pronunciation": "KÁRpet",
+          "examples": [
+            {
+              "text": "The carpet is very old.",
+              "translation": "La alfombra es muy vieja.",
+              "mirror": {
+                "say": "La alfombra es muy vieja",
+                "pieces": [
+                  {
+                    "es": "La alfombra",
+                    "en": "The carpet",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy vieja",
+                    "en": "very old",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take off your shoes on the carpet.",
+              "translation": "Quítate los zapatos en la alfombra."
+            }
+          ]
+        },
+        {
+          "key": "bath",
+          "type": "term",
+          "text": "bath",
+          "meaning": "bañera; baño",
+          "pronunciation": "BAAZ",
+          "examples": [
+            {
+              "text": "I need a hot bath.",
+              "translation": "Necesito un baño caliente.",
+              "mirror": {
+                "say": "Necesito un baño caliente",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "baño",
+                    "en": "bath",
+                    "role": "word"
+                  },
+                  {
+                    "es": "caliente",
+                    "en": "hot",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The baby is in the bath.",
+              "translation": "El bebé está en la bañera."
+            }
+          ]
+        },
+        {
+          "key": "drawer",
+          "type": "term",
+          "text": "drawer",
+          "meaning": "cajón",
+          "pronunciation": "DRÓOR",
+          "examples": [
+            {
+              "text": "It's in the top drawer.",
+              "translation": "Está en el cajón de arriba.",
+              "mirror": {
+                "say": "Está en el cajón de arriba",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Está"
+                  },
+                  {
+                    "es": "en el",
+                    "en": "in the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cajón",
+                    "en": "drawer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de arriba",
+                    "en": "top",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Open the drawer.",
+              "translation": "Abre el cajón."
+            }
+          ]
+        },
+        {
+          "key": "sink",
+          "type": "term",
+          "text": "sink",
+          "meaning": "fregadero, lavabo",
+          "pronunciation": "SINK",
+          "examples": [
+            {
+              "text": "The dishes are in the sink.",
+              "translation": "Los platos están en el fregadero.",
+              "mirror": {
+                "say": "Los platos están en el fregadero",
+                "pieces": [
+                  {
+                    "es": "Los platos",
+                    "en": "The dishes",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el fregadero",
+                    "en": "in the sink",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wash your hands in the sink.",
+              "translation": "Lávate las manos en el lavabo."
+            }
+          ]
+        },
+        {
+          "key": "toilet",
+          "type": "term",
+          "text": "toilet",
+          "meaning": "váter; aseo",
+          "pronunciation": "TÓIlet",
+          "examples": [
+            {
+              "text": "Where is the toilet?",
+              "translation": "¿Dónde está el aseo?",
+              "mirror": {
+                "say": "¿Dónde está el aseo?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el aseo",
+                    "en": "the toilet",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I use the toilet?",
+              "translation": "¿Puedo usar el baño?"
+            }
+          ],
+          "notes": "En EE. UU. se dice bathroom o restroom."
+        },
+        {
+          "key": "dishwasher",
+          "type": "term",
+          "text": "dishwasher",
+          "meaning": "lavavajillas",
+          "pronunciation": "DÍSHuosher",
+          "examples": [
+            {
+              "text": "Put the plates in the dishwasher.",
+              "translation": "Mete los platos en el lavavajillas.",
+              "mirror": {
+                "say": "Mete los platos en el lavavajillas",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb",
+                    "from": "Mete"
+                  },
+                  {
+                    "es": "los platos",
+                    "en": "the plates",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el lavavajillas",
+                    "en": "in the dishwasher",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The dishwasher is broken.",
+              "translation": "El lavavajillas está roto."
+            }
+          ]
+        },
+        {
+          "key": "garage",
+          "type": "term",
+          "text": "garage",
+          "meaning": "garaje",
+          "pronunciation": "GÁraach",
+          "examples": [
+            {
+              "text": "The car is in the garage.",
+              "translation": "El coche está en el garaje.",
+              "mirror": {
+                "say": "El coche está en el garaje",
+                "pieces": [
+                  {
+                    "es": "El coche",
+                    "en": "The car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el garaje",
+                    "en": "in the garage",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A garage sale.",
+              "translation": "Un mercadillo en casa."
+            }
+          ]
+        },
+        {
+          "key": "balcony",
+          "type": "term",
+          "text": "balcony",
+          "meaning": "balcón",
+          "pronunciation": "BÁLkoni",
+          "examples": [
+            {
+              "text": "Let's have breakfast on the balcony.",
+              "translation": "Desayunemos en el balcón.",
+              "mirror": {
+                "say": "Desayunemos en el balcón",
+                "pieces": [
+                  {
+                    "es": "Desayunemos",
+                    "en": "Let's have breakfast",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre el balcón",
+                    "en": "on the balcony",
+                    "role": "word",
+                    "from": "en el balcón",
+                    "why": "En el balcón se dice ON: on the balcony."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A flat with a balcony.",
+              "translation": "Un piso con balcón."
+            }
+          ]
+        },
+        {
+          "key": "cupboard",
+          "type": "term",
+          "text": "cupboard",
+          "meaning": "armario (de cocina)",
+          "pronunciation": "KÁberd",
+          "examples": [
+            {
+              "text": "The cups are in the cupboard.",
+              "translation": "Las tazas están en el armario.",
+              "mirror": {
+                "say": "Las tazas están en el armario",
+                "pieces": [
+                  {
+                    "es": "Las tazas",
+                    "en": "The cups",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el armario",
+                    "en": "in the cupboard",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Close the cupboard.",
+              "translation": "Cierra el armario."
+            }
+          ],
+          "notes": "La p no suena: KÁberd."
+        },
+        {
+          "key": "bin",
+          "type": "term",
+          "text": "bin",
+          "meaning": "cubo de la basura",
+          "pronunciation": "BIN",
+          "examples": [
+            {
+              "text": "Put it in the bin.",
+              "translation": "Tíralo a la basura.",
+              "mirror": {
+                "say": "Tíralo a la basura",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put",
+                    "role": "verb",
+                    "from": "Tira",
+                    "why": "Tirar a la basura es «ponerlo en el cubo»: put it in the bin."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el cubo",
+                    "en": "in the bin",
+                    "role": "word",
+                    "from": "a la basura"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take out the bin.",
+              "translation": "Saca la basura."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

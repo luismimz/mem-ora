@@ -1,0 +1,742 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "51-deporte",
+      "title": "Misión 51 · Deporte",
+      "units": [
+        {
+          "key": "g-play-go-do",
+          "type": "pattern",
+          "goal": "Jugar, ir, hacer: PLAY, GO o DO",
+          "rule": "PLAY con pelota (play tennis), GO con actividades en -ING (go swimming) y DO con lo demás (do yoga, do karate).",
+          "pieces": [
+            {
+              "text": "I",
+              "role": "fixed",
+              "hint": "yo"
+            },
+            {
+              "text": "go",
+              "role": "fixed",
+              "hint": "voy a"
+            },
+            {
+              "text": "swimming",
+              "role": "slot",
+              "hint": "nadar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I play basketball on Fridays.",
+              "translation": "Juego al baloncesto los viernes.",
+              "mirror": {
+                "say": "Juego al baloncesto los viernes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juego",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "baloncesto",
+                    "en": "basketball",
+                    "role": "word",
+                    "from": "al baloncesto",
+                    "why": "Los deportes van sin «al» ni «the»: play basketball."
+                  },
+                  {
+                    "es": "EN viernes",
+                    "en": "on Fridays",
+                    "role": "word",
+                    "from": "los viernes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We go running every morning.",
+              "translation": "Salimos a correr cada mañana.",
+              "mirror": {
+                "say": "Salimos a correr cada mañana",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb",
+                    "from": "Salimos"
+                  },
+                  {
+                    "es": "corriendo",
+                    "en": "running",
+                    "role": "word",
+                    "from": "a correr",
+                    "why": "Con GO, la actividad en -ING: go swimming."
+                  },
+                  {
+                    "es": "cada mañana",
+                    "en": "every morning",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She does yoga.",
+              "translation": "Hace yoga."
+            },
+            {
+              "text": "Let's play a match!",
+              "translation": "¡Juguemos un partido!"
+            }
+          ],
+          "pitfalls": [
+            "«Play swimming» está mal: go swimming.",
+            "«Play the football» sobra the: play football."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Con PELOTA, PLAY; con -ING, GO; lo demás, DO.",
+            "emoji": "⚽"
+          }
+        },
+        {
+          "key": "basketball",
+          "type": "term",
+          "text": "basketball",
+          "meaning": "baloncesto",
+          "pronunciation": "BÁSketbol",
+          "examples": [
+            {
+              "text": "I play basketball with my friends.",
+              "translation": "Juego al baloncesto con mis amigos.",
+              "mirror": {
+                "say": "Juego al baloncesto con mis amigos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juego",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "baloncesto",
+                    "en": "basketball",
+                    "role": "word",
+                    "from": "al baloncesto",
+                    "why": "Los deportes van sin «al» ni «the»: play basketball."
+                  },
+                  {
+                    "es": "con mis amigos",
+                    "en": "with my friends",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He is a basketball player.",
+              "translation": "Es jugador de baloncesto."
+            }
+          ]
+        },
+        {
+          "key": "swimming",
+          "type": "term",
+          "text": "swimming",
+          "meaning": "natación",
+          "pronunciation": "SUÍming",
+          "examples": [
+            {
+              "text": "I go swimming on Saturdays.",
+              "translation": "Voy a nadar los sábados.",
+              "mirror": {
+                "say": "Voy a nadar los sábados",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "nadando",
+                    "en": "swimming",
+                    "role": "word",
+                    "from": "a nadar",
+                    "why": "Con GO, la actividad en -ING: go swimming."
+                  },
+                  {
+                    "es": "EN sábados",
+                    "en": "on Saturdays",
+                    "role": "word",
+                    "from": "los sábados",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Swimming is good for you.",
+              "translation": "Nadar es bueno para ti."
+            }
+          ]
+        },
+        {
+          "key": "running",
+          "type": "term",
+          "text": "running",
+          "meaning": "correr (deporte), running",
+          "pronunciation": "RÁning",
+          "examples": [
+            {
+              "text": "Running makes me happy.",
+              "translation": "Correr me hace feliz.",
+              "mirror": {
+                "say": "Correr me hace feliz",
+                "pieces": [
+                  {
+                    "es": "Corriendo",
+                    "en": "Running",
+                    "role": "who",
+                    "from": "Correr",
+                    "why": "Como tema de la frase, el verbo va en -ING: running."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "feliz",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I go running in the park.",
+              "translation": "Salgo a correr al parque."
+            }
+          ]
+        },
+        {
+          "key": "cycling",
+          "type": "term",
+          "text": "cycling",
+          "meaning": "ciclismo, ir en bici",
+          "pronunciation": "SÁIkling",
+          "examples": [
+            {
+              "text": "Let's go cycling this weekend.",
+              "translation": "Vamos en bici este fin de semana.",
+              "mirror": {
+                "say": "Vamos en bici este fin de semana",
+                "pieces": [
+                  {
+                    "es": "Vamos",
+                    "en": "Let's go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en bici",
+                    "en": "cycling",
+                    "role": "word"
+                  },
+                  {
+                    "es": "este fin de semana",
+                    "en": "this weekend",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cycling is popular in Holland.",
+              "translation": "El ciclismo es popular en Holanda."
+            }
+          ]
+        },
+        {
+          "key": "skiing",
+          "type": "term",
+          "text": "skiing",
+          "meaning": "esquí, esquiar",
+          "pronunciation": "SKÍing",
+          "examples": [
+            {
+              "text": "We go skiing every winter.",
+              "translation": "Vamos a esquiar cada invierno.",
+              "mirror": {
+                "say": "Vamos a esquiar cada invierno",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esquiando",
+                    "en": "skiing",
+                    "role": "word",
+                    "from": "a esquiar",
+                    "why": "Con GO, la actividad en -ING: go swimming."
+                  },
+                  {
+                    "es": "cada invierno",
+                    "en": "every winter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Skiing is expensive.",
+              "translation": "Esquiar es caro."
+            }
+          ]
+        },
+        {
+          "key": "player",
+          "type": "term",
+          "text": "player",
+          "meaning": "jugador",
+          "pronunciation": "PLÉIer",
+          "examples": [
+            {
+              "text": "He is the best player on the team.",
+              "translation": "Es el mejor jugador del equipo.",
+              "mirror": {
+                "say": "Es el mejor jugador del equipo",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el mejor jugador",
+                    "en": "the best player",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el equipo",
+                    "en": "on the team",
+                    "role": "word",
+                    "from": "del equipo",
+                    "why": "En un equipo se está ON: on the team."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is a tennis player.",
+              "translation": "Es tenista."
+            }
+          ]
+        },
+        {
+          "key": "goal",
+          "type": "term",
+          "text": "goal",
+          "meaning": "gol; objetivo",
+          "pronunciation": "GÓUL",
+          "examples": [
+            {
+              "text": "What a goal!",
+              "translation": "¡Qué golazo!",
+              "mirror": {
+                "say": "¡Qué golazo!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un gol",
+                    "en": "a goal",
+                    "role": "word",
+                    "from": "golazo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My goal is to speak English.",
+              "translation": "Mi objetivo es hablar inglés."
+            }
+          ]
+        },
+        {
+          "key": "coach",
+          "type": "term",
+          "text": "coach",
+          "meaning": "entrenador",
+          "pronunciation": "KÓUCH",
+          "examples": [
+            {
+              "text": "The coach is angry.",
+              "translation": "El entrenador está enfadado.",
+              "mirror": {
+                "say": "El entrenador está enfadado",
+                "pieces": [
+                  {
+                    "es": "El entrenador",
+                    "en": "The coach",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enfadado",
+                    "en": "angry",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is my tennis coach.",
+              "translation": "Es mi entrenadora de tenis."
+            }
+          ]
+        },
+        {
+          "key": "score",
+          "type": "term",
+          "text": "score",
+          "meaning": "marcador; marcar",
+          "pronunciation": "SKÓR",
+          "examples": [
+            {
+              "text": "What's the score?",
+              "translation": "¿Cómo van?",
+              "mirror": {
+                "say": "¿Cómo van?",
+                "pieces": [
+                  {
+                    "es": "Cuál es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cómo"
+                  },
+                  {
+                    "es": "el marcador",
+                    "en": "the score",
+                    "role": "word",
+                    "from": "van",
+                    "why": "«¿Cómo van?» es «¿cuál es el marcador?»: what's the score?"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He scored two goals.",
+              "translation": "Marcó dos goles."
+            }
+          ]
+        },
+        {
+          "key": "race",
+          "type": "term",
+          "text": "race",
+          "meaning": "carrera",
+          "pronunciation": "RÉIS",
+          "examples": [
+            {
+              "text": "She won the race.",
+              "translation": "Ganó la carrera.",
+              "mirror": {
+                "say": "Ganó la carrera",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ganó",
+                    "en": "won",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la carrera",
+                    "en": "the race",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A horse race.",
+              "translation": "Una carrera de caballos."
+            }
+          ]
+        },
+        {
+          "key": "ball",
+          "type": "term",
+          "text": "ball",
+          "meaning": "pelota, balón",
+          "pronunciation": "BÓOL",
+          "examples": [
+            {
+              "text": "Pass me the ball!",
+              "translation": "¡Pásame el balón!",
+              "mirror": {
+                "say": "¡Pásame el balón!",
+                "pieces": [
+                  {
+                    "es": "Pasa",
+                    "en": "Pass",
+                    "role": "verb",
+                    "from": "Pásame",
+                    "why": "Lo pegado se separa: pass ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el balón",
+                    "en": "the ball",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The ball is out.",
+              "translation": "La pelota está fuera."
+            }
+          ]
+        },
+        {
+          "key": "fan",
+          "type": "term",
+          "text": "fan",
+          "meaning": "aficionado, fan; ventilador",
+          "pronunciation": "FAN",
+          "examples": [
+            {
+              "text": "I'm a big fan of this band.",
+              "translation": "Soy muy fan de este grupo.",
+              "mirror": {
+                "say": "Soy muy fan de este grupo",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un gran fan",
+                    "en": "a big fan",
+                    "role": "word",
+                    "from": "muy fan"
+                  },
+                  {
+                    "es": "de este grupo",
+                    "en": "of this band",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Turn on the fan.",
+              "translation": "Enciende el ventilador."
+            }
+          ]
+        },
+        {
+          "key": "stadium",
+          "type": "term",
+          "text": "stadium",
+          "meaning": "estadio",
+          "pronunciation": "STÉIdium",
+          "examples": [
+            {
+              "text": "The stadium was full.",
+              "translation": "El estadio estaba lleno.",
+              "mirror": {
+                "say": "El estadio estaba lleno",
+                "pieces": [
+                  {
+                    "es": "El estadio",
+                    "en": "The stadium",
+                    "role": "who"
+                  },
+                  {
+                    "es": "estaba",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lleno",
+                    "en": "full",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A football stadium.",
+              "translation": "Un estadio de fútbol."
+            }
+          ],
+          "notes": "Ojo a la pronunciación: STÉIdium."
+        },
+        {
+          "key": "referee",
+          "type": "term",
+          "text": "referee",
+          "meaning": "árbitro",
+          "pronunciation": "refeRÍI",
+          "examples": [
+            {
+              "text": "The referee was terrible.",
+              "translation": "El árbitro fue horrible.",
+              "mirror": {
+                "say": "El árbitro fue horrible",
+                "pieces": [
+                  {
+                    "es": "El árbitro",
+                    "en": "The referee",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "horrible",
+                    "en": "terrible",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Listen to the referee.",
+              "translation": "Escucha al árbitro."
+            }
+          ]
+        },
+        {
+          "key": "champion",
+          "type": "term",
+          "text": "champion",
+          "meaning": "campeón",
+          "pronunciation": "CHÁMpion",
+          "examples": [
+            {
+              "text": "We are the champions!",
+              "translation": "¡Somos los campeones!",
+              "mirror": {
+                "say": "¡Somos los campeones!",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) somos",
+                    "en": "We are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "los campeones",
+                    "en": "the champions",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The world champion.",
+              "translation": "El campeón del mundo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
