@@ -1,0 +1,783 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "59-ciudad-2",
+      "title": "Misión 59 · Moverse por la ciudad",
+      "units": [
+        {
+          "key": "g-first-conditional",
+          "type": "pattern",
+          "goal": "Si llueve, me quedo = IF it rains, I'LL stay",
+          "rule": "Para lo que pasará si…: IF + presente, y WILL + verbo. If it rains, I'll stay at home. Detrás de if, nunca will.",
+          "pieces": [
+            {
+              "text": "If it rains",
+              "role": "slot",
+              "hint": "si llueve"
+            },
+            {
+              "text": "I'll stay",
+              "role": "fixed",
+              "hint": "me quedo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "If it rains, I'll stay at home.",
+              "translation": "Si llueve, me quedo en casa.",
+              "mirror": {
+                "say": "Si llueve, me quedo en casa",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO llueve",
+                    "en": "it rains",
+                    "role": "verb",
+                    "from": "llueve",
+                    "why": "Llover necesita su IT: it rains."
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "me",
+                    "why": "Lo que pasará va con WILL: I'll stay."
+                  },
+                  {
+                    "es": "quedar",
+                    "en": "stay",
+                    "role": "verb",
+                    "from": "quedo"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you hurry, you'll catch the bus.",
+              "translation": "Si te das prisa, pillas el bus.",
+              "mirror": {
+                "say": "Si te das prisa, pillas el bus",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "te das prisa",
+                    "en": "hurry",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) cogerás",
+                    "en": "you'll catch",
+                    "role": "verb",
+                    "from": "pillas",
+                    "why": "Lo que pasará va con WILL: you'll catch."
+                  },
+                  {
+                    "es": "el bus",
+                    "en": "the bus",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'll call you if I can.",
+              "translation": "Te llamo si puedo."
+            },
+            {
+              "text": "What will you do if you fail?",
+              "translation": "¿Qué harás si suspendes?"
+            }
+          ],
+          "pitfalls": [
+            "«If it will rain» está mal: detrás de if, presente (if it rains).",
+            "Se puede dar la vuelta: I'll stay at home if it rains."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "IF abre el PARAGUAS y WILL se queda en CASA.",
+            "emoji": "☔"
+          }
+        },
+        {
+          "key": "traffic-light",
+          "type": "term",
+          "text": "traffic light",
+          "meaning": "semáforo",
+          "pronunciation": "TRÁfik lait",
+          "examples": [
+            {
+              "text": "Turn left at the traffic lights.",
+              "translation": "Gira a la izquierda en el semáforo.",
+              "mirror": {
+                "say": "Gira a la izquierda en el semáforo",
+                "pieces": [
+                  {
+                    "es": "Gira",
+                    "en": "Turn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la izquierda",
+                    "en": "left",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en los semáforos",
+                    "en": "at the traffic lights",
+                    "role": "word",
+                    "from": "en el semáforo",
+                    "why": "En inglés el semáforo va en plural: the traffic lights."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The traffic light is red.",
+              "translation": "El semáforo está en rojo."
+            }
+          ]
+        },
+        {
+          "key": "crossroads",
+          "type": "term",
+          "text": "crossroads",
+          "meaning": "cruce",
+          "pronunciation": "KRÓSrouds",
+          "examples": [
+            {
+              "text": "Stop at the crossroads.",
+              "translation": "Para en el cruce.",
+              "mirror": {
+                "say": "Para en el cruce",
+                "pieces": [
+                  {
+                    "es": "Para",
+                    "en": "Stop",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el cruce",
+                    "en": "at the crossroads",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm at a crossroads in my life.",
+              "translation": "Estoy en una encrucijada."
+            }
+          ]
+        },
+        {
+          "key": "pavement",
+          "type": "term",
+          "text": "pavement",
+          "meaning": "acera",
+          "pronunciation": "PÉIVment",
+          "examples": [
+            {
+              "text": "Walk on the pavement.",
+              "translation": "Camina por la acera.",
+              "mirror": {
+                "say": "Camina por la acera",
+                "pieces": [
+                  {
+                    "es": "Camina",
+                    "en": "Walk",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre la acera",
+                    "en": "on the pavement",
+                    "role": "word",
+                    "from": "por la acera",
+                    "why": "Encima de la acera es ON: on the pavement."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The pavement is wet.",
+              "translation": "La acera está mojada."
+            }
+          ],
+          "notes": "En EE. UU. se dice sidewalk."
+        },
+        {
+          "key": "neighbourhood",
+          "type": "term",
+          "text": "neighbourhood",
+          "meaning": "barrio",
+          "pronunciation": "NÉIborjud",
+          "examples": [
+            {
+              "text": "I live in a quiet neighbourhood.",
+              "translation": "Vivo en un barrio tranquilo.",
+              "mirror": {
+                "say": "Vivo en un barrio tranquilo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en un",
+                    "en": "in a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "barrio",
+                    "en": "neighbourhood",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tranquilo",
+                    "en": "quiet",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A nice neighbourhood.",
+              "translation": "Un barrio agradable."
+            }
+          ],
+          "notes": "En EE. UU. se escribe neighborhood."
+        },
+        {
+          "key": "village",
+          "type": "term",
+          "text": "village",
+          "meaning": "pueblo",
+          "pronunciation": "VÍlich",
+          "examples": [
+            {
+              "text": "My grandparents live in a small village.",
+              "translation": "Mis abuelos viven en un pueblo pequeño.",
+              "mirror": {
+                "say": "Mis abuelos viven en un pueblo pequeño",
+                "pieces": [
+                  {
+                    "es": "Mis abuelos",
+                    "en": "My grandparents",
+                    "role": "who"
+                  },
+                  {
+                    "es": "viven",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en un",
+                    "en": "in a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pueblo",
+                    "en": "village",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pequeño",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Village life.",
+              "translation": "La vida de pueblo."
+            }
+          ]
+        },
+        {
+          "key": "town",
+          "type": "term",
+          "text": "town",
+          "meaning": "ciudad pequeña; el centro",
+          "pronunciation": "TÁUN",
+          "examples": [
+            {
+              "text": "Let's go into town.",
+              "translation": "Vamos al centro.",
+              "mirror": {
+                "say": "Vamos al centro",
+                "pieces": [
+                  {
+                    "es": "Vamos",
+                    "en": "Let's go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dentro de ciudad",
+                    "en": "into town",
+                    "role": "word",
+                    "from": "al centro",
+                    "why": "Ir al centro es go into town, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A small town.",
+              "translation": "Una ciudad pequeña."
+            }
+          ]
+        },
+        {
+          "key": "city-centre",
+          "type": "term",
+          "text": "city centre",
+          "meaning": "centro de la ciudad",
+          "pronunciation": "SÍti SÉNter",
+          "examples": [
+            {
+              "text": "The hotel is in the city centre.",
+              "translation": "El hotel está en el centro.",
+              "mirror": {
+                "say": "El hotel está en el centro",
+                "pieces": [
+                  {
+                    "es": "El hotel",
+                    "en": "The hotel",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el centro de la ciudad",
+                    "en": "in the city centre",
+                    "role": "word",
+                    "from": "en el centro"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How do I get to the city centre?",
+              "translation": "¿Cómo llego al centro?"
+            }
+          ],
+          "notes": "En EE. UU. se dice downtown."
+        },
+        {
+          "key": "building",
+          "type": "term",
+          "text": "building",
+          "meaning": "edificio",
+          "pronunciation": "BÍLding",
+          "examples": [
+            {
+              "text": "The tallest building in the city.",
+              "translation": "El edificio más alto de la ciudad.",
+              "mirror": {
+                "say": "El edificio más alto de la ciudad",
+                "pieces": [
+                  {
+                    "es": "El",
+                    "en": "The",
+                    "role": "word"
+                  },
+                  {
+                    "es": "edificio",
+                    "en": "building",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más alto",
+                    "en": "tallest",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la ciudad",
+                    "en": "in the city",
+                    "role": "word",
+                    "from": "de la ciudad",
+                    "why": "Lo más… DE un sitio es IN: the tallest in the city."
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "An old building.",
+              "translation": "Un edificio antiguo."
+            }
+          ]
+        },
+        {
+          "key": "tower",
+          "type": "term",
+          "text": "tower",
+          "meaning": "torre",
+          "pronunciation": "TÁUer",
+          "examples": [
+            {
+              "text": "You can see the tower from here.",
+              "translation": "Desde aquí se ve la torre.",
+              "mirror": {
+                "say": "Desde aquí se ve la torre",
+                "pieces": [
+                  {
+                    "es": "desde aquí",
+                    "en": "from here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ puedes",
+                    "en": "You can",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "«Se ve» es «puedes ver»: you can see."
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb",
+                    "from": "ve"
+                  },
+                  {
+                    "es": "la torre",
+                    "en": "the tower",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "The Eiffel Tower.",
+              "translation": "La torre Eiffel."
+            }
+          ]
+        },
+        {
+          "key": "church",
+          "type": "term",
+          "text": "church",
+          "meaning": "iglesia",
+          "pronunciation": "CHERCH",
+          "examples": [
+            {
+              "text": "The church is in the main square.",
+              "translation": "La iglesia está en la plaza mayor.",
+              "mirror": {
+                "say": "La iglesia está en la plaza mayor",
+                "pieces": [
+                  {
+                    "es": "La iglesia",
+                    "en": "The church",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la",
+                    "en": "in the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "plaza",
+                    "en": "square",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mayor",
+                    "en": "main",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "An old church.",
+              "translation": "Una iglesia antigua."
+            }
+          ]
+        },
+        {
+          "key": "castle",
+          "type": "term",
+          "text": "castle",
+          "meaning": "castillo",
+          "pronunciation": "KÁsel",
+          "examples": [
+            {
+              "text": "We visited a castle.",
+              "translation": "Visitamos un castillo.",
+              "mirror": {
+                "say": "Visitamos un castillo",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "visitamos",
+                    "en": "visited",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un castillo",
+                    "en": "a castle",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A sandcastle.",
+              "translation": "Un castillo de arena."
+            }
+          ],
+          "notes": "La t no suena: KÁsel."
+        },
+        {
+          "key": "post-office",
+          "type": "term",
+          "text": "post office",
+          "meaning": "oficina de correos",
+          "pronunciation": "PÓUST ófis",
+          "examples": [
+            {
+              "text": "Where is the post office?",
+              "translation": "¿Dónde está correos?",
+              "mirror": {
+                "say": "¿Dónde está correos?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la oficina de correos",
+                    "en": "the post office",
+                    "role": "word",
+                    "from": "correos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The post office closes at two.",
+              "translation": "Correos cierra a las dos."
+            }
+          ]
+        },
+        {
+          "key": "police-station",
+          "type": "term",
+          "text": "police station",
+          "meaning": "comisaría",
+          "pronunciation": "poLÍIS stéishon",
+          "examples": [
+            {
+              "text": "Go to the police station.",
+              "translation": "Ve a la comisaría.",
+              "mirror": {
+                "say": "Ve a la comisaría",
+                "pieces": [
+                  {
+                    "es": "Ve",
+                    "en": "Go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la comisaría",
+                    "en": "to the police station",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The police station is near here.",
+              "translation": "La comisaría está cerca de aquí."
+            }
+          ]
+        },
+        {
+          "key": "car-park",
+          "type": "term",
+          "text": "car park",
+          "meaning": "aparcamiento, parking",
+          "pronunciation": "KÁR park",
+          "examples": [
+            {
+              "text": "The car park is full.",
+              "translation": "El parking está lleno.",
+              "mirror": {
+                "say": "El parking está lleno",
+                "pieces": [
+                  {
+                    "es": "El parking",
+                    "en": "The car park",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lleno",
+                    "en": "full",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Parking is free on Sundays.",
+              "translation": "Aparcar es gratis los domingos."
+            }
+          ],
+          "notes": "En EE. UU. se dice parking lot."
+        },
+        {
+          "key": "roundabout",
+          "type": "term",
+          "text": "roundabout",
+          "meaning": "rotonda",
+          "pronunciation": "RÁUNdabaut",
+          "examples": [
+            {
+              "text": "Take the second exit at the roundabout.",
+              "translation": "En la rotonda, coge la segunda salida.",
+              "mirror": {
+                "say": "En la rotonda, coge la segunda salida",
+                "pieces": [
+                  {
+                    "es": "en la rotonda",
+                    "en": "at the roundabout",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Coge",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la segunda salida",
+                    "en": "the second exit",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A big roundabout.",
+              "translation": "Una rotonda grande."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

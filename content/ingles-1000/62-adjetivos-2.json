@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "62-adjetivos-2",
+      "title": "Misión 62 · Cómo son las cosas",
+      "units": [
+        {
+          "key": "g-so-such",
+          "type": "pattern",
+          "goal": "¡Qué bonito! = It's SO beautiful",
+          "rule": "Para exagerar: SO + adjetivo (so beautiful). Si hay nombre: SUCH A + adjetivo + nombre (such a beautiful day).",
+          "pieces": [
+            {
+              "text": "It's",
+              "role": "fixed",
+              "hint": "es"
+            },
+            {
+              "text": "so",
+              "role": "fixed",
+              "hint": "tan"
+            },
+            {
+              "text": "beautiful",
+              "role": "slot",
+              "hint": "bonito"
+            }
+          ],
+          "examples": [
+            {
+              "text": "It's so cold!",
+              "translation": "¡Qué frío hace!",
+              "mirror": {
+                "say": "¡Qué frío hace!",
+                "pieces": [
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word",
+                    "from": "Qué"
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace",
+                    "why": "El tiempo va con IT IS: it's cold."
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "It's such a nice day!",
+              "translation": "¡Qué día tan bueno!",
+              "mirror": {
+                "say": "¡Qué día tan bueno!",
+                "pieces": [
+                  {
+                    "es": "ESO ES",
+                    "en": "It's",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "un (tan)",
+                    "en": "such a",
+                    "role": "word",
+                    "from": "Qué",
+                    "why": "Con nombre: SUCH A + adjetivo + nombre."
+                  },
+                  {
+                    "es": "día",
+                    "en": "day",
+                    "role": "word"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "nice",
+                    "role": "word",
+                    "from": "tan bueno"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "You're so kind.",
+              "translation": "Eres muy amable."
+            },
+            {
+              "text": "She's such a good friend.",
+              "translation": "Es una amiga buenísima."
+            }
+          ],
+          "pitfalls": [
+            "«Such beautiful» sin nombre está mal: so beautiful.",
+            "«So a nice day» está mal: such a nice day."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "SO infla el ADJETIVO; SUCH A, la FRASE entera.",
+            "emoji": "🎈"
+          }
+        },
+        {
+          "key": "empty",
+          "type": "term",
+          "text": "empty",
+          "meaning": "vacío",
+          "pronunciation": "ÉMti",
+          "examples": [
+            {
+              "text": "The fridge is empty.",
+              "translation": "La nevera está vacía.",
+              "mirror": {
+                "say": "La nevera está vacía",
+                "pieces": [
+                  {
+                    "es": "La nevera",
+                    "en": "The fridge",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "vacía",
+                    "en": "empty",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An empty bottle.",
+              "translation": "Una botella vacía."
+            }
+          ]
+        },
+        {
+          "key": "full",
+          "type": "term",
+          "text": "full",
+          "meaning": "lleno",
+          "pronunciation": "FUL",
+          "examples": [
+            {
+              "text": "I'm full, thanks.",
+              "translation": "Estoy lleno, gracias.",
+              "mirror": {
+                "say": "Estoy lleno, gracias",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lleno",
+                    "en": "full",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gracias",
+                    "en": "thanks",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bus is full.",
+              "translation": "El autobús va lleno."
+            }
+          ]
+        },
+        {
+          "key": "loud",
+          "type": "term",
+          "text": "loud",
+          "meaning": "fuerte, alto (sonido)",
+          "pronunciation": "LÁUD",
+          "examples": [
+            {
+              "text": "The music is too loud.",
+              "translation": "La música está demasiado alta.",
+              "mirror": {
+                "say": "La música está demasiado alta",
+                "pieces": [
+                  {
+                    "es": "La música",
+                    "en": "The music",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado alta",
+                    "en": "too loud",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Speak louder, please.",
+              "translation": "Habla más alto, por favor."
+            }
+          ]
+        },
+        {
+          "key": "dirty",
+          "type": "term",
+          "text": "dirty",
+          "meaning": "sucio",
+          "pronunciation": "DÉRti",
+          "examples": [
+            {
+              "text": "Your shoes are dirty.",
+              "translation": "Tienes los zapatos sucios.",
+              "mirror": {
+                "say": "Tienes los zapatos sucios",
+                "pieces": [
+                  {
+                    "es": "TUS zapatos",
+                    "en": "Your shoes",
+                    "role": "who",
+                    "from": "Tienes los zapatos",
+                    "why": "«Tienes los zapatos sucios» es «tus zapatos están sucios»."
+                  },
+                  {
+                    "es": "ESTÁN",
+                    "en": "are",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sucios",
+                    "en": "dirty",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Dirty clothes.",
+              "translation": "Ropa sucia."
+            }
+          ]
+        },
+        {
+          "key": "wet",
+          "type": "term",
+          "text": "wet",
+          "meaning": "mojado",
+          "pronunciation": "UET",
+          "examples": [
+            {
+              "text": "My hair is wet.",
+              "translation": "Tengo el pelo mojado.",
+              "mirror": {
+                "say": "Tengo el pelo mojado",
+                "pieces": [
+                  {
+                    "es": "MI pelo",
+                    "en": "My hair",
+                    "role": "who",
+                    "from": "Tengo el pelo",
+                    "why": "«Tengo el pelo mojado» es «mi pelo está mojado»."
+                  },
+                  {
+                    "es": "ESTÁ",
+                    "en": "is",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "mojado",
+                    "en": "wet",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wet paint!",
+              "translation": "¡Recién pintado!"
+            }
+          ]
+        },
+        {
+          "key": "dry",
+          "type": "term",
+          "text": "dry",
+          "meaning": "seco; secar",
+          "pronunciation": "DRÁI",
+          "examples": [
+            {
+              "text": "The clothes are dry.",
+              "translation": "La ropa está seca.",
+              "mirror": {
+                "say": "La ropa está seca",
+                "pieces": [
+                  {
+                    "es": "La ropa",
+                    "en": "The clothes",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "está",
+                    "why": "Clothes es plural: the clothes ARE."
+                  },
+                  {
+                    "es": "secas",
+                    "en": "dry",
+                    "role": "word",
+                    "from": "seca"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Dry your hands.",
+              "translation": "Sécate las manos."
+            }
+          ]
+        },
+        {
+          "key": "heavy",
+          "type": "term",
+          "text": "heavy",
+          "meaning": "pesado",
+          "pronunciation": "JÉvi",
+          "examples": [
+            {
+              "text": "This box is very heavy.",
+              "translation": "Esta caja pesa mucho.",
+              "mirror": {
+                "say": "Esta caja pesa mucho",
+                "pieces": [
+                  {
+                    "es": "Esta caja",
+                    "en": "This box",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es muy pesada",
+                    "en": "is very heavy",
+                    "role": "word",
+                    "from": "pesa mucho",
+                    "why": "Pesar mucho es «ser pesado»: is very heavy."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Heavy rain.",
+              "translation": "Lluvia fuerte."
+            }
+          ]
+        },
+        {
+          "key": "soft",
+          "type": "term",
+          "text": "soft",
+          "meaning": "blando, suave",
+          "pronunciation": "SOFT",
+          "examples": [
+            {
+              "text": "This pillow is so soft.",
+              "translation": "Esta almohada es muy blandita.",
+              "mirror": {
+                "say": "Esta almohada es muy blandita",
+                "pieces": [
+                  {
+                    "es": "Esta almohada",
+                    "en": "This pillow",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan blanda",
+                    "en": "so soft",
+                    "role": "word",
+                    "from": "muy blandita"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A soft voice.",
+              "translation": "Una voz suave."
+            }
+          ]
+        },
+        {
+          "key": "hard",
+          "type": "term",
+          "text": "hard",
+          "meaning": "duro; difícil",
+          "pronunciation": "JARD",
+          "examples": [
+            {
+              "text": "The exam was very hard.",
+              "translation": "El examen fue muy difícil.",
+              "mirror": {
+                "say": "El examen fue muy difícil",
+                "pieces": [
+                  {
+                    "es": "El examen",
+                    "en": "The exam",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy difícil",
+                    "en": "very hard",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Work hard!",
+              "translation": "¡Trabaja duro!"
+            }
+          ]
+        },
+        {
+          "key": "deep",
+          "type": "term",
+          "text": "deep",
+          "meaning": "profundo, hondo",
+          "pronunciation": "DIIP",
+          "examples": [
+            {
+              "text": "The water is very deep here.",
+              "translation": "Aquí el agua cubre mucho.",
+              "mirror": {
+                "say": "Aquí el agua cubre mucho",
+                "pieces": [
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "El agua",
+                    "en": "The water",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es muy profunda",
+                    "en": "is very deep",
+                    "role": "word",
+                    "from": "cubre mucho"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Take a deep breath.",
+              "translation": "Respira hondo."
+            }
+          ]
+        },
+        {
+          "key": "narrow",
+          "type": "term",
+          "text": "narrow",
+          "meaning": "estrecho",
+          "pronunciation": "NÁrou",
+          "examples": [
+            {
+              "text": "The streets are very narrow.",
+              "translation": "Las calles son muy estrechas.",
+              "mirror": {
+                "say": "Las calles son muy estrechas",
+                "pieces": [
+                  {
+                    "es": "Las calles",
+                    "en": "The streets",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy estrechas",
+                    "en": "very narrow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A narrow bridge.",
+              "translation": "Un puente estrecho."
+            }
+          ]
+        },
+        {
+          "key": "strange",
+          "type": "term",
+          "text": "strange",
+          "meaning": "raro, extraño",
+          "pronunciation": "STRÉINCH",
+          "examples": [
+            {
+              "text": "That is very strange.",
+              "translation": "Eso es muy raro.",
+              "mirror": {
+                "say": "Eso es muy raro",
+                "pieces": [
+                  {
+                    "es": "Eso",
+                    "en": "That",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy raro",
+                    "en": "very strange",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A strange noise.",
+              "translation": "Un ruido raro."
+            }
+          ],
+          "notes": "Un desconocido es a stranger."
+        },
+        {
+          "key": "famous",
+          "type": "term",
+          "text": "famous",
+          "meaning": "famoso",
+          "pronunciation": "FÉImos",
+          "examples": [
+            {
+              "text": "She is a famous singer.",
+              "translation": "Es una cantante famosa.",
+              "mirror": {
+                "say": "Es una cantante famosa",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cantante",
+                    "en": "singer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "famosa",
+                    "en": "famous",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Spain is famous for its food.",
+              "translation": "España es famosa por su comida."
+            }
+          ]
+        },
+        {
+          "key": "useful",
+          "type": "term",
+          "text": "useful",
+          "meaning": "útil",
+          "pronunciation": "IÚSful",
+          "examples": [
+            {
+              "text": "This app is very useful.",
+              "translation": "Esta app es muy útil.",
+              "mirror": {
+                "say": "Esta app es muy útil",
+                "pieces": [
+                  {
+                    "es": "Esta app",
+                    "en": "This app",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy útil",
+                    "en": "very useful",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Useful phrases.",
+              "translation": "Frases útiles."
+            }
+          ]
+        },
+        {
+          "key": "dangerous",
+          "type": "term",
+          "text": "dangerous",
+          "meaning": "peligroso",
+          "pronunciation": "DÉINyeros",
+          "examples": [
+            {
+              "text": "It's dangerous to swim here.",
+              "translation": "Es peligroso nadar aquí.",
+              "mirror": {
+                "say": "Es peligroso nadar aquí",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "peligroso",
+                    "en": "dangerous",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nadar",
+                    "en": "to swim",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A dangerous road.",
+              "translation": "Una carretera peligrosa."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
