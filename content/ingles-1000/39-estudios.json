@@ -1,0 +1,797 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "39-estudios",
+      "title": "Misión 39 · Clase y estudios",
+      "units": [
+        {
+          "key": "g-have-to",
+          "type": "pattern",
+          "goal": "Tener que = HAVE TO",
+          "rule": "«Tengo que + verbo» = I have to + verbo: I have to study. Él o ella: HAS to. «No tengo que» (no hace falta) = I don't have to.",
+          "pieces": [
+            {
+              "text": "I have to",
+              "role": "fixed",
+              "hint": "tengo que"
+            },
+            {
+              "text": "study",
+              "role": "slot",
+              "hint": "estudiar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I have to study tonight.",
+              "translation": "Tengo que estudiar esta noche.",
+              "mirror": {
+                "say": "Tengo que estudiar esta noche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estudiar",
+                    "en": "study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has to work on Saturday.",
+              "translation": "Tiene que trabajar el sábado.",
+              "mirror": {
+                "say": "Tiene que trabajar el sábado",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene que",
+                    "en": "has to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabajar",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en sábado",
+                    "en": "on Saturday",
+                    "role": "word",
+                    "from": "el sábado",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You don't have to come.",
+              "translation": "No hace falta que vengas."
+            },
+            {
+              "text": "Do I have to pay?",
+              "translation": "¿Tengo que pagar?"
+            }
+          ],
+          "pitfalls": [
+            "«I must to study» está mal: must va sin TO (I must study).",
+            "«Don't have to» no es prohibido: es que no hace falta."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El PROFESOR señala la pizarra: HAVE TO, HAVE TO.",
+            "emoji": "📚"
+          }
+        },
+        {
+          "key": "teacher",
+          "type": "term",
+          "text": "teacher",
+          "meaning": "profesor, profesora",
+          "pronunciation": "TÍIcher",
+          "examples": [
+            {
+              "text": "Our teacher is very patient.",
+              "translation": "Nuestro profesor tiene mucha paciencia.",
+              "mirror": {
+                "say": "Nuestro profesor tiene mucha paciencia",
+                "pieces": [
+                  {
+                    "es": "Nuestro profesor",
+                    "en": "Our teacher",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "tiene",
+                    "why": "«Tiene mucha paciencia» se dice «es muy paciente»."
+                  },
+                  {
+                    "es": "muy paciente",
+                    "en": "very patient",
+                    "role": "word",
+                    "from": "mucha paciencia"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Ask your teacher.",
+              "translation": "Pregúntale a tu profesor."
+            }
+          ]
+        },
+        {
+          "key": "student",
+          "type": "term",
+          "text": "student",
+          "meaning": "estudiante, alumno",
+          "pronunciation": "STIÚdent",
+          "examples": [
+            {
+              "text": "I'm a student.",
+              "translation": "Soy estudiante.",
+              "mirror": {
+                "say": "Soy estudiante",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un estudiante",
+                    "en": "a student",
+                    "role": "word",
+                    "from": "estudiante",
+                    "why": "Lo que eres lleva «a»: a student."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There are twenty students in my class.",
+              "translation": "Hay veinte alumnos en mi clase."
+            }
+          ]
+        },
+        {
+          "key": "class",
+          "type": "term",
+          "text": "class",
+          "meaning": "clase",
+          "pronunciation": "KLAS",
+          "examples": [
+            {
+              "text": "I have English class today.",
+              "translation": "Hoy tengo clase de inglés.",
+              "mirror": {
+                "say": "Hoy tengo clase de inglés",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "clase",
+                    "en": "class",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  4,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "We're in the same class.",
+              "translation": "Estamos en la misma clase."
+            }
+          ]
+        },
+        {
+          "key": "lesson",
+          "type": "term",
+          "text": "lesson",
+          "meaning": "lección, clase",
+          "pronunciation": "LÉson",
+          "examples": [
+            {
+              "text": "Today's lesson is about verbs.",
+              "translation": "La lección de hoy va de verbos.",
+              "mirror": {
+                "say": "La lección de hoy va de verbos",
+                "pieces": [
+                  {
+                    "es": "La lección",
+                    "en": "lesson",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hoy + 'S",
+                    "en": "Today's",
+                    "role": "word",
+                    "from": "de hoy",
+                    "why": "Hoy como dueño, delante: TODAY'S lesson."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "va"
+                  },
+                  {
+                    "es": "sobre verbos",
+                    "en": "about verbs",
+                    "role": "word",
+                    "from": "de verbos"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Driving lessons.",
+              "translation": "Clases de conducir."
+            }
+          ]
+        },
+        {
+          "key": "homework",
+          "type": "term",
+          "text": "homework",
+          "meaning": "deberes",
+          "pronunciation": "JÓUMuerk",
+          "examples": [
+            {
+              "text": "Did you do your homework?",
+              "translation": "¿Hiciste los deberes?",
+              "mirror": {
+                "say": "¿Hiciste los deberes?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hacer",
+                    "en": "do",
+                    "role": "verb",
+                    "from": "hiciste",
+                    "why": "Con DID el verbo va tal cual: do."
+                  },
+                  {
+                    "es": "TUS deberes",
+                    "en": "your homework",
+                    "role": "word",
+                    "from": "los deberes"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have a lot of homework.",
+              "translation": "Tengo muchos deberes."
+            }
+          ],
+          "notes": "Homework no tiene plural: a lot of homework."
+        },
+        {
+          "key": "exam",
+          "type": "term",
+          "text": "exam",
+          "meaning": "examen",
+          "pronunciation": "igSÁM",
+          "examples": [
+            {
+              "text": "I have an exam on Friday.",
+              "translation": "Tengo un examen el viernes.",
+              "mirror": {
+                "say": "Tengo un examen el viernes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un examen",
+                    "en": "an exam",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en viernes",
+                    "en": "on Friday",
+                    "role": "word",
+                    "from": "el viernes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I passed the exam!",
+              "translation": "¡Aprobé el examen!"
+            }
+          ]
+        },
+        {
+          "key": "pass",
+          "type": "term",
+          "text": "pass",
+          "meaning": "aprobar; pasar",
+          "pronunciation": "PAS",
+          "examples": [
+            {
+              "text": "I hope I pass.",
+              "translation": "Espero aprobar.",
+              "mirror": {
+                "say": "Espero aprobar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "espero",
+                    "en": "hope",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "apruebo",
+                    "en": "pass",
+                    "role": "verb",
+                    "from": "aprobar",
+                    "why": "«Espero aprobar» se dice «espero que YO apruebe»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Pass me the salt.",
+              "translation": "Pásame la sal."
+            }
+          ]
+        },
+        {
+          "key": "fail",
+          "type": "term",
+          "text": "fail",
+          "meaning": "suspender; fallar",
+          "pronunciation": "FÉIL",
+          "examples": [
+            {
+              "text": "He failed maths.",
+              "translation": "Suspendió matemáticas.",
+              "mirror": {
+                "say": "Suspendió matemáticas",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "suspendió",
+                    "en": "failed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "matemáticas",
+                    "en": "maths",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't be afraid to fail.",
+              "translation": "No tengas miedo de fallar."
+            }
+          ]
+        },
+        {
+          "key": "subject",
+          "type": "term",
+          "text": "subject",
+          "meaning": "asignatura; tema",
+          "pronunciation": "SÁBdyekt",
+          "examples": [
+            {
+              "text": "My favourite subject is history.",
+              "translation": "Mi asignatura favorita es historia.",
+              "mirror": {
+                "say": "Mi asignatura favorita es historia",
+                "pieces": [
+                  {
+                    "es": "Mi",
+                    "en": "My",
+                    "role": "word"
+                  },
+                  {
+                    "es": "asignatura",
+                    "en": "subject",
+                    "role": "word"
+                  },
+                  {
+                    "es": "favorita",
+                    "en": "favourite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "historia",
+                    "en": "history",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "What subjects do you study?",
+              "translation": "¿Qué asignaturas estudias?"
+            }
+          ]
+        },
+        {
+          "key": "mark",
+          "type": "term",
+          "text": "mark",
+          "meaning": "nota (calificación)",
+          "pronunciation": "MARK",
+          "examples": [
+            {
+              "text": "I got a good mark.",
+              "translation": "Saqué buena nota.",
+              "mirror": {
+                "say": "Saqué buena nota",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "saqué",
+                    "en": "got",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una buena nota",
+                    "en": "a good mark",
+                    "role": "word",
+                    "from": "buena nota"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What mark did you get?",
+              "translation": "¿Qué nota sacaste?"
+            }
+          ],
+          "notes": "En EE. UU. se dice grade."
+        },
+        {
+          "key": "mistake",
+          "type": "term",
+          "text": "mistake",
+          "meaning": "error, fallo",
+          "pronunciation": "misTÉIK",
+          "examples": [
+            {
+              "text": "Everyone makes mistakes.",
+              "translation": "Todo el mundo comete errores.",
+              "mirror": {
+                "say": "Todo el mundo comete errores",
+                "pieces": [
+                  {
+                    "es": "Todo el mundo",
+                    "en": "Everyone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb",
+                    "from": "comete",
+                    "why": "Cometer un error es MAKE a mistake."
+                  },
+                  {
+                    "es": "errores",
+                    "en": "mistakes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sorry, my mistake.",
+              "translation": "Perdón, fue culpa mía."
+            }
+          ]
+        },
+        {
+          "key": "practice",
+          "type": "term",
+          "text": "practice",
+          "meaning": "práctica; practicar",
+          "pronunciation": "PRÁKtis",
+          "examples": [
+            {
+              "text": "Practice makes perfect.",
+              "translation": "La práctica hace al maestro.",
+              "mirror": {
+                "say": "La práctica hace al maestro",
+                "pieces": [
+                  {
+                    "es": "práctica",
+                    "en": "Practice",
+                    "role": "who",
+                    "from": "La práctica",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "perfecto",
+                    "en": "perfect",
+                    "role": "word",
+                    "from": "al maestro"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I practise every day.",
+              "translation": "Practico todos los días."
+            }
+          ],
+          "notes": "En Reino Unido: practice (nombre) y practise (verbo)."
+        },
+        {
+          "key": "dictionary",
+          "type": "term",
+          "text": "dictionary",
+          "meaning": "diccionario",
+          "pronunciation": "DÍKshonari",
+          "examples": [
+            {
+              "text": "I need a dictionary.",
+              "translation": "Necesito un diccionario.",
+              "mirror": {
+                "say": "Necesito un diccionario",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un diccionario",
+                    "en": "a dictionary",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Look it up in the dictionary.",
+              "translation": "Búscalo en el diccionario."
+            }
+          ]
+        },
+        {
+          "key": "university",
+          "type": "term",
+          "text": "university",
+          "meaning": "universidad",
+          "pronunciation": "iuniVÉRsiti",
+          "examples": [
+            {
+              "text": "She goes to university.",
+              "translation": "Va a la universidad.",
+              "mirror": {
+                "say": "Va a la universidad",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "va",
+                    "en": "goes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a universidad",
+                    "en": "to university",
+                    "role": "word",
+                    "from": "a la universidad",
+                    "why": "Ir a la universidad: to university, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A university degree.",
+              "translation": "Un título universitario."
+            }
+          ],
+          "notes": "Se dice A university (suena «iu»), no «an»."
+        },
+        {
+          "key": "question",
+          "type": "term",
+          "text": "question",
+          "meaning": "pregunta",
+          "pronunciation": "KUÉSchon",
+          "examples": [
+            {
+              "text": "Can I ask a question?",
+              "translation": "¿Puedo hacer una pregunta?",
+              "mirror": {
+                "say": "¿Puedo hacer una pregunta?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "preguntar",
+                    "en": "ask",
+                    "role": "verb",
+                    "from": "hacer",
+                    "why": "Hacer una pregunta es ASK a question."
+                  },
+                  {
+                    "es": "una pregunta",
+                    "en": "a question",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "That's a good question.",
+              "translation": "Buena pregunta."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
