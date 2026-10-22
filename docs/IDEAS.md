@@ -23,6 +23,25 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Más vocabulario hasta 1.000** (meta de 30 días): ciudad, trabajo, viajes, pasado simple, frases para conversar.
 - **[inglés] Arrastre tipo imán** para las piezas de Lego (hoy, botones).
 
+## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)
+
+Ideas, no un cambio de formato: su base es el test de 4 opciones (reconocimiento, pesa poco en Memora).
+
+1. **[experiencia] Mapa de misiones con 4 estados** en la Home: superada, en curso, «conviene repasar» (el motor sabe
+   qué se olvida) y sin empezar. Que se vea el avance y lo que se apaga.
+2. **[experiencia] Contador de fallos que se vacía** («Vacía tus N fallos»): un fallo sale al acertarlo después.
+3. **[contenido] «Reportar un error»** en la ficha o la pregunta: un toque y va a la cola de revisión de Studio.
+4. **[núcleo] «Acerté, pero dudé»:** toque opcional al acertar; el acierto cuenta como poco seguro (regla 9).
+5. **[experiencia] Calendario de actividad** (días estudiados) y **logros honestos** (por memoria real, no por
+   respuestas correctas).
+6. **[inglés] Inglés técnico/profesional** del módulo DAM: vocabulario de desarrollo, correos, CV, pasiva.
+7. **[DAM] Simulacro de examen:** 30 preguntas de todos los temas, 60 min, sin ayudas hasta el final, se aprueba con
+   7, mejor nota. Solo mide: nunca marca «dominado». Con los exámenes de práctica de ILERNA cuando estén en `private/`.
+8. **[DAM] Código comprobado:** compilar el código de las preguntas DAM en la puerta (`private/dam/taught.py`).
+
+No se cogen: elegir nº de preguntas o reloj antes de empezar (fricción), atajos de teclado (el usuario usa iPhone),
+rangos por respuestas correctas (inflan).
+
 ## Ideas anteriores (de la etapa por hitos)
 
 - **Arcade respeta las compuertas de nivel** (H3): el selector del Arcade no debe sacar habilidades «aprendidas»

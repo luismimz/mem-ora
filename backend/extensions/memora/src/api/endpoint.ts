@@ -21,7 +21,7 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, dueUnits, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
 import { buildAssociationSession, buildFlowSession, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
@@ -62,6 +62,9 @@ function newUnitsSince(learner: Learner, dayStart: number): number {
   return Object.values(firstSeen).filter((t) => t >= dayStart).length;
 }
 
+/** Fallos por ronda de «Vacía tus fallos»: corta, para vaciarlos en tandas. */
+const FAILURES_PER_ROUND = 8;
+
 export interface MissionRef {
   key: string;
   title: string;
@@ -75,6 +78,8 @@ export interface SessionState {
   plan: SessionPlan | AssocPlan;
   /** Misión de la sesión: solo entra contenido nuevo de ella (los repasos vencidos, de todo el curso). */
   mission?: MissionRef;
+  /** Ronda especial: «fallos» = solo los fallos pendientes («Vacía tus fallos»). */
+  focus?: 'fallos';
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -159,13 +164,17 @@ export default {
     }
 
     type Mission = { key: string; title: string; units: string[] };
-    /** Avance del alumno en cada misión: unidades trabajadas (alguna habilidad empezada) y aprendidas. */
+    /**
+     * Avance del alumno en cada misión: unidades trabajadas (alguna habilidad empezada) y aprendidas, y cuántas conviene
+     * repasar ya (`due`, el cuarto estado del mapa: lo que se está olvidando).
+     */
     function missionProgress(missions: Mission[], catalog: Catalog, learner: Learner) {
       const worked = new Set(Object.values(learner.skills).filter((x) => x.status !== 'new').map((x) => x.unitId));
+      const dueNow = dueUnits(learner.skills, Date.now());
       const list = missions.map((m, i) => {
         const learned = m.units.filter((u) => ['learned', 'stable', 'mastered'].includes(unitLevel(u, catalog, learner.skills, config).level)).length;
         const done = m.units.filter((u) => worked.has(u)).length;
-        return { key: m.key, title: m.title, index: i + 1, total: m.units.length, worked: done, learned, status: done === 0 ? 'pending' : done === m.units.length ? 'done' : 'active' };
+        return { key: m.key, title: m.title, index: i + 1, total: m.units.length, worked: done, learned, due: m.units.filter((u) => dueNow.has(u)).length, status: done === 0 ? 'pending' : done === m.units.length ? 'done' : 'active' };
       });
       const current = list.find((m) => m.status !== 'done') ?? list[list.length - 1] ?? null;
       return { list, current, worked };
@@ -221,6 +230,7 @@ export default {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
       const wanted = typeof req.query.mission === 'string' && req.query.mission ? req.query.mission : null;
+      const wantFailures = req.query.focus === 'fallos';
       const { units, catalog, missions, changedAt } = await publishedContent(course);
       if (wanted && !missions.some((m) => m.key === wanted)) throw new HttpError(404, 'NOT_FOUND', 'Misión no disponible.');
       const now = Date.now();
@@ -228,7 +238,7 @@ export default {
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first();
       const savedState: SessionState | null = saved ? parse(saved.state) : null;
       // «Continuar aventura» (sin misión) retoma la sesión empezada; elegir una misión la retoma solo si es la misma.
-      const sameMission = !wanted || savedState?.mission?.key === wanted;
+      const sameMission = (!wanted || savedState?.mission?.key === wanted) && (savedState?.focus === 'fallos') === wantFailures;
       const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
       // D-075: si el curso cambió de experiencia (escenas ↔ Flujo), la sesión guardada no se retoma: se crea una nueva.
       const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations');
@@ -236,6 +246,15 @@ export default {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
+      // «Vacía tus fallos»: una ronda solo con los fallos pendientes (sin nuevas ni repasos). Al acertarlos, salen.
+      if (wantFailures && modes.includes('flow')) {
+        const failed = pendingFailures(learner.skills, FAILURES_PER_ROUND).filter((k) => units[k]);
+        const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: [], units, maxNewUnits: 0,
+          errorUnits: failed, practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguageCourse(course) });
+        const state: SessionState = { plan: session, focus: 'fallos', index: 0, outcomes: {}, finished: session.steps.length === 0 };
+        await savePosition(userId, course.id, state, null);
+        return { data: { state, units, resumed: false } };
+      }
       const progress = missionProgress(missions, catalog, learner);
       const target = wanted ?? progress.current?.key ?? null;
       const focus = missions.find((m) => m.key === target);
@@ -255,7 +274,8 @@ export default {
       // Idiomas (inglés intensivo, decisión del usuario 22-oct-2026): sin tope diario; sigue con nuevas mientras la
       // ronda anterior pase del 80 % de aciertos. El resto de cursos mantiene el tope de tres rondas de nuevas al día.
       const isLanguage = isLanguageCourse(course);
-      const prevRound = savedState && savedState.plan.day === today && (savedState.plan as { mode?: string }).mode === 'flow' ? savedState : null;
+      // Una ronda de «Vacía tus fallos» no cuenta para decidir si hay nuevas: ahí se falla más por diseño.
+      const prevRound = savedState && savedState.plan.day === today && (savedState.plan as { mode?: string }).mode === 'flow' && savedState.focus !== 'fallos' ? savedState : null;
       const prevOutcomes = Object.values(prevRound?.outcomes ?? {});
       const flowNew = flowNewUnits({ perRound: newMax, newToday, dailyRounds: isLanguage ? null : 3,
         ...(prevRound ? { lastRound: { answered: prevOutcomes.length, correct: prevOutcomes.filter((o) => o.correct).length } } : {}) });
@@ -438,6 +458,8 @@ export default {
           streak: streak.days,
           shields: streak.shields,
           todayAttempts: learner.activity[String(today)]?.attempts ?? 0,
+          // «Vacía tus fallos»: unidades falladas desde su último acierto.
+          failures: pendingFailures(learner.skills).filter((k) => catalog.units.some((u) => u.id === k)).length,
           // Meta del día (D-081): nuevas de hoy frente a la meta del curso.
           today: { newUnits: newUnitsSince(learner, config.load.dayOriginMs + today * config.load.dayLengthMs), goal: dailyGoal(course) },
           skills: catalog.skills.map((s) => ({ key: s.id, unit: s.unitId, kind: s.kind, status: learner.skills[s.id]?.status ?? 'new', dueAt: learner.skills[s.id]?.dueAt ?? null })),

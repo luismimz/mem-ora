@@ -58,6 +58,8 @@ export interface Mission {
   total: number;
   worked: number;
   learned: number;
+  /** Unidades de la misión que conviene repasar ya (se están olvidando). */
+  due?: number;
   status: 'pending' | 'active' | 'done';
 }
 export interface StudioMission {
@@ -75,6 +77,8 @@ export interface StudioMission {
 export interface SessionState {
   plan: AssocPlan;
   mission?: MissionRef;
+  /** Ronda especial «Vacía tus fallos». */
+  focus?: 'fallos';
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -94,6 +98,8 @@ export interface Progress {
   /** Protectores de racha guardados (D-077). */
   shields?: number;
   todayAttempts?: number;
+  /** Fallos pendientes: unidades falladas desde su último acierto. */
+  failures?: number;
   /** Meta del día (D-081): unidades nuevas de hoy y la meta del curso (en idiomas, 35 ⇒ 1.000 en 30 días). */
   today?: { newUnits: number; goal: number };
   skills: Array<{ key: string; unit: string; kind: string; status: string; dueAt: number | null }>;
@@ -124,7 +130,7 @@ export const api = {
   me: () => request<Me>('GET', '/users/me?fields=id,first_name,email'),
   courses: () => request<Course[]>('GET', '/memora/courses'),
   whoami: () => request<{ staff: boolean }>('GET', '/memora/me'),
-  session: (course: string, mission?: string) => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}`),
+  session: (course: string, mission?: string, focus?: 'fallos') => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}${focus ? `&focus=${focus}` : ''}`),
   missions: (course: string) => request<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
   studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),
   retos: (course: string) => request<{ retos: Reto[] }>('GET', `/memora/retos?course=${encodeURIComponent(course)}`),

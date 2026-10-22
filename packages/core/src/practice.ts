@@ -31,3 +31,23 @@ export function weakUnits(skills: Record<string, SkillState>, limit = 8, exclude
   }
   return [...by.entries()].sort((a, b) => b[1].score - a[1].score || a[1].due - b[1].due).slice(0, limit).map(([k]) => k);
 }
+
+/**
+ * Fallos pendientes («Vacía tus fallos»): unidades con alguna habilidad fallada desde su último acierto, la más reciente
+ * primero. Una unidad sale de aquí en cuanto se acierta esa habilidad (sus fallos seguidos vuelven a 0).
+ */
+export function pendingFailures(skills: Record<string, SkillState>, limit = Infinity): string[] {
+  const last = new Map<string, number>();
+  for (const s of Object.values(skills)) {
+    if (s.attempts === 0 || s.consecutiveFailures === 0) continue;
+    last.set(s.unitId, Math.max(last.get(s.unitId) ?? 0, s.lastAttemptAt ?? 0));
+  }
+  return [...last.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit).map(([k]) => k);
+}
+
+/** Unidades que conviene repasar ya: alguna habilidad trabajada vence en `now` o antes. */
+export function dueUnits(skills: Record<string, SkillState>, now: number): Set<string> {
+  const out = new Set<string>();
+  for (const s of Object.values(skills)) if (s.attempts > 0 && s.dueAt !== null && s.dueAt <= now) out.add(s.unitId);
+  return out;
+}
