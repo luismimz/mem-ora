@@ -196,6 +196,8 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
  */
 function PatternFace({ unit }: { unit: SessionUnit }) {
   const p = unit.payload as PatternPayload;
+  // D-082: el espejo en movimiento con su primera frase (si la tiene), en la misma tarjeta del truco.
+  const first = (p.examples as Array<{ text: string; mirror?: Mirror }>).find((e) => e.mirror);
   const voice = audioEnabled();
   const say = (text: string) => (voice ? <button type="button" className="say" aria-label={`Escuchar «${text}»`} onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button> : null);
   return (
@@ -203,6 +205,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
       <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🪞'}</div>
       <h2 className="pattern-goal">{p.goal}</h2>
       {unit.association?.text && <p className="face-story"><Marked text={unit.association.text} /></p>}
+      {first ? <MirrorAnim unit={unit} m={first.mirror!} text={first.text} /> : (
       <div className="mirror" role="list" aria-label="Pieza a pieza">
         {p.pieces.map((x, i) => (
           <span key={i} role="listitem" className={`piece ${x.role}`}>
@@ -210,7 +213,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
             {x.hint && <small>{x.hint}</small>}
           </span>
         ))}
-      </div>
+      </div>)}
       <p className="pattern-rule">{p.rule}</p>
       <div className="face-learn">
         <p className="learn-label">{p.examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>
@@ -340,8 +343,8 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
       <p className="tag">🧩 CONSTRUYE LA FRASE</p>
       <h3 className="ask build-es">«{ex.translation}»</h3>
       {ex.mirror && done === null && (help
-        ? <TrainBody unit={unit} m={ex.mirror} text={ex.text} compact />
-        : <button type="button" className="train-help" onClick={() => setHelp(true)}>🚂 ¿Cómo se construye?</button>)}
+        ? <MirrorAnim unit={unit} m={ex.mirror} text={ex.text} compact />
+        : <button type="button" className="train-help" onClick={() => setHelp(true)}>🪞 ¿Cómo se construye?</button>)}
       <div className="build-line" aria-label="Tu frase" lang={unit.language}>
         {chosen.length ? chosen.map((i) => <button type="button" key={i} className="tile on" onClick={() => toggle(i)}>{bank[i]!.w}</button>) : <span className="build-empty">Toca las palabras en orden</span>}
       </div>
@@ -374,81 +377,79 @@ type TrainStage = 'say' | 'ghost' | 'swap' | 'flip' | 'jump' | 'done';
  * a pieza al inglés → y, en las preguntas, el ayudante SALTA delante. Cada papel tiene siempre su color (quién azul,
  * ayudante naranja, acción verde, semáforo rojo), en toda la app. Lo hace el alumno con el dedo, paso a paso.
  */
-function TrainBody({ unit, m, text, compact = false, onDone }: { unit: SessionUnit; m: Mirror; text: string; compact?: boolean; onDone?: () => void }) {
+/** Tiempos de la animación del espejo (ms): lo que dices → en español completo → en inglés → el salto. */
+const MORPH_MS = [1100, 1700, 1500, 1200];
+
+/**
+ * El espejo en movimiento (D-082, simplificado): UNA fila de fichas que se transforma sola, sin toques. Primero lo que
+ * dices («¿Tienes hambre?»); después la misma frase completa en español, con el pronombre que se esconde (👻 TÚ) y la
+ * ficha cambiada (tienes → estás); las fichas se dan la vuelta al inglés con su color; y, si el orden cambia, la pieza
+ * salta (el ayudante delante en las preguntas). Termina con la frase, su voz y «↻» para verlo otra vez.
+ */
+function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: Mirror; text: string; compact?: boolean }) {
   const order = m.order ?? m.pieces.map((_, i) => i);
   const jumps = order.some((v, i) => v !== i);
-  const stages = useMemo<TrainStage[]>(() => [
-    ...(compact ? [] : ['say' as const]),
-    ...(m.pieces.some((p) => p.ghost) ? ['ghost' as const] : []),
-    ...(m.pieces.some((p) => p.from) ? ['swap' as const] : []),
-    'flip',
-    ...(jumps ? ['jump' as const] : []),
-    'done',
-  ], [m, jumps, compact]);
-  const [at, setAt] = useState(0);
-  const stage = stages[at]!;
-  const passed = (s: TrainStage) => stages.indexOf(s) >= 0 && at > stages.indexOf(s);
-  const go = () => setAt((a) => Math.min(stages.length - 1, a + 1));
+  const last = jumps ? 3 : 2;
+  const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const [phase, setPhase] = useState(reduced ? last + 1 : 0);
+  const [run, setRun] = useState(0);
   useEffect(() => {
-    if (stage !== 'done') return;
-    if (audioEnabled()) speak(text, unit.language);
-    sfx('party');
-    onDone?.();
-  }, [stage]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (phase > last) return;
+    const t = setTimeout(() => setPhase((p) => p + 1), MORPH_MS[phase]);
+    return () => clearTimeout(t);
+  }, [phase, last, run]);
+  const done = phase > last;
+  useEffect(() => { if (done && audioEnabled()) speak(text, unit.language); }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
+  const english = phase >= 2;
+  const shownOrder = phase >= 3 ? order : m.pieces.map((_, i) => i);
+  const question = m.say.trim().startsWith('¿');
+  const spanishFull = m.pieces.filter((p) => p.role !== 'signal').map((p) => p.es).join(' ');
   const helperJumps = jumps && order.findIndex((i) => m.pieces[i]!.role === 'helper') < order.findIndex((i) => m.pieces[i]!.role === 'who');
-  const english = passed('jump') || (!jumps && passed('flip')) ? order : m.pieces.map((_, i) => i);
-  const tip: Record<TrainStage, string> = {
-    say: '¿Cómo lo dirías en inglés? Primero, dilo completo en español.',
-    ghost: '👆 Toca el hueco: el español esconde a alguien.',
-    swap: '👆 Toca la ficha ⚡: en inglés es otra.',
-    flip: '👆 Dale la vuelta: pieza a pieza al inglés.',
-    jump: helperJumps ? '👆 Es una pregunta: ¡haz saltar al ayudante delante!' : '👆 En inglés el orden cambia: ¡haz saltar la pieza!',
-    done: compact ? '¡Así se construye! Ahora, tú.' : '¡Así se construye! Desliza para practicarlo.',
-  };
+  const swaps = m.pieces.filter((p) => p.from);
+  const caption = phase === 0 ? 'Lo que dices…'
+    : phase === 1 ? <>En español completo: <b>{question ? `¿${spanishFull}?` : spanishFull}</b></>
+    : phase === 2 ? 'Pieza a pieza al inglés'
+    : phase === 3 ? (helperJumps ? '¡El ayudante salta delante!' : '¡En inglés, la pieza salta!')
+    : null;
   return (
-    <div className={`train-body ${compact ? 'compact' : ''}`}>
-      <div className="wagon w1"><small>1 · LO QUE DICES</small><p className="say-line">{m.say}</p></div>
-      {(compact || at >= 1) && (
-        <div className="wagon w2"><small>2 · TU FRASE COMPLETA EN ESPAÑOL</small>
-          <div className="chips">
-            {m.pieces.map((p, i) => (p.role === 'signal' ? null : p.ghost && !passed('ghost') ? (
-              <button type="button" key={i} className={`chip ghost ${stage === 'ghost' ? 'pulse' : ''}`} onClick={() => stage === 'ghost' && go()} aria-label="Despertar al pronombre escondido">👻<b>?</b></button>
-            ) : p.from && !passed('swap') ? (
-              <button type="button" key={i} className={`chip swap role-${p.role} ${stage === 'swap' ? 'pulse' : ''}`} onClick={() => stage === 'swap' && go()}><b>{p.from}</b><small>⚡ toca</small></button>
-            ) : (
-              <span key={i} className={`chip role-${p.role} ${p.ghost ? 'woke' : ''} ${p.from ? 'swapped' : ''}`}><b>{p.es}</b><small>{p.ghost ? '👻 apareció' : p.from ? `antes «${p.from}»` : ROLE_LABEL[p.role]}</small></span>
-            )))}
-          </div>
-          {passed('swap') && m.pieces.filter((p) => p.from && p.why).map((p, i) => <p key={i} className="why">⚡ {p.from} → {p.es}: {p.why}</p>)}
+    <div className={`morph ${compact ? 'compact' : ''}`}>
+      {phase === 0 ? <p className="morph-say">{m.say}</p> : (
+        <div className="morph-row" lang={english ? unit.language : 'es'}>
+          {shownOrder.map((i) => {
+            const p = m.pieces[i]!;
+            if (p.role === 'signal' && !english) return null;
+            const moved = phase >= 3 && order.indexOf(i) !== i;
+            const label = english ? (p.role === 'signal' ? `🚦 ${p.en}` : p.en) : p.es;
+            return (
+              <span key={`${i}-${english ? 'en' : 'es'}`} className={`chip role-${p.role} ${english ? 'flip' : p.ghost ? 'pop' : 'in'} ${moved ? 'hop' : ''}`}>
+                {!english && p.ghost && <i className="ghost-tag" aria-hidden="true">👻</i>}
+                {!english && p.from && <s className="was">{p.from}</s>}
+                <b>{label}</b>
+              </span>
+            );
+          })}
         </div>
       )}
-      {passed('flip') && (
-        <div className="wagon w3"><small>3 · EN INGLÉS</small>
-          <div className="chips" lang={unit.language}>
-            {english.map((i, pos) => {
-              const p = m.pieces[i]!;
-              const moved = passed('jump') && order.indexOf(i) !== i;
-              return <span key={i} className={`chip en role-${p.role} ${moved ? 'hop' : 'flip'}`} style={{ animationDelay: `${moved ? 0 : pos * 120}ms` }}><b>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{ROLE_LABEL[p.role]}</small></span>;
-            })}
-          </div>
+      {caption && <p className="morph-cap">{caption}</p>}
+      {phase === 1 && swaps.some((p) => p.why) && <p className="why">⚡ {swaps.map((p) => `${p.from} → ${p.es}`).join(', ')}: {swaps.find((p) => p.why)!.why}</p>}
+      {done && (
+        <div className="morph-end">
+          <p className="train-final" lang={unit.language}>{text}</p>
+          {audioEnabled() && <button type="button" className="say" aria-label="Escuchar" onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button>}
+          <button type="button" className="morph-again" aria-label="Verlo otra vez" onClick={(e) => { e.stopPropagation(); setPhase(0); setRun((r) => r + 1); }}>↻</button>
         </div>
       )}
-      {stage === 'done' && <p className="train-final" lang={unit.language}>{text} {audioEnabled() && <button type="button" className="say" aria-label="Escuchar" onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button>}</p>}
-      <p className="train-tip">{tip[stage]}</p>
-      {(stage === 'say' || stage === 'flip' || stage === 'jump') && <button type="button" className="train-go" onClick={go}>{stage === 'say' ? 'Empezar →' : stage === 'flip' ? '🔄 Dale la vuelta' : helperJumps ? '🦘 ¡Salta!' : '🦘 ¡Salta!'}</button>}
-      {!compact && <div className="train-dots" aria-hidden="true">{stages.slice(0, -1).map((s, i) => <i key={s} className={i < at ? 'on' : ''} />)}</div>}
-      {stage === 'done' && <Confetti burst={1} />}
     </div>
   );
 }
 
+/** Sesiones guardadas con la tarjeta antigua del tren: se muestra la animación en un paso. */
 function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; onNext: () => void }) {
   const ex = (unit.payload as { examples: Array<{ text: string; mirror?: Mirror }> }).examples[example]!;
-  const [done, setDone] = useState(false);
   return (
-    <Slide tone={hue(unit.key)} onNext={done ? onNext : undefined} className="train">
-      <p className="tag">🚂 EL TREN DE LA FRASE</p>
-      <TrainBody unit={unit} m={ex.mirror!} text={ex.text} onDone={() => setDone(true)} />
+    <Slide tone={hue(unit.key)} onNext={onNext} className="train">
+      <p className="tag">🪞 CÓMO SE CONSTRUYE</p>
+      <MirrorAnim unit={unit} m={ex.mirror!} text={ex.text} />
     </Slide>
   );
 }

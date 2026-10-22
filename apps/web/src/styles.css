@@ -628,3 +628,20 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .train-body.compact .wagon { padding: .45rem .6rem .55rem; }
 .train-body.compact .say-line { font-size: 1.15rem; }
 .train-help { align-self: center; border: 1px dashed rgba(255,255,255,.55); background: rgba(255,255,255,.08); color: #fff; border-radius: 1rem; padding: .55rem .9rem; font-weight: 800; font-size: .95rem; }
+
+/* ═══ D-082 (simplificado): el espejo en movimiento, en una sola fila ═══ */
+.morph { display: flex; flex-direction: column; align-items: center; gap: .55rem; padding: .75rem .6rem; border-radius: 1.2rem; background: rgba(0,0,0,.2); min-height: 10.5rem; justify-content: center; width: 100%; box-sizing: border-box; }
+.morph.compact { min-height: 7rem; padding: .55rem .5rem; }
+.morph-say { margin: 0; font-size: clamp(1.5rem, 7vw, 2rem); font-weight: 950; animation: woke .45s ease; }
+.morph-row { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; }
+.morph-row .chip { position: relative; padding: .5rem .75rem; min-width: 0; }
+.morph-row .chip b { font-size: 1.25rem; }
+.morph-row .chip.in { animation: woke .4s ease both; }
+.morph-row .chip.pop { animation: woke .7s cubic-bezier(.2, 1.6, .3, 1) both; box-shadow: 0 0 0 3px rgba(255,255,255,.75); }
+.morph-row .chip .ghost-tag { position: absolute; top: -.7rem; right: -.5rem; font-style: normal; font-size: 1rem; animation: pulse .9s ease 2; }
+.morph-row .chip .was { position: absolute; top: -.95rem; left: 50%; transform: translateX(-50%); font-size: .7rem; font-weight: 800; color: #ffd76a; white-space: nowrap; }
+.morph-cap { margin: 0; text-align: center; font-weight: 800; font-size: .95rem; }
+.morph-cap b { color: #ffd76a; }
+.morph-end { display: flex; align-items: center; gap: .5rem; }
+.morph-end .train-final { font-size: clamp(1.3rem, 6vw, 1.7rem); }
+.morph-again { border: 0; width: 2.3rem; height: 2.3rem; border-radius: 50%; background: rgba(255,255,255,.18); color: #fff; font-size: 1.15rem; font-weight: 900; }

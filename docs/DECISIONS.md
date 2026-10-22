@@ -785,3 +785,8 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   y en los ejemplos de las misiones 1 y 2; el resto, vuelta a vuelta.
 - **Empezar de cero (usuario):** en Perfil, con dos toques, borra el progreso del alumno en un curso tras guardar una
   copia en Archivos de Studio (si la copia falla, no borra nada).
+- **Simplificado (usuario, 22-oct-2026):** «entre más pasos, más difícil de recordar». El tren pasa a ser el **espejo en
+  movimiento**: una sola fila de fichas que se transforma sola dentro de la ficha del truco (lo que dices → en español
+  completo con 👻 y la ficha cambiada → al inglés → el salto), sin toques obligatorios y con «↻» para repetir. Sin
+  tarjeta aparte: truco → construir otra frase.
+

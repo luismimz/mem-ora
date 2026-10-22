@@ -144,14 +144,8 @@ export function buildFlowSession(input: {
     const skill = units[u]!.skills.find((s) => s.kind === 'apply') ?? units[u]!.skills.find((s) => s.kind === 'recall');
     return skill ? { kind: 'burst', unitKey: u, scene: -4, skillKey: skill.key, ...tag(u) } : null;
   };
-  // D-082: el tren de la frase — cómo se construye desde el español. Solo lo nuevo y los errores: es un andamio que
-  // se retira (en los repasos ya no sale).
-  const train = (u: string): Draft | null => {
-    if (units[u]!.type !== 'pattern' || (known.has(u) && focus(u) !== 'errors')) return null;
-    const n = mirrorExamples(units[u]!)[0];
-    return n === undefined ? null : { kind: 'train', unitKey: u, scene: -4, example: n, ...tag(u) };
-  };
-  // Construir una frase distinta de la del tren, si la hay.
+  // D-082 (simplificado): el espejo en movimiento va dentro de la ficha del truco (un solo paso, sin tarjeta aparte).
+  // Después se construye una frase DISTINTA de la que se ha visto animada, si la hay.
   const buildAfter = (u: string, shown?: number): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'produce');
     const options = buildableExamples(units[u]!);
@@ -169,9 +163,7 @@ export function buildFlowSession(input: {
     // escribiendo. La gramática se practica construyendo una de sus frases.
     pair.forEach((u, j) => {
       if (units[u]!.type === 'pattern') {
-        const t = train(u);
-        if (t) base.push(t);
-        base.push(levelUp(u) ?? buildAfter(u, t?.example) ?? quick(u));
+        base.push(levelUp(u) ?? buildAfter(u, mirrorExamples(units[u]!)[0]) ?? quick(u));
         return;
       }
       base.push(burst(u) ?? levelUp(u) ?? (j === 0 ? (listen(u) ?? quick(u)) : judge(u)));

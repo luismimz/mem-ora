@@ -188,7 +188,7 @@ describe('Ráfaga: los juegos de los pilares (D-081)', () => {
   });
 });
 
-describe('el tren de la frase (D-082)', () => {
+describe('el espejo en movimiento (D-082, en un solo paso)', () => {
   const pattern: SessionUnit = {
     key: 'q1', type: 'pattern', language: 'en',
     payload: { goal: 'Preguntar', rule: 'el ayudante salta', pieces: [{ text: 'Are', role: 'fixed' }, { text: 'you', role: 'slot' }], examples: [
@@ -200,19 +200,9 @@ describe('el tren de la frase (D-082)', () => {
   } as unknown as SessionUnit;
   const lang = { ...base, units: { ...units, q1: pattern } };
 
-  it('lo nuevo: ficha del truco → tren de la frase → construir OTRA frase', () => {
+  it('lo nuevo: la ficha del truco (con su espejo animado dentro) y enseguida construir OTRA frase; sin tarjeta extra', () => {
     const plan = buildFlowSession({ ...lang, items: [item('q1', 'new')] });
-    expect(plan.steps.filter((s) => s.unitKey === 'q1' && !s.retry).map((s) => [s.kind, s.example])).toEqual([['reel', undefined], ['train', 0], ['build', 1]]);
-  });
-
-  it('en los repasos el tren ya no sale (el andamio se retira)', () => {
-    const plan = buildFlowSession({ ...lang, items: [item('q1', 'review')] });
+    expect(plan.steps.filter((s) => s.unitKey === 'q1' && !s.retry).map((s) => [s.kind, s.example])).toEqual([['reel', undefined], ['build', 1]]);
     expect(plan.steps.some((s) => s.kind === 'train')).toBe(false);
   });
-
-  it('si se falló, vuelve a salir el tren (está en «tus errores»)', () => {
-    const plan = buildFlowSession({ ...lang, items: [], errorUnits: ['q1'] });
-    expect(plan.steps.some((s) => s.kind === 'train' && s.unitKey === 'q1')).toBe(true);
-  });
 });
-
