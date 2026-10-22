@@ -1,0 +1,785 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "55-aeropuerto",
+      "title": "Misión 55 · En el aeropuerto",
+      "units": [
+        {
+          "key": "g-ever",
+          "type": "pattern",
+          "goal": "¿Has estado alguna vez…? = HAVE YOU EVER BEEN…?",
+          "rule": "Para experiencias: Have you ever + participio? (Have you ever been to London?). Respuesta: Yes, I have / No, never.",
+          "pieces": [
+            {
+              "text": "Have you ever",
+              "role": "fixed",
+              "hint": "¿alguna vez has"
+            },
+            {
+              "text": "been to London",
+              "role": "slot",
+              "hint": "estado en Londres"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Have you ever been to London?",
+              "translation": "¿Has estado alguna vez en Londres?",
+              "mirror": {
+                "say": "¿Has estado alguna vez en Londres?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "alguna vez",
+                    "en": "ever",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a Londres",
+                    "en": "to London",
+                    "role": "word",
+                    "from": "en Londres",
+                    "why": "Haber estado EN un sitio es been TO."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I've never flown.",
+              "translation": "Nunca he volado.",
+              "mirror": {
+                "say": "Nunca he volado",
+                "pieces": [
+                  {
+                    "es": "Nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "he",
+                    "en": "I've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "volado",
+                    "en": "flown",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Yes, I have.",
+              "translation": "Sí."
+            },
+            {
+              "text": "No, never.",
+              "translation": "No, nunca."
+            }
+          ],
+          "pitfalls": [
+            "«Have you ever been in London?» suena raro: been TO London.",
+            "Fly es irregular: fly, flew, flown."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "EVER es una MALETA llena de PEGATINAS de viajes.",
+            "emoji": "✈️"
+          }
+        },
+        {
+          "key": "luggage",
+          "type": "term",
+          "text": "luggage",
+          "meaning": "equipaje",
+          "pronunciation": "LÁguich",
+          "examples": [
+            {
+              "text": "How much luggage do you have?",
+              "translation": "¿Cuánto equipaje llevas?",
+              "mirror": {
+                "say": "¿Cuánto equipaje llevas?",
+                "pieces": [
+                  {
+                    "es": "Cuánto equipaje",
+                    "en": "How much luggage",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "llevas"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My luggage is lost.",
+              "translation": "Mi equipaje se ha perdido."
+            }
+          ],
+          "notes": "No se cuenta: much luggage, nunca «luggages»."
+        },
+        {
+          "key": "platform",
+          "type": "term",
+          "text": "platform",
+          "meaning": "andén",
+          "pronunciation": "PLÁTform",
+          "examples": [
+            {
+              "text": "The train leaves from platform 4.",
+              "translation": "El tren sale del andén 4.",
+              "mirror": {
+                "say": "El tren sale del andén 4",
+                "pieces": [
+                  {
+                    "es": "El tren",
+                    "en": "The train",
+                    "role": "who"
+                  },
+                  {
+                    "es": "sale",
+                    "en": "leaves",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "de andén",
+                    "en": "from platform",
+                    "role": "word",
+                    "from": "del andén",
+                    "why": "Los andenes numerados van sin «the»: platform 4."
+                  },
+                  {
+                    "es": "4",
+                    "en": "4",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wait on the platform.",
+              "translation": "Espera en el andén."
+            }
+          ]
+        },
+        {
+          "key": "boarding-pass",
+          "type": "term",
+          "text": "boarding pass",
+          "meaning": "tarjeta de embarque",
+          "pronunciation": "BÓRding pas",
+          "examples": [
+            {
+              "text": "Show me your boarding pass.",
+              "translation": "Enséñame la tarjeta de embarque.",
+              "mirror": {
+                "say": "Enséñame la tarjeta de embarque",
+                "pieces": [
+                  {
+                    "es": "Enseña",
+                    "en": "Show",
+                    "role": "verb",
+                    "from": "Enséñame",
+                    "why": "Lo pegado se separa: show ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TU tarjeta de embarque",
+                    "en": "your boarding pass",
+                    "role": "word",
+                    "from": "la tarjeta de embarque"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I printed my boarding pass.",
+              "translation": "He imprimido la tarjeta de embarque."
+            }
+          ]
+        },
+        {
+          "key": "gate",
+          "type": "term",
+          "text": "gate",
+          "meaning": "puerta (de embarque)",
+          "pronunciation": "GUÉIT",
+          "examples": [
+            {
+              "text": "Go to gate 12.",
+              "translation": "Vaya a la puerta 12.",
+              "mirror": {
+                "say": "Vaya a la puerta 12",
+                "pieces": [
+                  {
+                    "es": "Vaya",
+                    "en": "Go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a puerta",
+                    "en": "to gate",
+                    "role": "word",
+                    "from": "a la puerta",
+                    "why": "Las puertas numeradas van sin «the»: gate 12."
+                  },
+                  {
+                    "es": "12",
+                    "en": "12",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The gate is closed.",
+              "translation": "La puerta está cerrada."
+            }
+          ]
+        },
+        {
+          "key": "seat",
+          "type": "term",
+          "text": "seat",
+          "meaning": "asiento",
+          "pronunciation": "SIIT",
+          "examples": [
+            {
+              "text": "Is this seat free?",
+              "translation": "¿Está libre este asiento?",
+              "mirror": {
+                "say": "¿Está libre este asiento?",
+                "pieces": [
+                  {
+                    "es": "Está",
+                    "en": "Is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "libre",
+                    "en": "free",
+                    "role": "word"
+                  },
+                  {
+                    "es": "este asiento",
+                    "en": "this seat",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Take a seat.",
+              "translation": "Siéntate."
+            }
+          ]
+        },
+        {
+          "key": "aisle",
+          "type": "term",
+          "text": "aisle",
+          "meaning": "pasillo (avión, súper)",
+          "pronunciation": "ÁIL",
+          "examples": [
+            {
+              "text": "An aisle seat, please.",
+              "translation": "Un asiento de pasillo, por favor.",
+              "mirror": {
+                "say": "Un asiento de pasillo, por favor",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "An",
+                    "role": "word"
+                  },
+                  {
+                    "es": "asiento",
+                    "en": "seat",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de pasillo",
+                    "en": "aisle",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Milk is in aisle 5.",
+              "translation": "La leche está en el pasillo 5."
+            }
+          ],
+          "notes": "La s no suena: ÁIL."
+        },
+        {
+          "key": "departure",
+          "type": "term",
+          "text": "departure",
+          "meaning": "salida",
+          "pronunciation": "diPÁRcher",
+          "examples": [
+            {
+              "text": "Check the departure time.",
+              "translation": "Mira la hora de salida.",
+              "mirror": {
+                "say": "Mira la hora de salida",
+                "pieces": [
+                  {
+                    "es": "Comprueba",
+                    "en": "Check",
+                    "role": "verb",
+                    "from": "Mira"
+                  },
+                  {
+                    "es": "la",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hora",
+                    "en": "time",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de salida",
+                    "en": "departure",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Departures are upstairs.",
+              "translation": "Las salidas están arriba."
+            }
+          ]
+        },
+        {
+          "key": "arrival",
+          "type": "term",
+          "text": "arrival",
+          "meaning": "llegada",
+          "pronunciation": "aRÁIval",
+          "examples": [
+            {
+              "text": "Arrivals are on the ground floor.",
+              "translation": "Las llegadas están en la planta baja.",
+              "mirror": {
+                "say": "Las llegadas están en la planta baja",
+                "pieces": [
+                  {
+                    "es": "Las llegadas",
+                    "en": "Arrivals",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sobre la planta baja",
+                    "en": "on the ground floor",
+                    "role": "word",
+                    "from": "en la planta baja",
+                    "why": "Las plantas van con ON: on the first floor."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The arrival time is 6 pm.",
+              "translation": "La hora de llegada es a las 6 de la tarde."
+            }
+          ]
+        },
+        {
+          "key": "customs",
+          "type": "term",
+          "text": "customs",
+          "meaning": "aduana",
+          "pronunciation": "KÁStoms",
+          "examples": [
+            {
+              "text": "We went through customs.",
+              "translation": "Pasamos la aduana.",
+              "mirror": {
+                "say": "Pasamos la aduana",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pasamos",
+                    "en": "went through",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aduana",
+                    "en": "customs",
+                    "role": "word",
+                    "from": "la aduana",
+                    "why": "Customs va sin «the» y siempre con s."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Customs officers.",
+              "translation": "Agentes de aduanas."
+            }
+          ]
+        },
+        {
+          "key": "journey",
+          "type": "term",
+          "text": "journey",
+          "meaning": "viaje (trayecto)",
+          "pronunciation": "YÉRni",
+          "examples": [
+            {
+              "text": "How was your journey?",
+              "translation": "¿Qué tal el viaje?",
+              "mirror": {
+                "say": "¿Qué tal el viaje?",
+                "pieces": [
+                  {
+                    "es": "Cómo",
+                    "en": "How",
+                    "role": "word",
+                    "from": "Qué tal"
+                  },
+                  {
+                    "es": "FUE",
+                    "en": "was",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "TU viaje",
+                    "en": "your journey",
+                    "role": "word",
+                    "from": "el viaje"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A long journey.",
+              "translation": "Un trayecto largo."
+            }
+          ],
+          "notes": "Journey es el trayecto; trip, el viaje entero."
+        },
+        {
+          "key": "backpack",
+          "type": "term",
+          "text": "backpack",
+          "meaning": "mochila",
+          "pronunciation": "BÁKpak",
+          "examples": [
+            {
+              "text": "My backpack is too heavy.",
+              "translation": "Mi mochila pesa demasiado.",
+              "mirror": {
+                "say": "Mi mochila pesa demasiado",
+                "pieces": [
+                  {
+                    "es": "Mi mochila",
+                    "en": "My backpack",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es demasiado pesada",
+                    "en": "is too heavy",
+                    "role": "word",
+                    "from": "pesa demasiado",
+                    "why": "Pesar mucho es «ser pesado»: is too heavy."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Travelling with a backpack.",
+              "translation": "Viajar con mochila."
+            }
+          ]
+        },
+        {
+          "key": "hostel",
+          "type": "term",
+          "text": "hostel",
+          "meaning": "albergue",
+          "pronunciation": "JÓStel",
+          "examples": [
+            {
+              "text": "We're staying at a hostel.",
+              "translation": "Nos alojamos en un albergue.",
+              "mirror": {
+                "say": "Nos alojamos en un albergue",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper",
+                    "from": "Nos"
+                  },
+                  {
+                    "es": "alojando",
+                    "en": "staying",
+                    "role": "verb",
+                    "from": "alojamos"
+                  },
+                  {
+                    "es": "en un albergue",
+                    "en": "at a hostel",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Hostels are cheap.",
+              "translation": "Los albergues son baratos."
+            }
+          ]
+        },
+        {
+          "key": "passenger",
+          "type": "term",
+          "text": "passenger",
+          "meaning": "pasajero",
+          "pronunciation": "PÁsenyer",
+          "examples": [
+            {
+              "text": "All passengers must show their passports.",
+              "translation": "Todos los pasajeros deben enseñar el pasaporte.",
+              "mirror": {
+                "say": "Todos los pasajeros deben enseñar el pasaporte",
+                "pieces": [
+                  {
+                    "es": "Todos pasajeros",
+                    "en": "All passengers",
+                    "role": "who",
+                    "from": "Todos los pasajeros",
+                    "why": "Todos los… va sin «the»: all passengers."
+                  },
+                  {
+                    "es": "deben",
+                    "en": "must",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enseñar",
+                    "en": "show",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "SUS pasaportes",
+                    "en": "their passports",
+                    "role": "word",
+                    "from": "el pasaporte"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bus has 40 passengers.",
+              "translation": "El autobús lleva 40 pasajeros."
+            }
+          ]
+        },
+        {
+          "key": "land",
+          "type": "term",
+          "text": "land",
+          "meaning": "aterrizar; tierra",
+          "pronunciation": "LAND",
+          "examples": [
+            {
+              "text": "We land at nine.",
+              "translation": "Aterrizamos a las nueve.",
+              "mirror": {
+                "say": "Aterrizamos a las nueve",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "aterrizamos",
+                    "en": "land",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las nueve",
+                    "en": "at nine",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The plane landed safely.",
+              "translation": "El avión aterrizó sin problemas."
+            }
+          ]
+        },
+        {
+          "key": "return-ticket",
+          "type": "term",
+          "text": "return ticket",
+          "meaning": "billete de ida y vuelta",
+          "pronunciation": "riTÉRN tiket",
+          "examples": [
+            {
+              "text": "A return ticket to Madrid, please.",
+              "translation": "Un billete de ida y vuelta a Madrid, por favor.",
+              "mirror": {
+                "say": "Un billete de ida y vuelta a Madrid, por favor",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "billete",
+                    "en": "ticket",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de ida y vuelta",
+                    "en": "return",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a Madrid",
+                    "en": "to Madrid",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A single or a return?",
+              "translation": "¿Solo ida o ida y vuelta?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

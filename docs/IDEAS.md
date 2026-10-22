@@ -24,8 +24,9 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   viajes + going to, trabajo + comparativos), 22 (inglés profesional) y 23–26 (tiempo, ropa, emociones, fechas) 27–30
   (adjetivos, animales, compras, salud), 31–34 (familia, ocio, naturaleza, cocina) , 35–38 (verbos, futuro, moverse,
   conversación) 39–42 (estudios, tecnología, carácter, objetos), 43–46 (verbos frasales, opiniones, fechas y números, hotel) 47–50
-  (acciones y sentidos, comida 2, profesiones, proponer y felicitar) y 51–54 (deporte, casa 2, emociones 2, verbos 7):
-  808 palabras. Siguiente: viajes 2, cuerpo y salud 2, escuela y oficina, tiempo libre 2, adverbios y conectores 2.
+  (acciones y sentidos, comida 2, profesiones, proponer y felicitar) 51–54 (deporte, casa 2, emociones 2, verbos 7) y
+  55–58 (aeropuerto, cuerpo 2, clase y oficina, aficiones): 868 palabras. Siguiente: ciudad 2, adverbios y
+  conectores 2, verbos 8, adjetivos 2, frases para conversar 4.
 - ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).
 
 ## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)

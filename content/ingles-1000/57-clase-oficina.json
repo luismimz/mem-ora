@@ -1,0 +1,736 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "57-clase-oficina",
+      "title": "Misión 57 · En clase y en la oficina",
+      "units": [
+        {
+          "key": "g-it-takes",
+          "type": "pattern",
+          "goal": "Tardo 20 minutos = IT TAKES ME 20 minutes",
+          "rule": "Para el tiempo que cuesta algo: it takes (me) + tiempo. It takes me 20 minutes to get to school. How long does it take?",
+          "pieces": [
+            {
+              "text": "It takes me",
+              "role": "fixed",
+              "hint": "tardo"
+            },
+            {
+              "text": "20 minutes",
+              "role": "slot",
+              "hint": "20 minutos"
+            }
+          ],
+          "examples": [
+            {
+              "text": "It takes me twenty minutes to get to school.",
+              "translation": "Tardo veinte minutos en llegar a clase.",
+              "mirror": {
+                "say": "Tardo veinte minutos en llegar a clase",
+                "pieces": [
+                  {
+                    "es": "ESO me lleva",
+                    "en": "It takes me",
+                    "role": "helper",
+                    "from": "Tardo",
+                    "why": "Tardar es «a mí me lleva»: it takes me."
+                  },
+                  {
+                    "es": "veinte minutos",
+                    "en": "twenty minutes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para llegar",
+                    "en": "to get",
+                    "role": "verb",
+                    "from": "en llegar"
+                  },
+                  {
+                    "es": "a la escuela",
+                    "en": "to school",
+                    "role": "word",
+                    "from": "a clase"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How long does it take?",
+              "translation": "¿Cuánto se tarda?",
+              "mirror": {
+                "say": "¿Cuánto se tarda?",
+                "pieces": [
+                  {
+                    "es": "Cuánto tiempo",
+                    "en": "How long",
+                    "role": "word",
+                    "from": "Cuánto"
+                  },
+                  {
+                    "es": "",
+                    "en": "does",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "lleva",
+                    "en": "take",
+                    "role": "verb",
+                    "from": "se tarda"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It takes two hours by train.",
+              "translation": "En tren son dos horas."
+            },
+            {
+              "text": "It won't take long.",
+              "translation": "No tardaré mucho."
+            }
+          ],
+          "pitfalls": [
+            "«I take twenty minutes» suena raro: it takes me twenty minutes.",
+            "Para preguntar: how long does it take?"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El RELOJ te COBRA minutos: IT TAKES ME…",
+            "emoji": "⏱️"
+          }
+        },
+        {
+          "key": "pen",
+          "type": "term",
+          "text": "pen",
+          "meaning": "bolígrafo, boli",
+          "pronunciation": "PEN",
+          "examples": [
+            {
+              "text": "Can I borrow your pen?",
+              "translation": "¿Me dejas tu boli?",
+              "mirror": {
+                "say": "¿Me dejas tu boli?",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Me dejas",
+                    "why": "«¿Me dejas…?» es «¿puedo tomar prestado…?»: can I borrow…?"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tomar prestado",
+                    "en": "borrow",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu boli",
+                    "en": "your pen",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Write it in pen.",
+              "translation": "Escríbelo a boli."
+            }
+          ]
+        },
+        {
+          "key": "pencil",
+          "type": "term",
+          "text": "pencil",
+          "meaning": "lápiz",
+          "pronunciation": "PÉNsil",
+          "examples": [
+            {
+              "text": "I need a pencil and a rubber.",
+              "translation": "Necesito un lápiz y una goma.",
+              "mirror": {
+                "say": "Necesito un lápiz y una goma",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un lápiz",
+                    "en": "a pencil",
+                    "role": "word"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una goma",
+                    "en": "a rubber",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A pencil case.",
+              "translation": "Un estuche."
+            }
+          ]
+        },
+        {
+          "key": "notebook",
+          "type": "term",
+          "text": "notebook",
+          "meaning": "cuaderno; portátil",
+          "pronunciation": "NÓUTbuk",
+          "examples": [
+            {
+              "text": "Write it in your notebook.",
+              "translation": "Apúntalo en el cuaderno.",
+              "mirror": {
+                "say": "Apúntalo en el cuaderno",
+                "pieces": [
+                  {
+                    "es": "Escribe",
+                    "en": "Write",
+                    "role": "verb",
+                    "from": "Apunta"
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en TU cuaderno",
+                    "en": "in your notebook",
+                    "role": "word",
+                    "from": "en el cuaderno"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My new notebook is very light.",
+              "translation": "Mi portátil nuevo pesa muy poco."
+            }
+          ]
+        },
+        {
+          "key": "desk",
+          "type": "term",
+          "text": "desk",
+          "meaning": "mesa (de trabajo), escritorio",
+          "pronunciation": "DESK",
+          "examples": [
+            {
+              "text": "The keys are on my desk.",
+              "translation": "Las llaves están en mi mesa.",
+              "mirror": {
+                "say": "Las llaves están en mi mesa",
+                "pieces": [
+                  {
+                    "es": "Las llaves",
+                    "en": "The keys",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sobre mi mesa",
+                    "en": "on my desk",
+                    "role": "word",
+                    "from": "en mi mesa",
+                    "why": "Encima de la mesa es ON: on my desk."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The front desk.",
+              "translation": "La recepción."
+            }
+          ]
+        },
+        {
+          "key": "whiteboard",
+          "type": "term",
+          "text": "whiteboard",
+          "meaning": "pizarra blanca",
+          "pronunciation": "UÁITbord",
+          "examples": [
+            {
+              "text": "Look at the whiteboard.",
+              "translation": "Mirad la pizarra.",
+              "mirror": {
+                "say": "Mirad la pizarra",
+                "pieces": [
+                  {
+                    "es": "Mirad",
+                    "en": "Look at",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la pizarra",
+                    "en": "the whiteboard",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Write it on the whiteboard.",
+              "translation": "Escríbelo en la pizarra."
+            }
+          ]
+        },
+        {
+          "key": "rubber",
+          "type": "term",
+          "text": "rubber",
+          "meaning": "goma de borrar",
+          "pronunciation": "RÁber",
+          "examples": [
+            {
+              "text": "Can I use your rubber?",
+              "translation": "¿Puedo usar tu goma?",
+              "mirror": {
+                "say": "¿Puedo usar tu goma?",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "usar",
+                    "en": "use",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu goma",
+                    "en": "your rubber",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My rubber is in my bag.",
+              "translation": "Mi goma está en la mochila."
+            }
+          ],
+          "notes": "En EE. UU. se dice eraser."
+        },
+        {
+          "key": "ruler",
+          "type": "term",
+          "text": "ruler",
+          "meaning": "regla",
+          "pronunciation": "RÚUler",
+          "examples": [
+            {
+              "text": "Draw a line with a ruler.",
+              "translation": "Traza una línea con la regla.",
+              "mirror": {
+                "say": "Traza una línea con la regla",
+                "pieces": [
+                  {
+                    "es": "Dibuja",
+                    "en": "Draw",
+                    "role": "verb",
+                    "from": "Traza"
+                  },
+                  {
+                    "es": "una línea",
+                    "en": "a line",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con UNA regla",
+                    "en": "with a ruler",
+                    "role": "word",
+                    "from": "con la regla"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A 30 cm ruler.",
+              "translation": "Una regla de 30 cm."
+            }
+          ]
+        },
+        {
+          "key": "stapler",
+          "type": "term",
+          "text": "stapler",
+          "meaning": "grapadora",
+          "pronunciation": "STÉIpler",
+          "examples": [
+            {
+              "text": "Where is the stapler?",
+              "translation": "¿Dónde está la grapadora?",
+              "mirror": {
+                "say": "¿Dónde está la grapadora?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la grapadora",
+                    "en": "the stapler",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Staple these pages.",
+              "translation": "Grapa estas hojas."
+            }
+          ]
+        },
+        {
+          "key": "printer",
+          "type": "term",
+          "text": "printer",
+          "meaning": "impresora",
+          "pronunciation": "PRÍNter",
+          "examples": [
+            {
+              "text": "The printer doesn't work.",
+              "translation": "La impresora no funciona.",
+              "mirror": {
+                "say": "La impresora no funciona",
+                "pieces": [
+                  {
+                    "es": "La impresora",
+                    "en": "The printer",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "funcionar",
+                    "en": "work",
+                    "role": "verb",
+                    "from": "funciona",
+                    "why": "Con DOESN'T el verbo va tal cual: work."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The printer is out of paper.",
+              "translation": "La impresora no tiene papel."
+            }
+          ]
+        },
+        {
+          "key": "lunch-break",
+          "type": "term",
+          "text": "lunch break",
+          "meaning": "pausa para comer",
+          "pronunciation": "LANCH breik",
+          "examples": [
+            {
+              "text": "We have a one-hour lunch break.",
+              "translation": "Tenemos una hora para comer.",
+              "mirror": {
+                "say": "Tenemos una hora para comer",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una pausa de una hora para comer",
+                    "en": "a one-hour lunch break",
+                    "role": "word",
+                    "from": "una hora para comer"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm on my lunch break.",
+              "translation": "Estoy en la pausa de la comida."
+            }
+          ]
+        },
+        {
+          "key": "grade",
+          "type": "term",
+          "text": "grade",
+          "meaning": "nota; curso",
+          "pronunciation": "GRÉID",
+          "examples": [
+            {
+              "text": "I got a good grade in maths.",
+              "translation": "Saqué buena nota en mates.",
+              "mirror": {
+                "say": "Saqué buena nota en mates",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "conseguí",
+                    "en": "got",
+                    "role": "verb",
+                    "from": "Saqué"
+                  },
+                  {
+                    "es": "UNA buena nota",
+                    "en": "a good grade",
+                    "role": "word",
+                    "from": "buena nota"
+                  },
+                  {
+                    "es": "en mates",
+                    "en": "in maths",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is in fifth grade.",
+              "translation": "Está en quinto."
+            }
+          ],
+          "notes": "En el Reino Unido, la nota también es mark."
+        },
+        {
+          "key": "timetable",
+          "type": "term",
+          "text": "timetable",
+          "meaning": "horario",
+          "pronunciation": "TÁIMteibol",
+          "examples": [
+            {
+              "text": "Check the timetable.",
+              "translation": "Mira el horario.",
+              "mirror": {
+                "say": "Mira el horario",
+                "pieces": [
+                  {
+                    "es": "Comprueba",
+                    "en": "Check",
+                    "role": "verb",
+                    "from": "Mira"
+                  },
+                  {
+                    "es": "el horario",
+                    "en": "the timetable",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The train timetable.",
+              "translation": "El horario de trenes."
+            }
+          ]
+        },
+        {
+          "key": "classroom",
+          "type": "term",
+          "text": "classroom",
+          "meaning": "aula",
+          "pronunciation": "KLÁSrum",
+          "examples": [
+            {
+              "text": "The classroom is on the first floor.",
+              "translation": "El aula está en la primera planta.",
+              "mirror": {
+                "say": "El aula está en la primera planta",
+                "pieces": [
+                  {
+                    "es": "El aula",
+                    "en": "The classroom",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sobre la primera planta",
+                    "en": "on the first floor",
+                    "role": "word",
+                    "from": "en la primera planta",
+                    "why": "Las plantas van con ON: on the first floor."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An empty classroom.",
+              "translation": "Un aula vacía."
+            }
+          ]
+        },
+        {
+          "key": "classmate",
+          "type": "term",
+          "text": "classmate",
+          "meaning": "compañero de clase",
+          "pronunciation": "KLÁSmeit",
+          "examples": [
+            {
+              "text": "My classmates are very friendly.",
+              "translation": "Mis compañeros de clase son muy majos.",
+              "mirror": {
+                "say": "Mis compañeros de clase son muy majos",
+                "pieces": [
+                  {
+                    "es": "Mis compañeros de clase",
+                    "en": "My classmates",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy simpáticos",
+                    "en": "very friendly",
+                    "role": "word",
+                    "from": "muy majos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A classmate made a website.",
+              "translation": "Un compañero hizo una web."
+            }
+          ]
+        },
+        {
+          "key": "scissors",
+          "type": "term",
+          "text": "scissors",
+          "meaning": "tijeras",
+          "pronunciation": "SÍsors",
+          "examples": [
+            {
+              "text": "Pass me the scissors.",
+              "translation": "Pásame las tijeras.",
+              "mirror": {
+                "say": "Pásame las tijeras",
+                "pieces": [
+                  {
+                    "es": "Pasa",
+                    "en": "Pass",
+                    "role": "verb",
+                    "from": "Pásame",
+                    "why": "Lo pegado se separa: pass ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "las tijeras",
+                    "en": "the scissors",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A pair of scissors.",
+              "translation": "Unas tijeras."
+            }
+          ],
+          "notes": "Siempre en plural: the scissors are…"
+        }
+      ]
+    }
+  ]
+}
