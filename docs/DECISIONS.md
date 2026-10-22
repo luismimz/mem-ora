@@ -757,3 +757,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   arrancar Directus (idempotente, conserva el progreso, nunca borra). Fusionar el PR es la orden de publicar.
   **Descartado:** una GitHub Action con la clave de administración (exige guardar un secreto más y depende del runner).
 
+
+## D-081 · Reto de 30 días, Ráfaga y los pilares del método (22-oct-2026)
+- **Decisiones del usuario:** meta de aprender inglés en 30 días con un objetivo diario exigente y divertido, y estos
+  pilares: Feynman y semáforos (Toco o cuento: HAVE si se toca o se cuenta, TO BE si se siente; DO/DID/WILL como
+  alarmas de presente, pasado y futuro; HAVE al principio = «¿YA…?»), equivalencias directas (-ar/-er/-ir = TO,
+  -ando = -ING, -ría = WOULD, «si tuviera» = pasado), piezas de Lego (chunks: look at/for/after, listen to…) e
+  «inglés al revés» (la preposición al final).
+- **Meta diaria:** 35 nuevas al día en idiomas (≈ 1.000 en 30 días), visible en Inicio y en cada hito. Honestidad: el
+  curso tiene ~250 unidades; el resto se añade vuelta a vuelta.
+- **Ráfaga:** un concepto cuyas preguntas se responden con el mismo puñado de respuestas cortas se juega rápido: con
+  dos, deslizando la tarjeta; con tres o cuatro, con botones gigantes de colores; confeti y «pop» al acertar. La
+  tarjeta cae en 4 s; si toca el suelo vuelve una vez al final (la rapidez da puntos, no castiga: ESTANDAR §2).
+  Arrastrar piezas tipo imán (chunks) se resolvió con botones de pieza: más fiable en el móvil.

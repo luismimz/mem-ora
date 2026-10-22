@@ -42,6 +42,25 @@ export function buildableExample(u: SessionUnit): number | null {
   return buildableExamples(u)[0] ?? null;
 }
 
+/** Mínimo de preguntas para que un concepto se juegue como «Ráfaga». */
+export const FLOW_BURST_MIN = 4;
+/** Como mucho, estas respuestas distintas (botones) en una «Ráfaga». */
+export const FLOW_BURST_MAX_OPTIONS = 4;
+
+/**
+ * Opciones de una «Ráfaga» (D-081), en orden estable (el de la primera pregunta: respuesta y después las falsas), o
+ * `null` si el concepto no es un juego. Es un juego cuando todas sus preguntas (≥ FLOW_BURST_MIN) se responden eligiendo
+ * entre el MISMO puñado de respuestas cortas: «¿I HAVE o I AM?», «¿DO, DID o WILL?», «¿look AT, FOR o AFTER?».
+ */
+export function burstOptions(u: SessionUnit): string[] | null {
+  const ex = exercisesOf(u);
+  if (u.type !== 'concept' || ex.length < FLOW_BURST_MIN) return null;
+  if (!ex.every((e) => e.kind !== 'order_steps' && !e.code && e.answer && (e.distractors?.length ?? 0) >= 1)) return null;
+  const order: string[] = [];
+  for (const e of ex) for (const o of [e.answer!, ...e.distractors!]) if (!order.includes(o)) order.push(o);
+  return order.length >= 2 && order.length <= FLOW_BURST_MAX_OPTIONS ? order : null;
+}
+
 /** Ejercicio que se puede completar escribiendo: respuesta corta y sin «ordenar pasos». */
 export function typeableExercise(u: SessionUnit): number | null {
   const i = exercisesOf(u).findIndex((e) => e.kind !== 'order_steps' && Boolean(e.answer) && e.answer!.length <= FLOW_TYPED_MAX);
@@ -113,6 +132,12 @@ export function buildFlowSession(input: {
     const n = buildableExample(units[u]!);
     return skill && n !== null ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
   };
+  // D-081: un concepto-juego se practica con su «Ráfaga» (todas sus preguntas, rápidas), no con relámpago ni examen.
+  const burst = (u: string): Draft | null => {
+    if (!burstOptions(units[u]!)) return null;
+    const skill = units[u]!.skills.find((s) => s.kind === 'apply') ?? units[u]!.skills.find((s) => s.kind === 'recall');
+    return skill ? { kind: 'burst', unitKey: u, scene: -4, skillKey: skill.key, ...tag(u) } : null;
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -122,7 +147,7 @@ export function buildFlowSession(input: {
     for (const u of pair) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) });
     // Variedad: la primera de la pareja, escucha (idiomas) o relámpago; la segunda, ¿verdad o mentira?; lo dominado,
     // escribiendo. La gramática se practica construyendo una de sus frases.
-    pair.forEach((u, j) => base.push(levelUp(u) ?? (units[u]!.type === 'pattern' ? (build(u) ?? quick(u)) : j === 0 ? (listen(u) ?? quick(u)) : judge(u))));
+    pair.forEach((u, j) => base.push(burst(u) ?? levelUp(u) ?? (units[u]!.type === 'pattern' ? (build(u) ?? quick(u)) : j === 0 ? (listen(u) ?? quick(u)) : judge(u))));
     // Idiomas (D-079): tras cada pareja de palabras, una frase que construir con una de ellas.
     const terms = pair.filter((u) => units[u]!.type === 'term');
     const word = terms[Math.floor(rand() * terms.length)];
@@ -152,7 +177,7 @@ export function buildFlowSession(input: {
   for (const d of withRetry) {
     push(d);
     if (d.unitKey && !seenUnits.includes(d.unitKey)) seenUnits.push(d.unitKey);
-    if (d.levelUp) bossDone.add(d.unitKey);
+    if (d.levelUp || d.kind === 'burst') bossDone.add(d.unitKey);
     if (!d.retry) sinceBoss += 1;
     if (sinceBoss >= FLOW_BOSS_EVERY) {
       const answerable = (k: string) => exercisesOf(units[k]!).map((e, n) => ({ e, n })).filter(({ e }) => e.kind !== 'order_steps');

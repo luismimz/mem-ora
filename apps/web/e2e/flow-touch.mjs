@@ -109,7 +109,7 @@ try {
   const units = await en.evaluate(() => window.__units);
   const seen = new Set();
   let builtOk = false;
-  for (let n = 0; n < 40; n++) {
+  for (let n = 0; n < 60; n++) {
     const tag = (await en.locator('.slide .tag').first().textContent().catch(() => '')) ?? '';
     if (/RONDA/.test(tag)) { seen.add('hito'); break; }
     if (/ESCUCHA/.test(tag)) {
@@ -129,6 +129,32 @@ try {
       if (await en.locator('.slide.build.right').count()) builtOk = true;
       await en.waitForTimeout(1600); continue;
     }
+    if (/🎮/.test(tag)) {
+      // Ráfaga (D-081): con dos respuestas se desliza la tarjeta (← la primera, la segunda →); con tres, botones.
+      const u = Object.values(units).find((x) => x.type === 'concept' && tag.includes(x.payload.name.toUpperCase()));
+      const two = (await en.locator('.burst-btn').count()) === 2;
+      for (let k = 0; k < 12 && /🎮/.test((await en.locator('.slide .tag').first().textContent().catch(() => '')) ?? ''); k++) {
+        const prompt = await en.locator('.burst-prompt').textContent().catch(() => null);
+        if (!prompt) { await en.waitForTimeout(300); continue; }
+        const ex = u.payload.exercises.find((e) => e.prompt === prompt);
+        if (two) {
+          const box = await en.locator('.burst-card').boundingBox();
+          const left = ex.answer === u.payload.exercises[0].answer;
+          const y = box.y + box.height / 2; const x0 = box.x + box.width / 2; const x1 = left ? x0 - 150 : x0 + 150;
+          await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: x0, y }] });
+          for (let i = 1; i <= 8; i++) { await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: x0 + ((x1 - x0) * i) / 8, y }] }); await en.waitForTimeout(16); }
+          await cdpEn.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+          seen.add('rafaga-desliza');
+        } else {
+          await en.locator('.burst-btn', { hasText: new RegExp(`^${ex.answer}$`) }).tap();
+          seen.add('rafaga-botones');
+        }
+        await en.waitForTimeout(150);
+        if (await en.locator('.confetti').count()) seen.add('confeti');
+        await en.waitForTimeout(600);
+      }
+      await en.waitForTimeout(800); continue;
+    }
     if (/TRUCO/.test(tag)) seen.add('truco');
     if (/VERDAD/.test(tag)) { await en.locator('.option.yes').tap(); await en.waitForTimeout(1300); continue; }
     if (/RELÁMPAGO|AL REVÉS/.test(tag)) { await en.locator('.option').first().tap(); await en.waitForTimeout(1300); continue; }
@@ -143,6 +169,9 @@ try {
   check(seen.has('escucha'), 'inglés: aparece «Escucha» y se responde tocando lo que se ha oído');
   check(seen.has('construye') && builtOk, 'inglés: «Construye la frase» se completa tocando las palabras en orden');
   check(seen.has('truco'), 'inglés: la gramática entra con su «Truco»');
+  check(seen.has('rafaga-desliza'), 'Ráfaga de dos respuestas («Toco o cuento»): se responde deslizando la tarjeta con el dedo');
+  check(seen.has('rafaga-botones'), 'Ráfaga de tres respuestas («Semáforos»): se responde golpeando los botones');
+  check(seen.has('confeti'), 'Ráfaga: al acertar sale confeti');
   check(seen.has('hito'), 'inglés: la ronda llega al hito (deslizando también desde encima de los botones 🔊)');
   check(enErrors.length === 0, `inglés: sin errores en la página${enErrors.length ? `: ${enErrors.join(' | ')}` : ''}`);
 } finally {

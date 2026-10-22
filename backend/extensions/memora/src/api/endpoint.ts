@@ -47,6 +47,20 @@ function courseConfig(course: Row) {
   return resolveConfig({ load: { newCap: perSession * 3 * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 120, totalCap: perSession * 3 * 3 + 120 } });
 }
 
+/** Meta diaria en idiomas (D-081): ≈ 1.000 palabras en 30 días ⇒ 35 nuevas al día. */
+export const DAILY_GOAL_LANGUAGE = 35;
+const isLanguageCourse = (course: Row) => Boolean(course.content_language) && course.content_language !== (course.learner_language ?? course.ui_language);
+/** Meta de unidades nuevas al día: en idiomas, la del reto de 30 días; en el resto, tres rondas de nuevas (D-077). */
+export function dailyGoal(course: Row): number {
+  return isLanguageCourse(course) ? DAILY_GOAL_LANGUAGE : Math.max(1, Number(course.new_per_session) || 15) * 3;
+}
+/** Unidades vistas por primera vez desde `dayStart`. */
+function newUnitsSince(learner: Learner, dayStart: number): number {
+  const firstSeen: Record<string, number> = {};
+  for (const sk of Object.values(learner.skills)) if (sk.presentedAt) firstSeen[sk.unitId] = Math.min(firstSeen[sk.unitId] ?? Infinity, sk.presentedAt);
+  return Object.values(firstSeen).filter((t) => t >= dayStart).length;
+}
+
 export interface MissionRef {
   key: string;
   title: string;
@@ -236,12 +250,10 @@ export default {
       // Flujo infinito (D-077): cada ronda trae como mucho newMax nuevas y, al día, tres rondas de nuevas; después sigue
       // con repasos, «tus errores» y refuerzo de lo más débil, sin fin.
       const dayStart = config.load.dayOriginMs + today * config.load.dayLengthMs;
-      const firstSeen: Record<string, number> = {};
-      for (const sk of Object.values(learner.skills)) if (sk.presentedAt) firstSeen[sk.unitId] = Math.min(firstSeen[sk.unitId] ?? Infinity, sk.presentedAt);
-      const newToday = Object.values(firstSeen).filter((t) => t >= dayStart).length;
+      const newToday = newUnitsSince(learner, dayStart);
       // Idiomas (inglés intensivo, decisión del usuario 22-oct-2026): sin tope diario; sigue con nuevas mientras la
       // ronda anterior pase del 80 % de aciertos. El resto de cursos mantiene el tope de tres rondas de nuevas al día.
-      const isLanguage = Boolean(course.content_language) && course.content_language !== (course.learner_language ?? course.ui_language);
+      const isLanguage = isLanguageCourse(course);
       const prevRound = savedState && savedState.plan.day === today && (savedState.plan as { mode?: string }).mode === 'flow' ? savedState : null;
       const prevOutcomes = Object.values(prevRound?.outcomes ?? {});
       const flowNew = flowNewUnits({ perRound: newMax, newToday, dailyRounds: isLanguage ? null : 3,
@@ -425,6 +437,8 @@ export default {
           streak: streak.days,
           shields: streak.shields,
           todayAttempts: learner.activity[String(today)]?.attempts ?? 0,
+          // Meta del día (D-081): nuevas de hoy frente a la meta del curso.
+          today: { newUnits: newUnitsSince(learner, config.load.dayOriginMs + today * config.load.dayLengthMs), goal: dailyGoal(course) },
           skills: catalog.skills.map((s) => ({ key: s.id, unit: s.unitId, kind: s.kind, status: learner.skills[s.id]?.status ?? 'new', dueAt: learner.skills[s.id]?.dueAt ?? null })),
           units: catalog.units.map((u) => {
             const r = unitLevel(u.id, catalog, learner.skills, config);

@@ -94,6 +94,8 @@ export interface Progress {
   /** Protectores de racha guardados (D-077). */
   shields?: number;
   todayAttempts?: number;
+  /** Meta del día (D-081): unidades nuevas de hoy y la meta del curso (en idiomas, 35 ⇒ 1.000 en 30 días). */
+  today?: { newUnits: number; goal: number };
   skills: Array<{ key: string; unit: string; kind: string; status: string; dueAt: number | null }>;
   units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
 }

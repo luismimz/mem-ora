@@ -243,7 +243,8 @@ function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void 
   }
   checkText(issues, ex.answer, `${path}.answer`, { max: 160 });
   checkTextList(issues, ex.accepted, `${path}.accepted`, 0, 160);
-  checkTextList(issues, ex.distractors, `${path}.distractors`, 2, 160);
+  // Una opción falsa basta en los juegos de dos respuestas («¿I HAVE o I AM?», D-081); lo normal son dos o más.
+  checkTextList(issues, ex.distractors, `${path}.distractors`, 1, 160);
   if (typeof ex.answer === 'string' && Array.isArray(ex.distractors) && ex.distractors.some((d) => typeof d === 'string' && d.trim().toLowerCase() === ex.answer!.toString().trim().toLowerCase())) {
     issues.push(issue('distractor_is_answer', `${path}.distractors`));
   }

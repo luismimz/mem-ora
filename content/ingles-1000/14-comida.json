@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "14-comida",
+      "title": "Misión 14 · Comida y bebida",
+      "units": [
+        {
+          "key": "eat",
+          "type": "term",
+          "text": "eat",
+          "meaning": "comer",
+          "pronunciation": "IIT",
+          "examples": [
+            {
+              "text": "I eat at two.",
+              "translation": "Como a las dos."
+            },
+            {
+              "text": "What do you want to eat?",
+              "translation": "¿Qué quieres comer?"
+            }
+          ]
+        },
+        {
+          "key": "drink",
+          "type": "term",
+          "text": "drink",
+          "meaning": "beber",
+          "pronunciation": "DRINK",
+          "examples": [
+            {
+              "text": "I drink a lot of water.",
+              "translation": "Bebo mucha agua."
+            },
+            {
+              "text": "Do you want a drink?",
+              "translation": "¿Quieres algo de beber?"
+            }
+          ]
+        },
+        {
+          "key": "water",
+          "type": "term",
+          "text": "water",
+          "meaning": "agua",
+          "pronunciation": "UÓter",
+          "examples": [
+            {
+              "text": "A glass of water, please.",
+              "translation": "Un vaso de agua, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VÁTER",
+            "scene": "Un pez bebe AGUA directamente del VÁTER.",
+            "sceneTarget": "A fish drinks WATER straight from the toilet.",
+            "emoji": "🚽"
+          }
+        },
+        {
+          "key": "bread",
+          "type": "term",
+          "text": "bread",
+          "meaning": "pan",
+          "pronunciation": "BRED",
+          "examples": [
+            {
+              "text": "I buy bread every morning.",
+              "translation": "Compro pan cada mañana."
+            }
+          ]
+        },
+        {
+          "key": "milk",
+          "type": "term",
+          "text": "milk",
+          "meaning": "leche",
+          "pronunciation": "MILK",
+          "examples": [
+            {
+              "text": "Coffee with milk, please.",
+              "translation": "Café con leche, por favor."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MIL",
+            "scene": "Una vaca da MIL litros de LECHE al día.",
+            "sceneTarget": "A cow gives a thousand litres of MILK a day.",
+            "emoji": "🐄"
+          }
+        },
+        {
+          "key": "meat",
+          "type": "term",
+          "text": "meat",
+          "meaning": "carne",
+          "pronunciation": "MIIT",
+          "examples": [
+            {
+              "text": "I don't eat meat.",
+              "translation": "No como carne."
+            }
+          ]
+        },
+        {
+          "key": "fish",
+          "type": "term",
+          "text": "fish",
+          "meaning": "pescado, pez",
+          "pronunciation": "FISH",
+          "examples": [
+            {
+              "text": "We eat fish on Fridays.",
+              "translation": "Comemos pescado los viernes."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FICHA",
+            "scene": "Un PESCADO juega al dominó con FICHAS.",
+            "sceneTarget": "A FISH plays dominoes with tiles.",
+            "emoji": "🐟"
+          }
+        },
+        {
+          "key": "egg",
+          "type": "term",
+          "text": "egg",
+          "meaning": "huevo",
+          "pronunciation": "EG",
+          "examples": [
+            {
+              "text": "Two eggs and bread.",
+              "translation": "Dos huevos y pan."
+            }
+          ]
+        },
+        {
+          "key": "apple",
+          "type": "term",
+          "text": "apple",
+          "meaning": "manzana",
+          "pronunciation": "Ápel",
+          "examples": [
+            {
+              "text": "An apple a day.",
+              "translation": "Una manzana al día."
+            }
+          ]
+        },
+        {
+          "key": "rice",
+          "type": "term",
+          "text": "rice",
+          "meaning": "arroz",
+          "pronunciation": "RÁIS",
+          "examples": [
+            {
+              "text": "Rice with chicken.",
+              "translation": "Arroz con pollo."
+            }
+          ]
+        },
+        {
+          "key": "cheese",
+          "type": "term",
+          "text": "cheese",
+          "meaning": "queso",
+          "pronunciation": "CHIIS",
+          "examples": [
+            {
+              "text": "I love cheese.",
+              "translation": "Me encanta el queso."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHISTE",
+            "scene": "El QUESO cuenta un CHISTE y la rata ríe.",
+            "sceneTarget": "The CHEESE tells a joke and the rat laughs.",
+            "emoji": "🧀"
+          }
+        },
+        {
+          "key": "breakfast",
+          "type": "term",
+          "text": "breakfast",
+          "meaning": "desayuno",
+          "pronunciation": "BRÉKfast",
+          "examples": [
+            {
+              "text": "I have breakfast at eight.",
+              "translation": "Desayuno a las ocho."
+            }
+          ]
+        },
+        {
+          "key": "lunch",
+          "type": "term",
+          "text": "lunch",
+          "meaning": "comida, almuerzo",
+          "pronunciation": "LANCH",
+          "examples": [
+            {
+              "text": "Let's have lunch together.",
+              "translation": "Comamos juntos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LANCHA",
+            "scene": "Te comes el ALMUERZO en una LANCHA.",
+            "sceneTarget": "You eat your LUNCH on a speedboat.",
+            "emoji": "🚤"
+          }
+        },
+        {
+          "key": "dinner",
+          "type": "term",
+          "text": "dinner",
+          "meaning": "cena",
+          "pronunciation": "DÍner",
+          "examples": [
+            {
+              "text": "Dinner is at nine.",
+              "translation": "La cena es a las nueve."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DINERO",
+            "scene": "Pagas la CENA con DINERO de juguete.",
+            "sceneTarget": "You pay for DINNER with toy money.",
+            "emoji": "💸"
+          }
+        },
+        {
+          "key": "hungry",
+          "type": "term",
+          "text": "hungry",
+          "meaning": "hambriento (tener hambre)",
+          "pronunciation": "JÁNgri",
+          "examples": [
+            {
+              "text": "I am very hungry.",
+              "translation": "Tengo mucha hambre."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
