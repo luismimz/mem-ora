@@ -1,0 +1,763 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "23-tiempo",
+      "title": "Misión 23 · ¿Qué tiempo hace?",
+      "units": [
+        {
+          "key": "g-weather-it",
+          "type": "pattern",
+          "goal": "El tiempo: «hace frío» = IT'S cold",
+          "rule": "Para el tiempo, el inglés pone IT y BE: hace frío = it's cold; llueve = it's raining; hace sol = it's sunny.",
+          "pieces": [
+            {
+              "text": "It's",
+              "role": "fixed",
+              "hint": "hace / está"
+            },
+            {
+              "text": "cold",
+              "role": "slot",
+              "hint": "frío"
+            }
+          ],
+          "examples": [
+            {
+              "text": "It's cold today.",
+              "translation": "Hoy hace frío.",
+              "mirror": {
+                "say": "Hoy hace frío",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace",
+                    "why": "«Hace frío» se dice «ESO está frío»: it's cold."
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "It's raining.",
+              "translation": "Está lloviendo.",
+              "mirror": {
+                "say": "Está lloviendo",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lloviendo",
+                    "en": "raining",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was very hot yesterday.",
+              "translation": "Ayer hizo mucho calor."
+            },
+            {
+              "text": "Is it sunny?",
+              "translation": "¿Hace sol?"
+            }
+          ],
+          "pitfalls": [
+            "«Makes cold» no existe: hace frío = it's cold.",
+            "«Tengo frío» es otra cosa: I'm cold (lo sientes tú)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El tiempo siempre lo trae IT: IT IS cold.",
+            "emoji": "⛅"
+          }
+        },
+        {
+          "key": "weather",
+          "type": "term",
+          "text": "weather",
+          "meaning": "tiempo (el que hace)",
+          "pronunciation": "UÉder",
+          "examples": [
+            {
+              "text": "The weather is nice today.",
+              "translation": "Hoy hace buen tiempo.",
+              "mirror": {
+                "say": "Hoy hace buen tiempo",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el tiempo",
+                    "en": "The weather",
+                    "role": "who",
+                    "from": "hace buen tiempo",
+                    "why": "«Hace buen tiempo» es «el tiempo es bueno»: the weather is nice."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "nice",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "What's the weather like?",
+              "translation": "¿Qué tiempo hace?"
+            }
+          ],
+          "notes": "Ojo: weather es el tiempo que hace; el tiempo del reloj es time."
+        },
+        {
+          "key": "sun",
+          "type": "term",
+          "text": "sun",
+          "meaning": "sol",
+          "pronunciation": "SAN",
+          "examples": [
+            {
+              "text": "The sun is very strong.",
+              "translation": "El sol pega muy fuerte.",
+              "mirror": {
+                "say": "El sol pega muy fuerte",
+                "pieces": [
+                  {
+                    "es": "El sol",
+                    "en": "The sun",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "pega",
+                    "why": "En inglés el sol «es» fuerte: the sun IS strong."
+                  },
+                  {
+                    "es": "muy fuerte",
+                    "en": "very strong",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's sit in the sun.",
+              "translation": "Sentémonos al sol."
+            }
+          ]
+        },
+        {
+          "key": "rain",
+          "type": "term",
+          "text": "rain",
+          "meaning": "lluvia; llover",
+          "pronunciation": "RÉIN",
+          "examples": [
+            {
+              "text": "It rains a lot in London.",
+              "translation": "Llueve mucho en Londres.",
+              "mirror": {
+                "say": "Llueve mucho en Londres",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llueve",
+                    "en": "rains",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho",
+                    "en": "a lot",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en Londres",
+                    "en": "in London",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love the sound of rain.",
+              "translation": "Me encanta el sonido de la lluvia."
+            }
+          ]
+        },
+        {
+          "key": "snow",
+          "type": "term",
+          "text": "snow",
+          "meaning": "nieve; nevar",
+          "pronunciation": "SNÓU",
+          "examples": [
+            {
+              "text": "It snows in winter.",
+              "translation": "Nieva en invierno.",
+              "mirror": {
+                "say": "Nieva en invierno",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nieva",
+                    "en": "snows",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en invierno",
+                    "en": "in winter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The mountains are white with snow.",
+              "translation": "Las montañas están blancas de nieve."
+            }
+          ]
+        },
+        {
+          "key": "wind",
+          "type": "term",
+          "text": "wind",
+          "meaning": "viento",
+          "pronunciation": "UIND",
+          "examples": [
+            {
+              "text": "The wind is very strong.",
+              "translation": "Hace mucho viento.",
+              "mirror": {
+                "say": "Hace mucho viento",
+                "pieces": [
+                  {
+                    "es": "el viento",
+                    "en": "The wind",
+                    "role": "who",
+                    "from": "hace",
+                    "why": "«Hace mucho viento» es «el viento es muy fuerte»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy fuerte",
+                    "en": "very strong",
+                    "role": "word",
+                    "from": "mucho viento"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The wind closed the door.",
+              "translation": "El viento cerró la puerta."
+            }
+          ]
+        },
+        {
+          "key": "cloud",
+          "type": "term",
+          "text": "cloud",
+          "meaning": "nube",
+          "pronunciation": "KLÁUD",
+          "examples": [
+            {
+              "text": "There are no clouds today.",
+              "translation": "Hoy no hay nubes.",
+              "mirror": {
+                "say": "Hoy no hay nubes",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hay",
+                    "en": "There are",
+                    "role": "helper",
+                    "from": "no hay",
+                    "why": "Una sola negación: there are NO clouds."
+                  },
+                  {
+                    "es": "ninguna nube",
+                    "en": "no clouds",
+                    "role": "word",
+                    "from": "nubes"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Look at that big cloud.",
+              "translation": "Mira esa nube tan grande."
+            }
+          ]
+        },
+        {
+          "key": "hot",
+          "type": "term",
+          "text": "hot",
+          "meaning": "caliente; hace calor",
+          "pronunciation": "JOT",
+          "examples": [
+            {
+              "text": "It's very hot today.",
+              "translation": "Hoy hace mucho calor.",
+              "mirror": {
+                "say": "Hoy hace mucho calor",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace",
+                    "why": "«Hace calor» es «está caliente»: it's hot."
+                  },
+                  {
+                    "es": "muy caliente",
+                    "en": "very hot",
+                    "role": "word",
+                    "from": "mucho calor"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Careful, the soup is hot.",
+              "translation": "Cuidado, la sopa está caliente."
+            }
+          ]
+        },
+        {
+          "key": "cold",
+          "type": "term",
+          "text": "cold",
+          "meaning": "frío",
+          "pronunciation": "KÓULD",
+          "examples": [
+            {
+              "text": "I'm cold.",
+              "translation": "Tengo frío.",
+              "mirror": {
+                "say": "Tengo frío",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "tengo",
+                    "why": "El frío se siente: se ESTÁ frío. I'm cold."
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Winter is very cold here.",
+              "translation": "Aquí el invierno es muy frío."
+            }
+          ]
+        },
+        {
+          "key": "warm",
+          "type": "term",
+          "text": "warm",
+          "meaning": "templado, calentito",
+          "pronunciation": "UORM",
+          "examples": [
+            {
+              "text": "It's warm in here.",
+              "translation": "Aquí dentro se está calentito.",
+              "mirror": {
+                "say": "Aquí dentro se está calentito",
+                "pieces": [
+                  {
+                    "es": "Aquí dentro",
+                    "en": "in here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "se está"
+                  },
+                  {
+                    "es": "calentito",
+                    "en": "warm",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Wear a warm coat.",
+              "translation": "Ponte un abrigo calentito."
+            }
+          ]
+        },
+        {
+          "key": "sunny",
+          "type": "term",
+          "text": "sunny",
+          "meaning": "soleado",
+          "pronunciation": "SÁni",
+          "examples": [
+            {
+              "text": "It's a sunny day.",
+              "translation": "Hace un día soleado.",
+              "mirror": {
+                "say": "Hace un día soleado",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "día",
+                    "en": "day",
+                    "role": "word"
+                  },
+                  {
+                    "es": "soleado",
+                    "en": "sunny",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Is it sunny in Madrid?",
+              "translation": "¿Hace sol en Madrid?"
+            }
+          ]
+        },
+        {
+          "key": "cloudy",
+          "type": "term",
+          "text": "cloudy",
+          "meaning": "nublado",
+          "pronunciation": "KLÁUdi",
+          "examples": [
+            {
+              "text": "It's cloudy today.",
+              "translation": "Hoy está nublado.",
+              "mirror": {
+                "say": "Hoy está nublado",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nublado",
+                    "en": "cloudy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A cloudy morning.",
+              "translation": "Una mañana nublada."
+            }
+          ]
+        },
+        {
+          "key": "storm",
+          "type": "term",
+          "text": "storm",
+          "meaning": "tormenta",
+          "pronunciation": "STORM",
+          "examples": [
+            {
+              "text": "There is a storm tonight.",
+              "translation": "Esta noche hay tormenta.",
+              "mirror": {
+                "say": "Esta noche hay tormenta",
+                "pieces": [
+                  {
+                    "es": "Esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una tormenta",
+                    "en": "a storm",
+                    "role": "word",
+                    "from": "tormenta"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "The storm broke the window.",
+              "translation": "La tormenta rompió la ventana."
+            }
+          ]
+        },
+        {
+          "key": "umbrella",
+          "type": "term",
+          "text": "umbrella",
+          "meaning": "paraguas",
+          "pronunciation": "amBRÉla",
+          "examples": [
+            {
+              "text": "Take an umbrella.",
+              "translation": "Coge un paraguas.",
+              "mirror": {
+                "say": "Coge un paraguas",
+                "pieces": [
+                  {
+                    "es": "Coge",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un paraguas",
+                    "en": "an umbrella",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I forgot my umbrella.",
+              "translation": "Me he olvidado el paraguas."
+            }
+          ]
+        },
+        {
+          "key": "temperature",
+          "type": "term",
+          "text": "temperature",
+          "meaning": "temperatura",
+          "pronunciation": "TÉMpracher",
+          "examples": [
+            {
+              "text": "The temperature is twenty degrees.",
+              "translation": "Hace veinte grados.",
+              "mirror": {
+                "say": "Hace veinte grados",
+                "pieces": [
+                  {
+                    "es": "la temperatura",
+                    "en": "The temperature",
+                    "role": "who",
+                    "from": "hace",
+                    "why": "«Hace 20 grados» es «la temperatura es de 20 grados»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "veinte grados",
+                    "en": "twenty degrees",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Check the temperature.",
+              "translation": "Mira la temperatura."
+            }
+          ]
+        },
+        {
+          "key": "season",
+          "type": "term",
+          "text": "season",
+          "meaning": "estación del año",
+          "pronunciation": "SÍIson",
+          "examples": [
+            {
+              "text": "Spring is my favourite season.",
+              "translation": "La primavera es mi estación favorita.",
+              "mirror": {
+                "say": "La primavera es mi estación favorita",
+                "pieces": [
+                  {
+                    "es": "primavera",
+                    "en": "Spring",
+                    "role": "who",
+                    "from": "La primavera",
+                    "why": "Las estaciones van sin «the»: spring, summer."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi",
+                    "en": "my",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estación",
+                    "en": "season",
+                    "role": "word"
+                  },
+                  {
+                    "es": "favorita",
+                    "en": "favourite",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "There are four seasons.",
+              "translation": "Hay cuatro estaciones."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,802 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "24-ropa",
+      "title": "Misión 24 · La ropa",
+      "units": [
+        {
+          "key": "g-wear",
+          "type": "pattern",
+          "goal": "Llevar ropa puesta = WEAR",
+          "rule": "La ropa que llevas puesta es WEAR (no carry): I'm wearing a coat. Ponerse = PUT ON; probarse = TRY ON.",
+          "pieces": [
+            {
+              "text": "I'm",
+              "role": "fixed",
+              "hint": "YO estoy"
+            },
+            {
+              "text": "wearing",
+              "role": "fixed",
+              "hint": "llevando puesto"
+            },
+            {
+              "text": "a coat",
+              "role": "slot",
+              "hint": "un abrigo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "She's wearing a red dress.",
+              "translation": "Lleva un vestido rojo.",
+              "mirror": {
+                "say": "Lleva un vestido rojo",
+                "pieces": [
+                  {
+                    "es": "(ELLA) está",
+                    "en": "She's",
+                    "role": "helper",
+                    "from": "lleva",
+                    "why": "Lo que llevas puesto ahora: está LLEVANDO. She's wearing."
+                  },
+                  {
+                    "es": "llevando",
+                    "en": "wearing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "vestido",
+                    "en": "dress",
+                    "role": "word"
+                  },
+                  {
+                    "es": "rojo",
+                    "en": "red",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I don't wear a tie.",
+              "translation": "No llevo corbata.",
+              "mirror": {
+                "say": "No llevo corbata",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llevo",
+                    "en": "wear",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una corbata",
+                    "en": "a tie",
+                    "role": "word",
+                    "from": "corbata"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I try it on?",
+              "translation": "¿Me lo puedo probar?"
+            },
+            {
+              "text": "Put on your shoes.",
+              "translation": "Ponte los zapatos."
+            }
+          ],
+          "pitfalls": [
+            "«Carry a coat» es llevarlo en la mano; puesto es WEAR.",
+            "Probarse ropa: TRY ON (try it on)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El ARMARIO grita WEAR cada vez que te vistes.",
+            "emoji": "👕"
+          }
+        },
+        {
+          "key": "clothes",
+          "type": "term",
+          "text": "clothes",
+          "meaning": "ropa",
+          "pronunciation": "KLÓUDS",
+          "examples": [
+            {
+              "text": "I need new clothes.",
+              "translation": "Necesito ropa nueva.",
+              "mirror": {
+                "say": "Necesito ropa nueva",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ropa",
+                    "en": "clothes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nueva",
+                    "en": "new",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Put your clothes in the wardrobe.",
+              "translation": "Guarda la ropa en el armario."
+            }
+          ],
+          "notes": "Clothes siempre es plural: my clothes ARE clean."
+        },
+        {
+          "key": "shirt",
+          "type": "term",
+          "text": "shirt",
+          "meaning": "camisa",
+          "pronunciation": "SHERT",
+          "examples": [
+            {
+              "text": "This shirt is too big.",
+              "translation": "Esta camisa es demasiado grande.",
+              "mirror": {
+                "say": "Esta camisa es demasiado grande",
+                "pieces": [
+                  {
+                    "es": "Esta camisa",
+                    "en": "This shirt",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado grande",
+                    "en": "too big",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Iron your shirt.",
+              "translation": "Plancha la camisa."
+            }
+          ]
+        },
+        {
+          "key": "dress",
+          "type": "term",
+          "text": "dress",
+          "meaning": "vestido",
+          "pronunciation": "DRES",
+          "examples": [
+            {
+              "text": "What a beautiful dress!",
+              "translation": "¡Qué vestido tan bonito!",
+              "mirror": {
+                "say": "¡Qué vestido tan bonito!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "vestido",
+                    "en": "dress",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tan bonito",
+                    "en": "beautiful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "She wore a black dress.",
+              "translation": "Llevaba un vestido negro."
+            }
+          ]
+        },
+        {
+          "key": "coat",
+          "type": "term",
+          "text": "coat",
+          "meaning": "abrigo",
+          "pronunciation": "KÓUT",
+          "examples": [
+            {
+              "text": "Take your coat, it's cold.",
+              "translation": "Coge el abrigo, hace frío.",
+              "mirror": {
+                "say": "Coge el abrigo, hace frío",
+                "pieces": [
+                  {
+                    "es": "Coge",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU abrigo",
+                    "en": "your coat",
+                    "role": "word",
+                    "from": "el abrigo",
+                    "why": "Lo tuyo lleva su dueño: YOUR coat."
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "it's",
+                    "role": "helper",
+                    "from": "hace"
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where is my coat?",
+              "translation": "¿Dónde está mi abrigo?"
+            }
+          ]
+        },
+        {
+          "key": "jacket",
+          "type": "term",
+          "text": "jacket",
+          "meaning": "chaqueta",
+          "pronunciation": "YÁket",
+          "examples": [
+            {
+              "text": "I like your jacket.",
+              "translation": "Me gusta tu chaqueta.",
+              "mirror": {
+                "say": "Me gusta tu chaqueta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: YO like."
+                  },
+                  {
+                    "es": "tu chaqueta",
+                    "en": "your jacket",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A leather jacket.",
+              "translation": "Una chaqueta de cuero."
+            }
+          ]
+        },
+        {
+          "key": "trousers",
+          "type": "term",
+          "text": "trousers",
+          "meaning": "pantalones",
+          "pronunciation": "TRÁUsers",
+          "examples": [
+            {
+              "text": "These trousers are too long.",
+              "translation": "Estos pantalones son demasiado largos.",
+              "mirror": {
+                "say": "Estos pantalones son demasiado largos",
+                "pieces": [
+                  {
+                    "es": "Estos pantalones",
+                    "en": "These trousers",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado largos",
+                    "en": "too long",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need new trousers.",
+              "translation": "Necesito unos pantalones nuevos."
+            }
+          ],
+          "notes": "En EE. UU. se dice pants. Siempre en plural."
+        },
+        {
+          "key": "jeans",
+          "type": "term",
+          "text": "jeans",
+          "meaning": "vaqueros",
+          "pronunciation": "YIINS",
+          "examples": [
+            {
+              "text": "I always wear jeans.",
+              "translation": "Siempre llevo vaqueros.",
+              "mirror": {
+                "say": "Siempre llevo vaqueros",
+                "pieces": [
+                  {
+                    "es": "Siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llevo",
+                    "en": "wear",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "vaqueros",
+                    "en": "jeans",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Blue jeans.",
+              "translation": "Vaqueros azules."
+            }
+          ]
+        },
+        {
+          "key": "skirt",
+          "type": "term",
+          "text": "skirt",
+          "meaning": "falda",
+          "pronunciation": "SKERT",
+          "examples": [
+            {
+              "text": "She's wearing a long skirt.",
+              "translation": "Lleva una falda larga.",
+              "mirror": {
+                "say": "Lleva una falda larga",
+                "pieces": [
+                  {
+                    "es": "(ELLA) está",
+                    "en": "She's",
+                    "role": "helper",
+                    "from": "lleva"
+                  },
+                  {
+                    "es": "llevando",
+                    "en": "wearing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "falda",
+                    "en": "skirt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "larga",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "This skirt is too short.",
+              "translation": "Esta falda es demasiado corta."
+            }
+          ]
+        },
+        {
+          "key": "hat",
+          "type": "term",
+          "text": "hat",
+          "meaning": "sombrero, gorro",
+          "pronunciation": "JAT",
+          "examples": [
+            {
+              "text": "Put on your hat.",
+              "translation": "Ponte el gorro.",
+              "mirror": {
+                "say": "Ponte el gorro",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put on",
+                    "role": "verb",
+                    "from": "Ponte",
+                    "why": "Ponerse algo es PUT ON."
+                  },
+                  {
+                    "es": "TU gorro",
+                    "en": "your hat",
+                    "role": "word",
+                    "from": "el gorro"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A big black hat.",
+              "translation": "Un sombrero negro grande."
+            }
+          ]
+        },
+        {
+          "key": "socks",
+          "type": "term",
+          "text": "socks",
+          "meaning": "calcetines",
+          "pronunciation": "SOKS",
+          "examples": [
+            {
+              "text": "My socks are wet.",
+              "translation": "Tengo los calcetines mojados.",
+              "mirror": {
+                "say": "Tengo los calcetines mojados",
+                "pieces": [
+                  {
+                    "es": "MIS calcetines",
+                    "en": "My socks",
+                    "role": "who",
+                    "from": "tengo los calcetines",
+                    "why": "En inglés: MIS calcetines ESTÁN mojados."
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mojados",
+                    "en": "wet",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A pair of socks.",
+              "translation": "Un par de calcetines."
+            }
+          ]
+        },
+        {
+          "key": "shoes",
+          "type": "term",
+          "text": "shoes",
+          "meaning": "zapatos",
+          "pronunciation": "SHUUS",
+          "examples": [
+            {
+              "text": "These shoes are very comfortable.",
+              "translation": "Estos zapatos son muy cómodos.",
+              "mirror": {
+                "say": "Estos zapatos son muy cómodos",
+                "pieces": [
+                  {
+                    "es": "Estos zapatos",
+                    "en": "These shoes",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy cómodos",
+                    "en": "very comfortable",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take off your shoes.",
+              "translation": "Quítate los zapatos."
+            }
+          ]
+        },
+        {
+          "key": "wear",
+          "type": "term",
+          "text": "wear",
+          "meaning": "llevar puesto",
+          "pronunciation": "UÉR",
+          "examples": [
+            {
+              "text": "I wear glasses.",
+              "translation": "Llevo gafas.",
+              "mirror": {
+                "say": "Llevo gafas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llevo",
+                    "en": "wear",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "gafas",
+                    "en": "glasses",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What are you wearing?",
+              "translation": "¿Qué llevas puesto?"
+            }
+          ]
+        },
+        {
+          "key": "size",
+          "type": "term",
+          "text": "size",
+          "meaning": "talla, tamaño",
+          "pronunciation": "SÁIS",
+          "examples": [
+            {
+              "text": "What size are you?",
+              "translation": "¿Qué talla usas?",
+              "mirror": {
+                "say": "¿Qué talla usas?",
+                "pieces": [
+                  {
+                    "es": "Qué talla",
+                    "en": "What size",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "eres",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "usas",
+                    "why": "La talla se ES: what size ARE you?"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Do you have a bigger size?",
+              "translation": "¿Tienen una talla más grande?"
+            }
+          ]
+        },
+        {
+          "key": "try-on",
+          "type": "term",
+          "text": "try on",
+          "meaning": "probarse (ropa)",
+          "pronunciation": "TRÁI ON",
+          "examples": [
+            {
+              "text": "Can I try on this shirt?",
+              "translation": "¿Puedo probarme esta camisa?",
+              "mirror": {
+                "say": "¿Puedo probarme esta camisa?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "probar",
+                    "en": "try on",
+                    "role": "verb",
+                    "from": "probarme",
+                    "why": "Probarse ropa es TRY ON."
+                  },
+                  {
+                    "es": "esta camisa",
+                    "en": "this shirt",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Try it on!",
+              "translation": "¡Pruébatelo!"
+            }
+          ]
+        },
+        {
+          "key": "fit",
+          "type": "term",
+          "text": "fit",
+          "meaning": "quedar bien (de talla)",
+          "pronunciation": "FIT",
+          "examples": [
+            {
+              "text": "These jeans don't fit me.",
+              "translation": "Estos vaqueros no me quedan bien.",
+              "mirror": {
+                "say": "Estos vaqueros no me quedan bien",
+                "pieces": [
+                  {
+                    "es": "Estos vaqueros",
+                    "en": "These jeans",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "quedan bien",
+                    "en": "fit",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Does it fit?",
+              "translation": "¿Te queda bien?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,741 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "26-fechas",
+      "title": "Misión 26 · Días, meses y fechas",
+      "units": [
+        {
+          "key": "g-in-on-at",
+          "type": "pattern",
+          "goal": "IN, ON, AT: ¿cuándo?",
+          "rule": "AT para la hora (at five), ON para el día (on Monday), IN para lo largo: meses, años y estaciones (in May, in 2025, in summer).",
+          "pieces": [
+            {
+              "text": "at",
+              "role": "fixed",
+              "hint": "a las"
+            },
+            {
+              "text": "five",
+              "role": "slot",
+              "hint": "cinco"
+            }
+          ],
+          "examples": [
+            {
+              "text": "The class is at five.",
+              "translation": "La clase es a las cinco.",
+              "mirror": {
+                "say": "La clase es a las cinco",
+                "pieces": [
+                  {
+                    "es": "La clase",
+                    "en": "The class",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "a las cinco",
+                    "en": "at five",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I was born in May.",
+              "translation": "Nací en mayo.",
+              "mirror": {
+                "say": "Nací en mayo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fui nacido",
+                    "en": "was born",
+                    "role": "verb",
+                    "from": "nací",
+                    "why": "Nacer se dice «ser nacido»: I WAS born."
+                  },
+                  {
+                    "es": "en mayo",
+                    "en": "in May",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "See you on Friday at eight.",
+              "translation": "Nos vemos el viernes a las ocho."
+            },
+            {
+              "text": "We met in 2020.",
+              "translation": "Nos conocimos en 2020."
+            }
+          ],
+          "pitfalls": [
+            "«In Monday» está mal: los días van con ON.",
+            "«At the morning» no: in the morning, pero at night."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "RELOJ: AT. CALENDARIO: ON. AÑO entero: IN.",
+            "emoji": "📅"
+          }
+        },
+        {
+          "key": "monday",
+          "type": "term",
+          "text": "Monday",
+          "meaning": "lunes",
+          "pronunciation": "MÁNdei",
+          "examples": [
+            {
+              "text": "I start work on Monday.",
+              "translation": "Empiezo a trabajar el lunes.",
+              "mirror": {
+                "say": "Empiezo a trabajar el lunes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "empiezo",
+                    "en": "start",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el trabajo",
+                    "en": "work",
+                    "role": "word",
+                    "from": "a trabajar"
+                  },
+                  {
+                    "es": "en lunes",
+                    "en": "on Monday",
+                    "role": "word",
+                    "from": "el lunes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Mondays are hard.",
+              "translation": "Los lunes son duros."
+            }
+          ],
+          "notes": "Los días se escriben con mayúscula: Monday."
+        },
+        {
+          "key": "tuesday",
+          "type": "term",
+          "text": "Tuesday",
+          "meaning": "martes",
+          "pronunciation": "TIÚSdei",
+          "examples": [
+            {
+              "text": "See you on Tuesday.",
+              "translation": "Nos vemos el martes.",
+              "mirror": {
+                "say": "Nos vemos el martes",
+                "pieces": [
+                  {
+                    "es": "Te veo",
+                    "en": "See you",
+                    "role": "verb",
+                    "from": "Nos vemos"
+                  },
+                  {
+                    "es": "en martes",
+                    "en": "on Tuesday",
+                    "role": "word",
+                    "from": "el martes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The shop is closed on Tuesdays.",
+              "translation": "La tienda cierra los martes."
+            }
+          ]
+        },
+        {
+          "key": "wednesday",
+          "type": "term",
+          "text": "Wednesday",
+          "meaning": "miércoles",
+          "pronunciation": "UÉNSdei",
+          "examples": [
+            {
+              "text": "The meeting is on Wednesday.",
+              "translation": "La reunión es el miércoles.",
+              "mirror": {
+                "say": "La reunión es el miércoles",
+                "pieces": [
+                  {
+                    "es": "La reunión",
+                    "en": "The meeting",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en miércoles",
+                    "en": "on Wednesday",
+                    "role": "word",
+                    "from": "el miércoles",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wednesday is the middle of the week.",
+              "translation": "El miércoles es la mitad de la semana."
+            }
+          ],
+          "notes": "Se escribe Wednesday pero se dice UÉNSdei: la d no suena."
+        },
+        {
+          "key": "thursday",
+          "type": "term",
+          "text": "Thursday",
+          "meaning": "jueves",
+          "pronunciation": "ZÉRSdei",
+          "examples": [
+            {
+              "text": "I play football on Thursdays.",
+              "translation": "Juego al fútbol los jueves.",
+              "mirror": {
+                "say": "Juego al fútbol los jueves",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juego",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fútbol",
+                    "en": "football",
+                    "role": "word",
+                    "from": "al fútbol",
+                    "why": "Los deportes van sin «the»: play football."
+                  },
+                  {
+                    "es": "en jueves",
+                    "en": "on Thursdays",
+                    "role": "word",
+                    "from": "los jueves"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Last Thursday.",
+              "translation": "El jueves pasado."
+            }
+          ]
+        },
+        {
+          "key": "friday",
+          "type": "term",
+          "text": "Friday",
+          "meaning": "viernes",
+          "pronunciation": "FRÁIdei",
+          "examples": [
+            {
+              "text": "Finally, it's Friday!",
+              "translation": "¡Por fin es viernes!",
+              "mirror": {
+                "say": "¡Por fin es viernes!",
+                "pieces": [
+                  {
+                    "es": "Por fin",
+                    "en": "Finally",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "viernes",
+                    "en": "Friday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What are you doing on Friday?",
+              "translation": "¿Qué haces el viernes?"
+            }
+          ]
+        },
+        {
+          "key": "saturday",
+          "type": "term",
+          "text": "Saturday",
+          "meaning": "sábado",
+          "pronunciation": "SÁterdei",
+          "examples": [
+            {
+              "text": "We go shopping on Saturdays.",
+              "translation": "Vamos de compras los sábados.",
+              "mirror": {
+                "say": "Vamos de compras los sábados",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos de compras",
+                    "en": "go shopping",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en sábados",
+                    "en": "on Saturdays",
+                    "role": "word",
+                    "from": "los sábados",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Saturday morning.",
+              "translation": "El sábado por la mañana."
+            }
+          ]
+        },
+        {
+          "key": "sunday",
+          "type": "term",
+          "text": "Sunday",
+          "meaning": "domingo",
+          "pronunciation": "SÁNdei",
+          "examples": [
+            {
+              "text": "I rest on Sunday.",
+              "translation": "Descanso el domingo.",
+              "mirror": {
+                "say": "Descanso el domingo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "descanso",
+                    "en": "rest",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en domingo",
+                    "en": "on Sunday",
+                    "role": "word",
+                    "from": "el domingo",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sunday is a family day.",
+              "translation": "El domingo es un día de familia."
+            }
+          ]
+        },
+        {
+          "key": "week",
+          "type": "term",
+          "text": "week",
+          "meaning": "semana",
+          "pronunciation": "UIIK",
+          "examples": [
+            {
+              "text": "I work five days a week.",
+              "translation": "Trabajo cinco días a la semana.",
+              "mirror": {
+                "say": "Trabajo cinco días a la semana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cinco días",
+                    "en": "five days",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a la semana",
+                    "en": "a week",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "See you next week.",
+              "translation": "Nos vemos la semana que viene."
+            }
+          ]
+        },
+        {
+          "key": "weekend",
+          "type": "term",
+          "text": "weekend",
+          "meaning": "fin de semana",
+          "pronunciation": "UIIKend",
+          "examples": [
+            {
+              "text": "Have a nice weekend!",
+              "translation": "¡Buen fin de semana!",
+              "mirror": {
+                "say": "¡Buen fin de semana!",
+                "pieces": [
+                  {
+                    "es": "Ten",
+                    "en": "Have",
+                    "role": "verb",
+                    "ghost": true
+                  },
+                  {
+                    "es": "un buen fin de semana",
+                    "en": "a nice weekend",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What did you do at the weekend?",
+              "translation": "¿Qué hiciste el fin de semana?"
+            }
+          ]
+        },
+        {
+          "key": "month",
+          "type": "term",
+          "text": "month",
+          "meaning": "mes",
+          "pronunciation": "MANZ",
+          "examples": [
+            {
+              "text": "I visit my parents every month.",
+              "translation": "Visito a mis padres cada mes.",
+              "mirror": {
+                "say": "Visito a mis padres cada mes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "visito",
+                    "en": "visit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mis padres",
+                    "en": "my parents",
+                    "role": "word",
+                    "from": "a mis padres",
+                    "why": "Visitar a alguien, sin «a»: visit my parents."
+                  },
+                  {
+                    "es": "cada mes",
+                    "en": "every month",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Next month.",
+              "translation": "El mes que viene."
+            }
+          ]
+        },
+        {
+          "key": "year",
+          "type": "term",
+          "text": "year",
+          "meaning": "año",
+          "pronunciation": "YÍER",
+          "examples": [
+            {
+              "text": "Happy New Year!",
+              "translation": "¡Feliz Año Nuevo!",
+              "mirror": {
+                "say": "¡Feliz Año Nuevo!",
+                "pieces": [
+                  {
+                    "es": "Feliz",
+                    "en": "Happy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Año",
+                    "en": "Year",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Nuevo",
+                    "en": "New",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I'm twenty years old.",
+              "translation": "Tengo veinte años."
+            }
+          ]
+        },
+        {
+          "key": "summer",
+          "type": "term",
+          "text": "summer",
+          "meaning": "verano",
+          "pronunciation": "SÁmer",
+          "examples": [
+            {
+              "text": "We go to the beach in summer.",
+              "translation": "En verano vamos a la playa.",
+              "mirror": {
+                "say": "En verano vamos a la playa",
+                "pieces": [
+                  {
+                    "es": "En verano",
+                    "en": "in summer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la playa",
+                    "en": "to the beach",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Summer holidays.",
+              "translation": "Las vacaciones de verano."
+            }
+          ]
+        },
+        {
+          "key": "winter",
+          "type": "term",
+          "text": "winter",
+          "meaning": "invierno",
+          "pronunciation": "UÍNter",
+          "examples": [
+            {
+              "text": "It's cold in winter.",
+              "translation": "En invierno hace frío.",
+              "mirror": {
+                "say": "En invierno hace frío",
+                "pieces": [
+                  {
+                    "es": "En invierno",
+                    "en": "in winter",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace"
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A long winter.",
+              "translation": "Un invierno largo."
+            }
+          ]
+        },
+        {
+          "key": "birthday",
+          "type": "term",
+          "text": "birthday",
+          "meaning": "cumpleaños",
+          "pronunciation": "BÉRZdei",
+          "examples": [
+            {
+              "text": "When is your birthday?",
+              "translation": "¿Cuándo es tu cumpleaños?",
+              "mirror": {
+                "say": "¿Cuándo es tu cumpleaños?",
+                "pieces": [
+                  {
+                    "es": "Cuándo",
+                    "en": "When",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tu cumpleaños",
+                    "en": "your birthday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I had a party for my birthday.",
+              "translation": "Hice una fiesta por mi cumpleaños."
+            }
+          ]
+        },
+        {
+          "key": "date",
+          "type": "term",
+          "text": "date",
+          "meaning": "fecha",
+          "pronunciation": "DÉIT",
+          "examples": [
+            {
+              "text": "What's the date today?",
+              "translation": "¿A qué día estamos?",
+              "mirror": {
+                "say": "¿A qué día estamos?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "A qué día estamos",
+                    "why": "La fecha se pregunta «¿cuál es la fecha?»: what's the date?"
+                  },
+                  {
+                    "es": "la fecha",
+                    "en": "the date",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hoy",
+                    "en": "today",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's set a date.",
+              "translation": "Pongamos una fecha."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
