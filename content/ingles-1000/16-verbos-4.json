@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "16-verbos-4",
+      "title": "Misión 16 · Verbos para el día a día",
+      "units": [
+        {
+          "key": "buy",
+          "type": "term",
+          "text": "buy",
+          "meaning": "comprar",
+          "pronunciation": "BÁI",
+          "examples": [
+            {
+              "text": "I buy bread every day.",
+              "translation": "Compro pan todos los días."
+            },
+            {
+              "text": "What did you buy?",
+              "translation": "¿Qué compraste?"
+            }
+          ]
+        },
+        {
+          "key": "sell",
+          "type": "term",
+          "text": "sell",
+          "meaning": "vender",
+          "pronunciation": "SEL",
+          "examples": [
+            {
+              "text": "They sell old books.",
+              "translation": "Venden libros viejos."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SELLO",
+            "scene": "VENDES un SELLO raro por un millón.",
+            "sceneTarget": "You SELL a rare stamp for a million.",
+            "emoji": "📮"
+          }
+        },
+        {
+          "key": "pay",
+          "type": "term",
+          "text": "pay",
+          "meaning": "pagar",
+          "pronunciation": "PÉI",
+          "examples": [
+            {
+              "text": "Can I pay by card?",
+              "translation": "¿Puedo pagar con tarjeta?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PEINE",
+            "scene": "PAGAS el café con un PEINE.",
+            "sceneTarget": "You PAY for the coffee with a comb.",
+            "emoji": "🪮"
+          }
+        },
+        {
+          "key": "cost",
+          "type": "term",
+          "text": "cost",
+          "meaning": "costar",
+          "pronunciation": "KOST",
+          "examples": [
+            {
+              "text": "How much does it cost?",
+              "translation": "¿Cuánto cuesta?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COSTA",
+            "scene": "Una casa en la COSTA CUESTA un riñón.",
+            "sceneTarget": "A house on the coast COSTS a fortune.",
+            "emoji": "🏖️"
+          }
+        },
+        {
+          "key": "read",
+          "type": "term",
+          "text": "read",
+          "meaning": "leer",
+          "pronunciation": "RIID",
+          "examples": [
+            {
+              "text": "I read every night.",
+              "translation": "Leo todas las noches."
+            }
+          ]
+        },
+        {
+          "key": "write",
+          "type": "term",
+          "text": "write",
+          "meaning": "escribir",
+          "pronunciation": "RÁIT",
+          "examples": [
+            {
+              "text": "Write your name here.",
+              "translation": "Escribe tu nombre aquí."
+            }
+          ]
+        },
+        {
+          "key": "speak",
+          "type": "term",
+          "text": "speak",
+          "meaning": "hablar (un idioma)",
+          "pronunciation": "SPIIK",
+          "examples": [
+            {
+              "text": "Do you speak English?",
+              "translation": "¿Hablas inglés?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPIGA",
+            "scene": "Una ESPIGA de trigo HABLA inglés en la radio.",
+            "sceneTarget": "An ear of wheat SPEAKS English on the radio.",
+            "emoji": "🌾"
+          }
+        },
+        {
+          "key": "learn",
+          "type": "term",
+          "text": "learn",
+          "meaning": "aprender",
+          "pronunciation": "LERN",
+          "examples": [
+            {
+              "text": "I want to learn English.",
+              "translation": "Quiero aprender inglés."
+            }
+          ]
+        },
+        {
+          "key": "study",
+          "type": "term",
+          "text": "study",
+          "meaning": "estudiar",
+          "pronunciation": "STÁdi",
+          "examples": [
+            {
+              "text": "I study at night.",
+              "translation": "Estudio por la noche."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTADIO",
+            "scene": "ESTUDIAS para el examen en un ESTADIO lleno.",
+            "sceneTarget": "You STUDY for the exam in a full stadium.",
+            "emoji": "🏟️"
+          }
+        },
+        {
+          "key": "work",
+          "type": "term",
+          "text": "work",
+          "meaning": "trabajar, trabajo",
+          "pronunciation": "UÉRK",
+          "examples": [
+            {
+              "text": "I work in an office.",
+              "translation": "Trabajo en una oficina."
+            }
+          ]
+        },
+        {
+          "key": "play",
+          "type": "term",
+          "text": "play",
+          "meaning": "jugar, tocar (música)",
+          "pronunciation": "PLÉI",
+          "examples": [
+            {
+              "text": "The children play in the park.",
+              "translation": "Los niños juegan en el parque."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLAYA",
+            "scene": "JUEGAS al voleibol en la PLAYA con un pulpo.",
+            "sceneTarget": "You PLAY volleyball on the beach with an octopus.",
+            "emoji": "🏐"
+          }
+        },
+        {
+          "key": "sleep",
+          "type": "term",
+          "text": "sleep",
+          "meaning": "dormir",
+          "pronunciation": "SLIIP",
+          "examples": [
+            {
+              "text": "I sleep eight hours.",
+              "translation": "Duermo ocho horas."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SLIP",
+            "scene": "DUERMES en SLIP sobre la nieve.",
+            "sceneTarget": "You SLEEP in your briefs on the snow.",
+            "emoji": "🩲"
+          }
+        },
+        {
+          "key": "call",
+          "type": "term",
+          "text": "call",
+          "meaning": "llamar",
+          "pronunciation": "KOOL",
+          "examples": [
+            {
+              "text": "Call me tomorrow.",
+              "translation": "Llámame mañana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COL",
+            "scene": "LLAMAS a tu madre por un teléfono de COL.",
+            "sceneTarget": "You CALL your mother on a cabbage phone.",
+            "emoji": "🥬"
+          }
+        },
+        {
+          "key": "love",
+          "type": "term",
+          "text": "love",
+          "meaning": "querer, amar",
+          "pronunciation": "LAV",
+          "examples": [
+            {
+              "text": "I love you.",
+              "translation": "Te quiero."
+            },
+            {
+              "text": "I love this song.",
+              "translation": "Me encanta esta canción."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAVA",
+            "scene": "AMAS tanto que tu corazón escupe LAVA.",
+            "sceneTarget": "You LOVE so much that your heart spits lava.",
+            "emoji": "🌋"
+          }
+        },
+        {
+          "key": "understand",
+          "type": "term",
+          "text": "understand",
+          "meaning": "entender",
+          "pronunciation": "anderSTÁND",
+          "examples": [
+            {
+              "text": "I understand you.",
+              "translation": "Te entiendo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
