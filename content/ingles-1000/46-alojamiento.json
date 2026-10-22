@@ -1,0 +1,794 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "46-alojamiento",
+      "title": "Misión 46 · En el hotel y de turismo",
+      "units": [
+        {
+          "key": "g-would-like",
+          "type": "pattern",
+          "goal": "Me gustaría = I'D LIKE TO",
+          "rule": "«Me gustaría + verbo» = I'd like TO + verbo: I'd like to book a room. Más educado que «I want».",
+          "pieces": [
+            {
+              "text": "I'd like to",
+              "role": "fixed",
+              "hint": "me gustaría"
+            },
+            {
+              "text": "book a room",
+              "role": "slot",
+              "hint": "reservar una habitación"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'd like to book a room.",
+              "translation": "Me gustaría reservar una habitación.",
+              "mirror": {
+                "say": "Me gustaría reservar una habitación",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb",
+                    "from": "me gustaría",
+                    "why": "«Me gustaría» = I'd like: más educado que want."
+                  },
+                  {
+                    "es": "reservar",
+                    "en": "to book",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una habitación",
+                    "en": "a room",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Would you like to come?",
+              "translation": "¿Te gustaría venir?",
+              "mirror": {
+                "say": "¿Te gustaría venir?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÍAS",
+                    "en": "Would",
+                    "role": "helper",
+                    "from": "te gustaría",
+                    "why": "-RÍA = WOULD: would you like…?"
+                  },
+                  {
+                    "es": "gustar",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "to come",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'd like a window seat.",
+              "translation": "Quisiera un asiento de ventanilla."
+            },
+            {
+              "text": "We'd like to see the menu.",
+              "translation": "Nos gustaría ver la carta."
+            }
+          ],
+          "pitfalls": [
+            "«I'd like go» está mal: con un verbo, I'd like TO go.",
+            "«I like» (me gusta) no es «I'd like» (me gustaría)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "La -RÍA viaja con WOULD y TO de equipaje.",
+            "emoji": "🛎️"
+          }
+        },
+        {
+          "key": "reception",
+          "type": "term",
+          "text": "reception",
+          "meaning": "recepción",
+          "pronunciation": "riSÉPshon",
+          "examples": [
+            {
+              "text": "Ask at reception.",
+              "translation": "Pregunta en recepción.",
+              "mirror": {
+                "say": "Pregunta en recepción",
+                "pieces": [
+                  {
+                    "es": "Pregunta",
+                    "en": "Ask",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en recepción",
+                    "en": "at reception",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Reception is open all night.",
+              "translation": "La recepción abre toda la noche."
+            }
+          ]
+        },
+        {
+          "key": "booking",
+          "type": "term",
+          "text": "booking",
+          "meaning": "reserva",
+          "pronunciation": "BÚking",
+          "examples": [
+            {
+              "text": "I have a booking for two nights.",
+              "translation": "Tengo una reserva para dos noches.",
+              "mirror": {
+                "say": "Tengo una reserva para dos noches",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una reserva",
+                    "en": "a booking",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para dos noches",
+                    "en": "for two nights",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I change my booking?",
+              "translation": "¿Puedo cambiar mi reserva?"
+            }
+          ]
+        },
+        {
+          "key": "lift",
+          "type": "term",
+          "text": "lift",
+          "meaning": "ascensor",
+          "pronunciation": "LIFT",
+          "examples": [
+            {
+              "text": "The lift is not working.",
+              "translation": "El ascensor no funciona.",
+              "mirror": {
+                "say": "El ascensor no funciona",
+                "pieces": [
+                  {
+                    "es": "El ascensor",
+                    "en": "The lift",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no está",
+                    "en": "is not",
+                    "role": "helper",
+                    "from": "no"
+                  },
+                  {
+                    "es": "funcionando",
+                    "en": "working",
+                    "role": "verb",
+                    "from": "funciona",
+                    "why": "Lo que pasa ahora: is not work-ING."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take the lift to the fifth floor.",
+              "translation": "Coge el ascensor hasta el quinto piso."
+            }
+          ],
+          "notes": "En EE. UU. se dice elevator."
+        },
+        {
+          "key": "view",
+          "type": "term",
+          "text": "view",
+          "meaning": "vista(s)",
+          "pronunciation": "VIU",
+          "examples": [
+            {
+              "text": "A room with a view of the sea.",
+              "translation": "Una habitación con vistas al mar.",
+              "mirror": {
+                "say": "Una habitación con vistas al mar",
+                "pieces": [
+                  {
+                    "es": "Una habitación",
+                    "en": "A room",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con una vista",
+                    "en": "with a view",
+                    "role": "word",
+                    "from": "con vistas"
+                  },
+                  {
+                    "es": "del mar",
+                    "en": "of the sea",
+                    "role": "word",
+                    "from": "al mar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What a view!",
+              "translation": "¡Qué vistas!"
+            }
+          ]
+        },
+        {
+          "key": "guest",
+          "type": "term",
+          "text": "guest",
+          "meaning": "huésped, invitado",
+          "pronunciation": "GUEST",
+          "examples": [
+            {
+              "text": "We have guests tonight.",
+              "translation": "Esta noche tenemos invitados.",
+              "mirror": {
+                "say": "Esta noche tenemos invitados",
+                "pieces": [
+                  {
+                    "es": "Esta noche",
+                    "en": "tonight",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "invitados",
+                    "en": "guests",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Hotel guests only.",
+              "translation": "Solo clientes del hotel."
+            }
+          ]
+        },
+        {
+          "key": "tourist",
+          "type": "term",
+          "text": "tourist",
+          "meaning": "turista",
+          "pronunciation": "TÚrist",
+          "examples": [
+            {
+              "text": "This city is full of tourists.",
+              "translation": "Esta ciudad está llena de turistas.",
+              "mirror": {
+                "say": "Esta ciudad está llena de turistas",
+                "pieces": [
+                  {
+                    "es": "Esta ciudad",
+                    "en": "This city",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llena de turistas",
+                    "en": "full of tourists",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A tourist guide.",
+              "translation": "Una guía turística."
+            }
+          ]
+        },
+        {
+          "key": "guide",
+          "type": "term",
+          "text": "guide",
+          "meaning": "guía",
+          "pronunciation": "GÁID",
+          "examples": [
+            {
+              "text": "Our guide speaks Spanish.",
+              "translation": "Nuestro guía habla español.",
+              "mirror": {
+                "say": "Nuestro guía habla español",
+                "pieces": [
+                  {
+                    "es": "Nuestro guía",
+                    "en": "Our guide",
+                    "role": "who"
+                  },
+                  {
+                    "es": "habla",
+                    "en": "speaks",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "español",
+                    "en": "Spanish",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A guide book.",
+              "translation": "Una guía de viaje."
+            }
+          ]
+        },
+        {
+          "key": "souvenir",
+          "type": "term",
+          "text": "souvenir",
+          "meaning": "recuerdo (objeto)",
+          "pronunciation": "suveNÍER",
+          "examples": [
+            {
+              "text": "I bought a souvenir for my mum.",
+              "translation": "Compré un recuerdo para mi madre.",
+              "mirror": {
+                "say": "Compré un recuerdo para mi madre",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un recuerdo",
+                    "en": "a souvenir",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para mi madre",
+                    "en": "for my mum",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A souvenir shop.",
+              "translation": "Una tienda de recuerdos."
+            }
+          ]
+        },
+        {
+          "key": "postcard",
+          "type": "term",
+          "text": "postcard",
+          "meaning": "postal",
+          "pronunciation": "PÓUSTkard",
+          "examples": [
+            {
+              "text": "Send me a postcard!",
+              "translation": "¡Mándame una postal!",
+              "mirror": {
+                "say": "¡Mándame una postal!",
+                "pieces": [
+                  {
+                    "es": "Manda",
+                    "en": "Send",
+                    "role": "verb",
+                    "from": "Mándame",
+                    "why": "Lo pegado se separa: send ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una postal",
+                    "en": "a postcard",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A postcard from Rome.",
+              "translation": "Una postal de Roma."
+            }
+          ]
+        },
+        {
+          "key": "sightseeing",
+          "type": "term",
+          "text": "sightseeing",
+          "meaning": "turismo (ver monumentos)",
+          "pronunciation": "SÁITsiing",
+          "examples": [
+            {
+              "text": "We went sightseeing in Rome.",
+              "translation": "Hicimos turismo en Roma.",
+              "mirror": {
+                "say": "Hicimos turismo en Roma",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fuimos",
+                    "en": "went",
+                    "role": "verb",
+                    "from": "hicimos",
+                    "why": "Hacer turismo es GO sightseeing."
+                  },
+                  {
+                    "es": "turismo",
+                    "en": "sightseeing",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en Roma",
+                    "en": "in Rome",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A day of sightseeing.",
+              "translation": "Un día de turismo."
+            }
+          ]
+        },
+        {
+          "key": "abroad",
+          "type": "term",
+          "text": "abroad",
+          "meaning": "en el extranjero",
+          "pronunciation": "aBRÓOD",
+          "examples": [
+            {
+              "text": "I want to study abroad.",
+              "translation": "Quiero estudiar en el extranjero.",
+              "mirror": {
+                "say": "Quiero estudiar en el extranjero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "estudiar",
+                    "en": "to study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el extranjero",
+                    "en": "abroad",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you ever lived abroad?",
+              "translation": "¿Has vivido alguna vez en el extranjero?"
+            }
+          ]
+        },
+        {
+          "key": "foreign",
+          "type": "term",
+          "text": "foreign",
+          "meaning": "extranjero (adjetivo)",
+          "pronunciation": "FÓren",
+          "examples": [
+            {
+              "text": "Do you speak any foreign languages?",
+              "translation": "¿Hablas algún idioma extranjero?",
+              "mirror": {
+                "say": "¿Hablas algún idioma extranjero?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hablas",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "algunos",
+                    "en": "any",
+                    "role": "word",
+                    "from": "algún"
+                  },
+                  {
+                    "es": "idiomas",
+                    "en": "languages",
+                    "role": "word",
+                    "from": "idioma",
+                    "why": "Con «any» se pregunta en plural: any languages."
+                  },
+                  {
+                    "es": "extranjeros",
+                    "en": "foreign",
+                    "role": "word",
+                    "from": "extranjero"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A foreign student.",
+              "translation": "Un estudiante extranjero."
+            }
+          ],
+          "notes": "La g no suena: FÓren."
+        },
+        {
+          "key": "currency",
+          "type": "term",
+          "text": "currency",
+          "meaning": "moneda (divisa)",
+          "pronunciation": "KÁrensi",
+          "examples": [
+            {
+              "text": "What's the currency in Japan?",
+              "translation": "¿Cuál es la moneda de Japón?",
+              "mirror": {
+                "say": "¿Cuál es la moneda de Japón?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cuál es"
+                  },
+                  {
+                    "es": "la moneda",
+                    "en": "the currency",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en Japón",
+                    "en": "in Japan",
+                    "role": "word",
+                    "from": "de Japón"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Foreign currency.",
+              "translation": "Moneda extranjera."
+            }
+          ]
+        },
+        {
+          "key": "insurance",
+          "type": "term",
+          "text": "insurance",
+          "meaning": "seguro (póliza)",
+          "pronunciation": "inSHÚrans",
+          "examples": [
+            {
+              "text": "Do you have travel insurance?",
+              "translation": "¿Tienes seguro de viaje?",
+              "mirror": {
+                "say": "¿Tienes seguro de viaje?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "seguro",
+                    "en": "insurance",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de viaje",
+                    "en": "travel",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Car insurance is expensive.",
+              "translation": "El seguro del coche es caro."
+            }
+          ]
+        },
+        {
+          "key": "delay",
+          "type": "term",
+          "text": "delay",
+          "meaning": "retraso",
+          "pronunciation": "diLÉI",
+          "examples": [
+            {
+              "text": "There is a two-hour delay.",
+              "translation": "Hay un retraso de dos horas.",
+              "mirror": {
+                "say": "Hay un retraso de dos horas",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "retraso",
+                    "en": "delay",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de dos horas",
+                    "en": "two-hour",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Sorry for the delay.",
+              "translation": "Perdón por el retraso."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

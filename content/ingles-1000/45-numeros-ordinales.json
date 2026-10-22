@@ -1,0 +1,747 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "45-numeros-ordinales",
+      "title": "Misión 45 · Fechas, veces y precios",
+      "units": [
+        {
+          "key": "g-dates",
+          "type": "pattern",
+          "goal": "Fechas: el 5 de mayo = THE FIFTH OF MAY",
+          "rule": "Las fechas usan números ordinales (first, second, fifth…): the fifth of May o May the fifth. Se escribe 5th May.",
+          "pieces": [
+            {
+              "text": "the",
+              "role": "fixed",
+              "hint": "el"
+            },
+            {
+              "text": "fifth",
+              "role": "slot",
+              "hint": "5"
+            },
+            {
+              "text": "of May",
+              "role": "fixed",
+              "hint": "de mayo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "My birthday is on the fifth of May.",
+              "translation": "Mi cumpleaños es el 5 de mayo.",
+              "mirror": {
+                "say": "Mi cumpleaños es el 5 de mayo",
+                "pieces": [
+                  {
+                    "es": "Mi cumpleaños",
+                    "en": "My birthday",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el quinto",
+                    "en": "on the fifth",
+                    "role": "word",
+                    "from": "el 5",
+                    "why": "Las fechas: ON + ordinal. On the fifth."
+                  },
+                  {
+                    "es": "de mayo",
+                    "en": "of May",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Today is the twentieth.",
+              "translation": "Hoy es día 20.",
+              "mirror": {
+                "say": "Hoy es día 20",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "Today",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el vigésimo",
+                    "en": "the twentieth",
+                    "role": "word",
+                    "from": "día 20"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's the first of January.",
+              "translation": "Es el 1 de enero."
+            },
+            {
+              "text": "What's the date today? It's the third.",
+              "translation": "¿A qué día estamos? A día 3."
+            }
+          ],
+          "pitfalls": [
+            "En fechas no se dice «the five of May»: the FIFTH (ordinal).",
+            "Se escriben 1st, 2nd, 3rd, 4th, 5th…"
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "El CALENDARIO solo habla en ORDINALES: FIRST, FIFTH.",
+            "emoji": "🗓️"
+          }
+        },
+        {
+          "key": "fourth",
+          "type": "term",
+          "text": "fourth",
+          "meaning": "cuarto (4.º)",
+          "pronunciation": "FORZ",
+          "examples": [
+            {
+              "text": "We live on the fourth floor.",
+              "translation": "Vivimos en el cuarto piso.",
+              "mirror": {
+                "say": "Vivimos en el cuarto piso",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivimos",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el cuarto piso",
+                    "en": "on the fourth floor",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The fourth of July.",
+              "translation": "El 4 de julio."
+            }
+          ]
+        },
+        {
+          "key": "fifth",
+          "type": "term",
+          "text": "fifth",
+          "meaning": "quinto (5.º)",
+          "pronunciation": "FIFZ",
+          "examples": [
+            {
+              "text": "This is my fifth coffee today!",
+              "translation": "¡Es mi quinto café de hoy!",
+              "mirror": {
+                "say": "¡Es mi quinto café de hoy!",
+                "pieces": [
+                  {
+                    "es": "(ESTO) es",
+                    "en": "This is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi quinto café",
+                    "en": "my fifth coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de hoy",
+                    "en": "today",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "On the fifth of May.",
+              "translation": "El 5 de mayo."
+            }
+          ]
+        },
+        {
+          "key": "sixth",
+          "type": "term",
+          "text": "sixth",
+          "meaning": "sexto (6.º)",
+          "pronunciation": "SIKSZ",
+          "examples": [
+            {
+              "text": "She finished sixth in the race.",
+              "translation": "Terminó sexta en la carrera.",
+              "mirror": {
+                "say": "Terminó sexta en la carrera",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "terminó",
+                    "en": "finished",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sexta",
+                    "en": "sixth",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la carrera",
+                    "en": "in the race",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The sixth day.",
+              "translation": "El sexto día."
+            }
+          ]
+        },
+        {
+          "key": "tenth",
+          "type": "term",
+          "text": "tenth",
+          "meaning": "décimo (10.º)",
+          "pronunciation": "TENZ",
+          "examples": [
+            {
+              "text": "It's our tenth anniversary.",
+              "translation": "Es nuestro décimo aniversario.",
+              "mirror": {
+                "say": "Es nuestro décimo aniversario",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nuestro",
+                    "en": "our",
+                    "role": "word"
+                  },
+                  {
+                    "es": "décimo aniversario",
+                    "en": "tenth anniversary",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "On the tenth of June.",
+              "translation": "El 10 de junio."
+            }
+          ]
+        },
+        {
+          "key": "twentieth",
+          "type": "term",
+          "text": "twentieth",
+          "meaning": "vigésimo (20.º)",
+          "pronunciation": "TUÉNtiez",
+          "examples": [
+            {
+              "text": "The twentieth century.",
+              "translation": "El siglo veinte.",
+              "mirror": {
+                "say": "El siglo veinte",
+                "pieces": [
+                  {
+                    "es": "El siglo",
+                    "en": "century",
+                    "role": "word"
+                  },
+                  {
+                    "es": "veinte",
+                    "en": "The twentieth",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "On the twentieth of March.",
+              "translation": "El 20 de marzo."
+            }
+          ]
+        },
+        {
+          "key": "quarter",
+          "type": "term",
+          "text": "quarter",
+          "meaning": "cuarto (1/4); y cuarto",
+          "pronunciation": "KUÓRter",
+          "examples": [
+            {
+              "text": "It's a quarter past ten.",
+              "translation": "Son las diez y cuarto.",
+              "mirror": {
+                "say": "Son las diez y cuarto",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Son"
+                  },
+                  {
+                    "es": "las diez",
+                    "en": "ten",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un cuarto",
+                    "en": "a quarter",
+                    "role": "word",
+                    "from": "y cuarto",
+                    "why": "La hora: a quarter PAST ten (un cuarto pasadas las diez)."
+                  },
+                  {
+                    "es": "pasadas",
+                    "en": "past",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "A quarter of an hour.",
+              "translation": "Un cuarto de hora."
+            }
+          ]
+        },
+        {
+          "key": "once",
+          "type": "term",
+          "text": "once",
+          "meaning": "una vez",
+          "pronunciation": "UANS",
+          "examples": [
+            {
+              "text": "I go to the gym once a week.",
+              "translation": "Voy al gimnasio una vez por semana.",
+              "mirror": {
+                "say": "Voy al gimnasio una vez por semana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "voy",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al gimnasio",
+                    "en": "to the gym",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una vez por semana",
+                    "en": "once a week",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Once upon a time…",
+              "translation": "Érase una vez…"
+            }
+          ]
+        },
+        {
+          "key": "twice",
+          "type": "term",
+          "text": "twice",
+          "meaning": "dos veces",
+          "pronunciation": "TUÁIS",
+          "examples": [
+            {
+              "text": "I've been to Paris twice.",
+              "translation": "He estado en París dos veces.",
+              "mirror": {
+                "say": "He estado en París dos veces",
+                "pieces": [
+                  {
+                    "es": "(YO) he",
+                    "en": "I've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a París",
+                    "en": "to Paris",
+                    "role": "word",
+                    "from": "en París",
+                    "why": "Haber estado en un sitio: been TO Paris."
+                  },
+                  {
+                    "es": "dos veces",
+                    "en": "twice",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Twice a day.",
+              "translation": "Dos veces al día."
+            }
+          ]
+        },
+        {
+          "key": "double",
+          "type": "term",
+          "text": "double",
+          "meaning": "doble",
+          "pronunciation": "DÁbol",
+          "examples": [
+            {
+              "text": "A double room, please.",
+              "translation": "Una habitación doble, por favor.",
+              "mirror": {
+                "say": "Una habitación doble, por favor",
+                "pieces": [
+                  {
+                    "es": "Una",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "habitación",
+                    "en": "room",
+                    "role": "word"
+                  },
+                  {
+                    "es": "doble",
+                    "en": "double",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Double the price.",
+              "translation": "El doble de precio."
+            }
+          ]
+        },
+        {
+          "key": "euro",
+          "type": "term",
+          "text": "euro",
+          "meaning": "euro",
+          "pronunciation": "IÚrou",
+          "examples": [
+            {
+              "text": "It costs ten euros.",
+              "translation": "Cuesta diez euros.",
+              "mirror": {
+                "say": "Cuesta diez euros",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cuesta",
+                    "en": "costs",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "diez euros",
+                    "en": "ten euros",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you accept euros?",
+              "translation": "¿Aceptan euros?"
+            }
+          ]
+        },
+        {
+          "key": "cent",
+          "type": "term",
+          "text": "cent",
+          "meaning": "céntimo",
+          "pronunciation": "SENT",
+          "examples": [
+            {
+              "text": "Fifty cents, please.",
+              "translation": "Cincuenta céntimos, por favor.",
+              "mirror": {
+                "say": "Cincuenta céntimos, por favor",
+                "pieces": [
+                  {
+                    "es": "Cincuenta céntimos",
+                    "en": "Fifty cents",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's one euro and twenty cents.",
+              "translation": "Es un euro con veinte céntimos."
+            }
+          ]
+        },
+        {
+          "key": "percent",
+          "type": "term",
+          "text": "per cent",
+          "meaning": "por ciento",
+          "pronunciation": "per SÉNT",
+          "examples": [
+            {
+              "text": "There's a twenty per cent discount.",
+              "translation": "Hay un veinte por ciento de descuento.",
+              "mirror": {
+                "say": "Hay un veinte por ciento de descuento",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un veinte por ciento",
+                    "en": "a twenty per cent",
+                    "role": "word"
+                  },
+                  {
+                    "es": "descuento",
+                    "en": "discount",
+                    "role": "word",
+                    "from": "de descuento"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm a hundred per cent sure.",
+              "translation": "Estoy seguro al cien por cien."
+            }
+          ]
+        },
+        {
+          "key": "total",
+          "type": "term",
+          "text": "total",
+          "meaning": "total",
+          "pronunciation": "TÓUtal",
+          "examples": [
+            {
+              "text": "What's the total?",
+              "translation": "¿Cuánto es en total?",
+              "mirror": {
+                "say": "¿Cuánto es en total?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Cuánto es"
+                  },
+                  {
+                    "es": "el total",
+                    "en": "the total",
+                    "role": "word",
+                    "from": "en total"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "In total, thirty euros.",
+              "translation": "En total, treinta euros."
+            }
+          ]
+        },
+        {
+          "key": "plus",
+          "type": "term",
+          "text": "plus",
+          "meaning": "más (+)",
+          "pronunciation": "PLAS",
+          "examples": [
+            {
+              "text": "Two plus two is four.",
+              "translation": "Dos más dos son cuatro.",
+              "mirror": {
+                "say": "Dos más dos son cuatro",
+                "pieces": [
+                  {
+                    "es": "Dos",
+                    "en": "Two",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más",
+                    "en": "plus",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dos",
+                    "en": "two",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "son",
+                    "why": "En las sumas se dice IS: two plus two IS four."
+                  },
+                  {
+                    "es": "cuatro",
+                    "en": "four",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Thirty euros plus tax.",
+              "translation": "Treinta euros más impuestos."
+            }
+          ]
+        },
+        {
+          "key": "zero",
+          "type": "term",
+          "text": "zero",
+          "meaning": "cero",
+          "pronunciation": "SÍrou",
+          "examples": [
+            {
+              "text": "It's zero degrees outside.",
+              "translation": "Fuera hace cero grados.",
+              "mirror": {
+                "say": "Fuera hace cero grados",
+                "pieces": [
+                  {
+                    "es": "Fuera",
+                    "en": "outside",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "hace"
+                  },
+                  {
+                    "es": "cero grados",
+                    "en": "zero degrees",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "My number starts with zero.",
+              "translation": "Mi número empieza por cero."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
