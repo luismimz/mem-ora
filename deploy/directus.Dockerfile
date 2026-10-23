@@ -1,5 +1,5 @@
 # Directus 12 con las extensiones de Memora ya compiladas y el esquema versionado dentro de la imagen.
-FROM node:22.18-alpine AS build
+FROM node:22.23.4-alpine AS build
 WORKDIR /repo
 RUN corepack enable
 COPY . .

@@ -1,5 +1,5 @@
 # App del alumno (PWA): se compila con Vite y la sirve nginx, que reenvía /api a Directus (mismo origen, D-032).
-FROM node:22.18-alpine AS build
+FROM node:22.23.4-alpine AS build
 WORKDIR /repo
 RUN corepack enable
 COPY . .
