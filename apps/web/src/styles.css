@@ -446,8 +446,16 @@ blockquote.reading { font-size: .92rem; }
   background: radial-gradient(120% 80% at 50% 0%, hsl(var(--tone) 70% 38%) 0%, hsl(calc(var(--tone) + 40) 60% 16%) 70%, #0f0e0c 100%);
   animation: slide-in .34s cubic-bezier(.2, .9, .2, 1); touch-action: none; user-select: none; transition: transform .15s ease; }
 @keyframes slide-in { from { transform: translateY(70px); opacity: .2; } to { transform: none; opacity: 1; } }
-.slide.right { box-shadow: inset 0 0 0 6px #43d68b; }
-.slide.wrong { box-shadow: inset 0 0 0 6px #ff6b5b; animation: shake .35s ease; }
+/* Marco de acierto/fallo: lo dibuja la pantalla del Flujo (no la tarjeta) con las esquinas redondeadas como las del
+   iPhone. Antes era un borde recto y en las esquinas redondas de la pantalla se cortaba. El radio es algo MAYOR que el de
+   la pantalla más redondeada (si fuera menor, la esquina se seguiría cortando; si es mayor, el marco solo se curva un poco
+   hacia dentro). Se queda quieto aunque la tarjeta tiemble al fallar. */
+:root { --screen-radius: 1.4rem; }
+@media (pointer: coarse) { :root { --screen-radius: 4rem; } }
+.feed::after { content: ''; position: absolute; inset: 0; z-index: 4; pointer-events: none; border: 6px solid transparent; border-radius: var(--screen-radius); transition: border-color .15s ease; }
+.feed:has(.slide.right)::after { border-color: #43d68b; }
+.feed:has(.slide.wrong)::after { border-color: #ff6b5b; }
+.slide.wrong { animation: shake .35s ease; }
 @keyframes shake { 20% { transform: translateX(-9px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
 @keyframes pulse { 50% { transform: scale(1.18); } }
 .slide .tag { margin: 0; font-size: .74rem; letter-spacing: .14em; font-weight: 900; opacity: .85; text-align: center; }

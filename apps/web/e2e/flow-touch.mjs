@@ -68,7 +68,13 @@ try {
   // 3. Relámpago: tocar la respuesta correcta pasa sola.
   const right = page.locator('.option', { hasText: /^KEY$/ });
   if (await right.count()) await right.first().tap();
-  await page.waitForTimeout(1200);
+  // El marco verde sigue las esquinas redondas de la pantalla del iPhone (antes era recto y se cortaba en las esquinas).
+  await page.waitForTimeout(200);
+  const frame = await page.evaluate(() => { const st = getComputedStyle(document.querySelector('.feed'), '::after'); return { color: st.borderTopColor, width: st.borderTopWidth, radius: parseFloat(st.borderTopLeftRadius), card: getComputedStyle(document.querySelector('.slide')).boxShadow }; });
+  if (process.env.E2E_SHOTS) await page.screenshot({ path: `${process.env.E2E_SHOTS}/marco-acierto.png` });
+  check(frame.color === 'rgb(67, 214, 139)' && frame.width === '6px' && frame.radius >= 60 && frame.card === 'none',
+    `al acertar, marco verde de toda la pantalla con esquinas redondas (radio ${frame.radius}px), sin borde recto en la tarjeta`);
+  await page.waitForTimeout(1000);
   c = await card();
   check(c.tag.includes('VERDAD O MENTIRA'), 'tocar la respuesta correcta pasa sola a la siguiente tarjeta');
 
