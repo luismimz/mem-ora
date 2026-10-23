@@ -1,0 +1,811 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "76-habitos",
+      "title": "Misión 76 · Hábitos (B1)",
+      "units": [
+        {
+          "key": "g-gerund-inf",
+          "type": "pattern",
+          "goal": "Disfruto leyendo / Decidí ir: ENJOY + -ING, DECIDE + TO",
+          "rule": "Unos verbos piden -ING (enjoy, avoid, mind, finish, can't stand) y otros TO (decide, want, hope, plan). I enjoy reading. I decided to go.",
+          "pieces": [
+            {
+              "text": "I enjoy",
+              "role": "fixed",
+              "hint": "disfruto"
+            },
+            {
+              "text": "reading",
+              "role": "slot",
+              "hint": "leyendo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I enjoy reading in bed.",
+              "translation": "Disfruto leyendo en la cama.",
+              "mirror": {
+                "say": "Disfruto leyendo en la cama",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "disfruto",
+                    "en": "enjoy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "leyendo",
+                    "en": "reading",
+                    "role": "verb",
+                    "from": "leyendo",
+                    "why": "Detrás de enjoy, -ING: enjoy reading."
+                  },
+                  {
+                    "es": "en cama",
+                    "en": "in bed",
+                    "role": "word",
+                    "from": "en la cama",
+                    "why": "En la cama es IN bed, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We decided to stay at home.",
+              "translation": "Decidimos quedarnos en casa.",
+              "mirror": {
+                "say": "Decidimos quedarnos en casa",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "decidimos",
+                    "en": "decided",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a quedar",
+                    "en": "to stay",
+                    "role": "verb",
+                    "from": "quedarnos",
+                    "why": "Detrás de decide, TO + verbo: decided to stay."
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I can't stand waiting.",
+              "translation": "No soporto esperar."
+            },
+            {
+              "text": "I hope to see you soon.",
+              "translation": "Espero verte pronto."
+            }
+          ],
+          "pitfalls": [
+            "«I enjoy to read» está mal: enjoy + -ING.",
+            "«I decided going» está mal: decide + TO."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "ENJOY lleva un -ING en la MOCHILA; DECIDE, un TO.",
+            "emoji": "🔀"
+          }
+        },
+        {
+          "key": "enjoy",
+          "type": "term",
+          "text": "enjoy",
+          "meaning": "disfrutar",
+          "pronunciation": "enYÓI",
+          "examples": [
+            {
+              "text": "Did you enjoy the film?",
+              "translation": "¿Te gustó la película?",
+              "mirror": {
+                "say": "¿Te gustó la película?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "disfrutar",
+                    "en": "enjoy",
+                    "role": "verb",
+                    "from": "Te gustó",
+                    "why": "«¿Te gustó?» es «¿disfrutaste?»: did you enjoy?"
+                  },
+                  {
+                    "es": "la película",
+                    "en": "the film",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Enjoy yourself!",
+              "translation": "¡Pásalo bien!"
+            }
+          ]
+        },
+        {
+          "key": "avoid",
+          "type": "term",
+          "text": "avoid",
+          "meaning": "evitar",
+          "pronunciation": "aVÓID",
+          "examples": [
+            {
+              "text": "I avoid eating late.",
+              "translation": "Evito cenar tarde.",
+              "mirror": {
+                "say": "Evito cenar tarde",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "evito",
+                    "en": "avoid",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "comiendo",
+                    "en": "eating",
+                    "role": "verb",
+                    "from": "cenar",
+                    "why": "Detrás de avoid, -ING: avoid eating."
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Avoid the traffic.",
+              "translation": "Evita el tráfico."
+            }
+          ]
+        },
+        {
+          "key": "quit",
+          "type": "term",
+          "text": "quit",
+          "meaning": "dejar (un hábito, un trabajo)",
+          "pronunciation": "KUIT",
+          "examples": [
+            {
+              "text": "He quit smoking last year.",
+              "translation": "Dejó de fumar el año pasado.",
+              "mirror": {
+                "say": "Dejó de fumar el año pasado",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dejó",
+                    "en": "quit",
+                    "role": "verb",
+                    "from": "Dejó de"
+                  },
+                  {
+                    "es": "fumando",
+                    "en": "smoking",
+                    "role": "verb",
+                    "from": "fumar",
+                    "why": "Dejar de hacer algo: quit + -ING."
+                  },
+                  {
+                    "es": "año pasado",
+                    "en": "last year",
+                    "role": "word",
+                    "from": "el año pasado",
+                    "why": "Last year va sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I quit!",
+              "translation": "¡Lo dejo!"
+            }
+          ],
+          "notes": "No cambia: quit, quit, quit."
+        },
+        {
+          "key": "practise",
+          "type": "term",
+          "text": "practise",
+          "meaning": "practicar",
+          "pronunciation": "PRÁKtis",
+          "examples": [
+            {
+              "text": "Practise speaking every day.",
+              "translation": "Practica hablar todos los días.",
+              "mirror": {
+                "say": "Practica hablar todos los días",
+                "pieces": [
+                  {
+                    "es": "Practica",
+                    "en": "Practise",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hablando",
+                    "en": "speaking",
+                    "role": "verb",
+                    "from": "hablar",
+                    "why": "Detrás de practise, -ING: practise speaking."
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word",
+                    "from": "todos los días",
+                    "why": "«Todos los días» es CADA día: every day."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Practice makes perfect.",
+              "translation": "La práctica hace al maestro."
+            }
+          ],
+          "notes": "El nombre es practice; en EE. UU. el verbo también."
+        },
+        {
+          "key": "consider",
+          "type": "term",
+          "text": "consider",
+          "meaning": "plantearse, considerar",
+          "pronunciation": "konSÍder",
+          "examples": [
+            {
+              "text": "I'm considering moving to London.",
+              "translation": "Me estoy planteando mudarme a Londres.",
+              "mirror": {
+                "say": "Me estoy planteando mudarme a Londres",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Me estoy"
+                  },
+                  {
+                    "es": "considerando",
+                    "en": "considering",
+                    "role": "verb",
+                    "from": "planteando"
+                  },
+                  {
+                    "es": "mudando",
+                    "en": "moving",
+                    "role": "verb",
+                    "from": "mudarme",
+                    "why": "Detrás de consider, -ING: considering moving."
+                  },
+                  {
+                    "es": "a Londres",
+                    "en": "to London",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Consider it done.",
+              "translation": "Dalo por hecho."
+            }
+          ]
+        },
+        {
+          "key": "imagine",
+          "type": "term",
+          "text": "imagine",
+          "meaning": "imaginar",
+          "pronunciation": "iMÁyin",
+          "examples": [
+            {
+              "text": "Imagine living on an island.",
+              "translation": "Imagina vivir en una isla.",
+              "mirror": {
+                "say": "Imagina vivir en una isla",
+                "pieces": [
+                  {
+                    "es": "Imagina",
+                    "en": "Imagine",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "viviendo",
+                    "en": "living",
+                    "role": "verb",
+                    "from": "vivir",
+                    "why": "Detrás de imagine, -ING: imagine living."
+                  },
+                  {
+                    "es": "sobre una isla",
+                    "en": "on an island",
+                    "role": "word",
+                    "from": "en una isla",
+                    "why": "En una isla es ON an island."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I can't imagine it.",
+              "translation": "No me lo imagino."
+            }
+          ]
+        },
+        {
+          "key": "risk",
+          "type": "term",
+          "text": "risk",
+          "meaning": "riesgo; arriesgar",
+          "pronunciation": "RISK",
+          "examples": [
+            {
+              "text": "Don't risk losing your job.",
+              "translation": "No te arriesgues a perder el trabajo.",
+              "mirror": {
+                "say": "No te arriesgues a perder el trabajo",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "arriesgues",
+                    "en": "risk",
+                    "role": "verb",
+                    "from": "te arriesgues a"
+                  },
+                  {
+                    "es": "perdiendo",
+                    "en": "losing",
+                    "role": "verb",
+                    "from": "perder",
+                    "why": "Detrás de risk, -ING: risk losing."
+                  },
+                  {
+                    "es": "TU trabajo",
+                    "en": "your job",
+                    "role": "word",
+                    "from": "el trabajo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's not worth the risk.",
+              "translation": "No merece la pena el riesgo."
+            }
+          ]
+        },
+        {
+          "key": "postpone",
+          "type": "term",
+          "text": "postpone",
+          "meaning": "aplazar",
+          "pronunciation": "poustPÓUN",
+          "examples": [
+            {
+              "text": "They postponed the meeting.",
+              "translation": "Aplazaron la reunión.",
+              "mirror": {
+                "say": "Aplazaron la reunión",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "aplazaron",
+                    "en": "postponed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la reunión",
+                    "en": "the meeting",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't postpone it.",
+              "translation": "No lo dejes para luego."
+            }
+          ]
+        },
+        {
+          "key": "intend",
+          "type": "term",
+          "text": "intend",
+          "meaning": "tener intención de",
+          "pronunciation": "inTÉND",
+          "examples": [
+            {
+              "text": "I intend to finish today.",
+              "translation": "Pienso terminar hoy.",
+              "mirror": {
+                "say": "Pienso terminar hoy",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo intención",
+                    "en": "intend",
+                    "role": "verb",
+                    "from": "Pienso"
+                  },
+                  {
+                    "es": "a terminar",
+                    "en": "to finish",
+                    "role": "verb",
+                    "from": "terminar",
+                    "why": "Detrás de intend, TO: intend to finish."
+                  },
+                  {
+                    "es": "hoy",
+                    "en": "today",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I didn't intend to hurt you.",
+              "translation": "No quería hacerte daño."
+            }
+          ]
+        },
+        {
+          "key": "hesitate",
+          "type": "term",
+          "text": "hesitate",
+          "meaning": "dudar (en hacer algo)",
+          "pronunciation": "JÉsiteit",
+          "examples": [
+            {
+              "text": "Don't hesitate to call me.",
+              "translation": "No dudes en llamarme.",
+              "mirror": {
+                "say": "No dudes en llamarme",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "dudes",
+                    "en": "hesitate",
+                    "role": "verb",
+                    "from": "dudes en"
+                  },
+                  {
+                    "es": "a llamar",
+                    "en": "to call",
+                    "role": "verb",
+                    "from": "llamarme",
+                    "why": "Lo pegado se separa: call ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She hesitated for a moment.",
+              "translation": "Dudó un momento."
+            }
+          ]
+        },
+        {
+          "key": "mind",
+          "type": "term",
+          "text": "mind",
+          "meaning": "importar (molestar); mente",
+          "pronunciation": "MÁIND",
+          "examples": [
+            {
+              "text": "Do you mind waiting?",
+              "translation": "¿Te importa esperar?",
+              "mirror": {
+                "say": "¿Te importa esperar?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "importas",
+                    "en": "mind",
+                    "role": "verb",
+                    "from": "Te importa",
+                    "why": "Importar se da la vuelta: do you mind…?"
+                  },
+                  {
+                    "es": "esperando",
+                    "en": "waiting",
+                    "role": "verb",
+                    "from": "esperar",
+                    "why": "Detrás de mind, -ING: mind waiting."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Change your mind.",
+              "translation": "Cambia de opinión."
+            }
+          ]
+        },
+        {
+          "key": "routine",
+          "type": "term",
+          "text": "routine",
+          "meaning": "rutina",
+          "pronunciation": "ruTÍIN",
+          "examples": [
+            {
+              "text": "I have a morning routine.",
+              "translation": "Tengo una rutina por las mañanas.",
+              "mirror": {
+                "say": "Tengo una rutina por las mañanas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "rutina",
+                    "en": "routine",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de mañana",
+                    "en": "morning",
+                    "role": "word",
+                    "from": "por las mañanas"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A daily routine.",
+              "translation": "Una rutina diaria."
+            }
+          ]
+        },
+        {
+          "key": "habit",
+          "type": "term",
+          "text": "habit",
+          "meaning": "hábito, costumbre",
+          "pronunciation": "JÁbit",
+          "examples": [
+            {
+              "text": "It's a bad habit.",
+              "translation": "Es una mala costumbre.",
+              "mirror": {
+                "say": "Es una mala costumbre",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "un mal hábito",
+                    "en": "a bad habit",
+                    "role": "word",
+                    "from": "una mala costumbre"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Old habits die hard.",
+              "translation": "Las costumbres cuestan de quitar."
+            }
+          ]
+        },
+        {
+          "key": "cant-stand",
+          "type": "term",
+          "text": "can't stand",
+          "meaning": "no soportar",
+          "pronunciation": "kant STAND",
+          "examples": [
+            {
+              "text": "I can't stand the noise.",
+              "translation": "No soporto el ruido.",
+              "mirror": {
+                "say": "No soporto el ruido",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "soportar",
+                    "en": "stand",
+                    "role": "verb",
+                    "from": "soporto"
+                  },
+                  {
+                    "es": "el ruido",
+                    "en": "the noise",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She can't stand waiting.",
+              "translation": "No soporta esperar."
+            }
+          ]
+        },
+        {
+          "key": "look-forward-to",
+          "type": "term",
+          "text": "look forward to",
+          "meaning": "tener ganas de",
+          "pronunciation": "luk FÓRuord tu",
+          "examples": [
+            {
+              "text": "I'm looking forward to seeing you.",
+              "translation": "Tengo ganas de verte.",
+              "mirror": {
+                "say": "Tengo ganas de verte",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Tengo"
+                  },
+                  {
+                    "es": "esperando con ganas",
+                    "en": "looking forward to",
+                    "role": "verb",
+                    "from": "ganas de"
+                  },
+                  {
+                    "es": "viendo",
+                    "en": "seeing",
+                    "role": "verb",
+                    "from": "ver",
+                    "why": "Aquí TO es preposición: to + -ING (to seeing)."
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I look forward to your reply.",
+              "translation": "Quedo a la espera de su respuesta."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

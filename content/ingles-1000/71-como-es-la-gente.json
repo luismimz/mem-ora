@@ -1,0 +1,786 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "71-como-es-la-gente",
+      "title": "Misión 71 · Cómo es la gente (B1)",
+      "units": [
+        {
+          "key": "g-relative",
+          "type": "pattern",
+          "goal": "El chico QUE vive aquí = the boy WHO lives here",
+          "rule": "QUE es WHO para personas, WHICH para cosas y THAT para las dos; donde es WHERE. The man who called. The book that I read.",
+          "pieces": [
+            {
+              "text": "the boy",
+              "role": "slot",
+              "hint": "el chico"
+            },
+            {
+              "text": "who",
+              "role": "fixed",
+              "hint": "que"
+            },
+            {
+              "text": "lives here",
+              "role": "fixed",
+              "hint": "vive aquí"
+            }
+          ],
+          "examples": [
+            {
+              "text": "The girl who lives next door is a nurse.",
+              "translation": "La chica que vive al lado es enfermera.",
+              "mirror": {
+                "say": "La chica que vive al lado es enfermera",
+                "pieces": [
+                  {
+                    "es": "La chica",
+                    "en": "The girl",
+                    "role": "who"
+                  },
+                  {
+                    "es": "quien",
+                    "en": "who",
+                    "role": "word",
+                    "from": "que",
+                    "why": "QUE de persona es WHO."
+                  },
+                  {
+                    "es": "vive al lado",
+                    "en": "lives next door",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una enfermera",
+                    "en": "a nurse",
+                    "role": "word",
+                    "from": "enfermera",
+                    "why": "Tu trabajo siempre lleva A: a nurse."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This is the app that I use.",
+              "translation": "Esta es la app que uso.",
+              "mirror": {
+                "say": "Esta es la app que uso",
+                "pieces": [
+                  {
+                    "es": "Esta es",
+                    "en": "This is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la app",
+                    "en": "the app",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "that",
+                    "role": "word",
+                    "from": "que",
+                    "why": "QUE de cosa es THAT (o WHICH)."
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "uso",
+                    "en": "use",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The town where I was born.",
+              "translation": "El pueblo donde nací."
+            },
+            {
+              "text": "The book which you lent me.",
+              "translation": "El libro que me prestaste."
+            }
+          ],
+          "pitfalls": [
+            "«The man which called» está mal: las personas van con WHO.",
+            "En «the app that I use» el THAT se puede quitar: the app I use."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "WHO lleva CARA; WHICH, un TORNILLO; THAT vale para todo.",
+            "emoji": "🔗"
+          }
+        },
+        {
+          "key": "reliable",
+          "type": "term",
+          "text": "reliable",
+          "meaning": "fiable, de fiar",
+          "pronunciation": "riLÁIabol",
+          "examples": [
+            {
+              "text": "She is very reliable.",
+              "translation": "Es muy de fiar.",
+              "mirror": {
+                "say": "Es muy de fiar",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy fiable",
+                    "en": "very reliable",
+                    "role": "word",
+                    "from": "muy de fiar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A reliable car.",
+              "translation": "Un coche fiable."
+            }
+          ]
+        },
+        {
+          "key": "selfish",
+          "type": "term",
+          "text": "selfish",
+          "meaning": "egoísta",
+          "pronunciation": "SÉLfish",
+          "examples": [
+            {
+              "text": "Don't be so selfish.",
+              "translation": "No seas tan egoísta.",
+              "mirror": {
+                "say": "No seas tan egoísta",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "seas",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tan egoísta",
+                    "en": "so selfish",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A selfish decision.",
+              "translation": "Una decisión egoísta."
+            }
+          ]
+        },
+        {
+          "key": "ambitious",
+          "type": "term",
+          "text": "ambitious",
+          "meaning": "ambicioso",
+          "pronunciation": "amBÍshos",
+          "examples": [
+            {
+              "text": "He is an ambitious student.",
+              "translation": "Es un alumno ambicioso.",
+              "mirror": {
+                "say": "Es un alumno ambicioso",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "an",
+                    "role": "word"
+                  },
+                  {
+                    "es": "alumno",
+                    "en": "student",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ambicioso",
+                    "en": "ambitious",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "An ambitious plan.",
+              "translation": "Un plan ambicioso."
+            }
+          ]
+        },
+        {
+          "key": "stubborn",
+          "type": "term",
+          "text": "stubborn",
+          "meaning": "cabezota",
+          "pronunciation": "STÁborn",
+          "examples": [
+            {
+              "text": "My grandfather is very stubborn.",
+              "translation": "Mi abuelo es muy cabezota.",
+              "mirror": {
+                "say": "Mi abuelo es muy cabezota",
+                "pieces": [
+                  {
+                    "es": "Mi abuelo",
+                    "en": "My grandfather",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy cabezota",
+                    "en": "very stubborn",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "As stubborn as a mule.",
+              "translation": "Más terco que una mula."
+            }
+          ]
+        },
+        {
+          "key": "sensitive",
+          "type": "term",
+          "text": "sensitive",
+          "meaning": "sensible (que siente mucho)",
+          "pronunciation": "SÉNsitiv",
+          "examples": [
+            {
+              "text": "He is very sensitive.",
+              "translation": "Es muy sensible.",
+              "mirror": {
+                "say": "Es muy sensible",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy sensible",
+                    "en": "very sensitive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sensitive skin.",
+              "translation": "Piel sensible."
+            }
+          ],
+          "notes": "Falso amigo: sensato es sensible; sensible es sensitive."
+        },
+        {
+          "key": "hard-working",
+          "type": "term",
+          "text": "hard working",
+          "meaning": "trabajador",
+          "pronunciation": "jard UÉRking",
+          "examples": [
+            {
+              "text": "They are hard-working people.",
+              "translation": "Son gente muy trabajadora.",
+              "mirror": {
+                "say": "Son gente muy trabajadora",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gente",
+                    "en": "people",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajadora",
+                    "en": "hard-working",
+                    "role": "word",
+                    "from": "muy trabajadora"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A hard-working team.",
+              "translation": "Un equipo trabajador."
+            }
+          ]
+        },
+        {
+          "key": "cheerful",
+          "type": "term",
+          "text": "cheerful",
+          "meaning": "alegre",
+          "pronunciation": "CHÍERful",
+          "examples": [
+            {
+              "text": "She is always cheerful.",
+              "translation": "Siempre está alegre.",
+              "mirror": {
+                "say": "Siempre está alegre",
+                "pieces": [
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "alegre",
+                    "en": "cheerful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A cheerful song.",
+              "translation": "Una canción alegre."
+            }
+          ]
+        },
+        {
+          "key": "creative",
+          "type": "term",
+          "text": "creative",
+          "meaning": "creativo",
+          "pronunciation": "kriÉItiv",
+          "examples": [
+            {
+              "text": "You're very creative.",
+              "translation": "Eres muy creativo.",
+              "mirror": {
+                "say": "Eres muy creativo",
+                "pieces": [
+                  {
+                    "es": "(TÚ) eres",
+                    "en": "You're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy creativo",
+                    "en": "very creative",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Creative writing.",
+              "translation": "Escritura creativa."
+            }
+          ]
+        },
+        {
+          "key": "loyal",
+          "type": "term",
+          "text": "loyal",
+          "meaning": "leal, fiel",
+          "pronunciation": "LÓIal",
+          "examples": [
+            {
+              "text": "Dogs are loyal animals.",
+              "translation": "Los perros son animales fieles.",
+              "mirror": {
+                "say": "Los perros son animales fieles",
+                "pieces": [
+                  {
+                    "es": "perros",
+                    "en": "Dogs",
+                    "role": "who",
+                    "from": "Los perros",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "animales",
+                    "en": "animals",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fieles",
+                    "en": "loyal",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A loyal friend.",
+              "translation": "Un amigo leal."
+            }
+          ]
+        },
+        {
+          "key": "modest",
+          "type": "term",
+          "text": "modest",
+          "meaning": "modesto, humilde",
+          "pronunciation": "MÓdest",
+          "examples": [
+            {
+              "text": "He's very modest about his success.",
+              "translation": "Es muy humilde con su éxito.",
+              "mirror": {
+                "say": "Es muy humilde con su éxito",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es",
+                    "en": "He's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "muy modesto",
+                    "en": "very modest",
+                    "role": "word",
+                    "from": "muy humilde"
+                  },
+                  {
+                    "es": "sobre su éxito",
+                    "en": "about his success",
+                    "role": "word",
+                    "from": "con su éxito"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A modest house.",
+              "translation": "Una casa modesta."
+            }
+          ]
+        },
+        {
+          "key": "careless",
+          "type": "term",
+          "text": "careless",
+          "meaning": "descuidado",
+          "pronunciation": "KÉRles",
+          "examples": [
+            {
+              "text": "That was a careless mistake.",
+              "translation": "Fue un error por descuido.",
+              "mirror": {
+                "say": "Fue un error por descuido",
+                "pieces": [
+                  {
+                    "es": "Eso fue",
+                    "en": "That was",
+                    "role": "helper",
+                    "from": "Fue"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "error",
+                    "en": "mistake",
+                    "role": "word"
+                  },
+                  {
+                    "es": "descuidado",
+                    "en": "careless",
+                    "role": "word",
+                    "from": "por descuido"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Be careful!",
+              "translation": "¡Ten cuidado!"
+            }
+          ],
+          "notes": "Lo contrario es careful (cuidadoso)."
+        },
+        {
+          "key": "bossy",
+          "type": "term",
+          "text": "bossy",
+          "meaning": "mandón",
+          "pronunciation": "BÓsi",
+          "examples": [
+            {
+              "text": "My sister is so bossy.",
+              "translation": "Mi hermana es muy mandona.",
+              "mirror": {
+                "say": "Mi hermana es muy mandona",
+                "pieces": [
+                  {
+                    "es": "Mi hermana",
+                    "en": "My sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan mandona",
+                    "en": "so bossy",
+                    "role": "word",
+                    "from": "muy mandona"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't be bossy.",
+              "translation": "No seas mandón."
+            }
+          ]
+        },
+        {
+          "key": "moody",
+          "type": "term",
+          "text": "moody",
+          "meaning": "de mal humor; cambiante",
+          "pronunciation": "MÚUdi",
+          "examples": [
+            {
+              "text": "He's moody in the morning.",
+              "translation": "Por la mañana tiene mal humor.",
+              "mirror": {
+                "say": "Por la mañana tiene mal humor",
+                "pieces": [
+                  {
+                    "es": "por la mañana",
+                    "en": "in the morning",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ÉL) está",
+                    "en": "He's",
+                    "role": "helper",
+                    "from": "tiene"
+                  },
+                  {
+                    "es": "malhumorado",
+                    "en": "moody",
+                    "role": "word",
+                    "from": "mal humor"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Teenagers can be moody.",
+              "translation": "Los adolescentes pueden ser muy cambiantes."
+            }
+          ]
+        },
+        {
+          "key": "sociable",
+          "type": "term",
+          "text": "sociable",
+          "meaning": "sociable",
+          "pronunciation": "SÓUshabol",
+          "examples": [
+            {
+              "text": "I'm quite sociable.",
+              "translation": "Soy bastante sociable.",
+              "mirror": {
+                "say": "Soy bastante sociable",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bastante sociable",
+                    "en": "quite sociable",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A sociable person.",
+              "translation": "Una persona sociable."
+            }
+          ]
+        },
+        {
+          "key": "brave",
+          "type": "term",
+          "text": "brave",
+          "meaning": "valiente",
+          "pronunciation": "BRÉIV",
+          "examples": [
+            {
+              "text": "That was very brave of you.",
+              "translation": "Fuiste muy valiente.",
+              "mirror": {
+                "say": "Fuiste muy valiente",
+                "pieces": [
+                  {
+                    "es": "Eso fue",
+                    "en": "That was",
+                    "role": "helper",
+                    "from": "Fuiste"
+                  },
+                  {
+                    "es": "muy valiente",
+                    "en": "very brave",
+                    "role": "word"
+                  },
+                  {
+                    "es": "DE TI",
+                    "en": "of you",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Be brave!",
+              "translation": "¡Sé valiente!"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

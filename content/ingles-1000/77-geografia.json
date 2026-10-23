@@ -1,0 +1,843 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "77-geografia",
+      "title": "Misión 77 · Geografía y récords (B1)",
+      "units": [
+        {
+          "key": "g-superlatives",
+          "type": "pattern",
+          "goal": "El más grande = THE BIGGEST",
+          "rule": "Corto: THE + -EST (the biggest, the coldest). Largo: THE MOST + adjetivo (the most beautiful). Irregulares: the best, the worst.",
+          "pieces": [
+            {
+              "text": "the",
+              "role": "fixed",
+              "hint": "el"
+            },
+            {
+              "text": "biggest",
+              "role": "slot",
+              "hint": "más grande"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Asia is the biggest continent.",
+              "translation": "Asia es el continente más grande.",
+              "mirror": {
+                "say": "Asia es el continente más grande",
+                "pieces": [
+                  {
+                    "es": "Asia",
+                    "en": "Asia",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "continente",
+                    "en": "continent",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más grande",
+                    "en": "biggest",
+                    "role": "word",
+                    "from": "más grande",
+                    "why": "Corto: THE + -EST, y DELANTE: the biggest continent."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "It's the most beautiful beach in Spain.",
+              "translation": "Es la playa más bonita de España.",
+              "mirror": {
+                "say": "Es la playa más bonita de España",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "la",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "playa",
+                    "en": "beach",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más bonita",
+                    "en": "most beautiful",
+                    "role": "word",
+                    "from": "más bonita",
+                    "why": "Largo: THE MOST + adjetivo."
+                  },
+                  {
+                    "es": "en España",
+                    "en": "in Spain",
+                    "role": "word",
+                    "from": "de España",
+                    "why": "Lo más… DE un sitio es IN."
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "This is the best day of my life.",
+              "translation": "Es el mejor día de mi vida."
+            },
+            {
+              "text": "The worst film ever.",
+              "translation": "La peor película de la historia."
+            }
+          ],
+          "pitfalls": [
+            "«The most big» está mal: si es corto, the biggest.",
+            "«The biggest of Spain» está mal: de un sitio, IN Spain."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un PODIO: el -EST sube al escalón MÁS ALTO.",
+            "emoji": "🏆"
+          }
+        },
+        {
+          "key": "continent",
+          "type": "term",
+          "text": "continent",
+          "meaning": "continente",
+          "pronunciation": "KÓNtinent",
+          "examples": [
+            {
+              "text": "Africa is a huge continent.",
+              "translation": "África es un continente enorme.",
+              "mirror": {
+                "say": "África es un continente enorme",
+                "pieces": [
+                  {
+                    "es": "África",
+                    "en": "Africa",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "continente",
+                    "en": "continent",
+                    "role": "word"
+                  },
+                  {
+                    "es": "enorme",
+                    "en": "huge",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Seven continents.",
+              "translation": "Siete continentes."
+            }
+          ]
+        },
+        {
+          "key": "ocean",
+          "type": "term",
+          "text": "ocean",
+          "meaning": "océano",
+          "pronunciation": "ÓUshan",
+          "examples": [
+            {
+              "text": "The Pacific is the largest ocean.",
+              "translation": "El Pacífico es el océano más grande.",
+              "mirror": {
+                "say": "El Pacífico es el océano más grande",
+                "pieces": [
+                  {
+                    "es": "El Pacífico",
+                    "en": "The Pacific",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "océano",
+                    "en": "ocean",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más grande",
+                    "en": "largest",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The Atlantic Ocean.",
+              "translation": "El océano Atlántico."
+            }
+          ]
+        },
+        {
+          "key": "desert",
+          "type": "term",
+          "text": "desert",
+          "meaning": "desierto",
+          "pronunciation": "DÉsert",
+          "examples": [
+            {
+              "text": "The Sahara is a hot desert.",
+              "translation": "El Sáhara es un desierto cálido.",
+              "mirror": {
+                "say": "El Sáhara es un desierto cálido",
+                "pieces": [
+                  {
+                    "es": "El Sáhara",
+                    "en": "The Sahara",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "desierto",
+                    "en": "desert",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cálido",
+                    "en": "hot",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "In the middle of the desert.",
+              "translation": "En mitad del desierto."
+            }
+          ],
+          "notes": "Desert (desierto) lleva una s; dessert (postre), dos."
+        },
+        {
+          "key": "coast",
+          "type": "term",
+          "text": "coast",
+          "meaning": "costa",
+          "pronunciation": "KÓUST",
+          "examples": [
+            {
+              "text": "We live on the coast.",
+              "translation": "Vivimos en la costa.",
+              "mirror": {
+                "say": "Vivimos en la costa",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivimos",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre la costa",
+                    "en": "on the coast",
+                    "role": "word",
+                    "from": "en la costa",
+                    "why": "En la costa es ON the coast."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The east coast.",
+              "translation": "La costa este."
+            }
+          ]
+        },
+        {
+          "key": "border",
+          "type": "term",
+          "text": "border",
+          "meaning": "frontera",
+          "pronunciation": "BÓRder",
+          "examples": [
+            {
+              "text": "We crossed the border.",
+              "translation": "Cruzamos la frontera.",
+              "mirror": {
+                "say": "Cruzamos la frontera",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cruzamos",
+                    "en": "crossed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la frontera",
+                    "en": "the border",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Near the French border.",
+              "translation": "Cerca de la frontera francesa."
+            }
+          ]
+        },
+        {
+          "key": "north",
+          "type": "term",
+          "text": "north",
+          "meaning": "norte",
+          "pronunciation": "NORZ",
+          "examples": [
+            {
+              "text": "It's in the north of Spain.",
+              "translation": "Está en el norte de España.",
+              "mirror": {
+                "say": "Está en el norte de España",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Está"
+                  },
+                  {
+                    "es": "en el norte",
+                    "en": "in the north",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de España",
+                    "en": "of Spain",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "North America.",
+              "translation": "Norteamérica."
+            }
+          ]
+        },
+        {
+          "key": "south",
+          "type": "term",
+          "text": "south",
+          "meaning": "sur",
+          "pronunciation": "SÁUZ",
+          "examples": [
+            {
+              "text": "Birds fly south in winter.",
+              "translation": "Los pájaros vuelan al sur en invierno.",
+              "mirror": {
+                "say": "Los pájaros vuelan al sur en invierno",
+                "pieces": [
+                  {
+                    "es": "pájaros",
+                    "en": "Birds",
+                    "role": "who",
+                    "from": "Los pájaros",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "vuelan",
+                    "en": "fly",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sur",
+                    "en": "south",
+                    "role": "word",
+                    "from": "al sur",
+                    "why": "Hacia un punto cardinal, sin «to the»: fly south."
+                  },
+                  {
+                    "es": "en invierno",
+                    "en": "in winter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The south of France.",
+              "translation": "El sur de Francia."
+            }
+          ]
+        },
+        {
+          "key": "east",
+          "type": "term",
+          "text": "east",
+          "meaning": "este",
+          "pronunciation": "IIST",
+          "examples": [
+            {
+              "text": "The sun rises in the east.",
+              "translation": "El sol sale por el este.",
+              "mirror": {
+                "say": "El sol sale por el este",
+                "pieces": [
+                  {
+                    "es": "El sol",
+                    "en": "The sun",
+                    "role": "who"
+                  },
+                  {
+                    "es": "sale",
+                    "en": "rises",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el este",
+                    "en": "in the east",
+                    "role": "word",
+                    "from": "por el este"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The Middle East.",
+              "translation": "Oriente Medio."
+            }
+          ]
+        },
+        {
+          "key": "west",
+          "type": "term",
+          "text": "west",
+          "meaning": "oeste",
+          "pronunciation": "UEST",
+          "examples": [
+            {
+              "text": "The sun sets in the west.",
+              "translation": "El sol se pone por el oeste.",
+              "mirror": {
+                "say": "El sol se pone por el oeste",
+                "pieces": [
+                  {
+                    "es": "El sol",
+                    "en": "The sun",
+                    "role": "who"
+                  },
+                  {
+                    "es": "se pone",
+                    "en": "sets",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el oeste",
+                    "en": "in the west",
+                    "role": "word",
+                    "from": "por el oeste"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "West of the city.",
+              "translation": "Al oeste de la ciudad."
+            }
+          ]
+        },
+        {
+          "key": "valley",
+          "type": "term",
+          "text": "valley",
+          "meaning": "valle",
+          "pronunciation": "VÁli",
+          "examples": [
+            {
+              "text": "A village in a green valley.",
+              "translation": "Un pueblo en un valle verde.",
+              "mirror": {
+                "say": "Un pueblo en un valle verde",
+                "pieces": [
+                  {
+                    "es": "Un pueblo",
+                    "en": "A village",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en un",
+                    "en": "in a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "valle",
+                    "en": "valley",
+                    "role": "word"
+                  },
+                  {
+                    "es": "verde",
+                    "en": "green",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A deep valley.",
+              "translation": "Un valle profundo."
+            }
+          ]
+        },
+        {
+          "key": "volcano",
+          "type": "term",
+          "text": "volcano",
+          "meaning": "volcán",
+          "pronunciation": "volKÉInou",
+          "examples": [
+            {
+              "text": "The volcano erupted in 2021.",
+              "translation": "El volcán entró en erupción en 2021.",
+              "mirror": {
+                "say": "El volcán entró en erupción en 2021",
+                "pieces": [
+                  {
+                    "es": "El volcán",
+                    "en": "The volcano",
+                    "role": "who"
+                  },
+                  {
+                    "es": "erupcionó",
+                    "en": "erupted",
+                    "role": "verb",
+                    "from": "entró en erupción"
+                  },
+                  {
+                    "es": "en 2021",
+                    "en": "in 2021",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An active volcano.",
+              "translation": "Un volcán activo."
+            }
+          ]
+        },
+        {
+          "key": "record",
+          "type": "term",
+          "text": "record",
+          "meaning": "récord; grabar",
+          "pronunciation": "RÉkord",
+          "examples": [
+            {
+              "text": "She broke the world record.",
+              "translation": "Batió el récord mundial.",
+              "mirror": {
+                "say": "Batió el récord mundial",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "rompió",
+                    "en": "broke",
+                    "role": "verb",
+                    "from": "Batió"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "récord",
+                    "en": "record",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mundial",
+                    "en": "world",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Record a video.",
+              "translation": "Graba un vídeo."
+            }
+          ],
+          "notes": "Nombre: RÉkord; verbo (grabar): riKÓRD."
+        },
+        {
+          "key": "landscape",
+          "type": "term",
+          "text": "landscape",
+          "meaning": "paisaje",
+          "pronunciation": "LÁNDskeip",
+          "examples": [
+            {
+              "text": "What a beautiful landscape!",
+              "translation": "¡Qué paisaje tan bonito!",
+              "mirror": {
+                "say": "¡Qué paisaje tan bonito!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "paisaje",
+                    "en": "landscape",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un bonito",
+                    "en": "a beautiful",
+                    "role": "word",
+                    "from": "tan bonito",
+                    "why": "«¡Qué … tan bonito!» es What a beautiful …!"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Landscape mode.",
+              "translation": "Modo horizontal."
+            }
+          ]
+        },
+        {
+          "key": "region",
+          "type": "term",
+          "text": "region",
+          "meaning": "región, zona",
+          "pronunciation": "RÍIyon",
+          "examples": [
+            {
+              "text": "It rains a lot in this region.",
+              "translation": "En esta zona llueve mucho.",
+              "mirror": {
+                "say": "En esta zona llueve mucho",
+                "pieces": [
+                  {
+                    "es": "en esta región",
+                    "en": "in this region",
+                    "role": "word",
+                    "from": "En esta zona"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llueve",
+                    "en": "rains",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho",
+                    "en": "a lot",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A wine region.",
+              "translation": "Una zona de vinos."
+            }
+          ]
+        },
+        {
+          "key": "capital",
+          "type": "term",
+          "text": "capital",
+          "meaning": "capital; mayúscula",
+          "pronunciation": "KÁpital",
+          "examples": [
+            {
+              "text": "Madrid is the capital of Spain.",
+              "translation": "Madrid es la capital de España.",
+              "mirror": {
+                "say": "Madrid es la capital de España",
+                "pieces": [
+                  {
+                    "es": "Madrid",
+                    "en": "Madrid",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la capital",
+                    "en": "the capital",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de España",
+                    "en": "of Spain",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Write it in capital letters.",
+              "translation": "Escríbelo en mayúsculas."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

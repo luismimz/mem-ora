@@ -1,0 +1,769 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "68-logros",
+      "title": "Misión 68 · Logros y experiencias (B1)",
+      "units": [
+        {
+          "key": "g-present-perfect",
+          "type": "pattern",
+          "goal": "He estado / Estuve: HAVE BEEN o WAS",
+          "rule": "Sin momento concreto (tu vida hasta hoy): have + participio. Con momento acabado (ayer, en 2020): pasado. I've been to Rome. I went in 2020.",
+          "pieces": [
+            {
+              "text": "I've",
+              "role": "fixed",
+              "hint": "he"
+            },
+            {
+              "text": "visited",
+              "role": "slot",
+              "hint": "visitado"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I've been to Rome twice.",
+              "translation": "He estado en Roma dos veces.",
+              "mirror": {
+                "say": "He estado en Roma dos veces",
+                "pieces": [
+                  {
+                    "es": "(YO) he",
+                    "en": "I've",
+                    "role": "helper",
+                    "from": "He"
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Roma",
+                    "en": "to Rome",
+                    "role": "word",
+                    "from": "en Roma",
+                    "why": "Haber estado EN un sitio es been TO."
+                  },
+                  {
+                    "es": "dos veces",
+                    "en": "twice",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I went there in 2020.",
+              "translation": "Fui en 2020.",
+              "mirror": {
+                "say": "Fui en 2020",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fui",
+                    "en": "went",
+                    "role": "verb",
+                    "from": "fui",
+                    "why": "Con un momento terminado (en 2020), pasado: went."
+                  },
+                  {
+                    "es": "ALLÍ",
+                    "en": "there",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "en 2020",
+                    "en": "in 2020",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you finished yet?",
+              "translation": "¿Has terminado ya?"
+            },
+            {
+              "text": "She has lived here since 2019.",
+              "translation": "Vive aquí desde 2019."
+            }
+          ],
+          "pitfalls": [
+            "«I have been in Rome yesterday» está mal: con yesterday, pasado (I was).",
+            "Si dices cuándo, pasado; si no lo dices, have + participio."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "HAVE guarda recuerdos sin FECHA; el PASADO lleva FECHA.",
+            "emoji": "🎒"
+          }
+        },
+        {
+          "key": "achieve",
+          "type": "term",
+          "text": "achieve",
+          "meaning": "lograr, conseguir",
+          "pronunciation": "aCHÍIV",
+          "examples": [
+            {
+              "text": "I've achieved my goal.",
+              "translation": "He conseguido mi objetivo.",
+              "mirror": {
+                "say": "He conseguido mi objetivo",
+                "pieces": [
+                  {
+                    "es": "(YO) he",
+                    "en": "I've",
+                    "role": "helper",
+                    "from": "He"
+                  },
+                  {
+                    "es": "conseguido",
+                    "en": "achieved",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mi objetivo",
+                    "en": "my goal",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You can achieve anything.",
+              "translation": "Puedes conseguir lo que te propongas."
+            }
+          ]
+        },
+        {
+          "key": "succeed",
+          "type": "term",
+          "text": "succeed",
+          "meaning": "tener éxito, conseguirlo",
+          "pronunciation": "sakSÍID",
+          "examples": [
+            {
+              "text": "If you try hard, you will succeed.",
+              "translation": "Si te esfuerzas, lo conseguirás.",
+              "mirror": {
+                "say": "Si te esfuerzas, lo conseguirás",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "te esfuerzas",
+                    "en": "try hard",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) -RÁS",
+                    "en": "you will",
+                    "role": "helper",
+                    "from": "conseguirás"
+                  },
+                  {
+                    "es": "tener éxito",
+                    "en": "succeed",
+                    "role": "verb",
+                    "from": "lo conseguirás",
+                    "why": "Conseguirlo es «tener éxito»: succeed."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Success!",
+              "translation": "¡Éxito!"
+            }
+          ],
+          "notes": "El nombre es success."
+        },
+        {
+          "key": "attempt",
+          "type": "term",
+          "text": "attempt",
+          "meaning": "intento; intentar",
+          "pronunciation": "aTÉMPT",
+          "examples": [
+            {
+              "text": "I passed at the first attempt.",
+              "translation": "Aprobé a la primera.",
+              "mirror": {
+                "say": "Aprobé a la primera",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "aprobé",
+                    "en": "passed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el primer intento",
+                    "en": "at the first attempt",
+                    "role": "word",
+                    "from": "a la primera"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't attempt it alone.",
+              "translation": "No lo intentes solo."
+            }
+          ]
+        },
+        {
+          "key": "career",
+          "type": "term",
+          "text": "career",
+          "meaning": "carrera (profesional)",
+          "pronunciation": "kaRÍER",
+          "examples": [
+            {
+              "text": "She has had a great career.",
+              "translation": "Ha tenido una gran carrera.",
+              "mirror": {
+                "say": "Ha tenido una gran carrera",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ha",
+                    "en": "has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tenido",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una gran carrera",
+                    "en": "a great career",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A career in IT.",
+              "translation": "Una carrera profesional en informática."
+            }
+          ],
+          "notes": "Falso amigo: la carrera universitaria es degree."
+        },
+        {
+          "key": "graduate",
+          "type": "term",
+          "text": "graduate",
+          "meaning": "graduarse; titulado",
+          "pronunciation": "GRÁyueit",
+          "examples": [
+            {
+              "text": "I graduated last year.",
+              "translation": "Me gradué el año pasado.",
+              "mirror": {
+                "say": "Me gradué el año pasado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gradué",
+                    "en": "graduated",
+                    "role": "verb",
+                    "from": "Me gradué"
+                  },
+                  {
+                    "es": "año pasado",
+                    "en": "last year",
+                    "role": "word",
+                    "from": "el año pasado",
+                    "why": "Last year va sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'll graduate in June.",
+              "translation": "Me graduaré en junio."
+            }
+          ]
+        },
+        {
+          "key": "award",
+          "type": "term",
+          "text": "award",
+          "meaning": "premio; premiar",
+          "pronunciation": "aUÓRD",
+          "examples": [
+            {
+              "text": "The film has won three awards.",
+              "translation": "La película ha ganado tres premios.",
+              "mirror": {
+                "say": "La película ha ganado tres premios",
+                "pieces": [
+                  {
+                    "es": "La película",
+                    "en": "The film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ha",
+                    "en": "has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ganado",
+                    "en": "won",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres premios",
+                    "en": "three awards",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An award ceremony.",
+              "translation": "Una entrega de premios."
+            }
+          ]
+        },
+        {
+          "key": "opportunity",
+          "type": "term",
+          "text": "opportunity",
+          "meaning": "oportunidad",
+          "pronunciation": "opoTIÚniti",
+          "examples": [
+            {
+              "text": "Don't miss this opportunity.",
+              "translation": "No pierdas esta oportunidad.",
+              "mirror": {
+                "say": "No pierdas esta oportunidad",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pierdas",
+                    "en": "miss",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esta oportunidad",
+                    "en": "this opportunity",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A great opportunity.",
+              "translation": "Una gran oportunidad."
+            }
+          ]
+        },
+        {
+          "key": "adventure",
+          "type": "term",
+          "text": "adventure",
+          "meaning": "aventura",
+          "pronunciation": "adVÉNcher",
+          "examples": [
+            {
+              "text": "It was a real adventure.",
+              "translation": "Fue toda una aventura.",
+              "mirror": {
+                "say": "Fue toda una aventura",
+                "pieces": [
+                  {
+                    "es": "(ESO) fue",
+                    "en": "It was",
+                    "role": "helper",
+                    "from": "Fue"
+                  },
+                  {
+                    "es": "una verdadera aventura",
+                    "en": "a real adventure",
+                    "role": "word",
+                    "from": "toda una aventura"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An adventure film.",
+              "translation": "Una película de aventuras."
+            }
+          ]
+        },
+        {
+          "key": "challenge",
+          "type": "term",
+          "text": "challenge",
+          "meaning": "reto, desafío",
+          "pronunciation": "CHÁlench",
+          "examples": [
+            {
+              "text": "Learning English is a challenge.",
+              "translation": "Aprender inglés es un reto.",
+              "mirror": {
+                "say": "Aprender inglés es un reto",
+                "pieces": [
+                  {
+                    "es": "Aprend-IENDO inglés",
+                    "en": "Learning English",
+                    "role": "who",
+                    "from": "Aprender inglés",
+                    "why": "Como tema de la frase, el verbo va en -ING: learning."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un reto",
+                    "en": "a challenge",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I love a challenge.",
+              "translation": "Me encantan los retos."
+            }
+          ]
+        },
+        {
+          "key": "recently",
+          "type": "term",
+          "text": "recently",
+          "meaning": "últimamente, hace poco",
+          "pronunciation": "RÍIsentli",
+          "examples": [
+            {
+              "text": "Have you seen Ana recently?",
+              "translation": "¿Has visto a Ana últimamente?",
+              "mirror": {
+                "say": "¿Has visto a Ana últimamente?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "word",
+                    "from": "a Ana",
+                    "why": "Ver A alguien, sin «a»: see Ana."
+                  },
+                  {
+                    "es": "recientemente",
+                    "en": "recently",
+                    "role": "word",
+                    "from": "últimamente"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've recently moved.",
+              "translation": "Me he mudado hace poco."
+            }
+          ]
+        },
+        {
+          "key": "lifetime",
+          "type": "term",
+          "text": "lifetime",
+          "meaning": "toda una vida",
+          "pronunciation": "LÁIFtaim",
+          "examples": [
+            {
+              "text": "It's the trip of a lifetime.",
+              "translation": "Es el viaje de mi vida.",
+              "mirror": {
+                "say": "Es el viaje de mi vida",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "el viaje",
+                    "en": "the trip",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de una vida",
+                    "en": "of a lifetime",
+                    "role": "word",
+                    "from": "de mi vida"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Once in a lifetime.",
+              "translation": "Una vez en la vida."
+            }
+          ]
+        },
+        {
+          "key": "dream",
+          "type": "term",
+          "text": "dream",
+          "meaning": "sueño; soñar",
+          "pronunciation": "DRIIM",
+          "examples": [
+            {
+              "text": "It's my dream job.",
+              "translation": "Es el trabajo de mis sueños.",
+              "mirror": {
+                "say": "Es el trabajo de mis sueños",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "job",
+                    "role": "word",
+                    "from": "el trabajo"
+                  },
+                  {
+                    "es": "mi",
+                    "en": "my",
+                    "role": "word",
+                    "from": "de mis"
+                  },
+                  {
+                    "es": "sueño",
+                    "en": "dream",
+                    "role": "word",
+                    "from": "sueños",
+                    "why": "El de los sueños va DELANTE: my dream job."
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I had a strange dream.",
+              "translation": "Tuve un sueño raro."
+            }
+          ],
+          "notes": "Dormir es sleep; lo que sueñas, dream."
+        },
+        {
+          "key": "retire",
+          "type": "term",
+          "text": "retire",
+          "meaning": "jubilarse",
+          "pronunciation": "riTÁIER",
+          "examples": [
+            {
+              "text": "My father retired last year.",
+              "translation": "Mi padre se jubiló el año pasado.",
+              "mirror": {
+                "say": "Mi padre se jubiló el año pasado",
+                "pieces": [
+                  {
+                    "es": "Mi padre",
+                    "en": "My father",
+                    "role": "who"
+                  },
+                  {
+                    "es": "se jubiló",
+                    "en": "retired",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "año pasado",
+                    "en": "last year",
+                    "role": "word",
+                    "from": "el año pasado",
+                    "why": "Last year va sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "When will you retire?",
+              "translation": "¿Cuándo te jubilarás?"
+            }
+          ],
+          "notes": "Falso amigo: retirar dinero es withdraw."
+        },
+        {
+          "key": "progress",
+          "type": "term",
+          "text": "progress",
+          "meaning": "progreso, avances",
+          "pronunciation": "PRÓgres",
+          "examples": [
+            {
+              "text": "You've made a lot of progress.",
+              "translation": "Has avanzado mucho.",
+              "mirror": {
+                "say": "Has avanzado mucho",
+                "pieces": [
+                  {
+                    "es": "(TÚ) has",
+                    "en": "You've",
+                    "role": "helper",
+                    "from": "Has"
+                  },
+                  {
+                    "es": "hecho mucho progreso",
+                    "en": "made a lot of progress",
+                    "role": "verb",
+                    "from": "avanzado mucho",
+                    "why": "Avanzar mucho es «hacer mucho progreso»: make progress."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Check your progress.",
+              "translation": "Mira tu progreso."
+            }
+          ],
+          "notes": "No se cuenta: a lot of progress, nunca «progresses»."
+        },
+        {
+          "key": "ambition",
+          "type": "term",
+          "text": "ambition",
+          "meaning": "ambición",
+          "pronunciation": "amBÍshon",
+          "examples": [
+            {
+              "text": "My ambition is to work abroad.",
+              "translation": "Mi ambición es trabajar en el extranjero.",
+              "mirror": {
+                "say": "Mi ambición es trabajar en el extranjero",
+                "pieces": [
+                  {
+                    "es": "Mi ambición",
+                    "en": "My ambition",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabajar",
+                    "en": "to work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fuera",
+                    "en": "abroad",
+                    "role": "word",
+                    "from": "en el extranjero",
+                    "why": "Abroad va solo, sin «in the»: work abroad."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has big ambitions.",
+              "translation": "Tiene grandes ambiciones."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

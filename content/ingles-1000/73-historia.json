@@ -1,0 +1,752 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "73-historia",
+      "title": "Misión 73 · Historia (B1)",
+      "units": [
+        {
+          "key": "g-passive-past",
+          "type": "pattern",
+          "goal": "Se construyó = it WAS BUILT",
+          "rule": "La pasiva en pasado: was/were + participio. It was built in 1889. Si dices quién lo hizo: by. It was painted by Picasso.",
+          "pieces": [
+            {
+              "text": "It",
+              "role": "fixed",
+              "hint": "eso"
+            },
+            {
+              "text": "was",
+              "role": "fixed",
+              "hint": "fue"
+            },
+            {
+              "text": "built",
+              "role": "slot",
+              "hint": "construido"
+            }
+          ],
+          "examples": [
+            {
+              "text": "The tower was built in 1889.",
+              "translation": "La torre se construyó en 1889.",
+              "mirror": {
+                "say": "La torre se construyó en 1889",
+                "pieces": [
+                  {
+                    "es": "La torre",
+                    "en": "The tower",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "«Se construyó» es pasiva: was built."
+                  },
+                  {
+                    "es": "construida",
+                    "en": "built",
+                    "role": "verb",
+                    "from": "construyó"
+                  },
+                  {
+                    "es": "en 1889",
+                    "en": "in 1889",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "These houses were destroyed in the war.",
+              "translation": "Estas casas fueron destruidas en la guerra.",
+              "mirror": {
+                "say": "Estas casas fueron destruidas en la guerra",
+                "pieces": [
+                  {
+                    "es": "Estas casas",
+                    "en": "These houses",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fueron",
+                    "en": "were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "destruidas",
+                    "en": "destroyed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la guerra",
+                    "en": "in the war",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was painted by Picasso.",
+              "translation": "Lo pintó Picasso."
+            },
+            {
+              "text": "When was it invented?",
+              "translation": "¿Cuándo se inventó?"
+            }
+          ],
+          "pitfalls": [
+            "«It was build» está mal: el participio, built.",
+            "En plural: WERE (they were built)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un SELLO antiguo con FECHA: WAS + participio.",
+            "emoji": "🏛️"
+          }
+        },
+        {
+          "key": "invent",
+          "type": "term",
+          "text": "invent",
+          "meaning": "inventar",
+          "pronunciation": "inVÉNT",
+          "examples": [
+            {
+              "text": "Who invented the telephone?",
+              "translation": "¿Quién inventó el teléfono?",
+              "mirror": {
+                "say": "¿Quién inventó el teléfono?",
+                "pieces": [
+                  {
+                    "es": "Quién",
+                    "en": "Who",
+                    "role": "who"
+                  },
+                  {
+                    "es": "inventó",
+                    "en": "invented",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el teléfono",
+                    "en": "the telephone",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A great invention.",
+              "translation": "Un gran invento."
+            }
+          ]
+        },
+        {
+          "key": "century",
+          "type": "term",
+          "text": "century",
+          "meaning": "siglo",
+          "pronunciation": "SÉNchuri",
+          "examples": [
+            {
+              "text": "In the 21st century.",
+              "translation": "En el siglo XXI.",
+              "mirror": {
+                "say": "En el siglo XXI",
+                "pieces": [
+                  {
+                    "es": "En el",
+                    "en": "In the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "siglo",
+                    "en": "century",
+                    "role": "word"
+                  },
+                  {
+                    "es": "21.º",
+                    "en": "21st",
+                    "role": "word",
+                    "from": "XXI",
+                    "why": "Los siglos van con número ordinal y DELANTE: the 21st century."
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "A century ago.",
+              "translation": "Hace un siglo."
+            }
+          ]
+        },
+        {
+          "key": "ancient",
+          "type": "term",
+          "text": "ancient",
+          "meaning": "antiguo (de la Antigüedad)",
+          "pronunciation": "ÉINshent",
+          "examples": [
+            {
+              "text": "Ancient Rome.",
+              "translation": "La antigua Roma.",
+              "mirror": {
+                "say": "La antigua Roma",
+                "pieces": [
+                  {
+                    "es": "antigua",
+                    "en": "Ancient",
+                    "role": "word",
+                    "from": "La antigua",
+                    "why": "Sin «the»: Ancient Rome."
+                  },
+                  {
+                    "es": "Roma",
+                    "en": "Rome",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An ancient tradition.",
+              "translation": "Una tradición muy antigua."
+            }
+          ]
+        },
+        {
+          "key": "empire",
+          "type": "term",
+          "text": "empire",
+          "meaning": "imperio",
+          "pronunciation": "ÉMpaier",
+          "examples": [
+            {
+              "text": "The Roman Empire was huge.",
+              "translation": "El Imperio romano era enorme.",
+              "mirror": {
+                "say": "El Imperio romano era enorme",
+                "pieces": [
+                  {
+                    "es": "El",
+                    "en": "The",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Imperio",
+                    "en": "Empire",
+                    "role": "word"
+                  },
+                  {
+                    "es": "romano",
+                    "en": "Roman",
+                    "role": "word"
+                  },
+                  {
+                    "es": "era",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enorme",
+                    "en": "huge",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Build an empire.",
+              "translation": "Construir un imperio."
+            }
+          ]
+        },
+        {
+          "key": "war",
+          "type": "term",
+          "text": "war",
+          "meaning": "guerra",
+          "pronunciation": "UÓR",
+          "examples": [
+            {
+              "text": "The war ended in 1945.",
+              "translation": "La guerra acabó en 1945.",
+              "mirror": {
+                "say": "La guerra acabó en 1945",
+                "pieces": [
+                  {
+                    "es": "La guerra",
+                    "en": "The war",
+                    "role": "who"
+                  },
+                  {
+                    "es": "acabó",
+                    "en": "ended",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en 1945",
+                    "en": "in 1945",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "After the war.",
+              "translation": "Después de la guerra."
+            }
+          ],
+          "notes": "Se dice UÓR, no UAR."
+        },
+        {
+          "key": "peace",
+          "type": "term",
+          "text": "peace",
+          "meaning": "paz",
+          "pronunciation": "PIIS",
+          "examples": [
+            {
+              "text": "We want peace.",
+              "translation": "Queremos paz.",
+              "mirror": {
+                "say": "Queremos paz",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "queremos",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "paz",
+                    "en": "peace",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Leave me in peace.",
+              "translation": "Déjame en paz."
+            }
+          ]
+        },
+        {
+          "key": "king",
+          "type": "term",
+          "text": "king",
+          "meaning": "rey",
+          "pronunciation": "KING",
+          "examples": [
+            {
+              "text": "The king lived in a palace.",
+              "translation": "El rey vivía en un palacio.",
+              "mirror": {
+                "say": "El rey vivía en un palacio",
+                "pieces": [
+                  {
+                    "es": "El rey",
+                    "en": "The king",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vivía",
+                    "en": "lived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en un palacio",
+                    "en": "in a palace",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The King of Spain.",
+              "translation": "El rey de España."
+            }
+          ]
+        },
+        {
+          "key": "queen",
+          "type": "term",
+          "text": "queen",
+          "meaning": "reina",
+          "pronunciation": "KUIIN",
+          "examples": [
+            {
+              "text": "The queen visited the city.",
+              "translation": "La reina visitó la ciudad.",
+              "mirror": {
+                "say": "La reina visitó la ciudad",
+                "pieces": [
+                  {
+                    "es": "La reina",
+                    "en": "The queen",
+                    "role": "who"
+                  },
+                  {
+                    "es": "visitó",
+                    "en": "visited",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la ciudad",
+                    "en": "the city",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A queen and her people.",
+              "translation": "Una reina y su pueblo."
+            }
+          ]
+        },
+        {
+          "key": "government",
+          "type": "term",
+          "text": "government",
+          "meaning": "gobierno",
+          "pronunciation": "GÁvernment",
+          "examples": [
+            {
+              "text": "The government has changed the law.",
+              "translation": "El gobierno ha cambiado la ley.",
+              "mirror": {
+                "say": "El gobierno ha cambiado la ley",
+                "pieces": [
+                  {
+                    "es": "El gobierno",
+                    "en": "The government",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ha",
+                    "en": "has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cambiado",
+                    "en": "changed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la ley",
+                    "en": "the law",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A new government.",
+              "translation": "Un gobierno nuevo."
+            }
+          ]
+        },
+        {
+          "key": "monument",
+          "type": "term",
+          "text": "monument",
+          "meaning": "monumento",
+          "pronunciation": "MÓNiument",
+          "examples": [
+            {
+              "text": "The monument was built in 1900.",
+              "translation": "El monumento se construyó en 1900.",
+              "mirror": {
+                "say": "El monumento se construyó en 1900",
+                "pieces": [
+                  {
+                    "es": "El monumento",
+                    "en": "The monument",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "se",
+                    "why": "«Se construyó» es pasiva: was built."
+                  },
+                  {
+                    "es": "construido",
+                    "en": "built",
+                    "role": "verb",
+                    "from": "construyó"
+                  },
+                  {
+                    "es": "en 1900",
+                    "en": "in 1900",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A national monument.",
+              "translation": "Un monumento nacional."
+            }
+          ]
+        },
+        {
+          "key": "destroy",
+          "type": "term",
+          "text": "destroy",
+          "meaning": "destruir",
+          "pronunciation": "disTRÓI",
+          "examples": [
+            {
+              "text": "The fire destroyed the forest.",
+              "translation": "El fuego destruyó el bosque.",
+              "mirror": {
+                "say": "El fuego destruyó el bosque",
+                "pieces": [
+                  {
+                    "es": "El fuego",
+                    "en": "The fire",
+                    "role": "who"
+                  },
+                  {
+                    "es": "destruyó",
+                    "en": "destroyed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el bosque",
+                    "en": "the forest",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Completely destroyed.",
+              "translation": "Totalmente destruido."
+            }
+          ]
+        },
+        {
+          "key": "palace",
+          "type": "term",
+          "text": "palace",
+          "meaning": "palacio",
+          "pronunciation": "PÁlas",
+          "examples": [
+            {
+              "text": "The palace is open to visitors.",
+              "translation": "El palacio está abierto a los visitantes.",
+              "mirror": {
+                "say": "El palacio está abierto a los visitantes",
+                "pieces": [
+                  {
+                    "es": "El palacio",
+                    "en": "The palace",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "abierto",
+                    "en": "open",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a visitantes",
+                    "en": "to visitors",
+                    "role": "word",
+                    "from": "a los visitantes",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The Royal Palace.",
+              "translation": "El Palacio Real."
+            }
+          ]
+        },
+        {
+          "key": "statue",
+          "type": "term",
+          "text": "statue",
+          "meaning": "estatua",
+          "pronunciation": "STÁchu",
+          "examples": [
+            {
+              "text": "The Statue of Liberty.",
+              "translation": "La Estatua de la Libertad.",
+              "mirror": {
+                "say": "La Estatua de la Libertad",
+                "pieces": [
+                  {
+                    "es": "La Estatua",
+                    "en": "The Statue",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de Libertad",
+                    "en": "of Liberty",
+                    "role": "word",
+                    "from": "de la Libertad",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A bronze statue.",
+              "translation": "Una estatua de bronce."
+            }
+          ]
+        },
+        {
+          "key": "population",
+          "type": "term",
+          "text": "population",
+          "meaning": "población (habitantes)",
+          "pronunciation": "popiuLÉIshon",
+          "examples": [
+            {
+              "text": "The population is growing.",
+              "translation": "La población está creciendo.",
+              "mirror": {
+                "say": "La población está creciendo",
+                "pieces": [
+                  {
+                    "es": "La población",
+                    "en": "The population",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "creciendo",
+                    "en": "growing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A small population.",
+              "translation": "Una población pequeña."
+            }
+          ]
+        },
+        {
+          "key": "revolution",
+          "type": "term",
+          "text": "revolution",
+          "meaning": "revolución",
+          "pronunciation": "revoLÚshon",
+          "examples": [
+            {
+              "text": "The French Revolution began in 1789.",
+              "translation": "La Revolución francesa empezó en 1789.",
+              "mirror": {
+                "say": "La Revolución francesa empezó en 1789",
+                "pieces": [
+                  {
+                    "es": "La",
+                    "en": "The",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Revolución",
+                    "en": "Revolution",
+                    "role": "word"
+                  },
+                  {
+                    "es": "francesa",
+                    "en": "French",
+                    "role": "word"
+                  },
+                  {
+                    "es": "empezó",
+                    "en": "began",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en 1789",
+                    "en": "in 1789",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A technological revolution.",
+              "translation": "Una revolución tecnológica."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
