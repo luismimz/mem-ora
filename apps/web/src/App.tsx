@@ -3,6 +3,7 @@ import { RetosHome } from './Retos';
 import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pendingCount, sessionProgress, type OfflineBundle, type OfflineSession } from './offline';
 import { useCallback, useEffect, useState } from 'react';
 import { Exam } from './Exam';
+import { Guided } from './Guided';
 import { api, ApiError, type Course, type Me, type Mission, type Progress, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { Feed } from './Feed';
@@ -20,7 +21,7 @@ type View =
   | { name: 'offlineSession'; bundle: OfflineBundle; session: OfflineSession }
   | { name: 'studio' }
   | { name: 'session'; course: Course; payload: SessionPayload; mission?: string; focus?: 'fallos' }
-  | { name: 'exam'; course: Course }
+  | { name: 'exam'; course: Course; guided?: boolean }
   | { name: 'preview'; payload: SessionPayload | null; error?: string };
 
 const PREF = 'memora.preferences';
@@ -47,7 +48,7 @@ const cleanTitle = (t: string) => t.replace(/\s*\(.*\)$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
-type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' } | { name: 'exam'; course: string } | { name: 'preview'; unit: string };
+type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'preview'; unit: string };
 function readRoute(): Route {
   const { pathname, search } = window.location;
   const q = new URLSearchParams(search);
@@ -56,7 +57,7 @@ function readRoute(): Route {
   if (pathname === '/perfil') return { name: 'profile' };
   if (pathname === '/sin-conexion') return { name: 'offline' };
   if (pathname === '/studio') return { name: 'studio' };
-  if (pathname === '/simulacro' && q.get('curso')) return { name: 'exam', course: q.get('curso')! };
+  if (pathname === '/simulacro' && q.get('curso')) return { name: 'exam', course: q.get('curso')!, ...(q.get('modo') === 'guiado' ? { guided: true } : {}) };
   if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}), ...(q.get('foco') === 'fallos' ? { focus: 'fallos' as const } : {}) };
   return { name: 'home' };
 }
@@ -65,7 +66,7 @@ function routePath(r: Route): string {
   if (r.name === 'offline') return '/sin-conexion';
   if (r.name === 'studio') return '/studio';
   if (r.name === 'preview') return `/preview/${r.unit}`;
-  if (r.name === 'exam') return `/simulacro?curso=${encodeURIComponent(r.course)}`;
+  if (r.name === 'exam') return `/simulacro?curso=${encodeURIComponent(r.course)}${r.guided ? '&modo=guiado' : ''}`;
   if (r.name === 'session') return `/sesion?curso=${encodeURIComponent(r.course)}${r.mission ? `&mision=${encodeURIComponent(r.mission)}` : ''}${r.focus ? `&foco=${r.focus}` : ''}`;
   return '/';
 }
@@ -111,7 +112,7 @@ export function App() {
     }
     if (r.name === 'exam') {
       const c = list.find((x) => x.id === r.course);
-      if (c) { setCourse(c.id); return setView({ name: 'exam', course: c }); }
+      if (c) { setCourse(c.id); return setView({ name: 'exam', course: c, ...(r.guided ? { guided: true } : {}) }); }
       window.history.replaceState(null, '', '/');
       return setView({ name: 'home' });
     }
@@ -192,7 +193,8 @@ export function App() {
   if (view.name === 'login') return <div className="app"><Login onDone={() => void start()} /></div>;
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview staff={staff} onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
   // Modo Flujo (D-072): pantalla completa propia, sin la estructura de la sesión por escenas.
-  if (view.name === 'exam') return <div className="app"><Exam key={view.course.id} course={view.course} onExit={() => go({ name: 'home' })} onFailures={() => go({ name: 'session', course: view.course.id, focus: 'fallos' })} /></div>;
+  if (view.name === 'exam' && view.guided) return <Guided key={`g-${view.course.id}`} course={view.course} onExit={() => go({ name: 'home' })} onExam={() => go({ name: 'exam', course: view.course.id })} onFailures={() => go({ name: 'session', course: view.course.id, focus: 'fallos' })} />;
+  if (view.name === 'exam') return <div className="app"><Exam key={view.course.id} course={view.course} onExit={() => go({ name: 'home' })} onGuided={() => go({ name: 'exam', course: view.course.id, guided: true })} onFailures={() => go({ name: 'session', course: view.course.id, focus: 'fallos' })} /></div>;
   if (view.name === 'session' && (view.payload.state.plan as { mode?: string }).mode === 'flow') return <Feed key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={leaveSession} onAgain={() => void openSession(view.course, view.mission, view.focus)} next={() => api.session(view.course.id)} />;
   if (view.name === 'session') return <div className="app"><AssocSession key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} staff={staff} onExit={leaveSession} onReload={() => void openSession(view.course, view.mission)} onMission={(key) => go({ name: 'session', course: view.course.id, mission: key })} /></div>;
 
@@ -292,7 +294,7 @@ export function App() {
             ))}
           </div>
           </>}
-          {current && !isMem && !isLanguage(current) && (current.modes as string[]).includes('flow') && <ExamCard stats={prog?.exam} onOpen={() => go({ name: 'exam', course: current.id })} />}
+          {current && !isMem && !isLanguage(current) && (current.modes as string[]).includes('flow') && <ExamCard stats={prog?.exam} onOpen={(guided) => go({ name: 'exam', course: current.id, ...(guided ? { guided: true } : {}) })} />}
           {current && !isMem && <FlightCard course={current} onOpen={() => go({ name: 'offline' })} />}
           {enabled.length > 1 && <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>}
         </section>
@@ -514,16 +516,21 @@ function Constancy({ prog, missionsDone, words }: { prog: Progress; missionsDone
   );
 }
 
-/** Simulacro de examen en Inicio (cursos que no son de idiomas): la mejor nota y a por otro. */
-function ExamCard({ stats, onOpen }: { stats?: Progress['exam']; onOpen: () => void }) {
+/**
+ * Modelos de examen en Inicio (cursos que no son de idiomas). Primero el guiado (petición del usuario: «enseñarme
+ * primero y después se resuelven»): ficha y pregunta, tema a tema. Después, el simulacro sin ayudas, con su mejor nota.
+ */
+function ExamCard({ stats, onOpen }: { stats?: Progress['exam']; onOpen: (guided: boolean) => void }) {
   const best = stats?.best;
   const g = (n: number) => n.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   return (
     <section className="card-panel exam-card">
-      <h2>📝 Simulacro de examen</h2>
-      <p className="muted">30 preguntas de todo lo que has trabajado, 60 minutos, sin ayudas hasta el final. Se aprueba con un 7.</p>
-      {best && <p className="exam-card-best">Mejor nota: <b className={best.grade >= 7 ? 'pass' : 'fail'}>{g(best.grade)}</b> · {stats!.taken} {stats!.taken === 1 ? 'simulacro' : 'simulacros'}</p>}
-      <button type="button" className="primary" onClick={onOpen}>{best ? 'Hacer otro simulacro' : 'Hacer un simulacro'}</button>
+      <h2>📝 Modelos de examen</h2>
+      <div className="exam-modes">
+        <button type="button" className="exam-mode main" onClick={() => onOpen(true)}><b>📖 Aprende y resuelve</b><small>15 preguntas de examen; antes de cada una, la ficha que la enseña. Sin reloj.</small></button>
+        <button type="button" className="exam-mode" onClick={() => onOpen(false)}><b>⏱️ Simulacro sin ayudas</b><small>30 preguntas de lo trabajado, 60 minutos. Se aprueba con un 7.</small></button>
+      </div>
+      {best && <p className="exam-card-best">Mejor nota del simulacro: <b className={best.grade >= 7 ? 'pass' : 'fail'}>{g(best.grade)}</b> · {stats!.taken} {stats!.taken === 1 ? 'simulacro' : 'simulacros'}</p>}
     </section>
   );
 }

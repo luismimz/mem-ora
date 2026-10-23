@@ -790,3 +790,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   completo con 👻 y la ficha cambiada → al inglés → el salto), sin toques obligatorios y con «↻» para repetir. Sin
   tarjeta aparte: truco → construir otra frase.
 
+
+## D-083 · Modelos de examen: primero se enseña, después se resuelve (usuario, 23-oct-2026)
+
+- **Decisión del usuario:** «sigue con modelos de exámenes y debes enseñarme primero y después se resuelven».
+- **Modelo guiado** («📖 Aprende y resuelve», en Inicio antes del simulacro): 15 preguntas de examen por orden del
+  temario; antes de cada una, la ficha que la enseña (la misma del Flujo); después la pregunta, con la corrección y su
+  porqué al momento. Sin reloj. Puede incluir temas aún no trabajados, porque los enseña antes.
+- **Peso honesto (regla 9):** cada respuesta es reconocimiento con pista 1 (ficha vista justo antes) o pista 2 (si se
+  vuelve a mirar); no cuenta como nota de simulacro. Los fallos van a «Vacía tus fallos».
+- El **simulacro** (sin ayudas, 30 preguntas, 60 min) se mantiene y se ofrece al terminar el modelo guiado.
+- Los exámenes de práctica y PAC de ILERNA (regla 13) entrarán como preguntas de estos modelos cuando estén en
+  `private/`; hoy no hay ninguno.

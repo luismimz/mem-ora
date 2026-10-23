@@ -43,7 +43,7 @@ function Marked({ text }: { text: string }) {
   return <>{text.split(/(\p{Lu}{2,}(?:\s+\p{Lu}{2,})*)/u).map((p, i) => (/^\p{Lu}{2,}/u.test(p) ? <mark key={i}>{p}</mark> : <span key={i}>{p}</span>))}</>;
 }
 /** Color de fondo estable por unidad: cada concepto tiene «su» color, como una portada. */
-function hue(key: string) {
+export function hue(key: string) {
   let h = 0;
   for (const c of key) h = (h * 31 + c.charCodeAt(0)) % 360;
   return h;
@@ -189,6 +189,11 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
       )}
     </div>
   );
+}
+
+/** La ficha que enseña una unidad (la misma del Flujo): para el modelo de examen guiado, antes de cada pregunta. */
+export function UnitFicha({ unit, courseId }: { unit: SessionUnit; courseId: string }) {
+  return unit.type === 'pattern' ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="exam" />;
 }
 
 /**

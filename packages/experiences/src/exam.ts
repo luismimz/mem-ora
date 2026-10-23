@@ -10,6 +10,12 @@ export const EXAM_MINUTES = 60;
 export const EXAM_PASS = 7;
 /** Por debajo de esto no hay simulacro: sería un test de pocas preguntas, no un examen. */
 export const EXAM_MIN_QUESTIONS = 10;
+/**
+ * Modelo de examen guiado (petición del usuario, 23-oct-2026: «primero enseñarme y después se resuelven»): antes de
+ * cada pregunta se ve la ficha que la enseña. Como enseña, puede incluir temas aún no trabajados; va por orden del
+ * temario y es más corto que el simulacro.
+ */
+export const EXAM_GUIDED_SIZE = 15;
 
 export interface ExamQuestion {
   id: string;
@@ -30,18 +36,24 @@ const examSkill = (u: SessionUnit) => (u.skills.find((s) => s.kind === 'apply') 
 /**
  * Elige las preguntas repartidas entre todas las misiones (una vuelta por misión cada vez), una por unidad, y las baraja.
  * Mismo `examId` → mismo examen (se puede retomar).
+ * `ordered` (modelo guiado): los temas que entran se eligen al azar, pero las preguntas salen en el orden del temario
+ * (misión y posición de la unidad), para enseñar de lo básico a lo siguiente.
  */
-export function buildExam(input: { examId: string; units: Record<string, SessionUnit>; missions: Array<{ key: string; units: string[] }>; size?: number }): ExamQuestion[] {
+export function buildExam(input: { examId: string; units: Record<string, SessionUnit>; missions: Array<{ key: string; units: string[] }>; size?: number; ordered?: boolean }): ExamQuestion[] {
   const rand = seeded(input.examId);
   const size = input.size ?? EXAM_SIZE;
-  const pools = input.missions
+  const rank = new Map<string, number>();
+  input.missions.forEach((m, mi) => m.units.forEach((u, ui) => { if (!rank.has(u)) rank.set(u, mi * 10_000 + ui); }));
+  let pools = input.missions
     .map((m) => shuffle(m.units.filter((k) => input.units[k] && examExercises(input.units[k]!).length && examSkill(input.units[k]!)), rand))
     .filter((p) => p.length);
+  if (input.ordered) pools = shuffle(pools, rand);
   const chosen: string[] = [];
   while (chosen.length < size && pools.some((p) => p.length)) {
     for (const p of pools) if (p.length && chosen.length < size) chosen.push(p.shift()!);
   }
-  return shuffle(chosen, rand).map((k, n) => {
+  const order = input.ordered ? [...chosen].sort((a, b) => rank.get(a)! - rank.get(b)!) : shuffle(chosen, rand);
+  return order.map((k, n) => {
     const u = input.units[k]!;
     const options = examExercises(u);
     const exercise = options[Math.floor(rand() * options.length)]!;

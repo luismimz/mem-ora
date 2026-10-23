@@ -115,7 +115,7 @@ export interface Progress {
 /** Resultado de un simulacro guardado en el servidor. */
 export interface ExamResult { examId: string; grade: number; correct: number; total: number; ms: number; at: number }
 export interface ExamStats { taken: number; best: ExamResult | null; last: ExamResult | null }
-export interface ExamPayload { examId: string; available: boolean; need: number; worked: number; questions: ExamQuestion[]; units: Record<string, SessionUnit>; minutes: number; pass: number; stats: ExamStats }
+export interface ExamPayload { examId: string; guided?: boolean; available: boolean; need: number; worked: number; questions: ExamQuestion[]; units: Record<string, SessionUnit>; minutes: number; pass: number; stats: ExamStats }
 export type ReportReason = 'asociacion' | 'significado' | 'respuesta' | 'audio' | 'otro';
 /** Aviso de un alumno en Studio: un error reportado o un «Explícame más». */
 export interface StudioRequest { id: string; unitId: string; unit: string; label: string; kind: 'error' | 'explain'; reason: ReportReason | null; note: string | null; times: number; at: number }
@@ -163,7 +163,7 @@ export const api = {
   pushKey: () => request<{ publicKey: string | null }>('GET', '/memora/push/key'),
   pushSubscribe: (subscription: unknown, deviceId: string) => request<{ saved: boolean }>('POST', '/memora/push/subscribe', { subscription, deviceId }),
   pushTest: () => request<{ sent: number }>('POST', '/memora/push/test'),
-  exam: (course: string) => request<ExamPayload>('GET', `/memora/exam?course=${encodeURIComponent(course)}`),
+  exam: (course: string, guided = false) => request<ExamPayload>('GET', `/memora/exam?course=${encodeURIComponent(course)}${guided ? '&modo=guiado' : ''}`),
   examResult: (course: string, body: { examId: string; correct: number; total: number; ms: number }) => request<{ saved: boolean; grade: number; stats: ExamStats }>('POST', '/memora/exam/result', { course, ...body }),
   /** «Reportar un error» de una tarjeta: va a la cola de avisos de Studio. */
   report: (course: string, unit: string, reason: ReportReason, note?: string) => request<{ saved: boolean }>('POST', '/memora/report', { course, unit, reason, ...(note ? { note } : {}) }),
