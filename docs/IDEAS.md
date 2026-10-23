@@ -10,7 +10,10 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   Ráfaga. Falta ejecutarlo con la app y el Directus locales arrancados (`private/release.sh`).
 - ✓ **Prueba del gesto en el repositorio:** `apps/web/e2e/*-touch.mjs` (Flujo, Inicio y simulacro, con toques reales).
 - **[experiencia] Revisión de la Home en el móvil:** qué ve el alumno al entrar, qué hace después y si se entiende.
-- **[experiencia] Audio:** confirmar en el iPhone del usuario que la voz suena; después, Kokoro pregenerado.
+- **[experiencia] Audio:** ✓ la frase ya no se corta al pasar de tarjeta (se espera al final de la voz; prueba en
+  `flow-touch`). ✓ Reproductor de audio Kokoro pregenerado (`tools/audio/generate.py` → `/audio/<idioma>/`), con la
+  voz del dispositivo como reserva. Pendiente: publicar los audios generados y confirmarlo en el iPhone del usuario
+  (también en modo silencio).
 - **[contenido] Exámenes de práctica y PAC de ILERNA** tal cual, en una misión privada del usuario (regla 13), y
   **preguntas nuevas con su mismo patrón** por módulo del semestre (Programación, Bases de datos, Acceso a datos,
   Interfaces, SGE…). Necesita que el usuario deje los PDF en `private/`.

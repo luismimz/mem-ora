@@ -2,8 +2,12 @@
 // Si vuelve a pasar, sube el número (sw-v3.js) en main.tsx.: guarda la app en el dispositivo para abrirla sin conexión.
 // - Páginas: primero la red; sin red, la copia guardada de index.html (todas las rutas son la misma app).
 // - Recursos de /assets (con huella en el nombre): de la caché, y si no están, de la red y se guardan.
+// - Voz Kokoro (/audio): el índice, primero de la red y, sin red, la última copia. Los MP3 NO pasan por aquí: Safari
+//   los pide por trozos (Range) y servirlos desde aquí puede dejarlos mudos en el iPhone; los guarda la caché normal
+//   del navegador (nginx los marca para un año: el nombre lleva la huella del texto y no cambian).
 // - La API (/api) nunca se guarda aquí: el progreso es del servidor y lo offline va por la cola de la app.
 const CACHE = 'memora-app-v2';
+const AUDIO = 'memora-audio-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
@@ -20,7 +24,7 @@ self.addEventListener('install', (event) => {
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
-    for (const k of await caches.keys()) if (k !== CACHE) await caches.delete(k);
+    for (const k of await caches.keys()) if (k !== CACHE && k !== AUDIO) await caches.delete(k);
     await self.clients.claim();
   })());
 });
@@ -37,6 +41,19 @@ self.addEventListener('fetch', (event) => {
         return res;
       } catch {
         return (await caches.match('/index.html')) ?? Response.error();
+      }
+    })());
+    return;
+  }
+  if (url.pathname.startsWith('/audio/') && url.pathname.endsWith('/index.json')) {
+    event.respondWith((async () => {
+      const cache = await caches.open(AUDIO);
+      try {
+        const res = await fetch(event.request, { cache: 'no-store' });
+        if (res.ok) cache.put(event.request, res.clone());
+        return res;
+      } catch {
+        return (await cache.match(event.request)) ?? Response.error();
       }
     })());
     return;

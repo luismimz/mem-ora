@@ -8,7 +8,7 @@ import { AssocSession } from './AssocSession';
 import { Feed } from './Feed';
 import { ARCADE_FROM, CHAT_AFTER_GRAMMAR, GRAMMAR_EVERY, milestones, type Milestones } from './milestones';
 import { setLanguage } from './i18n';
-import { setAudioEnabled } from './speech';
+import { preloadVoice, setAudioEnabled } from './speech';
 
 type Mode = 'associations' | 'grammar' | 'arcade' | 'chat';
 type View =
@@ -98,6 +98,7 @@ export function App() {
   async function openSession(c: Course, mission?: string, focus?: 'fallos') {
     setLanguage(c.ui_language);
     setAudioEnabled(c.audio_enabled !== false);
+    if (c.audio_enabled !== false) preloadVoice(c.content_language);
     setError(null);
     setNotice(null);
     try { setView({ name: 'session', course: c, payload: await api.session(c.id, mission, focus), ...(mission ? { mission } : {}), ...(focus ? { focus } : {}) }); }

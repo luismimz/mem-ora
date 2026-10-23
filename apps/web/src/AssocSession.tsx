@@ -345,8 +345,9 @@ function Choose({ title, combo, art, question, choices, reveal, quiet = false, o
     setPicked(i);
     const right = choices[i]!.correct;
     onAnswer(right, Math.round(performance.now() - t0.current));
-    speak(unitText(reveal), reveal.language);
-    if (right) setTimeout(() => onDone(true), 750);
+    const voice = speak(unitText(reveal), reveal.language);
+    // Al acertar se pasa sola, pero cuando acaba la voz (y nunca antes de 750 ms).
+    if (right) void Promise.all([voice, new Promise((r) => { window.setTimeout(r, 750); })]).then(() => onDone(true));
   }
   return (
     <SwipeCard className={picked === null ? '' : ok ? 'ok' : 'ko'} onNext={picked !== null && !ok ? () => onDone(false) : undefined} label="Seguir">
