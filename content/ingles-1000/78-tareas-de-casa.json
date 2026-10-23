@@ -1,0 +1,734 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "78-tareas-de-casa",
+      "title": "Misión 78 · Tareas de casa (B1)",
+      "units": [
+        {
+          "key": "g-few-little",
+          "type": "pattern",
+          "goal": "Pocos y poco: A FEW o A LITTLE",
+          "rule": "Con lo que se cuenta: A FEW (a few friends). Con lo que no: A LITTLE (a little time). Sin la A suena negativo: few friends = casi ninguno.",
+          "pieces": [
+            {
+              "text": "I have",
+              "role": "fixed",
+              "hint": "tengo"
+            },
+            {
+              "text": "a few",
+              "role": "fixed",
+              "hint": "unos pocos"
+            },
+            {
+              "text": "friends",
+              "role": "slot",
+              "hint": "amigos"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I have a few friends here.",
+              "translation": "Tengo unos cuantos amigos aquí.",
+              "mirror": {
+                "say": "Tengo unos cuantos amigos aquí",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "unos pocos",
+                    "en": "a few",
+                    "role": "word",
+                    "from": "unos cuantos",
+                    "why": "Los amigos se cuentan: A FEW."
+                  },
+                  {
+                    "es": "amigos",
+                    "en": "friends",
+                    "role": "word"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Add a little salt.",
+              "translation": "Añade un poco de sal.",
+              "mirror": {
+                "say": "Añade un poco de sal",
+                "pieces": [
+                  {
+                    "es": "Añade",
+                    "en": "Add",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de",
+                    "en": "a little",
+                    "role": "word",
+                    "from": "un poco de",
+                    "why": "La sal no se cuenta: A LITTLE."
+                  },
+                  {
+                    "es": "sal",
+                    "en": "salt",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Just a few minutes.",
+              "translation": "Solo unos minutos."
+            },
+            {
+              "text": "I speak a little English.",
+              "translation": "Hablo un poco de inglés."
+            }
+          ],
+          "pitfalls": [
+            "«A few salt» está mal: la sal no se cuenta (a little salt).",
+            "«Few people came» es casi nadie; «a few people came», unos cuantos."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "A FEW cuenta CANICAS; A LITTLE echa una GOTA.",
+            "emoji": "🧂"
+          }
+        },
+        {
+          "key": "chores",
+          "type": "term",
+          "text": "chores",
+          "meaning": "tareas de casa",
+          "pronunciation": "CHÓRS",
+          "examples": [
+            {
+              "text": "We share the chores.",
+              "translation": "Nos repartimos las tareas de casa.",
+              "mirror": {
+                "say": "Nos repartimos las tareas de casa",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compartimos",
+                    "en": "share",
+                    "role": "verb",
+                    "from": "repartimos"
+                  },
+                  {
+                    "es": "las tareas",
+                    "en": "the chores",
+                    "role": "word",
+                    "from": "las tareas de casa"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Household chores.",
+              "translation": "Tareas domésticas."
+            }
+          ]
+        },
+        {
+          "key": "laundry",
+          "type": "term",
+          "text": "laundry",
+          "meaning": "colada, ropa para lavar",
+          "pronunciation": "LÓNdri",
+          "examples": [
+            {
+              "text": "I do the laundry on Sundays.",
+              "translation": "Hago la colada los domingos.",
+              "mirror": {
+                "say": "Hago la colada los domingos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hago",
+                    "en": "do",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la colada",
+                    "en": "the laundry",
+                    "role": "word"
+                  },
+                  {
+                    "es": "EN domingos",
+                    "en": "on Sundays",
+                    "role": "word",
+                    "from": "los domingos",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A laundry basket.",
+              "translation": "Un cesto de la ropa."
+            }
+          ]
+        },
+        {
+          "key": "vacuum",
+          "type": "term",
+          "text": "vacuum",
+          "meaning": "pasar la aspiradora",
+          "pronunciation": "VÁkium",
+          "examples": [
+            {
+              "text": "Can you vacuum the living room?",
+              "translation": "¿Puedes pasar la aspiradora por el salón?",
+              "mirror": {
+                "say": "¿Puedes pasar la aspiradora por el salón?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aspirar",
+                    "en": "vacuum",
+                    "role": "verb",
+                    "from": "pasar la aspiradora por"
+                  },
+                  {
+                    "es": "el salón",
+                    "en": "the living room",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A vacuum cleaner.",
+              "translation": "Una aspiradora."
+            }
+          ]
+        },
+        {
+          "key": "dust",
+          "type": "term",
+          "text": "dust",
+          "meaning": "polvo; quitar el polvo",
+          "pronunciation": "DAST",
+          "examples": [
+            {
+              "text": "The shelves are covered in dust.",
+              "translation": "Las baldas están llenas de polvo.",
+              "mirror": {
+                "say": "Las baldas están llenas de polvo",
+                "pieces": [
+                  {
+                    "es": "Las baldas",
+                    "en": "The shelves",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cubiertas de",
+                    "en": "covered in",
+                    "role": "word",
+                    "from": "llenas de"
+                  },
+                  {
+                    "es": "polvo",
+                    "en": "dust",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Dust the furniture.",
+              "translation": "Quita el polvo a los muebles."
+            }
+          ]
+        },
+        {
+          "key": "sweep",
+          "type": "term",
+          "text": "sweep",
+          "meaning": "barrer",
+          "pronunciation": "SUIIP",
+          "examples": [
+            {
+              "text": "Sweep the floor, please.",
+              "translation": "Barre el suelo, por favor.",
+              "mirror": {
+                "say": "Barre el suelo, por favor",
+                "pieces": [
+                  {
+                    "es": "Barre",
+                    "en": "Sweep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el suelo",
+                    "en": "the floor",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I swept the kitchen.",
+              "translation": "Barrí la cocina."
+            }
+          ],
+          "notes": "Pasado: swept."
+        },
+        {
+          "key": "tidy",
+          "type": "term",
+          "text": "tidy",
+          "meaning": "ordenado; ordenar",
+          "pronunciation": "TÁIdi",
+          "examples": [
+            {
+              "text": "Tidy your room!",
+              "translation": "¡Ordena tu cuarto!",
+              "mirror": {
+                "say": "¡Ordena tu cuarto!",
+                "pieces": [
+                  {
+                    "es": "Ordena",
+                    "en": "Tidy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu cuarto",
+                    "en": "your room",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A tidy desk.",
+              "translation": "Una mesa ordenada."
+            }
+          ]
+        },
+        {
+          "key": "mess",
+          "type": "term",
+          "text": "mess",
+          "meaning": "desorden, lío",
+          "pronunciation": "MES",
+          "examples": [
+            {
+              "text": "What a mess!",
+              "translation": "¡Qué desastre!",
+              "mirror": {
+                "say": "¡Qué desastre!",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un lío",
+                    "en": "a mess",
+                    "role": "word",
+                    "from": "desastre"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't make a mess.",
+              "translation": "No lo dejes todo patas arriba."
+            }
+          ]
+        },
+        {
+          "key": "mop",
+          "type": "term",
+          "text": "mop",
+          "meaning": "fregona; fregar el suelo",
+          "pronunciation": "MOP",
+          "examples": [
+            {
+              "text": "Mop the kitchen floor.",
+              "translation": "Friega el suelo de la cocina.",
+              "mirror": {
+                "say": "Friega el suelo de la cocina",
+                "pieces": [
+                  {
+                    "es": "Friega",
+                    "en": "Mop",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "suelo",
+                    "en": "floor",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de la cocina",
+                    "en": "kitchen",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Where is the mop?",
+              "translation": "¿Dónde está la fregona?"
+            }
+          ]
+        },
+        {
+          "key": "dishes",
+          "type": "term",
+          "text": "dishes",
+          "meaning": "platos (para fregar)",
+          "pronunciation": "DÍshis",
+          "examples": [
+            {
+              "text": "I'll do the dishes.",
+              "translation": "Yo friego los platos.",
+              "mirror": {
+                "say": "Yo friego los platos",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "Yo"
+                  },
+                  {
+                    "es": "hacer",
+                    "en": "do",
+                    "role": "verb",
+                    "from": "friego",
+                    "why": "Fregar los platos es DO the dishes."
+                  },
+                  {
+                    "es": "los platos",
+                    "en": "the dishes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Dirty dishes.",
+              "translation": "Platos sucios."
+            }
+          ]
+        },
+        {
+          "key": "polish",
+          "type": "term",
+          "text": "polish",
+          "meaning": "sacar brillo; esmalte",
+          "pronunciation": "PÓlish",
+          "examples": [
+            {
+              "text": "Polish your shoes.",
+              "translation": "Límpiate los zapatos.",
+              "mirror": {
+                "say": "Límpiate los zapatos",
+                "pieces": [
+                  {
+                    "es": "Saca brillo a",
+                    "en": "Polish",
+                    "role": "verb",
+                    "from": "Límpiate"
+                  },
+                  {
+                    "es": "TUS zapatos",
+                    "en": "your shoes",
+                    "role": "word",
+                    "from": "los zapatos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Nail polish.",
+              "translation": "Esmalte de uñas."
+            }
+          ],
+          "notes": "Polish con mayúscula es polaco."
+        },
+        {
+          "key": "scrub",
+          "type": "term",
+          "text": "scrub",
+          "meaning": "frotar",
+          "pronunciation": "SKRAB",
+          "examples": [
+            {
+              "text": "Scrub the pan.",
+              "translation": "Frota la sartén.",
+              "mirror": {
+                "say": "Frota la sartén",
+                "pieces": [
+                  {
+                    "es": "Frota",
+                    "en": "Scrub",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la sartén",
+                    "en": "the pan",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Scrub it hard.",
+              "translation": "Frótalo fuerte."
+            }
+          ]
+        },
+        {
+          "key": "bucket",
+          "type": "term",
+          "text": "bucket",
+          "meaning": "cubo",
+          "pronunciation": "BÁket",
+          "examples": [
+            {
+              "text": "Fill the bucket with water.",
+              "translation": "Llena el cubo de agua.",
+              "mirror": {
+                "say": "Llena el cubo de agua",
+                "pieces": [
+                  {
+                    "es": "Llena",
+                    "en": "Fill",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el cubo",
+                    "en": "the bucket",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con agua",
+                    "en": "with water",
+                    "role": "word",
+                    "from": "de agua",
+                    "why": "Llenar DE algo es fill WITH."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A bucket of ice.",
+              "translation": "Un cubo de hielo."
+            }
+          ]
+        },
+        {
+          "key": "broom",
+          "type": "term",
+          "text": "broom",
+          "meaning": "escoba",
+          "pronunciation": "BRUUM",
+          "examples": [
+            {
+              "text": "Where is the broom?",
+              "translation": "¿Dónde está la escoba?",
+              "mirror": {
+                "say": "¿Dónde está la escoba?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la escoba",
+                    "en": "the broom",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A witch on a broom.",
+              "translation": "Una bruja en una escoba."
+            }
+          ]
+        },
+        {
+          "key": "sponge",
+          "type": "term",
+          "text": "sponge",
+          "meaning": "esponja",
+          "pronunciation": "SPANCH",
+          "examples": [
+            {
+              "text": "Clean it with a sponge.",
+              "translation": "Límpialo con una esponja.",
+              "mirror": {
+                "say": "Límpialo con una esponja",
+                "pieces": [
+                  {
+                    "es": "Limpia",
+                    "en": "Clean",
+                    "role": "verb",
+                    "from": "Límpialo",
+                    "why": "Lo pegado se separa: clean IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "con una esponja",
+                    "en": "with a sponge",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A sponge cake.",
+              "translation": "Un bizcocho."
+            }
+          ]
+        },
+        {
+          "key": "detergent",
+          "type": "term",
+          "text": "detergent",
+          "meaning": "detergente",
+          "pronunciation": "diTÉRyent",
+          "examples": [
+            {
+              "text": "We've run out of detergent.",
+              "translation": "Se nos ha acabado el detergente.",
+              "mirror": {
+                "say": "Se nos ha acabado el detergente",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) hemos",
+                    "en": "We've",
+                    "role": "helper",
+                    "from": "Se nos ha"
+                  },
+                  {
+                    "es": "quedado sin",
+                    "en": "run out of",
+                    "role": "verb",
+                    "from": "acabado"
+                  },
+                  {
+                    "es": "detergente",
+                    "en": "detergent",
+                    "role": "word",
+                    "from": "el detergente",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Washing-up liquid.",
+              "translation": "Lavavajillas (líquido)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

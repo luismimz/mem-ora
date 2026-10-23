@@ -1,0 +1,812 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "79-conversacion-5",
+      "title": "Misión 79 · Opinar con soltura (B1)",
+      "units": [
+        {
+          "key": "g-make-do",
+          "type": "pattern",
+          "goal": "Hacer: MAKE o DO",
+          "rule": "MAKE para crear o producir (make a cake, make a mistake, make a decision). DO para tareas y actividades (do homework, do sport).",
+          "pieces": [
+            {
+              "text": "make",
+              "role": "fixed",
+              "hint": "hacer (crear)"
+            },
+            {
+              "text": "a mistake",
+              "role": "slot",
+              "hint": "un error"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I made a mistake.",
+              "translation": "Cometí un error.",
+              "mirror": {
+                "say": "Cometí un error",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hice",
+                    "en": "made",
+                    "role": "verb",
+                    "from": "Cometí",
+                    "why": "Un error se HACE con make: make a mistake."
+                  },
+                  {
+                    "es": "un error",
+                    "en": "a mistake",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you done your homework?",
+              "translation": "¿Has hecho los deberes?",
+              "mirror": {
+                "say": "¿Has hecho los deberes?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hecho",
+                    "en": "done",
+                    "role": "verb",
+                    "from": "hecho",
+                    "why": "Las tareas van con DO: do homework."
+                  },
+                  {
+                    "es": "TUS deberes",
+                    "en": "your homework",
+                    "role": "word",
+                    "from": "los deberes"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It doesn't make sense.",
+              "translation": "No tiene sentido."
+            },
+            {
+              "text": "Do me a favour.",
+              "translation": "Hazme un favor."
+            }
+          ],
+          "pitfalls": [
+            "«Do a mistake» está mal: make a mistake.",
+            "«Make homework» está mal: do homework."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "MAKE tiene HORNO y crea; DO tiene LISTA de tareas.",
+            "emoji": "🛠️"
+          }
+        },
+        {
+          "key": "in-my-opinion",
+          "type": "term",
+          "text": "in my opinion",
+          "meaning": "en mi opinión",
+          "pronunciation": "in mai oPÍnion",
+          "examples": [
+            {
+              "text": "In my opinion, it's too expensive.",
+              "translation": "En mi opinión, es demasiado caro.",
+              "mirror": {
+                "say": "En mi opinión, es demasiado caro",
+                "pieces": [
+                  {
+                    "es": "En mi opinión",
+                    "en": "In my opinion",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper",
+                    "from": "es"
+                  },
+                  {
+                    "es": "demasiado caro",
+                    "en": "too expensive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That's just my opinion.",
+              "translation": "Es solo mi opinión."
+            }
+          ]
+        },
+        {
+          "key": "to-be-honest",
+          "type": "term",
+          "text": "to be honest",
+          "meaning": "para ser sincero",
+          "pronunciation": "tu bi Ónest",
+          "examples": [
+            {
+              "text": "To be honest, I don't like it.",
+              "translation": "Para ser sincero, no me gusta.",
+              "mirror": {
+                "say": "Para ser sincero, no me gusta",
+                "pieces": [
+                  {
+                    "es": "Para ser sincero",
+                    "en": "To be honest",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb",
+                    "from": "me gusta",
+                    "why": "Gustar se da la vuelta: I like…"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "To be honest with you…",
+              "translation": "Si te soy sincero…"
+            }
+          ],
+          "notes": "La h no suena: Ónest."
+        },
+        {
+          "key": "on-the-other-hand",
+          "type": "term",
+          "text": "on the other hand",
+          "meaning": "por otro lado",
+          "pronunciation": "on di Áder jand",
+          "examples": [
+            {
+              "text": "It's cheap. On the other hand, it's slow.",
+              "translation": "Es barato. Por otro lado, es lento.",
+              "mirror": {
+                "say": "Es barato. Por otro lado, es lento",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "barato",
+                    "en": "cheap",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Por otro lado",
+                    "en": "On the other hand",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper",
+                    "from": "es"
+                  },
+                  {
+                    "es": "lento",
+                    "en": "slow",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "On the one hand…",
+              "translation": "Por un lado…"
+            }
+          ]
+        },
+        {
+          "key": "in-fact",
+          "type": "term",
+          "text": "in fact",
+          "meaning": "de hecho",
+          "pronunciation": "in FAKT",
+          "examples": [
+            {
+              "text": "In fact, I agree with you.",
+              "translation": "De hecho, estoy de acuerdo contigo.",
+              "mirror": {
+                "say": "De hecho, estoy de acuerdo contigo",
+                "pieces": [
+                  {
+                    "es": "De hecho",
+                    "en": "In fact",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy de acuerdo",
+                    "en": "agree",
+                    "role": "verb",
+                    "from": "estoy de acuerdo",
+                    "why": "Estar de acuerdo es un verbo: I agree (sin am)."
+                  },
+                  {
+                    "es": "contigo",
+                    "en": "with you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's a fact.",
+              "translation": "Es un hecho."
+            }
+          ]
+        },
+        {
+          "key": "at-least",
+          "type": "term",
+          "text": "at least",
+          "meaning": "al menos",
+          "pronunciation": "at LIIST",
+          "examples": [
+            {
+              "text": "At least nobody was hurt.",
+              "translation": "Al menos nadie salió herido.",
+              "mirror": {
+                "say": "Al menos nadie salió herido",
+                "pieces": [
+                  {
+                    "es": "Al menos",
+                    "en": "At least",
+                    "role": "word"
+                  },
+                  {
+                    "es": "nadie",
+                    "en": "nobody",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "salió"
+                  },
+                  {
+                    "es": "herido",
+                    "en": "hurt",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "At least two hours.",
+              "translation": "Al menos dos horas."
+            }
+          ]
+        },
+        {
+          "key": "after-all",
+          "type": "term",
+          "text": "after all",
+          "meaning": "al fin y al cabo; al final",
+          "pronunciation": "áfter OL",
+          "examples": [
+            {
+              "text": "Don't worry, it's only a game after all.",
+              "translation": "Tranquilo, al fin y al cabo es solo un juego.",
+              "mirror": {
+                "say": "Tranquilo, al fin y al cabo es solo un juego",
+                "pieces": [
+                  {
+                    "es": "No te preocupes",
+                    "en": "Don't worry",
+                    "role": "word",
+                    "from": "Tranquilo"
+                  },
+                  {
+                    "es": "al fin y al cabo",
+                    "en": "after all",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper",
+                    "from": "es"
+                  },
+                  {
+                    "es": "solo un juego",
+                    "en": "only a game",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "He came after all.",
+              "translation": "Al final vino."
+            }
+          ]
+        },
+        {
+          "key": "as-far-as-i-know",
+          "type": "term",
+          "text": "as far as I know",
+          "meaning": "que yo sepa",
+          "pronunciation": "as far as ai NÓU",
+          "examples": [
+            {
+              "text": "As far as I know, the shop is closed.",
+              "translation": "Que yo sepa, la tienda está cerrada.",
+              "mirror": {
+                "say": "Que yo sepa, la tienda está cerrada",
+                "pieces": [
+                  {
+                    "es": "Hasta donde yo sé",
+                    "en": "As far as I know",
+                    "role": "word",
+                    "from": "Que yo sepa"
+                  },
+                  {
+                    "es": "la tienda",
+                    "en": "the shop",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerrada",
+                    "en": "closed",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Not as far as I know.",
+              "translation": "Que yo sepa, no."
+            }
+          ]
+        },
+        {
+          "key": "apparently",
+          "type": "term",
+          "text": "apparently",
+          "meaning": "por lo visto",
+          "pronunciation": "aPÁrentli",
+          "examples": [
+            {
+              "text": "Apparently, it's going to rain.",
+              "translation": "Por lo visto, va a llover.",
+              "mirror": {
+                "say": "Por lo visto, va a llover",
+                "pieces": [
+                  {
+                    "es": "Por lo visto",
+                    "en": "Apparently",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO va a",
+                    "en": "it's going to",
+                    "role": "helper",
+                    "from": "va a"
+                  },
+                  {
+                    "es": "llover",
+                    "en": "rain",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Apparently not.",
+              "translation": "Parece que no."
+            }
+          ],
+          "notes": "Ojo: apparently es «por lo visto», no «aparentemente»."
+        },
+        {
+          "key": "basically",
+          "type": "term",
+          "text": "basically",
+          "meaning": "básicamente, en resumen",
+          "pronunciation": "BÉIsikli",
+          "examples": [
+            {
+              "text": "Basically, we need more time.",
+              "translation": "Básicamente, necesitamos más tiempo.",
+              "mirror": {
+                "say": "Básicamente, necesitamos más tiempo",
+                "pieces": [
+                  {
+                    "es": "Básicamente",
+                    "en": "Basically",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "más tiempo",
+                    "en": "more time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That's basically it.",
+              "translation": "En resumen, eso es todo."
+            }
+          ]
+        },
+        {
+          "key": "generally",
+          "type": "term",
+          "text": "generally",
+          "meaning": "por lo general",
+          "pronunciation": "YÉnerali",
+          "examples": [
+            {
+              "text": "I generally get up at seven.",
+              "translation": "Por lo general me levanto a las siete.",
+              "mirror": {
+                "say": "Por lo general me levanto a las siete",
+                "pieces": [
+                  {
+                    "es": "por lo general",
+                    "en": "generally",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me levanto",
+                    "en": "get up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las siete",
+                    "en": "at seven",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Generally speaking…",
+              "translation": "En general…"
+            }
+          ]
+        },
+        {
+          "key": "personally",
+          "type": "term",
+          "text": "personally",
+          "meaning": "personalmente",
+          "pronunciation": "PÉRsonali",
+          "examples": [
+            {
+              "text": "Personally, I prefer the beach.",
+              "translation": "Personalmente, prefiero la playa.",
+              "mirror": {
+                "say": "Personalmente, prefiero la playa",
+                "pieces": [
+                  {
+                    "es": "Personalmente",
+                    "en": "Personally",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prefiero",
+                    "en": "prefer",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la playa",
+                    "en": "the beach",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't take it personally.",
+              "translation": "No te lo tomes como algo personal."
+            }
+          ]
+        },
+        {
+          "key": "seriously",
+          "type": "term",
+          "text": "seriously",
+          "meaning": "en serio",
+          "pronunciation": "SÍriosli",
+          "examples": [
+            {
+              "text": "Seriously? I can't believe it.",
+              "translation": "¿En serio? No me lo creo.",
+              "mirror": {
+                "say": "¿En serio? No me lo creo",
+                "pieces": [
+                  {
+                    "es": "En serio",
+                    "en": "Seriously",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puedo",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "creer",
+                    "en": "believe",
+                    "role": "verb",
+                    "from": "me lo creo"
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take it seriously.",
+              "translation": "Tómatelo en serio."
+            }
+          ]
+        },
+        {
+          "key": "it-makes-sense",
+          "type": "term",
+          "text": "it makes sense",
+          "meaning": "tiene sentido",
+          "pronunciation": "it meiks SENS",
+          "examples": [
+            {
+              "text": "Now it makes sense.",
+              "translation": "Ahora tiene sentido.",
+              "mirror": {
+                "say": "Ahora tiene sentido",
+                "pieces": [
+                  {
+                    "es": "ahora",
+                    "en": "Now",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb",
+                    "from": "tiene",
+                    "why": "Tener sentido es MAKE sense."
+                  },
+                  {
+                    "es": "sentido",
+                    "en": "sense",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It doesn't make sense.",
+              "translation": "No tiene sentido."
+            }
+          ]
+        },
+        {
+          "key": "no-wonder",
+          "type": "term",
+          "text": "no wonder",
+          "meaning": "no me extraña",
+          "pronunciation": "nóu UÁNder",
+          "examples": [
+            {
+              "text": "No wonder you're tired.",
+              "translation": "No me extraña que estés cansado.",
+              "mirror": {
+                "say": "No me extraña que estés cansado",
+                "pieces": [
+                  {
+                    "es": "Ninguna sorpresa",
+                    "en": "No wonder",
+                    "role": "word",
+                    "from": "No me extraña"
+                  },
+                  {
+                    "es": "(TÚ) estás",
+                    "en": "you're",
+                    "role": "helper",
+                    "from": "que estés"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No wonder!",
+              "translation": "¡Normal!"
+            }
+          ]
+        },
+        {
+          "key": "either-way",
+          "type": "term",
+          "text": "either way",
+          "meaning": "en cualquier caso",
+          "pronunciation": "áider UÉI",
+          "examples": [
+            {
+              "text": "Either way, I'll call you.",
+              "translation": "En cualquier caso, te llamo.",
+              "mirror": {
+                "say": "En cualquier caso, te llamo",
+                "pieces": [
+                  {
+                    "es": "En cualquier caso",
+                    "en": "Either way",
+                    "role": "word"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "llamo"
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb",
+                    "from": "llamo"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Either way is fine.",
+              "translation": "Cualquiera de las dos vale."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
