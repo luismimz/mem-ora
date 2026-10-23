@@ -1,0 +1,813 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "69-historias",
+      "title": "Misión 69 · Contar una historia (B1)",
+      "units": [
+        {
+          "key": "g-past-perfect",
+          "type": "pattern",
+          "goal": "Ya había salido = it HAD LEFT",
+          "rule": "Para lo que pasó ANTES de otro pasado: had + participio. When I arrived, the train had left (primero salió el tren).",
+          "pieces": [
+            {
+              "text": "had",
+              "role": "fixed",
+              "hint": "había"
+            },
+            {
+              "text": "left",
+              "role": "slot",
+              "hint": "salido"
+            }
+          ],
+          "examples": [
+            {
+              "text": "When I arrived, the train had left.",
+              "translation": "Cuando llegué, el tren ya había salido.",
+              "mirror": {
+                "say": "Cuando llegué, el tren ya había salido",
+                "pieces": [
+                  {
+                    "es": "Cuando",
+                    "en": "When",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegué",
+                    "en": "arrived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el tren",
+                    "en": "the train",
+                    "role": "who"
+                  },
+                  {
+                    "es": "había",
+                    "en": "had",
+                    "role": "helper",
+                    "from": "ya había",
+                    "why": "Lo que pasó ANTES de otro pasado: had + participio."
+                  },
+                  {
+                    "es": "salido",
+                    "en": "left",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I realised I had forgotten my keys.",
+              "translation": "Me di cuenta de que había olvidado las llaves.",
+              "mirror": {
+                "say": "Me di cuenta de que había olvidado las llaves",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me di cuenta",
+                    "en": "realised",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) había",
+                    "en": "I had",
+                    "role": "helper",
+                    "from": "de que había"
+                  },
+                  {
+                    "es": "olvidado",
+                    "en": "forgotten",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MIS llaves",
+                    "en": "my keys",
+                    "role": "word",
+                    "from": "las llaves",
+                    "why": "En inglés las llaves son MÍAS: my keys."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She had never seen the sea.",
+              "translation": "Nunca había visto el mar."
+            },
+            {
+              "text": "By ten, everyone had gone.",
+              "translation": "A las diez ya se habían ido todos."
+            }
+          ],
+          "pitfalls": [
+            "«When I arrived, the train left» cambia el sentido: salió al llegar tú.",
+            "Had + participio vale para todos: I had, she had, they had."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "HAD es una FLECHA que apunta MÁS ATRÁS del pasado.",
+            "emoji": "⏮️"
+          }
+        },
+        {
+          "key": "realise",
+          "type": "term",
+          "text": "realise",
+          "meaning": "darse cuenta",
+          "pronunciation": "RÍalais",
+          "examples": [
+            {
+              "text": "I suddenly realised the truth.",
+              "translation": "De repente me di cuenta de la verdad.",
+              "mirror": {
+                "say": "De repente me di cuenta de la verdad",
+                "pieces": [
+                  {
+                    "es": "de repente",
+                    "en": "suddenly",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me di cuenta de",
+                    "en": "realised",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la verdad",
+                    "en": "the truth",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I didn't realise it was so late.",
+              "translation": "No me di cuenta de que era tan tarde."
+            }
+          ],
+          "notes": "Falso amigo: realizar es carry out o do. En EE. UU. se escribe realize."
+        },
+        {
+          "key": "notice",
+          "type": "term",
+          "text": "notice",
+          "meaning": "notar, fijarse; aviso",
+          "pronunciation": "NÓUtis",
+          "examples": [
+            {
+              "text": "Did you notice anything strange?",
+              "translation": "¿Notaste algo raro?",
+              "mirror": {
+                "say": "¿Notaste algo raro?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "notar",
+                    "en": "notice",
+                    "role": "verb",
+                    "from": "Notaste",
+                    "why": "Con DID el verbo va tal cual: notice."
+                  },
+                  {
+                    "es": "algo",
+                    "en": "anything",
+                    "role": "word"
+                  },
+                  {
+                    "es": "raro",
+                    "en": "strange",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Read the notice.",
+              "translation": "Lee el aviso."
+            }
+          ]
+        },
+        {
+          "key": "discover",
+          "type": "term",
+          "text": "discover",
+          "meaning": "descubrir",
+          "pronunciation": "disKÁver",
+          "examples": [
+            {
+              "text": "They discovered an old map.",
+              "translation": "Descubrieron un mapa antiguo.",
+              "mirror": {
+                "say": "Descubrieron un mapa antiguo",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "descubrieron",
+                    "en": "discovered",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "an",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mapa",
+                    "en": "map",
+                    "role": "word"
+                  },
+                  {
+                    "es": "antiguo",
+                    "en": "old",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Discover new places.",
+              "translation": "Descubre sitios nuevos."
+            }
+          ]
+        },
+        {
+          "key": "event",
+          "type": "term",
+          "text": "event",
+          "meaning": "acontecimiento, evento",
+          "pronunciation": "iVÉNT",
+          "examples": [
+            {
+              "text": "It was the event of the year.",
+              "translation": "Fue el acontecimiento del año.",
+              "mirror": {
+                "say": "Fue el acontecimiento del año",
+                "pieces": [
+                  {
+                    "es": "(ESO) fue",
+                    "en": "It was",
+                    "role": "helper",
+                    "from": "Fue"
+                  },
+                  {
+                    "es": "el acontecimiento",
+                    "en": "the event",
+                    "role": "word"
+                  },
+                  {
+                    "es": "del año",
+                    "en": "of the year",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A sports event.",
+              "translation": "Un evento deportivo."
+            }
+          ]
+        },
+        {
+          "key": "accident",
+          "type": "term",
+          "text": "accident",
+          "meaning": "accidente",
+          "pronunciation": "ÁKsident",
+          "examples": [
+            {
+              "text": "Nobody was hurt in the accident.",
+              "translation": "Nadie resultó herido en el accidente.",
+              "mirror": {
+                "say": "Nadie resultó herido en el accidente",
+                "pieces": [
+                  {
+                    "es": "Nadie",
+                    "en": "Nobody",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "resultó"
+                  },
+                  {
+                    "es": "herido",
+                    "en": "hurt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el accidente",
+                    "en": "in the accident",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "By accident.",
+              "translation": "Sin querer."
+            }
+          ]
+        },
+        {
+          "key": "escape",
+          "type": "term",
+          "text": "escape",
+          "meaning": "escapar(se)",
+          "pronunciation": "esKÉIP",
+          "examples": [
+            {
+              "text": "The prisoner escaped at night.",
+              "translation": "El preso se escapó por la noche.",
+              "mirror": {
+                "say": "El preso se escapó por la noche",
+                "pieces": [
+                  {
+                    "es": "El preso",
+                    "en": "The prisoner",
+                    "role": "who"
+                  },
+                  {
+                    "es": "se escapó",
+                    "en": "escaped",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la noche",
+                    "en": "at night",
+                    "role": "word",
+                    "from": "por la noche",
+                    "why": "Por la noche es AT night, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There was no escape.",
+              "translation": "No había escapatoria."
+            }
+          ]
+        },
+        {
+          "key": "survive",
+          "type": "term",
+          "text": "survive",
+          "meaning": "sobrevivir",
+          "pronunciation": "serVÁIV",
+          "examples": [
+            {
+              "text": "Everyone survived the storm.",
+              "translation": "Todos sobrevivieron a la tormenta.",
+              "mirror": {
+                "say": "Todos sobrevivieron a la tormenta",
+                "pieces": [
+                  {
+                    "es": "Todos",
+                    "en": "Everyone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "sobrevivieron",
+                    "en": "survived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la tormenta",
+                    "en": "the storm",
+                    "role": "word",
+                    "from": "a la tormenta",
+                    "why": "Sobrevivir A algo, sin «a»: survive the storm."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How did you survive?",
+              "translation": "¿Cómo sobreviviste?"
+            }
+          ],
+          "notes": "Everyone va con el verbo en singular: everyone is…"
+        },
+        {
+          "key": "appear",
+          "type": "term",
+          "text": "appear",
+          "meaning": "aparecer; parecer",
+          "pronunciation": "aPÍER",
+          "examples": [
+            {
+              "text": "A man appeared at the door.",
+              "translation": "Un hombre apareció en la puerta.",
+              "mirror": {
+                "say": "Un hombre apareció en la puerta",
+                "pieces": [
+                  {
+                    "es": "Un hombre",
+                    "en": "A man",
+                    "role": "who"
+                  },
+                  {
+                    "es": "apareció",
+                    "en": "appeared",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la puerta",
+                    "en": "at the door",
+                    "role": "word",
+                    "from": "en la puerta",
+                    "why": "En la puerta es AT the door."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She appears to be happy.",
+              "translation": "Parece que está contenta."
+            }
+          ]
+        },
+        {
+          "key": "disappear",
+          "type": "term",
+          "text": "disappear",
+          "meaning": "desaparecer",
+          "pronunciation": "disaPÍER",
+          "examples": [
+            {
+              "text": "My keys have disappeared.",
+              "translation": "Mis llaves han desaparecido.",
+              "mirror": {
+                "say": "Mis llaves han desaparecido",
+                "pieces": [
+                  {
+                    "es": "Mis llaves",
+                    "en": "My keys",
+                    "role": "who"
+                  },
+                  {
+                    "es": "han",
+                    "en": "have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "desaparecido",
+                    "en": "disappeared",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The sun disappeared.",
+              "translation": "El sol desapareció."
+            }
+          ]
+        },
+        {
+          "key": "scream",
+          "type": "term",
+          "text": "scream",
+          "meaning": "gritar (de miedo); grito",
+          "pronunciation": "SKRIIM",
+          "examples": [
+            {
+              "text": "Somebody screamed in the dark.",
+              "translation": "Alguien gritó en la oscuridad.",
+              "mirror": {
+                "say": "Alguien gritó en la oscuridad",
+                "pieces": [
+                  {
+                    "es": "Alguien",
+                    "en": "Somebody",
+                    "role": "who"
+                  },
+                  {
+                    "es": "gritó",
+                    "en": "screamed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en la oscuridad",
+                    "en": "in the dark",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A loud scream.",
+              "translation": "Un grito fuerte."
+            }
+          ],
+          "notes": "Shout es gritar para que te oigan; scream, de miedo o dolor."
+        },
+        {
+          "key": "afterwards",
+          "type": "term",
+          "text": "afterwards",
+          "meaning": "después, más tarde",
+          "pronunciation": "ÁFteruords",
+          "examples": [
+            {
+              "text": "We had dinner and afterwards we went dancing.",
+              "translation": "Cenamos y después fuimos a bailar.",
+              "mirror": {
+                "say": "Cenamos y después fuimos a bailar",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cenamos",
+                    "en": "had dinner",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "y",
+                    "en": "and",
+                    "role": "word"
+                  },
+                  {
+                    "es": "después",
+                    "en": "afterwards",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fuimos",
+                    "en": "went",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bail-ANDO",
+                    "en": "dancing",
+                    "role": "verb",
+                    "from": "a bailar",
+                    "why": "Con GO, la actividad en -ING: go dancing."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Call me afterwards.",
+              "translation": "Llámame luego."
+            }
+          ]
+        },
+        {
+          "key": "meanwhile",
+          "type": "term",
+          "text": "meanwhile",
+          "meaning": "mientras tanto",
+          "pronunciation": "MÍINuail",
+          "examples": [
+            {
+              "text": "Meanwhile, the police were coming.",
+              "translation": "Mientras tanto, la policía estaba llegando.",
+              "mirror": {
+                "say": "Mientras tanto, la policía estaba llegando",
+                "pieces": [
+                  {
+                    "es": "Mientras tanto",
+                    "en": "Meanwhile",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la policía",
+                    "en": "the police",
+                    "role": "who"
+                  },
+                  {
+                    "es": "estaban",
+                    "en": "were",
+                    "role": "helper",
+                    "from": "estaba",
+                    "why": "Police es plural en inglés: the police WERE."
+                  },
+                  {
+                    "es": "viniendo",
+                    "en": "coming",
+                    "role": "verb",
+                    "from": "llegando"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Meanwhile, back at home…",
+              "translation": "Mientras tanto, en casa…"
+            }
+          ]
+        },
+        {
+          "key": "eventually",
+          "type": "term",
+          "text": "eventually",
+          "meaning": "al final, finalmente",
+          "pronunciation": "iVÉNchuali",
+          "examples": [
+            {
+              "text": "Eventually, we found the hotel.",
+              "translation": "Al final encontramos el hotel.",
+              "mirror": {
+                "say": "Al final encontramos el hotel",
+                "pieces": [
+                  {
+                    "es": "Al final",
+                    "en": "Eventually",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encontramos",
+                    "en": "found",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el hotel",
+                    "en": "the hotel",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It will happen eventually.",
+              "translation": "Tarde o temprano pasará."
+            }
+          ],
+          "notes": "Falso amigo: eventualmente es maybe u occasionally."
+        },
+        {
+          "key": "story",
+          "type": "term",
+          "text": "story",
+          "meaning": "historia, cuento",
+          "pronunciation": "STÓri",
+          "examples": [
+            {
+              "text": "Tell me a story.",
+              "translation": "Cuéntame un cuento.",
+              "mirror": {
+                "say": "Cuéntame un cuento",
+                "pieces": [
+                  {
+                    "es": "Cuenta",
+                    "en": "Tell",
+                    "role": "verb",
+                    "from": "Cuéntame",
+                    "why": "Lo pegado se separa: tell ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una historia",
+                    "en": "a story",
+                    "role": "word",
+                    "from": "un cuento"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's a long story.",
+              "translation": "Es una larga historia."
+            }
+          ],
+          "notes": "La asignatura de Historia es history."
+        },
+        {
+          "key": "chase",
+          "type": "term",
+          "text": "chase",
+          "meaning": "perseguir",
+          "pronunciation": "CHÉIS",
+          "examples": [
+            {
+              "text": "The dog chased the cat.",
+              "translation": "El perro persiguió al gato.",
+              "mirror": {
+                "say": "El perro persiguió al gato",
+                "pieces": [
+                  {
+                    "es": "El perro",
+                    "en": "The dog",
+                    "role": "who"
+                  },
+                  {
+                    "es": "persiguió",
+                    "en": "chased",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el gato",
+                    "en": "the cat",
+                    "role": "word",
+                    "from": "al gato",
+                    "why": "Perseguir A alguien, sin «a»: chase the cat."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A car chase.",
+              "translation": "Una persecución de coches."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,817 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "70-lo-que-dijo",
+      "title": "Misión 70 · Lo que dijo (B1)",
+      "units": [
+        {
+          "key": "g-reported",
+          "type": "pattern",
+          "goal": "Dijo que estaba cansado = he SAID he WAS tired",
+          "rule": "Al contar lo que dijo alguien, el verbo da un paso atrás: «I am tired» → he said he was tired. Con tell, di a quién: she told me.",
+          "pieces": [
+            {
+              "text": "He said",
+              "role": "fixed",
+              "hint": "dijo"
+            },
+            {
+              "text": "he was tired",
+              "role": "slot",
+              "hint": "que estaba cansado"
+            }
+          ],
+          "examples": [
+            {
+              "text": "He said he was tired.",
+              "translation": "Dijo que estaba cansado.",
+              "mirror": {
+                "say": "Dijo que estaba cansado",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ÉL) estaba",
+                    "en": "he was",
+                    "role": "helper",
+                    "from": "que estaba",
+                    "why": "El «que» se suele quitar: he said he was…"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She told me she would come.",
+              "translation": "Me dijo que vendría.",
+              "mirror": {
+                "say": "Me dijo que vendría",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "told",
+                    "role": "verb",
+                    "from": "dijo",
+                    "why": "Decir A alguien es TELL: she told me."
+                  },
+                  {
+                    "es": "(ELLA) -RÍA",
+                    "en": "she would",
+                    "role": "helper",
+                    "from": "que vendría"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb",
+                    "from": "vendría"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "They asked if I was ready.",
+              "translation": "Me preguntaron si estaba listo."
+            },
+            {
+              "text": "He told me not to worry.",
+              "translation": "Me dijo que no me preocupara."
+            }
+          ],
+          "pitfalls": [
+            "«She said me» está mal: she TOLD me, o she SAID (sin me).",
+            "«He said he is tired» se oye, pero lo normal es dar el paso atrás: he was."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "SAID empuja cada VERBO un PASO hacia ATRÁS.",
+            "emoji": "🗣️"
+          }
+        },
+        {
+          "key": "claim",
+          "type": "term",
+          "text": "claim",
+          "meaning": "afirmar; reclamación",
+          "pronunciation": "KLÉIM",
+          "examples": [
+            {
+              "text": "He claims he is innocent.",
+              "translation": "Afirma que es inocente.",
+              "mirror": {
+                "say": "Afirma que es inocente",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "afirma",
+                    "en": "claims",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ÉL) es",
+                    "en": "he is",
+                    "role": "helper",
+                    "from": "que es"
+                  },
+                  {
+                    "es": "inocente",
+                    "en": "innocent",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Baggage claim.",
+              "translation": "Recogida de equipajes."
+            }
+          ]
+        },
+        {
+          "key": "admit",
+          "type": "term",
+          "text": "admit",
+          "meaning": "admitir, reconocer",
+          "pronunciation": "adMÍT",
+          "examples": [
+            {
+              "text": "She admitted she was wrong.",
+              "translation": "Reconoció que se había equivocado.",
+              "mirror": {
+                "say": "Reconoció que se había equivocado",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "admitió",
+                    "en": "admitted",
+                    "role": "verb",
+                    "from": "Reconoció"
+                  },
+                  {
+                    "es": "(ELLA) estaba",
+                    "en": "she was",
+                    "role": "helper",
+                    "from": "que se había"
+                  },
+                  {
+                    "es": "equivocada",
+                    "en": "wrong",
+                    "role": "word",
+                    "from": "equivocado",
+                    "why": "Equivocarse es «estar mal»: be wrong."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I admit it.",
+              "translation": "Lo reconozco."
+            }
+          ]
+        },
+        {
+          "key": "deny",
+          "type": "term",
+          "text": "deny",
+          "meaning": "negar",
+          "pronunciation": "diNÁI",
+          "examples": [
+            {
+              "text": "He denied everything.",
+              "translation": "Lo negó todo.",
+              "mirror": {
+                "say": "Lo negó todo",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "negó",
+                    "en": "denied",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todo",
+                    "en": "everything",
+                    "role": "word",
+                    "from": "lo… todo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't deny it.",
+              "translation": "No lo niegues."
+            }
+          ]
+        },
+        {
+          "key": "warn",
+          "type": "term",
+          "text": "warn",
+          "meaning": "avisar, advertir",
+          "pronunciation": "UÓRN",
+          "examples": [
+            {
+              "text": "I warned you!",
+              "translation": "¡Te avisé!",
+              "mirror": {
+                "say": "¡Te avisé!",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "avisé",
+                    "en": "warned",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "They warned us about the storm.",
+              "translation": "Nos avisaron de la tormenta."
+            }
+          ],
+          "notes": "La a suena O: UÓRN."
+        },
+        {
+          "key": "suggest",
+          "type": "term",
+          "text": "suggest",
+          "meaning": "sugerir, proponer",
+          "pronunciation": "saYÉST",
+          "examples": [
+            {
+              "text": "I suggest we take a taxi.",
+              "translation": "Propongo que cojamos un taxi.",
+              "mirror": {
+                "say": "Propongo que cojamos un taxi",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sugiero",
+                    "en": "suggest",
+                    "role": "verb",
+                    "from": "Propongo"
+                  },
+                  {
+                    "es": "NOSOTROS cogemos",
+                    "en": "we take",
+                    "role": "verb",
+                    "from": "que cojamos",
+                    "why": "Sin «que» y con el verbo tal cual: I suggest we take."
+                  },
+                  {
+                    "es": "un taxi",
+                    "en": "a taxi",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Any suggestions?",
+              "translation": "¿Alguna sugerencia?"
+            }
+          ]
+        },
+        {
+          "key": "announce",
+          "type": "term",
+          "text": "announce",
+          "meaning": "anunciar",
+          "pronunciation": "aNÁUNS",
+          "examples": [
+            {
+              "text": "They announced the winner.",
+              "translation": "Anunciaron el ganador.",
+              "mirror": {
+                "say": "Anunciaron el ganador",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "anunciaron",
+                    "en": "announced",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el ganador",
+                    "en": "the winner",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An important announcement.",
+              "translation": "Un anuncio importante."
+            }
+          ]
+        },
+        {
+          "key": "insist",
+          "type": "term",
+          "text": "insist",
+          "meaning": "insistir",
+          "pronunciation": "inSÍST",
+          "examples": [
+            {
+              "text": "She insisted on paying.",
+              "translation": "Insistió en pagar.",
+              "mirror": {
+                "say": "Insistió en pagar",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "insistió",
+                    "en": "insisted",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre",
+                    "en": "on",
+                    "role": "word",
+                    "from": "en",
+                    "why": "Insistir EN es insist ON."
+                  },
+                  {
+                    "es": "pag-ANDO",
+                    "en": "paying",
+                    "role": "verb",
+                    "from": "pagar",
+                    "why": "Detrás de on, el verbo en -ING: paying."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you insist.",
+              "translation": "Si insistes."
+            }
+          ]
+        },
+        {
+          "key": "rumour",
+          "type": "term",
+          "text": "rumour",
+          "meaning": "rumor",
+          "pronunciation": "RÚmor",
+          "examples": [
+            {
+              "text": "It's just a rumour.",
+              "translation": "Es solo un rumor.",
+              "mirror": {
+                "say": "Es solo un rumor",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "solo",
+                    "en": "just",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un rumor",
+                    "en": "a rumour",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Rumours spread fast.",
+              "translation": "Los rumores corren rápido."
+            }
+          ],
+          "notes": "En EE. UU. se escribe rumor."
+        },
+        {
+          "key": "gossip",
+          "type": "term",
+          "text": "gossip",
+          "meaning": "cotilleo; cotillear",
+          "pronunciation": "GÓsip",
+          "examples": [
+            {
+              "text": "Stop gossiping!",
+              "translation": "¡Deja de cotillear!",
+              "mirror": {
+                "say": "¡Deja de cotillear!",
+                "pieces": [
+                  {
+                    "es": "Deja de",
+                    "en": "Stop",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cotille-ANDO",
+                    "en": "gossiping",
+                    "role": "verb",
+                    "from": "cotillear",
+                    "why": "Detrás de stop, -ING: stop gossiping."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Office gossip.",
+              "translation": "Cotilleos de oficina."
+            }
+          ]
+        },
+        {
+          "key": "conversation",
+          "type": "term",
+          "text": "conversation",
+          "meaning": "conversación",
+          "pronunciation": "konverSÉIshon",
+          "examples": [
+            {
+              "text": "We had a long conversation.",
+              "translation": "Tuvimos una conversación larga.",
+              "mirror": {
+                "say": "Tuvimos una conversación larga",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuvimos",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "conversación",
+                    "en": "conversation",
+                    "role": "word"
+                  },
+                  {
+                    "es": "larga",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "An English conversation class.",
+              "translation": "Una clase de conversación en inglés."
+            }
+          ]
+        },
+        {
+          "key": "argument",
+          "type": "term",
+          "text": "argument",
+          "meaning": "discusión (pelea); argumento",
+          "pronunciation": "ÁRguiument",
+          "examples": [
+            {
+              "text": "They had an argument about money.",
+              "translation": "Discutieron por dinero.",
+              "mirror": {
+                "say": "Discutieron por dinero",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuvieron una discusión",
+                    "en": "had an argument",
+                    "role": "verb",
+                    "from": "Discutieron"
+                  },
+                  {
+                    "es": "sobre dinero",
+                    "en": "about money",
+                    "role": "word",
+                    "from": "por dinero"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That's a good argument.",
+              "translation": "Es un buen argumento."
+            }
+          ]
+        },
+        {
+          "key": "advice",
+          "type": "term",
+          "text": "advice",
+          "meaning": "consejo(s)",
+          "pronunciation": "adVÁIS",
+          "examples": [
+            {
+              "text": "Can you give me some advice?",
+              "translation": "¿Me das un consejo?",
+              "mirror": {
+                "say": "¿Me das un consejo?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Me"
+                  },
+                  {
+                    "es": "dar",
+                    "en": "give",
+                    "role": "verb",
+                    "from": "das"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "algún consejo",
+                    "en": "some advice",
+                    "role": "word",
+                    "from": "un consejo",
+                    "why": "Advice no se cuenta: some advice, nunca «an advice»."
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Thanks for the advice.",
+              "translation": "Gracias por el consejo."
+            }
+          ],
+          "notes": "El verbo es advise, con s."
+        },
+        {
+          "key": "news",
+          "type": "term",
+          "text": "news",
+          "meaning": "noticias",
+          "pronunciation": "NIÚS",
+          "examples": [
+            {
+              "text": "I've got good news!",
+              "translation": "¡Tengo buenas noticias!",
+              "mirror": {
+                "say": "¡Tengo buenas noticias!",
+                "pieces": [
+                  {
+                    "es": "(YO) tengo",
+                    "en": "I've got",
+                    "role": "helper",
+                    "from": "Tengo"
+                  },
+                  {
+                    "es": "buenas noticias",
+                    "en": "good news",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The news is on.",
+              "translation": "Están dando las noticias."
+            }
+          ],
+          "notes": "Va en singular: the news IS."
+        },
+        {
+          "key": "persuade",
+          "type": "term",
+          "text": "persuade",
+          "meaning": "convencer",
+          "pronunciation": "perSUÉID",
+          "examples": [
+            {
+              "text": "She persuaded me to come.",
+              "translation": "Me convenció para venir.",
+              "mirror": {
+                "say": "Me convenció para venir",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "convenció",
+                    "en": "persuaded",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a venir",
+                    "en": "to come",
+                    "role": "verb",
+                    "from": "para venir"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Try to persuade him.",
+              "translation": "Intenta convencerlo."
+            }
+          ]
+        },
+        {
+          "key": "remind",
+          "type": "term",
+          "text": "remind",
+          "meaning": "recordar (a alguien)",
+          "pronunciation": "riMÁIND",
+          "examples": [
+            {
+              "text": "Remind me to call Ana.",
+              "translation": "Recuérdame que llame a Ana.",
+              "mirror": {
+                "say": "Recuérdame que llame a Ana",
+                "pieces": [
+                  {
+                    "es": "Recuerda",
+                    "en": "Remind",
+                    "role": "verb",
+                    "from": "Recuérdame",
+                    "why": "Lo pegado se separa: remind ME."
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a llamar",
+                    "en": "to call",
+                    "role": "verb",
+                    "from": "que llame",
+                    "why": "Recordar a alguien que haga algo: remind me TO call."
+                  },
+                  {
+                    "es": "Ana",
+                    "en": "Ana",
+                    "role": "word",
+                    "from": "a Ana"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You remind me of my sister.",
+              "translation": "Me recuerdas a mi hermana."
+            }
+          ],
+          "notes": "Acordarte tú es remember; que otro se acuerde, remind."
+        }
+      ]
+    }
+  ]
+}
