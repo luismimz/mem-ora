@@ -1,0 +1,764 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "84-normas",
+      "title": "Misión 84 · Normas y seguridad (B1)",
+      "units": [
+        {
+          "key": "g-passive-modal",
+          "type": "pattern",
+          "goal": "Hay que hacerlo = it MUST BE DONE",
+          "rule": "Pasiva con modal: modal + BE + participio. It must be done today. It can be recycled. Phones must be switched off.",
+          "pieces": [
+            {
+              "text": "It",
+              "role": "fixed",
+              "hint": "eso"
+            },
+            {
+              "text": "must be",
+              "role": "fixed",
+              "hint": "debe ser"
+            },
+            {
+              "text": "done",
+              "role": "slot",
+              "hint": "hecho"
+            }
+          ],
+          "examples": [
+            {
+              "text": "This form must be signed.",
+              "translation": "Hay que firmar este impreso.",
+              "mirror": {
+                "say": "Hay que firmar este impreso",
+                "pieces": [
+                  {
+                    "es": "debe ser",
+                    "en": "must be",
+                    "role": "helper",
+                    "from": "Hay que",
+                    "why": "«Hay que firmarlo» es «debe ser firmado»: must be signed."
+                  },
+                  {
+                    "es": "firmado",
+                    "en": "signed",
+                    "role": "verb",
+                    "from": "firmar"
+                  },
+                  {
+                    "es": "Este impreso",
+                    "en": "This form",
+                    "role": "who",
+                    "from": "este impreso"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Glass can be recycled.",
+              "translation": "El vidrio se puede reciclar.",
+              "mirror": {
+                "say": "El vidrio se puede reciclar",
+                "pieces": [
+                  {
+                    "es": "vidrio",
+                    "en": "Glass",
+                    "role": "who",
+                    "from": "El vidrio",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "puede ser",
+                    "en": "can be",
+                    "role": "helper",
+                    "from": "se puede",
+                    "why": "«Se puede reciclar» es pasiva: can be recycled."
+                  },
+                  {
+                    "es": "reciclado",
+                    "en": "recycled",
+                    "role": "verb",
+                    "from": "reciclar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Phones must be switched off.",
+              "translation": "Los móviles deben estar apagados."
+            },
+            {
+              "text": "It should be done today.",
+              "translation": "Debería hacerse hoy."
+            }
+          ],
+          "pitfalls": [
+            "«It must done» está mal: falta BE (must be done).",
+            "Tras el modal, BE siempre igual: must be, can be, should be."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un CARTEL oficial: MUST BE + participio, sin excusas.",
+            "emoji": "🪧"
+          }
+        },
+        {
+          "key": "rule",
+          "type": "term",
+          "text": "rule",
+          "meaning": "norma, regla",
+          "pronunciation": "RUUL",
+          "examples": [
+            {
+              "text": "Follow the rules.",
+              "translation": "Sigue las normas.",
+              "mirror": {
+                "say": "Sigue las normas",
+                "pieces": [
+                  {
+                    "es": "Sigue",
+                    "en": "Follow",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "las normas",
+                    "en": "the rules",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "As a rule…",
+              "translation": "Por norma general…"
+            }
+          ]
+        },
+        {
+          "key": "forbidden",
+          "type": "term",
+          "text": "forbidden",
+          "meaning": "prohibido",
+          "pronunciation": "forBÍden",
+          "examples": [
+            {
+              "text": "Smoking is forbidden.",
+              "translation": "Está prohibido fumar.",
+              "mirror": {
+                "say": "Está prohibido fumar",
+                "pieces": [
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "Está"
+                  },
+                  {
+                    "es": "prohibido",
+                    "en": "forbidden",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Fumando",
+                    "en": "Smoking",
+                    "role": "who",
+                    "from": "fumar",
+                    "why": "Como tema de la frase, el verbo va en -ING: smoking."
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Forbidden fruit.",
+              "translation": "Fruta prohibida."
+            }
+          ]
+        },
+        {
+          "key": "permit",
+          "type": "term",
+          "text": "permit",
+          "meaning": "permiso; permitir",
+          "pronunciation": "PÉRmit",
+          "examples": [
+            {
+              "text": "You need a work permit.",
+              "translation": "Necesitas un permiso de trabajo.",
+              "mirror": {
+                "say": "Necesitas un permiso de trabajo",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitas",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "permiso",
+                    "en": "permit",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de trabajo",
+                    "en": "work",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A parking permit.",
+              "translation": "Una tarjeta de aparcamiento."
+            }
+          ]
+        },
+        {
+          "key": "safety",
+          "type": "term",
+          "text": "safety",
+          "meaning": "seguridad (estar a salvo)",
+          "pronunciation": "SÉIFti",
+          "examples": [
+            {
+              "text": "Safety comes first.",
+              "translation": "La seguridad es lo primero.",
+              "mirror": {
+                "say": "La seguridad es lo primero",
+                "pieces": [
+                  {
+                    "es": "seguridad",
+                    "en": "Safety",
+                    "role": "who",
+                    "from": "La seguridad",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "viene primero",
+                    "en": "comes first",
+                    "role": "verb",
+                    "from": "es lo primero"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "For your safety.",
+              "translation": "Por su seguridad."
+            }
+          ],
+          "notes": "Safety es estar a salvo; security, protección contra robos o ataques."
+        },
+        {
+          "key": "emergency",
+          "type": "term",
+          "text": "emergency",
+          "meaning": "emergencia",
+          "pronunciation": "iMÉRyensi",
+          "examples": [
+            {
+              "text": "In an emergency, call 112.",
+              "translation": "En caso de emergencia, llama al 112.",
+              "mirror": {
+                "say": "En caso de emergencia, llama al 112",
+                "pieces": [
+                  {
+                    "es": "en una emergencia",
+                    "en": "In an emergency",
+                    "role": "word",
+                    "from": "En caso de emergencia"
+                  },
+                  {
+                    "es": "llama",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "112",
+                    "en": "112",
+                    "role": "word",
+                    "from": "al 112"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Emergency exit.",
+              "translation": "Salida de emergencia."
+            }
+          ]
+        },
+        {
+          "key": "seatbelt",
+          "type": "term",
+          "text": "seatbelt",
+          "meaning": "cinturón de seguridad",
+          "pronunciation": "SÍITbelt",
+          "examples": [
+            {
+              "text": "Fasten your seatbelt.",
+              "translation": "Abróchate el cinturón.",
+              "mirror": {
+                "say": "Abróchate el cinturón",
+                "pieces": [
+                  {
+                    "es": "Abrocha",
+                    "en": "Fasten",
+                    "role": "verb",
+                    "from": "Abróchate"
+                  },
+                  {
+                    "es": "TU cinturón",
+                    "en": "your seatbelt",
+                    "role": "word",
+                    "from": "el cinturón"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wear a seatbelt.",
+              "translation": "Ponte el cinturón."
+            }
+          ]
+        },
+        {
+          "key": "helmet",
+          "type": "term",
+          "text": "helmet",
+          "meaning": "casco",
+          "pronunciation": "JÉLmet",
+          "examples": [
+            {
+              "text": "Always wear a helmet.",
+              "translation": "Lleva siempre casco.",
+              "mirror": {
+                "say": "Lleva siempre casco",
+                "pieces": [
+                  {
+                    "es": "lleva",
+                    "en": "wear",
+                    "role": "verb",
+                    "from": "Lleva",
+                    "why": "Llevar puesto es WEAR."
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "Always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un casco",
+                    "en": "a helmet",
+                    "role": "word",
+                    "from": "casco"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A bike helmet.",
+              "translation": "Un casco de bici."
+            }
+          ]
+        },
+        {
+          "key": "licence",
+          "type": "term",
+          "text": "licence",
+          "meaning": "permiso, carné",
+          "pronunciation": "LÁIsens",
+          "examples": [
+            {
+              "text": "Can I see your driving licence?",
+              "translation": "¿Me enseña el carné de conducir?",
+              "mirror": {
+                "say": "¿Me enseña el carné de conducir?",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Me enseña"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "SU carné de conducir",
+                    "en": "your driving licence",
+                    "role": "word",
+                    "from": "el carné de conducir"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A fishing licence.",
+              "translation": "Una licencia de pesca."
+            }
+          ],
+          "notes": "En EE. UU. se escribe license."
+        },
+        {
+          "key": "obey",
+          "type": "term",
+          "text": "obey",
+          "meaning": "obedecer, cumplir",
+          "pronunciation": "oBÉI",
+          "examples": [
+            {
+              "text": "You must obey the law.",
+              "translation": "Debes cumplir la ley.",
+              "mirror": {
+                "say": "Debes cumplir la ley",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "debes",
+                    "en": "must",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "obedecer",
+                    "en": "obey",
+                    "role": "verb",
+                    "from": "cumplir"
+                  },
+                  {
+                    "es": "la ley",
+                    "en": "the law",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The dog obeys me.",
+              "translation": "El perro me obedece."
+            }
+          ]
+        },
+        {
+          "key": "ban",
+          "type": "term",
+          "text": "ban",
+          "meaning": "prohibir; prohibición",
+          "pronunciation": "BAN",
+          "examples": [
+            {
+              "text": "They banned plastic bags.",
+              "translation": "Prohibieron las bolsas de plástico.",
+              "mirror": {
+                "say": "Prohibieron las bolsas de plástico",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prohibieron",
+                    "en": "banned",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bolsas",
+                    "en": "bags",
+                    "role": "word",
+                    "from": "las bolsas",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "de plástico",
+                    "en": "plastic",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A smoking ban.",
+              "translation": "Una prohibición de fumar."
+            }
+          ]
+        },
+        {
+          "key": "penalty",
+          "type": "term",
+          "text": "penalty",
+          "meaning": "sanción, recargo; penalti",
+          "pronunciation": "PÉnalti",
+          "examples": [
+            {
+              "text": "There is a penalty for late payment.",
+              "translation": "Hay recargo por pagar tarde.",
+              "mirror": {
+                "say": "Hay recargo por pagar tarde",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una sanción",
+                    "en": "a penalty",
+                    "role": "word",
+                    "from": "recargo"
+                  },
+                  {
+                    "es": "por pago tarde",
+                    "en": "for late payment",
+                    "role": "word",
+                    "from": "por pagar tarde"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He scored a penalty.",
+              "translation": "Marcó un penalti."
+            }
+          ]
+        },
+        {
+          "key": "sign",
+          "type": "term",
+          "text": "sign",
+          "meaning": "firmar; cartel, señal",
+          "pronunciation": "SÁIN",
+          "examples": [
+            {
+              "text": "Sign here, please.",
+              "translation": "Firme aquí, por favor.",
+              "mirror": {
+                "say": "Firme aquí, por favor",
+                "pieces": [
+                  {
+                    "es": "Firme",
+                    "en": "Sign",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Read the sign.",
+              "translation": "Lee el cartel."
+            }
+          ],
+          "notes": "La g no suena: SÁIN."
+        },
+        {
+          "key": "exit",
+          "type": "term",
+          "text": "exit",
+          "meaning": "salida",
+          "pronunciation": "ÉKsit",
+          "examples": [
+            {
+              "text": "Where is the exit?",
+              "translation": "¿Dónde está la salida?",
+              "mirror": {
+                "say": "¿Dónde está la salida?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la salida",
+                    "en": "the exit",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fire exit.",
+              "translation": "Salida de incendios."
+            }
+          ]
+        },
+        {
+          "key": "procedure",
+          "type": "term",
+          "text": "procedure",
+          "meaning": "procedimiento, trámite",
+          "pronunciation": "proSÍIyer",
+          "examples": [
+            {
+              "text": "Follow the safety procedure.",
+              "translation": "Sigue el procedimiento de seguridad.",
+              "mirror": {
+                "say": "Sigue el procedimiento de seguridad",
+                "pieces": [
+                  {
+                    "es": "Sigue",
+                    "en": "Follow",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "procedimiento",
+                    "en": "procedure",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de seguridad",
+                    "en": "safety",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A simple procedure.",
+              "translation": "Un trámite sencillo."
+            }
+          ]
+        },
+        {
+          "key": "respect",
+          "type": "term",
+          "text": "respect",
+          "meaning": "respeto; respetar",
+          "pronunciation": "risPÉKT",
+          "examples": [
+            {
+              "text": "Respect other people.",
+              "translation": "Respeta a los demás.",
+              "mirror": {
+                "say": "Respeta a los demás",
+                "pieces": [
+                  {
+                    "es": "Respeta",
+                    "en": "Respect",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "otra gente",
+                    "en": "other people",
+                    "role": "word",
+                    "from": "a los demás",
+                    "why": "Respetar A alguien, sin «a»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "With respect…",
+              "translation": "Con todo respeto…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
