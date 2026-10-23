@@ -1,0 +1,738 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "85-agenda",
+      "title": "Misión 85 · Agenda y planes (B1)",
+      "units": [
+        {
+          "key": "g-future-continuous",
+          "type": "pattern",
+          "goal": "Estaré trabajando = I'LL BE working",
+          "rule": "Para lo que estará en marcha en un momento futuro: will be + -ING. This time tomorrow I'll be flying. Will you be using the car?",
+          "pieces": [
+            {
+              "text": "I'll be",
+              "role": "fixed",
+              "hint": "estaré"
+            },
+            {
+              "text": "working",
+              "role": "slot",
+              "hint": "trabajando"
+            }
+          ],
+          "examples": [
+            {
+              "text": "This time tomorrow I'll be flying to London.",
+              "translation": "Mañana a esta hora estaré volando a Londres.",
+              "mirror": {
+                "say": "Mañana a esta hora estaré volando a Londres",
+                "pieces": [
+                  {
+                    "es": "mañana a esta hora",
+                    "en": "This time tomorrow",
+                    "role": "word",
+                    "from": "Mañana a esta hora"
+                  },
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper",
+                    "from": "estaré",
+                    "why": "Lo que estará en marcha: will be + -ING."
+                  },
+                  {
+                    "es": "volando",
+                    "en": "flying",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Londres",
+                    "en": "to London",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't call at nine, I'll be working.",
+              "translation": "No llames a las nueve, estaré trabajando.",
+              "mirror": {
+                "say": "No llames a las nueve, estaré trabajando",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llames",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las nueve",
+                    "en": "at nine",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper",
+                    "from": "estaré",
+                    "why": "Lo que estará en marcha: will be + -ING."
+                  },
+                  {
+                    "es": "trabajando",
+                    "en": "working",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Will you be using the car tonight?",
+              "translation": "¿Vas a usar el coche esta noche?"
+            },
+            {
+              "text": "We'll be waiting for you.",
+              "translation": "Te estaremos esperando."
+            }
+          ],
+          "pitfalls": [
+            "«I'll working» está mal: falta BE (I'll be working).",
+            "Es para un momento concreto del futuro; si no, basta con will."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una FOTO del FUTURO en plena acción: WILL BE -ING.",
+            "emoji": "🔮"
+          }
+        },
+        {
+          "key": "calendar",
+          "type": "term",
+          "text": "calendar",
+          "meaning": "calendario",
+          "pronunciation": "KÁlendar",
+          "examples": [
+            {
+              "text": "I'll check my calendar.",
+              "translation": "Miraré mi calendario.",
+              "mirror": {
+                "say": "Miraré mi calendario",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "Miraré"
+                  },
+                  {
+                    "es": "comprobar",
+                    "en": "check",
+                    "role": "verb",
+                    "from": "Miraré"
+                  },
+                  {
+                    "es": "mi calendario",
+                    "en": "my calendar",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A wall calendar.",
+              "translation": "Un calendario de pared."
+            }
+          ]
+        },
+        {
+          "key": "reminder",
+          "type": "term",
+          "text": "reminder",
+          "meaning": "recordatorio, aviso",
+          "pronunciation": "riMÁINder",
+          "examples": [
+            {
+              "text": "Set a reminder.",
+              "translation": "Pon un recordatorio.",
+              "mirror": {
+                "say": "Pon un recordatorio",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Set",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un recordatorio",
+                    "en": "a reminder",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Just a quick reminder.",
+              "translation": "Solo un recordatorio rápido."
+            }
+          ]
+        },
+        {
+          "key": "arrange",
+          "type": "term",
+          "text": "arrange",
+          "meaning": "organizar; quedar",
+          "pronunciation": "aRÉINCH",
+          "examples": [
+            {
+              "text": "Let's arrange a meeting.",
+              "translation": "Organicemos una reunión.",
+              "mirror": {
+                "say": "Organicemos una reunión",
+                "pieces": [
+                  {
+                    "es": "Organicemos",
+                    "en": "Let's arrange",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una reunión",
+                    "en": "a meeting",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've arranged to meet Ana.",
+              "translation": "He quedado con Ana."
+            }
+          ]
+        },
+        {
+          "key": "confirm",
+          "type": "term",
+          "text": "confirm",
+          "meaning": "confirmar",
+          "pronunciation": "konFÉRM",
+          "examples": [
+            {
+              "text": "Please confirm your booking.",
+              "translation": "Confirme su reserva, por favor.",
+              "mirror": {
+                "say": "Confirme su reserva, por favor",
+                "pieces": [
+                  {
+                    "es": "confirme",
+                    "en": "confirm",
+                    "role": "verb",
+                    "from": "Confirme"
+                  },
+                  {
+                    "es": "SU reserva",
+                    "en": "your booking",
+                    "role": "word",
+                    "from": "su reserva"
+                  },
+                  {
+                    "es": "Por favor",
+                    "en": "Please",
+                    "role": "word",
+                    "from": "por favor"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I can confirm that.",
+              "translation": "Lo confirmo."
+            }
+          ]
+        },
+        {
+          "key": "reschedule",
+          "type": "term",
+          "text": "reschedule",
+          "meaning": "cambiar de fecha",
+          "pronunciation": "riSHÉdiul",
+          "examples": [
+            {
+              "text": "Can we reschedule the meeting?",
+              "translation": "¿Podemos cambiar la reunión de día?",
+              "mirror": {
+                "say": "¿Podemos cambiar la reunión de día?",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podemos",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cambiar de fecha",
+                    "en": "reschedule",
+                    "role": "verb",
+                    "from": "cambiar… de día"
+                  },
+                  {
+                    "es": "la reunión",
+                    "en": "the meeting",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The match was rescheduled.",
+              "translation": "Cambiaron el partido de fecha."
+            }
+          ]
+        },
+        {
+          "key": "conference",
+          "type": "term",
+          "text": "conference",
+          "meaning": "congreso; conferencia",
+          "pronunciation": "KÓNferens",
+          "examples": [
+            {
+              "text": "I'll be at a conference all week.",
+              "translation": "Estaré en un congreso toda la semana.",
+              "mirror": {
+                "say": "Estaré en un congreso toda la semana",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper",
+                    "from": "Estaré"
+                  },
+                  {
+                    "es": "en un congreso",
+                    "en": "at a conference",
+                    "role": "word"
+                  },
+                  {
+                    "es": "toda semana",
+                    "en": "all week",
+                    "role": "word",
+                    "from": "toda la semana",
+                    "why": "Toda la semana es ALL week, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A video conference.",
+              "translation": "Una videoconferencia."
+            }
+          ]
+        },
+        {
+          "key": "agenda",
+          "type": "term",
+          "text": "agenda",
+          "meaning": "orden del día",
+          "pronunciation": "aYÉNda",
+          "examples": [
+            {
+              "text": "What's on the agenda?",
+              "translation": "¿Qué hay en el orden del día?",
+              "mirror": {
+                "say": "¿Qué hay en el orden del día?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word",
+                    "from": "Qué hay"
+                  },
+                  {
+                    "es": "en la agenda",
+                    "en": "on the agenda",
+                    "role": "word",
+                    "from": "en el orden del día"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The first item on the agenda.",
+              "translation": "El primer punto del orden del día."
+            }
+          ],
+          "notes": "Falso amigo: la agenda donde apuntas es a diary o a planner."
+        },
+        {
+          "key": "by-then",
+          "type": "term",
+          "text": "by then",
+          "meaning": "para entonces",
+          "pronunciation": "bai ZEN",
+          "examples": [
+            {
+              "text": "I'll be finished by then.",
+              "translation": "Para entonces habré terminado.",
+              "mirror": {
+                "say": "Para entonces habré terminado",
+                "pieces": [
+                  {
+                    "es": "para entonces",
+                    "en": "by then",
+                    "role": "word",
+                    "from": "Para entonces"
+                  },
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper",
+                    "from": "habré"
+                  },
+                  {
+                    "es": "terminado",
+                    "en": "finished",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "By then it was too late.",
+              "translation": "Para entonces ya era tarde."
+            }
+          ]
+        },
+        {
+          "key": "in-advance",
+          "type": "term",
+          "text": "in advance",
+          "meaning": "con antelación",
+          "pronunciation": "in adVÁNS",
+          "examples": [
+            {
+              "text": "Book in advance.",
+              "translation": "Reserva con antelación.",
+              "mirror": {
+                "say": "Reserva con antelación",
+                "pieces": [
+                  {
+                    "es": "Reserva",
+                    "en": "Book",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con antelación",
+                    "en": "in advance",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Thanks in advance.",
+              "translation": "Gracias de antemano."
+            }
+          ]
+        },
+        {
+          "key": "on-time",
+          "type": "term",
+          "text": "on time",
+          "meaning": "puntual, a la hora",
+          "pronunciation": "on TÁIM",
+          "examples": [
+            {
+              "text": "The train was on time.",
+              "translation": "El tren llegó puntual.",
+              "mirror": {
+                "say": "El tren llegó puntual",
+                "pieces": [
+                  {
+                    "es": "El tren",
+                    "en": "The train",
+                    "role": "who"
+                  },
+                  {
+                    "es": "estuvo",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "llegó"
+                  },
+                  {
+                    "es": "a la hora",
+                    "en": "on time",
+                    "role": "word",
+                    "from": "puntual"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Please be on time.",
+              "translation": "Por favor, sé puntual."
+            }
+          ],
+          "notes": "On time es a la hora exacta; in time, con tiempo."
+        },
+        {
+          "key": "in-time",
+          "type": "term",
+          "text": "in time",
+          "meaning": "a tiempo",
+          "pronunciation": "in TÁIM",
+          "examples": [
+            {
+              "text": "We arrived just in time.",
+              "translation": "Llegamos justo a tiempo.",
+              "mirror": {
+                "say": "Llegamos justo a tiempo",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegamos",
+                    "en": "arrived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "justo",
+                    "en": "just",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a tiempo",
+                    "en": "in time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "In time for dinner.",
+              "translation": "A tiempo para la cena."
+            }
+          ]
+        },
+        {
+          "key": "cancel",
+          "type": "term",
+          "text": "cancel",
+          "meaning": "cancelar",
+          "pronunciation": "KÁNsel",
+          "examples": [
+            {
+              "text": "The flight was cancelled.",
+              "translation": "Cancelaron el vuelo.",
+              "mirror": {
+                "say": "Cancelaron el vuelo",
+                "pieces": [
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "Cancelaron",
+                    "why": "«Cancelaron el vuelo» es pasiva: the flight was cancelled."
+                  },
+                  {
+                    "es": "cancelado",
+                    "en": "cancelled",
+                    "role": "verb",
+                    "from": "Cancelaron"
+                  },
+                  {
+                    "es": "El vuelo",
+                    "en": "The flight",
+                    "role": "who",
+                    "from": "el vuelo"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Cancel my order.",
+              "translation": "Cancela mi pedido."
+            }
+          ]
+        },
+        {
+          "key": "upcoming",
+          "type": "term",
+          "text": "upcoming",
+          "meaning": "próximo, que viene",
+          "pronunciation": "ÁPkaming",
+          "examples": [
+            {
+              "text": "Upcoming events.",
+              "translation": "Próximos eventos.",
+              "mirror": {
+                "say": "Próximos eventos",
+                "pieces": [
+                  {
+                    "es": "Próximos",
+                    "en": "Upcoming",
+                    "role": "word"
+                  },
+                  {
+                    "es": "eventos",
+                    "en": "events",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The upcoming exam.",
+              "translation": "El examen que viene."
+            }
+          ]
+        },
+        {
+          "key": "flexible",
+          "type": "term",
+          "text": "flexible",
+          "meaning": "flexible",
+          "pronunciation": "FLÉKsibol",
+          "examples": [
+            {
+              "text": "My hours are flexible.",
+              "translation": "Tengo horario flexible.",
+              "mirror": {
+                "say": "Tengo horario flexible",
+                "pieces": [
+                  {
+                    "es": "MIS horas",
+                    "en": "My hours",
+                    "role": "who",
+                    "from": "Tengo horario"
+                  },
+                  {
+                    "es": "SON",
+                    "en": "are",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "flexibles",
+                    "en": "flexible",
+                    "role": "word",
+                    "from": "flexible"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Be flexible.",
+              "translation": "Sé flexible."
+            }
+          ]
+        },
+        {
+          "key": "diary",
+          "type": "term",
+          "text": "diary",
+          "meaning": "agenda (libreta); diario",
+          "pronunciation": "DÁIari",
+          "examples": [
+            {
+              "text": "I'll write it in my diary.",
+              "translation": "Lo apunto en la agenda.",
+              "mirror": {
+                "say": "Lo apunto en la agenda",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "apunto"
+                  },
+                  {
+                    "es": "escribir",
+                    "en": "write",
+                    "role": "verb",
+                    "from": "apunto"
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word",
+                    "from": "Lo"
+                  },
+                  {
+                    "es": "en MI agenda",
+                    "en": "in my diary",
+                    "role": "word",
+                    "from": "en la agenda"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She keeps a diary.",
+              "translation": "Escribe un diario."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

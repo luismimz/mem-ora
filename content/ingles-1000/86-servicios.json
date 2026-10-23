@@ -1,0 +1,764 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "86-servicios",
+      "title": "Misión 86 · Que te lo hagan (B1)",
+      "units": [
+        {
+          "key": "g-have-done",
+          "type": "pattern",
+          "goal": "Me corté el pelo (me lo cortaron) = I HAD my hair CUT",
+          "rule": "Cuando otro lo hace por ti: have + cosa + participio. I had my hair cut. I'm having my car repaired. (I cut my hair: me lo corté yo.)",
+          "pieces": [
+            {
+              "text": "I had",
+              "role": "fixed",
+              "hint": "me hice"
+            },
+            {
+              "text": "my hair",
+              "role": "slot",
+              "hint": "el pelo"
+            },
+            {
+              "text": "cut",
+              "role": "fixed",
+              "hint": "cortar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I had my hair cut yesterday.",
+              "translation": "Ayer me corté el pelo.",
+              "mirror": {
+                "say": "Ayer me corté el pelo",
+                "pieces": [
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) tuve",
+                    "en": "I had",
+                    "role": "helper",
+                    "from": "me",
+                    "why": "En la peluquería te lo hace otro: have + cosa + participio."
+                  },
+                  {
+                    "es": "cortado",
+                    "en": "cut",
+                    "role": "verb",
+                    "from": "corté"
+                  },
+                  {
+                    "es": "MI pelo",
+                    "en": "my hair",
+                    "role": "word",
+                    "from": "el pelo"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "We're having the kitchen painted.",
+              "translation": "Nos están pintando la cocina.",
+              "mirror": {
+                "say": "Nos están pintando la cocina",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper",
+                    "from": "Nos están"
+                  },
+                  {
+                    "es": "teniendo",
+                    "en": "having",
+                    "role": "verb",
+                    "from": "pintando"
+                  },
+                  {
+                    "es": "la cocina",
+                    "en": "the kitchen",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pintada",
+                    "en": "painted",
+                    "role": "verb",
+                    "from": "pintando",
+                    "why": "Si te lo hace otro: have + cosa + participio."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where do you get your car repaired?",
+              "translation": "¿Dónde te arreglan el coche?"
+            },
+            {
+              "text": "I need to have my eyes tested.",
+              "translation": "Tengo que revisarme la vista."
+            }
+          ],
+          "pitfalls": [
+            "«I cut my hair» es que te lo cortaste tú mismo.",
+            "El orden es have + cosa + participio (no have + participio + cosa)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Tú en el SOFÁ; OTRO lo hace: HAVE IT DONE.",
+            "emoji": "🛋️"
+          }
+        },
+        {
+          "key": "hairdresser",
+          "type": "term",
+          "text": "hairdresser",
+          "meaning": "peluquero, peluquería",
+          "pronunciation": "JÉRdreser",
+          "examples": [
+            {
+              "text": "I'm going to the hairdresser's.",
+              "translation": "Voy a la peluquería.",
+              "mirror": {
+                "say": "Voy a la peluquería",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy yendo",
+                    "en": "I'm going",
+                    "role": "helper",
+                    "from": "Voy"
+                  },
+                  {
+                    "es": "a la del peluquero",
+                    "en": "to the hairdresser's",
+                    "role": "word",
+                    "from": "a la peluquería",
+                    "why": "La peluquería es «la del peluquero»: the hairdresser's."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My hairdresser is great.",
+              "translation": "Mi peluquera es genial."
+            }
+          ]
+        },
+        {
+          "key": "barber",
+          "type": "term",
+          "text": "barber",
+          "meaning": "barbero",
+          "pronunciation": "BÁRber",
+          "examples": [
+            {
+              "text": "He goes to the barber every month.",
+              "translation": "Va al barbero cada mes.",
+              "mirror": {
+                "say": "Va al barbero cada mes",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "va",
+                    "en": "goes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al barbero",
+                    "en": "to the barber",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada mes",
+                    "en": "every month",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A barber's shop.",
+              "translation": "Una barbería."
+            }
+          ]
+        },
+        {
+          "key": "haircut",
+          "type": "term",
+          "text": "haircut",
+          "meaning": "corte de pelo",
+          "pronunciation": "JÉRkat",
+          "examples": [
+            {
+              "text": "Nice haircut!",
+              "translation": "¡Qué buen corte de pelo!",
+              "mirror": {
+                "say": "¡Qué buen corte de pelo!",
+                "pieces": [
+                  {
+                    "es": "Buen",
+                    "en": "Nice",
+                    "role": "word",
+                    "from": "Qué buen"
+                  },
+                  {
+                    "es": "corte de pelo",
+                    "en": "haircut",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need a haircut.",
+              "translation": "Necesito cortarme el pelo."
+            }
+          ]
+        },
+        {
+          "key": "repair",
+          "type": "term",
+          "text": "repair",
+          "meaning": "reparar; reparación",
+          "pronunciation": "riPÉR",
+          "examples": [
+            {
+              "text": "I had my phone repaired.",
+              "translation": "Me arreglaron el móvil.",
+              "mirror": {
+                "say": "Me arreglaron el móvil",
+                "pieces": [
+                  {
+                    "es": "(YO) tuve",
+                    "en": "I had",
+                    "role": "helper",
+                    "from": "Me",
+                    "why": "Si te lo hace otro: have + cosa + participio."
+                  },
+                  {
+                    "es": "reparado",
+                    "en": "repaired",
+                    "role": "verb",
+                    "from": "arreglaron"
+                  },
+                  {
+                    "es": "MI móvil",
+                    "en": "my phone",
+                    "role": "word",
+                    "from": "el móvil"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Closed for repairs.",
+              "translation": "Cerrado por reformas."
+            }
+          ]
+        },
+        {
+          "key": "plumber",
+          "type": "term",
+          "text": "plumber",
+          "meaning": "fontanero",
+          "pronunciation": "PLÁmer",
+          "examples": [
+            {
+              "text": "Call a plumber!",
+              "translation": "¡Llama a un fontanero!",
+              "mirror": {
+                "say": "¡Llama a un fontanero!",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un fontanero",
+                    "en": "a plumber",
+                    "role": "word",
+                    "from": "a un fontanero",
+                    "why": "Llamar A alguien, sin «a»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The plumber fixed the leak.",
+              "translation": "El fontanero arregló la fuga."
+            }
+          ],
+          "notes": "La b no suena: PLÁmer."
+        },
+        {
+          "key": "electrician",
+          "type": "term",
+          "text": "electrician",
+          "meaning": "electricista",
+          "pronunciation": "elekTRÍshan",
+          "examples": [
+            {
+              "text": "We need an electrician.",
+              "translation": "Necesitamos un electricista.",
+              "mirror": {
+                "say": "Necesitamos un electricista",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un electricista",
+                    "en": "an electrician",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A qualified electrician.",
+              "translation": "Un electricista titulado."
+            }
+          ]
+        },
+        {
+          "key": "tailor",
+          "type": "term",
+          "text": "tailor",
+          "meaning": "sastre",
+          "pronunciation": "TÉIlor",
+          "examples": [
+            {
+              "text": "The tailor made my suit.",
+              "translation": "El sastre me hizo el traje.",
+              "mirror": {
+                "say": "El sastre me hizo el traje",
+                "pieces": [
+                  {
+                    "es": "El sastre",
+                    "en": "The tailor",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hizo",
+                    "en": "made",
+                    "role": "verb",
+                    "from": "me hizo"
+                  },
+                  {
+                    "es": "MI traje",
+                    "en": "my suit",
+                    "role": "word",
+                    "from": "el traje"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Tailor-made.",
+              "translation": "Hecho a medida."
+            }
+          ]
+        },
+        {
+          "key": "cleaner",
+          "type": "term",
+          "text": "cleaner",
+          "meaning": "limpiador; producto de limpieza",
+          "pronunciation": "KLÍIner",
+          "examples": [
+            {
+              "text": "The cleaner comes on Fridays.",
+              "translation": "La señora de la limpieza viene los viernes.",
+              "mirror": {
+                "say": "La señora de la limpieza viene los viernes",
+                "pieces": [
+                  {
+                    "es": "La limpiadora",
+                    "en": "The cleaner",
+                    "role": "who",
+                    "from": "La señora de la limpieza"
+                  },
+                  {
+                    "es": "viene",
+                    "en": "comes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "EN viernes",
+                    "en": "on Fridays",
+                    "role": "word",
+                    "from": "los viernes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Glass cleaner.",
+              "translation": "Limpiacristales."
+            }
+          ]
+        },
+        {
+          "key": "install",
+          "type": "term",
+          "text": "install",
+          "meaning": "instalar",
+          "pronunciation": "inSTÓL",
+          "examples": [
+            {
+              "text": "They installed the internet yesterday.",
+              "translation": "Ayer nos instalaron internet.",
+              "mirror": {
+                "say": "Ayer nos instalaron internet",
+                "pieces": [
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "instalaron",
+                    "en": "installed",
+                    "role": "verb",
+                    "from": "nos instalaron"
+                  },
+                  {
+                    "es": "el internet",
+                    "en": "the internet",
+                    "role": "word",
+                    "from": "internet"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Install the app.",
+              "translation": "Instala la app."
+            }
+          ]
+        },
+        {
+          "key": "service",
+          "type": "term",
+          "text": "service",
+          "meaning": "servicio; revisión",
+          "pronunciation": "SÉRvis",
+          "examples": [
+            {
+              "text": "I had my car serviced.",
+              "translation": "Le hice la revisión al coche.",
+              "mirror": {
+                "say": "Le hice la revisión al coche",
+                "pieces": [
+                  {
+                    "es": "(YO) tuve",
+                    "en": "I had",
+                    "role": "helper",
+                    "from": "Le hice",
+                    "why": "Si te lo hace otro: have + cosa + participio."
+                  },
+                  {
+                    "es": "revisado",
+                    "en": "serviced",
+                    "role": "verb",
+                    "from": "la revisión"
+                  },
+                  {
+                    "es": "MI coche",
+                    "en": "my car",
+                    "role": "word",
+                    "from": "al coche"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "The service was excellent.",
+              "translation": "El servicio fue excelente."
+            }
+          ]
+        },
+        {
+          "key": "painter",
+          "type": "term",
+          "text": "painter",
+          "meaning": "pintor",
+          "pronunciation": "PÉINter",
+          "examples": [
+            {
+              "text": "The painters are coming tomorrow.",
+              "translation": "Mañana vienen los pintores.",
+              "mirror": {
+                "say": "Mañana vienen los pintores",
+                "pieces": [
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  },
+                  {
+                    "es": "están viniendo",
+                    "en": "are coming",
+                    "role": "verb",
+                    "from": "vienen"
+                  },
+                  {
+                    "es": "Los pintores",
+                    "en": "The painters",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A famous painter.",
+              "translation": "Un pintor famoso."
+            }
+          ]
+        },
+        {
+          "key": "decorate",
+          "type": "term",
+          "text": "decorate",
+          "meaning": "decorar; pintar (una casa)",
+          "pronunciation": "DÉkoreit",
+          "examples": [
+            {
+              "text": "We're decorating the living room.",
+              "translation": "Estamos pintando el salón.",
+              "mirror": {
+                "say": "Estamos pintando el salón",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper",
+                    "from": "Estamos"
+                  },
+                  {
+                    "es": "decorando",
+                    "en": "decorating",
+                    "role": "verb",
+                    "from": "pintando"
+                  },
+                  {
+                    "es": "el salón",
+                    "en": "the living room",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Decorate the tree.",
+              "translation": "Decora el árbol."
+            }
+          ]
+        },
+        {
+          "key": "check-up",
+          "type": "term",
+          "text": "check up",
+          "meaning": "revisión (médica)",
+          "pronunciation": "CHÉK ap",
+          "examples": [
+            {
+              "text": "I have a check-up next week.",
+              "translation": "Tengo revisión la semana que viene.",
+              "mirror": {
+                "say": "Tengo revisión la semana que viene",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una revisión",
+                    "en": "a check-up",
+                    "role": "word",
+                    "from": "revisión"
+                  },
+                  {
+                    "es": "semana que viene",
+                    "en": "next week",
+                    "role": "word",
+                    "from": "la semana que viene",
+                    "why": "Next week va sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A dental check-up.",
+              "translation": "Una revisión del dentista."
+            }
+          ]
+        },
+        {
+          "key": "quote",
+          "type": "term",
+          "text": "quote",
+          "meaning": "presupuesto; cita (frase)",
+          "pronunciation": "KUÓUT",
+          "examples": [
+            {
+              "text": "Can you give me a quote?",
+              "translation": "¿Me hace un presupuesto?",
+              "mirror": {
+                "say": "¿Me hace un presupuesto?",
+                "pieces": [
+                  {
+                    "es": "USTED puede",
+                    "en": "Can you",
+                    "role": "helper",
+                    "from": "Me hace"
+                  },
+                  {
+                    "es": "dar",
+                    "en": "give",
+                    "role": "verb",
+                    "from": "hace"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un presupuesto",
+                    "en": "a quote",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A famous quote.",
+              "translation": "Una cita famosa."
+            }
+          ]
+        },
+        {
+          "key": "optician",
+          "type": "term",
+          "text": "optician",
+          "meaning": "óptico, óptica",
+          "pronunciation": "opTÍshan",
+          "examples": [
+            {
+              "text": "I'm going to the optician's.",
+              "translation": "Voy a la óptica.",
+              "mirror": {
+                "say": "Voy a la óptica",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy yendo",
+                    "en": "I'm going",
+                    "role": "helper",
+                    "from": "Voy"
+                  },
+                  {
+                    "es": "a la del óptico",
+                    "en": "to the optician's",
+                    "role": "word",
+                    "from": "a la óptica",
+                    "why": "La tienda es «la del óptico»: the optician's."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The optician tested my eyes.",
+              "translation": "El óptico me revisó la vista."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

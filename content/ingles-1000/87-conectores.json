@@ -1,0 +1,890 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "87-conectores",
+      "title": "Misión 87 · Escribir mejor (B1)",
+      "units": [
+        {
+          "key": "g-connectors",
+          "type": "pattern",
+          "goal": "Aunque / A pesar de: ALTHOUGH, DESPITE, HOWEVER",
+          "rule": "ALTHOUGH + frase (although it rained). DESPITE + nombre o -ING (despite the rain). HOWEVER abre una frase nueva: However, we went.",
+          "pieces": [
+            {
+              "text": "Although",
+              "role": "fixed",
+              "hint": "aunque"
+            },
+            {
+              "text": "it was raining",
+              "role": "slot",
+              "hint": "llovía"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Although it was raining, we went out.",
+              "translation": "Aunque llovía, salimos.",
+              "mirror": {
+                "say": "Aunque llovía, salimos",
+                "pieces": [
+                  {
+                    "es": "Aunque",
+                    "en": "Although",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO estaba lloviendo",
+                    "en": "it was raining",
+                    "role": "verb",
+                    "from": "llovía"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "salimos",
+                    "en": "went out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Despite the rain, we went out.",
+              "translation": "A pesar de la lluvia, salimos.",
+              "mirror": {
+                "say": "A pesar de la lluvia, salimos",
+                "pieces": [
+                  {
+                    "es": "A pesar de",
+                    "en": "Despite",
+                    "role": "word",
+                    "from": "A pesar de",
+                    "why": "DESPITE va sin «of»: despite the rain."
+                  },
+                  {
+                    "es": "la lluvia",
+                    "en": "the rain",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "salimos",
+                    "en": "went out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was expensive. However, it was worth it.",
+              "translation": "Era caro. Sin embargo, mereció la pena."
+            },
+            {
+              "text": "Even though I was tired, I finished.",
+              "translation": "Aunque estaba cansado, terminé."
+            }
+          ],
+          "pitfalls": [
+            "«Despite of» está mal: despite (o in spite of).",
+            "«Despite it was raining» está mal: con frase, although."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "ALTHOUGH lleva FRASE; DESPITE, solo una COSA.",
+            "emoji": "🧩"
+          }
+        },
+        {
+          "key": "despite",
+          "type": "term",
+          "text": "despite",
+          "meaning": "a pesar de",
+          "pronunciation": "disPÁIT",
+          "examples": [
+            {
+              "text": "Despite the traffic, we arrived on time.",
+              "translation": "A pesar del tráfico, llegamos a la hora.",
+              "mirror": {
+                "say": "A pesar del tráfico, llegamos a la hora",
+                "pieces": [
+                  {
+                    "es": "A pesar de",
+                    "en": "Despite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el tráfico",
+                    "en": "the traffic",
+                    "role": "word",
+                    "from": "del tráfico"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegamos",
+                    "en": "arrived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la hora",
+                    "en": "on time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Despite everything.",
+              "translation": "A pesar de todo."
+            }
+          ]
+        },
+        {
+          "key": "whereas",
+          "type": "term",
+          "text": "whereas",
+          "meaning": "mientras que",
+          "pronunciation": "uerÁS",
+          "examples": [
+            {
+              "text": "I love coffee, whereas my wife prefers tea.",
+              "translation": "A mí me encanta el café, mientras que mi mujer prefiere té.",
+              "mirror": {
+                "say": "A mí me encanta el café, mientras que mi mujer prefiere té",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "me encanta",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word",
+                    "from": "el café",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "mientras que",
+                    "en": "whereas",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mi mujer",
+                    "en": "my wife",
+                    "role": "who"
+                  },
+                  {
+                    "es": "prefiere",
+                    "en": "prefers",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Some agree, whereas others don't.",
+              "translation": "Unos están de acuerdo, mientras que otros no."
+            }
+          ]
+        },
+        {
+          "key": "therefore",
+          "type": "term",
+          "text": "therefore",
+          "meaning": "por lo tanto",
+          "pronunciation": "ZÉRfor",
+          "examples": [
+            {
+              "text": "I think, therefore I am.",
+              "translation": "Pienso, luego existo.",
+              "mirror": {
+                "say": "Pienso, luego existo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pienso",
+                    "en": "think",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por lo tanto",
+                    "en": "therefore",
+                    "role": "word",
+                    "from": "luego"
+                  },
+                  {
+                    "es": "(YO) soy",
+                    "en": "I am",
+                    "role": "helper",
+                    "from": "existo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's late; therefore, we should go.",
+              "translation": "Es tarde; por lo tanto, deberíamos irnos."
+            }
+          ]
+        },
+        {
+          "key": "moreover",
+          "type": "term",
+          "text": "moreover",
+          "meaning": "además (formal)",
+          "pronunciation": "morÓUver",
+          "examples": [
+            {
+              "text": "Moreover, it is cheaper.",
+              "translation": "Además, es más barato.",
+              "mirror": {
+                "say": "Además, es más barato",
+                "pieces": [
+                  {
+                    "es": "Además",
+                    "en": "Moreover",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO es",
+                    "en": "it is",
+                    "role": "helper",
+                    "from": "es"
+                  },
+                  {
+                    "es": "más barato",
+                    "en": "cheaper",
+                    "role": "word",
+                    "from": "más barato",
+                    "why": "Corto: -ER, sin more: cheaper."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Moreover, the report says…",
+              "translation": "Además, el informe dice…"
+            }
+          ],
+          "notes": "Muy formal; al hablar se usa also o besides."
+        },
+        {
+          "key": "furthermore",
+          "type": "term",
+          "text": "furthermore",
+          "meaning": "además (formal)",
+          "pronunciation": "ferzerMÓR",
+          "examples": [
+            {
+              "text": "Furthermore, the price includes breakfast.",
+              "translation": "Además, el precio incluye el desayuno.",
+              "mirror": {
+                "say": "Además, el precio incluye el desayuno",
+                "pieces": [
+                  {
+                    "es": "Además",
+                    "en": "Furthermore",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el precio",
+                    "en": "the price",
+                    "role": "who"
+                  },
+                  {
+                    "es": "incluye",
+                    "en": "includes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "desayuno",
+                    "en": "breakfast",
+                    "role": "word",
+                    "from": "el desayuno",
+                    "why": "Las comidas van sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Furthermore, it is free.",
+              "translation": "Además, es gratis."
+            }
+          ]
+        },
+        {
+          "key": "otherwise",
+          "type": "term",
+          "text": "otherwise",
+          "meaning": "si no, de lo contrario",
+          "pronunciation": "ÁDeruais",
+          "examples": [
+            {
+              "text": "Hurry, otherwise we will be late.",
+              "translation": "Date prisa, que si no llegamos tarde.",
+              "mirror": {
+                "say": "Date prisa, que si no llegamos tarde",
+                "pieces": [
+                  {
+                    "es": "Date prisa",
+                    "en": "Hurry",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "de lo contrario",
+                    "en": "otherwise",
+                    "role": "word",
+                    "from": "que si no"
+                  },
+                  {
+                    "es": "NOSOTROS -REMOS",
+                    "en": "we will",
+                    "role": "helper",
+                    "from": "llegamos"
+                  },
+                  {
+                    "es": "estar",
+                    "en": "be",
+                    "role": "verb",
+                    "from": "llegamos"
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Otherwise, everything is fine.",
+              "translation": "Por lo demás, todo bien."
+            }
+          ]
+        },
+        {
+          "key": "nevertheless",
+          "type": "term",
+          "text": "nevertheless",
+          "meaning": "no obstante, aun así",
+          "pronunciation": "neverZeLÉS",
+          "examples": [
+            {
+              "text": "It was hard. Nevertheless, we did it.",
+              "translation": "Fue duro. No obstante, lo conseguimos.",
+              "mirror": {
+                "say": "Fue duro. No obstante, lo conseguimos",
+                "pieces": [
+                  {
+                    "es": "(ESO) fue",
+                    "en": "It was",
+                    "role": "helper",
+                    "from": "Fue"
+                  },
+                  {
+                    "es": "duro",
+                    "en": "hard",
+                    "role": "word"
+                  },
+                  {
+                    "es": "No obstante",
+                    "en": "Nevertheless",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "lo hicimos",
+                    "en": "did it",
+                    "role": "verb",
+                    "from": "lo conseguimos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Nevertheless, thank you.",
+              "translation": "Aun así, gracias."
+            }
+          ]
+        },
+        {
+          "key": "as-a-result",
+          "type": "term",
+          "text": "as a result",
+          "meaning": "como resultado",
+          "pronunciation": "as a riSÁLT",
+          "examples": [
+            {
+              "text": "It rained a lot. As a result, the river flooded.",
+              "translation": "Llovió mucho. Como resultado, el río se desbordó.",
+              "mirror": {
+                "say": "Llovió mucho. Como resultado, el río se desbordó",
+                "pieces": [
+                  {
+                    "es": "ESO llovió",
+                    "en": "It rained",
+                    "role": "verb",
+                    "from": "Llovió"
+                  },
+                  {
+                    "es": "mucho",
+                    "en": "a lot",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Como resultado",
+                    "en": "As a result",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el río",
+                    "en": "the river",
+                    "role": "who"
+                  },
+                  {
+                    "es": "se desbordó",
+                    "en": "flooded",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "As a result of the strike…",
+              "translation": "Como consecuencia de la huelga…"
+            }
+          ]
+        },
+        {
+          "key": "in-addition",
+          "type": "term",
+          "text": "in addition",
+          "meaning": "además",
+          "pronunciation": "in aDÍshon",
+          "examples": [
+            {
+              "text": "In addition, you get a free gift.",
+              "translation": "Además, te llevas un regalo.",
+              "mirror": {
+                "say": "Además, te llevas un regalo",
+                "pieces": [
+                  {
+                    "es": "Además",
+                    "en": "In addition",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "consigues",
+                    "en": "get",
+                    "role": "verb",
+                    "from": "te llevas"
+                  },
+                  {
+                    "es": "un regalo gratis",
+                    "en": "a free gift",
+                    "role": "word",
+                    "from": "un regalo"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "In addition to English, I speak French.",
+              "translation": "Además de inglés, hablo francés."
+            }
+          ]
+        },
+        {
+          "key": "so-that",
+          "type": "term",
+          "text": "so that",
+          "meaning": "para que",
+          "pronunciation": "SOU zat",
+          "examples": [
+            {
+              "text": "Speak slowly so that everyone understands.",
+              "translation": "Habla despacio para que todos lo entiendan.",
+              "mirror": {
+                "say": "Habla despacio para que todos lo entiendan",
+                "pieces": [
+                  {
+                    "es": "Habla",
+                    "en": "Speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "despacio",
+                    "en": "slowly",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para que",
+                    "en": "so that",
+                    "role": "word"
+                  },
+                  {
+                    "es": "todos",
+                    "en": "everyone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "entiende",
+                    "en": "understands",
+                    "role": "verb",
+                    "from": "lo entiendan",
+                    "why": "Everyone va en singular: everyone understandS."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Save money so that you can travel.",
+              "translation": "Ahorra para poder viajar."
+            }
+          ]
+        },
+        {
+          "key": "in-order-to",
+          "type": "term",
+          "text": "in order to",
+          "meaning": "para (+ verbo)",
+          "pronunciation": "in ÓRder tu",
+          "examples": [
+            {
+              "text": "I study in order to get a better job.",
+              "translation": "Estudio para conseguir un trabajo mejor.",
+              "mirror": {
+                "say": "Estudio para conseguir un trabajo mejor",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estudio",
+                    "en": "study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para",
+                    "en": "in order to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "conseguir",
+                    "en": "get",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "job",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mejor",
+                    "en": "better",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  6,
+                  5
+                ]
+              }
+            },
+            {
+              "text": "In order to win, you must train.",
+              "translation": "Para ganar, tienes que entrenar."
+            }
+          ]
+        },
+        {
+          "key": "due-to",
+          "type": "term",
+          "text": "due to",
+          "meaning": "debido a",
+          "pronunciation": "DIÚ tu",
+          "examples": [
+            {
+              "text": "The flight was delayed due to fog.",
+              "translation": "El vuelo se retrasó debido a la niebla.",
+              "mirror": {
+                "say": "El vuelo se retrasó debido a la niebla",
+                "pieces": [
+                  {
+                    "es": "El vuelo",
+                    "en": "The flight",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue retrasado",
+                    "en": "was delayed",
+                    "role": "verb",
+                    "from": "se retrasó",
+                    "why": "«Se retrasó» es pasiva: was delayed."
+                  },
+                  {
+                    "es": "debido a",
+                    "en": "due to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "niebla",
+                    "en": "fog",
+                    "role": "word",
+                    "from": "la niebla",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Due to the rain…",
+              "translation": "Debido a la lluvia…"
+            }
+          ]
+        },
+        {
+          "key": "even-though",
+          "type": "term",
+          "text": "even though",
+          "meaning": "aunque (aun siendo así)",
+          "pronunciation": "ÍIven zou",
+          "examples": [
+            {
+              "text": "Even though it was late, she called me.",
+              "translation": "Aunque era tarde, me llamó.",
+              "mirror": {
+                "say": "Aunque era tarde, me llamó",
+                "pieces": [
+                  {
+                    "es": "Aunque",
+                    "en": "Even though",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO era",
+                    "en": "it was",
+                    "role": "helper",
+                    "from": "era"
+                  },
+                  {
+                    "es": "tarde",
+                    "en": "late",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "llamó",
+                    "en": "called",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Even though I tried, I failed.",
+              "translation": "Aunque lo intenté, fallé."
+            }
+          ],
+          "notes": "Más fuerte que although."
+        },
+        {
+          "key": "in-spite-of",
+          "type": "term",
+          "text": "in spite of",
+          "meaning": "a pesar de",
+          "pronunciation": "in SPÁIT of",
+          "examples": [
+            {
+              "text": "In spite of the cold, we swam.",
+              "translation": "A pesar del frío, nos bañamos.",
+              "mirror": {
+                "say": "A pesar del frío, nos bañamos",
+                "pieces": [
+                  {
+                    "es": "A pesar de",
+                    "en": "In spite of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el frío",
+                    "en": "the cold",
+                    "role": "word",
+                    "from": "del frío"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nadamos",
+                    "en": "swam",
+                    "role": "verb",
+                    "from": "nos bañamos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "In spite of everything.",
+              "translation": "A pesar de todo."
+            }
+          ]
+        },
+        {
+          "key": "on-the-contrary",
+          "type": "term",
+          "text": "on the contrary",
+          "meaning": "al contrario",
+          "pronunciation": "on de KÓNtrari",
+          "examples": [
+            {
+              "text": "It isn't boring. On the contrary, it's great.",
+              "translation": "No es aburrido. Al contrario, es genial.",
+              "mirror": {
+                "say": "No es aburrido. Al contrario, es genial",
+                "pieces": [
+                  {
+                    "es": "(ESO) no es",
+                    "en": "It isn't",
+                    "role": "helper",
+                    "from": "No es"
+                  },
+                  {
+                    "es": "aburrido",
+                    "en": "boring",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Al contrario",
+                    "en": "On the contrary",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper",
+                    "from": "es"
+                  },
+                  {
+                    "es": "genial",
+                    "en": "great",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Quite the contrary.",
+              "translation": "Todo lo contrario."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
