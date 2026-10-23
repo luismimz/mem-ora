@@ -97,9 +97,29 @@ try {
   // ── Inglés (D-079): escuchar, construir la frase y truco de gramática, con el planificador real ──
   const en = await context.newPage();
   await en.addInitScript(() => {
+    // Voz simulada con duración realista: la del dispositivo tarda ~45 ms por letra en decir la frase (avisa al
+    // terminar con onend) y los audios de Kokoro, 200 ms (avisan con «ended»). Así se comprueba que no se corta.
     window.__spoken = [];
-    Object.defineProperty(window, 'speechSynthesis', { value: { speaking: false, pending: false, paused: false, speak(u) { window.__spoken.push(u.text); }, cancel() {}, resume() {}, getVoices() { return []; } } });
+    window.__played = [];
+    window.__speechLog = [];
+    Object.defineProperty(window, 'speechSynthesis', { value: { speaking: false, pending: false, paused: false, speak(u) {
+      window.__spoken.push(u.text);
+      const log = { text: u.text, start: performance.now(), end: null };
+      window.__speechLog.push(log);
+      setTimeout(() => { log.end = performance.now(); u.onend?.(); }, 300 + u.text.length * 45);
+    }, cancel() {}, resume() {}, getVoices() { return []; } } });
     window.SpeechSynthesisUtterance = function (t) { this.text = t; };
+    HTMLMediaElement.prototype.play = function () {
+      if (this.src.startsWith('data:')) return Promise.resolve();
+      window.__played.push(new URL(this.src).pathname);
+      setTimeout(() => this.dispatchEvent(new Event('ended')), 200);
+      return Promise.resolve();
+    };
+  });
+  // Índice de audios Kokoro de prueba: cada palabra suelta tiene su archivo; las frases no (van por la voz de reserva).
+  await en.route('**/audio/en/index.json', async (route) => {
+    const us = await en.evaluate(() => window.__units);
+    await route.fulfill({ json: Object.fromEntries(Object.values(us).filter((u) => u.type === 'term').map((u) => [u.payload.text, `${u.key}.mp3`])) });
   });
   const enErrors = [];
   en.on('pageerror', (e) => enErrors.push(String(e)));
@@ -116,14 +136,17 @@ try {
   const seen = new Set();
   const dragChecks = [];
   let builtOk = false;
+  const voiceWaits = [];
   for (let n = 0; n < 80; n++) {
     const tag = (await en.locator('.slide .tag').first().textContent().catch(() => '')) ?? '';
     if (process.env.E2E_DEBUG) console.log('  ·', n, tag);
     if (/RONDA/.test(tag)) { seen.add('hito'); break; }
     if (/ESCUCHA/.test(tag)) {
       seen.add('escucha');
-      const spoken = await en.evaluate(() => window.__spoken.at(-1));
-      const u = Object.values(units).find((x) => x.payload.text === spoken);
+      // La palabra suena con su audio Kokoro (no con la voz del dispositivo).
+      const played = await en.evaluate(() => window.__played.at(-1) ?? '');
+      const u = Object.values(units).find((x) => played === `/audio/en/${x.key}.mp3`);
+      if (u) seen.add('kokoro');
       await en.locator('.option', { hasText: new RegExp(`^${u.payload.meaning}$`) }).tap();
       await en.waitForTimeout(1400); continue;
     }
@@ -178,7 +201,18 @@ try {
       for (const w of words.slice(start)) { await en.locator('.build-bank .tile:not([disabled])', { hasText: new RegExp(`^${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`) }).first().tap(); await en.waitForTimeout(100); }
       await en.waitForTimeout(200);
       if (await en.locator('.slide.build.right').count()) builtOk = true;
-      await en.waitForTimeout(1600); continue;
+      // Al acertar suena la frase entera: la tarjeta no cambia hasta que la voz termina (antes se cortaba).
+      const sentence = u.payload.examples.find((e) => e.translation === es).text;
+      const timing = await en.evaluate(async (text) => {
+        const card0 = document.querySelector('.slide');
+        const t0 = performance.now();
+        while (document.querySelector('.slide') === card0 && performance.now() - t0 < 9000) await new Promise((r) => setTimeout(r, 30));
+        const log = window.__speechLog.filter((l) => l.text === text).at(-1);
+        return { changed: performance.now(), end: log?.end ?? null, dur: log && log.end ? log.end - log.start : 0 };
+      }, sentence);
+      voiceWaits.push(timing);
+      if (process.env.E2E_DEBUG) console.log('  voz', sentence, JSON.stringify(timing));
+      continue;
     }
     if (/🎮/.test(tag)) {
       // Ráfaga (D-081): con dos respuestas se desliza la tarjeta (← la primera, la segunda →); con tres, botones.
@@ -230,6 +264,10 @@ try {
   check(seen.has('escucha'), 'inglés: aparece «Escucha» y se responde tocando lo que se ha oído');
   check(seen.has('construye') && builtOk, 'inglés: «Construye la frase» se completa tocando las palabras en orden');
   check(seen.has('arrastre'), 'inglés: en «Construye la frase» se puede arrastrar con el dedo');
+  const longOnes = voiceWaits.filter((t) => t.dur > 1100);
+  check(voiceWaits.length > 0 && voiceWaits.every((t) => t.end !== null && t.changed >= t.end) && longOnes.length > 0,
+    `«Construye la frase»: la frase se oye entera antes de pasar de tarjeta (${voiceWaits.length} frases, ${longOnes.length} de más de 1,1 s)`);
+  check(seen.has('kokoro'), 'la palabra suena con su audio Kokoro pregenerado (y la frase sin audio, con la voz de reserva)');
   for (const [ok, text] of dragChecks) check(Boolean(ok), `arrastre tipo imán: ${text}`);
   check(seen.has('truco'), 'inglés: la gramática entra con su «Truco»');
   check(seen.has('espejo-solo'), 'Espejo en movimiento: se reproduce solo dentro del truco, sin toques, y acaba en la frase');

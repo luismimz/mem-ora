@@ -316,6 +316,8 @@ function Listen({ unit, pool, onResult }: { unit: SessionUnit; pool: SessionUnit
   );
 }
 
+const wait = (ms: number) => new Promise<void>((r) => { window.setTimeout(r, ms); });
+
 /** Orden estable que nunca deja la frase ya resuelta (si se puede). */
 function scramble(words: string[], seed: string): string[] {
   let h = 0;
@@ -343,8 +345,10 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
     const answer = chosen.map((i) => bank[i]!.w).join(' ');
     const ok = plain(answer) === plain(words.join(' '));
     setDone(ok);
-    if (ok && audioEnabled()) speak(ex.text, unit.language);
-    setTimeout(() => onResult(ok, Math.round(performance.now() - t0.current), `Es «${ex.text}» (${ex.translation}).`, help ? 2 : 1), ok ? 1100 : 1500);
+    // Se pasa a la siguiente cuando acaba la frase (las largas se cortaban) y nunca antes del tiempo para ver el acierto.
+    const ms = Math.round(performance.now() - t0.current);
+    const voice = ok && audioEnabled() ? speak(ex.text, unit.language) : Promise.resolve();
+    void Promise.all([voice, wait(ok ? 1100 : 1500)]).then(() => onResult(ok, ms, `Es «${ex.text}» (${ex.translation}).`, help ? 2 : 1));
   }, [chosen]); // eslint-disable-line react-hooks/exhaustive-deps
   const toggle = (i: number) => { if (done !== null) return; setChosen((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i])); };
 
