@@ -1,0 +1,800 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "74-medio-ambiente",
+      "title": "Misión 74 · El planeta (B1)",
+      "units": [
+        {
+          "key": "g-so-neither",
+          "type": "pattern",
+          "goal": "Yo también / Yo tampoco = SO DO I / NEITHER DO I",
+          "rule": "«Yo también»: SO + ayudante + I (so do I, so am I). «Yo tampoco»: NEITHER + ayudante + I (neither do I). El ayudante copia la frase.",
+          "pieces": [
+            {
+              "text": "So",
+              "role": "fixed",
+              "hint": "también"
+            },
+            {
+              "text": "do",
+              "role": "fixed",
+              "hint": "(ayudante)"
+            },
+            {
+              "text": "I",
+              "role": "slot",
+              "hint": "yo"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I love the sea. So do I.",
+              "translation": "Me encanta el mar. A mí también.",
+              "mirror": {
+                "say": "Me encanta el mar. A mí también",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "Me encanta",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "el mar",
+                    "en": "the sea",
+                    "role": "word"
+                  },
+                  {
+                    "es": "yo",
+                    "en": "I",
+                    "role": "who",
+                    "from": "A mí",
+                    "why": "«A mí también» es «también lo hago yo»: so do I."
+                  },
+                  {
+                    "es": "Así",
+                    "en": "So",
+                    "role": "word",
+                    "from": "también"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  5,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'm not tired. Neither am I.",
+              "translation": "No estoy cansado. Yo tampoco.",
+              "mirror": {
+                "say": "No estoy cansado. Yo tampoco",
+                "pieces": [
+                  {
+                    "es": "(YO) no estoy",
+                    "en": "I'm not",
+                    "role": "helper",
+                    "from": "No estoy"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  },
+                  {
+                    "es": "yo",
+                    "en": "I",
+                    "role": "who",
+                    "from": "Yo"
+                  },
+                  {
+                    "es": "Tampoco",
+                    "en": "Neither",
+                    "role": "word",
+                    "from": "tampoco",
+                    "why": "Tras NEITHER, el ayudante en positivo: neither AM I."
+                  },
+                  {
+                    "es": "",
+                    "en": "am",
+                    "role": "signal"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  4,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "She can swim. So can I.",
+              "translation": "Ella sabe nadar. Yo también."
+            },
+            {
+              "text": "I didn't go. Neither did I.",
+              "translation": "Yo no fui. Yo tampoco."
+            }
+          ],
+          "pitfalls": [
+            "«Me too» y «me neither» valen al hablar; so do I es lo correcto.",
+            "Tras NEITHER, el ayudante va en positivo: neither do I (no «neither don't I»)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un ESPEJO: SO y NEITHER copian el AYUDANTE.",
+            "emoji": "👯"
+          }
+        },
+        {
+          "key": "environment",
+          "type": "term",
+          "text": "environment",
+          "meaning": "medio ambiente; entorno",
+          "pronunciation": "enVÁIronment",
+          "examples": [
+            {
+              "text": "We must protect the environment.",
+              "translation": "Debemos proteger el medio ambiente.",
+              "mirror": {
+                "say": "Debemos proteger el medio ambiente",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "debemos",
+                    "en": "must",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "proteger",
+                    "en": "protect",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el medio ambiente",
+                    "en": "the environment",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A good work environment.",
+              "translation": "Un buen ambiente de trabajo."
+            }
+          ]
+        },
+        {
+          "key": "pollution",
+          "type": "term",
+          "text": "pollution",
+          "meaning": "contaminación",
+          "pronunciation": "poLÚshon",
+          "examples": [
+            {
+              "text": "Pollution is a big problem.",
+              "translation": "La contaminación es un gran problema.",
+              "mirror": {
+                "say": "La contaminación es un gran problema",
+                "pieces": [
+                  {
+                    "es": "contaminación",
+                    "en": "Pollution",
+                    "role": "who",
+                    "from": "La contaminación",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un gran problema",
+                    "en": "a big problem",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Air pollution.",
+              "translation": "Contaminación del aire."
+            }
+          ]
+        },
+        {
+          "key": "recycle",
+          "type": "term",
+          "text": "recycle",
+          "meaning": "reciclar",
+          "pronunciation": "riSÁIkol",
+          "examples": [
+            {
+              "text": "We recycle glass and paper.",
+              "translation": "Reciclamos vidrio y papel.",
+              "mirror": {
+                "say": "Reciclamos vidrio y papel",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "reciclamos",
+                    "en": "recycle",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "vidrio y papel",
+                    "en": "glass and paper",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The recycling bin.",
+              "translation": "El contenedor de reciclaje."
+            }
+          ]
+        },
+        {
+          "key": "climate",
+          "type": "term",
+          "text": "climate",
+          "meaning": "clima",
+          "pronunciation": "KLÁImit",
+          "examples": [
+            {
+              "text": "The climate is changing.",
+              "translation": "El clima está cambiando.",
+              "mirror": {
+                "say": "El clima está cambiando",
+                "pieces": [
+                  {
+                    "es": "El clima",
+                    "en": "The climate",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cambiando",
+                    "en": "changing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Climate change.",
+              "translation": "El cambio climático."
+            }
+          ],
+          "notes": "El tiempo de hoy es weather; el clima, climate."
+        },
+        {
+          "key": "plastic",
+          "type": "term",
+          "text": "plastic",
+          "meaning": "plástico",
+          "pronunciation": "PLÁStik",
+          "examples": [
+            {
+              "text": "Avoid plastic bags.",
+              "translation": "Evita las bolsas de plástico.",
+              "mirror": {
+                "say": "Evita las bolsas de plástico",
+                "pieces": [
+                  {
+                    "es": "Evita",
+                    "en": "Avoid",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bolsas",
+                    "en": "bags",
+                    "role": "word",
+                    "from": "las bolsas",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "de plástico",
+                    "en": "plastic",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "A plastic bottle.",
+              "translation": "Una botella de plástico."
+            }
+          ]
+        },
+        {
+          "key": "energy",
+          "type": "term",
+          "text": "energy",
+          "meaning": "energía",
+          "pronunciation": "ÉNeryi",
+          "examples": [
+            {
+              "text": "Save energy: turn off the lights.",
+              "translation": "Ahorra energía: apaga las luces.",
+              "mirror": {
+                "say": "Ahorra energía: apaga las luces",
+                "pieces": [
+                  {
+                    "es": "Ahorra",
+                    "en": "Save",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "energía",
+                    "en": "energy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "apaga",
+                    "en": "turn off",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "las luces",
+                    "en": "the lights",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've got no energy today.",
+              "translation": "Hoy no tengo energía."
+            }
+          ]
+        },
+        {
+          "key": "planet",
+          "type": "term",
+          "text": "planet",
+          "meaning": "planeta",
+          "pronunciation": "PLÁnet",
+          "examples": [
+            {
+              "text": "We only have one planet.",
+              "translation": "Solo tenemos un planeta.",
+              "mirror": {
+                "say": "Solo tenemos un planeta",
+                "pieces": [
+                  {
+                    "es": "solo",
+                    "en": "only",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un planeta",
+                    "en": "one planet",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Planet Earth.",
+              "translation": "El planeta Tierra."
+            }
+          ]
+        },
+        {
+          "key": "species",
+          "type": "term",
+          "text": "species",
+          "meaning": "especie",
+          "pronunciation": "SPÍIshiis",
+          "examples": [
+            {
+              "text": "Many species are in danger.",
+              "translation": "Muchas especies están en peligro.",
+              "mirror": {
+                "say": "Muchas especies están en peligro",
+                "pieces": [
+                  {
+                    "es": "Muchas especies",
+                    "en": "Many species",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en peligro",
+                    "en": "in danger",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A rare species.",
+              "translation": "Una especie rara."
+            }
+          ],
+          "notes": "Igual en singular y plural: one species, two species."
+        },
+        {
+          "key": "wildlife",
+          "type": "term",
+          "text": "wildlife",
+          "meaning": "fauna, animales salvajes",
+          "pronunciation": "UÁILDlaif",
+          "examples": [
+            {
+              "text": "The park is full of wildlife.",
+              "translation": "El parque está lleno de animales.",
+              "mirror": {
+                "say": "El parque está lleno de animales",
+                "pieces": [
+                  {
+                    "es": "El parque",
+                    "en": "The park",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lleno de",
+                    "en": "full of",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fauna",
+                    "en": "wildlife",
+                    "role": "word",
+                    "from": "animales"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Protect wildlife.",
+              "translation": "Protege la fauna."
+            }
+          ]
+        },
+        {
+          "key": "global-warming",
+          "type": "term",
+          "text": "global warming",
+          "meaning": "calentamiento global",
+          "pronunciation": "GLÓUbal UÓRming",
+          "examples": [
+            {
+              "text": "Global warming is real.",
+              "translation": "El calentamiento global es real.",
+              "mirror": {
+                "say": "El calentamiento global es real",
+                "pieces": [
+                  {
+                    "es": "calentamiento global",
+                    "en": "Global warming",
+                    "role": "who",
+                    "from": "El calentamiento global",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "real",
+                    "en": "real",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The effects of global warming.",
+              "translation": "Los efectos del calentamiento global."
+            }
+          ]
+        },
+        {
+          "key": "disaster",
+          "type": "term",
+          "text": "disaster",
+          "meaning": "desastre",
+          "pronunciation": "diSÁSter",
+          "examples": [
+            {
+              "text": "It was a natural disaster.",
+              "translation": "Fue una catástrofe natural.",
+              "mirror": {
+                "say": "Fue una catástrofe natural",
+                "pieces": [
+                  {
+                    "es": "(ESO) fue",
+                    "en": "It was",
+                    "role": "helper",
+                    "from": "Fue"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word",
+                    "from": "una"
+                  },
+                  {
+                    "es": "desastre",
+                    "en": "disaster",
+                    "role": "word",
+                    "from": "catástrofe"
+                  },
+                  {
+                    "es": "natural",
+                    "en": "natural",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "What a disaster!",
+              "translation": "¡Qué desastre!"
+            }
+          ]
+        },
+        {
+          "key": "flood",
+          "type": "term",
+          "text": "flood",
+          "meaning": "inundación; inundar",
+          "pronunciation": "FLAD",
+          "examples": [
+            {
+              "text": "The flood destroyed many houses.",
+              "translation": "La inundación destruyó muchas casas.",
+              "mirror": {
+                "say": "La inundación destruyó muchas casas",
+                "pieces": [
+                  {
+                    "es": "La inundación",
+                    "en": "The flood",
+                    "role": "who"
+                  },
+                  {
+                    "es": "destruyó",
+                    "en": "destroyed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "muchas casas",
+                    "en": "many houses",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The river flooded.",
+              "translation": "El río se desbordó."
+            }
+          ],
+          "notes": "Se dice FLAD, no FLUUD."
+        },
+        {
+          "key": "drought",
+          "type": "term",
+          "text": "drought",
+          "meaning": "sequía",
+          "pronunciation": "DRÁUT",
+          "examples": [
+            {
+              "text": "Spain has had a long drought.",
+              "translation": "España ha tenido una larga sequía.",
+              "mirror": {
+                "say": "España ha tenido una larga sequía",
+                "pieces": [
+                  {
+                    "es": "España",
+                    "en": "Spain",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ha",
+                    "en": "has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tenido",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una larga sequía",
+                    "en": "a long drought",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A severe drought.",
+              "translation": "Una sequía grave."
+            }
+          ],
+          "notes": "La ough suena AU: DRÁUT."
+        },
+        {
+          "key": "renewable",
+          "type": "term",
+          "text": "renewable",
+          "meaning": "renovable",
+          "pronunciation": "riNIÚabol",
+          "examples": [
+            {
+              "text": "Solar power is a renewable energy.",
+              "translation": "La energía solar es renovable.",
+              "mirror": {
+                "say": "La energía solar es renovable",
+                "pieces": [
+                  {
+                    "es": "energía solar",
+                    "en": "Solar power",
+                    "role": "who",
+                    "from": "La energía solar",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una energía renovable",
+                    "en": "a renewable energy",
+                    "role": "word",
+                    "from": "renovable"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Renewable sources.",
+              "translation": "Fuentes renovables."
+            }
+          ]
+        },
+        {
+          "key": "fuel",
+          "type": "term",
+          "text": "fuel",
+          "meaning": "combustible",
+          "pronunciation": "FIÚal",
+          "examples": [
+            {
+              "text": "The car is running out of fuel.",
+              "translation": "El coche se está quedando sin gasolina.",
+              "mirror": {
+                "say": "El coche se está quedando sin gasolina",
+                "pieces": [
+                  {
+                    "es": "El coche",
+                    "en": "The car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "se está quedando sin",
+                    "en": "is running out of",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "combustible",
+                    "en": "fuel",
+                    "role": "word",
+                    "from": "gasolina"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Fossil fuels.",
+              "translation": "Combustibles fósiles."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

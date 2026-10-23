@@ -1,0 +1,787 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "75-buscar-trabajo",
+      "title": "Misión 75 · Buscar trabajo (B1)",
+      "units": [
+        {
+          "key": "g-pp-continuous",
+          "type": "pattern",
+          "goal": "Llevo dos horas estudiando = I'VE BEEN studying",
+          "rule": "Para algo que empezó antes y sigue: have been + -ING + for/since. I've been studying for two hours. How long have you been waiting?",
+          "pieces": [
+            {
+              "text": "I've been",
+              "role": "fixed",
+              "hint": "llevo"
+            },
+            {
+              "text": "studying",
+              "role": "slot",
+              "hint": "estudiando"
+            },
+            {
+              "text": "for two hours",
+              "role": "fixed",
+              "hint": "dos horas"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I've been studying for two hours.",
+              "translation": "Llevo dos horas estudiando.",
+              "mirror": {
+                "say": "Llevo dos horas estudiando",
+                "pieces": [
+                  {
+                    "es": "(YO) he estado",
+                    "en": "I've been",
+                    "role": "helper",
+                    "from": "Llevo",
+                    "why": "«Llevo… -ando» es «he estado… -ing»: I've been studying."
+                  },
+                  {
+                    "es": "durante dos horas",
+                    "en": "for two hours",
+                    "role": "word",
+                    "from": "dos horas"
+                  },
+                  {
+                    "es": "estudiando",
+                    "en": "studying",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "How long have you been waiting?",
+              "translation": "¿Cuánto tiempo llevas esperando?",
+              "mirror": {
+                "say": "¿Cuánto tiempo llevas esperando?",
+                "pieces": [
+                  {
+                    "es": "Cuánto tiempo",
+                    "en": "How long",
+                    "role": "word"
+                  },
+                  {
+                    "es": "has",
+                    "en": "have",
+                    "role": "helper",
+                    "from": "llevas"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "helper",
+                    "from": "llevas"
+                  },
+                  {
+                    "es": "esperando",
+                    "en": "waiting",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's been working here since May.",
+              "translation": "Trabaja aquí desde mayo."
+            },
+            {
+              "text": "It's been raining all day.",
+              "translation": "Lleva lloviendo todo el día."
+            }
+          ],
+          "pitfalls": [
+            "«I am studying for two hours» está mal: si dura hasta ahora, I've been studying.",
+            "Con verbos como know o like, sin -ING: I've known her for years."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un CRONÓMETRO que sigue CORRIENDO: I'VE BEEN + -ING.",
+            "emoji": "🔄"
+          }
+        },
+        {
+          "key": "candidate",
+          "type": "term",
+          "text": "candidate",
+          "meaning": "candidato",
+          "pronunciation": "KÁNdideit",
+          "examples": [
+            {
+              "text": "She is the best candidate.",
+              "translation": "Es la mejor candidata.",
+              "mirror": {
+                "say": "Es la mejor candidata",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la mejor candidata",
+                    "en": "the best candidate",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Ten candidates applied.",
+              "translation": "Se presentaron diez candidatos."
+            }
+          ]
+        },
+        {
+          "key": "application",
+          "type": "term",
+          "text": "application",
+          "meaning": "solicitud; aplicación",
+          "pronunciation": "apliKÉIshon",
+          "examples": [
+            {
+              "text": "Send your application by Friday.",
+              "translation": "Envía tu solicitud antes del viernes.",
+              "mirror": {
+                "say": "Envía tu solicitud antes del viernes",
+                "pieces": [
+                  {
+                    "es": "Envía",
+                    "en": "Send",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu solicitud",
+                    "en": "your application",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para el viernes",
+                    "en": "by Friday",
+                    "role": "word",
+                    "from": "antes del viernes",
+                    "why": "Como muy tarde un día: BY Friday."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A mobile application.",
+              "translation": "Una aplicación para el móvil."
+            }
+          ]
+        },
+        {
+          "key": "contract",
+          "type": "term",
+          "text": "contract",
+          "meaning": "contrato",
+          "pronunciation": "KÓNtrakt",
+          "examples": [
+            {
+              "text": "Read the contract before you sign.",
+              "translation": "Lee el contrato antes de firmar.",
+              "mirror": {
+                "say": "Lee el contrato antes de firmar",
+                "pieces": [
+                  {
+                    "es": "Lee",
+                    "en": "Read",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el contrato",
+                    "en": "the contract",
+                    "role": "word"
+                  },
+                  {
+                    "es": "antes",
+                    "en": "before",
+                    "role": "word",
+                    "from": "antes de"
+                  },
+                  {
+                    "es": "TÚ firmas",
+                    "en": "you sign",
+                    "role": "verb",
+                    "from": "firmar"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A one-year contract.",
+              "translation": "Un contrato de un año."
+            }
+          ]
+        },
+        {
+          "key": "employer",
+          "type": "term",
+          "text": "employer",
+          "meaning": "empresa, jefe (que contrata)",
+          "pronunciation": "emPLÓIer",
+          "examples": [
+            {
+              "text": "My employer pays for the course.",
+              "translation": "Mi empresa paga el curso.",
+              "mirror": {
+                "say": "Mi empresa paga el curso",
+                "pieces": [
+                  {
+                    "es": "Mi empresa",
+                    "en": "My employer",
+                    "role": "who"
+                  },
+                  {
+                    "es": "paga",
+                    "en": "pays for",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el curso",
+                    "en": "the course",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A good employer.",
+              "translation": "Una buena empresa para trabajar."
+            }
+          ],
+          "notes": "Employer contrata; employee es quien trabaja."
+        },
+        {
+          "key": "employee",
+          "type": "term",
+          "text": "employee",
+          "meaning": "empleado",
+          "pronunciation": "emploÍI",
+          "examples": [
+            {
+              "text": "The company has fifty employees.",
+              "translation": "La empresa tiene cincuenta empleados.",
+              "mirror": {
+                "say": "La empresa tiene cincuenta empleados",
+                "pieces": [
+                  {
+                    "es": "La empresa",
+                    "en": "The company",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cincuenta empleados",
+                    "en": "fifty employees",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Employee of the month.",
+              "translation": "Empleado del mes."
+            }
+          ]
+        },
+        {
+          "key": "promotion",
+          "type": "term",
+          "text": "promotion",
+          "meaning": "ascenso; promoción",
+          "pronunciation": "proMÓUshon",
+          "examples": [
+            {
+              "text": "She got a promotion.",
+              "translation": "La ascendieron.",
+              "mirror": {
+                "say": "La ascendieron",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "consiguió un ascenso",
+                    "en": "got a promotion",
+                    "role": "verb",
+                    "from": "La ascendieron",
+                    "why": "«La ascendieron» es «consiguió un ascenso»: she got a promotion."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A special promotion.",
+              "translation": "Una promoción especial."
+            }
+          ]
+        },
+        {
+          "key": "qualification",
+          "type": "term",
+          "text": "qualification",
+          "meaning": "título, titulación",
+          "pronunciation": "kualifiKÉIshon",
+          "examples": [
+            {
+              "text": "What qualifications do you have?",
+              "translation": "¿Qué titulación tienes?",
+              "mirror": {
+                "say": "¿Qué titulación tienes?",
+                "pieces": [
+                  {
+                    "es": "Qué titulaciones",
+                    "en": "What qualifications",
+                    "role": "word",
+                    "from": "Qué titulación"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A professional qualification.",
+              "translation": "Una titulación profesional."
+            }
+          ]
+        },
+        {
+          "key": "responsible",
+          "type": "term",
+          "text": "responsible",
+          "meaning": "responsable",
+          "pronunciation": "risPÓNsibol",
+          "examples": [
+            {
+              "text": "I'm responsible for the website.",
+              "translation": "Soy el responsable de la web.",
+              "mirror": {
+                "say": "Soy el responsable de la web",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "responsable",
+                    "en": "responsible",
+                    "role": "word",
+                    "from": "el responsable"
+                  },
+                  {
+                    "es": "para la web",
+                    "en": "for the website",
+                    "role": "word",
+                    "from": "de la web",
+                    "why": "Responsable DE algo es responsible FOR."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A responsible person.",
+              "translation": "Una persona responsable."
+            }
+          ]
+        },
+        {
+          "key": "shift",
+          "type": "term",
+          "text": "shift",
+          "meaning": "turno",
+          "pronunciation": "SHIFT",
+          "examples": [
+            {
+              "text": "I work the night shift.",
+              "translation": "Trabajo en el turno de noche.",
+              "mirror": {
+                "say": "Trabajo en el turno de noche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word",
+                    "from": "en el"
+                  },
+                  {
+                    "es": "turno",
+                    "en": "shift",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de noche",
+                    "en": "night",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A twelve-hour shift.",
+              "translation": "Un turno de doce horas."
+            }
+          ]
+        },
+        {
+          "key": "overtime",
+          "type": "term",
+          "text": "overtime",
+          "meaning": "horas extra",
+          "pronunciation": "ÓUvertaim",
+          "examples": [
+            {
+              "text": "I worked overtime yesterday.",
+              "translation": "Ayer hice horas extra.",
+              "mirror": {
+                "say": "Ayer hice horas extra",
+                "pieces": [
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajé horas extra",
+                    "en": "worked overtime",
+                    "role": "verb",
+                    "from": "hice horas extra"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Overtime pay.",
+              "translation": "Pago de horas extra."
+            }
+          ]
+        },
+        {
+          "key": "unemployed",
+          "type": "term",
+          "text": "unemployed",
+          "meaning": "en paro, desempleado",
+          "pronunciation": "anemPLÓID",
+          "examples": [
+            {
+              "text": "He has been unemployed for a year.",
+              "translation": "Lleva un año en paro.",
+              "mirror": {
+                "say": "Lleva un año en paro",
+                "pieces": [
+                  {
+                    "es": "(ÉL) ha estado",
+                    "en": "He has been",
+                    "role": "helper",
+                    "from": "Lleva"
+                  },
+                  {
+                    "es": "durante un año",
+                    "en": "for a year",
+                    "role": "word",
+                    "from": "un año"
+                  },
+                  {
+                    "es": "en paro",
+                    "en": "unemployed",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Unemployment is falling.",
+              "translation": "El paro está bajando."
+            }
+          ]
+        },
+        {
+          "key": "hire",
+          "type": "term",
+          "text": "hire",
+          "meaning": "contratar",
+          "pronunciation": "JÁIER",
+          "examples": [
+            {
+              "text": "They hired me last week.",
+              "translation": "Me contrataron la semana pasada.",
+              "mirror": {
+                "say": "Me contrataron la semana pasada",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "contrataron",
+                    "en": "hired",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "semana pasada",
+                    "en": "last week",
+                    "role": "word",
+                    "from": "la semana pasada",
+                    "why": "Last week va sin «the»."
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Hire a car.",
+              "translation": "Alquilar un coche."
+            }
+          ]
+        },
+        {
+          "key": "resign",
+          "type": "term",
+          "text": "resign",
+          "meaning": "dimitir, dejar el trabajo",
+          "pronunciation": "riSÁIN",
+          "examples": [
+            {
+              "text": "She resigned last month.",
+              "translation": "Dejó el trabajo el mes pasado.",
+              "mirror": {
+                "say": "Dejó el trabajo el mes pasado",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dimitió",
+                    "en": "resigned",
+                    "role": "verb",
+                    "from": "Dejó el trabajo"
+                  },
+                  {
+                    "es": "mes pasado",
+                    "en": "last month",
+                    "role": "word",
+                    "from": "el mes pasado",
+                    "why": "Last month va sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He resigned from his job.",
+              "translation": "Dimitió de su puesto."
+            }
+          ],
+          "notes": "Falso amigo: resignarse es accept."
+        },
+        {
+          "key": "part-time",
+          "type": "term",
+          "text": "part time",
+          "meaning": "a media jornada",
+          "pronunciation": "part TÁIM",
+          "examples": [
+            {
+              "text": "I work part-time.",
+              "translation": "Trabajo a media jornada.",
+              "mirror": {
+                "say": "Trabajo a media jornada",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a media jornada",
+                    "en": "part-time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A part-time job.",
+              "translation": "Un trabajo a tiempo parcial."
+            }
+          ]
+        },
+        {
+          "key": "full-time",
+          "type": "term",
+          "text": "full time",
+          "meaning": "a jornada completa",
+          "pronunciation": "ful TÁIM",
+          "examples": [
+            {
+              "text": "It's a full-time job.",
+              "translation": "Es un trabajo a jornada completa.",
+              "mirror": {
+                "say": "Es un trabajo a jornada completa",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "job",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a jornada completa",
+                    "en": "full-time",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "She studies full-time.",
+              "translation": "Estudia a tiempo completo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

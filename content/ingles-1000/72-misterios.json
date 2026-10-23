@@ -1,0 +1,788 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "72-misterios",
+      "title": "Misión 72 · Misterios y suposiciones (B1)",
+      "units": [
+        {
+          "key": "g-deduction",
+          "type": "pattern",
+          "goal": "Debe de estar en casa = she MUST be at home",
+          "rule": "Para suponer: MUST (seguro que sí), MIGHT o COULD (quizá), CAN'T (seguro que no) + verbo. She must be tired. It can't be true.",
+          "pieces": [
+            {
+              "text": "She",
+              "role": "fixed",
+              "hint": "ella"
+            },
+            {
+              "text": "must",
+              "role": "fixed",
+              "hint": "debe de"
+            },
+            {
+              "text": "be tired",
+              "role": "slot",
+              "hint": "estar cansada"
+            }
+          ],
+          "examples": [
+            {
+              "text": "She must be at home.",
+              "translation": "Debe de estar en casa.",
+              "mirror": {
+                "say": "Debe de estar en casa",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "debe de",
+                    "en": "must",
+                    "role": "helper",
+                    "from": "Debe de",
+                    "why": "Para suponer que seguro que sí: MUST."
+                  },
+                  {
+                    "es": "estar",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "That can't be true!",
+              "translation": "¡No puede ser verdad!",
+              "mirror": {
+                "say": "¡No puede ser verdad!",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "That",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puede",
+                    "en": "can't",
+                    "role": "helper",
+                    "from": "No puede",
+                    "why": "Para «seguro que no»: CAN'T."
+                  },
+                  {
+                    "es": "ser",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "verdadero",
+                    "en": "true",
+                    "role": "word",
+                    "from": "verdad",
+                    "why": "Ser verdad es «be true» (adjetivo)."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It might rain later.",
+              "translation": "Puede que llueva luego."
+            },
+            {
+              "text": "He could be lost.",
+              "translation": "Quizá se ha perdido."
+            }
+          ],
+          "pitfalls": [
+            "«She must to be» está mal: detrás de must, el verbo tal cual.",
+            "Para «seguro que no» se dice CAN'T, no mustn't."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un DETECTIVE con LUPA: MUST, MIGHT o CAN'T.",
+            "emoji": "🔍"
+          }
+        },
+        {
+          "key": "possibly",
+          "type": "term",
+          "text": "possibly",
+          "meaning": "posiblemente",
+          "pronunciation": "PÓsibli",
+          "examples": [
+            {
+              "text": "It will possibly rain.",
+              "translation": "Posiblemente llueva.",
+              "mirror": {
+                "say": "Posiblemente llueva",
+                "pieces": [
+                  {
+                    "es": "posiblemente",
+                    "en": "possibly",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÁ",
+                    "en": "will",
+                    "role": "helper",
+                    "from": "llueva"
+                  },
+                  {
+                    "es": "llover",
+                    "en": "rain",
+                    "role": "verb",
+                    "from": "llueva"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I can't possibly finish today.",
+              "translation": "Es imposible que acabe hoy."
+            }
+          ]
+        },
+        {
+          "key": "certainly",
+          "type": "term",
+          "text": "certainly",
+          "meaning": "desde luego, claro",
+          "pronunciation": "SÉRtenli",
+          "examples": [
+            {
+              "text": "Can I sit here? Certainly.",
+              "translation": "¿Puedo sentarme aquí? Claro que sí.",
+              "mirror": {
+                "say": "¿Puedo sentarme aquí? Claro que sí",
+                "pieces": [
+                  {
+                    "es": "Puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sentarme",
+                    "en": "sit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Ciertamente",
+                    "en": "Certainly",
+                    "role": "word",
+                    "from": "Claro que sí"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's certainly true.",
+              "translation": "Desde luego, es verdad."
+            }
+          ]
+        },
+        {
+          "key": "definitely",
+          "type": "term",
+          "text": "definitely",
+          "meaning": "sin duda, seguro",
+          "pronunciation": "DÉfinitli",
+          "examples": [
+            {
+              "text": "I'll definitely come.",
+              "translation": "Vendré seguro.",
+              "mirror": {
+                "say": "Vendré seguro",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper",
+                    "from": "Vendré"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb",
+                    "from": "Vendré"
+                  },
+                  {
+                    "es": "seguro",
+                    "en": "definitely",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Definitely not!",
+              "translation": "¡Ni de broma!"
+            }
+          ],
+          "notes": "Falso amigo: definitivamente es for good o finally."
+        },
+        {
+          "key": "obviously",
+          "type": "term",
+          "text": "obviously",
+          "meaning": "obviamente",
+          "pronunciation": "ÓBviosli",
+          "examples": [
+            {
+              "text": "Obviously, I said yes.",
+              "translation": "Obviamente, dije que sí.",
+              "mirror": {
+                "say": "Obviamente, dije que sí",
+                "pieces": [
+                  {
+                    "es": "Obviamente",
+                    "en": "Obviously",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dije",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sí",
+                    "en": "yes",
+                    "role": "word",
+                    "from": "que sí"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was obviously a mistake.",
+              "translation": "Estaba claro que era un error."
+            }
+          ]
+        },
+        {
+          "key": "evidence",
+          "type": "term",
+          "text": "evidence",
+          "meaning": "pruebas",
+          "pronunciation": "ÉVidens",
+          "examples": [
+            {
+              "text": "There's no evidence.",
+              "translation": "No hay pruebas.",
+              "mirror": {
+                "say": "No hay pruebas",
+                "pieces": [
+                  {
+                    "es": "No hay",
+                    "en": "There's no",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "prueba",
+                    "en": "evidence",
+                    "role": "word",
+                    "from": "pruebas",
+                    "why": "Evidence no se cuenta: va en singular."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Strong evidence.",
+              "translation": "Pruebas sólidas."
+            }
+          ],
+          "notes": "Falso amigo: evidente es obvious."
+        },
+        {
+          "key": "clue",
+          "type": "term",
+          "text": "clue",
+          "meaning": "pista",
+          "pronunciation": "KLUU",
+          "examples": [
+            {
+              "text": "The detective found a clue.",
+              "translation": "El detective encontró una pista.",
+              "mirror": {
+                "say": "El detective encontró una pista",
+                "pieces": [
+                  {
+                    "es": "El detective",
+                    "en": "The detective",
+                    "role": "who"
+                  },
+                  {
+                    "es": "encontró",
+                    "en": "found",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una pista",
+                    "en": "a clue",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I haven't got a clue.",
+              "translation": "No tengo ni idea."
+            }
+          ]
+        },
+        {
+          "key": "mystery",
+          "type": "term",
+          "text": "mystery",
+          "meaning": "misterio",
+          "pronunciation": "MÍSteri",
+          "examples": [
+            {
+              "text": "It's a mystery to me.",
+              "translation": "Para mí es un misterio.",
+              "mirror": {
+                "say": "Para mí es un misterio",
+                "pieces": [
+                  {
+                    "es": "para mí",
+                    "en": "to me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "es"
+                  },
+                  {
+                    "es": "un misterio",
+                    "en": "a mystery",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A mystery novel.",
+              "translation": "Una novela de misterio."
+            }
+          ]
+        },
+        {
+          "key": "suspect",
+          "type": "term",
+          "text": "suspect",
+          "meaning": "sospechoso; sospechar",
+          "pronunciation": "SÁSpekt",
+          "examples": [
+            {
+              "text": "The police arrested a suspect.",
+              "translation": "La policía detuvo a un sospechoso.",
+              "mirror": {
+                "say": "La policía detuvo a un sospechoso",
+                "pieces": [
+                  {
+                    "es": "La policía",
+                    "en": "The police",
+                    "role": "who"
+                  },
+                  {
+                    "es": "detuvo",
+                    "en": "arrested",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un sospechoso",
+                    "en": "a suspect",
+                    "role": "word",
+                    "from": "a un sospechoso",
+                    "why": "Detener A alguien, sin «a»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I suspect he is lying.",
+              "translation": "Sospecho que miente."
+            }
+          ],
+          "notes": "Nombre: SÁSpekt; verbo: sasPÉKT."
+        },
+        {
+          "key": "witness",
+          "type": "term",
+          "text": "witness",
+          "meaning": "testigo",
+          "pronunciation": "UÍTnes",
+          "examples": [
+            {
+              "text": "Were there any witnesses?",
+              "translation": "¿Hubo testigos?",
+              "mirror": {
+                "say": "¿Hubo testigos?",
+                "pieces": [
+                  {
+                    "es": "Hubo",
+                    "en": "Were there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "algunos testigos",
+                    "en": "any witnesses",
+                    "role": "word",
+                    "from": "testigos"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A key witness.",
+              "translation": "Un testigo clave."
+            }
+          ]
+        },
+        {
+          "key": "detective",
+          "type": "term",
+          "text": "detective",
+          "meaning": "detective",
+          "pronunciation": "diTÉKtiv",
+          "examples": [
+            {
+              "text": "My favourite detective is Sherlock Holmes.",
+              "translation": "Mi detective favorito es Sherlock Holmes.",
+              "mirror": {
+                "say": "Mi detective favorito es Sherlock Holmes",
+                "pieces": [
+                  {
+                    "es": "Mi",
+                    "en": "My",
+                    "role": "word"
+                  },
+                  {
+                    "es": "detective",
+                    "en": "detective",
+                    "role": "word"
+                  },
+                  {
+                    "es": "favorito",
+                    "en": "favourite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "Sherlock Holmes",
+                    "en": "Sherlock Holmes",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "A private detective.",
+              "translation": "Un detective privado."
+            }
+          ]
+        },
+        {
+          "key": "prove",
+          "type": "term",
+          "text": "prove",
+          "meaning": "demostrar",
+          "pronunciation": "PRUUV",
+          "examples": [
+            {
+              "text": "Can you prove it?",
+              "translation": "¿Puedes demostrarlo?",
+              "mirror": {
+                "say": "¿Puedes demostrarlo?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demostrar",
+                    "en": "prove",
+                    "role": "verb",
+                    "from": "demostrarlo",
+                    "why": "Lo pegado se separa: prove IT."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Prove me wrong.",
+              "translation": "Demuéstrame que me equivoco."
+            }
+          ]
+        },
+        {
+          "key": "solve",
+          "type": "term",
+          "text": "solve",
+          "meaning": "resolver",
+          "pronunciation": "SOLV",
+          "examples": [
+            {
+              "text": "We solved the problem.",
+              "translation": "Resolvimos el problema.",
+              "mirror": {
+                "say": "Resolvimos el problema",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "resolvimos",
+                    "en": "solved",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el problema",
+                    "en": "the problem",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Solve the puzzle.",
+              "translation": "Resuelve el puzle."
+            }
+          ]
+        },
+        {
+          "key": "thief",
+          "type": "term",
+          "text": "thief",
+          "meaning": "ladrón",
+          "pronunciation": "ZIIF",
+          "examples": [
+            {
+              "text": "The thief stole my phone.",
+              "translation": "El ladrón me robó el móvil.",
+              "mirror": {
+                "say": "El ladrón me robó el móvil",
+                "pieces": [
+                  {
+                    "es": "El ladrón",
+                    "en": "The thief",
+                    "role": "who"
+                  },
+                  {
+                    "es": "robó",
+                    "en": "stole",
+                    "role": "verb",
+                    "from": "me robó"
+                  },
+                  {
+                    "es": "MI móvil",
+                    "en": "my phone",
+                    "role": "word",
+                    "from": "el móvil",
+                    "why": "En inglés el móvil es MÍO: my phone."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Stop, thief!",
+              "translation": "¡Al ladrón!"
+            }
+          ],
+          "notes": "Plural: thieves."
+        },
+        {
+          "key": "burglar",
+          "type": "term",
+          "text": "burglar",
+          "meaning": "ladrón (que entra en casas)",
+          "pronunciation": "BÉRglar",
+          "examples": [
+            {
+              "text": "A burglar broke into the house.",
+              "translation": "Un ladrón entró a robar en la casa.",
+              "mirror": {
+                "say": "Un ladrón entró a robar en la casa",
+                "pieces": [
+                  {
+                    "es": "Un ladrón",
+                    "en": "A burglar",
+                    "role": "who"
+                  },
+                  {
+                    "es": "irrumpió en",
+                    "en": "broke into",
+                    "role": "verb",
+                    "from": "entró a robar en"
+                  },
+                  {
+                    "es": "la casa",
+                    "en": "the house",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Burglar alarm.",
+              "translation": "Alarma antirrobo."
+            }
+          ]
+        },
+        {
+          "key": "investigate",
+          "type": "term",
+          "text": "investigate",
+          "meaning": "investigar",
+          "pronunciation": "inVÉStigueit",
+          "examples": [
+            {
+              "text": "The police are investigating the case.",
+              "translation": "La policía está investigando el caso.",
+              "mirror": {
+                "say": "La policía está investigando el caso",
+                "pieces": [
+                  {
+                    "es": "La policía",
+                    "en": "The police",
+                    "role": "who"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper",
+                    "from": "está",
+                    "why": "Police es plural en inglés: the police ARE."
+                  },
+                  {
+                    "es": "investigando",
+                    "en": "investigating",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el caso",
+                    "en": "the case",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Investigate the error.",
+              "translation": "Investiga el error."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
