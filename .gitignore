@@ -19,3 +19,6 @@ backend/.env
 backend/.env.accounts
 backend/backups/
 backend/extensions-dist/
+
+# Caché de Python (tools/audio, scripts)
+__pycache__/
