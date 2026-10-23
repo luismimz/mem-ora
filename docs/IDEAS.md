@@ -26,9 +26,9 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Hacia B1 → C1 (usuario, 23-oct-2026: «me gustaría llegar a un nivel C1… ve completando B1»).** Hecho:
   misiones 68–79 (1.183 palabras) con presente perfecto o pasado, pasado perfecto, estilo indirecto, relativos,
   must/might/can't, pasiva en pasado, so/neither do I, have been + -ING, -ING o TO, superlativos, a few / a little y
-  make o do. Siguiente para cerrar B1: segundo condicional repasado, wish, used to frente a be used to, pasiva con
-  modales, both/either/neither, as…as, futuro continuo, y vocabulario hasta ~2.000. Después, B2. Falta generar sus audios
-  Kokoro (`tools/audio/generate.py`) cuando esté fusionado el PR de la voz.
+  make o do; y 80–83 (1.243 palabras): wish, be used to, both/either/neither y as…as. Siguiente para cerrar B1:
+  pasiva con modales, futuro continuo, have something done, conectores de texto (although, however, despite)
+  y vocabulario hasta ~2.000. Después, B2.
 - ✓ **[inglés] 1.000 palabras** (meta de 30 días, 23-oct-2026): 1.003 palabras en las misiones 00–67, cada una con
   pronunciación, dos ejemplos y espejo, y un truco de gramática por misión desde la 18. Siguiente: **repaso de
   calidad** con el usuario (asociaciones y espejos que no le convenzan) antes de ampliar más; después, B1 (phrasal

@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "80-deseos",
+      "title": "Misión 80 · Deseos y lamentos (B1)",
+      "units": [
+        {
+          "key": "g-wish",
+          "type": "pattern",
+          "goal": "Ojalá tuviera = I WISH I HAD",
+          "rule": "Para desear que algo fuera distinto ahora: I wish + pasado (I wish I had more time). Con be, were: I wish I were taller.",
+          "pieces": [
+            {
+              "text": "I wish",
+              "role": "fixed",
+              "hint": "ojalá"
+            },
+            {
+              "text": "I had",
+              "role": "slot",
+              "hint": "tuviera"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I wish I had more time.",
+              "translation": "Ojalá tuviera más tiempo.",
+              "mirror": {
+                "say": "Ojalá tuviera más tiempo",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper",
+                    "from": "Ojalá",
+                    "why": "Ojalá es «yo deseo»: I wish."
+                  },
+                  {
+                    "es": "(YO) tuve",
+                    "en": "I had",
+                    "role": "verb",
+                    "from": "tuviera",
+                    "why": "Tras wish, el verbo en pasado: I had."
+                  },
+                  {
+                    "es": "más tiempo",
+                    "en": "more time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish I could fly.",
+              "translation": "Ojalá pudiera volar.",
+              "mirror": {
+                "say": "Ojalá pudiera volar",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(YO) podía",
+                    "en": "I could",
+                    "role": "helper",
+                    "from": "pudiera",
+                    "why": "Tras wish, pasado: CAN pasa a COULD."
+                  },
+                  {
+                    "es": "volar",
+                    "en": "fly",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish you were here.",
+              "translation": "Ojalá estuvieras aquí."
+            },
+            {
+              "text": "If only I knew!",
+              "translation": "¡Si yo lo supiera!"
+            }
+          ],
+          "pitfalls": [
+            "«I wish I have» está mal: tras wish, pasado (I had).",
+            "Para el futuro que puede pasar, hope: I hope you come."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una ESTRELLA FUGAZ que vuela HACIA ATRÁS: WISH + pasado.",
+            "emoji": "🌠"
+          }
+        },
+        {
+          "key": "wish",
+          "type": "term",
+          "text": "wish",
+          "meaning": "deseo; desear",
+          "pronunciation": "UISH",
+          "examples": [
+            {
+              "text": "Make a wish!",
+              "translation": "¡Pide un deseo!",
+              "mirror": {
+                "say": "¡Pide un deseo!",
+                "pieces": [
+                  {
+                    "es": "Haz",
+                    "en": "Make",
+                    "role": "verb",
+                    "from": "Pide",
+                    "why": "Pedir un deseo es MAKE a wish."
+                  },
+                  {
+                    "es": "un deseo",
+                    "en": "a wish",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Best wishes.",
+              "translation": "Un saludo cordial."
+            }
+          ]
+        },
+        {
+          "key": "regret",
+          "type": "term",
+          "text": "regret",
+          "meaning": "arrepentirse; arrepentimiento",
+          "pronunciation": "riGRÉT",
+          "examples": [
+            {
+              "text": "I don't regret it.",
+              "translation": "No me arrepiento.",
+              "mirror": {
+                "say": "No me arrepiento",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper",
+                    "from": "No"
+                  },
+                  {
+                    "es": "arrepiento",
+                    "en": "regret",
+                    "role": "verb",
+                    "from": "me arrepiento"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No regrets.",
+              "translation": "Sin arrepentimientos."
+            }
+          ]
+        },
+        {
+          "key": "envy",
+          "type": "term",
+          "text": "envy",
+          "meaning": "envidia; envidiar",
+          "pronunciation": "ÉNvi",
+          "examples": [
+            {
+              "text": "I envy you!",
+              "translation": "¡Te envidio!",
+              "mirror": {
+                "say": "¡Te envidio!",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "envidio",
+                    "en": "envy",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Green with envy.",
+              "translation": "Muerto de envidia."
+            }
+          ]
+        },
+        {
+          "key": "lottery",
+          "type": "term",
+          "text": "lottery",
+          "meaning": "lotería",
+          "pronunciation": "LÓteri",
+          "examples": [
+            {
+              "text": "He won the lottery.",
+              "translation": "Le tocó la lotería.",
+              "mirror": {
+                "say": "Le tocó la lotería",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ganó",
+                    "en": "won",
+                    "role": "verb",
+                    "from": "Le tocó",
+                    "why": "«Le tocó» es «ganó»: he won."
+                  },
+                  {
+                    "es": "la lotería",
+                    "en": "the lottery",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A lottery ticket.",
+              "translation": "Un billete de lotería."
+            }
+          ]
+        },
+        {
+          "key": "fortune",
+          "type": "term",
+          "text": "fortune",
+          "meaning": "fortuna; suerte",
+          "pronunciation": "FÓRchun",
+          "examples": [
+            {
+              "text": "It cost a fortune.",
+              "translation": "Costó un dineral.",
+              "mirror": {
+                "say": "Costó un dineral",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "costó",
+                    "en": "cost",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una fortuna",
+                    "en": "a fortune",
+                    "role": "word",
+                    "from": "un dineral"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Good fortune.",
+              "translation": "Buena suerte."
+            }
+          ]
+        },
+        {
+          "key": "rich",
+          "type": "term",
+          "text": "rich",
+          "meaning": "rico (con dinero)",
+          "pronunciation": "RICH",
+          "examples": [
+            {
+              "text": "They are very rich.",
+              "translation": "Son muy ricos.",
+              "mirror": {
+                "say": "Son muy ricos",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy ricos",
+                    "en": "very rich",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Rich and famous.",
+              "translation": "Rico y famoso."
+            }
+          ],
+          "notes": "Rico de sabor es delicious o tasty."
+        },
+        {
+          "key": "poor",
+          "type": "term",
+          "text": "poor",
+          "meaning": "pobre",
+          "pronunciation": "PUR",
+          "examples": [
+            {
+              "text": "The poor dog was cold.",
+              "translation": "El pobre perro tenía frío.",
+              "mirror": {
+                "say": "El pobre perro tenía frío",
+                "pieces": [
+                  {
+                    "es": "El",
+                    "en": "The",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pobre",
+                    "en": "poor",
+                    "role": "word"
+                  },
+                  {
+                    "es": "perro",
+                    "en": "dog",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estaba",
+                    "en": "was",
+                    "role": "helper",
+                    "from": "tenía",
+                    "why": "Tener frío es «estar frío»: be cold."
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A poor country.",
+              "translation": "Un país pobre."
+            }
+          ]
+        },
+        {
+          "key": "fame",
+          "type": "term",
+          "text": "fame",
+          "meaning": "fama",
+          "pronunciation": "FÉIM",
+          "examples": [
+            {
+              "text": "Fame changed him.",
+              "translation": "La fama lo cambió.",
+              "mirror": {
+                "say": "La fama lo cambió",
+                "pieces": [
+                  {
+                    "es": "fama",
+                    "en": "Fame",
+                    "role": "who",
+                    "from": "La fama",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "lo",
+                    "en": "him",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cambió",
+                    "en": "changed",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Fame and fortune.",
+              "translation": "Fama y fortuna."
+            }
+          ]
+        },
+        {
+          "key": "freedom",
+          "type": "term",
+          "text": "freedom",
+          "meaning": "libertad",
+          "pronunciation": "FRÍIdom",
+          "examples": [
+            {
+              "text": "Freedom is important.",
+              "translation": "La libertad es importante.",
+              "mirror": {
+                "say": "La libertad es importante",
+                "pieces": [
+                  {
+                    "es": "libertad",
+                    "en": "Freedom",
+                    "role": "who",
+                    "from": "La libertad",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "importante",
+                    "en": "important",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Freedom of speech.",
+              "translation": "Libertad de expresión."
+            }
+          ]
+        },
+        {
+          "key": "mansion",
+          "type": "term",
+          "text": "mansion",
+          "meaning": "mansión",
+          "pronunciation": "MÁNshon",
+          "examples": [
+            {
+              "text": "They live in a mansion.",
+              "translation": "Viven en una mansión.",
+              "mirror": {
+                "say": "Viven en una mansión",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viven",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en una mansión",
+                    "en": "in a mansion",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A huge mansion.",
+              "translation": "Una mansión enorme."
+            }
+          ]
+        },
+        {
+          "key": "wealthy",
+          "type": "term",
+          "text": "wealthy",
+          "meaning": "adinerado",
+          "pronunciation": "UÉLzi",
+          "examples": [
+            {
+              "text": "A wealthy family.",
+              "translation": "Una familia adinerada.",
+              "mirror": {
+                "say": "Una familia adinerada",
+                "pieces": [
+                  {
+                    "es": "Una",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "familia",
+                    "en": "family",
+                    "role": "word"
+                  },
+                  {
+                    "es": "adinerada",
+                    "en": "wealthy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Wealth is not everything.",
+              "translation": "El dinero no lo es todo."
+            }
+          ]
+        },
+        {
+          "key": "desire",
+          "type": "term",
+          "text": "desire",
+          "meaning": "deseo (fuerte)",
+          "pronunciation": "diSÁIER",
+          "examples": [
+            {
+              "text": "I have no desire to go.",
+              "translation": "No tengo ningunas ganas de ir.",
+              "mirror": {
+                "say": "No tengo ningunas ganas de ir",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "No tengo"
+                  },
+                  {
+                    "es": "ningún deseo",
+                    "en": "no desire",
+                    "role": "word",
+                    "from": "ningunas ganas",
+                    "why": "Una sola negación: I have NO desire."
+                  },
+                  {
+                    "es": "a ir",
+                    "en": "to go",
+                    "role": "verb",
+                    "from": "de ir"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A strong desire.",
+              "translation": "Un deseo fuerte."
+            }
+          ]
+        },
+        {
+          "key": "if-only",
+          "type": "term",
+          "text": "if only",
+          "meaning": "ojalá; si al menos",
+          "pronunciation": "if ÓUNli",
+          "examples": [
+            {
+              "text": "If only it were Friday!",
+              "translation": "¡Ojalá fuera viernes!",
+              "mirror": {
+                "say": "¡Ojalá fuera viernes!",
+                "pieces": [
+                  {
+                    "es": "Si solo",
+                    "en": "If only",
+                    "role": "word",
+                    "from": "Ojalá"
+                  },
+                  {
+                    "es": "ESO fuera",
+                    "en": "it were",
+                    "role": "helper",
+                    "from": "fuera",
+                    "why": "Tras if only, pasado; con be, were."
+                  },
+                  {
+                    "es": "viernes",
+                    "en": "Friday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If only I knew.",
+              "translation": "Si yo lo supiera."
+            }
+          ]
+        },
+        {
+          "key": "pity",
+          "type": "term",
+          "text": "pity",
+          "meaning": "pena, lástima",
+          "pronunciation": "PÍti",
+          "examples": [
+            {
+              "text": "It's a pity you can't come.",
+              "translation": "Es una pena que no puedas venir.",
+              "mirror": {
+                "say": "Es una pena que no puedas venir",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "una pena",
+                    "en": "a pity",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(TÚ) no puedes",
+                    "en": "you can't",
+                    "role": "helper",
+                    "from": "que no puedas"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What a pity!",
+              "translation": "¡Qué pena!"
+            }
+          ]
+        },
+        {
+          "key": "secret",
+          "type": "term",
+          "text": "secret",
+          "meaning": "secreto",
+          "pronunciation": "SÍIkret",
+          "examples": [
+            {
+              "text": "Can you keep a secret?",
+              "translation": "¿Sabes guardar un secreto?",
+              "mirror": {
+                "say": "¿Sabes guardar un secreto?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper",
+                    "from": "Sabes"
+                  },
+                  {
+                    "es": "guardar",
+                    "en": "keep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un secreto",
+                    "en": "a secret",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "It's a secret.",
+              "translation": "Es un secreto."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
