@@ -10,7 +10,7 @@ import { enqueue, isNetworkError } from './offline';
 const mmss = (ms: number) => { const s = Math.max(0, Math.ceil(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 const grade1 = (g: number) => g.toLocaleString('es-ES', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
-export function Exam({ course, onExit, onFailures }: { course: Course; onExit: () => void; onFailures: () => void }) {
+export function Exam({ course, onExit, onFailures, onGuided }: { course: Course; onExit: () => void; onFailures: () => void; onGuided: () => void }) {
   const [data, setData] = useState<ExamPayload | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [phase, setPhase] = useState<'intro' | 'run' | 'done'>('intro');
@@ -77,7 +77,9 @@ export function Exam({ course, onExit, onFailures }: { course: Course; onExit: (
       <p className="eyebrow">SIMULACRO DE EXAMEN</p>
       <h1>Aún no hay bastante</h1>
       <p>El simulacro pregunta solo lo que ya has trabajado, y para que sea un examen necesita al menos {data.need} fichas con preguntas. Llevas {data.worked}.</p>
-      <button type="button" className="primary" onClick={onExit}>Seguir aprendiendo</button>
+      <p>Mientras tanto, el <b>modelo guiado</b> te enseña cada tema antes de su pregunta.</p>
+      <button type="button" className="primary" onClick={onGuided}>📖 Aprende y resuelve</button>
+      <button type="button" className="link" onClick={onExit}>Seguir aprendiendo</button>
     </main>
   );
 
@@ -95,6 +97,7 @@ export function Exam({ course, onExit, onFailures }: { course: Course; onExit: (
         </ul>
         <p className="exam-best">{best ? <>Tu mejor nota: <b>{grade1(best.grade)}</b> · {data.stats.taken} {data.stats.taken === 1 ? 'simulacro' : 'simulacros'}</> : 'Es tu primer simulacro de este curso.'}</p>
         <button type="button" className="primary" onClick={start}>Empezar el simulacro</button>
+        <button type="button" className="link" onClick={onGuided}>Prefiero antes el modelo guiado (ficha y pregunta)</button>
         <button type="button" className="link" onClick={onExit}>Ahora no</button>
       </main>
     );

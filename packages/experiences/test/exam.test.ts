@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { buildExam, examCorrect, examExercises, examGrade, EXAM_SIZE, type SessionUnit } from '../src';
+import { buildExam, examCorrect, examExercises, examGrade, EXAM_GUIDED_SIZE, EXAM_SIZE, type SessionUnit } from '../src';
 
 const concept = (key: string, exercises: unknown[] = [{ kind: 'apply_case', prompt: `¿${key}?`, answer: `si-${key}`, distractors: ['no', 'quizá', 'nunca', 'otra'] }]): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -41,5 +41,22 @@ describe('simulacro de examen', () => {
     expect(examGrade(21, 30)).toBe(7);
     expect(examGrade(20, 30)).toBe(6.7);
     expect(examGrade(0, 0)).toBe(0);
+  });
+});
+
+describe('modelo de examen guiado (primero se enseña, después se resuelve)', () => {
+  const many = Array.from({ length: 20 }, (_, m) => ({ key: `t${m}`, units: Array.from({ length: 3 }, (_, i) => `t${m}u${i}`) }));
+  const all = Object.fromEntries(many.flatMap((m) => m.units).map((k) => [k, concept(k)]));
+  const rank = (k: string) => { const [, t, u] = /^t(\d+)u(\d+)$/.exec(k)!; return Number(t) * 100 + Number(u); };
+  it('15 preguntas en el orden del temario (de lo primero a lo siguiente)', () => {
+    const g = buildExam({ examId: 'g1', units: all, missions: many, size: EXAM_GUIDED_SIZE, ordered: true });
+    expect(g).toHaveLength(EXAM_GUIDED_SIZE);
+    const ranks = g.map((q) => rank(q.unitKey));
+    expect(ranks).toEqual([...ranks].sort((a, b) => a - b));
+  });
+  it('con más temas que preguntas, no se queda siempre con los primeros temas', () => {
+    const topics = new Set<string>();
+    for (const id of ['a', 'b', 'c', 'd']) for (const q of buildExam({ examId: id, units: all, missions: many, size: EXAM_GUIDED_SIZE, ordered: true })) topics.add(q.unitKey.split('u')[0]!);
+    expect(topics.size).toBeGreaterThan(EXAM_GUIDED_SIZE);
   });
 });

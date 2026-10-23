@@ -39,7 +39,7 @@ Ideas, no un cambio de formato: su base es el test de 4 opciones (reconocimiento
    respuestas correctas).
 6. **[inglés] Inglés técnico/profesional** del módulo DAM. Hecho: misión 17 (informática) y misión 22 (correos formales,
    CV, pasiva).
-7. ✓ (PR del simulacro; falta: preguntas de los exámenes de ILERNA cuando estén en `private/`) **[DAM] Simulacro de examen:** 30 preguntas de todos los temas, 60 min, sin ayudas hasta el final, se aprueba con
+7. ✓ (PR del simulacro y, D-083, modelo guiado «primero se enseña, después se resuelve»; falta: preguntas de los exámenes de ILERNA cuando estén en `private/`) **[DAM] Simulacro de examen:** 30 preguntas de todos los temas, 60 min, sin ayudas hasta el final, se aprueba con
    7, mejor nota. Solo mide: nunca marca «dominado». Con los exámenes de práctica de ILERNA cuando estén en `private/`.
 8. **[DAM] Código comprobado:** compilar el código de las preguntas DAM en la puerta (`private/dam/taught.py`).
 

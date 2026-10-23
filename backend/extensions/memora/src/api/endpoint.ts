@@ -27,7 +27,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
 import { assessAssociation, dayOf, dueUnits, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
-import { buildAssociationSession, buildExam, buildFlowSession, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
+import { buildAssociationSession, buildExam, buildFlowSession, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
 import { ring, vapidFromEnv } from '../push/lib';
@@ -540,11 +540,13 @@ export default {
       const { units, catalog, missions } = await publishedContent(course);
       const learner = await learnerFor(userId, course.id);
       const { worked } = missionProgress(missions, catalog, learner);
-      const seen = missions.map((m) => ({ key: m.key, units: m.units.filter((u) => worked.has(u)) }));
       const examId = randomUUID();
-      const questions = buildExam({ examId, units, missions: seen });
+      // Modelo guiado: cada pregunta llega después de su ficha, así que entra todo el temario (no solo lo trabajado).
+      const guided = req.query.modo === 'guiado';
+      const pool = guided ? missions : missions.map((m) => ({ key: m.key, units: m.units.filter((u) => worked.has(u)) }));
+      const questions = buildExam({ examId, units, missions: pool, ...(guided ? { size: EXAM_GUIDED_SIZE, ordered: true } : {}) });
       const used = Object.fromEntries(questions.map((q) => [q.unitKey, units[q.unitKey]]));
-      return { data: { examId, available: questions.length >= EXAM_MIN_QUESTIONS, need: EXAM_MIN_QUESTIONS, worked: worked.size, questions, units: used, minutes: EXAM_MINUTES, pass: EXAM_PASS, stats: await examStats(userId, course.id) } };
+      return { data: { examId, guided, available: guided ? questions.length > 0 : questions.length >= EXAM_MIN_QUESTIONS, need: EXAM_MIN_QUESTIONS, worked: worked.size, questions, units: used, minutes: EXAM_MINUTES, pass: EXAM_PASS, stats: await examStats(userId, course.id) } };
     }));
     router.post('/exam/result', wrap(async (req) => {
       const userId = req.accountability.user;

@@ -35,6 +35,7 @@ async function open(page, examOverride = {}) {
       : path === '/memora/courses' ? [course]
       : path === '/memora/missions' ? { missions: [{ key: 'm1', title: 'Misión 1 · Bases', index: 1, total: 12, worked: 12, learned: 4, due: 0, status: 'done' }], current: 'm1' }
       : path === '/memora/progress' ? { streak: 1, failures: 0, today: { newUnits: 3, goal: 45 }, calendar: [], skills: [], units: [], associations: [], exam: stats }
+      : path === '/memora/exam' && u.searchParams.get('modo') === 'guiado' ? { examId: 'g1-abcdef', guided: true, available: true, need: 10, worked: 0, questions: questions.slice(0, 3).map((q) => ({ ...q, id: q.id.replace('ex1', 'g1') })), units, minutes: 60, pass: 7, stats }
       : path === '/memora/exam' ? { examId: 'ex1-abcdef', available: true, need: 10, worked: 12, questions, units, minutes: 60, pass: 7, stats, ...examOverride }
       : path === '/memora/exam/result' ? { saved: true, grade: Math.round((route.request().postDataJSON().correct / route.request().postDataJSON().total) * 100) / 10, stats: { ...stats, taken: 3 } }
       : path === '/memora/events' ? { accepted: [], duplicates: [], rejected: [] }
@@ -57,7 +58,10 @@ try {
 
   await page.waitForSelector('.exam-card');
   check((await page.$eval('.exam-card', (e) => e.textContent)).includes('6,5'), 'Inicio (curso DAM) ofrece el simulacro con la mejor nota (6,5)');
-  await page.locator('.exam-card .primary').tap();
+  check((await page.$eval('.exam-card .exam-mode', (e) => e.textContent)).includes('Aprende y resuelve'), 'Inicio ofrece primero el modelo guiado («Aprende y resuelve») y después el simulacro');
+  await page.$eval('.exam-card', (e) => e.scrollIntoView({ block: 'center' }));
+  await shot('inicio-modelos');
+  await page.locator('.exam-card .exam-mode:not(.main)').tap();
   await page.waitForSelector('.exam-intro');
   check(page.url().includes('/simulacro?curso=dam'), 'abre el simulacro en su propia dirección');
   check((await page.$eval('.exam-intro', (e) => e.textContent)).includes('60 minutos'), 'la portada explica las reglas (12 preguntas, 60 minutos, sin ayudas, se aprueba con un 7)');
@@ -104,7 +108,7 @@ try {
   p2.on('pageerror', (e) => errors.push(String(e)));
   const r2 = await open(p2, { minutes: 0.04 });
   await p2.waitForSelector('.exam-card');
-  await p2.locator('.exam-card .primary').tap();
+  await p2.locator('.exam-card .exam-mode:not(.main)').tap();
   await p2.locator('.exam-intro .primary').tap();
   await p2.locator('.exam-options button', { hasText: 'R0' }).tap();
   await p2.waitForSelector('.exam-done', { timeout: 8000 }).catch(() => undefined);
@@ -114,9 +118,64 @@ try {
   const p3 = await context.newPage();
   await open(p3, { available: false, worked: 4, questions: [] });
   await p3.waitForSelector('.exam-card');
-  await p3.locator('.exam-card .primary').tap();
+  await p3.locator('.exam-card .exam-mode:not(.main)').tap();
   await p3.waitForSelector('.exam-intro');
   check((await p3.$eval('.exam-intro', (e) => e.textContent)).includes('Llevas 4'), 'si aún no hay bastante trabajado, lo explica en vez de hacer un examen corto');
+  check((await p3.$eval('.exam-intro .primary', (e) => e.textContent)).includes('Aprende y resuelve'), 'y ofrece el modelo guiado, que enseña antes de preguntar');
+
+  // Modelo guiado: primero la ficha, después la pregunta, con la corrección al momento.
+  const p4 = await context.newPage();
+  p4.on('pageerror', (e) => errors.push(String(e)));
+  const r4 = await open(p4);
+  const cdp4 = await context.newCDPSession(p4);
+  const shot4 = (name) => p4.screenshot({ path: process.env.E2E_SHOTS ? `${process.env.E2E_SHOTS}/${name}.png` : '/dev/null' }).catch(() => undefined);
+  await p4.waitForSelector('.exam-card');
+  await p4.locator('.exam-card .exam-mode.main').tap();
+  await p4.waitForSelector('.guided .slide');
+  const learn = await p4.evaluate(() => ({ url: location.href, tag: document.querySelector('.slide .tag')?.textContent, h: document.querySelector('.concept-face h2')?.textContent, def: document.querySelector('.face-learn')?.textContent, options: document.querySelectorAll('.options .option').length, over: document.documentElement.scrollWidth > innerWidth }));
+  check(learn.url.includes('modo=guiado') && /PRIMERO APRENDE/.test(learn.tag) && learn.h?.includes('CONCEPTO 0') && learn.def?.includes('QUÉ ES') && learn.options === 0,
+    'el modelo guiado empieza ENSEÑANDO: la ficha del tema (qué es) y todavía sin la pregunta');
+  await shot4('guiado-ficha');
+  await p4.locator('.guided .go').tap();
+  const ask = await p4.evaluate(() => ({ tag: document.querySelector('.slide .tag')?.textContent, q: document.querySelector('.guided-q')?.textContent, code: Boolean(document.querySelector('.guided-code')), n: document.querySelectorAll('.options .option').length }));
+  check(/RESUÉLVELO/.test(ask.tag) && ask.q === '¿Qué imprime el programa 0?' && ask.code && ask.n === 4, 'después llega la pregunta (con su código y 4 opciones)');
+  await p4.locator('.options .option', { hasText: /^R0$/ }).tap();
+  await p4.waitForSelector('.guided-why.ok');
+  check(Boolean(await p4.$('.option.is-right')), 'al acertar se corrige al momento (en verde)');
+  await p4.waitForTimeout(450);
+  await shot4('guiado-acierto');
+  await p4.locator('.guided .go').tap();
+  // Segunda: vuelve a mirar la ficha (cuenta como más ayuda) y falla: ve la correcta y el porqué.
+  await p4.waitForSelector('.guided .slide .concept-face');
+  await p4.locator('.guided .go').tap();
+  await p4.locator('.guided .more-btn').tap();
+  const back = await p4.$eval('.slide .tag', (e) => e.textContent);
+  await p4.locator('.guided .go').tap();
+  await p4.locator('.options .option', { hasText: /^F1a$/ }).tap();
+  await p4.waitForSelector('.guided-why.ko');
+  const why = await p4.$eval('.guided-why', (e) => e.textContent);
+  check(/PRIMERO APRENDE/.test(back) && why.includes('Era «R1»') && why.includes('explicación 1'), '«Ver la ficha otra vez» vuelve a enseñar; al fallar, se ve la respuesta y su explicación');
+  await p4.waitForTimeout(450);
+  await shot4('guiado-fallo');
+  await p4.locator('.guided .go').tap();
+  await p4.locator('.guided .go').tap();
+  // La tercera, con el dedo de verdad (CDP) sobre la opción correcta.
+  const box = await p4.locator('.options .option', { hasText: /^R2$/ }).boundingBox();
+  await cdp4.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: box.x + box.width / 2, y: box.y + box.height / 2 }] });
+  await cdp4.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+  await p4.waitForSelector('.guided-why.ok');
+  await p4.locator('.guided .go').tap();
+  await p4.waitForSelector('.guided-end');
+  const end = await p4.evaluate(() => ({ score: document.querySelector('.end-xp')?.textContent, over: document.documentElement.scrollWidth > innerWidth }));
+  check(end.score === '2/3' && !end.over && !learn.over, `al final, cuántas (2/3) y sin salirse por los lados`);
+  await shot4('guiado-final');
+  const gev = r4.posted.filter((p) => p.path === '/memora/events').flatMap((p) => p.body.events);
+  check(gev.length === 3 && gev.every((e) => e.format === 'recognition_choice' && e.contextId.endsWith('#exam-guided')) && gev[0].hint === 1 && gev[1].hint === 2 && gev[1].correct === false,
+    'cada respuesta cuenta poco (reconocimiento con pista 1; con pista 2 si se volvió a mirar la ficha)');
+  check(!r4.posted.some((p) => p.path === '/memora/exam/result'), 'el modelo guiado no cuenta como nota de simulacro');
+  await p4.locator('.guided-end .go').tap();
+  await p4.waitForSelector('.exam-intro');
+  check(!p4.url().includes('modo=guiado'), 'desde el final se pasa al simulacro sin ayudas');
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();
