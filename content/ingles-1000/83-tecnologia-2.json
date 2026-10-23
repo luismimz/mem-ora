@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "83-tecnologia-2",
+      "title": "Misión 83 · El móvil y la red (B1)",
+      "units": [
+        {
+          "key": "g-as-as",
+          "type": "pattern",
+          "goal": "Tan rápido como = AS fast AS",
+          "rule": "Para decir que dos cosas son iguales: AS + adjetivo + AS (as tall as me). En negativo: NOT AS… AS (not as expensive as).",
+          "pieces": [
+            {
+              "text": "as",
+              "role": "fixed",
+              "hint": "tan"
+            },
+            {
+              "text": "fast",
+              "role": "slot",
+              "hint": "rápido"
+            },
+            {
+              "text": "as",
+              "role": "fixed",
+              "hint": "como"
+            }
+          ],
+          "examples": [
+            {
+              "text": "My phone is as fast as yours.",
+              "translation": "Mi móvil es tan rápido como el tuyo.",
+              "mirror": {
+                "say": "Mi móvil es tan rápido como el tuyo",
+                "pieces": [
+                  {
+                    "es": "Mi móvil",
+                    "en": "My phone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan rápido como",
+                    "en": "as fast as",
+                    "role": "word",
+                    "from": "tan rápido como",
+                    "why": "Igualdad: AS + adjetivo + AS."
+                  },
+                  {
+                    "es": "el tuyo",
+                    "en": "yours",
+                    "role": "word",
+                    "from": "el tuyo",
+                    "why": "El tuyo es una sola palabra: yours."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It isn't as expensive as I thought.",
+              "translation": "No es tan caro como pensaba.",
+              "mirror": {
+                "say": "No es tan caro como pensaba",
+                "pieces": [
+                  {
+                    "es": "(ESO) no es",
+                    "en": "It isn't",
+                    "role": "helper",
+                    "from": "No es"
+                  },
+                  {
+                    "es": "tan caro como",
+                    "en": "as expensive as",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pensé",
+                    "en": "thought",
+                    "role": "verb",
+                    "from": "pensaba"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Come as soon as possible.",
+              "translation": "Ven lo antes posible."
+            },
+            {
+              "text": "She's as tall as me.",
+              "translation": "Es tan alta como yo."
+            }
+          ],
+          "pitfalls": [
+            "«As fast than» está mal: AS… AS.",
+            "Para «lo antes posible»: as soon as possible (ASAP)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Dos AS sujetan el adjetivo como un SÁNDWICH.",
+            "emoji": "🥪"
+          }
+        },
+        {
+          "key": "device",
+          "type": "term",
+          "text": "device",
+          "meaning": "dispositivo, aparato",
+          "pronunciation": "diVÁIS",
+          "examples": [
+            {
+              "text": "Turn off all your devices.",
+              "translation": "Apaga todos tus dispositivos.",
+              "mirror": {
+                "say": "Apaga todos tus dispositivos",
+                "pieces": [
+                  {
+                    "es": "Apaga",
+                    "en": "Turn off",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todos tus dispositivos",
+                    "en": "all your devices",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A mobile device.",
+              "translation": "Un dispositivo móvil."
+            }
+          ]
+        },
+        {
+          "key": "privacy",
+          "type": "term",
+          "text": "privacy",
+          "meaning": "privacidad",
+          "pronunciation": "PRÁIvasi",
+          "examples": [
+            {
+              "text": "Protect your privacy online.",
+              "translation": "Protege tu privacidad en internet.",
+              "mirror": {
+                "say": "Protege tu privacidad en internet",
+                "pieces": [
+                  {
+                    "es": "Protege",
+                    "en": "Protect",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tu privacidad",
+                    "en": "your privacy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en línea",
+                    "en": "online",
+                    "role": "word",
+                    "from": "en internet"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Privacy settings.",
+              "translation": "Ajustes de privacidad."
+            }
+          ]
+        },
+        {
+          "key": "notification",
+          "type": "term",
+          "text": "notification",
+          "meaning": "notificación, aviso",
+          "pronunciation": "noutifiKÉIshon",
+          "examples": [
+            {
+              "text": "Turn off notifications.",
+              "translation": "Desactiva las notificaciones.",
+              "mirror": {
+                "say": "Desactiva las notificaciones",
+                "pieces": [
+                  {
+                    "es": "Apaga",
+                    "en": "Turn off",
+                    "role": "verb",
+                    "from": "Desactiva"
+                  },
+                  {
+                    "es": "notificaciones",
+                    "en": "notifications",
+                    "role": "word",
+                    "from": "las notificaciones",
+                    "why": "Hablando en general, sin «the»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A new notification.",
+              "translation": "Una notificación nueva."
+            }
+          ]
+        },
+        {
+          "key": "storage",
+          "type": "term",
+          "text": "storage",
+          "meaning": "almacenamiento",
+          "pronunciation": "STÓrich",
+          "examples": [
+            {
+              "text": "My phone is out of storage.",
+              "translation": "Mi móvil no tiene espacio.",
+              "mirror": {
+                "say": "Mi móvil no tiene espacio",
+                "pieces": [
+                  {
+                    "es": "Mi móvil",
+                    "en": "My phone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está sin",
+                    "en": "is out of",
+                    "role": "word",
+                    "from": "no tiene"
+                  },
+                  {
+                    "es": "almacenamiento",
+                    "en": "storage",
+                    "role": "word",
+                    "from": "espacio"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cloud storage.",
+              "translation": "Almacenamiento en la nube."
+            }
+          ]
+        },
+        {
+          "key": "backup",
+          "type": "term",
+          "text": "backup",
+          "meaning": "copia de seguridad",
+          "pronunciation": "BÁKap",
+          "examples": [
+            {
+              "text": "Make a backup of your files.",
+              "translation": "Haz una copia de seguridad de tus archivos.",
+              "mirror": {
+                "say": "Haz una copia de seguridad de tus archivos",
+                "pieces": [
+                  {
+                    "es": "Haz",
+                    "en": "Make",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una copia de seguridad",
+                    "en": "a backup",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de tus archivos",
+                    "en": "of your files",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Back up your phone.",
+              "translation": "Haz copia del móvil."
+            }
+          ],
+          "notes": "El verbo se escribe separado: back up."
+        },
+        {
+          "key": "browser",
+          "type": "term",
+          "text": "browser",
+          "meaning": "navegador",
+          "pronunciation": "BRÁUser",
+          "examples": [
+            {
+              "text": "Open your browser.",
+              "translation": "Abre el navegador.",
+              "mirror": {
+                "say": "Abre el navegador",
+                "pieces": [
+                  {
+                    "es": "Abre",
+                    "en": "Open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU navegador",
+                    "en": "your browser",
+                    "role": "word",
+                    "from": "el navegador"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Clear the browser history.",
+              "translation": "Borra el historial del navegador."
+            }
+          ]
+        },
+        {
+          "key": "settings",
+          "type": "term",
+          "text": "settings",
+          "meaning": "ajustes, configuración",
+          "pronunciation": "SÉtings",
+          "examples": [
+            {
+              "text": "Go to Settings.",
+              "translation": "Ve a Ajustes.",
+              "mirror": {
+                "say": "Ve a Ajustes",
+                "pieces": [
+                  {
+                    "es": "Ve",
+                    "en": "Go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Ajustes",
+                    "en": "to Settings",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Change the settings.",
+              "translation": "Cambia la configuración."
+            }
+          ]
+        },
+        {
+          "key": "signal",
+          "type": "term",
+          "text": "signal",
+          "meaning": "señal; cobertura",
+          "pronunciation": "SÍGnal",
+          "examples": [
+            {
+              "text": "There's no signal here.",
+              "translation": "Aquí no hay cobertura.",
+              "mirror": {
+                "say": "Aquí no hay cobertura",
+                "pieces": [
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "No hay",
+                    "en": "There's no",
+                    "role": "helper",
+                    "from": "no hay"
+                  },
+                  {
+                    "es": "señal",
+                    "en": "signal",
+                    "role": "word",
+                    "from": "cobertura"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "A traffic signal.",
+              "translation": "Una señal de tráfico."
+            }
+          ]
+        },
+        {
+          "key": "hack",
+          "type": "term",
+          "text": "hack",
+          "meaning": "hackear; truco",
+          "pronunciation": "JAK",
+          "examples": [
+            {
+              "text": "Someone hacked my account.",
+              "translation": "Alguien me hackeó la cuenta.",
+              "mirror": {
+                "say": "Alguien me hackeó la cuenta",
+                "pieces": [
+                  {
+                    "es": "Alguien",
+                    "en": "Someone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hackeó",
+                    "en": "hacked",
+                    "role": "verb",
+                    "from": "me hackeó"
+                  },
+                  {
+                    "es": "MI cuenta",
+                    "en": "my account",
+                    "role": "word",
+                    "from": "la cuenta",
+                    "why": "En inglés la cuenta es MÍA: my account."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A useful life hack.",
+              "translation": "Un truco útil para el día a día."
+            }
+          ]
+        },
+        {
+          "key": "screenshot",
+          "type": "term",
+          "text": "screenshot",
+          "meaning": "captura de pantalla",
+          "pronunciation": "SKRÍINshot",
+          "examples": [
+            {
+              "text": "Take a screenshot.",
+              "translation": "Haz una captura de pantalla.",
+              "mirror": {
+                "say": "Haz una captura de pantalla",
+                "pieces": [
+                  {
+                    "es": "Toma",
+                    "en": "Take",
+                    "role": "verb",
+                    "from": "Haz",
+                    "why": "Hacer una captura es TAKE a screenshot."
+                  },
+                  {
+                    "es": "una captura",
+                    "en": "a screenshot",
+                    "role": "word",
+                    "from": "una captura de pantalla"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Send me a screenshot.",
+              "translation": "Mándame una captura."
+            }
+          ]
+        },
+        {
+          "key": "subscribe",
+          "type": "term",
+          "text": "subscribe",
+          "meaning": "suscribirse",
+          "pronunciation": "sabsKRÁIB",
+          "examples": [
+            {
+              "text": "Subscribe to the channel.",
+              "translation": "Suscríbete al canal.",
+              "mirror": {
+                "say": "Suscríbete al canal",
+                "pieces": [
+                  {
+                    "es": "Suscribe",
+                    "en": "Subscribe",
+                    "role": "verb",
+                    "from": "Suscríbete"
+                  },
+                  {
+                    "es": "al canal",
+                    "en": "to the channel",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cancel your subscription.",
+              "translation": "Cancela tu suscripción."
+            }
+          ]
+        },
+        {
+          "key": "scroll",
+          "type": "term",
+          "text": "scroll",
+          "meaning": "desplazarse (por la pantalla)",
+          "pronunciation": "SKRÓUL",
+          "examples": [
+            {
+              "text": "Scroll down to the bottom.",
+              "translation": "Baja hasta el final.",
+              "mirror": {
+                "say": "Baja hasta el final",
+                "pieces": [
+                  {
+                    "es": "Desplázate abajo",
+                    "en": "Scroll down",
+                    "role": "verb",
+                    "from": "Baja"
+                  },
+                  {
+                    "es": "hasta el final",
+                    "en": "to the bottom",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I spend hours scrolling.",
+              "translation": "Me paso horas mirando el móvil."
+            }
+          ]
+        },
+        {
+          "key": "offline",
+          "type": "term",
+          "text": "offline",
+          "meaning": "sin conexión",
+          "pronunciation": "ÓFlain",
+          "examples": [
+            {
+              "text": "The app works offline.",
+              "translation": "La app funciona sin conexión.",
+              "mirror": {
+                "say": "La app funciona sin conexión",
+                "pieces": [
+                  {
+                    "es": "La app",
+                    "en": "The app",
+                    "role": "who"
+                  },
+                  {
+                    "es": "funciona",
+                    "en": "works",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sin conexión",
+                    "en": "offline",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm offline.",
+              "translation": "Estoy desconectado."
+            }
+          ]
+        },
+        {
+          "key": "cable",
+          "type": "term",
+          "text": "cable",
+          "meaning": "cable",
+          "pronunciation": "KÉIbol",
+          "examples": [
+            {
+              "text": "Where is the cable?",
+              "translation": "¿Dónde está el cable?",
+              "mirror": {
+                "say": "¿Dónde está el cable?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el cable",
+                    "en": "the cable",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A USB cable.",
+              "translation": "Un cable USB."
+            }
+          ],
+          "notes": "Se dice KÉIbol."
+        },
+        {
+          "key": "plug",
+          "type": "term",
+          "text": "plug",
+          "meaning": "enchufe; enchufar",
+          "pronunciation": "PLAG",
+          "examples": [
+            {
+              "text": "Plug it in.",
+              "translation": "Enchúfalo.",
+              "mirror": {
+                "say": "Enchúfalo",
+                "pieces": [
+                  {
+                    "es": "Enchufa",
+                    "en": "Plug",
+                    "role": "verb",
+                    "from": "Enchúfalo"
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "DENTRO",
+                    "en": "in",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where is the plug?",
+              "translation": "¿Dónde está el enchufe?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

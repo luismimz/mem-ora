@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "81-costumbres",
+      "title": "Misión 81 · Costumbres y adaptarse (B1)",
+      "units": [
+        {
+          "key": "g-be-used-to",
+          "type": "pattern",
+          "goal": "Estoy acostumbrado = I'M USED TO + -ING",
+          "rule": "Estar acostumbrado: be used to + -ING o nombre (I'm used to the cold). Acostumbrarse: get used to. Ojo: I used to = antes solía.",
+          "pieces": [
+            {
+              "text": "I'm used to",
+              "role": "fixed",
+              "hint": "estoy acostumbrado a"
+            },
+            {
+              "text": "getting up early",
+              "role": "slot",
+              "hint": "madrugar"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I'm used to getting up early.",
+              "translation": "Estoy acostumbrado a madrugar.",
+              "mirror": {
+                "say": "Estoy acostumbrado a madrugar",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper",
+                    "from": "Estoy"
+                  },
+                  {
+                    "es": "acostumbrado a",
+                    "en": "used to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "levantándome temprano",
+                    "en": "getting up early",
+                    "role": "verb",
+                    "from": "madrugar",
+                    "why": "Aquí TO es preposición: to + -ING."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You'll get used to it.",
+              "translation": "Ya te acostumbrarás.",
+              "mirror": {
+                "say": "Ya te acostumbrarás",
+                "pieces": [
+                  {
+                    "es": "(TÚ) -RÁS",
+                    "en": "You'll",
+                    "role": "helper",
+                    "from": "acostumbrarás"
+                  },
+                  {
+                    "es": "acostumbrarte",
+                    "en": "get used",
+                    "role": "verb",
+                    "from": "te acostumbrarás",
+                    "why": "Acostumbrarse es GET used to."
+                  },
+                  {
+                    "es": "A ESO",
+                    "en": "to it",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm not used to the cold.",
+              "translation": "No estoy acostumbrado al frío."
+            },
+            {
+              "text": "She is getting used to her new job.",
+              "translation": "Se está acostumbrando a su nuevo trabajo."
+            }
+          ],
+          "pitfalls": [
+            "«I used to» (sin be) es otra cosa: antes solía.",
+            "«I'm used to get up» está mal: used to getting up."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Unas ZAPATILLAS GASTADAS: estás USED TO llevarlas.",
+            "emoji": "👟"
+          }
+        },
+        {
+          "key": "adapt",
+          "type": "term",
+          "text": "adapt",
+          "meaning": "adaptarse",
+          "pronunciation": "aDÁPT",
+          "examples": [
+            {
+              "text": "It's hard to adapt to a new country.",
+              "translation": "Cuesta adaptarse a un país nuevo.",
+              "mirror": {
+                "say": "Cuesta adaptarse a un país nuevo",
+                "pieces": [
+                  {
+                    "es": "(ESO) es difícil",
+                    "en": "It's hard",
+                    "role": "helper",
+                    "from": "Cuesta"
+                  },
+                  {
+                    "es": "adaptarse",
+                    "en": "to adapt",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a un país nuevo",
+                    "en": "to a new country",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Animals adapt to the climate.",
+              "translation": "Los animales se adaptan al clima."
+            }
+          ]
+        },
+        {
+          "key": "custom",
+          "type": "term",
+          "text": "custom",
+          "meaning": "costumbre (de un lugar)",
+          "pronunciation": "KÁStom",
+          "examples": [
+            {
+              "text": "It's a local custom.",
+              "translation": "Es una costumbre del lugar.",
+              "mirror": {
+                "say": "Es una costumbre del lugar",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "costumbre",
+                    "en": "custom",
+                    "role": "word"
+                  },
+                  {
+                    "es": "local",
+                    "en": "local",
+                    "role": "word",
+                    "from": "del lugar"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Old customs.",
+              "translation": "Costumbres antiguas."
+            }
+          ],
+          "notes": "Customs (con s) es la aduana."
+        },
+        {
+          "key": "culture",
+          "type": "term",
+          "text": "culture",
+          "meaning": "cultura",
+          "pronunciation": "KÁLcher",
+          "examples": [
+            {
+              "text": "I love Japanese culture.",
+              "translation": "Me encanta la cultura japonesa.",
+              "mirror": {
+                "say": "Me encanta la cultura japonesa",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanto",
+                    "en": "love",
+                    "role": "verb",
+                    "from": "Me encanta",
+                    "why": "Encantar se da la vuelta: I love…"
+                  },
+                  {
+                    "es": "cultura",
+                    "en": "culture",
+                    "role": "word",
+                    "from": "la cultura",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "japonesa",
+                    "en": "Japanese",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Culture shock.",
+              "translation": "Choque cultural."
+            }
+          ]
+        },
+        {
+          "key": "tradition",
+          "type": "term",
+          "text": "tradition",
+          "meaning": "tradición",
+          "pronunciation": "traDÍshon",
+          "examples": [
+            {
+              "text": "It's a family tradition.",
+              "translation": "Es una tradición familiar.",
+              "mirror": {
+                "say": "Es una tradición familiar",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tradición",
+                    "en": "tradition",
+                    "role": "word"
+                  },
+                  {
+                    "es": "familiar",
+                    "en": "family",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "By tradition.",
+              "translation": "Por tradición."
+            }
+          ]
+        },
+        {
+          "key": "foreigner",
+          "type": "term",
+          "text": "foreigner",
+          "meaning": "extranjero (persona)",
+          "pronunciation": "FÓrener",
+          "examples": [
+            {
+              "text": "Many foreigners live here.",
+              "translation": "Aquí viven muchos extranjeros.",
+              "mirror": {
+                "say": "Aquí viven muchos extranjeros",
+                "pieces": [
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "viven",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "muchos extranjeros",
+                    "en": "Many foreigners",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I feel like a foreigner.",
+              "translation": "Me siento extranjero."
+            }
+          ],
+          "notes": "Ir al extranjero es go abroad."
+        },
+        {
+          "key": "local",
+          "type": "term",
+          "text": "local",
+          "meaning": "local, de la zona",
+          "pronunciation": "LÓUkal",
+          "examples": [
+            {
+              "text": "Ask a local.",
+              "translation": "Pregunta a alguien de aquí.",
+              "mirror": {
+                "say": "Pregunta a alguien de aquí",
+                "pieces": [
+                  {
+                    "es": "Pregunta",
+                    "en": "Ask",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un local",
+                    "en": "a local",
+                    "role": "word",
+                    "from": "a alguien de aquí",
+                    "why": "«Alguien de aquí» es a local; y preguntar A alguien, sin «a»."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The local market.",
+              "translation": "El mercado del barrio."
+            }
+          ]
+        },
+        {
+          "key": "accent",
+          "type": "term",
+          "text": "accent",
+          "meaning": "acento",
+          "pronunciation": "ÁKsent",
+          "examples": [
+            {
+              "text": "You have a Spanish accent.",
+              "translation": "Tienes acento español.",
+              "mirror": {
+                "say": "Tienes acento español",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "UN",
+                    "en": "a",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "acento",
+                    "en": "accent",
+                    "role": "word"
+                  },
+                  {
+                    "es": "español",
+                    "en": "Spanish",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "A strong accent.",
+              "translation": "Un acento muy marcado."
+            }
+          ]
+        },
+        {
+          "key": "typical",
+          "type": "term",
+          "text": "typical",
+          "meaning": "típico",
+          "pronunciation": "TÍpikal",
+          "examples": [
+            {
+              "text": "Paella is a typical Spanish dish.",
+              "translation": "La paella es un plato típico español.",
+              "mirror": {
+                "say": "La paella es un plato típico español",
+                "pieces": [
+                  {
+                    "es": "paella",
+                    "en": "Paella",
+                    "role": "who",
+                    "from": "La paella",
+                    "why": "Hablando en general, sin «the»."
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "plato",
+                    "en": "dish",
+                    "role": "word"
+                  },
+                  {
+                    "es": "típico español",
+                    "en": "typical Spanish",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "That's typical of him!",
+              "translation": "¡Típico de él!"
+            }
+          ]
+        },
+        {
+          "key": "behaviour",
+          "type": "term",
+          "text": "behaviour",
+          "meaning": "comportamiento",
+          "pronunciation": "biJÉIvior",
+          "examples": [
+            {
+              "text": "His behaviour was strange.",
+              "translation": "Su comportamiento fue raro.",
+              "mirror": {
+                "say": "Su comportamiento fue raro",
+                "pieces": [
+                  {
+                    "es": "Su comportamiento",
+                    "en": "His behaviour",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "raro",
+                    "en": "strange",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Good behaviour.",
+              "translation": "Buen comportamiento."
+            }
+          ],
+          "notes": "En EE. UU. se escribe behavior. El verbo es behave."
+        },
+        {
+          "key": "adjust",
+          "type": "term",
+          "text": "adjust",
+          "meaning": "ajustar; adaptarse",
+          "pronunciation": "aYÁST",
+          "examples": [
+            {
+              "text": "Adjust the seat.",
+              "translation": "Ajusta el asiento.",
+              "mirror": {
+                "say": "Ajusta el asiento",
+                "pieces": [
+                  {
+                    "es": "Ajusta",
+                    "en": "Adjust",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el asiento",
+                    "en": "the seat",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm adjusting to the new job.",
+              "translation": "Me estoy adaptando al nuevo trabajo."
+            }
+          ]
+        },
+        {
+          "key": "settle-in",
+          "type": "term",
+          "text": "settle in",
+          "meaning": "instalarse, adaptarse",
+          "pronunciation": "setol IN",
+          "examples": [
+            {
+              "text": "Have you settled in?",
+              "translation": "¿Ya te has instalado?",
+              "mirror": {
+                "say": "¿Ya te has instalado?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper",
+                    "from": "Ya… has"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "instalado",
+                    "en": "settled in",
+                    "role": "verb",
+                    "from": "te… instalado"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It takes time to settle in.",
+              "translation": "Lleva tiempo adaptarse."
+            }
+          ]
+        },
+        {
+          "key": "neighbour",
+          "type": "term",
+          "text": "neighbour",
+          "meaning": "vecino",
+          "pronunciation": "NÉIbor",
+          "examples": [
+            {
+              "text": "My neighbours are very noisy.",
+              "translation": "Mis vecinos son muy ruidosos.",
+              "mirror": {
+                "say": "Mis vecinos son muy ruidosos",
+                "pieces": [
+                  {
+                    "es": "Mis vecinos",
+                    "en": "My neighbours",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy ruidosos",
+                    "en": "very noisy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My next-door neighbour.",
+              "translation": "Mi vecino de al lado."
+            }
+          ],
+          "notes": "En EE. UU. se escribe neighbor."
+        },
+        {
+          "key": "celebrate",
+          "type": "term",
+          "text": "celebrate",
+          "meaning": "celebrar",
+          "pronunciation": "SÉlebreit",
+          "examples": [
+            {
+              "text": "We celebrated my birthday.",
+              "translation": "Celebramos mi cumpleaños.",
+              "mirror": {
+                "say": "Celebramos mi cumpleaños",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "celebramos",
+                    "en": "celebrated",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mi cumpleaños",
+                    "en": "my birthday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Let's celebrate!",
+              "translation": "¡Vamos a celebrarlo!"
+            }
+          ]
+        },
+        {
+          "key": "ceremony",
+          "type": "term",
+          "text": "ceremony",
+          "meaning": "ceremonia",
+          "pronunciation": "SÉremoni",
+          "examples": [
+            {
+              "text": "The ceremony starts at noon.",
+              "translation": "La ceremonia empieza a mediodía.",
+              "mirror": {
+                "say": "La ceremonia empieza a mediodía",
+                "pieces": [
+                  {
+                    "es": "La ceremonia",
+                    "en": "The ceremony",
+                    "role": "who"
+                  },
+                  {
+                    "es": "empieza",
+                    "en": "starts",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a mediodía",
+                    "en": "at noon",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A wedding ceremony.",
+              "translation": "Una ceremonia de boda."
+            }
+          ]
+        },
+        {
+          "key": "lifestyle",
+          "type": "term",
+          "text": "lifestyle",
+          "meaning": "estilo de vida",
+          "pronunciation": "LÁIFstail",
+          "examples": [
+            {
+              "text": "A healthy lifestyle.",
+              "translation": "Un estilo de vida sano.",
+              "mirror": {
+                "say": "Un estilo de vida sano",
+                "pieces": [
+                  {
+                    "es": "Un",
+                    "en": "A",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estilo de vida",
+                    "en": "lifestyle",
+                    "role": "word"
+                  },
+                  {
+                    "es": "sano",
+                    "en": "healthy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Change your lifestyle.",
+              "translation": "Cambia tu estilo de vida."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

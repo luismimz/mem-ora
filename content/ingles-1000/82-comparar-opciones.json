@@ -1,0 +1,712 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "associations",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "82-comparar-opciones",
+      "title": "Misión 82 · Elegir entre opciones (B1)",
+      "units": [
+        {
+          "key": "g-both-either",
+          "type": "pattern",
+          "goal": "Los dos o ninguno: BOTH, EITHER, NEITHER",
+          "rule": "BOTH = los dos (both are good). EITHER = cualquiera de los dos (either is fine). NEITHER = ninguno de los dos (neither is cheap).",
+          "pieces": [
+            {
+              "text": "Both",
+              "role": "fixed",
+              "hint": "los dos"
+            },
+            {
+              "text": "options",
+              "role": "slot",
+              "hint": "opciones"
+            },
+            {
+              "text": "are good",
+              "role": "fixed",
+              "hint": "son buenas"
+            }
+          ],
+          "examples": [
+            {
+              "text": "Both options are good.",
+              "translation": "Las dos opciones son buenas.",
+              "mirror": {
+                "say": "Las dos opciones son buenas",
+                "pieces": [
+                  {
+                    "es": "Ambas opciones",
+                    "en": "Both options",
+                    "role": "who",
+                    "from": "Las dos opciones"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "buenas",
+                    "en": "good",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Neither of them is cheap.",
+              "translation": "Ninguno de los dos es barato.",
+              "mirror": {
+                "say": "Ninguno de los dos es barato",
+                "pieces": [
+                  {
+                    "es": "Ninguno de ellos",
+                    "en": "Neither of them",
+                    "role": "who",
+                    "from": "Ninguno de los dos"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper",
+                    "from": "es",
+                    "why": "Neither va con verbo en singular: neither IS."
+                  },
+                  {
+                    "es": "barato",
+                    "en": "cheap",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Either day is fine for me.",
+              "translation": "Cualquiera de los dos días me viene bien."
+            },
+            {
+              "text": "I like both.",
+              "translation": "Me gustan los dos."
+            }
+          ],
+          "pitfalls": [
+            "«Both of them is» está mal: both va en plural (are).",
+            "«Neither is not» está mal: una sola negación (neither is)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "BOTH abraza a DOS; NEITHER no abraza a NINGUNO.",
+            "emoji": "✌️"
+          }
+        },
+        {
+          "key": "option",
+          "type": "term",
+          "text": "option",
+          "meaning": "opción",
+          "pronunciation": "ÓPshon",
+          "examples": [
+            {
+              "text": "We have no other option.",
+              "translation": "No tenemos otra opción.",
+              "mirror": {
+                "say": "No tenemos otra opción",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb",
+                    "from": "No tenemos"
+                  },
+                  {
+                    "es": "ninguna otra opción",
+                    "en": "no other option",
+                    "role": "word",
+                    "from": "otra opción",
+                    "why": "Una sola negación: we have NO other option."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A good option.",
+              "translation": "Una buena opción."
+            }
+          ]
+        },
+        {
+          "key": "choice",
+          "type": "term",
+          "text": "choice",
+          "meaning": "elección, opción",
+          "pronunciation": "CHÓIS",
+          "examples": [
+            {
+              "text": "You have a choice.",
+              "translation": "Tienes elección.",
+              "mirror": {
+                "say": "Tienes elección",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una elección",
+                    "en": "a choice",
+                    "role": "word",
+                    "from": "elección"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Good choice!",
+              "translation": "¡Buena elección!"
+            }
+          ],
+          "notes": "El verbo es choose."
+        },
+        {
+          "key": "advantage",
+          "type": "term",
+          "text": "advantage",
+          "meaning": "ventaja",
+          "pronunciation": "adVÁNtich",
+          "examples": [
+            {
+              "text": "It has many advantages.",
+              "translation": "Tiene muchas ventajas.",
+              "mirror": {
+                "say": "Tiene muchas ventajas",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "muchas ventajas",
+                    "en": "many advantages",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take advantage of it.",
+              "translation": "Aprovéchalo."
+            }
+          ]
+        },
+        {
+          "key": "disadvantage",
+          "type": "term",
+          "text": "disadvantage",
+          "meaning": "desventaja",
+          "pronunciation": "disadVÁNtich",
+          "examples": [
+            {
+              "text": "The main disadvantage is the price.",
+              "translation": "La principal desventaja es el precio.",
+              "mirror": {
+                "say": "La principal desventaja es el precio",
+                "pieces": [
+                  {
+                    "es": "La principal desventaja",
+                    "en": "The main disadvantage",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el precio",
+                    "en": "the price",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Advantages and disadvantages.",
+              "translation": "Ventajas y desventajas."
+            }
+          ]
+        },
+        {
+          "key": "compare",
+          "type": "term",
+          "text": "compare",
+          "meaning": "comparar",
+          "pronunciation": "komPÉR",
+          "examples": [
+            {
+              "text": "Compare the prices.",
+              "translation": "Compara los precios.",
+              "mirror": {
+                "say": "Compara los precios",
+                "pieces": [
+                  {
+                    "es": "Compara",
+                    "en": "Compare",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "los precios",
+                    "en": "the prices",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't compare yourself to others.",
+              "translation": "No te compares con los demás."
+            }
+          ]
+        },
+        {
+          "key": "similar",
+          "type": "term",
+          "text": "similar",
+          "meaning": "parecido",
+          "pronunciation": "SÍmilar",
+          "examples": [
+            {
+              "text": "Your phone is similar to mine.",
+              "translation": "Tu móvil se parece al mío.",
+              "mirror": {
+                "say": "Tu móvil se parece al mío",
+                "pieces": [
+                  {
+                    "es": "Tu móvil",
+                    "en": "Your phone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es parecido",
+                    "en": "is similar",
+                    "role": "word",
+                    "from": "se parece",
+                    "why": "Parecerse a algo es «ser parecido a»: be similar TO."
+                  },
+                  {
+                    "es": "al mío",
+                    "en": "to mine",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Very similar.",
+              "translation": "Muy parecido."
+            }
+          ]
+        },
+        {
+          "key": "alternative",
+          "type": "term",
+          "text": "alternative",
+          "meaning": "alternativa",
+          "pronunciation": "olTÉRnativ",
+          "examples": [
+            {
+              "text": "Is there an alternative?",
+              "translation": "¿Hay alguna alternativa?",
+              "mirror": {
+                "say": "¿Hay alguna alternativa?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una alternativa",
+                    "en": "an alternative",
+                    "role": "word",
+                    "from": "alguna alternativa"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "An alternative plan.",
+              "translation": "Un plan alternativo."
+            }
+          ]
+        },
+        {
+          "key": "decision",
+          "type": "term",
+          "text": "decision",
+          "meaning": "decisión",
+          "pronunciation": "diSÍyon",
+          "examples": [
+            {
+              "text": "It's a difficult decision.",
+              "translation": "Es una decisión difícil.",
+              "mirror": {
+                "say": "Es una decisión difícil",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Es"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "decisión",
+                    "en": "decision",
+                    "role": "word"
+                  },
+                  {
+                    "es": "difícil",
+                    "en": "difficult",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Make a decision.",
+              "translation": "Toma una decisión."
+            }
+          ],
+          "notes": "Tomar una decisión es MAKE a decision."
+        },
+        {
+          "key": "worth",
+          "type": "term",
+          "text": "worth",
+          "meaning": "que vale la pena",
+          "pronunciation": "UÉRZ",
+          "examples": [
+            {
+              "text": "It's worth it.",
+              "translation": "Merece la pena.",
+              "mirror": {
+                "say": "Merece la pena",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper",
+                    "from": "Merece"
+                  },
+                  {
+                    "es": "que vale",
+                    "en": "worth",
+                    "role": "word",
+                    "from": "la pena"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's not worth the money.",
+              "translation": "No vale lo que cuesta."
+            }
+          ]
+        },
+        {
+          "key": "quality",
+          "type": "term",
+          "text": "quality",
+          "meaning": "calidad",
+          "pronunciation": "KUÓliti",
+          "examples": [
+            {
+              "text": "Good quality food.",
+              "translation": "Comida de buena calidad.",
+              "mirror": {
+                "say": "Comida de buena calidad",
+                "pieces": [
+                  {
+                    "es": "Comida",
+                    "en": "food",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de buena calidad",
+                    "en": "Good quality",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Quality over quantity.",
+              "translation": "Calidad antes que cantidad."
+            }
+          ]
+        },
+        {
+          "key": "brand",
+          "type": "term",
+          "text": "brand",
+          "meaning": "marca",
+          "pronunciation": "BRAND",
+          "examples": [
+            {
+              "text": "What brand is it?",
+              "translation": "¿De qué marca es?",
+              "mirror": {
+                "say": "¿De qué marca es?",
+                "pieces": [
+                  {
+                    "es": "Qué marca",
+                    "en": "What brand",
+                    "role": "word",
+                    "from": "De qué marca"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A famous brand.",
+              "translation": "Una marca famosa."
+            }
+          ]
+        },
+        {
+          "key": "value",
+          "type": "term",
+          "text": "value",
+          "meaning": "valor",
+          "pronunciation": "VÁliu",
+          "examples": [
+            {
+              "text": "Good value for money.",
+              "translation": "Buena relación calidad-precio.",
+              "mirror": {
+                "say": "Buena relación calidad-precio",
+                "pieces": [
+                  {
+                    "es": "Buen valor",
+                    "en": "Good value",
+                    "role": "word",
+                    "from": "Buena relación"
+                  },
+                  {
+                    "es": "por el dinero",
+                    "en": "for money",
+                    "role": "word",
+                    "from": "calidad-precio"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Family values.",
+              "translation": "Valores familiares."
+            }
+          ]
+        },
+        {
+          "key": "feature",
+          "type": "term",
+          "text": "feature",
+          "meaning": "característica, función",
+          "pronunciation": "FÍIcher",
+          "examples": [
+            {
+              "text": "This phone has great features.",
+              "translation": "Este móvil tiene funciones geniales.",
+              "mirror": {
+                "say": "Este móvil tiene funciones geniales",
+                "pieces": [
+                  {
+                    "es": "Este móvil",
+                    "en": "This phone",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "funciones",
+                    "en": "features",
+                    "role": "word"
+                  },
+                  {
+                    "es": "geniales",
+                    "en": "great",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "A new feature.",
+              "translation": "Una función nueva."
+            }
+          ]
+        },
+        {
+          "key": "pros-and-cons",
+          "type": "term",
+          "text": "pros and cons",
+          "meaning": "pros y contras",
+          "pronunciation": "prous and KONS",
+          "examples": [
+            {
+              "text": "Let's look at the pros and cons.",
+              "translation": "Veamos los pros y los contras.",
+              "mirror": {
+                "say": "Veamos los pros y los contras",
+                "pieces": [
+                  {
+                    "es": "Miremos",
+                    "en": "Let's look at",
+                    "role": "verb",
+                    "from": "Veamos"
+                  },
+                  {
+                    "es": "los pros y contras",
+                    "en": "the pros and cons",
+                    "role": "word",
+                    "from": "los pros y los contras"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Weigh up the pros and cons.",
+              "translation": "Sopesa los pros y los contras."
+            }
+          ]
+        },
+        {
+          "key": "depend",
+          "type": "term",
+          "text": "depend",
+          "meaning": "depender",
+          "pronunciation": "diPÉND",
+          "examples": [
+            {
+              "text": "It depends on the price.",
+              "translation": "Depende del precio.",
+              "mirror": {
+                "say": "Depende del precio",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "depende",
+                    "en": "depends",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sobre el precio",
+                    "en": "on the price",
+                    "role": "word",
+                    "from": "del precio",
+                    "why": "Depender DE algo es depend ON."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You can depend on me.",
+              "translation": "Puedes contar conmigo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
