@@ -34,8 +34,8 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   calidad** con el usuario (asociaciones y espejos que no le convenzan) antes de ampliar más; después, B1 (phrasal
   verbs 2, conectores de texto, presente perfecto en uso real, inglés de entrevistas y del módulo DAM).
 - **[inglés] La escena que cambia (D-084, 24-oct-2026):** ✓ tarjetas «Mira cómo cambia» y «¿Dónde está?» con el 🐛 y
-  el 🎩 en «¿Dónde está?» (misión 42). Siguiente: escenas en comparativos (🐭 < 🐶 < 🐘), superlativos, *there is/are*
-  (cuántos hay), contrarios (big/small, full/empty) y adverbios de frecuencia. Después, **«La cadena»**: patrón
+  el 🎩 en «¿Dónde está?» (misión 42). ✓ Comparativos (🐘 > 🐶 > 🐱 > 🐭), superlativos (la 👑 marca al ganador) y
+  *there is/are* (🍎 en el plato). Siguiente: contrarios (big/small, full/empty) y adverbios de frecuencia. Después, **«La cadena»**: patrón
   repetido con ritmo («Is this a cat? No, it isn't…») como calentamiento. Mejora pendiente: al fallar en la escena,
   enseñar la escena correcta dentro de la ficha.
 - ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).

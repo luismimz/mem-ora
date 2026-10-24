@@ -145,6 +145,156 @@
             {
               "text": "The worst film ever.",
               "translation": "La peor película de la historia."
+            },
+            {
+              "text": "The elephant is the biggest.",
+              "translation": "El elefante es el más grande.",
+              "stage": [
+                {
+                  "e": "🐭",
+                  "x": 12,
+                  "y": 66,
+                  "s": 0.8
+                },
+                {
+                  "e": "🐶",
+                  "x": 36,
+                  "y": 64,
+                  "s": 1.3
+                },
+                {
+                  "e": "🐘",
+                  "x": 74,
+                  "y": 58,
+                  "s": 2.0
+                },
+                {
+                  "e": "👑",
+                  "x": 74,
+                  "y": 28,
+                  "s": 1
+                }
+              ]
+            },
+            {
+              "text": "The mouse is the smallest.",
+              "translation": "El ratón es el más pequeño.",
+              "stage": [
+                {
+                  "e": "🐭",
+                  "x": 12,
+                  "y": 66,
+                  "s": 0.8
+                },
+                {
+                  "e": "🐶",
+                  "x": 36,
+                  "y": 64,
+                  "s": 1.3
+                },
+                {
+                  "e": "🐘",
+                  "x": 74,
+                  "y": 58,
+                  "s": 2.0
+                },
+                {
+                  "e": "👑",
+                  "x": 12,
+                  "y": 50,
+                  "s": 0.8
+                }
+              ]
+            },
+            {
+              "text": "The rabbit is the fastest.",
+              "translation": "El conejo es el más rápido.",
+              "stage": [
+                {
+                  "e": "🐌",
+                  "x": 18,
+                  "y": 64,
+                  "s": 1.3
+                },
+                {
+                  "e": "🐢",
+                  "x": 48,
+                  "y": 64,
+                  "s": 1.4
+                },
+                {
+                  "e": "🐇",
+                  "x": 80,
+                  "y": 64,
+                  "s": 1.4
+                },
+                {
+                  "e": "👑",
+                  "x": 80,
+                  "y": 40,
+                  "s": 0.9
+                }
+              ]
+            },
+            {
+              "text": "The snail is the slowest.",
+              "translation": "El caracol es el más lento.",
+              "stage": [
+                {
+                  "e": "🐌",
+                  "x": 18,
+                  "y": 64,
+                  "s": 1.3
+                },
+                {
+                  "e": "🐢",
+                  "x": 48,
+                  "y": 64,
+                  "s": 1.4
+                },
+                {
+                  "e": "🐇",
+                  "x": 80,
+                  "y": 64,
+                  "s": 1.4
+                },
+                {
+                  "e": "👑",
+                  "x": 18,
+                  "y": 40,
+                  "s": 0.9
+                }
+              ]
+            },
+            {
+              "text": "The tree is the tallest.",
+              "translation": "El árbol es el más alto.",
+              "stage": [
+                {
+                  "e": "🌱",
+                  "x": 16,
+                  "y": 70,
+                  "s": 1
+                },
+                {
+                  "e": "🌿",
+                  "x": 44,
+                  "y": 64,
+                  "s": 1.5
+                },
+                {
+                  "e": "🌳",
+                  "x": 76,
+                  "y": 56,
+                  "s": 2.4
+                },
+                {
+                  "e": "👑",
+                  "x": 76,
+                  "y": 22,
+                  "s": 0.9
+                }
+              ]
             }
           ],
           "pitfalls": [
