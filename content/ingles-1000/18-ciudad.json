@@ -111,6 +111,115 @@
             {
               "text": "There isn't any milk.",
               "translation": "No hay leche."
+            },
+            {
+              "text": "There is an apple on the plate.",
+              "translation": "Hay una manzana en el plato.",
+              "stage": [
+                {
+                  "e": "🍽️",
+                  "x": 50,
+                  "y": 62,
+                  "s": 3
+                },
+                {
+                  "e": "🍎",
+                  "x": 50,
+                  "y": 55,
+                  "s": 1.2,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "There are two apples on the plate.",
+              "translation": "Hay dos manzanas en el plato.",
+              "stage": [
+                {
+                  "e": "🍽️",
+                  "x": 50,
+                  "y": 62,
+                  "s": 3
+                },
+                {
+                  "e": "🍎",
+                  "x": 40,
+                  "y": 55,
+                  "s": 1.2,
+                  "z": 1
+                },
+                {
+                  "e": "🍎",
+                  "x": 60,
+                  "y": 55,
+                  "s": 1.2,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "There are three apples on the plate.",
+              "translation": "Hay tres manzanas en el plato.",
+              "stage": [
+                {
+                  "e": "🍽️",
+                  "x": 50,
+                  "y": 62,
+                  "s": 3
+                },
+                {
+                  "e": "🍎",
+                  "x": 34,
+                  "y": 56,
+                  "s": 1.1,
+                  "z": 1
+                },
+                {
+                  "e": "🍎",
+                  "x": 50,
+                  "y": 52,
+                  "s": 1.1,
+                  "z": 1
+                },
+                {
+                  "e": "🍎",
+                  "x": 66,
+                  "y": 56,
+                  "s": 1.1,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "There isn't an apple on the plate.",
+              "translation": "No hay ninguna manzana en el plato.",
+              "stage": [
+                {
+                  "e": "🍽️",
+                  "x": 50,
+                  "y": 62,
+                  "s": 3
+                }
+              ]
+            },
+            {
+              "text": "There is a bug on the plate.",
+              "translation": "Hay un bicho en el plato.",
+              "stage": [
+                {
+                  "e": "🍽️",
+                  "x": 50,
+                  "y": 62,
+                  "s": 3
+                },
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 55,
+                  "s": 1.2,
+                  "z": 1
+                }
+              ]
             }
           ],
           "pitfalls": [

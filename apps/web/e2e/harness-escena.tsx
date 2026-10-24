@@ -5,9 +5,11 @@ import { buildFlowSession, type SessionUnit } from '@memora/experiences';
 import '../src/styles.css';
 import { Feed } from '../src/Feed';
 import type { SessionPayload } from '../src/api';
-import course from '../../../content/ingles-1000/42-objetos.json';
 
-const raw = (course as unknown as { modules: Array<{ units: Array<Record<string, unknown>> }> }).modules[0]!.units.find((u) => u.key === 'g-place')!;
+// Cualquier truco del curso con escenas: ?k=g-comparatives (por defecto, ¿Dónde está?).
+const files = import.meta.glob('../../../content/ingles-1000/*.json', { eager: true, import: 'default' }) as Record<string, { modules: Array<{ units: Array<Record<string, unknown>> }> }>;
+const wanted = new URLSearchParams(location.search).get('k') ?? 'g-place';
+const raw = Object.values(files).flatMap((f) => f.modules.flatMap((m) => m.units)).find((u) => u.key === wanted)!;
 const { key, type, association, ...payload } = raw as { key: string; type: string; association?: { technique: string; scene: string; emoji?: string } } & Record<string, unknown>;
 const units: Record<string, SessionUnit> = {
   [key]: {

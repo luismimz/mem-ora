@@ -141,6 +141,108 @@
             {
               "text": "Today is worse than yesterday.",
               "translation": "Hoy es peor que ayer."
+            },
+            {
+              "text": "The elephant is bigger than the dog.",
+              "translation": "El elefante es más grande que el perro.",
+              "stage": [
+                {
+                  "e": "🐘",
+                  "x": 36,
+                  "y": 58,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐶",
+                  "x": 78,
+                  "y": 66,
+                  "s": 1.1
+                }
+              ]
+            },
+            {
+              "text": "The dog is bigger than the cat.",
+              "translation": "El perro es más grande que el gato.",
+              "stage": [
+                {
+                  "e": "🐶",
+                  "x": 32,
+                  "y": 60,
+                  "s": 2
+                },
+                {
+                  "e": "🐱",
+                  "x": 75,
+                  "y": 66,
+                  "s": 1
+                }
+              ]
+            },
+            {
+              "text": "The cat is bigger than the mouse.",
+              "translation": "El gato es más grande que el ratón.",
+              "stage": [
+                {
+                  "e": "🐱",
+                  "x": 32,
+                  "y": 60,
+                  "s": 1.8
+                },
+                {
+                  "e": "🐭",
+                  "x": 75,
+                  "y": 68,
+                  "s": 0.8
+                }
+              ]
+            },
+            {
+              "text": "The tree is taller than the house.",
+              "translation": "El árbol es más alto que la casa.",
+              "stage": [
+                {
+                  "e": "🌳",
+                  "x": 32,
+                  "y": 48,
+                  "s": 2.6
+                },
+                {
+                  "e": "🏠",
+                  "x": 74,
+                  "y": 68,
+                  "s": 1.3
+                }
+              ]
+            },
+            {
+              "text": "The coffee is hotter than the ice cream.",
+              "translation": "El café está más caliente que el helado.",
+              "stage": [
+                {
+                  "e": "☕",
+                  "x": 30,
+                  "y": 62,
+                  "s": 1.7
+                },
+                {
+                  "e": "🔥",
+                  "x": 30,
+                  "y": 36,
+                  "s": 1
+                },
+                {
+                  "e": "🍦",
+                  "x": 72,
+                  "y": 62,
+                  "s": 1.7
+                },
+                {
+                  "e": "❄️",
+                  "x": 72,
+                  "y": 36,
+                  "s": 1
+                }
+              ]
             }
           ],
           "pitfalls": [

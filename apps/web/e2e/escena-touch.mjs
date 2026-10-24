@@ -69,8 +69,10 @@ try {
   await s.page.waitForTimeout(250);
   check(await s.page.evaluate(() => document.querySelector('.slide').classList.contains('right')), 'tocar la correcta la marca en verde');
   if (shots) await s.page.screenshot({ path: `${shots}/escena-acierto.png` });
-  await s.page.waitForTimeout(1500);
-  check(!/DÓNDE ESTÁ|QUÉ PASA AQUÍ/.test(await s.tag()) || (await s.step()).id !== spot.id, 'al acertar pasa sola a la siguiente tarjeta');
+  // Al acertar suena la frase (audio Kokoro) y después pasa sola: se espera a que cambie la etiqueta.
+  let moved = false;
+  for (let i = 0; i < 20 && !moved; i++) { await s.page.waitForTimeout(250); moved = !/DÓNDE ESTÁ|QUÉ PASA AQUÍ/.test(await s.tag()); }
+  check(moved, 'al acertar pasa sola a la siguiente tarjeta (tras oír la frase)');
   await s.page.close();
 
   // 3. Fallar enseña la ficha.
