@@ -109,6 +109,82 @@
             {
               "text": "Is it big enough?",
               "translation": "¿Es lo bastante grande?"
+            },
+            {
+              "text": "The hat is too big for the bug.",
+              "translation": "El sombrero es demasiado grande para el bicho.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 80,
+                  "s": 0.8
+                },
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 3,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "The hat is too small for the bug.",
+              "translation": "El sombrero es demasiado pequeño para el bicho.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 62,
+                  "s": 2.6
+                },
+                {
+                  "e": "🎩",
+                  "x": 39,
+                  "y": 40,
+                  "s": 0.6,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "The hat is big enough for the bug.",
+              "translation": "El sombrero es lo bastante grande para el bicho.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 66,
+                  "s": 1.4
+                },
+                {
+                  "e": "🎩",
+                  "x": 45,
+                  "y": 52,
+                  "s": 1.2,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "The box is too small for the cat.",
+              "translation": "La caja es demasiado pequeña para el gato.",
+              "stage": [
+                {
+                  "e": "🐱",
+                  "x": 50,
+                  "y": 48,
+                  "s": 2.4
+                },
+                {
+                  "e": "📦",
+                  "x": 50,
+                  "y": 78,
+                  "s": 1,
+                  "z": 1
+                }
+              ]
             }
           ],
           "pitfalls": [

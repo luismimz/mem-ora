@@ -256,14 +256,22 @@ function Reel({ unit, focus, courseId, onNext }: { unit: SessionUnit; focus?: As
 }
 
 /** Aviso al fallar: la asociación completa (se enseña en el error). */
-function Teach({ unit, note, courseId, onNext }: { unit: SessionUnit; note?: string; courseId: string; onNext: () => void }) {
+function Teach({ unit, note, scene, courseId, onNext }: { unit: SessionUnit; note?: string; scene?: number; courseId: string; onNext: () => void }) {
   // D-082: al fallar una palabra cuya frase tiene espejo, se ve cómo se construye (en el momento en que más sirve).
+  // D-084: al fallar en una escena, se ve la escena correcta con su frase.
+  const shown = scene === undefined ? undefined : stagedOf(unit)[scene];
   const mirrored = unit.type === 'term' ? (unit.payload as { examples?: Array<{ text: string; mirror?: Mirror }> }).examples?.find((e) => e.mirror) : undefined;
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className="teach">
       <p className="tag ko">RECUÉRDALO ASÍ · VUELVE EN UN MOMENTO</p>
       {note && <p className="teach-note">{note}</p>}
       {mirrored && <MirrorAnim unit={unit} m={mirrored.mirror!} text={mirrored.text} compact />}
+      {shown && (
+        <div className="teach-scene">
+          <Stage actors={shown.stage!} size="small" label={shown.text} />
+          <p><b lang={unit.language}>{shown.text}</b><br /><span>{shown.translation}</span></p>
+        </div>
+      )}
       {unit.type === 'pattern' ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="teach" />}
     </Slide>
   );
@@ -939,7 +947,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const units = batch.units;
   const [index, setIndex] = useState(batch.state.index);
   const [outcomes, setOutcomes] = useState<Record<string, Outcome>>(batch.state.outcomes);
-  const [teaching, setTeaching] = useState<{ key: string; note?: string } | null>(null);
+  const [teaching, setTeaching] = useState<{ key: string; note?: string; scene?: number } | null>(null);
   const [xp, setXp] = useState(0);
   const [combo, setCombo] = useState(0);
   const [best, setBest] = useState(0);
@@ -1051,7 +1059,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const pct = Math.round((position / Math.max(1, visible.length)) * 100);
 
   let card: ReactNode = null;
-  if (teaching && units[teaching.key]) card = <Teach key={`teach-${step?.id}`} unit={units[teaching.key]!} {...(teaching.note ? { note: teaching.note } : {})} courseId={courseId} onNext={() => { setTeaching(null); void advance({ correct: false, hint: 0 }); }} />;
+  if (teaching && units[teaching.key]) card = <Teach key={`teach-${step?.id}`} unit={units[teaching.key]!} {...(teaching.note ? { note: teaching.note } : {})} {...(teaching.scene !== undefined ? { scene: teaching.scene } : {})} courseId={courseId} onNext={() => { setTeaching(null); void advance({ correct: false, hint: 0 }); }} />;
   else if (!step || skip) card = null;
   else if (step.kind === 'reel' && unit) card = <Reel key={step.id} unit={unit} focus={step.focus} courseId={courseId} onNext={() => { for (const s of unit.skills) queue.current.push(event(unit, s.key, { kind: 'exposure' })); void advance(); }} />;
   else if (step.kind === 'quick' && unit) card = <Quick key={step.id} unit={unit} reverse={Boolean(step.reverse)} retry={Boolean(step.retry)} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#quick${step.reverse ? '-inv' : ''}`, 10)} />;
@@ -1059,7 +1067,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
-  else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening')} />;
+  else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
   else if (step.kind === 'challenge' && unit && step.typed) card = <Complete key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#level-${step.exercise ?? 0}`, 30, step.skillKey, format, 0, note)} />;

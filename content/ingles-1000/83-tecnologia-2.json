@@ -126,6 +126,78 @@
             {
               "text": "She's as tall as me.",
               "translation": "Es tan alta como yo."
+            },
+            {
+              "text": "The cat is as big as the dog.",
+              "translation": "El gato es tan grande como el perro.",
+              "stage": [
+                {
+                  "e": "🐱",
+                  "x": 30,
+                  "y": 60,
+                  "s": 1.7
+                },
+                {
+                  "e": "🐶",
+                  "x": 72,
+                  "y": 60,
+                  "s": 1.7
+                }
+              ]
+            },
+            {
+              "text": "The cat isn't as big as the dog.",
+              "translation": "El gato no es tan grande como el perro.",
+              "stage": [
+                {
+                  "e": "🐱",
+                  "x": 30,
+                  "y": 68,
+                  "s": 1
+                },
+                {
+                  "e": "🐶",
+                  "x": 68,
+                  "y": 56,
+                  "s": 2.3
+                }
+              ]
+            },
+            {
+              "text": "The dog isn't as big as the cat.",
+              "translation": "El perro no es tan grande como el gato.",
+              "stage": [
+                {
+                  "e": "🐱",
+                  "x": 32,
+                  "y": 56,
+                  "s": 2.3
+                },
+                {
+                  "e": "🐶",
+                  "x": 72,
+                  "y": 68,
+                  "s": 1
+                }
+              ]
+            },
+            {
+              "text": "The tree is as tall as the house.",
+              "translation": "El árbol es tan alto como la casa.",
+              "stage": [
+                {
+                  "e": "🌳",
+                  "x": 30,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🏠",
+                  "x": 72,
+                  "y": 55,
+                  "s": 2.2
+                }
+              ]
             }
           ],
           "pitfalls": [

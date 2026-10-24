@@ -35,9 +35,10 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   verbs 2, conectores de texto, presente perfecto en uso real, inglés de entrevistas y del módulo DAM).
 - **[inglés] La escena que cambia (D-084, 24-oct-2026):** ✓ tarjetas «Mira cómo cambia» y «¿Dónde está?» con el 🐛 y
   el 🎩 en «¿Dónde está?» (misión 42). ✓ Comparativos (🐘 > 🐶 > 🐱 > 🐭), superlativos (la 👑 marca al ganador) y
-  *there is/are* (🍎 en el plato). Siguiente: contrarios (big/small, full/empty) y adverbios de frecuencia. Después, **«La cadena»**: patrón
-  repetido con ritmo («Is this a cat? No, it isn't…») como calentamiento. Mejora pendiente: al fallar en la escena,
-  enseñar la escena correcta dentro de la ficha.
+  *there is/are* (🍎 en el plato). ✓ Frecuencia (☕ del bicho: always → never), too/enough (🎩 demasiado grande o
+  pequeño para el 🐛) y as…as (🐱 y 🐶). ✓ Al fallar en la escena, la ficha enseña la escena correcta con su frase.
+  Siguiente: **«La cadena»**: patrón repetido con ritmo («Is this a cat? No, it isn't…») como calentamiento. Más
+  escenas posibles: some/any, much/many, presente continuo.
 - ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).
 
 ## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)

@@ -519,6 +519,11 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .learn-asked { margin: .5rem 0 0; font-size: .85rem; font-weight: 800; color: #43d68b; }
 .learn-example { display: flex; flex-direction: column; gap: .15rem; }
 .learn-example + .learn-example { margin-top: .35rem; }
+.teach-scene { display: flex; align-items: center; gap: .8rem; margin: .2rem auto; max-width: 34rem; }
+.teach-scene .scene-box { width: 7.5rem; flex: none; }
+.teach-scene .scene-box .actor { font-size: 1.3rem; }
+.teach-scene p { margin: 0; line-height: 1.35; }
+.teach-scene span { opacity: .8; }
 .teach-note { margin: 0 auto; max-width: 34rem; padding: .7rem .9rem; border-radius: 1rem; background: rgba(255,107,91,.18); font-weight: 800; text-align: center; overflow-wrap: anywhere; }
 .complete { display: flex; gap: .5rem; align-items: stretch; }
 .complete input.write { margin: 0; flex: 1; min-width: 0; font-size: 1.3rem; }
