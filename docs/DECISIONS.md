@@ -802,3 +802,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - El **simulacro** (sin ayudas, 30 preguntas, 60 min) se mantiene y se ofrece al terminar el modelo guiado.
 - Los exámenes de práctica y PAC de ILERNA (regla 13) entrarán como preguntas de estos modelos cuando estén en
   `private/`; hoy no hay ninguno.
+
+## D-084 · La escena que cambia (usuario, 24-oct-2026)
+- **Por qué (usuario):** vídeos de enseñanza de inglés con imágenes y canciones («Where is the donut?»): una misma escena
+  en la que solo cambia un detalle enseña mejor las preposiciones que una frase suelta. El usuario elige el 🐛 y el 🎩 y
+  pide extenderlo al resto del contenido para que aprender sea dinámico y divertido. Aprueba el cambio del estándar.
+- **Qué:** campo `stage` en los ejemplos (emojis colocados en un escenario de 100 × 100, con tamaño y capa; validado:
+  dentro del escenario, como mínimo 3 escenas distintas). En el Flujo, tras la ficha de un truco con escenas:
+  «👀 Mira cómo cambia» (la escena se transforma frase a frase con voz) y «¿Dónde está?» (oír la frase y tocar su
+  escena entre tres, o ver la escena y elegir la frase). Después, «Construye la frase» como siempre.
+- **Peso honesto (regla 9):** «¿Dónde está?» es reconocer (escuchando o eligiendo): pesa poco y practica «recordar».
+- **Primer contenido:** «¿Dónde está?» (misión 42) con siete escenas: on, in, under, next to, behind, in front of y
+  between. Después, comparativos, superlativos, *there is/are* y contrarios.
+- **Corrección:** «Construye la frase paso a paso» (el otro vídeo) ya existía: es el tren de la frase (D-082).

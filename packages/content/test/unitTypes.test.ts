@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { DEFAULT_SKILLS, describeContentIssue, emptyPayload, fieldLabel, mirrorIssues, validateUnitPayload } from '../src';
+import { DEFAULT_SKILLS, describeContentIssue, emptyPayload, fieldLabel, mirrorIssues, stageIssues, validateUnitPayload } from '../src';
 import { borrow, canI } from './fixtures';
 
 const codes = (type: string, payload: unknown) => validateUnitPayload(type, payload).map((i) => `${i.code}@${i.path}`);
@@ -82,5 +82,27 @@ describe('tren de la frase (D-082)', () => {
   it('un «por qué» sin pieza que cambie no se vería nunca', () => {
     const m = { say: 'Siempre bebo café', pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'bebo', en: 'drink', role: 'verb', why: 'Sin explicación visible.' }] };
     expect(mirrorIssues(m, 'I drink', 'm').map((i) => i.code)).toEqual(['mirror_why_without_from']);
+  });
+});
+
+describe('la escena que cambia (D-084)', () => {
+  const hat = { e: '🎩', x: 50, y: 70, s: 2 };
+  const ex = (text: string, bug: { x: number; y: number; z?: number }) => ({ text, translation: 'x', stage: [hat, { e: '🐛', ...bug }] });
+  const pattern = (examples: unknown[]) => ({ goal: 'Dónde está', rule: 'IN, ON, UNDER', pieces: [{ text: 'The bug is', role: 'fixed' }, { text: 'on', role: 'slot' }], examples });
+  it('tres escenas distintas son válidas', () => {
+    const p = pattern([ex('The bug is on the hat.', { x: 50, y: 45 }), ex('The bug is under the hat.', { x: 50, y: 92 }), ex('The bug is next to the hat.', { x: 82, y: 70 })]);
+    expect(validateUnitPayload('pattern', p)).toEqual([]);
+  });
+  it('con menos de tres escenas no hay juego posible', () => {
+    const p = pattern([ex('The bug is on the hat.', { x: 50, y: 45 }), ex('The bug is under the hat.', { x: 50, y: 92 }), { text: 'Where is the bug?', translation: 'x' }]);
+    expect(validateUnitPayload('pattern', p).map((i) => i.code)).toEqual(['stage_too_few']);
+  });
+  it('dos escenas idénticas no se pueden distinguir', () => {
+    const p = pattern([ex('The bug is on the hat.', { x: 50, y: 45 }), ex('The bug is above the hat.', { x: 50, y: 45 }), ex('The bug is next to the hat.', { x: 82, y: 70 })]);
+    expect(validateUnitPayload('pattern', p).map((i) => i.code)).toEqual(['stage_duplicate']);
+  });
+  it('actores fuera del escenario, de tamaño absurdo o con capa decimal', () => {
+    expect(stageIssues([{ e: '🐛', x: 120, y: 50, s: 9, z: 0.5 }], 's').map((i) => i.code)).toEqual(['stage_out_of_bounds', 'stage_bad_scale', 'stage_bad_layer']);
+    expect(describeContentIssue(stageIssues([{ e: '🐛', x: -1, y: 50 }], 'examples.0.stage')[0]!)).toContain('de 0 a 100');
   });
 });

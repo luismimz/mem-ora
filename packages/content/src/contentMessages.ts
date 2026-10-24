@@ -57,6 +57,12 @@ const FIELD_ES: Record<string, string> = {
   title: 'título',
   association: 'asociación',
   scene: 'escena',
+  stage: 'escena dibujada',
+  e: 'emoji',
+  x: 'posición horizontal',
+  y: 'posición vertical',
+  s: 'tamaño',
+  z: 'capa',
   sceneTarget: 'escena en el idioma del contenido',
   emoji: 'ilustración',
   contentLanguage: 'idioma del contenido',
@@ -66,7 +72,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -126,6 +132,11 @@ const es: Record<string, Template> = {
   mirror_bad_order: (_p, f) => `${f}: el orden en inglés debe usar cada pieza una sola vez (0, 1, 2…).`,
   mirror_mismatch: (p, f) => `${f}: las piezas en inglés dicen «${p.got}» y la frase es «${p.want}».`,
   mirror_signal_es: (_p, f) => `${f}: un semáforo (do, did, will) no lleva español; si la pieza tiene español, es «word».`,
+  stage_out_of_bounds: (_p, f) => `${f}: la posición va de 0 a 100 dentro del escenario.`,
+  stage_bad_scale: (p, f) => `${f}: el tamaño va de ${p.min} a ${p.max} (1 es el normal).`,
+  stage_bad_layer: (_p, f) => `${f}: la capa es un número entero (mayor, más delante).`,
+  stage_too_few: (p) => `La escena que cambia necesita al menos ${p.min} ejemplos con escena (hay ${p.count}).`,
+  stage_duplicate: (p, f) => `${f}: es la misma escena que la del ejemplo ${Number(p.other) + 1}; en el juego no se podrían distinguir.`,
   mirror_why_without_from: (_p, f) => `${f}: el «por qué» solo se ve si la pieza cambia («from»); añade «from» o quítalo.`,
   story_too_long: (p, f) => `${f}: la historia tiene ${p.words} palabras; el máximo es ${p.max}.`,
   note_not_in_story: (_p, f) => `${f}: nombra en MAYÚSCULAS un elemento que aparezca en la historia (así la línea queda atada a ella).`,

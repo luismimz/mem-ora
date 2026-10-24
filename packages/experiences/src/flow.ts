@@ -43,6 +43,16 @@ export function mirrorExamples(u: SessionUnit): number[] {
   return examples.flatMap((e, i) => (e.mirror ? [i] : []));
 }
 
+/** Escenas mínimas para jugar a «¿Dónde está?» (D-084): se eligen entre tres. */
+export const FLOW_STAGE_MIN = 3;
+
+/** Ejemplos con escena dibujada (D-084), por su posición. Vacío si no llegan al mínimo para jugar. */
+export function stagedExamples(u: SessionUnit): number[] {
+  const examples = ((u.payload as { examples?: Array<{ stage?: unknown[] }> }).examples ?? []);
+  const out = examples.flatMap((e, i) => (Array.isArray(e.stage) && e.stage.length ? [i] : []));
+  return out.length >= FLOW_STAGE_MIN ? out : [];
+}
+
 /** Primer ejemplo que se puede construir con fichas; `null` si no hay ninguno. */
 export function buildableExample(u: SessionUnit): number | null {
   return buildableExamples(u)[0] ?? null;
@@ -152,6 +162,15 @@ export function buildFlowSession(input: {
     const n = options.find((x) => x !== shown) ?? options[0];
     return skill && n !== undefined ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
   };
+  // D-084: la escena que cambia. Primero se mira (el bicho se mueve y suena cada frase) y después se juega: oír la frase y
+  // tocar la escena correcta, o ver la escena y elegir la frase. Reconocer pesa poco; producir llega con «Construye».
+  const spot = (u: string, avoid?: number): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'recall');
+    const st = stagedExamples(units[u]!);
+    const options = st.filter((n) => n !== avoid);
+    if (!skill || !options.length) return null;
+    return { kind: 'spot', unitKey: u, scene: -4, skillKey: skill.key, example: options[Math.floor(rand() * options.length)]!, reverse: rand() < 0.35, ...tag(u) };
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -163,7 +182,10 @@ export function buildFlowSession(input: {
     // escribiendo. La gramática se practica construyendo una de sus frases.
     pair.forEach((u, j) => {
       if (units[u]!.type === 'pattern') {
-        base.push(levelUp(u) ?? buildAfter(u, mirrorExamples(units[u]!)[0]) ?? quick(u));
+        const up = levelUp(u);
+        const play = up ? null : spot(u);
+        if (play) base.push({ kind: 'watch', unitKey: u, scene: -4, ...tag(u) }, play);
+        base.push(up ?? buildAfter(u, mirrorExamples(units[u]!)[0]) ?? quick(u));
         return;
       }
       base.push(burst(u) ?? levelUp(u) ?? (j === 0 ? (listen(u) ?? quick(u)) : judge(u)));
@@ -182,7 +204,9 @@ export function buildFlowSession(input: {
     withRetry.push(d);
     // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada).
     const other = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? buildableExamples(units[d.unitKey]!).find((n) => n !== d.example) : undefined;
-    if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });
+    const replay = d.kind === 'spot' ? spot(d.unitKey, d.example) : null;
+    if (replay) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { ...replay, retry: true } });
+    else if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });
     else if (['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(d.kind)) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });
     for (let j = pending.length - 1; j >= 0; j -= 1) if (pending[j]!.at <= withRetry.length) withRetry.push(pending.splice(j, 1)[0]!.step);
   }

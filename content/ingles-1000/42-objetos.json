@@ -34,8 +34,8 @@
         {
           "key": "g-place",
           "type": "pattern",
-          "goal": "¿Dónde está? IN, ON, UNDER, NEXT TO",
-          "rule": "IN dentro (in the box), ON encima (on the table), UNDER debajo (under the bed), NEXT TO al lado (next to the door).",
+          "goal": "¿Dónde está? IN, ON, UNDER, NEXT TO, BEHIND, BETWEEN",
+          "rule": "IN dentro, ON encima, UNDER debajo, NEXT TO al lado, BEHIND detrás, IN FRONT OF delante, BETWEEN entre.",
           "pieces": [
             {
               "text": "It's",
@@ -116,6 +116,142 @@
             {
               "text": "The lamp is next to the sofa.",
               "translation": "La lámpara está al lado del sofá."
+            },
+            {
+              "text": "The bug is on the hat.",
+              "translation": "El bicho está encima del sombrero.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 29,
+                  "s": 1,
+                  "z": 1
+                }
+              ]
+            },
+            {
+              "text": "The bug is in the hat.",
+              "translation": "El bicho está dentro del sombrero.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 38,
+                  "s": 0.9,
+                  "z": -1
+                }
+              ]
+            },
+            {
+              "text": "The bug is under the hat.",
+              "translation": "El bicho está debajo del sombrero.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 86,
+                  "s": 1
+                }
+              ]
+            },
+            {
+              "text": "The bug is next to the hat.",
+              "translation": "El bicho está al lado del sombrero.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐛",
+                  "x": 86,
+                  "y": 65,
+                  "s": 1
+                }
+              ]
+            },
+            {
+              "text": "The bug is behind the hat.",
+              "translation": "El bicho está detrás del sombrero.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐛",
+                  "x": 66,
+                  "y": 47,
+                  "s": 1.1,
+                  "z": -1
+                }
+              ]
+            },
+            {
+              "text": "The bug is in front of the hat.",
+              "translation": "El bicho está delante del sombrero.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 50,
+                  "y": 55,
+                  "s": 2.2
+                },
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 67,
+                  "s": 1.5,
+                  "z": 2
+                }
+              ]
+            },
+            {
+              "text": "The bug is between the hats.",
+              "translation": "El bicho está entre los sombreros.",
+              "stage": [
+                {
+                  "e": "🎩",
+                  "x": 24,
+                  "y": 55,
+                  "s": 1.6
+                },
+                {
+                  "e": "🎩",
+                  "x": 76,
+                  "y": 55,
+                  "s": 1.6
+                },
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 63,
+                  "s": 1
+                }
+              ]
             }
           ],
           "pitfalls": [

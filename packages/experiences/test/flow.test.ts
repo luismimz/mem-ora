@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -204,5 +204,42 @@ describe('el espejo en movimiento (D-082, en un solo paso)', () => {
     const plan = buildFlowSession({ ...lang, items: [item('q1', 'new')] });
     expect(plan.steps.filter((s) => s.unitKey === 'q1' && !s.retry).map((s) => [s.kind, s.example])).toEqual([['reel', undefined], ['build', 1]]);
     expect(plan.steps.some((s) => s.kind === 'train')).toBe(false);
+  });
+});
+
+describe('la escena que cambia (D-084)', () => {
+  const hat = { e: '🎩', x: 50, y: 70, s: 2 };
+  const ex = (text: string, x: number, y: number) => ({ text, translation: 'x', stage: [hat, { e: '🐛', x, y }] });
+  const pattern = (examples: unknown[]): SessionUnit => ({
+    key: 'w1', type: 'pattern', language: 'en',
+    payload: { goal: 'Dónde está', rule: 'IN, ON, UNDER', pieces: [{ text: 'The bug is', role: 'fixed' }, { text: 'on', role: 'slot' }], examples },
+    skills: [{ key: 'w1.recall', kind: 'recall' }, { key: 'w1.produce', kind: 'produce' }],
+    association: null,
+  } as unknown as SessionUnit);
+  const staged = pattern([ex('The bug is on the hat.', 50, 45), ex('The bug is under the hat.', 50, 92), ex('The bug is next to the hat.', 82, 70), { text: 'The cat is in the box.', translation: 'x' }]);
+
+  it('solo hay juego con tres escenas o más', () => {
+    expect(stagedExamples(staged)).toEqual([0, 1, 2]);
+    expect(stagedExamples(pattern([ex('a b c', 1, 1), ex('a b d', 2, 2)]))).toEqual([]);
+  });
+  it('lo nuevo: ficha, mirar la escena, jugar (con la habilidad «recordar») y construir una frase', () => {
+    const plan = buildFlowSession({ ...base, units: { ...units, w1: staged }, items: [item('w1', 'new')] });
+    const main = plan.steps.filter((s) => s.unitKey === 'w1' && !s.retry);
+    expect(main.map((s) => s.kind)).toEqual(['reel', 'watch', 'spot', 'build']);
+    const play = main[2]!;
+    expect(play.skillKey).toBe('w1.recall');
+    expect(stagedExamples(staged)).toContain(play.example);
+  });
+  it('si se falla, se repite con OTRA escena más tarde (no justo después)', () => {
+    const plan = buildFlowSession({ ...base, units: { ...units, w1: staged }, items: [item('w1', 'new')] });
+    const first = plan.steps.find((s) => s.kind === 'spot' && !s.retry)!;
+    const again = plan.steps.find((s) => s.kind === 'spot' && s.retry)!;
+    expect(again.example).not.toBe(first.example);
+    expect(plan.steps.indexOf(again)).toBeGreaterThan(plan.steps.indexOf(first) + 1);
+  });
+  it('un truco sin escenas sigue igual que antes', () => {
+    const plain = pattern([{ text: 'The cat is in the box.', translation: 'x' }, { text: 'The cat is on the bed.', translation: 'x' }, { text: 'The dog is under the table.', translation: 'x' }]);
+    const plan = buildFlowSession({ ...base, units: { ...units, w1: plain }, items: [item('w1', 'new')] });
+    expect(plan.steps.some((s) => s.kind === 'watch' || s.kind === 'spot')).toBe(false);
   });
 });

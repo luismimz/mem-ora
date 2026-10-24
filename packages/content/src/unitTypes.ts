@@ -40,6 +40,18 @@ export interface Mirror {
   order?: number[];
 }
 
+/**
+ * Actor de una escena (D-084): un emoji colocado en un escenario de 100 × 100 (x de izquierda a derecha, y de arriba
+ * abajo, en el centro del emoji), con su tamaño (`s`, 1 = normal) y su capa (`z`: mayor, delante).
+ */
+export interface StageActor {
+  e: string;
+  x: number;
+  y: number;
+  s?: number;
+  z?: number;
+}
+
 export interface Example {
   text: string;
   translation: string;
@@ -47,7 +59,32 @@ export interface Example {
   source?: string;
   /** Cómo se construye la frase desde el español (D-082). */
   mirror?: Mirror;
+  /** La escena que cambia (D-084): lo que dice la frase, dibujado con emojis. */
+  stage?: StageActor[];
 }
+
+export const STAGE_LIMITS = { minActors: 1, maxActors: 6, minScale: 0.3, maxScale: 3, minExamples: 3 } as const;
+
+/** Problemas de la escena de un ejemplo: de 1 a 6 actores, dentro del escenario y con un tamaño razonable. */
+export function stageIssues(st: unknown, path: string): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  if (!Array.isArray(st)) return [issue('not_list', path)];
+  if (st.length < STAGE_LIMITS.minActors) issues.push(issue('min_items', path, { min: STAGE_LIMITS.minActors, count: st.length }));
+  if (st.length > STAGE_LIMITS.maxActors) issues.push(issue('max_items', path, { max: STAGE_LIMITS.maxActors, count: st.length }));
+  st.forEach((a, i) => {
+    const ap = `${path}.${i}`;
+    if (!isRecord(a)) return void issues.push(issue('not_object', ap));
+    checkUnknownFields(issues, a, ap, ['e', 'x', 'y', 's', 'z']);
+    checkText(issues, a.e, `${ap}.e`, { max: 16 });
+    for (const k of ['x', 'y'] as const) if (typeof a[k] !== 'number' || a[k] < 0 || a[k] > 100) issues.push(issue('stage_out_of_bounds', `${ap}.${k}`));
+    if (a.s !== undefined && (typeof a.s !== 'number' || a.s < STAGE_LIMITS.minScale || a.s > STAGE_LIMITS.maxScale)) issues.push(issue('stage_bad_scale', `${ap}.s`, { min: STAGE_LIMITS.minScale, max: STAGE_LIMITS.maxScale }));
+    if (a.z !== undefined && (typeof a.z !== 'number' || !Number.isInteger(a.z))) issues.push(issue('stage_bad_layer', `${ap}.z`));
+  });
+  return issues;
+}
+
+/** Huella de una escena: dos escenas iguales no se pueden distinguir en el juego. */
+export const stageKey = (st: StageActor[]) => [...st].map((a) => `${a.e}@${Math.round(a.x)},${Math.round(a.y)}x${a.s ?? 1}z${a.z ?? 0}`).sort().join('|');
 
 // Los guiones marcan terminaciones para enseñarlas (walk-ING = walking): no cuentan al comparar.
 const plainWords = (x: string) => x.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').replace(/[’]/g, "'").replace(/(\p{L})-(\p{L})/gu, '$1$2').split(/\s+/).filter(Boolean).join(' ');
@@ -198,8 +235,9 @@ function checkExamples(issues: ContentIssue[], value: unknown, min: number): voi
   value.forEach((ex, i) => {
     const path = `examples.${i}`;
     if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-    checkUnknownFields(issues, ex, path, ['text', 'translation', 'source', 'mirror']);
+    checkUnknownFields(issues, ex, path, ['text', 'translation', 'source', 'mirror', 'stage']);
     if (ex.mirror !== undefined) issues.push(...mirrorIssues(ex.mirror, ex.text, `${path}.mirror`));
+    if (ex.stage !== undefined) issues.push(...stageIssues(ex.stage, `${path}.stage`));
     checkText(issues, ex.text, `${path}.text`, { max: PAYLOAD_LIMITS.exampleText });
     checkText(issues, ex.translation, `${path}.translation`, { max: PAYLOAD_LIMITS.exampleText });
     checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });
@@ -207,6 +245,14 @@ function checkExamples(issues: ContentIssue[], value: unknown, min: number): voi
     if (key && seen.has(key)) issues.push(issue('duplicate_example', `${path}.text`));
     seen.add(key);
   });
+  // La escena que cambia (D-084) necesita al menos tres escenas distintas: el juego enseña tres para elegir.
+  const staged = value.flatMap((ex, i) => (isRecord(ex) && Array.isArray(ex.stage) && !stageIssues(ex.stage, '').length ? [{ i, k: stageKey(ex.stage as StageActor[]) }] : []));
+  if (staged.length && staged.length < STAGE_LIMITS.minExamples) issues.push(issue('stage_too_few', 'examples', { min: STAGE_LIMITS.minExamples, count: staged.length }));
+  const scenes = new Map<string, number>();
+  for (const { i, k } of staged) {
+    if (scenes.has(k)) issues.push(issue('stage_duplicate', `examples.${i}.stage`, { other: scenes.get(k)! }));
+    else scenes.set(k, i);
+  }
 }
 
 function validateTerm(p: Record<string, unknown>): ContentIssue[] {
