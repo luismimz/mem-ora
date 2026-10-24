@@ -1,8 +1,9 @@
 # Estándar de Memora (congelado)
 
-Versión 3 · 24-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
+Versión 4 · 25-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
 sus respuestas del mismo día: deslizar sin botones, feed infinito, ejemplo visto para cada pregunta (D-077); versión 3,
-«La escena que cambia» (D-084, aprobada por el usuario el 24-oct-2026).
+«La escena que cambia» (D-084, aprobada por el usuario el 24-oct-2026); versión 4, «La cadena» (D-085, aprobada
+por el usuario el 25-oct-2026).
 **Nada de este documento se cambia sin aprobación explícita del usuario.** Un fallo se corrige respetándolo y se añade
 una comprobación automática para que no vuelva.
 
@@ -26,7 +27,8 @@ tarjeta pasa sola; al fallar, «Recuérdalo así» se queda hasta que deslizas. 
 | **Recuérdalo así** | Al fallar: la ficha completa y, si viene de una pregunta, su respuesta | La unidad vuelve 3 tarjetas después (repesca). |
 | **Escríbelo** | Solo en idiomas: escribir la palabra | En conceptos solo se escribe al subir de nivel. |
 | **Mira cómo cambia 👀** | Idiomas (D-084): una escena de emojis cambia sola frase a frase (el 🐛 encima, dentro, debajo del 🎩) y suena cada frase | Va después de la ficha del truco y antes de jugar. Lo que se mueve es lo único que cambia. «↻ Otra vez» la repite. |
-| **¿Dónde está? 👂** | Oyes la frase y tocas su escena entre tres; o, al revés, ves la escena y eliges la frase | Pesa como reconocer (poco). Al fallar, la ficha; vuelve más tarde con otra escena. |
+| **¿Dónde está? 👂** | Oyes la frase y tocas su escena entre tres; o, al revés, ves la escena y eliges la frase | Pesa como reconocer (poco). Al fallar, la ficha con la escena correcta; vuelve más tarde con otra escena. |
+| **La cadena 🎵** | Idiomas (D-085): pregunta y respuesta con ritmo cambiando solo el emoji (*Is this a cat? No, it isn't. It's a dog*). Los dos primeros versos se oyen; en los demás eliges la respuesta | Va tras la ficha del truco. Un fallo no corta la canción; al final, si hubo alguno, la ficha y vuelve más tarde. Pesa como reconocer al escuchar. Mínimo 4 versos y 2 respuestas distintas. |
 | **Hito** («Ronda N completada») | XP de la ronda, racha, protectores 🛡️, aciertos, mejor combo, nuevos, próximo repaso | Se desliza y empieza la siguiente ronda. |
 
 Orden de cada ronda: **repasos, tus errores, lo nuevo** y, si no queda nada de eso, **refuerzo de lo más débil**. Siempre
@@ -51,6 +53,7 @@ por ronda. **Racha con protector:** cada 7 días de racha se gana un protector (
 | Fragmento de código | **Trazado de código**: historia ≤ 20 palabras, cada línea atada a un elemento | `bind` = HILO que ata dos cosas |
 | Lista ordenada o regla | **Acrónimo o regla** | Método LÁSER: Leer, Subrayar, Esquematizar, Resumir |
 | Contraste en idiomas: preposiciones, comparativos, contrarios, *there is/are* | **La escena que cambia** (D-084): misma escena y mismos actores, solo cambia una cosa; al menos 3 escenas distintas | 🐛 *on / in / under the* 🎩 |
+| Respuestas cortas y preguntas que se repiten en idiomas (*Is it…? Can it…?*) | **La cadena** (D-085): el mismo molde con ritmo, cambia solo el emoji y la respuesta | 🐟 *Can a fish fly? No, it can't!* |
 
 Mnemotecnia ≤ 10 palabras (código ≤ 20), una sola acción visual, la pieza clave en MAYÚSCULAS y una palabra de la idea
 clave dentro. Si no hay asociación defendible, no se inventa: se enseña con definición y ejemplo.

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -241,5 +241,34 @@ describe('la escena que cambia (D-084)', () => {
     const plain = pattern([{ text: 'The cat is in the box.', translation: 'x' }, { text: 'The cat is on the bed.', translation: 'x' }, { text: 'The dog is under the table.', translation: 'x' }]);
     const plan = buildFlowSession({ ...base, units: { ...units, w1: plain }, items: [item('w1', 'new')] });
     expect(plan.steps.some((s) => s.kind === 'watch' || s.kind === 'spot')).toBe(false);
+  });
+});
+
+describe('la cadena (D-085)', () => {
+  const v = (e: string, a: string) => ({ e, q: 'Is this a cat?', a });
+  const sung = (chant: unknown[]): SessionUnit => ({
+    key: 'c1', type: 'pattern', language: 'en',
+    payload: { goal: 'Contestar corto', rule: 'Yes, it is.', pieces: [{ text: 'Yes, it', role: 'fixed' }, { text: 'is', role: 'slot' }], examples: [{ text: 'Yes, it is.', translation: 'x' }, { text: 'No, it isn\'t.', translation: 'x' }, { text: 'Yes, I do.', translation: 'x' }], chant },
+    skills: [{ key: 'c1.recall', kind: 'recall' }, { key: 'c1.produce', kind: 'produce' }],
+    association: null,
+  } as unknown as SessionUnit);
+  const four = [v('🐱', 'Yes, it is!'), v('🐶', "No, it isn't."), v('🐭', "No, it isn't."), v('🐱', 'Yes, it is!')];
+
+  it('lo nuevo: ficha, la cadena (con «recordar») y construir una frase', () => {
+    const plan = buildFlowSession({ ...base, units: { ...units, c1: sung(four) }, items: [item('c1', 'new')] });
+    const main = plan.steps.filter((s) => s.unitKey === 'c1' && !s.retry);
+    expect(main.map((s) => s.kind)).toEqual(['reel', 'chant', 'build']);
+    expect(main[1]!.skillKey).toBe('c1.recall');
+  });
+  it('si se falla, la cadena vuelve más tarde', () => {
+    const plan = buildFlowSession({ ...base, units: { ...units, c1: sung(four) }, items: [item('c1', 'new')] });
+    const first = plan.steps.find((s) => s.kind === 'chant' && !s.retry)!;
+    const again = plan.steps.find((s) => s.kind === 'chant' && s.retry)!;
+    expect(plan.steps.indexOf(again)).toBeGreaterThan(plan.steps.indexOf(first) + 1);
+  });
+  it('con menos de cuatro versos no hay cadena', () => {
+    expect(chantOf(sung(four.slice(0, 3)))).toEqual([]);
+    const plan = buildFlowSession({ ...base, units: { ...units, c1: sung(four.slice(0, 3)) }, items: [item('c1', 'new')] });
+    expect(plan.steps.some((s) => s.kind === 'chant')).toBe(false);
   });
 });

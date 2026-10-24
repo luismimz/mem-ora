@@ -95,7 +95,45 @@
             "technique": "absurd_scene",
             "scene": "El AYUDANTE de la pregunta CONTESTA también: YES, I DO.",
             "emoji": "💬"
-          }
+          },
+          "chant": [
+            {
+              "e": "🐶",
+              "q": "Is this a cat?",
+              "a": "No, it isn't. It's a dog.",
+              "es": "¿Es un gato? No, no lo es. Es un perro."
+            },
+            {
+              "e": "🐱",
+              "q": "Is this a cat?",
+              "a": "Yes, it is!",
+              "es": "¿Es un gato? ¡Sí, lo es!"
+            },
+            {
+              "e": "🐭",
+              "q": "Is this a cat?",
+              "a": "No, it isn't. It's a mouse.",
+              "es": "¿Es un gato? No, no lo es. Es un ratón."
+            },
+            {
+              "e": "🐛",
+              "q": "Is this a cat?",
+              "a": "No, it isn't. It's a bug.",
+              "es": "¿Es un gato? No, no lo es. Es un bicho."
+            },
+            {
+              "e": "🐘",
+              "q": "Is this a cat?",
+              "a": "No, it isn't. It's an elephant.",
+              "es": "¿Es un gato? No, no lo es. Es un elefante."
+            },
+            {
+              "e": "🐱",
+              "q": "Is this a cat?",
+              "a": "Yes, it is!",
+              "es": "¿Es un gato? ¡Sí, lo es!"
+            }
+          ]
         },
         {
           "key": "whats-up",

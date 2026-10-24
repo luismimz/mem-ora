@@ -39,6 +39,8 @@ def texts() -> dict:
                     bag.append(' '.join(p['text'] for p in u['pieces'] if p['role'] == 'fixed'))
                 for ex in u.get('examples', []):
                     bag.append(ex['text'])
+                for v in u.get('chant', []):
+                    bag.extend([v['q'], v['a']])
                 if (u.get('association') or {}).get('sceneTarget'):
                     bag.append(u['association']['sceneTarget'])
     return {k: list(dict.fromkeys(norm(t) for t in v if norm(t))) for k, v in out.items()}

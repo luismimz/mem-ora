@@ -53,6 +53,15 @@ export function stagedExamples(u: SessionUnit): number[] {
   return out.length >= FLOW_STAGE_MIN ? out : [];
 }
 
+/** Versos mínimos para cantar «La cadena» (D-085). */
+export const FLOW_CHANT_MIN = 4;
+
+/** Versos de «La cadena» (D-085): pregunta y respuesta con ritmo. Vacío si no llegan al mínimo. */
+export function chantOf(u: SessionUnit): Array<{ e: string; q: string; a: string; es?: string }> {
+  const c = (u.payload as { chant?: Array<{ e: string; q: string; a: string; es?: string }> }).chant;
+  return Array.isArray(c) && c.length >= FLOW_CHANT_MIN ? c : [];
+}
+
 /** Primer ejemplo que se puede construir con fichas; `null` si no hay ninguno. */
 export function buildableExample(u: SessionUnit): number | null {
   return buildableExamples(u)[0] ?? null;
@@ -171,6 +180,12 @@ export function buildFlowSession(input: {
     if (!skill || !options.length) return null;
     return { kind: 'spot', unitKey: u, scene: -4, skillKey: skill.key, example: options[Math.floor(rand() * options.length)]!, reverse: rand() < 0.35, ...tag(u) };
   };
+  // D-085: la cadena. Se oyen los primeros versos y después contestas tú, al ritmo, eligiendo la respuesta. Reconocer al
+  // escuchar pesa medio-bajo; producir llega con «Construye».
+  const chant = (u: string): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'recall');
+    return skill && chantOf(units[u]!).length ? { kind: 'chant', unitKey: u, scene: -4, skillKey: skill.key, ...tag(u) } : null;
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -183,6 +198,8 @@ export function buildFlowSession(input: {
     pair.forEach((u, j) => {
       if (units[u]!.type === 'pattern') {
         const up = levelUp(u);
+        const sing = up ? null : chant(u);
+        if (sing) base.push(sing);
         const play = up ? null : spot(u);
         if (play) base.push({ kind: 'watch', unitKey: u, scene: -4, ...tag(u) }, play);
         base.push(up ?? buildAfter(u, mirrorExamples(units[u]!)[0]) ?? quick(u));
@@ -204,7 +221,7 @@ export function buildFlowSession(input: {
     withRetry.push(d);
     // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada).
     const other = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? buildableExamples(units[d.unitKey]!).find((n) => n !== d.example) : undefined;
-    const replay = d.kind === 'spot' ? spot(d.unitKey, d.example) : null;
+    const replay = d.kind === 'spot' ? spot(d.unitKey, d.example) : d.kind === 'chant' ? chant(d.unitKey) : null;
     if (replay) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { ...replay, retry: true } });
     else if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });
     else if (['quick', 'judge', 'challenge', 'review', 'listen', 'build'].includes(d.kind)) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'quick', unitKey: d.unitKey, scene: -4, retry: true, reverse: !d.reverse } });

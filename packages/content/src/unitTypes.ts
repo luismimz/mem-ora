@@ -84,6 +84,29 @@ export function stageIssues(st: unknown, path: string): ContentIssue[] {
 }
 
 /** Huella de una escena: dos escenas iguales no se pueden distinguir en el juego. */
+/** «La cadena» (D-085): pregunta y respuesta que se repiten con ritmo, cambiando una sola cosa (Is this a cat? No, it isn't). */
+export interface ChantVerse { e: string; q: string; a: string; es?: string; }
+export const CHANT_LIMITS = { minVerses: 4, maxVerses: 8, minAnswers: 2, textMax: 80 } as const;
+
+export function chantIssues(c: unknown): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  if (!Array.isArray(c)) return [issue('not_list', 'chant')];
+  if (c.length < CHANT_LIMITS.minVerses) issues.push(issue('min_items', 'chant', { min: CHANT_LIMITS.minVerses, count: c.length }));
+  if (c.length > CHANT_LIMITS.maxVerses) issues.push(issue('max_items', 'chant', { max: CHANT_LIMITS.maxVerses, count: c.length }));
+  c.forEach((v, i) => {
+    const path = `chant.${i}`;
+    if (!isRecord(v)) return void issues.push(issue('not_object', path));
+    checkUnknownFields(issues, v, path, ['e', 'q', 'a', 'es']);
+    checkText(issues, v.e, `${path}.e`, { max: 16 });
+    checkText(issues, v.q, `${path}.q`, { max: CHANT_LIMITS.textMax });
+    checkText(issues, v.a, `${path}.a`, { max: CHANT_LIMITS.textMax });
+    checkText(issues, v.es, `${path}.es`, { required: false, max: 160 });
+  });
+  const answers = new Set(c.flatMap((v) => (isRecord(v) && typeof v.a === 'string' ? [v.a.trim().toLowerCase()] : [])));
+  if (c.length >= CHANT_LIMITS.minVerses && answers.size < CHANT_LIMITS.minAnswers) issues.push(issue('chant_one_answer', 'chant', { min: CHANT_LIMITS.minAnswers }));
+  return issues;
+}
+
 export const stageKey = (st: StageActor[]) => [...st].map((a) => `${a.e}@${Math.round(a.x)},${Math.round(a.y)}x${a.s ?? 1}z${a.z ?? 0}`).sort().join('|');
 
 // Los guiones marcan terminaciones para enseñarlas (walk-ING = walking): no cuentan al comparar.
@@ -146,6 +169,8 @@ export interface PatternPayload {
   examples: Example[];
   /** Dónde la equivalencia deja de funcionar. */
   pitfalls?: string[];
+  /** «La cadena» (D-085): versos de pregunta y respuesta con ritmo. */
+  chant?: ChantVerse[];
 }
 
 export interface ConceptExample {
@@ -277,7 +302,8 @@ function validateTerm(p: Record<string, unknown>): ContentIssue[] {
 
 function validatePattern(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls']);
+  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant']);
+  if (p.chant !== undefined) issues.push(...chantIssues(p.chant));
   checkText(issues, p.goal, 'goal', { max: 120 });
   checkText(issues, p.rule, 'rule', { max: PAYLOAD_LIMITS.ruleLength });
   if (typeof p.rule === 'string' && /\n/.test(p.rule)) issues.push(issue('rule_multiline', 'rule'));
