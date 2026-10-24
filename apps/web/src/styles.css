@@ -804,3 +804,21 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .exam-mode { display: grid; gap: .2rem; text-align: left; border: 1.5px solid var(--line); background: var(--surface-strong); color: var(--ink); border-radius: 1.1rem; padding: .85rem 1rem; font: inherit; }
 .exam-mode b { font-size: 1.02rem; } .exam-mode small { color: var(--muted); }
 .exam-mode.main { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface-strong)); }
+
+/* La escena que cambia (D-084): emojis en un escenario; al cambiar de escena, cada actor se desplaza. */
+.scene-box { position: relative; width: min(100%, 19rem); aspect-ratio: 1 / 1; margin: .4rem auto .6rem; border-radius: 1.6rem; background: radial-gradient(circle at 50% 35%, rgba(255,255,255,.22), rgba(255,255,255,.06) 70%); box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); overflow: hidden; }
+.scene-box .actor { position: absolute; font-size: 3.2rem; line-height: 1; transition: left .7s cubic-bezier(.3, 1.3, .4, 1), top .7s cubic-bezier(.3, 1.3, .4, 1), transform .7s ease; filter: drop-shadow(0 6px 10px rgba(0,0,0,.3)); user-select: none; }
+.scene-box-small { width: 100%; margin: 0; border-radius: 1rem; }
+.scene-box-small .actor { font-size: 1.7rem; }
+.stage-say { text-align: center; font-size: 1.35rem; margin: .2rem 0 0; }
+.stage-es { text-align: center; opacity: .8; margin: .2rem 0 .4rem; }
+.stage-dots { display: flex; justify-content: center; gap: .4rem; margin: .4rem 0; }
+.stage-dots span { width: .55rem; height: .55rem; border-radius: 50%; background: rgba(255,255,255,.25); }
+.stage-dots span.on { background: #fff; transform: scale(1.3); } .stage-dots span.past { background: rgba(255,255,255,.6); }
+.stage-again { display: block; margin: .4rem auto 0; min-height: 2.8rem; padding: .5rem 1.2rem; }
+.stage-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: .55rem; }
+.stage-option { border: 0; padding: .3rem; border-radius: 1.2rem; background: rgba(255,255,255,.12); transition: transform .08s ease, background .2s ease; }
+.stage-option:active { transform: scale(.96); }
+.stage-option.is-right { background: #43d68b; } .stage-option.is-wrong { background: #ff6b5b; } .stage-option.is-off { opacity: .45; }
+.option.is-off { opacity: .45; }
+@media (prefers-reduced-motion: reduce) { .scene-box .actor { transition: none; } }

@@ -5,7 +5,7 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload, Mirror, PatternPayload } from '@memora/content';
+import type { ConceptPayload, Mirror, PatternPayload, StageActor } from '@memora/content';
 import {
   buildTiles,
   burstOptions,
@@ -15,6 +15,7 @@ import {
   gradeChallenge,
   gradeReview,
   reviewHints,
+  stagedExamples,
   unitMeaning,
   unitText,
   type AssocPlan,
@@ -287,6 +288,106 @@ function Quick({ unit, reverse, pool, retry, onResult }: { unit: SessionUnit; re
       <div className="options">
         {choices.map((c, i) => <button type="button" key={c.label} className={`option ${c.label.length > 24 ? 'long' : ''} ${picked !== null && c.correct ? 'is-right' : ''} ${picked === i && !c.correct ? 'is-wrong' : ''}`} onClick={() => pick(i)}>{c.label}</button>)}
       </div>
+    </Slide>
+  );
+}
+
+type StagedExample = { text: string; translation?: string; stage?: StageActor[] };
+const stagedOf = (unit: SessionUnit) => (unit.payload as { examples: StagedExample[] }).examples;
+
+/**
+ * Escenario (D-084): emojis colocados en un cuadro de 100 × 100. Cada actor conserva su identidad entre escenas (mismo
+ * emoji, misma aparición), así que al cambiar de escena se DESPLAZA en vez de aparecer de golpe: se ve el movimiento.
+ */
+function Stage({ actors, size = 'big', label }: { actors: StageActor[]; size?: 'big' | 'small'; label?: string }) {
+  const seen: Record<string, number> = {};
+  return (
+    <div className={`scene-box scene-box-${size}`} role="img" aria-label={label ?? 'Escena'}>
+      {actors.map((a) => {
+        const n = (seen[a.e] = (seen[a.e] ?? 0) + 1);
+        return <span key={`${a.e}-${n}`} className="actor" aria-hidden="true" style={{ left: `${a.x}%`, top: `${a.y}%`, zIndex: 10 + (a.z ?? 0), transform: `translate(-50%, -50%) scale(${a.s ?? 1})` }}>{a.e}</span>;
+      })}
+    </div>
+  );
+}
+
+/** Mira (D-084): la escena cambia sola, frase a frase, con su voz. Primero se enseña; después se juega. */
+function Watch({ unit, onNext }: { unit: SessionUnit; onNext: () => void }) {
+  const examples = stagedOf(unit);
+  const order = useMemo(() => stagedExamples(unit), [unit]);
+  const [at, setAt] = useState(0);
+  const [round, setRound] = useState(0);
+  const ex = examples[order[at]!]!;
+  useEffect(() => {
+    let alive = true;
+    const t = window.setTimeout(() => {
+      void Promise.all([speak(ex.text, unit.language, 0.85), wait(2200)]).then(() => {
+        if (alive && at < order.length - 1) setAt(at + 1);
+      });
+    }, at === 0 ? 450 : 250);
+    return () => { alive = false; window.clearTimeout(t); };
+  }, [at, round]); // eslint-disable-line react-hooks/exhaustive-deps
+  const done = at === order.length - 1;
+  return (
+    <Slide tone={hue(unit.key)} onNext={onNext}>
+      <p className="tag">👀 MIRA CÓMO CAMBIA</p>
+      <Stage actors={ex.stage!} label={ex.text} />
+      <p className="stage-say" lang={unit.language} aria-live="polite"><b>{ex.text}</b></p>
+      {ex.translation && <p className="stage-es">{ex.translation}</p>}
+      <div className="stage-dots" aria-hidden="true">{order.map((n, i) => <span key={n} className={i === at ? 'on' : i < at ? 'past' : ''} />)}</div>
+      {done && <button type="button" className="option ghost stage-again" onClick={() => { setAt(0); setRound((r) => r + 1); }}>↻ Otra vez</button>}
+    </Slide>
+  );
+}
+
+/**
+ * ¿Dónde está? (D-084): oyes la frase y tocas su escena entre tres (reconocer al escuchar) o, al revés, ves la escena y
+ * eliges la frase (reconocer). Practica «recordar» con poco peso: elegir no es producir (regla 9).
+ */
+function Spot({ unit, example, reverse, onResult }: { unit: SessionUnit; example: number; reverse: boolean; onResult: (ok: boolean, ms: number) => void }) {
+  const examples = stagedOf(unit);
+  const ex = examples[example]!;
+  const options = useMemo(() => {
+    const others = stagedExamples(unit).filter((n) => n !== example);
+    const picked = choicesFor(String(example), others.map(String), `${unit.key}-spot-${example}-${reverse}`, 3);
+    return picked.map((c) => ({ n: Number(c.label), correct: c.correct }));
+  }, [unit, example, reverse]);
+  const [picked, setPicked] = useState<number | null>(null);
+  const t0 = useRef(performance.now());
+  const play = () => speak(ex.text, unit.language, 0.85);
+  useEffect(() => { if (!reverse) void play(); }, [unit, example]); // eslint-disable-line react-hooks/exhaustive-deps
+  function pick(i: number) {
+    if (picked !== null) return;
+    setPicked(i);
+    const ok = options[i]!.correct;
+    const ms = Math.round(performance.now() - t0.current);
+    const voice = ok && audioEnabled() ? speak(ex.text, unit.language, 0.85) : Promise.resolve();
+    void Promise.all([voice, wait(ok ? 900 : 1300)]).then(() => onResult(ok, ms));
+  }
+  const state = (i: number) => (picked === null ? '' : options[i]!.correct ? 'is-right' : picked === i ? 'is-wrong' : 'is-off');
+  return (
+    <Slide tone={hue(unit.key)} className={picked === null ? '' : options[picked]!.correct ? 'right' : 'wrong'}>
+      <p className="tag">{reverse ? '🔎 ¿QUÉ PASA AQUÍ?' : '👂 ¿DÓNDE ESTÁ?'}</p>
+      {reverse ? (
+        <>
+          <Stage actors={ex.stage!} label="Escena" />
+          <div className="options">
+            {options.map((o, i) => <button type="button" key={o.n} data-n={o.n} lang={unit.language} className={`option long ${state(i)}`} onClick={() => pick(i)}>{examples[o.n]!.text}</button>)}
+          </div>
+        </>
+      ) : (
+        <>
+          <button type="button" className="listen-play" aria-label="Escuchar otra vez" onClick={() => void play()}>🔊</button>
+          <h3 className="ask" lang={unit.language}>{picked === null ? 'Toca la escena que oyes' : <b>{ex.text}</b>}</h3>
+          <div className="stage-options">
+            {options.map((o, i) => (
+              <button type="button" key={o.n} data-n={o.n} className={`stage-option ${state(i)}`} aria-label={`Escena ${i + 1}`} onClick={() => pick(i)}>
+                <Stage actors={examples[o.n]!.stage!} size="small" />
+              </button>
+            ))}
+          </div>
+        </>
+      )}
     </Slide>
   );
 }
@@ -957,6 +1058,8 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'train' && unit && step.example !== undefined) card = <Train key={step.id} unit={unit} example={step.example} onNext={() => void advance()} />;
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
+  else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
+  else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening')} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
   else if (step.kind === 'challenge' && unit && step.typed) card = <Complete key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#level-${step.exercise ?? 0}`, 30, step.skillKey, format, 0, note)} />;
