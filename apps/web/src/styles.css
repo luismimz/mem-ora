@@ -826,4 +826,14 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .stage-option:active { transform: scale(.96); }
 .stage-option.is-right { background: #43d68b; } .stage-option.is-wrong { background: #ff6b5b; } .stage-option.is-off { opacity: .45; }
 .option.is-off { opacity: .45; }
-@media (prefers-reduced-motion: reduce) { .scene-box .actor { transition: none; } }
+.chant-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem; margin: .2rem 0 .6rem; font-size: 1.1rem; }
+.chant-links span { opacity: .35; transition: opacity .3s, transform .3s; }
+.chant-links span.now { opacity: 1; transform: scale(1.35); }
+.chant-links span.seen, .chant-links span.ok { opacity: 1; }
+.chant-links span.ko { opacity: 1; filter: grayscale(1); }
+.chant-emoji { font-size: 6.5rem; line-height: 1; text-align: center; margin: .6rem 0 .4rem; animation: chant-pop .55s cubic-bezier(.3, 1.5, .5, 1); filter: drop-shadow(0 8px 14px rgba(0,0,0,.3)); }
+@keyframes chant-pop { from { transform: scale(.3) rotate(-12deg); opacity: 0; } to { transform: none; opacity: 1; } }
+.chant-q { text-align: center; font-size: 1.6rem; margin: .2rem 0; }
+.chant-a { text-align: center; font-size: 1.45rem; font-weight: 800; color: #ffd65a; margin: .3rem 0 0; animation: chant-pop .4s ease-out; }
+.chant-done { text-align: center; font-size: 1.6rem; margin: 2.5rem 0; }
+@media (prefers-reduced-motion: reduce) { .scene-box .actor { transition: none; } .chant-emoji, .chant-a { animation: none; } }

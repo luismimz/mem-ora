@@ -462,7 +462,45 @@
             "technique": "absurd_scene",
             "scene": "El AYUDANTE salta como un CANGURO delante del TÚ.",
             "emoji": "🦘"
-          }
+          },
+          "chant": [
+            {
+              "e": "😀",
+              "q": "Is he happy?",
+              "a": "Yes, he is!",
+              "es": "¿Está contento? ¡Sí, lo está!"
+            },
+            {
+              "e": "😢",
+              "q": "Is he happy?",
+              "a": "No, he isn't. He's sad.",
+              "es": "¿Está contento? No. Está triste."
+            },
+            {
+              "e": "😴",
+              "q": "Is he happy?",
+              "a": "No, he isn't. He's tired.",
+              "es": "¿Está contento? No. Está cansado."
+            },
+            {
+              "e": "😡",
+              "q": "Is he happy?",
+              "a": "No, he isn't. He's angry.",
+              "es": "¿Está contento? No. Está enfadado."
+            },
+            {
+              "e": "🥶",
+              "q": "Is he happy?",
+              "a": "No, he isn't. He's cold.",
+              "es": "¿Está contento? No. Tiene frío."
+            },
+            {
+              "e": "😀",
+              "q": "Is he happy?",
+              "a": "Yes, he is!",
+              "es": "¿Está contento? ¡Sí, lo está!"
+            }
+          ]
         }
       ]
     }

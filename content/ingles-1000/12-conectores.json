@@ -900,7 +900,45 @@
             "technique": "absurd_scene",
             "scene": "Una LATA (CAN) mágica te da poderes: I CAN fly.",
             "emoji": "🥫"
-          }
+          },
+          "chant": [
+            {
+              "e": "🐟",
+              "q": "Can a fish swim?",
+              "a": "Yes, it can!",
+              "es": "¿Puede nadar un pez? ¡Sí, puede!"
+            },
+            {
+              "e": "🐟",
+              "q": "Can a fish fly?",
+              "a": "No, it can't!",
+              "es": "¿Puede volar un pez? ¡No, no puede!"
+            },
+            {
+              "e": "🐦",
+              "q": "Can a bird fly?",
+              "a": "Yes, it can!",
+              "es": "¿Puede volar un pájaro? ¡Sí, puede!"
+            },
+            {
+              "e": "🐘",
+              "q": "Can an elephant fly?",
+              "a": "No, it can't!",
+              "es": "¿Puede volar un elefante? ¡No, no puede!"
+            },
+            {
+              "e": "🐒",
+              "q": "Can a monkey climb?",
+              "a": "Yes, it can!",
+              "es": "¿Puede trepar un mono? ¡Sí, puede!"
+            },
+            {
+              "e": "🐢",
+              "q": "Can a turtle run?",
+              "a": "No, it can't!",
+              "es": "¿Puede correr una tortuga? ¡No, no puede!"
+            }
+          ]
         },
         {
           "key": "g-would",

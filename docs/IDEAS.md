@@ -37,8 +37,8 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   el 🎩 en «¿Dónde está?» (misión 42). ✓ Comparativos (🐘 > 🐶 > 🐱 > 🐭), superlativos (la 👑 marca al ganador) y
   *there is/are* (🍎 en el plato). ✓ Frecuencia (☕ del bicho: always → never), too/enough (🎩 demasiado grande o
   pequeño para el 🐛) y as…as (🐱 y 🐶). ✓ Al fallar en la escena, la ficha enseña la escena correcta con su frase.
-  Siguiente: **«La cadena»**: patrón repetido con ritmo («Is this a cat? No, it isn't…») como calentamiento. Más
-  escenas posibles: some/any, much/many, presente continuo.
+  ✓ **«La cadena»** (D-085): *Is this a cat?*, *Can a fish fly?* e *Is he happy?*. Siguiente: más cadenas (a/an,
+  some/any, do/does, pasado *Did you…?*) y escenas para some/any, much/many y presente continuo.
 - ✓ **[inglés] Arrastre tipo imán** en «Construye la frase» (tocar sigue funcionando).
 
 ## Ideas de benrios.dev/tests (22-oct-2026, revisadas con el usuario)

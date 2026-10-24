@@ -815,3 +815,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Primer contenido:** «¿Dónde está?» (misión 42) con siete escenas: on, in, under, next to, behind, in front of y
   between. Después, comparativos, superlativos, *there is/are* y contrarios.
 - **Corrección:** «Construye la frase paso a paso» (el otro vídeo) ya existía: es el tren de la frase (D-082).
+
+## D-085 · La cadena (usuario, 25-oct-2026)
+- **Por qué (usuario):** el vídeo «¿Esto es un gato? No, no es…»: un patrón que se repite con ritmo se pega. El usuario
+  pide incluir todo el contenido parecido que haga el inglés divertido y dinámico, y aprueba esta vuelta («Bien hazlo»).
+- **Qué:** campo `chant` en los trucos (4 a 8 versos con emoji, pregunta, respuesta y traducción opcional; al menos 2
+  respuestas distintas). En el Flujo, tras la ficha: «🎵 La cadena». Los dos primeros versos se oyen enteros; en los
+  demás suena la pregunta y eliges la respuesta. Un fallo no corta la canción: se ve la buena y sigue.
+- **Peso honesto (regla 9):** reconocer al escuchar; cuenta como acierto solo si no falla ningún eslabón. Si falla, la
+  ficha y la cadena vuelve más tarde.
+- **Primer contenido:** *Is this a cat?* (respuestas cortas, misión 38), *Can a fish fly?* (can, misión 12) e
+  *Is he happy?* (preguntas, misión 0).
+- **También en esta vuelta (D-084):** al fallar «¿Dónde está?», la ficha enseña la escena correcta.
+

@@ -106,3 +106,16 @@ describe('la escena que cambia (D-084)', () => {
     expect(describeContentIssue(stageIssues([{ e: '🐛', x: -1, y: 50 }], 'examples.0.stage')[0]!)).toContain('de 0 a 100');
   });
 });
+
+describe('la cadena (D-085)', () => {
+  const v = (e: string, a: string) => ({ e, q: 'Is this a cat?', a });
+  const pattern = (chant: unknown) => ({ goal: 'Contestar corto', rule: 'Yes, it is. No, it isn\'t.', pieces: [{ text: 'Yes, it', role: 'fixed' }, { text: 'is', role: 'slot' }], examples: [{ text: 'Yes, it is.', translation: 'Sí.' }, { text: 'No, it isn\'t.', translation: 'No.' }, { text: 'Yes, I do.', translation: 'Sí.' }], chant });
+  it('cuatro versos con dos respuestas distintas son válidos', () => {
+    expect(validateUnitPayload('pattern', pattern([v('🐱', 'Yes, it is!'), v('🐶', "No, it isn't."), v('🐭', "No, it isn't."), v('🐱', 'Yes, it is!')]))).toEqual([]);
+  });
+  it('pocos versos, campos desconocidos o una sola respuesta', () => {
+    expect(validateUnitPayload('pattern', pattern([v('🐱', 'Yes'), v('🐶', 'No')])).map((i) => i.code)).toEqual(['min_items']);
+    expect(validateUnitPayload('pattern', pattern([v('🐱', 'Yes'), v('🐶', 'Yes'), v('🐭', 'yes'), { ...v('🐘', 'Yes'), x: 1 }])).map((i) => i.code)).toEqual(['unknown_field', 'chant_one_answer']);
+    expect(describeContentIssue(validateUnitPayload('pattern', pattern([v('🐱', 'Yes'), v('🐶', 'Yes'), v('🐭', 'Yes'), v('🐘', 'Yes')]))[0]!)).toContain('respuestas distintas');
+  });
+});

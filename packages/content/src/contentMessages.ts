@@ -59,6 +59,10 @@ const FIELD_ES: Record<string, string> = {
   scene: 'escena',
   stage: 'escena dibujada',
   e: 'emoji',
+  chant: 'la cadena',
+  q: 'pregunta',
+  a: 'respuesta',
+  es: 'traducción',
   x: 'posición horizontal',
   y: 'posición vertical',
   s: 'tamaño',
@@ -72,7 +76,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -136,6 +140,7 @@ const es: Record<string, Template> = {
   stage_bad_scale: (p, f) => `${f}: el tamaño va de ${p.min} a ${p.max} (1 es el normal).`,
   stage_bad_layer: (_p, f) => `${f}: la capa es un número entero (mayor, más delante).`,
   stage_too_few: (p) => `La escena que cambia necesita al menos ${p.min} ejemplos con escena (hay ${p.count}).`,
+  chant_one_answer: (p) => `La cadena necesita al menos ${p.min} respuestas distintas; si todas son iguales no hay nada que elegir.`,
   stage_duplicate: (p, f) => `${f}: es la misma escena que la del ejemplo ${Number(p.other) + 1}; en el juego no se podrían distinguir.`,
   mirror_why_without_from: (_p, f) => `${f}: el «por qué» solo se ve si la pieza cambia («from»); añade «from» o quítalo.`,
   story_too_long: (p, f) => `${f}: la historia tiene ${p.words} palabras; el máximo es ${p.max}.`,

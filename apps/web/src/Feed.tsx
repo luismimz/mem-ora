@@ -10,6 +10,7 @@ import {
   buildTiles,
   burstOptions,
   challengeChoices,
+  chantOf,
   choicesFor,
   exercisesOf,
   gradeChallenge,
@@ -394,6 +395,76 @@ function Spot({ unit, example, reverse, onResult }: { unit: SessionUnit; example
               </button>
             ))}
           </div>
+        </>
+      )}
+    </Slide>
+  );
+}
+
+/** Versos que se oyen antes de que contestes tú en «La cadena». */
+const CHANT_SHOWN = 2;
+
+/**
+ * La cadena (D-085): pregunta y respuesta con ritmo, cambiando solo el emoji (Is this a cat? No, it isn't. It's a dog).
+ * Los primeros versos se oyen enteros; en los demás suena la pregunta y eliges la respuesta. Un fallo no corta la
+ * canción: se ve la buena y sigue. Al terminar cuenta como acierto solo si no ha fallado ningún eslabón.
+ */
+function Chant({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, ms: number) => void }) {
+  const verses = useMemo(() => chantOf(unit), [unit]);
+  const [at, setAt] = useState(0);
+  const [phase, setPhase] = useState<'q' | 'a' | 'pick' | 'end'>('q');
+  const [picked, setPicked] = useState<number | null>(null);
+  const [marks, setMarks] = useState<Array<'ok' | 'ko' | 'seen'>>([]);
+  const t0 = useRef(performance.now());
+  const v = verses[Math.min(at, verses.length - 1)]!;
+  const yours = at >= CHANT_SHOWN;
+  const options = useMemo(() => choicesFor(v.a, verses.map((x) => x.a), `${unit.key}-chant-${at}`, 3), [unit, at]); // eslint-disable-line react-hooks/exhaustive-deps
+  const next = (mark: 'ok' | 'ko' | 'seen') => {
+    const all = [...marks, mark];
+    setMarks(all); setPicked(null);
+    if (at + 1 < verses.length) { setAt(at + 1); setPhase('q'); return; }
+    setPhase('end');
+    const ok = !all.includes('ko');
+    const ms = Math.round(performance.now() - t0.current);
+    void wait(ok ? 1100 : 1400).then(() => onResult(ok, ms));
+  };
+  useEffect(() => {
+    let alive = true;
+    if (phase === 'q') {
+      void Promise.all([speak(v.q, unit.language, 0.9), wait(yours ? 700 : 1100)]).then(() => { if (alive) setPhase(yours ? 'pick' : 'a'); });
+    } else if (phase === 'a') {
+      void Promise.all([speak(v.a, unit.language, 0.9), wait(1200)]).then(() => { if (alive) next('seen'); });
+    }
+    return () => { alive = false; };
+  }, [at, phase]); // eslint-disable-line react-hooks/exhaustive-deps
+  function pick(i: number) {
+    if (picked !== null || phase !== 'pick') return;
+    setPicked(i);
+    const ok = options[i]!.correct;
+    void Promise.all([speak(v.a, unit.language, 0.9), wait(ok ? 900 : 1500)]).then(() => next(ok ? 'ok' : 'ko'));
+  }
+  const state = (i: number) => (picked === null ? '' : options[i]!.correct ? 'is-right' : picked === i ? 'is-wrong' : 'is-off');
+  const done = phase === 'end';
+  const clean = done && !marks.includes('ko');
+  return (
+    <Slide tone={hue(unit.key)} className={done ? (clean ? 'right' : 'wrong') : ''}>
+      <p className="tag">🎵 LA CADENA{yours ? ' · TE TOCA' : ' · ESCUCHA'}</p>
+      <div className="chant-links" aria-label={`Eslabón ${Math.min(at + 1, verses.length)} de ${verses.length}`}>
+        {verses.map((_, i) => <span key={i} className={marks[i] ?? (i === at && !done ? 'now' : '')}>{i < CHANT_SHOWN ? '♪' : '🔗'}</span>)}
+      </div>
+      {done ? (
+        <h3 className="chant-done">{clean ? '¡Cadena completa! 🎉' : `${marks.filter((m) => m === 'ok').length} de ${verses.length - CHANT_SHOWN} eslabones`}</h3>
+      ) : (
+        <>
+          <div key={at} className="chant-emoji" aria-hidden="true">{v.e}</div>
+          <h3 className="chant-q" lang={unit.language}>{v.q}</h3>
+          {phase === 'a' && <p className="chant-a" lang={unit.language}>{v.a}</p>}
+          {(phase === 'a' || picked !== null) && v.es && <p className="stage-es">{v.es}</p>}
+          {phase === 'pick' && (
+            <div className="options">
+              {options.map((o, i) => <button type="button" key={o.label} data-ok={o.correct ? '1' : '0'} lang={unit.language} className={`option long ${state(i)}`} onClick={() => pick(i)}>{o.label}</button>)}
+            </div>
+          )}
         </>
       )}
     </Slide>
@@ -1067,6 +1138,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
+  else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
