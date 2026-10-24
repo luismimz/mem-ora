@@ -766,7 +766,7 @@
           "key": "g-frequency",
           "type": "pattern",
           "goal": "Decir con qué frecuencia haces algo",
-          "rule": "La palabra de frecuencia va ANTES del verbo: I always drink coffee. Con am / is / are, detrás: I am always late.",
+          "rule": "ALWAYS siempre, OFTEN a menudo, SOMETIMES a veces, NEVER nunca. Antes del verbo: I always drink. Con am/is/are, detrás: I am always late.",
           "pieces": [
             {
               "text": "I",
@@ -851,6 +851,121 @@
             {
               "text": "He is always late.",
               "translation": "Siempre llega tarde."
+            },
+            {
+              "text": "The bug always drinks coffee.",
+              "translation": "El bicho siempre bebe café.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 32,
+                  "s": 1.6
+                },
+                {
+                  "e": "☕",
+                  "x": 14,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "☕",
+                  "x": 32,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "☕",
+                  "x": 50,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "☕",
+                  "x": 68,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "☕",
+                  "x": 86,
+                  "y": 74,
+                  "s": 0.9
+                }
+              ]
+            },
+            {
+              "text": "The bug often drinks coffee.",
+              "translation": "El bicho a menudo bebe café.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 32,
+                  "s": 1.6
+                },
+                {
+                  "e": "☕",
+                  "x": 30,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "☕",
+                  "x": 50,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "☕",
+                  "x": 70,
+                  "y": 74,
+                  "s": 0.9
+                }
+              ]
+            },
+            {
+              "text": "The bug sometimes drinks coffee.",
+              "translation": "El bicho a veces bebe café.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 32,
+                  "s": 1.6
+                },
+                {
+                  "e": "☕",
+                  "x": 50,
+                  "y": 74,
+                  "s": 0.9
+                }
+              ]
+            },
+            {
+              "text": "The bug never drinks coffee.",
+              "translation": "El bicho nunca bebe café.",
+              "stage": [
+                {
+                  "e": "🐛",
+                  "x": 50,
+                  "y": 32,
+                  "s": 1.6
+                },
+                {
+                  "e": "☕",
+                  "x": 50,
+                  "y": 74,
+                  "s": 0.9
+                },
+                {
+                  "e": "🚫",
+                  "x": 50,
+                  "y": 74,
+                  "s": 1.5,
+                  "z": 1
+                }
+              ]
             }
           ],
           "pitfalls": [

@@ -88,6 +88,10 @@ try {
   await s.page.waitForTimeout(1800);
   const teach = await s.page.evaluate(() => document.querySelector('.slide')?.textContent ?? '');
   check(/IN dentro|NEXT TO/.test(teach), 'al fallar aparece la ficha del truco para repasarlo');
+  const right = await s.page.evaluate(() => window.__plan.steps.find((x) => x.kind === 'spot' && !x.retry).example);
+  const shown = await s.page.evaluate(() => { const b = document.querySelector('.teach-scene'); const r = b?.querySelector('.scene-box')?.getBoundingClientRect(); return b ? { text: b.querySelector('b')?.textContent, bottom: Math.round(r.bottom), actors: b.querySelectorAll('.actor').length } : null; });
+  const expected = await s.page.evaluate((n) => Object.values(window.__units)[0].payload.examples[n].text, right);
+  check(Boolean(shown) && shown.actors > 0 && shown.bottom <= 844 && shown.text === expected, `la ficha enseña la escena correcta («${shown?.text}»)`);
   if (shots) await s.page.screenshot({ path: `${shots}/escena-fallo.png` });
   await s.page.close();
 
