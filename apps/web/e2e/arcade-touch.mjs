@@ -9,7 +9,7 @@ import { createServer } from 'vite';
 const web = fileURLToPath(new URL('..', import.meta.url));
 const server = await createServer({ root: web, configFile: `${web}vite.config.ts`, logLevel: 'error', server: { port: 5195, strictPort: false, host: '127.0.0.1' } });
 await server.listen();
-const keys = 'be,have,do,make,get,take,say,tell';
+const keys = 'be,have,do,make,get,take,say,tell,brown,red,yellow,white';
 const shots = process.env.E2E_SHOTS;
 const results = [];
 const check = (ok, text) => { results.push(ok); console.log(`${ok ? '✓' : '✗'} ${text}`); };
@@ -43,22 +43,33 @@ try {
   const secs2 = await page.locator('.arcade-secs').textContent();
   check(Number(secs2) < 5, `y baja (${secs2} s)`);
   if (shots) await page.screenshot({ path: `${shots}/arcade-juego.png` });
-  // Dos aciertos seguidos: puntos y combo.
-  for (let n = 0; n < 2; n++) { await page.locator('.slide .option[data-ok="1"]').tap(); await page.waitForTimeout(800); }
-  const pts = await page.locator('.arcade-pts').textContent();
-  check(/^[1-9]\d* pts/.test(pts) && /×1\.5/.test(pts), `acertar suma puntos y combo («${pts.trim()}»)`);
-  // Dejar que se acabe el tiempo.
-  await page.waitForTimeout(5300);
-  const late = await page.evaluate(() => ({ late: Boolean(document.querySelector('.arcade-late')), right: document.querySelectorAll('.slide .option.is-right').length }));
-  check(late.late && late.right === 1, 'si se acaba el tiempo, lo dice y enseña la buena');
-  if (shots) await page.screenshot({ path: `${shots}/arcade-tiempo.png` });
-  await page.waitForTimeout(1700);
-  const fresh = await page.locator('.arcade-secs').textContent();
-  check(/ARCADE · 4\//.test(await tag()) && Number(fresh) >= 4, `y el juego sigue con la siguiente, con el reloj lleno (${fresh} s; antes nacía a 0)`);
-  for (let n = 0; n < 3; n++) { await page.locator('.slide .option[data-ok="1"]').tap(); await page.waitForTimeout(800); }
-  check(/FIN DEL ARCADE/.test(await tag()), 'al final, la puntuación');
+  // Diez preguntas: palabras y frases «¿Está bien dicho?». Se acierta todo salvo la 3.ª, que se deja agotar.
+  const total = await page.evaluate(() => Number(document.querySelector('.slide .tag').textContent.match(/\/(\d+)/)[1]));
+  check(total === 10, `diez preguntas (${total})`);
+  const ys = new Set(); let judges = 0; let ruleSeen = false; let fresh = null;
+  for (let n = 1; n <= total; n++) {
+    await page.waitForFunction((k) => new RegExp(`ARCADE · ${k}/`).test(document.querySelector('.slide .tag')?.textContent ?? '') && !document.querySelector('.slide .option.is-right'), n, { timeout: 8000 });
+    const pos = await page.evaluate(() => Math.round(document.querySelector('.arcade-clock').getBoundingClientRect().top));
+    ys.add(pos);
+    if (n === 4) fresh = await page.locator('.arcade-secs').textContent();
+    if (n === 3) { await page.waitForTimeout(5300); check(await page.locator('.arcade-late').count() === 1 && await page.locator('.slide .option.is-right').count() === 1, 'si se acaba el tiempo, lo dice y enseña la buena'); if (shots) await page.screenshot({ path: `${shots}/arcade-tiempo.png` }); continue; }
+    const judge = await page.locator('.arcade-kind').count();
+    await page.locator('.slide .option[data-ok="1"]').tap();
+    await page.waitForTimeout(250);
+    if (judge) {
+      judges += 1;
+      ruleSeen ||= (await page.locator('.arcade-rule').count()) === 1;
+      if (shots && judges === 1) await page.screenshot({ path: `${shots}/arcade-frase.png` });
+    }
+    if (n === 2) { const pts = await page.locator('.arcade-pts').textContent(); check(/^[1-9]\d* pts/.test(pts) && /×1\.5/.test(pts), `acertar suma puntos y combo («${pts.trim()}»)`); }
+  }
+  check(Number(fresh) >= 4, `tras agotarse el tiempo, la siguiente empieza con el reloj lleno (${fresh} s)`);
+  check(judges >= 1 && ruleSeen, `hay frases «¿Está bien dicho?» y al responder se ve la regla (${judges})`);
+  check(ys.size === 1, `el diseño no salta entre preguntas (reloj siempre a ${[...ys].join(', ')} px)`);
+  await page.waitForFunction(() => /FIN DEL ARCADE/.test(document.querySelector('.slide .tag')?.textContent ?? ''), null, { timeout: 8000 });
+  check(true, 'al final, la puntuación');
   const end = await page.evaluate(() => document.querySelector('.slide')?.textContent ?? '');
-  check(/5\/6 aciertos/.test(end) && /mejor combo ×3/.test(end), `con aciertos y mejor combo («${end.replace(/\s+/g, ' ').slice(0, 90)}»)`);
+  check(/9\/10 aciertos/.test(end) && /mejor combo ×7/.test(end), `con aciertos y mejor combo («${end.replace(/\s+/g, ' ').slice(0, 90)}»)`);
   const fit = await page.evaluate(() => ({ overflowX: document.documentElement.scrollWidth > innerWidth }));
   check(!fit.overflowX, 'nada se sale de la pantalla');
   if (shots) await page.screenshot({ path: `${shots}/arcade-fin.png` });

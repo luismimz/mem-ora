@@ -854,3 +854,15 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **También:** en la ficha al fallar, el espejo animado se aplastaba y su frase quedaba encima del emoji (iPhone);
   en una tarjeta que se desplaza ya nada se encoge. Prueba táctil que detecta bloques montados.
 
+## D-088 · Por qué cambia el orden, Arcade de 10 y Arcade gramatical (usuario, 28-oct-2026)
+- **Por qué (usuario):** el Arcade «salta» de diseño tras la primera pregunta; 6 preguntas son pocas; y al fallar
+  «She has eyes brown» no se enseña que el color va primero. Pide un Arcade gramatical.
+- **Por qué cambia el orden:** las frases con espejo guardan las piezas en orden español y el orden inglés aparte. Al
+  fallar se dice «Has seguido el orden del español («ojos marrones»). En inglés va así: «brown eyes»» y la regla, si
+  se reconoce con seguridad: lo que describe delante, preguntas, me/te detrás del verbo, frecuencia, ago, would,
+  preposición al final, enough, cuándo y dónde al final. Comprobado contra las 335 frases que cambian de orden; si no
+  se reconoce, no se inventa (mejor nada que algo falso). El porqué escrito en una pieza (`why`) manda.
+- **Arcade:** 10 preguntas; ya no salta (la tarjeta no se reanima entre preguntas y va anclada arriba). Hasta 4 son
+  «¿Está bien dicho?»: una frase ya aprendida, bien o con el orden del español, y al responder la regla. Solo con
+  reglas donde ese orden es seguro que está mal (describe, me/te, frecuencia, ago, would; «Today I am busy» vale).
+

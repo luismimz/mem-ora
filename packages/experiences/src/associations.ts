@@ -19,6 +19,8 @@ export interface AssocStep {
   startHint?: HintLevel;
   /** Arcade sorpresa: unidades que entran en la ronda. */
   arcadeUnits?: string[];
+  /** Arcade gramatical (D-088): frases de lo aprendido, bien o con el error del orden del español. */
+  arcadeGrammar?: Array<{ unitKey: string; example: number; wrong: boolean }>;
   /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
   exercise?: number;
   typed?: boolean;

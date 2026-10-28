@@ -12,6 +12,7 @@
 import type { PlanItem } from '@memora/core';
 import { exercisesOf, seeded, shuffle, unitMeaning, unitText, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
 import type { SessionUnit } from './session';
+import { orderRule, spanishOrderCalque, type OrderMirror } from './order';
 
 /** Tarjetas entre una pregunta fallada y su repesca. */
 export const FLOW_RETRY_GAP = 3;
@@ -100,7 +101,21 @@ export function typeableExercise(u: SessionUnit): number | null {
 }
 
 /** Arcade sorpresa (D-087): preguntas por partida, mínimo de lo aprendido para jugar y probabilidad por ronda. */
-export const FLOW_ARCADE_SIZE = 6;
+export const FLOW_ARCADE_SIZE = 10;
+/** Preguntas gramaticales («¿Está bien dicho?») como mucho en cada Arcade (D-088). */
+export const FLOW_ARCADE_GRAMMAR = 4;
+/** Reglas de orden con las que el calco del español es SEGURO que está mal en inglés («Today I am busy» sí vale). */
+export const JUDGE_SAFE_RULES = ['describe', 'object', 'frequency', 'ago', 'would'] as const;
+
+/** Ejemplos de una unidad que sirven para «¿Está bien dicho?»: con espejo, orden distinto y una regla segura. */
+export function judgeableExamples(u: SessionUnit): number[] {
+  const examples = ((u.payload as { examples?: Array<{ text: string; mirror?: OrderMirror }> }).examples ?? []);
+  return examples.flatMap((e, i) => {
+    if (!e.mirror?.order || i >= FLOW_TAUGHT_EXAMPLES) return [];
+    const r = orderRule(e.mirror, e.text);
+    return r && (JUDGE_SAFE_RULES as readonly string[]).includes(r.rule) && spanishOrderCalque(e.mirror).toLowerCase() !== e.text.replace(/[.!?]+$/, '').toLowerCase() ? [i] : [];
+  });
+}
 export const FLOW_ARCADE_MIN = 6;
 export const FLOW_ARCADE_CHANCE = 0.5;
 /** No sale antes de esta tarjeta de la ronda (primero se aprende algo). */
@@ -287,9 +302,11 @@ export function buildFlowSession(input: {
   // (todo enseñado antes). Pesa como reconocer y un fallo no corta el juego: vuelve en su repaso.
   const arcadePool = (input.arcadeUnits ?? []).filter((k) => has(k) && arcadeable(units[k]!));
   if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
-    const pick = shuffle([...arcadePool], rand).slice(0, FLOW_ARCADE_SIZE);
+    const judge = shuffle((input.arcadeUnits ?? []).filter(has).flatMap((k) => judgeableExamples(units[k]!).map((example) => ({ unitKey: k, example }))), rand)
+      .slice(0, FLOW_ARCADE_GRAMMAR).map((g) => ({ ...g, wrong: rand() < 0.5 }));
+    const pick = shuffle([...arcadePool], rand).slice(0, FLOW_ARCADE_SIZE - judge.length);
     const at = FLOW_ARCADE_AFTER - 1 + Math.floor(rand() * (steps.length - FLOW_ARCADE_AFTER + 1));
-    steps.splice(at, 0, { kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: pick, id: `${steps.length + 1}-arcade-x` });
+    steps.splice(at, 0, { kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: pick, ...(judge.length ? { arcadeGrammar: judge } : {}), id: `${steps.length + 1}-arcade-x` });
   }
   // 5. Hito: resumen de la ronda dentro del feed; al deslizar empieza la siguiente.
   if (steps.length) push({ kind: 'summary', unitKey: '', scene: -4 });

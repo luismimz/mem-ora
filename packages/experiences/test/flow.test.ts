@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -299,7 +299,7 @@ describe('Arcade sorpresa en el Flujo (D-087)', () => {
     for (const r of with_) {
       const i = r.steps.findIndex((s) => s.kind === 'arcade');
       const a = r.steps[i]!;
-      expect(a.arcadeUnits).toHaveLength(6);
+      expect(a.arcadeUnits).toHaveLength(8);
       for (const k of a.arcadeUnits!) expect(Object.keys(pool)).toContain(k);
       expect(i).toBeGreaterThanOrEqual(3);
       expect(r.steps.at(-1)!.kind).toBe('summary');
@@ -308,5 +308,15 @@ describe('Arcade sorpresa en el Flujo (D-087)', () => {
   });
   it('con menos de 6 cosas aprendidas no sale', () => {
     for (const id of ['r1', 'r2', 'r3', 'r4', 'r5', 'r6']) expect(round(id, Object.keys(pool).slice(0, 5)).steps.some((s) => s.kind === 'arcade')).toBe(false);
+  });
+});
+
+describe('Arcade gramatical (D-088)', () => {
+  const brown = { key: 'brown', type: 'term', language: 'en', payload: { text: 'brown', meaning: 'marrón', examples: [
+    { text: 'She has brown eyes.', translation: 'Tiene los ojos marrones.', mirror: { say: 'x', pieces: [{ es: 'ELLA', en: 'She', role: 'who' }, { es: 'tiene', en: 'has', role: 'verb' }, { es: 'ojos', en: 'eyes', role: 'word' }, { es: 'marrones', en: 'brown', role: 'word' }], order: [0, 1, 3, 2] } },
+    { text: 'I am busy today.', translation: 'Hoy estoy ocupado.', mirror: { say: 'x', pieces: [{ es: 'Hoy', en: 'today', role: 'word' }, { es: 'YO', en: 'I', role: 'who' }, { es: 'estoy ocupado', en: 'am busy', role: 'word' }], order: [1, 2, 0] } },
+  ] }, skills: [{ key: 'brown.recall', kind: 'recall' }], association: null } as unknown as SessionUnit;
+  it('solo frases cuyo orden del español es seguro que está mal (brown eyes sí; «Today I am busy» no)', () => {
+    expect(judgeableExamples(brown)).toEqual([0]);
   });
 });
