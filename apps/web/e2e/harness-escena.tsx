@@ -30,4 +30,11 @@ if (q.get('solo')) plan.steps = plan.steps.filter((x) => x.kind === q.get('solo'
 const state = { plan, index: 0, outcomes: {}, finished: false };
 const w = window as unknown as { __plan: unknown; __units: unknown };
 w.__plan = plan; w.__units = units;
-createRoot(document.getElementById('root')!).render(<Feed payload={{ state, units } as unknown as SessionPayload} courseId="e2e" offline onExit={() => undefined} onAgain={() => undefined} />);
+// ?next=ms: la siguiente ronda tarda ms en prepararse (o nunca, con ?next=never); sin ?next, modo sin conexión.
+const delay = q.get('next');
+const nextRound = delay === null ? undefined : () => new Promise<SessionPayload>((resolve) => {
+  if (delay === 'never') return;
+  window.setTimeout(() => resolve({ state: { ...state, plan: { ...plan, sessionId: `${sessionId}-2`, steps: plan.steps.filter((x) => x.kind !== 'summary').concat(plan.steps.filter((x) => x.kind === 'summary')) } }, units } as unknown as SessionPayload), Number(delay));
+});
+(window as unknown as { __again: number }).__again = 0;
+createRoot(document.getElementById('root')!).render(<Feed payload={{ state, units } as unknown as SessionPayload} courseId="e2e" offline={!nextRound} {...(nextRound ? { next: nextRound } : {})} onExit={() => undefined} onAgain={() => { (window as unknown as { __again: number }).__again += 1; }} />);

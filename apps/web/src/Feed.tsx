@@ -874,6 +874,9 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
   );
 }
 
+/** Pasado este tiempo preparando la siguiente ronda, se ofrece reintentar. */
+const NEXT_SLOW_MS = 10000;
+
 /** Segundos por pregunta del Arcade sorpresa (D-087). */
 const ARCADE_MS = 5000;
 
@@ -1239,9 +1242,18 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     setUpcoming('loading');
     saving.current.then(() => next()).then((p) => setUpcoming(p)).catch(() => setUpcoming('error'));
   }, [atMilestone, courseId, offline]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Si deslizas mientras se prepara, la ronda se abre sola en cuanto esté; si tarda, se ofrece reintentar.
+  const [wantNext, setWantNext] = useState(false);
+  const [slow, setSlow] = useState(false);
+  useEffect(() => {
+    if (upcoming !== 'loading') { setSlow(false); return; }
+    const t = window.setTimeout(() => setSlow(true), NEXT_SLOW_MS);
+    return () => window.clearTimeout(t);
+  }, [upcoming]);
+  useEffect(() => { if (wantNext && upcoming !== 'loading') { setWantNext(false); nextRound(); } }, [wantNext, upcoming]); // eslint-disable-line react-hooks/exhaustive-deps
   function nextRound() {
     if (!next || offline) { onAgain(); return; }
-    if (upcoming === 'loading') return;
+    if (upcoming === 'loading') { setWantNext(true); return; }
     if (upcoming === 'error' || upcoming === null) { onAgain(); return; }
     if (!upcoming.state.plan.steps.length) { onExit(); return; }
     setBatch(upcoming); setIndex(upcoming.state.index); setOutcomes(upcoming.state.outcomes);
@@ -1313,7 +1325,16 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
         {shields > 0 && <p className="end-next">🛡️ {shields === 1 ? 'Tienes 1 protector' : `Tienes ${shields} protectores`}: si un día no puedes estudiar, tu racha no se rompe.</p>}
         {when && <p className="end-next">Tu próximo repaso: {when}, justo antes de que se te olvide.</p>}
         {!offline && <PushOptIn />}
-        <p className="end-next">{offline ? 'Sin conexión: la siguiente ronda llegará al volver la red.' : ready ? 'La siguiente ronda está lista.' : 'Preparando la siguiente ronda…'}</p>
+        {offline ? <p className="end-next">Sin conexión: la siguiente ronda llegará al volver la red.</p>
+          : upcoming === 'error' ? <p className="end-next">No se pudo preparar la siguiente ronda. Desliza para intentarlo otra vez.</p>
+          : ready ? <p className="end-next ready">✅ La siguiente ronda está lista.</p>
+          : (
+            <div className="end-loading" role="status">
+              <div className="end-loading-bar"><i /></div>
+              <p className="end-next">{wantNext ? 'Preparando la siguiente ronda… se abrirá sola en cuanto esté.' : 'Preparando la siguiente ronda…'}</p>
+              {slow && <button type="button" className="end-retry" onClick={onAgain}>Está tardando más de lo normal · ↻ Reintentar</button>}
+            </div>
+          )}
       </Slide>
     );
   }
