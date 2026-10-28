@@ -12,6 +12,9 @@ import {
   challengeChoices,
   chantOf,
   choicesFor,
+  orderRule,
+  orderSwap,
+  spanishOrderCalque,
   exercisesOf,
   gradeChallenge,
   gradeReview,
@@ -535,9 +538,10 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
   }, [chosen]); // eslint-disable-line react-hooks/exhaustive-deps
   const spent = useRef(0);
   const answer = chosen.map((i) => bank[i]!.w);
-  const mistake = done === false ? buildMistake(answer, words) : null;
-  const rule = unit.type === 'pattern' ? (unit.payload as PatternPayload).rule : undefined;
-  const failNext = () => onResult(false, spent.current, `Tu frase: «${answer.join(' ')}». Así es: «${ex.text}» (${ex.translation}).`, help ? 2 : 1);
+  const mistake = done === false ? buildMistake(answer, words, ex.mirror, ex.text) : null;
+  // D-088: la regla de orden que se ha roto (lo que describe va delante…) y, en los trucos, su regla.
+  const rule = mistake?.rule ?? (unit.type === 'pattern' ? (unit.payload as PatternPayload).rule : undefined);
+  const failNext = () => onResult(false, spent.current, `Tu frase: «${answer.join(' ')}». Así es: «${ex.text}» (${ex.translation}).${mistake?.rule ? ` ${mistake.rule}` : ''}`, help ? 2 : 1);
   const toggle = (i: number) => { if (done !== null) return; setChosen((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i])); };
 
   // Arrastre tipo imán: se arrastra una pieza con el dedo y, sobre la frase, se abre un hueco donde caerá (las demás se
@@ -642,7 +646,7 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
  * En qué te has equivocado al construir la frase (D-086): qué posiciones están mal y una explicación corta. Las
  * fichas son las palabras de la frase, así que el fallo siempre es de orden: se dice qué pieza va antes.
  */
-export function buildMistake(answer: string[], words: string[]): { wrong: number[]; reason: string } {
+export function buildMistake(answer: string[], words: string[], mirror?: Mirror, text = ''): { wrong: number[]; reason: string; rule?: string } {
   const same = (a?: string, b?: string) => plain(a ?? '') === plain(b ?? '');
   const wrong = words.flatMap((w, i) => (same(answer[i], w) ? [] : [i]));
   const i = wrong[0];
@@ -650,10 +654,14 @@ export function buildMistake(answer: string[], words: string[]): { wrong: number
   const put = answer[i]!;
   const should = words[i]!;
   const later = words.findIndex((w, j) => j > i && same(w, put));
-  const reason = later > i
+  let reason = later > i
     ? `Tienes las palabras bien, pero no el orden: «${should}» va antes que «${put}».`
     : `En ese hueco va «${should}», no «${put}».`;
-  return { wrong, reason };
+  // D-088: si has puesto el inglés en el orden del español, se dice tal cual, con el trozo que cambia y su regla.
+  const rule = mirror ? orderRule(mirror, text)?.text : undefined;
+  const swap = mirror ? orderSwap(mirror) : null;
+  if (mirror && swap && same(answer.join(' '), spanishOrderCalque(mirror))) reason = `Has seguido el orden del español («${swap.es}»). En inglés va así: «${swap.en}».`;
+  return { wrong, reason, ...(rule ? { rule } : {}) };
 }
 
 /** Confeti al acertar en la Ráfaga: piezas de colores que saltan y caen (solo CSS). */
@@ -885,7 +893,28 @@ const ARCADE_MS = 5000;
  * 5 s por pregunta con la cuenta atrás bien visible, combo, puntos y confeti. Un fallo no corta el juego ni manda a la
  * ficha: se ve la respuesta buena y sigue; vuelve en su repaso.
  */
-function FlowArcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; seed: string; onAnswer: (u: SessionUnit, ok: boolean, ms: number) => void; onDone: () => void }) {
+type ArcadeQ = { kind: 'word'; unit: SessionUnit; inverse: boolean } | { kind: 'judge'; unit: SessionUnit; text: string; right: string; wrong: boolean; rule?: string };
+
+/** Las preguntas del Arcade: palabras y, intercaladas, frases «¿Está bien dicho?» (D-088). */
+function arcadeQuestions(units: SessionUnit[], grammar: Array<{ unitKey: string; example: number; wrong: boolean }>, all: Record<string, SessionUnit>): ArcadeQ[] {
+  const words: ArcadeQ[] = units.map((u, i) => ({ kind: 'word', unit: u, inverse: i % 2 === 1 }));
+  const judges: ArcadeQ[] = grammar.flatMap((g) => {
+    const u = all[g.unitKey];
+    const ex = (u?.payload as { examples?: Array<{ text: string; mirror?: Mirror }> } | undefined)?.examples?.[g.example];
+    if (!u || !ex?.mirror) return [];
+    const end = /[?!]$/.test(ex.text.trim()) ? ex.text.trim().slice(-1) : '.';
+    const calque = spanishOrderCalque(ex.mirror);
+    const text = g.wrong ? `${calque.charAt(0).toUpperCase()}${calque.slice(1)}${end}` : ex.text;
+    const rule = orderRule(ex.mirror, ex.text)?.text;
+    return [{ kind: 'judge' as const, unit: u, text, right: ex.text, wrong: g.wrong, ...(rule ? { rule } : {}) }];
+  });
+  const out: ArcadeQ[] = [];
+  while (words.length || judges.length) { if (words.length) out.push(words.shift()!); if (judges.length) out.push(judges.shift()!); }
+  return out;
+}
+
+function FlowArcade({ units, grammar = [], all, seed, onAnswer, onDone }: { units: SessionUnit[]; grammar?: Array<{ unitKey: string; example: number; wrong: boolean }>; all: Record<string, SessionUnit>; seed: string; onAnswer: (u: SessionUnit, ok: boolean, ms: number, context: string) => void; onDone: () => void }) {
+  const questions = useMemo(() => arcadeQuestions(units, grammar, all), [units, grammar, all]);
   const [i, setI] = useState(-1);
   const [picked, setPicked] = useState<number | null>(null);
   const [left, setLeft] = useState(ARCADE_MS);
@@ -895,30 +924,34 @@ function FlowArcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; s
   const [right, setRight] = useState(0);
   const [confetti, setConfetti] = useState(0);
   const t0 = useRef(performance.now());
-  const u = i >= 0 ? units[i] : undefined;
-  const inverse = i % 2 === 1;
-  const label = (x: SessionUnit) => (inverse ? unitText(x).toUpperCase() : unitMeaning(x));
-  const choices = useMemo(() => (u ? choicesFor(label(u), units.map(label), `${seed}-arcade-${i}`, 3) : []), [u, i]); // eslint-disable-line react-hooks/exhaustive-deps
+  const q = i >= 0 ? questions[i] : undefined;
+  const label = (x: SessionUnit, inverse: boolean) => (inverse ? unitText(x).toUpperCase() : unitMeaning(x));
+  const choices = useMemo(() => {
+    if (!q) return [];
+    if (q.kind === 'judge') return [{ label: '✅ Bien dicho', correct: !q.wrong }, { label: '❌ Mal dicho', correct: q.wrong }];
+    return choicesFor(label(q.unit, q.inverse), units.map((x) => label(x, q.inverse)), `${seed}-arcade-${i}`, 3);
+  }, [q, i]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    if (!u || picked !== null) return;
+    if (!q || picked !== null) return;
     t0.current = performance.now();
     setLeft(ARCADE_MS);
     const tick = window.setInterval(() => setLeft(Math.max(0, ARCADE_MS - (performance.now() - t0.current))), 100);
     return () => window.clearInterval(tick);
   }, [i, picked]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => { if (u && picked === null && left <= 0) pick(-1); });
+  useEffect(() => { if (q && picked === null && left <= 0) pick(-1); });
   function pick(k: number) {
-    if (!u || picked !== null) return;
+    if (!q || picked !== null) return;
     const ok = k >= 0 && choices[k]!.correct;
     setPicked(k);
-    onAnswer(u, ok, Math.round(performance.now() - t0.current));
+    onAnswer(q.unit, ok, Math.round(performance.now() - t0.current), q.kind === 'judge' ? 'judge' : 'arcade');
     if (ok) {
       const c = combo + 1;
       setCombo(c); setBest((b) => Math.max(b, c)); setRight((r) => r + 1); setConfetti((n) => n + 1);
       setScore((sc) => sc + Math.round((100 + (left / 1000) * 20) * Math.min(3, 1 + (c - 1) * 0.5)));
     } else setCombo(0);
-    // El reloj se repone ANTES de pasar: si no, tras agotarse el tiempo, la siguiente nacía a 0 s y se daba por fallada.
-    window.setTimeout(() => { setLeft(ARCADE_MS); setPicked(null); setI((n) => n + 1); }, ok ? 600 : 1500);
+    // En las frases se deja leer la regla; el reloj se repone ANTES de pasar (si no, la siguiente nacía a 0 s).
+    const hold = q.kind === 'judge' ? (ok ? 1800 : 3200) : ok ? 600 : 1500;
+    window.setTimeout(() => { setLeft(ARCADE_MS); setPicked(null); setI((n) => n + 1); }, hold);
   }
   if (i < 0) {
     return (
@@ -926,19 +959,19 @@ function FlowArcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; s
         <p className="tag">⚡ ARCADE SORPRESA</p>
         <div className="arcade-big" aria-hidden="true">🕹️</div>
         <h2 className="ask">¡Ráfaga de lo que ya sabes!</h2>
-        <p className="arcade-rules">{units.length} preguntas · 5 segundos cada una · encadena aciertos para multiplicar</p>
+        <p className="arcade-rules">{questions.length} preguntas · 5 segundos cada una · encadena aciertos para multiplicar{grammar.length ? ' · y frases: ¿bien o mal dicho?' : ''}</p>
         <button type="button" className="primary arcade-go" onClick={() => setI(0)}>¡Jugar! ⚡</button>
       </Slide>
     );
   }
-  if (!u) {
+  if (!q) {
     return (
       <Slide tone={45} className="arcade-end" onNext={onDone}>
         <p className="tag">⚡ FIN DEL ARCADE</p>
         <div className="arcade-score">{score}</div>
-        <p className="arcade-rules">puntos · {right}/{units.length} aciertos{best > 1 ? ` · mejor combo ×${best}` : ''}</p>
-        <p className="arcade-rules muted">{right === units.length ? '¡Perfecto! 🏆' : 'Lo que fallaste vuelve en tu repaso.'}</p>
-        <Confetti burst={right === units.length ? 99 : 0} />
+        <p className="arcade-rules">puntos · {right}/{questions.length} aciertos{best > 1 ? ` · mejor combo ×${best}` : ''}</p>
+        <p className="arcade-rules muted">{right === questions.length ? '¡Perfecto! 🏆' : 'Lo que fallaste vuelve en tu repaso.'}</p>
+        <Confetti burst={right === questions.length ? 99 : 0} />
       </Slide>
     );
   }
@@ -947,18 +980,27 @@ function FlowArcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; s
   return (
     <Slide tone={45} className={`arcade-play ${picked === null ? '' : picked >= 0 && choices[picked]!.correct ? 'right' : 'wrong'}`}>
       <div className="arcade-head">
-        <p className="tag">⚡ ARCADE · {i + 1}/{units.length}</p>
+        <p className="tag">⚡ ARCADE · {i + 1}/{questions.length}</p>
         <span className="arcade-pts">{score} pts{combo > 1 ? <b> · 🔥 ×{Math.min(3, 1 + (combo - 1) * 0.5)}</b> : null}</span>
       </div>
       <div className={`arcade-clock ${secs <= 2 ? 'hurry' : ''}`} role="timer" aria-label={`Quedan ${secs} segundos`}>
         <span className="arcade-secs">{secs}</span>
         <div className="arcade-bar"><i style={{ width: `${(left / ARCADE_MS) * 100}%` }} /></div>
       </div>
-      <h3 className="ask arcade-prompt" lang={inverse ? undefined : u.language}>{inverse ? unitMeaning(u) : unitText(u)}</h3>
-      <div className="options">
-        {choices.map((c, k) => <button type="button" key={c.label} data-ok={c.correct ? '1' : '0'} className={`option ${state(k)}`} onClick={() => pick(k)} lang={inverse ? u.language : undefined}>{c.label}</button>)}
+      {q.kind === 'judge' && <p className="arcade-kind">🧩 ¿Está bien dicho?</p>}
+      <h3 className="ask arcade-prompt" lang={q.kind === 'word' && q.inverse ? undefined : q.unit.language}>{q.kind === 'judge' ? q.text : q.inverse ? unitMeaning(q.unit) : unitText(q.unit)}</h3>
+      <div className={`options ${q.kind === 'judge' ? 'arcade-judge' : ''}`}>
+        {choices.map((c, k) => <button type="button" key={c.label} data-ok={c.correct ? '1' : '0'} className={`option ${state(k)}`} onClick={() => pick(k)} lang={q.kind === 'word' && q.inverse ? q.unit.language : undefined}>{c.label}</button>)}
       </div>
-      {picked === -1 && <p className="arcade-late">⏰ ¡Se acabó el tiempo!</p>}
+      <div className="arcade-after" aria-live="polite">
+        {picked === -1 && <p className="arcade-late">⏰ ¡Se acabó el tiempo!</p>}
+        {picked !== null && q.kind === 'judge' && (
+          <div className="arcade-why">
+            {q.wrong && <p>Así se dice: <b lang={q.unit.language}>{q.right}</b></p>}
+            {q.rule && <p className="arcade-rule">📏 {q.rule}</p>}
+          </div>
+        )}
+      </div>
       <Confetti burst={confetti} />
     </Slide>
   );
@@ -1273,8 +1315,8 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
-  else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))}
-    onAnswer={(u, ok, ms) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#arcade` })); scored(ok, 6); }} onDone={() => void advance()} />;
+  else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} all={units} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))} {...(step.arcadeGrammar ? { grammar: step.arcadeGrammar } : {})}
+    onAnswer={(u, ok, ms, context) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); scored(ok, 6); }} onDone={() => void advance()} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;

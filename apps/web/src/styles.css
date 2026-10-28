@@ -879,3 +879,20 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .end-next.ready { color: #8ff0bd; font-weight: 800; }
 .end-retry { min-height: 2.8rem; padding: .5rem 1rem; border-radius: 99px; border: 0; background: rgba(255,255,255,.2); color: #fff; font-weight: 800; }
 @media (prefers-reduced-motion: reduce) { .end-loading-bar i { animation-duration: 3s; } }
+
+/* D-088: el Arcade ya no salta: arriba fijo y sitio reservado para el aviso y la regla. */
+.slide.arcade-play { justify-content: flex-start; padding-top: 6rem; }
+.arcade-prompt { min-height: 4.4rem; display: flex; align-items: center; justify-content: center; margin: 0; }
+.arcade-after { min-height: 5.2rem; }
+.arcade-kind { margin: 0; text-align: center; font-weight: 900; color: #ffd76a; }
+.arcade-judge { grid-template-columns: 1fr 1fr; }
+.arcade-why { text-align: center; display: grid; gap: .3rem; }
+.arcade-why p { margin: 0; }
+.arcade-rule { font-size: .92rem; opacity: .92; }
+/* El salto del Arcade (iPhone, 28-oct-2026): al quitar .wrong, el navegador relanzaba la animación de entrada y la
+   tarjeta entera volvía a subir. En el Arcade la tarjeta no se anima entre preguntas; se sacuden solo las respuestas. */
+.slide.arcade-play, .slide.arcade-play.wrong { animation: none; }
+.slide.arcade-play.wrong .options { animation: shake .35s ease; }
+/* Las tarjetas se centran con márgenes automáticos; el Arcade va anclado arriba para no moverse entre preguntas. */
+.slide.arcade-play > :first-child { margin-top: 0; }
+.slide.arcade-play > :last-child { margin-bottom: 0; }
