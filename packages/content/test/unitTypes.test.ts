@@ -119,3 +119,26 @@ describe('la cadena (D-085)', () => {
     expect(describeContentIssue(validateUnitPayload('pattern', pattern([v('🐱', 'Yes'), v('🐶', 'Yes'), v('🐭', 'Yes'), v('🐘', 'Yes')]))[0]!)).toContain('respuestas distintas');
   });
 });
+
+describe('los tiempos verbales (D-089)', () => {
+  const drill = { text: 'Look! It ___ (rain).', answer: 'is raining', wrong: ['rains', 'rained'], signal: 'Look!', es: '¡Mira! Está lloviendo.' };
+  const tense = (extra: Record<string, unknown>) => ({ ...canI, tense: 'Presente continuo', timeline: [{ kind: 'action', at: -0.6, to: 0.6, label: 'ahora mismo' }], signals: ['now', 'Look!'], drills: [drill], ...extra });
+  it('acepta un tiempo con su línea, sus pistas y su juego', () => {
+    expect(validateUnitPayload('pattern', tense({}))).toEqual([]);
+  });
+  it('la línea va de -3 a 3, «hasta» después de «posición» y una barra necesita «hasta»', () => {
+    expect(codes('pattern', tense({ timeline: [{ kind: 'event', at: 5 }] }))).toContain('timeline_position@timeline.0.at');
+    expect(codes('pattern', tense({ timeline: [{ kind: 'action', at: 1, to: 0 }] }))).toContain('timeline_position@timeline.0.to');
+    expect(codes('pattern', tense({ timeline: [{ kind: 'action', at: 1 }] }))).toContain('required@timeline.0.to');
+    expect(codes('pattern', tense({ timeline: [{ kind: 'blob', at: 0 }] }))).toContain('invalid_choice@timeline.0.kind');
+  });
+  it('cada frase del juego: un hueco, su pista dentro y formas falsas distintas de la buena', () => {
+    expect(codes('pattern', tense({ drills: [{ ...drill, text: 'Look! It is (rain).' }] }))).toContain('gap_missing@drills.0.text');
+    expect(codes('pattern', tense({ drills: [{ ...drill, signal: 'now' }] }))).toContain('signal_not_in_text@drills.0.signal');
+    expect(codes('pattern', tense({ drills: [{ ...drill, wrong: ['Is raining'] }] }))).toContain('distractor_is_answer@drills.0.wrong');
+    expect(codes('pattern', tense({ drills: [{ ...drill, wrong: [] }] }))).toContain('min_items@drills.0.wrong');
+    expect(codes('pattern', tense({ drills: [{ ...drill, wrong: ['rains', 'rains'] }] }))).toContain('duplicate_option@drills.0.wrong');
+    expect(describeContentIssue({ code: 'signal_not_in_text', path: 'drills.0.signal', params: {} })).toBe('Frase 1 › pista: la pista tiene que aparecer en la frase.');
+  });
+});
+

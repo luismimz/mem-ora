@@ -10,8 +10,10 @@ import type { SessionPayload } from '../src/api';
 const files = import.meta.glob('../../../content/ingles-1000/*.json', { eager: true, import: 'default' }) as Record<string, { modules: Array<{ units: Array<Record<string, unknown>> }> }>;
 const wanted = (new URLSearchParams(location.search).get('k') ?? 'g-place').split(',');
 const all = Object.values(files).flatMap((f) => f.modules.flatMap((m) => m.units));
+// ?learned=a,b: unidades ya aprendidas (no se enseñan en la ronda; el Arcade y «¿Qué tiempo pide?» las mezclan).
+const learned = (new URLSearchParams(location.search).get('learned') ?? '').split(',').filter(Boolean);
 const units: Record<string, SessionUnit> = {};
-for (const w of wanted) {
+for (const w of [...wanted, ...learned]) {
   const raw = all.find((u) => u.key === w)!;
   const { key, type, association, ...payload } = raw as { key: string; type: string; association?: { technique: string; scene: string; emoji?: string; cue?: string; sceneTarget?: string } } & Record<string, unknown>;
   units[key] = {
@@ -25,7 +27,7 @@ const sessionId = new URLSearchParams(location.search).get('s') ?? 'e2e-escena';
 const items = wanted.map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 // ?a=1: lo ya aprendido son las unidades pedidas (Arcade sorpresa, D-087); ?solo=arcade deja solo el Arcade y el resumen.
 const q = new URLSearchParams(location.search);
-const plan = buildFlowSession({ sessionId, courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true, ...(q.get('a') ? { arcadeUnits: wanted } : {}) });
+const plan = buildFlowSession({ sessionId, courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true, ...(q.get('a') ? { arcadeUnits: wanted } : learned.length ? { arcadeUnits: learned } : {}) });
 if (q.get('solo')) plan.steps = plan.steps.filter((x) => x.kind === q.get('solo') || x.kind === 'summary');
 const state = { plan, index: 0, outcomes: {}, finished: false };
 const w = window as unknown as { __plan: unknown; __units: unknown };

@@ -146,7 +146,58 @@
             "technique": "absurd_scene",
             "scene": "HAD es una FLECHA que apunta MÁS ATRÁS del pasado.",
             "emoji": "⏮️"
-          }
+          },
+          "tense": "Pasado perfecto",
+          "timeline": [
+            {
+              "kind": "event",
+              "at": -2.4,
+              "label": "1.º salió el tren"
+            },
+            {
+              "kind": "event",
+              "at": -1.0,
+              "label": "2.º llegué"
+            }
+          ],
+          "signals": [
+            "when I arrived",
+            "by the time",
+            "before",
+            "already (en pasado)"
+          ],
+          "drills": [
+            {
+              "text": "When I arrived, the train ___ (leave).",
+              "answer": "had left",
+              "wrong": [
+                "has left",
+                "leaves"
+              ],
+              "signal": "When I arrived",
+              "es": "Cuando llegué, el tren ya había salido."
+            },
+            {
+              "text": "She ___ (never / see) snow before that trip.",
+              "answer": "had never seen",
+              "wrong": [
+                "has never seen",
+                "never sees"
+              ],
+              "signal": "before that trip",
+              "es": "Nunca había visto la nieve antes de aquel viaje."
+            },
+            {
+              "text": "By ten, everyone ___ (go) home.",
+              "answer": "had gone",
+              "wrong": [
+                "has gone",
+                "goes"
+              ],
+              "signal": "By ten",
+              "es": "A las diez, ya se habían ido todos a casa."
+            }
+          ]
         },
         {
           "key": "realise",

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, FLOW_RETRY_GAP, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -320,3 +320,53 @@ describe('Arcade gramatical (D-088)', () => {
     expect(judgeableExamples(brown)).toEqual([0]);
   });
 });
+
+describe('los tiempos verbales: «¿Qué tiempo pide?» (D-089)', () => {
+  const drill = (n: number, signal: string) => ({ text: `Frase ${n} ___ (go) ${signal}.`, answer: `a${n}`, wrong: [`b${n}`], signal });
+  const tense = (key: string, n = 4): SessionUnit => ({
+    key, type: 'pattern', language: 'en',
+    payload: { goal: key, rule: 'r', pieces: [{ text: 'I', role: 'fixed' }, { text: 'go', role: 'slot' }], examples: [{ text: 'I go home now.', translation: 'Voy a casa.' }],
+      tense: key, timeline: [{ kind: 'event', at: -1 }], signals: ['now'], drills: Array.from({ length: n }, (_, i) => drill(i, `pista${key}${i}`)) },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }],
+    association: null,
+  } as unknown as SessionUnit);
+  const all = { t1: tense('t1'), t2: tense('t2'), t3: tense('t3'), t9: tense('t9') };
+  const run = (items: PlanItem[], arcadeUnits: string[] = []) => buildFlowSession({ ...base, units: all, items, arcadeUnits });
+
+  it('el juego llega DESPUÉS de enseñar el tiempo (su ficha) y con sus frases', () => {
+    const plan = run([item('t1', 'new')]);
+    const game = plan.steps.find((s) => s.kind === 'tense')!;
+    expect(game).toBeDefined();
+    expect(plan.steps.findIndex((s) => s.kind === 'reel' && s.unitKey === 't1')).toBeLessThan(plan.steps.indexOf(game));
+    expect(game.tenseDrills!.length).toBe(4);
+    expect(game.tenseDrills!.every((d) => d.unitKey === 't1')).toBe(true);
+    expect(game).toMatchObject({ skillKey: 't1.recall', tenseRoute: ['t1'] });
+  });
+
+  it('mezcla con los tiempos YA aprendidos, nunca con uno sin enseñar', () => {
+    const plan = run([item('t2', 'new')], ['t1']);
+    const game = plan.steps.find((s) => s.kind === 'tense')!;
+    const from = new Set(game.tenseDrills!.map((d) => d.unitKey));
+    expect(from).toEqual(new Set(['t1', 't2']));
+    expect(from.has('t9')).toBe(false);
+    expect(game.tenseDrills!.length).toBe(FLOW_TENSE_SIZE);
+    expect(game.tenseDrills!.filter((d) => d.unitKey === 't2').length).toBe(3);
+    expect(game.tenseRoute).toEqual(['t2', 't1']);
+  });
+
+  it('dos tiempos nuevos en la misma ronda: el segundo juego ya mezcla con el primero', () => {
+    const plan = run([item('t1', 'new'), item('t2', 'new')]);
+    const games = plan.steps.filter((s) => s.kind === 'tense');
+    expect(games.map((g) => g.unitKey)).toEqual(['t1', 't2']);
+    expect(new Set(games[0]!.tenseDrills!.map((d) => d.unitKey))).toEqual(new Set(['t1']));
+    expect(new Set(games[1]!.tenseDrills!.map((d) => d.unitKey))).toEqual(new Set(['t1', 't2']));
+  });
+
+  it('cada frase existe en su unidad; sin frases no hay juego', () => {
+    const plan = run([item('t3', 'new')], ['t1', 't2']);
+    for (const d of plan.steps.find((s) => s.kind === 'tense')!.tenseDrills!) expect(drillsOf(all[d.unitKey as keyof typeof all])[d.drill]).toBeDefined();
+    const none = buildFlowSession({ ...base, units: { t1: tense('t1', 0) }, items: [item('t1', 'new')] });
+    expect(none.steps.some((s) => s.kind === 'tense')).toBe(false);
+  });
+});
+

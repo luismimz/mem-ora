@@ -130,5 +130,16 @@ describe('el contenido del repositorio es válido', () => {
         expect(fileProblems(JSON.parse(readFileSync(join(root, course, f), 'utf8')))).toEqual([]);
       });
     }
+    // Cada archivo se valida por separado; una clave repetida en DOS misiones pisaría la misma unidad al volcar.
+    it(`${course}: ninguna clave de unidad o misión se repite entre archivos`, () => {
+      const seen = new Map<string, string>(); const dups: string[] = [];
+      for (const f of readdirSync(join(root, course)).filter((x) => x.endsWith('.json'))) {
+        const file = JSON.parse(readFileSync(join(root, course, f), 'utf8')) as { modules: Array<{ key: string; units: Array<{ key: string }> }> };
+        for (const k of file.modules.flatMap((m) => [`misión ${m.key}`, ...m.units.map((u) => u.key)])) {
+          if (seen.has(k)) dups.push(`${k} (${seen.get(k)} y ${f})`); else seen.set(k, f);
+        }
+      }
+      expect(dups).toEqual([]);
+    });
   }
 });

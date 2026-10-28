@@ -60,6 +60,15 @@ const FIELD_ES: Record<string, string> = {
   stage: 'escena dibujada',
   e: 'emoji',
   chant: 'la cadena',
+  tense: 'tiempo verbal',
+  timeline: 'línea del tiempo',
+  signals: 'pistas',
+  drills: '¿qué tiempo pide?',
+  wrong: 'formas que no encajan',
+  signal: 'pista',
+  at: 'posición',
+  to: 'hasta',
+  label: 'etiqueta',
   q: 'pregunta',
   a: 'respuesta',
   es: 'traducción',
@@ -76,7 +85,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', timeline: 'Marca', signals: 'Pista', drills: 'Frase', wrong: 'Forma', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -149,6 +158,9 @@ const es: Record<string, Template> = {
   decoy_in_list: (p, f) => `${f}: «${p.word}» es una palabra falsa pero también está en la lista.`,
   word_not_in_story: (p, f) => `${f}: «${p.word}» no aparece en la historia.`,
   word_out_of_order: (p, f) => `${f}: «${p.word}» aparece en la historia, pero no en el orden de la lista.`,
+  timeline_position: (_p, f) => `${f}: la posición va de -3 (antes) a 3 (después); 0 es ahora, y «hasta» va después de «posición».`,
+  signal_not_in_text: (_p, f) => `${f}: la pista tiene que aparecer en la frase.`,
+  duplicate_option: (_p, f) => `${f}: hay formas repetidas.`,
   max_items: (p, f) => `${f}: como máximo ${p.max} (hay ${p.count}).`,
   scene_too_long: (p, f) => `${f}: la escena tiene ${p.words} palabras; el máximo es ${p.max}.`,
   scene_without_highlight: (_, f) => `${f}: resalta la pieza clave en MAYÚSCULAS (por ejemplo, «Un BURRO te PIDE PRESTADO el móvil»).`,

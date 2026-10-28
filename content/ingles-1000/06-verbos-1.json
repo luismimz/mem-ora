@@ -785,7 +785,66 @@
             "technique": "absurd_scene",
             "scene": "YO manda: el GUSTO pasa a ser I LIKE.",
             "emoji": "👑"
-          }
+          },
+          "tense": "Presente simple",
+          "timeline": [
+            {
+              "kind": "habit",
+              "at": -3,
+              "to": 3,
+              "label": "siempre, en general"
+            }
+          ],
+          "signals": [
+            "every day",
+            "always",
+            "usually",
+            "often",
+            "never",
+            "on Mondays"
+          ],
+          "drills": [
+            {
+              "text": "I usually ___ (get up) at seven.",
+              "answer": "get up",
+              "wrong": [
+                "am getting up",
+                "got up"
+              ],
+              "signal": "usually",
+              "es": "Normalmente me levanto a las siete."
+            },
+            {
+              "text": "We ___ (go) to the gym on Mondays.",
+              "answer": "go",
+              "wrong": [
+                "are going",
+                "went"
+              ],
+              "signal": "on Mondays",
+              "es": "Vamos al gimnasio los lunes."
+            },
+            {
+              "text": "They ___ (play) football every weekend.",
+              "answer": "play",
+              "wrong": [
+                "are playing",
+                "played"
+              ],
+              "signal": "every weekend",
+              "es": "Juegan al fútbol todos los fines de semana."
+            },
+            {
+              "text": "I never ___ (drink) coffee.",
+              "answer": "drink",
+              "wrong": [
+                "drinks",
+                "am drinking"
+              ],
+              "signal": "never",
+              "es": "Nunca tomo café."
+            }
+          ]
         },
         {
           "key": "g-to-infinitive",

@@ -32,6 +32,110 @@
       "title": "Misión 16 · Verbos para el día a día",
       "units": [
         {
+          "key": "g-simple-or-continuous",
+          "type": "pattern",
+          "goal": "¿Siempre o ahora? I WORK o I'M WORKING",
+          "rule": "Costumbre (siempre, cada día): I work. Lo que pasa ahora mismo: I'm working. Las pistas te lo dicen.",
+          "pieces": [
+            {
+              "text": "I work",
+              "role": "fixed",
+              "hint": "siempre"
+            },
+            {
+              "text": "I'm working",
+              "role": "slot",
+              "hint": "ahora"
+            }
+          ],
+          "examples": [
+            {
+              "text": "He plays tennis every Sunday.",
+              "translation": "Juega al tenis todos los domingos."
+            },
+            {
+              "text": "Shh! He's sleeping.",
+              "translation": "¡Chis! Está durmiendo."
+            },
+            {
+              "text": "What do you do? — I'm a teacher.",
+              "translation": "¿A qué te dedicas? — Soy profesor."
+            },
+            {
+              "text": "What are you doing? — I'm reading.",
+              "translation": "¿Qué haces ahora? — Estoy leyendo."
+            }
+          ],
+          "pitfalls": [
+            "«What do you do?» pregunta tu trabajo; «What are you doing?», qué haces ahora.",
+            "Like, know o want casi nunca llevan -ING: I know, no «I'm knowing»."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un RELOJ gira siempre; un FLASH dispara AHORA.",
+            "emoji": "⏱️"
+          },
+          "tense": "Presente simple o continuo",
+          "timeline": [
+            {
+              "kind": "habit",
+              "at": -3,
+              "to": 3,
+              "label": "siempre: I work"
+            },
+            {
+              "kind": "action",
+              "at": -0.5,
+              "to": 0.5,
+              "label": "ahora: I'm working"
+            }
+          ],
+          "signals": [
+            "every Sunday",
+            "usually",
+            "now",
+            "Shh!",
+            "at the moment"
+          ],
+          "drills": [
+            {
+              "text": "He ___ (play) tennis every Sunday.",
+              "answer": "plays",
+              "wrong": [
+                "is playing"
+              ],
+              "signal": "every Sunday",
+              "es": "Juega al tenis todos los domingos."
+            },
+            {
+              "text": "Shh! He ___ (sleep) right now.",
+              "answer": "is sleeping",
+              "wrong": [
+                "sleeps"
+              ],
+              "signal": "right now",
+              "es": "¡Chis! Ahora mismo está durmiendo."
+            },
+            {
+              "text": "Water ___ (boil) at 100 degrees.",
+              "answer": "boils",
+              "wrong": [
+                "is boiling"
+              ],
+              "es": "El agua hierve a 100 grados (siempre)."
+            },
+            {
+              "text": "Why ___ (you / laugh)? What's so funny?",
+              "answer": "are you laughing",
+              "wrong": [
+                "do you laugh"
+              ],
+              "signal": "What's so funny?",
+              "es": "¿Por qué te ríes? ¿Qué tiene tanta gracia?"
+            }
+          ]
+        },
+        {
           "key": "buy",
           "type": "term",
           "text": "buy",

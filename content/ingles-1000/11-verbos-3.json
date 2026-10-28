@@ -703,7 +703,65 @@
             "technique": "absurd_scene",
             "scene": "Cada -ANDO cambia de disfraz y sale como -ING.",
             "emoji": "🎭"
-          }
+          },
+          "tense": "Presente continuo",
+          "timeline": [
+            {
+              "kind": "action",
+              "at": -0.6,
+              "to": 0.6,
+              "label": "ahora mismo"
+            }
+          ],
+          "signals": [
+            "now",
+            "right now",
+            "at the moment",
+            "Look!",
+            "Listen!"
+          ],
+          "drills": [
+            {
+              "text": "Look! It ___ (rain).",
+              "answer": "is raining",
+              "wrong": [
+                "rains",
+                "rained"
+              ],
+              "signal": "Look!",
+              "es": "¡Mira! Está lloviendo."
+            },
+            {
+              "text": "I can't talk now, I ___ (drive).",
+              "answer": "am driving",
+              "wrong": [
+                "drive",
+                "drove"
+              ],
+              "signal": "now",
+              "es": "Ahora no puedo hablar, estoy conduciendo."
+            },
+            {
+              "text": "Listen! The baby ___ (cry).",
+              "answer": "is crying",
+              "wrong": [
+                "cries",
+                "cried"
+              ],
+              "signal": "Listen!",
+              "es": "¡Escucha! El bebé está llorando."
+            },
+            {
+              "text": "They ___ (watch) a film at the moment.",
+              "answer": "are watching",
+              "wrong": [
+                "watch",
+                "watched"
+              ],
+              "signal": "at the moment",
+              "es": "Ahora mismo están viendo una película."
+            }
+          ]
         },
         {
           "key": "chunks-verbos",

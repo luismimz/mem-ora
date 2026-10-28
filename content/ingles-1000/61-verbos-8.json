@@ -131,7 +131,59 @@
             "technique": "absurd_scene",
             "scene": "Una PELÍCULA congelada a MEDIAS: WAS + -ING.",
             "emoji": "🎞️"
-          }
+          },
+          "tense": "Pasado continuo",
+          "timeline": [
+            {
+              "kind": "action",
+              "at": -2.6,
+              "to": -1.0,
+              "label": "estaba durmiendo"
+            },
+            {
+              "kind": "event",
+              "at": -1.8,
+              "label": "llamaste"
+            }
+          ],
+          "signals": [
+            "while",
+            "when + pasado",
+            "at 8 last night",
+            "all evening"
+          ],
+          "drills": [
+            {
+              "text": "I ___ (sleep) when you called.",
+              "answer": "was sleeping",
+              "wrong": [
+                "slept",
+                "am sleeping"
+              ],
+              "signal": "when you called",
+              "es": "Estaba durmiendo cuando llamaste."
+            },
+            {
+              "text": "While she ___ (cook), the lights went out.",
+              "answer": "was cooking",
+              "wrong": [
+                "cooked",
+                "is cooking"
+              ],
+              "signal": "While",
+              "es": "Mientras cocinaba, se fue la luz."
+            },
+            {
+              "text": "They ___ (play) football when it started to rain.",
+              "answer": "were playing",
+              "wrong": [
+                "was playing",
+                "played"
+              ],
+              "signal": "when it started",
+              "es": "Estaban jugando al fútbol cuando empezó a llover."
+            }
+          ]
         },
         {
           "key": "guess",

@@ -134,6 +134,135 @@
           }
         },
         {
+          "key": "g-zero-conditional",
+          "type": "pattern",
+          "goal": "Si pasa A, siempre pasa B: IF you heat ice, it MELTS",
+          "rule": "Para lo que pasa siempre (reglas, ciencia, costumbres): IF + presente, presente. If you press here, it starts.",
+          "pieces": [
+            {
+              "text": "If you heat ice,",
+              "role": "fixed",
+              "hint": "si calientas el hielo"
+            },
+            {
+              "text": "it melts",
+              "role": "slot",
+              "hint": "se derrite (siempre)"
+            }
+          ],
+          "examples": [
+            {
+              "text": "If you heat ice, it melts.",
+              "translation": "Si calientas el hielo, se derrite.",
+              "mirror": {
+                "say": "Si calientas el hielo, se derrite",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "calientas",
+                    "en": "heat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el hielo",
+                    "en": "ice",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ÉL",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se derrite",
+                    "en": "melts",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you press this button, the printer starts.",
+              "translation": "Si pulsas este botón, la impresora arranca."
+            },
+            {
+              "text": "If I drink coffee at night, I don't sleep.",
+              "translation": "Si tomo café por la noche, no duermo."
+            },
+            {
+              "text": "Plants die if they don't get water.",
+              "translation": "Las plantas mueren si no reciben agua."
+            }
+          ],
+          "pitfalls": [
+            "Aquí no hay will: para lo que pasa siempre, presente en las dos partes.",
+            "If se puede cambiar por when: When you heat ice, it melts."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Pulsas el INTERRUPTOR y la luz SIEMPRE se enciende.",
+            "emoji": "💡"
+          },
+          "tense": "Condicional cero",
+          "timeline": [
+            {
+              "kind": "habit",
+              "at": -3,
+              "to": 3,
+              "label": "siempre: si A, B"
+            }
+          ],
+          "signals": [
+            "If you…",
+            "When you…",
+            "always",
+            "every time"
+          ],
+          "drills": [
+            {
+              "text": "If you heat ice, it ___ (melt).",
+              "answer": "melts",
+              "wrong": [
+                "melted",
+                "would melt"
+              ],
+              "signal": "If you heat ice",
+              "es": "Si calientas el hielo, se derrite."
+            },
+            {
+              "text": "If I drink coffee at night, I ___ (not / sleep).",
+              "answer": "don't sleep",
+              "wrong": [
+                "didn't sleep",
+                "wouldn't sleep"
+              ],
+              "signal": "If I drink coffee",
+              "es": "Si tomo café por la noche, no duermo."
+            },
+            {
+              "text": "Plants ___ (die) if they don't get water.",
+              "answer": "die",
+              "wrong": [
+                "died",
+                "would die"
+              ],
+              "signal": "if they don't get water",
+              "es": "Las plantas mueren si no reciben agua."
+            }
+          ]
+        },
+        {
           "key": "pen",
           "type": "term",
           "text": "pen",

@@ -141,7 +141,54 @@
             "technique": "absurd_scene",
             "scene": "Cada -RÉ del futuro lleva un WILL de mochila.",
             "emoji": "🔮"
-          }
+          },
+          "tense": "Will (futuro)",
+          "timeline": [
+            {
+              "kind": "event",
+              "at": 1.6,
+              "label": "pasará"
+            }
+          ],
+          "signals": [
+            "I think",
+            "probably",
+            "tomorrow",
+            "I promise",
+            "OK, I…"
+          ],
+          "drills": [
+            {
+              "text": "The phone is ringing. — OK, I ___ (get) it!",
+              "answer": "will get",
+              "wrong": [
+                "get",
+                "got"
+              ],
+              "signal": "OK",
+              "es": "Está sonando el teléfono. — ¡Vale, ya lo cojo yo!"
+            },
+            {
+              "text": "I think it ___ (be) sunny tomorrow.",
+              "answer": "will be",
+              "wrong": [
+                "is",
+                "was"
+              ],
+              "signal": "I think",
+              "es": "Creo que mañana hará sol."
+            },
+            {
+              "text": "I promise I ___ (not / tell) anyone.",
+              "answer": "won't tell",
+              "wrong": [
+                "don't tell",
+                "didn't tell"
+              ],
+              "signal": "I promise",
+              "es": "Te prometo que no se lo diré a nadie."
+            }
+          ]
         },
         {
           "key": "hope",

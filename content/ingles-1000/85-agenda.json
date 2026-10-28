@@ -134,7 +134,58 @@
             "technique": "absurd_scene",
             "scene": "Una FOTO del FUTURO en plena acción: WILL BE -ING.",
             "emoji": "🔮"
-          }
+          },
+          "tense": "Futuro continuo",
+          "timeline": [
+            {
+              "kind": "action",
+              "at": 1.0,
+              "to": 2.2,
+              "label": "en marcha"
+            },
+            {
+              "kind": "ref",
+              "at": 1.6,
+              "label": "mañana a esta hora"
+            }
+          ],
+          "signals": [
+            "this time tomorrow",
+            "at nine tomorrow",
+            "all day tomorrow"
+          ],
+          "drills": [
+            {
+              "text": "This time tomorrow I ___ (fly) to London.",
+              "answer": "will be flying",
+              "wrong": [
+                "will fly",
+                "flew"
+              ],
+              "signal": "This time tomorrow",
+              "es": "Mañana a esta hora estaré volando a Londres."
+            },
+            {
+              "text": "Don't call at nine; I ___ (work).",
+              "answer": "will be working",
+              "wrong": [
+                "will work",
+                "worked"
+              ],
+              "signal": "at nine",
+              "es": "No llames a las nueve; estaré trabajando."
+            },
+            {
+              "text": "At midnight we ___ (sleep).",
+              "answer": "will be sleeping",
+              "wrong": [
+                "will sleep",
+                "slept"
+              ],
+              "signal": "At midnight",
+              "es": "A medianoche estaremos durmiendo."
+            }
+          ]
         },
         {
           "key": "calendar",

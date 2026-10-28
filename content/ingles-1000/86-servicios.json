@@ -146,6 +146,137 @@
           }
         },
         {
+          "key": "g-will-have-done",
+          "type": "pattern",
+          "goal": "Lo habré terminado = I WILL HAVE finished",
+          "rule": "Lo que estará hecho antes de un momento futuro: will have + participio. By Friday, they will have fixed it.",
+          "pieces": [
+            {
+              "text": "I will have",
+              "role": "fixed",
+              "hint": "habré"
+            },
+            {
+              "text": "finished",
+              "role": "slot",
+              "hint": "terminado"
+            }
+          ],
+          "examples": [
+            {
+              "text": "They will have fixed it by Friday.",
+              "translation": "Lo habrán arreglado para el viernes.",
+              "mirror": {
+                "say": "Lo habrán arreglado para el viernes",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ELLOS) habrán",
+                    "en": "They will have",
+                    "role": "helper",
+                    "from": "habrán",
+                    "why": "Habrán + participio = WILL HAVE + participio."
+                  },
+                  {
+                    "es": "arreglado",
+                    "en": "fixed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para el viernes",
+                    "en": "by Friday",
+                    "role": "word",
+                    "from": "para el viernes",
+                    "why": "Como muy tarde ese día: BY Friday."
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "By 2030, they will have built the new station.",
+              "translation": "Para 2030 habrán construido la nueva estación."
+            },
+            {
+              "text": "Come at ten; we will have eaten by then.",
+              "translation": "Ven a las diez; para entonces ya habremos comido."
+            },
+            {
+              "text": "Will you have finished by Monday?",
+              "translation": "¿Lo habrás terminado para el lunes?"
+            }
+          ],
+          "pitfalls": [
+            "BY = como muy tarde: by Friday (no es el «para» de finalidad).",
+            "«I will have finish» está mal: detrás de have, participio (finished)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una BANDERA de META clavada antes del VIERNES.",
+            "emoji": "🏁"
+          },
+          "tense": "Futuro perfecto",
+          "timeline": [
+            {
+              "kind": "event",
+              "at": 0.9,
+              "label": "ya hecho"
+            },
+            {
+              "kind": "ref",
+              "at": 1.9,
+              "label": "el viernes"
+            }
+          ],
+          "signals": [
+            "by Friday",
+            "by then",
+            "by 2030",
+            "by the time"
+          ],
+          "drills": [
+            {
+              "text": "By Friday I ___ (finish) the project.",
+              "answer": "will have finished",
+              "wrong": [
+                "will be finishing",
+                "have finished"
+              ],
+              "signal": "By Friday",
+              "es": "Para el viernes habré terminado el proyecto."
+            },
+            {
+              "text": "By 2030, they ___ (build) the new station.",
+              "answer": "will have built",
+              "wrong": [
+                "built",
+                "are building"
+              ],
+              "signal": "By 2030",
+              "es": "Para 2030 habrán construido la nueva estación."
+            },
+            {
+              "text": "Come at ten; we ___ (eat) by then.",
+              "answer": "will have eaten",
+              "wrong": [
+                "are eating",
+                "ate"
+              ],
+              "signal": "by then",
+              "es": "Ven a las diez; para entonces ya habremos comido."
+            }
+          ]
+        },
+        {
           "key": "hairdresser",
           "type": "term",
           "text": "hairdresser",

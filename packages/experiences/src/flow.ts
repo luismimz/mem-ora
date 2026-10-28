@@ -125,6 +125,14 @@ export function arcadeable(u: SessionUnit): boolean {
   return (u.type === 'term' || u.type === 'concept') && Boolean(unitText(u)) && Boolean(unitMeaning(u));
 }
 
+/** «¿Qué tiempo pide?» (D-089): frases por partida. */
+export const FLOW_TENSE_SIZE = 6;
+/** Frases del juego «¿Qué tiempo pide?» de una unidad (los tiempos verbales). */
+export function drillsOf(u: SessionUnit): Array<{ text: string; answer: string; wrong: string[]; signal?: string; es?: string }> {
+  const d = (u.payload as { drills?: Array<{ text: string; answer: string; wrong: string[]; signal?: string; es?: string }> }).drills;
+  return u.type === 'pattern' && Array.isArray(d) ? d : [];
+}
+
 export function buildFlowSession(input: {
   sessionId: string;
   courseId: string;
@@ -225,6 +233,19 @@ export function buildFlowSession(input: {
     const skill = units[u]!.skills.find((s) => s.kind === 'recall');
     return skill && chantOf(units[u]!).length ? { kind: 'chant', unitKey: u, scene: -4, skillKey: skill.key, ...tag(u) } : null;
   };
+  // D-089: «¿Qué tiempo pide?», justo después de enseñar un tiempo verbal. Mezcla sus frases con las de los tiempos YA
+  // aprendidos (nunca uno sin enseñar): hay que fijarse en la pista para elegir la forma. Elegir pesa poco.
+  const taughtTenses = new Set<string>();
+  const tenseGame = (u: string): Draft | null => {
+    const own = drillsOf(units[u]!);
+    const skill = units[u]!.skills.find((s) => s.kind === 'recall');
+    if (!own.length || !skill) return null;
+    const learned = [...new Set([...(input.arcadeUnits ?? []), ...taughtTenses])].filter((k) => k !== u && has(k) && drillsOf(units[k]!).length);
+    const mine = shuffle(own.map((_, drill) => ({ unitKey: u, drill })), rand).slice(0, learned.length ? 3 : 4);
+    const others = shuffle(learned.flatMap((k) => drillsOf(units[k]!).map((_, drill) => ({ unitKey: k, drill }))), rand).slice(0, FLOW_TENSE_SIZE - mine.length);
+    taughtTenses.add(u);
+    return { kind: 'tense', unitKey: u, scene: -4, skillKey: skill.key, tenseDrills: shuffle([...mine, ...others], rand), tenseRoute: [u, ...learned], ...tag(u) };
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -242,6 +263,8 @@ export function buildFlowSession(input: {
         const play = up ? null : spot(u);
         if (play) base.push({ kind: 'watch', unitKey: u, scene: -4, ...tag(u) }, play);
         base.push(up ?? buildAfter(u, mirrorExamples(units[u]!)[0]) ?? quick(u));
+        const game = tenseGame(u);
+        if (game) base.push(game);
         return;
       }
       base.push(burst(u) ?? levelUp(u) ?? (j === 0 ? (listen(u) ?? quick(u)) : judge(u)));

@@ -137,6 +137,151 @@
           }
         },
         {
+          "key": "g-had-been-ing",
+          "type": "pattern",
+          "goal": "Llevaba horas limpiando = I HAD BEEN cleaning",
+          "rule": "Algo que duraba hasta otro momento del pasado: had been + -ING. I had been cleaning for hours when they arrived.",
+          "pieces": [
+            {
+              "text": "I had been",
+              "role": "fixed",
+              "hint": "llevaba"
+            },
+            {
+              "text": "cleaning",
+              "role": "slot",
+              "hint": "limpiando"
+            }
+          ],
+          "examples": [
+            {
+              "text": "I had been cleaning for hours when they arrived.",
+              "translation": "Llevaba horas limpiando cuando llegaron.",
+              "mirror": {
+                "say": "Llevaba horas limpiando cuando llegaron",
+                "pieces": [
+                  {
+                    "es": "(YO) llevaba",
+                    "en": "I had been",
+                    "role": "helper",
+                    "from": "llevaba",
+                    "why": "Llevaba + -ndo = HAD BEEN + -ING."
+                  },
+                  {
+                    "es": "horas",
+                    "en": "for hours",
+                    "role": "word",
+                    "from": "horas",
+                    "why": "Lo que dura va con FOR: for hours."
+                  },
+                  {
+                    "es": "limpiando",
+                    "en": "cleaning",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cuando",
+                    "en": "when",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ELLOS",
+                    "en": "they",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegaron",
+                    "en": "arrived",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            },
+            {
+              "text": "She was tired because she had been working all day.",
+              "translation": "Estaba cansada porque llevaba todo el día trabajando."
+            },
+            {
+              "text": "How long had you been waiting?",
+              "translation": "¿Cuánto tiempo llevabas esperando?"
+            },
+            {
+              "text": "It had been raining, so the streets were wet.",
+              "translation": "Había estado lloviendo, así que las calles estaban mojadas."
+            }
+          ],
+          "pitfalls": [
+            "Es el «llevo… -ndo» en pasado: I've been → I had been.",
+            "Con had been, el verbo siempre lleva -ING: «had been clean» está mal."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Un CRONÓMETRO parado en el PASADO: HAD BEEN -ING.",
+            "emoji": "⏳"
+          },
+          "tense": "Pasado perfecto continuo",
+          "timeline": [
+            {
+              "kind": "action",
+              "at": -2.8,
+              "to": -1.2,
+              "label": "llevaba horas…"
+            },
+            {
+              "kind": "event",
+              "at": -1.2,
+              "label": "…y llegaron"
+            }
+          ],
+          "signals": [
+            "for hours when",
+            "all day (en pasado)",
+            "how long had",
+            "because + pasado"
+          ],
+          "drills": [
+            {
+              "text": "I ___ (wait) for two hours when the bus finally came.",
+              "answer": "had been waiting",
+              "wrong": [
+                "have been waiting",
+                "am waiting"
+              ],
+              "signal": "when the bus finally came",
+              "es": "Llevaba dos horas esperando cuando por fin llegó el autobús."
+            },
+            {
+              "text": "She was tired because she ___ (work) all day.",
+              "answer": "had been working",
+              "wrong": [
+                "has been working",
+                "is working"
+              ],
+              "signal": "She was tired because",
+              "es": "Estaba cansada porque llevaba todo el día trabajando."
+            },
+            {
+              "text": "They ___ (talk) for ages when I arrived.",
+              "answer": "had been talking",
+              "wrong": [
+                "have been talking",
+                "are talking"
+              ],
+              "signal": "when I arrived",
+              "es": "Llevaban siglos hablando cuando llegué."
+            }
+          ]
+        },
+        {
           "key": "chores",
           "type": "term",
           "text": "chores",

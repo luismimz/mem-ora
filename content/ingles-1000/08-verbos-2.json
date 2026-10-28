@@ -776,7 +776,53 @@
             "technique": "absurd_scene",
             "scene": "ÉL y ELLA silban como SERPIENTES: she comeSSS.",
             "emoji": "🐍"
-          }
+          },
+          "tense": "Presente simple (he, she, it)",
+          "timeline": [
+            {
+              "kind": "habit",
+              "at": -3,
+              "to": 3,
+              "label": "siempre, en general"
+            }
+          ],
+          "signals": [
+            "every day",
+            "usually",
+            "never",
+            "on Sundays"
+          ],
+          "drills": [
+            {
+              "text": "She ___ (work) in a bank.",
+              "answer": "works",
+              "wrong": [
+                "work",
+                "is work"
+              ],
+              "es": "Trabaja en un banco."
+            },
+            {
+              "text": "He never ___ (drink) coffee.",
+              "answer": "drinks",
+              "wrong": [
+                "drink",
+                "is drinking"
+              ],
+              "signal": "never",
+              "es": "Nunca toma café."
+            },
+            {
+              "text": "My mother ___ (go) to work by bus every day.",
+              "answer": "goes",
+              "wrong": [
+                "go",
+                "is going"
+              ],
+              "signal": "every day",
+              "es": "Mi madre va al trabajo en autobús todos los días."
+            }
+          ]
         },
         {
           "key": "chunks-look",

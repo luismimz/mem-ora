@@ -22,13 +22,15 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
 - **[inglés] Calidad de las asociaciones e historias:** el usuario las ve malas. Revisar con él ejemplos concretos
   antes de reescribir en masa; una asociación mala es peor que ninguna.
 
+- **[inglés] Ruta de los tiempos (D-089), siguiente:** línea del tiempo también para g-just, g-ever y g-have-ya (usos
+  del presente perfecto) y para will o going to (dos marcas); un mapa de la ruta en Inicio con los tiempos aprendidos.
 - **[inglés] Espejos pendientes:** `many` (have got), `jump` y `stand` (una sola pieza); `thirteen`/`fifteen` (sin valor).
 - **[inglés] Hacia B1 → C1 (usuario, 23-oct-2026: «me gustaría llegar a un nivel C1… ve completando B1»).** Hecho:
   misiones 68–79 (1.183 palabras) con presente perfecto o pasado, pasado perfecto, estilo indirecto, relativos,
   must/might/can't, pasiva en pasado, so/neither do I, have been + -ING, -ING o TO, superlativos, a few / a little y
   make o do; 80–83: wish, be used to, both/either/neither y as…as; y 84–87 (1.303 palabras): pasiva con modales, futuro
   continuo, have something done y conectores (although, despite, however). La gramática B1 queda cubierta; falta
-  vocabulario hasta ~2.000 y repaso mixto de tiempos. Después, B2. Después, B2.
+  vocabulario hasta ~2.000. El repaso mixto de tiempos ya está: «¿Qué tiempo pide?» (D-089). Después, B2.
 - ✓ **[inglés] 1.000 palabras** (meta de 30 días, 23-oct-2026): 1.003 palabras en las misiones 00–67, cada una con
   pronunciación, dos ejemplos y espejo, y un truco de gramática por misión desde la 18. Siguiente: **repaso de
   calidad** con el usuario (asociaciones y espejos que no le convenzan) antes de ampliar más; después, B1 (phrasal
