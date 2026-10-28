@@ -828,3 +828,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   *Is he happy?* (preguntas, misión 0).
 - **También en esta vuelta (D-084):** al fallar «¿Dónde está?», la ficha enseña la escena correcta.
 
+
+## D-086 · Fallar enseña en qué, y repetir no es un bucle (usuario y su hermana, 28-oct-2026)
+- **Fallos vistos por una alumna nueva:** al fallar «Construye la frase» la mandaba a repasar sin decir en qué se había
+  equivocado; y a veces salía el mismo contenido en bucle sin pasar de misión.
+- **Construye la frase al fallar:** la tarjeta ya no pasa sola. Enseña tu frase con las piezas mal colocadas en rojo, la
+  correcta con las que cambian resaltadas, qué pieza va antes («We» va antes que «are») y la regla del truco; al
+  deslizar llega la ficha con tu frase y la buena.
+- **Bucle, causa 1:** tras una ronda por debajo del 80 % de aciertos, la siguiente traía 0 nuevas; quien empieza y falla
+  a menudo encadenaba rondas de solo repaso. Ahora la ronda de refuerzo trae un tercio de nuevas (al menos 1): nunca
+  se queda parado.
+- **Bucle, causa 2:** «Construye la frase» pedía siempre el primer ejemplo. Ahora cada ronda elige otra de las frases
+  que la ficha enseña (las 4 primeras o las de «Mira cómo cambia»): se repite el truco, no la frase. Sigue la regla de
+  enseñar antes de preguntar (D-067).

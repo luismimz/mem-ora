@@ -837,3 +837,13 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .chant-a { text-align: center; font-size: 1.45rem; font-weight: 800; color: #ffd65a; margin: .3rem 0 0; animation: chant-pop .4s ease-out; }
 .chant-done { text-align: center; font-size: 1.6rem; margin: 2.5rem 0; }
 @media (prefers-reduced-motion: reduce) { .scene-box .actor { transition: none; } .chant-emoji, .chant-a { animation: none; } }
+
+/* D-086: al fallar «Construye la frase», en qué te has equivocado. */
+.build-why { display: grid; gap: .35rem; margin: .4rem 0; }
+.build-cmp { display: flex; flex-wrap: wrap; gap: .35rem; justify-content: center; }
+.tile.cmp { cursor: default; }
+.tile.cmp.ok { background: #dcf8e8; color: #10351f; box-shadow: inset 0 0 0 2px #43d68b; }
+.tile.cmp.ko { background: #ffe0dc; color: #6b1209; box-shadow: inset 0 0 0 2px #ff6b5b; text-decoration: line-through; text-decoration-thickness: 2px; }
+.tile.cmp.fix { background: #fff3c4; color: #4a3500; box-shadow: inset 0 0 0 3px #ffb800; font-weight: 800; }
+.build-reason { margin: .4rem 0 0; padding: .6rem .8rem; border-radius: 1rem; background: rgba(255,107,91,.16); font-weight: 800; text-align: center; }
+.build-rule { margin: 0; opacity: .9; text-align: center; }

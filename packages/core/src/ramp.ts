@@ -50,10 +50,15 @@ export const FLOW_NEW_MIN_ANSWERS = 4;
 /**
  * Nuevas para la siguiente ronda del Flujo. Con tope diario (D-077), `perRound` hasta agotar `dailyRounds` rondas.
  * Sin tope (cursos intensivos, decisión del usuario 22-oct-2026): siempre `perRound`, salvo que la ronda anterior
- * bajara del 80 % de aciertos; entonces esa ronda es de repaso (0 nuevas) y la siguiente vuelve a traer nuevas.
+ * bajara del 80 % de aciertos; entonces es de refuerzo: sobre todo repaso, con un tercio de nuevas (D-086).
  */
+/** Nuevas de una ronda de refuerzo: un tercio de lo normal (al menos 1). */
+export const reinforcementNew = (perRound: number): number => Math.max(1, Math.ceil(perRound / 3));
+
 export function flowNewUnits({ perRound, newToday, dailyRounds, lastRound }: FlowNewInput): number {
   if (dailyRounds !== null) return Math.max(0, Math.min(perRound, perRound * dailyRounds - newToday));
-  if (lastRound && lastRound.answered >= FLOW_NEW_MIN_ANSWERS && lastRound.correct / lastRound.answered < FLOW_NEW_IF) return 0;
+  // D-086: una ronda floja da una ronda de refuerzo con menos nuevas, nunca cero: con cero, quien empieza y falla a
+  // menudo encadenaba rondas de solo repaso y no pasaba de misión (parecía un bucle).
+  if (lastRound && lastRound.answered >= FLOW_NEW_MIN_ANSWERS && lastRound.correct / lastRound.answered < FLOW_NEW_IF) return reinforcementNew(perRound);
   return perRound;
 }
