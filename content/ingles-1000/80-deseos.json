@@ -123,6 +123,130 @@
           }
         },
         {
+          "key": "g-third-conditional",
+          "type": "pattern",
+          "goal": "Si lo hubiera sabido… = IF I HAD KNOWN, I WOULD HAVE…",
+          "rule": "Para un pasado que no pasó: IF + had + participio, WOULD HAVE + participio. If I had known, I would have come.",
+          "pieces": [
+            {
+              "text": "If I had known,",
+              "role": "fixed",
+              "hint": "si lo hubiera sabido"
+            },
+            {
+              "text": "I would have come",
+              "role": "slot",
+              "hint": "habría venido"
+            }
+          ],
+          "examples": [
+            {
+              "text": "If I had known, I would have come.",
+              "translation": "Si lo hubiera sabido, habría venido.",
+              "mirror": {
+                "say": "Si lo hubiera sabido, habría venido",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) lo hubiera",
+                    "en": "I had",
+                    "role": "helper",
+                    "from": "hubiera",
+                    "why": "Hubiera + participio = HAD + participio."
+                  },
+                  {
+                    "es": "sabido",
+                    "en": "known",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) habría",
+                    "en": "I would have",
+                    "role": "helper",
+                    "from": "habría",
+                    "why": "Habría = WOULD HAVE + participio."
+                  },
+                  {
+                    "es": "venido",
+                    "en": "come",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If we had left earlier, we wouldn't have missed the train.",
+              "translation": "Si hubiéramos salido antes, no habríamos perdido el tren."
+            },
+            {
+              "text": "She would have passed if she had studied.",
+              "translation": "Habría aprobado si hubiera estudiado."
+            },
+            {
+              "text": "What would you have done?",
+              "translation": "¿Qué habrías hecho tú?"
+            }
+          ],
+          "pitfalls": [
+            "«If I would have known» está mal: detrás de if, had + participio (if I had known).",
+            "Would have se dice corto: «would've» (wúdav)."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "Una MÁQUINA DEL TIEMPO rota: lo que no pasó.",
+            "emoji": "🕰️"
+          },
+          "tense": "Tercer condicional",
+          "timeline": [
+            {
+              "kind": "unreal",
+              "at": -1.8,
+              "label": "pasado que no pasó"
+            }
+          ],
+          "signals": [
+            "If I had known",
+            "would have",
+            "if she had studied"
+          ],
+          "drills": [
+            {
+              "text": "If I had known, I ___ (come).",
+              "answer": "would have come",
+              "wrong": [
+                "would come",
+                "will come"
+              ],
+              "signal": "If I had known",
+              "es": "Si lo hubiera sabido, habría venido."
+            },
+            {
+              "text": "If we ___ (leave) earlier, we wouldn't have missed the train.",
+              "answer": "had left",
+              "wrong": [
+                "left",
+                "would leave"
+              ],
+              "signal": "wouldn't have missed",
+              "es": "Si hubiéramos salido antes, no habríamos perdido el tren."
+            },
+            {
+              "text": "She ___ (pass) if she had studied.",
+              "answer": "would have passed",
+              "wrong": [
+                "would pass",
+                "will pass"
+              ],
+              "signal": "if she had studied",
+              "es": "Habría aprobado si hubiera estudiado."
+            }
+          ]
+        },
+        {
           "key": "wish",
           "type": "term",
           "text": "wish",

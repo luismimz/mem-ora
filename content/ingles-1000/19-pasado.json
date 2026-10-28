@@ -164,7 +164,65 @@
             "technique": "absurd_scene",
             "scene": "Cada verbo del PASADO arrastra una cola: -ED.",
             "emoji": "⏪"
-          }
+          },
+          "tense": "Pasado simple",
+          "timeline": [
+            {
+              "kind": "event",
+              "at": -1.8,
+              "label": "pasó y acabó"
+            }
+          ],
+          "signals": [
+            "yesterday",
+            "last night",
+            "last week",
+            "ago",
+            "in 2020",
+            "when I was a child"
+          ],
+          "drills": [
+            {
+              "text": "I ___ (see) Ana yesterday.",
+              "answer": "saw",
+              "wrong": [
+                "have seen",
+                "was seeing"
+              ],
+              "signal": "yesterday",
+              "es": "Vi a Ana ayer."
+            },
+            {
+              "text": "We ___ (move) to Madrid two years ago.",
+              "answer": "moved",
+              "wrong": [
+                "have moved",
+                "move"
+              ],
+              "signal": "ago",
+              "es": "Nos mudamos a Madrid hace dos años."
+            },
+            {
+              "text": "She ___ (not / come) to the party last night.",
+              "answer": "didn't come",
+              "wrong": [
+                "hasn't come",
+                "didn't came"
+              ],
+              "signal": "last night",
+              "es": "No vino a la fiesta anoche."
+            },
+            {
+              "text": "They ___ (buy) the car in 2019.",
+              "answer": "bought",
+              "wrong": [
+                "have bought",
+                "buyed"
+              ],
+              "signal": "in 2019",
+              "es": "Compraron el coche en 2019."
+            }
+          ]
         },
         {
           "key": "went",

@@ -866,3 +866,18 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   «¿Está bien dicho?»: una frase ya aprendida, bien o con el orden del español, y al responder la regla. Solo con
   reglas donde ese orden es seguro que está mal (describe, me/te, frecuencia, ago, would; «Today I am busy» vale).
 
+## D-089 · La ruta de los tiempos verbales y «¿Qué tiempo pide?» (usuario, 28-oct-2026)
+- **Por qué (usuario):** el juego de los tiempos «solo tiene sentido si enseñamos primero los tiempos»; enseñar antes
+  de pedir, y que sea divertido porque la diversión mantiene la concentración.
+- **Enseñar:** cada tiempo tiene en su ficha su **línea del tiempo** (antes · AHORA · después, animada), su nombre
+  corto y sus **pistas** (las palabras que lo piden). Campos nuevos del truco: `tense`, `timeline`, `signals`, `drills`.
+- **Tiempos:** se completan los que había repartidos por las misiones (presente simple y continuo, pasado, pasado
+  continuo, used to, going to, will, presente perfecto y su continuo, pasado perfecto, futuro continuo, condicionales
+  primero y segundo) y se añaden los que faltaban: condicional cero (57), pasado perfecto continuo (78), tercer
+  condicional (80) y futuro perfecto (86), más dos parejas que se confunden: presente simple o continuo (16) y will o
+  going to (37). Nada duplicado: una prueba impide repetir una clave entre misiones.
+- **Jugar (solo después de enseñar):** «¿Qué tiempo pide?» va justo tras la ficha y la frase del tiempo: 6 frases con
+  hueco, mezclando el tiempo nuevo con los ya aprendidos (nunca uno sin enseñar). Sin reloj; «🔎 Ver la pista» da menos
+  puntos. Al responder, la pista → el tiempo, su línea y la traducción; al final, estrellas y «tu ruta de los tiempos».
+  Pesa como reconocer; si fallas alguna, se vuelve a enseñar ese tiempo.
+

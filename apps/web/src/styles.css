@@ -896,3 +896,53 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 /* Las tarjetas se centran con márgenes automáticos; el Arcade va anclado arriba para no moverse entre preguntas. */
 .slide.arcade-play > :first-child { margin-top: 0; }
 .slide.arcade-play > :last-child { margin-bottom: 0; }
+
+/* Los tiempos verbales (D-089): la línea del tiempo, las pistas y el juego «¿Qué tiempo pide?». */
+.timeline { margin: 0; width: 100%; max-width: 22rem; align-self: center; background: rgba(0,0,0,.22); border-radius: 1rem; padding: .5rem .4rem .2rem; }
+.timeline figcaption { font-size: .72rem; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: #ffd76a; text-align: center; }
+.timeline svg { display: block; width: 100%; height: auto; overflow: visible; }
+.timeline.small { max-width: 18rem; padding: .3rem .3rem .1rem; }
+.tl-axis { stroke: rgba(255,255,255,.55); stroke-width: 2.5; stroke-linecap: round; }
+.tl-arrow { fill: rgba(255,255,255,.55); }
+.tl-now { stroke: #fff; stroke-width: 2; stroke-dasharray: 3 3; }
+.tl-now-dot { fill: #fff; animation: tl-pulse 1.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes tl-pulse { 50% { transform: scale(1.6); opacity: .6; } }
+.tl-zone { fill: rgba(255,255,255,.6); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-anchor: middle; }
+.tl-zone.now { fill: #fff; font-weight: 950; }
+.tl-event { fill: #ffd76a; stroke: #0f0e0c; stroke-width: 2; animation: pop .5s cubic-bezier(.2, 1.4, .3, 1) both; transform-box: fill-box; transform-origin: center; }
+.tl-action { fill: #ffd76a; animation: tl-grow .7s cubic-bezier(.2, .9, .2, 1) both; transform-box: fill-box; transform-origin: left center; }
+@keyframes tl-grow { from { transform: scaleX(0); } to { transform: none; } }
+.tl-habit circle { fill: #8fd3ff; animation: pop .4s ease both; transform-box: fill-box; transform-origin: center; }
+.tl-ref { stroke: #ff9b85; stroke-width: 2.5; stroke-dasharray: 4 3; }
+.tl-link { fill: none; stroke: #8fd3ff; stroke-width: 2.5; stroke-dasharray: 5 4; animation: tl-dash 1.2s linear infinite; }
+@keyframes tl-dash { to { stroke-dashoffset: -18; } }
+.tl-unreal circle { fill: none; stroke: #c4b5fd; stroke-width: 2.5; stroke-dasharray: 4 3; }
+.tl-unreal text { fill: #c4b5fd; font-size: 12px; font-weight: 950; text-anchor: middle; }
+.tl-label { fill: #fff; font-size: 11px; font-weight: 800; text-anchor: middle; paint-order: stroke; stroke: rgba(0,0,0,.45); stroke-width: 3px; }
+.tl-label.ref { fill: #ffcabd; } .tl-label.habit, .tl-label.link { fill: #cdeeff; } .tl-label.unreal { fill: #e2dbff; }
+.tense-chip { margin: 0; font-size: .8rem; font-weight: 900; letter-spacing: .08em; color: #ffd76a; text-transform: uppercase; }
+.tense-signals { margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: .35rem; max-width: 24rem; }
+.tense-signals span { width: 100%; font-size: .68rem; letter-spacing: .14em; font-weight: 900; color: #ffd76a; }
+.tense-signals b { font-size: .85rem; padding: .2rem .55rem; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); }
+.drill-text { margin: 0; text-align: center; font-size: clamp(1.35rem, 6.4vw, 1.8rem); line-height: 1.35; font-weight: 900; }
+.drill-verb { font-size: .7em; opacity: .65; font-weight: 700; }
+.drill-gap { display: inline-block; min-width: 4.5ch; padding: 0 .3em; margin: 0 .1em; border-bottom: 3px dashed rgba(255,255,255,.7); color: rgba(255,255,255,.5); }
+.drill-gap.filled { color: #062b17; background: #43d68b; border: 0; border-radius: .5rem; animation: pop .4s cubic-bezier(.2, 1.4, .3, 1); }
+.tense-play.wrong .drill-gap.filled { background: #ffd76a; color: #2b2006; }
+.drill-signal { background: #ffd76a; color: #2b2006; border-radius: .35rem; padding: 0 .2em; box-shadow: 0 0 0 4px rgba(255,215,106,.25); animation: tl-glow 1.2s ease-in-out 2; }
+@keyframes tl-glow { 50% { box-shadow: 0 0 0 9px rgba(255,215,106,.12); } }
+.burst-buttons.tense-options { display: grid; grid-template-columns: 1fr; gap: .7rem; width: 100%; }
+.tense-options .burst-btn { text-transform: none; min-height: 3.6rem; }
+.tense-clue { align-self: center; border: 1px dashed rgba(255,255,255,.45); background: transparent; color: #fff; font-weight: 800; border-radius: 999px; padding: .55rem 1.1rem; min-height: 44px; }
+.tense-after { display: flex; flex-direction: column; gap: .55rem; align-items: center; text-align: center; }
+.tense-verdict { margin: 0; font-size: 1.2rem; font-weight: 950; } .tense-verdict.ok { color: #9cf0c4; } .tense-verdict.ko { color: #ffd2c9; }
+.tense-why { margin: 0; font-size: 1.02rem; font-weight: 800; }
+.tense-es { margin: 0; font-size: .95rem; opacity: .85; font-style: italic; }
+.tense-route { width: 100%; max-width: 24rem; align-self: center; text-align: center; background: rgba(0,0,0,.22); border-radius: 1rem; padding: .6rem .7rem; }
+.tense-route p { margin: 0 0 .4rem; font-weight: 800; font-size: .92rem; }
+.tense-route div { display: flex; flex-wrap: wrap; gap: .3rem; justify-content: center; }
+.tense-route span { font-size: .75rem; font-weight: 800; padding: .2rem .5rem; border-radius: 999px; background: rgba(255,255,255,.14); }
+.tense-route span.new { background: #ffd76a; color: #2b2006; }
+.tense-stars { display: flex; justify-content: center; gap: .4rem; font-size: 3.4rem; line-height: 1; }
+.tense-stars span { color: rgba(255,255,255,.3); } .tense-stars span.on { color: #ffd76a; animation: pop .5s cubic-bezier(.2, 1.4, .3, 1) both; filter: drop-shadow(0 6px 14px rgba(255,215,106,.35)); }
+.tense-stars span:nth-child(2) { animation-delay: .15s; } .tense-stars span:nth-child(3) { animation-delay: .3s; }

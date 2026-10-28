@@ -88,6 +88,85 @@ export function stageIssues(st: unknown, path: string): ContentIssue[] {
 export interface ChantVerse { e: string; q: string; a: string; es?: string; }
 export const CHANT_LIMITS = { minVerses: 4, maxVerses: 8, minAnswers: 2, textMax: 80 } as const;
 
+/**
+ * Los tiempos verbales (D-089). Cada tiempo se enseña con su LÍNEA DEL TIEMPO (antes · ahora · después), sus PISTAS
+ * (las palabras que lo piden: yesterday, now, since…) y, ya enseñado, el juego «¿Qué tiempo pide?»: una frase con hueco
+ * y su pista, para elegir la forma del verbo.
+ * Marcas de la línea (posición de -3 a 3; 0 es ahora): `event` un punto (pasó una vez), `action` una barra (duraba),
+ * `habit` puntitos (se repite), `ref` una línea de referencia («mañana a esta hora»), `link` un arco hasta otro momento
+ * (lo pasado que cuenta hoy) y `unreal` un punto discontinuo (imaginado, no pasó).
+ */
+export const TIMELINE_KINDS = ['event', 'action', 'habit', 'ref', 'link', 'unreal'] as const;
+export interface TimelineMark { kind: (typeof TIMELINE_KINDS)[number]; at: number; to?: number; label?: string }
+export interface TenseDrill {
+  /** La frase con un hueco ___ y el verbo base entre paréntesis: «Look! It ___ (rain).» */
+  text: string;
+  answer: string;
+  /** Formas de otros tiempos (1 a 3) que no encajan con la pista. */
+  wrong: string[];
+  /** La pista de la frase (tiene que estar en ella): «Look!». */
+  signal?: string;
+  /** Traducción de la frase completa. */
+  es?: string;
+}
+export const TENSE_LIMITS = { maxMarks: 4, label: 22, maxSignals: 8, signal: 30, maxDrills: 8, drillText: 120, form: 30, maxWrong: 3 } as const;
+
+export function tenseIssues(p: Record<string, unknown>): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  if (p.tense !== undefined) checkText(issues, p.tense, 'tense', { max: 40 });
+  if (p.timeline !== undefined) {
+    if (!Array.isArray(p.timeline)) issues.push(issue('not_list', 'timeline'));
+    else {
+      if (p.timeline.length < 1) issues.push(issue('min_items', 'timeline', { min: 1, count: 0 }));
+      if (p.timeline.length > TENSE_LIMITS.maxMarks) issues.push(issue('max_items', 'timeline', { max: TENSE_LIMITS.maxMarks, count: p.timeline.length }));
+      p.timeline.forEach((m, i) => {
+        const path = `timeline.${i}`;
+        if (!isRecord(m)) return void issues.push(issue('not_object', path));
+        checkUnknownFields(issues, m, path, ['kind', 'at', 'to', 'label']);
+        checkChoice(issues, m.kind, `${path}.kind`, TIMELINE_KINDS);
+        const at = m.at; const to = m.to;
+        if (typeof at !== 'number' || at < -3 || at > 3) issues.push(issue('timeline_position', `${path}.at`));
+        if (to !== undefined && (typeof to !== 'number' || to < -3 || to > 3 || (typeof at === 'number' && to <= at))) issues.push(issue('timeline_position', `${path}.to`));
+        if (['action', 'habit', 'link'].includes(String(m.kind)) && to === undefined) issues.push(issue('required', `${path}.to`));
+        checkText(issues, m.label, `${path}.label`, { required: false, max: TENSE_LIMITS.label });
+      });
+    }
+  }
+  if (p.signals !== undefined) {
+    if (!Array.isArray(p.signals)) issues.push(issue('not_list', 'signals'));
+    else {
+      if (p.signals.length > TENSE_LIMITS.maxSignals) issues.push(issue('max_items', 'signals', { max: TENSE_LIMITS.maxSignals, count: p.signals.length }));
+      p.signals.forEach((t, i) => checkText(issues, t, `signals.${i}`, { max: TENSE_LIMITS.signal }));
+    }
+  }
+  if (p.drills !== undefined) {
+    if (!Array.isArray(p.drills)) issues.push(issue('not_list', 'drills'));
+    else {
+      if (p.drills.length > TENSE_LIMITS.maxDrills) issues.push(issue('max_items', 'drills', { max: TENSE_LIMITS.maxDrills, count: p.drills.length }));
+      p.drills.forEach((d, i) => {
+        const path = `drills.${i}`;
+        if (!isRecord(d)) return void issues.push(issue('not_object', path));
+        checkUnknownFields(issues, d, path, ['text', 'answer', 'wrong', 'signal', 'es']);
+        checkText(issues, d.text, `${path}.text`, { max: TENSE_LIMITS.drillText });
+        if (typeof d.text === 'string' && d.text.split('___').length !== 2) issues.push(issue('gap_missing', `${path}.text`));
+        checkText(issues, d.answer, `${path}.answer`, { max: TENSE_LIMITS.form });
+        checkText(issues, d.es, `${path}.es`, { required: false, max: 160 });
+        checkText(issues, d.signal, `${path}.signal`, { required: false, max: TENSE_LIMITS.signal });
+        if (typeof d.signal === 'string' && typeof d.text === 'string' && !d.text.toLowerCase().includes(d.signal.toLowerCase())) issues.push(issue('signal_not_in_text', `${path}.signal`));
+        if (!Array.isArray(d.wrong) || d.wrong.length < 1) issues.push(issue('min_items', `${path}.wrong`, { min: 1, count: Array.isArray(d.wrong) ? d.wrong.length : 0 }));
+        else {
+          if (d.wrong.length > TENSE_LIMITS.maxWrong) issues.push(issue('max_items', `${path}.wrong`, { max: TENSE_LIMITS.maxWrong, count: d.wrong.length }));
+          d.wrong.forEach((w, j) => checkText(issues, w, `${path}.wrong.${j}`, { max: TENSE_LIMITS.form }));
+          const norm = (x: unknown) => String(x).trim().toLowerCase();
+          if (d.wrong.some((w) => norm(w) === norm(d.answer))) issues.push(issue('distractor_is_answer', `${path}.wrong`));
+          if (new Set(d.wrong.map(norm)).size !== d.wrong.length) issues.push(issue('duplicate_option', `${path}.wrong`));
+        }
+      });
+    }
+  }
+  return issues;
+}
+
 export function chantIssues(c: unknown): ContentIssue[] {
   const issues: ContentIssue[] = [];
   if (!Array.isArray(c)) return [issue('not_list', 'chant')];
@@ -171,6 +250,11 @@ export interface PatternPayload {
   pitfalls?: string[];
   /** «La cadena» (D-085): versos de pregunta y respuesta con ritmo. */
   chant?: ChantVerse[];
+  /** Los tiempos verbales (D-089): nombre corto del tiempo, su línea del tiempo, sus pistas y el juego. */
+  tense?: string;
+  timeline?: TimelineMark[];
+  signals?: string[];
+  drills?: TenseDrill[];
 }
 
 export interface ConceptExample {
@@ -302,8 +386,9 @@ function validateTerm(p: Record<string, unknown>): ContentIssue[] {
 
 function validatePattern(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant']);
+  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills']);
   if (p.chant !== undefined) issues.push(...chantIssues(p.chant));
+  issues.push(...tenseIssues(p));
   checkText(issues, p.goal, 'goal', { max: 120 });
   checkText(issues, p.rule, 'rule', { max: PAYLOAD_LIMITS.ruleLength });
   if (typeof p.rule === 'string' && /\n/.test(p.rule)) issues.push(issue('rule_multiline', 'rule'));

@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'burst' | 'train' | 'watch' | 'spot' | 'chant' | 'summary';
+export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'burst' | 'train' | 'watch' | 'spot' | 'chant' | 'tense' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -21,6 +21,9 @@ export interface AssocStep {
   arcadeUnits?: string[];
   /** Arcade gramatical (D-088): frases de lo aprendido, bien o con el error del orden del español. */
   arcadeGrammar?: Array<{ unitKey: string; example: number; wrong: boolean }>;
+  /** «¿Qué tiempo pide?» (D-089): frases del juego (de qué tiempo y cuál) y los tiempos que ya llevas en la ruta. */
+  tenseDrills?: Array<{ unitKey: string; drill: number }>;
+  tenseRoute?: string[];
   /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
   exercise?: number;
   typed?: boolean;

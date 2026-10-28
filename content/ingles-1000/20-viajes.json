@@ -140,7 +140,59 @@
             "technique": "absurd_scene",
             "scene": "Un TREN llamado GOING TO te lleva a tus planes.",
             "emoji": "🚆"
-          }
+          },
+          "tense": "Going to (planes)",
+          "timeline": [
+            {
+              "kind": "link",
+              "at": 0,
+              "to": 1.6,
+              "label": "ya decidido"
+            },
+            {
+              "kind": "event",
+              "at": 1.6,
+              "label": "el plan"
+            }
+          ],
+          "signals": [
+            "I've decided",
+            "next week",
+            "It's all planned",
+            "Look at those clouds!"
+          ],
+          "drills": [
+            {
+              "text": "Look at those clouds! It ___ (rain).",
+              "answer": "is going to rain",
+              "wrong": [
+                "rains",
+                "rained"
+              ],
+              "signal": "Look at those clouds!",
+              "es": "¡Mira esas nubes! Va a llover."
+            },
+            {
+              "text": "I've decided: I ___ (study) medicine.",
+              "answer": "am going to study",
+              "wrong": [
+                "study",
+                "studied"
+              ],
+              "signal": "I've decided",
+              "es": "Lo he decidido: voy a estudiar medicina."
+            },
+            {
+              "text": "We ___ (visit) my grandparents next weekend. It's all planned.",
+              "answer": "are going to visit",
+              "wrong": [
+                "visit",
+                "visited"
+              ],
+              "signal": "It's all planned",
+              "es": "Vamos a visitar a mis abuelos el fin de semana que viene. Está todo planeado."
+            }
+          ]
         },
         {
           "key": "travel",

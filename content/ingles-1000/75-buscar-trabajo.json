@@ -140,7 +140,55 @@
             "technique": "absurd_scene",
             "scene": "Un CRONÓMETRO que sigue CORRIENDO: I'VE BEEN + -ING.",
             "emoji": "🔄"
-          }
+          },
+          "tense": "Presente perfecto continuo",
+          "timeline": [
+            {
+              "kind": "action",
+              "at": -2.2,
+              "to": 0,
+              "label": "empezó… y sigue"
+            }
+          ],
+          "signals": [
+            "for two hours",
+            "since May",
+            "how long",
+            "all day",
+            "lately"
+          ],
+          "drills": [
+            {
+              "text": "I ___ (wait) for an hour.",
+              "answer": "have been waiting",
+              "wrong": [
+                "am waiting",
+                "wait"
+              ],
+              "signal": "for an hour",
+              "es": "Llevo una hora esperando."
+            },
+            {
+              "text": "How long ___ (you / study) English?",
+              "answer": "have you been studying",
+              "wrong": [
+                "are you studying",
+                "do you study"
+              ],
+              "signal": "How long",
+              "es": "¿Cuánto tiempo llevas estudiando inglés?"
+            },
+            {
+              "text": "It ___ (rain) all day.",
+              "answer": "has been raining",
+              "wrong": [
+                "is raining",
+                "rains"
+              ],
+              "signal": "all day",
+              "es": "Lleva todo el día lloviendo."
+            }
+          ]
         },
         {
           "key": "candidate",

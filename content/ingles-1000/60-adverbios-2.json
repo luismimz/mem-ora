@@ -138,7 +138,54 @@
             "technique": "absurd_scene",
             "scene": "Una FOTO VIEJA en blanco y negro: USED TO.",
             "emoji": "📷"
-          }
+          },
+          "tense": "Used to (antes sí, ahora no)",
+          "timeline": [
+            {
+              "kind": "habit",
+              "at": -3,
+              "to": -1,
+              "label": "antes sí, ahora no"
+            }
+          ],
+          "signals": [
+            "when I was a child",
+            "years ago",
+            "but now…",
+            "not any more"
+          ],
+          "drills": [
+            {
+              "text": "When I was a child, I ___ (live) in Lima.",
+              "answer": "used to live",
+              "wrong": [
+                "use to live",
+                "am living"
+              ],
+              "signal": "When I was a child",
+              "es": "De niño vivía en Lima."
+            },
+            {
+              "text": "He ___ (smoke), but he stopped.",
+              "answer": "used to smoke",
+              "wrong": [
+                "is smoking",
+                "has smoked"
+              ],
+              "signal": "but he stopped",
+              "es": "Antes fumaba, pero lo dejó."
+            },
+            {
+              "text": "We ___ (not / have) a car then.",
+              "answer": "didn't use to have",
+              "wrong": [
+                "didn't used to have",
+                "don't have"
+              ],
+              "signal": "then",
+              "es": "Entonces no teníamos coche."
+            }
+          ]
         },
         {
           "key": "almost",

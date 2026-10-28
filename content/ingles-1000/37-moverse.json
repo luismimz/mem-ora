@@ -124,6 +124,88 @@
           }
         },
         {
+          "key": "g-will-or-going-to",
+          "type": "pattern",
+          "goal": "¿Lo decides ahora o ya lo tenías pensado? WILL o GOING TO",
+          "rule": "Decides en el momento, prometes o crees: I'll… Plan ya decidido o lo ves venir: I'm going to…",
+          "pieces": [
+            {
+              "text": "I'll",
+              "role": "fixed",
+              "hint": "lo decido ahora"
+            },
+            {
+              "text": "I'm going to",
+              "role": "slot",
+              "hint": "ya lo tenía pensado"
+            }
+          ],
+          "examples": [
+            {
+              "text": "You look tired. I'll drive.",
+              "translation": "Pareces cansado. Conduzco yo."
+            },
+            {
+              "text": "I'm going to drive to Valencia on Saturday.",
+              "translation": "El sábado voy a ir en coche a Valencia."
+            },
+            {
+              "text": "Careful! You're going to fall!",
+              "translation": "¡Cuidado! ¡Te vas a caer!"
+            },
+            {
+              "text": "I think the bus will be late.",
+              "translation": "Creo que el autobús llegará tarde."
+            }
+          ],
+          "pitfalls": [
+            "Al decidir en el momento, will: «The phone! — I'll get it».",
+            "Si ya lo ves venir (nubes negras), going to: It's going to rain."
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "scene": "WILL, una CHISPA; GOING TO, un TREN ya en marcha.",
+            "emoji": "⚡"
+          },
+          "tense": "Will o going to",
+          "signals": [
+            "I've decided",
+            "It's on my list",
+            "Careful!",
+            "OK, I…",
+            "I think"
+          ],
+          "drills": [
+            {
+              "text": "We have no milk. — Really? OK, I ___ (buy) some.",
+              "answer": "will buy",
+              "wrong": [
+                "am going to buy"
+              ],
+              "signal": "Really? OK",
+              "es": "No hay leche. — ¿En serio? Vale, compro yo."
+            },
+            {
+              "text": "I ___ (buy) milk later; it's on my list.",
+              "answer": "am going to buy",
+              "wrong": [
+                "will buy"
+              ],
+              "signal": "it's on my list",
+              "es": "Luego voy a comprar leche; la tengo en la lista."
+            },
+            {
+              "text": "Careful! You ___ (fall)!",
+              "answer": "are going to fall",
+              "wrong": [
+                "will fall"
+              ],
+              "signal": "Careful!",
+              "es": "¡Cuidado! ¡Te vas a caer!"
+            }
+          ]
+        },
+        {
           "key": "car",
           "type": "term",
           "text": "car",

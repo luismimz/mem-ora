@@ -5,13 +5,14 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload, Mirror, PatternPayload, StageActor } from '@memora/content';
+import type { ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark } from '@memora/content';
 import {
   buildTiles,
   burstOptions,
   challengeChoices,
   chantOf,
   choicesFor,
+  drillsOf,
   orderRule,
   orderSwap,
   spanishOrderCalque,
@@ -226,6 +227,8 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
         ))}
       </div>)}
       <p className="pattern-rule">{p.rule}</p>
+      {p.timeline?.length ? <TimeLine marks={p.timeline} {...(p.tense ? { title: p.tense } : {})} /> : p.tense ? <p className="tense-chip">🕰️ {p.tense}</p> : null}
+      {p.signals?.length ? <p className="tense-signals" lang={unit.language}><span>🔎 PISTAS</span>{p.signals.map((t) => <b key={t}>{t}</b>)}</p> : null}
       <div className="face-learn">
         <p className="learn-label">{p.examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>
         {p.examples.slice(0, 4).map((ex, i) => (
@@ -237,6 +240,50 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
         {p.pitfalls?.length ? <><p className="learn-label">OJO</p>{p.pitfalls.map((t, i) => <p key={i} className="learn-contrast">{t}</p>)}</> : null}
       </div>
     </div>
+  );
+}
+
+/**
+ * La línea del tiempo (D-089): antes · AHORA · después, con las marcas del tiempo verbal. Un punto pasó una vez, una
+ * barra duraba, los puntitos se repiten, la línea discontinua es un momento de referencia, el arco une algo pasado con
+ * hoy y el círculo discontinuo es imaginado. Las etiquetas se apilan para no pisarse.
+ */
+export function TimeLine({ marks, title, small = false }: { marks: TimelineMark[]; title?: string; small?: boolean }) {
+  const labeled = marks.filter((m) => m.label);
+  const axis = 30 + labeled.length * 16;
+  const height = axis + 24;
+  const x = (at: number) => 160 + at * 46;
+  const mid = (m: TimelineMark) => (m.to === undefined ? x(m.at) : (x(m.at) + x(m.to)) / 2);
+  const said = marks.map((m) => m.label).filter(Boolean).join(' · ');
+  return (
+    <figure className={`timeline ${small ? 'small' : ''}`}>
+      {title && <figcaption>🕰️ {title}</figcaption>}
+      <svg viewBox={`0 0 320 ${height}`} role="img" aria-label={`Línea del tiempo${said ? `: ${said}` : ''}`}>
+        <line className="tl-axis" x1="8" x2="306" y1={axis} y2={axis} />
+        <polygon className="tl-arrow" points={`306,${axis - 5} 316,${axis} 306,${axis + 5}`} />
+        <line className="tl-now" x1="160" x2="160" y1={axis - 12} y2={axis + 12} />
+        <circle className="tl-now-dot" cx="160" cy={axis} r="4" />
+        <text className="tl-zone" x="34" y={height - 4}>ANTES</text>
+        <text className="tl-zone now" x="160" y={height - 4}>AHORA</text>
+        <text className="tl-zone" x="286" y={height - 4}>DESPUÉS</text>
+        {marks.map((m, i) => {
+          const to = m.to ?? m.at;
+          if (m.kind === 'action') return <rect key={i} className="tl-action" x={x(m.at)} y={axis - 6} width={Math.max(8, x(to) - x(m.at))} height="12" rx="6" />;
+          if (m.kind === 'habit') {
+            const n = Math.max(2, Math.floor((x(to) - x(m.at)) / 20) + 1);
+            return <g key={i} className="tl-habit">{Array.from({ length: n }, (_, k) => <circle key={k} cx={x(m.at) + ((x(to) - x(m.at)) * k) / (n - 1)} cy={axis} r="4" style={{ animationDelay: `${k * 30}ms` }} />)}</g>;
+          }
+          if (m.kind === 'ref') return <line key={i} className="tl-ref" x1={x(m.at)} x2={x(m.at)} y1={axis - 16} y2={axis + 12} />;
+          if (m.kind === 'link') return <path key={i} className="tl-link" d={`M ${x(m.at)} ${axis - 7} Q ${(x(m.at) + x(to)) / 2} ${axis - 30} ${x(to)} ${axis - 7}`} />;
+          if (m.kind === 'unreal') return <g key={i} className="tl-unreal"><circle cx={x(m.at)} cy={axis} r="9" /><text x={x(m.at)} y={axis + 4}>?</text></g>;
+          return <circle key={i} className="tl-event" cx={x(m.at)} cy={axis} r="7" />;
+        })}
+        {labeled.map((m, i) => {
+          const y = axis - 18 - (labeled.length - 1 - i) * 16;
+          return <text key={i} className={`tl-label ${m.kind}`} x={Math.min(262, Math.max(58, mid(m)))} y={y}>{m.label}</text>;
+        })}
+      </svg>
+    </figure>
   );
 }
 
@@ -1006,6 +1053,120 @@ function FlowArcade({ units, grammar = [], all, seed, onAnswer, onDone }: { unit
   );
 }
 
+/** La frase del juego con su hueco: el verbo base entre paréntesis, apagado, y la pista resaltada si toca. */
+function DrillText({ text, signal, show, fill, lang }: { text: string; signal?: string; show: boolean; fill: string | null; lang: string }) {
+  const mark = (part: string, k: string): ReactNode[] => {
+    const pieces: ReactNode[] = [];
+    const lower = part.toLowerCase();
+    const at = show && signal ? lower.indexOf(signal.toLowerCase()) : -1;
+    const chunks = at < 0 ? [part] : [part.slice(0, at), part.slice(at, at + signal!.length), part.slice(at + signal!.length)];
+    chunks.forEach((c, j) => {
+      if (at >= 0 && j === 1) { pieces.push(<mark key={`${k}s`} className="drill-signal">{c}</mark>); return; }
+      c.split(/(\([^)]*\))/).forEach((t, n) => { if (t && !(fill && /^\(/.test(t))) pieces.push(/^\(/.test(t) ? <small key={`${k}${j}${n}`} className="drill-verb">{t}</small> : <Fragment key={`${k}${j}${n}`}>{t}</Fragment>); });
+    });
+    return pieces;
+  };
+  const [before = '', after = ''] = text.split('___');
+  return <h3 className="ask drill-text" lang={lang}>{mark(before, 'a')}<span className={`drill-gap ${fill ? 'filled' : ''}`}>{fill ?? '＿＿＿'}</span>{mark(after, 'b')}</h3>;
+}
+
+/** Orden estable de las opciones (la misma partida, el mismo orden al reanudar). */
+const stableOrder = (items: string[], seed: string) => [...items].sort((a, b) => hue(`${seed}${a}`) - hue(`${seed}${b}`));
+
+/**
+ * «¿Qué tiempo pide?» (D-089): ya enseñado el tiempo, frases con un hueco y su PISTA (yesterday, now, since…). Se elige
+ * la forma del verbo entre las de otros tiempos. Sin reloj: aquí se piensa. «🔎 Pista» resalta la palabra clave (da
+ * menos puntos). Al responder se ve la pista, el tiempo y su línea; al final, estrellas y tu ruta de los tiempos.
+ * Si fallas alguna, la ficha de ese tiempo se enseña otra vez antes de seguir.
+ */
+function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
+  unit: SessionUnit; all: Record<string, SessionUnit>; drills: Array<{ unitKey: string; drill: number }>; route: string[]; seed: string;
+  onAnswer: (u: SessionUnit, ok: boolean, ms: number, drill: number, clue: boolean) => void; onDone: (failed: string | null) => void;
+}) {
+  const items = useMemo(() => drills.flatMap((d) => { const u = all[d.unitKey]; const x = u ? drillsOf(u)[d.drill] : undefined; return u && x ? [{ u, x, n: d.drill }] : []; }), [drills, all]);
+  const tenseOf = (u: SessionUnit) => (u.payload as PatternPayload).tense ?? (u.payload as PatternPayload).goal;
+  const total = useMemo(() => Object.values(all).filter((u) => drillsOf(u).length).length, [all]);
+  const [i, setI] = useState(-1);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [clue, setClue] = useState(false);
+  const [right, setRight] = useState(0);
+  const [confetti, setConfetti] = useState(0);
+  const failed = useRef<string[]>([]);
+  const t0 = useRef(performance.now());
+  const q = i >= 0 ? items[i] : undefined;
+  const options = useMemo(() => (q ? stableOrder([q.x.answer, ...q.x.wrong], `${seed}-${i}`) : []), [q, i, seed]);
+  useEffect(() => { t0.current = performance.now(); }, [i]);
+  function pick(o: string) {
+    if (!q || picked !== null) return;
+    const ok = o === q.x.answer;
+    setPicked(o);
+    if (ok) { setRight((r) => r + 1); setConfetti((c) => c + 1); } else failed.current.push(q.u.key);
+    onAnswer(q.u, ok, Math.round(performance.now() - t0.current), q.n, clue);
+  }
+  function next() { setPicked(null); setClue(false); setI((n) => n + 1); }
+  const finish = () => onDone(failed.current.includes(unit.key) ? unit.key : failed.current[0] ?? null);
+  const routeChips = (
+    <div className="tense-route">
+      <p>🛤️ Tu ruta de los tiempos: <b>{route.length}</b> de {total}</p>
+      <div>{route.map((k) => all[k]).filter((u): u is SessionUnit => Boolean(u)).map((u) => <span key={u.key} className={u.key === unit.key ? 'new' : ''}>{tenseOf(u)}</span>)}</div>
+    </div>
+  );
+  if (i < 0) {
+    return (
+      <Slide tone={hue(unit.key)} className="tense-intro" onNext={() => setI(0)}>
+        <p className="tag">🕰️ ¿QUÉ TIEMPO PIDE?</p>
+        <div className="arcade-big" aria-hidden="true">🕵️</div>
+        <h2 className="ask">Sé detective: busca la pista</h2>
+        <p className="arcade-rules">{items.length} frases · cada una tiene una PISTA (yesterday, now, since…) que te dice qué tiempo pide el verbo.</p>
+        {routeChips}
+        <button type="button" className="primary arcade-go" onClick={() => setI(0)}>¡Vamos! 🔎</button>
+      </Slide>
+    );
+  }
+  if (!q) {
+    const stars = right === items.length ? 3 : right >= items.length * 0.66 ? 2 : right > 0 ? 1 : 0;
+    return (
+      <Slide tone={hue(unit.key)} className="tense-end" onNext={finish}>
+        <p className="tag">🕰️ CASO CERRADO</p>
+        <div className="tense-stars" aria-label={`${stars} de 3 estrellas`}>{[0, 1, 2].map((k) => <span key={k} className={k < stars ? 'on' : ''}>★</span>)}</div>
+        <p className="arcade-rules">{right}/{items.length} frases resueltas{right === items.length ? ' · ¡detective de los tiempos! 🏆' : ''}</p>
+        {routeChips}
+        {failed.current.length > 0 && <p className="arcade-rules muted">Ahora repasas el tiempo que se te resistió.</p>}
+        <button type="button" className="primary arcade-go" onClick={finish}>Seguir →</button>
+        <Confetti burst={stars === 3 ? 99 : 0} />
+      </Slide>
+    );
+  }
+  const ok = picked === q.x.answer;
+  const p = q.u.payload as PatternPayload;
+  return (
+    <Slide tone={hue(unit.key)} className={`tense-play ${picked === null ? '' : ok ? 'right' : 'wrong'}`} {...(picked !== null ? { onNext: next } : {})}>
+      <div className="arcade-head">
+        <p className="tag">🕰️ ¿QUÉ TIEMPO PIDE? · {i + 1}/{items.length}</p>
+        <span className="arcade-pts">✅ {right}</span>
+      </div>
+      <DrillText text={q.x.text} {...(q.x.signal ? { signal: q.x.signal } : {})} show={clue || picked !== null} fill={picked === null ? null : q.x.answer} lang={q.u.language} />
+      {picked === null ? (
+        <>
+          <div className={`burst-buttons n${options.length} tense-options`}>
+            {options.map((o, k) => <button type="button" key={o} className={`burst-btn c${k}`} lang={q.u.language} onClick={() => pick(o)}>{o}</button>)}
+          </div>
+          {q.x.signal && !clue && <button type="button" className="tense-clue" onClick={() => setClue(true)}>🔎 Ver la pista</button>}
+        </>
+      ) : (
+        <div className="tense-after" aria-live="polite">
+          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Sí! 🎉' : <>Era <b lang={q.u.language}>{q.x.answer}</b> (elegiste «{picked}»)</>}</p>
+          {q.x.signal && <p className="tense-why">📍 <b lang={q.u.language}>«{q.x.signal}»</b> → {tenseOf(q.u)}</p>}
+          {p.timeline?.length ? <TimeLine marks={p.timeline} small /> : null}
+          {q.x.es && <p className="tense-es">{q.x.es}</p>}
+          <button type="button" className="primary arcade-go" onClick={next}>{i + 1 < items.length ? 'Siguiente →' : 'Ver resultado →'}</button>
+        </div>
+      )}
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
 /** ¿Verdad o mentira?: desliza → (verdad) o ← (mentira), o toca los botones. */
 function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUnit; onResult: (ok: boolean, ms: number) => void }) {
   const truth = shown.key === unit.key;
@@ -1317,6 +1478,9 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
   else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} all={units} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))} {...(step.arcadeGrammar ? { grammar: step.arcadeGrammar } : {})}
     onAnswer={(u, ok, ms, context) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); scored(ok, 6); }} onDone={() => void advance()} />;
+  else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
+    onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
+    onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
@@ -1325,7 +1489,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'review' && unit) card = <Write key={step.id} unit={unit} levelUp={Boolean(step.levelUp)} onResult={(ok, ms, hint, format) => answered(unit, ok, ms, `${unit.key}#write`, 20, step.skillKey, format, hint)} />;
   else if (step.kind === 'summary') {
-    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst'].includes(s.kind) && outcomes[s.id]);
+    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst', 'tense'].includes(s.kind) && outcomes[s.id]);
     const right = asked.filter((s) => outcomes[s.id]!.correct).length;
     const newOnes = plan.steps.filter((s) => s.kind === 'reel' && !s.focus).length;
     const soon = progress?.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now());

@@ -142,7 +142,52 @@
             "technique": "absurd_scene",
             "scene": "IF abre el PARAGUAS y WILL se queda en CASA.",
             "emoji": "☔"
-          }
+          },
+          "tense": "Primer condicional",
+          "timeline": [
+            {
+              "kind": "event",
+              "at": 1.6,
+              "label": "si pasa, pasará"
+            }
+          ],
+          "signals": [
+            "if + presente",
+            "unless",
+            "as soon as"
+          ],
+          "drills": [
+            {
+              "text": "If it rains, I ___ (stay) at home.",
+              "answer": "will stay",
+              "wrong": [
+                "would stay",
+                "stayed"
+              ],
+              "signal": "If it rains",
+              "es": "Si llueve, me quedaré en casa."
+            },
+            {
+              "text": "If you ___ (hurry), you'll catch the bus.",
+              "answer": "hurry",
+              "wrong": [
+                "will hurry",
+                "hurried"
+              ],
+              "signal": "you'll catch",
+              "es": "Si te das prisa, cogerás el autobús."
+            },
+            {
+              "text": "I'll call you if I ___ (have) time.",
+              "answer": "have",
+              "wrong": [
+                "will have",
+                "had"
+              ],
+              "signal": "I'll call you if",
+              "es": "Te llamaré si tengo tiempo."
+            }
+          ]
         },
         {
           "key": "traffic-light",

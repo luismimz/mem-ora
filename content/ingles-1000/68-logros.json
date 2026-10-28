@@ -131,7 +131,72 @@
             "technique": "absurd_scene",
             "scene": "HAVE guarda recuerdos sin FECHA; el PASADO lleva FECHA.",
             "emoji": "🎒"
-          }
+          },
+          "tense": "Presente perfecto",
+          "timeline": [
+            {
+              "kind": "event",
+              "at": -1.6,
+              "label": "sin fecha"
+            },
+            {
+              "kind": "link",
+              "at": -1.6,
+              "to": 0,
+              "label": "cuenta hoy"
+            }
+          ],
+          "signals": [
+            "ever",
+            "never",
+            "already",
+            "yet",
+            "just",
+            "since",
+            "so far"
+          ],
+          "drills": [
+            {
+              "text": "I ___ (never / see) the sea.",
+              "answer": "have never seen",
+              "wrong": [
+                "never saw",
+                "am never seeing"
+              ],
+              "signal": "never",
+              "es": "Nunca he visto el mar."
+            },
+            {
+              "text": "She ___ (already / send) the email.",
+              "answer": "has already sent",
+              "wrong": [
+                "already sends",
+                "is already sending"
+              ],
+              "signal": "already",
+              "es": "Ya ha enviado el correo."
+            },
+            {
+              "text": "I ___ (lose) my keys! I can't get in.",
+              "answer": "have lost",
+              "wrong": [
+                "lose",
+                "was losing"
+              ],
+              "signal": "I can't get in",
+              "es": "¡He perdido las llaves! No puedo entrar."
+            },
+            {
+              "text": "We ___ (live) here since 2019.",
+              "answer": "have lived",
+              "wrong": [
+                "live",
+                "are living"
+              ],
+              "signal": "since 2019",
+              "es": "Vivimos aquí desde 2019."
+            }
+          ]
         },
         {
           "key": "achieve",

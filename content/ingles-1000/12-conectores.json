@@ -1184,7 +1184,53 @@
             "technique": "absurd_scene",
             "scene": "SI TUVIERA viaja al PASADO y vuelve IF I HAD.",
             "emoji": "⏪"
-          }
+          },
+          "tense": "Segundo condicional",
+          "timeline": [
+            {
+              "kind": "unreal",
+              "at": 0,
+              "label": "imaginado, no real"
+            }
+          ],
+          "signals": [
+            "If I had",
+            "If I were you",
+            "would",
+            "imagine"
+          ],
+          "drills": [
+            {
+              "text": "If I ___ (have) more money, I would travel more.",
+              "answer": "had",
+              "wrong": [
+                "have",
+                "will have"
+              ],
+              "signal": "I would travel",
+              "es": "Si tuviera más dinero, viajaría más."
+            },
+            {
+              "text": "If I were you, I ___ (call) her.",
+              "answer": "would call",
+              "wrong": [
+                "will call",
+                "call"
+              ],
+              "signal": "If I were you",
+              "es": "Yo que tú, la llamaría."
+            },
+            {
+              "text": "She ___ (be) happier if she lived by the sea.",
+              "answer": "would be",
+              "wrong": [
+                "will be",
+                "is"
+              ],
+              "signal": "if she lived",
+              "es": "Sería más feliz si viviera junto al mar."
+            }
+          ]
         }
       ]
     }
