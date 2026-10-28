@@ -7,14 +7,22 @@ export class ApiError extends Error {
   }
 }
 
+/** Tiempo máximo de una petición. */
+export const REQUEST_TIMEOUT_MS = 25000;
+
 async function request<T>(method: string, path: string, body?: unknown, retry = true): Promise<T> {
   // Sin cobertura, fetch lanza TypeError: se convierte en un error reconocible («OFFLINE»).
+  // Tiempo máximo (28-oct-2026): con mala cobertura una petición podía quedarse esperando para siempre y la tarjeta
+  // «Preparando la siguiente ronda…» no salía nunca. Pasado el tiempo cuenta como sin conexión (se reintenta luego).
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), REQUEST_TIMEOUT_MS);
   const res = await fetch(`/api${path}`, {
     method,
     credentials: 'same-origin',
     headers: body ? { 'content-type': 'application/json' } : {},
     body: body ? JSON.stringify(body) : undefined,
-  }).catch(() => { throw new ApiError(0, 'OFFLINE', 'Sin conexión.'); });
+    signal: ctrl.signal,
+  }).catch(() => { throw new ApiError(0, 'OFFLINE', 'Sin conexión.'); }).finally(() => clearTimeout(timer));
   if (res.status === 401 && retry && path !== '/auth/refresh' && path !== '/auth/login') {
     const refreshed = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'same-origin', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ mode: 'session' }) });
     if (refreshed.ok) return request<T>(method, path, body, false);
