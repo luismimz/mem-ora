@@ -45,8 +45,15 @@ describe('flowNewUnits', () => {
     expect(flowNewUnits({ perRound: 8, newToday: 200, dailyRounds: null, lastRound: { answered: 10, correct: 8 } })).toBe(8);
   });
 
-  it('sin tope, una ronda anterior con menos del 80 % de aciertos da una ronda de repaso', () => {
-    expect(flowNewUnits({ perRound: 8, newToday: 40, dailyRounds: null, lastRound: { answered: 10, correct: 7 } })).toBe(0);
+  it('sin tope, una ronda anterior con menos del 80 % da una ronda de refuerzo: menos nuevas, nunca cero (D-086)', () => {
+    expect(flowNewUnits({ perRound: 8, newToday: 40, dailyRounds: null, lastRound: { answered: 10, correct: 7 } })).toBe(3);
+    expect(flowNewUnits({ perRound: 2, newToday: 40, dailyRounds: null, lastRound: { answered: 10, correct: 0 } })).toBe(1);
+  });
+
+  it('fallar ronda tras ronda no deja el curso parado: siempre entra algo nuevo (D-086)', () => {
+    let seen = 0;
+    for (let r = 0; r < 6; r += 1) seen += flowNewUnits({ perRound: 8, newToday: seen, dailyRounds: null, lastRound: { answered: 12, correct: 6 } });
+    expect(seen).toBeGreaterThanOrEqual(6 * 3);
   });
 
   it('una ronda anterior con muy pocas respuestas no cuenta', () => {

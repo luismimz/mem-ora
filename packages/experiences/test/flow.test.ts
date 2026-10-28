@@ -145,8 +145,19 @@ describe('idiomas en el Flujo: escuchar, construir y gramática (D-079)', () => 
   }));
 
   it('la gramática se repesca construyendo otra de sus frases, no eligiendo', () => {
+    const first = plan.steps.find((s) => s.unitKey === 'p1' && s.kind === 'build' && !s.retry)!;
     const retry = plan.steps.find((s) => s.unitKey === 'p1' && s.retry);
-    expect(retry).toMatchObject({ kind: 'build', example: 1, skillKey: 'p1.produce' });
+    expect(retry).toMatchObject({ kind: 'build', skillKey: 'p1.produce' });
+    expect(retry!.example).not.toBe(first.example);
+  });
+
+  it('cada ronda pide una frase distinta, siempre de las que enseña la ficha (D-086)', () => {
+    const picked = new Set<number>();
+    for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
+      const round = buildFlowSession({ ...lang, sessionId: id, audio: true, items: [item('p1', 'new')] });
+      for (const st of round.steps.filter((x) => x.kind === 'build' && x.unitKey === 'p1' && !x.retry)) { picked.add(st.example!); expect(st.example!).toBeLessThan(4); }
+    }
+    expect(picked.size).toBeGreaterThan(1);
   });
 
   it('sin audio no hay «Escucha»', () => {

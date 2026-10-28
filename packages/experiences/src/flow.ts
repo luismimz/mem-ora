@@ -37,6 +37,13 @@ export function buildableExamples(u: SessionUnit): number[] {
   return examples.flatMap((e, i) => (Boolean(e.translation) && buildTiles(e.text).length >= FLOW_BUILD_WORDS.min && buildTiles(e.text).length <= FLOW_BUILD_WORDS.max ? [i] : []));
 }
 
+/** Ejemplos que la ficha enseña (los 4 primeros) o que se ven en «Mira cómo cambia»: solo esos se piden (enseñar antes). */
+export const FLOW_TAUGHT_EXAMPLES = 4;
+export function taughtBuildable(u: SessionUnit): number[] {
+  const staged = new Set(stagedExamples(u));
+  return buildableExamples(u).filter((n) => n < FLOW_TAUGHT_EXAMPLES || staged.has(n));
+}
+
 /** Ejemplos con su tren de la frase (D-082), por su posición. */
 export function mirrorExamples(u: SessionUnit): number[] {
   const examples = ((u.payload as { examples?: Array<{ mirror?: unknown }> }).examples ?? []);
@@ -154,7 +161,9 @@ export function buildFlowSession(input: {
   // D-079: construir una frase real con la unidad (habilidad «producir»), en idiomas y gramática.
   const build = (u: string): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'produce');
-    const n = buildableExample(units[u]!);
+    // D-086: cada ronda, una frase distinta de las enseñadas (antes siempre la primera: parecía un bucle).
+    const options = taughtBuildable(units[u]!);
+    const n = options.length ? options[Math.floor(rand() * options.length)]! : null;
     return skill && n !== null ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
   };
   // D-081: un concepto-juego se practica con su «Ráfaga» (todas sus preguntas, rápidas), no con relámpago ni examen.
@@ -167,8 +176,10 @@ export function buildFlowSession(input: {
   // Después se construye una frase DISTINTA de la que se ha visto animada, si la hay.
   const buildAfter = (u: string, shown?: number): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'produce');
-    const options = buildableExamples(units[u]!);
-    const n = options.find((x) => x !== shown) ?? options[0];
+    const options = taughtBuildable(units[u]!);
+    const others = options.filter((x) => x !== shown);
+    const pool = others.length ? others : options;
+    const n = pool.length ? pool[Math.floor(rand() * pool.length)] : undefined;
     return skill && n !== undefined ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
   };
   // D-084: la escena que cambia. Primero se mira (el bicho se mueve y suena cada frase) y después se juega: oír la frase y
@@ -220,7 +231,8 @@ export function buildFlowSession(input: {
   for (const d of base) {
     withRetry.push(d);
     // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada).
-    const other = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? buildableExamples(units[d.unitKey]!).find((n) => n !== d.example) : undefined;
+    const rest = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? taughtBuildable(units[d.unitKey]!).filter((n) => n !== d.example) : [];
+    const other = rest.length ? rest[Math.floor(rand() * rest.length)] : undefined;
     const replay = d.kind === 'spot' ? spot(d.unitKey, d.example) : d.kind === 'chant' ? chant(d.unitKey) : null;
     if (replay) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { ...replay, retry: true } });
     else if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });

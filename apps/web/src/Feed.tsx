@@ -525,11 +525,19 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
     const answer = chosen.map((i) => bank[i]!.w).join(' ');
     const ok = plain(answer) === plain(words.join(' '));
     setDone(ok);
-    // Se pasa a la siguiente cuando acaba la frase (las largas se cortaban) y nunca antes del tiempo para ver el acierto.
     const ms = Math.round(performance.now() - t0.current);
-    const voice = ok && audioEnabled() ? speak(ex.text, unit.language) : Promise.resolve();
-    void Promise.all([voice, wait(ok ? 1100 : 1500)]).then(() => onResult(ok, ms, `Es «${ex.text}» (${ex.translation}).`, help ? 2 : 1));
+    spent.current = ms;
+    // Acierto: suena la frase y pasa sola. Fallo (D-086): la tarjeta se queda quieta y explica en qué te has equivocado;
+    // se sigue deslizando, y después llega la ficha para repasar.
+    if (!ok) return;
+    const voice = audioEnabled() ? speak(ex.text, unit.language) : Promise.resolve();
+    void Promise.all([voice, wait(1100)]).then(() => onResult(true, ms, '', help ? 2 : 1));
   }, [chosen]); // eslint-disable-line react-hooks/exhaustive-deps
+  const spent = useRef(0);
+  const answer = chosen.map((i) => bank[i]!.w);
+  const mistake = done === false ? buildMistake(answer, words) : null;
+  const rule = unit.type === 'pattern' ? (unit.payload as PatternPayload).rule : undefined;
+  const failNext = () => onResult(false, spent.current, `Tu frase: «${answer.join(' ')}». Así es: «${ex.text}» (${ex.translation}).`, help ? 2 : 1);
   const toggle = (i: number) => { if (done !== null) return; setChosen((c) => (c.includes(i) ? c.filter((x) => x !== i) : [...c, i])); };
 
   // Arrastre tipo imán: se arrastra una pieza con el dedo y, sobre la frase, se abre un hueco donde caerá (las demás se
@@ -597,12 +605,22 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
   if (gapBefore === 'end') shown.push('gap');
   const handlers = (i: number, from: 'bank' | 'line') => ({ onPointerDown: down(i, from), onPointerMove: moveTile, onClick: tap(i) });
   return (
-    <Slide tone={hue(unit.key)} className={`build ${done === null ? '' : done ? 'right' : 'wrong'}`}>
+    <Slide tone={hue(unit.key)} className={`build ${done === null ? '' : done ? 'right' : 'wrong'}`} {...(done === false ? { onNext: failNext } : {})}>
       <p className="tag">🧩 CONSTRUYE LA FRASE</p>
       <h3 className="ask build-es">«{ex.translation}»</h3>
       {ex.mirror && done === null && (help
         ? <MirrorAnim unit={unit} m={ex.mirror} text={ex.text} compact />
         : <button type="button" className="train-help" onClick={() => setHelp(true)}>🪞 ¿Cómo se construye?</button>)}
+      {mistake ? (
+        <div className="build-why" lang={unit.language}>
+          <p className="learn-label">TU FRASE</p>
+          <div className="build-cmp" aria-label="Tu frase">{answer.map((w, i) => <span key={i} className={`tile cmp ${mistake.wrong.includes(i) ? 'ko' : 'ok'}`}>{w}</span>)}</div>
+          <p className="learn-label">ASÍ ES</p>
+          <div className="build-cmp" aria-label="La frase correcta">{words.map((w, i) => <span key={i} className={`tile cmp ${mistake.wrong.includes(i) ? 'fix' : ''}`}>{w}</span>)}</div>
+          <p className="build-reason" lang="es">{mistake.reason}</p>
+          {rule && <p className="build-rule" lang="es">📏 {rule}</p>}
+        </div>
+      ) : <>
       <div ref={line} className={`build-line ${dragging && gap !== null ? 'magnet' : ''}`} aria-label="Tu frase" lang={unit.language}>
         {shown.length
           ? shown.map((i) => (i === 'gap'
@@ -615,9 +633,27 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
       </div>
       {/* La pieza que sigue al dedo va fuera de la tarjeta: dentro rompería el centrado (:last-child) y movería la frase. */}
       {dragging && createPortal(<span className="tile tile-ghost" style={{ left: dragging.x, top: dragging.y }} aria-hidden="true">{bank[dragging.tile]!.w}</span>, document.body)}
-      {done === false && <p className="judge-truth">Es <b>{ex.text}</b></p>}
+      </>}
     </Slide>
   );
+}
+
+/**
+ * En qué te has equivocado al construir la frase (D-086): qué posiciones están mal y una explicación corta. Las
+ * fichas son las palabras de la frase, así que el fallo siempre es de orden: se dice qué pieza va antes.
+ */
+export function buildMistake(answer: string[], words: string[]): { wrong: number[]; reason: string } {
+  const same = (a?: string, b?: string) => plain(a ?? '') === plain(b ?? '');
+  const wrong = words.flatMap((w, i) => (same(answer[i], w) ? [] : [i]));
+  const i = wrong[0];
+  if (i === undefined) return { wrong, reason: '' };
+  const put = answer[i]!;
+  const should = words[i]!;
+  const later = words.findIndex((w, j) => j > i && same(w, put));
+  const reason = later > i
+    ? `Tienes las palabras bien, pero no el orden: «${should}» va antes que «${put}».`
+    : `En ese hueco va «${should}», no «${put}».`;
+  return { wrong, reason };
 }
 
 /** Confeti al acertar en la Ráfaga: piezas de colores que saltan y caen (solo CSS). */

@@ -33,6 +33,8 @@ lo demás). Lo que se ve por el camino se anota aquí, no se implementa de paso.
   pronunciación, dos ejemplos y espejo, y un truco de gramática por misión desde la 18. Siguiente: **repaso de
   calidad** con el usuario (asociaciones y espejos que no le convenzan) antes de ampliar más; después, B1 (phrasal
   verbs 2, conectores de texto, presente perfecto en uso real, inglés de entrevistas y del módulo DAM).
+- ✓ **[todos] Fallar enseña en qué y repetir no es un bucle (D-086, 28-oct-2026).** Pendiente: Arcade sin tiempo (aclarar
+  con la usuaria qué pantalla es) y más «dopamina» con aprendizaje (combo, celebración de misión, nuevas dominadas).
 - **[inglés] La escena que cambia (D-084, 24-oct-2026):** ✓ tarjetas «Mira cómo cambia» y «¿Dónde está?» con el 🐛 y
   el 🎩 en «¿Dónde está?» (misión 42). ✓ Comparativos (🐘 > 🐶 > 🐱 > 🐭), superlativos (la 👑 marca al ganador) y
   *there is/are* (🍎 en el plato). ✓ Frecuencia (☕ del bicho: always → never), too/enough (🎩 demasiado grande o
