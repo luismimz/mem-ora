@@ -1,9 +1,9 @@
 # Estándar de Memora (congelado)
 
-Versión 4 · 25-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
+Versión 5 · 28-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
 sus respuestas del mismo día: deslizar sin botones, feed infinito, ejemplo visto para cada pregunta (D-077); versión 3,
 «La escena que cambia» (D-084, aprobada por el usuario el 24-oct-2026); versión 4, «La cadena» (D-085, aprobada
-por el usuario el 25-oct-2026).
+por el usuario el 25-oct-2026); versión 5, «Arcade sorpresa» en el Flujo (D-087, pedido por el usuario el 28-oct-2026).
 **Nada de este documento se cambia sin aprobación explícita del usuario.** Un fallo se corrige respetándolo y se añade
 una comprobación automática para que no vuelva.
 
@@ -29,6 +29,7 @@ tarjeta pasa sola; al fallar, «Recuérdalo así» se queda hasta que deslizas. 
 | **Mira cómo cambia 👀** | Idiomas (D-084): una escena de emojis cambia sola frase a frase (el 🐛 encima, dentro, debajo del 🎩) y suena cada frase | Va después de la ficha del truco y antes de jugar. Lo que se mueve es lo único que cambia. «↻ Otra vez» la repite. |
 | **¿Dónde está? 👂** | Oyes la frase y tocas su escena entre tres; o, al revés, ves la escena y eliges la frase | Pesa como reconocer (poco). Al fallar, la ficha con la escena correcta; vuelve más tarde con otra escena. |
 | **La cadena 🎵** | Idiomas (D-085): pregunta y respuesta con ritmo cambiando solo el emoji (*Is this a cat? No, it isn't. It's a dog*). Los dos primeros versos se oyen; en los demás eliges la respuesta | Va tras la ficha del truco. Un fallo no corta la canción; al final, si hubo alguno, la ficha y vuelve más tarde. Pesa como reconocer al escuchar. Mínimo 4 versos y 2 respuestas distintas. |
+| **Arcade sorpresa ⚡** | En la mitad de las rondas aproximadamente, en un punto al azar: 6 preguntas contrarreloj (5 s, cuenta atrás grande) de lo YA aprendido, con combo, puntos y confeti | Nunca antes de la 4.ª tarjeta ni con menos de 6 cosas aprendidas. Pesa como reconocer; un fallo no corta el juego ni manda a la ficha: vuelve en su repaso. |
 | **Hito** («Ronda N completada») | XP de la ronda, racha, protectores 🛡️, aciertos, mejor combo, nuevos, próximo repaso | Se desliza y empieza la siguiente ronda. |
 
 Orden de cada ronda: **repasos, tus errores, lo nuevo** y, si no queda nada de eso, **refuerzo de lo más débil**. Siempre

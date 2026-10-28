@@ -874,6 +874,93 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
   );
 }
 
+/** Segundos por pregunta del Arcade sorpresa (D-087). */
+const ARCADE_MS = 5000;
+
+/**
+ * Arcade sorpresa (D-087): una ráfaga contrarreloj de lo YA aprendido, en mitad del Flujo, para romper la monotonía.
+ * 5 s por pregunta con la cuenta atrás bien visible, combo, puntos y confeti. Un fallo no corta el juego ni manda a la
+ * ficha: se ve la respuesta buena y sigue; vuelve en su repaso.
+ */
+function FlowArcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; seed: string; onAnswer: (u: SessionUnit, ok: boolean, ms: number) => void; onDone: () => void }) {
+  const [i, setI] = useState(-1);
+  const [picked, setPicked] = useState<number | null>(null);
+  const [left, setLeft] = useState(ARCADE_MS);
+  const [score, setScore] = useState(0);
+  const [combo, setCombo] = useState(0);
+  const [best, setBest] = useState(0);
+  const [right, setRight] = useState(0);
+  const [confetti, setConfetti] = useState(0);
+  const t0 = useRef(performance.now());
+  const u = i >= 0 ? units[i] : undefined;
+  const inverse = i % 2 === 1;
+  const label = (x: SessionUnit) => (inverse ? unitText(x).toUpperCase() : unitMeaning(x));
+  const choices = useMemo(() => (u ? choicesFor(label(u), units.map(label), `${seed}-arcade-${i}`, 3) : []), [u, i]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!u || picked !== null) return;
+    t0.current = performance.now();
+    setLeft(ARCADE_MS);
+    const tick = window.setInterval(() => setLeft(Math.max(0, ARCADE_MS - (performance.now() - t0.current))), 100);
+    return () => window.clearInterval(tick);
+  }, [i, picked]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (u && picked === null && left <= 0) pick(-1); });
+  function pick(k: number) {
+    if (!u || picked !== null) return;
+    const ok = k >= 0 && choices[k]!.correct;
+    setPicked(k);
+    onAnswer(u, ok, Math.round(performance.now() - t0.current));
+    if (ok) {
+      const c = combo + 1;
+      setCombo(c); setBest((b) => Math.max(b, c)); setRight((r) => r + 1); setConfetti((n) => n + 1);
+      setScore((sc) => sc + Math.round((100 + (left / 1000) * 20) * Math.min(3, 1 + (c - 1) * 0.5)));
+    } else setCombo(0);
+    // El reloj se repone ANTES de pasar: si no, tras agotarse el tiempo, la siguiente nacía a 0 s y se daba por fallada.
+    window.setTimeout(() => { setLeft(ARCADE_MS); setPicked(null); setI((n) => n + 1); }, ok ? 600 : 1500);
+  }
+  if (i < 0) {
+    return (
+      <Slide tone={45} className="arcade-intro" onNext={() => setI(0)}>
+        <p className="tag">⚡ ARCADE SORPRESA</p>
+        <div className="arcade-big" aria-hidden="true">🕹️</div>
+        <h2 className="ask">¡Ráfaga de lo que ya sabes!</h2>
+        <p className="arcade-rules">{units.length} preguntas · 5 segundos cada una · encadena aciertos para multiplicar</p>
+        <button type="button" className="primary arcade-go" onClick={() => setI(0)}>¡Jugar! ⚡</button>
+      </Slide>
+    );
+  }
+  if (!u) {
+    return (
+      <Slide tone={45} className="arcade-end" onNext={onDone}>
+        <p className="tag">⚡ FIN DEL ARCADE</p>
+        <div className="arcade-score">{score}</div>
+        <p className="arcade-rules">puntos · {right}/{units.length} aciertos{best > 1 ? ` · mejor combo ×${best}` : ''}</p>
+        <p className="arcade-rules muted">{right === units.length ? '¡Perfecto! 🏆' : 'Lo que fallaste vuelve en tu repaso.'}</p>
+        <Confetti burst={right === units.length ? 99 : 0} />
+      </Slide>
+    );
+  }
+  const secs = Math.ceil(left / 1000);
+  const state = (k: number) => (picked === null ? '' : choices[k]!.correct ? 'is-right' : picked === k ? 'is-wrong' : 'is-off');
+  return (
+    <Slide tone={45} className={`arcade-play ${picked === null ? '' : picked >= 0 && choices[picked]!.correct ? 'right' : 'wrong'}`}>
+      <div className="arcade-head">
+        <p className="tag">⚡ ARCADE · {i + 1}/{units.length}</p>
+        <span className="arcade-pts">{score} pts{combo > 1 ? <b> · 🔥 ×{Math.min(3, 1 + (combo - 1) * 0.5)}</b> : null}</span>
+      </div>
+      <div className={`arcade-clock ${secs <= 2 ? 'hurry' : ''}`} role="timer" aria-label={`Quedan ${secs} segundos`}>
+        <span className="arcade-secs">{secs}</span>
+        <div className="arcade-bar"><i style={{ width: `${(left / ARCADE_MS) * 100}%` }} /></div>
+      </div>
+      <h3 className="ask arcade-prompt" lang={inverse ? undefined : u.language}>{inverse ? unitMeaning(u) : unitText(u)}</h3>
+      <div className="options">
+        {choices.map((c, k) => <button type="button" key={c.label} data-ok={c.correct ? '1' : '0'} className={`option ${state(k)}`} onClick={() => pick(k)} lang={inverse ? u.language : undefined}>{c.label}</button>)}
+      </div>
+      {picked === -1 && <p className="arcade-late">⏰ ¡Se acabó el tiempo!</p>}
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
 /** ¿Verdad o mentira?: desliza → (verdad) o ← (mentira), o toca los botones. */
 function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUnit; onResult: (ok: boolean, ms: number) => void }) {
   const truth = shown.key === unit.key;
@@ -1174,6 +1261,8 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
+  else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))}
+    onAnswer={(u, ok, ms) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#arcade` })); scored(ok, 6); }} onDone={() => void advance()} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;

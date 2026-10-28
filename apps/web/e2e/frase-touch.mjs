@@ -10,7 +10,16 @@ import { createServer } from 'vite';
 const web = fileURLToPath(new URL('..', import.meta.url));
 const server = await createServer({ root: web, configFile: `${web}vite.config.ts`, logLevel: 'error', server: { port: 5197, strictPort: false, host: '127.0.0.1' } });
 await server.listen();
-const base = `${server.resolvedUrls.local[0]}e2e/harness-escena.html?k=g-present-continuous`;
+const root = `${server.resolvedUrls.local[0]}e2e/harness-escena.html`;
+const base = `${root}?k=g-present-continuous`;
+// Ningún bloque de la tarjeta se monta sobre el siguiente ni se aplasta (el espejo se aplastaba sobre el emoji).
+const overlaps = (page) => page.evaluate(() => {
+  const kids = [...document.querySelectorAll('.slide > *')].filter((e) => e.getClientRects().length);
+  const bad = [];
+  for (let i = 1; i < kids.length; i++) { const a = kids[i - 1].getBoundingClientRect(), b = kids[i].getBoundingClientRect(); if (a.bottom > b.top + 1) bad.push(`${kids[i - 1].className} sobre ${kids[i].className}`); }
+  for (const m of document.querySelectorAll('.slide .morph')) if (m.scrollHeight > m.clientHeight + 1) bad.push('espejo aplastado');
+  return bad;
+});
 const shots = process.env.E2E_SHOTS;
 
 const results = [];
@@ -69,6 +78,8 @@ try {
   await s.swipeUp();
   const teach = await s.page.evaluate(() => document.querySelector('.slide')?.textContent ?? '');
   check(/RECUÉRDALO/.test(teach) && teach.includes('Tu frase') && teach.includes('Así es'), 'al deslizar, la ficha del truco con tu frase y la buena');
+  const o1 = await overlaps(s.page);
+  check(o1.length === 0, `la ficha no tiene bloques montados${o1.length ? `: ${o1.join(', ')}` : ''}`);
   if (shots) await s.page.screenshot({ path: `${shots}/frase-ficha.png` });
   await s.page.close();
 
@@ -82,6 +93,30 @@ try {
   for (let i = 0; i < 20 && !moved; i++) { await s.page.waitForTimeout(250); moved = !/CONSTRUYE/.test(await s.tag()); }
   check(moved, 'al acertar pasa sola a la siguiente tarjeta');
   await s.page.close();
+  // 3. La ficha de una palabra con espejo (BE) al fallar: el espejo animado no se monta sobre el emoji (iPhone, 28-oct).
+  {
+    const page = await context.newPage();
+    page.on('pageerror', (e) => errors.push(String(e)));
+    await page.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
+    await page.goto(`${root}?k=be,want&s=x1`);
+    await page.waitForSelector('.slide');
+    const cdp = await context.newCDPSession(page);
+    const tag = () => page.evaluate(() => document.querySelector('.slide .tag')?.textContent ?? '');
+    for (let i = 0; i < 10 && !/RELÁMPAGO/.test(await tag()); i++) {
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 700 }] });
+      for (let j = 1; j <= 10; j++) { await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195, y: 700 - 34 * j }] }); await page.waitForTimeout(16); }
+      await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await page.waitForTimeout(450);
+    }
+    const opts = await page.locator('.slide .option').allTextContents();
+    await page.locator('.slide .option').nth(opts.findIndex((t) => !/^BE$|ser/i.test(t.trim()))).tap();
+    await page.waitForTimeout(2500);
+    await page.waitForTimeout(6000); // el espejo termina de transformarse
+    const o2 = await overlaps(page);
+    check(/RECUÉRDALO/.test(await tag()) && o2.length === 0, `ficha de BE con su espejo, sin bloques montados${o2.length ? `: ${o2.join(', ')}` : ''}`);
+    if (shots) await page.screenshot({ path: `${shots}/ficha-be.png` });
+    await page.close();
+  }
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

@@ -283,3 +283,30 @@ describe('la cadena (D-085)', () => {
     expect(plan.steps.some((s) => s.kind === 'chant')).toBe(false);
   });
 });
+
+describe('Arcade sorpresa en el Flujo (D-087)', () => {
+  const w = (k: string, t: string, m: string): SessionUnit => ({ key: k, type: 'term', language: 'en', payload: { text: t, meaning: m, examples: [] }, skills: [{ key: `${k}.recall`, kind: 'recall' }], association: null } as unknown as SessionUnit);
+  const pool = Object.fromEntries(['dog', 'cat', 'house', 'car', 'tree', 'sun', 'moon', 'book'].map((t, i) => [`k${i}`, w(`k${i}`, t, `m${i}`)]));
+  const fresh = Object.fromEntries(['a', 'b', 'c', 'd'].map((t) => [`n${t}`, w(`n${t}`, `word${t}`, `sig${t}`)]));
+  const all = { ...pool, ...fresh };
+  const round = (id: string, known: string[]) => buildFlowSession({ ...base, sessionId: id, units: all, items: Object.keys(fresh).map((k) => item(k, 'new')), arcadeUnits: known });
+
+  it('sale en algunas rondas (no en todas), con 6 preguntas solo de lo ya aprendido y nunca al principio', () => {
+    const rounds = ['r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10'].map((id) => round(id, Object.keys(pool)));
+    const with_ = rounds.filter((r) => r.steps.some((s) => s.kind === 'arcade'));
+    expect(with_.length).toBeGreaterThan(0);
+    expect(with_.length).toBeLessThan(rounds.length);
+    for (const r of with_) {
+      const i = r.steps.findIndex((s) => s.kind === 'arcade');
+      const a = r.steps[i]!;
+      expect(a.arcadeUnits).toHaveLength(6);
+      for (const k of a.arcadeUnits!) expect(Object.keys(pool)).toContain(k);
+      expect(i).toBeGreaterThanOrEqual(3);
+      expect(r.steps.at(-1)!.kind).toBe('summary');
+      expect(new Set(r.steps.map((s) => s.id)).size).toBe(r.steps.length);
+    }
+  });
+  it('con menos de 6 cosas aprendidas no sale', () => {
+    for (const id of ['r1', 'r2', 'r3', 'r4', 'r5', 'r6']) expect(round(id, Object.keys(pool).slice(0, 5)).steps.some((s) => s.kind === 'arcade')).toBe(false);
+  });
+});

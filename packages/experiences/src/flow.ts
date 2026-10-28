@@ -10,7 +10,7 @@
 // ninguna palabra llegaba nunca a «aprendida», porque esas habilidades no se practicaban. La gramática (unidades
 // `pattern`) entra en el Flujo con su truco y se practica construyendo frases.
 import type { PlanItem } from '@memora/core';
-import { exercisesOf, seeded, shuffle, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
+import { exercisesOf, seeded, shuffle, unitMeaning, unitText, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
 import type { SessionUnit } from './session';
 
 /** Tarjetas entre una pregunta fallada y su repesca. */
@@ -99,6 +99,17 @@ export function typeableExercise(u: SessionUnit): number | null {
   return i < 0 ? null : i;
 }
 
+/** Arcade sorpresa (D-087): preguntas por partida, mínimo de lo aprendido para jugar y probabilidad por ronda. */
+export const FLOW_ARCADE_SIZE = 6;
+export const FLOW_ARCADE_MIN = 6;
+export const FLOW_ARCADE_CHANCE = 0.5;
+/** No sale antes de esta tarjeta de la ronda (primero se aprende algo). */
+export const FLOW_ARCADE_AFTER = 4;
+/** Se puede jugar en el Arcade: una palabra o un concepto con su significado (no los trucos de gramática). */
+export function arcadeable(u: SessionUnit): boolean {
+  return (u.type === 'term' || u.type === 'concept') && Boolean(unitText(u)) && Boolean(unitMeaning(u));
+}
+
 export function buildFlowSession(input: {
   sessionId: string;
   courseId: string;
@@ -116,6 +127,8 @@ export function buildFlowSession(input: {
   levels?: Record<string, number>;
   /** El curso tiene audio (idiomas): habilita «Escucha». */
   audio?: boolean;
+  /** Lo ya aprendido (D-087): de aquí salen las preguntas del «Arcade sorpresa». */
+  arcadeUnits?: string[];
 }): AssocPlan {
   const { units, items } = input;
   const rand = seeded(input.sessionId);
@@ -269,6 +282,14 @@ export function buildFlowSession(input: {
   for (const u of fresh) {
     const recall = units[u]!.skills.find((s) => s.kind === 'recall');
     if (recall && units[u]!.type === 'term') push({ kind: 'review', unitKey: u, scene: -4, skillKey: recall.key, startHint: 0 });
+  }
+  // 4b. Arcade sorpresa (D-087): de vez en cuando, en un punto al azar, una ráfaga contrarreloj SOLO de lo ya aprendido
+  // (todo enseñado antes). Pesa como reconocer y un fallo no corta el juego: vuelve en su repaso.
+  const arcadePool = (input.arcadeUnits ?? []).filter((k) => has(k) && arcadeable(units[k]!));
+  if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
+    const pick = shuffle([...arcadePool], rand).slice(0, FLOW_ARCADE_SIZE);
+    const at = FLOW_ARCADE_AFTER - 1 + Math.floor(rand() * (steps.length - FLOW_ARCADE_AFTER + 1));
+    steps.splice(at, 0, { kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: pick, id: `${steps.length + 1}-arcade-x` });
   }
   // 5. Hito: resumen de la ronda dentro del feed; al deslizar empieza la siguiente.
   if (steps.length) push({ kind: 'summary', unitKey: '', scene: -4 });
