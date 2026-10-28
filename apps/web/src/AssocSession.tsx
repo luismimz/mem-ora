@@ -411,14 +411,15 @@ function Arcade({ units, seed, onAnswer, onDone }: { units: SessionUnit[]; seed:
     setPicked(k);
     onAnswer(u, ok, Math.round(performance.now() - t0.current));
     if (ok) setScore((s) => s + 100 + Math.round(left * 20));
-    setTimeout(() => { setPicked(null); setI((n) => n + 1); }, ok ? 500 : 1300);
+    // El reloj se repone ANTES de pasar: si no, tras agotarse el tiempo, la siguiente nacía a 0 s y se daba por fallada.
+    setTimeout(() => { setLeft(5); setPicked(null); setI((n) => n + 1); }, ok ? 500 : 1300);
   }
   if (i < 0) return <SwipeCard onNext={() => setI(0)} label="¡Jugar!"><div className="reward"><p className="eyebrow">ARCADE SORPRESA</p><div className="big">¡Ráfaga!</div><p>{units.length} recuerdos en 5 segundos cada uno. Escena → palabra y palabra → significado.</p><div className="art small"><span className="emoji">⚡🎯</span></div></div></SwipeCard>;
   if (!u) return <SwipeCard onNext={onDone} label="Seguir"><div className="reward"><p className="eyebrow">FIN DE LA RÁFAGA</p><div className="xp">{score}</div><p>puntos · lo que falló vuelve a tu repaso</p></div></SwipeCard>;
   return (
     <div className={`card enter ${picked === null ? '' : picked >= 0 && choices[picked]!.correct ? 'ok' : 'ko'}`}>
       <div className="row"><p className="eyebrow">ARCADE · {i + 1}/{units.length}</p><span className="combo hot">{score} PTS</span></div>
-      <div className="timer"><i style={{ width: `${(left / 5) * 100}%` }} /></div>
+      <div className="timer arcade-old" role="timer" aria-label={`Quedan ${Math.ceil(left)} segundos`}><span>{Math.ceil(left)}</span><i style={{ width: `${(left / 5) * 100}%` }} /></div>
       <Art unit={u} small chain={false} />
       <div className="question">{inverse ? <>¿Qué significa <em>{unitText(u)}</em>?</> : <>{hiddenName(u)}</>}</div>
       <div className="choices">{choices.map((c, k) => <button type="button" key={c.label} className={`choice ${picked !== null && c.correct ? 'right' : ''} ${picked === k && !c.correct ? 'wrong' : ''}`} onClick={() => answer(k)}>{c.label}</button>)}</div>

@@ -298,9 +298,11 @@ export default {
       const weakAll = weakUnits(learner.skills, 8, [...reviewKeys, ...errors]).filter((k) => units[k]);
       const weakFresh = weakUnits(learner.skills, 8, [...reviewKeys, ...errors, ...prevUnits]).filter((k) => units[k]);
       const practice = weakFresh.length >= 2 ? weakFresh : weakAll;
+      // Arcade sorpresa (D-087): solo lo ya aprendido (practicado y más allá de «presentado»), si el curso tiene Arcade.
+      const learnedUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]);
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, maxNewUnits: flowNew,
-            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage })
+            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };

@@ -841,3 +841,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Bucle, causa 2:** «Construye la frase» pedía siempre el primer ejemplo. Ahora cada ronda elige otra de las frases
   que la ficha enseña (las 4 primeras o las de «Mira cómo cambia»): se repite el truco, no la frase. Sigue la regla de
   enseñar antes de preguntar (D-067).
+
+## D-087 · Arcade sorpresa en el Flujo y reloj que se repone (usuario, 28-oct-2026)
+- **Por qué (usuario):** «un Arcade sorpresa sobre lo ya aprendido para dar emoción y quitarle monotonía». Su hermana
+  veía además que en el Arcade «no salía tiempo».
+- **Qué:** en la mitad de las rondas del Flujo aproximadamente, en un punto al azar (nunca antes de la 4.ª tarjeta),
+  una ráfaga de 6 preguntas de lo ya aprendido (practicado y más allá de «presentado»; mínimo 6): 5 s por pregunta
+  con número grande y barra gruesa, combo hasta ×3, puntos, confeti y resumen. Pesa como reconocer; un fallo no manda
+  a la ficha ni corta el juego.
+- **Fallo arreglado:** tras agotarse el tiempo en una pregunta, la siguiente nacía con el reloj a 0 y se daba por
+  fallada al instante (también en el Arcade sorpresa antiguo, el del modo avión, que además enseña ahora los segundos).
+- **También:** en la ficha al fallar, el espejo animado se aplastaba y su frase quedaba encima del emoji (iPhone);
+  en una tarjeta que se desplaza ya nada se encoge. Prueba táctil que detecta bloques montados.
+
