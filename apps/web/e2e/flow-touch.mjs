@@ -255,7 +255,7 @@ try {
         if (english === 'are you hungry') seen.add('orden-pregunta');
       }
     }
-    if (/LAS PIEZAS/.test(tag)) {
+    if (/DILO EN INGLÉS|LAS PIEZAS/.test(tag)) {
       // «Las piezas» (D-092): la primera pregunta (se adelanta / falta) y luego ordenar los trozos tocándolos.
       seen.add('piezas');
       if (await en.locator('.pieces .tense-options .burst-btn').count()) await en.locator('.pieces .tense-options .burst-btn').first().tap();

@@ -966,3 +966,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   frase en «Las piezas» y justo después en «Construye» (si no hay otra, no se construye). Sin botones: al acertar pasa
   sola; al fallar se lee por qué y se desliza.
 
+## D-097 · «Las piezas», una sola tarea clara (usuario, 29-oct-2026)
+- **Por qué (usuario, captura de «¿Qué pieza se adelanta?»):** «mucha información y no se sabe qué hacer».
+- **Decisión:** fuera la pregunta previa («¿qué pieza se adelanta?» / «¿cuál falta?») y el texto de encima (nombre del
+  truco y etiqueta). Queda: «DILO EN INGLÉS», la frase en español, los huecos (late el que toca) y los trozos para
+  tocarlos en orden. Lo que enseñaba la pregunta previa (qué pieza salta) se ve en la ficha girando las piezas y, si
+  fallas, en el orden bueno con la pieza que salta marcada.
+

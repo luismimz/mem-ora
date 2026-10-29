@@ -56,7 +56,7 @@ try {
       await page.waitForTimeout(2200);
       if (await page.locator('.slide.pieces').count()) await swipeUp(); await page.waitForTimeout(700);
     };
-    const untilTag = async (re, max = 8) => { for (let i = 0; i < max && !re.test(await tag()); i++) { if (/LAS PIEZAS/.test(await tag())) await pieces(); else await swipeUp(); } return re.test(await tag()); };
+    const untilTag = async (re, max = 8) => { for (let i = 0; i < max && !re.test(await tag()); i++) { if (/DILO EN INGLÉS|LAS PIEZAS/.test(await tag())) await pieces(); else await swipeUp(); } return re.test(await tag()); };
     // Las palabras de la frase que pide esta tarjeta, en su orden correcto.
     const words = () => page.evaluate(() => {
       const st = window.__plan.steps.find((s) => s.kind === 'build' && !s.retry);

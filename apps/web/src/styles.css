@@ -1113,3 +1113,7 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .arcade-answer { margin: 0; text-align: center; font-size: clamp(1.8rem, 8vw, 2.4rem); font-weight: 950; color: #ffd76a; display: flex; align-items: center; justify-content: center; gap: .5rem; animation: woke .35s ease; }
 .arcade-missed ul { list-style: none; margin: .3rem 0 0; padding: 0; display: grid; gap: .25rem; text-align: center; }
 .arcade-missed b { color: #ffd76a; }
+/* D-097: el hueco que toca ahora late un poco: se ve dónde va la siguiente pieza. */
+.pslot.next { border-color: #ffd76a; animation: pulse 1.2s ease infinite; }
+.pieces .pieces-q { opacity: .8; font-weight: 700; font-size: .92rem; }
+@media (prefers-reduced-motion: reduce) { .pslot.next { animation: none; } }
