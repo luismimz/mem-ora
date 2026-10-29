@@ -74,6 +74,18 @@ try {
       const ex = it.kind === 'code' ? u.exercises[it.exercise] : null;
       const kind = ex ? ex.kind : it.kind;
       const wrongNow = !failedOnce && kind === 'widget';
+      if (i === 1) {
+        // Tras un acierto queda el confeti (fijo) como último hijo: el contenido debe seguir centrado, no pegado abajo.
+        const gaps = await page.evaluate(() => {
+          const sl = [...document.querySelectorAll('.slide')].find((x) => x.querySelector('.arcade-head'));
+          const st = getComputedStyle(sl); const r = sl.getBoundingClientRect();
+          const kids = [...sl.children].filter((c) => !['fixed', 'absolute'].includes(getComputedStyle(c).position) && c.getBoundingClientRect().height > 0);
+          const top = kids[0].getBoundingClientRect().top - r.top - parseFloat(st.paddingTop);
+          const bottom = r.bottom - parseFloat(st.paddingBottom) - kids.at(-1).getBoundingClientRect().bottom;
+          return { top: Math.round(top), bottom: Math.round(bottom), confetti: Boolean(sl.querySelector(':scope > .confetti')) };
+        });
+        check(Math.abs(gaps.top - gaps.bottom) <= 24, `el reto queda centrado aunque haya confeti (arriba ${gaps.top} px, abajo ${gaps.bottom} px, confeti: ${gaps.confetti})`);
+      }
       if (kind === 'whatis') {
         const shown = await page.locator('.shop-code, .shop-case').first().textContent();
         check(!shown.toLowerCase().includes(u.name.toLowerCase()) && shown.includes('▢▢▢') === shown.toLowerCase().includes('▢'), `«¿Qué es esto?» no enseña el nombre («${u.name}» oculto)`);
