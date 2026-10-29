@@ -39,14 +39,15 @@ try {
     if (/OTRA VEZ/.test(tag)) againSeen = true;
     const prompt = ((await page.locator('.arcade-prompt').textContent()) ?? '').trim();
     seen.push(prompt);
-    if (await page.locator('.arcade-reveal').count()) {
+    const kind = ((await page.locator('.arcade-kind').textContent().catch(() => '')) ?? '').trim();
+    if (/inglés/.test(kind) && !/OTRA VEZ/.test(tag)) {
+      // Lo maduro (D-100): del español al inglés eligiendo entre opciones, en UNA pantalla (sin «Ver la respuesta»).
       recallSeen = true;
-      await page.locator('.arcade-reveal').tap();
-      const answer = (await page.locator('.arcade-answer').textContent())?.trim();
-      check(/nine/i.test(answer ?? '') && /nueve/i.test(prompt), `la palabra madura se recuerda: «${prompt}» → «${answer}»`);
+      const opts = (await page.locator('.options .option').allTextContents()).map((x) => x.trim());
+      check(/nueve/i.test(prompt) && opts.some((o) => /^NINE$/i.test(o)) && await page.locator('.arcade-reveal').count() === 0, `lo maduro, con opciones en inglés: «${prompt}» → ${opts.join(' / ')}`);
       if (shots) await page.screenshot({ path: `${shots}/repaso-recuerda.png` });
-      await page.locator('.arcade-recall .option').first().tap();
-      await page.waitForTimeout(600);
+      await page.locator('.options .option[data-ok="1"]').tap();
+      await page.waitForTimeout(800);
       continue;
     }
     // Reconocer: la primera vez se falla aposta para ver que vuelve; después, bien.
@@ -57,7 +58,7 @@ try {
     if (!failedOnce && u?.key === 'boy') { failedOnce = true; await options.nth(bad).tap(); if (shots) await page.waitForTimeout(200), await page.screenshot({ path: `${shots}/repaso-fallo.png` }); await page.waitForTimeout(1700); }
     else { await options.nth(ok).tap(); await page.waitForTimeout(800); }
   }
-  check(recallSeen, 'hay pregunta de recordar para lo maduro (no de elegir)');
+  check(recallSeen, 'lo maduro se pregunta del español al inglés');
   check(failedOnce && againSeen, 'lo fallado vuelve al final de la ráfaga («OTRA VEZ»)');
   const end = await page.evaluate(() => ({ tag: document.querySelector('.slide .tag')?.textContent, score: document.querySelector('.arcade-score')?.textContent, missed: [...document.querySelectorAll('.arcade-missed li')].map((l) => l.textContent) }));
   check(/FIN DEL REPASO/.test(end.tag ?? '') && end.score === '2/3' && end.missed.length === 1 && /boy/.test(end.missed[0] ?? ''), `al acabar: ${end.score} a la primera y vuelve antes «${end.missed.join(', ')}»`);
