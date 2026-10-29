@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -216,5 +216,25 @@ describe('retos de memoria: puntuación', () => {
   it('al revés: la racha se cuenta desde la última palabra', () => {
     expect(scoreRecall(w, ['Dinosaurio', 'Semáforo', 'Cactus'], true).inOrder).toBe(3);
     expect(scoreRecall(w, ['Pingüino'], true).inOrder).toBe(0);
+  });
+});
+
+describe('«Señala la parte» (D-102)', () => {
+  const ex = { kind: 'spot_part' as const, prompt: 'Toca la línea que declara la propiedad', code: 'class A {\n  IntegerProperty n;\n}', answer: 'la propiedad', distractors: ['el constructor', 'el evento'], line: 1 };
+  const unit = { key: 'prop', type: 'concept', language: 'es', version: 1, payload: { name: 'propiedad', gist: 'g', definition: 'd', examples: [], exercises: [ex] }, skills: [], association: null } as unknown as SessionUnit;
+  it('en el Taller se juega tocando la línea', () => {
+    expect(codeExercises(unit)).toEqual([0]);
+  });
+  it('fuera del Taller marca la línea con 👉 y pregunta qué parte es; se corrige con el nombre de la parte', () => {
+    const v = exerciseView(ex);
+    expect(v.prompt).toMatch(/marcada/);
+    expect(v.code!.split('\n')[1]).toBe('👉   IntegerProperty n;');
+    expect(v.code!.split('\n')[0]).toBe('   class A {');
+    expect(gradeChallenge(ex, 'la propiedad', false).correct).toBe(true);
+    expect(gradeChallenge(ex, 'el evento', false).correct).toBe(false);
+  });
+  it('los demás retos se enseñan tal cual', () => {
+    const fill = { kind: 'fill_gap' as const, prompt: 'Completa', code: 'int ___ = 1;', answer: 'x' };
+    expect(exerciseView(fill)).toEqual({ prompt: 'Completa', code: 'int ___ = 1;' });
   });
 });

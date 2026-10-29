@@ -1015,3 +1015,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Decisión:** «¿Qué tiempo pide?» empieza con una chuleta: cada tiempo de la partida con su nombre, su línea del
   tiempo y sus pistas. Al fallar, se dice qué tiempo sería la forma elegida y qué pista le haría falta. Sin botones
   (al acertar pasa sola; al fallar o al final, se desliza). La ficha del presente simple lo nombra en su objetivo.
+
+## D-102 · «Señala la parte»: reconocer cada pieza en código real (usuario, 30-oct-2026)
+
+- **Contexto:** el usuario tiene que entregar la PAC de desarrollo del RA3 de Desarrollo de Interfaces y pidió
+  «ejemplos de código de uso y poder identificar cada parte del sistema».
+- **Decisión:** nuevo tipo de reto `spot_part`. Lleva el código, la línea (`line`) y el nombre de la parte (`answer`)
+  con otras partes como opciones falsas. En el Taller se toca la línea («Toca la línea que crea la Scene»). En la
+  pregunta jefe, el simulacro y el modo guiado, la línea sale marcada con 👉 y se elige qué parte es. El Taller pierde
+  sus botones: al acertar pasa solo, al fallar se desliza. Se añaden 20 retos en las misiones 1, 2, 2c y 4 de
+  Desarrollo de interfaces, sobre fragmentos de código propios (app JavaFX, FXML, controlador, eventos, componente
+  propio, evento propio, persistencia y componente compuesto).

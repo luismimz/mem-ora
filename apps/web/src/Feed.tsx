@@ -20,6 +20,7 @@ import {
   orderSwap,
   spanishOrderCalque,
   exercisesOf,
+  exerciseView,
   gradeChallenge,
   gradeReview,
   reviewHints,
@@ -1503,7 +1504,10 @@ export function WidgetMock({ kind }: { kind: Widget }) {
   );
 }
 
-const WORKSHOP_TAG = { whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', widget: '🖥️ ¿QUÉ COMPONENTE ES?' } as const;
+/** Lo que se espera tras acertar un reto del Taller antes de pasar solo al siguiente (da tiempo a ver la explicación). */
+const SHOP_AUTO_MS = 2600;
+
+const WORKSHOP_TAG = { whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?' } as const;
 
 /**
  * El Taller (D-090): saber USAR lo aprendido. Retos mezclados de conceptos ya enseñados: reconocer un ejemplo o un
@@ -1525,14 +1529,16 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
   const it = i >= 0 ? list[i] : undefined;
   const u = it ? all[it.unitKey]! : undefined;
   const ex = it?.kind === 'code' && u ? exercisesOf(u)[it.exercise]! : undefined;
-  const kind = !it ? null : it.kind === 'code' ? (ex!.kind as 'fill_gap' | 'predict_output' | 'find_bug') : it.kind;
-  const tapLine = kind === 'find_bug' && ex?.bugLine !== undefined;
+  const kind = !it ? null : it.kind === 'code' ? (ex!.kind as 'fill_gap' | 'predict_output' | 'find_bug' | 'spot_part') : it.kind;
+  // Se juega tocando una línea: «Caza el bug» (la del error) y «Señala la parte» (D-102: la de la parte pedida).
+  const target = kind === 'spot_part' ? ex?.line : kind === 'find_bug' ? ex?.bugLine : undefined;
+  const tapLine = target !== undefined;
   const options = useMemo(() => {
     if (!it || !u) return [];
     if (it.kind === 'code') return stableOrder([ex!.answer!, ...(ex!.distractors ?? [])], `${seed}-${i}`);
     return it.options.map((k) => unitText(all[k]!));
   }, [it, u, ex, i, seed, all]);
-  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(ex!.bugLine) : ex!.answer!) : unitText(u);
+  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : unitText(u);
   const ok = picked !== null && (it?.kind === 'code' && !tapLine ? gradeChallenge(ex!, picked, false).correct : picked === answer);
   function pick(o: string) {
     if (!it || !u || picked !== null) return;
@@ -1540,8 +1546,12 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
     setPicked(o);
     if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); } else failed.current.push(u.key);
     onAnswer(u, good, Math.round(performance.now() - t0.current), it);
+    // Sin botones: al acertar pasa solo; al fallar se queda para leer la explicación y se desliza.
+    if (good) { const at = i; window.setTimeout(() => nextRef.current(at), SHOP_AUTO_MS); }
   }
-  const next = () => { setPicked(null); setI((n) => n + 1); };
+  const next = (at = i) => { if (at !== i) return; setPicked(null); setI((n) => n + 1); };
+  const nextRef = useRef(next);
+  nextRef.current = next;
   const finish = () => onDone(failed.current[0] ?? null);
   if (i < 0) {
     const kinds = [...new Set(list.map((x) => (x.kind === 'code' ? exercisesOf(all[x.unitKey]!)[x.exercise]!.kind : x.kind)))] as Array<keyof typeof WORKSHOP_TAG>;
@@ -1552,7 +1562,6 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
         <h2 className="ask">Recordarlo está bien. Ahora, ¡a usarlo!</h2>
         <p className="arcade-rules">{list.length} retos con lo que ya has visto:</p>
         <div className="shop-kinds">{kinds.map((k) => <span key={k}>{WORKSHOP_TAG[k]}</span>)}</div>
-        <button type="button" className="primary arcade-go" onClick={() => setI(0)}>¡Al taller! 🔧</button>
       </Slide>
     );
   }
@@ -1564,7 +1573,6 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
         <div className="tense-stars" aria-label={`${stars} de 3 estrellas`}>{[0, 1, 2].map((k) => <span key={k} className={k < stars ? 'on' : ''}>★</span>)}</div>
         <p className="arcade-rules">{right}/{list.length} retos resueltos{right === list.length ? ' · ¡manos de experto! 🏆' : ''}</p>
         {failed.current.length > 0 && <p className="arcade-rules muted">Ahora repasas lo que se te resistió.</p>}
-        <button type="button" className="primary arcade-go" onClick={finish}>Seguir →</button>
         <Confetti burst={stars === 3 ? 99 : 0} />
       </Slide>
     );
@@ -1575,7 +1583,7 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
   const lines = ex?.code?.split('\n') ?? [];
   const state = (o: string) => (picked === null ? '' : o === answer || (it.kind === 'code' && !tapLine && gradeChallenge(ex!, o, false).correct) ? 'is-right' : picked === o ? 'is-wrong' : 'is-off');
   return (
-    <Slide tone={hue(u.key)} className={`shop-play ${kind} ${picked === null ? '' : ok ? 'right' : 'wrong'}`} {...(picked !== null ? { onNext: next } : {})}>
+    <Slide tone={hue(u.key)} className={`shop-play ${kind} ${picked === null ? '' : ok ? 'right' : 'wrong'}`} {...(picked !== null ? { onNext: () => next() } : {})}>
       <div className="arcade-head">
         <p className="tag">{WORKSHOP_TAG[kind!]} · {i + 1}/{list.length}</p>
         <span className="arcade-pts">✅ {right}</span>
@@ -1593,22 +1601,21 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
         {kind === 'predict_output' && (
           <div className="shop-term"><span className="shop-term-bar">▶ terminal</span><pre><code>{ex.code}</code></pre>{picked !== null && <pre className="shop-out"><code>{'> '}{ex.answer}</code></pre>}</div>
         )}
-        {kind === 'find_bug' && (tapLine
-          ? <div className="shop-lines" role="list">{lines.map((l, n) => <button type="button" key={n} role="listitem" className={`shop-line ${picked === null ? '' : n === ex.bugLine ? 'bug' : String(n) === picked ? 'miss' : ''}`} onClick={() => pick(String(n))}><b>{n + 1}</b><code>{l || ' '}</code></button>)}</div>
-          : <pre className="learn-code shop-code"><code>{ex.code}</code></pre>)}
+        {tapLine
+          ? <div className="shop-lines" role="list">{lines.map((l, n) => <button type="button" key={n} role="listitem" className={`shop-line ${picked === null ? '' : n === target ? (kind === 'spot_part' ? 'spot' : 'bug') : String(n) === picked ? 'miss' : ''}`} onClick={() => pick(String(n))}><b>{n + 1}</b><code>{l || ' '}</code></button>)}</div>
+          : kind === 'find_bug' && <pre className="learn-code shop-code"><code>{ex.code}</code></pre>}
       </>}
       {picked === null ? (
-        tapLine ? <p className="shop-hint">👆 Toca la línea donde está el error</p>
+        tapLine ? <p className="shop-hint">{kind === 'spot_part' ? '👆 Toca esa línea' : '👆 Toca la línea donde está el error'}</p>
           : kind === 'fill_gap' ? <div className="shop-tiles">{options.map((o) => <button type="button" key={o} className="shop-tile" onClick={() => pick(o)}>{o}</button>)}</div>
           : <div className="options">{options.map((o) => <button type="button" key={o} className={`option ${o.length > 24 ? 'long' : ''}`} onClick={() => pick(o)}>{o}</button>)}</div>
       ) : (
         <div className="tense-after" aria-live="polite">
           {it.kind !== 'code' && !tapLine && <div className="options shop-done">{options.map((o) => <span key={o} className={`option ${state(o)}`}>{o}</span>)}</div>}
-          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : tapLine ? <>El error está en la línea {ex!.bugLine! + 1}</> : <>Era <b>{it.kind === 'code' ? ex!.answer : unitText(u)}</b></>}</p>
+          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : kind === 'spot_part' ? <>Era la línea {target! + 1}</> : tapLine ? <>El error está en la línea {target! + 1}</> : <>Era <b>{it.kind === 'code' ? ex!.answer : unitText(u)}</b></>}</p>
           {it.kind !== 'code' && <p className="tense-why"><b>{unitText(u)}</b>: {p.gist}</p>}
-          {tapLine && <p className="tense-why">Arreglo: <code>{ex!.answer}</code></p>}
+          {tapLine && (kind === 'spot_part' ? <p className="tense-why">👆 Es <b>{ex!.answer}</b></p> : <p className="tense-why">Arreglo: <code>{ex!.answer}</code></p>)}
           {(ex?.explanation || shownNote) && <p className="tense-es">{ex?.explanation ?? shownNote}</p>}
-          <button type="button" className="primary arcade-go" onClick={next}>{i + 1 < list.length ? 'Siguiente →' : 'Ver resultado →'}</button>
         </div>
       )}
       <Confetti burst={confetti} />
@@ -1652,6 +1659,7 @@ function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUni
 
 function Boss({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; onResult: (ok: boolean, ms: number, format: ClientEvent['format'], note?: string) => void }) {
   const exercise = exercisesOf(unit)[step.exercise ?? 0]!;
+  const view = exerciseView(exercise);
   const choices = useMemo(() => challengeChoices(exercise, step.id), [exercise, step.id]);
   const [picked, setPicked] = useState<string | null>(null);
   const t0 = useRef(performance.now());
@@ -1666,8 +1674,8 @@ function Boss({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; on
   return (
     <Slide tone={hue(unit.key)} className={`boss ${picked === null ? '' : right ? 'right' : 'wrong'}`}>
       <p className="tag boss-tag">👑 PREGUNTA JEFE · {unitText(unit).toUpperCase()}</p>
-      <h3 className="ask">{exercise.prompt}</h3>
-      {exercise.code && <blockquote className="reading">{exercise.code}</blockquote>}
+      <h3 className="ask">{view.prompt}</h3>
+      {view.code && (exercise.kind === 'spot_part' ? <pre className="learn-code shop-code"><code>{view.code}</code></pre> : <blockquote className="reading">{view.code}</blockquote>)}
       <div className="options">
         {choices.map((c) => <button type="button" key={c.label} className={`option ${c.label.length > 24 ? 'long' : ''} ${picked !== null && c.correct ? 'is-right' : ''} ${picked === c.label && !c.correct ? 'is-wrong' : ''}`} onClick={() => pick(c.label)}>{c.label}</button>)}
       </div>
@@ -1678,6 +1686,7 @@ function Boss({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; on
 /** Sube de nivel (D-077): ya lo has repasado con éxito; ahora lo completas tú, sin opciones. */
 function Complete({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; onResult: (ok: boolean, ms: number, format: ClientEvent['format'], note?: string) => void }) {
   const exercise = exercisesOf(unit)[step.exercise ?? 0]!;
+  const view = exerciseView(exercise);
   const [text, setText] = useState('');
   const [done, setDone] = useState<boolean | null>(null);
   const t0 = useRef(performance.now());
@@ -1691,8 +1700,8 @@ function Complete({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep
   return (
     <Slide tone={hue(unit.key)} className={done === null ? '' : done ? 'right' : 'wrong'}>
       <p className="tag boss-tag">⬆️ SUBES DE NIVEL · COMPLÉTALO</p>
-      <h3 className="ask">{exercise.prompt}</h3>
-      {exercise.code && <blockquote className="reading">{exercise.code}</blockquote>}
+      <h3 className="ask">{view.prompt}</h3>
+      {view.code && (exercise.kind === 'spot_part' ? <pre className="learn-code shop-code"><code>{view.code}</code></pre> : <blockquote className="reading">{view.code}</blockquote>)}
       <form className="complete" onSubmit={(e) => { e.preventDefault(); check(); }}>
         <input className="write" autoFocus value={text} onChange={(e) => setText(e.target.value)} enterKeyHint="done" autoCapitalize="none" autoCorrect="off" spellCheck={false} disabled={done !== null} aria-label="Tu respuesta" />
         {done === null && <button type="submit" className="go" disabled={!text.trim()} aria-label="Comprobar">✓</button>}

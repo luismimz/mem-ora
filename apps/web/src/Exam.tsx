@@ -2,7 +2,7 @@
 // ayudas hasta el final; se aprueba con un 7. Al terminar: la nota, la mejor nota y la corrección de cada fallo con su
 // explicación. Las respuestas cuentan como reconocimiento (peso bajo, regla 9) y los fallos van a «Vacía tus fallos».
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { examCorrect, exercisesOf, unitText, type ClientEvent } from '@memora/experiences';
+import { examCorrect, exercisesOf, exerciseView, unitText, type ClientEvent } from '@memora/experiences';
 import { api, ApiError, type Course, type ExamPayload, type ExamStats } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError } from './offline';
@@ -124,8 +124,8 @@ export function Exam({ course, onExit, onFailures, onGuided }: { course: Course;
             return (
               <li key={x.id} className={ok ? 'ok' : 'ko'}>
                 <small>Pregunta {n + 1} · {unitText(data.units[x.unitKey]!)}{doubt[x.id] ? ' · 🤔 la marcaste dudosa' : ''}</small>
-                <p className="exam-q">{ex.prompt}</p>
-                {ex.code && <pre className="exam-code"><code>{ex.code}</code></pre>}
+                <p className="exam-q">{exerciseView(ex).prompt}</p>
+                {ex.code && <pre className="exam-code"><code>{exerciseView(ex).code}</code></pre>}
                 {!ok && <p className="exam-mine">{mine === undefined ? 'Sin responder' : <>Tu respuesta: <s>{mine}</s></>}</p>}
                 <p className="exam-right">✓ {ex.answer}</p>
                 {ex.explanation && <p className="exam-why">{ex.explanation}</p>}
@@ -152,8 +152,8 @@ export function Exam({ course, onExit, onFailures, onGuided }: { course: Course;
         <span className={`exam-clock ${left < 5 * 60_000 ? 'hurry' : ''}`} role="timer" aria-label={`Quedan ${mmss(left)}`}>⏱️ {mmss(left)}</span>
       </header>
       <div className="exam-dots" aria-hidden="true">{questions.map((x, n) => <i key={x.id} className={`${picks[x.id] !== undefined ? 'done' : ''} ${doubt[x.id] ? 'doubt' : ''} ${n === idx ? 'here' : ''}`} onClick={() => setIdx(n)} />)}</div>
-      <p className="exam-q">{ex.prompt}</p>
-      {ex.code && <pre className="exam-code"><code>{ex.code}</code></pre>}
+      <p className="exam-q">{exerciseView(ex).prompt}</p>
+      {ex.code && <pre className="exam-code"><code>{exerciseView(ex).code}</code></pre>}
       <div className="exam-options">
         {q.options.map((o, n) => <button type="button" key={o} className={picks[q.id] === o ? 'on' : ''} aria-pressed={picks[q.id] === o} onClick={() => pick(o)}><span>{'ABCD'[n]}</span>{o}</button>)}
       </div>

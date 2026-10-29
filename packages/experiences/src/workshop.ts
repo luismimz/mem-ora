@@ -1,6 +1,6 @@
 // El Taller (D-090): saber USAR lo aprendido, no solo recordarlo. En los cursos de conceptos (DAM), cada pocas fichas
 // llega un minijuego de 5 retos mezclados con lo ya enseñado: «¿Qué es esto?» (un ejemplo o un caso y eliges qué
-// concepto es), «Completa el código», «¿Qué imprime?», «Caza el bug» (tocando la línea) y, en interfaces, «¿Qué
+// concepto es), «Completa el código», «¿Qué imprime?», «Caza el bug» y «Señala la parte» (tocando la línea) y, en interfaces, «¿Qué
 // componente es?» con el componente dibujado. Solo entra lo que ya se ha enseñado (regla de oro, D-067).
 import type { ConceptExample, ConceptExercise, ConceptPayload } from '@memora/content';
 import { exercisesOf, shuffle, unitText } from './associations';
@@ -48,6 +48,7 @@ export function codeExercises(u: SessionUnit): number[] {
     if (e.kind === 'fill_gap') return e.code.includes('___') && opts ? [i] : [];
     if (e.kind === 'predict_output') return opts ? [i] : [];
     if (e.kind === 'find_bug') return e.bugLine !== undefined || opts ? [i] : [];
+    if (e.kind === 'spot_part') return e.line !== undefined ? [i] : [];
     return [];
   });
 }

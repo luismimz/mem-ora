@@ -269,6 +269,19 @@ export function exercisesOf(u: SessionUnit): ConceptExercise[] {
   return u.type === 'concept' ? ((u.payload as ConceptPayload).exercises ?? []) : [];
 }
 
+/** Marca de la línea señalada en «Señala la parte» cuando se responde con opciones o escribiendo. */
+export const SPOT_MARK = '👉 ';
+
+/**
+ * Lo que se enseña de un reto (pregunta y código). Igual que el ejercicio salvo «Señala la parte» (D-102): fuera del
+ * Taller no se toca la línea, se marca con 👉 y se pregunta qué parte es (la respuesta es el nombre de la parte).
+ */
+export function exerciseView(ex: ConceptExercise): { prompt: string; code?: string } {
+  if (ex.kind !== 'spot_part' || ex.line === undefined || !ex.code) return { prompt: ex.prompt, code: ex.code };
+  const code = ex.code.split('\n').map((l, i) => (i === ex.line ? `${SPOT_MARK}${l}` : `   ${l}`)).join('\n');
+  return { prompt: '¿Qué parte es la línea marcada con 👉?', code };
+}
+
 /** Opciones del reto (primer día): la respuesta y sus opciones falsas, en orden estable. */
 export function challengeChoices(ex: ConceptExercise, seed: string): Choice[] {
   if (!ex.answer) return [];

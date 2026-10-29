@@ -1,7 +1,7 @@
 // El Taller (D-090) con TOQUES TÁCTILES REALES en un móvil emulado (390×844), sin servidor y con conceptos de prueba.
 // Comprueba: el Taller llega DESPUÉS de enseñar sus conceptos; «¿Qué es esto?» no deja la respuesta a la vista;
 // «Completa el código» rellena el hueco con la ficha tocada; «¿Qué imprime?» ejecuta y enseña la salida; «Caza el bug»
-// se juega tocando la línea; «¿Qué componente es?» dibuja el componente; cada respuesta se explica; al final, estrellas
+// y «Señala la parte» se juegan tocando la línea; «¿Qué componente es?» dibuja el componente; cada respuesta se explica; al final, estrellas
 // y, si fallaste, vuelve la ficha. Todo cabe y se toca con el dedo.
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
@@ -45,11 +45,19 @@ try {
   for (let k = 1; k <= 30 && !seed; k++) {
     const p = await open(`s=t${k}`);
     const kinds = await p.evaluate(() => [...new Set(window.__plan.steps.filter((s) => s.kind === 'workshop').flatMap((s) => s.workshop.map((it) => (it.kind === 'code' ? window.__units[it.unitKey].payload.exercises[it.exercise].kind : it.kind))))]);
-    if (kinds.length === 5) seed = `t${k}`;
+    if (kinds.length === 6) seed = `t${k}`;
     await p.close();
   }
-  check(Boolean(seed), `hay rondas con los cinco tipos de reto (semilla ${seed})`);
+  check(Boolean(seed), `hay rondas con los seis tipos de reto (semilla ${seed})`);
   page = await open(`s=${seed}&solo=workshop`);
+  const cdp = await context.newCDPSession(page);
+  const swipeUp = async () => {
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 760 }] });
+    for (let k = 1; k <= 10; k++) { await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195, y: 760 - 34 * k }] }); await page.waitForTimeout(16); }
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForTimeout(300);
+  };
+  const noButton = async (where) => check(await page.locator('.slide button.arcade-go').count() === 0, `${where}: sin botón, se desliza`);
   const shops = await page.evaluate(() => window.__plan.steps.filter((s) => s.kind === 'workshop').map((s) => s.workshop));
   const seen = new Set(); let failedOnce = false;
   for (const [n, items] of shops.entries()) {
@@ -57,8 +65,9 @@ try {
     if (n === 0) {
       check(await page.locator('.shop-kinds span').count() >= 2, 'se presenta el Taller con los tipos de reto');
       if (shots) await page.screenshot({ path: `${shots}/taller-intro.png` });
+      await noButton('la presentación');
     }
-    await page.locator('.arcade-go').tap();
+    await swipeUp();
     for (const [i, it] of items.entries()) {
       await page.waitForFunction((k) => new RegExp(` · ${k}/`).test(document.querySelector('.slide .tag')?.textContent ?? ''), i + 1, { timeout: 5000 });
       const u = await page.evaluate((k) => window.__units[k].payload, it.unitKey);
@@ -92,25 +101,35 @@ try {
         await page.locator('.shop-line').nth(ex.bugLine).tap();
         check(await page.locator('.shop-line.bug').count() === 1 && /Arreglo/.test(await page.locator('.tense-why').textContent()), 'al cazarlo, se marca la línea y se enseña el arreglo');
         if (shots) await page.screenshot({ path: `${shots}/taller-bug.png` });
+      } else if (kind === 'spot_part') {
+        const ask = await page.locator('.shop-ask').textContent();
+        const lines = await page.locator('.shop-line').evaluateAll((b) => b.map((x) => Math.round(x.getBoundingClientRect().height)));
+        check(ask === ex.prompt && lines.length === ex.code.split('\n').length && lines.every((h) => h >= 44), `«Señala la parte»: «${ask}» y cada línea se toca (${lines.length} líneas)`);
+        await page.locator('.shop-line').nth(ex.line).tap();
+        const why = await page.locator('.tense-why').textContent();
+        check(await page.locator('.shop-line.spot').count() === 1 && why.includes(ex.answer), `al señalarla, se marca en verde y se nombra la parte («${why.trim()}»)`);
+        if (shots) await page.screenshot({ path: `${shots}/taller-parte.png` });
       }
       seen.add(kind);
       check(!(await overflow(page)), `${kind}: nada se sale de la pantalla`);
-      await page.locator('.tense-after .arcade-go').tap();
+      const right = await page.locator('.tense-verdict.ok').count();
+      if (right) await page.waitForFunction((k) => !new RegExp(` · ${k}/`).test(document.querySelector('.slide .tag')?.textContent ?? ''), i + 1, { timeout: 5000 });
+      else { await noButton('tras fallar'); await swipeUp(); }
+      if (right && !seen.has('auto')) { seen.add('auto'); check(true, 'al acertar, pasa solo al siguiente reto'); }
     }
     await page.waitForFunction(() => /TALLER TERMINADO/.test(document.querySelector('.slide .tag')?.textContent ?? ''), null, { timeout: 5000 });
     if (shots && n === 0) await page.screenshot({ path: `${shots}/taller-fin.png` });
     const failedHere = await page.locator('.shop-end .muted').count();
-    await page.locator('.shop-end .arcade-go').tap();
+    if (n === 0) await noButton('el final');
+    await swipeUp();
     await page.waitForTimeout(300);
     if (failedHere) {
       check(/RECUÉRDALO/.test(await page.locator('.slide .tag').first().textContent()), 'como fallaste uno, vuelve su ficha antes de seguir');
       if (shots) await page.screenshot({ path: `${shots}/taller-repaso.png` });
-      await page.locator('.slide').first().tap({ position: { x: 10, y: 10 } }).catch(() => {});
-      await page.keyboard.press('Enter');
-      await page.waitForTimeout(300);
+      await swipeUp();
     }
   }
-  check(['whatis', 'widget', 'fill_gap', 'predict_output', 'find_bug'].every((k) => seen.has(k)), `se han jugado los cinco tipos de reto (${[...seen].join(', ')})`);
+  check(['whatis', 'widget', 'fill_gap', 'predict_output', 'find_bug', 'spot_part'].every((k) => seen.has(k)), `se han jugado los seis tipos de reto (${[...seen].join(', ')})`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

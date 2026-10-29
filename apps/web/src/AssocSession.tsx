@@ -11,6 +11,7 @@ import {
   unitMeaning,
   challengeChoices,
   exercisesOf,
+  exerciseView,
   gradeChallenge,
   shuffledSteps,
   unitText,
@@ -597,6 +598,7 @@ const CHALLENGE_TITLES: Record<ConceptExercise['kind'], string> = {
   predict_output: 'RETO · PREDICE LA SALIDA',
   fill_gap: 'RETO · COMPLETA EL CÓDIGO',
   find_bug: 'RETO · ENCUENTRA EL ERROR',
+  spot_part: 'RETO · SEÑALA LA PARTE',
   apply_case: 'RETO · APLÍCALO',
   order_steps: 'RETO · ORDENA LOS PASOS',
 };
@@ -631,8 +633,8 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
     <SwipeCard className="challenge" onNext={result ? () => onDone(result.correct) : undefined}>
       <div className="row"><p className="eyebrow">{CHALLENGE_TITLES[exercise.kind]}</p><span key={combo} className={`combo ${combo > 1 ? 'hot' : ''}`}>COMBO x{Math.max(1, combo)}</span></div>
       <p className="place">{unitText(unit)} · {unitMeaning(unit)}</p>
-      <div className="question">{exercise.prompt}</div>
-      {exercise.code && <div className="concept">{unit.language === 'es' ? <blockquote className="example reading">{exercise.code}</blockquote> : <pre lang={unit.language}><code>{exercise.code}</code></pre>}</div>}
+      <div className="question">{exerciseView(exercise).prompt}</div>
+      {exercise.code && <div className="concept">{unit.language === 'es' && exercise.kind !== 'spot_part' ? <blockquote className="example reading">{exercise.code}</blockquote> : <pre lang={unit.language}><code>{exerciseView(exercise).code}</code></pre>}</div>}
       {isOrder ? (
         <>
           <ol className="order-picked">{order.map((s) => <li key={s}>{s}</li>)}</ol>

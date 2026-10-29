@@ -308,7 +308,7 @@ export interface ConceptExample {
 export const WIDGETS = ['button', 'label', 'textfield', 'passwordfield', 'textarea', 'checkbox', 'radiobutton', 'togglebutton', 'combobox', 'listview', 'tableview', 'treeview', 'slider', 'progressbar', 'spinner', 'datepicker', 'colorpicker', 'menubar', 'toolbar', 'tabpane', 'hyperlink', 'alert', 'hbox', 'vbox', 'borderpane', 'gridpane', 'stackpane', 'flowpane'] as const;
 export type Widget = (typeof WIDGETS)[number];
 
-export const EXERCISE_KINDS = ['predict_output', 'fill_gap', 'find_bug', 'apply_case', 'order_steps'] as const;
+export const EXERCISE_KINDS = ['predict_output', 'fill_gap', 'find_bug', 'apply_case', 'order_steps', 'spot_part'] as const;
 export type ConceptExerciseKind = (typeof EXERCISE_KINDS)[number];
 
 /**
@@ -331,6 +331,12 @@ export interface ConceptExercise {
   explanation?: string;
   /** «Caza el bug» (D-090): la línea del código (desde 0) donde está el error; se caza tocándola. */
   bugLine?: number;
+  /**
+   * «Señala la parte» (D-102, `spot_part`): la línea del código (desde 0) que es la parte pedida. En el Taller se toca
+   * esa línea («Toca la línea que declara la propiedad»); en los demás retos se marca y se elige qué parte es
+   * (`answer` = el nombre de la parte, `distractors` = otras partes).
+   */
+  line?: number;
 }
 
 /** Concepto de cualquier materia: «class», «subred», «TCP». */
@@ -518,7 +524,13 @@ function checkTextList(issues: ContentIssue[], value: unknown, path: string, min
 
 function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void {
   if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation', 'bugLine']);
+  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation', 'bugLine', 'line']);
+  if (ex.kind === 'spot_part' || ex.line !== undefined) {
+    const lines = typeof ex.code === 'string' ? ex.code.split('\n').length : 0;
+    if (ex.kind !== 'spot_part') issues.push(issue('line_not_spot', `${path}.line`));
+    else if (ex.line === undefined) issues.push(issue('required', `${path}.line`));
+    else if (typeof ex.line !== 'number' || !Number.isInteger(ex.line) || ex.line < 0 || ex.line >= lines) issues.push(issue('bugline_out_of_code', `${path}.line`, { lines }));
+  }
   if (ex.bugLine !== undefined) {
     const lines = typeof ex.code === 'string' ? ex.code.split('\n').length : 0;
     if (ex.kind !== 'find_bug') issues.push(issue('bugline_not_bug', `${path}.bugLine`));
@@ -527,7 +539,7 @@ function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void 
   checkChoice(issues, ex.kind, `${path}.kind`, EXERCISE_KINDS);
   checkText(issues, ex.prompt, `${path}.prompt`, { max: 200 });
   checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 300 });
-  const needsCode = ex.kind === 'predict_output' || ex.kind === 'fill_gap' || ex.kind === 'find_bug';
+  const needsCode = ex.kind === 'predict_output' || ex.kind === 'fill_gap' || ex.kind === 'find_bug' || ex.kind === 'spot_part';
   checkText(issues, ex.code, `${path}.code`, { required: needsCode, max: 800 });
   if (ex.kind === 'fill_gap' && typeof ex.code === 'string' && !ex.code.includes('___')) issues.push(issue('gap_missing', `${path}.code`));
   if (ex.kind === 'order_steps') {

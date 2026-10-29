@@ -4,7 +4,7 @@
 // aún no trabajados (por eso enseña antes). Las respuestas cuentan poco (vista la ficha justo antes: pista 1; si se
 // vuelve a mirar, pista 2), así que nunca marcan «dominado» (regla 9); los fallos van a «Vacía tus fallos».
 import { useEffect, useState } from 'react';
-import { examCorrect, exercisesOf, unitText, type ClientEvent } from '@memora/experiences';
+import { examCorrect, exercisesOf, exerciseView, unitText, type ClientEvent } from '@memora/experiences';
 import { api, ApiError, type Course, type ExamPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { hue, UnitFicha } from './Feed';
@@ -84,8 +84,8 @@ export function Guided({ course, onExit, onExam, onFailures }: { course: Course;
   const ok = picked !== undefined && results[idx];
   return shell(<>
     <p className={`tag ${picked !== undefined && !ok ? 'ko' : ''}`}>✍️ AHORA RESUÉLVELO · {unitText(unit).toUpperCase()}</p>
-    <h3 className="ask guided-q">{ex.prompt}</h3>
-    {ex.code && <pre className="learn-code guided-code"><code>{ex.code}</code></pre>}
+    <h3 className="ask guided-q">{exerciseView(ex).prompt}</h3>
+    {ex.code && <pre className="learn-code guided-code"><code>{exerciseView(ex).code}</code></pre>}
     <div className="options">
       {q.options.map((o) => (
         <button type="button" key={o} className={`option long ${picked !== undefined && o === ex.answer ? 'is-right' : ''} ${picked === o && o !== ex.answer ? 'is-wrong' : ''}`} disabled={picked !== undefined && o !== picked && o !== ex.answer} onClick={() => void answer(o)}>{o}</button>
