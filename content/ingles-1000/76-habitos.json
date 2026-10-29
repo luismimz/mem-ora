@@ -124,6 +124,167 @@
               "translation": "Espero verte pronto."
             }
           ],
+          "practice": [
+            {
+              "text": "I enjoy cooking.",
+              "translation": "Disfruto cocinando.",
+              "mirror": {
+                "say": "Disfruto cocinando",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "disfruto",
+                    "en": "enjoy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cocinando",
+                    "en": "cooking",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I decided to stay.",
+              "translation": "Decidí quedarme.",
+              "mirror": {
+                "say": "Decidí quedarme",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "decidí",
+                    "en": "decided",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a quedar",
+                    "en": "to stay",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She wants to learn.",
+              "translation": "Ella quiere aprender.",
+              "mirror": {
+                "say": "Ella quiere aprender",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "quiere",
+                    "en": "wants",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a aprender",
+                    "en": "to learn",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I finished reading the book.",
+              "translation": "Terminé de leer el libro.",
+              "mirror": {
+                "say": "Terminé de leer el libro",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "terminé",
+                    "en": "finished",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "leyendo",
+                    "en": "reading",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el libro",
+                    "en": "the book",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I hope to pass.",
+              "translation": "Espero aprobar.",
+              "mirror": {
+                "say": "Espero aprobar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "espero",
+                    "en": "hope",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a aprobar",
+                    "en": "to pass",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I avoid driving at night.",
+              "translation": "Evito conducir de noche.",
+              "mirror": {
+                "say": "Evito conducir de noche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "evito",
+                    "en": "avoid",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "conduciendo",
+                    "en": "driving",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "de noche",
+                    "en": "at night",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I enjoy to read» está mal: enjoy + -ING.",
             "«I decided going» está mal: decide + TO."

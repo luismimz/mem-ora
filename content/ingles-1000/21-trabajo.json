@@ -245,6 +245,192 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "My car is faster than yours.",
+              "translation": "Mi coche es más rápido que el tuyo.",
+              "mirror": {
+                "say": "Mi coche es más rápido que el tuyo",
+                "pieces": [
+                  {
+                    "es": "Mi coche",
+                    "en": "My car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rápido-ER",
+                    "en": "fast-ER",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "than",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el tuyo",
+                    "en": "yours",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Today is colder than yesterday.",
+              "translation": "Hoy hace más frío que ayer.",
+              "mirror": {
+                "say": "Hoy hace más frío que ayer",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "Today",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "frío-ER",
+                    "en": "cold-ER",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "than",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This book is more interesting.",
+              "translation": "Este libro es más interesante.",
+              "mirror": {
+                "say": "Este libro es más interesante",
+                "pieces": [
+                  {
+                    "es": "Este libro",
+                    "en": "This book",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "más interesante",
+                    "en": "more interesting",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My brother is taller than me.",
+              "translation": "Mi hermano es más alto que yo.",
+              "mirror": {
+                "say": "Mi hermano es más alto que yo",
+                "pieces": [
+                  {
+                    "es": "Mi hermano",
+                    "en": "My brother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "alto-ER",
+                    "en": "tall-ER",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "than",
+                    "role": "word"
+                  },
+                  {
+                    "es": "yo",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Tea is better than coffee.",
+              "translation": "El té es mejor que el café.",
+              "mirror": {
+                "say": "El té es mejor que el café",
+                "pieces": [
+                  {
+                    "es": "El té",
+                    "en": "Tea",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mejor",
+                    "en": "better",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "than",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This hotel is cheaper.",
+              "translation": "Este hotel es más barato.",
+              "mirror": {
+                "say": "Este hotel es más barato",
+                "pieces": [
+                  {
+                    "es": "Este hotel",
+                    "en": "This hotel",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "barato-ER",
+                    "en": "cheap-ER",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«More big» está mal: palabra corta → bigger.",
             "Mejor y peor no siguen la regla: better, worse."

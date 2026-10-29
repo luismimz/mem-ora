@@ -187,6 +187,169 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "The coffee is too hot.",
+              "translation": "El café está demasiado caliente.",
+              "mirror": {
+                "say": "El café está demasiado caliente",
+                "pieces": [
+                  {
+                    "es": "El café",
+                    "en": "The coffee",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado caliente",
+                    "en": "too hot",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It isn't big enough.",
+              "translation": "No es lo bastante grande.",
+              "mirror": {
+                "say": "No es lo bastante grande",
+                "pieces": [
+                  {
+                    "es": "(ESO) no es",
+                    "en": "It isn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lo bastante",
+                    "en": "enough",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "You're too young.",
+              "translation": "Eres demasiado joven.",
+              "mirror": {
+                "say": "Eres demasiado joven",
+                "pieces": [
+                  {
+                    "es": "(TÚ) eres",
+                    "en": "You're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado joven",
+                    "en": "too young",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The room is big enough.",
+              "translation": "La sala es lo bastante grande.",
+              "mirror": {
+                "say": "La sala es lo bastante grande",
+                "pieces": [
+                  {
+                    "es": "La sala",
+                    "en": "The room",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lo bastante",
+                    "en": "enough",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "It's too expensive.",
+              "translation": "Es demasiado caro.",
+              "mirror": {
+                "say": "Es demasiado caro",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "demasiado caro",
+                    "en": "too expensive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He isn't tall enough.",
+              "translation": "Él no es lo bastante alto.",
+              "mirror": {
+                "say": "Él no es lo bastante alto",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no es",
+                    "en": "isn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lo bastante",
+                    "en": "enough",
+                    "role": "word"
+                  },
+                  {
+                    "es": "alto",
+                    "en": "tall",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Enough big» está mal: ENOUGH va detrás (big enough).",
             "TOO es «demasiado» (algo que sobra); «muy» es VERY."

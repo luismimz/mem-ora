@@ -115,6 +115,148 @@
               "translation": "Me gustan los dos."
             }
           ],
+          "practice": [
+            {
+              "text": "Both are doctors.",
+              "translation": "Los dos son médicos.",
+              "mirror": {
+                "say": "Los dos son médicos",
+                "pieces": [
+                  {
+                    "es": "Ambos",
+                    "en": "Both",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "médicos",
+                    "en": "doctors",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Neither of them came.",
+              "translation": "Ninguno de los dos vino.",
+              "mirror": {
+                "say": "Ninguno de los dos vino",
+                "pieces": [
+                  {
+                    "es": "Ninguno de ellos",
+                    "en": "Neither of them",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vino",
+                    "en": "came",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Either is fine.",
+              "translation": "Cualquiera de los dos vale.",
+              "mirror": {
+                "say": "Cualquiera de los dos vale",
+                "pieces": [
+                  {
+                    "es": "Cualquiera",
+                    "en": "Either",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bien",
+                    "en": "fine",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I like both colours.",
+              "translation": "Me gustan los dos colores.",
+              "mirror": {
+                "say": "Me gustan los dos colores",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ambos colores",
+                    "en": "both colours",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Both rooms are big.",
+              "translation": "Ambas habitaciones son grandes.",
+              "mirror": {
+                "say": "Ambas habitaciones son grandes",
+                "pieces": [
+                  {
+                    "es": "Ambas habitaciones",
+                    "en": "Both rooms",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "grandes",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Neither option is good.",
+              "translation": "Ninguna opción es buena.",
+              "mirror": {
+                "say": "Ninguna opción es buena",
+                "pieces": [
+                  {
+                    "es": "Ninguna opción",
+                    "en": "Neither option",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "buena",
+                    "en": "good",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Both of them is» está mal: both va en plural (are).",
             "«Neither is not» está mal: una sola negación (neither is)."

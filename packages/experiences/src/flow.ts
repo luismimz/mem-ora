@@ -62,6 +62,39 @@ export function pieceExamples(u: SessionUnit): number[] {
   return examples.flatMap((e, i) => (i < FLOW_TAUGHT_EXAMPLES && (e.mirror?.pieces ?? []).filter((p) => p.role !== 'signal').length >= 2 ? [i] : []));
 }
 
+/**
+ * Frases de una unidad para practicar, por posición: primero los ejemplos de la ficha y después sus frases de práctica
+ * (D-093), que NO salen en la ficha. Un paso con `example ≥ examples.length` usa una frase de práctica.
+ */
+export type PracticeLike = { text: string; translation?: string; mirror?: { say: string; pieces: Array<{ es: string; en: string; role: string; ghost?: boolean; why?: string; from?: string }>; order?: number[] } };
+export function sentencesOf(u: SessionUnit): PracticeLike[] {
+  const p = u.payload as { examples?: PracticeLike[]; practice?: PracticeLike[] };
+  return [...(p.examples ?? []), ...(u.type === 'pattern' ? (p.practice ?? []) : [])];
+}
+
+/** Posiciones de las frases de práctica (D-093) en `sentencesOf`. */
+export function practiceIndices(u: SessionUnit): number[] {
+  const p = u.payload as { examples?: unknown[]; practice?: unknown[] };
+  if (u.type !== 'pattern') return [];
+  const n = (p.examples ?? []).length;
+  return (p.practice ?? []).map((_, j) => n + j);
+}
+
+/** Frases de práctica que se pueden construir con fichas. */
+export function practiceBuildable(u: SessionUnit): number[] {
+  const all = sentencesOf(u);
+  return practiceIndices(u).filter((i) => { const t = buildTiles(all[i]!.text).length; return Boolean(all[i]!.translation) && t >= FLOW_BUILD_WORDS.min && t <= FLOW_BUILD_WORDS.max; });
+}
+
+/** Frases de práctica que se juegan por piezas (al menos dos con español). */
+export function practicePieces(u: SessionUnit): number[] {
+  const all = sentencesOf(u);
+  return practiceIndices(u).filter((i) => (all[i]!.mirror?.pieces ?? []).filter((pc) => pc.role !== 'signal').length >= 2);
+}
+
+/** Palabras de una frase en minúsculas, sin puntuación ni guiones de enseñar terminaciones (walk-ING). */
+const wordsOf = (t: string) => t.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').replace(/(\p{L})-(\p{L})/gu, '$1$2').split(/\s+/).filter(Boolean);
+
 /** Escenas mínimas para jugar a «¿Dónde está?» (D-084): se eligen entre tres. */
 export const FLOW_STAGE_MIN = 3;
 
@@ -221,8 +254,24 @@ export function buildFlowSession(input: {
   };
   // D-082 (simplificado): el espejo en movimiento va dentro de la ficha del truco (un solo paso, sin tarjeta aparte).
   // Después se construye una frase DISTINTA de la que se ha visto animada, si la hay.
+  // D-093: con frases de práctica, se elige una NUEVA (no está en la ficha), mejor con palabras que ya sabes.
+  const knownWords = new Set<string>();
+  const learnWords = (k: string) => { const x = units[k]; if (x?.type === 'term') for (const w of wordsOf(String((x.payload as { text?: string }).text ?? ''))) knownWords.add(w); };
+  for (const k of input.arcadeUnits ?? []) learnWords(k);
+  const pickPractice = (u: string, options: number[]): number | undefined => {
+    if (!options.length) return undefined;
+    const all = sentencesOf(units[u]!);
+    const score = (i: number) => wordsOf(all[i]!.text).filter((w) => knownWords.has(w)).length;
+    const best = Math.max(...options.map(score));
+    // Entre las que más palabras conocidas tienen (y alguna con una menos, para no repetir siempre la misma).
+    const pool = options.filter((i) => score(i) >= best - 1);
+    return pool[Math.floor(rand() * pool.length)];
+  };
   const buildAfter = (u: string, shown?: number): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'produce');
+    const fresh = practiceBuildable(units[u]!).filter((x) => x !== shown);
+    const novel = pickPractice(u, fresh);
+    if (skill && novel !== undefined) return { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: novel, ...tag(u) };
     const options = taughtBuildable(units[u]!);
     const others = options.filter((x) => x !== shown);
     const pool = others.length ? others : options;
@@ -277,6 +326,8 @@ export function buildFlowSession(input: {
   // «Construye la frase» (palabra a palabra), con otro ejemplo si lo hay: piezas → palabras → escribir.
   const pieces = (u: string, avoid?: number): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'recall');
+    const novel = pickPractice(u, practicePieces(units[u]!).filter((n) => n !== avoid));
+    if (skill && novel !== undefined) return { kind: 'pieces', unitKey: u, scene: -4, skillKey: skill.key, example: novel, ...tag(u) };
     const options = pieceExamples(units[u]!).filter((n) => n !== avoid);
     return skill && options.length ? { kind: 'pieces', unitKey: u, scene: -4, skillKey: skill.key, example: options[Math.floor(rand() * options.length)]!, ...tag(u) } : null;
   };
@@ -286,7 +337,7 @@ export function buildFlowSession(input: {
   while (rv.length || nw.length) { if (rv.length) order.push(...rv.splice(0, 2)); if (nw.length) order.push(...nw.splice(0, 2)); }
   for (let i = 0; i < order.length; i += 2) {
     const pair = order.slice(i, i + 2);
-    for (const u of pair) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) });
+    for (const u of pair) { base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) }); learnWords(u); }
     // Variedad: la primera de la pareja, escucha (idiomas) o relámpago; la segunda, ¿verdad o mentira?; lo dominado,
     // escribiendo. La gramática se practica construyendo una de sus frases.
     pair.forEach((u, j) => {

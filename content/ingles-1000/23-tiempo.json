@@ -108,6 +108,170 @@
               "translation": "¿Hace sol?"
             }
           ],
+          "practice": [
+            {
+              "text": "It's sunny today.",
+              "translation": "Hoy hace sol.",
+              "mirror": {
+                "say": "Hoy hace sol",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "soleado",
+                    "en": "sunny",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "It's snowing.",
+              "translation": "Está nevando.",
+              "mirror": {
+                "say": "Está nevando",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nevando",
+                    "en": "snowing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was cold yesterday.",
+              "translation": "Ayer hizo frío.",
+              "mirror": {
+                "say": "Ayer hizo frío",
+                "pieces": [
+                  {
+                    "es": "Ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) estaba",
+                    "en": "It was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "frío",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "It's very windy.",
+              "translation": "Hace mucho viento.",
+              "mirror": {
+                "say": "Hace mucho viento",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy ventoso",
+                    "en": "very windy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Is it raining?",
+              "translation": "¿Está lloviendo?",
+              "mirror": {
+                "say": "¿Está lloviendo?",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "Is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lloviendo",
+                    "en": "raining",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "It will be hot tomorrow.",
+              "translation": "Mañana hará calor.",
+              "mirror": {
+                "say": "Mañana hará calor",
+                "pieces": [
+                  {
+                    "es": "Mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se-RÁ",
+                    "en": "will be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caluroso",
+                    "en": "hot",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Makes cold» no existe: hace frío = it's cold.",
             "«Tengo frío» es otra cosa: I'm cold (lo sientes tú)."

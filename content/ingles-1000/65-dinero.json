@@ -115,6 +115,147 @@
               "translation": "¿Cuánto cuesta?"
             }
           ],
+          "practice": [
+            {
+              "text": "How much is this book?",
+              "translation": "¿Cuánto cuesta este libro?",
+              "mirror": {
+                "say": "¿Cuánto cuesta este libro?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "este libro",
+                    "en": "this book",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much are the shoes?",
+              "translation": "¿Cuánto cuestan los zapatos?",
+              "mirror": {
+                "say": "¿Cuánto cuestan los zapatos?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "los zapatos",
+                    "en": "the shoes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's twenty euros.",
+              "translation": "Son veinte euros.",
+              "mirror": {
+                "say": "Son veinte euros",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "veinte euros",
+                    "en": "twenty euros",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much is a coffee?",
+              "translation": "¿Cuánto cuesta un café?",
+              "mirror": {
+                "say": "¿Cuánto cuesta un café?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much does the room cost?",
+              "translation": "¿Cuánto cuesta la habitación?",
+              "mirror": {
+                "say": "¿Cuánto cuesta la habitación?",
+                "pieces": [
+                  {
+                    "es": "Cuánto",
+                    "en": "How much",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "does",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "la habitación",
+                    "en": "the room",
+                    "role": "who"
+                  },
+                  {
+                    "es": "cuesta",
+                    "en": "cost",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They're five euros.",
+              "translation": "Cuestan cinco euros.",
+              "mirror": {
+                "say": "Cuestan cinco euros",
+                "pieces": [
+                  {
+                    "es": "(ELLOS) son",
+                    "en": "They're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cinco euros",
+                    "en": "five euros",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«How many is it?» está mal: el dinero se mide, how MUCH.",
             "El precio va con IT IS: it's ten euros."

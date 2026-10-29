@@ -137,6 +137,188 @@
               "translation": "Ponte los zapatos."
             }
           ],
+          "practice": [
+            {
+              "text": "I wear glasses.",
+              "translation": "Llevo gafas.",
+              "mirror": {
+                "say": "Llevo gafas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llevo",
+                    "en": "wear",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "gafas",
+                    "en": "glasses",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's wearing a blue shirt.",
+              "translation": "Él lleva una camisa azul.",
+              "mirror": {
+                "say": "Él lleva una camisa azul",
+                "pieces": [
+                  {
+                    "es": "(ÉL) está",
+                    "en": "He's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llevando",
+                    "en": "wearing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "camisa",
+                    "en": "shirt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "azul",
+                    "en": "blue",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Put on your coat.",
+              "translation": "Ponte el abrigo.",
+              "mirror": {
+                "say": "Ponte el abrigo",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Put on",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU abrigo",
+                    "en": "your coat",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I try on these shoes?",
+              "translation": "¿Puedo probarme estos zapatos?",
+              "mirror": {
+                "say": "¿Puedo probarme estos zapatos?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "probar",
+                    "en": "try on",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "estos zapatos",
+                    "en": "these shoes",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She isn't wearing a coat.",
+              "translation": "Ella no lleva abrigo.",
+              "mirror": {
+                "say": "Ella no lleva abrigo",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no está",
+                    "en": "isn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llevando",
+                    "en": "wearing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un abrigo",
+                    "en": "a coat",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I always wear jeans.",
+              "translation": "Siempre llevo vaqueros.",
+              "mirror": {
+                "say": "Siempre llevo vaqueros",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "llevo",
+                    "en": "wear",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "vaqueros",
+                    "en": "jeans",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Carry a coat» es llevarlo en la mano; puesto es WEAR.",
             "Probarse ropa: TRY ON (try it on)."

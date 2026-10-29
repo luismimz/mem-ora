@@ -118,6 +118,155 @@
               "translation": "Hazme un favor."
             }
           ],
+          "practice": [
+            {
+              "text": "I made a cake.",
+              "translation": "Hice un pastel.",
+              "mirror": {
+                "say": "Hice un pastel",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hice",
+                    "en": "made",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un pastel",
+                    "en": "a cake",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I do my homework.",
+              "translation": "Hago los deberes.",
+              "mirror": {
+                "say": "Hago los deberes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hago",
+                    "en": "do",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MIS deberes",
+                    "en": "my homework",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We made a decision.",
+              "translation": "Tomamos una decisión.",
+              "mirror": {
+                "say": "Tomamos una decisión",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hicimos",
+                    "en": "made",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una decisión",
+                    "en": "a decision",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She does sport.",
+              "translation": "Ella hace deporte.",
+              "mirror": {
+                "say": "Ella hace deporte",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "does",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "deporte",
+                    "en": "sport",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't make a noise.",
+              "translation": "No hagas ruido.",
+              "mirror": {
+                "say": "No hagas ruido",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hagas",
+                    "en": "make",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ruido",
+                    "en": "a noise",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He does the shopping.",
+              "translation": "Él hace la compra.",
+              "mirror": {
+                "say": "Él hace la compra",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "does",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la compra",
+                    "en": "the shopping",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Do a mistake» está mal: make a mistake.",
             "«Make homework» está mal: do homework."

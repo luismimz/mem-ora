@@ -130,6 +130,210 @@
               "translation": "Antes no me gustaba el café."
             }
           ],
+          "practice": [
+            {
+              "text": "I used to smoke.",
+              "translation": "Antes fumaba.",
+              "mirror": {
+                "say": "Antes fumaba",
+                "pieces": [
+                  {
+                    "es": "Antes",
+                    "en": "used to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fumar",
+                    "en": "smoke",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "We used to live in Paris.",
+              "translation": "Antes vivíamos en París.",
+              "mirror": {
+                "say": "Antes vivíamos en París",
+                "pieces": [
+                  {
+                    "es": "Antes",
+                    "en": "used to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivir",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en París",
+                    "en": "in Paris",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She used to have a dog.",
+              "translation": "Ella antes tenía un perro.",
+              "mirror": {
+                "say": "Ella antes tenía un perro",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "antes",
+                    "en": "used to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un perro",
+                    "en": "a dog",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I used to play tennis.",
+              "translation": "Antes jugaba al tenis.",
+              "mirror": {
+                "say": "Antes jugaba al tenis",
+                "pieces": [
+                  {
+                    "es": "Antes",
+                    "en": "used to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "jugar",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al tenis",
+                    "en": "tennis",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Did you use to live here?",
+              "translation": "¿Antes vivías aquí?",
+              "mirror": {
+                "say": "¿Antes vivías aquí?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "antes",
+                    "en": "use to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "vivir",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I didn't use to like tea.",
+              "translation": "Antes no me gustaba el té.",
+              "mirror": {
+                "say": "Antes no me gustaba el té",
+                "pieces": [
+                  {
+                    "es": "Antes no",
+                    "en": "didn't use to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustar",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I use to live» para el pasado está mal: used to.",
             "Al preguntar o negar se quita la d: did you USE to…?"

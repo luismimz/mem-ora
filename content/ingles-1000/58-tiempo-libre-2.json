@@ -120,6 +120,176 @@
               "translation": "No canto muy bien."
             }
           ],
+          "practice": [
+            {
+              "text": "I'm good at cooking.",
+              "translation": "Se me da bien cocinar.",
+              "mirror": {
+                "say": "Se me da bien cocinar",
+                "pieces": [
+                  {
+                    "es": "(YO) soy bueno",
+                    "en": "I'm good",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cocin-ANDO",
+                    "en": "cooking",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's bad at dancing.",
+              "translation": "Se le da mal bailar.",
+              "mirror": {
+                "say": "Se le da mal bailar",
+                "pieces": [
+                  {
+                    "es": "(ELLA) es mala",
+                    "en": "She's bad",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "bail-ANDO",
+                    "en": "dancing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm good at maths.",
+              "translation": "Se me dan bien las matemáticas.",
+              "mirror": {
+                "say": "Se me dan bien las matemáticas",
+                "pieces": [
+                  {
+                    "es": "(YO) soy bueno",
+                    "en": "I'm good",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "matemáticas",
+                    "en": "maths",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Are you good at swimming?",
+              "translation": "¿Se te da bien nadar?",
+              "mirror": {
+                "say": "¿Se te da bien nadar?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "eres",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "good",
+                    "role": "word"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nad-ANDO",
+                    "en": "swimming",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "We're good at football.",
+              "translation": "Se nos da bien el fútbol.",
+              "mirror": {
+                "say": "Se nos da bien el fútbol",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) somos buenos",
+                    "en": "We're good",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fútbol",
+                    "en": "football",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's very good at drawing.",
+              "translation": "Se le da muy bien dibujar.",
+              "mirror": {
+                "say": "Se le da muy bien dibujar",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es muy bueno",
+                    "en": "He's very good",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "EN",
+                    "en": "at",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dibuj-ANDO",
+                    "en": "drawing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I'm good in drawing» está mal: good AT.",
             "«Good at draw» está mal: good at drawing."

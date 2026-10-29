@@ -968,6 +968,198 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "I always eat fruit.",
+              "translation": "Siempre como fruta.",
+              "mirror": {
+                "say": "Siempre como fruta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fruta",
+                    "en": "fruit",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I never drink coffee.",
+              "translation": "Nunca bebo café.",
+              "mirror": {
+                "say": "Nunca bebo café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "bebo",
+                    "en": "drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We sometimes read.",
+              "translation": "A veces leemos.",
+              "mirror": {
+                "say": "A veces leemos",
+                "pieces": [
+                  {
+                    "es": "A veces",
+                    "en": "sometimes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "leemos",
+                    "en": "read",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "She is always busy.",
+              "translation": "Ella siempre está ocupada.",
+              "mirror": {
+                "say": "Ella siempre está ocupada",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "siempre",
+                    "en": "always",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ocupada",
+                    "en": "busy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She often cooks.",
+              "translation": "Ella cocina a menudo.",
+              "mirror": {
+                "say": "Ella cocina a menudo",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "cocina",
+                    "en": "cooks",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a menudo",
+                    "en": "often",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I am never tired.",
+              "translation": "Nunca estoy cansado.",
+              "mirror": {
+                "say": "Nunca estoy cansado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Al final suena mal: «I drink coffee always»; di I always drink coffee."
           ],

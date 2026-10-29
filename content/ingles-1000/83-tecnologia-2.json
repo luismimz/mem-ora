@@ -200,6 +200,173 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "I'm as tall as my father.",
+              "translation": "Soy tan alto como mi padre.",
+              "mirror": {
+                "say": "Soy tan alto como mi padre",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan alto como",
+                    "en": "as tall as",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mi padre",
+                    "en": "my father",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It isn't as difficult as it looks.",
+              "translation": "No es tan difícil como parece.",
+              "mirror": {
+                "say": "No es tan difícil como parece",
+                "pieces": [
+                  {
+                    "es": "(ESO) no es",
+                    "en": "It isn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan difícil como",
+                    "en": "as difficult as",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "parece",
+                    "en": "looks",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This car is as fast as yours.",
+              "translation": "Este coche es tan rápido como el tuyo.",
+              "mirror": {
+                "say": "Este coche es tan rápido como el tuyo",
+                "pieces": [
+                  {
+                    "es": "Este coche",
+                    "en": "This car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan rápido como",
+                    "en": "as fast as",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el tuyo",
+                    "en": "yours",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She isn't as old as me.",
+              "translation": "Ella no es tan mayor como yo.",
+              "mirror": {
+                "say": "Ella no es tan mayor como yo",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no es",
+                    "en": "isn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan mayor como",
+                    "en": "as old as",
+                    "role": "word"
+                  },
+                  {
+                    "es": "yo",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Call me as soon as possible.",
+              "translation": "Llámame lo antes posible.",
+              "mirror": {
+                "say": "Llámame lo antes posible",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "lo antes posible",
+                    "en": "as soon as possible",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The tea is as hot as the coffee.",
+              "translation": "El té está tan caliente como el café.",
+              "mirror": {
+                "say": "El té está tan caliente como el café",
+                "pieces": [
+                  {
+                    "es": "El té",
+                    "en": "The tea",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan caliente como",
+                    "en": "as hot as",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el café",
+                    "en": "the coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«As fast than» está mal: AS… AS.",
             "Para «lo antes posible»: as soon as possible (ASAP)."

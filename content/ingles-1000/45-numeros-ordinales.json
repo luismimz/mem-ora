@@ -119,6 +119,168 @@
               "translation": "¿A qué día estamos? A día 3."
             }
           ],
+          "practice": [
+            {
+              "text": "Today is the third of March.",
+              "translation": "Hoy es 3 de marzo.",
+              "mirror": {
+                "say": "Hoy es 3 de marzo",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "Today",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el tercero",
+                    "en": "the third",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de marzo",
+                    "en": "of March",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My birthday is on the first of April.",
+              "translation": "Mi cumpleaños es el 1 de abril.",
+              "mirror": {
+                "say": "Mi cumpleaños es el 1 de abril",
+                "pieces": [
+                  {
+                    "es": "Mi cumpleaños",
+                    "en": "My birthday",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el primero",
+                    "en": "on the first",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de abril",
+                    "en": "of April",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I arrive on the tenth of June.",
+              "translation": "Llego el 10 de junio.",
+              "mirror": {
+                "say": "Llego el 10 de junio",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llego",
+                    "en": "arrive",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el décimo",
+                    "en": "on the tenth",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de junio",
+                    "en": "of June",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's the second of May.",
+              "translation": "Es el 2 de mayo.",
+              "mirror": {
+                "say": "Es el 2 de mayo",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el segundo",
+                    "en": "the second",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de mayo",
+                    "en": "of May",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The exam is on the fifteenth.",
+              "translation": "El examen es el 15.",
+              "mirror": {
+                "say": "El examen es el 15",
+                "pieces": [
+                  {
+                    "es": "El examen",
+                    "en": "The exam",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en el decimoquinto",
+                    "en": "on the fifteenth",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "See you on the thirty-first of December.",
+              "translation": "Nos vemos el 31 de diciembre.",
+              "mirror": {
+                "say": "Nos vemos el 31 de diciembre",
+                "pieces": [
+                  {
+                    "es": "Nos vemos",
+                    "en": "See you",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el trigésimo primero",
+                    "en": "on the thirty-first",
+                    "role": "word"
+                  },
+                  {
+                    "es": "de diciembre",
+                    "en": "of December",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "En fechas no se dice «the five of May»: the FIFTH (ordinal).",
             "Se escriben 1st, 2nd, 3rd, 4th, 5th…"

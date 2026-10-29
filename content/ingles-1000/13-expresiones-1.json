@@ -828,6 +828,230 @@
               "translation": "¿Podrías hablar despacio?"
             }
           ],
+          "practice": [
+            {
+              "text": "Could you close the door?",
+              "translation": "¿Podrías cerrar la puerta?",
+              "mirror": {
+                "say": "¿Podrías cerrar la puerta?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerrar",
+                    "en": "close",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la puerta",
+                    "en": "the door",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Could you call me?",
+              "translation": "¿Podrías llamarme?",
+              "mirror": {
+                "say": "¿Podrías llamarme?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Could I have some water, please?",
+              "translation": "¿Me das agua, por favor?",
+              "mirror": {
+                "say": "¿Me das agua, por favor?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podría",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de agua",
+                    "en": "some water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "Could you open the window?",
+              "translation": "¿Podrías abrir la ventana?",
+              "mirror": {
+                "say": "¿Podrías abrir la ventana?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "abrir",
+                    "en": "open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la ventana",
+                    "en": "the window",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Could you wait here?",
+              "translation": "¿Podrías esperar aquí?",
+              "mirror": {
+                "say": "¿Podrías esperar aquí?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "esperar",
+                    "en": "wait",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Could you speak louder?",
+              "translation": "¿Podrías hablar más alto?",
+              "mirror": {
+                "say": "¿Podrías hablar más alto?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hablar",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "más alto",
+                    "en": "louder",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Sin «please» suena brusco: en inglés importa mucho."
           ],
@@ -927,6 +1151,172 @@
             {
               "text": "Has she called you?",
               "translation": "¿Ya te ha llamado?"
+            }
+          ],
+          "practice": [
+            {
+              "text": "Have you called your mother?",
+              "translation": "¿Ya llamaste a tu madre?",
+              "mirror": {
+                "say": "¿Ya llamaste a tu madre?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llamaste",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a tu madre",
+                    "en": "your mother",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you finished?",
+              "translation": "¿Ya terminaste?",
+              "mirror": {
+                "say": "¿Ya terminaste?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "terminaste",
+                    "en": "finished",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you seen the email?",
+              "translation": "¿Ya has visto el correo?",
+              "mirror": {
+                "say": "¿Ya has visto el correo?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el correo",
+                    "en": "the email",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Has she arrived?",
+              "translation": "¿Ya ha llegado ella?",
+              "mirror": {
+                "say": "¿Ya ha llegado ella?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ella",
+                    "en": "she",
+                    "role": "who"
+                  },
+                  {
+                    "es": "llegado",
+                    "en": "arrived",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you bought the bread?",
+              "translation": "¿Ya compraste el pan?",
+              "mirror": {
+                "say": "¿Ya compraste el pan?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compraste",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el pan",
+                    "en": "the bread",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have they left?",
+              "translation": "¿Ya se han ido?",
+              "mirror": {
+                "say": "¿Ya se han ido?",
+                "pieces": [
+                  {
+                    "es": "¿Ya",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ELLOS",
+                    "en": "they",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ido",
+                    "en": "left",
+                    "role": "verb"
+                  }
+                ]
+              }
             }
           ],
           "pitfalls": [

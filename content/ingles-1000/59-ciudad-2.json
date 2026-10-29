@@ -134,6 +134,263 @@
               "translation": "¿Qué harás si suspendes?"
             }
           ],
+          "practice": [
+            {
+              "text": "If it rains, I won't go out.",
+              "translation": "Si llueve, no saldré.",
+              "mirror": {
+                "say": "Si llueve, no saldré",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO llueve",
+                    "en": "it rains",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) no -RÉ",
+                    "en": "I won't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sal-",
+                    "en": "go out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you study, you'll pass.",
+              "translation": "Si estudias, aprobarás.",
+              "mirror": {
+                "say": "Si estudias, aprobarás",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estudias",
+                    "en": "study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aproba-",
+                    "en": "pass",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) -RÁS",
+                    "en": "you'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "If I have time, I'll call you.",
+              "translation": "Si tengo tiempo, te llamaré.",
+              "mirror": {
+                "say": "Si tengo tiempo, te llamaré",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tiempo",
+                    "en": "time",
+                    "role": "word"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "llama-",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  6,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "If you come, I'll cook.",
+              "translation": "Si vienes, cocinaré.",
+              "mirror": {
+                "say": "Si vienes, cocinaré",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vienes",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cocina-",
+                    "en": "cook",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'll help you if I can.",
+              "translation": "Te ayudaré si puedo.",
+              "mirror": {
+                "say": "Te ayudaré si puedo",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ayuda-",
+                    "en": "help",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "si",
+                    "en": "if",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "can",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0,
+                  3,
+                  4,
+                  5
+                ]
+              }
+            },
+            {
+              "text": "If you don't eat, you'll be hungry.",
+              "translation": "Si no comes, tendrás hambre.",
+              "mirror": {
+                "say": "Si no comes, tendrás hambre",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comes",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) -RÁS",
+                    "en": "you'll",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estar hambriento",
+                    "en": "be hungry",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«If it will rain» está mal: detrás de if, presente (if it rains).",
             "Se puede dar la vuelta: I'll stay at home if it rains."

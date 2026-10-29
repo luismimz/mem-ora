@@ -113,6 +113,132 @@
               "translation": "Perdone, ¿cómo llego a la estación?"
             }
           ],
+          "practice": [
+            {
+              "text": "Turn left.",
+              "translation": "Gira a la izquierda.",
+              "mirror": {
+                "say": "Gira a la izquierda",
+                "pieces": [
+                  {
+                    "es": "Gira",
+                    "en": "Turn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la izquierda",
+                    "en": "left",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Go straight on.",
+              "translation": "Sigue todo recto.",
+              "mirror": {
+                "say": "Sigue todo recto",
+                "pieces": [
+                  {
+                    "es": "Sigue",
+                    "en": "Go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "todo recto",
+                    "en": "straight on",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's on the right.",
+              "translation": "Está a la derecha.",
+              "mirror": {
+                "say": "Está a la derecha",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en la derecha",
+                    "en": "on the right",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Take the first street.",
+              "translation": "Coge la primera calle.",
+              "mirror": {
+                "say": "Coge la primera calle",
+                "pieces": [
+                  {
+                    "es": "Coge",
+                    "en": "Take",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la primera calle",
+                    "en": "the first street",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bank is next to the hotel.",
+              "translation": "El banco está al lado del hotel.",
+              "mirror": {
+                "say": "El banco está al lado del hotel",
+                "pieces": [
+                  {
+                    "es": "El banco",
+                    "en": "The bank",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "al lado de",
+                    "en": "next to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el hotel",
+                    "en": "the hotel",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Cross the street.",
+              "translation": "Cruza la calle.",
+              "mirror": {
+                "say": "Cruza la calle",
+                "pieces": [
+                  {
+                    "es": "Cruza",
+                    "en": "Cross",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la calle",
+                    "en": "the street",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Turn to the left» se entiende, pero se dice turn left.",
             "Todo recto no es «all straight»: go straight on."
@@ -156,6 +282,189 @@
             {
               "text": "I think the bus will be late.",
               "translation": "Creo que el autobús llegará tarde."
+            }
+          ],
+          "practice": [
+            {
+              "text": "I'll open it.",
+              "translation": "Ya lo abro yo.",
+              "mirror": {
+                "say": "Ya lo abro yo",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "abri-",
+                    "en": "open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I'm going to visit my grandmother.",
+              "translation": "Voy a visitar a mi abuela.",
+              "mirror": {
+                "say": "Voy a visitar a mi abuela",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "visitar",
+                    "en": "visit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a mi abuela",
+                    "en": "my grandmother",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I think you'll win.",
+              "translation": "Creo que ganarás.",
+              "mirror": {
+                "say": "Creo que ganarás",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "creo",
+                    "en": "think",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "gana-",
+                    "en": "win",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) -RÁS",
+                    "en": "you'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Careful! It's going to fall!",
+              "translation": "¡Cuidado! ¡Se va a caer!",
+              "mirror": {
+                "say": "¡Cuidado! ¡Se va a caer!",
+                "pieces": [
+                  {
+                    "es": "Cuidado",
+                    "en": "Careful",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "caer",
+                    "en": "fall",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We're going to get married in May.",
+              "translation": "Vamos a casarnos en mayo.",
+              "mirror": {
+                "say": "Vamos a casarnos en mayo",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "casar",
+                    "en": "get married",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en mayo",
+                    "en": "in May",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'll call him.",
+              "translation": "Lo llamo yo.",
+              "mirror": {
+                "say": "Lo llamo yo",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "him",
+                    "role": "word"
+                  },
+                  {
+                    "es": "llama-",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0
+                ]
+              }
             }
           ],
           "pitfalls": [

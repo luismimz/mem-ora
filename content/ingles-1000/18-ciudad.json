@@ -222,6 +222,137 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "There is a cat in the garden.",
+              "translation": "Hay un gato en el jardín.",
+              "mirror": {
+                "say": "Hay un gato en el jardín",
+                "pieces": [
+                  {
+                    "es": "hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un gato",
+                    "en": "a cat",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en el jardín",
+                    "en": "in the garden",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There are three chairs.",
+              "translation": "Hay tres sillas.",
+              "mirror": {
+                "say": "Hay tres sillas",
+                "pieces": [
+                  {
+                    "es": "hay (varios)",
+                    "en": "There are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tres sillas",
+                    "en": "three chairs",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Is there a toilet here?",
+              "translation": "¿Hay un baño aquí?",
+              "mirror": {
+                "say": "¿Hay un baño aquí?",
+                "pieces": [
+                  {
+                    "es": "¿Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un baño",
+                    "en": "a toilet",
+                    "role": "word"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There are a lot of people.",
+              "translation": "Hay mucha gente.",
+              "mirror": {
+                "say": "Hay mucha gente",
+                "pieces": [
+                  {
+                    "es": "hay (varios)",
+                    "en": "There are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mucha gente",
+                    "en": "a lot of people",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There is a problem.",
+              "translation": "Hay un problema.",
+              "mirror": {
+                "say": "Hay un problema",
+                "pieces": [
+                  {
+                    "es": "hay",
+                    "en": "There is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un problema",
+                    "en": "a problem",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "There are two beds in the room.",
+              "translation": "Hay dos camas en la habitación.",
+              "mirror": {
+                "say": "Hay dos camas en la habitación",
+                "pieces": [
+                  {
+                    "es": "hay (varios)",
+                    "en": "There are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "dos camas",
+                    "en": "two beds",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en la habitación",
+                    "en": "in the room",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«There is two parks» está mal: con varios, THERE ARE.",
             "«Hay» nunca es HAVE: «Have a bank here?» está mal."

@@ -255,6 +255,42 @@ export interface PatternPayload {
   timeline?: TimelineMark[];
   signals?: string[];
   drills?: TenseDrill[];
+  /**
+   * Frases de práctica (D-093): frases NUEVAS del mismo truco que no salen en la ficha, con su espejo. «Las piezas» y
+   * «Construye la frase» usan una distinta cada vez, para aprender a formar frases distintas y no repetir el ejemplo.
+   */
+  practice?: PracticeSentence[];
+}
+
+export interface PracticeSentence {
+  text: string;
+  translation: string;
+  mirror: Mirror;
+}
+
+export const PRACTICE_LIMITS = { max: 12 } as const;
+
+/** Problemas de las frases de práctica: cada una con su espejo exacto y sin repetir un ejemplo de la ficha. */
+export function practiceIssues(p: Record<string, unknown>): ContentIssue[] {
+  const issues: ContentIssue[] = [];
+  if (p.practice === undefined) return issues;
+  if (!Array.isArray(p.practice)) return [issue('not_list', 'practice')];
+  if (p.practice.length > PRACTICE_LIMITS.max) issues.push(issue('max_items', 'practice', { max: PRACTICE_LIMITS.max, count: p.practice.length }));
+  const norm = (t: unknown) => (typeof t === 'string' ? t.trim().toLowerCase() : '');
+  const seen = new Set((Array.isArray(p.examples) ? p.examples : []).flatMap((e) => (isRecord(e) ? [norm(e.text)] : [])));
+  p.practice.forEach((ex, i) => {
+    const path = `practice.${i}`;
+    if (!isRecord(ex)) return void issues.push(issue('not_object', path));
+    checkUnknownFields(issues, ex, path, ['text', 'translation', 'mirror']);
+    checkText(issues, ex.text, `${path}.text`, { max: PAYLOAD_LIMITS.exampleText });
+    checkText(issues, ex.translation, `${path}.translation`, { max: PAYLOAD_LIMITS.exampleText });
+    if (ex.mirror === undefined) issues.push(issue('required', `${path}.mirror`));
+    else issues.push(...mirrorIssues(ex.mirror, ex.text, `${path}.mirror`));
+    const k = norm(ex.text);
+    if (k && seen.has(k)) issues.push(issue('duplicate_example', `${path}.text`));
+    seen.add(k);
+  });
+  return issues;
 }
 
 export interface ConceptExample {
@@ -399,8 +435,9 @@ function validateTerm(p: Record<string, unknown>): ContentIssue[] {
 
 function validatePattern(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills']);
+  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills', 'practice']);
   if (p.chant !== undefined) issues.push(...chantIssues(p.chant));
+  issues.push(...practiceIssues(p));
   issues.push(...tenseIssues(p));
   checkText(issues, p.goal, 'goal', { max: 120 });
   checkText(issues, p.rule, 'rule', { max: PAYLOAD_LIMITS.ruleLength });

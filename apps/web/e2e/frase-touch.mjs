@@ -57,7 +57,7 @@ try {
     // Las palabras de la frase que pide esta tarjeta, en su orden correcto.
     const words = () => page.evaluate(() => {
       const st = window.__plan.steps.find((s) => s.kind === 'build' && !s.retry);
-      const text = Object.values(window.__units)[0].payload.examples[st.example].text;
+      const u = Object.values(window.__units)[0]; const text = [...u.payload.examples, ...(u.payload.practice ?? [])][st.example].text;
       return text.replace(/[.!?¡¿]+$/u, '').split(/\s+/).filter(Boolean);
     });
     const put = async (order) => { for (const w of order) { await page.locator('.build-bank .tile:not([disabled])', { hasText: esc(w) }).first().tap(); await page.waitForTimeout(90); } };

@@ -126,6 +126,175 @@
               "translation": "Hablo un poco de inglés."
             }
           ],
+          "practice": [
+            {
+              "text": "I have a little time.",
+              "translation": "Tengo un poco de tiempo.",
+              "mirror": {
+                "say": "Tengo un poco de tiempo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de",
+                    "en": "a little",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tiempo",
+                    "en": "time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "A few friends came.",
+              "translation": "Vinieron unos cuantos amigos.",
+              "mirror": {
+                "say": "Vinieron unos cuantos amigos",
+                "pieces": [
+                  {
+                    "es": "vinieron",
+                    "en": "came",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "unos pocos",
+                    "en": "A few",
+                    "role": "word"
+                  },
+                  {
+                    "es": "amigos",
+                    "en": "friends",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Drink a little water.",
+              "translation": "Bebe un poco de agua.",
+              "mirror": {
+                "say": "Bebe un poco de agua",
+                "pieces": [
+                  {
+                    "es": "Bebe",
+                    "en": "Drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de",
+                    "en": "a little",
+                    "role": "word"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wait a few minutes.",
+              "translation": "Espera unos minutos.",
+              "mirror": {
+                "say": "Espera unos minutos",
+                "pieces": [
+                  {
+                    "es": "Espera",
+                    "en": "Wait",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "unos pocos",
+                    "en": "a few",
+                    "role": "word"
+                  },
+                  {
+                    "es": "minutos",
+                    "en": "minutes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I know a little French.",
+              "translation": "Sé un poco de francés.",
+              "mirror": {
+                "say": "Sé un poco de francés",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sé",
+                    "en": "know",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco de",
+                    "en": "a little",
+                    "role": "word"
+                  },
+                  {
+                    "es": "francés",
+                    "en": "French",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I bought a few apples.",
+              "translation": "Compré unas cuantas manzanas.",
+              "mirror": {
+                "say": "Compré unas cuantas manzanas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "unas pocas",
+                    "en": "a few",
+                    "role": "word"
+                  },
+                  {
+                    "es": "manzanas",
+                    "en": "apples",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«A few salt» está mal: la sal no se cuenta (a little salt).",
             "«Few people came» es casi nadie; «a few people came», unos cuantos."
@@ -217,6 +386,189 @@
             {
               "text": "It had been raining, so the streets were wet.",
               "translation": "Había estado lloviendo, así que las calles estaban mojadas."
+            }
+          ],
+          "practice": [
+            {
+              "text": "I had been waiting for an hour.",
+              "translation": "Llevaba una hora esperando.",
+              "mirror": {
+                "say": "Llevaba una hora esperando",
+                "pieces": [
+                  {
+                    "es": "(YO) llevaba",
+                    "en": "I had been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una hora",
+                    "en": "for an hour",
+                    "role": "word"
+                  },
+                  {
+                    "es": "esperando",
+                    "en": "waiting",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "She had been working there for years.",
+              "translation": "Ella llevaba años trabajando allí.",
+              "mirror": {
+                "say": "Ella llevaba años trabajando allí",
+                "pieces": [
+                  {
+                    "es": "(ELLA) llevaba",
+                    "en": "She had been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "años",
+                    "en": "for years",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajando",
+                    "en": "working",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "allí",
+                    "en": "there",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "They were tired because they had been running.",
+              "translation": "Estaban cansados porque habían estado corriendo.",
+              "mirror": {
+                "say": "Estaban cansados porque habían estado corriendo",
+                "pieces": [
+                  {
+                    "es": "(ELLOS) estaban",
+                    "en": "They were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansados",
+                    "en": "tired",
+                    "role": "word"
+                  },
+                  {
+                    "es": "porque",
+                    "en": "because",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ELLOS) habían estado",
+                    "en": "they had been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "corriendo",
+                    "en": "running",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It had been snowing.",
+              "translation": "Había estado nevando.",
+              "mirror": {
+                "say": "Había estado nevando",
+                "pieces": [
+                  {
+                    "es": "(ESO) había estado",
+                    "en": "It had been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nevando",
+                    "en": "snowing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We had been talking for hours.",
+              "translation": "Llevábamos horas hablando.",
+              "mirror": {
+                "say": "Llevábamos horas hablando",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) llevábamos",
+                    "en": "We had been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "horas",
+                    "en": "for hours",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hablando",
+                    "en": "talking",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "How long had it been raining?",
+              "translation": "¿Cuánto tiempo llevaba lloviendo?",
+              "mirror": {
+                "say": "¿Cuánto tiempo llevaba lloviendo?",
+                "pieces": [
+                  {
+                    "es": "Cuánto tiempo",
+                    "en": "How long",
+                    "role": "word"
+                  },
+                  {
+                    "es": "había",
+                    "en": "had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lloviendo",
+                    "en": "raining",
+                    "role": "verb"
+                  }
+                ]
+              }
             }
           ],
           "pitfalls": [

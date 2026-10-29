@@ -15,6 +15,7 @@ import {
   drillsOf,
   maskName,
   movedPieces,
+  sentencesOf,
   orderRule,
   orderSwap,
   spanishOrderCalque,
@@ -565,7 +566,7 @@ const plain = (x: string) => x.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').r
  * una frase real es lo que la fija; practica la habilidad «producir» (con las piezas a la vista: pista 1).
  */
 function Build({ unit, example, onResult }: { unit: SessionUnit; example: number; onResult: (ok: boolean, ms: number, note: string, hint: number) => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string; mirror?: Mirror }> }).examples[example]!;
+  const ex = (sentencesOf(unit) as Array<{ text: string; translation?: string; mirror?: Mirror }>)[example]!;
   // D-082: si la frase tiene su tren, se puede pedir ver cómo se construye (cuenta como ayuda: pista 2).
   const [help, setHelp] = useState(false);
   const words = useMemo(() => buildTiles(ex.text), [ex.text]);
@@ -986,8 +987,9 @@ function scrambled<T>(items: T[], seed: string): T[] {
  * piezas en inglés. Al fallar, se ve el orden bueno y la regla; si has seguido el orden del español, se dice.
  */
 function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all: Record<string, SessionUnit>; example: number; seed: string; onResult: (ok: boolean, ms: number, note: string) => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string; mirror?: Mirror }> }).examples[example]!;
+  const ex = (sentencesOf(unit) as Array<{ text: string; translation?: string; mirror?: Mirror }>)[example]!;
   const m = ex.mirror!;
+  const isPractice = example >= ((unit.payload as { examples?: unknown[] }).examples ?? []).length;
   const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
   const moved = movedPieces(m);
   const jumper = order.find((i) => moved.includes(i));
@@ -1000,7 +1002,7 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
     if (hidden === undefined) return null;
     const want = m.pieces[hidden]!;
     const pool = new Set<string>();
-    for (const u of Object.values(all)) for (const e of ((u.payload as { examples?: Array<{ mirror?: Mirror }> }).examples ?? [])) for (const p of e.mirror?.pieces ?? []) if (p.role === want.role && p.en.toLowerCase() !== want.en.toLowerCase() && p.en.split(' ').length === want.en.split(' ').length) pool.add(p.en);
+    for (const u of Object.values(all)) for (const e of (sentencesOf(u) as Array<{ mirror?: Mirror }>)) for (const p of e.mirror?.pieces ?? []) if (p.role === want.role && p.en.toLowerCase() !== want.en.toLowerCase() && p.en.split(' ').length === want.en.split(' ').length) pool.add(p.en);
     const wrong = [...pool].sort((a, b) => hue(`${seed}${a}`) - hue(`${seed}${b}`)).slice(0, 2);
     return wrong.length === 2 ? { hidden, options: scrambled([want.en, ...wrong], seed) } : null;
   }, [m, all, seed, canJump]);
@@ -1041,7 +1043,13 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
   };
   return (
     <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked && okA ? 'right' : checked === false ? 'wrong' : ''}`} {...(checked !== null ? { onNext: finish } : {})}>
+      <div className="pieces-body">
       <p className="tag">🧩 LAS PIEZAS · {phase === 'order' ? 'ORDÉNALAS' : phase === 'jump' ? '¿QUÉ PIEZA SE ADELANTA?' : '¿CUÁL FALTA?'}</p>
+      <div className="pieces-head">
+        <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🧩'}</div>
+        <p className="pieces-goal">{unit.type === 'pattern' ? (unit.payload as PatternPayload).goal : `${unitText(unit)} · ${(unit.payload as { meaning?: string }).meaning ?? ''}`}</p>
+      </div>
+      <p className="pieces-new">{isPractice ? '✨ Frase nueva' : 'Frase de la ficha'}</p>
       <h3 className="ask pieces-es">{m.say}</h3>
       {phase === 'jump' && (
         <>
@@ -1100,6 +1108,7 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
           )}
         </>
       )}
+      </div>
       <Confetti burst={confetti} />
     </Slide>
   );
@@ -1107,7 +1116,7 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
 
 /** Sesiones guardadas con la tarjeta antigua del tren: se muestra la animación en un paso. */
 function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; onNext: () => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; mirror?: Mirror }> }).examples[example]!;
+  const ex = (sentencesOf(unit) as Array<{ text: string; mirror?: Mirror }>)[example]!;
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className="train">
       <p className="tag">🪞 CÓMO SE CONSTRUYE</p>

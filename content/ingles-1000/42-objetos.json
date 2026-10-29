@@ -254,6 +254,172 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "The book is on the table.",
+              "translation": "El libro está en la mesa.",
+              "mirror": {
+                "say": "El libro está en la mesa",
+                "pieces": [
+                  {
+                    "es": "El libro",
+                    "en": "The book",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sobre la mesa",
+                    "en": "on the table",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The dog is under the table.",
+              "translation": "El perro está debajo de la mesa.",
+              "mirror": {
+                "say": "El perro está debajo de la mesa",
+                "pieces": [
+                  {
+                    "es": "El perro",
+                    "en": "The dog",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "debajo de",
+                    "en": "under",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la mesa",
+                    "en": "the table",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My house is next to the park.",
+              "translation": "Mi casa está al lado del parque.",
+              "mirror": {
+                "say": "Mi casa está al lado del parque",
+                "pieces": [
+                  {
+                    "es": "Mi casa",
+                    "en": "My house",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "al lado de",
+                    "en": "next to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el parque",
+                    "en": "the park",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The car is behind the house.",
+              "translation": "El coche está detrás de la casa.",
+              "mirror": {
+                "say": "El coche está detrás de la casa",
+                "pieces": [
+                  {
+                    "es": "El coche",
+                    "en": "The car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "detrás de",
+                    "en": "behind",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la casa",
+                    "en": "the house",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The water is in the fridge.",
+              "translation": "El agua está en la nevera.",
+              "mirror": {
+                "say": "El agua está en la nevera",
+                "pieces": [
+                  {
+                    "es": "El agua",
+                    "en": "The water",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "dentro de la nevera",
+                    "en": "in the fridge",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The chemist's is between the bank and the bar.",
+              "translation": "La farmacia está entre el banco y el bar.",
+              "mirror": {
+                "say": "La farmacia está entre el banco y el bar",
+                "pieces": [
+                  {
+                    "es": "La farmacia",
+                    "en": "The chemist's",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "entre",
+                    "en": "between",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el banco y el bar",
+                    "en": "the bank and the bar",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«En» puede ser IN (dentro) u ON (encima): in the box, on the table.",
             "«Al lado de» es NEXT TO, sin «of»."

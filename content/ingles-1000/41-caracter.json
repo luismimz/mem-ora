@@ -109,6 +109,146 @@
               "translation": "¿Cómo está? Bien."
             }
           ],
+          "practice": [
+            {
+              "text": "What's your house like?",
+              "translation": "¿Cómo es tu casa?",
+              "mirror": {
+                "say": "¿Cómo es tu casa?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tu casa",
+                    "en": "your house",
+                    "role": "who"
+                  },
+                  {
+                    "es": "como",
+                    "en": "like",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's your sister like?",
+              "translation": "¿Cómo es tu hermana?",
+              "mirror": {
+                "say": "¿Cómo es tu hermana?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tu hermana",
+                    "en": "your sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "como",
+                    "en": "like",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What's London like?",
+              "translation": "¿Cómo es Londres?",
+              "mirror": {
+                "say": "¿Cómo es Londres?",
+                "pieces": [
+                  {
+                    "es": "Qué es",
+                    "en": "What's",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Londres",
+                    "en": "London",
+                    "role": "who"
+                  },
+                  {
+                    "es": "como",
+                    "en": "like",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's very tall.",
+              "translation": "Es muy alto.",
+              "mirror": {
+                "say": "Es muy alto",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es",
+                    "en": "He's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy alto",
+                    "en": "very tall",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What are your neighbours like?",
+              "translation": "¿Cómo son tus vecinos?",
+              "mirror": {
+                "say": "¿Cómo son tus vecinos?",
+                "pieces": [
+                  {
+                    "es": "Qué son",
+                    "en": "What are",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tus vecinos",
+                    "en": "your neighbours",
+                    "role": "who"
+                  },
+                  {
+                    "es": "como",
+                    "en": "like",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's very nice.",
+              "translation": "Es muy simpático.",
+              "mirror": {
+                "say": "Es muy simpático",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es",
+                    "en": "He's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "muy simpático",
+                    "en": "very nice",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«How is your boss?» pregunta cómo ESTÁ (de salud), no cómo ES.",
             "En la respuesta no se repite like: She's nice."

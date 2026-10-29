@@ -131,6 +131,239 @@
               "translation": "No, nunca."
             }
           ],
+          "practice": [
+            {
+              "text": "Have you ever eaten sushi?",
+              "translation": "¿Has comido sushi alguna vez?",
+              "mirror": {
+                "say": "¿Has comido sushi alguna vez?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comido",
+                    "en": "eaten",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sushi",
+                    "en": "sushi",
+                    "role": "word"
+                  },
+                  {
+                    "es": "alguna vez",
+                    "en": "ever",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  4,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Have you ever been to Rome?",
+              "translation": "¿Has estado alguna vez en Roma?",
+              "mirror": {
+                "say": "¿Has estado alguna vez en Roma?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "alguna vez",
+                    "en": "ever",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a Roma",
+                    "en": "to Rome",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I've never seen snow.",
+              "translation": "Nunca he visto la nieve.",
+              "mirror": {
+                "say": "Nunca he visto la nieve",
+                "pieces": [
+                  {
+                    "es": "Nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "he",
+                    "en": "I've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la nieve",
+                    "en": "snow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Have you ever ridden a horse?",
+              "translation": "¿Has montado alguna vez a caballo?",
+              "mirror": {
+                "say": "¿Has montado alguna vez a caballo?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "montado",
+                    "en": "ridden",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "alguna vez",
+                    "en": "ever",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a caballo",
+                    "en": "a horse",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "She has never flown.",
+              "translation": "Ella nunca ha volado.",
+              "mirror": {
+                "say": "Ella nunca ha volado",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ha",
+                    "en": "has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "volado",
+                    "en": "flown",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I've never been to London.",
+              "translation": "Nunca he estado en Londres.",
+              "mirror": {
+                "say": "Nunca he estado en Londres",
+                "pieces": [
+                  {
+                    "es": "Nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "he",
+                    "en": "I've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en Londres",
+                    "en": "to London",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Have you ever been in London?» suena raro: been TO London.",
             "Fly es irregular: fly, flew, flown."

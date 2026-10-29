@@ -41,6 +41,9 @@ try {
   const build = plan.findIndex((s, i) => i > pieces && s.kind === 'build');
   check(reel >= 0 && pieces > reel && build > pieces, `orden de la ronda: ficha (${reel + 1}.ª) → las piezas (${pieces + 1}.ª) → construye (${build + 1}.ª)`);
   check(build < 0 || plan[build].example !== plan[pieces].example, `«Construye» usa otro ejemplo (${plan[pieces].example} → ${plan[build]?.example})`);
+  // D-093: las dos son frases NUEVAS (de práctica), no las de la ficha.
+  const nEx = await page.evaluate(() => Object.values(window.__units)[0].payload.examples.length);
+  check(plan[pieces].example >= nEx && plan[build].example >= nEx, `«Las piezas» y «Construye» usan frases nuevas que no salen en la ficha (${plan[pieces].example}, ${plan[build].example} ≥ ${nEx})`);
 
   // 2. La ficha: las piezas en español, gira con el dedo y, si no tocas, se giran solas.
   await page.waitForSelector('.flipm .mchip');
@@ -67,9 +70,11 @@ try {
   await page.waitForSelector('.pieces');
   const tag = await page.locator('.pieces .tag').textContent();
   check(/ADELANTA/.test(tag), `primero: «${tag.trim()}»`);
+  const head = await page.evaluate(() => ({ top: Math.round(document.querySelector('.pieces .tag').getBoundingClientRect().top), badge: document.querySelector('.pieces-new')?.textContent, goal: document.querySelector('.pieces-goal')?.textContent }));
+  check(head.top < 140 && /nueva/i.test(head.badge ?? '') && Boolean(head.goal), `empieza arriba como la ficha (${head.top}px), con el truco («${head.goal}») y «${head.badge}»`);
   check(await fits(page), 'las piezas caben en la pantalla');
   if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-adelanta.png` });
-  const ex = await page.evaluate(() => { const s = window.__plan.steps.find((x) => x.kind === 'pieces'); const u = window.__units[s.unitKey]; const m = u.payload.examples[s.example].mirror; const order = m.order ?? m.pieces.map((_, i) => i); return { pieces: m.pieces, order }; });
+  const ex = await page.evaluate(() => { const s = window.__plan.steps.find((x) => x.kind === 'pieces'); const u = window.__units[s.unitKey]; const m = [...u.payload.examples, ...(u.payload.practice ?? [])][s.example].mirror; const order = m.order ?? m.pieces.map((_, i) => i); return { pieces: m.pieces, order }; });
   const jumper = ex.order.find((v, k) => v !== k && ex.order.indexOf(v) < v) ?? ex.order.find((v, k) => v !== k);
   await tapText(page, '.pieces-row .ptile', ex.pieces[jumper].es);
   const v1 = await page.locator('.tense-verdict').textContent();

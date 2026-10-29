@@ -138,6 +138,212 @@
               "translation": "A las diez ya se habían ido todos."
             }
           ],
+          "practice": [
+            {
+              "text": "When I arrived, they had left.",
+              "translation": "Cuando llegué, ya se habían ido.",
+              "mirror": {
+                "say": "Cuando llegué, ya se habían ido",
+                "pieces": [
+                  {
+                    "es": "Cuando",
+                    "en": "When",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegué",
+                    "en": "arrived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ELLOS) habían",
+                    "en": "they had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ido",
+                    "en": "left",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I had never seen a bear.",
+              "translation": "Nunca había visto un oso.",
+              "mirror": {
+                "say": "Nunca había visto un oso",
+                "pieces": [
+                  {
+                    "es": "Nunca",
+                    "en": "never",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) había",
+                    "en": "I had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un oso",
+                    "en": "a bear",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She had already eaten.",
+              "translation": "Ella ya había comido.",
+              "mirror": {
+                "say": "Ella ya había comido",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ya",
+                    "en": "already",
+                    "role": "word"
+                  },
+                  {
+                    "es": "había",
+                    "en": "had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comido",
+                    "en": "eaten",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The film had started.",
+              "translation": "La película había empezado.",
+              "mirror": {
+                "say": "La película había empezado",
+                "pieces": [
+                  {
+                    "es": "La película",
+                    "en": "The film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "había",
+                    "en": "had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "empezado",
+                    "en": "started",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I realised I had lost my phone.",
+              "translation": "Me di cuenta de que había perdido el móvil.",
+              "mirror": {
+                "say": "Me di cuenta de que había perdido el móvil",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me di cuenta",
+                    "en": "realised",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) había",
+                    "en": "I had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "perdido",
+                    "en": "lost",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI móvil",
+                    "en": "my phone",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "When I called, he had gone.",
+              "translation": "Cuando llamé, él se había ido.",
+              "mirror": {
+                "say": "Cuando llamé, él se había ido",
+                "pieces": [
+                  {
+                    "es": "Cuando",
+                    "en": "When",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llamé",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "él",
+                    "en": "he",
+                    "role": "who"
+                  },
+                  {
+                    "es": "había",
+                    "en": "had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ido",
+                    "en": "gone",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«When I arrived, the train left» cambia el sentido: salió al llegar tú.",
             "Had + participio vale para todos: I had, she had, they had."

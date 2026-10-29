@@ -87,6 +87,156 @@
               "translation": "¿La llamaste? No."
             }
           ],
+          "practice": [
+            {
+              "text": "Yes, I can.",
+              "translation": "Sí, puedo.",
+              "mirror": {
+                "say": "Sí, puedo",
+                "pieces": [
+                  {
+                    "es": "Sí",
+                    "en": "Yes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "can",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No, she isn't.",
+              "translation": "No, ella no.",
+              "mirror": {
+                "say": "No, ella no",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "No",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ella",
+                    "en": "she",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no está",
+                    "en": "isn't",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Yes, it is.",
+              "translation": "Sí, lo es.",
+              "mirror": {
+                "say": "Sí, lo es",
+                "pieces": [
+                  {
+                    "es": "Sí",
+                    "en": "Yes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No, I didn't.",
+              "translation": "No, no lo hice.",
+              "mirror": {
+                "say": "No, no lo hice",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "No",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no hice",
+                    "en": "didn't",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Yes, she does.",
+              "translation": "Sí, a ella sí.",
+              "mirror": {
+                "say": "Sí, a ella sí",
+                "pieces": [
+                  {
+                    "es": "Sí",
+                    "en": "Yes",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ella",
+                    "en": "she",
+                    "role": "who"
+                  },
+                  {
+                    "es": "sí hace",
+                    "en": "does",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "No, we don't.",
+              "translation": "No, no tenemos.",
+              "mirror": {
+                "say": "No, no tenemos",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "No",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no hacemos",
+                    "en": "don't",
+                    "role": "helper"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Solo «Yes» o «No» suena seco: Yes, I do. / No, I don't.",
             "«Yes, I like» está mal: se repite el ayudante (Yes, I do)."

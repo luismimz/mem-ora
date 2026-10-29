@@ -125,6 +125,162 @@
               "translation": "Debería hacerse hoy."
             }
           ],
+          "practice": [
+            {
+              "text": "This must be done today.",
+              "translation": "Esto debe hacerse hoy.",
+              "mirror": {
+                "say": "Esto debe hacerse hoy",
+                "pieces": [
+                  {
+                    "es": "Esto",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "debe ser",
+                    "en": "must be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hecho",
+                    "en": "done",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hoy",
+                    "en": "today",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Plastic can be recycled.",
+              "translation": "El plástico se puede reciclar.",
+              "mirror": {
+                "say": "El plástico se puede reciclar",
+                "pieces": [
+                  {
+                    "es": "plástico",
+                    "en": "Plastic",
+                    "role": "who"
+                  },
+                  {
+                    "es": "puede ser",
+                    "en": "can be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "reciclado",
+                    "en": "recycled",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The doors must be closed.",
+              "translation": "Las puertas deben estar cerradas.",
+              "mirror": {
+                "say": "Las puertas deben estar cerradas",
+                "pieces": [
+                  {
+                    "es": "Las puertas",
+                    "en": "The doors",
+                    "role": "who"
+                  },
+                  {
+                    "es": "deben ser",
+                    "en": "must be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cerradas",
+                    "en": "closed",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This should be fixed.",
+              "translation": "Esto debería arreglarse.",
+              "mirror": {
+                "say": "Esto debería arreglarse",
+                "pieces": [
+                  {
+                    "es": "Esto",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "debería ser",
+                    "en": "should be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "arreglado",
+                    "en": "fixed",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bill must be paid.",
+              "translation": "Hay que pagar la factura.",
+              "mirror": {
+                "say": "Hay que pagar la factura",
+                "pieces": [
+                  {
+                    "es": "debe ser",
+                    "en": "must be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pagada",
+                    "en": "paid",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la factura",
+                    "en": "The bill",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "The food can be frozen.",
+              "translation": "La comida se puede congelar.",
+              "mirror": {
+                "say": "La comida se puede congelar",
+                "pieces": [
+                  {
+                    "es": "La comida",
+                    "en": "The food",
+                    "role": "who"
+                  },
+                  {
+                    "es": "puede ser",
+                    "en": "can be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "congelada",
+                    "en": "frozen",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«It must done» está mal: falta BE (must be done).",
             "Tras el modal, BE siempre igual: must be, can be, should be."

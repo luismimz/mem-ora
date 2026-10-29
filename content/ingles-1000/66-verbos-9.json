@@ -123,6 +123,180 @@
               "translation": "Aprendo haciendo."
             }
           ],
+          "practice": [
+            {
+              "text": "Brush your teeth before sleeping.",
+              "translation": "Cepíllate los dientes antes de dormir.",
+              "mirror": {
+                "say": "Cepíllate los dientes antes de dormir",
+                "pieces": [
+                  {
+                    "es": "Cepilla",
+                    "en": "Brush",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS dientes",
+                    "en": "your teeth",
+                    "role": "word"
+                  },
+                  {
+                    "es": "antes de",
+                    "en": "before",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dorm-IENDO",
+                    "en": "sleeping",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "After eating, I rest.",
+              "translation": "Después de comer, descanso.",
+              "mirror": {
+                "say": "Después de comer, descanso",
+                "pieces": [
+                  {
+                    "es": "Después de",
+                    "en": "After",
+                    "role": "word"
+                  },
+                  {
+                    "es": "com-IENDO",
+                    "en": "eating",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "descanso",
+                    "en": "rest",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He left without paying.",
+              "translation": "Se fue sin pagar.",
+              "mirror": {
+                "say": "Se fue sin pagar",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se fue",
+                    "en": "left",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sin",
+                    "en": "without",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pag-ANDO",
+                    "en": "paying",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Call me before coming.",
+              "translation": "Llámame antes de venir.",
+              "mirror": {
+                "say": "Llámame antes de venir",
+                "pieces": [
+                  {
+                    "es": "Llama",
+                    "en": "Call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "antes de",
+                    "en": "before",
+                    "role": "word"
+                  },
+                  {
+                    "es": "vin-IENDO",
+                    "en": "coming",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I learnt English by watching series.",
+              "translation": "Aprendí inglés viendo series.",
+              "mirror": {
+                "say": "Aprendí inglés viendo series",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "aprendí",
+                    "en": "learnt",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  },
+                  {
+                    "es": "vi-ENDO series",
+                    "en": "by watching series",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Read before signing.",
+              "translation": "Lee antes de firmar.",
+              "mirror": {
+                "say": "Lee antes de firmar",
+                "pieces": [
+                  {
+                    "es": "Lee",
+                    "en": "Read",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "antes de",
+                    "en": "before",
+                    "role": "word"
+                  },
+                  {
+                    "es": "firm-ANDO",
+                    "en": "signing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Before to leave» está mal: before leaving.",
             "En español va infinitivo (antes de salir); en inglés, -ING."

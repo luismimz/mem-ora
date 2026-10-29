@@ -114,6 +114,162 @@
               "translation": "¿Te gusta cocinar?"
             }
           ],
+          "practice": [
+            {
+              "text": "I like reading.",
+              "translation": "Me gusta leer.",
+              "mirror": {
+                "say": "Me gusta leer",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ley-ENDO",
+                    "en": "read-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He loves cooking.",
+              "translation": "Le encanta cocinar.",
+              "mirror": {
+                "say": "Le encanta cocinar",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "encanta",
+                    "en": "loves",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cocin-ANDO",
+                    "en": "cook-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I hate waiting.",
+              "translation": "Odio esperar.",
+              "mirror": {
+                "say": "Odio esperar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "odio",
+                    "en": "hate",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esper-ANDO",
+                    "en": "wait-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We like travelling.",
+              "translation": "Nos gusta viajar.",
+              "mirror": {
+                "say": "Nos gusta viajar",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustamos",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "viaj-ANDO",
+                    "en": "travell-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you like dancing?",
+              "translation": "¿Te gusta bailar?",
+              "mirror": {
+                "say": "¿Te gusta bailar?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bail-ANDO",
+                    "en": "danc-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She loves running.",
+              "translation": "A ella le encanta correr.",
+              "mirror": {
+                "say": "A ella le encanta correr",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "encanta",
+                    "en": "loves",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "corr-IENDO",
+                    "en": "runn-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I like swim» está mal: detrás de like, -ING (swimming).",
             "Con «me gustaría» es distinto: I'd like TO swim."

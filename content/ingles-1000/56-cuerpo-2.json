@@ -128,6 +128,188 @@
               "translation": "Desde 2020."
             }
           ],
+          "practice": [
+            {
+              "text": "I've lived here since 2015.",
+              "translation": "Vivo aquí desde 2015.",
+              "mirror": {
+                "say": "Vivo aquí desde 2015",
+                "pieces": [
+                  {
+                    "es": "(YO) he vivido",
+                    "en": "I've lived",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "desde",
+                    "en": "since",
+                    "role": "word"
+                  },
+                  {
+                    "es": "2015",
+                    "en": "2015",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've known her for years.",
+              "translation": "La conozco desde hace años.",
+              "mirror": {
+                "say": "La conozco desde hace años",
+                "pieces": [
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) he conocido",
+                    "en": "I've known",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "durante",
+                    "en": "for",
+                    "role": "word"
+                  },
+                  {
+                    "es": "años",
+                    "en": "years",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I've been ill since Monday.",
+              "translation": "Estoy enfermo desde el lunes.",
+              "mirror": {
+                "say": "Estoy enfermo desde el lunes",
+                "pieces": [
+                  {
+                    "es": "(YO) he estado",
+                    "en": "I've been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enfermo",
+                    "en": "ill",
+                    "role": "word"
+                  },
+                  {
+                    "es": "desde",
+                    "en": "since",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el lunes",
+                    "en": "Monday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've worked here for three months.",
+              "translation": "Trabajo aquí desde hace tres meses.",
+              "mirror": {
+                "say": "Trabajo aquí desde hace tres meses",
+                "pieces": [
+                  {
+                    "es": "(YO) he trabajado",
+                    "en": "I've worked",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "durante",
+                    "en": "for",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tres meses",
+                    "en": "three months",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We've been married since 2010.",
+              "translation": "Estamos casados desde 2010.",
+              "mirror": {
+                "say": "Estamos casados desde 2010",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) hemos estado",
+                    "en": "We've been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "casados",
+                    "en": "married",
+                    "role": "word"
+                  },
+                  {
+                    "es": "desde",
+                    "en": "since",
+                    "role": "word"
+                  },
+                  {
+                    "es": "2010",
+                    "en": "2010",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've had this car for a year.",
+              "translation": "Tengo este coche desde hace un año.",
+              "mirror": {
+                "say": "Tengo este coche desde hace un año",
+                "pieces": [
+                  {
+                    "es": "(YO) he tenido",
+                    "en": "I've had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "este coche",
+                    "en": "this car",
+                    "role": "word"
+                  },
+                  {
+                    "es": "durante",
+                    "en": "for",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un año",
+                    "en": "a year",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Since two days» está mal: FOR two days.",
             "«I have a cough since Monday» está mal: I've HAD a cough since Monday."

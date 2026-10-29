@@ -67,6 +67,7 @@ const FIELD_ES: Record<string, string> = {
   timeline: 'línea del tiempo',
   signals: 'pistas',
   drills: '¿qué tiempo pide?',
+  practice: 'frases de práctica',
   wrong: 'formas que no encajan',
   signal: 'pista',
   at: 'posición',
@@ -88,7 +89,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', timeline: 'Marca', signals: 'Pista', drills: 'Frase', cases: 'Caso', wrong: 'Forma', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', timeline: 'Marca', signals: 'Pista', drills: 'Frase', practice: 'Frase de práctica', cases: 'Caso', wrong: 'Forma', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {

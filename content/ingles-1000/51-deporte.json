@@ -130,6 +130,176 @@
               "translation": "¡Juguemos un partido!"
             }
           ],
+          "practice": [
+            {
+              "text": "I play tennis.",
+              "translation": "Juego al tenis.",
+              "mirror": {
+                "say": "Juego al tenis",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juego",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al tenis",
+                    "en": "tennis",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We go swimming on Sundays.",
+              "translation": "Vamos a nadar los domingos.",
+              "mirror": {
+                "say": "Vamos a nadar los domingos",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "nadando",
+                    "en": "swimming",
+                    "role": "word"
+                  },
+                  {
+                    "es": "LOS domingos",
+                    "en": "on Sundays",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She does karate.",
+              "translation": "Ella hace kárate.",
+              "mirror": {
+                "say": "Ella hace kárate",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "does",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "kárate",
+                    "en": "karate",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you play football?",
+              "translation": "¿Juegas al fútbol?",
+              "mirror": {
+                "say": "¿Juegas al fútbol?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juegas",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al fútbol",
+                    "en": "football",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He goes skiing in winter.",
+              "translation": "Él va a esquiar en invierno.",
+              "mirror": {
+                "say": "Él va a esquiar en invierno",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "va",
+                    "en": "goes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esquiando",
+                    "en": "skiing",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en invierno",
+                    "en": "in winter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I do yoga every morning.",
+              "translation": "Hago yoga cada mañana.",
+              "mirror": {
+                "say": "Hago yoga cada mañana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hago",
+                    "en": "do",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "yoga",
+                    "en": "yoga",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cada mañana",
+                    "en": "every morning",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Play swimming» está mal: go swimming.",
             "«Play the football» sobra the: play football."

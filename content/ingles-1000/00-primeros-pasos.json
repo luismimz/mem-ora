@@ -155,6 +155,158 @@
               }
             }
           ],
+          "practice": [
+            {
+              "text": "I have a cat.",
+              "translation": "Tengo un gato.",
+              "mirror": {
+                "say": "Tengo un gato",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un gato",
+                    "en": "a cat",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want a coffee.",
+              "translation": "Quiero un café.",
+              "mirror": {
+                "say": "Quiero un café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are at home.",
+              "translation": "Estamos en casa.",
+              "mirror": {
+                "say": "Estamos en casa",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He is my friend.",
+              "translation": "Es mi amigo.",
+              "mirror": {
+                "say": "Es mi amigo",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi amigo",
+                    "en": "my friend",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They need water.",
+              "translation": "Necesitan agua.",
+              "mirror": {
+                "say": "Necesitan agua",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitan",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I live in Madrid.",
+              "translation": "Vivo en Madrid.",
+              "mirror": {
+                "say": "Vivo en Madrid",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en Madrid",
+                    "en": "in Madrid",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Am Luis» o «Have a dog» están mal: sin el quién no hay frase."
           ],
@@ -290,6 +442,158 @@
                   {
                     "es": "con sueño",
                     "en": "sleepy",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
+          "practice": [
+            {
+              "text": "I am thirsty.",
+              "translation": "Tengo sed.",
+              "mirror": {
+                "say": "Tengo sed",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sediento",
+                    "en": "thirsty",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He is cold.",
+              "translation": "Tiene frío.",
+              "mirror": {
+                "say": "Tiene frío",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "helado",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are hungry.",
+              "translation": "Tenemos hambre.",
+              "mirror": {
+                "say": "Tenemos hambre",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hambrientos",
+                    "en": "hungry",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I am sleepy.",
+              "translation": "Tengo sueño.",
+              "mirror": {
+                "say": "Tengo sueño",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "con sueño",
+                    "en": "sleepy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They are scared.",
+              "translation": "Tienen miedo.",
+              "mirror": {
+                "say": "Tienen miedo",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "asustados",
+                    "en": "scared",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I am in a hurry.",
+              "translation": "Tengo prisa.",
+              "mirror": {
+                "say": "Tengo prisa",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "con prisa",
+                    "en": "in a hurry",
                     "role": "word"
                   }
                 ]
@@ -445,6 +749,188 @@
                     "es": "tarde",
                     "en": "late",
                     "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            }
+          ],
+          "practice": [
+            {
+              "text": "Are you tired?",
+              "translation": "¿Estás cansado?",
+              "mirror": {
+                "say": "¿Estás cansado?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Is he cold?",
+              "translation": "¿Tiene frío?",
+              "mirror": {
+                "say": "¿Tiene frío?",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "he",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "helado",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Are you ready?",
+              "translation": "¿Estáis listos?",
+              "mirror": {
+                "say": "¿Estáis listos?",
+                "pieces": [
+                  {
+                    "es": "VOSOTROS",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estáis",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "listos",
+                    "en": "ready",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Can you come?",
+              "translation": "¿Puedes venir?",
+              "mirror": {
+                "say": "¿Puedes venir?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Is it open?",
+              "translation": "¿Está abierto?",
+              "mirror": {
+                "say": "¿Está abierto?",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "abierto",
+                    "en": "open",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Can she drive?",
+              "translation": "¿Sabe conducir?",
+              "mirror": {
+                "say": "¿Sabe conducir?",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "she",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puede",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "conducir",
+                    "en": "drive",
+                    "role": "verb"
                   }
                 ],
                 "order": [

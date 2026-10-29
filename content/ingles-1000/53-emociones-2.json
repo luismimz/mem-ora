@@ -138,6 +138,219 @@
               "translation": "¡Me da muchísima rabia!"
             }
           ],
+          "practice": [
+            {
+              "text": "Music makes me happy.",
+              "translation": "La música me hace feliz.",
+              "mirror": {
+                "say": "La música me hace feliz",
+                "pieces": [
+                  {
+                    "es": "La música",
+                    "en": "Music",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "feliz",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Coffee makes me nervous.",
+              "translation": "El café me pone nervioso.",
+              "mirror": {
+                "say": "El café me pone nervioso",
+                "pieces": [
+                  {
+                    "es": "El café",
+                    "en": "Coffee",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pone",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "nervioso",
+                    "en": "nervous",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "My brother makes me laugh.",
+              "translation": "Mi hermano me hace reír.",
+              "mirror": {
+                "say": "Mi hermano me hace reír",
+                "pieces": [
+                  {
+                    "es": "Mi hermano",
+                    "en": "My brother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "reír",
+                    "en": "laugh",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "This film makes me sad.",
+              "translation": "Esta película me pone triste.",
+              "mirror": {
+                "say": "Esta película me pone triste",
+                "pieces": [
+                  {
+                    "es": "Esta película",
+                    "en": "This film",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pone",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "triste",
+                    "en": "sad",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "You make me happy.",
+              "translation": "Me haces feliz.",
+              "mirror": {
+                "say": "Me haces feliz",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "haces",
+                    "en": "make",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "feliz",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "The heat makes me sleepy.",
+              "translation": "El calor me da sueño.",
+              "mirror": {
+                "say": "El calor me da sueño",
+                "pieces": [
+                  {
+                    "es": "El calor",
+                    "en": "The heat",
+                    "role": "who"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "da",
+                    "en": "makes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "sueño",
+                    "en": "sleepy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«It makes me to laugh» está mal: sin to (makes me laugh).",
             "«Me pone nervioso» no es put: it makes me nervous."

@@ -159,8 +159,9 @@ try {
         if (await en.locator('.morph-end').count()) seen.add('ayuda-tren');
       }
       const es = (await en.locator('.build-es').textContent()).replace(/[«»]/g, '');
-      const u = Object.values(units).find((x) => x.payload.examples.some((e) => e.translation === es));
-      const words = u.payload.examples.find((e) => e.translation === es).text.replace(/[.!?]+$/, '').split(/\s+/);
+      const all = (x) => [...x.payload.examples, ...(x.payload.practice ?? [])];
+      const u = Object.values(units).find((x) => all(x).some((e) => e.translation === es));
+      const words = all(u).find((e) => e.translation === es).text.replace(/[.!?]+$/, '').split(/\s+/);
       const esc = (w) => new RegExp(`^${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`);
       let start = 0;
       if (!seen.has('arrastre') && words.length >= 3) {
@@ -202,7 +203,7 @@ try {
       await en.waitForTimeout(200);
       if (await en.locator('.slide.build.right').count()) builtOk = true;
       // Al acertar suena la frase entera: la tarjeta no cambia hasta que la voz termina (antes se cortaba).
-      const sentence = u.payload.examples.find((e) => e.translation === es).text;
+      const sentence = all(u).find((e) => e.translation === es).text;
       const timing = await en.evaluate(async (text) => {
         const card0 = document.querySelector('.slide');
         const t0 = performance.now();

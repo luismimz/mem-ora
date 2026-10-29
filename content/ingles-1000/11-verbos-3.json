@@ -695,6 +695,171 @@
               "translation": "Están nadando."
             }
           ],
+          "practice": [
+            {
+              "text": "I am eating.",
+              "translation": "Estoy comiendo.",
+              "mirror": {
+                "say": "Estoy comiendo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "com-IENDO",
+                    "en": "eat-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is reading a book.",
+              "translation": "Ella está leyendo un libro.",
+              "mirror": {
+                "say": "Ella está leyendo un libro",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ley-ENDO",
+                    "en": "read-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un libro",
+                    "en": "a book",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are playing football.",
+              "translation": "Estamos jugando al fútbol.",
+              "mirror": {
+                "say": "Estamos jugando al fútbol",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "jug-ANDO",
+                    "en": "play-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al fútbol",
+                    "en": "football",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They are sleeping.",
+              "translation": "Están durmiendo.",
+              "mirror": {
+                "say": "Están durmiendo",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "durm-IENDO",
+                    "en": "sleep-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I am working now.",
+              "translation": "Estoy trabajando ahora.",
+              "mirror": {
+                "say": "Estoy trabajando ahora",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estoy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabaj-ANDO",
+                    "en": "work-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ahora",
+                    "en": "now",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He is cooking.",
+              "translation": "Él está cocinando.",
+              "mirror": {
+                "say": "Él está cocinando",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cocin-ANDO",
+                    "en": "cook-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Am walking» está mal: falta el YO (I).",
             "Para lo de siempre, sin -ing: I walk to work every day."

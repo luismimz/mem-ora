@@ -114,6 +114,154 @@
               "translation": "Sabe a pollo."
             }
           ],
+          "practice": [
+            {
+              "text": "This cake tastes great.",
+              "translation": "Este pastel sabe genial.",
+              "mirror": {
+                "say": "Este pastel sabe genial",
+                "pieces": [
+                  {
+                    "es": "Este pastel",
+                    "en": "This cake",
+                    "role": "who"
+                  },
+                  {
+                    "es": "sabe",
+                    "en": "tastes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "genial",
+                    "en": "great",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You look happy.",
+              "translation": "Pareces contento.",
+              "mirror": {
+                "say": "Pareces contento",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pareces",
+                    "en": "look",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "contento",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The music sounds good.",
+              "translation": "La música suena bien.",
+              "mirror": {
+                "say": "La música suena bien",
+                "pieces": [
+                  {
+                    "es": "La música",
+                    "en": "The music",
+                    "role": "who"
+                  },
+                  {
+                    "es": "suena",
+                    "en": "sounds",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "good",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I feel tired.",
+              "translation": "Me siento cansado.",
+              "mirror": {
+                "say": "Me siento cansado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "siento",
+                    "en": "feel",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bread smells great.",
+              "translation": "El pan huele genial.",
+              "mirror": {
+                "say": "El pan huele genial",
+                "pieces": [
+                  {
+                    "es": "El pan",
+                    "en": "The bread",
+                    "role": "who"
+                  },
+                  {
+                    "es": "huele",
+                    "en": "smells",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "genial",
+                    "en": "great",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She looks tired.",
+              "translation": "Ella parece cansada.",
+              "mirror": {
+                "say": "Ella parece cansada",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "parece",
+                    "en": "looks",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cansada",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«It smells well» está mal: con los sentidos, adjetivo (good).",
             "Saber A algo es TASTE LIKE: it tastes like chicken."

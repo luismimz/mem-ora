@@ -802,6 +802,245 @@
               "translation": "Un perro negro grande."
             }
           ],
+          "practice": [
+            {
+              "text": "I have a green bike.",
+              "translation": "Tengo una bici verde.",
+              "mirror": {
+                "say": "Tengo una bici verde",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "bici",
+                    "en": "bike",
+                    "role": "word"
+                  },
+                  {
+                    "es": "verde",
+                    "en": "green",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I want a blue shirt.",
+              "translation": "Quiero una camisa azul.",
+              "mirror": {
+                "say": "Quiero una camisa azul",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "camisa",
+                    "en": "shirt",
+                    "role": "word"
+                  },
+                  {
+                    "es": "azul",
+                    "en": "blue",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "He has long hair.",
+              "translation": "Él tiene el pelo largo.",
+              "mirror": {
+                "say": "Él tiene el pelo largo",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pelo",
+                    "en": "hair",
+                    "role": "word"
+                  },
+                  {
+                    "es": "largo",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "It is a big house.",
+              "translation": "Es una casa grande.",
+              "mirror": {
+                "say": "Es una casa grande",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "casa",
+                    "en": "house",
+                    "role": "word"
+                  },
+                  {
+                    "es": "grande",
+                    "en": "big",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "My mother has a white cat.",
+              "translation": "Mi madre tiene un gato blanco.",
+              "mirror": {
+                "say": "Mi madre tiene un gato blanco",
+                "pieces": [
+                  {
+                    "es": "Mi madre",
+                    "en": "My mother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un",
+                    "en": "a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "gato",
+                    "en": "cat",
+                    "role": "word"
+                  },
+                  {
+                    "es": "blanco",
+                    "en": "white",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Two red flowers, please.",
+              "translation": "Dos flores rojas, por favor.",
+              "mirror": {
+                "say": "Dos flores rojas, por favor",
+                "pieces": [
+                  {
+                    "es": "Dos",
+                    "en": "Two",
+                    "role": "word"
+                  },
+                  {
+                    "es": "flores",
+                    "en": "flowers",
+                    "role": "word"
+                  },
+                  {
+                    "es": "rojas",
+                    "en": "red",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«A car red» está mal: el color va delante.",
             "El color no tiene plural: red cars (no «reds cars»)."

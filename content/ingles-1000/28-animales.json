@@ -107,6 +107,145 @@
               "translation": "Tiene un caballo."
             }
           ],
+          "practice": [
+            {
+              "text": "I eat an apple.",
+              "translation": "Como una manzana.",
+              "mirror": {
+                "say": "Como una manzana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una manzana",
+                    "en": "an apple",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She is an engineer.",
+              "translation": "Ella es ingeniera.",
+              "mirror": {
+                "say": "Ella es ingeniera",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "UNA ingeniera",
+                    "en": "an engineer",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have an idea.",
+              "translation": "Tengo una idea.",
+              "mirror": {
+                "say": "Tengo una idea",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una idea",
+                    "en": "an idea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's an egg.",
+              "translation": "Es un huevo.",
+              "mirror": {
+                "say": "Es un huevo",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un huevo",
+                    "en": "an egg",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want an ice cream.",
+              "translation": "Quiero un helado.",
+              "mirror": {
+                "say": "Quiero un helado",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un helado",
+                    "en": "an ice cream",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wait an hour.",
+              "translation": "Espera una hora.",
+              "mirror": {
+                "say": "Espera una hora",
+                "pieces": [
+                  {
+                    "es": "Espera",
+                    "en": "Wait",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una hora",
+                    "en": "an hour",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«A elephant» suena raro: delante de vocal, AN.",
             "Cuenta el SONIDO: an hour (la h no suena), a university (suena «iu»)."

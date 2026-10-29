@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, pieceExamples, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, pieceExamples, sentencesOf, practiceIndices, practicePieces, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -435,3 +435,50 @@ describe('«Las piezas» (D-092)', () => {
   });
 });
 
+describe('frases de práctica (D-093)', () => {
+  const m = (say: string, a: string, b: string, c: string) => ({ say, pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'tengo', en: 'have', role: 'verb' }, { es: a, en: b, role: 'word' }, { es: c, en: c.toUpperCase(), role: 'word' }] });
+  const pattern = (practice: unknown[]): SessionUnit => ({
+    key: 'g1', type: 'pattern', language: 'en',
+    payload: { goal: 'g', rule: 'r', pieces: [{ text: 'I', role: 'fixed' }, { text: 'have', role: 'slot' }], examples: [
+      { text: 'I have a red car.', translation: 'Tengo un coche rojo.', mirror: { say: 'Tengo un coche rojo', pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'tengo', en: 'have', role: 'verb' }, { es: 'un coche', en: 'a car', role: 'word' }, { es: 'rojo', en: 'red', role: 'word' }], order: [0, 1, 3, 2] } },
+      { text: 'She has brown eyes.', translation: 'Tiene los ojos marrones.' },
+      { text: 'Two white shirts, please.', translation: 'Dos camisas blancas, por favor.' },
+    ], practice },
+    skills: [{ key: 'g1.recall', kind: 'recall' }, { key: 'g1.produce', kind: 'produce' }], association: null,
+  } as unknown as SessionUnit);
+  const practice = [
+    { text: 'I have a green bike.', translation: 'Tengo una bici verde.', mirror: m('x', 'una bici', 'a', 'verde') },
+    { text: 'I have a blue pen.', translation: 'Tengo un boli azul.', mirror: m('x', 'un boli', 'a', 'azul') },
+    { text: 'I have a black cat.', translation: 'Tengo un gato negro.', mirror: m('x', 'un gato', 'a', 'negro') },
+  ];
+  it('van después de los ejemplos y no se cuentan como enseñados en la ficha', () => {
+    const u = pattern(practice);
+    expect(sentencesOf(u).map((e) => e.text).slice(3)).toEqual(practice.map((p) => p.text));
+    expect(practiceIndices(u)).toEqual([3, 4, 5]);
+    expect(practicePieces(u)).toEqual([3, 4, 5]);
+  });
+  it('«Las piezas» y «Construye» usan dos frases NUEVAS y distintas (no la del ejemplo de la ficha)', () => {
+    for (const sessionId of ['a', 'b', 'c', 'd', 'e']) {
+      const plan = buildFlowSession({ ...base, units: { g1: pattern(practice) }, items: [item('g1', 'new')], sessionId });
+      const st = plan.steps.filter((s) => s.unitKey === 'g1' && !s.retry && (s.kind === 'pieces' || s.kind === 'build'));
+      expect(st.map((s) => s.kind)).toEqual(['pieces', 'build']);
+      expect(st.every((s) => s.example! >= 3)).toBe(true);
+      expect(st[0]!.example).not.toBe(st[1]!.example);
+    }
+  });
+  it('prefiere frases con palabras que ya has aprendido', () => {
+    const cat = { key: 'cat', type: 'term', language: 'en', payload: { form: 'word', text: 'cat', meaning: 'gato', examples: [{ text: 'A cat.', translation: 'Un gato.' }] }, skills: [{ key: 'cat.recall', kind: 'recall' }], association: null } as unknown as SessionUnit;
+    const black = { ...cat, key: 'black', payload: { ...cat.payload, text: 'black', meaning: 'negro' } } as unknown as SessionUnit;
+    const seen = new Set<number>();
+    for (const sessionId of ['a', 'b', 'c', 'd', 'e', 'f']) {
+      const plan = buildFlowSession({ ...base, units: { g1: pattern(practice), cat, black }, items: [item('g1', 'new')], arcadeUnits: ['cat', 'black'], sessionId });
+      seen.add(plan.steps.find((s) => s.kind === 'pieces')!.example!);
+    }
+    // «I have a black cat» (2 conocidas) o, como mucho, una con una conocida menos; nunca al azar entre todas.
+    expect([...seen].every((i) => i === 5)).toBe(true);
+  });
+  it('sin frases de práctica, sigue como antes (ejemplos de la ficha)', () => {
+    const plan = buildFlowSession({ ...base, units: { g1: pattern([]) }, items: [item('g1', 'new')], sessionId: 'z' });
+    expect(plan.steps.find((s) => s.kind === 'pieces')!.example).toBe(0);
+  });
+});

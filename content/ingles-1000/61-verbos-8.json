@@ -123,6 +123,159 @@
               "translation": "Estaban hablando."
             }
           ],
+          "practice": [
+            {
+              "text": "I was cooking.",
+              "translation": "Estaba cocinando.",
+              "mirror": {
+                "say": "Estaba cocinando",
+                "pieces": [
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cocin-ANDO",
+                    "en": "cook-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We were watching TV.",
+              "translation": "Estábamos viendo la tele.",
+              "mirror": {
+                "say": "Estábamos viendo la tele",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estábamos",
+                    "en": "We were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "viendo",
+                    "en": "watching",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la tele",
+                    "en": "TV",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She was reading when I arrived.",
+              "translation": "Ella estaba leyendo cuando llegué.",
+              "mirror": {
+                "say": "Ella estaba leyendo cuando llegué",
+                "pieces": [
+                  {
+                    "es": "(ELLA) estaba",
+                    "en": "She was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "leyendo",
+                    "en": "reading",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cuando",
+                    "en": "when",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegué",
+                    "en": "arrived",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Where were you living?",
+              "translation": "¿Dónde estabas viviendo?",
+              "mirror": {
+                "say": "¿Dónde estabas viviendo?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estabas",
+                    "en": "were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viviendo",
+                    "en": "living",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was snowing.",
+              "translation": "Estaba nevando.",
+              "mirror": {
+                "say": "Estaba nevando",
+                "pieces": [
+                  {
+                    "es": "(ESO) estaba",
+                    "en": "It was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nevando",
+                    "en": "snowing",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They were playing in the park.",
+              "translation": "Estaban jugando en el parque.",
+              "mirror": {
+                "say": "Estaban jugando en el parque",
+                "pieces": [
+                  {
+                    "es": "(ELLOS) estaban",
+                    "en": "They were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "jugando",
+                    "en": "playing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en el parque",
+                    "en": "in the park",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Con I, he, she, it: WAS. Con you, we, they: WERE.",
             "«I was sleep» está mal: I was sleepING."

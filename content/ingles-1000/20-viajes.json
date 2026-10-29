@@ -132,6 +132,185 @@
               "translation": "Vamos a comprar un coche."
             }
           ],
+          "practice": [
+            {
+              "text": "I'm going to cook.",
+              "translation": "Voy a cocinar.",
+              "mirror": {
+                "say": "Voy a cocinar",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cocinar",
+                    "en": "cook",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We're going to watch a film.",
+              "translation": "Vamos a ver una película.",
+              "mirror": {
+                "say": "Vamos a ver una película",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ver",
+                    "en": "watch",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una película",
+                    "en": "a film",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Are you going to call her?",
+              "translation": "¿Vas a llamarla?",
+              "mirror": {
+                "say": "¿Vas a llamarla?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "She's going to study English.",
+              "translation": "Ella va a estudiar inglés.",
+              "mirror": {
+                "say": "Ella va a estudiar inglés",
+                "pieces": [
+                  {
+                    "es": "(ELLA) está",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "estudiar",
+                    "en": "study",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's going to snow.",
+              "translation": "Va a nevar.",
+              "mirror": {
+                "say": "Va a nevar",
+                "pieces": [
+                  {
+                    "es": "(ESO) está",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "nevar",
+                    "en": "snow",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm going to buy bread.",
+              "translation": "Voy a comprar pan.",
+              "mirror": {
+                "say": "Voy a comprar pan",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "comprar",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I going to…» está mal: falta el ayudante (I'M going to).",
             "Detrás de going to, el verbo tal cual: going to eat."

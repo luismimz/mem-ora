@@ -132,6 +132,199 @@
               "translation": "Lleva lloviendo todo el día."
             }
           ],
+          "practice": [
+            {
+              "text": "I've been waiting for an hour.",
+              "translation": "Llevo una hora esperando.",
+              "mirror": {
+                "say": "Llevo una hora esperando",
+                "pieces": [
+                  {
+                    "es": "(YO) he estado",
+                    "en": "I've been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "durante una hora",
+                    "en": "for an hour",
+                    "role": "word"
+                  },
+                  {
+                    "es": "esperando",
+                    "en": "waiting",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "We've been living here for years.",
+              "translation": "Llevamos años viviendo aquí.",
+              "mirror": {
+                "say": "Llevamos años viviendo aquí",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) hemos estado",
+                    "en": "We've been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "años",
+                    "en": "for years",
+                    "role": "word"
+                  },
+                  {
+                    "es": "viviendo",
+                    "en": "living",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "She's been working for two hours.",
+              "translation": "Ella lleva dos horas trabajando.",
+              "mirror": {
+                "say": "Ella lleva dos horas trabajando",
+                "pieces": [
+                  {
+                    "es": "(ELLA) ha estado",
+                    "en": "She's been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "dos horas",
+                    "en": "for two hours",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajando",
+                    "en": "working",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "How long have you been studying English?",
+              "translation": "¿Cuánto tiempo llevas estudiando inglés?",
+              "mirror": {
+                "say": "¿Cuánto tiempo llevas estudiando inglés?",
+                "pieces": [
+                  {
+                    "es": "Cuánto tiempo",
+                    "en": "How long",
+                    "role": "word"
+                  },
+                  {
+                    "es": "has",
+                    "en": "have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estudiando",
+                    "en": "studying",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've been cooking all morning.",
+              "translation": "Llevo toda la mañana cocinando.",
+              "mirror": {
+                "say": "Llevo toda la mañana cocinando",
+                "pieces": [
+                  {
+                    "es": "(YO) he estado",
+                    "en": "I've been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "toda la mañana",
+                    "en": "all morning",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cocinando",
+                    "en": "cooking",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "They've been travelling for a week.",
+              "translation": "Llevan una semana viajando.",
+              "mirror": {
+                "say": "Llevan una semana viajando",
+                "pieces": [
+                  {
+                    "es": "(ELLOS) han estado",
+                    "en": "They've been",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una semana",
+                    "en": "for a week",
+                    "role": "word"
+                  },
+                  {
+                    "es": "viajando",
+                    "en": "travelling",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I am studying for two hours» está mal: si dura hasta ahora, I've been studying.",
             "Con verbos como know o like, sin -ING: I've known her for years."

@@ -111,6 +111,161 @@
               "translation": "Juegas muy bien."
             }
           ],
+          "practice": [
+            {
+              "text": "Speak slowly.",
+              "translation": "Habla lentamente.",
+              "mirror": {
+                "say": "Habla lentamente",
+                "pieces": [
+                  {
+                    "es": "Habla",
+                    "en": "Speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "lenta-MENTE",
+                    "en": "slow-LY",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Drive carefully.",
+              "translation": "Conduce cuidadosamente.",
+              "mirror": {
+                "say": "Conduce cuidadosamente",
+                "pieces": [
+                  {
+                    "es": "Conduce",
+                    "en": "Drive",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cuidadosa-MENTE",
+                    "en": "careful-LY",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She works quickly.",
+              "translation": "Ella trabaja rápidamente.",
+              "mirror": {
+                "say": "Ella trabaja rápidamente",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "trabaja",
+                    "en": "works",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "rápida-MENTE",
+                    "en": "quick-LY",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I did it easily.",
+              "translation": "Lo hice fácilmente.",
+              "mirror": {
+                "say": "Lo hice fácilmente",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hice",
+                    "en": "did",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fácil-MENTE",
+                    "en": "eas-ILY",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I normally eat at home.",
+              "translation": "Normalmente como en casa.",
+              "mirror": {
+                "say": "Normalmente como en casa",
+                "pieces": [
+                  {
+                    "es": "Normal-MENTE",
+                    "en": "normal-LY",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Speak clearly.",
+              "translation": "Habla claramente.",
+              "mirror": {
+                "say": "Habla claramente",
+                "pieces": [
+                  {
+                    "es": "Habla",
+                    "en": "Speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "clara-MENTE",
+                    "en": "clear-LY",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Bien no es «goodly»: es WELL (you play well).",
             "Algunas no cambian: fast, hard (he runs fast)."

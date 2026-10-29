@@ -66,6 +66,175 @@
               "translation": "¿Qué haces ahora? — Estoy leyendo."
             }
           ],
+          "practice": [
+            {
+              "text": "I work every day.",
+              "translation": "Trabajo todos los días.",
+              "mirror": {
+                "say": "Trabajo todos los días",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm working now.",
+              "translation": "Ahora estoy trabajando.",
+              "mirror": {
+                "say": "Ahora estoy trabajando",
+                "pieces": [
+                  {
+                    "es": "ahora",
+                    "en": "now",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabaj-ANDO",
+                    "en": "work-ING",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "She reads every night.",
+              "translation": "Ella lee cada noche.",
+              "mirror": {
+                "say": "Ella lee cada noche",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "lee",
+                    "en": "reads",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada noche",
+                    "en": "every night",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Look, she's reading.",
+              "translation": "Mira, está leyendo.",
+              "mirror": {
+                "say": "Mira, está leyendo",
+                "pieces": [
+                  {
+                    "es": "Mira",
+                    "en": "Look",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ELLA) está",
+                    "en": "she's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ley-ENDO",
+                    "en": "read-ING",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I usually drink tea.",
+              "translation": "Normalmente bebo té.",
+              "mirror": {
+                "say": "Normalmente bebo té",
+                "pieces": [
+                  {
+                    "es": "Normalmente",
+                    "en": "usually",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "bebo",
+                    "en": "drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Today I'm drinking coffee.",
+              "translation": "Hoy estoy bebiendo café.",
+              "mirror": {
+                "say": "Hoy estoy bebiendo café",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "Today",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "beb-IENDO",
+                    "en": "drink-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«What do you do?» pregunta tu trabajo; «What are you doing?», qué haces ahora.",
             "Like, know o want casi nunca llevan -ING: I know, no «I'm knowing»."

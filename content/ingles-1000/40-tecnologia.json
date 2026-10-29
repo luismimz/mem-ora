@@ -112,6 +112,148 @@
               "translation": "¿Te acabas de despertar?"
             }
           ],
+          "practice": [
+            {
+              "text": "I've just eaten.",
+              "translation": "Acabo de comer.",
+              "mirror": {
+                "say": "Acabo de comer",
+                "pieces": [
+                  {
+                    "es": "(YO) he justo",
+                    "en": "I've just",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comido",
+                    "en": "eaten",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We've just arrived.",
+              "translation": "Acabamos de llegar.",
+              "mirror": {
+                "say": "Acabamos de llegar",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) hemos justo",
+                    "en": "We've just",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llegado",
+                    "en": "arrived",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He has just left.",
+              "translation": "Él acaba de salir.",
+              "mirror": {
+                "say": "Él acaba de salir",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ha justo",
+                    "en": "has just",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "salido",
+                    "en": "left",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I've just seen her.",
+              "translation": "Acabo de verla.",
+              "mirror": {
+                "say": "Acabo de verla",
+                "pieces": [
+                  {
+                    "es": "(YO) he justo",
+                    "en": "I've just",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The train has just arrived.",
+              "translation": "El tren acaba de llegar.",
+              "mirror": {
+                "say": "El tren acaba de llegar",
+                "pieces": [
+                  {
+                    "es": "El tren",
+                    "en": "The train",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ha justo",
+                    "en": "has just",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llegado",
+                    "en": "arrived",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has just called you.",
+              "translation": "Acaba de llamarte.",
+              "mirror": {
+                "say": "Acaba de llamarte",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ha justo",
+                    "en": "has just",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamado",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I just arrive» está mal: con JUST va HAVE + participio (I've just arrived).",
             "En EE. UU. también se oye «I just arrived»."
