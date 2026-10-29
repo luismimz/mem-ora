@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "10b-meses",
+      "title": "Misión 10b · Los meses del año",
+      "units": [
+        {
+          "key": "january",
+          "type": "term",
+          "text": "January",
+          "meaning": "enero",
+          "pronunciation": "YÁNiueri",
+          "examples": [
+            {
+              "text": "My birthday is in January.",
+              "translation": "Mi cumpleaños es en enero."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: January.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAMÓN",
+            "scene": "En ENERO, un JAMÓN patina sobre hielo.",
+            "sceneTarget": "In JANUARY, a ham skates on ice.",
+            "emoji": "🍖⛸️"
+          }
+        },
+        {
+          "key": "february",
+          "type": "term",
+          "text": "February",
+          "meaning": "febrero",
+          "pronunciation": "FÉbrueri",
+          "examples": [
+            {
+              "text": "February is a short month.",
+              "translation": "Febrero es un mes corto."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: February.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIEBRE",
+            "scene": "En FEBRERO todos tienen FIEBRE de amor.",
+            "sceneTarget": "In FEBRUARY everybody has love fever.",
+            "emoji": "🤒❤️"
+          }
+        },
+        {
+          "key": "march",
+          "type": "term",
+          "text": "March",
+          "meaning": "marzo",
+          "pronunciation": "MARCH",
+          "examples": [
+            {
+              "text": "Spring starts in March.",
+              "translation": "La primavera empieza en marzo."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: March.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MARCHA",
+            "scene": "En MARZO, todo el pueblo se va de MARCHA.",
+            "sceneTarget": "In MARCH, the whole town goes out partying.",
+            "emoji": "🎉🌸"
+          }
+        },
+        {
+          "key": "april",
+          "type": "term",
+          "text": "April",
+          "meaning": "abril",
+          "pronunciation": "ÉIpril",
+          "examples": [
+            {
+              "text": "It rains a lot in April.",
+              "translation": "Llueve mucho en abril."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: April."
+        },
+        {
+          "key": "may",
+          "type": "term",
+          "text": "May",
+          "meaning": "mayo",
+          "pronunciation": "MEI",
+          "examples": [
+            {
+              "text": "We travel in May.",
+              "translation": "Viajamos en mayo."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: May."
+        },
+        {
+          "key": "june",
+          "type": "term",
+          "text": "June",
+          "meaning": "junio",
+          "pronunciation": "YUUN",
+          "examples": [
+            {
+              "text": "School ends in June.",
+              "translation": "El colegio termina en junio."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: June.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YUNQUE",
+            "scene": "En JUNIO, un herrero golpea un YUNQUE en la playa.",
+            "sceneTarget": "In JUNE, a blacksmith hits an anvil on the beach.",
+            "emoji": "⚒️🏖️"
+          }
+        },
+        {
+          "key": "july",
+          "type": "term",
+          "text": "July",
+          "meaning": "julio",
+          "pronunciation": "yuLÁI",
+          "examples": [
+            {
+              "text": "July is very hot here.",
+              "translation": "Julio es muy caluroso aquí."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: July."
+        },
+        {
+          "key": "august",
+          "type": "term",
+          "text": "August",
+          "meaning": "agosto",
+          "pronunciation": "ÓOgast",
+          "examples": [
+            {
+              "text": "Spain goes on holiday in August.",
+              "translation": "España se va de vacaciones en agosto."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: August.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GASTO",
+            "scene": "En AGOSTO, el GASTO de las vacaciones te ahoga.",
+            "sceneTarget": "In AUGUST, the holiday spending drowns you.",
+            "emoji": "💸🏖️"
+          }
+        },
+        {
+          "key": "september",
+          "type": "term",
+          "text": "September",
+          "meaning": "septiembre",
+          "pronunciation": "sepTÉMber",
+          "examples": [
+            {
+              "text": "Classes start in September.",
+              "translation": "Las clases empiezan en septiembre."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: September."
+        },
+        {
+          "key": "october",
+          "type": "term",
+          "text": "October",
+          "meaning": "octubre",
+          "pronunciation": "okTÓUber",
+          "examples": [
+            {
+              "text": "October is my favourite month.",
+              "translation": "Octubre es mi mes favorito."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: October."
+        },
+        {
+          "key": "november",
+          "type": "term",
+          "text": "November",
+          "meaning": "noviembre",
+          "pronunciation": "nouVÉMber",
+          "examples": [
+            {
+              "text": "It gets dark early in November.",
+              "translation": "En noviembre anochece pronto."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: November."
+        },
+        {
+          "key": "december",
+          "type": "term",
+          "text": "December",
+          "meaning": "diciembre",
+          "pronunciation": "diSÉMber",
+          "examples": [
+            {
+              "text": "Christmas is in December.",
+              "translation": "La Navidad es en diciembre."
+            }
+          ],
+          "notes": "Los meses se escriben con mayúscula en inglés: December."
+        }
+      ]
+    }
+  ]
+}

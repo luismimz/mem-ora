@@ -419,7 +419,14 @@
               "text": "That's a big problem.",
               "translation": "Es un problema grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BIGOTE",
+            "scene": "Un BIGOTE GRANDE como una escoba.",
+            "sceneTarget": "A BIG moustache like a broom.",
+            "emoji": "🥸🧹"
+          }
         },
         {
           "key": "small",
@@ -474,7 +481,14 @@
               "text": "The room is too small.",
               "translation": "La habitación es demasiado pequeña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESMALTE",
+            "scene": "Un bote de ESMALTE PEQUEÑO, diminuto.",
+            "sceneTarget": "A tiny SMALL bottle of nail polish.",
+            "emoji": "💅🔬"
+          }
         },
         {
           "key": "tall",
@@ -512,7 +526,14 @@
               "translation": "Un edificio alto."
             }
           ],
-          "notes": "Alto de persona o edificio es tall; una pared o un precio alto, high."
+          "notes": "Alto de persona o edificio es tall; una pared o un precio alto, high.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TOLDO",
+            "scene": "Un hombre tan ALTO que toca el TOLDO.",
+            "sceneTarget": "A man so TALL he touches the awning.",
+            "emoji": "🧍⛱️"
+          }
         },
         {
           "key": "short",
@@ -564,7 +585,14 @@
               "text": "A short film.",
               "translation": "Un cortometraje."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHORTS",
+            "scene": "Unos SHORTS son pantalones CORTOS.",
+            "sceneTarget": "Shorts are SHORT trousers.",
+            "emoji": "🩳✂️"
+          }
         },
         {
           "key": "old",
@@ -618,7 +646,14 @@
               "text": "How old is your son?",
               "translation": "¿Cuántos años tiene tu hijo?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OLA",
+            "scene": "Una OLA VIEJA con bastón.",
+            "sceneTarget": "An OLD wave with a walking stick.",
+            "emoji": "🌊👴"
+          }
         },
         {
           "key": "young",
@@ -748,7 +783,14 @@
               "text": "Cheap flights.",
               "translation": "Vuelos baratos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHIP",
+            "scene": "Un CHIP tan BARATO que cuesta un céntimo.",
+            "sceneTarget": "A chip so CHEAP it costs one cent.",
+            "emoji": "💾🪙"
+          }
         },
         {
           "key": "expensive",
@@ -899,7 +941,14 @@
               "text": "A fast train.",
               "translation": "Un tren rápido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FASTIDIO",
+            "scene": "Qué FASTIDIO, va demasiado RÁPIDO.",
+            "sceneTarget": "How annoying, it’s too FAST.",
+            "emoji": "🏎️😩"
+          }
         },
         {
           "key": "slow",
@@ -1018,7 +1067,14 @@
               "text": "An ugly dog.",
               "translation": "Un perro feo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÁGIL",
+            "scene": "Un monstruo FEO pero muy ÁGIL.",
+            "sceneTarget": "An UGLY but very agile monster.",
+            "emoji": "👹🤸"
+          }
         }
       ]
     }

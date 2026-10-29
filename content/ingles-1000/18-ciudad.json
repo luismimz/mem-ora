@@ -422,7 +422,14 @@
               "text": "Madrid is a beautiful city.",
               "translation": "Madrid es una ciudad bonita."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CITA",
+            "scene": "Una CITA en cada esquina de la CIUDAD.",
+            "sceneTarget": "A date on every corner of the CITY.",
+            "emoji": "🏙️❤️"
+          }
         },
         {
           "key": "street",
@@ -460,7 +467,14 @@
               "text": "Cross the street.",
               "translation": "Cruza la calle."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTRECHA",
+            "scene": "Una CALLE tan ESTRECHA que no pasa ni un gato.",
+            "sceneTarget": "A STREET so narrow not even a cat fits.",
+            "emoji": "🛣️🐈"
+          }
         },
         {
           "key": "shop",
@@ -497,7 +511,14 @@
               "text": "Is there a shop near here?",
               "translation": "¿Hay una tienda cerca de aquí?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHOPITOS",
+            "scene": "Una TIENDA que solo vende CHOPITOS.",
+            "sceneTarget": "A SHOP that only sells baby squid.",
+            "emoji": "🦑🏪"
+          }
         },
         {
           "key": "bank",
@@ -860,7 +881,14 @@
               "text": "Cross the bridge.",
               "translation": "Cruza el puente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRIDA",
+            "scene": "El PUENTE cuelga de una BRIDA de caballo.",
+            "sceneTarget": "The BRIDGE hangs from a horse’s bridle.",
+            "emoji": "🌉🐴"
+          }
         },
         {
           "key": "market",
@@ -903,7 +931,14 @@
               "text": "The market opens on Saturdays.",
               "translation": "El mercado abre los sábados."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MARCA",
+            "scene": "En el MERCADO todo es de MARCA.",
+            "sceneTarget": "At the MARKET everything is designer brand.",
+            "emoji": "🛍️🏷️"
+          }
         },
         {
           "key": "library",
@@ -942,7 +977,14 @@
               "translation": "La biblioteca es tranquila."
             }
           ],
-          "notes": "Ojo: library es BIBLIOTECA. Una librería (donde se compran libros) es a bookshop."
+          "notes": "Ojo: library es BIBLIOTECA. Una librería (donde se compran libros) es a bookshop.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LIBRERÍA",
+            "scene": "¡Ojo! LIBRARY no es LIBRERÍA: es BIBLIOTECA gratis.",
+            "sceneTarget": "Watch out! A LIBRARY is free, not a bookshop.",
+            "emoji": "📚🆓"
+          }
         },
         {
           "key": "near",
@@ -985,7 +1027,14 @@
               "text": "I live near the station.",
               "translation": "Vivo cerca de la estación."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NIDO",
+            "scene": "El NIDO está CERCA, a un salto.",
+            "sceneTarget": "The nest is NEAR, one jump away.",
+            "emoji": "🪺🦘"
+          }
         }
       ]
     }

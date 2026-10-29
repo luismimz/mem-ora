@@ -29,7 +29,7 @@
   "modules": [
     {
       "key": "10-tiempo-frecuencia",
-      "title": "Misión 10 · Frecuencia y tiempo",
+      "title": "Misión 10 · Frecuencia, días y tiempo",
       "units": [
         {
           "key": "always",
@@ -760,6 +760,531 @@
             "scene": "AYER te caíste y hoy llevas YESO hasta la nariz.",
             "sceneTarget": "YESTERDAY you fell; today you're in a cast up to your nose.",
             "emoji": "🦴😵"
+          }
+        },
+        {
+          "key": "monday",
+          "type": "term",
+          "text": "Monday",
+          "meaning": "lunes",
+          "pronunciation": "MÁNdei",
+          "examples": [
+            {
+              "text": "I start work on Monday.",
+              "translation": "Empiezo a trabajar el lunes.",
+              "mirror": {
+                "say": "Empiezo a trabajar el lunes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "empiezo",
+                    "en": "start",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el trabajo",
+                    "en": "work",
+                    "role": "word",
+                    "from": "a trabajar"
+                  },
+                  {
+                    "es": "en lunes",
+                    "en": "on Monday",
+                    "role": "word",
+                    "from": "el lunes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Mondays are hard.",
+              "translation": "Los lunes son duros."
+            }
+          ],
+          "notes": "Los días se escriben con mayúscula: Monday.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANDO",
+            "scene": "El LUNES, la LUNA agarra el MANDO de la tele.",
+            "sceneTarget": "On MONDAY, the moon grabs the TV remote.",
+            "emoji": "🌙📺"
+          }
+        },
+        {
+          "key": "tuesday",
+          "type": "term",
+          "text": "Tuesday",
+          "meaning": "martes",
+          "pronunciation": "TIÚSdei",
+          "examples": [
+            {
+              "text": "See you on Tuesday.",
+              "translation": "Nos vemos el martes.",
+              "mirror": {
+                "say": "Nos vemos el martes",
+                "pieces": [
+                  {
+                    "es": "Te veo",
+                    "en": "See you",
+                    "role": "verb",
+                    "from": "Nos vemos"
+                  },
+                  {
+                    "es": "en martes",
+                    "en": "on Tuesday",
+                    "role": "word",
+                    "from": "el martes",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The shop is closed on Tuesdays.",
+              "translation": "La tienda cierra los martes."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TOS",
+            "scene": "El MARTES, MARTE tiene TOS sin parar.",
+            "sceneTarget": "On TUESDAY, Mars coughs non-stop.",
+            "emoji": "🔴🤧"
+          }
+        },
+        {
+          "key": "wednesday",
+          "type": "term",
+          "text": "Wednesday",
+          "meaning": "miércoles",
+          "pronunciation": "UÉNSdei",
+          "examples": [
+            {
+              "text": "The meeting is on Wednesday.",
+              "translation": "La reunión es el miércoles.",
+              "mirror": {
+                "say": "La reunión es el miércoles",
+                "pieces": [
+                  {
+                    "es": "La reunión",
+                    "en": "The meeting",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en miércoles",
+                    "en": "on Wednesday",
+                    "role": "word",
+                    "from": "el miércoles",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wednesday is the middle of the week.",
+              "translation": "El miércoles es la mitad de la semana."
+            }
+          ],
+          "notes": "Se escribe Wednesday pero se dice UÉNSdei: la d no suena.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HUÉSPED",
+            "scene": "El MIÉRCOLES llega un HUÉSPED con mil maletas.",
+            "sceneTarget": "On WEDNESDAY a guest arrives with a thousand suitcases.",
+            "emoji": "🧳🛎️"
+          }
+        },
+        {
+          "key": "thursday",
+          "type": "term",
+          "text": "Thursday",
+          "meaning": "jueves",
+          "pronunciation": "ZÉRSdei",
+          "examples": [
+            {
+              "text": "I play football on Thursdays.",
+              "translation": "Juego al fútbol los jueves.",
+              "mirror": {
+                "say": "Juego al fútbol los jueves",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "juego",
+                    "en": "play",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fútbol",
+                    "en": "football",
+                    "role": "word",
+                    "from": "al fútbol",
+                    "why": "Los deportes van sin «the»: play football."
+                  },
+                  {
+                    "es": "en jueves",
+                    "en": "on Thursdays",
+                    "role": "word",
+                    "from": "los jueves"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Last Thursday.",
+              "translation": "El jueves pasado."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CERDO",
+            "scene": "El JUEVES, un CERDO JUEGA a las cartas.",
+            "sceneTarget": "On THURSDAY, a pig plays cards.",
+            "emoji": "🐷🃏"
+          }
+        },
+        {
+          "key": "friday",
+          "type": "term",
+          "text": "Friday",
+          "meaning": "viernes",
+          "pronunciation": "FRÁIdei",
+          "examples": [
+            {
+              "text": "Finally, it's Friday!",
+              "translation": "¡Por fin es viernes!",
+              "mirror": {
+                "say": "¡Por fin es viernes!",
+                "pieces": [
+                  {
+                    "es": "Por fin",
+                    "en": "Finally",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "viernes",
+                    "en": "Friday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What are you doing on Friday?",
+              "translation": "¿Qué haces el viernes?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FRAILE",
+            "scene": "El VIERNES, un FRAILE baila en la discoteca.",
+            "sceneTarget": "On FRIDAY, a friar dances at the disco.",
+            "emoji": "🕺🪩"
+          }
+        },
+        {
+          "key": "saturday",
+          "type": "term",
+          "text": "Saturday",
+          "meaning": "sábado",
+          "pronunciation": "SÁterdei",
+          "examples": [
+            {
+              "text": "We go shopping on Saturdays.",
+              "translation": "Vamos de compras los sábados.",
+              "mirror": {
+                "say": "Vamos de compras los sábados",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos de compras",
+                    "en": "go shopping",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en sábados",
+                    "en": "on Saturdays",
+                    "role": "word",
+                    "from": "los sábados",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Saturday morning.",
+              "translation": "El sábado por la mañana."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SATURNO",
+            "scene": "El SÁBADO, SATURNO hace una fiesta en sus anillos.",
+            "sceneTarget": "On SATURDAY, Saturn throws a party on its rings.",
+            "emoji": "🪐🎉"
+          }
+        },
+        {
+          "key": "sunday",
+          "type": "term",
+          "text": "Sunday",
+          "meaning": "domingo",
+          "pronunciation": "SÁNdei",
+          "examples": [
+            {
+              "text": "I rest on Sunday.",
+              "translation": "Descanso el domingo.",
+              "mirror": {
+                "say": "Descanso el domingo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "descanso",
+                    "en": "rest",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en domingo",
+                    "en": "on Sunday",
+                    "role": "word",
+                    "from": "el domingo",
+                    "why": "Los días llevan ON: on Monday, on Fridays."
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sunday is a family day.",
+              "translation": "El domingo es un día de familia."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SANDÍA",
+            "scene": "El DOMINGO comes una SANDÍA gigante al sol.",
+            "sceneTarget": "On SUNDAY you eat a giant watermelon in the sun.",
+            "emoji": "🍉☀️"
+          }
+        },
+        {
+          "key": "week",
+          "type": "term",
+          "text": "week",
+          "meaning": "semana",
+          "pronunciation": "UIIK",
+          "examples": [
+            {
+              "text": "I work five days a week.",
+              "translation": "Trabajo cinco días a la semana.",
+              "mirror": {
+                "say": "Trabajo cinco días a la semana",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cinco días",
+                    "en": "five days",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a la semana",
+                    "en": "a week",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "See you next week.",
+              "translation": "Nos vemos la semana que viene."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "WIKI",
+            "scene": "Una SEMANA entera leyendo la WIKI.",
+            "sceneTarget": "A whole WEEK reading the wiki.",
+            "emoji": "📅📖"
+          }
+        },
+        {
+          "key": "weekend",
+          "type": "term",
+          "text": "weekend",
+          "meaning": "fin de semana",
+          "pronunciation": "UIIKend",
+          "examples": [
+            {
+              "text": "Have a nice weekend!",
+              "translation": "¡Buen fin de semana!",
+              "mirror": {
+                "say": "¡Buen fin de semana!",
+                "pieces": [
+                  {
+                    "es": "Ten",
+                    "en": "Have",
+                    "role": "verb",
+                    "ghost": true
+                  },
+                  {
+                    "es": "un buen fin de semana",
+                    "en": "a nice weekend",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What did you do at the weekend?",
+              "translation": "¿Qué hiciste el fin de semana?"
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "WIKI",
+            "scene": "El FIN DE SEMANA cierras la WIKI y pone FIN.",
+            "sceneTarget": "At the WEEKEND you close the wiki: the end.",
+            "emoji": "🏁📖"
+          }
+        },
+        {
+          "key": "month",
+          "type": "term",
+          "text": "month",
+          "meaning": "mes",
+          "pronunciation": "MANZ",
+          "examples": [
+            {
+              "text": "I visit my parents every month.",
+              "translation": "Visito a mis padres cada mes.",
+              "mirror": {
+                "say": "Visito a mis padres cada mes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "visito",
+                    "en": "visit",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mis padres",
+                    "en": "my parents",
+                    "role": "word",
+                    "from": "a mis padres",
+                    "why": "Visitar a alguien, sin «a»: visit my parents."
+                  },
+                  {
+                    "es": "cada mes",
+                    "en": "every month",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Next month.",
+              "translation": "El mes que viene."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANZANA",
+            "scene": "Cada MES, una MANZANA nueva en el calendario.",
+            "sceneTarget": "Every MONTH, a new apple on the calendar.",
+            "emoji": "🍎📅"
+          }
+        },
+        {
+          "key": "year",
+          "type": "term",
+          "text": "year",
+          "meaning": "año",
+          "pronunciation": "YÍER",
+          "examples": [
+            {
+              "text": "Happy New Year!",
+              "translation": "¡Feliz Año Nuevo!",
+              "mirror": {
+                "say": "¡Feliz Año Nuevo!",
+                "pieces": [
+                  {
+                    "es": "Feliz",
+                    "en": "Happy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Año",
+                    "en": "Year",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Nuevo",
+                    "en": "New",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I'm twenty years old.",
+              "translation": "Tengo veinte años."
+            }
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AYER",
+            "scene": "Un AÑO entero repitiendo: «¡AYER, AYER!».",
+            "sceneTarget": "A whole YEAR repeating: «yesterday, yesterday!».",
+            "emoji": "🗓️🔁"
           }
         },
         {

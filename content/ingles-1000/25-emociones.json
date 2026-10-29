@@ -375,7 +375,14 @@
               "text": "My boss is angry.",
               "translation": "Mi jefe está enfadado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANGRY BIRDS",
+            "scene": "Los ANGRY BIRDS están ENFADADOS con los cerdos.",
+            "sceneTarget": "The Angry Birds are ANGRY with the pigs.",
+            "emoji": "😠🐦"
+          }
         },
         {
           "key": "tired",
@@ -412,7 +419,14 @@
               "text": "You look tired.",
               "translation": "Pareces cansado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TARDE",
+            "scene": "Llegas TARDE y muy CANSADO.",
+            "sceneTarget": "You arrive late and very TIRED.",
+            "emoji": "😴⏰"
+          }
         },
         {
           "key": "worried",
@@ -607,7 +621,14 @@
               "text": "I get bored at home.",
               "translation": "Me aburro en casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BORDE",
+            "scene": "ABURRIDO, sentado en el BORDE de la cama.",
+            "sceneTarget": "BORED, sitting on the edge of the bed.",
+            "emoji": "🥱🛏️"
+          }
         },
         {
           "key": "surprised",
@@ -690,7 +711,14 @@
               "text": "Her parents are very proud.",
               "translation": "Sus padres están muy orgullosos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRADO",
+            "scene": "ORGULLOSO, posas en el PRADO como un pavo real.",
+            "sceneTarget": "PROUD, you pose in the meadow like a peacock.",
+            "emoji": "🦚🌾"
+          }
         },
         {
           "key": "calm",
@@ -775,7 +803,14 @@
               "translation": "Es un hombre solitario."
             }
           ],
-          "notes": "Lonely es sentirse solo. Estar solo (sin nadie) es alone."
+          "notes": "Lonely es sentirse solo. Estar solo (sin nadie) es alone.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LONA",
+            "scene": "SOLO bajo una LONA en el desierto.",
+            "sceneTarget": "LONELY under a tarp in the desert.",
+            "emoji": "⛺🏜️"
+          }
         },
         {
           "key": "upset",
@@ -818,7 +853,14 @@
               "text": "Don't get upset.",
               "translation": "No te disgustes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SETA",
+            "scene": "DISGUSTADO porque se comieron tu SETA.",
+            "sceneTarget": "UPSET because they ate your mushroom.",
+            "emoji": "🍄😤"
+          }
         },
         {
           "key": "glad",
@@ -858,7 +900,14 @@
               "text": "Glad to meet you.",
               "translation": "Encantado de conocerte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GLADIADOR",
+            "scene": "Un GLADIADOR CONTENTO reparte flores.",
+            "sceneTarget": "A GLAD gladiator hands out flowers.",
+            "emoji": "⚔️🌸"
+          }
         }
       ]
     }

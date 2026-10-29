@@ -947,3 +947,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Carga esperada (simulación del calendario, `tools/simulate/src/curva-sim.ts`, acertando todo):** con 33 nuevas al
   día, unos 80–120 repasos diarios al cabo de 1–4 semanas (más si se falla).
 
+
+## D-095 · Vuelve el toque inicial: escenas absurdas en las misiones 14–30, los días antes y los meses (usuario, 29-oct-2026)
+- **Por qué (usuario):** «no he visto los días de la semana ni ejercicios absurdos; el toque inicial se está esfumando».
+- **Lo que pasaba:** hasta la misión 13 casi todo tenía su escena; desde la 14, casi nada (informática 0 de 15; de la 18
+  en adelante, 1 por misión). Los días estaban en la misión 26 y los meses no existían.
+- **Decisión:** 161 escenas nuevas (≤ 10 palabras, puente de sonido con una palabra española real en MAYÚSCULAS) para
+  las palabras de las misiones 14–30 que no las tenían. Los cognados fáciles (hotel, museum, doctor…) se quedan sin
+  escena: una asociación forzada es peor que ninguna (D-060). Los días, week, weekend, month y year pasan a la misión 10
+  («Frecuencia, días y tiempo»), conservando su progreso; los 12 meses son una misión nueva justo después (10b). La
+  sincronización del contenido ahora cambia de misión una unidad que se mueve de archivo, sin perder su id.
+- Pendiente: escenas de las misiones 31–87, por tandas.

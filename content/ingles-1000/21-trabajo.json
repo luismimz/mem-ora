@@ -494,7 +494,14 @@
               "text": "What's your job?",
               "translation": "¿A qué te dedicas?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YOGUR",
+            "scene": "Tu TRABAJO: probar YOGURES todo el día.",
+            "sceneTarget": "Your JOB: tasting yogurts all day.",
+            "emoji": "🥣👅"
+          }
         },
         {
           "key": "boss",
@@ -531,7 +538,14 @@
               "text": "Ask your boss.",
               "translation": "Pregúntale a tu jefe."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOSTEZA",
+            "scene": "Tu JEFE BOSTEZA en cada reunión.",
+            "sceneTarget": "Your BOSS yawns in every meeting.",
+            "emoji": "🥱👔"
+          }
         },
         {
           "key": "office",
@@ -800,7 +814,14 @@
               "text": "We have a new customer.",
               "translation": "Tenemos un cliente nuevo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COSTUMBRE",
+            "scene": "El CLIENTE tiene la COSTUMBRE de quejarse.",
+            "sceneTarget": "The CUSTOMER has the habit of complaining.",
+            "emoji": "🧾😤"
+          }
         },
         {
           "key": "team",
@@ -838,7 +859,14 @@
               "text": "Which team do you support?",
               "translation": "¿De qué equipo eres?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TIMÓN",
+            "scene": "El EQUIPO entero rema y uno lleva el TIMÓN.",
+            "sceneTarget": "The whole TEAM rows and one steers.",
+            "emoji": "🚣⚓"
+          }
         },
         {
           "key": "project",
@@ -1038,7 +1066,14 @@
               "text": "Are you busy?",
               "translation": "¿Estás ocupado?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BIZCO",
+            "scene": "Estás tan OCUPADO que te pones BIZCO.",
+            "sceneTarget": "You’re so BUSY you go cross-eyed.",
+            "emoji": "😵📞"
+          }
         },
         {
           "key": "earn",
@@ -1081,7 +1116,14 @@
               "text": "How much do you earn?",
               "translation": "¿Cuánto ganas?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HERNIA",
+            "scene": "GANAS dinero cargando sacos: ¡HERNIA!",
+            "sceneTarget": "You EARN money carrying sacks: hernia!",
+            "emoji": "💰🏋️"
+          }
         },
         {
           "key": "task",
@@ -1124,7 +1166,14 @@
               "text": "This task is easy.",
               "translation": "Esta tarea es fácil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TASCA",
+            "scene": "Tu TAREA de hoy: limpiar la TASCA.",
+            "sceneTarget": "Your TASK today: clean the tavern.",
+            "emoji": "🍷🧹"
+          }
         }
       ]
     }
