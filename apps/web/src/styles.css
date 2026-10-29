@@ -509,6 +509,9 @@ blockquote.reading { font-size: .92rem; }
 /* Sin min-height: 0 la tarjeta crece más que la pantalla, .feed la recorta y la ficha larga no se puede desplazar. */
 .feed-stage { min-height: 0; }
 .slide > :first-child { margin-top: auto; } .slide > :last-child { margin-bottom: auto; }
+/* El confeti y los avisos flotantes van fuera del flujo: si son el último hijo, su margen no centra nada y todo el hueco
+   se iba arriba (el Taller se pegaba abajo tras el primer acierto, visto en el móvil del usuario, 29-oct-2026). */
+.slide > :nth-last-child(1 of :not(.confetti, .party, .floater)) { margin-bottom: auto; }
 .slide .slide-hint { margin-top: .2rem; }
 /* D-077: «Explícame más», nota del fallo, ejemplos y completar escribiendo */
 .more-btn { margin-top: .5rem; border: 1px dashed rgba(255,255,255,.4); border-radius: .9rem; padding: .6rem .8rem; background: transparent; color: #fff; font-weight: 800; font-size: .9rem; }
@@ -896,6 +899,7 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 /* Las tarjetas se centran con márgenes automáticos; el Arcade va anclado arriba para no moverse entre preguntas. */
 .slide.arcade-play > :first-child { margin-top: 0; }
 .slide.arcade-play > :last-child { margin-bottom: 0; }
+.slide.arcade-play > :nth-last-child(1 of :not(.confetti, .party, .floater)) { margin-bottom: 0; }
 
 /* Los tiempos verbales (D-089): la línea del tiempo, las pistas y el juego «¿Qué tiempo pide?». */
 .timeline { margin: 0; width: 100%; max-width: 22rem; align-self: center; background: rgba(0,0,0,.22); border-radius: 1rem; padding: .5rem .4rem .2rem; }
