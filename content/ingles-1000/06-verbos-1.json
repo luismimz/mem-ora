@@ -696,7 +696,7 @@
         {
           "key": "g-present-simple",
           "type": "pattern",
-          "goal": "Decir lo que te gusta, quieres o necesitas",
+          "goal": "PRESENTE SIMPLE: lo que te gusta, quieres o haces siempre",
           "rule": "Con I, you, we, they el verbo va tal cual: I like music. «Me gusta» se dice al revés: YO gusto → I like.",
           "pieces": [
             {

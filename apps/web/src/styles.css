@@ -1117,3 +1117,9 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .pslot.next { border-color: #ffd76a; animation: pulse 1.2s ease infinite; }
 .pieces .pieces-q { opacity: .8; font-weight: 700; font-size: .92rem; }
 @media (prefers-reduced-motion: reduce) { .pslot.next { animation: none; } }
+/* D-101: chuleta de los tiempos al empezar «¿Qué tiempo pide?» y el contraste al fallar. */
+.tense-cheat { display: grid; gap: .7rem; width: 100%; }
+.tense-cheat-row { display: grid; gap: .25rem; justify-items: center; padding: .5rem .6rem; border-radius: 1rem; background: rgba(0,0,0,.22); }
+.tense-cheat-signals { margin: 0; font-size: .85rem; font-weight: 800; opacity: .9; text-align: center; }
+.tense-other { margin: 0; font-size: .92rem; text-align: center; opacity: .92; }
+.tense-other b { color: #ffd76a; }

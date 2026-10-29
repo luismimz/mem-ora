@@ -82,10 +82,7 @@ try {
   check(fromUnits.every((k) => ['g-past-simple', 'g-present-continuous', 'g-present-simple'].includes(k)) && fromUnits.includes('g-present-continuous') && fromUnits.length >= 2, `mezcla el tiempo nuevo con los ya aprendidos (${fromUnits.join(', ')})`);
   const tag = () => page.evaluate(() => document.querySelector('.slide .tag')?.textContent ?? '');
   check(/QUÉ TIEMPO PIDE/.test(await tag()), 'se presenta: «🕰️ ¿QUÉ TIEMPO PIDE?»');
-  const route = await page.locator('.tense-route p').textContent();
-  check(/3 de 3/.test(route), `enseña tu ruta de los tiempos («${route.trim()}»)`);
   if (shots) await page.screenshot({ path: `${shots}/tiempos-intro.png` });
-  await page.locator('.arcade-go').tap();
   const cdp = await context.newCDPSession(page);
   const swipeUp = async () => {
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 760 }] });
@@ -93,6 +90,10 @@ try {
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     await page.waitForTimeout(300);
   };
+  const cheat = await page.evaluate(() => [...document.querySelectorAll('.tense-cheat-row')].map((r) => ({ name: r.querySelector('.tense-chip')?.textContent ?? '', line: Boolean(r.querySelector('.timeline svg')), signals: r.querySelector('.tense-cheat-signals')?.textContent ?? '' })));
+  check(cheat.length >= 2 && cheat.some((c) => /Presente simple/i.test(c.name)) && cheat.every((c) => c.line && c.signals.length > 3), `chuleta: cada tiempo con su nombre, línea y pistas (${cheat.map((c) => c.name).join(' · ')})`);
+  check(await page.locator('.slide button.arcade-go').count() === 0, 'sin botón: se empieza deslizando');
+  await swipeUp();
   const total = step.tenseDrills.length;
   check(total === 6, `seis frases (${total})`);
   const drillOf = (n) => page.evaluate((i) => { const s = window.__plan.steps.find((x) => x.kind === 'tense'); const d = s.tenseDrills[i]; return { ...window.__units[d.unitKey].payload.drills[d.drill], unitKey: d.unitKey }; }, n);
@@ -126,19 +127,28 @@ try {
       check(/Era/.test(after.verdict) && after.gap === d.answer, `al fallar, se ve la buena en el hueco («${after.gap}») y lo que elegiste`);
       check((!d.signal || after.why.includes(d.signal)) && after.es.length > 0, `y por qué: «${after.why.trim()}» + «${after.es}»`);
       check(after.line || d.unitKey === 'g-simple-or-continuous', 'con la línea del tiempo de ese tiempo');
+      const other = await page.locator('.tense-other').count() ? await page.locator('.tense-other').textContent() : '';
+      check(/sería .+ pista como/.test(other), `contraste: lo que elegiste pediría otra pista («${other.trim()}»)`);
       if (shots) { await page.waitForTimeout(900); await page.screenshot({ path: `${shots}/tiempos-fallo.png` }); }
     } else if (n === 0) {
       check(/¡Sí!/.test(after.verdict) && after.gap === d.answer, `al acertar, se celebra y se llena el hueco («${after.gap}»)`);
       if (shots) await page.screenshot({ path: `${shots}/tiempos-acierto.png` });
     }
-    if (n === 2) await swipeUp(); else await page.locator('.tense-after .arcade-go').tap();
+    if (wrongNow || n === 2) await swipeUp();
+    else if (n === 0) {
+      await page.waitForFunction(() => /PIDE\? · 2\//.test(document.querySelector('.slide .tag')?.textContent ?? ''), null, { timeout: 5000 });
+      check(true, 'al acertar, pasa sola a la siguiente (sin botón)');
+    }
     if (n === 2) check(true, 'se pasa a la siguiente deslizando hacia arriba');
   }
   await page.waitForFunction(() => /CASO CERRADO/.test(document.querySelector('.slide .tag')?.textContent ?? ''), null, { timeout: 5000 });
   const end = await page.evaluate(() => ({ on: document.querySelectorAll('.tense-stars span.on').length, text: document.querySelector('.slide').textContent.replace(/\s+/g, ' ') }));
   check(end.on === 2 && /5\/6 frases resueltas/.test(end.text), `al final, estrellas (${end.on}/3) y aciertos («5/6 frases resueltas»)`);
+  const route = await page.locator('.tense-route p').textContent();
+  check(/3 de 3/.test(route), `al final, tu ruta de los tiempos («${route.trim()}»)`);
   if (shots) await page.screenshot({ path: `${shots}/tiempos-fin.png` });
-  await page.locator('.tense-end .arcade-go').tap();
+  check(await page.locator('.tense-end button.arcade-go').count() === 0, 'final sin botón «Seguir»');
+  await swipeUp();
   await page.waitForTimeout(300);
   const teach = await page.evaluate(() => ({ tag: document.querySelector('.slide .tag')?.textContent ?? '', line: Boolean(document.querySelector('.teach .timeline svg')), note: document.querySelector('.teach-note')?.textContent ?? '' }));
   check(wrongAt >= 0 && /RECUÉRDALO/.test(teach.tag) && teach.line && /línea del tiempo/.test(teach.note), 'como fallaste una, se vuelve a enseñar ese tiempo con su línea antes de seguir');
