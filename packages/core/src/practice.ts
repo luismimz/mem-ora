@@ -51,3 +51,22 @@ export function dueUnits(skills: Record<string, SkillState>, now: number): Set<s
   for (const s of Object.values(skills)) if (s.attempts > 0 && s.dueAt !== null && s.dueAt <= now) out.add(s.unitId);
   return out;
 }
+
+/** Escalón del programador desde el que una palabra se repasa recordándola (no eligiendo): los intervalos largos exigen recuperar. */
+export const MATURE_STEP = 3;
+
+/**
+ * Repaso por palabra (D-094): de los repasos vencidos del plan (ya ordenados por urgencia), las palabras cuya habilidad
+ * de recordar toca hoy según su curva. Una palabra sale una sola vez aunque venzan varias de sus habilidades; las de
+ * escuchar y producir se practican con lo nuevo. `recall` indica que ya es madura y se repasa recordándola.
+ */
+export function dueWords(items: Array<{ skillId: string; unitId: string; reason: string }>, kindOf: (skillId: string) => string | undefined, isWord: (unitId: string) => boolean, skills: Record<string, SkillState>): Array<{ unitKey: string; recall: boolean }> {
+  const out: Array<{ unitKey: string; recall: boolean }> = [];
+  const seen = new Set<string>();
+  for (const it of items) {
+    if (it.reason !== 'review' || seen.has(it.unitId) || !isWord(it.unitId) || kindOf(it.skillId) !== 'recall') continue;
+    seen.add(it.unitId);
+    out.push({ unitKey: it.unitId, recall: (skills[it.skillId]?.step ?? 0) >= MATURE_STEP });
+  }
+  return out;
+}

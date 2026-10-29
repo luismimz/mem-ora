@@ -161,6 +161,8 @@ export function judgeableExamples(u: SessionUnit): number[] {
   });
 }
 export const FLOW_ARCADE_MIN = 6;
+/** Repaso rápido (D-094): como mucho estas palabras por ronda; las demás vencidas, en la siguiente. */
+export const FLOW_REVIEW_ARCADE_MAX = 25;
 export const FLOW_ARCADE_CHANCE = 0.5;
 /** No sale antes de esta tarjeta de la ronda (primero se aprende algo). */
 export const FLOW_ARCADE_AFTER = 4;
@@ -196,6 +198,11 @@ export function buildFlowSession(input: {
   audio?: boolean;
   /** Lo ya aprendido (D-087): de aquí salen las preguntas del «Arcade sorpresa». */
   arcadeUnits?: string[];
+  /**
+   * Repaso rápido (D-094): palabras que vencen hoy según su curva, en orden de urgencia. Van al principio, en formato
+   * Arcade y sin ficha; `recall` = ya madura, se recuerda del español al inglés. Si hay repaso, no hay Arcade sorpresa.
+   */
+  reviewArcade?: Array<{ unitKey: string; recall: boolean }>;
 }): AssocPlan {
   const { units, items } = input;
   const rand = seeded(input.sessionId);
@@ -417,7 +424,11 @@ export function buildFlowSession(input: {
   // 4b. Arcade sorpresa (D-087): de vez en cuando, en un punto al azar, una ráfaga contrarreloj SOLO de lo ya aprendido
   // (todo enseñado antes). Pesa como reconocer y un fallo no corta el juego: vuelve en su repaso.
   const arcadePool = (input.arcadeUnits ?? []).filter((k) => has(k) && arcadeable(units[k]!));
-  if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
+  const review = (input.reviewArcade ?? []).filter((r) => has(r.unitKey)).slice(0, FLOW_REVIEW_ARCADE_MAX);
+  if (review.length) {
+    const recall = review.filter((r) => r.recall).map((r) => r.unitKey);
+    steps.unshift({ kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: review.map((r) => r.unitKey), arcadeReview: true, ...(recall.length ? { arcadeRecall: recall } : {}), id: '0-repaso' });
+  } else if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
     const judge = shuffle((input.arcadeUnits ?? []).filter(has).flatMap((k) => judgeableExamples(units[k]!).map((example) => ({ unitKey: k, example }))), rand)
       .slice(0, FLOW_ARCADE_GRAMMAR).map((g) => ({ ...g, wrong: rand() < 0.5 }));
     const pick = shuffle([...arcadePool], rand).slice(0, FLOW_ARCADE_SIZE - judge.length);

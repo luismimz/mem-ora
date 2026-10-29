@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, pieceExamples, sentencesOf, practiceIndices, practicePieces, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, pieceExamples, sentencesOf, practiceIndices, practicePieces, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, FLOW_REVIEW_ARCADE_MAX, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -480,5 +480,26 @@ describe('frases de práctica (D-093)', () => {
   it('sin frases de práctica, sigue como antes (ejemplos de la ficha)', () => {
     const plan = buildFlowSession({ ...base, units: { g1: pattern([]) }, items: [item('g1', 'new')], sessionId: 'z' });
     expect(plan.steps.find((s) => s.kind === 'pieces')!.example).toBe(0);
+  });
+});
+
+describe('repaso rápido por curva (D-094)', () => {
+  const w = (key: string): SessionUnit => ({ key, type: 'term', language: 'en', payload: { form: 'word', text: key, meaning: key, examples: [{ text: `I see a ${key} here.`, translation: 'x' }] },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }], association: null } as unknown as SessionUnit);
+  const units = Object.fromEntries(['boy', 'nine', 'cat', 'dog', 'sun', 'red', 'sky', 'car'].map((k) => [k, w(k)]));
+  const plan = buildFlowSession({ ...base, units, items: [item('sun', 'new'), item('sky', 'new')], reviewArcade: [{ unitKey: 'nine', recall: true }, { unitKey: 'boy', recall: false }],
+    arcadeUnits: ['boy', 'nine', 'cat', 'dog', 'red', 'car'], sessionId: 'r' });
+  it('empieza con el repaso (Arcade, sin ficha) y después solo hay contenido nuevo', () => {
+    expect(plan.steps[0]).toMatchObject({ kind: 'arcade', arcadeReview: true, arcadeUnits: ['nine', 'boy'], arcadeRecall: ['nine'] });
+    const reels = plan.steps.filter((s) => s.kind === 'reel').map((s) => s.unitKey);
+    expect(reels).toEqual(['sun', 'sky']);
+  });
+  it('con repaso no hay Arcade sorpresa (una sola ráfaga por ronda)', () => {
+    expect(plan.steps.filter((s) => s.kind === 'arcade').length).toBe(1);
+  });
+  it('como mucho FLOW_REVIEW_ARCADE_MAX palabras por ronda', () => {
+    const many = Array.from({ length: 40 }, (_, i) => `w${i}`);
+    const p = buildFlowSession({ ...base, units: Object.fromEntries(many.map((k) => [k, w(k)])), items: [], reviewArcade: many.map((unitKey) => ({ unitKey, recall: false })), sessionId: 'm' });
+    expect(p.steps[0]!.arcadeUnits!.length).toBe(FLOW_REVIEW_ARCADE_MAX);
   });
 });

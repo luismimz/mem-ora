@@ -929,4 +929,21 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   nueva» (antes el confeti dejaba el contenido pegado abajo).
 - **Voz:** los audios Kokoro acababan casi en seco y el iPhone se comía la última palabra: todos llevan ahora 0,35 s de
   silencio al final (nombre de archivo nuevo para que ningún móvil siga con el viejo de su caché).
+## D-094 · La curva del olvido de verdad en idiomas: repaso rápido + contenido nuevo (usuario, 29-oct-2026)
+- **Por qué (usuario):** «llevo varios días y me salen siempre las mismas palabras… fifteen o brown salen tan a menudo
+  y otras han quedado en el olvido… así no se llega a las 1.000 palabras al mes». Propone repasar con el Arcade y que el
+  resto sea nuevo, y que se repita lo fallado; los repasos, según la curva (1 h, 1 día, 3 días…), no todos a la vez.
+- **Lo que pasaba (datos reales, 29-oct):** 94 palabras en 13 días; desde el 20-oct, 2–4 nuevas al día con un 95–99 %
+  de aciertos; boy 32 intentos, brown 26… y nine, seven, sister… 10 días sin salir (71 vencidas). Causas: el tope total
+  del día se gastaba con el «refuerzo de lo más débil» (siempre las mismas 8) y solo quedaban las 3 nuevas mínimas; 30
+  repasos al día como mucho; cada palabra tenía 3 calendarios (reconocer, producir, escuchar); y cada repaso volvía a
+  enseñar la ficha entera.
+- **Decisión:** en idiomas, cada ronda empieza con el **Repaso rápido** (Arcade sin ficha) de las palabras que tocan
+  según su curva, una vez por palabra, las más urgentes primero, sin tope diario (25 por ronda). Las jóvenes se
+  reconocen; las maduras (3 días o más) se recuerdan y uno se califica, que es lo que alarga el intervalo (reconocer
+  sigue pesando poco). Lo fallado vuelve al final de la ráfaga y la curva lo trae antes. El resto de la ronda es nuevo:
+  11 por ronda, meta 33 al día, y se puede seguir (elección del usuario). «Tus errores» solo con lo fallado pendiente;
+  el refuerzo, solo si no queda nada más.
+- **Carga esperada (simulación del calendario, `tools/simulate/src/curva-sim.ts`, acertando todo):** con 33 nuevas al
+  día, unos 80–120 repasos diarios al cabo de 1–4 semanas (más si se falla).
 

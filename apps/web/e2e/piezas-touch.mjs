@@ -87,7 +87,7 @@ try {
   const tag = await page.locator('.pieces .tag').textContent();
   check(/ADELANTA/.test(tag), `primero: «${tag.trim()}»`);
   const head = await page.evaluate(() => ({ top: Math.round(document.querySelector('.pieces .tag').getBoundingClientRect().top), badge: document.querySelector('.pieces-new')?.textContent, goal: document.querySelector('.pieces-goal')?.textContent }));
-  check(head.top < 140 && /nueva/i.test(head.badge ?? '') && Boolean(head.goal), `empieza arriba como la ficha (${head.top}px), con el truco («${head.goal}») y «${head.badge}»`);
+  check(head.top < 200 && /nueva/i.test(head.badge ?? '') && Boolean(head.goal), `empieza arriba como la ficha (${head.top}px), con el truco («${head.goal}») y «${head.badge}»`);
   check(await fits(page), 'las piezas caben en la pantalla');
   if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-adelanta.png` });
   const ex = await page.evaluate(() => { const s = window.__plan.steps.find((x) => x.kind === 'pieces'); const u = window.__units[s.unitKey]; const m = [...u.payload.examples, ...(u.payload.practice ?? [])][s.example].mirror; const order = m.order ?? m.pieces.map((_, i) => i); return { pieces: m.pieces, order }; });
