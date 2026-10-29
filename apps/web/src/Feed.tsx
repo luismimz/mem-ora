@@ -1351,10 +1351,34 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
     if (!q || picked !== null) return;
     const ok = o === q.x.answer;
     setPicked(o);
-    if (ok) { setRight((r) => r + 1); setConfetti((c) => c + 1); } else failed.current.push(q.u.key);
+    // Sin botones (D-101): si aciertas, pasa sola tras ver la pista y su tiempo; si fallas, lees y deslizas.
+    if (ok) { setRight((r) => r + 1); setConfetti((c) => c + 1); window.setTimeout(() => nextRef.current(), 2600); } else failed.current.push(q.u.key);
     onAnswer(q.u, ok, Math.round(performance.now() - t0.current), q.n, clue);
   }
-  function next() { setPicked(null); setClue(false); setI((n) => n + 1); }
+  const shownAt = useRef(-1);
+  function next() { if (shownAt.current === i) return; shownAt.current = i; setPicked(null); setClue(false); setI((n) => n + 1); }
+  const nextRef = useRef(next);
+  nextRef.current = next;
+  // Los tiempos de esta partida, con su línea y sus pistas: así se sabe QUÉ es «presente simple» antes de pedirlo
+  // (usuario, 29-oct: «es raro haber enseñado el presente simple sin saber que lo era»).
+  const tenses = useMemo(() => [...new Map(items.map((it) => [it.u.key, it.u])).values()], [items]);
+  // Al fallar: qué tiempo sería la forma elegida y qué pista haría falta (si es la respuesta de otra frase del juego).
+  // Si la forma no es respuesta de ninguna frase, se deduce por su forma («rains» → presente simple, «played» → pasado).
+  const shapeKey = (form: string) => {
+    const f = form.trim().toLowerCase();
+    if (/^(am|is|are|'m|'re|'s)\s+\w+ing$/.test(f)) return 'g-present-continuous';
+    if (/^(was|were)\s+\w+ing$/.test(f)) return 'g-past-continuous';
+    if (/^will\s/.test(f)) return 'g-will';
+    if (/^(have|has)\s+been\s+\w+ing$/.test(f)) return 'g-present-perfect-continuous';
+    if (/^(have|has)\s/.test(f)) return 'g-present-perfect';
+    if (/^(did|didn't)\s|^\w+ed$/.test(f)) return 'g-past-simple';
+    if (/^(do|does|don't|doesn't)\s/.test(f)) return 'g-present-simple';
+    // Una palabra suelta: presente simple, salvo que sea un pasado irregular que aparece en la ficha del pasado («went»).
+    if (/^\w+$/.test(f)) return all['g-past-simple'] && new RegExp(`\\b${f}\\b`, 'i').test(JSON.stringify(all['g-past-simple'].payload)) ? 'g-past-simple' : 'g-present-simple';
+    return null;
+  };
+  const formTense = (form: string) => Object.values(all).find((u) => drillsOf(u).some((d) => d.answer === form) && (u.payload as PatternPayload).tense)
+    ?? (shapeKey(form) ? all[shapeKey(form)!] : undefined);
   const finish = () => onDone(failed.current.includes(unit.key) ? unit.key : failed.current[0] ?? null);
   const routeChips = (
     <div className="tense-route">
@@ -1366,11 +1390,20 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
     return (
       <Slide tone={hue(unit.key)} className="tense-intro" onNext={() => setI(0)}>
         <p className="tag">🕰️ ¿QUÉ TIEMPO PIDE?</p>
-        <div className="arcade-big" aria-hidden="true">🕵️</div>
-        <h2 className="ask">Sé detective: busca la pista</h2>
-        <p className="arcade-rules">{items.length} frases · cada una tiene una PISTA (yesterday, now, since…) que te dice qué tiempo pide el verbo.</p>
-        {routeChips}
-        <button type="button" className="primary arcade-go" onClick={() => setI(0)}>¡Vamos! 🔎</button>
+        <h2 className="ask">Sé detective: la PISTA te dice el tiempo</h2>
+        <div className="tense-cheat">
+          {tenses.map((u) => {
+            const pp = u.payload as PatternPayload;
+            return (
+              <div key={u.key} className="tense-cheat-row">
+                <p className="tense-chip">{tenseOf(u)}</p>
+                {pp.timeline?.length ? <TimeLine marks={pp.timeline} small /> : null}
+                {pp.signals?.length ? <p className="tense-cheat-signals" lang={u.language}>🔎 {pp.signals.slice(0, 5).join(' · ')}</p> : null}
+              </div>
+            );
+          })}
+        </div>
+        <p className="arcade-rules">{items.length} frases · desliza para empezar</p>
       </Slide>
     );
   }
@@ -1383,7 +1416,6 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
         <p className="arcade-rules">{right}/{items.length} frases resueltas{right === items.length ? ' · ¡detective de los tiempos! 🏆' : ''}</p>
         {routeChips}
         {failed.current.length > 0 && <p className="arcade-rules muted">Ahora repasas el tiempo que se te resistió.</p>}
-        <button type="button" className="primary arcade-go" onClick={finish}>Seguir →</button>
         <Confetti burst={stars === 3 ? 99 : 0} />
       </Slide>
     );
@@ -1410,7 +1442,11 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
           {q.x.signal && <p className="tense-why">📍 <b lang={q.u.language}>«{q.x.signal}»</b> → {tenseOf(q.u)}</p>}
           {p.timeline?.length ? <TimeLine marks={p.timeline} small /> : null}
           {q.x.es && <p className="tense-es">{q.x.es}</p>}
-          <button type="button" className="primary arcade-go" onClick={next}>{i + 1 < items.length ? 'Siguiente →' : 'Ver resultado →'}</button>
+          {!ok && picked && (() => {
+            const other = formTense(picked);
+            const op = other?.payload as PatternPayload | undefined;
+            return other && other.key !== q.u.key && op?.signals?.length ? <p className="tense-other">«{picked}» sería <b>{tenseOf(other)}</b>: haría falta una pista como <b lang={other.language}>{op.signals.slice(0, 3).join(', ')}</b>.</p> : null;
+          })()}
         </div>
       )}
       <Confetti burst={confetti} />

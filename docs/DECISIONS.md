@@ -1007,3 +1007,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   a «Comer, vivir, jugar… = TO + verbo»: «El verbo sin conjugar (acaba en -ar, -er, -ir) lleva TO DELANTE: comer = to
   eat. Quiero comer = I want TO eat.» Escena: «La -ER de comER despega y un TO aterriza DELANTE.»
 
+
+## D-101 · Los tiempos con nombre y por contraste (usuario, 29-oct-2026)
+
+- **Contexto:** el usuario dudaba entre *play* y *played* («para played debería ser más larga la frase… deberíamos
+  enseñar estas cosas») y vio raro haber aprendido el presente simple sin que se llamara así.
+- **Decisión:** «¿Qué tiempo pide?» empieza con una chuleta: cada tiempo de la partida con su nombre, su línea del
+  tiempo y sus pistas. Al fallar, se dice qué tiempo sería la forma elegida y qué pista le haría falta. Sin botones
+  (al acertar pasa sola; al fallar o al final, se desliza). La ficha del presente simple lo nombra en su objetivo.
