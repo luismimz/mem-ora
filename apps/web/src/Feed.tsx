@@ -2,7 +2,7 @@
 // vez y sin botones de avance: se desliza hacia arriba para seguir y, al acertar, pasa sola. Asociación → relámpago /
 // ¿verdad o mentira? → pregunta jefe. Se enseña en el error y lo fallado vuelve unas tarjetas después. Infinito: cada
 // ronda acaba en un hito y la siguiente ya está cargada. Puntos, racha con protector, combos, vibración y sonido.
-import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
 import type { ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark, Widget } from '@memora/content';
@@ -14,6 +14,7 @@ import {
   choicesFor,
   drillsOf,
   maskName,
+  movedPieces,
   orderRule,
   orderSwap,
   spanishOrderCalque,
@@ -219,7 +220,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
       <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🪞'}</div>
       <h2 className="pattern-goal">{p.goal}</h2>
       {unit.association?.text && <p className="face-story"><Marked text={unit.association.text} /></p>}
-      {first ? <MirrorAnim unit={unit} m={first.mirror!} text={first.text} /> : (
+      {first ? <FlipMirror unit={unit} m={first.mirror!} text={first.text} /> : (
       <div className="mirror" role="list" aria-label="Pieza a pieza">
         {p.pieces.map((x, i) => (
           <span key={i} role="listitem" className={`piece ${x.role}`}>
@@ -857,13 +858,260 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
   );
 }
 
+/**
+ * «Gira las piezas» (D-092): el ejemplo del truco se descubre TÚ. La frase en español sale partida en piezas; piensas
+ * cómo se dice cada una y la giras (suena el inglés). Con todas giradas, las piezas se colocan en el orden del inglés
+ * (si cambia, la que salta lo hace en arco) y aparece la regla. Enseña: no puntúa.
+ */
+/** ¿Se ve este elemento (al menos un 55 % en pantalla y con la app delante)? */
+function useSeen(box: RefObject<HTMLElement | null>) {
+  const [seen, setSeen] = useState(false);
+  useEffect(() => {
+    const el = box.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setSeen(true); return; }
+    const io = new IntersectionObserver(([e]) => setSeen(Boolean(e && e.isIntersecting && e.intersectionRatio >= 0.55) && document.visibilityState === 'visible'), { threshold: 0.6 });
+    io.observe(el);
+    const vis = () => { if (document.visibilityState !== 'visible') setSeen(false); else { io.unobserve(el); io.observe(el); } };
+    document.addEventListener('visibilitychange', vis);
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', vis); };
+  }, [box]);
+  return seen;
+}
+
+/** Si no tocas, el ejemplo se gira solo: la primera pieza a los FLIP_FIRST_MS (para pensarla) y las demás cada
+ * FLIP_IDLE_MS. Nunca hace falta un botón para verlo. */
+const FLIP_FIRST_MS = 2200;
+const FLIP_IDLE_MS = 1300;
+
+function FlipMirror({ unit, m, text }: { unit: SessionUnit; m: Mirror; text: string }) {
+  const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
+  const jumps = order.some((v, i) => v !== i);
+  const flippable = useMemo(() => m.pieces.flatMap((p, i) => (p.role === 'signal' ? [] : [i])), [m]);
+  const [flipped, setFlipped] = useState<number[]>([]);
+  const [stage, setStage] = useState<'flip' | 'move' | 'done'>('flip');
+  const [run, setRun] = useState(0);
+  const chips = useRef<Record<number, HTMLElement | null>>({});
+  const rects = useRef<Record<number, DOMRect>>({});
+  const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+  const all = flippable.every((i) => flipped.includes(i));
+  // Empieza solo (usuario, 29-oct: «todo debería iniciar con el ejemplo sin darle al botón»): si al verlo no tocas,
+  // las piezas se giran solas una a una; tocar cualquiera adelanta. Mientras no se ve, espera.
+  const box = useRef<HTMLDivElement>(null);
+  const seen = useSeen(box);
+  useEffect(() => {
+    if (stage !== 'flip' || all || !seen) return;
+    const t = setTimeout(() => { const next = flippable.find((i) => !flipped.includes(i)); if (next !== undefined) flip(next); }, flipped.length ? FLIP_IDLE_MS : FLIP_FIRST_MS);
+    return () => clearTimeout(t);
+  }, [flipped, stage, seen, run]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (stage !== 'flip' || !all) return;
+    const t = setTimeout(() => { setStage('move'); sfx(jumps ? 'boing' : 'whoosh'); }, 650);
+    return () => clearTimeout(t);
+  }, [all, stage]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (stage !== 'move') return;
+    const t = setTimeout(() => { setStage('done'); if (audioEnabled()) speak(text, unit.language); }, jumps ? 950 : 350);
+    return () => clearTimeout(t);
+  }, [stage]); // eslint-disable-line react-hooks/exhaustive-deps
+  const last = useRef(stage);
+  useLayoutEffect(() => {
+    const moving = last.current === 'flip' && stage === 'move';
+    last.current = stage;
+    for (const [k, el] of Object.entries(chips.current)) {
+      if (!el) continue;
+      const now = el.getBoundingClientRect();
+      const before = rects.current[Number(k)];
+      rects.current[Number(k)] = now;
+      if (!before || !moving || reduced) continue;
+      const dx = before.left - now.left; const dy = before.top - now.top;
+      if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
+      el.animate(dx > 0 ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 50}px) rotate(-8deg) scale(1.1)`, offset: 0.5 }, { transform: 'none' }]
+        : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 800, easing: 'cubic-bezier(.3, 1.2, .5, 1)' });
+    }
+  });
+  function flip(i: number) {
+    if (stage !== 'flip' || flipped.includes(i)) return;
+    setFlipped((f) => [...f, i]);
+    sfx('pop');
+    if (audioEnabled()) speak(m.pieces[i]!.en, unit.language);
+  }
+  const again = () => { rects.current = {}; setFlipped([]); setStage('flip'); setRun((r) => r + 1); };
+  const english = stage !== 'flip';
+  const shown = english ? order : flippable;
+  const own = m.pieces.find((p) => p.why);
+  const rule = own?.why ?? orderRule(m, text)?.text;
+  return (
+    <div className="morph flipm" key={run} ref={box}>
+      <p className="flip-say">{m.say}</p>
+      <p className="morph-cap" aria-live="polite">{stage === 'flip' ? <>🤔 Piensa cómo se dice cada pieza y <b>gírala</b> ({flipped.length}/{flippable.length})</> : jumps ? <>¡En inglés el <b>orden cambia</b>!</> : <>Mismo orden que en español 👍</>}</p>
+      <div className="morph-row" lang={english ? unit.language : 'es'}>
+        {shown.map((i) => {
+          const p = m.pieces[i]!;
+          const isFlipped = english || flipped.includes(i);
+          return (
+            <button type="button" key={`f${i}`} ref={(el) => { chips.current[i] = el; }} className={`mchip flipchip role-${p.role} ${p.role === 'signal' ? 'grow' : ''} ${!isFlipped ? 'todo' : ''}`} onClick={(e) => { e.stopPropagation(); flip(i); }} aria-label={isFlipped ? p.en : `Girar «${p.es}»`}>
+              <span className={`mface ${isFlipped ? 'flipped' : ''}`}>
+                <span className="front">{p.ghost && <i className="ghost-tag" aria-hidden="true">👻</i>}<b>{p.es}</b><small>toca ↻</small></span>
+                <span className="back"><b>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}</small></span>
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      {stage === 'flip' && <button type="button" className="link flip-all" onClick={(e) => { e.stopPropagation(); setFlipped(flippable); }}>Girar todas</button>}
+      {stage === 'done' && (
+        <>
+          {jumps && rule && <p className="why">📏 {rule}</p>}
+          <div className="morph-end">
+            <p className="train-final" lang={unit.language}>{text}</p>
+            {audioEnabled() && <button type="button" className="say" aria-label="Escuchar" onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button>}
+            <button type="button" className="morph-again" aria-label="Otra vez" onClick={(e) => { e.stopPropagation(); again(); }}>↻</button>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+/** Orden estable que no deja las fichas ya ordenadas (si no, no habría nada que hacer). */
+function scrambled<T>(items: T[], seed: string): T[] {
+  const out = [...items].sort((a, b) => hue(`${seed}${String(a)}`) - hue(`${seed}${String(b)}`));
+  if (out.length > 1 && out.every((x, i) => x === items[i])) out.push(out.shift()!);
+  return out;
+}
+
+/**
+ * «Las piezas» (D-092): practicar una frase por trozos antes de construirla palabra a palabra. Primero, si el inglés
+ * cambia el orden, «¿Qué pieza se adelanta?» (fijarse en lo que salta); si no, «¿Cuál falta?». Después, ordenar las
+ * piezas en inglés. Al fallar, se ve el orden bueno y la regla; si has seguido el orden del español, se dice.
+ */
+function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all: Record<string, SessionUnit>; example: number; seed: string; onResult: (ok: boolean, ms: number, note: string) => void }) {
+  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string; mirror?: Mirror }> }).examples[example]!;
+  const m = ex.mirror!;
+  const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
+  const moved = movedPieces(m);
+  const jumper = order.find((i) => moved.includes(i));
+  const canJump = jumper !== undefined && m.pieces[jumper]!.role !== 'signal';
+  // ¿Cuál falta?: una pieza con contenido, y dos falsas del mismo papel sacadas de otras frases.
+  const gap = useMemo(() => {
+    if (canJump) return null;
+    const candidates = m.pieces.flatMap((p, i) => (!p.ghost && (p.role === 'word' || p.role === 'verb') ? [i] : []));
+    const hidden = candidates.length ? candidates[hue(seed) % candidates.length]! : undefined;
+    if (hidden === undefined) return null;
+    const want = m.pieces[hidden]!;
+    const pool = new Set<string>();
+    for (const u of Object.values(all)) for (const e of ((u.payload as { examples?: Array<{ mirror?: Mirror }> }).examples ?? [])) for (const p of e.mirror?.pieces ?? []) if (p.role === want.role && p.en.toLowerCase() !== want.en.toLowerCase() && p.en.split(' ').length === want.en.split(' ').length) pool.add(p.en);
+    const wrong = [...pool].sort((a, b) => hue(`${seed}${a}`) - hue(`${seed}${b}`)).slice(0, 2);
+    return wrong.length === 2 ? { hidden, options: scrambled([want.en, ...wrong], seed) } : null;
+  }, [m, all, seed, canJump]);
+  const first: 'jump' | 'gap' | 'order' = canJump ? 'jump' : gap ? 'gap' : 'order';
+  const [phase, setPhase] = useState<'jump' | 'gap' | 'order'>(first);
+  const [pickA, setPickA] = useState<string | null>(null);
+  const [okA, setOkA] = useState(true);
+  const tiles = useMemo(() => scrambled(order, `${seed}-t`), [order, seed]);
+  const [placed, setPlaced] = useState<number[]>([]);
+  const [checked, setChecked] = useState<boolean | null>(null);
+  const [confetti, setConfetti] = useState(0);
+  const t0 = useRef(performance.now());
+  const rule = m.pieces.find((p) => p.why && moved.includes(m.pieces.indexOf(p)))?.why ?? orderRule(m, ex.text)?.text;
+  function answerA(choice: string, good: boolean) {
+    if (pickA !== null) return;
+    setPickA(choice); setOkA(good);
+    if (good) { sfx('ok'); setConfetti((c) => c + 1); } else sfx('ko');
+  }
+  function place(i: number) {
+    if (checked !== null) return;
+    const next = [...placed, i];
+    setPlaced(next);
+    sfx('pop');
+    if (next.length === order.length) {
+      const good = next.every((x, k) => m.pieces[x]!.en === m.pieces[order[k]!]!.en);
+      setChecked(good);
+      if (good) { setConfetti((c) => c + 1); sfx('party'); if (audioEnabled()) speak(ex.text, unit.language); } else sfx('ko');
+    }
+  }
+  const spanishOrder = placed.length === order.length && placed.every((x, k) => x === k) && order.some((v, k) => v !== k);
+  const finish = () => {
+    const ok = okA && Boolean(checked);
+    onResult(ok, Math.round(performance.now() - t0.current), ok ? '' : `${spanishOrder ? 'Has seguido el orden del español. ' : ''}En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}`);
+  };
+  const chip = (i: number, extra = '') => {
+    const p = m.pieces[i]!;
+    return <><b lang={unit.language}>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}{extra}</small></>;
+  };
+  return (
+    <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked && okA ? 'right' : checked === false ? 'wrong' : ''}`} {...(checked !== null ? { onNext: finish } : {})}>
+      <p className="tag">🧩 LAS PIEZAS · {phase === 'order' ? 'ORDÉNALAS' : phase === 'jump' ? '¿QUÉ PIEZA SE ADELANTA?' : '¿CUÁL FALTA?'}</p>
+      <h3 className="ask pieces-es">{m.say}</h3>
+      {phase === 'jump' && (
+        <>
+          <p className="pieces-q">En inglés, <b>una pieza se adelanta</b>. ¿Cuál?</p>
+          <div className="pieces-row">
+            {m.pieces.map((p, i) => (p.role === 'signal' ? null : (
+              <button type="button" key={i} className={`ptile role-${p.role} ${pickA === null ? '' : i === jumper ? 'is-right' : pickA === String(i) ? 'is-wrong' : 'is-off'}`} onClick={() => answerA(String(i), i === jumper)}><b>{p.es}</b></button>
+            )))}
+          </div>
+          {pickA !== null && (
+            <div className="pieces-after">
+              <p className={`tense-verdict ${okA ? 'ok' : 'ko'}`}>{okA ? '¡Eso es! 🎉' : <>Era <b>{m.pieces[jumper!]!.es}</b></>}</p>
+              <p className="pieces-jump"><b>{m.pieces[jumper!]!.es}</b> → <b lang={unit.language}>{m.pieces[jumper!]!.en}</b> va antes</p>
+              {rule && <p className="why">📏 {rule}</p>}
+              <button type="button" className="primary arcade-go" onClick={() => setPhase('order')}>Ahora ordénalas →</button>
+            </div>
+          )}
+        </>
+      )}
+      {phase === 'gap' && gap && (
+        <>
+          <p className="pieces-q">¿Qué pieza falta en inglés?</p>
+          <div className="pieces-row" lang={unit.language}>
+            {order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${i === gap.hidden ? 'hole' : ''}`}>{i === gap.hidden ? <b>{pickA ?? '＿＿'}</b> : chip(i)}</span>)}
+          </div>
+          {pickA === null ? (
+            <div className="burst-buttons tense-options">{gap.options.map((o, k) => <button type="button" key={o} className={`burst-btn c${k}`} lang={unit.language} onClick={() => answerA(o, o === m.pieces[gap.hidden]!.en)}>{o}</button>)}</div>
+          ) : (
+            <div className="pieces-after">
+              <p className={`tense-verdict ${okA ? 'ok' : 'ko'}`}>{okA ? '¡Eso es! 🎉' : <>Era <b lang={unit.language}>{m.pieces[gap.hidden]!.en}</b> ({m.pieces[gap.hidden]!.es})</>}</p>
+              <button type="button" className="primary arcade-go" onClick={() => setPhase('order')}>Ahora ordénalas →</button>
+            </div>
+          )}
+        </>
+      )}
+      {phase === 'order' && (
+        <>
+          <p className="pieces-q">Toca las piezas en el orden del <b>inglés</b>.</p>
+          <div className={`pieces-slots ${checked === null ? '' : checked ? 'ok' : 'ko'}`} lang={unit.language} aria-label="Tu frase">
+            {order.map((_, k) => {
+              const i = placed[k];
+              return i === undefined ? <span key={k} className="pslot" /> : <button type="button" key={k} className={`ptile role-${m.pieces[i]!.role}`} onClick={() => { if (checked === null) setPlaced((pl) => pl.filter((_, j) => j !== k)); }}>{chip(i)}</button>;
+            })}
+          </div>
+          {checked === null ? (
+            <div className="pieces-row">{tiles.map((i) => <button type="button" key={i} className={`ptile role-${m.pieces[i]!.role} ${placed.includes(i) ? 'used' : ''}`} disabled={placed.includes(i)} onClick={() => place(i)}>{chip(i)}</button>)}</div>
+          ) : (
+            <div className="pieces-after">
+              <p className={`tense-verdict ${checked ? 'ok' : 'ko'}`}>{checked ? '¡Perfecto! 🎉' : spanishOrder ? 'Has seguido el orden del español' : 'Casi…'}</p>
+              {!checked && <div className="pieces-row good" lang={unit.language}>{order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${moved.includes(i) ? 'jumped' : ''}`}>{chip(i)}</span>)}</div>}
+              <p className="train-final" lang={unit.language}>{ex.text}</p>
+              {ex.translation && <p className="tense-es">{ex.translation}</p>}
+              {rule && order.some((v, k) => v !== k) && <p className="why">📏 {rule}</p>}
+              <button type="button" className="primary arcade-go" onClick={finish}>Seguir →</button>
+            </div>
+          )}
+        </>
+      )}
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
 /** Sesiones guardadas con la tarjeta antigua del tren: se muestra la animación en un paso. */
 function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; onNext: () => void }) {
   const ex = (unit.payload as { examples: Array<{ text: string; mirror?: Mirror }> }).examples[example]!;
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className="train">
       <p className="tag">🪞 CÓMO SE CONSTRUYE</p>
-      <MirrorAnim unit={unit} m={ex.mirror!} text={ex.text} />
+      <FlipMirror unit={unit} m={ex.mirror!} text={ex.text} />
     </Slide>
   );
 }
@@ -1663,6 +1911,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units}
     onAnswer={(u, ok, ms, it) => { const k = (it.kind === 'code' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : ''}` })); scored(ok, 12); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su ficha y sus ejemplos: así lo reconocerás y lo usarás la próxima vez.' }); else void advance({ correct: true, hint: 0 }); }} />;
+  else if (step.kind === 'pieces' && unit && step.example !== undefined) card = <Pieces key={step.id} unit={unit} all={units} example={step.example} seed={step.id} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#piezas-${step.example}`, 15, step.skillKey, 'recognition_choice', 0, note || undefined)} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
@@ -1671,7 +1920,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'review' && unit) card = <Write key={step.id} unit={unit} levelUp={Boolean(step.levelUp)} onResult={(ok, ms, hint, format) => answered(unit, ok, ms, `${unit.key}#write`, 20, step.skillKey, format, hint)} />;
   else if (step.kind === 'summary') {
-    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst', 'tense', 'workshop'].includes(s.kind) && outcomes[s.id]);
+    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst', 'tense', 'workshop', 'pieces'].includes(s.kind) && outcomes[s.id]);
     const right = asked.filter((s) => outcomes[s.id]!.correct).length;
     const newOnes = plan.steps.filter((s) => s.kind === 'reel' && !s.focus).length;
     const soon = progress?.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now());

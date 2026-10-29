@@ -57,10 +57,10 @@ try {
     await p.waitForSelector('.morph');
     const below = await p.evaluate(() => document.querySelector('.morph').getBoundingClientRect().top > innerHeight);
     await p.waitForTimeout(6500);
-    const waited = await p.evaluate(() => Boolean(document.querySelector('.morph .morph-say')) && !document.querySelector('.morph-end'));
+    const waited = await p.evaluate(() => document.querySelectorAll('.morph .mface.flipped').length === 0 && !document.querySelector('.morph-end'));
     check(below && waited, `el ejemplo fuera de pantalla no se gasta: sigue esperando al principio (fuera: ${below}, esperando: ${waited})`);
     await p.evaluate(() => document.querySelector('.morph').scrollIntoView({ block: 'center' }));
-    await p.waitForSelector('.morph-end', { timeout: 9000 }).catch(() => undefined);
+    await p.waitForSelector('.morph-end', { timeout: 14000 }).catch(() => undefined);
     check(await p.locator('.morph-end').count() === 1, 'al verlo, arranca solo y llega al final sin pulsar ↻');
     await small.close();
     // Con «Reducir movimiento» (iPhone) también se ve el ejemplo paso a paso, sin tener que pulsar ↻.
@@ -69,8 +69,8 @@ try {
     await q.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
     await q.goto(`${server.resolvedUrls.local[0]}e2e/harness-escena.html?k=g-adjective-order&solo=reel`);
     await q.waitForSelector('.morph');
-    const starts = await q.locator('.morph .morph-say').count();
-    await q.waitForSelector('.morph-end', { timeout: 9000 }).catch(() => undefined);
+    const starts = (await q.locator('.morph .mchip').count()) > 0 && (await q.locator('.morph .mface.flipped').count()) === 0 ? 1 : 0;
+    await q.waitForSelector('.morph-end', { timeout: 14000 }).catch(() => undefined);
     check(starts === 1 && await q.locator('.morph-end').count() === 1, 'con «Reducir movimiento» el ejemplo empieza desde el principio y llega solo al final');
     await calm.close();
   }

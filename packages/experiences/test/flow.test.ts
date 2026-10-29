@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, pieceExamples, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -211,9 +211,9 @@ describe('el espejo en movimiento (D-082, en un solo paso)', () => {
   } as unknown as SessionUnit;
   const lang = { ...base, units: { ...units, q1: pattern } };
 
-  it('lo nuevo: la ficha del truco (con su espejo animado dentro) y enseguida construir OTRA frase; sin tarjeta extra', () => {
+  it('lo nuevo: la ficha del truco (con su espejo), sus piezas (D-092) y enseguida construir OTRA frase', () => {
     const plan = buildFlowSession({ ...lang, items: [item('q1', 'new')] });
-    expect(plan.steps.filter((s) => s.unitKey === 'q1' && !s.retry).map((s) => [s.kind, s.example])).toEqual([['reel', undefined], ['build', 1]]);
+    expect(plan.steps.filter((s) => s.unitKey === 'q1' && !s.retry).map((s) => [s.kind, s.example])).toEqual([['reel', undefined], ['pieces', 0], ['build', 1]]);
     expect(plan.steps.some((s) => s.kind === 'train')).toBe(false);
   });
 });
@@ -415,3 +415,23 @@ describe('el Taller: saber usarlo (D-090)', () => {
     expect(items.filter((i) => i.kind === 'widget').length).toBe(4);
   });
 });
+
+describe('«Las piezas» (D-092)', () => {
+  const mirror = (order?: number[]) => ({ say: 'Tengo un coche rojo', pieces: [{ es: '(YO) tengo', en: 'I have', role: 'helper' }, { es: 'un', en: 'a', role: 'word' }, { es: 'coche', en: 'car', role: 'word' }, { es: 'rojo', en: 'red', role: 'word' }], ...(order ? { order } : {}) });
+  const w = (key: string, examples: unknown[]): SessionUnit => ({ key, type: 'term', language: 'en', payload: { form: 'word', text: key, meaning: key, examples },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }], association: null } as unknown as SessionUnit);
+  const red = w('red', [{ text: 'I have a red car.', translation: 'Tengo un coche rojo.', mirror: mirror([0, 1, 3, 2]) }, { text: 'The red door is open.', translation: 'La puerta roja está abierta.' }]);
+  const car = w('car', [{ text: 'My car is old.', translation: 'Mi coche es viejo.' }]);
+  it('solo juega ejemplos con espejo de al menos dos piezas, de los que enseña la ficha', () => {
+    expect(pieceExamples(red)).toEqual([0]);
+    expect(pieceExamples(car)).toEqual([]);
+  });
+  it('tras la pareja de palabras, primero las piezas y después construir OTRA frase de la misma palabra', () => {
+    const plan = buildFlowSession({ ...base, units: { red, car }, items: [item('red', 'new'), item('car', 'new')], sessionId: 'p' });
+    const kinds = plan.steps.filter((s) => !s.retry && (s.kind === 'pieces' || s.kind === 'build')).map((s) => [s.kind, s.unitKey, s.example]);
+    const at = kinds.findIndex((k) => k[0] === 'pieces');
+    if (at >= 0) expect(kinds[at + 1]).toEqual(['build', 'red', 1]);
+    for (const s of plan.steps.filter((x) => x.kind === 'pieces')) expect(plan.steps.findIndex((x) => x.kind === 'reel' && x.unitKey === s.unitKey)).toBeLessThan(plan.steps.indexOf(s));
+  });
+});
+

@@ -902,3 +902,17 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   asignatura actual (icono y nombre) y «Cambiar», que abre una hoja con todas, cada una con su icono y la actual
   marcada. Con una sola asignatura no se ofrece cambiar.
 
+## D-092 · «Las piezas»: entender el orden del inglés por trozos (usuario, 29-oct-2026)
+- **Por qué (usuario):** al ver las tarjetas del espejo, «¿podemos incluir algo más como esto para practicar? … una
+  que enseña y otra que ordene», y después «hazlas todas … que nos ayude a entender inglés rápidamente, sobre todo
+  cuando el orden de las cosas no es el mismo que en español».
+- **Enseñar — «Gira las piezas»:** en la ficha del truco, la frase en español sale partida en piezas (el sujeto que
+  el español calla, con 👻). Piensas cómo se dice cada una y la giras (suena en inglés). Si no tocas, se giran solas
+  (la primera a los 2,2 s y luego cada 1,3 s), así el ejemplo sigue empezando sin botón (petición del 29-oct). Con
+  todas giradas, se colocan en el orden del inglés (la que salta lo hace en arco) y sale la regla.
+- **Practicar — «Las piezas»:** después de la ficha y antes de «Construye la frase» (que pasa a usar OTRO ejemplo):
+  primero «¿Qué pieza se adelanta?» si el orden cambia, o «¿Cuál falta?» si no; después, ordenar los trozos en inglés.
+  Si sigues el orden del español, se dice. Pesa como elegir; si fallas, vuelve la ficha.
+- Escalera completa: girar (ver) → la pieza que salta / la que falta (fijarse) → ordenar trozos → construir palabra a
+  palabra.
+

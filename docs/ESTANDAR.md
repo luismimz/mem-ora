@@ -1,11 +1,12 @@
 # Estándar de Memora (congelado)
 
-Versión 7 · 29-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
+Versión 8 · 29-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
 sus respuestas del mismo día: deslizar sin botones, feed infinito, ejemplo visto para cada pregunta (D-077); versión 3,
 «La escena que cambia» (D-084, aprobada por el usuario el 24-oct-2026); versión 4, «La cadena» (D-085, aprobada
 por el usuario el 25-oct-2026); versión 5, «Arcade sorpresa» en el Flujo (D-087, pedido por el usuario el 28-oct-2026); versión 6, la ruta de
 los tiempos verbales y «¿Qué tiempo pide?» (D-089, aprobada por el usuario el 28-oct-2026); versión 7, el Taller de «saber usarlo» en DAM (D-090, pedido por el
-usuario el 29-oct-2026).
+usuario el 29-oct-2026); versión 8, «Las piezas» y el ejemplo que se gira pieza a pieza (D-092, pedido por el usuario el
+29-oct-2026).
 **Nada de este documento se cambia sin aprobación explícita del usuario.** Un fallo se corrige respetándolo y se añade
 una comprobación automática para que no vuelva.
 
@@ -33,6 +34,7 @@ tarjeta pasa sola; al fallar, «Recuérdalo así» se queda hasta que deslizas. 
 | **La cadena 🎵** | Idiomas (D-085): pregunta y respuesta con ritmo cambiando solo el emoji (*Is this a cat? No, it isn't. It's a dog*). Los dos primeros versos se oyen; en los demás eliges la respuesta | Va tras la ficha del truco. Un fallo no corta la canción; al final, si hubo alguno, la ficha y vuelve más tarde. Pesa como reconocer al escuchar. Mínimo 4 versos y 2 respuestas distintas. |
 | **¿Qué tiempo pide? 🕰️** | Idiomas (D-089): justo después de la ficha de un tiempo verbal, 6 frases con hueco y su PISTA (*yesterday, now, since…*); se elige la forma del verbo. Sin reloj; «🔎 Ver la pista» la resalta (menos puntos). Al responder: la pista → el tiempo, su línea del tiempo y la traducción. Al final, estrellas y tu ruta de los tiempos | Solo mezcla el tiempo recién enseñado con los YA aprendidos, nunca uno sin enseñar. Pesa como reconocer. Si fallas alguna, se vuelve a enseñar ese tiempo antes de seguir. |
 | **Taller 🛠️** | Conceptos (DAM, D-090): cada 4 conceptos enseñados (y al acabar la ronda), 5 retos mezclados con lo ya aprendido: «¿Qué es esto?» (un caso o ejemplo sin el nombre y eliges el concepto), «Completa el código» (tocando fichas), «¿Qué imprime?» (se ejecuta y se ve la salida), «Caza el bug» (tocando la línea) y «¿Qué componente es?» (el componente dibujado como en una ventana). Sin reloj; cada respuesta se explica; estrellas al final | Solo conceptos ya enseñados. Los casos de «¿Qué es esto?» son nuevos (no salen en la ficha) cuando el concepto los tiene: reconocer en un caso nuevo es transferir. Pesa como elegir; si fallas alguno, vuelve su ficha. |
+| **Las piezas 🧩** | Idiomas (D-092): justo después de la ficha de un truco (o tras «Recuerda» de una palabra) y antes de «Construye la frase», con un ejemplo cuyo espejo tiene 2 o más piezas. Dos fases: si el inglés cambia el orden, «¿Qué pieza se adelanta?» (tocas la pieza en español que salta); si no, «¿Cuál falta?» (una pieza oculta y 3 opciones del mismo papel). Después, **ordenar las piezas en inglés** tocándolas. Al fallar se ve el orden bueno con la pieza que salta marcada y la regla; si has seguido el orden del español, se dice | «Construye la frase» usa OTRO ejemplo. Pesa como elegir (recuerdo). Si fallas, vuelve la ficha. |
 | **Arcade sorpresa ⚡** | En la mitad de las rondas aproximadamente, en un punto al azar: 10 preguntas contrarreloj (5 s, cuenta atrás grande) de lo YA aprendido, hasta 4 de ellas «¿Está bien dicho?» (D-088), con combo, puntos y confeti | Nunca antes de la 4.ª tarjeta ni con menos de 6 cosas aprendidas. Pesa como reconocer; un fallo no corta el juego ni manda a la ficha: vuelve en su repaso. |
 | **Hito** («Ronda N completada») | XP de la ronda, racha, protectores 🛡️, aciertos, mejor combo, nuevos, próximo repaso | Se desliza y empieza la siguiente ronda. |
 
