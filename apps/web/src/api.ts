@@ -145,12 +145,20 @@ export interface ImportResult {
   associations?: number;
 }
 
+export interface AccessData {
+  users: Array<{ id: string; email: string; name: string | null }>;
+  courses: Array<{ id: string; key: string; title: string; visibility: 'public' | 'private'; owner: string | null; visibleTo: string[] }>;
+}
+
 export const api = {
   login: (email: string, password: string, otp?: string) => request<unknown>('POST', '/auth/login', { email, password, mode: 'session', ...(otp ? { otp } : {}) }),
   logout: () => request<unknown>('POST', '/auth/logout', { mode: 'session' }).catch(() => undefined),
   me: () => request<Me>('GET', '/users/me?fields=id,first_name,email'),
   courses: () => request<Course[]>('GET', '/memora/courses'),
-  whoami: () => request<{ staff: boolean }>('GET', '/memora/me'),
+  whoami: () => request<{ staff: boolean; admin?: boolean }>('GET', '/memora/me'),
+  /** D-091: qué asignaturas ve cada alumno (solo administración). */
+  access: () => request<AccessData>('GET', '/memora/access'),
+  setAccess: (course: string, change: { visibility?: 'public' | 'private'; email?: string; on?: boolean }) => request<{ visibility: 'public' | 'private'; visibleTo: string[] }>('POST', '/memora/access', { course, ...change }),
   session: (course: string, mission?: string, focus?: 'fallos') => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}${focus ? `&focus=${focus}` : ''}`),
   missions: (course: string) => request<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
   studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),

@@ -4,7 +4,7 @@ import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pend
 import { useCallback, useEffect, useState } from 'react';
 import { Exam } from './Exam';
 import { Guided } from './Guided';
-import { api, ApiError, type Course, type Me, type Mission, type Progress, type SessionPayload } from './api';
+import { api, type AccessData, ApiError, type Course, type Me, type Mission, type Progress, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { Feed } from './Feed';
 import { ARCADE_FROM, CHAT_AFTER_GRAMMAR, GRAMMAR_EVERY, milestones, type Milestones } from './milestones';
@@ -45,6 +45,17 @@ const isLanguage = (c?: Course) => c?.subject === 'idioma' || Boolean(c?.modes.i
 const unitsWord = (c?: Course) => (isLanguage(c) ? 'palabras' : 'conceptos');
 const courseArt = (c?: Course) => (isLanguage(c) ? '🏠🗝️' : c?.subject === 'programación' ? '☕🧩' : '📚✨');
 const cleanTitle = (t: string) => t.replace(/\s*\(.*\)$/, '');
+/** Icono de cada asignatura para reconocerla de un vistazo (por su título o su materia). */
+export function courseIcon(c?: { title?: string; subject?: string | null }): string {
+  const t = (c?.title ?? '').toLowerCase();
+  const rules: Array<[RegExp, string]> = [[/ingl[eé]s|english/, '🇬🇧'], [/bases? de datos/, '🗄️'], [/acceso a datos/, '🔌'], [/interfaces/, '🖥️'], [/gesti[oó]n empresarial/, '🏢'],
+    [/programaci[oó]n/, '☕'], [/inteligencia artificial/, '🤖'], [/aprender a aprender/, '🧠'], [/grado medio|acceso a fp/, '🎓'], [/retos|memoria/, '🏛️'], [/coolify|sistema/, '🛠️']];
+  return rules.find(([r]) => r.test(t))?.[1] ?? (c?.subject === 'idioma' ? '🗣️' : '📘');
+}
+/** Debajo del nombre, en el selector: el ciclo o la materia, si añade algo. */
+const pickerNote = (c: Course) => (/·\s*DAM$/.test(cleanTitle(c.title)) ? 'Ciclo DAM · ILERNA' : c.subject && !c.title.toLowerCase().includes(c.subject.toLowerCase()) ? c.subject[0]!.toUpperCase() + c.subject.slice(1) : '');
+/** Título corto de la asignatura: sin el «· DAM» ni lo que va entre paréntesis. */
+const shortTitle = (t: string) => cleanTitle(t).replace(/\s*·\s*DAM$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
@@ -81,6 +92,8 @@ export function App() {
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [staff, setStaff] = useState(false);
+  const [admin, setAdmin] = useState(false);
+  const [picking, setPicking] = useState(false);
   const [ms, setMs] = useState<Milestones | null>(null);
   const [prog, setProg] = useState<Progress | null>(null);
   const [missions, setMissions] = useState<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number } | null>(null);
@@ -144,7 +157,7 @@ export function App() {
     setMe(who); cacheMe(who);
     // Si quedaron respuestas guardadas en el móvil, se envían ya.
     if (pendingCount()) flush().then((n) => n && setNotice(`Sincronizadas ${n} respuestas que hiciste sin conexión.`)).catch(() => undefined);
-    api.whoami().then((w) => setStaff(w.staff)).catch(() => setStaff(false));
+    api.whoami().then((w) => { setStaff(w.staff); setAdmin(Boolean(w.admin)); }).catch(() => { setStaff(false); setAdmin(false); });
     const list = await api.courses().catch(() => [] as Course[]);
     setCourses(list);
     setCourse((c) => (c && list.some((x) => x.id === c) ? c : list[0]?.id ?? null));
@@ -208,7 +221,7 @@ export function App() {
   const bar = <TopBar me={me} staff={staff} active={view.name} onNav={(name) => go({ name })} />;
   if (view.name === 'offline') return <div className="app">{bar}<OfflineHome online={navigator.onLine} onPlay={(bundle, session) => setView({ name: 'offlineSession', bundle, session })} /></div>;
   if (view.name === 'studio') return <div className="app">{bar}<Studio /></div>;
-  if (view.name === 'profile') return <div className="app">{bar}<Profile me={me} courses={courses} course={course} mode={mode} staff={staff}
+  if (view.name === 'profile') return <div className="app">{bar}<Profile me={me} courses={courses} course={course} mode={mode} staff={staff} admin={admin} onCoursesChanged={() => void api.courses().then(setCourses).catch(() => undefined)}
     onCourse={(id) => { setCourse(id); writePrefs({ course: id }); }} onMode={(m) => { setMode(m); writePrefs({ mode: m }); }} onLogout={() => void logout()} /></div>;
 
   const current = courses.find((c) => c.id === course);
@@ -231,16 +244,19 @@ export function App() {
       {notice && <p className="banner notice" role="status">✓ {notice} <button type="button" className="link" aria-label="Cerrar aviso" onClick={() => setNotice(null)}>✕</button></p>}
       <div className="home-grid">
         <section className="home-main">
-          {courses.length > 1 && (
-            <div className="courses" role="tablist" aria-label="Tus cursos">
-              {courses.map((c) => <button key={c.id} type="button" role="tab" aria-selected={c.id === course} className={c.id === course ? 'on' : ''} onClick={() => { setCourse(c.id); writePrefs({ course: c.id }); }}>{cleanTitle(c.title)}</button>)}
-            </div>
+          {current && (
+            <button type="button" className={`switcher ${courses.length > 1 ? '' : 'single'}`} disabled={courses.length < 2} aria-haspopup="dialog" onClick={() => setPicking(true)}>
+              <span className="switcher-ico" aria-hidden="true">{courseIcon(current)}</span>
+              <span className="switcher-body"><small>TU ASIGNATURA</small><b>{shortTitle(current.title)}</b></span>
+              {courses.length > 1 && <span className="switcher-go">Cambiar <span aria-hidden="true">▾</span></span>}
+            </button>
           )}
+          {picking && <CoursePicker courses={courses} current={course} onPick={(id) => { setCourse(id); writePrefs({ course: id }); setPicking(false); }} onClose={() => setPicking(false)} />}
           <p className="eyebrow">{isMem ? 'TU AVENTURA' : 'HOY'}</p>
           <h1>{isMem ? 'La historia sigue contigo.' : me?.first_name ? `Hola, ${me.first_name}.` : 'Hola.'}</h1>
           {current && isMem ? <RetosHome courseId={current.id} /> : current ? (
             <div className="hero">
-              <div className="hero-art"><span aria-hidden="true">{courseArt(current)}</span><span className="tag">{cleanTitle(current.title).toUpperCase()}</span></div>
+              <div className="hero-art"><span aria-hidden="true">{courseArt(current)}</span></div>
               <div className="hero-body">
                 {enabled.length > 1 && <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>}
                 <ul className="today" aria-label="Tu día">
@@ -330,7 +346,7 @@ function TopBar({ me, staff, active, onNav }: { me: Me | null; staff: boolean; a
 }
 
 /** Tu perfil: quién eres, cómo vas en cada curso, tus preferencias y la salida (lejos de los botones de uso diario). */
-function Profile({ me, courses, course, mode, staff, onCourse, onMode, onLogout }: { me: Me | null; courses: Course[]; course: string | null; mode: Mode; staff: boolean; onCourse: (id: string) => void; onMode: (m: Mode) => void; onLogout: () => void }) {
+function Profile({ me, courses, course, mode, staff, admin, onCoursesChanged, onCourse, onMode, onLogout }: { me: Me | null; courses: Course[]; course: string | null; mode: Mode; staff: boolean; admin: boolean; onCoursesChanged: () => void; onCourse: (id: string) => void; onMode: (m: Mode) => void; onLogout: () => void }) {
   const [progress, setProgress] = useState<Record<string, { done: number; total: number; worked: number; units: number }>>({});
   useEffect(() => {
     for (const c of courses) {
@@ -375,12 +391,99 @@ function Profile({ me, courses, course, mode, staff, onCourse, onMode, onLogout 
         </label>
       </section>
       {current && <ResetCourse course={current} />}
+      {admin && <AccessPanel me={me} onChanged={onCoursesChanged} />}
       <section className="card-panel">
         <h2>Cuenta</h2>
         <button type="button" className="danger" onClick={onLogout}>Cerrar sesión</button>
       </section>
       </div>
     </main>
+  );
+}
+
+/**
+ * Elegir asignatura (D-091): una hoja que sube desde abajo con cada asignatura, su icono y la actual marcada. Antes era
+ * una tira de pastillas que se salía de la pantalla y escondía casi todas.
+ */
+function CoursePicker({ courses, current, onPick, onClose }: { courses: Course[]; current: string | null; onPick: (id: string) => void; onClose: () => void }) {
+  useEffect(() => {
+    const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', esc);
+    return () => window.removeEventListener('keydown', esc);
+  }, [onClose]);
+  return (
+    <div className="sheet-back" onClick={onClose}>
+      <div className="sheet" role="dialog" aria-modal="true" aria-label="Elige asignatura" onClick={(e) => e.stopPropagation()}>
+        <span className="sheet-grip" aria-hidden="true" />
+        <h2>Tus asignaturas</h2>
+        <ul className="picker">
+          {courses.map((c) => (
+            <li key={c.id}>
+              <button type="button" className={c.id === current ? 'on' : ''} aria-current={c.id === current ? 'true' : undefined} onClick={() => onPick(c.id)}>
+                <span className="picker-ico" aria-hidden="true">{courseIcon(c)}</span>
+                <span className="picker-body"><b>{shortTitle(c.title)}</b>{pickerNote(c) && <small>{pickerNote(c)}</small>}</span>
+                {c.id === current && <span className="picker-on" aria-hidden="true">✓</span>}
+              </button>
+            </li>
+          ))}
+        </ul>
+        <button type="button" className="ghost sheet-close" onClick={onClose}>Cerrar</button>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Asignaturas de cada alumno (D-091, solo administración): cada curso es «para todos» o «solo para elegidos»; en ese
+ * caso se marca qué alumnos lo ven. El propietario lo ve siempre.
+ */
+function AccessPanel({ me, onChanged }: { me: Me | null; onChanged: () => void }) {
+  const [data, setData] = useState<AccessData | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState<string | null>(null);
+  useEffect(() => { api.access().then(setData).catch(() => setError('No se ha podido cargar.')); }, []);
+  async function change(courseId: string, ch: { visibility?: 'public' | 'private'; email?: string; on?: boolean }) {
+    setBusy(courseId + (ch.email ?? ''));
+    try {
+      const r = await api.setAccess(courseId, ch);
+      setData((d) => d && { ...d, courses: d.courses.map((c) => (c.id === courseId ? { ...c, ...r } : c)) });
+      onChanged();
+    } catch { setError('No se ha podido guardar. Prueba otra vez.'); }
+    setBusy(null);
+  }
+  return (
+    <section className="card-panel access">
+      <h2>Asignaturas de cada alumno</h2>
+      <p className="muted">«Para todos»: la ve cualquier alumno. «Solo elegidos»: la ves tú y los alumnos que marques.</p>
+      {error && <p className="banner" role="alert">{error}</p>}
+      {!data && !error && <p className="muted">Cargando…</p>}
+      {data?.courses.map((c) => (
+        <div key={c.id} className="access-course">
+          <div className="row"><b><span aria-hidden="true">{courseIcon(c)} </span>{shortTitle(c.title)}</b>
+            <span className="seg" role="group" aria-label={`Quién ve ${shortTitle(c.title)}`}>
+              <button type="button" className={c.visibility === 'public' ? 'on' : ''} aria-pressed={c.visibility === 'public'} disabled={busy !== null} onClick={() => void change(c.id, { visibility: 'public' })}>Para todos</button>
+              <button type="button" className={c.visibility === 'private' ? 'on' : ''} aria-pressed={c.visibility === 'private'} disabled={busy !== null} onClick={() => void change(c.id, { visibility: 'private' })}>Solo elegidos</button>
+            </span>
+          </div>
+          {c.visibility === 'private' && (
+            <ul className="access-users">
+              {data.users.map((u) => {
+                const owner = u.id === c.owner;
+                const on = owner || c.visibleTo.includes(u.email.toLowerCase());
+                return (
+                  <li key={u.id}>
+                    <label className={owner ? 'owner' : ''}>
+                      <input type="checkbox" checked={on} disabled={owner || busy !== null} onChange={(e) => void change(c.id, { email: u.email, on: e.target.checked })} />
+                      <span>{u.name ?? u.email.split('@')[0]}<small>{u.email}{owner ? ' · propietario (siempre)' : u.id === me?.id ? ' · tú' : ''}</small></span>
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
+        </div>
+      ))}
+    </section>
   );
 }
 
@@ -506,7 +609,7 @@ function Constancy({ prog, missionsDone, words }: { prog: Progress; missionsDone
               <span className="track-ico" aria-hidden="true">{t.ico}</span>
               <span className="track-body">
                 <b>{got.length ? t.label(prev, words) : `Primer logro: ${t.label(t.steps[0]!, words)}`}</b>
-                {next ? <><i className="track-bar"><i style={{ width: `${Math.round((Math.max(0, cur - base) / (next - base)) * 100)}%` }} /></i><small>Siguiente logro: {t.label(next, words)} · faltan {next - cur}</small></> : <small>¡Todos los logros de este camino! 🏆</small>}
+                {next ? <><i className="track-bar"><i style={{ width: `${Math.round((Math.max(0, cur - base) / (next - base)) * 100)}%` }} /></i><small>{got.length ? `Siguiente logro: ${t.label(next, words)} · ` : ''}faltan {next - cur}</small></> : <small>¡Todos los logros de este camino! 🏆</small>}
               </span>
               <span className="track-n" aria-label={`${got.length} de ${t.steps.length} logros`}>{got.length}/{t.steps.length}</span>
             </li>

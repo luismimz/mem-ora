@@ -892,3 +892,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   (con `bugLine`, se caza tocando la línea). «¿Qué componente es?» dibuja el `widget` del concepto (28 componentes y
   contenedores de escritorio). Sin reloj; si fallas alguno, vuelve su ficha.
 
+## D-091 · Qué asignaturas ve cada alumno y un selector de asignatura claro (usuario, 29-oct-2026)
+- **Por qué (usuario):** «quiero poder elegir qué asignatura le salga a cada usuario»; de momento, inglés para todos y
+  todas para él. Y el selector de Inicio «es algo extraño».
+- **Quién ve qué:** un curso «para todos» (público) lo ve cualquier alumno; uno «solo elegidos» (privado), su
+  propietario y los alumnos de su lista `visible_to` (emails). Se cambia desde la app (Perfil → «Asignaturas de cada
+  alumno», solo administración) o desde Studio. Aplicado: inglés para todos; el resto, solo para Luis (propietario).
+- **Selector:** en lugar de una tira de pastillas que se salía de la pantalla y escondía casi todas, un botón con la
+  asignatura actual (icono y nombre) y «Cambiar», que abre una hoja con todas, cada una con su icono y la actual
+  marcada. Con una sola asignatura no se ofrece cambiar.
+

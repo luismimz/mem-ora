@@ -48,6 +48,33 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/tiempos-ficha.png`, fullPage: true });
   await page.close();
 
+  // 1b. El ejemplo animado (espejo) empieza cuando se VE: si la tarjeta lo deja fuera de pantalla, espera.
+  {
+    const small = await browser.newContext({ viewport: { width: 390, height: 320 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
+    const p = await small.newPage();
+    await p.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
+    await p.goto(`${server.resolvedUrls.local[0]}e2e/harness-escena.html?k=g-adjective-order&solo=reel`);
+    await p.waitForSelector('.morph');
+    const below = await p.evaluate(() => document.querySelector('.morph').getBoundingClientRect().top > innerHeight);
+    await p.waitForTimeout(6500);
+    const waited = await p.evaluate(() => Boolean(document.querySelector('.morph .morph-say')) && !document.querySelector('.morph-end'));
+    check(below && waited, `el ejemplo fuera de pantalla no se gasta: sigue esperando al principio (fuera: ${below}, esperando: ${waited})`);
+    await p.evaluate(() => document.querySelector('.morph').scrollIntoView({ block: 'center' }));
+    await p.waitForSelector('.morph-end', { timeout: 9000 }).catch(() => undefined);
+    check(await p.locator('.morph-end').count() === 1, 'al verlo, arranca solo y llega al final sin pulsar ↻');
+    await small.close();
+    // Con «Reducir movimiento» (iPhone) también se ve el ejemplo paso a paso, sin tener que pulsar ↻.
+    const calm = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, reducedMotion: 'reduce' });
+    const q = await calm.newPage();
+    await q.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
+    await q.goto(`${server.resolvedUrls.local[0]}e2e/harness-escena.html?k=g-adjective-order&solo=reel`);
+    await q.waitForSelector('.morph');
+    const starts = await q.locator('.morph .morph-say').count();
+    await q.waitForSelector('.morph-end', { timeout: 9000 }).catch(() => undefined);
+    check(starts === 1 && await q.locator('.morph-end').count() === 1, 'con «Reducir movimiento» el ejemplo empieza desde el principio y llega solo al final');
+    await calm.close();
+  }
+
   // 2. El juego.
   page = await open('tense');
   const step = await page.evaluate(() => window.__plan.steps.find((s) => s.kind === 'tense'));
