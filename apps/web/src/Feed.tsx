@@ -747,6 +747,29 @@ const MORPH_MS = [1000, 1700, 1500, 1300];
  * verdad: el ayudante sale de su sitio y pasa por encima del quién en un arco. Al final, la frase con su voz y las
  * fichas iluminándose una a una. Un toque salta al final o lo repite. Sonidos cortos en cada paso.
  */
+/**
+ * Mueve las fichas de donde estaban a su sitio nuevo (FLIP) para que se VEA el cambio de orden (usuario, 29-oct: «car
+ * red → red car cambia de golpe, debería verse el movimiento para que se quede en la cabeza»). Es movimiento esencial
+ * (enseña el orden), así que con «Reducir movimiento» también se ve, pero sin saltos: un deslizamiento suave.
+ */
+function moveChips(chips: Record<number, HTMLElement | null>, rects: Record<number, DOMRect>, run: boolean, leaps: (k: number) => boolean, reduced: boolean) {
+  for (const [k, el] of Object.entries(chips)) {
+    if (!el) continue;
+    const now = el.getBoundingClientRect();
+    const before = rects[Number(k)];
+    rects[Number(k)] = now;
+    if (!before || !run) continue;
+    const dx = before.left - now.left; const dy = before.top - now.top;
+    if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
+    const jump = leaps(Number(k));
+    if (jump) { el.classList.add('jumping'); window.setTimeout(() => el.classList.remove('jumping'), 1600); }
+    el.animate(reduced || !jump
+      ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }]
+      : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 56}px) rotate(-8deg) scale(1.12)`, offset: 0.5 }, { transform: 'none' }],
+    { duration: reduced ? 1100 : 1000, easing: reduced ? 'ease-in-out' : 'cubic-bezier(.3, 1.2, .5, 1)' });
+  }
+}
+
 function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: Mirror; text: string; compact?: boolean }) {
   const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
   const jumps = order.some((v, i) => v !== i);
@@ -799,20 +822,7 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
   useLayoutEffect(() => {
     const reorder = lastPhase.current === 2 && phase === 3;
     lastPhase.current = phase;
-    for (const [k, el] of Object.entries(chips.current)) {
-      if (!el) continue;
-      const now = el.getBoundingClientRect();
-      const before = rects.current[Number(k)];
-      rects.current[Number(k)] = now;
-      if (!before || reduced || !reorder) continue;
-      const dx = before.left - now.left;
-      const dy = before.top - now.top;
-      if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
-      const leaps = m.pieces[Number(k)]!.role === 'helper' || dx > 0;
-      el.animate(leaps
-        ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 46}px) rotate(-8deg)`, offset: 0.5 }, { transform: 'none' }]
-        : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 750, easing: 'cubic-bezier(.3, 1.2, .5, 1)' });
-    }
+    moveChips(chips.current, rects.current, reorder, (k) => order.indexOf(k) < k, Boolean(reduced));
   });
 
   const english = phase >= 2;
@@ -906,29 +916,19 @@ function FlipMirror({ unit, m, text }: { unit: SessionUnit; m: Mirror; text: str
   }, [flipped, stage, seen, run]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (stage !== 'flip' || !all) return;
-    const t = setTimeout(() => { setStage('move'); sfx(jumps ? 'boing' : 'whoosh'); }, 650);
+    const t = setTimeout(() => { setStage('move'); sfx(jumps ? 'boing' : 'whoosh'); }, 950);
     return () => clearTimeout(t);
   }, [all, stage]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (stage !== 'move') return;
-    const t = setTimeout(() => { setStage('done'); if (audioEnabled()) speak(text, unit.language); }, jumps ? 950 : 350);
+    const t = setTimeout(() => { setStage('done'); if (audioEnabled()) speak(text, unit.language); }, jumps ? 1500 : 400);
     return () => clearTimeout(t);
   }, [stage]); // eslint-disable-line react-hooks/exhaustive-deps
   const last = useRef(stage);
   useLayoutEffect(() => {
     const moving = last.current === 'flip' && stage === 'move';
     last.current = stage;
-    for (const [k, el] of Object.entries(chips.current)) {
-      if (!el) continue;
-      const now = el.getBoundingClientRect();
-      const before = rects.current[Number(k)];
-      rects.current[Number(k)] = now;
-      if (!before || !moving || reduced) continue;
-      const dx = before.left - now.left; const dy = before.top - now.top;
-      if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
-      el.animate(dx > 0 ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 50}px) rotate(-8deg) scale(1.1)`, offset: 0.5 }, { transform: 'none' }]
-        : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 800, easing: 'cubic-bezier(.3, 1.2, .5, 1)' });
-    }
+    moveChips(chips.current, rects.current, moving, (k) => order.indexOf(k) < k, Boolean(reduced));
   });
   function flip(i: number) {
     if (stage !== 'flip' || flipped.includes(i)) return;

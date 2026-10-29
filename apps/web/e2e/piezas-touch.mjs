@@ -65,6 +65,22 @@ try {
   if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-ficha-final.png` });
   await page.close();
 
+  // 2b. El salto se VE (D-094), también con «Reducir movimiento» (iPhone): la pieza que cambia de sitio se desliza
+  //     iluminada hasta su sitio, no aparece de golpe.
+  for (const motion of ['no-preference', 'reduce']) {
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, reducedMotion: motion });
+    const p = await ctx.newPage();
+    await p.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
+    await p.goto(`${root}?k=g-adjective-order&solo=reel`);
+    await p.waitForSelector('.flipm .mchip');
+    await p.locator('.flip-all').tap();
+    await p.waitForSelector('.flipm .mchip.jumping', { timeout: 3000 }).catch(() => undefined);
+    const seen = await p.evaluate(() => { const j = document.querySelector('.flipm .mchip.jumping'); return { word: j?.querySelector('.back b')?.textContent, moving: j ? j.getAnimations().length > 0 : false }; });
+    check(seen.word === 'red' && seen.moving, `${motion === 'reduce' ? 'con «Reducir movimiento»' : 'normal'}: «red» se mueve iluminada hasta su sitio (no cambia de golpe)`);
+    if (shots) await p.waitForTimeout(250), await p.screenshot({ path: `${shots}/piezas-salto-${motion}.png` });
+    await ctx.close();
+  }
+
   // 3. «¿Cuál se adelanta?» → ordenar bien.
   page = await open('k=g-adjective-order&solo=pieces');
   await page.waitForSelector('.pieces');
