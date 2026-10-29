@@ -881,3 +881,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   puntos. Al responder, la pista → el tiempo, su línea y la traducción; al final, estrellas y «tu ruta de los tiempos».
   Pesa como reconocer; si fallas alguna, se vuelve a enseñar ese tiempo.
 
+## D-090 · El Taller: saber usarlo en DAM (usuario, 29-oct-2026)
+- **Por qué (usuario):** «recordar está muy bien, pero debo saber usarlo también, y esta parte es diferente a inglés».
+  Pide un juego de reconocer un ejemplo y elegir qué es, otro de completar, y algo chulo para Desarrollo de interfaces.
+  Elige los cuatro propuestos: ¿Qué es esto?, Completa el código, Caza el bug / ¿Qué imprime? e Interfaces en vivo.
+- **Cómo:** en los cursos de conceptos, cada 4 conceptos enseñados (y al final de la ronda) llega un Taller de 5 retos
+  con esos conceptos y lo ya aprendido. «¿Qué es esto?» usa los `cases` del concepto (ejemplos NUEVOS, no los de la
+  ficha) o, si no tiene, sus ejemplos enseñados, siempre sin el nombre a la vista; las opciones son conceptos cercanos
+  del curso. «Completa», «¿Qué imprime?» y «Caza el bug» usan los ejercicios `fill_gap`, `predict_output` y `find_bug`
+  (con `bugLine`, se caza tocando la línea). «¿Qué componente es?» dibuja el `widget` del concepto (28 componentes y
+  contenedores de escritorio). Sin reloj; si fallas alguno, vuelve su ficha.
+

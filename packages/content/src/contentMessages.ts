@@ -61,6 +61,9 @@ const FIELD_ES: Record<string, string> = {
   e: 'emoji',
   chant: 'la cadena',
   tense: 'tiempo verbal',
+  cases: 'casos para reconocer',
+  widget: 'componente dibujado',
+  bugLine: 'línea del error',
   timeline: 'línea del tiempo',
   signals: 'pistas',
   drills: '¿qué tiempo pide?',
@@ -85,7 +88,7 @@ const FIELD_ES: Record<string, string> = {
   visibility: 'visibilidad',
 };
 
-const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', timeline: 'Marca', signals: 'Pista', drills: 'Frase', wrong: 'Forma', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
+const LIST_ITEM_ES: Record<string, string> = { examples: 'Ejemplo', pieces: 'Pieza', pitfalls: 'Aviso', answers: 'Respuesta', exercises: 'Ejercicio', distractors: 'Opción falsa', steps: 'Paso', words: 'Palabra', decoys: 'Palabra falsa', scenes: 'Escena', stage: 'Actor', chant: 'Verso', timeline: 'Marca', signals: 'Pista', drills: 'Frase', cases: 'Caso', wrong: 'Forma', lines: 'Línea', accepted: 'Respuesta', modules: 'Módulo', units: 'Unidad' };
 
 /** «examples.2.text» → «Ejemplo 3 › texto». */
 export function fieldLabel(path: string): string {
@@ -160,6 +163,8 @@ const es: Record<string, Template> = {
   word_out_of_order: (p, f) => `${f}: «${p.word}» aparece en la historia, pero no en el orden de la lista.`,
   timeline_position: (_p, f) => `${f}: la posición va de -3 (antes) a 3 (después); 0 es ahora, y «hasta» va después de «posición».`,
   signal_not_in_text: (_p, f) => `${f}: la pista tiene que aparecer en la frase.`,
+  bugline_not_bug: (_p, f) => `${f}: solo los ejercicios «encontrar el error» (find_bug) llevan línea del error.`,
+  bugline_out_of_code: (p, f) => `${f}: la línea va de 0 a ${Number(p.lines) - 1} (el código tiene ${p.lines}).`,
   duplicate_option: (_p, f) => `${f}: hay formas repetidas.`,
   max_items: (p, f) => `${f}: como máximo ${p.max} (hay ${p.count}).`,
   scene_too_long: (p, f) => `${f}: la escena tiene ${p.words} palabras; el máximo es ${p.max}.`,

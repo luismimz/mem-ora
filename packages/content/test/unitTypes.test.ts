@@ -142,3 +142,17 @@ describe('los tiempos verbales (D-089)', () => {
   });
 });
 
+
+describe('el Taller: saber usarlo (D-090)', () => {
+  const concept = (extra: Record<string, unknown>) => ({ name: 'extends', gist: 'heredar de una clase', definition: 'Hace que una clase herede de otra.', examples: [{ text: 'class Perro extends Animal {}' }], ...extra });
+  it('acepta casos para reconocer, un componente dibujado y la línea del error', () => {
+    expect(validateUnitPayload('concept', concept({ cases: [{ text: 'class Gato extends Mascota {}', explanation: 'Gato hereda de Mascota.' }], widget: 'combobox',
+      exercises: [{ kind: 'find_bug', prompt: '¿Dónde está el error?', code: 'int x = 1;\nString s = 2;', answer: 'String s = "2";', distractors: ['int x = "1";'], bugLine: 1 }] }))).toEqual([]);
+  });
+  it('señala un componente desconocido y una línea del error fuera del código o en otro tipo', () => {
+    expect(codes('concept', concept({ widget: 'boton' }))).toContain('invalid_choice@widget');
+    expect(codes('concept', concept({ exercises: [{ kind: 'find_bug', prompt: 'p', code: 'a;\nb;', answer: 'x', bugLine: 2 }] }))).toContain('bugline_out_of_code@exercises.0.bugLine');
+    expect(codes('concept', concept({ exercises: [{ kind: 'fill_gap', prompt: 'p', code: '___;', answer: 'x', bugLine: 0 }] }))).toContain('bugline_not_bug@exercises.0.bugLine');
+    expect(codes('concept', concept({ cases: [{ text: '' }] }))).toContain('required@cases.0.text');
+  });
+});

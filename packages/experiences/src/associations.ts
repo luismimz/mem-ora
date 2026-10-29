@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'burst' | 'train' | 'watch' | 'spot' | 'chant' | 'tense' | 'summary';
+export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'burst' | 'train' | 'watch' | 'spot' | 'chant' | 'tense' | 'workshop' | 'summary';
 
 export interface AssocStep {
   id: string;
@@ -24,6 +24,8 @@ export interface AssocStep {
   /** «¿Qué tiempo pide?» (D-089): frases del juego (de qué tiempo y cuál) y los tiempos que ya llevas en la ruta. */
   tenseDrills?: Array<{ unitKey: string; drill: number }>;
   tenseRoute?: string[];
+  /** El Taller (D-090): los retos de «saber usarlo». */
+  workshop?: import('./workshop').WorkshopItem[];
   /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
   exercise?: number;
   typed?: boolean;

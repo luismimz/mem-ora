@@ -1,0 +1,26 @@
+{
+  "_": "Conceptos de prueba propios (no son material de ILERNA) para el E2E del Taller (D-090).",
+  "units": [
+    { "key": "extends", "name": "extends", "gist": "una clase hereda de otra", "definition": "Hace que una clase herede los atributos y métodos de otra.",
+      "examples": [{ "text": "class Perro extends Animal { }", "explanation": "Perro hereda de Animal." }],
+      "cases": [{ "text": "public class Coche extends Vehiculo {\n  // hereda velocidad y frenar()\n}", "explanation": "Coche hereda de Vehiculo: es herencia." }],
+      "exercises": [{ "kind": "fill_gap", "prompt": "Haz que Gato herede de Animal:", "code": "class Gato ___ Animal { }", "answer": "extends", "distractors": ["implements", "super"], "explanation": "Con una clase se hereda con extends; implements es para interfaces." }] },
+    { "key": "bucle-for", "name": "bucle for", "gist": "repetir un número conocido de veces", "definition": "Repite un bloque mientras se cumple una condición, con contador.",
+      "examples": [{ "text": "for (int i = 0; i < 3; i++) { System.out.println(i); }", "explanation": "Imprime 0, 1 y 2." }],
+      "exercises": [{ "kind": "predict_output", "prompt": "¿Qué imprime?", "code": "for (int i = 1; i <= 3; i++) {\n  System.out.print(i);\n}", "answer": "123", "distractors": ["0123", "12"], "explanation": "Empieza en 1 y llega hasta 3 incluido." }] },
+    { "key": "nullpointer", "name": "NullPointerException", "gist": "usar un objeto que vale null", "definition": "Error al llamar a un método o atributo de una referencia que vale null.",
+      "examples": [{ "text": "String s = null;\ns.length(); // salta el error", "explanation": "s no apunta a ningún objeto." }],
+      "exercises": [{ "kind": "find_bug", "prompt": "¿En qué línea salta el error?", "code": "String nombre = null;\nint largo = 0;\nlargo = nombre.length();\nSystem.out.println(largo);", "answer": "if (nombre != null) largo = nombre.length();", "bugLine": 2, "explanation": "nombre vale null: hay que comprobarlo antes de usarlo." }] },
+    { "key": "constructor", "name": "constructor", "gist": "crea e inicializa un objeto", "definition": "Método especial con el nombre de la clase que se ejecuta al hacer new.",
+      "examples": [{ "text": "public Punto(int x, int y) { this.x = x; this.y = y; }", "explanation": "Se ejecuta con new Punto(1, 2)." }],
+      "cases": [{ "text": "Cuenta c = new Cuenta(\"ES12\", 100.0);\n// arranca con saldo 100", "explanation": "new llama al constructor de Cuenta." }] },
+    { "key": "combobox", "name": "ComboBox", "gist": "lista desplegable para elegir una opción", "definition": "Control que muestra la opción elegida y despliega la lista al tocarlo.", "widget": "combobox",
+      "examples": [{ "text": "ComboBox<String> pais = new ComboBox<>();\npais.getItems().addAll(\"España\", \"Francia\");" }] },
+    { "key": "slider", "name": "Slider", "gist": "barra para elegir un valor deslizando", "definition": "Control con un tirador que se arrastra entre un mínimo y un máximo.", "widget": "slider",
+      "examples": [{ "text": "Slider volumen = new Slider(0, 100, 60);" }] },
+    { "key": "borderpane", "name": "BorderPane", "gist": "cinco zonas: arriba, abajo, lados y centro", "definition": "Contenedor con zonas top, bottom, left, right y center.", "widget": "borderpane",
+      "examples": [{ "text": "BorderPane raiz = new BorderPane();\nraiz.setTop(menu);\nraiz.setCenter(tabla);" }] },
+    { "key": "checkbox", "name": "CheckBox", "gist": "casilla que se marca o no", "definition": "Control de sí o no que se puede marcar independientemente de los demás.", "widget": "checkbox",
+      "examples": [{ "text": "CheckBox recordar = new CheckBox(\"Recordarme\");" }] }
+  ]
+}
