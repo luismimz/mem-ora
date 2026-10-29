@@ -503,3 +503,21 @@ describe('repaso rápido por curva (D-094)', () => {
     expect(p.steps[0]!.arcadeUnits!.length).toBe(FLOW_REVIEW_ARCADE_MAX);
   });
 });
+
+describe('sin repetir la misma frase (usuario, 29-oct-2026)', () => {
+  const mk = (key: string, order?: number[]): SessionUnit => ({ key, type: 'term', language: 'en', payload: { form: 'word', text: key, meaning: key,
+    examples: [{ text: "I don't know.", translation: 'No lo sé.', mirror: { say: 'No lo sé', pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'no', en: "don't", role: 'helper' }, { es: 'sé', en: 'know', role: 'verb' }], ...(order ? { order } : {}) } }] },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }], association: null } as unknown as SessionUnit);
+  it('una palabra cuya frase NO cambia el orden no juega a «Las piezas»', () => {
+    expect(pieceExamples(mk('know'))).toEqual([]);
+    expect(pieceExamples(mk('know', [1, 0, 2]))).toEqual([0]);
+  });
+  it('nunca la misma frase en «Las piezas» y justo después en «Construye»', () => {
+    for (const sessionId of ['a', 'b', 'c', 'd']) {
+      const units = { know: mk('know', [1, 0, 2]), other: mk('other', [1, 0, 2]) };
+      const plan = buildFlowSession({ ...base, units, items: [item('know', 'new'), item('other', 'new')], sessionId });
+      const st = plan.steps.filter((s) => !s.retry && (s.kind === 'pieces' || s.kind === 'build'));
+      for (let i = 1; i < st.length; i++) expect(st[i - 1]!.kind === 'pieces' && st[i]!.unitKey === st[i - 1]!.unitKey && st[i]!.example === st[i - 1]!.example).toBe(false);
+    }
+  });
+});

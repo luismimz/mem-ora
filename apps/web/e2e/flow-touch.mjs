@@ -260,9 +260,12 @@ try {
       seen.add('piezas');
       if (await en.locator('.pieces .tense-options .burst-btn').count()) await en.locator('.pieces .tense-options .burst-btn').first().tap();
       else if (!(await en.locator('.pieces-slots').count())) await en.locator('.pieces .pieces-row .ptile').first().tap();
-      if (await en.locator('.pieces .arcade-go').count()) await en.locator('.pieces .arcade-go').tap();
+      // Sin botones: si aciertas, pasa sola a ordenar; si no, se desliza.
+      await en.waitForSelector('.pieces-slots', { timeout: 1800 }).catch(() => undefined);
+      if (!(await en.locator('.pieces-slots').count())) await swipeEn();
       for (let k = 0; k < 8 && await en.locator('.pieces-row .ptile:not(.used)').count() && !(await en.locator('.pieces-after').count()); k++) await en.locator('.pieces-row .ptile:not(.used)').first().tap();
-      await en.locator('.pieces .arcade-go').tap();
+      await en.waitForTimeout(2200);
+      if (await en.locator('.slide.pieces').count()) await swipeEn();
       await en.waitForTimeout(1300); continue;
     }
     if (/VERDAD/.test(tag)) { await en.locator('.option.yes').tap(); await en.waitForTimeout(1300); continue; }

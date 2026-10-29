@@ -958,3 +958,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   («Frecuencia, días y tiempo»), conservando su progreso; los 12 meses son una misión nueva justo después (10b). La
   sincronización del contenido ahora cambia de misión una unidad que se mueve de archivo, sin perder su id.
 - Pendiente: escenas de las misiones 31–87, por tandas.
+
+## D-096 · «Las piezas» sin repetir la frase ni botones (usuario, 29-oct-2026)
+- **Por qué (usuario, capturas de «No lo sé»):** la misma frase salía tres veces seguidas (¿cuál falta?, ordénalas y
+  «Construye la frase») y había que pulsar «Ahora ordénalas» y «Seguir».
+- **Decisión:** en las palabras, «Las piezas» solo si su frase cambia el orden (para eso está el juego); nunca la misma
+  frase en «Las piezas» y justo después en «Construye» (si no hay otra, no se construye). Sin botones: al acertar pasa
+  sola; al fallar se lee por qué y se desliza.
+

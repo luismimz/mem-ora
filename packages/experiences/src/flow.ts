@@ -58,8 +58,11 @@ export function mirrorExamples(u: SessionUnit): number[] {
  */
 export function pieceExamples(u: SessionUnit): number[] {
   if (u.type !== 'term' && u.type !== 'pattern') return [];
-  const examples = ((u.payload as { examples?: Array<{ mirror?: { pieces?: Array<{ role: string }> } }> }).examples ?? []);
-  return examples.flatMap((e, i) => (i < FLOW_TAUGHT_EXAMPLES && (e.mirror?.pieces ?? []).filter((p) => p.role !== 'signal').length >= 2 ? [i] : []));
+  const examples = ((u.payload as { examples?: Array<{ mirror?: { pieces?: Array<{ role: string }>; order?: number[] } }> }).examples ?? []);
+  // En las palabras, solo si la frase CAMBIA el orden (para eso está el juego): con el mismo orden, ordenar trozos era
+  // lo mismo que «Construye la frase» con la misma frase tres veces seguidas (usuario, 29-oct-2026).
+  const jumps = (o?: number[]) => Boolean(o?.some((v, k) => v !== k));
+  return examples.flatMap((e, i) => (i < FLOW_TAUGHT_EXAMPLES && (e.mirror?.pieces ?? []).filter((p) => p.role !== 'signal').length >= 2 && (u.type === 'pattern' || jumps((e.mirror as { order?: number[] } | undefined)?.order)) ? [i] : []));
 }
 
 /**
@@ -274,24 +277,23 @@ export function buildFlowSession(input: {
     const pool = options.filter((i) => score(i) >= best - 1);
     return pool[Math.floor(rand() * pool.length)];
   };
-  const buildAfter = (u: string, shown?: number): Draft | null => {
+  const buildAfter = (u: string, shown?: number, strict = false): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'produce');
     const fresh = practiceBuildable(units[u]!).filter((x) => x !== shown);
     const novel = pickPractice(u, fresh);
     if (skill && novel !== undefined) return { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: novel, ...tag(u) };
     const options = taughtBuildable(units[u]!);
     const others = options.filter((x) => x !== shown);
-    const pool = others.length ? others : options;
+    const pool = others.length || strict ? others : options;
     const n = pool.length ? pool[Math.floor(rand() * pool.length)] : undefined;
     return skill && n !== undefined ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
   };
   // Construir otra frase distinta de la que se acaba de ordenar por piezas (si la unidad tiene otra).
+  // Nunca la misma frase dos veces seguidas: si la palabra no tiene otra, no se construye (ya se ha ordenado).
   const buildOther = (u: string, avoid: number): Draft | null => {
     const skill = units[u]!.skills.find((s) => s.kind === 'produce');
-    const options = taughtBuildable(units[u]!);
-    const others = options.filter((x) => x !== avoid);
-    const pool = others.length ? others : options;
-    return skill && pool.length ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: pool[Math.floor(rand() * pool.length)]!, ...tag(u) } : null;
+    const others = taughtBuildable(units[u]!).filter((x) => x !== avoid);
+    return skill && others.length ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: others[Math.floor(rand() * others.length)]!, ...tag(u) } : null;
   };
   // D-084: la escena que cambia. Primero se mira (el bicho se mueve y suena cada frase) y después se juega: oír la frase y
   // tocar la escena correcta, o ver la escena y elegir la frase. Reconocer pesa poco; producir llega con «Construye».
@@ -357,7 +359,9 @@ export function buildFlowSession(input: {
         const shownMirror = mirrorExamples(units[u]!)[0];
         const chunk = up ? null : pieces(u);
         if (chunk) base.push(chunk);
-        base.push(up ?? buildAfter(u, chunk?.example ?? shownMirror) ?? quick(u));
+        // Tras «Las piezas», construir OTRA frase; si no la hay, no se repite la misma (ya se ha ordenado).
+        const next = up ?? buildAfter(u, chunk?.example ?? shownMirror, Boolean(chunk)) ?? (chunk ? null : quick(u));
+        if (next) base.push(next);
         const game = tenseGame(u);
         if (game) base.push(game);
         return;
