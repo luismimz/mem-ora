@@ -27,7 +27,12 @@ const sessionId = new URLSearchParams(location.search).get('s') ?? 'e2e-escena';
 const items = wanted.map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 // ?a=1: lo ya aprendido son las unidades pedidas (Arcade sorpresa, D-087); ?solo=arcade deja solo el Arcade y el resumen.
 const q = new URLSearchParams(location.search);
-const plan = buildFlowSession({ sessionId, courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true, ...(q.get('a') ? { arcadeUnits: wanted } : learned.length ? { arcadeUnits: learned } : {}) });
+// ?repaso=a,b&recuerda=b: «Repaso rápido» (D-094) con esas palabras (las de ?recuerda, ya maduras: se recuerdan).
+const repaso = (q.get('repaso') ?? '').split(',').filter(Boolean);
+const recuerda = (q.get('recuerda') ?? '').split(',').filter(Boolean);
+for (const w of repaso) if (!units[w]) { const raw = all.find((u) => u.key === w)!; const { key, type, association: _a, ...payload } = raw as { key: string; type: string; association?: unknown } & Record<string, unknown>; units[key] = { key, type, language: 'en', version: 1, payload, skills: [{ key: `${key}.recall`, kind: 'recall' }], association: null } as unknown as SessionUnit; }
+const plan = buildFlowSession({ sessionId, courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true, ...(q.get('a') ? { arcadeUnits: wanted } : learned.length ? { arcadeUnits: learned } : {}),
+  ...(repaso.length ? { reviewArcade: repaso.map((unitKey) => ({ unitKey, recall: recuerda.includes(unitKey) })) } : {}) });
 if (q.get('solo')) plan.steps = plan.steps.filter((x) => x.kind === q.get('solo') || x.kind === 'summary');
 const state = { plan, index: 0, outcomes: {}, finished: false };
 const w = window as unknown as { __plan: unknown; __units: unknown };

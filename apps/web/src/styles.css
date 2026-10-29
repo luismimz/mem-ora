@@ -1107,3 +1107,9 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 /* La pieza que salta se ilumina mientras se mueve (D-094): se ve QUÉ cambia de sitio. */
 .mchip.jumping .back, .mchip.jumping .front { box-shadow: 0 0 0 3px #ffd76a, 0 0 22px rgba(255,215,106,.85); }
 .mchip.jumping { z-index: 2; }
+/* Repaso rápido (D-094): recordar del español al inglés y calificarte. */
+.arcade-reveal { margin-top: .4rem; }
+.arcade-recall { display: grid; gap: .7rem; }
+.arcade-answer { margin: 0; text-align: center; font-size: clamp(1.8rem, 8vw, 2.4rem); font-weight: 950; color: #ffd76a; display: flex; align-items: center; justify-content: center; gap: .5rem; animation: woke .35s ease; }
+.arcade-missed ul { list-style: none; margin: .3rem 0 0; padding: 0; display: grid; gap: .25rem; text-align: center; }
+.arcade-missed b { color: #ffd76a; }

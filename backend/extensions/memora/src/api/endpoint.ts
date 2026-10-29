@@ -26,8 +26,8 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, dueUnits, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
-import { buildAssociationSession, buildExam, buildFlowSession, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
+import { assessAssociation, dayOf, dueUnits, dueWords, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
+import { buildAssociationSession, buildExam, buildFlowSession, FLOW_REVIEW_ARCADE_MAX, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
 import { ring, vapidFromEnv } from '../push/lib';
@@ -49,13 +49,20 @@ class HttpError extends Error {
 
 /** Ritmo del curso: N unidades nuevas por sesión (cada una con unas 3 habilidades). Configuración, no lógica (D-037). */
 function courseConfig(course: Row) {
+  // Idiomas (D-094): el núcleo no recorta nada. Los repasos son TODOS los que vencen según su curva (sin tope diario) y
+  // cuántas nuevas entran lo decide la ronda (LANGUAGE_NEW_PER_ROUND, meta DAILY_GOAL_LANGUAGE). Antes, el tope total
+  // del día se gastaba con el refuerzo y solo quedaban las 3 nuevas mínimas (usuario, 29-oct-2026).
+  if (isLanguageCourse(course)) return resolveConfig({ load: { newCap: 300, minNewPerDay: 0, reviewCap: 9999, totalCap: 99999, backlogSuppressNew: 99999 } });
   const perSession = Math.max(1, Number(course.new_per_session) || 15);
   // El tope diario admite varias sesiones (meta de ≈1.000 al mes ⇒ 2–3 sesiones al día); cada sesión trae como mucho perSession.
   return resolveConfig({ load: { newCap: perSession * 3 * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 120, totalCap: perSession * 3 * 3 + 120 } });
 }
 
 /** Meta diaria en idiomas (D-081): ≈ 1.000 palabras en 30 días ⇒ 35 nuevas al día. */
-export const DAILY_GOAL_LANGUAGE = 35;
+export const DAILY_GOAL_LANGUAGE = 33;
+/** Idiomas (D-094): nuevas por ronda (3 rondas ≈ la meta del día; se puede seguir después) y, con muchos repasos acumulados, menos. */
+export const LANGUAGE_NEW_PER_ROUND = 11;
+export const LANGUAGE_BACKLOG_ROUNDS = 3;
 const isLanguageCourse = (course: Row) => Boolean(course.content_language) && course.content_language !== (course.learner_language ?? course.ui_language);
 /** Meta de unidades nuevas al día: en idiomas, la del reto de 30 días; en el resto, tres rondas de nuevas (D-077). */
 export function dailyGoal(course: Row): number {
@@ -322,20 +329,35 @@ export default {
       // Una ronda de «Vacía tus fallos» no cuenta para decidir si hay nuevas: ahí se falla más por diseño.
       const prevRound = savedState && savedState.plan.day === today && (savedState.plan as { mode?: string }).mode === 'flow' && savedState.focus !== 'fallos' ? savedState : null;
       const prevOutcomes = Object.values(prevRound?.outcomes ?? {});
-      const flowNew = flowNewUnits({ perRound: newMax, newToday, dailyRounds: isLanguage ? null : 3,
+      // Idiomas (D-094): las palabras que tocan según su curva van al «Repaso rápido» (Arcade, sin ficha); el resto de la
+      // ronda es nuevo. Una palabra se repasa una sola vez aunque venzan varias de sus habilidades.
+      const flowLanguage = modes.includes('flow') && isLanguage;
+      const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
+      const isWord = (k: string) => units[k]?.type === 'term';
+      const words = flowLanguage ? dueWords(plan.items as PlanItem[], (id) => skillKind.get(id), isWord, learner.skills) : [];
+      const roundWords = words.slice(0, FLOW_REVIEW_ARCADE_MAX);
+      const items = flowLanguage ? (plan.items as PlanItem[]).filter((i) => !(i.reason === 'review' && isWord(i.unitId))) : (plan.items as PlanItem[]);
+      const perRound = flowLanguage ? (words.length > FLOW_REVIEW_ARCADE_MAX * LANGUAGE_BACKLOG_ROUNDS ? Math.ceil(LANGUAGE_NEW_PER_ROUND / 3) : LANGUAGE_NEW_PER_ROUND) : newMax;
+      const flowNew = flowNewUnits({ perRound, newToday, dailyRounds: isLanguage ? null : 3,
         ...(prevRound ? { lastRound: { answered: prevOutcomes.length, correct: prevOutcomes.filter((o) => o.correct).length } } : {}) });
-      const reviewKeys = (plan.items as PlanItem[]).filter((i) => i.reason === 'review').map((i) => i.unitId);
-      const errors = errorUnits(learner.skills, 4, reviewKeys).filter((k) => units[k]);
+      const reviewKeys = [...items.filter((i) => i.reason === 'review').map((i) => i.unitId), ...roundWords.map((w) => w.unitKey)];
+      // «Tus errores»: en idiomas, solo lo fallado y aún no acertado (antes también todo lo que se olvidó alguna vez, y
+      // salían siempre las mismas). Vuelve con su ficha: si se falla, se repite.
+      const errors = (flowLanguage ? pendingFailures(learner.skills, 4).filter((k) => !reviewKeys.includes(k)) : errorUnits(learner.skills, 4, reviewKeys)).filter((k) => units[k]);
       // Refuerzo que rota: si se puede, no repite las unidades de la ronda anterior (antes salían siempre las mismas 8).
       const prevUnits = new Set((prevRound?.plan.steps ?? []).map((st: { unitKey: string }) => st.unitKey).filter(Boolean));
       const weakAll = weakUnits(learner.skills, 8, [...reviewKeys, ...errors]).filter((k) => units[k]);
       const weakFresh = weakUnits(learner.skills, 8, [...reviewKeys, ...errors, ...prevUnits]).filter((k) => units[k]);
-      const practice = weakFresh.length >= 2 ? weakFresh : weakAll;
+      // El refuerzo de «lo más débil» repetía siempre las mismas palabras: en idiomas solo entra si no hay nada nuevo ni
+      // nada que repasar (curso terminado y todo al día).
+      const nothingElse = !roundWords.length && !items.some((i) => i.reason === 'new') && !errors.length;
+      const practice = flowLanguage && !nothingElse ? [] : weakFresh.length >= 2 ? weakFresh : weakAll;
       // Arcade sorpresa (D-087): solo lo ya aprendido (practicado y más allá de «presentado»), si el curso tiene Arcade.
       const learnedUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]);
       const session = modes.includes('flow')
-        ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, maxNewUnits: flowNew,
-            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits })
+        ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: flowNew,
+            errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits,
+            ...(roundWords.length ? { reviewArcade: roundWords } : {}) })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };

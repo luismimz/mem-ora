@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dueUnits, errorUnits, pendingFailures, streakOf, weakUnits, type SkillState } from '../src';
+import { dueUnits, dueWords, MATURE_STEP, errorUnits, pendingFailures, streakOf, weakUnits, type SkillState } from '../src';
 
 const skill = (unitId: string, over: Partial<SkillState> = {}): SkillState => ({
   skillId: `${unitId}-r`, unitId, status: 'learning', evidence: 0, retrievalSuccesses: 0, deferredSuccesses: 0, consecutiveFailures: 0,
@@ -58,5 +58,26 @@ describe('racha con protector (D-077)', () => {
   it('como mucho se guardan 2 protectores', () => {
     const all = Array.from({ length: 30 }, (_, i) => i + 1);
     expect(streakOf(days(...all), 30).shields).toBe(2);
+  });
+});
+
+describe('dueWords (D-094): repaso por palabra según su curva', () => {
+  const kinds: Record<string, string> = { 'boy.recall': 'recall', 'boy.listen': 'listen', 'boy.produce': 'produce', 'nine.recall': 'recall', 'g1.recall': 'recall', 'cat.listen': 'listen' };
+  const items = [
+    { skillId: 'boy.listen', unitId: 'boy', reason: 'review' },
+    { skillId: 'nine.recall', unitId: 'nine', reason: 'review' },
+    { skillId: 'boy.recall', unitId: 'boy', reason: 'review' },
+    { skillId: 'boy.produce', unitId: 'boy', reason: 'review' },
+    { skillId: 'g1.recall', unitId: 'g1', reason: 'review' },
+    { skillId: 'cat.listen', unitId: 'cat', reason: 'review' },
+    { skillId: 'new.recall', unitId: 'new', reason: 'new' },
+  ];
+  const skills = { 'nine.recall': skill('nine', { step: MATURE_STEP }), 'boy.recall': skill('boy', { step: 1 }) };
+  const words = dueWords(items, (id) => kinds[id], (u) => u !== 'g1', skills);
+  it('cada palabra sale UNA vez, en el orden de urgencia del plan, solo si toca su habilidad de recordar', () => {
+    expect(words.map((w) => w.unitKey)).toEqual(['nine', 'boy']);
+  });
+  it('lo maduro se repasa recordando; lo joven, reconociendo', () => {
+    expect(words).toEqual([{ unitKey: 'nine', recall: true }, { unitKey: 'boy', recall: false }]);
   });
 });

@@ -19,6 +19,12 @@ export interface AssocStep {
   startHint?: HintLevel;
   /** Arcade sorpresa: unidades que entran en la ronda. */
   arcadeUnits?: string[];
+  /**
+   * Repaso rápido (D-094): el Arcade con lo que vence según la curva del olvido. Sin ficha delante (recordar es lo que
+   * fija); `arcadeRecall`, las palabras ya maduras, que se recuerdan del español al inglés (no se eligen).
+   */
+  arcadeReview?: boolean;
+  arcadeRecall?: string[];
   /** Arcade gramatical (D-088): frases de lo aprendido, bien o con el error del orden del español. */
   arcadeGrammar?: Array<{ unitKey: string; example: number; wrong: boolean }>;
   /** «¿Qué tiempo pide?» (D-089): frases del juego (de qué tiempo y cuál) y los tiempos que ya llevas en la ruta. */

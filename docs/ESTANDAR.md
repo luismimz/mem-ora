@@ -1,12 +1,13 @@
 # Estándar de Memora (congelado)
 
-Versión 9 · 29-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
+Versión 10 · 29-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
 sus respuestas del mismo día: deslizar sin botones, feed infinito, ejemplo visto para cada pregunta (D-077); versión 3,
 «La escena que cambia» (D-084, aprobada por el usuario el 24-oct-2026); versión 4, «La cadena» (D-085, aprobada
 por el usuario el 25-oct-2026); versión 5, «Arcade sorpresa» en el Flujo (D-087, pedido por el usuario el 28-oct-2026); versión 6, la ruta de
 los tiempos verbales y «¿Qué tiempo pide?» (D-089, aprobada por el usuario el 28-oct-2026); versión 7, el Taller de «saber usarlo» en DAM (D-090, pedido por el
 usuario el 29-oct-2026); versión 8, «Las piezas» y el ejemplo que se gira pieza a pieza (D-092, pedido por el usuario el
-29-oct-2026); versión 9, frases de práctica nuevas en «Las piezas» y «Construye» (D-093, elegido por el usuario).
+29-oct-2026); versión 9, frases de práctica nuevas en «Las piezas» y «Construye» (D-093, elegido por el usuario); versión 10, el «Repaso rápido» por la curva del olvido en idiomas (D-094, aprobado por el
+usuario el 29-oct-2026).
 **Nada de este documento se cambia sin aprobación explícita del usuario.** Un fallo se corrige respetándolo y se añade
 una comprobación automática para que no vuelva.
 
@@ -36,9 +37,15 @@ tarjeta pasa sola; al fallar, «Recuérdalo así» se queda hasta que deslizas. 
 | **Taller 🛠️** | Conceptos (DAM, D-090): cada 4 conceptos enseñados (y al acabar la ronda), 5 retos mezclados con lo ya aprendido: «¿Qué es esto?» (un caso o ejemplo sin el nombre y eliges el concepto), «Completa el código» (tocando fichas), «¿Qué imprime?» (se ejecuta y se ve la salida), «Caza el bug» (tocando la línea) y «¿Qué componente es?» (el componente dibujado como en una ventana). Sin reloj; cada respuesta se explica; estrellas al final | Solo conceptos ya enseñados. Los casos de «¿Qué es esto?» son nuevos (no salen en la ficha) cuando el concepto los tiene: reconocer en un caso nuevo es transferir. Pesa como elegir; si fallas alguno, vuelve su ficha. |
 | **Las piezas 🧩** | Idiomas (D-092): justo después de la ficha de un truco (o tras «Recuerda» de una palabra) y antes de «Construye la frase», con un ejemplo cuyo espejo tiene 2 o más piezas. Dos fases: si el inglés cambia el orden, «¿Qué pieza se adelanta?» (tocas la pieza en español que salta); si no, «¿Cuál falta?» (una pieza oculta y 3 opciones del mismo papel). Después, **ordenar las piezas en inglés** tocándolas. Al fallar se ve el orden bueno con la pieza que salta marcada y la regla; si has seguido el orden del español, se dice | En los trucos, «Las piezas» y «Construye la frase» usan **frases de práctica nuevas** (D-093: no salen en la ficha, distintas entre sí, mejor con palabras que ya sabes); sin ellas, ejemplos de la ficha y «Construye» con OTRO. Pesa como elegir (recuerdo). Si fallas, vuelve la ficha. |
 | **Arcade sorpresa ⚡** | En la mitad de las rondas aproximadamente, en un punto al azar: 10 preguntas contrarreloj (5 s, cuenta atrás grande) de lo YA aprendido, hasta 4 de ellas «¿Está bien dicho?» (D-088), con combo, puntos y confeti | Nunca antes de la 4.ª tarjeta ni con menos de 6 cosas aprendidas. Pesa como reconocer; un fallo no corta el juego ni manda a la ficha: vuelve en su repaso. |
+| **Repaso rápido 🧠** | Idiomas (D-094): al **empezar** la ronda, las palabras que tocan hoy según su curva (1 h, 3 h, 1 d, 3 d, 7 d, 14 d, 30 d), las más urgentes primero, hasta 25 por ronda. **Sin ficha delante:** las jóvenes se reconocen (inglés → significado, 5 s); las maduras (intervalo de 3 días o más) se recuerdan (significado → inglés, 6 s para pensar, «Ver la respuesta» y te calificas: «Me salía» / «No me salía»). Al final, qué vuelve antes | Una palabra se repasa una sola vez aunque venzan varias de sus habilidades. Lo fallado vuelve al final de la ráfaga, al revés, y la curva lo trae antes. Reconocer pesa poco; recordar sin ayuda, alto: solo recordando suben los intervalos largos. Con repaso no hay Arcade sorpresa. |
 | **Hito** («Ronda N completada») | XP de la ronda, racha, protectores 🛡️, aciertos, mejor combo, nuevos, próximo repaso | Se desliza y empieza la siguiente ronda. |
 
-Orden de cada ronda: **repasos, tus errores, lo nuevo** y, si no queda nada de eso, **refuerzo de lo más débil**. Siempre
+Orden de cada ronda: **repasos, tus errores, lo nuevo** y, si no queda nada de eso, **refuerzo de lo más débil**.
+**En idiomas (D-094):** **Repaso rápido** con todo lo que vence (sin tope diario), después **tus errores** (solo lo
+fallado y aún no acertado, con su ficha) y el resto **contenido nuevo**: 11 por ronda, meta de **33 al día** (≈ 1.000 al
+mes) y se puede seguir después; con más de 75 palabras vencidas, 4 nuevas por ronda hasta ponerse al día. El refuerzo
+solo entra si no queda nada nuevo ni que repasar. La regla 1 de §3 («se enseña antes de preguntar») se cumple con lo
+nuevo; un repaso pregunta sin ficha (recordar es lo que fija) y, si se falla, la ficha vuelve. Siempre
 en parejas **ficha, ficha, pregunta, pregunta**. Lo nuevo empieza en 8 por ronda y sube con los aciertos (D-057); al
 día, como mucho tres rondas de nuevas; después, el feed sigue con repasos, errores y refuerzo. Como mucho 10 repasos
 por ronda. **Racha con protector:** cada 7 días de racha se gana un protector (máximo 2) que salva un día perdido.
