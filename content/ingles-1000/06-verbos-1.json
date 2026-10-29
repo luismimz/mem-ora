@@ -1001,8 +1001,8 @@
         {
           "key": "g-to-infinitive",
           "type": "pattern",
-          "goal": "Verbos del diccionario: -AR, -ER, -IR = TO",
-          "rule": "-ar, -er, -ir (jugar, comer, vivir) = TO + verbo: to play, to eat, to live. Detrás de want, need, like: I want to eat.",
+          "goal": "Comer, vivir, jugar… = TO + verbo",
+          "rule": "El verbo sin conjugar (acaba en -ar, -er, -ir) lleva TO DELANTE: comer = to eat. Quiero comer = I want TO eat.",
           "pieces": [
             {
               "text": "I want",
@@ -1242,8 +1242,8 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "scene": "Cada -AR, -ER, -IR se convierte en un TO volador.",
-            "emoji": "🛫"
+            "scene": "La -ER de comER despega y un TO aterriza DELANTE.",
+            "emoji": "🛫🛬"
           }
         }
       ]

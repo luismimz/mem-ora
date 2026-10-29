@@ -1153,13 +1153,14 @@ const ARCADE_MS = 5000;
  * 5 s por pregunta con la cuenta atrás bien visible, combo, puntos y confeti. Un fallo no corta el juego ni manda a la
  * ficha: se ve la respuesta buena y sigue; vuelve en su repaso.
  */
-type ArcadeQ = ({ kind: 'word'; unit: SessionUnit; inverse: boolean } | { kind: 'recall'; unit: SessionUnit } | { kind: 'judge'; unit: SessionUnit; text: string; right: string; wrong: boolean; rule?: string }) & { again?: boolean };
-type ArcadeFormat = 'recognition_choice' | 'recall_unaided';
+type ArcadeQ = ({ kind: 'word'; unit: SessionUnit; inverse: boolean } | { kind: 'judge'; unit: SessionUnit; text: string; right: string; wrong: boolean; rule?: string }) & { again?: boolean };
+type ArcadeFormat = 'recognition_choice' | 'recall_cued';
 
 /** Las preguntas del Arcade: palabras y, intercaladas, frases «¿Está bien dicho?» (D-088). */
 function arcadeQuestions(units: SessionUnit[], grammar: Array<{ unitKey: string; example: number; wrong: boolean }>, all: Record<string, SessionUnit>, review: boolean, recall: string[]): ArcadeQ[] {
-  // Repaso (D-094): lo joven se reconoce (inglés → significado); lo maduro se recuerda (significado → inglés, sin opciones).
-  const words: ArcadeQ[] = units.map((u, i) => (review ? (recall.includes(u.key) ? { kind: 'recall', unit: u } : { kind: 'word', unit: u, inverse: false }) : { kind: 'word', unit: u, inverse: i % 2 === 1 }));
+  // Repaso (D-094, D-100): lo joven se reconoce (inglés → significado); lo maduro, del español al inglés eligiendo
+  // entre opciones (una sola pantalla y sin autocalificarse: «así no se miente», usuario 29-oct-2026).
+  const words: ArcadeQ[] = units.map((u, i) => ({ kind: 'word', unit: u, inverse: review ? recall.includes(u.key) : i % 2 === 1 }));
   const judges: ArcadeQ[] = grammar.flatMap((g) => {
     const u = all[g.unitKey];
     const ex = (u?.payload as { examples?: Array<{ text: string; mirror?: Mirror }> } | undefined)?.examples?.[g.example];
@@ -1175,8 +1176,6 @@ function arcadeQuestions(units: SessionUnit[], grammar: Array<{ unitKey: string;
   return out;
 }
 
-/** Tiempo para pensar una palabra madura antes de ver la respuesta (no cuenta como fallo: solo se destapa). */
-const RECALL_MS = 6000;
 
 /**
  * El Arcade (D-087) y el «Repaso rápido» (D-094). En repaso: las palabras que tocan hoy según su curva del olvido, sin
@@ -1187,7 +1186,6 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
   const [questions, setQuestions] = useState<ArcadeQ[]>(() => arcadeQuestions(units, grammar, all, review, recall));
   const [i, setI] = useState(-1);
   const [picked, setPicked] = useState<number | null>(null);
-  const [shown, setShown] = useState(false);
   const [left, setLeft] = useState(ARCADE_MS);
   const [score, setScore] = useState(0);
   const [combo, setCombo] = useState(0);
@@ -1201,24 +1199,19 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
   // Opciones falsas de todas las palabras de la ronda (en un repaso corto, las de la ráfaga no bastan).
   const pool = useMemo(() => [...new Set([...units, ...Object.values(all).filter((x) => x.type === 'term')])], [units, all]);
   const choices = useMemo(() => {
-    if (!q || q.kind === 'recall') return [];
+    if (!q) return [];
     if (q.kind === 'judge') return [{ label: '✅ Bien dicho', correct: !q.wrong }, { label: '❌ Mal dicho', correct: q.wrong }];
     return choicesFor(label(q.unit, q.inverse), pool.map((x) => label(x, q.inverse)), `${seed}-arcade-${i}`, 3);
   }, [q, i]); // eslint-disable-line react-hooks/exhaustive-deps
-  const limit = q?.kind === 'recall' ? RECALL_MS : ARCADE_MS;
+  const limit = ARCADE_MS;
   useEffect(() => {
-    if (!q || picked !== null || shown) return;
+    if (!q || picked !== null) return;
     t0.current = performance.now();
     setLeft(limit);
     const tick = window.setInterval(() => setLeft(Math.max(0, limit - (performance.now() - t0.current))), 100);
     return () => window.clearInterval(tick);
-  }, [i, picked, shown]); // eslint-disable-line react-hooks/exhaustive-deps
-  useEffect(() => { if (q && picked === null && !shown && left <= 0) { if (q.kind === 'recall') reveal(); else pick(-1); } });
-  function reveal() {
-    if (!q || shown) return;
-    setShown(true);
-    if (audioEnabled()) speak(unitText(q.unit), q.unit.language);
-  }
+  }, [i, picked]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { if (q && picked === null && left <= 0) pick(-1); });
   function settle(ok: boolean, format: ArcadeFormat, context: string, hold: number) {
     if (!q) return;
     onAnswer(q.unit, ok, Math.round(performance.now() - t0.current), context, format);
@@ -1230,23 +1223,20 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
       setCombo(0);
       // Si se falla, se repite: vuelve al final de la ráfaga una vez (si era de elegir, ahora al revés).
       if (review && q.kind !== 'judge' && !q.again) {
-        setQuestions((qs) => [...qs, q.kind === 'word' ? { kind: 'word', unit: q.unit, inverse: true, again: true } : { kind: 'recall', unit: q.unit, again: true }]);
+        setQuestions((qs) => [...qs, { kind: 'word', unit: q.unit, inverse: q.kind === 'word' ? !q.inverse : true, again: true }]);
         setMissed((m) => (m.includes(q.unit) ? m : [...m, q.unit]));
       }
     }
     // En las frases se deja leer la regla; el reloj se repone ANTES de pasar (si no, la siguiente nacía a 0 s).
-    window.setTimeout(() => { setLeft(ARCADE_MS); setPicked(null); setShown(false); setI((n) => n + 1); }, hold);
+    window.setTimeout(() => { setLeft(ARCADE_MS); setPicked(null); setI((n) => n + 1); }, hold);
   }
   function pick(k: number) {
-    if (!q || picked !== null || q.kind === 'recall') return;
+    if (!q || picked !== null) return;
     const ok = k >= 0 && choices[k]!.correct;
     setPicked(k);
-    settle(ok, 'recognition_choice', q.kind === 'judge' ? 'judge' : review ? `repaso${q.again ? '-otra' : ''}` : 'arcade', q.kind === 'judge' ? (ok ? 1800 : 3200) : ok ? 600 : 1500);
-  }
-  function grade(ok: boolean) {
-    if (!q || q.kind !== 'recall' || picked !== null) return;
-    setPicked(ok ? 0 : 1);
-    settle(ok, 'recall_unaided', `repaso-recuerda${q.again ? '-otra' : ''}`, ok ? 400 : 900);
+    if (review && q.kind === 'word' && audioEnabled()) speak(unitText(q.unit), q.unit.language);
+    // Del español al inglés con opciones = recuperar con pistas (pesa medio): sube el intervalo; reconocer, poco.
+    settle(ok, review && q.kind === 'word' && q.inverse ? 'recall_cued' : 'recognition_choice', q.kind === 'judge' ? 'judge' : review ? `repaso${q.again ? '-otra' : ''}` : 'arcade', q.kind === 'judge' ? (ok ? 1800 : 3200) : ok ? 600 : 1500);
   }
   if (i < 0) {
     return (
@@ -1282,39 +1272,23 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
   }
   const secs = Math.ceil(left / 1000);
   const state = (k: number) => (picked === null ? '' : choices[k]!.correct ? 'is-right' : picked === k ? 'is-wrong' : 'is-off');
-  const verdict = picked === null ? '' : q.kind === 'recall' ? (picked === 0 ? 'right' : 'wrong') : picked >= 0 && choices[picked]!.correct ? 'right' : 'wrong';
+  const verdict = picked === null ? '' : picked >= 0 && choices[picked]!.correct ? 'right' : 'wrong';
   return (
     <Slide tone={review ? 200 : 45} className={`arcade-play ${verdict}`}>
       <div className="arcade-head">
         <p className="tag">{review ? '🧠 REPASO' : '⚡ ARCADE'} · {i + 1}/{questions.length}{q.again ? ' · OTRA VEZ' : ''}</p>
         <span className="arcade-pts">{review ? `${right} ✓` : `${score} pts`}{combo > 1 ? <b> · 🔥 ×{Math.min(3, 1 + (combo - 1) * 0.5)}</b> : null}</span>
       </div>
-      {!(q.kind === 'recall' && shown) && (
-        <div className={`arcade-clock ${secs <= 2 && q.kind !== 'recall' ? 'hurry' : ''}`} role="timer" aria-label={`Quedan ${secs} segundos`}>
-          <span className="arcade-secs">{secs}</span>
-          <div className="arcade-bar"><i style={{ width: `${(left / limit) * 100}%` }} /></div>
-        </div>
-      )}
+      <div className={`arcade-clock ${secs <= 2 ? 'hurry' : ''}`} role="timer" aria-label={`Quedan ${secs} segundos`}>
+        <span className="arcade-secs">{secs}</span>
+        <div className="arcade-bar"><i style={{ width: `${(left / limit) * 100}%` }} /></div>
+      </div>
       {q.kind === 'judge' && <p className="arcade-kind">🧩 ¿Está bien dicho?</p>}
-      {q.kind === 'recall' && <p className="arcade-kind">💭 ¿Cómo se dice en inglés?</p>}
-      <h3 className="ask arcade-prompt" lang={q.kind === 'judge' || (q.kind === 'word' && !q.inverse) ? q.unit.language : undefined}>{q.kind === 'judge' ? q.text : q.kind === 'recall' || q.inverse ? unitMeaning(q.unit) : unitText(q.unit)}</h3>
-      {q.kind === 'recall' ? (
-        !shown ? (
-          <button type="button" className="primary arcade-go arcade-reveal" onClick={reveal}>👀 Ver la respuesta</button>
-        ) : (
-          <div className="arcade-recall">
-            <p className="arcade-answer" lang={q.unit.language}>{unitText(q.unit)} {audioEnabled() && <button type="button" className="say" aria-label="Escuchar" onClick={() => speak(unitText(q.unit), q.unit.language)}>🔊</button>}</p>
-            <div className="options arcade-judge">
-              <button type="button" className={`option ${picked === 0 ? 'is-right' : picked === 1 ? 'is-off' : ''}`} onClick={() => grade(true)}>✅ Me salía</button>
-              <button type="button" className={`option ${picked === 1 ? 'is-wrong' : picked === 0 ? 'is-off' : ''}`} onClick={() => grade(false)}>❌ No me salía</button>
-            </div>
-          </div>
-        )
-      ) : (
-        <div className={`options ${q.kind === 'judge' ? 'arcade-judge' : ''}`}>
-          {choices.map((c, k) => <button type="button" key={c.label} data-ok={c.correct ? '1' : '0'} className={`option ${state(k)}`} onClick={() => pick(k)} lang={q.kind === 'word' && q.inverse ? q.unit.language : undefined}>{c.label}</button>)}
-        </div>
-      )}
+      {review && q.kind === 'word' && <p className="arcade-kind">{q.inverse ? '💭 ¿Cómo se dice en inglés?' : '💭 ¿Qué significa?'}</p>}
+      <h3 className="ask arcade-prompt" lang={q.kind === 'judge' || (q.kind === 'word' && !q.inverse) ? q.unit.language : undefined}>{q.kind === 'judge' ? q.text : q.inverse ? unitMeaning(q.unit) : unitText(q.unit)}</h3>
+      <div className={`options ${q.kind === 'judge' ? 'arcade-judge' : ''}`}>
+        {choices.map((c, k) => <button type="button" key={c.label} data-ok={c.correct ? '1' : '0'} className={`option ${state(k)}`} onClick={() => pick(k)} lang={q.kind === 'word' && q.inverse ? q.unit.language : undefined}>{c.label}</button>)}
+      </div>
       <div className="arcade-after" aria-live="polite">
         {picked === -1 && <p className="arcade-late">⏰ ¡Se acabó el tiempo!</p>}
         {picked !== null && q.kind === 'judge' && (

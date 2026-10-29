@@ -998,3 +998,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   se falla, vuelve la ficha); 11 nuevas por ronda (8 solo con más de 150 vencidas); si a la misión le quedan pocas,
   entran las de las siguientes; lo nuevo va antes; la repesca nunca repite una frase de la ronda; una ronda armada con
   el planificador anterior no se retoma.
+
+## D-100 · Repaso con opciones, sin autocalificarse, y el truco del TO más claro (usuario, 29-oct-2026)
+- **Por qué (usuario):** «pulsar y decir me la sé o no, no me gusta nada; dos pantallas para esto; prefiero que
+  aparezcan las opciones y elegir, así no se miente». Y en «-AR, -ER, -IR = TO»: «decir TO delante del verbo».
+- **Decisión:** en el Repaso rápido, lo maduro se pregunta del español al inglés con opciones en una sola pantalla
+  (cuenta como recuperar con pistas, peso medio, y alarga el intervalo); suena la palabra al responder. El truco pasa
+  a «Comer, vivir, jugar… = TO + verbo»: «El verbo sin conjugar (acaba en -ar, -er, -ir) lleva TO DELANTE: comer = to
+  eat. Quiero comer = I want TO eat.» Escena: «La -ER de comER despega y un TO aterriza DELANTE.»
+
