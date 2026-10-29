@@ -89,23 +89,18 @@ try {
     await ctx.close();
   }
 
-  // 3. «¿Cuál se adelanta?» → ordenar bien.
+  // 3. Una sola tarea clara (D-097): la frase en español y sus trozos; tocarlos en el orden del inglés. Sin preguntas
+  //    previas ni botones; al acertar pasa sola.
   page = await open('k=g-adjective-order&solo=pieces');
   await page.waitForSelector('.pieces');
-  const tag = await page.locator('.pieces .tag').textContent();
-  check(/ADELANTA/.test(tag), `primero: «${tag.trim()}»`);
-  const head = await page.evaluate(() => ({ top: Math.round(document.querySelector('.pieces .tag').getBoundingClientRect().top), badge: document.querySelector('.pieces-new')?.textContent, goal: document.querySelector('.pieces-goal')?.textContent }));
-  check(head.top < 200 && /nueva/i.test(head.badge ?? '') && Boolean(head.goal), `empieza arriba como la ficha (${head.top}px), con el truco («${head.goal}») y «${head.badge}»`);
+  const tag = (await page.locator('.pieces .tag').textContent()).trim();
+  const clutter = await page.evaluate(() => ({ goal: Boolean(document.querySelector('.pieces-goal')), badge: Boolean(document.querySelector('.pieces-new')), slots: document.querySelectorAll('.pslot').length, next: document.querySelectorAll('.pslot.next').length, top: Math.round(document.querySelector('.pieces .tag').getBoundingClientRect().top) }));
+  check(/DILO EN INGLÉS/.test(tag) && !clutter.goal && !clutter.badge, `una sola tarea, sin texto de más: «${tag}»`);
+  check(clutter.slots >= 2 && clutter.next === 1 && clutter.top < 200, `se ven los huecos (${clutter.slots}) y cuál toca, y empieza arriba (${clutter.top}px)`);
+  check(await page.locator('.pieces button.arcade-go').count() === 0, 'sin botones de «seguir»');
   check(await fits(page), 'las piezas caben en la pantalla');
-  if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-adelanta.png` });
+  if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-tarea.png` });
   const ex = await page.evaluate(() => { const s = window.__plan.steps.find((x) => x.kind === 'pieces'); const u = window.__units[s.unitKey]; const m = [...u.payload.examples, ...(u.payload.practice ?? [])][s.example].mirror; const order = m.order ?? m.pieces.map((_, i) => i); return { pieces: m.pieces, order }; });
-  const jumper = ex.order.find((v, k) => v !== k && ex.order.indexOf(v) < v) ?? ex.order.find((v, k) => v !== k);
-  await tapText(page, '.pieces-row .ptile', ex.pieces[jumper].es);
-  const v1 = await page.locator('.tense-verdict').textContent();
-  check(/Eso es/.test(v1), `tocar la pieza que salta («${ex.pieces[jumper].es}») acierta y explica por qué`);
-  check(await page.locator('.pieces .arcade-go').count() === 0, 'sin botones de «seguir»');
-  await page.waitForSelector('.pieces-slots', { timeout: 3000 });
-  check(true, 'al acertar, pasa sola a ordenar');
   for (const i of ex.order) await page.locator('.pieces-row .ptile:not(.used)', { hasText: ex.pieces[i].en }).first().tap();
   const v2 = await page.locator('.tense-verdict').textContent();
   check(/Perfecto/.test(v2), `ordenarlas en inglés: «${v2}»`);
@@ -114,32 +109,19 @@ try {
   check(true, 'al ordenarlas bien, pasa sola a la siguiente tarjeta');
   await page.close();
 
-  // 4. Fallo: seguir el orden del español se dice, y se enseña el orden bueno con la pieza que salta marcada.
+  // 4. Fallo: seguir el orden del español se dice, se ve el orden bueno con la pieza que salta y no avanza solo.
   page = await open('k=g-adjective-order&solo=pieces');
   await page.waitForSelector('.pieces');
-  await page.locator('.pieces-row .ptile').first().tap();
-  await page.waitForTimeout(1500);
-  check(await page.locator('.pieces-slots').count() === 0, 'si fallas, NO pasa sola: te deja leer por qué');
-  await swipe(page);
-  await page.waitForSelector('.pieces-slots', { timeout: 3000 });
   for (let i = 0; i < ex.pieces.length; i += 1) await page.locator('.pieces-row .ptile:not(.used)', { hasText: ex.pieces[i].en }).first().tap();
   const bad = await page.evaluate(() => ({ v: document.querySelector('.tense-verdict')?.textContent, jumped: document.querySelectorAll('.ptile.jumped').length, why: document.querySelector('.pieces .why')?.textContent }));
   check(/orden del español/.test(bad.v ?? ''), `si sigues el orden del español, se dice: «${bad.v}»`);
-  check(bad.jumped >= 1 && Boolean(bad.why), `y se ve el orden bueno con la pieza que salta marcada y la regla`);
-  if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-fallo.png` });
-  await page.close();
-
-  // 5. Mismo orden que en español: «¿Cuál falta?».
-  page = await open('k=g-present-continuous&learned=g-present-simple,g-past-simple&solo=pieces');
-  const has = await page.locator('.pieces').count();
-  if (has) {
-    const t = await page.locator('.pieces .tag').textContent();
-    check(/FALTA|ADELANTA|ORDÉNALAS/.test(t), `en otro truco: «${t.trim()}»`);
-    if (/FALTA/.test(t)) {
-      check(await page.locator('.tense-options .burst-btn').count() === 3, '«¿Cuál falta?» da 3 opciones');
-      if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-falta.png` });
-    }
-  } else check(true, 'este truco no tiene ejemplo por piezas (no hay paso)');
+  check(bad.jumped >= 1 && Boolean(bad.why), 'y se ve el orden bueno con la pieza que salta marcada y la regla');
+  await page.waitForTimeout(2200);
+  check(await page.locator('.slide.pieces').count() === 1, 'al fallar no avanza solo: te deja leerlo');
+  if (shots) await page.screenshot({ path: `${shots}/piezas-fallo.png` });
+  await swipe(page);
+  await page.waitForSelector('.slide:not(.pieces)', { timeout: 4000 }).catch(() => undefined);
+  check(await page.locator('.slide.pieces').count() === 0, 'y se sigue deslizando');
   await page.close();
 
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);

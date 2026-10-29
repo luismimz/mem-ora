@@ -982,46 +982,23 @@ function scrambled<T>(items: T[], seed: string): T[] {
 }
 
 /**
- * «Las piezas» (D-092): practicar una frase por trozos antes de construirla palabra a palabra. Primero, si el inglés
- * cambia el orden, «¿Qué pieza se adelanta?» (fijarse en lo que salta); si no, «¿Cuál falta?». Después, ordenar las
- * piezas en inglés. Al fallar, se ve el orden bueno y la regla; si has seguido el orden del español, se dice.
+ * «Las piezas» (D-092, simplificada en D-097): UNA sola tarea clara. La frase en español arriba y debajo sus trozos en
+ * inglés (con su español pequeño): tócalos en el orden del inglés. Antes había una primera pregunta («¿qué pieza se
+ * adelanta?» / «¿cuál falta?») y mucho texto encima: «mucha información y no se sabe qué hacer» (usuario, 29-oct).
+ * Al acertar, suena la frase y pasa sola; al fallar, se ve el orden bueno con la pieza que salta marcada y la regla.
  */
-function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all: Record<string, SessionUnit>; example: number; seed: string; onResult: (ok: boolean, ms: number, note: string) => void }) {
+function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Record<string, SessionUnit>; example: number; seed: string; onResult: (ok: boolean, ms: number, note: string) => void }) {
   const ex = (sentencesOf(unit) as Array<{ text: string; translation?: string; mirror?: Mirror }>)[example]!;
   const m = ex.mirror!;
-  const isPractice = example >= ((unit.payload as { examples?: unknown[] }).examples ?? []).length;
   const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
   const moved = movedPieces(m);
-  const jumper = order.find((i) => moved.includes(i));
-  const canJump = jumper !== undefined && m.pieces[jumper]!.role !== 'signal';
-  // ¿Cuál falta?: una pieza con contenido, y dos falsas del mismo papel sacadas de otras frases.
-  const gap = useMemo(() => {
-    if (canJump) return null;
-    const candidates = m.pieces.flatMap((p, i) => (!p.ghost && (p.role === 'word' || p.role === 'verb') ? [i] : []));
-    const hidden = candidates.length ? candidates[hue(seed) % candidates.length]! : undefined;
-    if (hidden === undefined) return null;
-    const want = m.pieces[hidden]!;
-    const pool = new Set<string>();
-    for (const u of Object.values(all)) for (const e of (sentencesOf(u) as Array<{ mirror?: Mirror }>)) for (const p of e.mirror?.pieces ?? []) if (p.role === want.role && p.en.toLowerCase() !== want.en.toLowerCase() && p.en.split(' ').length === want.en.split(' ').length) pool.add(p.en);
-    const wrong = [...pool].sort((a, b) => hue(`${seed}${a}`) - hue(`${seed}${b}`)).slice(0, 2);
-    return wrong.length === 2 ? { hidden, options: scrambled([want.en, ...wrong], seed) } : null;
-  }, [m, all, seed, canJump]);
-  const first: 'jump' | 'gap' | 'order' = canJump ? 'jump' : gap ? 'gap' : 'order';
-  const [phase, setPhase] = useState<'jump' | 'gap' | 'order'>(first);
-  const [pickA, setPickA] = useState<string | null>(null);
-  const [okA, setOkA] = useState(true);
   const tiles = useMemo(() => scrambled(order, `${seed}-t`), [order, seed]);
   const [placed, setPlaced] = useState<number[]>([]);
   const [checked, setChecked] = useState<boolean | null>(null);
   const [confetti, setConfetti] = useState(0);
   const t0 = useRef(performance.now());
   const rule = m.pieces.find((p) => p.why && moved.includes(m.pieces.indexOf(p)))?.why ?? orderRule(m, ex.text)?.text;
-  function answerA(choice: string, good: boolean) {
-    if (pickA !== null) return;
-    setPickA(choice); setOkA(good);
-    // Sin botones (usuario, 29-oct): si aciertas, pasa solo a ordenar; si fallas, lees por qué y deslizas.
-    if (good) { sfx('ok'); setConfetti((c) => c + 1); window.setTimeout(() => setPhase('order'), 1200); } else sfx('ko');
-  }
+  const jumps = order.some((v, k) => v !== k);
   function place(i: number) {
     if (checked !== null) return;
     const next = [...placed, i];
@@ -1033,85 +1010,43 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
       if (good) { setConfetti((c) => c + 1); sfx('party'); if (audioEnabled()) speak(ex.text, unit.language); window.setTimeout(() => finishRef.current(), 1800); } else sfx('ko');
     }
   }
-  const spanishOrder = placed.length === order.length && placed.every((x, k) => x === k) && order.some((v, k) => v !== k);
+  const spanishOrder = placed.length === order.length && placed.every((x, k) => x === k) && jumps;
   const sent = useRef(false);
   const finish = () => {
     if (sent.current) return;
     sent.current = true;
-    const ok = okA && Boolean(checked);
-    onResult(ok, Math.round(performance.now() - t0.current), ok ? '' : `${spanishOrder ? 'Has seguido el orden del español. ' : ''}En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}`);
+    onResult(Boolean(checked), Math.round(performance.now() - t0.current), checked ? '' : `${spanishOrder ? 'Has seguido el orden del español. ' : ''}En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}`);
   };
   const finishRef = useRef(finish);
   finishRef.current = finish;
-  const swipe = checked !== null ? finish : phase !== 'order' && pickA !== null && !okA ? () => setPhase('order') : undefined;
-  const chip = (i: number, extra = '') => {
+  const chip = (i: number) => {
     const p = m.pieces[i]!;
-    return <><b lang={unit.language}>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}{extra}</small></>;
+    return <><b lang={unit.language}>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}</small></>;
   };
   return (
-    <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked && okA ? 'right' : checked === false ? 'wrong' : ''}`} {...(swipe ? { onNext: swipe } : {})}>
+    <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked ? 'right' : 'wrong'}`} {...(checked !== null ? { onNext: finish } : {})}>
       <div className="pieces-body">
-      <p className="tag">🧩 LAS PIEZAS · {phase === 'order' ? 'ORDÉNALAS' : phase === 'jump' ? '¿QUÉ PIEZA SE ADELANTA?' : '¿CUÁL FALTA?'}</p>
-      <div className="pieces-head">
-        <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🧩'}</div>
-        <p className="pieces-goal">{unit.type === 'pattern' ? (unit.payload as PatternPayload).goal : `${unitText(unit)} · ${(unit.payload as { meaning?: string }).meaning ?? ''}`}</p>
-      </div>
-      <p className="pieces-new">{isPractice ? '✨ Frase nueva' : 'Frase de la ficha'}</p>
-      <h3 className="ask pieces-es">{m.say}</h3>
-      {phase === 'jump' && (
-        <>
-          <p className="pieces-q">En inglés, <b>una pieza se adelanta</b>. ¿Cuál?</p>
-          <div className="pieces-row">
-            {m.pieces.map((p, i) => (p.role === 'signal' ? null : (
-              <button type="button" key={i} className={`ptile role-${p.role} ${pickA === null ? '' : i === jumper ? 'is-right' : pickA === String(i) ? 'is-wrong' : 'is-off'}`} onClick={() => answerA(String(i), i === jumper)}><b>{p.es}</b></button>
-            )))}
-          </div>
-          {pickA !== null && (
-            <div className="pieces-after">
-              <p className={`tense-verdict ${okA ? 'ok' : 'ko'}`}>{okA ? '¡Eso es! 🎉' : <>Era <b>{m.pieces[jumper!]!.es}</b></>}</p>
-              <p className="pieces-jump"><b>{m.pieces[jumper!]!.es}</b> → <b lang={unit.language}>{m.pieces[jumper!]!.en}</b> va antes</p>
-              {rule && <p className="why">📏 {rule}</p>}
-            </div>
-          )}
-        </>
-      )}
-      {phase === 'gap' && gap && (
-        <>
-          <p className="pieces-q">¿Qué pieza falta en inglés?</p>
-          <div className="pieces-row" lang={unit.language}>
-            {order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${i === gap.hidden ? 'hole' : ''}`}>{i === gap.hidden ? <b>{pickA ?? '＿＿'}</b> : chip(i)}</span>)}
-          </div>
-          {pickA === null ? (
-            <div className="burst-buttons tense-options">{gap.options.map((o, k) => <button type="button" key={o} className={`burst-btn c${k}`} lang={unit.language} onClick={() => answerA(o, o === m.pieces[gap.hidden]!.en)}>{o}</button>)}</div>
-          ) : (
-            <div className="pieces-after">
-              <p className={`tense-verdict ${okA ? 'ok' : 'ko'}`}>{okA ? '¡Eso es! 🎉' : <>Era <b lang={unit.language}>{m.pieces[gap.hidden]!.en}</b> ({m.pieces[gap.hidden]!.es})</>}</p>
-            </div>
-          )}
-        </>
-      )}
-      {phase === 'order' && (
-        <>
-          <p className="pieces-q">Toca las piezas en el orden del <b>inglés</b>.</p>
-          <div className={`pieces-slots ${checked === null ? '' : checked ? 'ok' : 'ko'}`} lang={unit.language} aria-label="Tu frase">
-            {order.map((_, k) => {
-              const i = placed[k];
-              return i === undefined ? <span key={k} className="pslot" /> : <button type="button" key={k} className={`ptile role-${m.pieces[i]!.role}`} onClick={() => { if (checked === null) setPlaced((pl) => pl.filter((_, j) => j !== k)); }}>{chip(i)}</button>;
-            })}
-          </div>
-          {checked === null ? (
+        <p className="tag">🧩 DILO EN INGLÉS</p>
+        <h3 className="ask pieces-es">{m.say}</h3>
+        <div className={`pieces-slots ${checked === null ? '' : checked ? 'ok' : 'ko'}`} lang={unit.language} aria-label="Tu frase en inglés">
+          {order.map((_, k) => {
+            const i = placed[k];
+            return i === undefined ? <span key={k} className={`pslot ${k === placed.length ? 'next' : ''}`} /> : <button type="button" key={k} className={`ptile role-${m.pieces[i]!.role}`} onClick={() => { if (checked === null) setPlaced((pl) => pl.filter((_, j) => j !== k)); }}>{chip(i)}</button>;
+          })}
+        </div>
+        {checked === null ? (
+          <>
             <div className="pieces-row">{tiles.map((i) => <button type="button" key={i} className={`ptile role-${m.pieces[i]!.role} ${placed.includes(i) ? 'used' : ''}`} disabled={placed.includes(i)} onClick={() => place(i)}>{chip(i)}</button>)}</div>
-          ) : (
-            <div className="pieces-after">
-              <p className={`tense-verdict ${checked ? 'ok' : 'ko'}`}>{checked ? '¡Perfecto! 🎉' : spanishOrder ? 'Has seguido el orden del español' : 'Casi…'}</p>
-              {!checked && <div className="pieces-row good" lang={unit.language}>{order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${moved.includes(i) ? 'jumped' : ''}`}>{chip(i)}</span>)}</div>}
-              <p className="train-final" lang={unit.language}>{ex.text}</p>
-              {ex.translation && <p className="tense-es">{ex.translation}</p>}
-              {rule && order.some((v, k) => v !== k) && <p className="why">📏 {rule}</p>}
-            </div>
-          )}
-        </>
-      )}
+            <p className="pieces-q">👆 Toca las piezas en el orden del <b>inglés</b></p>
+          </>
+        ) : (
+          <div className="pieces-after">
+            <p className={`tense-verdict ${checked ? 'ok' : 'ko'}`}>{checked ? '¡Perfecto! 🎉' : spanishOrder ? 'Has seguido el orden del español' : 'Casi…'}</p>
+            {!checked && <div className="pieces-row good" lang={unit.language}>{order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${moved.includes(i) ? 'jumped' : ''}`}>{chip(i)}</span>)}</div>}
+            <p className="train-final" lang={unit.language}>{ex.text}</p>
+            {rule && jumps && <p className="why">📏 {rule}</p>}
+          </div>
+        )}
       </div>
       <Confetti burst={confetti} />
     </Slide>
