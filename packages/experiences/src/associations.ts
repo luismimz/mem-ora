@@ -58,6 +58,8 @@ export interface AssocPlan {
   steps: AssocStep[];
   /** Escenas de la sesión, con las unidades de cada una. */
   scenes: string[][];
+  /** Versión del planificador del Flujo: una ronda guardada con otra versión no se retoma (se crea una nueva). */
+  version?: number;
 }
 
 export const SCENE_SIZE = 4;

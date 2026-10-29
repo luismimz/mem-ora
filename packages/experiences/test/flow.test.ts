@@ -521,3 +521,40 @@ describe('sin repetir la misma frase (usuario, 29-oct-2026)', () => {
     }
   });
 });
+
+describe('repaso ligero de los trucos (D-099)', () => {
+  const pat = (key: string): SessionUnit => ({ key, type: 'pattern', language: 'en', payload: { goal: key, rule: 'r', pieces: [{ text: 'I', role: 'fixed' }, { text: 'have', role: 'slot' }],
+    examples: [{ text: 'I have a red car.', translation: 'Tengo un coche rojo.' }, { text: 'She has two cats.', translation: 'Tiene dos gatos.' }, { text: 'We have a big house.', translation: 'Tenemos una casa grande.' }] },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }], association: null } as unknown as SessionUnit);
+  const word = (key: string): SessionUnit => ({ key, type: 'term', language: 'en', payload: { form: 'word', text: key, meaning: key, examples: [{ text: `I like the ${key} a lot.`, translation: 'x' }] },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.produce`, kind: 'produce' }], association: null } as unknown as SessionUnit);
+  const units = { g1: pat('g1'), g2: pat('g2'), a: word('a'), b: word('b'), c: word('c'), d: word('d') };
+  const items = [item('g1', 'review'), item('g2', 'review'), item('a', 'new'), item('b', 'new'), item('c', 'new'), item('d', 'new')];
+  it('un truco de repaso no se vuelve a enseñar entero: una frase que construir y nada más', () => {
+    const plan = buildFlowSession({ ...base, units, items, lightReviews: true, sessionId: 'l' });
+    for (const g of ['g1', 'g2']) {
+      const st = plan.steps.filter((s) => s.unitKey === g && !s.retry).map((s) => s.kind);
+      expect(st).toEqual(['build']);
+    }
+    expect(plan.steps.filter((s) => s.kind === 'reel').map((s) => s.unitKey)).toEqual(['a', 'b', 'c', 'd']);
+  });
+  it('sin la opción, sigue como antes (ficha antes de preguntar)', () => {
+    const plan = buildFlowSession({ ...base, units, items, sessionId: 'l' });
+    expect(plan.steps.filter((s) => s.kind === 'reel').map((s) => s.unitKey)).toContain('g1');
+  });
+});
+
+describe('la repesca nunca repite una frase de la ronda (D-099)', () => {
+  it('ni la de «Las piezas» ni la de «Construye»', () => {
+    const mir = (a: string, b: string) => ({ say: 'x', pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'tengo', en: 'have', role: 'verb' }, { es: a, en: a, role: 'word' }, { es: b, en: b, role: 'word' }], order: [0, 1, 3, 2] });
+    const g = { key: 'g', type: 'pattern', language: 'en', payload: { goal: 'g', rule: 'r', pieces: [{ text: 'I', role: 'fixed' }, { text: 'have', role: 'slot' }],
+      examples: [{ text: 'I have red cars.', translation: 'a', mirror: mir('cars', 'red') }, { text: 'I have blue pens.', translation: 'b' }, { text: 'I have big dogs.', translation: 'c' }],
+      practice: [{ text: 'I have green bikes.', translation: 'd', mirror: mir('bikes', 'green') }, { text: 'I have black cats.', translation: 'e', mirror: mir('cats', 'black') }, { text: 'I have old shoes.', translation: 'f', mirror: mir('shoes', 'old') }] },
+      skills: [{ key: 'g.recall', kind: 'recall' }, { key: 'g.produce', kind: 'produce' }], association: null } as unknown as SessionUnit;
+    for (const sessionId of ['a', 'b', 'c', 'd', 'e']) {
+      const plan = buildFlowSession({ ...base, units: { g }, items: [item('g', 'new')], sessionId });
+      const ex = plan.steps.filter((s) => s.unitKey === 'g' && (s.kind === 'pieces' || s.kind === 'build')).map((s) => s.example);
+      expect(new Set(ex).size).toBe(ex.length);
+    }
+  });
+});

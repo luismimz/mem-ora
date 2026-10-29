@@ -978,3 +978,23 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - «Lo que describe va delante» no se entendía bien. El usuario propone «primero pintamos y luego decimos qué pintamos».
 - Queda: «Al revés que en español: primero CÓMO es (o de qué tipo) y después QUÉ es: a white cat = un gato blanco».
   «Pintar» solo encaja con los colores; «cómo es / qué es» vale también para big, old, phone number…
+
+## D-099 · Más palabras nuevas por ronda y sin repetir frases (usuario, 29-oct-2026)
+- **Por qué (usuario):** «me salen todo el tiempo las mismas palabras… formar dos veces la misma frase… no he avanzado ni
+  una sola palabra nueva».
+- **Lo que pasaba (su última ronda real):** 58 pasos; 10 trucos de gramática de repaso, cada uno con ficha, piezas,
+  construir y repesca; solo 4 palabras nuevas (con más de 75 repasos vencidos, lo nuevo bajaba a 4 por ronda) y solo de
+  la misión actual, a la que le quedaban pocas. Las rondas largas no se terminaban y lo nuevo, al final, no llegaba.
+- **Decisión (idiomas):** como mucho 3 trucos de repaso por ronda y en **repaso ligero** (una frase nueva que construir;
+  si se falla, vuelve la ficha); lo nuevo ya no baja a 4 por los repasos (11 por ronda; 8 solo con más de 150 vencidas);
+  si a la misión le quedan pocas nuevas, entran las de las siguientes; lo nuevo va antes en la ronda; la repesca nunca
+  repite una frase ya usada en la ronda; y una ronda armada con el planificador anterior no se retoma.
+
+## D-099 · Más palabras nuevas por ronda y sin repetir frases (usuario, 29-oct-2026)
+- **Por qué (usuario):** «me salen siempre las mismas palabras… dos veces la misma frase… ni una sola palabra nueva».
+- **Lo que pasaba (su ronda real):** 58 pasos; 10 trucos de repaso con todos sus pasos; 4 nuevas (con más de 75 repasos
+  vencidos lo nuevo bajaba a 4) y solo de la misión actual, a la que le quedaban pocas.
+- **Decisión (idiomas):** como mucho 3 trucos de repaso por ronda, en repaso ligero (una frase nueva que construir; si
+  se falla, vuelve la ficha); 11 nuevas por ronda (8 solo con más de 150 vencidas); si a la misión le quedan pocas,
+  entran las de las siguientes; lo nuevo va antes; la repesca nunca repite una frase de la ronda; una ronda armada con
+  el planificador anterior no se retoma.

@@ -27,7 +27,7 @@
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
 import { assessAssociation, dayOf, dueUnits, dueWords, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
-import { buildAssociationSession, buildExam, buildFlowSession, FLOW_REVIEW_ARCADE_MAX, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
+import { buildAssociationSession, buildExam, buildFlowSession, FLOW_PLAN_VERSION, FLOW_REVIEW_ARCADE_MAX, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
 import { ring, vapidFromEnv } from '../push/lib';
@@ -62,7 +62,10 @@ function courseConfig(course: Row) {
 export const DAILY_GOAL_LANGUAGE = 33;
 /** Idiomas (D-094): nuevas por ronda (3 rondas ≈ la meta del día; se puede seguir después) y, con muchos repasos acumulados, menos. */
 export const LANGUAGE_NEW_PER_ROUND = 11;
-export const LANGUAGE_BACKLOG_ROUNDS = 3;
+export const LANGUAGE_BACKLOG_ROUNDS = 6;
+export const LANGUAGE_NEW_BACKLOG = 8;
+/** Trucos de gramática que se repasan por ronda (en repaso ligero). */
+export const LANGUAGE_PATTERN_REVIEWS = 3;
 const isLanguageCourse = (course: Row) => Boolean(course.content_language) && course.content_language !== (course.learner_language ?? course.ui_language);
 /** Meta de unidades nuevas al día: en idiomas, la del reto de 30 días; en el resto, tres rondas de nuevas (D-077). */
 export function dailyGoal(course: Row): number {
@@ -293,7 +296,9 @@ export default {
       const sameMission = (!wanted || savedState?.mission?.key === wanted) && (savedState?.focus === 'fallos') === wantFailures;
       const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
       // D-075: si el curso cambió de experiencia (escenas ↔ Flujo), la sesión guardada no se retoma: se crea una nueva.
-      const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations');
+      const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations')
+        // D-099: una ronda armada con un planificador anterior no se retoma (si no, se seguía con la ronda vieja).
+        && (!modes.includes('flow') || (savedState?.plan as { version?: number } | undefined)?.version === FLOW_PLAN_VERSION);
       if (savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
@@ -311,7 +316,16 @@ export default {
       const target = wanted ?? progress.current?.key ?? null;
       const focus = missions.find((m) => m.key === target);
       // Solo entra contenido nuevo de la misión; los repasos vencidos llegan de todo lo ya trabajado.
-      const planCatalog = focus ? focusCatalog(catalog, new Set(focus.units), progress.worked) : catalog;
+      // D-099: en idiomas, si a la misión le quedan pocas nuevas, entra también lo nuevo de las siguientes (en orden):
+      // antes, al final de una misión, cada ronda traía 2–3 nuevas y parecía que no se avanzaba.
+      const focusUnits = new Set(focus?.units ?? []);
+      if (focus && !wanted && isLanguageCourse(course)) {
+        for (const m of missions.slice(missions.indexOf(focus) + 1)) {
+          if ([...focusUnits].filter((u) => !progress.worked.has(u)).length >= LANGUAGE_NEW_PER_ROUND) break;
+          for (const u of m.units) focusUnits.add(u);
+        }
+      }
+      const planCatalog = focus ? focusCatalog(catalog, focusUnits, progress.worked) : catalog;
       const cfg = courseConfig(course);
       const plan = planDay({ catalog: planCatalog, learner, now, config: cfg });
       // Sin Arcade en el curso, nunca salta el Arcade sorpresa.
@@ -336,8 +350,13 @@ export default {
       const isWord = (k: string) => units[k]?.type === 'term';
       const words = flowLanguage ? dueWords(plan.items as PlanItem[], (id) => skillKind.get(id), isWord, learner.skills) : [];
       const roundWords = words.slice(0, FLOW_REVIEW_ARCADE_MAX);
-      const items = flowLanguage ? (plan.items as PlanItem[]).filter((i) => !(i.reason === 'review' && isWord(i.unitId))) : (plan.items as PlanItem[]);
-      const perRound = flowLanguage ? (words.length > FLOW_REVIEW_ARCADE_MAX * LANGUAGE_BACKLOG_ROUNDS ? Math.ceil(LANGUAGE_NEW_PER_ROUND / 3) : LANGUAGE_NEW_PER_ROUND) : newMax;
+      // D-099: de los trucos que tocan, como mucho LANGUAGE_PATTERN_REVIEWS por ronda (los más urgentes) y en repaso ligero
+      // (una frase nueva, sin volver a enseñarlos enteros); antes, diez por ronda con todos sus pasos tapaban lo nuevo.
+      const patternDue = flowLanguage ? [...new Set((plan.items as PlanItem[]).filter((i) => i.reason === 'review' && !isWord(i.unitId)).map((i) => i.unitId))].slice(0, LANGUAGE_PATTERN_REVIEWS) : [];
+      const items = flowLanguage ? (plan.items as PlanItem[]).filter((i) => i.reason !== 'review' || (!isWord(i.unitId) && patternDue.includes(i.unitId))) : (plan.items as PlanItem[]);
+      // D-099: lo nuevo no se frena por los repasos acumulados (el Repaso rápido los despacha deprisa); solo con muchísimos
+      // (más de LANGUAGE_BACKLOG_ROUNDS rondas llenas), algo menos. Antes bajaba a 4 y no se avanzaba.
+      const perRound = flowLanguage ? (words.length > FLOW_REVIEW_ARCADE_MAX * LANGUAGE_BACKLOG_ROUNDS ? LANGUAGE_NEW_BACKLOG : LANGUAGE_NEW_PER_ROUND) : newMax;
       const flowNew = flowNewUnits({ perRound, newToday, dailyRounds: isLanguage ? null : 3,
         ...(prevRound ? { lastRound: { answered: prevOutcomes.length, correct: prevOutcomes.filter((o) => o.correct).length } } : {}) });
       const reviewKeys = [...items.filter((i) => i.reason === 'review').map((i) => i.unitId), ...roundWords.map((w) => w.unitKey)];
@@ -357,7 +376,7 @@ export default {
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: flowNew,
             errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits,
-            ...(roundWords.length ? { reviewArcade: roundWords } : {}) })
+            ...(roundWords.length ? { reviewArcade: roundWords } : {}), ...(flowLanguage ? { lightReviews: true } : {}) })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };

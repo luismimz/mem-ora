@@ -164,6 +164,8 @@ export function judgeableExamples(u: SessionUnit): number[] {
   });
 }
 export const FLOW_ARCADE_MIN = 6;
+/** Sube cuando cambia de verdad cómo se arma una ronda: las rondas guardadas con otra versión no se retoman (D-099). */
+export const FLOW_PLAN_VERSION = 99;
 /** Repaso rápido (D-094): como mucho estas palabras por ronda; las demás vencidas, en la siguiente. */
 export const FLOW_REVIEW_ARCADE_MAX = 25;
 export const FLOW_ARCADE_CHANCE = 0.5;
@@ -206,6 +208,12 @@ export function buildFlowSession(input: {
    * Arcade y sin ficha; `recall` = ya madura, se recuerda del español al inglés. Si hay repaso, no hay Arcade sorpresa.
    */
   reviewArcade?: Array<{ unitKey: string; recall: boolean }>;
+  /**
+   * Repaso ligero de los trucos (D-099, idiomas): un truco que toca repasar no vuelve a enseñarse entero (ficha, piezas,
+   * construir…): se construye UNA frase nueva suya. Si se falla, vuelve la ficha. Antes, diez trucos de repaso por ronda
+   * con todos sus pasos tapaban lo nuevo.
+   */
+  lightReviews?: boolean;
 }): AssocPlan {
   const { units, items } = input;
   const rand = seeded(input.sessionId);
@@ -343,13 +351,19 @@ export function buildFlowSession(input: {
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
-  while (rv.length || nw.length) { if (rv.length) order.push(...rv.splice(0, 2)); if (nw.length) order.push(...nw.splice(0, 2)); }
+  while (rv.length || nw.length) { if (rv.length) order.push(...rv.splice(0, 2)); if (nw.length) order.push(...nw.splice(0, input.lightReviews ? 4 : 2)); }
   for (let i = 0; i < order.length; i += 2) {
     const pair = order.slice(i, i + 2);
-    for (const u of pair) { base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) }); learnWords(u); }
+    const light = (u: string) => Boolean(input.lightReviews) && reviews.includes(u) && units[u]!.type === 'pattern';
+    for (const u of pair) { if (!light(u)) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) }); learnWords(u); }
     // Variedad: la primera de la pareja, escucha (idiomas) o relámpago; la segunda, ¿verdad o mentira?; lo dominado,
     // escribiendo. La gramática se practica construyendo una de sus frases.
     pair.forEach((u, j) => {
+      if (light(u)) {
+        const once = levelUp(u) ?? buildAfter(u, undefined, true) ?? quick(u);
+        base.push(once);
+        return;
+      }
       if (units[u]!.type === 'pattern') {
         const up = levelUp(u);
         const sing = up ? null : chant(u);
@@ -383,11 +397,17 @@ export function buildFlowSession(input: {
   // 2. Repesca intercalada: tras cada pregunta, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).
   const withRetry: Draft[] = [];
   const pending: Array<{ at: number; step: Draft }> = [];
+  // Frases ya usadas en la ronda por unidad (piezas y construir): la repesca nunca repite una (D-099).
+  const usedSentences = new Map<string, Set<number>>();
+  for (const d of base) if ((d.kind === 'build' || d.kind === 'pieces') && d.example !== undefined) usedSentences.set(d.unitKey, new Set([...(usedSentences.get(d.unitKey) ?? []), d.example]));
   for (const d of base) {
     withRetry.push(d);
-    // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada).
-    const rest = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? taughtBuildable(units[d.unitKey]!).filter((n) => n !== d.example) : [];
-    const other = rest.length ? rest[Math.floor(rand() * rest.length)] : undefined;
+    // La gramática se repesca construyendo OTRA de sus frases (elegir entre etiquetas de gramática no enseña nada):
+    // primero una de práctica nueva y, si no, de la ficha; nunca una que ya ha salido en la ronda.
+    const used = usedSentences.get(d.unitKey) ?? new Set<number>();
+    const rest = units[d.unitKey]?.type === 'pattern' && d.kind === 'build' ? [...practiceBuildable(units[d.unitKey]!), ...taughtBuildable(units[d.unitKey]!)].filter((n) => !used.has(n)) : [];
+    const other = rest.length ? rest[0] : undefined;
+    if (other !== undefined) used.add(other);
     const replay = d.kind === 'spot' ? spot(d.unitKey, d.example) : d.kind === 'chant' ? chant(d.unitKey) : null;
     if (replay) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { ...replay, retry: true } });
     else if (other !== undefined) pending.push({ at: withRetry.length + FLOW_RETRY_GAP, step: { kind: 'build', unitKey: d.unitKey, scene: -4, retry: true, example: other, ...(d.skillKey ? { skillKey: d.skillKey } : {}) } });
@@ -441,5 +461,5 @@ export function buildFlowSession(input: {
   }
   // 5. Hito: resumen de la ronda dentro del feed; al deslizar empieza la siguiente.
   if (steps.length) push({ kind: 'summary', unitKey: '', scene: -4 });
-  return { mode: 'flow', sessionId: input.sessionId, courseId: input.courseId, day: input.day, createdAt: input.createdAt, steps, scenes: [] };
+  return { mode: 'flow', version: FLOW_PLAN_VERSION, sessionId: input.sessionId, courseId: input.courseId, day: input.day, createdAt: input.createdAt, steps, scenes: [] };
 }
