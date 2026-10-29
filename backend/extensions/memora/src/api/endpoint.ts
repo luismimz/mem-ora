@@ -33,6 +33,7 @@ import { reminderForUser } from '../push/data';
 import { ring, vapidFromEnv } from '../push/lib';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
 import { resetProgress } from './reset';
+import { audience, canSee, normEmail } from './access';
 import type { Catalog, LearnerState as Learner } from '@memora/core';
 import { effectiveTime, MAX_EVENTS_PER_BATCH, recompute, rejectReason, sessionUnits, skillIndex, type AssociationRow, type SkillRow, type StoredEvent, type UnitRow } from './learning';
 
@@ -113,10 +114,11 @@ export default {
       }
     };
 
+    const emailOf = async (userId: string): Promise<string | null> => (await db('directus_users').where({ id: userId }).first('email'))?.email ?? null;
     async function visibleCourse(courseId: unknown, userId: string): Promise<Row> {
       if (typeof courseId !== 'string' || !courseId) throw new HttpError(400, 'BAD_REQUEST', 'Falta el curso.');
       const course = await db('courses').where({ id: courseId, status: 'published' }).first();
-      if (!course || (course.visibility === 'private' && course.owner !== userId)) throw new HttpError(404, 'NOT_FOUND', 'Curso no disponible.');
+      if (!course || !canSee(course, userId, course.visibility === 'private' ? await emailOf(userId) : null)) throw new HttpError(404, 'NOT_FOUND', 'Curso no disponible.');
       return course;
     }
 
@@ -225,17 +227,48 @@ export default {
     router.get('/me', wrap(async (req) => {
       const acc = req.accountability;
       const role = acc.role ? await db('directus_roles').where({ id: acc.role }).first('name') : null;
-      return { data: { staff: Boolean(acc.admin || (role && STAFF_ROLES.has(role.name))) } };
+      return { data: { staff: Boolean(acc.admin || (role && STAFF_ROLES.has(role.name))), admin: Boolean(acc.admin) } };
+    }));
+
+    // D-091: qué asignaturas ve cada alumno. Solo administración: lista de alumnos y cursos, y cambiar quién ve qué.
+    const onlyAdmin = (req: any) => { if (!req.accountability?.admin) throw new HttpError(403, 'FORBIDDEN', 'Solo administración.'); };
+    router.get('/access', wrap(async (req) => {
+      onlyAdmin(req);
+      const users = await db('directus_users').where({ status: 'active' }).orderBy('email').select('id', 'email', 'first_name');
+      const courses = await db('courses').where({ status: 'published' }).orderBy('title').select('id', 'key', 'title', 'visibility', 'owner', 'visible_to');
+      return { data: { users: users.map((u: Row) => ({ id: u.id, email: u.email, name: u.first_name ?? null })),
+        courses: courses.map((c: Row) => ({ id: c.id, key: c.key, title: c.title, visibility: c.visibility === 'private' ? 'private' : 'public', owner: c.owner ?? null, visibleTo: audience(c) })) } };
+    }));
+    router.post('/access', wrap(async (req) => {
+      onlyAdmin(req);
+      const { course: courseId, visibility, email, on } = req.body ?? {};
+      const course = typeof courseId === 'string' ? await db('courses').where({ id: courseId }).first() : null;
+      if (!course) throw new HttpError(404, 'NOT_FOUND', 'Curso no encontrado.');
+      const patch: Row = {};
+      if (visibility !== undefined) {
+        if (visibility !== 'public' && visibility !== 'private') throw new HttpError(400, 'BAD_REQUEST', 'Visibilidad no válida.');
+        patch.visibility = visibility;
+      }
+      if (email !== undefined) {
+        const e = normEmail(email);
+        if (!e || !(await db('directus_users').whereRaw('lower(email) = ?', [e]).first('id'))) throw new HttpError(400, 'BAD_REQUEST', 'Ese alumno no existe.');
+        const list = audience(course).filter((x) => x !== e);
+        patch.visible_to = JSON.stringify(on ? [...list, e] : list);
+      }
+      if (Object.keys(patch).length) await db('courses').where({ id: course.id }).update(patch);
+      const after = await db('courses').where({ id: course.id }).first('visibility', 'visible_to');
+      return { data: { visibility: after.visibility === 'private' ? 'private' : 'public', visibleTo: audience(after) } };
     }));
 
     router.get('/courses', wrap(async (req) => {
       const userId = req.accountability.user;
-      const rows = await db('courses')
-        .where({ status: 'published' })
-        .andWhere((q: any) => q.where({ visibility: 'public' }).orWhere({ owner: userId }))
-        .select('id', 'key', 'title', 'subject', 'ui_language', 'learner_language', 'content_language', 'content_revision', 'audio_enabled', 'new_per_session', 'modes');
+      // D-091: públicos para todos; privados, para su propietario y los alumnos elegidos.
+      const email = await emailOf(userId);
+      const rows = (await db('courses').where({ status: 'published' })
+        .select('id', 'key', 'title', 'subject', 'ui_language', 'learner_language', 'content_language', 'content_revision', 'audio_enabled', 'new_per_session', 'modes', 'visibility', 'owner', 'visible_to'))
+        .filter((r: Row) => canSee(r, userId, email));
       // Sin configurar ⇒ todos los modos.
-      return { data: rows.map((r: Row) => ({ ...r, modes: (typeof r.modes === 'string' ? JSON.parse(r.modes) : r.modes) ?? ['associations', 'grammar', 'arcade', 'chat'] })) };
+      return { data: rows.map(({ visibility: _v, owner: _o, visible_to: _t, ...r }: Row) => ({ ...r, modes: (typeof r.modes === 'string' ? JSON.parse(r.modes) : r.modes) ?? ['associations', 'grammar', 'arcade', 'chat'] })) };
     }));
 
     router.get('/session', wrap(async (req) => {

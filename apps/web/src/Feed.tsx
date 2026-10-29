@@ -750,18 +750,33 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
   const jumps = order.some((v, i) => v !== i);
   const last = jumps ? 3 : 2;
   const reduced = typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-  const [phase, setPhase] = useState(reduced ? last + 1 : 0);
+  // Con «Reducir movimiento» (muy común en iPhone) antes se saltaba al final y había que pulsar ↻ para verlo: ahora la
+  // secuencia se ve igual, paso a paso, solo que sin saltos ni arcos (usuario, 29-oct-2026).
+  const [phase, setPhase] = useState(0);
   const [run, setRun] = useState(0);
   const [lit, setLit] = useState(-1);
   const done = phase > last;
   const chips = useRef<Record<number, HTMLElement | null>>({});
   const rects = useRef<Record<number, DOMRect>>({});
+  // El ejemplo empieza solo cuando se VE (en pantalla y con la app delante): antes arrancaba al montarse la tarjeta y,
+  // mientras leías el título o con la tarjeta más abajo, acababa sin que lo vieras y había que pulsar ↻ (usuario, 29-oct).
+  const box = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  useEffect(() => {
+    const el = box.current;
+    if (!el || typeof IntersectionObserver === 'undefined') { setInView(true); return; }
+    const io = new IntersectionObserver(([e]) => setInView(Boolean(e && e.isIntersecting && e.intersectionRatio >= 0.55) && document.visibilityState === 'visible'), { threshold: 0.6 });
+    io.observe(el);
+    const vis = () => { if (document.visibilityState !== 'visible') setInView(false); else { io.unobserve(el); io.observe(el); } };
+    document.addEventListener('visibilitychange', vis);
+    return () => { io.disconnect(); document.removeEventListener('visibilitychange', vis); };
+  }, []);
 
   useEffect(() => {
-    if (done) return;
+    if (done || !inView) return;
     const t = setTimeout(() => setPhase((p) => p + 1), MORPH_MS[phase]);
     return () => clearTimeout(t);
-  }, [phase, done, run]);
+  }, [phase, done, run, inView]);
   useEffect(() => {
     if (reduced) return;
     if (phase === 1 && m.pieces.some((p) => p.ghost)) sfx('pop');
@@ -811,7 +826,7 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
     : null;
   const tap = () => { if (done) { rects.current = {}; setPhase(0); setRun((r) => r + 1); } else setPhase(last + 1); };
   return (
-    <div className={`morph ${compact ? 'compact' : ''}`} onClick={tap} role="button" tabIndex={0} aria-label={done ? 'Verlo otra vez' : 'Saltar al final'}>
+    <div ref={box} className={`morph ${compact ? 'compact' : ''}`} onClick={tap} role="button" tabIndex={0} aria-label={done ? 'Verlo otra vez' : 'Saltar al final'}>
       {phase === 0 ? <p className="morph-say">{m.say}</p> : (
         <div className="morph-row" lang={english ? unit.language : 'es'}>
           {shown.map((i, pos) => {
