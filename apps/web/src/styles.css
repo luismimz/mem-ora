@@ -970,6 +970,7 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .shop-line code { font-size: .85rem; white-space: pre-wrap; word-break: break-word; }
 .shop-line.bug { background: #b4232a; border-color: #ff6b5b; box-shadow: 0 0 0 3px rgba(255,107,91,.35); animation: shake .35s ease; }
 .shop-line.miss { opacity: .5; text-decoration: line-through; }
+.shop-line.spot { background: #1f7a4d; border-color: #5be39a; box-shadow: 0 0 0 3px rgba(91,227,154,.35); }
 .shop-hint { margin: 0; text-align: center; font-weight: 800; opacity: .85; }
 .shop-done { display: grid; gap: .4rem; } .shop-done .option { min-height: 2.6rem; padding: .5rem; font-size: .9rem; display: flex; align-items: center; justify-content: center; }
 

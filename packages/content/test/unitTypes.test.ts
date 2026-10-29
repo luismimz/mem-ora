@@ -155,6 +155,14 @@ describe('el Taller: saber usarlo (D-090)', () => {
     expect(codes('concept', concept({ exercises: [{ kind: 'fill_gap', prompt: 'p', code: '___;', answer: 'x', bugLine: 0 }] }))).toContain('bugline_not_bug@exercises.0.bugLine');
     expect(codes('concept', concept({ cases: [{ text: '' }] }))).toContain('required@cases.0.text');
   });
+  it('«Señala la parte» (D-102) lleva código y la línea de la parte, dentro del código y solo en ese tipo', () => {
+    const spot = { kind: 'spot_part', prompt: 'Toca la línea que declara la propiedad', code: 'class A {\n  IntegerProperty n;\n}', answer: 'la propiedad', distractors: ['el constructor'] };
+    expect(validateUnitPayload('concept', concept({ exercises: [{ ...spot, line: 1 }] }))).toEqual([]);
+    expect(codes('concept', concept({ exercises: [spot] }))).toContain('required@exercises.0.line');
+    expect(codes('concept', concept({ exercises: [{ ...spot, line: 3 }] }))).toContain('bugline_out_of_code@exercises.0.line');
+    expect(codes('concept', concept({ exercises: [{ ...spot, code: undefined, line: 0 }] }))).toContain('required@exercises.0.code');
+    expect(codes('concept', concept({ exercises: [{ kind: 'fill_gap', prompt: 'p', code: '___;', answer: 'x', distractors: ['y'], line: 0 }] }))).toContain('line_not_spot@exercises.0.line');
+  });
 });
 
 describe('las frases de práctica (D-093)', () => {
