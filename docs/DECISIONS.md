@@ -973,3 +973,8 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   tocarlos en orden. Lo que enseñaba la pregunta previa (qué pieza salta) se ve en la ficha girando las piezas y, si
   fallas, en el orden bueno con la pieza que salta marcada.
 
+
+## D-098 · La regla del adjetivo, más precisa (usuario, 29-oct-2026)
+- «Lo que describe va delante» no se entendía bien. El usuario propone «primero pintamos y luego decimos qué pintamos».
+- Queda: «Al revés que en español: primero CÓMO es (o de qué tipo) y después QUÉ es: a white cat = un gato blanco».
+  «Pintar» solo encaja con los colores; «cómo es / qué es» vale también para big, old, phone number…

@@ -8,7 +8,8 @@ export interface OrderMirror { pieces: OrderPiece[]; order?: number[] }
 export type OrderRule = 'describe' | 'enough' | 'question' | 'object' | 'frequency' | 'ago' | 'would' | 'preposition' | 'time' | 'piece';
 
 export const ORDER_RULES: Record<Exclude<OrderRule, 'piece'>, string> = {
-  describe: 'En inglés, lo que describe va DELANTE de la cosa: brown eyes, a red car, phone number.',
+  // Más precisa (usuario, 29-oct-2026): primero se «pinta» la cosa y luego se dice qué es.
+  describe: 'Al revés que en español: primero CÓMO es (o de qué tipo) y después QUÉ es: a white cat = un gato blanco.',
   question: 'En las preguntas, el ayudante (are, is, can, do…) salta DELANTE del quién: Are you…?, Can you…?',
   object: 'En inglés, me, te, la, lo… van DETRÁS del verbo: help me, I saw her.',
   frequency: 'Always, never, often, already, still… van entre el quién y el verbo: I always drink, I have already eaten.',
