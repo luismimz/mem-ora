@@ -369,7 +369,14 @@
               "text": "Time is money.",
               "translation": "El tiempo es oro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANÍ",
+            "scene": "Pagas con MANÍ: el DINERO de los monos.",
+            "sceneTarget": "You pay with peanuts: monkey MONEY.",
+            "emoji": "🥜💵"
+          }
         },
         {
           "key": "price",
@@ -406,7 +413,14 @@
               "text": "What's the price?",
               "translation": "¿Qué precio tiene?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRISA",
+            "scene": "Miras el PRECIO con PRISA.",
+            "sceneTarget": "You check the PRICE in a hurry.",
+            "emoji": "🏷️⏱️"
+          }
         },
         {
           "key": "cash",
@@ -455,7 +469,14 @@
               "text": "I don't have any cash.",
               "translation": "No llevo efectivo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CACHÉ",
+            "scene": "Te pagan todo tu CACHÉ en EFECTIVO.",
+            "sceneTarget": "They pay your whole fee in CASH.",
+            "emoji": "💶🎤"
+          }
         },
         {
           "key": "card",
@@ -501,7 +522,14 @@
               "text": "My card doesn't work.",
               "translation": "Mi tarjeta no funciona."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARTA",
+            "scene": "Pagas con TARJETA... y es una CARTA de póker.",
+            "sceneTarget": "You pay by CARD... and it’s a poker card.",
+            "emoji": "💳🃏"
+          }
         },
         {
           "key": "change",
@@ -534,7 +562,14 @@
               "text": "Do you have change for twenty euros?",
               "translation": "¿Tienes cambio de veinte euros?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHANCLA",
+            "scene": "Te dan el CAMBIO dentro de una CHANCLA.",
+            "sceneTarget": "They give you the CHANGE inside a flip-flop.",
+            "emoji": "🩴🪙"
+          }
         },
         {
           "key": "receipt",
@@ -591,7 +626,14 @@
               "translation": "Guarda el tique."
             }
           ],
-          "notes": "La p no se pronuncia: riSÍIT."
+          "notes": "La p no se pronuncia: riSÍIT.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RECETA",
+            "scene": "El TIQUE parece una RECETA médica.",
+            "sceneTarget": "The RECEIPT looks like a prescription.",
+            "emoji": "🧾💊"
+          }
         },
         {
           "key": "bag",
@@ -635,7 +677,14 @@
               "text": "My bag is very heavy.",
               "translation": "Mi bolso pesa mucho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAGUETTE",
+            "scene": "Una BOLSA llena de BAGUETTES.",
+            "sceneTarget": "A BAG full of baguettes.",
+            "emoji": "🛍️🥖"
+          }
         },
         {
           "key": "discount",
@@ -722,7 +771,14 @@
               "text": "The sales start in January.",
               "translation": "Las rebajas empiezan en enero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SELLO",
+            "scene": "REBAJAS: un SELLO rojo en cada precio.",
+            "sceneTarget": "SALE: a red stamp on every price.",
+            "emoji": "🏷️🔴"
+          }
         },
         {
           "key": "queue",
@@ -772,7 +828,14 @@
               "text": "Please wait in the queue.",
               "translation": "Espere en la cola, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUIOSCO",
+            "scene": "Una COLA enorme en el QUIOSCO.",
+            "sceneTarget": "A huge QUEUE at the kiosk.",
+            "emoji": "🧍🗞️"
+          }
         },
         {
           "key": "supermarket",
@@ -854,7 +917,14 @@
               "text": "Can you wrap it as a gift?",
               "translation": "¿Me lo envuelve para regalo?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GIF",
+            "scene": "Tu REGALO: un GIF animado.",
+            "sceneTarget": "Your GIFT: an animated GIF.",
+            "emoji": "🎁📱"
+          }
         },
         {
           "key": "refund",
@@ -893,7 +963,14 @@
               "text": "Can I get a refund?",
               "translation": "¿Me pueden devolver el dinero?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REFUNFUÑA",
+            "scene": "Pides la DEVOLUCIÓN y el cajero REFUNFUÑA.",
+            "sceneTarget": "You ask for a REFUND and the cashier grumbles.",
+            "emoji": "💸😒"
+          }
         },
         {
           "key": "spend",
@@ -931,7 +1008,14 @@
               "text": "We spent the day at the beach.",
               "translation": "Pasamos el día en la playa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PENDIENTE",
+            "scene": "GASTAS todo en un PENDIENTE de oro.",
+            "sceneTarget": "You SPEND everything on a gold earring.",
+            "emoji": "💎💸"
+          }
         },
         {
           "key": "afford",
@@ -974,7 +1058,14 @@
               "text": "We can't afford a new car.",
               "translation": "No podemos permitirnos un coche nuevo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORD",
+            "scene": "No PUEDES PERMITIRTE ni un FORD viejo.",
+            "sceneTarget": "You can’t AFFORD even an old Ford.",
+            "emoji": "🚗🚫"
+          }
         }
       ]
     }

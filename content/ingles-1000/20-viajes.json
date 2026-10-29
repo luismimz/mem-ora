@@ -411,7 +411,14 @@
               "text": "We travel by train.",
               "translation": "Viajamos en tren."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRÉBOL",
+            "scene": "VIAJAS por el mundo con un TRÉBOL de la suerte.",
+            "sceneTarget": "You TRAVEL the world with a lucky clover.",
+            "emoji": "🍀✈️"
+          }
         },
         {
           "key": "trip",
@@ -444,7 +451,14 @@
               "text": "How was your trip?",
               "translation": "¿Qué tal el viaje?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRIPA",
+            "scene": "Un VIAJE corto en barco y te duele la TRIPA.",
+            "sceneTarget": "A short boat TRIP and your tummy hurts.",
+            "emoji": "⛵🤢"
+          }
         },
         {
           "key": "ticket",
@@ -515,7 +529,14 @@
               "text": "I don't like planes.",
               "translation": "No me gustan los aviones."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLENO",
+            "scene": "Un AVIÓN lleno: ¡PLENO absoluto!",
+            "sceneTarget": "A full PLANE: a full house!",
+            "emoji": "✈️💯"
+          }
         },
         {
           "key": "train",
@@ -685,7 +706,14 @@
               "text": "Where is my suitcase?",
               "translation": "¿Dónde está mi maleta?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUCIA",
+            "scene": "La MALETA llega SUCIA de barro.",
+            "sceneTarget": "The SUITCASE arrives dirty with mud.",
+            "emoji": "🧳💩"
+          }
         },
         {
           "key": "map",
@@ -757,7 +785,14 @@
               "text": "The beach is full of people.",
               "translation": "La playa está llena de gente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BICI",
+            "scene": "Vas en BICI por la PLAYA.",
+            "sceneTarget": "You ride a bike along the BEACH.",
+            "emoji": "🚲🏖️"
+          }
         },
         {
           "key": "holiday",
@@ -797,7 +832,14 @@
               "text": "Where did you go on holiday?",
               "translation": "¿Adónde fuiste de vacaciones?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JOLÍN",
+            "scene": "¡JOLÍN, por fin VACACIONES!",
+            "sceneTarget": "Gosh, HOLIDAYS at last!",
+            "emoji": "🎉🌴"
+          }
         },
         {
           "key": "flight",
@@ -834,7 +876,14 @@
               "text": "The flight was cancelled.",
               "translation": "Cancelaron el vuelo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FLAUTA",
+            "scene": "En el VUELO, el piloto toca la FLAUTA.",
+            "sceneTarget": "On the FLIGHT, the pilot plays the flute.",
+            "emoji": "🎶✈️"
+          }
         },
         {
           "key": "arrive",
@@ -879,7 +928,14 @@
               "text": "When does the train arrive?",
               "translation": "¿Cuándo llega el tren?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARRIBA",
+            "scene": "LLEGAS ARRIBA del todo, a la cima.",
+            "sceneTarget": "You ARRIVE at the very top.",
+            "emoji": "⛰️🚩"
+          }
         },
         {
           "key": "stay",
@@ -941,7 +997,14 @@
               "text": "How long are you staying?",
               "translation": "¿Cuánto tiempo te quedas?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTE",
+            "scene": "Te QUEDAS en ESTE hotel para siempre.",
+            "sceneTarget": "You STAY in this hotel forever.",
+            "emoji": "🏨♾️"
+          }
         },
         {
           "key": "visit",

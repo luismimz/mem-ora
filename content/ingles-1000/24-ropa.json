@@ -377,7 +377,14 @@
               "translation": "Guarda la ropa en el armario."
             }
           ],
-          "notes": "Clothes siempre es plural: my clothes ARE clean."
+          "notes": "Clothes siempre es plural: my clothes ARE clean.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLÓSET",
+            "scene": "Toda tu ROPA en un CLÓSET diminuto.",
+            "sceneTarget": "All your CLOTHES in a tiny closet.",
+            "emoji": "👕🚪"
+          }
         },
         {
           "key": "shirt",
@@ -414,7 +421,14 @@
               "text": "Iron your shirt.",
               "translation": "Plancha la camisa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHERIFF",
+            "scene": "El SHERIFF plancha su CAMISA antes del duelo.",
+            "sceneTarget": "The sheriff irons his SHIRT before the duel.",
+            "emoji": "🤠👔"
+          }
         },
         {
           "key": "dress",
@@ -456,7 +470,14 @@
               "text": "She wore a black dress.",
               "translation": "Llevaba un vestido negro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRES",
+            "scene": "Un VESTIDO con TRES mangas.",
+            "sceneTarget": "A DRESS with three sleeves.",
+            "emoji": "👗3️⃣"
+          }
         },
         {
           "key": "coat",
@@ -501,7 +522,14 @@
               "text": "Where is my coat?",
               "translation": "¿Dónde está mi abrigo?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COTA",
+            "scene": "Un ABRIGO de COTA de malla.",
+            "sceneTarget": "A COAT made of chainmail.",
+            "emoji": "🧥🛡️"
+          }
         },
         {
           "key": "jacket",
@@ -541,7 +569,14 @@
               "text": "A leather jacket.",
               "translation": "Una chaqueta de cuero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YATE",
+            "scene": "Una CHAQUETA de capitán de YATE.",
+            "sceneTarget": "A yacht captain’s JACKET.",
+            "emoji": "🧥⛵"
+          }
         },
         {
           "key": "trousers",
@@ -579,7 +614,14 @@
               "translation": "Necesito unos pantalones nuevos."
             }
           ],
-          "notes": "En EE. UU. se dice pants. Siempre en plural."
+          "notes": "En EE. UU. se dice pants. Siempre en plural.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRAUMA",
+            "scene": "PANTALONES tan apretados que te dan TRAUMA.",
+            "sceneTarget": "TROUSERS so tight they give you trauma.",
+            "emoji": "👖😱"
+          }
         },
         {
           "key": "jeans",
@@ -757,7 +799,14 @@
               "text": "A pair of socks.",
               "translation": "Un par de calcetines."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOCORRO",
+            "scene": "¡SOCORRO! Mis CALCETINES huelen fatal.",
+            "sceneTarget": "Help! My SOCKS stink.",
+            "emoji": "🧦🤢"
+          }
         },
         {
           "key": "shoes",
@@ -794,7 +843,14 @@
               "text": "Take off your shoes.",
               "translation": "Quítate los zapatos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHUZOS",
+            "scene": "Llueven ZAPATOS a CHUZOS.",
+            "sceneTarget": "It’s raining SHOES like spears.",
+            "emoji": "👟🌧️"
+          }
         },
         {
           "key": "wear",
@@ -877,7 +933,14 @@
               "text": "Do you have a bigger size?",
               "translation": "¿Tienen una talla más grande?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEIS",
+            "scene": "Tu TALLA es la SEIS... de bebé.",
+            "sceneTarget": "Your SIZE is six... baby size.",
+            "emoji": "📏👶"
+          }
         },
         {
           "key": "try-on",

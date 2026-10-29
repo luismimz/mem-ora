@@ -695,7 +695,14 @@
               "text": "We missed the deadline.",
               "translation": "No llegamos a tiempo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DEDO",
+            "scene": "La FECHA LÍMITE: un DEDO señala la LÍNEA roja.",
+            "sceneTarget": "The DEADLINE: a finger points at the red line.",
+            "emoji": "☝️⏰"
+          }
         },
         {
           "key": "skill",
@@ -749,7 +756,14 @@
               "text": "What skills do you have?",
               "translation": "¿Qué habilidades tienes?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESQUIAR",
+            "scene": "Tu HABILIDAD secreta: ESQUIAR hacia atrás.",
+            "sceneTarget": "Your secret SKILL: skiing backwards.",
+            "emoji": "⛷️🔙"
+          }
         },
         {
           "key": "experience",
@@ -832,7 +846,14 @@
               "text": "She applied for a job in London.",
               "translation": "Solicitó un trabajo en Londres."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APLAUSO",
+            "scene": "SOLICITAS el puesto y te reciben con APLAUSOS.",
+            "sceneTarget": "You APPLY for the job and get applause.",
+            "emoji": "👏📄"
+          }
         },
         {
           "key": "degree",
@@ -875,7 +896,14 @@
               "text": "She is studying for a degree.",
               "translation": "Está estudiando una carrera."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRIEGO",
+            "scene": "Tu TÍTULO está escrito en GRIEGO.",
+            "sceneTarget": "Your DEGREE is written in Greek.",
+            "emoji": "🎓🏛️"
+          }
         },
         {
           "key": "attach",
@@ -913,7 +941,14 @@
               "text": "Please find the file attached.",
               "translation": "Te envío el archivo adjunto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ATÁNDOLO",
+            "scene": "ADJUNTAS el archivo ATÁNDOLO con una cuerda.",
+            "sceneTarget": "You ATTACH the file tying it with a rope.",
+            "emoji": "📎🪢"
+          }
         },
         {
           "key": "reply",
@@ -945,7 +980,14 @@
               "text": "Please reply as soon as possible.",
               "translation": "Responde lo antes posible, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RÉPLICA",
+            "scene": "RESPONDES con una RÉPLICA exacta del correo.",
+            "sceneTarget": "You REPLY with an exact replica of the email.",
+            "emoji": "↩️📧"
+          }
         },
         {
           "key": "available",
@@ -982,7 +1024,14 @@
               "text": "Is the room available?",
               "translation": "¿Está libre la sala?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AVELLANA",
+            "scene": "¿Quedan AVELLANAS DISPONIBLES? Sí, libres.",
+            "sceneTarget": "Are there hazelnuts AVAILABLE? Yes, free.",
+            "emoji": "🌰✅"
+          }
         },
         {
           "key": "improve",
@@ -1025,7 +1074,14 @@
               "text": "Your English has improved a lot.",
               "translation": "Tu inglés ha mejorado mucho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRUEBA",
+            "scene": "MEJORAS a base de PRUEBA y error.",
+            "sceneTarget": "You IMPROVE by trial and error.",
+            "emoji": "📈🧪"
+          }
         },
         {
           "key": "develop",
@@ -1074,7 +1130,14 @@
               "text": "I'm developing a website.",
               "translation": "Estoy desarrollando una web."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VELO",
+            "scene": "DESARROLLAS una foto quitándole el VELO.",
+            "sceneTarget": "You DEVELOP a photo by lifting its veil.",
+            "emoji": "📸👰"
+          }
         },
         {
           "key": "manage",
@@ -1112,7 +1175,14 @@
               "text": "Can you manage?",
               "translation": "¿Puedes con ello?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANITAS",
+            "scene": "Un MANITAS lo GESTIONA y lo arregla todo.",
+            "sceneTarget": "A handyman MANAGES and fixes everything.",
+            "emoji": "🛠️🙌"
+          }
         },
         {
           "key": "schedule",

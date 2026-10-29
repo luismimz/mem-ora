@@ -292,7 +292,14 @@
               "text": "Dogs are great friends.",
               "translation": "Los perros son grandes amigos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DOGO",
+            "scene": "Un DOGO es un PERRO enorme.",
+            "sceneTarget": "A mastiff is a huge DOG.",
+            "emoji": "🐕🦴"
+          }
         },
         {
           "key": "cat",
@@ -329,7 +336,14 @@
               "text": "Do you like cats?",
               "translation": "¿Te gustan los gatos?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CATA",
+            "scene": "Un GATO hace una CATA de vinos.",
+            "sceneTarget": "A CAT does a wine tasting.",
+            "emoji": "🐈🍷"
+          }
         },
         {
           "key": "bird",
@@ -366,7 +380,14 @@
               "text": "Birds fly south in winter.",
               "translation": "Los pájaros vuelan al sur en invierno."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VERDE",
+            "scene": "Un PÁJARO VERDE canta sobre tu cabeza.",
+            "sceneTarget": "A green BIRD sings on your head.",
+            "emoji": "🐦💚"
+          }
         },
         {
           "key": "horse",
@@ -418,7 +439,14 @@
               "text": "A white horse.",
               "translation": "Un caballo blanco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JORGE",
+            "scene": "JORGE monta a CABALLO al revés.",
+            "sceneTarget": "Jorge rides a HORSE backwards.",
+            "emoji": "🐎🔄"
+          }
         },
         {
           "key": "cow",
@@ -457,7 +485,14 @@
               "text": "A big cow.",
               "translation": "Una vaca grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAOS",
+            "scene": "Una VACA en la autopista: CAOS total.",
+            "sceneTarget": "A COW on the motorway: total chaos.",
+            "emoji": "🐄🚗"
+          }
         },
         {
           "key": "pig",
@@ -494,7 +529,14 @@
               "text": "Don't eat like a pig!",
               "translation": "¡No comas como un cerdo!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PIJO",
+            "scene": "Un CERDO muy PIJO con gafas de sol.",
+            "sceneTarget": "A posh PIG with sunglasses.",
+            "emoji": "🐷🕶️"
+          }
         },
         {
           "key": "sheep",
@@ -537,7 +579,14 @@
               "translation": "Una oveja, dos ovejas."
             }
           ],
-          "notes": "Sheep no cambia en plural: one sheep, two sheep."
+          "notes": "Sheep no cambia en plural: one sheep, two sheep.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JEEP",
+            "scene": "Una OVEJA conduce un JEEP.",
+            "sceneTarget": "A SHEEP drives a jeep.",
+            "emoji": "🐑🚙"
+          }
         },
         {
           "key": "mouse",
@@ -575,7 +624,14 @@
               "translation": "Haz clic con el ratón."
             }
           ],
-          "notes": "Plural irregular: one mouse, two mice."
+          "notes": "Plural irregular: one mouse, two mice.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MAUSOLEO",
+            "scene": "Un RATÓN vive en un MAUSOLEO.",
+            "sceneTarget": "A MOUSE lives in a mausoleum.",
+            "emoji": "🐭🏛️"
+          }
         },
         {
           "key": "rabbit",
@@ -617,7 +673,14 @@
               "text": "A white rabbit.",
               "translation": "Un conejo blanco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RÁBANO",
+            "scene": "Un CONEJO roba un RÁBANO.",
+            "sceneTarget": "A RABBIT steals a radish.",
+            "emoji": "🐇🌱"
+          }
         },
         {
           "key": "elephant",
@@ -730,7 +793,14 @@
               "text": "Monkeys live in trees.",
               "translation": "Los monos viven en los árboles."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANGUERA",
+            "scene": "Un MONO juega con la MANGUERA.",
+            "sceneTarget": "A MONKEY plays with the hose.",
+            "emoji": "🐒💦"
+          }
         },
         {
           "key": "bear",
@@ -762,7 +832,14 @@
               "text": "Bears sleep in winter.",
               "translation": "Los osos duermen en invierno."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BERENJENA",
+            "scene": "Un OSO se come una BERENJENA.",
+            "sceneTarget": "A BEAR eats an aubergine.",
+            "emoji": "🐻🍆"
+          }
         },
         {
           "key": "snake",
@@ -803,7 +880,14 @@
               "text": "A long snake.",
               "translation": "Una serpiente larga."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SNACK",
+            "scene": "Una SERPIENTE se come tu SNACK.",
+            "sceneTarget": "A SNAKE eats your snack.",
+            "emoji": "🐍🥨"
+          }
         },
         {
           "key": "duck",
@@ -842,7 +926,14 @@
               "text": "A little duck.",
               "translation": "Un patito."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DAKAR",
+            "scene": "Un PATO corre el DAKAR.",
+            "sceneTarget": "A DUCK races the Dakar rally.",
+            "emoji": "🦆🏁"
+          }
         }
       ]
     }

@@ -137,7 +137,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PINGÜINO",
+            "scene": "Un PINGÜINO te mira por la VENTANA.",
+            "sceneTarget": "A penguin looks at you through the WINDOW.",
+            "emoji": "🐧🪟"
+          }
         },
         {
           "key": "kitchen",
@@ -210,7 +217,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAZAR",
+            "scene": "Tu BAÑO es un BAZAR de champús.",
+            "sceneTarget": "Your BATHROOM is a shampoo bazaar.",
+            "emoji": "🛁🧴"
+          }
         },
         {
           "key": "bed",
@@ -246,7 +260,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BEBÉ",
+            "scene": "Un BEBÉ gigante duerme en tu CAMA.",
+            "sceneTarget": "A giant baby sleeps in your BED.",
+            "emoji": "👶🛏️"
+          }
         },
         {
           "key": "table",
@@ -281,7 +302,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TABLA",
+            "scene": "Una MESA hecha con una TABLA de surf.",
+            "sceneTarget": "A TABLE made from a surfboard.",
+            "emoji": "🏄🪵"
+          }
         },
         {
           "key": "chair",
@@ -433,7 +461,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOL",
+            "scene": "Chutas, la PARED para el balón: ¡no hay GOL!",
+            "sceneTarget": "You shoot, the WALL stops the ball: no goal!",
+            "emoji": "⚽🧱"
+          }
         },
         {
           "key": "garden",
@@ -561,7 +596,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLAUSURADO",
+            "scene": "Un cartel gigante, «CLAUSURADO»: CIERRAN la tienda.",
+            "sceneTarget": "A giant sign, «closed»: they CLOSE the shop.",
+            "emoji": "🚫🏪"
+          }
         },
         {
           "key": "clean",

@@ -347,7 +347,14 @@
               "text": "What did you buy?",
               "translation": "¿Qué compraste?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAYETA",
+            "scene": "COMPRAS cien BAYETAS de golpe.",
+            "sceneTarget": "You BUY a hundred cloths at once.",
+            "emoji": "🧽🛒"
+          }
         },
         {
           "key": "sell",
@@ -533,7 +540,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RED",
+            "scene": "LEES las noticias atrapado en una RED.",
+            "sceneTarget": "You READ the news caught in a net.",
+            "emoji": "🕸️📰"
+          }
         },
         {
           "key": "write",
@@ -566,7 +580,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RAYA",
+            "scene": "ESCRIBES con RAYAS por toda la pared.",
+            "sceneTarget": "You WRITE lines all over the wall.",
+            "emoji": "✍️🧱"
+          }
         },
         {
           "key": "speak",
@@ -651,7 +672,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LERDO",
+            "scene": "Hasta el más LERDO APRENDE inglés con Memora.",
+            "sceneTarget": "Even the slowest person LEARNS English with Memora.",
+            "emoji": "🐢🎓"
+          }
         },
         {
           "key": "study",
@@ -726,7 +754,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HUERTO",
+            "scene": "TRABAJAS en el HUERTO de sol a sol.",
+            "sceneTarget": "You WORK in the vegetable patch from dawn to dusk.",
+            "emoji": "🧑‍🌾🥕"
+          }
         },
         {
           "key": "play",
@@ -940,7 +975,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANDA",
+            "scene": "¡ANDA! Ahora lo ENTIENDO todo.",
+            "sceneTarget": "Oh, now I UNDERSTAND everything.",
+            "emoji": "💡🤯"
+          }
         }
       ]
     }

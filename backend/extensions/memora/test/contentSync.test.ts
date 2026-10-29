@@ -109,6 +109,23 @@ describe('contenido desde git (D-080)', () => {
     expect(tables.units.find((u) => u.key === 'house')!.status).toBe('published');
   });
 
+  it('una unidad que pasa a otra misión cambia de misión, conserva su id (el progreso) y se ordena en la nueva', async () => {
+    const { db, tables, services } = fakeDb();
+    const m2 = mission(2, [word('house', 'house', 'casa', 'JAULA', 'Tu CASA es una JAULA.'), word('monday', 'Monday', 'lunes', 'MONDA', 'El LUNES se MONDA una naranja.')]);
+    await syncCourse(dirWith({ '01-m.json': m1, '02-m.json': m2 }), { db, services, schema: {} });
+    const id = tables.units.find((u) => u.key === 'monday')!.id;
+    const moved1 = mission(1, [...m1.modules[0]!.units, word('monday', 'Monday', 'lunes', 'MONDA', 'El LUNES se MONDA una naranja.')]);
+    const moved2 = mission(2, [word('house', 'house', 'casa', 'JAULA', 'Tu CASA es una JAULA.')]);
+    const r = await syncCourse(dirWith({ '01-m.json': moved1, '02-m.json': moved2 }), { db, services, schema: {} });
+    expect(r).toMatchObject({ movedUnits: 1, createdUnits: 0, problems: [] });
+    const unit = tables.units.find((u) => u.key === 'monday')!;
+    expect(unit.id).toBe(id);
+    expect(unit.module).toBe(tables.modules.find((m) => m.key === '01-m')!.id);
+    expect([...tables.units].sort((a, b) => a.sort - b.sort).map((u) => u.key)).toEqual(['dog', 'cat', 'monday', 'house']);
+    const again = await syncCourse(dirWith({ '01-m.json': moved1, '02-m.json': moved2 }), { db, services, schema: {} });
+    expect(again.movedUnits).toBe(0);
+  });
+
   it('un archivo con problemas no se vuelca y se informa (nunca a medias)', async () => {
     const { db, tables, services } = fakeDb();
     const bad = mission(1, [{ key: 'x', type: 'term', text: '', meaning: '', examples: [] }]);

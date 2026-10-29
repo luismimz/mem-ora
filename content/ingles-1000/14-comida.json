@@ -67,7 +67,14 @@
               "text": "What do you want to eat?",
               "translation": "¿Qué quieres comer?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HITO",
+            "scene": "Un HITO de la carretera COME patatas fritas.",
+            "sceneTarget": "A road marker EATS chips.",
+            "emoji": "🪨🍟"
+          }
         },
         {
           "key": "drink",
@@ -110,7 +117,14 @@
               "text": "Do you want a drink?",
               "translation": "¿Quieres algo de beber?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRINCA",
+            "scene": "El abuelo TRINCA: BEBE todo de un trago.",
+            "sceneTarget": "Grandpa knocks it back: he DRINKS it in one gulp.",
+            "emoji": "👴🍺"
+          }
         },
         {
           "key": "water",
@@ -189,7 +203,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BREA",
+            "scene": "Un PAN untado con BREA negra, ¡qué asco!",
+            "sceneTarget": "BREAD spread with black tar, yuck!",
+            "emoji": "🍞⚫"
+          }
         },
         {
           "key": "milk",
@@ -268,7 +289,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MITO",
+            "scene": "La CARNE es un MITO para los vegetarianos.",
+            "sceneTarget": "MEAT is a myth for vegetarians.",
+            "emoji": "🥩🦄"
+          }
         },
         {
           "key": "fish",
@@ -349,7 +377,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EGO",
+            "scene": "Un HUEVO con mucho EGO se mira al espejo.",
+            "sceneTarget": "An EGG with a big ego looks in the mirror.",
+            "emoji": "🥚🪞"
+          }
         },
         {
           "key": "apple",
@@ -377,7 +412,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "A PELAR",
+            "scene": "¡A PELAR la MANZANA, ya!",
+            "sceneTarget": "Peel the APPLE, now!",
+            "emoji": "🍎🔪"
+          }
         },
         {
           "key": "rice",
@@ -410,7 +452,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RAÍZ",
+            "scene": "Del ARROZ de tu plato sale una RAÍZ enorme.",
+            "sceneTarget": "A huge root grows out of the RICE on your plate.",
+            "emoji": "🍚🌱"
+          }
         },
         {
           "key": "cheese",
@@ -490,7 +539,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AYUNO",
+            "scene": "DESAYUNO: rompes (BREAK) el AYUNO (FAST).",
+            "sceneTarget": "BREAKFAST: you break the fast.",
+            "emoji": "🍳⏱️"
+          }
         },
         {
           "key": "lunch",
@@ -612,7 +668,14 @@
                 ]
               }
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HANGAR",
+            "scene": "Un HANGAR lleno de aviones con HAMBRE.",
+            "sceneTarget": "A hangar full of HUNGRY planes.",
+            "emoji": "✈️🍽️"
+          }
         }
       ]
     }

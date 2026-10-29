@@ -47,13 +47,13 @@ export function courseFiles(dir: string): string[] {
 
 const PATH: Record<string, string[]> = { draft: ['needs_review', 'approved', 'published'], needs_review: ['approved', 'published'], approved: ['published'] };
 
-export interface SyncReport { course: string; imported: string[]; updatedUnits: number; updatedAssociations: number; createdUnits: number; published: number; problems: string[] }
+export interface SyncReport { course: string; imported: string[]; updatedUnits: number; movedUnits: number; updatedAssociations: number; createdUnits: number; published: number; problems: string[] }
 
 /** Vuelca un curso (una carpeta de `content/`) a la base de datos. Escribe como sistema (sin `accountability`). */
 export async function syncCourse(dir: string, ctx: { db: any; services: any; schema: any }): Promise<SyncReport> {
   const { db, services, schema } = ctx;
   const svc = (c: string) => new services.ItemsService(c, { schema });
-  const report: SyncReport = { course: dir, imported: [], updatedUnits: 0, updatedAssociations: 0, createdUnits: 0, published: 0, problems: [] };
+  const report: SyncReport = { course: dir, imported: [], updatedUnits: 0, movedUnits: 0, updatedAssociations: 0, createdUnits: 0, published: 0, problems: [] };
   const touched = new Set<string>();
 
   for (const path of courseFiles(dir)) {
@@ -88,6 +88,9 @@ export async function syncCourse(dir: string, ctx: { db: any; services: any; sch
           continue;
         }
         if (stable(parse(unit.payload)) !== stable(unitPayload(u))) { await svc('units').updateOne(unit.id, { payload: unitPayload(u) }); report.updatedUnits += 1; }
+        // Una unidad que se pasa a otra misión (p. ej., los días de la semana, antes): cambia de misión conservando su id
+        // (y con él, el progreso). Su orden lo pone el paso final.
+        if (unit.module !== mod.id) { await db('units').where({ id: unit.id }).update({ module: mod.id, sort: sort++ }); report.movedUnits += 1; touched.add(mod.id); }
         if (unit.status !== 'published') touched.add(unit.module);
         if (!u.association) continue;
         const want = associationRow(u.association);

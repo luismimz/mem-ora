@@ -431,7 +431,14 @@
               "text": "Where did you go?",
               "translation": "¿Adónde fuiste?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PUENTE",
+            "scene": "Ayer FUI al PUENTE y salté al río.",
+            "sceneTarget": "Yesterday I WENT to the bridge and jumped in the river.",
+            "emoji": "🌉🏊"
+          }
         },
         {
           "key": "had",
@@ -469,7 +476,14 @@
               "text": "We had dinner at nine.",
               "translation": "Cenamos a las nueve."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HADA",
+            "scene": "Un HADA TENÍA tres deseos y los gastó.",
+            "sceneTarget": "A fairy HAD three wishes and used them up.",
+            "emoji": "🧚✨"
+          }
         },
         {
           "key": "did",
@@ -509,7 +523,14 @@
               "text": "What did you do yesterday?",
               "translation": "¿Qué hiciste ayer?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DEDO",
+            "scene": "HICE los deberes con un solo DEDO.",
+            "sceneTarget": "I DID the homework with one finger.",
+            "emoji": "☝️📝"
+          }
         },
         {
           "key": "saw",
@@ -552,7 +573,14 @@
               "text": "Did you see that?",
               "translation": "¿Viste eso?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOGA",
+            "scene": "VI una SOGA bailando sola.",
+            "sceneTarget": "I SAW a rope dancing by itself.",
+            "emoji": "🪢💃"
+          }
         },
         {
           "key": "came",
@@ -598,7 +626,14 @@
               "text": "They came by bus.",
               "translation": "Vinieron en autobús."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUEMA",
+            "scene": "VINO corriendo porque algo se QUEMA.",
+            "sceneTarget": "He CAME running because something’s burning.",
+            "emoji": "🏃🔥"
+          }
         },
         {
           "key": "made",
@@ -636,7 +671,14 @@
               "text": "You made a mistake.",
               "translation": "Cometiste un error."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MEDIA",
+            "scene": "HICE una MEDIA de lana gigante.",
+            "sceneTarget": "I MADE a giant wool sock.",
+            "emoji": "🧶🧦"
+          }
         },
         {
           "key": "got",
@@ -674,7 +716,14 @@
               "text": "We got home at ten.",
               "translation": "Llegamos a casa a las diez."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOTA",
+            "scene": "CONSEGUÍ una GOTA de agua en el desierto.",
+            "sceneTarget": "I GOT a drop of water in the desert.",
+            "emoji": "💧🏜️"
+          }
         },
         {
           "key": "took",
@@ -712,7 +761,14 @@
               "text": "It took two hours.",
               "translation": "Tardó dos horas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TUCÁN",
+            "scene": "Un TUCÁN me COGIÓ el bocadillo.",
+            "sceneTarget": "A toucan TOOK my sandwich.",
+            "emoji": "🦜🥪"
+          }
         },
         {
           "key": "said",
@@ -751,7 +807,14 @@
               "text": "What did he say?",
               "translation": "¿Qué dijo?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SED",
+            "scene": "DIJO: «Tengo SED».",
+            "sceneTarget": "He SAID: «I’m thirsty».",
+            "emoji": "💬💧"
+          }
         },
         {
           "key": "ate",
@@ -789,7 +852,14 @@
               "text": "Did you eat?",
               "translation": "¿Has comido?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OCHO",
+            "scene": "COMIÓ (ATE) OCHO (EIGHT) tartas: ¡suenan igual!",
+            "sceneTarget": "He ATE eight cakes: they sound the same!",
+            "emoji": "🎂8️⃣"
+          }
         },
         {
           "key": "bought",
@@ -844,7 +914,14 @@
               "text": "What did you buy?",
               "translation": "¿Qué compraste?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOTA",
+            "scene": "COMPRÉ una BOTA gigante para mi gato.",
+            "sceneTarget": "I BOUGHT a giant boot for my cat.",
+            "emoji": "👢🐈"
+          }
         },
         {
           "key": "gave",
@@ -931,7 +1008,14 @@
               "text": "I didn't know that.",
               "translation": "No lo sabía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÑU",
+            "scene": "Un ÑU SABÍA todas las respuestas del examen.",
+            "sceneTarget": "A gnu KNEW all the answers in the exam.",
+            "emoji": "🦬📝"
+          }
         },
         {
           "key": "thought",
@@ -976,7 +1060,14 @@
               "text": "I thought so.",
               "translation": "Eso pensaba."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZOTE",
+            "scene": "PENSÉ que era un ZOTE, pero era un genio.",
+            "sceneTarget": "I THOUGHT he was a dunce, but he was a genius.",
+            "emoji": "🤔💡"
+          }
         },
         {
           "key": "found",
@@ -1014,7 +1105,14 @@
               "text": "Did you find it?",
               "translation": "¿Lo encontraste?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FONDO",
+            "scene": "ENCONTRÉ el anillo en el FONDO del mar.",
+            "sceneTarget": "I FOUND the ring at the bottom of the sea.",
+            "emoji": "💍🌊"
+          }
         }
       ]
     }

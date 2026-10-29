@@ -370,7 +370,14 @@
               "text": "Let's sit in the sun.",
               "translation": "Sentémonos al sol."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SANTO",
+            "scene": "El SOL lleva aureola de SANTO.",
+            "sceneTarget": "The SUN wears a saint’s halo.",
+            "emoji": "☀️😇"
+          }
         },
         {
           "key": "rain",
@@ -413,7 +420,14 @@
               "text": "I love the sound of rain.",
               "translation": "Me encanta el sonido de la lluvia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REINA",
+            "scene": "La REINA baila bajo la LLUVIA.",
+            "sceneTarget": "The queen dances in the RAIN.",
+            "emoji": "👑🌧️"
+          }
         },
         {
           "key": "snow",
@@ -451,7 +465,14 @@
               "text": "The mountains are white with snow.",
               "translation": "Las montañas están blancas de nieve."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESNOB",
+            "scene": "Un ESNOB odia la NIEVE en sus zapatos.",
+            "sceneTarget": "A snob hates SNOW on his shoes.",
+            "emoji": "❄️🎩"
+          }
         },
         {
           "key": "wind",
@@ -491,7 +512,14 @@
               "text": "The wind closed the door.",
               "translation": "El viento cerró la puerta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUINDA",
+            "scene": "El VIENTO se lleva la GUINDA del pastel.",
+            "sceneTarget": "The WIND blows the cherry off the cake.",
+            "emoji": "🍒💨"
+          }
         },
         {
           "key": "cloud",
@@ -536,7 +564,14 @@
               "text": "Look at that big cloud.",
               "translation": "Mira esa nube tan grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLAUDIA",
+            "scene": "CLAUDIA vive en una NUBE de algodón.",
+            "sceneTarget": "Claudia lives on a cotton CLOUD.",
+            "emoji": "☁️👧"
+          }
         },
         {
           "key": "hot",
@@ -581,7 +616,14 @@
               "text": "Careful, the soup is hot.",
               "translation": "Cuidado, la sopa está caliente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JOTA",
+            "scene": "Bailas una JOTA con tanto CALOR que sudas.",
+            "sceneTarget": "You dance a jota so HOT you sweat.",
+            "emoji": "💃🥵"
+          }
         },
         {
           "key": "cold",
@@ -615,7 +657,14 @@
               "text": "Winter is very cold here.",
               "translation": "Aquí el invierno es muy frío."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COL",
+            "scene": "Una COL congelada: ¡qué FRÍO!",
+            "sceneTarget": "A frozen cabbage: so COLD!",
+            "emoji": "🥬🥶"
+          }
         },
         {
           "key": "warm",
@@ -792,7 +841,14 @@
               "text": "The storm broke the window.",
               "translation": "La tormenta rompió la ventana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTORNUDO",
+            "scene": "Una TORMENTA de ESTORNUDOS gigantes.",
+            "sceneTarget": "A STORM of giant sneezes.",
+            "emoji": "⛈️🤧"
+          }
         },
         {
           "key": "umbrella",
@@ -824,7 +880,14 @@
               "text": "I forgot my umbrella.",
               "translation": "Me he olvidado el paraguas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "UMBRAL",
+            "scene": "Abres el PARAGUAS en el UMBRAL de la puerta.",
+            "sceneTarget": "You open the UMBRELLA at the doorway.",
+            "emoji": "☂️🚪"
+          }
         },
         {
           "key": "temperature",
@@ -919,7 +982,14 @@
               "text": "There are four seasons.",
               "translation": "Hay cuatro estaciones."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SESIÓN",
+            "scene": "Una SESIÓN de fotos en cada ESTACIÓN del año.",
+            "sceneTarget": "A photo session every SEASON of the year.",
+            "emoji": "📷🍂"
+          }
         }
       ]
     }

@@ -431,7 +431,14 @@
               "text": "No pain, no gain.",
               "translation": "Sin esfuerzo no hay recompensa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PEINE",
+            "scene": "Te peinas con un PEINE de púas: ¡qué DOLOR!",
+            "sceneTarget": "You comb with a spiky comb: such PAIN!",
+            "emoji": "🪮😣"
+          }
         },
         {
           "key": "headache",
@@ -648,7 +655,14 @@
               "text": "Can I make an appointment?",
               "translation": "¿Puedo pedir cita?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APUNTAS",
+            "scene": "APUNTAS la CITA en la palma de la mano.",
+            "sceneTarget": "You write the APPOINTMENT on your palm.",
+            "emoji": "✋📅"
+          }
         },
         {
           "key": "cough",
@@ -705,7 +719,14 @@
               "text": "Cover your mouth when you cough.",
               "translation": "Tápate la boca al toser."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COFRE",
+            "scene": "Al TOSER, sale polvo de un COFRE.",
+            "sceneTarget": "When you COUGH, dust comes out of a chest.",
+            "emoji": "📦🤧"
+          }
         },
         {
           "key": "hurt",
@@ -782,7 +803,14 @@
               "text": "Eat healthy food.",
               "translation": "Come comida sana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HELADO",
+            "scene": "Un HELADO SANO de brócoli.",
+            "sceneTarget": "A HEALTHY broccoli ice cream.",
+            "emoji": "🍦🥦"
+          }
         },
         {
           "key": "nurse",

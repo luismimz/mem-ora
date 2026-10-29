@@ -100,7 +100,14 @@
               "text": "I can't open this file.",
               "translation": "No puedo abrir este archivo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FILA",
+            "scene": "Los ARCHIVOS hacen FILA para entrar.",
+            "sceneTarget": "The FILES queue up to get in.",
+            "emoji": "📄📄"
+          }
         },
         {
           "key": "folder",
@@ -148,7 +155,14 @@
               "text": "Put the files in this folder.",
               "translation": "Pon los archivos en esta carpeta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FOLLETO",
+            "scene": "Una CARPETA llena de FOLLETOS de pizza.",
+            "sceneTarget": "A FOLDER full of pizza leaflets.",
+            "emoji": "📁🍕"
+          }
         },
         {
           "key": "screen",
@@ -185,7 +199,14 @@
               "text": "Share your screen, please.",
               "translation": "Comparte tu pantalla, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CRIN",
+            "scene": "Una PANTALLA con CRIN de caballo.",
+            "sceneTarget": "A SCREEN with a horse’s mane.",
+            "emoji": "🖥️🐴"
+          }
         },
         {
           "key": "password",
@@ -224,7 +245,14 @@
               "text": "Change your password.",
               "translation": "Cambia tu contraseña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PASA",
+            "scene": "«PASA», dice la puerta si sabes la CONTRASEÑA.",
+            "sceneTarget": "«Come in», says the door if you know the PASSWORD.",
+            "emoji": "🔑🚪"
+          }
         },
         {
           "key": "download",
@@ -256,7 +284,14 @@
               "text": "The download is slow.",
               "translation": "La descarga va lenta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ABAJO",
+            "scene": "DESCARGAR: los datos caen hacia ABAJO (DOWN).",
+            "sceneTarget": "DOWNLOAD: the data falls down.",
+            "emoji": "⬇️💾"
+          }
         },
         {
           "key": "upload",
@@ -293,7 +328,14 @@
               "text": "I uploaded the video yesterday.",
               "translation": "Subí el vídeo ayer."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARRIBA",
+            "scene": "SUBIR: los datos vuelan hacia ARRIBA (UP).",
+            "sceneTarget": "UPLOAD: the data flies up.",
+            "emoji": "⬆️☁️"
+          }
         },
         {
           "key": "update",
@@ -325,7 +367,14 @@
               "text": "There is a new update.",
               "translation": "Hay una actualización nueva."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DÍA",
+            "scene": "ACTUALIZAR: tu móvil se pone al DÍA (DATE).",
+            "sceneTarget": "UPDATE: your phone gets up to date.",
+            "emoji": "🔄📱"
+          }
         },
         {
           "key": "bug",
@@ -362,7 +411,14 @@
               "text": "I found a bug.",
               "translation": "He encontrado un fallo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BICHO",
+            "scene": "Un BICHO se come tu código: un FALLO.",
+            "sceneTarget": "A BUG eats your code.",
+            "emoji": "🐛💻"
+          }
         },
         {
           "key": "fix",
@@ -400,7 +456,14 @@
               "text": "Can you fix my computer?",
               "translation": "¿Puedes arreglar mi ordenador?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIJANDO",
+            "scene": "ARREGLAS la silla FIJANDO cada tornillo.",
+            "sceneTarget": "You FIX the chair tightening every screw.",
+            "emoji": "🔧🪑"
+          }
         },
         {
           "key": "test",
@@ -530,7 +593,14 @@
               "text": "Create a new branch for this change.",
               "translation": "Crea una rama nueva para este cambio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRANQUIAS",
+            "scene": "Un pez con BRANQUIAS en cada RAMA del árbol.",
+            "sceneTarget": "A fish with gills on every BRANCH of the tree.",
+            "emoji": "🌳🐟"
+          }
         },
         {
           "key": "merge",
@@ -569,7 +639,14 @@
               "text": "I merged your changes.",
               "translation": "He fusionado tus cambios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MERENGUE",
+            "scene": "FUSIONAS dos tartas en un MERENGUE.",
+            "sceneTarget": "You MERGE two cakes into one meringue.",
+            "emoji": "🍰🍰"
+          }
         },
         {
           "key": "release",
