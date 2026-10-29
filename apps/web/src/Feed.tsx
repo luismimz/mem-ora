@@ -5,7 +5,7 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark } from '@memora/content';
+import type { ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark, Widget } from '@memora/content';
 import {
   buildTiles,
   burstOptions,
@@ -13,6 +13,7 @@ import {
   chantOf,
   choicesFor,
   drillsOf,
+  maskName,
   orderRule,
   orderSwap,
   spanishOrderCalque,
@@ -27,6 +28,7 @@ import {
   type AssocStep,
   type ClientEvent,
   type SessionUnit,
+  type WorkshopItem,
 } from '@memora/experiences';
 import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
@@ -1167,6 +1169,168 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
   );
 }
 
+/** Parece código (para pintarlo en monoespaciada), sea cual sea el idioma del curso. */
+const looksCode = (text: string) => /\n|[;{}=<>[\]]|\w\(|\w+\.\w+\(/.test(text);
+
+/**
+ * «Interfaces en vivo» (D-090): el componente dibujado como se ve en una ventana de escritorio, para reconocerlo. Los
+ * contenedores (HBox, VBox, BorderPane…) se dibujan con sus zonas marcadas, que es lo que los distingue.
+ */
+export function WidgetMock({ kind }: { kind: Widget }) {
+  const box = (n: number, cls = '') => <span className={`wm-cell ${cls}`}>{n}</span>;
+  const body = ((): ReactNode => {
+    switch (kind) {
+      case 'button': return <><span className="wm-btn primary">Aceptar</span><span className="wm-btn">Cancelar</span></>;
+      case 'label': return <span className="wm-label">Usuario:</span>;
+      case 'textfield': return <span className="wm-field">Ana García<i className="wm-caret" /></span>;
+      case 'passwordfield': return <span className="wm-field">●●●●●●●<i className="wm-caret" /></span>;
+      case 'textarea': return <span className="wm-area">Querida Ana:<br />Te escribo para contarte<br />que el proyecto ya está…<i className="wm-scroll" /></span>;
+      case 'checkbox': return <span className="wm-col"><span className="wm-check on">Recordarme</span><span className="wm-check">Recibir novedades</span></span>;
+      case 'radiobutton': return <span className="wm-col"><span className="wm-radio on">Tarjeta</span><span className="wm-radio">Efectivo</span><span className="wm-radio">Bizum</span></span>;
+      case 'togglebutton': return <span className="wm-row"><span className="wm-btn pressed"><b>N</b></span><span className="wm-btn"><i>K</i></span><span className="wm-btn"><u>S</u></span></span>;
+      case 'combobox': return <span className="wm-col"><span className="wm-field wm-combo">España<b>▾</b></span><span className="wm-drop"><span className="sel">España</span><span>Francia</span><span>Italia</span></span></span>;
+      case 'listview': return <span className="wm-list"><span>Ana</span><span className="sel">Luis</span><span>Marta</span><span>Pedro</span></span>;
+      case 'tableview': return <span className="wm-table"><span className="h">Nombre</span><span className="h">Edad</span><span>Ana</span><span>31</span><span className="sel">Luis</span><span className="sel">28</span><span>Marta</span><span>45</span></span>;
+      case 'treeview': return <span className="wm-tree"><span>▾ 📁 proyecto</span><span className="i1">▾ 📁 src</span><span className="i2">📄 Main.java</span><span className="i1">▸ 📁 test</span></span>;
+      case 'slider': return <span className="wm-slider"><i className="track"><i className="fill" /><i className="thumb" /></i><span className="ticks"><b>0</b><b>50</b><b>100</b></span></span>;
+      case 'progressbar': return <span className="wm-progress"><i /><b>60 %</b></span>;
+      case 'spinner': return <span className="wm-field wm-spin">3<span className="arrows"><b>▲</b><b>▼</b></span></span>;
+      case 'datepicker': return <span className="wm-col"><span className="wm-field wm-combo">29/10/2026<b>📅</b></span><span className="wm-cal">{['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((d) => <b key={d}>{d}</b>)}{Array.from({ length: 14 }, (_, n) => <span key={n} className={n === 10 ? 'sel' : ''}>{n + 19 > 31 ? n - 12 : n + 19}</span>)}</span></span>;
+      case 'colorpicker': return <span className="wm-col"><span className="wm-field wm-combo"><i className="wm-swatch" style={{ background: '#3b82f6' }} />#3B82F6<b>▾</b></span><span className="wm-colors">{['#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#111', '#fff', '#ec4899'].map((c) => <i key={c} style={{ background: c }} />)}</span></span>;
+      case 'menubar': return <span className="wm-col wide"><span className="wm-menubar"><b className="open">Archivo</b><b>Editar</b><b>Ver</b><b>Ayuda</b></span><span className="wm-drop menu"><span>Nuevo</span><span>Abrir…</span><span className="sel">Guardar</span><span>Salir</span></span></span>;
+      case 'toolbar': return <span className="wm-toolbar"><b>📄</b><b>📂</b><b>💾</b><i /><b>✂️</b><b>📋</b><i /><b>↩️</b></span>;
+      case 'tabpane': return <span className="wm-col wide"><span className="wm-tabs"><b className="on">General</b><b>Avanzado</b><b>Ayuda</b></span><span className="wm-tabbody">Idioma: Español</span></span>;
+      case 'hyperlink': return <span className="wm-link">¿Has olvidado la contraseña?</span>;
+      case 'alert': return <span className="wm-alert"><b>⚠️ Confirmación</b><span>¿Seguro que quieres borrar el archivo?</span><span className="wm-row end"><span className="wm-btn primary">Aceptar</span><span className="wm-btn">Cancelar</span></span></span>;
+      case 'hbox': return <span className="wm-pane wm-hbox">{box(1)}{box(2)}{box(3)}</span>;
+      case 'vbox': return <span className="wm-pane wm-vbox">{box(1)}{box(2)}{box(3)}</span>;
+      case 'borderpane': return <span className="wm-pane wm-border"><span className="wm-cell t">top</span><span className="wm-cell l">left</span><span className="wm-cell c">center</span><span className="wm-cell r">right</span><span className="wm-cell b">bottom</span></span>;
+      case 'gridpane': return <span className="wm-pane wm-grid">{['0,0', '1,0', '2,0', '0,1', '1,1', '2,1'].map((t) => <span key={t} className="wm-cell">{t}</span>)}</span>;
+      case 'stackpane': return <span className="wm-pane wm-stack"><span className="wm-cell s1">1</span><span className="wm-cell s2">2</span><span className="wm-cell s3">3</span></span>;
+      case 'flowpane': return <span className="wm-pane wm-flow">{[1, 2, 3, 4, 5, 6, 7].map((n) => <span key={n} className="wm-cell">{n}</span>)}</span>;
+    }
+  })();
+  return (
+    <figure className="wm" aria-label="Una ventana con un componente de interfaz">
+      <span className="wm-bar"><i /><i /><i /></span>
+      <span className="wm-body">{body}</span>
+    </figure>
+  );
+}
+
+const WORKSHOP_TAG = { whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', widget: '🖥️ ¿QUÉ COMPONENTE ES?' } as const;
+
+/**
+ * El Taller (D-090): saber USAR lo aprendido. Retos mezclados de conceptos ya enseñados: reconocer un ejemplo o un
+ * caso, completar código con fichas, predecir lo que imprime, tocar la línea del bug y reconocer componentes dibujados.
+ * Sin reloj; cada respuesta se explica y, si fallas alguno, se vuelve a enseñar ese concepto.
+ */
+function Workshop({ items, all, seed, onAnswer, onDone }: {
+  items: WorkshopItem[]; all: Record<string, SessionUnit>; seed: string;
+  onAnswer: (u: SessionUnit, ok: boolean, ms: number, item: WorkshopItem) => void; onDone: (failed: string | null) => void;
+}) {
+  const list = useMemo(() => items.filter((it) => all[it.unitKey] && (it.kind !== 'code' || exercisesOf(all[it.unitKey]!)[it.exercise])), [items, all]);
+  const [i, setI] = useState(-1);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [right, setRight] = useState(0);
+  const [confetti, setConfetti] = useState(0);
+  const failed = useRef<string[]>([]);
+  const t0 = useRef(performance.now());
+  useEffect(() => { t0.current = performance.now(); }, [i]);
+  const it = i >= 0 ? list[i] : undefined;
+  const u = it ? all[it.unitKey]! : undefined;
+  const ex = it?.kind === 'code' && u ? exercisesOf(u)[it.exercise]! : undefined;
+  const kind = !it ? null : it.kind === 'code' ? (ex!.kind as 'fill_gap' | 'predict_output' | 'find_bug') : it.kind;
+  const tapLine = kind === 'find_bug' && ex?.bugLine !== undefined;
+  const options = useMemo(() => {
+    if (!it || !u) return [];
+    if (it.kind === 'code') return stableOrder([ex!.answer!, ...(ex!.distractors ?? [])], `${seed}-${i}`);
+    return it.options.map((k) => unitText(all[k]!));
+  }, [it, u, ex, i, seed, all]);
+  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(ex!.bugLine) : ex!.answer!) : unitText(u);
+  const ok = picked !== null && (it?.kind === 'code' && !tapLine ? gradeChallenge(ex!, picked, false).correct : picked === answer);
+  function pick(o: string) {
+    if (!it || !u || picked !== null) return;
+    const good = it.kind === 'code' && !tapLine ? gradeChallenge(ex!, o, false).correct : o === answer;
+    setPicked(o);
+    if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); } else failed.current.push(u.key);
+    onAnswer(u, good, Math.round(performance.now() - t0.current), it);
+  }
+  const next = () => { setPicked(null); setI((n) => n + 1); };
+  const finish = () => onDone(failed.current[0] ?? null);
+  if (i < 0) {
+    const kinds = [...new Set(list.map((x) => (x.kind === 'code' ? exercisesOf(all[x.unitKey]!)[x.exercise]!.kind : x.kind)))] as Array<keyof typeof WORKSHOP_TAG>;
+    return (
+      <Slide tone={200} className="shop-intro" onNext={() => setI(0)}>
+        <p className="tag">🛠️ TALLER</p>
+        <div className="arcade-big" aria-hidden="true">🧰</div>
+        <h2 className="ask">Recordarlo está bien. Ahora, ¡a usarlo!</h2>
+        <p className="arcade-rules">{list.length} retos con lo que ya has visto:</p>
+        <div className="shop-kinds">{kinds.map((k) => <span key={k}>{WORKSHOP_TAG[k]}</span>)}</div>
+        <button type="button" className="primary arcade-go" onClick={() => setI(0)}>¡Al taller! 🔧</button>
+      </Slide>
+    );
+  }
+  if (!it || !u) {
+    const stars = right === list.length ? 3 : right >= list.length * 0.6 ? 2 : right > 0 ? 1 : 0;
+    return (
+      <Slide tone={200} className="shop-end" onNext={finish}>
+        <p className="tag">🛠️ TALLER TERMINADO</p>
+        <div className="tense-stars" aria-label={`${stars} de 3 estrellas`}>{[0, 1, 2].map((k) => <span key={k} className={k < stars ? 'on' : ''}>★</span>)}</div>
+        <p className="arcade-rules">{right}/{list.length} retos resueltos{right === list.length ? ' · ¡manos de experto! 🏆' : ''}</p>
+        {failed.current.length > 0 && <p className="arcade-rules muted">Ahora repasas lo que se te resistió.</p>}
+        <button type="button" className="primary arcade-go" onClick={finish}>Seguir →</button>
+        <Confetti burst={stars === 3 ? 99 : 0} />
+      </Slide>
+    );
+  }
+  const p = u.payload as ConceptPayload;
+  const shownText = it.kind === 'whatis' ? maskName((it.source === 'case' ? p.cases! : p.examples)[it.index]!.text, u) : '';
+  const shownNote = it.kind === 'whatis' ? (it.source === 'case' ? p.cases! : p.examples)[it.index]!.explanation : undefined;
+  const lines = ex?.code?.split('\n') ?? [];
+  const state = (o: string) => (picked === null ? '' : o === answer || (it.kind === 'code' && !tapLine && gradeChallenge(ex!, o, false).correct) ? 'is-right' : picked === o ? 'is-wrong' : 'is-off');
+  return (
+    <Slide tone={hue(u.key)} className={`shop-play ${kind} ${picked === null ? '' : ok ? 'right' : 'wrong'}`} {...(picked !== null ? { onNext: next } : {})}>
+      <div className="arcade-head">
+        <p className="tag">{WORKSHOP_TAG[kind!]} · {i + 1}/{list.length}</p>
+        <span className="arcade-pts">✅ {right}</span>
+      </div>
+      {it.kind === 'whatis' && <>
+        <h3 className="ask shop-ask">¿Qué concepto ves aquí?</h3>
+        {looksCode(shownText) ? <pre className="learn-code shop-code"><code>{shownText}</code></pre> : <blockquote className="reading shop-case">{shownText}</blockquote>}
+      </>}
+      {it.kind === 'widget' && <><h3 className="ask shop-ask">¿Qué componente es?</h3><WidgetMock kind={(p.widget ?? 'button') as Widget} /></>}
+      {ex && <>
+        <h3 className="ask shop-ask">{ex.prompt}</h3>
+        {kind === 'fill_gap' && (
+          <pre className="learn-code shop-code"><code>{ex.code!.split('___').map((part, n, arr) => <Fragment key={n}>{part}{n < arr.length - 1 && <span className={`shop-slot ${picked !== null ? (ok ? 'ok' : 'ko') : ''}`}>{picked === null ? '   ' : picked}</span>}</Fragment>)}</code></pre>
+        )}
+        {kind === 'predict_output' && (
+          <div className="shop-term"><span className="shop-term-bar">▶ terminal</span><pre><code>{ex.code}</code></pre>{picked !== null && <pre className="shop-out"><code>{'> '}{ex.answer}</code></pre>}</div>
+        )}
+        {kind === 'find_bug' && (tapLine
+          ? <div className="shop-lines" role="list">{lines.map((l, n) => <button type="button" key={n} role="listitem" className={`shop-line ${picked === null ? '' : n === ex.bugLine ? 'bug' : String(n) === picked ? 'miss' : ''}`} onClick={() => pick(String(n))}><b>{n + 1}</b><code>{l || ' '}</code></button>)}</div>
+          : <pre className="learn-code shop-code"><code>{ex.code}</code></pre>)}
+      </>}
+      {picked === null ? (
+        tapLine ? <p className="shop-hint">👆 Toca la línea donde está el error</p>
+          : kind === 'fill_gap' ? <div className="shop-tiles">{options.map((o) => <button type="button" key={o} className="shop-tile" onClick={() => pick(o)}>{o}</button>)}</div>
+          : <div className="options">{options.map((o) => <button type="button" key={o} className={`option ${o.length > 24 ? 'long' : ''}`} onClick={() => pick(o)}>{o}</button>)}</div>
+      ) : (
+        <div className="tense-after" aria-live="polite">
+          {it.kind !== 'code' && !tapLine && <div className="options shop-done">{options.map((o) => <span key={o} className={`option ${state(o)}`}>{o}</span>)}</div>}
+          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : tapLine ? <>El error está en la línea {ex!.bugLine! + 1}</> : <>Era <b>{it.kind === 'code' ? ex!.answer : unitText(u)}</b></>}</p>
+          {it.kind !== 'code' && <p className="tense-why"><b>{unitText(u)}</b>: {p.gist}</p>}
+          {tapLine && <p className="tense-why">Arreglo: <code>{ex!.answer}</code></p>}
+          {(ex?.explanation || shownNote) && <p className="tense-es">{ex?.explanation ?? shownNote}</p>}
+          <button type="button" className="primary arcade-go" onClick={next}>{i + 1 < list.length ? 'Siguiente →' : 'Ver resultado →'}</button>
+        </div>
+      )}
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
 /** ¿Verdad o mentira?: desliza → (verdad) o ← (mentira), o toca los botones. */
 function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUnit; onResult: (ok: boolean, ms: number) => void }) {
   const truth = shown.key === unit.key;
@@ -1481,6 +1645,9 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
+  else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units}
+    onAnswer={(u, ok, ms, it) => { const k = (it.kind === 'code' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : ''}` })); scored(ok, 12); }}
+    onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su ficha y sus ejemplos: así lo reconocerás y lo usarás la próxima vez.' }); else void advance({ correct: true, hint: 0 }); }} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
@@ -1489,7 +1656,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'review' && unit) card = <Write key={step.id} unit={unit} levelUp={Boolean(step.levelUp)} onResult={(ok, ms, hint, format) => answered(unit, ok, ms, `${unit.key}#write`, 20, step.skillKey, format, hint)} />;
   else if (step.kind === 'summary') {
-    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst', 'tense'].includes(s.kind) && outcomes[s.id]);
+    const asked = plan.steps.filter((s) => ['quick', 'judge', 'challenge', 'review', 'listen', 'build', 'burst', 'tense', 'workshop'].includes(s.kind) && outcomes[s.id]);
     const right = asked.filter((s) => outcomes[s.id]!.correct).length;
     const newOnes = plan.steps.filter((s) => s.kind === 'reel' && !s.focus).length;
     const soon = progress?.skills.map((s) => s.dueAt).filter((d): d is number => Boolean(d) && d! > Date.now());

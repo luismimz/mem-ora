@@ -265,6 +265,13 @@ export interface ConceptExample {
   source?: string;
 }
 
+/**
+ * «Interfaces en vivo» (D-090): componentes que la app sabe DIBUJAR de verdad (como se ven en una ventana), para
+ * reconocerlos y nombrarlos. Un concepto con `widget` se juega en el Taller como «¿Qué componente es?».
+ */
+export const WIDGETS = ['button', 'label', 'textfield', 'passwordfield', 'textarea', 'checkbox', 'radiobutton', 'togglebutton', 'combobox', 'listview', 'tableview', 'treeview', 'slider', 'progressbar', 'spinner', 'datepicker', 'colorpicker', 'menubar', 'toolbar', 'tabpane', 'hyperlink', 'alert', 'hbox', 'vbox', 'borderpane', 'gridpane', 'stackpane', 'flowpane'] as const;
+export type Widget = (typeof WIDGETS)[number];
+
 export const EXERCISE_KINDS = ['predict_output', 'fill_gap', 'find_bug', 'apply_case', 'order_steps'] as const;
 export type ConceptExerciseKind = (typeof EXERCISE_KINDS)[number];
 
@@ -286,6 +293,8 @@ export interface ConceptExercise {
   steps?: string[];
   /** Por qué es así: se muestra al corregir. */
   explanation?: string;
+  /** «Caza el bug» (D-090): la línea del código (desde 0) donde está el error; se caza tocándola. */
+  bugLine?: number;
 }
 
 /** Concepto de cualquier materia: «class», «subred», «TCP». */
@@ -304,6 +313,10 @@ export interface ConceptPayload {
   notes?: string;
   /** Ejercicios para aplicarlo (código, casos, pasos). Si hay, el concepto tiene también la habilidad «aplicar». */
   exercises?: ConceptExercise[];
+  /** «¿Qué es esto?» (D-090): ejemplos NUEVOS (no salen en la ficha) para reconocer el concepto en un caso real. */
+  cases?: ConceptExample[];
+  /** «Interfaces en vivo» (D-090): el componente que se dibuja para reconocerlo. */
+  widget?: Widget;
 }
 
 /**
@@ -415,7 +428,22 @@ function validatePattern(p: Record<string, unknown>): ContentIssue[] {
 
 function validateConcept(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes', 'exercises']);
+  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes', 'exercises', 'cases', 'widget']);
+  if (p.widget !== undefined) checkChoice(issues, p.widget, 'widget', WIDGETS);
+  if (p.cases !== undefined) {
+    if (!Array.isArray(p.cases)) issues.push(issue('not_list', 'cases'));
+    else {
+      if (p.cases.length > 8) issues.push(issue('max_items', 'cases', { max: 8, count: p.cases.length }));
+      p.cases.forEach((ex, i) => {
+        const path = `cases.${i}`;
+        if (!isRecord(ex)) return void issues.push(issue('not_object', path));
+        checkUnknownFields(issues, ex, path, ['text', 'explanation', 'source']);
+        checkText(issues, ex.text, `${path}.text`, { max: 500 });
+        checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 200 });
+        checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });
+      });
+    }
+  }
   checkText(issues, p.name, 'name', { max: PAYLOAD_LIMITS.conceptName });
   checkText(issues, p.gist, 'gist', { max: PAYLOAD_LIMITS.gist });
   checkText(issues, p.definition, 'definition', { max: PAYLOAD_LIMITS.definition });
@@ -453,7 +481,12 @@ function checkTextList(issues: ContentIssue[], value: unknown, path: string, min
 
 function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void {
   if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation']);
+  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation', 'bugLine']);
+  if (ex.bugLine !== undefined) {
+    const lines = typeof ex.code === 'string' ? ex.code.split('\n').length : 0;
+    if (ex.kind !== 'find_bug') issues.push(issue('bugline_not_bug', `${path}.bugLine`));
+    else if (typeof ex.bugLine !== 'number' || !Number.isInteger(ex.bugLine) || ex.bugLine < 0 || ex.bugLine >= lines) issues.push(issue('bugline_out_of_code', `${path}.bugLine`, { lines }));
+  }
   checkChoice(issues, ex.kind, `${path}.kind`, EXERCISE_KINDS);
   checkText(issues, ex.prompt, `${path}.prompt`, { max: 200 });
   checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 300 });

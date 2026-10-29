@@ -13,6 +13,7 @@ import type { PlanItem } from '@memora/core';
 import { exercisesOf, seeded, shuffle, unitMeaning, unitText, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
 import type { SessionUnit } from './session';
 import { orderRule, spanishOrderCalque, type OrderMirror } from './order';
+import { buildWorkshop, WORKSHOP_EVERY } from './workshop';
 
 /** Tarjetas entre una pregunta fallada y su repesca. */
 export const FLOW_RETRY_GAP = 3;
@@ -246,6 +247,14 @@ export function buildFlowSession(input: {
     taughtTenses.add(u);
     return { kind: 'tense', unitKey: u, scene: -4, skillKey: skill.key, tenseDrills: shuffle([...mine, ...others], rand), tenseRoute: [u, ...learned], ...tag(u) };
   };
+  // D-090: el Taller. Cada WORKSHOP_EVERY conceptos enseñados (o al acabar), retos de usarlos mezclados con lo aprendido.
+  let block: string[] = [];
+  const taughtConcepts: string[] = [];
+  const workshop = (): Draft | null => {
+    const items = buildWorkshop(block, [...new Set([...taughtConcepts, ...(input.arcadeUnits ?? [])])].filter(has), units, rand);
+    block = [];
+    return items ? { kind: 'workshop', unitKey: '', scene: -4, workshop: items } : null;
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -274,6 +283,9 @@ export function buildFlowSession(input: {
     const word = terms[Math.floor(rand() * terms.length)];
     const sentence = word ? build(word) : null;
     if (sentence) base.push(sentence);
+    const concepts = pair.filter((u) => units[u]!.type === 'concept');
+    block.push(...concepts); taughtConcepts.push(...concepts);
+    if (block.length >= WORKSHOP_EVERY || (i + 2 >= order.length && block.length >= 2)) { const w = workshop(); if (w) base.push(w); }
   }
 
   // 2. Repesca intercalada: tras cada pregunta, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
+import { buildFlowSession, buildTiles, burstOptions, stagedExamples, chantOf, judgeableExamples, drillsOf, maskName, FLOW_RETRY_GAP, FLOW_TENSE_SIZE, type AssocPlan, type SessionUnit } from '../src';
 
 const concept = (key: string): SessionUnit => ({
   key, type: 'concept', language: 'es',
@@ -370,3 +370,48 @@ describe('los tiempos verbales: «¿Qué tiempo pide?» (D-089)', () => {
   });
 });
 
+
+describe('el Taller: saber usarlo (D-090)', () => {
+  const c = (key: string, extra: Record<string, unknown> = {}): SessionUnit => ({
+    key, type: 'concept', language: 'es',
+    payload: { name: `Nombre${key}`, gist: `idea ${key}`, definition: 'd', examples: [{ text: `Aquí se usa Nombre${key} en un caso de verdad con datos.`, explanation: 'x' }],
+      exercises: [{ kind: 'apply_case', prompt: 'p', answer: 'a', distractors: ['b'] }], ...extra },
+    skills: [{ key: `${key}.recall`, kind: 'recall' }, { key: `${key}.apply`, kind: 'apply' }],
+    association: null,
+  } as unknown as SessionUnit);
+  const code = { exercises: [{ kind: 'fill_gap', prompt: 'Completa', code: 'class A ___ B {}', answer: 'extends', distractors: ['implements', 'super'] }] };
+  const all = Object.fromEntries([c('k0', code), c('k1'), c('k2', { cases: [{ text: 'Un caso nuevo donde aparece Nombrek2 sin decirlo.' }] }), c('k3', code), c('k4'), c('k5'), c('old1'), c('old2')].map((u) => [u.key, u]));
+  const plan = buildFlowSession({ ...base, units: all, items: ['k0', 'k1', 'k2', 'k3', 'k4', 'k5'].map((k) => item(k, 'new')), arcadeUnits: ['old1', 'old2'] });
+  const shops = plan.steps.filter((s) => s.kind === 'workshop');
+
+  it('cada 4 conceptos (y al acabar) llega un Taller, siempre DESPUÉS de enseñarlos', () => {
+    expect(shops.length).toBe(2);
+    for (const s of shops) {
+      const at = plan.steps.indexOf(s);
+      for (const it of s.workshop!) {
+        const taughtHere = plan.steps.slice(0, at).some((x) => x.kind === 'reel' && x.unitKey === it.unitKey);
+        expect(taughtHere || ['old1', 'old2'].includes(it.unitKey)).toBe(true);
+      }
+    }
+  });
+  it('mezcla retos: código si lo hay, ¿qué es esto? con opciones distintas y sin la respuesta a la vista', () => {
+    const items = shops.flatMap((s) => s.workshop!);
+    expect(items.length).toBeGreaterThanOrEqual(6);
+    expect(items.some((i) => i.kind === 'code')).toBe(true);
+    for (const i of items) {
+      if (i.kind !== 'whatis') continue;
+      expect(i.options).toContain(i.unitKey);
+      expect(new Set(i.options).size).toBe(i.options.length);
+      expect(i.options.length).toBeGreaterThanOrEqual(3);
+      if (i.unitKey === 'k2') expect(i.source).toBe('case');
+    }
+    const k2 = all.k2!;
+    expect(maskName('Un caso con Nombrek2 y nombrek2.', k2)).toBe('Un caso con ▢▢▢ y ▢▢▢.');
+  });
+  it('los componentes se reconocen dibujados cuando hay al menos 3 para elegir', () => {
+    const ws = Object.fromEntries(['button', 'combobox', 'slider', 'checkbox'].map((w, n) => [`w${n}`, c(`w${n}`, { widget: w })]));
+    const p = buildFlowSession({ ...base, units: ws, items: Object.keys(ws).map((k) => item(k, 'new')) });
+    const items = p.steps.filter((s) => s.kind === 'workshop').flatMap((s) => s.workshop!);
+    expect(items.filter((i) => i.kind === 'widget').length).toBe(4);
+  });
+});
