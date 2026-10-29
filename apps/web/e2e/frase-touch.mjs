@@ -45,7 +45,15 @@ try {
       await page.waitForTimeout(450);
     };
     const tag = () => page.evaluate(() => document.querySelector('.slide .tag')?.textContent ?? '');
-    const untilTag = async (re, max = 8) => { for (let i = 0; i < max && !re.test(await tag()); i++) await swipeUp(); return re.test(await tag()); };
+    // «Las piezas» (D-092) va entre la ficha y «Construye»: se resuelve tocando (no se salta deslizando).
+    const pieces = async () => {
+      if (await page.locator('.pieces .tense-options .burst-btn').count()) await page.locator('.pieces .tense-options .burst-btn').first().tap();
+      else if (!(await page.locator('.pieces-slots').count())) await page.locator('.pieces .pieces-row .ptile').first().tap();
+      if (await page.locator('.pieces .arcade-go').count()) await page.locator('.pieces .arcade-go').tap();
+      for (let k = 0; k < 8 && await page.locator('.pieces-row .ptile:not(.used)').count() && !(await page.locator('.pieces-after').count()); k++) await page.locator('.pieces-row .ptile:not(.used)').first().tap();
+      await page.locator('.pieces .arcade-go').tap(); await page.waitForTimeout(700);
+    };
+    const untilTag = async (re, max = 8) => { for (let i = 0; i < max && !re.test(await tag()); i++) { if (/LAS PIEZAS/.test(await tag())) await pieces(); else await swipeUp(); } return re.test(await tag()); };
     // Las palabras de la frase que pide esta tarjeta, en su orden correcto.
     const words = () => page.evaluate(() => {
       const st = window.__plan.steps.find((s) => s.kind === 'build' && !s.retry);

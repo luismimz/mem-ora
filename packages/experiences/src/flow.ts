@@ -52,6 +52,16 @@ export function mirrorExamples(u: SessionUnit): number[] {
   return examples.flatMap((e, i) => (e.mirror ? [i] : []));
 }
 
+/**
+ * «Las piezas» (D-092): ejemplos con espejo que se juegan por piezas (al menos dos piezas con español). Solo los que
+ * enseña la ficha (enseñar antes de pedir).
+ */
+export function pieceExamples(u: SessionUnit): number[] {
+  if (u.type !== 'term' && u.type !== 'pattern') return [];
+  const examples = ((u.payload as { examples?: Array<{ mirror?: { pieces?: Array<{ role: string }> } }> }).examples ?? []);
+  return examples.flatMap((e, i) => (i < FLOW_TAUGHT_EXAMPLES && (e.mirror?.pieces ?? []).filter((p) => p.role !== 'signal').length >= 2 ? [i] : []));
+}
+
 /** Escenas mínimas para jugar a «¿Dónde está?» (D-084): se eligen entre tres. */
 export const FLOW_STAGE_MIN = 3;
 
@@ -219,6 +229,14 @@ export function buildFlowSession(input: {
     const n = pool.length ? pool[Math.floor(rand() * pool.length)] : undefined;
     return skill && n !== undefined ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: n, ...tag(u) } : null;
   };
+  // Construir otra frase distinta de la que se acaba de ordenar por piezas (si la unidad tiene otra).
+  const buildOther = (u: string, avoid: number): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'produce');
+    const options = taughtBuildable(units[u]!);
+    const others = options.filter((x) => x !== avoid);
+    const pool = others.length ? others : options;
+    return skill && pool.length ? { kind: 'build', unitKey: u, scene: -4, skillKey: skill.key, example: pool[Math.floor(rand() * pool.length)]!, ...tag(u) } : null;
+  };
   // D-084: la escena que cambia. Primero se mira (el bicho se mueve y suena cada frase) y después se juega: oír la frase y
   // tocar la escena correcta, o ver la escena y elegir la frase. Reconocer pesa poco; producir llega con «Construye».
   const spot = (u: string, avoid?: number): Draft | null => {
@@ -255,6 +273,13 @@ export function buildFlowSession(input: {
     block = [];
     return items ? { kind: 'workshop', unitKey: '', scene: -4, workshop: items } : null;
   };
+  // D-092: «Las piezas»: ordenar los trozos de una frase (y antes, ver qué pieza salta o cuál falta). Va antes de
+  // «Construye la frase» (palabra a palabra), con otro ejemplo si lo hay: piezas → palabras → escribir.
+  const pieces = (u: string, avoid?: number): Draft | null => {
+    const skill = units[u]!.skills.find((s) => s.kind === 'recall');
+    const options = pieceExamples(units[u]!).filter((n) => n !== avoid);
+    return skill && options.length ? { kind: 'pieces', unitKey: u, scene: -4, skillKey: skill.key, example: options[Math.floor(rand() * options.length)]!, ...tag(u) } : null;
+  };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -271,7 +296,10 @@ export function buildFlowSession(input: {
         if (sing) base.push(sing);
         const play = up ? null : spot(u);
         if (play) base.push({ kind: 'watch', unitKey: u, scene: -4, ...tag(u) }, play);
-        base.push(up ?? buildAfter(u, mirrorExamples(units[u]!)[0]) ?? quick(u));
+        const shownMirror = mirrorExamples(units[u]!)[0];
+        const chunk = up ? null : pieces(u);
+        if (chunk) base.push(chunk);
+        base.push(up ?? buildAfter(u, chunk?.example ?? shownMirror) ?? quick(u));
         const game = tenseGame(u);
         if (game) base.push(game);
         return;
@@ -281,7 +309,9 @@ export function buildFlowSession(input: {
     // Idiomas (D-079): tras cada pareja de palabras, una frase que construir con una de ellas.
     const terms = pair.filter((u) => units[u]!.type === 'term');
     const word = terms[Math.floor(rand() * terms.length)];
-    const sentence = word ? build(word) : null;
+    const chunkWord = word ? pieces(word) : null;
+    if (chunkWord) base.push(chunkWord);
+    const sentence = word ? (chunkWord ? buildOther(word, chunkWord.example!) : build(word)) : null;
     if (sentence) base.push(sentence);
     const concepts = pair.filter((u) => units[u]!.type === 'concept');
     block.push(...concepts); taughtConcepts.push(...concepts);

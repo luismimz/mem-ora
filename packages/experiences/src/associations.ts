@@ -6,7 +6,7 @@ import type { ConceptExercise, ConceptPayload, MemoryChallengePayload, PatternPa
 import { firstLetterHint, sameAnswer } from './answers';
 import type { SessionUnit } from './session';
 
-export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'burst' | 'train' | 'watch' | 'spot' | 'chant' | 'tense' | 'workshop' | 'summary';
+export type AssocStepKind = 'reel' | 'quick' | 'judge' | 'review' | 'check' | 'think' | 'cue' | 'card' | 'recall' | 'story' | 'sceneResult' | 'arcade' | 'rescue' | 'challenge' | 'listen' | 'build' | 'burst' | 'train' | 'watch' | 'spot' | 'chant' | 'tense' | 'workshop' | 'pieces' | 'summary';
 
 export interface AssocStep {
   id: string;

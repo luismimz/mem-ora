@@ -251,6 +251,16 @@ try {
         if (english === 'are you hungry') seen.add('orden-pregunta');
       }
     }
+    if (/LAS PIEZAS/.test(tag)) {
+      // «Las piezas» (D-092): la primera pregunta (se adelanta / falta) y luego ordenar los trozos tocándolos.
+      seen.add('piezas');
+      if (await en.locator('.pieces .tense-options .burst-btn').count()) await en.locator('.pieces .tense-options .burst-btn').first().tap();
+      else if (!(await en.locator('.pieces-slots').count())) await en.locator('.pieces .pieces-row .ptile').first().tap();
+      if (await en.locator('.pieces .arcade-go').count()) await en.locator('.pieces .arcade-go').tap();
+      for (let k = 0; k < 8 && await en.locator('.pieces-row .ptile:not(.used)').count() && !(await en.locator('.pieces-after').count()); k++) await en.locator('.pieces-row .ptile:not(.used)').first().tap();
+      await en.locator('.pieces .arcade-go').tap();
+      await en.waitForTimeout(1300); continue;
+    }
     if (/VERDAD/.test(tag)) { await en.locator('.option.yes').tap(); await en.waitForTimeout(1300); continue; }
     if (/RELÁMPAGO|AL REVÉS/.test(tag)) { await en.locator('.option').first().tap(); await en.waitForTimeout(1300); continue; }
     if (/ESCRÍBELO/.test(tag)) {
