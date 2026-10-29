@@ -105,6 +105,137 @@
               "translation": "La noticia es muy preocupante."
             }
           ],
+          "practice": [
+            {
+              "text": "I'm excited.",
+              "translation": "Estoy emocionado.",
+              "mirror": {
+                "say": "Estoy emocionado",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "emocion-ado",
+                    "en": "excit-ED",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The book is interesting.",
+              "translation": "El libro es interesante.",
+              "mirror": {
+                "say": "El libro es interesante",
+                "pieces": [
+                  {
+                    "es": "El libro",
+                    "en": "The book",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "interes-ante",
+                    "en": "interest-ING",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We're bored.",
+              "translation": "Estamos aburridos.",
+              "mirror": {
+                "say": "Estamos aburridos",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aburr-idos",
+                    "en": "bor-ED",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The class is boring.",
+              "translation": "La clase es aburrida.",
+              "mirror": {
+                "say": "La clase es aburrida",
+                "pieces": [
+                  {
+                    "es": "La clase",
+                    "en": "The class",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aburr-ida",
+                    "en": "bor-ING",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's worried.",
+              "translation": "Ella está preocupada.",
+              "mirror": {
+                "say": "Ella está preocupada",
+                "pieces": [
+                  {
+                    "es": "(ELLA) está",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "preocup-ada",
+                    "en": "worri-ED",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The trip was tiring.",
+              "translation": "El viaje fue agotador.",
+              "mirror": {
+                "say": "El viaje fue agotador",
+                "pieces": [
+                  {
+                    "es": "El viaje",
+                    "en": "The trip",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "agota-dor",
+                    "en": "tir-ING",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I'm boring» significa «soy aburrido» (aburres tú).",
             "Interested / interesting, tired / tiring: la misma regla."

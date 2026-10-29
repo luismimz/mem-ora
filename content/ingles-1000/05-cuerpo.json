@@ -753,6 +753,127 @@
               "translation": "Tiene el pelo largo."
             }
           ],
+          "practice": [
+            {
+              "text": "My back hurts.",
+              "translation": "Me duele la espalda.",
+              "mirror": {
+                "say": "Me duele la espalda",
+                "pieces": [
+                  {
+                    "es": "MI espalda",
+                    "en": "My back",
+                    "role": "who"
+                  },
+                  {
+                    "es": "duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wash your hands.",
+              "translation": "Lávate las manos.",
+              "mirror": {
+                "say": "Lávate las manos",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS manos",
+                    "en": "your hands",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "His feet hurt.",
+              "translation": "Le duelen los pies.",
+              "mirror": {
+                "say": "Le duelen los pies",
+                "pieces": [
+                  {
+                    "es": "SUS pies",
+                    "en": "His feet",
+                    "role": "who"
+                  },
+                  {
+                    "es": "duelen",
+                    "en": "hurt",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My stomach hurts.",
+              "translation": "Me duele el estómago.",
+              "mirror": {
+                "say": "Me duele el estómago",
+                "pieces": [
+                  {
+                    "es": "MI estómago",
+                    "en": "My stomach",
+                    "role": "who"
+                  },
+                  {
+                    "es": "duele",
+                    "en": "hurts",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Close your eyes.",
+              "translation": "Cierra los ojos.",
+              "mirror": {
+                "say": "Cierra los ojos",
+                "pieces": [
+                  {
+                    "es": "Cierra",
+                    "en": "Close",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TUS ojos",
+                    "en": "your eyes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Her hand is cold.",
+              "translation": "Tiene la mano fría.",
+              "mirror": {
+                "say": "Tiene la mano fría",
+                "pieces": [
+                  {
+                    "es": "SU mano",
+                    "en": "Her hand",
+                    "role": "who"
+                  },
+                  {
+                    "es": "está",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "fría",
+                    "en": "cold",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«The head hurts» suena raro: di de quién es (my, your, his, her)."
           ],

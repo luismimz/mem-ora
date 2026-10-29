@@ -1099,3 +1099,11 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .pieces-after { display: flex; flex-direction: column; align-items: center; gap: .45rem; margin-top: .4rem; text-align: center; }
 .pieces-jump { margin: 0; font-weight: 800; } .pieces-jump b { color: #ffd76a; }
 @media (prefers-reduced-motion: reduce) { .mchip.todo .front, .ptile.jumped, .ptile { animation: none; } }
+/* «Las piezas» empieza arriba, como la ficha (antes el confeti dejaba el contenido pegado abajo y un hueco arriba). */
+.slide.pieces > .pieces-body { margin: 0 0 auto; display: flex; flex-direction: column; gap: .7rem; }
+.pieces-head { display: flex; flex-direction: column; align-items: center; gap: .2rem; }
+.pieces-goal { margin: 0; text-align: center; font-weight: 900; font-size: clamp(1.05rem, 5vw, 1.3rem); line-height: 1.2; }
+.pieces-new { margin: .2rem 0 0; align-self: center; font-size: .72rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; padding: .2rem .6rem; border-radius: 999px; background: rgba(255,215,106,.18); color: #ffd76a; }
+/* La pieza que salta se ilumina mientras se mueve (D-094): se ve QUÉ cambia de sitio. */
+.mchip.jumping .back, .mchip.jumping .front { box-shadow: 0 0 0 3px #ffd76a, 0 0 22px rgba(255,215,106,.85); }
+.mchip.jumping { z-index: 2; }

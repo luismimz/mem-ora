@@ -129,6 +129,188 @@
               "translation": "Quizá se ha perdido."
             }
           ],
+          "practice": [
+            {
+              "text": "He must be tired.",
+              "translation": "Debe de estar cansado.",
+              "mirror": {
+                "say": "Debe de estar cansado",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "debe de",
+                    "en": "must",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estar",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It can't be him.",
+              "translation": "No puede ser él.",
+              "mirror": {
+                "say": "No puede ser él",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no puede",
+                    "en": "can't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ser",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "él",
+                    "en": "him",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She might be at home.",
+              "translation": "Puede que esté en casa.",
+              "mirror": {
+                "say": "Puede que esté en casa",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puede que",
+                    "en": "might",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "esté",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It must be expensive.",
+              "translation": "Debe de ser caro.",
+              "mirror": {
+                "say": "Debe de ser caro",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "debe de",
+                    "en": "must",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ser",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "caro",
+                    "en": "expensive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He could be asleep.",
+              "translation": "Quizá esté dormido.",
+              "mirror": {
+                "say": "Quizá esté dormido",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quizá",
+                    "en": "could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "esté",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dormido",
+                    "en": "asleep",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They can't be at home.",
+              "translation": "No pueden estar en casa.",
+              "mirror": {
+                "say": "No pueden estar en casa",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no pueden",
+                    "en": "can't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estar",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«She must to be» está mal: detrás de must, el verbo tal cual.",
             "Para «seguro que no» se dice CAN'T, no mustn't."

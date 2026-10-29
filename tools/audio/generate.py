@@ -18,6 +18,8 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 OUT = os.path.join(ROOT, 'apps', 'web', 'public', 'audio')
 VOICE = {'en': ('af_heart', 'en-us')}  # voz y acento por idioma del curso
 SPEED = 0.9  # algo más lento que lo natural: es para aprender
+# Silencio al final (s): Kokoro acaba casi en seco y el iPhone se come la última palabra (usuario, 29-oct-2026).
+PAD = 0.35
 
 def norm(t: str) -> str:
     return re.sub(r'\s+', ' ', t).strip()
@@ -37,7 +39,7 @@ def texts() -> dict:
                     bag.append(u['text'])
                 if u['type'] == 'pattern':
                     bag.append(' '.join(p['text'] for p in u['pieces'] if p['role'] == 'fixed'))
-                for ex in u.get('examples', []):
+                for ex in u.get('examples', []) + u.get('practice', []):
                     bag.append(ex['text'])
                 for v in u.get('chant', []):
                     bag.extend([v['q'], v['a']])
@@ -50,7 +52,7 @@ def spoken(text: str) -> str:
     return re.sub(r"\b[A-Z][A-Z']+\b", lambda m: m.group(0).lower(), text) if sum(w.isupper() for w in text.split()) >= 1 and not re.search(r'\b(SQL|API|USB|PDF|CV|PC|TV|OK|IT|HTML|CSS|JSON|URL|DNS|IP|ID)\b', text) else text
 
 def name(lang: str, text: str) -> str:
-    return hashlib.sha1(f'{lang}|{VOICE[lang][0]}|{SPEED}|{text}'.encode()).hexdigest()[:16] + '.mp3'
+    return hashlib.sha1(f'{lang}|{VOICE[lang][0]}|{SPEED}|pad{PAD}|{text}'.encode()).hexdigest()[:16] + '.mp3'
 
 def main() -> None:
     ap = argparse.ArgumentParser()
@@ -73,7 +75,7 @@ def main() -> None:
             samples, sr = k.create(spoken(t), voice=voice, speed=SPEED, lang=accent)
             with tempfile.NamedTemporaryFile(suffix='.wav') as w:
                 sf.write(w.name, samples, sr)
-                subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', w.name, '-ac', '1', '-ar', '24000', '-b:a', '32k', os.path.join(d, name(lang, t))], check=True)
+                subprocess.run(['ffmpeg', '-loglevel', 'error', '-y', '-i', w.name, '-af', f'apad=pad_dur={PAD}', '-ac', '1', '-ar', '24000', '-b:a', '32k', os.path.join(d, name(lang, t))], check=True)
             if i % 100 == 0:
                 print(f'  {i + 1}/{len(missing)} {t}', flush=True)
                 write_index(lang, items, d)

@@ -111,6 +111,157 @@
               "translation": "¿Qué opinas?"
             }
           ],
+          "practice": [
+            {
+              "text": "I agree with her.",
+              "translation": "Estoy de acuerdo con ella.",
+              "mirror": {
+                "say": "Estoy de acuerdo con ella",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "acuerdo",
+                    "en": "agree",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con ella",
+                    "en": "with her",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He doesn't agree.",
+              "translation": "Él no está de acuerdo.",
+              "mirror": {
+                "say": "Él no está de acuerdo",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acuerda",
+                    "en": "agree",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you agree?",
+              "translation": "¿Estás de acuerdo?",
+              "mirror": {
+                "say": "¿Estás de acuerdo?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "acuerdas",
+                    "en": "agree",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We agree.",
+              "translation": "Estamos de acuerdo.",
+              "mirror": {
+                "say": "Estamos de acuerdo",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "acordamos",
+                    "en": "agree",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I think it's expensive.",
+              "translation": "Creo que es caro.",
+              "mirror": {
+                "say": "Creo que es caro",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "creo",
+                    "en": "think",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caro",
+                    "en": "expensive",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I totally agree.",
+              "translation": "Estoy totalmente de acuerdo.",
+              "mirror": {
+                "say": "Estoy totalmente de acuerdo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "totalmente",
+                    "en": "totally",
+                    "role": "word"
+                  },
+                  {
+                    "es": "acuerdo",
+                    "en": "agree",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I am agree» está mal: AGREE ya es «estar de acuerdo».",
             "«On my opinion» está mal: IN my opinion."

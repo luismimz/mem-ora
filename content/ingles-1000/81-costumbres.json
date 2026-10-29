@@ -113,6 +113,165 @@
               "translation": "Se está acostumbrando a su nuevo trabajo."
             }
           ],
+          "practice": [
+            {
+              "text": "I'm used to the heat.",
+              "translation": "Estoy acostumbrado al calor.",
+              "mirror": {
+                "say": "Estoy acostumbrado al calor",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acostumbrado a",
+                    "en": "used to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el calor",
+                    "en": "the heat",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's used to working hard.",
+              "translation": "Ella está acostumbrada a trabajar mucho.",
+              "mirror": {
+                "say": "Ella está acostumbrada a trabajar mucho",
+                "pieces": [
+                  {
+                    "es": "(ELLA) está",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acostumbrada a",
+                    "en": "used to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "trabajando duro",
+                    "en": "working hard",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm not used to getting up early.",
+              "translation": "No estoy acostumbrado a madrugar.",
+              "mirror": {
+                "say": "No estoy acostumbrado a madrugar",
+                "pieces": [
+                  {
+                    "es": "(YO) no estoy",
+                    "en": "I'm not",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acostumbrado a",
+                    "en": "used to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "levantándome temprano",
+                    "en": "getting up early",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm getting used to it.",
+              "translation": "Me estoy acostumbrando.",
+              "mirror": {
+                "say": "Me estoy acostumbrando",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acostumbrándome",
+                    "en": "getting used",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "A ESO",
+                    "en": "to it",
+                    "role": "word",
+                    "ghost": true
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We're used to the noise.",
+              "translation": "Estamos acostumbrados al ruido.",
+              "mirror": {
+                "say": "Estamos acostumbrados al ruido",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) estamos",
+                    "en": "We're",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acostumbrados a",
+                    "en": "used to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el ruido",
+                    "en": "the noise",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Are you used to the food?",
+              "translation": "¿Estás acostumbrado a la comida?",
+              "mirror": {
+                "say": "¿Estás acostumbrado a la comida?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "Are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acostumbrado a",
+                    "en": "used to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "la comida",
+                    "en": "the food",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I used to» (sin be) es otra cosa: antes solía.",
             "«I'm used to get up» está mal: used to getting up."

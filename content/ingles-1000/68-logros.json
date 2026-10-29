@@ -123,6 +123,176 @@
               "translation": "Vive aquí desde 2019."
             }
           ],
+          "practice": [
+            {
+              "text": "I've been to Italy.",
+              "translation": "He estado en Italia.",
+              "mirror": {
+                "say": "He estado en Italia",
+                "pieces": [
+                  {
+                    "es": "(YO) he",
+                    "en": "I've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estado",
+                    "en": "been",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Italia",
+                    "en": "to Italy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I went to Italy in 2019.",
+              "translation": "Fui a Italia en 2019.",
+              "mirror": {
+                "say": "Fui a Italia en 2019",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fui",
+                    "en": "went",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Italia",
+                    "en": "to Italy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en 2019",
+                    "en": "in 2019",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has lost her keys.",
+              "translation": "Ella ha perdido las llaves.",
+              "mirror": {
+                "say": "Ella ha perdido las llaves",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ha",
+                    "en": "has",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "perdido",
+                    "en": "lost",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "SUS llaves",
+                    "en": "her keys",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I saw Ana yesterday.",
+              "translation": "Ayer vi a Ana.",
+              "mirror": {
+                "say": "Ayer vi a Ana",
+                "pieces": [
+                  {
+                    "es": "Ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vi",
+                    "en": "saw",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Ana",
+                    "en": "Ana",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "We've finished.",
+              "translation": "Hemos terminado.",
+              "mirror": {
+                "say": "Hemos terminado",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) hemos",
+                    "en": "We've",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "terminado",
+                    "en": "finished",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Have you seen my glasses?",
+              "translation": "¿Has visto mis gafas?",
+              "mirror": {
+                "say": "¿Has visto mis gafas?",
+                "pieces": [
+                  {
+                    "es": "Has",
+                    "en": "Have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mis gafas",
+                    "en": "my glasses",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I have been in Rome yesterday» está mal: con yesterday, pasado (I was).",
             "Si dices cuándo, pasado; si no lo dices, have + participio."

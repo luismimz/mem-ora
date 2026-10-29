@@ -101,6 +101,127 @@
               "translation": "Siéntate, por favor."
             }
           ],
+          "practice": [
+            {
+              "text": "Open the window.",
+              "translation": "Abre la ventana.",
+              "mirror": {
+                "say": "Abre la ventana",
+                "pieces": [
+                  {
+                    "es": "Abre",
+                    "en": "Open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la ventana",
+                    "en": "the window",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't run.",
+              "translation": "No corras.",
+              "mirror": {
+                "say": "No corras",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "corras",
+                    "en": "run",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Wash the potatoes.",
+              "translation": "Lava las patatas.",
+              "mirror": {
+                "say": "Lava las patatas",
+                "pieces": [
+                  {
+                    "es": "Lava",
+                    "en": "Wash",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "las patatas",
+                    "en": "the potatoes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Don't open the door.",
+              "translation": "No abras la puerta.",
+              "mirror": {
+                "say": "No abras la puerta",
+                "pieces": [
+                  {
+                    "es": "No",
+                    "en": "Don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "abras",
+                    "en": "open",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la puerta",
+                    "en": "the door",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Set the table.",
+              "translation": "Pon la mesa.",
+              "mirror": {
+                "say": "Pon la mesa",
+                "pieces": [
+                  {
+                    "es": "Pon",
+                    "en": "Set",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la mesa",
+                    "en": "the table",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Heat the water.",
+              "translation": "Calienta el agua.",
+              "mirror": {
+                "say": "Calienta el agua",
+                "pieces": [
+                  {
+                    "es": "Calienta",
+                    "en": "Heat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el agua",
+                    "en": "the water",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«You cut the bread» parece que lo cuentas; la orden es solo «Cut the bread».",
             "Para que suene amable, añade please."

@@ -138,6 +138,211 @@
               "translation": "El libro que me prestaste."
             }
           ],
+          "practice": [
+            {
+              "text": "The man who called is my uncle.",
+              "translation": "El hombre que llamó es mi tío.",
+              "mirror": {
+                "say": "El hombre que llamó es mi tío",
+                "pieces": [
+                  {
+                    "es": "El hombre",
+                    "en": "The man",
+                    "role": "who"
+                  },
+                  {
+                    "es": "quien",
+                    "en": "who",
+                    "role": "word"
+                  },
+                  {
+                    "es": "llamó",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi tío",
+                    "en": "my uncle",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "This is the book that I read.",
+              "translation": "Este es el libro que leí.",
+              "mirror": {
+                "say": "Este es el libro que leí",
+                "pieces": [
+                  {
+                    "es": "Este es",
+                    "en": "This is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el libro",
+                    "en": "the book",
+                    "role": "word"
+                  },
+                  {
+                    "es": "que",
+                    "en": "that",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "leí",
+                    "en": "read",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The city where I live.",
+              "translation": "La ciudad donde vivo.",
+              "mirror": {
+                "say": "La ciudad donde vivo",
+                "pieces": [
+                  {
+                    "es": "La ciudad",
+                    "en": "The city",
+                    "role": "word"
+                  },
+                  {
+                    "es": "donde",
+                    "en": "where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivo",
+                    "en": "live",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The girl who sings is my sister.",
+              "translation": "La chica que canta es mi hermana.",
+              "mirror": {
+                "say": "La chica que canta es mi hermana",
+                "pieces": [
+                  {
+                    "es": "La chica",
+                    "en": "The girl",
+                    "role": "who"
+                  },
+                  {
+                    "es": "quien",
+                    "en": "who",
+                    "role": "word"
+                  },
+                  {
+                    "es": "canta",
+                    "en": "sings",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi hermana",
+                    "en": "my sister",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The car that I bought is red.",
+              "translation": "El coche que compré es rojo.",
+              "mirror": {
+                "say": "El coche que compré es rojo",
+                "pieces": [
+                  {
+                    "es": "El coche",
+                    "en": "The car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "que",
+                    "en": "that",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rojo",
+                    "en": "red",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The restaurant where we ate.",
+              "translation": "El restaurante donde comimos.",
+              "mirror": {
+                "say": "El restaurante donde comimos",
+                "pieces": [
+                  {
+                    "es": "El restaurante",
+                    "en": "The restaurant",
+                    "role": "word"
+                  },
+                  {
+                    "es": "donde",
+                    "en": "where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comimos",
+                    "en": "ate",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«The man which called» está mal: las personas van con WHO.",
             "En «the app that I use» el THAT se puede quitar: the app I use."

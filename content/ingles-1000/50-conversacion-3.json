@@ -114,6 +114,164 @@
               "translation": "¿Qué tal mañana?"
             }
           ],
+          "practice": [
+            {
+              "text": "How about eating out?",
+              "translation": "¿Qué tal si comemos fuera?",
+              "mirror": {
+                "say": "¿Qué tal si comemos fuera?",
+                "pieces": [
+                  {
+                    "es": "Qué tal si",
+                    "en": "How about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "com-IENDO fuera",
+                    "en": "eat-ING out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How about going to the beach?",
+              "translation": "¿Qué tal si vamos a la playa?",
+              "mirror": {
+                "say": "¿Qué tal si vamos a la playa?",
+                "pieces": [
+                  {
+                    "es": "Qué tal si",
+                    "en": "How about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "v-AMOS",
+                    "en": "go-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la playa",
+                    "en": "to the beach",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Why don't we go to the cinema?",
+              "translation": "¿Por qué no vamos al cine?",
+              "mirror": {
+                "say": "¿Por qué no vamos al cine?",
+                "pieces": [
+                  {
+                    "es": "Por qué",
+                    "en": "Why",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al cine",
+                    "en": "to the cinema",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How about Saturday?",
+              "translation": "¿Qué tal el sábado?",
+              "mirror": {
+                "say": "¿Qué tal el sábado?",
+                "pieces": [
+                  {
+                    "es": "Qué tal",
+                    "en": "How about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el sábado",
+                    "en": "Saturday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How about watching a film?",
+              "translation": "¿Qué tal si vemos una película?",
+              "mirror": {
+                "say": "¿Qué tal si vemos una película?",
+                "pieces": [
+                  {
+                    "es": "Qué tal si",
+                    "en": "How about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ve-MOS",
+                    "en": "watch-ING",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una película",
+                    "en": "a film",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Why don't we cook together?",
+              "translation": "¿Por qué no cocinamos juntos?",
+              "mirror": {
+                "say": "¿Por qué no cocinamos juntos?",
+                "pieces": [
+                  {
+                    "es": "Por qué",
+                    "en": "Why",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cocinamos",
+                    "en": "cook",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "juntos",
+                    "en": "together",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«How about go?» está mal: How about GOING?",
             "«Why don't we…?» es proponer, no preguntar el motivo."

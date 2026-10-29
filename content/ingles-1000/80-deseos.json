@@ -112,6 +112,152 @@
               "translation": "¡Si yo lo supiera!"
             }
           ],
+          "practice": [
+            {
+              "text": "I wish I had a car.",
+              "translation": "Ojalá tuviera un coche.",
+              "mirror": {
+                "say": "Ojalá tuviera un coche",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(YO) tuve",
+                    "en": "I had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un coche",
+                    "en": "a car",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish I could go.",
+              "translation": "Ojalá pudiera ir.",
+              "mirror": {
+                "say": "Ojalá pudiera ir",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(YO) podía",
+                    "en": "I could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ir",
+                    "en": "go",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish I lived nearby.",
+              "translation": "Ojalá viviera cerca.",
+              "mirror": {
+                "say": "Ojalá viviera cerca",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(YO) viví",
+                    "en": "I lived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cerca",
+                    "en": "nearby",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish it were summer.",
+              "translation": "Ojalá fuera verano.",
+              "mirror": {
+                "say": "Ojalá fuera verano",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(ESO) fuera",
+                    "en": "it were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "verano",
+                    "en": "summer",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish I knew how to cook.",
+              "translation": "Ojalá supiera cocinar.",
+              "mirror": {
+                "say": "Ojalá supiera cocinar",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(YO) sabía",
+                    "en": "I knew",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cómo cocinar",
+                    "en": "how to cook",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I wish I spoke English.",
+              "translation": "Ojalá hablara inglés.",
+              "mirror": {
+                "say": "Ojalá hablara inglés",
+                "pieces": [
+                  {
+                    "es": "Ojalá",
+                    "en": "I wish",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "(YO) hablé",
+                    "en": "I spoke",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I wish I have» está mal: tras wish, pasado (I had).",
             "Para el futuro que puede pasar, hope: I hope you come."
@@ -189,6 +335,244 @@
             {
               "text": "What would you have done?",
               "translation": "¿Qué habrías hecho tú?"
+            }
+          ],
+          "practice": [
+            {
+              "text": "If I had studied, I would have passed.",
+              "translation": "Si hubiera estudiado, habría aprobado.",
+              "mirror": {
+                "say": "Si hubiera estudiado, habría aprobado",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) hubiera",
+                    "en": "I had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estudiado",
+                    "en": "studied",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) habría",
+                    "en": "I would have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aprobado",
+                    "en": "passed",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If I had seen it, I would have called you.",
+              "translation": "Si lo hubiera visto, te habría llamado.",
+              "mirror": {
+                "say": "Si lo hubiera visto, te habría llamado",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) hubiera",
+                    "en": "I had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "visto",
+                    "en": "seen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) habría",
+                    "en": "I would have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamado",
+                    "en": "called",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1,
+                  5,
+                  6,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "If you had come, you would have had fun.",
+              "translation": "Si hubieras venido, te habrías divertido.",
+              "mirror": {
+                "say": "Si hubieras venido, te habrías divertido",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(TÚ) hubieras",
+                    "en": "you had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venido",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(TÚ) habrías",
+                    "en": "you would have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "divertido",
+                    "en": "had fun",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I would have gone if I had known.",
+              "translation": "Habría ido si lo hubiera sabido.",
+              "mirror": {
+                "say": "Habría ido si lo hubiera sabido",
+                "pieces": [
+                  {
+                    "es": "(YO) habría",
+                    "en": "I would have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ido",
+                    "en": "gone",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "si",
+                    "en": "if",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) hubiera",
+                    "en": "I had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sabido",
+                    "en": "known",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If it had rained, we wouldn't have gone out.",
+              "translation": "Si hubiera llovido, no habríamos salido.",
+              "mirror": {
+                "say": "Si hubiera llovido, no habríamos salido",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) hubiera",
+                    "en": "it had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llovido",
+                    "en": "rained",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(NOSOTROS) no habríamos",
+                    "en": "we wouldn't have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "salido",
+                    "en": "gone out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you had called me, I would have come.",
+              "translation": "Si me hubieras llamado, habría venido.",
+              "mirror": {
+                "say": "Si me hubieras llamado, habría venido",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(TÚ) hubieras",
+                    "en": "you had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamado",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) habría",
+                    "en": "I would have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venido",
+                    "en": "come",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  3,
+                  1,
+                  4,
+                  5
+                ]
+              }
             }
           ],
           "pitfalls": [

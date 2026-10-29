@@ -122,6 +122,199 @@
               "translation": "¿Nos puedes ayudar?"
             }
           ],
+          "practice": [
+            {
+              "text": "I love you.",
+              "translation": "Te quiero.",
+              "mirror": {
+                "say": "Te quiero",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "love",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I know him.",
+              "translation": "Lo conozco.",
+              "mirror": {
+                "say": "Lo conozco",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "him",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "conozco",
+                    "en": "know",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I buy them here.",
+              "translation": "Las compro aquí.",
+              "mirror": {
+                "say": "Las compro aquí",
+                "pieces": [
+                  {
+                    "es": "las",
+                    "en": "them",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compro",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She visits us.",
+              "translation": "Ella nos visita.",
+              "mirror": {
+                "say": "Ella nos visita",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "nos",
+                    "en": "us",
+                    "role": "word"
+                  },
+                  {
+                    "es": "visita",
+                    "en": "visits",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "Can you see it?",
+              "translation": "¿Lo ves?",
+              "mirror": {
+                "say": "¿Lo ves?",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ver",
+                    "en": "see",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "I need it.",
+              "translation": "Lo necesito.",
+              "mirror": {
+                "say": "Lo necesito",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I her see» está mal: el pronombre va DETRÁS del verbo.",
             "Le / les se traducen según la persona: him, her o them."

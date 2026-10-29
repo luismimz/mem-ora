@@ -122,6 +122,170 @@
               "translation": "Sabes nadar, ¿verdad?"
             }
           ],
+          "practice": [
+            {
+              "text": "It's expensive, isn't it?",
+              "translation": "Es caro, ¿verdad?",
+              "mirror": {
+                "say": "Es caro, ¿verdad?",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caro",
+                    "en": "expensive",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no es ESO",
+                    "en": "isn't it",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You speak English, don't you?",
+              "translation": "Hablas inglés, ¿verdad?",
+              "mirror": {
+                "say": "Hablas inglés, ¿verdad?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hablas",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no TÚ",
+                    "en": "don't you",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's tired, isn't she?",
+              "translation": "Está cansada, ¿no?",
+              "mirror": {
+                "say": "Está cansada, ¿no?",
+                "pieces": [
+                  {
+                    "es": "(ELLA) está",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansada",
+                    "en": "tired",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no está ELLA",
+                    "en": "isn't she",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You can come, can't you?",
+              "translation": "Puedes venir, ¿verdad?",
+              "mirror": {
+                "say": "Puedes venir, ¿verdad?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "no puedes TÚ",
+                    "en": "can't you",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It isn't far, is it?",
+              "translation": "No está lejos, ¿verdad?",
+              "mirror": {
+                "say": "No está lejos, ¿verdad?",
+                "pieces": [
+                  {
+                    "es": "(ESO) no está",
+                    "en": "It isn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "lejos",
+                    "en": "far",
+                    "role": "word"
+                  },
+                  {
+                    "es": "está ESO",
+                    "en": "is it",
+                    "role": "helper"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You like coffee, don't you?",
+              "translation": "Te gusta el café, ¿no?",
+              "mirror": {
+                "say": "Te gusta el café, ¿no?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el café",
+                    "en": "coffee",
+                    "role": "word"
+                  },
+                  {
+                    "es": "no TÚ",
+                    "en": "don't you",
+                    "role": "helper"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Si la frase es afirmativa, la coletilla va en negativo (y al revés).",
             "Si dudas, «right?» también vale: It's cold, right?"

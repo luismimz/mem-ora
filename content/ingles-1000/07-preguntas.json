@@ -803,6 +803,188 @@
               "translation": "¿Cómo se dice esto?"
             }
           ],
+          "practice": [
+            {
+              "text": "Where do you work?",
+              "translation": "¿Dónde trabajas?",
+              "mirror": {
+                "say": "¿Dónde trabajas?",
+                "pieces": [
+                  {
+                    "es": "Dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajas",
+                    "en": "work",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you like tea?",
+              "translation": "¿Te gusta el té?",
+              "mirror": {
+                "say": "¿Te gusta el té?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What do you eat?",
+              "translation": "¿Qué comes?",
+              "mirror": {
+                "say": "¿Qué comes?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comes",
+                    "en": "eat",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you speak English?",
+              "translation": "¿Hablas inglés?",
+              "mirror": {
+                "say": "¿Hablas inglés?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hablas",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "When do we start?",
+              "translation": "¿Cuándo empezamos?",
+              "mirror": {
+                "say": "¿Cuándo empezamos?",
+                "pieces": [
+                  {
+                    "es": "Cuándo",
+                    "en": "When",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "empezamos",
+                    "en": "start",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you have children?",
+              "translation": "¿Tienes hijos?",
+              "mirror": {
+                "say": "¿Tienes hijos?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hijos",
+                    "en": "children",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Where you live?» está mal: falta DO.",
             "Con am / is / are no hace falta DO: Where are you?"
@@ -1064,6 +1246,239 @@
             {
               "text": "Where are you from?",
               "translation": "¿De dónde eres?"
+            }
+          ],
+          "practice": [
+            {
+              "text": "Where is he from?",
+              "translation": "¿De dónde es él?",
+              "mirror": {
+                "say": "¿De dónde es él?",
+                "pieces": [
+                  {
+                    "es": "De",
+                    "en": "from",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "él",
+                    "en": "he",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Who do you live with?",
+              "translation": "¿Con quién vives?",
+              "mirror": {
+                "say": "¿Con quién vives?",
+                "pieces": [
+                  {
+                    "es": "Con",
+                    "en": "with",
+                    "role": "word"
+                  },
+                  {
+                    "es": "quién",
+                    "en": "Who",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vives",
+                    "en": "live",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  4,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "What are you thinking about?",
+              "translation": "¿En qué piensas?",
+              "mirror": {
+                "say": "¿En qué piensas?",
+                "pieces": [
+                  {
+                    "es": "En",
+                    "en": "about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pensando",
+                    "en": "thinking",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  4,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Who is this for?",
+              "translation": "¿Para quién es esto?",
+              "mirror": {
+                "say": "¿Para quién es esto?",
+                "pieces": [
+                  {
+                    "es": "Para",
+                    "en": "for",
+                    "role": "word"
+                  },
+                  {
+                    "es": "quién",
+                    "en": "Who",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "esto",
+                    "en": "this",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  3,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "What are you talking about?",
+              "translation": "¿De qué hablas?",
+              "mirror": {
+                "say": "¿De qué hablas?",
+                "pieces": [
+                  {
+                    "es": "De",
+                    "en": "about",
+                    "role": "word"
+                  },
+                  {
+                    "es": "qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estás",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hablando",
+                    "en": "talking",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  4,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Where are they from?",
+              "translation": "¿De dónde son ellos?",
+              "mirror": {
+                "say": "¿De dónde son ellos?",
+                "pieces": [
+                  {
+                    "es": "De",
+                    "en": "from",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dónde",
+                    "en": "Where",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ellos",
+                    "en": "they",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  1,
+                  3,
+                  2,
+                  0
+                ]
+              }
             }
           ],
           "pitfalls": [

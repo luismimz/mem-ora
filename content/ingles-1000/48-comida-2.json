@@ -118,6 +118,177 @@
               "translation": "Hay mucha gente."
             }
           ],
+          "practice": [
+            {
+              "text": "How many books do you have?",
+              "translation": "¿Cuántos libros tienes?",
+              "mirror": {
+                "say": "¿Cuántos libros tienes?",
+                "pieces": [
+                  {
+                    "es": "Cuántos libros",
+                    "en": "How many books",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How much money do you need?",
+              "translation": "¿Cuánto dinero necesitas?",
+              "mirror": {
+                "say": "¿Cuánto dinero necesitas?",
+                "pieces": [
+                  {
+                    "es": "Cuánto dinero",
+                    "en": "How much money",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitas",
+                    "en": "need",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't have much money.",
+              "translation": "No tengo mucho dinero.",
+              "mirror": {
+                "say": "No tengo mucho dinero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho dinero",
+                    "en": "much money",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have a lot of friends.",
+              "translation": "Tengo muchos amigos.",
+              "mirror": {
+                "say": "Tengo muchos amigos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "muchos amigos",
+                    "en": "a lot of friends",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How many people are coming?",
+              "translation": "¿Cuántas personas vienen?",
+              "mirror": {
+                "say": "¿Cuántas personas vienen?",
+                "pieces": [
+                  {
+                    "es": "Cuántas personas",
+                    "en": "How many people",
+                    "role": "word"
+                  },
+                  {
+                    "es": "están",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "viniendo",
+                    "en": "coming",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't drink much water.",
+              "translation": "No bebo mucha agua.",
+              "mirror": {
+                "say": "No bebo mucha agua",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bebo",
+                    "en": "drink",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucha agua",
+                    "en": "much water",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Many water» está mal: el agua no se cuenta (much water).",
             "En frases normales suena mejor a lot of: I have a lot of time."

@@ -916,3 +916,17 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Escalera completa: girar (ver) → la pieza que salta / la que falta (fijarse) → ordenar trozos → construir palabra a
   palabra.
 
+## D-093 · Frases nuevas para practicar, «Las piezas» arriba y la voz sin cortar (usuario, 29-oct-2026)
+- **Por qué (usuario, probándolo en el iPhone):** «es muy repetitivo con la misma frase… lo ideal es aprender a formar
+  diferentes frases y no la misma frase»; «el diseño cambia» (contenido pegado abajo y hueco arriba) y «kokoro no dice
+  la última palabra de la frase».
+- **Frases de práctica:** cada truco de gramática lleva 6 frases NUEVAS (`practice`, con su espejo) que no salen en la
+  ficha, con palabras del curso (588 en total, redactadas con palabras propias). «Las piezas» y «Construye la frase»
+  usan una distinta cada vez y distinta entre ellas; se prefieren las que tienen más palabras que ya has aprendido. La
+  ficha sigue enseñando sus ejemplos. Sin frases de práctica, todo sigue como antes. Elección del usuario frente a
+  generar frases con plantillas (fallaría la concordancia del español) o solo no repetir.
+- **Diseño:** «Las piezas» empieza arriba como la ficha, con el emoji y el nombre del truco y la etiqueta «✨ Frase
+  nueva» (antes el confeti dejaba el contenido pegado abajo).
+- **Voz:** los audios Kokoro acababan casi en seco y el iPhone se comía la última palabra: todos llevan ahora 0,35 s de
+  silencio al final (nombre de archivo nuevo para que ningún móvil siga con el viejo de su caché).
+

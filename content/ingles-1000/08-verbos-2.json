@@ -768,6 +768,153 @@
               "translation": "Parece fácil."
             }
           ],
+          "practice": [
+            {
+              "text": "He works here.",
+              "translation": "Él trabaja aquí.",
+              "mirror": {
+                "say": "Él trabaja aquí",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "trabaja",
+                    "en": "works",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She lives in London.",
+              "translation": "Ella vive en Londres.",
+              "mirror": {
+                "say": "Ella vive en Londres",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vive",
+                    "en": "lives",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en Londres",
+                    "en": "in London",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My father drinks tea.",
+              "translation": "Mi padre bebe té.",
+              "mirror": {
+                "say": "Mi padre bebe té",
+                "pieces": [
+                  {
+                    "es": "Mi padre",
+                    "en": "My father",
+                    "role": "who"
+                  },
+                  {
+                    "es": "bebe",
+                    "en": "drinks",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has a dog.",
+              "translation": "Tiene un perro.",
+              "mirror": {
+                "say": "Tiene un perro",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un perro",
+                    "en": "a dog",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He goes to the gym.",
+              "translation": "Él va al gimnasio.",
+              "mirror": {
+                "say": "Él va al gimnasio",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "va",
+                    "en": "goes",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al gimnasio",
+                    "en": "to the gym",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My brother plays tennis.",
+              "translation": "Mi hermano juega al tenis.",
+              "mirror": {
+                "say": "Mi hermano juega al tenis",
+                "pieces": [
+                  {
+                    "es": "Mi hermano",
+                    "en": "My brother",
+                    "role": "who"
+                  },
+                  {
+                    "es": "juega",
+                    "en": "plays",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "al tenis",
+                    "en": "tennis",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«She come» está mal: con he / she / it, -s.",
             "Con I / you / we / they, sin -s: I come."

@@ -122,6 +122,166 @@
               "translation": "Nos gustaría ver la carta."
             }
           ],
+          "practice": [
+            {
+              "text": "I'd like to travel.",
+              "translation": "Me gustaría viajar.",
+              "mirror": {
+                "say": "Me gustaría viajar",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "viajar",
+                    "en": "to travel",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'd like a coffee.",
+              "translation": "Me gustaría un café.",
+              "mirror": {
+                "say": "Me gustaría un café",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un café",
+                    "en": "a coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We'd like to book a table.",
+              "translation": "Nos gustaría reservar una mesa.",
+              "mirror": {
+                "say": "Nos gustaría reservar una mesa",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) querríamos",
+                    "en": "We'd like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "reservar",
+                    "en": "to book",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una mesa",
+                    "en": "a table",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Would you like to dance?",
+              "translation": "¿Te gustaría bailar?",
+              "mirror": {
+                "say": "¿Te gustaría bailar?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÍAS",
+                    "en": "Would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gustar",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bailar",
+                    "en": "to dance",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'd like to speak to the manager.",
+              "translation": "Me gustaría hablar con el director.",
+              "mirror": {
+                "say": "Me gustaría hablar con el director",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hablar",
+                    "en": "to speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con el director",
+                    "en": "to the manager",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Would you like a tea?",
+              "translation": "¿Te gustaría un té?",
+              "mirror": {
+                "say": "¿Te gustaría un té?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÍAS",
+                    "en": "Would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gustar",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un té",
+                    "en": "a tea",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I'd like go» está mal: con un verbo, I'd like TO go.",
             "«I like» (me gusta) no es «I'd like» (me gustaría)."

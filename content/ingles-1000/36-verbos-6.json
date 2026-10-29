@@ -133,6 +133,191 @@
               "translation": "No se lo diré a nadie."
             }
           ],
+          "practice": [
+            {
+              "text": "I'll do it tomorrow.",
+              "translation": "Lo haré mañana.",
+              "mirror": {
+                "say": "Lo haré mañana",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ha-",
+                    "en": "do",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She will come.",
+              "translation": "Ella vendrá.",
+              "mirror": {
+                "say": "Ella vendrá",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "ven-",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-DRÁ",
+                    "en": "will",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "I'll help you.",
+              "translation": "Te ayudaré.",
+              "mirror": {
+                "say": "Te ayudaré",
+                "pieces": [
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ayuda-",
+                    "en": "help",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) -RÉ",
+                    "en": "I'll",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  2,
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "It won't rain.",
+              "translation": "No lloverá.",
+              "mirror": {
+                "say": "No lloverá",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no -RÁ",
+                    "en": "won't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llove-",
+                    "en": "rain",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We'll be at home.",
+              "translation": "Estaremos en casa.",
+              "mirror": {
+                "say": "Estaremos en casa",
+                "pieces": [
+                  {
+                    "es": "esta-",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(NOSOTROS) -REMOS",
+                    "en": "We'll",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en casa",
+                    "en": "at home",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Will you come to the party?",
+              "translation": "¿Vendrás a la fiesta?",
+              "mirror": {
+                "say": "¿Vendrás a la fiesta?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "ven-",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-DRÁS",
+                    "en": "Will",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "a la fiesta",
+                    "en": "to the party",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I will to go» está mal: detrás de will, el verbo tal cual.",
             "Para planes ya decididos se usa más going to; WILL, para decidir en el momento o predecir."

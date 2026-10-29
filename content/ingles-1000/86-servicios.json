@@ -135,6 +135,178 @@
               "translation": "Tengo que revisarme la vista."
             }
           ],
+          "practice": [
+            {
+              "text": "I had my car repaired.",
+              "translation": "Me arreglaron el coche.",
+              "mirror": {
+                "say": "Me arreglaron el coche",
+                "pieces": [
+                  {
+                    "es": "(YO) tuve",
+                    "en": "I had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "MI coche",
+                    "en": "my car",
+                    "role": "word"
+                  },
+                  {
+                    "es": "arreglado",
+                    "en": "repaired",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm going to have my hair cut.",
+              "translation": "Me voy a cortar el pelo.",
+              "mirror": {
+                "say": "Me voy a cortar el pelo",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "yendo a",
+                    "en": "going to",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI pelo",
+                    "en": "my hair",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cortado",
+                    "en": "cut",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We had our house painted.",
+              "translation": "Nos pintaron la casa.",
+              "mirror": {
+                "say": "Nos pintaron la casa",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) tuvimos",
+                    "en": "We had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "NUESTRA casa",
+                    "en": "our house",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pintada",
+                    "en": "painted",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She had her nails done.",
+              "translation": "Ella se hizo las uñas.",
+              "mirror": {
+                "say": "Ella se hizo las uñas",
+                "pieces": [
+                  {
+                    "es": "(ELLA) tuvo",
+                    "en": "She had",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "SUS uñas",
+                    "en": "her nails",
+                    "role": "word"
+                  },
+                  {
+                    "es": "hechas",
+                    "en": "done",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need to have my car checked.",
+              "translation": "Tengo que llevar el coche a revisar.",
+              "mirror": {
+                "say": "Tengo que llevar el coche a revisar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "to have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI coche",
+                    "en": "my car",
+                    "role": "word"
+                  },
+                  {
+                    "es": "revisado",
+                    "en": "checked",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'm having my phone fixed.",
+              "translation": "Me están arreglando el móvil.",
+              "mirror": {
+                "say": "Me están arreglando el móvil",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "teniendo",
+                    "en": "having",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "MI móvil",
+                    "en": "my phone",
+                    "role": "word"
+                  },
+                  {
+                    "es": "arreglado",
+                    "en": "fixed",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I cut my hair» es que te lo cortaste tú mismo.",
             "El orden es have + cosa + participio (no have + participio + cosa)."
@@ -213,6 +385,181 @@
             {
               "text": "Will you have finished by Monday?",
               "translation": "¿Lo habrás terminado para el lunes?"
+            }
+          ],
+          "practice": [
+            {
+              "text": "I will have finished it by Monday.",
+              "translation": "Lo habré terminado para el lunes.",
+              "mirror": {
+                "say": "Lo habré terminado para el lunes",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) habré",
+                    "en": "I will have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "terminado",
+                    "en": "finished",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para el lunes",
+                    "en": "by Monday",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "We will have arrived by eight.",
+              "translation": "Habremos llegado a las ocho.",
+              "mirror": {
+                "say": "Habremos llegado a las ocho",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) habremos",
+                    "en": "We will have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llegado",
+                    "en": "arrived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para las ocho",
+                    "en": "by eight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "By then she will have left.",
+              "translation": "Para entonces se habrá ido.",
+              "mirror": {
+                "say": "Para entonces se habrá ido",
+                "pieces": [
+                  {
+                    "es": "Para entonces",
+                    "en": "By then",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ELLA) habrá",
+                    "en": "she will have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ido",
+                    "en": "left",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They will have eaten.",
+              "translation": "Habrán comido.",
+              "mirror": {
+                "say": "Habrán comido",
+                "pieces": [
+                  {
+                    "es": "(ELLOS) habrán",
+                    "en": "They will have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comido",
+                    "en": "eaten",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "By June I will have saved a thousand euros.",
+              "translation": "Para junio habré ahorrado mil euros.",
+              "mirror": {
+                "say": "Para junio habré ahorrado mil euros",
+                "pieces": [
+                  {
+                    "es": "Para junio",
+                    "en": "By June",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) habré",
+                    "en": "I will have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ahorrado",
+                    "en": "saved",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mil euros",
+                    "en": "a thousand euros",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Will you have finished by five?",
+              "translation": "¿Habrás acabado a las cinco?",
+              "mirror": {
+                "say": "¿Habrás acabado a las cinco?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÁS",
+                    "en": "Will",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "haber",
+                    "en": "have",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "acabado",
+                    "en": "finished",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las cinco",
+                    "en": "by five",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
             }
           ],
           "pitfalls": [

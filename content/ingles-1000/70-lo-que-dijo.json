@@ -136,6 +136,205 @@
               "translation": "Me dijo que no me preocupara."
             }
           ],
+          "practice": [
+            {
+              "text": "She said she was hungry.",
+              "translation": "Dijo que tenía hambre.",
+              "mirror": {
+                "say": "Dijo que tenía hambre",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ELLA) estaba",
+                    "en": "she was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hambrienta",
+                    "en": "hungry",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He told me he was busy.",
+              "translation": "Me dijo que estaba ocupado.",
+              "mirror": {
+                "say": "Me dijo que estaba ocupado",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "told",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ÉL) estaba",
+                    "en": "he was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ocupado",
+                    "en": "busy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "They said they would come.",
+              "translation": "Dijeron que vendrían.",
+              "mirror": {
+                "say": "Dijeron que vendrían",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dijeron",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ELLOS) -RÍAN",
+                    "en": "they would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He said he lived in Rome.",
+              "translation": "Dijo que vivía en Roma.",
+              "mirror": {
+                "say": "Dijo que vivía en Roma",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ÉL) vivía",
+                    "en": "he lived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en Roma",
+                    "en": "in Rome",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She asked if I was OK.",
+              "translation": "Me preguntó si estaba bien.",
+              "mirror": {
+                "say": "Me preguntó si estaba bien",
+                "pieces": [
+                  {
+                    "es": "ELLA",
+                    "en": "She",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me preguntó",
+                    "en": "asked",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "si",
+                    "en": "if",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bien",
+                    "en": "OK",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He said he could help.",
+              "translation": "Dijo que podía ayudar.",
+              "mirror": {
+                "say": "Dijo que podía ayudar",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dijo",
+                    "en": "said",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(ÉL) podía",
+                    "en": "he could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ayudar",
+                    "en": "help",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«She said me» está mal: she TOLD me, o she SAID (sin me).",
             "«He said he is tired» se oye, pero lo normal es dar el paso atrás: he was."

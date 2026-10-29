@@ -126,6 +126,160 @@
               "translation": "Te estaremos esperando."
             }
           ],
+          "practice": [
+            {
+              "text": "This time tomorrow I'll be working.",
+              "translation": "Mañana a esta hora estaré trabajando.",
+              "mirror": {
+                "say": "Mañana a esta hora estaré trabajando",
+                "pieces": [
+                  {
+                    "es": "mañana a esta hora",
+                    "en": "This time tomorrow",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabajando",
+                    "en": "working",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'll be waiting.",
+              "translation": "Estaré esperando.",
+              "mirror": {
+                "say": "Estaré esperando",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "esperando",
+                    "en": "waiting",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "At ten we'll be having dinner.",
+              "translation": "A las diez estaremos cenando.",
+              "mirror": {
+                "say": "A las diez estaremos cenando",
+                "pieces": [
+                  {
+                    "es": "A las diez",
+                    "en": "At ten",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(NOSOTROS) -REMOS estar",
+                    "en": "we'll be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cenando",
+                    "en": "having dinner",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Will you be using the computer?",
+              "translation": "¿Estarás usando el ordenador?",
+              "mirror": {
+                "say": "¿Estarás usando el ordenador?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÁS",
+                    "en": "Will",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estar",
+                    "en": "be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "usando",
+                    "en": "using",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el ordenador",
+                    "en": "the computer",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "She'll be sleeping.",
+              "translation": "Ella estará durmiendo.",
+              "mirror": {
+                "say": "Ella estará durmiendo",
+                "pieces": [
+                  {
+                    "es": "(ELLA) -RÁ estar",
+                    "en": "She'll be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "durmiendo",
+                    "en": "sleeping",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Tonight I'll be studying.",
+              "translation": "Esta noche estaré estudiando.",
+              "mirror": {
+                "say": "Esta noche estaré estudiando",
+                "pieces": [
+                  {
+                    "es": "Esta noche",
+                    "en": "Tonight",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) -RÉ estar",
+                    "en": "I'll be",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estudiando",
+                    "en": "studying",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I'll working» está mal: falta BE (I'll be working).",
             "Es para un momento concreto del futuro; si no, basta con will."

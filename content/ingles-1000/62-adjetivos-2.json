@@ -134,6 +134,197 @@
               "translation": "Es una amiga buenísima."
             }
           ],
+          "practice": [
+            {
+              "text": "It's so hot!",
+              "translation": "¡Qué calor hace!",
+              "mirror": {
+                "say": "¡Qué calor hace!",
+                "pieces": [
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word"
+                  },
+                  {
+                    "es": "caluroso",
+                    "en": "hot",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "It's such a nice house!",
+              "translation": "¡Qué casa tan bonita!",
+              "mirror": {
+                "say": "¡Qué casa tan bonita!",
+                "pieces": [
+                  {
+                    "es": "ESO ES",
+                    "en": "It's",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "un (tan)",
+                    "en": "such a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "casa",
+                    "en": "house",
+                    "role": "word"
+                  },
+                  {
+                    "es": "bonita",
+                    "en": "nice",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I'm so tired.",
+              "translation": "Estoy muy cansado.",
+              "mirror": {
+                "say": "Estoy muy cansado",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's such a nice boy.",
+              "translation": "Es un chico tan simpático.",
+              "mirror": {
+                "say": "Es un chico tan simpático",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es",
+                    "en": "He's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un (tan)",
+                    "en": "such a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "chico",
+                    "en": "boy",
+                    "role": "word"
+                  },
+                  {
+                    "es": "simpático",
+                    "en": "nice",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "It's so difficult!",
+              "translation": "¡Qué difícil es!",
+              "mirror": {
+                "say": "¡Qué difícil es!",
+                "pieces": [
+                  {
+                    "es": "tan",
+                    "en": "so",
+                    "role": "word"
+                  },
+                  {
+                    "es": "difícil",
+                    "en": "difficult",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  2,
+                  0,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "It's such a long day!",
+              "translation": "¡Qué día tan largo!",
+              "mirror": {
+                "say": "¡Qué día tan largo!",
+                "pieces": [
+                  {
+                    "es": "ESO ES",
+                    "en": "It's",
+                    "role": "helper",
+                    "ghost": true
+                  },
+                  {
+                    "es": "un (tan)",
+                    "en": "such a",
+                    "role": "word"
+                  },
+                  {
+                    "es": "día",
+                    "en": "day",
+                    "role": "word"
+                  },
+                  {
+                    "es": "largo",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Such beautiful» sin nombre está mal: so beautiful.",
             "«So a nice day» está mal: such a nice day."

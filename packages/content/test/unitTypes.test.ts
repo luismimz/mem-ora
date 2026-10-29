@@ -156,3 +156,20 @@ describe('el Taller: saber usarlo (D-090)', () => {
     expect(codes('concept', concept({ cases: [{ text: '' }] }))).toContain('required@cases.0.text');
   });
 });
+
+describe('las frases de práctica (D-093)', () => {
+  const mirror = { say: 'Tengo una bici verde', pieces: [{ es: 'YO', en: 'I', role: 'who', ghost: true }, { es: 'tengo', en: 'have', role: 'verb' }, { es: 'una', en: 'a', role: 'word' }, { es: 'bici', en: 'bike', role: 'word' }, { es: 'verde', en: 'green', role: 'word' }], order: [0, 1, 2, 4, 3] };
+  const ok = { text: 'I have a green bike.', translation: 'Tengo una bici verde.', mirror };
+  const with_ = (practice: unknown) => ({ ...canI, practice });
+  it('acepta frases nuevas con su espejo exacto', () => {
+    expect(validateUnitPayload('pattern', with_([ok]))).toEqual([]);
+  });
+  it('cada frase lleva espejo, el espejo dice la frase y no repite un ejemplo de la ficha', () => {
+    expect(codes('pattern', with_([{ text: ok.text, translation: ok.translation }]))).toContain('required@practice.0.mirror');
+    expect(codes('pattern', with_([{ ...ok, text: 'I have a red bike.' }]))).toContain('mirror_mismatch@practice.0.mirror.pieces');
+    const first = (canI as { examples: Array<{ text: string }> }).examples[0]!.text;
+    expect(codes('pattern', with_([{ ...ok, text: first }]))).toContain('duplicate_example@practice.0.text');
+    expect(codes('pattern', with_([ok, ok]))).toContain('duplicate_example@practice.1.text');
+    expect(codes('pattern', with_('x'))).toContain('not_list@practice');
+  });
+});

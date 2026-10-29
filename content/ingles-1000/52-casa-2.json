@@ -120,6 +120,209 @@
               "translation": "¿Quieres un té?"
             }
           ],
+          "practice": [
+            {
+              "text": "Is there any bread?",
+              "translation": "¿Hay pan?",
+              "mirror": {
+                "say": "¿Hay pan?",
+                "pieces": [
+                  {
+                    "es": "Hay",
+                    "en": "Is there",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ALGO DE",
+                    "en": "any",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pan",
+                    "en": "bread",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want some fruit.",
+              "translation": "Quiero algo de fruta.",
+              "mirror": {
+                "say": "Quiero algo de fruta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "algo de",
+                    "en": "some",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fruta",
+                    "en": "fruit",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't have any money.",
+              "translation": "No tengo dinero.",
+              "mirror": {
+                "say": "No tengo dinero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "NADA DE",
+                    "en": "any",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "dinero",
+                    "en": "money",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Would you like some biscuits?",
+              "translation": "¿Quieres galletas?",
+              "mirror": {
+                "say": "¿Quieres galletas?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "-RÍAS",
+                    "en": "Would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gustar",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "UNAS",
+                    "en": "some",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "galletas",
+                    "en": "biscuits",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I bought some apples.",
+              "translation": "Compré manzanas.",
+              "mirror": {
+                "say": "Compré manzanas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "UNAS",
+                    "en": "some",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "manzanas",
+                    "en": "apples",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you have any questions?",
+              "translation": "¿Tienes preguntas?",
+              "mirror": {
+                "say": "¿Tienes preguntas?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienes",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ALGUNA",
+                    "en": "any",
+                    "role": "word",
+                    "ghost": true
+                  },
+                  {
+                    "es": "preguntas",
+                    "en": "questions",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I don't have some» está mal: al negar, any.",
             "Al ofrecer se usa some: would you like some tea?"

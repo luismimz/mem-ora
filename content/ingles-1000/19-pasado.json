@@ -156,6 +156,172 @@
               "translation": "Jugamos al fútbol."
             }
           ],
+          "practice": [
+            {
+              "text": "I worked on Monday.",
+              "translation": "Trabajé el lunes.",
+              "mirror": {
+                "say": "Trabajé el lunes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabaj-É",
+                    "en": "work-ED",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "EL lunes",
+                    "en": "on Monday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I cooked yesterday.",
+              "translation": "Ayer cociné.",
+              "mirror": {
+                "say": "Ayer cociné",
+                "pieces": [
+                  {
+                    "es": "Ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "cocin-É",
+                    "en": "cook-ED",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Did you call Ana?",
+              "translation": "¿Llamaste a Ana?",
+              "mirror": {
+                "say": "¿Llamaste a Ana?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Did",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a Ana",
+                    "en": "Ana",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We went to the beach.",
+              "translation": "Fuimos a la playa.",
+              "mirror": {
+                "say": "Fuimos a la playa",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fuimos",
+                    "en": "went",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la playa",
+                    "en": "to the beach",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I didn't eat anything.",
+              "translation": "No comí nada.",
+              "mirror": {
+                "say": "No comí nada",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "didn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comer",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "nada",
+                    "en": "anything",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She saw a film.",
+              "translation": "Ella vio una película.",
+              "mirror": {
+                "say": "Ella vio una película",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "vio",
+                    "en": "saw",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una película",
+                    "en": "a film",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Did you went?» está mal: con DID, el verbo en su forma base (go).",
             "Muchos verbos comunes no llevan -ED: go → went, have → had, see → saw."

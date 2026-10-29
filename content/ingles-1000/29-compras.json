@@ -128,6 +128,196 @@
               "translation": "Solo estoy mirando, gracias."
             }
           ],
+          "practice": [
+            {
+              "text": "Can I have a beer?",
+              "translation": "¿Me pones una cerveza?",
+              "mirror": {
+                "say": "¿Me pones una cerveza?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una cerveza",
+                    "en": "a beer",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I'd like a tea.",
+              "translation": "Quisiera un té.",
+              "mirror": {
+                "say": "Quisiera un té",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un té",
+                    "en": "a tea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I pay by card?",
+              "translation": "¿Puedo pagar con tarjeta?",
+              "mirror": {
+                "say": "¿Puedo pagar con tarjeta?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pagar",
+                    "en": "pay",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "con tarjeta",
+                    "en": "by card",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Can I have the bill, please?",
+              "translation": "¿Me trae la cuenta, por favor?",
+              "mirror": {
+                "say": "¿Me trae la cuenta, por favor?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la cuenta",
+                    "en": "the bill",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I'd like two tickets.",
+              "translation": "Quisiera dos entradas.",
+              "mirror": {
+                "say": "Quisiera dos entradas",
+                "pieces": [
+                  {
+                    "es": "(YO) querría",
+                    "en": "I'd like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dos entradas",
+                    "en": "two tickets",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I have a bag?",
+              "translation": "¿Me da una bolsa?",
+              "mirror": {
+                "say": "¿Me da una bolsa?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tener",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una bolsa",
+                    "en": "a bag",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I want a coffee» suena brusco al pedir: mejor Can I have…? o I'd like…",
             "«Give me» sin please suena a orden."

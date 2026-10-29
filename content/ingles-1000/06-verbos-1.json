@@ -777,6 +777,158 @@
               "translation": "Quiero un café."
             }
           ],
+          "practice": [
+            {
+              "text": "I like coffee.",
+              "translation": "Me gusta el café.",
+              "mirror": {
+                "say": "Me gusta el café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need a car.",
+              "translation": "Necesito un coche.",
+              "mirror": {
+                "say": "Necesito un coche",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un coche",
+                    "en": "a car",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We want pizza.",
+              "translation": "Queremos pizza.",
+              "mirror": {
+                "say": "Queremos pizza",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "queremos",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "pizza",
+                    "en": "pizza",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We like football.",
+              "translation": "Nos gusta el fútbol.",
+              "mirror": {
+                "say": "Nos gusta el fútbol",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustamos",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el fútbol",
+                    "en": "football",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They have a big house.",
+              "translation": "Tienen una casa grande.",
+              "mirror": {
+                "say": "Tienen una casa grande",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tienen",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una casa grande",
+                    "en": "a big house",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You like tea.",
+              "translation": "Te gusta el té.",
+              "mirror": {
+                "say": "Te gusta el té",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustas",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Me like» está mal: es I like (YO gusto).",
             "Sin sujeto no hay frase: «Want coffee» está mal; es I want coffee."
@@ -926,6 +1078,163 @@
             {
               "text": "She wants to live here.",
               "translation": "Quiere vivir aquí."
+            }
+          ],
+          "practice": [
+            {
+              "text": "I want to sleep.",
+              "translation": "Quiero dormir.",
+              "mirror": {
+                "say": "Quiero dormir",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dorm-IR",
+                    "en": "TO sleep",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I need to work.",
+              "translation": "Necesito trabajar.",
+              "mirror": {
+                "say": "Necesito trabajar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesito",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "trabaj-AR",
+                    "en": "TO work",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We like to dance.",
+              "translation": "Nos gusta bailar.",
+              "mirror": {
+                "say": "Nos gusta bailar",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "gustamos",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "bail-AR",
+                    "en": "TO dance",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They want to eat.",
+              "translation": "Quieren comer.",
+              "mirror": {
+                "say": "Quieren comer",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quieren",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "com-ER",
+                    "en": "TO eat",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We need to talk.",
+              "translation": "Necesitamos hablar.",
+              "mirror": {
+                "say": "Necesitamos hablar",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "habl-AR",
+                    "en": "TO talk",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want to learn English.",
+              "translation": "Quiero aprender inglés.",
+              "mirror": {
+                "say": "Quiero aprender inglés",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aprend-ER",
+                    "en": "TO learn",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "pitfalls": [

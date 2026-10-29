@@ -124,6 +124,183 @@
               "translation": "¿Cuándo se inventó?"
             }
           ],
+          "practice": [
+            {
+              "text": "The bridge was built in 1950.",
+              "translation": "El puente se construyó en 1950.",
+              "mirror": {
+                "say": "El puente se construyó en 1950",
+                "pieces": [
+                  {
+                    "es": "El puente",
+                    "en": "The bridge",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "construido",
+                    "en": "built",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en 1950",
+                    "en": "in 1950",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The book was written by Cervantes.",
+              "translation": "El libro fue escrito por Cervantes.",
+              "mirror": {
+                "say": "El libro fue escrito por Cervantes",
+                "pieces": [
+                  {
+                    "es": "El libro",
+                    "en": "The book",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "escrito",
+                    "en": "written",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por Cervantes",
+                    "en": "by Cervantes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The letters were sent yesterday.",
+              "translation": "Las cartas se enviaron ayer.",
+              "mirror": {
+                "say": "Las cartas se enviaron ayer",
+                "pieces": [
+                  {
+                    "es": "Las cartas",
+                    "en": "The letters",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fueron",
+                    "en": "were",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enviadas",
+                    "en": "sent",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "When was it built?",
+              "translation": "¿Cuándo se construyó?",
+              "mirror": {
+                "say": "¿Cuándo se construyó?",
+                "pieces": [
+                  {
+                    "es": "Cuándo",
+                    "en": "When",
+                    "role": "word"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "construido",
+                    "en": "built",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The car was stolen last night.",
+              "translation": "El coche fue robado anoche.",
+              "mirror": {
+                "say": "El coche fue robado anoche",
+                "pieces": [
+                  {
+                    "es": "El coche",
+                    "en": "The car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "robado",
+                    "en": "stolen",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "anoche",
+                    "en": "last night",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The radio was invented a long time ago.",
+              "translation": "La radio se inventó hace mucho.",
+              "mirror": {
+                "say": "La radio se inventó hace mucho",
+                "pieces": [
+                  {
+                    "es": "La radio",
+                    "en": "The radio",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "inventada",
+                    "en": "invented",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace mucho",
+                    "en": "a long time ago",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«It was build» está mal: el participio, built.",
             "En plural: WERE (they were built)."

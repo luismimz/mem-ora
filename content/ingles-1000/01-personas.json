@@ -725,6 +725,155 @@
               "translation": "Mi madre está contenta."
             }
           ],
+          "practice": [
+            {
+              "text": "I am a student.",
+              "translation": "Soy estudiante.",
+              "mirror": {
+                "say": "Soy estudiante",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "soy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un estudiante",
+                    "en": "a student",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He is my father.",
+              "translation": "Él es mi padre.",
+              "mirror": {
+                "say": "Él es mi padre",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi padre",
+                    "en": "my father",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are happy.",
+              "translation": "Estamos contentos.",
+              "mirror": {
+                "say": "Estamos contentos",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "estamos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "contentos",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They are doctors.",
+              "translation": "Ellos son médicos.",
+              "mirror": {
+                "say": "Ellos son médicos",
+                "pieces": [
+                  {
+                    "es": "Ellos",
+                    "en": "They",
+                    "role": "who"
+                  },
+                  {
+                    "es": "son",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "médicos",
+                    "en": "doctors",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My house is small.",
+              "translation": "Mi casa es pequeña.",
+              "mirror": {
+                "say": "Mi casa es pequeña",
+                "pieces": [
+                  {
+                    "es": "Mi casa",
+                    "en": "My house",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pequeña",
+                    "en": "small",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You are my best friend.",
+              "translation": "Eres mi mejor amigo.",
+              "mirror": {
+                "say": "Eres mi mejor amigo",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "eres",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "mi mejor amigo",
+                    "en": "my best friend",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Soy profesor» lleva «a»: I am A teacher.",
             "«Am a teacher» está mal: falta el YO (I)."

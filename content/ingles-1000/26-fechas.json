@@ -109,6 +109,155 @@
               "translation": "Nos conocimos en 2020."
             }
           ],
+          "practice": [
+            {
+              "text": "See you at six.",
+              "translation": "Nos vemos a las seis.",
+              "mirror": {
+                "say": "Nos vemos a las seis",
+                "pieces": [
+                  {
+                    "es": "Nos vemos",
+                    "en": "See you",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las seis",
+                    "en": "at six",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My birthday is in June.",
+              "translation": "Mi cumpleaños es en junio.",
+              "mirror": {
+                "say": "Mi cumpleaños es en junio",
+                "pieces": [
+                  {
+                    "es": "Mi cumpleaños",
+                    "en": "My birthday",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "en junio",
+                    "en": "in June",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I work on Mondays.",
+              "translation": "Trabajo los lunes.",
+              "mirror": {
+                "say": "Trabajo los lunes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "LOS lunes",
+                    "en": "on Mondays",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I was born in 1995.",
+              "translation": "Nací en 1995.",
+              "mirror": {
+                "say": "Nací en 1995",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "fui nacido",
+                    "en": "was born",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en 1995",
+                    "en": "in 1995",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The meeting is on Tuesday.",
+              "translation": "La reunión es el martes.",
+              "mirror": {
+                "say": "La reunión es el martes",
+                "pieces": [
+                  {
+                    "es": "La reunión",
+                    "en": "The meeting",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "EL martes",
+                    "en": "on Tuesday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We go to the beach in summer.",
+              "translation": "Vamos a la playa en verano.",
+              "mirror": {
+                "say": "Vamos a la playa en verano",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vamos",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a la playa",
+                    "en": "to the beach",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en verano",
+                    "en": "in summer",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«In Monday» está mal: los días van con ON.",
             "«At the morning» no: in the morning, pero at night."

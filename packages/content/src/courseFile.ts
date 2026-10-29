@@ -36,6 +36,7 @@ export interface UnitEntry {
   timeline?: TimelineMark[];
   signals?: string[];
   drills?: TenseDrill[];
+  practice?: PatternPayload['practice'];
   // concept
   cases?: ConceptPayload['examples'];
   widget?: ConceptPayload['widget'];
@@ -96,7 +97,7 @@ export function unitPayload(u: UnitEntry): TermPayload | PatternPayload | Concep
   }
   if (u.type === 'pattern') {
     return { goal: u.goal ?? '', rule: u.rule ?? '', pieces: u.pieces ?? [], examples: (u.examples ?? []) as PatternPayload['examples'], ...(u.pitfalls ? { pitfalls: u.pitfalls } : {}), ...(u.chant ? { chant: u.chant } : {}),
-      ...(u.tense ? { tense: u.tense } : {}), ...(u.timeline ? { timeline: u.timeline } : {}), ...(u.signals ? { signals: u.signals } : {}), ...(u.drills ? { drills: u.drills } : {}) };
+      ...(u.tense ? { tense: u.tense } : {}), ...(u.timeline ? { timeline: u.timeline } : {}), ...(u.signals ? { signals: u.signals } : {}), ...(u.drills ? { drills: u.drills } : {}), ...(u.practice ? { practice: u.practice } : {}) };
   }
   const text = u.text ?? '';
   const pronunciation = typeof u.pronunciation === 'string' ? { respelling: u.pronunciation } : u.pronunciation;
@@ -155,7 +156,7 @@ export function validateCourseFile(data: unknown): ContentIssue[] {
     m.units.forEach((u, ui) => {
       const up = `${mp}.units.${ui}`;
       if (!isRecord(u)) return void issues.push(issue('not_object', up));
-      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills', 'cases', 'widget', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'title', 'words', 'emojis', 'decoys', 'scenes', 'seconds', 'examples', 'association', 'license', 'sources']);
+      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills', 'practice', 'cases', 'widget', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'title', 'words', 'emojis', 'decoys', 'scenes', 'seconds', 'examples', 'association', 'license', 'sources']);
       if (typeof u.key !== 'string' || !KEY.test(u.key)) issues.push(issue('key_format', `${up}.key`));
       else if (unitKeys.has(u.key)) issues.push(issue('key_taken', `${up}.key`, { key: u.key }));
       else unitKeys.add(u.key);

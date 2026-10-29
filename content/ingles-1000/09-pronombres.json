@@ -762,6 +762,171 @@
               "translation": "No lo sé."
             }
           ],
+          "practice": [
+            {
+              "text": "I don't like coffee.",
+              "translation": "No me gusta el café.",
+              "mirror": {
+                "say": "No me gusta el café",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "gusto",
+                    "en": "like",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He doesn't work.",
+              "translation": "Él no trabaja.",
+              "mirror": {
+                "say": "Él no trabaja",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabaja",
+                    "en": "work",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We don't have time.",
+              "translation": "No tenemos tiempo.",
+              "mirror": {
+                "say": "No tenemos tiempo",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tiempo",
+                    "en": "time",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She doesn't drink.",
+              "translation": "Ella no bebe.",
+              "mirror": {
+                "say": "Ella no bebe",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no",
+                    "en": "doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bebe",
+                    "en": "drink",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't understand.",
+              "translation": "No entiendo.",
+              "mirror": {
+                "say": "No entiendo",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "entiendo",
+                    "en": "understand",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "They don't live here.",
+              "translation": "No viven aquí.",
+              "mirror": {
+                "say": "No viven aquí",
+                "pieces": [
+                  {
+                    "es": "ELLOS",
+                    "en": "They",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "viven",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I no want» está mal: el NO va con un ayudante (don't).",
             "Con doesn't, sin -s: She doesn't like (no «likes»)."

@@ -120,6 +120,172 @@
               "translation": "¿Tengo que pagar?"
             }
           ],
+          "practice": [
+            {
+              "text": "I have to work.",
+              "translation": "Tengo que trabajar.",
+              "mirror": {
+                "say": "Tengo que trabajar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "trabajar",
+                    "en": "work",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We have to go.",
+              "translation": "Tenemos que irnos.",
+              "mirror": {
+                "say": "Tenemos que irnos",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ir",
+                    "en": "go",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He has to study.",
+              "translation": "Él tiene que estudiar.",
+              "mirror": {
+                "say": "Él tiene que estudiar",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene que",
+                    "en": "has to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estudiar",
+                    "en": "study",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You don't have to pay.",
+              "translation": "No tienes que pagar.",
+              "mirror": {
+                "say": "No tienes que pagar",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tienes que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pagar",
+                    "en": "pay",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do I have to wait?",
+              "translation": "¿Tengo que esperar?",
+              "mirror": {
+                "say": "¿Tengo que esperar?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "esperar",
+                    "en": "wait",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I have to call my mother.",
+              "translation": "Tengo que llamar a mi madre.",
+              "mirror": {
+                "say": "Tengo que llamar a mi madre",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo que",
+                    "en": "have to",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a mi madre",
+                    "en": "my mother",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I must to study» está mal: must va sin TO (I must study).",
             "«Don't have to» no es prohibido: es que no hace falta."

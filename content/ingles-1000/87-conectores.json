@@ -121,6 +121,202 @@
               "translation": "Aunque estaba cansado, terminé."
             }
           ],
+          "practice": [
+            {
+              "text": "Although I was tired, I went out.",
+              "translation": "Aunque estaba cansado, salí.",
+              "mirror": {
+                "say": "Aunque estaba cansado, salí",
+                "pieces": [
+                  {
+                    "es": "Aunque",
+                    "en": "Although",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estaba",
+                    "en": "I was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "salí",
+                    "en": "went out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Despite the cold, we swam.",
+              "translation": "A pesar del frío, nadamos.",
+              "mirror": {
+                "say": "A pesar del frío, nadamos",
+                "pieces": [
+                  {
+                    "es": "A pesar de",
+                    "en": "Despite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el frío",
+                    "en": "the cold",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nadamos",
+                    "en": "swam",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's expensive. However, it's good.",
+              "translation": "Es caro. Sin embargo, es bueno.",
+              "mirror": {
+                "say": "Es caro. Sin embargo, es bueno",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caro",
+                    "en": "expensive",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Sin embargo",
+                    "en": "However",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(ESO) es",
+                    "en": "it's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "bueno",
+                    "en": "good",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Although it was raining, we played.",
+              "translation": "Aunque llovía, jugamos.",
+              "mirror": {
+                "say": "Aunque llovía, jugamos",
+                "pieces": [
+                  {
+                    "es": "Aunque",
+                    "en": "Although",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO estaba lloviendo",
+                    "en": "it was raining",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "jugamos",
+                    "en": "played",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Despite being tired, she worked.",
+              "translation": "A pesar de estar cansada, trabajó.",
+              "mirror": {
+                "say": "A pesar de estar cansada, trabajó",
+                "pieces": [
+                  {
+                    "es": "A pesar de",
+                    "en": "Despite",
+                    "role": "word"
+                  },
+                  {
+                    "es": "estar",
+                    "en": "being",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cansada",
+                    "en": "tired",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ELLA",
+                    "en": "she",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajó",
+                    "en": "worked",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It was raining. However, we went out.",
+              "translation": "Llovía. Sin embargo, salimos.",
+              "mirror": {
+                "say": "Llovía. Sin embargo, salimos",
+                "pieces": [
+                  {
+                    "es": "ESO estaba lloviendo",
+                    "en": "It was raining",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "Sin embargo",
+                    "en": "However",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "salimos",
+                    "en": "went out",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Despite of» está mal: despite (o in spite of).",
             "«Despite it was raining» está mal: con frase, although."

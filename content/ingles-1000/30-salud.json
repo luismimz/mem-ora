@@ -121,6 +121,183 @@
               "translation": "Deberías beber más agua."
             }
           ],
+          "practice": [
+            {
+              "text": "You should sleep more.",
+              "translation": "Deberías dormir más.",
+              "mirror": {
+                "say": "Deberías dormir más",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "deberías",
+                    "en": "should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "dormir",
+                    "en": "sleep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "más",
+                    "en": "more",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "You shouldn't eat that.",
+              "translation": "No deberías comer eso.",
+              "mirror": {
+                "say": "No deberías comer eso",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no deberías",
+                    "en": "shouldn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "comer",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "eso",
+                    "en": "that",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We should go.",
+              "translation": "Deberíamos irnos.",
+              "mirror": {
+                "say": "Deberíamos irnos",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "deberíamos",
+                    "en": "should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ir",
+                    "en": "go",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He should study.",
+              "translation": "Él debería estudiar.",
+              "mirror": {
+                "say": "Él debería estudiar",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "debería",
+                    "en": "should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "estudiar",
+                    "en": "study",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Should I call her?",
+              "translation": "¿Debería llamarla?",
+              "mirror": {
+                "say": "¿Debería llamarla?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "debería",
+                    "en": "Should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la",
+                    "en": "her",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "You should rest a little.",
+              "translation": "Deberías descansar un poco.",
+              "mirror": {
+                "say": "Deberías descansar un poco",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "You",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "deberías",
+                    "en": "should",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "descansar",
+                    "en": "rest",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un poco",
+                    "en": "a little",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«You should to rest» está mal: detrás de should, el verbo tal cual.",
             "SHOULD es un consejo; MUST es una obligación."

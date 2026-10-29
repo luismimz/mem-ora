@@ -15,6 +15,7 @@ import {
   drillsOf,
   maskName,
   movedPieces,
+  sentencesOf,
   orderRule,
   orderSwap,
   spanishOrderCalque,
@@ -565,7 +566,7 @@ const plain = (x: string) => x.toLowerCase().replace(/[.,!?¡¿;:"«»]/g, '').r
  * una frase real es lo que la fija; practica la habilidad «producir» (con las piezas a la vista: pista 1).
  */
 function Build({ unit, example, onResult }: { unit: SessionUnit; example: number; onResult: (ok: boolean, ms: number, note: string, hint: number) => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string; mirror?: Mirror }> }).examples[example]!;
+  const ex = (sentencesOf(unit) as Array<{ text: string; translation?: string; mirror?: Mirror }>)[example]!;
   // D-082: si la frase tiene su tren, se puede pedir ver cómo se construye (cuenta como ayuda: pista 2).
   const [help, setHelp] = useState(false);
   const words = useMemo(() => buildTiles(ex.text), [ex.text]);
@@ -746,6 +747,29 @@ const MORPH_MS = [1000, 1700, 1500, 1300];
  * verdad: el ayudante sale de su sitio y pasa por encima del quién en un arco. Al final, la frase con su voz y las
  * fichas iluminándose una a una. Un toque salta al final o lo repite. Sonidos cortos en cada paso.
  */
+/**
+ * Mueve las fichas de donde estaban a su sitio nuevo (FLIP) para que se VEA el cambio de orden (usuario, 29-oct: «car
+ * red → red car cambia de golpe, debería verse el movimiento para que se quede en la cabeza»). Es movimiento esencial
+ * (enseña el orden), así que con «Reducir movimiento» también se ve, pero sin saltos: un deslizamiento suave.
+ */
+function moveChips(chips: Record<number, HTMLElement | null>, rects: Record<number, DOMRect>, run: boolean, leaps: (k: number) => boolean, reduced: boolean) {
+  for (const [k, el] of Object.entries(chips)) {
+    if (!el) continue;
+    const now = el.getBoundingClientRect();
+    const before = rects[Number(k)];
+    rects[Number(k)] = now;
+    if (!before || !run) continue;
+    const dx = before.left - now.left; const dy = before.top - now.top;
+    if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
+    const jump = leaps(Number(k));
+    if (jump) { el.classList.add('jumping'); window.setTimeout(() => el.classList.remove('jumping'), 1600); }
+    el.animate(reduced || !jump
+      ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }]
+      : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 56}px) rotate(-8deg) scale(1.12)`, offset: 0.5 }, { transform: 'none' }],
+    { duration: reduced ? 1100 : 1000, easing: reduced ? 'ease-in-out' : 'cubic-bezier(.3, 1.2, .5, 1)' });
+  }
+}
+
 function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: Mirror; text: string; compact?: boolean }) {
   const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
   const jumps = order.some((v, i) => v !== i);
@@ -798,20 +822,7 @@ function MirrorAnim({ unit, m, text, compact = false }: { unit: SessionUnit; m: 
   useLayoutEffect(() => {
     const reorder = lastPhase.current === 2 && phase === 3;
     lastPhase.current = phase;
-    for (const [k, el] of Object.entries(chips.current)) {
-      if (!el) continue;
-      const now = el.getBoundingClientRect();
-      const before = rects.current[Number(k)];
-      rects.current[Number(k)] = now;
-      if (!before || reduced || !reorder) continue;
-      const dx = before.left - now.left;
-      const dy = before.top - now.top;
-      if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
-      const leaps = m.pieces[Number(k)]!.role === 'helper' || dx > 0;
-      el.animate(leaps
-        ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 46}px) rotate(-8deg)`, offset: 0.5 }, { transform: 'none' }]
-        : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 750, easing: 'cubic-bezier(.3, 1.2, .5, 1)' });
-    }
+    moveChips(chips.current, rects.current, reorder, (k) => order.indexOf(k) < k, Boolean(reduced));
   });
 
   const english = phase >= 2;
@@ -905,29 +916,19 @@ function FlipMirror({ unit, m, text }: { unit: SessionUnit; m: Mirror; text: str
   }, [flipped, stage, seen, run]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (stage !== 'flip' || !all) return;
-    const t = setTimeout(() => { setStage('move'); sfx(jumps ? 'boing' : 'whoosh'); }, 650);
+    const t = setTimeout(() => { setStage('move'); sfx(jumps ? 'boing' : 'whoosh'); }, 950);
     return () => clearTimeout(t);
   }, [all, stage]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (stage !== 'move') return;
-    const t = setTimeout(() => { setStage('done'); if (audioEnabled()) speak(text, unit.language); }, jumps ? 950 : 350);
+    const t = setTimeout(() => { setStage('done'); if (audioEnabled()) speak(text, unit.language); }, jumps ? 1500 : 400);
     return () => clearTimeout(t);
   }, [stage]); // eslint-disable-line react-hooks/exhaustive-deps
   const last = useRef(stage);
   useLayoutEffect(() => {
     const moving = last.current === 'flip' && stage === 'move';
     last.current = stage;
-    for (const [k, el] of Object.entries(chips.current)) {
-      if (!el) continue;
-      const now = el.getBoundingClientRect();
-      const before = rects.current[Number(k)];
-      rects.current[Number(k)] = now;
-      if (!before || !moving || reduced) continue;
-      const dx = before.left - now.left; const dy = before.top - now.top;
-      if (Math.abs(dx) < 2 && Math.abs(dy) < 2) continue;
-      el.animate(dx > 0 ? [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: `translate(${dx / 2}px, ${dy / 2 - 50}px) rotate(-8deg) scale(1.1)`, offset: 0.5 }, { transform: 'none' }]
-        : [{ transform: `translate(${dx}px, ${dy}px)` }, { transform: 'none' }], { duration: 800, easing: 'cubic-bezier(.3, 1.2, .5, 1)' });
-    }
+    moveChips(chips.current, rects.current, moving, (k) => order.indexOf(k) < k, Boolean(reduced));
   });
   function flip(i: number) {
     if (stage !== 'flip' || flipped.includes(i)) return;
@@ -986,8 +987,9 @@ function scrambled<T>(items: T[], seed: string): T[] {
  * piezas en inglés. Al fallar, se ve el orden bueno y la regla; si has seguido el orden del español, se dice.
  */
 function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all: Record<string, SessionUnit>; example: number; seed: string; onResult: (ok: boolean, ms: number, note: string) => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; translation?: string; mirror?: Mirror }> }).examples[example]!;
+  const ex = (sentencesOf(unit) as Array<{ text: string; translation?: string; mirror?: Mirror }>)[example]!;
   const m = ex.mirror!;
+  const isPractice = example >= ((unit.payload as { examples?: unknown[] }).examples ?? []).length;
   const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
   const moved = movedPieces(m);
   const jumper = order.find((i) => moved.includes(i));
@@ -1000,7 +1002,7 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
     if (hidden === undefined) return null;
     const want = m.pieces[hidden]!;
     const pool = new Set<string>();
-    for (const u of Object.values(all)) for (const e of ((u.payload as { examples?: Array<{ mirror?: Mirror }> }).examples ?? [])) for (const p of e.mirror?.pieces ?? []) if (p.role === want.role && p.en.toLowerCase() !== want.en.toLowerCase() && p.en.split(' ').length === want.en.split(' ').length) pool.add(p.en);
+    for (const u of Object.values(all)) for (const e of (sentencesOf(u) as Array<{ mirror?: Mirror }>)) for (const p of e.mirror?.pieces ?? []) if (p.role === want.role && p.en.toLowerCase() !== want.en.toLowerCase() && p.en.split(' ').length === want.en.split(' ').length) pool.add(p.en);
     const wrong = [...pool].sort((a, b) => hue(`${seed}${a}`) - hue(`${seed}${b}`)).slice(0, 2);
     return wrong.length === 2 ? { hidden, options: scrambled([want.en, ...wrong], seed) } : null;
   }, [m, all, seed, canJump]);
@@ -1041,7 +1043,13 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
   };
   return (
     <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked && okA ? 'right' : checked === false ? 'wrong' : ''}`} {...(checked !== null ? { onNext: finish } : {})}>
+      <div className="pieces-body">
       <p className="tag">🧩 LAS PIEZAS · {phase === 'order' ? 'ORDÉNALAS' : phase === 'jump' ? '¿QUÉ PIEZA SE ADELANTA?' : '¿CUÁL FALTA?'}</p>
+      <div className="pieces-head">
+        <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🧩'}</div>
+        <p className="pieces-goal">{unit.type === 'pattern' ? (unit.payload as PatternPayload).goal : `${unitText(unit)} · ${(unit.payload as { meaning?: string }).meaning ?? ''}`}</p>
+      </div>
+      <p className="pieces-new">{isPractice ? '✨ Frase nueva' : 'Frase de la ficha'}</p>
       <h3 className="ask pieces-es">{m.say}</h3>
       {phase === 'jump' && (
         <>
@@ -1100,6 +1108,7 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
           )}
         </>
       )}
+      </div>
       <Confetti burst={confetti} />
     </Slide>
   );
@@ -1107,7 +1116,7 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
 
 /** Sesiones guardadas con la tarjeta antigua del tren: se muestra la animación en un paso. */
 function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; onNext: () => void }) {
-  const ex = (unit.payload as { examples: Array<{ text: string; mirror?: Mirror }> }).examples[example]!;
+  const ex = (sentencesOf(unit) as Array<{ text: string; mirror?: Mirror }>)[example]!;
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className="train">
       <p className="tag">🪞 CÓMO SE CONSTRUYE</p>

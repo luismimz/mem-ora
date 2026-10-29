@@ -106,6 +106,134 @@
               "translation": "Salimos anoche."
             }
           ],
+          "practice": [
+            {
+              "text": "I wake up at eight.",
+              "translation": "Me despierto a las ocho.",
+              "mirror": {
+                "say": "Me despierto a las ocho",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "despierto",
+                    "en": "wake up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a las ocho",
+                    "en": "at eight",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Turn on the light.",
+              "translation": "Enciende la luz.",
+              "mirror": {
+                "say": "Enciende la luz",
+                "pieces": [
+                  {
+                    "es": "Enciende",
+                    "en": "Turn on",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la luz",
+                    "en": "the light",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Sit down, please.",
+              "translation": "Siéntate, por favor.",
+              "mirror": {
+                "say": "Siéntate, por favor",
+                "pieces": [
+                  {
+                    "es": "Siéntate",
+                    "en": "Sit down",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Look up the word.",
+              "translation": "Busca la palabra.",
+              "mirror": {
+                "say": "Busca la palabra",
+                "pieces": [
+                  {
+                    "es": "Busca",
+                    "en": "Look up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la palabra",
+                    "en": "the word",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I go out on Fridays.",
+              "translation": "Salgo los viernes.",
+              "mirror": {
+                "say": "Salgo los viernes",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "salgo",
+                    "en": "go out",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "LOS viernes",
+                    "en": "on Fridays",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Pick up your clothes.",
+              "translation": "Recoge tu ropa.",
+              "mirror": {
+                "say": "Recoge tu ropa",
+                "pieces": [
+                  {
+                    "es": "Recoge",
+                    "en": "Pick up",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "TU ropa",
+                    "en": "your clothes",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "La partícula lo cambia todo: look AT (mirar), look FOR (buscar), look AFTER (cuidar).",
             "Con it o them, va en medio: turn it off."

@@ -126,6 +126,197 @@
               "translation": "Me enseñó a usar Git."
             }
           ],
+          "practice": [
+            {
+              "text": "How to make an omelette.",
+              "translation": "Cómo hacer una tortilla.",
+              "mirror": {
+                "say": "Cómo hacer una tortilla",
+                "pieces": [
+                  {
+                    "es": "Cómo",
+                    "en": "How",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a hacer",
+                    "en": "to make",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "una tortilla",
+                    "en": "an omelette",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I don't know how to use this.",
+              "translation": "No sé cómo usar esto.",
+              "mirror": {
+                "say": "No sé cómo usar esto",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "sé",
+                    "en": "know",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cómo",
+                    "en": "how",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a usar",
+                    "en": "to use",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "esto",
+                    "en": "this",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How to install Python.",
+              "translation": "Cómo instalar Python.",
+              "mirror": {
+                "say": "Cómo instalar Python",
+                "pieces": [
+                  {
+                    "es": "Cómo",
+                    "en": "How",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a instalar",
+                    "en": "to install",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "Python",
+                    "en": "Python",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Do you know how to get there?",
+              "translation": "¿Sabes cómo llegar?",
+              "mirror": {
+                "say": "¿Sabes cómo llegar?",
+                "pieces": [
+                  {
+                    "es": "",
+                    "en": "Do",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sabes",
+                    "en": "know",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cómo",
+                    "en": "how",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a llegar allí",
+                    "en": "to get there",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He taught me how to cook.",
+              "translation": "Me enseñó a cocinar.",
+              "mirror": {
+                "say": "Me enseñó a cocinar",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "enseñó",
+                    "en": "taught",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cómo",
+                    "en": "how",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a cocinar",
+                    "en": "to cook",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "How to delete a file.",
+              "translation": "Cómo borrar un archivo.",
+              "mirror": {
+                "say": "Cómo borrar un archivo",
+                "pieces": [
+                  {
+                    "es": "Cómo",
+                    "en": "How",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a borrar",
+                    "en": "to delete",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un archivo",
+                    "en": "a file",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«How install Java» está mal: falta TO (how to install).",
             "Para preguntar a alguien: How do I install it?"

@@ -297,6 +297,196 @@
               ]
             }
           ],
+          "practice": [
+            {
+              "text": "It's the tallest building.",
+              "translation": "Es el edificio más alto.",
+              "mirror": {
+                "say": "Es el edificio más alto",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "edificio",
+                    "en": "building",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más alto",
+                    "en": "tallest",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "She's the fastest.",
+              "translation": "Ella es la más rápida.",
+              "mirror": {
+                "say": "Ella es la más rápida",
+                "pieces": [
+                  {
+                    "es": "(ELLA) es",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la más rápida",
+                    "en": "the fastest",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It's the most beautiful city.",
+              "translation": "Es la ciudad más bonita.",
+              "mirror": {
+                "say": "Es la ciudad más bonita",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "la",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ciudad",
+                    "en": "city",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más bonita",
+                    "en": "most beautiful",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "It's the best restaurant.",
+              "translation": "Es el mejor restaurante.",
+              "mirror": {
+                "say": "Es el mejor restaurante",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mejor",
+                    "en": "best",
+                    "role": "word"
+                  },
+                  {
+                    "es": "restaurante",
+                    "en": "restaurant",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Today is the coldest day.",
+              "translation": "Hoy es el día más frío.",
+              "mirror": {
+                "say": "Hoy es el día más frío",
+                "pieces": [
+                  {
+                    "es": "Hoy",
+                    "en": "Today",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "día",
+                    "en": "day",
+                    "role": "word"
+                  },
+                  {
+                    "es": "más frío",
+                    "en": "coldest",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "It's the worst coffee.",
+              "translation": "Es el peor café.",
+              "mirror": {
+                "say": "Es el peor café",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "el",
+                    "en": "the",
+                    "role": "word"
+                  },
+                  {
+                    "es": "peor",
+                    "en": "worst",
+                    "role": "word"
+                  },
+                  {
+                    "es": "café",
+                    "en": "coffee",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«The most big» está mal: si es corto, the biggest.",
             "«The biggest of Spain» está mal: de un sitio, IN Spain."

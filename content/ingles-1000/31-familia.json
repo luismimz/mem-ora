@@ -135,6 +135,201 @@
               "translation": "¿De quién es este móvil? Es de Luis."
             }
           ],
+          "practice": [
+            {
+              "text": "It's Ana's house.",
+              "translation": "Es la casa de Ana.",
+              "mirror": {
+                "say": "Es la casa de Ana",
+                "pieces": [
+                  {
+                    "es": "(ESO) es",
+                    "en": "It's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "casa",
+                    "en": "house",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Ana + 'S",
+                    "en": "Ana's",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1
+                ]
+              }
+            },
+            {
+              "text": "My mother's car is red.",
+              "translation": "El coche de mi madre es rojo.",
+              "mirror": {
+                "say": "El coche de mi madre es rojo",
+                "pieces": [
+                  {
+                    "es": "coche",
+                    "en": "car",
+                    "role": "who"
+                  },
+                  {
+                    "es": "mi madre + 'S",
+                    "en": "My mother's",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "rojo",
+                    "en": "red",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "This is Luis's dog.",
+              "translation": "Este es el perro de Luis.",
+              "mirror": {
+                "say": "Este es el perro de Luis",
+                "pieces": [
+                  {
+                    "es": "Este",
+                    "en": "This",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "perro",
+                    "en": "dog",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Luis + 'S",
+                    "en": "Luis's",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "Pedro's sister is a doctor.",
+              "translation": "La hermana de Pedro es médica.",
+              "mirror": {
+                "say": "La hermana de Pedro es médica",
+                "pieces": [
+                  {
+                    "es": "hermana",
+                    "en": "sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "Pedro + 'S",
+                    "en": "Pedro's",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "médica",
+                    "en": "a doctor",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "My father's birthday.",
+              "translation": "El cumpleaños de mi padre.",
+              "mirror": {
+                "say": "El cumpleaños de mi padre",
+                "pieces": [
+                  {
+                    "es": "cumpleaños",
+                    "en": "birthday",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mi padre + 'S",
+                    "en": "My father's",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "Is it Juan's phone?",
+              "translation": "¿Es el móvil de Juan?",
+              "mirror": {
+                "say": "¿Es el móvil de Juan?",
+                "pieces": [
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "es",
+                    "en": "Is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "móvil",
+                    "en": "phone",
+                    "role": "word"
+                  },
+                  {
+                    "es": "Juan + 'S",
+                    "en": "Juan's",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  3,
+                  2
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«The car of my father» se entiende, pero suena raro: my father's car.",
             "Plural acabado en -s: solo el apóstrofo (my parents' house)."

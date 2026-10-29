@@ -124,6 +124,149 @@
               "translation": "Prefiero que no."
             }
           ],
+          "practice": [
+            {
+              "text": "I prefer dogs to cats.",
+              "translation": "Prefiero los perros a los gatos.",
+              "mirror": {
+                "say": "Prefiero los perros a los gatos",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prefiero",
+                    "en": "prefer",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "perros",
+                    "en": "dogs",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a gatos",
+                    "en": "to cats",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'd rather read.",
+              "translation": "Prefiero leer.",
+              "mirror": {
+                "say": "Prefiero leer",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÍA antes",
+                    "en": "I'd rather",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "leer",
+                    "en": "read",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She prefers tea.",
+              "translation": "Ella prefiere el té.",
+              "mirror": {
+                "say": "Ella prefiere el té",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "prefiere",
+                    "en": "prefers",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "el té",
+                    "en": "tea",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I'd rather walk.",
+              "translation": "Prefiero ir andando.",
+              "mirror": {
+                "say": "Prefiero ir andando",
+                "pieces": [
+                  {
+                    "es": "(YO) -RÍA antes",
+                    "en": "I'd rather",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "caminar",
+                    "en": "walk",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I prefer summer to winter.",
+              "translation": "Prefiero el verano al invierno.",
+              "mirror": {
+                "say": "Prefiero el verano al invierno",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "prefiero",
+                    "en": "prefer",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "verano",
+                    "en": "summer",
+                    "role": "word"
+                  },
+                  {
+                    "es": "a invierno",
+                    "en": "to winter",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We'd rather stay.",
+              "translation": "Preferimos quedarnos.",
+              "mirror": {
+                "say": "Preferimos quedarnos",
+                "pieces": [
+                  {
+                    "es": "(NOSOTROS) -RÍAMOS antes",
+                    "en": "We'd rather",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "quedar",
+                    "en": "stay",
+                    "role": "verb"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I prefer tea than coffee» está mal: TO coffee.",
             "Detrás de I'd rather, el verbo va tal cual: I'd rather go."

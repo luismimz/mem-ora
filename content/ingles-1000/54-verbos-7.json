@@ -130,6 +130,230 @@
               "translation": "¿Hace cuánto?"
             }
           ],
+          "practice": [
+            {
+              "text": "I arrived an hour ago.",
+              "translation": "Llegué hace una hora.",
+              "mirror": {
+                "say": "Llegué hace una hora",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llegué",
+                    "en": "arrived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una hora",
+                    "en": "an hour",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "We met ten years ago.",
+              "translation": "Nos conocimos hace diez años.",
+              "mirror": {
+                "say": "Nos conocimos hace diez años",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "nos conocimos",
+                    "en": "met",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "diez años",
+                    "en": "ten years",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I ate two hours ago.",
+              "translation": "Comí hace dos horas.",
+              "mirror": {
+                "say": "Comí hace dos horas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "comí",
+                    "en": "ate",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "dos horas",
+                    "en": "two hours",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "He left a moment ago.",
+              "translation": "Se fue hace un momento.",
+              "mirror": {
+                "say": "Se fue hace un momento",
+                "pieces": [
+                  {
+                    "es": "ÉL",
+                    "en": "He",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se fue",
+                    "en": "left",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "un momento",
+                    "en": "a moment",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  3,
+                  2
+                ]
+              }
+            },
+            {
+              "text": "I bought it a week ago.",
+              "translation": "Lo compré hace una semana.",
+              "mirror": {
+                "say": "Lo compré hace una semana",
+                "pieces": [
+                  {
+                    "es": "lo",
+                    "en": "it",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "compré",
+                    "en": "bought",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "una semana",
+                    "en": "a week",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  2,
+                  0,
+                  4,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "It rained three days ago.",
+              "translation": "Hace tres días llovió.",
+              "mirror": {
+                "say": "Hace tres días llovió",
+                "pieces": [
+                  {
+                    "es": "hace",
+                    "en": "ago",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tres días",
+                    "en": "three days",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "It",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "llovió",
+                    "en": "rained",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  2,
+                  3,
+                  1,
+                  0
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«Ago two years» está mal: AGO va al final.",
             "«Hace dos años que vivo aquí» no es ago: I have lived here for two years."

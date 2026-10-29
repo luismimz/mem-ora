@@ -123,6 +123,153 @@
               "translation": "No tardaré mucho."
             }
           ],
+          "practice": [
+            {
+              "text": "It takes me an hour to get there.",
+              "translation": "Tardo una hora en llegar.",
+              "mirror": {
+                "say": "Tardo una hora en llegar",
+                "pieces": [
+                  {
+                    "es": "ESO me lleva",
+                    "en": "It takes me",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "una hora",
+                    "en": "an hour",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para llegar allí",
+                    "en": "to get there",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How long does it take you?",
+              "translation": "¿Cuánto tardas?",
+              "mirror": {
+                "say": "¿Cuánto tardas?",
+                "pieces": [
+                  {
+                    "es": "Cuánto tiempo",
+                    "en": "How long",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "does",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "te lleva",
+                    "en": "take you",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It takes ten minutes.",
+              "translation": "Se tarda diez minutos.",
+              "mirror": {
+                "say": "Se tarda diez minutos",
+                "pieces": [
+                  {
+                    "es": "ESO lleva",
+                    "en": "It takes",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "diez minutos",
+                    "en": "ten minutes",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It takes me half an hour to cook.",
+              "translation": "Tardo media hora en cocinar.",
+              "mirror": {
+                "say": "Tardo media hora en cocinar",
+                "pieces": [
+                  {
+                    "es": "ESO me lleva",
+                    "en": "It takes me",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "media hora",
+                    "en": "half an hour",
+                    "role": "word"
+                  },
+                  {
+                    "es": "para cocinar",
+                    "en": "to cook",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It takes three hours by car.",
+              "translation": "Son tres horas en coche.",
+              "mirror": {
+                "say": "Son tres horas en coche",
+                "pieces": [
+                  {
+                    "es": "ESO lleva",
+                    "en": "It takes",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "tres horas",
+                    "en": "three hours",
+                    "role": "word"
+                  },
+                  {
+                    "es": "en coche",
+                    "en": "by car",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "It doesn't take me long.",
+              "translation": "No tardo mucho.",
+              "mirror": {
+                "say": "No tardo mucho",
+                "pieces": [
+                  {
+                    "es": "ESO no",
+                    "en": "It doesn't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "me lleva",
+                    "en": "take me",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho",
+                    "en": "long",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I take twenty minutes» suena raro: it takes me twenty minutes.",
             "Para preguntar: how long does it take?"
@@ -203,6 +350,246 @@
             {
               "text": "Plants die if they don't get water.",
               "translation": "Las plantas mueren si no reciben agua."
+            }
+          ],
+          "practice": [
+            {
+              "text": "If it rains, I get wet.",
+              "translation": "Si llueve, me mojo.",
+              "mirror": {
+                "say": "Si llueve, me mojo",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO llueve",
+                    "en": "it rains",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "me mojo",
+                    "en": "get wet",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you mix red and blue, you get purple.",
+              "translation": "Si mezclas rojo y azul, sale morado.",
+              "mirror": {
+                "say": "Si mezclas rojo y azul, sale morado",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "mezclas",
+                    "en": "mix",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "rojo y azul",
+                    "en": "red and blue",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "sale",
+                    "en": "get",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "morado",
+                    "en": "purple",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If I don't sleep, I'm tired.",
+              "translation": "Si no duermo, estoy cansado.",
+              "mirror": {
+                "say": "Si no duermo, estoy cansado",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "no",
+                    "en": "don't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "duermo",
+                    "en": "sleep",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cansado",
+                    "en": "tired",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you press here, it turns off.",
+              "translation": "Si pulsas aquí, se apaga.",
+              "mirror": {
+                "say": "Si pulsas aquí, se apaga",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "pulsas",
+                    "en": "press",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ESO",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se apaga",
+                    "en": "turns off",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If you boil water, it evaporates.",
+              "translation": "Si hierves agua, se evapora.",
+              "mirror": {
+                "say": "Si hierves agua, se evapora",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "hierves",
+                    "en": "boil",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "agua",
+                    "en": "water",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ELLA",
+                    "en": "it",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se evapora",
+                    "en": "evaporates",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If I'm hungry, I eat fruit.",
+              "translation": "Si tengo hambre, como fruta.",
+              "mirror": {
+                "say": "Si tengo hambre, como fruta",
+                "pieces": [
+                  {
+                    "es": "si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "(YO) estoy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hambriento",
+                    "en": "hungry",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "como",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "fruta",
+                    "en": "fruit",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "pitfalls": [

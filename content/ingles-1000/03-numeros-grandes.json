@@ -664,6 +664,145 @@
               "translation": "Mil libros."
             }
           ],
+          "practice": [
+            {
+              "text": "I have two dogs.",
+              "translation": "Tengo dos perros.",
+              "mirror": {
+                "say": "Tengo dos perros",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tengo",
+                    "en": "have",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dos perros",
+                    "en": "two dogs",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Three beers, please.",
+              "translation": "Tres cervezas, por favor.",
+              "mirror": {
+                "say": "Tres cervezas, por favor",
+                "pieces": [
+                  {
+                    "es": "Tres cervezas",
+                    "en": "Three beers",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I want four apples.",
+              "translation": "Quiero cuatro manzanas.",
+              "mirror": {
+                "say": "Quiero cuatro manzanas",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "quiero",
+                    "en": "want",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cuatro manzanas",
+                    "en": "four apples",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She has three sisters.",
+              "translation": "Ella tiene tres hermanas.",
+              "mirror": {
+                "say": "Ella tiene tres hermanas",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "has",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tres hermanas",
+                    "en": "three sisters",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We need five chairs.",
+              "translation": "Necesitamos cinco sillas.",
+              "mirror": {
+                "say": "Necesitamos cinco sillas",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "necesitamos",
+                    "en": "need",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cinco sillas",
+                    "en": "five chairs",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Two tickets, please.",
+              "translation": "Dos billetes, por favor.",
+              "mirror": {
+                "say": "Dos billetes, por favor",
+                "pieces": [
+                  {
+                    "es": "Dos billetes",
+                    "en": "Two tickets",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por favor",
+                    "en": "please",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Irregulares: one child → two children; one man → two men; one woman → two women.",
             "«People» ya es plural: many people (no «peoples»)."

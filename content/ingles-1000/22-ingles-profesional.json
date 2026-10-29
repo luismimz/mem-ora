@@ -128,6 +128,188 @@
               "translation": "Aquí se habla inglés."
             }
           ],
+          "practice": [
+            {
+              "text": "The email is sent every day.",
+              "translation": "El correo se envía cada día.",
+              "mirror": {
+                "say": "El correo se envía cada día",
+                "pieces": [
+                  {
+                    "es": "El correo",
+                    "en": "The email",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "enviado",
+                    "en": "sent",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada día",
+                    "en": "every day",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Spanish is spoken here.",
+              "translation": "Aquí se habla español.",
+              "mirror": {
+                "say": "Aquí se habla español",
+                "pieces": [
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hablado",
+                    "en": "spoken",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "español",
+                    "en": "Spanish",
+                    "role": "who"
+                  }
+                ],
+                "order": [
+                  3,
+                  1,
+                  2,
+                  0
+                ]
+              }
+            },
+            {
+              "text": "The code is checked every week.",
+              "translation": "El código se revisa cada semana.",
+              "mirror": {
+                "say": "El código se revisa cada semana",
+                "pieces": [
+                  {
+                    "es": "El código",
+                    "en": "The code",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "revisado",
+                    "en": "checked",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "cada semana",
+                    "en": "every week",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The app is used a lot.",
+              "translation": "La app se usa mucho.",
+              "mirror": {
+                "say": "La app se usa mucho",
+                "pieces": [
+                  {
+                    "es": "La app",
+                    "en": "The app",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "usada",
+                    "en": "used",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mucho",
+                    "en": "a lot",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The bug was fixed yesterday.",
+              "translation": "El fallo se arregló ayer.",
+              "mirror": {
+                "say": "El fallo se arregló ayer",
+                "pieces": [
+                  {
+                    "es": "El fallo",
+                    "en": "The bug",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "arreglado",
+                    "en": "fixed",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "ayer",
+                    "en": "yesterday",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "The house was built in 1990.",
+              "translation": "La casa se construyó en 1990.",
+              "mirror": {
+                "say": "La casa se construyó en 1990",
+                "pieces": [
+                  {
+                    "es": "La casa",
+                    "en": "The house",
+                    "role": "who"
+                  },
+                  {
+                    "es": "fue",
+                    "en": "was",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "construida",
+                    "en": "built",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "en 1990",
+                    "en": "in 1990",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«The app is test» está mal: detrás de is / was va el participio (tested, written).",
             "El «se» no se traduce: se convierte en IS o WAS."
@@ -239,6 +421,188 @@
             {
               "text": "Best regards, Luis",
               "translation": "Un saludo, Luis"
+            }
+          ],
+          "practice": [
+            {
+              "text": "I'm writing to ask for information.",
+              "translation": "Te escribo para pedir información.",
+              "mirror": {
+                "say": "Te escribo para pedir información",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy escribiendo",
+                    "en": "I'm writing",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "para",
+                    "en": "to",
+                    "role": "word"
+                  },
+                  {
+                    "es": "pedir",
+                    "en": "ask for",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "información",
+                    "en": "information",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Could you call me tomorrow?",
+              "translation": "¿Podrías llamarme mañana?",
+              "mirror": {
+                "say": "¿Podrías llamarme mañana?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "llamar",
+                    "en": "call",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "me",
+                    "en": "me",
+                    "role": "word"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "I'm sending you the report.",
+              "translation": "Te envío el informe.",
+              "mirror": {
+                "say": "Te envío el informe",
+                "pieces": [
+                  {
+                    "es": "(YO) estoy enviando",
+                    "en": "I'm sending",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "el informe",
+                    "en": "the report",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Could you confirm the date?",
+              "translation": "¿Podrías confirmar la fecha?",
+              "mirror": {
+                "say": "¿Podrías confirmar la fecha?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podrías",
+                    "en": "Could",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "confirmar",
+                    "en": "confirm",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "la fecha",
+                    "en": "the date",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "Thank you for your help.",
+              "translation": "Gracias por tu ayuda.",
+              "mirror": {
+                "say": "Gracias por tu ayuda",
+                "pieces": [
+                  {
+                    "es": "Gracias",
+                    "en": "Thank you",
+                    "role": "word"
+                  },
+                  {
+                    "es": "por",
+                    "en": "for",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tu ayuda",
+                    "en": "your help",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I look forward to your reply.",
+              "translation": "Espero tu respuesta.",
+              "mirror": {
+                "say": "Espero tu respuesta",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "espero con ganas",
+                    "en": "look forward",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "a tu respuesta",
+                    "en": "to your reply",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "pitfalls": [

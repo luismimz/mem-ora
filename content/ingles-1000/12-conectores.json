@@ -892,6 +892,182 @@
               "translation": "Podemos irnos ya."
             }
           ],
+          "practice": [
+            {
+              "text": "I can cook.",
+              "translation": "Sé cocinar.",
+              "mirror": {
+                "say": "Sé cocinar",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cocinar",
+                    "en": "cook",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can you come tomorrow?",
+              "translation": "¿Puedes venir mañana?",
+              "mirror": {
+                "say": "¿Puedes venir mañana?",
+                "pieces": [
+                  {
+                    "es": "TÚ",
+                    "en": "you",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedes",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "venir",
+                    "en": "come",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "mañana",
+                    "en": "tomorrow",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "He can't swim.",
+              "translation": "Él no sabe nadar.",
+              "mirror": {
+                "say": "Él no sabe nadar",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "no puede",
+                    "en": "can't",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "nadar",
+                    "en": "swim",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We can help you.",
+              "translation": "Podemos ayudarte.",
+              "mirror": {
+                "say": "Podemos ayudarte",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "podemos",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ayudar",
+                    "en": "help",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "te",
+                    "en": "you",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She can speak English.",
+              "translation": "Ella sabe hablar inglés.",
+              "mirror": {
+                "say": "Ella sabe hablar inglés",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "puede",
+                    "en": "can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "hablar",
+                    "en": "speak",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "Can I come in?",
+              "translation": "¿Puedo pasar?",
+              "mirror": {
+                "say": "¿Puedo pasar?",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "puedo",
+                    "en": "Can",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pasar",
+                    "en": "come in",
+                    "role": "verb"
+                  }
+                ],
+                "order": [
+                  1,
+                  0,
+                  2
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Sin «to»: I can swim (no «I can to swim»).",
             "Nunca -s: she can (no «she cans»)."
@@ -1046,6 +1222,221 @@
               }
             }
           ],
+          "practice": [
+            {
+              "text": "I would eat pizza.",
+              "translation": "Comería pizza.",
+              "mirror": {
+                "say": "Comería pizza",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "come-",
+                    "en": "eat",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "pizza",
+                    "en": "pizza",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I would travel to Japan.",
+              "translation": "Viajaría a Japón.",
+              "mirror": {
+                "say": "Viajaría a Japón",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viaja-",
+                    "en": "travel",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "a Japón",
+                    "en": "to Japan",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "She would buy a car.",
+              "translation": "Ella compraría un coche.",
+              "mirror": {
+                "say": "Ella compraría un coche",
+                "pieces": [
+                  {
+                    "es": "Ella",
+                    "en": "She",
+                    "role": "who"
+                  },
+                  {
+                    "es": "compra-",
+                    "en": "buy",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "un coche",
+                    "en": "a car",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "We would live here.",
+              "translation": "Viviríamos aquí.",
+              "mirror": {
+                "say": "Viviríamos aquí",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "vivi-",
+                    "en": "live",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍAMOS",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "I would go with you.",
+              "translation": "Yo iría contigo.",
+              "mirror": {
+                "say": "Yo iría contigo",
+                "pieces": [
+                  {
+                    "es": "Yo",
+                    "en": "I",
+                    "role": "who"
+                  },
+                  {
+                    "es": "i-",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "contigo",
+                    "en": "with you",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            },
+            {
+              "text": "He would work more.",
+              "translation": "Él trabajaría más.",
+              "mirror": {
+                "say": "Él trabajaría más",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "trabaja-",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "más",
+                    "en": "more",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  2,
+                  1,
+                  3
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "Solo para -ría: «comía» o «jugaba» (imperfecto) NO es would."
           ],
@@ -1175,6 +1566,237 @@
             {
               "text": "If she knew, she would help.",
               "translation": "Si lo supiera, ayudaría."
+            }
+          ],
+          "practice": [
+            {
+              "text": "If I had money.",
+              "translation": "Si tuviera dinero.",
+              "mirror": {
+                "say": "Si tuviera dinero",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuviera",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "dinero",
+                    "en": "money",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If I lived here.",
+              "translation": "Si viviera aquí.",
+              "mirror": {
+                "say": "Si viviera aquí",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "viviera",
+                    "en": "lived",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "aquí",
+                    "en": "here",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If I knew English.",
+              "translation": "Si supiera inglés.",
+              "mirror": {
+                "say": "Si supiera inglés",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "supiera",
+                    "en": "knew",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "inglés",
+                    "en": "English",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "If I had a dog, I would be happy.",
+              "translation": "Si tuviera un perro, sería feliz.",
+              "mirror": {
+                "say": "Si tuviera un perro, sería feliz",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuviera",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "un perro",
+                    "en": "a dog",
+                    "role": "word"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "se-",
+                    "en": "be",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "feliz",
+                    "en": "happy",
+                    "role": "word"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  6,
+                  5,
+                  7
+                ]
+              }
+            },
+            {
+              "text": "If she called, I would go.",
+              "translation": "Si ella llamara, iría.",
+              "mirror": {
+                "say": "Si ella llamara, iría",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "ella",
+                    "en": "she",
+                    "role": "who"
+                  },
+                  {
+                    "es": "llamara",
+                    "en": "called",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "i-",
+                    "en": "go",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "-RÍA",
+                    "en": "would",
+                    "role": "helper"
+                  }
+                ],
+                "order": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  5,
+                  4
+                ]
+              }
+            },
+            {
+              "text": "If we had time.",
+              "translation": "Si tuviéramos tiempo.",
+              "mirror": {
+                "say": "Si tuviéramos tiempo",
+                "pieces": [
+                  {
+                    "es": "Si",
+                    "en": "If",
+                    "role": "word"
+                  },
+                  {
+                    "es": "NOSOTROS",
+                    "en": "we",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tuviéramos",
+                    "en": "had",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "tiempo",
+                    "en": "time",
+                    "role": "word"
+                  }
+                ]
+              }
             }
           ],
           "pitfalls": [

@@ -668,6 +668,154 @@
               "translation": "El bebé tiene un año."
             }
           ],
+          "practice": [
+            {
+              "text": "I am thirty years old.",
+              "translation": "Tengo treinta años.",
+              "mirror": {
+                "say": "Tengo treinta años",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "soy",
+                    "en": "am",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "treinta años",
+                    "en": "thirty years old",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My sister is twelve.",
+              "translation": "Mi hermana tiene doce años.",
+              "mirror": {
+                "say": "Mi hermana tiene doce años",
+                "pieces": [
+                  {
+                    "es": "Mi hermana",
+                    "en": "My sister",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "doce años",
+                    "en": "twelve",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He is forty years old.",
+              "translation": "Él tiene cuarenta años.",
+              "mirror": {
+                "say": "Él tiene cuarenta años",
+                "pieces": [
+                  {
+                    "es": "Él",
+                    "en": "He",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cuarenta años",
+                    "en": "forty years old",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My dog is five years old.",
+              "translation": "Mi perro tiene cinco años.",
+              "mirror": {
+                "say": "Mi perro tiene cinco años",
+                "pieces": [
+                  {
+                    "es": "Mi perro",
+                    "en": "My dog",
+                    "role": "who"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "cinco años",
+                    "en": "five years old",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "How old is she?",
+              "translation": "¿Cuántos años tiene ella?",
+              "mirror": {
+                "say": "¿Cuántos años tiene ella?",
+                "pieces": [
+                  {
+                    "es": "Cuántos años",
+                    "en": "How old",
+                    "role": "word"
+                  },
+                  {
+                    "es": "tiene",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "ella",
+                    "en": "she",
+                    "role": "who"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "We are twenty.",
+              "translation": "Tenemos veinte años.",
+              "mirror": {
+                "say": "Tenemos veinte años",
+                "pieces": [
+                  {
+                    "es": "NOSOTROS",
+                    "en": "We",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "tenemos",
+                    "en": "are",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "veinte años",
+                    "en": "twenty",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I have twenty years» está mal: la edad va con am / is / are."
           ],

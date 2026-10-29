@@ -117,6 +117,143 @@
               "translation": "Trabaja de camarero."
             }
           ],
+          "practice": [
+            {
+              "text": "I'm a teacher.",
+              "translation": "Soy profesora.",
+              "mirror": {
+                "say": "Soy profesora",
+                "pieces": [
+                  {
+                    "es": "(YO) soy",
+                    "en": "I'm",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "UNA profesora",
+                    "en": "a teacher",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "He's a nurse.",
+              "translation": "Él es enfermero.",
+              "mirror": {
+                "say": "Él es enfermero",
+                "pieces": [
+                  {
+                    "es": "(ÉL) es",
+                    "en": "He's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "UN enfermero",
+                    "en": "a nurse",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "She's an architect.",
+              "translation": "Ella es arquitecta.",
+              "mirror": {
+                "say": "Ella es arquitecta",
+                "pieces": [
+                  {
+                    "es": "(ELLA) es",
+                    "en": "She's",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "UNA arquitecta",
+                    "en": "an architect",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "What does she do?",
+              "translation": "¿A qué se dedica ella?",
+              "mirror": {
+                "say": "¿A qué se dedica ella?",
+                "pieces": [
+                  {
+                    "es": "Qué",
+                    "en": "What",
+                    "role": "word"
+                  },
+                  {
+                    "es": "",
+                    "en": "does",
+                    "role": "signal"
+                  },
+                  {
+                    "es": "ella",
+                    "en": "she",
+                    "role": "who"
+                  },
+                  {
+                    "es": "hace",
+                    "en": "do",
+                    "role": "verb"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "I work as a cook.",
+              "translation": "Trabajo de cocinero.",
+              "mirror": {
+                "say": "Trabajo de cocinero",
+                "pieces": [
+                  {
+                    "es": "YO",
+                    "en": "I",
+                    "role": "who",
+                    "ghost": true
+                  },
+                  {
+                    "es": "trabajo",
+                    "en": "work",
+                    "role": "verb"
+                  },
+                  {
+                    "es": "de cocinero",
+                    "en": "as a cook",
+                    "role": "word"
+                  }
+                ]
+              }
+            },
+            {
+              "text": "My father is a doctor.",
+              "translation": "Mi padre es médico.",
+              "mirror": {
+                "say": "Mi padre es médico",
+                "pieces": [
+                  {
+                    "es": "Mi padre",
+                    "en": "My father",
+                    "role": "who"
+                  },
+                  {
+                    "es": "es",
+                    "en": "is",
+                    "role": "helper"
+                  },
+                  {
+                    "es": "UN médico",
+                    "en": "a doctor",
+                    "role": "word"
+                  }
+                ]
+              }
+            }
+          ],
           "pitfalls": [
             "«I'm doctor» está mal: falta A (I'm a doctor).",
             "Trabajar DE algo es work AS: he works as a waiter."
