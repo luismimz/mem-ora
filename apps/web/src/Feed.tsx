@@ -1019,7 +1019,8 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
   function answerA(choice: string, good: boolean) {
     if (pickA !== null) return;
     setPickA(choice); setOkA(good);
-    if (good) { sfx('ok'); setConfetti((c) => c + 1); } else sfx('ko');
+    // Sin botones (usuario, 29-oct): si aciertas, pasa solo a ordenar; si fallas, lees por qué y deslizas.
+    if (good) { sfx('ok'); setConfetti((c) => c + 1); window.setTimeout(() => setPhase('order'), 1200); } else sfx('ko');
   }
   function place(i: number) {
     if (checked !== null) return;
@@ -1029,20 +1030,26 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
     if (next.length === order.length) {
       const good = next.every((x, k) => m.pieces[x]!.en === m.pieces[order[k]!]!.en);
       setChecked(good);
-      if (good) { setConfetti((c) => c + 1); sfx('party'); if (audioEnabled()) speak(ex.text, unit.language); } else sfx('ko');
+      if (good) { setConfetti((c) => c + 1); sfx('party'); if (audioEnabled()) speak(ex.text, unit.language); window.setTimeout(() => finishRef.current(), 1800); } else sfx('ko');
     }
   }
   const spanishOrder = placed.length === order.length && placed.every((x, k) => x === k) && order.some((v, k) => v !== k);
+  const sent = useRef(false);
   const finish = () => {
+    if (sent.current) return;
+    sent.current = true;
     const ok = okA && Boolean(checked);
     onResult(ok, Math.round(performance.now() - t0.current), ok ? '' : `${spanishOrder ? 'Has seguido el orden del español. ' : ''}En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}`);
   };
+  const finishRef = useRef(finish);
+  finishRef.current = finish;
+  const swipe = checked !== null ? finish : phase !== 'order' && pickA !== null && !okA ? () => setPhase('order') : undefined;
   const chip = (i: number, extra = '') => {
     const p = m.pieces[i]!;
     return <><b lang={unit.language}>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}{extra}</small></>;
   };
   return (
-    <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked && okA ? 'right' : checked === false ? 'wrong' : ''}`} {...(checked !== null ? { onNext: finish } : {})}>
+    <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked && okA ? 'right' : checked === false ? 'wrong' : ''}`} {...(swipe ? { onNext: swipe } : {})}>
       <div className="pieces-body">
       <p className="tag">🧩 LAS PIEZAS · {phase === 'order' ? 'ORDÉNALAS' : phase === 'jump' ? '¿QUÉ PIEZA SE ADELANTA?' : '¿CUÁL FALTA?'}</p>
       <div className="pieces-head">
@@ -1064,7 +1071,6 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
               <p className={`tense-verdict ${okA ? 'ok' : 'ko'}`}>{okA ? '¡Eso es! 🎉' : <>Era <b>{m.pieces[jumper!]!.es}</b></>}</p>
               <p className="pieces-jump"><b>{m.pieces[jumper!]!.es}</b> → <b lang={unit.language}>{m.pieces[jumper!]!.en}</b> va antes</p>
               {rule && <p className="why">📏 {rule}</p>}
-              <button type="button" className="primary arcade-go" onClick={() => setPhase('order')}>Ahora ordénalas →</button>
             </div>
           )}
         </>
@@ -1080,7 +1086,6 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
           ) : (
             <div className="pieces-after">
               <p className={`tense-verdict ${okA ? 'ok' : 'ko'}`}>{okA ? '¡Eso es! 🎉' : <>Era <b lang={unit.language}>{m.pieces[gap.hidden]!.en}</b> ({m.pieces[gap.hidden]!.es})</>}</p>
-              <button type="button" className="primary arcade-go" onClick={() => setPhase('order')}>Ahora ordénalas →</button>
             </div>
           )}
         </>
@@ -1103,7 +1108,6 @@ function Pieces({ unit, all, example, seed, onResult }: { unit: SessionUnit; all
               <p className="train-final" lang={unit.language}>{ex.text}</p>
               {ex.translation && <p className="tense-es">{ex.translation}</p>}
               {rule && order.some((v, k) => v !== k) && <p className="why">📏 {rule}</p>}
-              <button type="button" className="primary arcade-go" onClick={finish}>Seguir →</button>
             </div>
           )}
         </>

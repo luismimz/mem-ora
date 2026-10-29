@@ -32,6 +32,14 @@ try {
     return !(document.documentElement.scrollWidth > innerWidth) && out.length === 0;
   });
   const tapText = (page, sel, text) => page.locator(sel, { hasText: text }).first().tap();
+  // Deslizar hacia arriba con el dedo (CDP): así se sigue cuando hay que leer algo (sin botones).
+  const swipe = async (page) => {
+    const cdp = await context.newCDPSession(page);
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 195, y: 700 }] });
+    for (let i = 1; i <= 10; i++) { await cdp.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 195, y: 700 - 32 * i }] }); await page.waitForTimeout(16); }
+    await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+    await page.waitForTimeout(400);
+  };
 
   // 1. El plan: tras la ficha del truco, «Las piezas» y después «Construye la frase» con OTRO ejemplo.
   let page = await open('k=g-adjective-order');
@@ -95,21 +103,25 @@ try {
   await tapText(page, '.pieces-row .ptile', ex.pieces[jumper].es);
   const v1 = await page.locator('.tense-verdict').textContent();
   check(/Eso es/.test(v1), `tocar la pieza que salta («${ex.pieces[jumper].es}») acierta y explica por qué`);
-  await page.locator('.arcade-go').tap();
+  check(await page.locator('.pieces .arcade-go').count() === 0, 'sin botones de «seguir»');
+  await page.waitForSelector('.pieces-slots', { timeout: 3000 });
+  check(true, 'al acertar, pasa sola a ordenar');
   for (const i of ex.order) await page.locator('.pieces-row .ptile:not(.used)', { hasText: ex.pieces[i].en }).first().tap();
   const v2 = await page.locator('.tense-verdict').textContent();
   check(/Perfecto/.test(v2), `ordenarlas en inglés: «${v2}»`);
   if (shots) await page.waitForTimeout(800), await page.screenshot({ path: `${shots}/piezas-bien.png` });
-  await page.locator('.pieces .arcade-go').tap();
-  await page.waitForSelector('.summary, .slide:not(.pieces)', { timeout: 4000 });
-  check(true, 'se sigue con «Seguir →»');
+  await page.waitForSelector('.summary, .slide:not(.pieces)', { timeout: 5000 });
+  check(true, 'al ordenarlas bien, pasa sola a la siguiente tarjeta');
   await page.close();
 
   // 4. Fallo: seguir el orden del español se dice, y se enseña el orden bueno con la pieza que salta marcada.
   page = await open('k=g-adjective-order&solo=pieces');
   await page.waitForSelector('.pieces');
   await page.locator('.pieces-row .ptile').first().tap();
-  await page.locator('.arcade-go').tap();
+  await page.waitForTimeout(1500);
+  check(await page.locator('.pieces-slots').count() === 0, 'si fallas, NO pasa sola: te deja leer por qué');
+  await swipe(page);
+  await page.waitForSelector('.pieces-slots', { timeout: 3000 });
   for (let i = 0; i < ex.pieces.length; i += 1) await page.locator('.pieces-row .ptile:not(.used)', { hasText: ex.pieces[i].en }).first().tap();
   const bad = await page.evaluate(() => ({ v: document.querySelector('.tense-verdict')?.textContent, jumped: document.querySelectorAll('.ptile.jumped').length, why: document.querySelector('.pieces .why')?.textContent }));
   check(/orden del español/.test(bad.v ?? ''), `si sigues el orden del español, se dice: «${bad.v}»`);
