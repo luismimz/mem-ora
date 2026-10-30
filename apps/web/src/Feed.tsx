@@ -20,6 +20,8 @@ import {
   orderSwap,
   spanishOrderCalque,
   exercisesOf,
+  arcadeLimit,
+  ARCADE_MS,
   exerciseView,
   gradeChallenge,
   gradeReview,
@@ -720,10 +722,13 @@ export function buildMistake(answer: string[], words: string[], mirror?: Mirror,
 function Confetti({ burst }: { burst: number }) {
   if (!burst) return null;
   const colors = ['#ffd76a', '#43d68b', '#ff6b5b', '#6bc7ff', '#c88bff'];
-  return (
+  // Fuera de la tarjeta (portal): si quedaba como su último hijo, el centrado vertical se rompía y el contenido se
+  // pegaba abajo (visto en el móvil del usuario, 29-oct-2026).
+  return createPortal(
     <div className="confetti" key={burst} aria-hidden="true">
       {Array.from({ length: 18 }, (_, i) => <i key={i} style={{ '--x': `${((i * 37) % 100) - 50}vw`, '--r': `${(i * 53) % 360}deg`, background: colors[i % colors.length], animationDelay: `${(i % 6) * 25}ms` } as React.CSSProperties} />)}
-    </div>
+    </div>,
+    document.body,
   );
 }
 
@@ -1146,9 +1151,6 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
 /** Pasado este tiempo preparando la siguiente ronda, se ofrece reintentar. */
 const NEXT_SLOW_MS = 10000;
 
-/** Segundos por pregunta del Arcade sorpresa (D-087). */
-const ARCADE_MS = 5000;
-
 /**
  * Arcade sorpresa (D-087): una ráfaga contrarreloj de lo YA aprendido, en mitad del Flujo, para romper la monotonía.
  * 5 s por pregunta con la cuenta atrás bien visible, combo, puntos y confeti. Un fallo no corta el juego ni manda a la
@@ -1204,7 +1206,8 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
     if (q.kind === 'judge') return [{ label: '✅ Bien dicho', correct: !q.wrong }, { label: '❌ Mal dicho', correct: q.wrong }];
     return choicesFor(label(q.unit, q.inverse), pool.map((x) => label(x, q.inverse)), `${seed}-arcade-${i}`, 3);
   }, [q, i]); // eslint-disable-line react-hooks/exhaustive-deps
-  const limit = ARCADE_MS;
+  const limit = q ? arcadeLimit(q.unit, [q.kind === 'judge' ? q.text : q.inverse ? unitMeaning(q.unit) : unitText(q.unit), ...choices.map((c) => c.label)]) : ARCADE_MS;
+  const concepts = units.some((u) => u.type === 'concept');
   useEffect(() => {
     if (!q || picked !== null) return;
     t0.current = performance.now();
@@ -1229,7 +1232,7 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
       }
     }
     // En las frases se deja leer la regla; el reloj se repone ANTES de pasar (si no, la siguiente nacía a 0 s).
-    window.setTimeout(() => { setLeft(ARCADE_MS); setPicked(null); setI((n) => n + 1); }, hold);
+    window.setTimeout(() => { setLeft(Number.POSITIVE_INFINITY); setPicked(null); setI((n) => n + 1); }, hold);
   }
   function pick(k: number) {
     if (!q || picked !== null) return;
@@ -1247,7 +1250,7 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
         <h2 className="ask">{review ? 'Lo que tu memoria está a punto de olvidar' : '¡Ráfaga de lo que ya sabes!'}</h2>
         <p className="arcade-rules">{review
           ? `${questions.length} palabra${questions.length === 1 ? '' : 's'} que tocan hoy según tu curva del olvido · las que fallas vuelven al final`
-          : `${questions.length} preguntas · 5 segundos cada una · encadena aciertos para multiplicar${grammar.length ? ' · y frases: ¿bien o mal dicho?' : ''}`}</p>
+          : `${questions.length} preguntas · ${concepts ? 'tiempo según lo que hay que leer' : '5 segundos cada una'} · encadena aciertos para multiplicar${grammar.length ? ' · y frases: ¿bien o mal dicho?' : ''}`}</p>
         <button type="button" className="primary arcade-go" onClick={() => setI(0)}>{review ? '¡A repasar! 🧠' : '¡Jugar! ⚡'}</button>
       </Slide>
     );
@@ -1271,7 +1274,8 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
       </Slide>
     );
   }
-  const secs = Math.ceil(left / 1000);
+  const shown = Math.min(left, limit);
+  const secs = Math.ceil(shown / 1000);
   const state = (k: number) => (picked === null ? '' : choices[k]!.correct ? 'is-right' : picked === k ? 'is-wrong' : 'is-off');
   const verdict = picked === null ? '' : picked >= 0 && choices[picked]!.correct ? 'right' : 'wrong';
   return (
@@ -1282,7 +1286,7 @@ function FlowArcade({ units, grammar = [], all, seed, review = false, recall = [
       </div>
       <div className={`arcade-clock ${secs <= 2 ? 'hurry' : ''}`} role="timer" aria-label={`Quedan ${secs} segundos`}>
         <span className="arcade-secs">{secs}</span>
-        <div className="arcade-bar"><i style={{ width: `${(left / limit) * 100}%` }} /></div>
+        <div className="arcade-bar"><i style={{ width: `${(shown / limit) * 100}%` }} /></div>
       </div>
       {q.kind === 'judge' && <p className="arcade-kind">🧩 ¿Está bien dicho?</p>}
       {review && q.kind === 'word' && <p className="arcade-kind">{q.inverse ? '💭 ¿Cómo se dice en inglés?' : '💭 ¿Qué significa?'}</p>}

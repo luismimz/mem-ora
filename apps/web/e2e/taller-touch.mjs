@@ -82,8 +82,9 @@ try {
           const kids = [...sl.children].filter((c) => !['fixed', 'absolute'].includes(getComputedStyle(c).position) && c.getBoundingClientRect().height > 0);
           const top = kids[0].getBoundingClientRect().top - r.top - parseFloat(st.paddingTop);
           const bottom = r.bottom - parseFloat(st.paddingBottom) - kids.at(-1).getBoundingClientRect().bottom;
-          return { top: Math.round(top), bottom: Math.round(bottom), confetti: Boolean(sl.querySelector(':scope > .confetti')) };
+          return { top: Math.round(top), bottom: Math.round(bottom), confetti: Boolean(document.querySelector('.confetti')), inside: Boolean(sl.querySelector('.confetti')) };
         });
+        check(!gaps.inside, 'el confeti se dibuja fuera de la tarjeta (no puede descolocarla)');
         check(Math.abs(gaps.top - gaps.bottom) <= 24, `el reto queda centrado aunque haya confeti (arriba ${gaps.top} px, abajo ${gaps.bottom} px, confeti: ${gaps.confetti})`);
       }
       if (kind === 'whatis') {
@@ -140,6 +141,23 @@ try {
       if (shots) await page.screenshot({ path: `${shots}/taller-repaso.png` });
       await swipeUp();
     }
+  }
+  // 3. El Arcade de conceptos da tiempo para leer (usuario, 29-oct-2026): más que los 5 s de idiomas.
+  let arcade = null;
+  for (let k = 1; k <= 40 && !arcade; k++) {
+    const p = await open(`s=a${k}&a=1&solo=arcade`);
+    if (await p.evaluate(() => window.__plan.steps.some((x) => x.kind === 'arcade'))) arcade = p; else await p.close();
+  }
+  check(Boolean(arcade), 'hay un Arcade de conceptos');
+  if (arcade) {
+    const rules = await arcade.locator('.arcade-rules').first().textContent();
+    check(/según lo que hay que leer/.test(rules), `la presentación no promete 5 s («${rules.trim()}»)`);
+    await arcade.locator('.arcade-go').tap();
+    await arcade.waitForSelector('.arcade-secs');
+    await arcade.waitForTimeout(300);
+    const secs = Number(await arcade.locator('.arcade-secs').textContent());
+    check(secs >= 8 && secs <= 25, `cada pregunta de conceptos da tiempo para leer (${secs} s)`);
+    if (shots) await arcade.screenshot({ path: `${shots}/arcade-dam.png` });
   }
   check(['whatis', 'widget', 'fill_gap', 'predict_output', 'find_bug', 'spot_part'].every((k) => seen.has(k)), `se han jugado los seis tipos de reto (${[...seen].join(', ')})`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
