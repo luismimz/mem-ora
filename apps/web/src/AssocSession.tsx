@@ -599,6 +599,7 @@ const CHALLENGE_TITLES: Record<ConceptExercise['kind'], string> = {
   fill_gap: 'RETO · COMPLETA EL CÓDIGO',
   find_bug: 'RETO · ENCUENTRA EL ERROR',
   spot_part: 'RETO · SEÑALA LA PARTE',
+  multi_choice: 'RETO · VARIAS CORRECTAS',
   apply_case: 'RETO · APLÍCALO',
   order_steps: 'RETO · ORDENA LOS PASOS',
 };
