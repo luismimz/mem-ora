@@ -1034,3 +1034,16 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Decisión:** en idiomas siguen los 5 s por pregunta. En conceptos, el reloj se calcula con lo que hay que leer
   (pregunta + opciones): 4 s + 0,35 s por palabra, entre 9 y 25 s (`arcadeLimit`). La presentación ya no promete
   «5 segundos» en DAM.
+
+## D-104 · Interfaces de ejemplo, casos reales y POO sin líos (usuario, 30-oct-2026)
+
+- **Contexto:** «Falta aclarar mejor qué es una instancia, objetos… siempre me lío con los términos; necesito
+  asociaciones. Faltan casos reales, interfaces de ejemplo para reconocer dónde está y qué hace».
+- **Decisión:**
+  - Nuevo reto del Taller «📍 ¿Dónde está?»: una ventana de ejemplo con 3 o 4 componentes dibujados (solo controles,
+    nunca contenedores, sin repetir dibujo). Se toca el pedido y después cada uno muestra su nombre. Sale la mitad de
+    las veces que toca un componente dibujado; la otra mitad sigue «¿Qué componente es?».
+  - Contenido (privado): los términos de POO comparten una sola historia, la urbanización. La clase es el plano, el
+    objeto y la instancia son la casa construida («instancia» suena a «estancia»), `new` es la grúa, el constructor
+    el albañil, los atributos los datos de cada casa, el método su mando, `this` es «esta casa» y `static` la piscina
+    común. Se añaden la unidad «instancia», un contraste en cada término y casos reales.

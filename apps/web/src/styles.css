@@ -1128,3 +1128,15 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .tense-cheat-signals { margin: 0; font-size: .85rem; font-weight: 800; opacity: .9; text-align: center; }
 .tense-other { margin: 0; font-size: .92rem; text-align: center; opacity: .92; }
 .tense-other b { color: #ffd76a; }
+
+/* «¿Dónde está?» (D-104): una ventana de ejemplo con varios componentes; se toca el pedido y luego se nombran todos. */
+.wm-where { width: 100%; }
+.wm-bar b { margin-left: .5rem; font-size: .72rem; font-weight: 700; color: #475569; }
+.wm-where-body { display: flex; flex-direction: column; gap: 8px; align-items: stretch; padding: 10px; }
+.where-spot { position: relative; display: flex; justify-content: center; align-items: center; min-height: 48px; padding: 8px; border: 2px dashed transparent; border-radius: 10px; background: transparent; font: inherit; color: inherit; -webkit-tap-highlight-color: transparent; }
+.where-spot:active { background: rgba(59,130,246,.08); }
+.where-spot.is-right { border: 2px solid #22c55e; background: rgba(34,197,94,.12); }
+.where-spot.is-wrong { border: 2px solid #ef4444; background: rgba(239,68,68,.1); }
+.where-spot.is-off { opacity: .75; border-color: #cbd5e1; }
+.where-name { position: absolute; top: -9px; left: 10px; background: #0f172a; color: #fff; font-size: .7rem; font-weight: 800; padding: 1px 7px; border-radius: 99px; }
+.where-spot.is-right .where-name { background: #16a34a; }

@@ -45,10 +45,10 @@ try {
   for (let k = 1; k <= 30 && !seed; k++) {
     const p = await open(`s=t${k}`);
     const kinds = await p.evaluate(() => [...new Set(window.__plan.steps.filter((s) => s.kind === 'workshop').flatMap((s) => s.workshop.map((it) => (it.kind === 'code' ? window.__units[it.unitKey].payload.exercises[it.exercise].kind : it.kind))))]);
-    if (kinds.length === 6) seed = `t${k}`;
+    if (kinds.length === 7) seed = `t${k}`;
     await p.close();
   }
-  check(Boolean(seed), `hay rondas con los seis tipos de reto (semilla ${seed})`);
+  check(Boolean(seed), `hay rondas con los siete tipos de reto (semilla ${seed})`);
   page = await open(`s=${seed}&solo=workshop`);
   const cdp = await context.newCDPSession(page);
   const swipeUp = async () => {
@@ -98,6 +98,14 @@ try {
         const opts = await page.locator('.slide .option').allTextContents();
         await page.locator('.slide .option', { hasText: new RegExp(`^${esc(wrongNow ? opts.find((o) => o !== u.name) : u.name)}$`) }).tap();
         if (wrongNow) { failedOnce = true; check(/Era/.test(await page.locator('.tense-verdict').textContent()), 'al fallar, dice cuál era y qué es'); }
+      } else if (kind === 'where') {
+        const spots = await page.locator('.where-spot').evaluateAll((b) => b.map((x) => Math.round(x.getBoundingClientRect().height)));
+        check(spots.length === it.options.length && spots.every((h) => h >= 44), `«¿Dónde está?»: ventana con ${spots.length} componentes, todos tocables (${spots.join(', ')} px)`);
+        check(await page.locator('.where-name').count() === 0, 'antes de responder, los componentes no dicen su nombre');
+        await page.locator('.where-spot').nth(it.options.indexOf(it.unitKey)).tap();
+        const names = await page.locator('.where-name').allTextContents();
+        check(await page.locator('.where-spot.is-right').count() === 1 && names.length === it.options.length, `al tocarlo, se marca y se nombra cada componente (${names.join(', ')})`);
+        if (shots) await page.screenshot({ path: `${shots}/taller-donde.png` });
       } else if (kind === 'fill_gap') {
         const tiles = await page.locator('.shop-tile').evaluateAll((b) => b.map((x) => Math.round(x.getBoundingClientRect().height)));
         check(tiles.length === ex.distractors.length + 1 && tiles.every((h) => h >= 44), `«Completa el código»: fichas tocables (${tiles.join(', ')} px)`);
@@ -159,6 +167,7 @@ try {
     const target = await sq.evaluate(() => {
       const it = window.__plan.steps.find((x) => x.kind === 'workshop').workshop[0];
       const u = window.__units[it.unitKey].payload;
+      if (it.kind === 'where') return { sel: '.where-spot', nth: it.options.indexOf(it.unitKey) };
       if (it.kind !== 'code') return { sel: '.slide .option', text: u.name };
       const ex = u.exercises[it.exercise];
       if (ex.kind === 'find_bug') return { sel: '.shop-line', nth: ex.bugLine };
@@ -196,7 +205,7 @@ try {
     check(secs >= 8 && secs <= 25, `cada pregunta de conceptos da tiempo para leer (${secs} s)`);
     if (shots) await arcade.screenshot({ path: `${shots}/arcade-dam.png` });
   }
-  check(['whatis', 'widget', 'fill_gap', 'predict_output', 'find_bug', 'spot_part'].every((k) => seen.has(k)), `se han jugado los seis tipos de reto (${[...seen].join(', ')})`);
+  check(['whatis', 'widget', 'where', 'fill_gap', 'predict_output', 'find_bug', 'spot_part'].every((k) => seen.has(k)), `se han jugado los siete tipos de reto (${[...seen].join(', ')})`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

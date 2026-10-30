@@ -412,7 +412,8 @@ describe('el Taller: saber usarlo (D-090)', () => {
     const ws = Object.fromEntries(['button', 'combobox', 'slider', 'checkbox'].map((w, n) => [`w${n}`, c(`w${n}`, { widget: w })]));
     const p = buildFlowSession({ ...base, units: ws, items: Object.keys(ws).map((k) => item(k, 'new')) });
     const items = p.steps.filter((s) => s.kind === 'workshop').flatMap((s) => s.workshop!);
-    expect(items.filter((i) => i.kind === 'widget').length).toBe(4);
+    // Dibujados siempre: «¿Qué componente es?» o, la mitad de las veces, «¿Dónde está?» en una ventana (D-104).
+    expect(items.filter((i) => i.kind === 'widget' || i.kind === 'where').length).toBe(4);
   });
 });
 

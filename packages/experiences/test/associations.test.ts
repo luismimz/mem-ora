@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, arcadeLimit, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, arcadeLimit, buildWorkshop, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -250,5 +250,26 @@ describe('reloj del Arcade (usuario, 29-oct-2026)', () => {
     const largo = 'contenedor que coloca a sus hijos en una sola columna de arriba abajo con separación';
     expect(arcadeLimit(concept, [largo, largo, largo, largo])).toBeGreaterThan(15000);
     expect(arcadeLimit(concept, Array(20).fill(largo))).toBe(25000);
+  });
+});
+
+describe('«¿Dónde está?» (D-104)', () => {
+  const w = (key: string, widget: string) => ({ key, type: 'concept', language: 'es', version: 1, payload: { name: key, gist: 'g', definition: 'd', examples: [], widget }, skills: [], association: null }) as unknown as SessionUnit;
+  const units: Record<string, SessionUnit> = Object.fromEntries([['cb', 'combobox'], ['sl', 'slider'], ['ck', 'checkbox'], ['tf', 'textfield'], ['bp', 'borderpane']].map(([k, x]) => [k, w(k!, x!)]));
+  it('pone el componente pedido en una ventana con otros controles (nunca contenedores) y sin repetir dibujo', () => {
+    let seen = 0;
+    for (let s = 0; s < 40; s++) {
+      let n = s;
+      const rand = () => { n = (n * 9301 + 49297) % 233280; return n / 233280; };
+      for (const it of buildWorkshop(['cb', 'sl', 'ck', 'tf', 'bp'], [], units, rand) ?? []) {
+        if (it.kind !== 'where') continue;
+        seen++;
+        expect(it.options).toContain(it.unitKey);
+        expect(it.options.length).toBeGreaterThanOrEqual(3);
+        expect(it.options).not.toContain('bp');
+        expect(new Set(it.options).size).toBe(it.options.length);
+      }
+    }
+    expect(seen).toBeGreaterThan(0);
   });
 });

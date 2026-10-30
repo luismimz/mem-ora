@@ -1,7 +1,7 @@
 // El Taller (D-090): saber USAR lo aprendido, no solo recordarlo. En los cursos de conceptos (DAM), cada pocas fichas
 // llega un minijuego de 5 retos mezclados con lo ya enseñado: «¿Qué es esto?» (un ejemplo o un caso y eliges qué
 // concepto es), «Completa el código», «¿Qué imprime?», «Caza el bug» y «Señala la parte» (tocando la línea) y, en interfaces, «¿Qué
-// componente es?» con el componente dibujado. Solo entra lo que ya se ha enseñado (regla de oro, D-067).
+// componente es?» con el componente dibujado y «¿Dónde está?» (tocarlo en una ventana con otros, D-104). Solo entra lo que ya se ha enseñado (regla de oro, D-067).
 import type { ConceptExample, ConceptExercise, ConceptPayload } from '@memora/content';
 import { exercisesOf, shuffle, unitText } from './associations';
 import type { SessionUnit } from './session';
@@ -9,7 +9,9 @@ import type { SessionUnit } from './session';
 export type WorkshopItem =
   | { kind: 'whatis'; unitKey: string; source: 'case' | 'example'; index: number; options: string[] }
   | { kind: 'code'; unitKey: string; exercise: number }
-  | { kind: 'widget'; unitKey: string; options: string[] };
+  | { kind: 'widget'; unitKey: string; options: string[] }
+  /** «¿Dónde está?»: una ventana con varios componentes dibujados (el pedido y otros) y se toca el pedido. */
+  | { kind: 'where'; unitKey: string; options: string[] };
 
 /** Retos por Taller, opciones de «¿Qué es esto?» y fichas enseñadas (las que se ven en la ficha del concepto). */
 export const WORKSHOP_SIZE = 5;
@@ -55,6 +57,11 @@ export function codeExercises(u: SessionUnit): number[] {
 
 export const widgetOf = (u: SessionUnit) => (u.type === 'concept' ? (u.payload as ConceptPayload).widget : undefined);
 
+/** Controles que caben juntos en una ventana de ejemplo (los contenedores y los diálogos se reconocen solos). */
+export const WHERE_WIDGETS = ['button', 'label', 'textfield', 'passwordfield', 'checkbox', 'radiobutton', 'togglebutton', 'combobox', 'listview', 'slider', 'progressbar', 'spinner', 'datepicker', 'colorpicker', 'hyperlink', 'toolbar', 'tabpane', 'menubar', 'textarea', 'tableview', 'treeview'];
+/** Componentes en la ventana de «¿Dónde está?» (el pedido incluido). */
+export const WHERE_SIZE = 4;
+
 /**
  * Un Taller con los conceptos recién enseñados (`block`) y, para completar, lo ya aprendido (`pool`). Cada concepto
  * del bloque aporta un reto (código si lo tiene, si no «¿Qué es esto?» o su componente). Las opciones son conceptos
@@ -76,9 +83,15 @@ export function buildWorkshop(block: string[], pool: string[], units: Record<str
   };
   const concepts = [...new Set([...block, ...pool])].filter((k) => units[k]?.type === 'concept');
   const widgets = concepts.filter((k) => widgetOf(units[k]!));
+  const controls = widgets.filter((k) => WHERE_WIDGETS.includes(widgetOf(units[k]!)!));
   const itemFor = (u: string): WorkshopItem | null => {
     const unit = units[u]!;
     const w = widgetOf(unit);
+    // D-104: la mitad de las veces, encontrarlo en una ventana real con otros componentes («¿Dónde está?»).
+    if (w && WHERE_WIDGETS.includes(w) && controls.length >= 3 && rand() < 0.5) {
+      const others = shuffle(controls.filter((k) => k !== u && widgetOf(units[k]!) !== w), rand).slice(0, WHERE_SIZE - 1);
+      if (others.length >= 2) return { kind: 'where', unitKey: u, options: shuffle([u, ...others], rand) };
+    }
     if (w && widgets.length >= 3) {
       const options = optionsFor(u, widgets);
       if (options) return { kind: 'widget', unitKey: u, options };
