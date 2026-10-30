@@ -82,8 +82,9 @@ try {
           const kids = [...sl.children].filter((c) => !['fixed', 'absolute'].includes(getComputedStyle(c).position) && c.getBoundingClientRect().height > 0);
           const top = kids[0].getBoundingClientRect().top - r.top - parseFloat(st.paddingTop);
           const bottom = r.bottom - parseFloat(st.paddingBottom) - kids.at(-1).getBoundingClientRect().bottom;
-          return { top: Math.round(top), bottom: Math.round(bottom), confetti: Boolean(sl.querySelector(':scope > .confetti')) };
+          return { top: Math.round(top), bottom: Math.round(bottom), confetti: Boolean(document.querySelector('.confetti')), inside: Boolean(sl.querySelector('.confetti')) };
         });
+        check(!gaps.inside, 'el confeti se dibuja fuera de la tarjeta (no puede descolocarla)');
         check(Math.abs(gaps.top - gaps.bottom) <= 24, `el reto queda centrado aunque haya confeti (arriba ${gaps.top} px, abajo ${gaps.bottom} px, confeti: ${gaps.confetti})`);
       }
       if (kind === 'whatis') {
@@ -140,6 +141,60 @@ try {
       if (shots) await page.screenshot({ path: `${shots}/taller-repaso.png` });
       await swipeUp();
     }
+  }
+  // 2b. Pantalla casi cuadrada (Honor Magic V3 abierto, el móvil del usuario): tras acertar, el reto sigue centrado.
+  {
+    const sq = await (await browser.newContext({ viewport: { width: 707, height: 770 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2.6 })).newPage();
+    await sq.goto(`${base}?s=${seed}&solo=workshop`);
+    await sq.waitForSelector('.slide');
+    const c2 = await sq.context().newCDPSession(sq);
+    const swipe = async () => {
+      await c2.send('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: 350, y: 700 }] });
+      for (let k = 1; k <= 10; k++) { await c2.send('Input.dispatchTouchEvent', { type: 'touchMove', touchPoints: [{ x: 350, y: 700 - 34 * k }] }); await sq.waitForTimeout(16); }
+      await c2.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
+      await sq.waitForTimeout(400);
+    };
+    await swipe();
+    // Acierta el primer reto (sea cual sea) usando la respuesta buena del plan, y mide el segundo con el confeti en pantalla.
+    const target = await sq.evaluate(() => {
+      const it = window.__plan.steps.find((x) => x.kind === 'workshop').workshop[0];
+      const u = window.__units[it.unitKey].payload;
+      if (it.kind !== 'code') return { sel: '.slide .option', text: u.name };
+      const ex = u.exercises[it.exercise];
+      if (ex.kind === 'find_bug') return { sel: '.shop-line', nth: ex.bugLine };
+      if (ex.kind === 'spot_part') return { sel: '.shop-line', nth: ex.line };
+      return { sel: ex.kind === 'fill_gap' ? '.shop-tile' : '.slide .option', text: ex.answer };
+    });
+    const loc = target.text !== undefined ? sq.locator(target.sel, { hasText: new RegExp(`^${esc(target.text)}$`) }) : sq.locator(target.sel).nth(target.nth);
+    await loc.tap();
+    check(await sq.locator('.tense-verdict.ok').count() === 1, 'pantalla cuadrada: acierta el primer reto (sale confeti)');
+    await sq.waitForTimeout(3200);
+    const g = await sq.evaluate(() => {
+      const sl = [...document.querySelectorAll('.slide')].find((x) => x.querySelector('.arcade-head')); const st = getComputedStyle(sl); const r = sl.getBoundingClientRect();
+      const kids = [...sl.children].filter((c) => !['fixed', 'absolute'].includes(getComputedStyle(c).position) && c.getBoundingClientRect().height > 0);
+      return { top: Math.round(kids[0].getBoundingClientRect().top - r.top - parseFloat(st.paddingTop)), bottom: Math.round(r.bottom - parseFloat(st.paddingBottom) - kids.at(-1).getBoundingClientRect().bottom) };
+    });
+    check(Math.abs(g.top - g.bottom) <= 24, `pantalla cuadrada (707×770): el reto queda centrado (arriba ${g.top} px, abajo ${g.bottom} px)`);
+    if (shots) await sq.screenshot({ path: `${shots}/taller-cuadrada.png` });
+    await sq.context().close();
+  }
+
+  // 3. El Arcade de conceptos da tiempo para leer (usuario, 29-oct-2026): más que los 5 s de idiomas.
+  let arcade = null;
+  for (let k = 1; k <= 40 && !arcade; k++) {
+    const p = await open(`s=a${k}&a=1&solo=arcade`);
+    if (await p.evaluate(() => window.__plan.steps.some((x) => x.kind === 'arcade'))) arcade = p; else await p.close();
+  }
+  check(Boolean(arcade), 'hay un Arcade de conceptos');
+  if (arcade) {
+    const rules = await arcade.locator('.arcade-rules').first().textContent();
+    check(/según lo que hay que leer/.test(rules), `la presentación no promete 5 s («${rules.trim()}»)`);
+    await arcade.locator('.arcade-go').tap();
+    await arcade.waitForSelector('.arcade-secs');
+    await arcade.waitForTimeout(300);
+    const secs = Number(await arcade.locator('.arcade-secs').textContent());
+    check(secs >= 8 && secs <= 25, `cada pregunta de conceptos da tiempo para leer (${secs} s)`);
+    if (shots) await arcade.screenshot({ path: `${shots}/arcade-dam.png` });
   }
   check(['whatis', 'widget', 'fill_gap', 'predict_output', 'find_bug', 'spot_part'].every((k) => seen.has(k)), `se han jugado los seis tipos de reto (${[...seen].join(', ')})`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);

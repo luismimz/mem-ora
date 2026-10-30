@@ -1026,3 +1026,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   sus botones: al acertar pasa solo, al fallar se desliza. Se añaden 20 retos en las misiones 1, 2, 2c y 4 de
   Desarrollo de interfaces, sobre fragmentos de código propios (app JavaFX, FXML, controlador, eventos, componente
   propio, evento propio, persistencia y componente compuesto).
+
+## D-103 · El Arcade de DAM da tiempo para leer (usuario, 29-oct-2026)
+
+- **Contexto:** «Arcade en inglés está bien el tiempo, pero en DAM debe haber más tiempo porque hay que leer mucho
+  para contestar bien».
+- **Decisión:** en idiomas siguen los 5 s por pregunta. En conceptos, el reloj se calcula con lo que hay que leer
+  (pregunta + opciones): 4 s + 0,35 s por palabra, entre 9 y 25 s (`arcadeLimit`). La presentación ya no promete
+  «5 segundos» en DAM.

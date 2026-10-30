@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, arcadeLimit, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -236,5 +236,19 @@ describe('«Señala la parte» (D-102)', () => {
   it('los demás retos se enseñan tal cual', () => {
     const fill = { kind: 'fill_gap' as const, prompt: 'Completa', code: 'int ___ = 1;', answer: 'x' };
     expect(exerciseView(fill)).toEqual({ prompt: 'Completa', code: 'int ___ = 1;' });
+  });
+});
+
+describe('reloj del Arcade (usuario, 29-oct-2026)', () => {
+  const term = { key: 'cat', type: 'term' } as unknown as SessionUnit;
+  const concept = { key: 'stage', type: 'concept' } as unknown as SessionUnit;
+  it('en idiomas, 5 s por pregunta', () => {
+    expect(arcadeLimit(term, ['cat', 'gato', 'perro', 'casa'])).toBe(5000);
+  });
+  it('en conceptos crece con lo que hay que leer, entre 9 y 25 s', () => {
+    expect(arcadeLimit(concept, ['Stage', 'la ventana', 'la escena', 'un nodo'])).toBe(9000);
+    const largo = 'contenedor que coloca a sus hijos en una sola columna de arriba abajo con separación';
+    expect(arcadeLimit(concept, [largo, largo, largo, largo])).toBeGreaterThan(15000);
+    expect(arcadeLimit(concept, Array(20).fill(largo))).toBe(25000);
   });
 });

@@ -263,6 +263,22 @@ export function gradeReview(u: SessionUnit, answer: string, startHint: HintLevel
   return { correct: hint < 5 && acceptedAnswers(u).some((a) => sameAnswer(answer, a)), format: hint > 0 ? 'recall_cued' : 'recall_unaided', hint };
 }
 
+// ─── Arcade (D-087) ──────────────────────────────────────────────────────────────────────────────────────
+
+/** Tiempo por pregunta del Arcade en idiomas. */
+export const ARCADE_MS = 5000;
+
+/**
+ * Tiempo de una pregunta del Arcade. En idiomas, 5 s (palabras cortas). En conceptos (DAM) hay que leer la definición
+ * y las opciones, así que el reloj crece con lo que hay que leer: 4 s + 0,35 s por palabra, entre 9 y 25 s
+ * (usuario, 29-oct-2026: «en DAM debe haber más tiempo porque hay que leer mucho para contestar bien»).
+ */
+export function arcadeLimit(unit: SessionUnit, texts: string[]): number {
+  if (unit.type !== 'concept') return ARCADE_MS;
+  const words = texts.join(' ').split(/\s+/).filter(Boolean).length;
+  return Math.min(25000, Math.max(9000, Math.round((4000 + words * 350) / 1000) * 1000));
+}
+
 // ─── Retos de aplicación (conceptos con ejercicios) ─────────────────────────────────────────────────────────
 
 export function exercisesOf(u: SessionUnit): ConceptExercise[] {
