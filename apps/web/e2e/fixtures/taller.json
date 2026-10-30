@@ -22,6 +22,9 @@
     { "key": "borderpane", "name": "BorderPane", "gist": "cinco zonas: arriba, abajo, lados y centro", "definition": "Contenedor con zonas top, bottom, left, right y center.", "widget": "borderpane",
       "examples": [{ "text": "BorderPane raiz = new BorderPane();\nraiz.setTop(menu);\nraiz.setCenter(tabla);" }] },
     { "key": "checkbox", "name": "CheckBox", "gist": "casilla que se marca o no", "definition": "Control de sí o no que se puede marcar independientemente de los demás.", "widget": "checkbox",
-      "examples": [{ "text": "CheckBox recordar = new CheckBox(\"Recordarme\");" }] }
+      "examples": [{ "text": "CheckBox recordar = new CheckBox(\"Recordarme\");" }] },
+    { "key": "swing-libreria", "name": "Swing", "gist": "librería de ventanas hecha en Java sobre AWT", "definition": "Librería gráfica de Java escrita en Java puro que se apoya en AWT y añade más controles.",
+      "examples": [{ "text": "JFrame ventana = new JFrame(\"Agenda\");", "explanation": "Una ventana de Swing." }],
+      "exercises": [{ "kind": "multi_choice", "prompt": "Marca lo que es cierto de esta librería de prueba", "answers": ["Escrita en Java puro", "Se apoya en AWT"], "distractors": ["Escrita en .NET", "AWT se creó a partir de ella"], "explanation": "Swing es Java puro y se construye sobre AWT, que es anterior." }] }
   ]
 }

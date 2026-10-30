@@ -8,7 +8,7 @@
     "build": "tsc -p tsconfig.json && vite build",
     "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json",
-    "e2e": "node e2e/flow-touch.mjs && node e2e/home-touch.mjs && node e2e/exam-touch.mjs && node e2e/retos-touch.mjs && node e2e/escena-touch.mjs && node e2e/cadena-touch.mjs && node e2e/frase-touch.mjs && node e2e/arcade-touch.mjs && node e2e/ronda-touch.mjs && node e2e/tiempos-touch.mjs && node e2e/taller-touch.mjs && node e2e/asignaturas-touch.mjs && node e2e/piezas-touch.mjs && node e2e/repaso-touch.mjs"
+    "e2e": "node e2e/flow-touch.mjs && node e2e/home-touch.mjs && node e2e/exam-touch.mjs && node e2e/retos-touch.mjs && node e2e/escena-touch.mjs && node e2e/cadena-touch.mjs && node e2e/frase-touch.mjs && node e2e/arcade-touch.mjs && node e2e/ronda-touch.mjs && node e2e/tiempos-touch.mjs && node e2e/taller-touch.mjs && node e2e/multi-touch.mjs && node e2e/asignaturas-touch.mjs && node e2e/piezas-touch.mjs && node e2e/repaso-touch.mjs"
   },
   "dependencies": {
     "@memora/content": "workspace:*",

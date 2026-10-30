@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { PlanItem } from '@memora/core';
-import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, arcadeLimit, buildWorkshop, type SessionUnit } from '../src';
+import { buildAssociationSession, choicesFor, gradeReview, reviewHints, storyGap, unitMeaning, unitText, gradeChallenge, shuffledSteps, challengeChoices, scoreRecall, exerciseView, codeExercises, arcadeLimit, buildWorkshop, buildExam, examCorrect, MULTI_SEP, type SessionUnit } from '../src';
 
 const unit = (key: string, text: string, meaning: string, scene: string, cue = ''): SessionUnit => ({
   key, type: 'term', language: 'en', version: 1,
@@ -271,5 +271,27 @@ describe('«¿Dónde está?» (D-104)', () => {
       }
     }
     expect(seen).toBeGreaterThan(0);
+  });
+});
+
+describe('«Varias correctas» (D-105)', () => {
+  const ex = { kind: 'multi_choice' as const, prompt: 'Selecciona las características de Swing', answers: ['Java puro', 'Se apoya en AWT'], distractors: ['.NET puro', 'AWT nace de Swing'] };
+  it('se acierta solo marcando exactamente las buenas, en cualquier orden', () => {
+    expect(gradeChallenge(ex, ['Se apoya en AWT', 'Java puro'], false).correct).toBe(true);
+    expect(gradeChallenge(ex, ['Java puro'], false).correct).toBe(false);
+    expect(gradeChallenge(ex, ['Java puro', 'Se apoya en AWT', '.NET puro'], false).correct).toBe(false);
+  });
+  it('las opciones del reto son todas, buenas y falsas', () => {
+    const c = challengeChoices(ex, 's');
+    expect(c.filter((x) => x.correct).map((x) => x.label).sort()).toEqual(['Java puro', 'Se apoya en AWT']);
+    expect(c).toHaveLength(4);
+  });
+  it('en el simulacro salen todas sus opciones, se marca como multi y se corrige el conjunto', () => {
+    const u = { key: 'swing', type: 'concept', language: 'es', version: 1, payload: { name: 'Swing', gist: 'g', definition: 'd', examples: [], exercises: [ex] }, skills: [{ key: 'swing.apply', kind: 'apply' }], association: null } as unknown as SessionUnit;
+    const [q] = buildExam({ examId: 'e1', units: { swing: u }, missions: [{ key: 'm', units: ['swing'] }] });
+    expect(q!.multi).toBe(true);
+    expect(q!.options).toHaveLength(4);
+    expect(examCorrect(q!, { swing: u }, ['Java puro', 'Se apoya en AWT'].join(MULTI_SEP))).toBe(true);
+    expect(examCorrect(q!, { swing: u }, 'Java puro')).toBe(false);
   });
 });

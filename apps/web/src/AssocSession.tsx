@@ -11,6 +11,7 @@ import {
   unitMeaning,
   challengeChoices,
   exercisesOf,
+  isMulti,
   exerciseView,
   gradeChallenge,
   shuffledSteps,
@@ -614,6 +615,7 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
   const [text, setText] = useState('');
   const [picked, setPicked] = useState<string | null>(null);
   const [order, setOrder] = useState<string[]>([]);
+  const [multi, setMulti] = useState<string[]>([]);
   const isOrder = exercise.kind === 'order_steps';
   const pool = useMemo(() => (isOrder ? shuffledSteps(exercise, seed) : []), [exercise, seed, isOrder]);
   const choices = useMemo(() => challengeChoices(exercise, seed), [exercise, seed]);
@@ -642,6 +644,12 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
           <div className="choices order-pool">{pool.map((s) => <button type="button" key={s} className="choice" disabled={order.includes(s) || Boolean(result)} onClick={() => tapStep(s)}>{s}</button>)}</div>
           {!result && order.length > 0 && <button type="button" className="link" onClick={() => setOrder([])}>Empezar de nuevo</button>}
         </>
+      ) : isMulti(exercise) ? (
+        <>
+          <p className="multi-hint">☑️ Marca <b>todas</b> las correctas</p>
+          <div className="choices">{choices.map((c) => { const on = multi.includes(c.label); return <button type="button" key={c.label} role="checkbox" aria-checked={on} className={`choice long ${result ? (c.correct ? 'right' : on ? 'wrong' : '') : on ? 'marked' : ''}`} disabled={Boolean(result)} onClick={() => setMulti((m) => (m.includes(c.label) ? m.filter((x) => x !== c.label) : [...m, c.label]))}>{on ? '☑ ' : '☐ '}{c.label}</button>; })}</div>
+          {!result && <button type="button" className="go" disabled={!multi.length} onClick={() => finish(multi)}>Comprobar</button>}
+        </>
       ) : typed ? (
         <form onSubmit={(e) => { e.preventDefault(); if (!result && text.trim()) finish(text); }}>
           <input className="answer-input" lang={unit.language} autoFocus autoCapitalize="off" autoComplete="off" spellCheck={false} value={text} disabled={Boolean(result)} onChange={(e) => setText(e.target.value)} aria-label="Tu respuesta" />
@@ -652,7 +660,7 @@ function Challenge({ unit, exercise, typed, seed, combo, onAnswer, onDone }: { u
       )}
       {result && (
         <div className={`feedback ${result.correct ? 'ok' : 'ko'}`}>
-          <p>{result.correct ? '¡Correcto! +10 XP' : isOrder ? 'El orden era:' : <>Era <b>{exercise.answer}</b>.</>}</p>
+          <p>{result.correct ? '¡Correcto! +10 XP' : isOrder ? 'El orden era:' : isMulti(exercise) ? <>Las correctas: <b>{exercise.answers!.join(' · ')}</b>.</> : <>Era <b>{exercise.answer}</b>.</>}</p>
           {!result.correct && isOrder && <ol>{exercise.steps!.map((s) => <li key={s}>{s}</li>)}</ol>}
           {exercise.explanation && <p>{exercise.explanation}</p>}
           <button type="button" className="primary" onClick={() => onDone(result.correct)}>Seguir →</button>
