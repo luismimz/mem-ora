@@ -1466,9 +1466,10 @@ const looksCode = (text: string) => /\n|[;{}=<>[\]]|\w\(|\w+\.\w+\(/.test(text);
  * «Interfaces en vivo» (D-090): el componente dibujado como se ve en una ventana de escritorio, para reconocerlo. Los
  * contenedores (HBox, VBox, BorderPane…) se dibujan con sus zonas marcadas, que es lo que los distingue.
  */
-export function WidgetMock({ kind }: { kind: Widget }) {
+/** El dibujo de un componente (sin la ventana): lo usan «¿Qué componente es?» y «¿Dónde está?». */
+function widgetBody(kind: Widget): ReactNode {
   const box = (n: number, cls = '') => <span className={`wm-cell ${cls}`}>{n}</span>;
-  const body = ((): ReactNode => {
+  {
     switch (kind) {
       case 'button': return <><span className="wm-btn primary">Aceptar</span><span className="wm-btn">Cancelar</span></>;
       case 'label': return <span className="wm-label">Usuario:</span>;
@@ -1499,7 +1500,11 @@ export function WidgetMock({ kind }: { kind: Widget }) {
       case 'stackpane': return <span className="wm-pane wm-stack"><span className="wm-cell s1">1</span><span className="wm-cell s2">2</span><span className="wm-cell s3">3</span></span>;
       case 'flowpane': return <span className="wm-pane wm-flow">{[1, 2, 3, 4, 5, 6, 7].map((n) => <span key={n} className="wm-cell">{n}</span>)}</span>;
     }
-  })();
+  }
+}
+
+export function WidgetMock({ kind }: { kind: Widget }) {
+  const body = widgetBody(kind);
   return (
     <figure className="wm" aria-label="Una ventana con un componente de interfaz">
       <span className="wm-bar"><i /><i /><i /></span>
@@ -1511,7 +1516,31 @@ export function WidgetMock({ kind }: { kind: Widget }) {
 /** Lo que se espera tras acertar un reto del Taller antes de pasar solo al siguiente (da tiempo a ver la explicación). */
 const SHOP_AUTO_MS = 2600;
 
-const WORKSHOP_TAG = { whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?' } as const;
+/**
+ * «¿Dónde está?» (D-104): una ventana de ejemplo con varios componentes dibujados; se toca el pedido. Al responder, cada
+ * uno se etiqueta con su nombre: así se reconoce DÓNDE está y QUÉ hace cada pieza en una pantalla real.
+ */
+function WhereWindow({ options, all, target, picked, onPick }: { options: string[]; all: Record<string, SessionUnit>; target: string; picked: string | null; onPick: (k: string) => void }) {
+  return (
+    <figure className="wm wm-where" aria-label="Una ventana de ejemplo con varios componentes">
+      <span className="wm-bar"><i /><i /><i /><b>Mi aplicación</b></span>
+      <span className="wm-body wm-where-body">
+        {options.map((k) => {
+          const u = all[k]!;
+          const st = picked === null ? '' : k === target ? 'is-right' : k === picked ? 'is-wrong' : 'is-off';
+          return (
+            <button type="button" key={k} className={`where-spot ${st}`} onClick={() => onPick(k)} aria-label={picked === null ? 'Componente de la ventana' : unitText(u)}>
+              {widgetBody(((u.payload as ConceptPayload).widget ?? 'button') as Widget)}
+              {picked !== null && <span className="where-name">{unitText(u)}</span>}
+            </button>
+          );
+        })}
+      </span>
+    </figure>
+  );
+}
+
+const WORKSHOP_TAG = { whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?', where: '📍 ¿DÓNDE ESTÁ?' } as const;
 
 /**
  * El Taller (D-090): saber USAR lo aprendido. Retos mezclados de conceptos ya enseñados: reconocer un ejemplo o un
@@ -1540,9 +1569,10 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
   const options = useMemo(() => {
     if (!it || !u) return [];
     if (it.kind === 'code') return stableOrder([ex!.answer!, ...(ex!.distractors ?? [])], `${seed}-${i}`);
+    if (it.kind === 'where') return [];
     return it.options.map((k) => unitText(all[k]!));
   }, [it, u, ex, i, seed, all]);
-  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : unitText(u);
+  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : it.kind === 'where' ? u.key : unitText(u);
   const ok = picked !== null && (it?.kind === 'code' && !tapLine ? gradeChallenge(ex!, picked, false).correct : picked === answer);
   function pick(o: string) {
     if (!it || !u || picked !== null) return;
@@ -1597,6 +1627,7 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
         {looksCode(shownText) ? <pre className="learn-code shop-code"><code>{shownText}</code></pre> : <blockquote className="reading shop-case">{shownText}</blockquote>}
       </>}
       {it.kind === 'widget' && <><h3 className="ask shop-ask">¿Qué componente es?</h3><WidgetMock kind={(p.widget ?? 'button') as Widget} /></>}
+      {it.kind === 'where' && <><h3 className="ask shop-ask">¿Dónde está el <b>{unitText(u)}</b>?</h3><WhereWindow options={it.options} all={all} target={u.key} picked={picked} onPick={pick} /></>}
       {ex && <>
         <h3 className="ask shop-ask">{ex.prompt}</h3>
         {kind === 'fill_gap' && (
@@ -1610,13 +1641,14 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
           : kind === 'find_bug' && <pre className="learn-code shop-code"><code>{ex.code}</code></pre>}
       </>}
       {picked === null ? (
-        tapLine ? <p className="shop-hint">{kind === 'spot_part' ? '👆 Toca esa línea' : '👆 Toca la línea donde está el error'}</p>
+        it.kind === 'where' ? <p className="shop-hint">👆 Tócalo en la ventana</p>
+          : tapLine ? <p className="shop-hint">{kind === 'spot_part' ? '👆 Toca esa línea' : '👆 Toca la línea donde está el error'}</p>
           : kind === 'fill_gap' ? <div className="shop-tiles">{options.map((o) => <button type="button" key={o} className="shop-tile" onClick={() => pick(o)}>{o}</button>)}</div>
           : <div className="options">{options.map((o) => <button type="button" key={o} className={`option ${o.length > 24 ? 'long' : ''}`} onClick={() => pick(o)}>{o}</button>)}</div>
       ) : (
         <div className="tense-after" aria-live="polite">
-          {it.kind !== 'code' && !tapLine && <div className="options shop-done">{options.map((o) => <span key={o} className={`option ${state(o)}`}>{o}</span>)}</div>}
-          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : kind === 'spot_part' ? <>Era la línea {target! + 1}</> : tapLine ? <>El error está en la línea {target! + 1}</> : <>Era <b>{it.kind === 'code' ? ex!.answer : unitText(u)}</b></>}</p>
+          {it.kind !== 'code' && it.kind !== 'where' && !tapLine && <div className="options shop-done">{options.map((o) => <span key={o} className={`option ${state(o)}`}>{o}</span>)}</div>}
+          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : it.kind === 'where' ? <>Estaba aquí: el marcado en verde</> : kind === 'spot_part' ? <>Era la línea {target! + 1}</> : tapLine ? <>El error está en la línea {target! + 1}</> : <>Era <b>{it.kind === 'code' ? ex!.answer : unitText(u)}</b></>}</p>
           {it.kind !== 'code' && <p className="tense-why"><b>{unitText(u)}</b>: {p.gist}</p>}
           {tapLine && (kind === 'spot_part' ? <p className="tense-why">👆 Es <b>{ex!.answer}</b></p> : <p className="tense-why">Arreglo: <code>{ex!.answer}</code></p>)}
           {(ex?.explanation || shownNote) && <p className="tense-es">{ex?.explanation ?? shownNote}</p>}
