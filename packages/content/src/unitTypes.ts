@@ -308,7 +308,7 @@ export interface ConceptExample {
 export const WIDGETS = ['button', 'label', 'textfield', 'passwordfield', 'textarea', 'checkbox', 'radiobutton', 'togglebutton', 'combobox', 'listview', 'tableview', 'treeview', 'slider', 'progressbar', 'spinner', 'datepicker', 'colorpicker', 'menubar', 'toolbar', 'tabpane', 'hyperlink', 'alert', 'hbox', 'vbox', 'borderpane', 'gridpane', 'stackpane', 'flowpane'] as const;
 export type Widget = (typeof WIDGETS)[number];
 
-export const EXERCISE_KINDS = ['predict_output', 'fill_gap', 'find_bug', 'apply_case', 'order_steps', 'spot_part'] as const;
+export const EXERCISE_KINDS = ['predict_output', 'fill_gap', 'find_bug', 'apply_case', 'order_steps', 'spot_part', 'multi_choice'] as const;
 export type ConceptExerciseKind = (typeof EXERCISE_KINDS)[number];
 
 /**
@@ -337,6 +337,11 @@ export interface ConceptExercise {
    * (`answer` = el nombre de la parte, `distractors` = otras partes).
    */
   line?: number;
+  /**
+   * «Varias correctas» (D-105, `multi_choice`): todas las opciones buenas; `distractors` son las falsas. Se acierta
+   * marcando exactamente las buenas, como en las preguntas de tipo test del profesor («Selecciona las características…»).
+   */
+  answers?: string[];
 }
 
 /** Concepto de cualquier materia: «class», «subred», «TCP». */
@@ -524,7 +529,8 @@ function checkTextList(issues: ContentIssue[], value: unknown, path: string, min
 
 function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void {
   if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation', 'bugLine', 'line']);
+  checkUnknownFields(issues, ex, path, ['kind', 'prompt', 'code', 'answer', 'accepted', 'distractors', 'steps', 'explanation', 'bugLine', 'line', 'answers']);
+  if (ex.answers !== undefined && ex.kind !== 'multi_choice') issues.push(issue('answers_not_multi', `${path}.answers`));
   if (ex.kind === 'spot_part' || ex.line !== undefined) {
     const lines = typeof ex.code === 'string' ? ex.code.split('\n').length : 0;
     if (ex.kind !== 'spot_part') issues.push(issue('line_not_spot', `${path}.line`));
@@ -544,6 +550,16 @@ function checkExercise(issues: ContentIssue[], ex: unknown, path: string): void 
   if (ex.kind === 'fill_gap' && typeof ex.code === 'string' && !ex.code.includes('___')) issues.push(issue('gap_missing', `${path}.code`));
   if (ex.kind === 'order_steps') {
     checkTextList(issues, ex.steps, `${path}.steps`, 3, 160);
+    return;
+  }
+  if (ex.kind === 'multi_choice') {
+    checkTextList(issues, ex.answers, `${path}.answers`, 1, 160);
+    checkTextList(issues, ex.distractors, `${path}.distractors`, 1, 160);
+    const good = Array.isArray(ex.answers) ? ex.answers : [];
+    const bad = Array.isArray(ex.distractors) ? ex.distractors : [];
+    const low = (t: unknown) => String(t).trim().toLowerCase();
+    if (bad.some((d) => good.some((g) => low(g) === low(d)))) issues.push(issue('distractor_is_answer', `${path}.distractors`));
+    if (good.length + bad.length > 8) issues.push(issue('max_items', `${path}.distractors`, { max: 8, count: good.length + bad.length }));
     return;
   }
   checkText(issues, ex.answer, `${path}.answer`, { max: 160 });

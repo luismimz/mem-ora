@@ -1,13 +1,13 @@
 # Estándar de Memora (congelado)
 
-Versión 13 · 30-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
+Versión 14 · 30-oct-2026 · aprobado por el usuario al pedir «establecer de una vez cada parte» (D-075); versión 2 con
 sus respuestas del mismo día: deslizar sin botones, feed infinito, ejemplo visto para cada pregunta (D-077); versión 3,
 «La escena que cambia» (D-084, aprobada por el usuario el 24-oct-2026); versión 4, «La cadena» (D-085, aprobada
 por el usuario el 25-oct-2026); versión 5, «Arcade sorpresa» en el Flujo (D-087, pedido por el usuario el 28-oct-2026); versión 6, la ruta de
 los tiempos verbales y «¿Qué tiempo pide?» (D-089, aprobada por el usuario el 28-oct-2026); versión 7, el Taller de «saber usarlo» en DAM (D-090, pedido por el
 usuario el 29-oct-2026); versión 8, «Las piezas» y el ejemplo que se gira pieza a pieza (D-092, pedido por el usuario el
 29-oct-2026); versión 9, frases de práctica nuevas en «Las piezas» y «Construye» (D-093, elegido por el usuario); versión 10, el «Repaso rápido» por la curva del olvido en idiomas (D-094, aprobado por el
-usuario el 29-oct-2026); versión 11, «Señala la parte» en el Taller (D-102, pedido por el usuario el 30-oct-2026: «identificar cada parte del sistema»); versión 12, el Arcade de conceptos da tiempo para leer (D-103, pedido por el usuario el 29-oct-2026); versión 13, «¿Dónde está?» en el Taller (D-104, pedido por el usuario el 30-oct-2026).
+usuario el 29-oct-2026); versión 11, «Señala la parte» en el Taller (D-102, pedido por el usuario el 30-oct-2026: «identificar cada parte del sistema»); versión 12, el Arcade de conceptos da tiempo para leer (D-103, pedido por el usuario el 29-oct-2026); versión 13, «¿Dónde está?» en el Taller (D-104, pedido por el usuario el 30-oct-2026); versión 14, preguntas de «varias correctas» como las del profesor (D-105, pedido por el usuario el 30-oct-2026).
 **Nada de este documento se cambia sin aprobación explícita del usuario.** Un fallo se corrige respetándolo y se añade
 una comprobación automática para que no vuelva.
 

@@ -42,7 +42,7 @@ try {
   // 2. Jugar los Talleres.
   // Una semilla en la que salen los cinco tipos de reto.
   let seed = null;
-  for (let k = 1; k <= 30 && !seed; k++) {
+  for (let k = 1; k <= 120 && !seed; k++) {
     const p = await open(`s=t${k}`);
     const kinds = await p.evaluate(() => [...new Set(window.__plan.steps.filter((s) => s.kind === 'workshop').flatMap((s) => s.workshop.map((it) => (it.kind === 'code' ? window.__units[it.unitKey].payload.exercises[it.exercise].kind : it.kind))))]);
     if (kinds.length === 7) seed = `t${k}`;

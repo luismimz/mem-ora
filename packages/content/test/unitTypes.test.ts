@@ -155,6 +155,14 @@ describe('el Taller: saber usarlo (D-090)', () => {
     expect(codes('concept', concept({ exercises: [{ kind: 'fill_gap', prompt: 'p', code: '___;', answer: 'x', bugLine: 0 }] }))).toContain('bugline_not_bug@exercises.0.bugLine');
     expect(codes('concept', concept({ cases: [{ text: '' }] }))).toContain('required@cases.0.text');
   });
+  it('«Varias correctas» (D-105): varias buenas y al menos una falsa, sin repetir y como mucho 8 opciones', () => {
+    const multi = { kind: 'multi_choice', prompt: 'Selecciona las características de Swing', answers: ['Hecha en Java puro', 'Se apoya en AWT'], distractors: ['Hecha en .NET'] };
+    expect(validateUnitPayload('concept', concept({ exercises: [multi] }))).toEqual([]);
+    expect(codes('concept', concept({ exercises: [{ ...multi, answers: [] }] }))).toContain('min_items@exercises.0.answers');
+    expect(codes('concept', concept({ exercises: [{ ...multi, distractors: ['Hecha en Java puro'] }] }))).toContain('distractor_is_answer@exercises.0.distractors');
+    expect(codes('concept', concept({ exercises: [{ ...multi, distractors: ['a', 'b', 'c', 'd', 'e', 'f', 'g'] }] }))).toContain('max_items@exercises.0.distractors');
+    expect(codes('concept', concept({ exercises: [{ kind: 'apply_case', prompt: 'p', answer: 'x', distractors: ['y'], answers: ['x'] }] }))).toContain('answers_not_multi@exercises.0.answers');
+  });
   it('«Señala la parte» (D-102) lleva código y la línea de la parte, dentro del código y solo en ese tipo', () => {
     const spot = { kind: 'spot_part', prompt: 'Toca la línea que declara la propiedad', code: 'class A {\n  IntegerProperty n;\n}', answer: 'la propiedad', distractors: ['el constructor'] };
     expect(validateUnitPayload('concept', concept({ exercises: [{ ...spot, line: 1 }] }))).toEqual([]);

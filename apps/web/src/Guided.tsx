@@ -4,7 +4,7 @@
 // aún no trabajados (por eso enseña antes). Las respuestas cuentan poco (vista la ficha justo antes: pista 1; si se
 // vuelve a mirar, pista 2), así que nunca marcan «dominado» (regla 9); los fallos van a «Vacía tus fallos».
 import { useEffect, useState } from 'react';
-import { examCorrect, exercisesOf, exerciseView, unitText, type ClientEvent } from '@memora/experiences';
+import { examCorrect, exercisesOf, exerciseView, isMulti, MULTI_SEP, unitText, type ClientEvent } from '@memora/experiences';
 import { api, ApiError, type Course, type ExamPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { hue, UnitFicha } from './Feed';
@@ -19,6 +19,9 @@ export function Guided({ course, onExit, onExam, onFailures }: { course: Course;
   const [picks, setPicks] = useState<Record<string, string>>({});
   const [peek, setPeek] = useState<Record<string, boolean>>({});
   const [askedAt, setAskedAt] = useState(Date.now());
+  // Varias correctas (D-105): lo marcado antes de pulsar «Comprobar».
+  const [marked, setMarked] = useState<string[]>([]);
+  useEffect(() => { setMarked([]); }, [idx, round]);
 
   useEffect(() => {
     setData(null); setIdx(0); setStep('learn'); setPicks({}); setPeek({});
@@ -86,15 +89,25 @@ export function Guided({ course, onExit, onExam, onFailures }: { course: Course;
     <p className={`tag ${picked !== undefined && !ok ? 'ko' : ''}`}>✍️ AHORA RESUÉLVELO · {unitText(unit).toUpperCase()}</p>
     <h3 className="ask guided-q">{exerciseView(ex).prompt}</h3>
     {ex.code && <pre className="learn-code guided-code"><code>{exerciseView(ex).code}</code></pre>}
-    <div className="options">
+    {isMulti(ex) ? <>
+      <p className="multi-hint">☑️ Marca <b>todas</b> las correctas</p>
+      <div className="options multi-options">
+        {q.options.map((o) => {
+          const good = ex.answers!.includes(o); const on = picked !== undefined ? picked.split(MULTI_SEP).includes(o) : marked.includes(o);
+          const st = picked === undefined ? (on ? 'is-marked' : '') : good ? 'is-right' : on ? 'is-wrong' : 'is-off';
+          return <button type="button" key={o} role="checkbox" aria-checked={on} className={`option long ${st}`} disabled={picked !== undefined} onClick={() => setMarked((m) => (m.includes(o) ? m.filter((x) => x !== o) : [...m, o]))}><span className="multi-box" aria-hidden="true">{on ? '✓' : ''}</span>{o}</button>;
+        })}
+      </div>
+      {picked === undefined && <button type="button" className="go wide" disabled={!marked.length} onClick={() => void answer(marked.join(MULTI_SEP))}>Comprobar</button>}
+    </> : <div className="options">
       {q.options.map((o) => (
         <button type="button" key={o} className={`option long ${picked !== undefined && o === ex.answer ? 'is-right' : ''} ${picked === o && o !== ex.answer ? 'is-wrong' : ''}`} disabled={picked !== undefined && o !== picked && o !== ex.answer} onClick={() => void answer(o)}>{o}</button>
       ))}
-    </div>
+    </div>}
     {picked === undefined
       ? <button type="button" className="more-btn" onClick={() => { setPeek((p) => ({ ...p, [q.id]: true })); setStep('learn'); }}>📖 Ver la ficha otra vez</button>
       : <div className={`guided-why ${ok ? 'ok' : 'ko'}`} role="status">
-          <b>{ok ? '✓ ¡Bien!' : `✗ Era «${ex.answer}».`}</b>
+          <b>{ok ? '✓ ¡Bien!' : isMulti(ex) ? `✗ Las correctas: ${ex.answers!.join(' · ')}.` : `✗ Era «${ex.answer}».`}</b>
           {ex.explanation && <p>{ex.explanation}</p>}
         </div>}
     {picked !== undefined && <button type="button" className="go wide" onClick={() => { if (idx + 1 < qs.length) { setIdx(idx + 1); setStep('learn'); } else setStep('end'); }}>{idx + 1 < qs.length ? 'Siguiente tema →' : 'Ver cómo me ha ido →'}</button>}

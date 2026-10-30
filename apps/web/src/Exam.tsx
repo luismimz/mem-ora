@@ -2,7 +2,7 @@
 // ayudas hasta el final; se aprueba con un 7. Al terminar: la nota, la mejor nota y la corrección de cada fallo con su
 // explicación. Las respuestas cuentan como reconocimiento (peso bajo, regla 9) y los fallos van a «Vacía tus fallos».
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { examCorrect, exercisesOf, exerciseView, unitText, type ClientEvent } from '@memora/experiences';
+import { examCorrect, exercisesOf, exerciseView, isMulti, MULTI_SEP, unitText, type ClientEvent } from '@memora/experiences';
 import { api, ApiError, type Course, type ExamPayload, type ExamStats } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError } from './offline';
@@ -48,6 +48,15 @@ export function Exam({ course, onExit, onFailures, onGuided }: { course: Course;
   }
   function pick(option: string) {
     if (!q) return;
+    // Varias correctas (D-105): cada toque marca o desmarca; se guardan juntas.
+    if (q.multi) {
+      const cur = (picks[q.id] ?? '').split(MULTI_SEP).filter(Boolean);
+      const next = cur.includes(option) ? cur.filter((x) => x !== option) : [...cur, option];
+      setPicks((p) => { const n = { ...p }; if (next.length) n[q.id] = next.join(MULTI_SEP); else delete n[q.id]; return n; });
+      setSpent((s) => ({ ...s, [q.id]: (s[q.id] ?? 0) + (Date.now() - shownAt.current) }));
+      shownAt.current = Date.now();
+      return;
+    }
     setPicks((p) => ({ ...p, [q.id]: option }));
     setSpent((s) => ({ ...s, [q.id]: (s[q.id] ?? 0) + (Date.now() - shownAt.current) }));
     shownAt.current = Date.now();
@@ -126,8 +135,8 @@ export function Exam({ course, onExit, onFailures, onGuided }: { course: Course;
                 <small>Pregunta {n + 1} · {unitText(data.units[x.unitKey]!)}{doubt[x.id] ? ' · 🤔 la marcaste dudosa' : ''}</small>
                 <p className="exam-q">{exerciseView(ex).prompt}</p>
                 {ex.code && <pre className="exam-code"><code>{exerciseView(ex).code}</code></pre>}
-                {!ok && <p className="exam-mine">{mine === undefined ? 'Sin responder' : <>Tu respuesta: <s>{mine}</s></>}</p>}
-                <p className="exam-right">✓ {ex.answer}</p>
+                {!ok && <p className="exam-mine">{mine === undefined ? 'Sin responder' : <>Tu respuesta: <s>{mine.split(MULTI_SEP).join(' · ')}</s></>}</p>}
+                <p className="exam-right">✓ {isMulti(ex) ? ex.answers!.join(' · ') : ex.answer}</p>
                 {ex.explanation && <p className="exam-why">{ex.explanation}</p>}
               </li>
             );
@@ -154,8 +163,9 @@ export function Exam({ course, onExit, onFailures, onGuided }: { course: Course;
       <div className="exam-dots" aria-hidden="true">{questions.map((x, n) => <i key={x.id} className={`${picks[x.id] !== undefined ? 'done' : ''} ${doubt[x.id] ? 'doubt' : ''} ${n === idx ? 'here' : ''}`} onClick={() => setIdx(n)} />)}</div>
       <p className="exam-q">{exerciseView(ex).prompt}</p>
       {ex.code && <pre className="exam-code"><code>{exerciseView(ex).code}</code></pre>}
+      {q.multi && <p className="multi-hint">☑️ Marca <b>todas</b> las correctas</p>}
       <div className="exam-options">
-        {q.options.map((o, n) => <button type="button" key={o} className={picks[q.id] === o ? 'on' : ''} aria-pressed={picks[q.id] === o} onClick={() => pick(o)}><span>{'ABCD'[n]}</span>{o}</button>)}
+        {q.options.map((o, n) => { const on = q.multi ? (picks[q.id] ?? '').split(MULTI_SEP).includes(o) : picks[q.id] === o; return <button type="button" key={o} className={on ? 'on' : ''} {...(q.multi ? { role: 'checkbox', 'aria-checked': on } : { 'aria-pressed': on })} onClick={() => pick(o)}><span>{'ABCDEFGH'[n]}</span>{o}</button>; })}
       </div>
       <button type="button" className={`unsure-inline ${doubt[q.id] ? 'on' : ''}`} aria-pressed={Boolean(doubt[q.id])} onClick={() => setDoubt((d) => ({ ...d, [q.id]: !d[q.id] }))}>🤔 {doubt[q.id] ? 'Marcada como dudosa' : 'Marcar como dudosa'}</button>
       <nav className="exam-nav">

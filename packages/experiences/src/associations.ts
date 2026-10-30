@@ -298,8 +298,15 @@ export function exerciseView(ex: ConceptExercise): { prompt: string; code?: stri
   return { prompt: '¿Qué parte es la línea marcada con 👉?', code };
 }
 
+/** ¿Es una pregunta de «varias correctas» (D-105)? */
+export const isMulti = (ex: ConceptExercise) => ex.kind === 'multi_choice' && Boolean(ex.answers?.length);
+
+/** Separador con el que se guardan las opciones marcadas de una pregunta de varias correctas (simulacro). */
+export const MULTI_SEP = '\u241F';
+
 /** Opciones del reto (primer día): la respuesta y sus opciones falsas, en orden estable. */
 export function challengeChoices(ex: ConceptExercise, seed: string): Choice[] {
+  if (isMulti(ex)) return shuffle([...ex.answers!.map((label) => ({ label, correct: true })), ...(ex.distractors ?? []).map((label) => ({ label, correct: false }))], seeded(seed));
   if (!ex.answer) return [];
   return shuffle([{ label: ex.answer, correct: true }, ...(ex.distractors ?? []).map((label) => ({ label, correct: false }))], seeded(seed));
 }
@@ -321,6 +328,12 @@ export function gradeChallenge(ex: ConceptExercise, answer: string | string[], t
   const format: ExerciseFormat = typed ? 'application' : 'recognition_choice';
   if (revealed) return { correct: false, format, hint: 5 };
   const norm = (t: string) => t.replace(/\s+/g, ' ').trim();
+  if (isMulti(ex)) {
+    // Varias correctas: se acierta marcando exactamente las buenas (ni una de más ni una de menos).
+    const marked = new Set(Array.isArray(answer) ? answer : answer.split(MULTI_SEP).filter(Boolean));
+    const good = new Set(ex.answers);
+    return { correct: marked.size === good.size && [...good].every((g) => marked.has(g)), format, hint: 0 };
+  }
   const correct = Array.isArray(answer)
     ? answer.length === (ex.steps ?? []).length && answer.every((s, i) => s === ex.steps![i])
     : [ex.answer ?? '', ...(ex.accepted ?? [])].some((a) => a && sameAnswer(norm(answer), norm(a)));

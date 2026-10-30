@@ -2,7 +2,7 @@
 // ayudas hasta el final y se aprueba con un 7. Solo mide: las respuestas cuentan como reconocimiento (peso bajo, regla
 // 9), así que nunca suben de nivel; los fallos entran en «Vacía tus fallos». Agnóstico de la materia: usa los ejercicios
 // con opciones que ya tienen las unidades.
-import { exercisesOf, seeded, shuffle } from './associations';
+import { exercisesOf, gradeChallenge, isMulti, seeded, shuffle } from './associations';
 import type { SessionUnit } from './session';
 
 export const EXAM_SIZE = 30;
@@ -22,13 +22,15 @@ export interface ExamQuestion {
   unitKey: string;
   skillKey: string;
   exercise: number;
-  /** La respuesta y sus opciones falsas (como mucho 4), barajadas. */
+  /** La respuesta y sus opciones falsas (como mucho 4), barajadas; en «varias correctas», todas (hasta 8). */
   options: string[];
+  /** Pregunta de varias correctas (D-105): se marcan varias y la elección se guarda unida con MULTI_SEP. */
+  multi?: boolean;
 }
 
 /** Ejercicios de una unidad que valen para el examen: tienen respuesta y al menos una opción falsa. */
 export function examExercises(u: SessionUnit): number[] {
-  return exercisesOf(u).map((e, i) => ({ e, i })).filter(({ e }) => e.kind !== 'order_steps' && Boolean(e.answer) && (e.distractors?.length ?? 0) > 0).map(({ i }) => i);
+  return exercisesOf(u).map((e, i) => ({ e, i })).filter(({ e }) => e.kind !== 'order_steps' && (Boolean(e.answer) || isMulti(e)) && (e.distractors?.length ?? 0) > 0).map(({ i }) => i);
 }
 
 const examSkill = (u: SessionUnit) => (u.skills.find((s) => s.kind === 'apply') ?? u.skills.find((s) => s.kind === 'recall'))?.key;
@@ -58,13 +60,17 @@ export function buildExam(input: { examId: string; units: Record<string, Session
     const options = examExercises(u);
     const exercise = options[Math.floor(rand() * options.length)]!;
     const ex = exercisesOf(u)[exercise]!;
-    return { id: `${input.examId}-${n}`, unitKey: k, skillKey: examSkill(u)!, exercise, options: shuffle([ex.answer!, ...(ex.distractors ?? []).slice(0, 3)], rand) };
+    // Varias correctas (D-105): todas sus opciones (hasta 8), como en el test del profesor.
+    const opts = isMulti(ex) ? [...ex.answers!, ...(ex.distractors ?? [])].slice(0, 8) : [ex.answer!, ...(ex.distractors ?? []).slice(0, 3)];
+    return { id: `${input.examId}-${n}`, unitKey: k, skillKey: examSkill(u)!, exercise, options: shuffle(opts, rand), ...(isMulti(ex) ? { multi: true } : {}) };
   });
 }
 
 /** ¿Es correcta la opción elegida? */
 export function examCorrect(q: ExamQuestion, units: Record<string, SessionUnit>, picked: string | null): boolean {
-  return picked !== null && picked === exercisesOf(units[q.unitKey]!)[q.exercise]?.answer;
+  const ex = exercisesOf(units[q.unitKey]!)[q.exercise];
+  if (!ex || picked === null) return false;
+  return isMulti(ex) ? gradeChallenge(ex, picked, false).correct : picked === ex.answer;
 }
 
 /** Nota sobre 10 con un decimal. */

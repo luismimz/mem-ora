@@ -5,7 +5,7 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
-import type { ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark, Widget } from '@memora/content';
+import type { ConceptExercise, ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark, Widget } from '@memora/content';
 import {
   buildTiles,
   burstOptions,
@@ -20,6 +20,7 @@ import {
   orderSwap,
   spanishOrderCalque,
   exercisesOf,
+  isMulti,
   arcadeLimit,
   ARCADE_MS,
   exerciseView,
@@ -1693,7 +1694,46 @@ function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUni
   );
 }
 
+/**
+ * «Varias correctas» (D-105), como en el test del profesor: se marcan todas las buenas y se desliza para comprobar (sin
+ * botones). Se acierta solo si se marcan exactamente las buenas.
+ */
+function BossMulti({ unit, step, exercise, onResult }: { unit: SessionUnit; step: AssocStep; exercise: ConceptExercise; onResult: (ok: boolean, ms: number, format: ClientEvent['format'], note?: string) => void }) {
+  const choices = useMemo(() => challengeChoices(exercise, step.id), [exercise, step.id]);
+  const [marked, setMarked] = useState<string[]>([]);
+  const [done, setDone] = useState<boolean | null>(null);
+  const t0 = useRef(performance.now());
+  const view = exerciseView(exercise);
+  const toggle = (l: string) => { if (done === null) setMarked((m) => (m.includes(l) ? m.filter((x) => x !== l) : [...m, l])); };
+  function check() {
+    if (done !== null || !marked.length) return;
+    const r = gradeChallenge(exercise, marked, false);
+    setDone(r.correct);
+    const ms = Math.round(performance.now() - t0.current);
+    setTimeout(() => onResult(r.correct, ms, r.format, `Las correctas: ${exercise.answers!.join(' · ')}.${exercise.explanation ? ` ${exercise.explanation}` : ''}`), r.correct ? 900 : 2600);
+  }
+  const state = (c: { label: string; correct: boolean }) => (done === null ? (marked.includes(c.label) ? 'is-marked' : '') : c.correct ? 'is-right' : marked.includes(c.label) ? 'is-wrong' : 'is-off');
+  return (
+    <Slide tone={hue(unit.key)} className={`boss multi ${done === null ? '' : done ? 'right' : 'wrong'}`} {...(done === null && marked.length ? { onNext: check } : {})}>
+      <p className="tag boss-tag">👑 PREGUNTA JEFE · {unitText(unit).toUpperCase()}</p>
+      <h3 className="ask">{view.prompt}</h3>
+      {view.code && <pre className="learn-code shop-code"><code>{view.code}</code></pre>}
+      <p className="multi-hint">☑️ Marca <b>todas</b> las correctas{marked.length ? ' · desliza para comprobar' : ''}</p>
+      <div className="options multi-options">
+        {choices.map((c) => <button type="button" key={c.label} role="checkbox" aria-checked={marked.includes(c.label)} className={`option long ${state(c)}`} onClick={() => toggle(c.label)}><span className="multi-box" aria-hidden="true">{marked.includes(c.label) ? '✓' : ''}</span>{c.label}</button>)}
+      </div>
+      {done === false && <p className="judge-truth">Eran: <b>{exercise.answers!.join(' · ')}</b></p>}
+    </Slide>
+  );
+}
+
 function Boss({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; onResult: (ok: boolean, ms: number, format: ClientEvent['format'], note?: string) => void }) {
+  const ex0 = exercisesOf(unit)[step.exercise ?? 0]!;
+  if (isMulti(ex0)) return <BossMulti unit={unit} step={step} exercise={ex0} onResult={onResult} />;
+  return <BossSingle unit={unit} step={step} onResult={onResult} />;
+}
+
+function BossSingle({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; onResult: (ok: boolean, ms: number, format: ClientEvent['format'], note?: string) => void }) {
   const exercise = exercisesOf(unit)[step.exercise ?? 0]!;
   const view = exerciseView(exercise);
   const choices = useMemo(() => challengeChoices(exercise, step.id), [exercise, step.id]);
@@ -1983,7 +2023,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;
   else if (step.kind === 'judge' && unit) card = <Judge key={step.id} unit={unit} shown={units[step.statementOf ?? unit.key] ?? unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#judge`, 8)} />;
-  else if (step.kind === 'challenge' && unit && step.typed) card = <Complete key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#level-${step.exercise ?? 0}`, 30, step.skillKey, format, 0, note)} />;
+  else if (step.kind === 'challenge' && unit && step.typed && !isMulti(exercisesOf(unit)[step.exercise ?? 0]!)) card = <Complete key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#level-${step.exercise ?? 0}`, 30, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'challenge' && unit) card = <Boss key={step.id} unit={unit} step={step} onResult={(ok, ms, format, note) => answered(unit, ok, ms, `${unit.key}#boss-${step.exercise ?? 0}`, 25, step.skillKey, format, 0, note)} />;
   else if (step.kind === 'review' && unit) card = <Write key={step.id} unit={unit} levelUp={Boolean(step.levelUp)} onResult={(ok, ms, hint, format) => answered(unit, ok, ms, `${unit.key}#write`, 20, step.skillKey, format, hint)} />;
   else if (step.kind === 'summary') {

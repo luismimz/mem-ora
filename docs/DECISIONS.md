@@ -1047,3 +1047,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
     objeto y la instancia son la casa construida («instancia» suena a «estancia»), `new` es la grúa, el constructor
     el albañil, los atributos los datos de cada casa, el método su mando, `this` es «esta casa» y `static` la piscina
     común. Se añaden la unidad «instancia», un contraste en cada término y casos reales.
+
+## D-105 · Preguntas de «varias correctas» y el estilo del profesor (usuario, 30-oct-2026)
+
+- **Contexto:** las PAC tienen preguntas del tipo «Selecciona las características de Swing», con cinco opciones que
+  mezclan afirmaciones verdaderas y falsas casi iguales. Memora solo tenía preguntas de una respuesta.
+- **Decisión:** nuevo tipo de reto `multi_choice`, con `answers` (todas las buenas) y `distractors` (como mucho 8
+  opciones en total). Se acierta solo marcando exactamente las buenas. En el Flujo (pregunta jefe) se marcan con el dedo
+  y se desliza para comprobar, sin botones. En el simulacro se marcan varias. En el modelo guiado y en la sesión clásica
+  se marcan y se pulsa «Comprobar». El contenido de todas las asignaturas se adapta a este estilo con preguntas propias.
+  Los tests públicos (Daypo) se usan solo como referencia de temas, tipos y trampas; nunca se copian.
