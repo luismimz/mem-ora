@@ -165,6 +165,7 @@ const es: Record<string, Template> = {
   word_out_of_order: (p, f) => `${f}: «${p.word}» aparece en la historia, pero no en el orden de la lista.`,
   timeline_position: (_p, f) => `${f}: la posición va de -3 (antes) a 3 (después); 0 es ahora, y «hasta» va después de «posición».`,
   signal_not_in_text: (_p, f) => `${f}: la pista tiene que aparecer en la frase.`,
+  answers_not_multi: (_p, f) => `${f}: solo los ejercicios «varias correctas» (multi_choice) llevan varias respuestas correctas.`,
   line_not_spot: (_p, f) => `${f}: solo los ejercicios «señala la parte» (spot_part) llevan línea que señalar.`,
   bugline_not_bug: (_p, f) => `${f}: solo los ejercicios «encontrar el error» (find_bug) llevan línea del error.`,
   bugline_out_of_code: (p, f) => `${f}: la línea va de 0 a ${Number(p.lines) - 1} (el código tiene ${p.lines}).`,
