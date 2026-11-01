@@ -197,8 +197,9 @@ export interface SpeakItem { unitKey: string; prompt: string; reference: string;
 export interface SpeakRound { available: boolean; reason: 'off' | 'not_language' | 'cap' | null; capEur: number; spentEur: number; language: string; items: SpeakItem[] }
 export interface SpeakVerdict { heard: string; ok: boolean; corrected: string; tip: string; reference: string; spentEur: number; capEur: number }
 
-export interface Scenario { key: string; title: string; emoji: string; goal: string; opening: string }
+export interface TalkHelp { idea: string; keywords: string[]; frame: string; model: string }
+export interface Scenario { key: string; title: string; emoji: string; goal: string; opening: string; help: TalkHelp }
 export interface TalkInfo { available: boolean; reason: 'off' | 'not_language' | 'cap' | null; capEur: number; spentEur: number; language: string; scenarios: Scenario[] }
 export interface TalkLine { who: 'ai' | 'me'; text: string }
 export interface TalkMistake { said: string; correct: string; why: string; unitKey: string | null; skillKey: string | null }
-export interface TalkReply { heard: string; reply: string; recast: string | null; selfCorrections: Array<{ from: string; to: string }>; mistakes: TalkMistake[]; goalDone: boolean; spentEur: number; capEur: number }
+export interface TalkReply { heard: string; reply: string; recast: string | null; selfCorrections: Array<{ from: string; to: string }>; mistakes: TalkMistake[]; goalDone: boolean; help: TalkHelp | null; howTo: { es: string; en: string } | null; spentEur: number; capEur: number }

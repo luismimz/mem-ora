@@ -1227,3 +1227,24 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .speak-points { margin: 0; font-weight: 800; }
 .talk-cheer { align-self: center; font-weight: 900; padding: .3rem .8rem; border-radius: 99px; background: rgba(255,215,106,.2); color: #ffe39a; animation: verdict-pop .38s cubic-bezier(.2, 1.4, .4, 1); }
 @media (prefers-reduced-motion: reduce) { .speak-verdict, .speak-verdict.ko, .speak-stars span, .talk-cheer { animation: none; transform: none; } }
+
+/* ── Ayuda para no quedarse en blanco (D-109) ── */
+.talk-mode { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.talk-mode button { display: grid; gap: .2rem; text-align: left; border: 1.5px solid rgba(255,255,255,.2); background: rgba(255,255,255,.06); color: #fff; border-radius: .9rem; padding: .6rem .7rem; font: inherit; min-height: 44px; }
+.talk-mode button.on { border-color: #ffd76a; background: rgba(255,215,106,.14); }
+.talk-mode small { opacity: .8; line-height: 1.3; }
+.talk-help { margin: 0 1rem .4rem; padding: .6rem .75rem; border-radius: 1rem; background: rgba(255,215,106,.1); border: 1px solid rgba(255,215,106,.25); display: grid; gap: .45rem; max-height: 42vh; overflow-y: auto; animation: verdict-pop .3s ease; }
+.talk-help p { margin: 0; line-height: 1.4; }
+.help-idea { font-weight: 800; }
+.help-keys { display: flex; flex-wrap: wrap; gap: .35rem; }
+.help-key { border: 0; border-radius: 99px; padding: .4rem .7rem; background: rgba(255,255,255,.14); color: #fff; font: inherit; font-weight: 700; font-size: .9rem; min-height: 36px; }
+.help-key.life { background: rgba(106,199,255,.18); }
+.help-note { width: 100%; opacity: .75; }
+.help-frame { font-size: 1.1rem; font-weight: 800; letter-spacing: .01em; }
+.help-model { font-size: 1.1rem; font-weight: 800; display: flex; align-items: center; gap: .4rem; }
+.help-model .say { margin: 0; flex: none; }
+.help-row { display: flex; gap: .4rem; flex-wrap: wrap; }
+.help-more, .help-life { border: 1px solid rgba(255,255,255,.3); background: none; color: #fff; border-radius: 99px; padding: .45rem .8rem; font: inherit; font-weight: 800; font-size: .88rem; min-height: 40px; }
+.help-more { border-color: #ffd76a; color: #ffe39a; }
+.help-life.on { background: rgba(106,199,255,.18); }
+.help-key, .help-more, .help-life, .talk-mode button { -webkit-tap-highlight-color: transparent; }
