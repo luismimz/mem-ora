@@ -5,7 +5,7 @@
 // repasos) y si cumpliste el objetivo.
 import { useEffect, useRef, useState } from 'react';
 import type { ClientEvent } from '@memora/experiences';
-import { api, ApiError, type Course, type Scenario, type TalkInfo, type TalkLine, type TalkReply } from './api';
+import { api, ApiError, type Course, type Scenario, type TalkHelp, type TalkInfo, type TalkLine, type TalkReply } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError } from './offline';
 import { canRecord, listenTurn, openMic, toWavBase64, type Turn } from './recorder';
@@ -14,6 +14,11 @@ import { buzz, Confetti, sfx } from './Feed';
 
 type Msg = { who: 'ai' | 'me' | 'cheer'; text: string; info?: Pick<TalkReply, 'selfCorrections' | 'mistakes' | 'recast'> };
 type Status = 'idle' | 'speaking' | 'listening' | 'hearing' | 'thinking' | 'paused';
+/** Frases salvavidas (D-109): para ganar tiempo o pedir ayuda sin bloquearte. Nunca cuentan como error. */
+const LIFELINES = ['Let me think…', 'How do you say…?', 'Can you repeat, please?', 'Sorry, I don\'t understand.', 'I mean…'];
+/** Si no hablas en estos ms, se abre sola la siguiente ayuda (como mucho hasta las palabras clave). */
+const AUTO_HELP_MS = 6000;
+type Mode = 'guiado' | 'libre';
 const eur = (n: number) => `${n.toFixed(2).replace('.', ',')} €`;
 const STATUS: Record<Status, string> = { idle: 'Toca para hablar', speaking: 'Te está hablando…', listening: 'Te escucho: habla cuando quieras', hearing: 'Escuchando… (toca para enviar)', thinking: 'Pensando…', paused: 'En pausa · toca para seguir' };
 
@@ -29,6 +34,12 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
   const [points, setPoints] = useState(0);
   const [confetti, setConfetti] = useState(0);
   const [floater, setFloater] = useState<{ id: number; text: string } | null>(null);
+  const [mode, setMode] = useState<Mode>('guiado');
+  const [help, setHelp] = useState<TalkHelp | null>(null);
+  const [level, setLevel] = useState(0);
+  const [lifelines, setLifelines] = useState(false);
+  const levelRef = useRef(0);
+  const helpTimer = useRef(0);
   const stream = useRef<MediaStream | null>(null);
   const turn = useRef<Turn | null>(null);
   const alive = useRef(true);
@@ -41,6 +52,7 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
     api.talk(course.id).then((r) => { setInfo(r); setSpent(r.spentEur); }).catch((e) => setError(e instanceof ApiError ? e.message : 'No se ha podido preparar la conversación.'));
     return () => { alive.current = false; turn.current?.cancel(); stream.current?.getTracks().forEach((t) => t.stop()); window.speechSynthesis?.cancel(); };
   }, [course.id]);
+  useEffect(() => { levelRef.current = level; }, [level]);
   useEffect(() => { msgsRef.current = msgs; list.current?.scrollTo({ top: list.current.scrollHeight, behavior: 'smooth' }); }, [msgs, status]);
 
   async function start(s: Scenario) {
@@ -52,12 +64,21 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
       return;
     }
     setSc(s);
+    newHelp(s.help);
     const first: Msg[] = [{ who: 'ai', text: s.opening }];
     setMsgs(first);
     msgsRef.current = first;
     await say(s.opening);
     void listen(s);
   }
+
+  /** Ayuda nueva para la siguiente respuesta: en guiado se ve ya la idea en español (modo puente); en libre, nada. */
+  function newHelp(h: TalkHelp | null) {
+    setHelp(h);
+    const l = h && mode === 'guiado' ? 1 : 0;
+    setLevel(l); levelRef.current = l;
+  }
+  function more() { setLevel((l) => { const n = Math.min(4, l + 1); levelRef.current = n; return n; }); }
 
   async function say(text: string) {
     if (!alive.current) return;
@@ -68,9 +89,13 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
   async function listen(s: Scenario) {
     if (!alive.current || !stream.current) return;
     setStatus('listening');
-    const t = listenTurn(stream.current, { onSpeech: () => setStatus('hearing') });
+    window.clearTimeout(helpTimer.current);
+    // Si te quedas en blanco, la ayuda se abre sola un escalón (hasta las palabras clave).
+    helpTimer.current = window.setTimeout(() => { if (levelRef.current < 2) more(); }, AUTO_HELP_MS);
+    const t = listenTurn(stream.current, { onSpeech: () => { window.clearTimeout(helpTimer.current); setStatus('hearing'); }, waitMs: 20_000 });
     turn.current = t;
     const blob = await t.done;
+    window.clearTimeout(helpTimer.current);
     turn.current = null;
     if (!alive.current) return;
     if (!blob) { setStatus('paused'); return; }
@@ -81,11 +106,13 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
       const r = await api.talkTurn(course.id, s.key, history, wav.base64);
       if (!alive.current) return;
       setSpent(r.spentEur);
-      const cheers = celebrate(r);
+      const cheers = celebrate(r, levelRef.current);
+      if (r.howTo) cheers.push({ who: 'cheer', text: `📖 ${r.howTo.es} = ${r.howTo.en}` });
       const next: Msg[] = [...msgsRef.current, ...(r.heard ? [{ who: 'me' as const, text: r.heard, info: { selfCorrections: r.selfCorrections, mistakes: r.mistakes, recast: r.recast } }] : []), ...cheers, { who: 'ai', text: r.reply }];
       setMsgs(next);
       msgsRef.current = next;
       review(r);
+      newHelp(r.help);
       await say(r.reply);
       if (r.spentEur >= r.capEur) { setError(`Has llegado al tope de ${eur(r.capEur)} de este mes.`); setEnded(true); return; }
       void listen(s);
@@ -96,10 +123,11 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
   }
 
   /** Celebración como en el Arcade (D-108): puntos por cada turno, extra por corregirte tú solo y fiesta al cumplir el objetivo. */
-  function celebrate(r: TalkReply): Msg[] {
+  function celebrate(r: TalkReply, used: number): Msg[] {
     if (!r.heard) return [];
     const out: Msg[] = [];
-    let gain = 10;
+    // Cuanta menos ayuda, más puntos (la idea en español del modo guiado no resta).
+    let gain = 10 + Math.max(0, 4 - Math.max(used, 1)) * 3;
     if (r.selfCorrections.length) { gain += 15; out.push({ who: 'cheer', text: '🔧 ¡Bien visto! Te has corregido tú solo · +15' }); sfx('pop'); buzz(12); }
     else if (!r.mistakes.length) { gain += 5; sfx('ok'); buzz(12); }
     if (r.goalDone && !goal) { gain += 50; setGoal(true); out.push({ who: 'cheer', text: '🎯 ¡Objetivo cumplido! · +50' }); setConfetti((c) => c + 1); sfx('party'); buzz([20, 40, 20]); }
@@ -156,6 +184,10 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
     <div className="talk-pick">
       <h2>¿De qué hablamos?</h2>
       <p className="talk-sub">Hablas tú, sin tocar nada: te escucho y te contesto. Si te equivocas, sigo la charla y al final te digo lo importante.</p>
+      <div className="talk-mode" role="radiogroup" aria-label="Nivel de ayuda">
+        <button type="button" role="radio" aria-checked={mode === 'guiado'} className={mode === 'guiado' ? 'on' : ''} onClick={() => setMode('guiado')}><b>🧭 Guiado</b><small>Te digo en español qué decir y tú lo dices en inglés</small></button>
+        <button type="button" role="radio" aria-checked={mode === 'libre'} className={mode === 'libre' ? 'on' : ''} onClick={() => setMode('libre')}><b>🕊️ Libre</b><small>Hablas tú; la ayuda 💡 solo si la pides</small></button>
+      </div>
       <div className="talk-scenarios">
         {info.scenarios.map((s) => (
           <button key={s.key} type="button" className="talk-sc" onClick={() => void start(s)}>
@@ -200,6 +232,19 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
       {status === 'thinking' && <div className="bubble ai typing" aria-label="Pensando"><p>···</p></div>}
     </div>
     {error && <p className="banner talk-err" role="alert">{error}</p>}
+    {help && status !== 'thinking' && (
+      <section className={`talk-help l${level}`} aria-label="Ayuda para contestar">
+        {level >= 1 && <p className="help-idea">🧭 {help.idea}</p>}
+        {level >= 2 && help.keywords.length > 0 && <p className="help-keys">{help.keywords.map((k) => <button key={k} type="button" className="help-key" onClick={() => void speak(k, info.language)}>🔊 {k}</button>)}</p>}
+        {level >= 3 && <p className="help-frame">{help.frame}</p>}
+        {level >= 4 && <p className="help-model"><button type="button" className="say" aria-label="Escuchar la frase" onClick={() => void speak(help.model, info.language)}>🔊</button> {help.model}</p>}
+        <div className="help-row">
+          {level < 4 && <button type="button" className="help-more" onClick={more}>💡 {level === 0 ? '¿Qué puedo decir?' : level === 1 ? 'Palabras clave' : level === 2 ? 'Frase con huecos' : 'Ver la frase entera'}</button>}
+          <button type="button" className={`help-life ${lifelines ? 'on' : ''}`} aria-expanded={lifelines} onClick={() => setLifelines((x) => !x)}>🛟 Salvavidas</button>
+        </div>
+        {lifelines && <p className="help-keys">{LIFELINES.map((l) => <button key={l} type="button" className="help-key life" onClick={() => void speak(l, info.language)}>🔊 {l}</button>)}<small className="help-note">También puedes preguntar en español: «¿cómo se dice…?»</small></p>}
+      </section>
+    )}
     <div className="talk-bar">
       <button type="button" className={`talk-mic ${status}`} aria-label={STATUS[status]} disabled={status === 'thinking'} onClick={tapMain}>
         <span aria-hidden="true">{status === 'thinking' ? '⏳' : status === 'speaking' ? '🔊' : status === 'paused' ? '▶️' : '🎙️'}</span>

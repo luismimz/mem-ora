@@ -1094,3 +1094,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   puntos (más con racha), racha 🔥 ×N, «casi» con sacudida suave, y al final estrellas, puntos y fanfarria. Conversación:
   puntos por turno, +15 y sonido por corregirse uno mismo (logro), +50 y confeti al cumplir el objetivo. Los puntos son
   solo de ánimo: el repaso sigue con su peso honesto (regla 9). El gasto de IA pasa al final y a la información del marcador.
+
+## D-109 · Ayuda para no quedarse en blanco al conversar (1-nov-2026)
+- **Petición del usuario:** crear frases de golpe y sin ayuda es difícil; se queda sin palabras porque no sabe QUÉ decir.
+  Aprobó: ayuda escalonada, modo puente (del español al inglés) y frases salvavidas. Los niveles automáticos, más adelante.
+- **Qué:** cada respuesta de la IA trae una ayuda para la siguiente del alumno (y cada situación, la de la primera, sin
+  coste): idea en español → palabras clave (con 🔊) → frase con huecos → frase entera. Modo **guiado** (por defecto): ya
+  se ve la idea en español y el alumno la dice en inglés. Modo **libre**: nada hasta pedir 💡. Si se queda callado 6 s,
+  sube sola un escalón (hasta las palabras clave). Menos ayuda, más puntos.
+- **Salvavidas:** *Let me think…*, *How do you say…?*, *Can you repeat, please?*… siempre a mano con su audio; nunca son
+  error. «¿Cómo se dice X?» en español: la IA da la palabra, queda en el chat (📖 factura = bill) y no penaliza.

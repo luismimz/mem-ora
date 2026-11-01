@@ -50,3 +50,22 @@ describe('conversación: lo que se manda a la IA (D-107)', () => {
     expect(sent.provider).toEqual({ data_collection: 'deny' });
   });
 });
+
+describe('conversación: ayuda para no quedarse en blanco (D-109)', () => {
+  it('cada situación trae la ayuda de la primera respuesta (sin coste)', () => {
+    for (const sc of SCENARIOS) expect(sc.help.idea && sc.help.model && sc.help.keywords.length >= 2 && sc.help.frame.includes('___')).toBeTruthy();
+  });
+  it('la ayuda y el «¿cómo se dice?» de la IA se validan', () => {
+    const v = parseTalk({ heard: '¿cómo se dice factura?', reply: 'It is "bill". Can I have the bill?', recast: null, selfCorrections: [], mistakes: [], goalDone: false,
+      help: { idea: 'Pide la cuenta', keywords: ['the bill', 'please', '', 7], frame: 'Can I have the ___, please?', model: 'Can I have the bill, please?' }, howTo: { es: 'factura', en: 'bill' } }, keys)!;
+    expect(v.help).toEqual({ idea: 'Pide la cuenta', keywords: ['the bill', 'please'], frame: 'Can I have the ___, please?', model: 'Can I have the bill, please?' });
+    expect(v.howTo).toEqual({ es: 'factura', en: 'bill' });
+    expect(parseTalk({ heard: 'x', reply: 'y', help: { idea: '', model: 'm' }, howTo: { es: 'a' } }, keys)).toMatchObject({ help: null, howTo: null });
+  });
+  it('el mensaje pide ayuda, acepta «¿cómo se dice?» y las frases salvavidas', () => {
+    const m = talkMessages(SCENARIOS[0]!, [], [], 'A', 'en', 'es');
+    expect(String(m[0]!.content)).toContain('"help"');
+    expect(String(m[0]!.content)).toContain('howTo');
+    expect(String(m[0]!.content)).toContain('Let me think');
+  });
+});

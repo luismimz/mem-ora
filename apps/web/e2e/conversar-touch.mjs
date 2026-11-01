@@ -16,8 +16,8 @@ const check = (ok, text) => { results.push(ok); console.log(`${ok ? '✓' : '✗
 
 const course = { id: 'c1', key: 'ingles', title: 'Inglés', subject: 'idioma', ui_language: 'es', content_language: 'en', learner_language: 'es', audio_enabled: false, new_per_session: 15, modes: ['flow'] };
 const scenarios = [
-  { key: 'libre', title: 'Charla libre', emoji: '💬', goal: 'Habla de ti.', opening: 'Hi! How was your day today?' },
-  { key: 'restaurante', title: 'En el restaurante', emoji: '🍽️', goal: 'Pide comida y la cuenta.', opening: 'Good evening! Are you ready to order?' },
+  { key: 'libre', title: 'Charla libre', emoji: '💬', goal: 'Habla de ti.', opening: 'Hi! How was your day today?', help: { idea: 'Cuéntale que tu día ha ido bien.', keywords: ['good', 'today'], frame: 'My day was ___.', model: 'My day was good.' } },
+  { key: 'restaurante', title: 'En el restaurante', emoji: '🍽️', goal: 'Pide comida y la cuenta.', opening: 'Good evening! Are you ready to order?', help: { idea: 'Pide una pizza.', keywords: ['pizza'], frame: 'I would like a ___.', model: 'I would like a pizza.' } },
 ];
 const turns = [];
 const events = [];
@@ -46,8 +46,8 @@ try {
       spent += 0.004;
       data = turns.length === 1
         ? { heard: 'The boy is ten years old and I has a dog', reply: 'Oh, he is ten! And you have a dog? What is its name?', recast: 'The boy is ten years old and I have a dog.',
-            selfCorrections: [{ from: 'has a 10 years old', to: 'is ten years old' }], mistakes: [{ said: 'I has a dog', correct: 'I have a dog', why: 'Con I se usa have.', unitKey: 'have', skillKey: 'have:recall' }], goalDone: false, spentEur: spent, capEur: 5 }
-        : { heard: 'Its name is Rex', reply: 'Rex is a great name!', recast: null, selfCorrections: [], mistakes: [], goalDone: true, spentEur: spent, capEur: 5 };
+            selfCorrections: [{ from: 'has a 10 years old', to: 'is ten years old' }], mistakes: [{ said: 'I has a dog', correct: 'I have a dog', why: 'Con I se usa have.', unitKey: 'have', skillKey: 'have:recall' }], goalDone: false, help: { idea: 'Dile cómo se llama tu perro.', keywords: ['his name', 'is'], frame: 'His name is ___.', model: 'His name is Rex.' }, howTo: null, spentEur: spent, capEur: 5 }
+        : { heard: 'Its name is Rex', reply: 'Rex is a great name!', recast: null, selfCorrections: [], mistakes: [], goalDone: true, help: null, howTo: { es: 'perro', en: 'dog' }, spentEur: spent, capEur: 5 };
     } else if (path === '/memora/events') { events.push(...body.events); data = { accepted: [], duplicates: [], rejected: [] }; }
     else data = path === '/users/me' ? { id: 'u1', first_name: 'Luis', email: 'luis@example.com' }
       : path === '/memora/me' ? { staff: false }
@@ -70,8 +70,24 @@ try {
   check(await page.locator('.talk-warm').count() === 1, 'el calentamiento de frases sueltas sigue disponible');
   if (shots) await page.screenshot({ path: `${shots}/conversar-elige.png` });
 
+  check(await page.locator('.talk-mode button.on', { hasText: 'Guiado' }).count() === 1, 'por defecto, modo guiado (del español al inglés)');
   await page.locator('.talk-sc', { hasText: 'Charla libre' }).tap();
   await page.waitForSelector('.bubble.ai');
+  await page.waitForSelector('.help-idea');
+  check(/tu día ha ido bien/.test(await page.textContent('.help-idea')) && await page.locator('.help-keys .help-key').count() === 0, 'guiado: ya se ve QUÉ decir, en español (sin dar aún las palabras)');
+  // Si te quedas en blanco, la ayuda sube sola un escalón: aparecen las palabras clave.
+  // (El pitido del micrófono simulado a veces cuenta como voz y entonces no salta sola: se pide con 💡.)
+  const auto = await page.waitForSelector('.help-keys .help-key', { timeout: 9000 }).then(() => true).catch(() => false);
+  if (!auto) await page.locator('.help-more').tap();
+  check(await page.locator('.help-keys .help-key').count() === 2, auto ? 'si te quedas callado, salen solas las palabras clave' : '💡 da las palabras clave (el micrófono simulado contó como voz)');
+  await page.locator('.help-more').tap();
+  check(/My day was ___/.test(await page.textContent('.help-frame')), '💡 da la frase con huecos');
+  await page.locator('.help-more').tap();
+  check(/My day was good/.test(await page.textContent('.help-model')) && await page.locator('.help-more').count() === 0, 'y por último la frase entera para leerla');
+  await page.locator('.help-life').tap();
+  const lifes = await page.$$eval('.help-key.life', (b) => b.map((x) => ({ t: x.textContent, h: Math.round(x.getBoundingClientRect().height) })));
+  check(lifes.length >= 4 && lifes.some((l) => /Let me think/.test(l.t)) && lifes.every((l) => l.h >= 36), 'salvavidas a mano: Let me think…, How do you say…?, Can you repeat…');
+  if (shots) await page.screenshot({ path: `${shots}/conversar-ayuda.png` });
   check((await page.textContent('.bubble.ai')).includes('How was your day'), 'la IA abre la conversación (frase fija: empezar no cuesta)');
   await page.waitForSelector('.talk-mic.listening, .talk-mic.hearing', { timeout: 5000 });
   check(true, 'después de hablar la IA, escucha sola (manos libres, sin mantener pulsado)');
@@ -88,6 +104,8 @@ try {
   check(/I have a dog/.test(miss), 'el error que se quedó, en ámbar y sin cortar la charla');
   check(/Te has corregido tú solo/.test(await page.textContent('.talk-cheer')), 'corregirse uno mismo se celebra (puntos extra y sonido)');
   check((await page.$$eval('.bubble.ai', (b) => b.map((x) => x.textContent))).some((t) => /What is its name/.test(t)), 'la IA contesta y sigue el hilo con una pregunta');
+  await page.waitForSelector('.help-idea');
+  check(/cómo se llama tu perro/.test(await page.textContent('.help-idea')) && await page.locator('.help-frame').count() === 0, 'cada respuesta trae su ayuda nueva, otra vez empezando por la idea');
   check(events.length === 1 && events[0].unitKey === 'have' && events[0].format === 'recall_cued' && events[0].correct === false, 'el error vuelve al repaso de su unidad (recordar con pista)');
   if (shots) await page.screenshot({ path: `${shots}/conversar-chat.png` });
 
@@ -98,6 +116,7 @@ try {
   await page.waitForFunction(() => document.querySelectorAll('.bubble.me').length === 2);
   check(turns[1].history.length === 3 && turns[1].history.every((t) => t.who === 'ai' || t.who === 'me'), 'el segundo turno lleva la conversación anterior (sin las celebraciones)');
   await page.waitForFunction(() => [...document.querySelectorAll('.talk-cheer')].some((e) => /Objetivo cumplido/.test(e.textContent)));
+  check((await page.$$eval('.talk-cheer', (e) => e.map((x) => x.textContent))).some((t) => /perro = dog/.test(t)), '«¿cómo se dice…?» deja la palabra en el chat, sin contar como error');
   check(await page.evaluate(() => document.querySelectorAll('.confetti i').length > 0), 'al cumplir el objetivo: confeti y celebración');
   if (shots) await page.screenshot({ path: `${shots}/conversar-objetivo.png` });
   check(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'nada se sale por los lados');
