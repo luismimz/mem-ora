@@ -62,7 +62,7 @@ export function hue(key: string) {
   for (const c of key) h = (h * 31 + c.charCodeAt(0)) % 360;
   return h;
 }
-const sfx = (() => {
+export const sfx = (() => {
   let ctx: AudioContext | null = null;
   const on = () => { try { return localStorage.getItem('memora.sfx') !== 'off'; } catch { return true; } };
   return (kind: 'ok' | 'ko' | 'party' | 'pop' | 'whoosh' | 'boing') => {
@@ -90,7 +90,7 @@ function whenLabel(at: number) {
   if (diff === 1) return `mañana a las ${hour}`;
   return `el ${d.toLocaleDateString('es-ES', { weekday: 'long' })} a las ${hour}`;
 }
-const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms); } catch { /* sin vibración */ } };
+export const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms); } catch { /* sin vibración */ } };
 
 /**
  * Tarjeta a pantalla completa: se pasa deslizando hacia arriba (o con ↑ / espacio). Sin botones de avance (D-077).
@@ -720,7 +720,7 @@ export function buildMistake(answer: string[], words: string[], mirror?: Mirror,
 }
 
 /** Confeti al acertar en la Ráfaga: piezas de colores que saltan y caen (solo CSS). */
-function Confetti({ burst }: { burst: number }) {
+export function Confetti({ burst }: { burst: number }) {
   if (!burst) return null;
   const colors = ['#ffd76a', '#43d68b', '#ff6b5b', '#6bc7ff', '#c88bff'];
   // Fuera de la tarjeta (portal): si quedaba como su último hijo, el centrado vertical se rompía y el contenido se

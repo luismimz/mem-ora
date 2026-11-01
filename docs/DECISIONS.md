@@ -1087,3 +1087,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Coste y privacidad:** mismo modelo, tope mensual y `data_collection = deny` que D-106. El servidor no guarda la
   conversación: el cliente manda el texto de los últimos 12 turnos y el audio del turno. La ronda de frases de D-106 se
   queda como «Calentamiento».
+
+## D-108 · Celebrar al hablar, como en el Arcade (1-nov-2026)
+- **Petición del usuario:** que acertar al hablar se celebre como en el Arcade (efectos de sonido, etc.), divertido y dinámico.
+- **Qué:** se reutilizan el sonido, la vibración y el confeti del Flujo. Ronda de frases: ánimo variado («¡Clavada! 🎯»),
+  puntos (más con racha), racha 🔥 ×N, «casi» con sacudida suave, y al final estrellas, puntos y fanfarria. Conversación:
+  puntos por turno, +15 y sonido por corregirse uno mismo (logro), +50 y confeti al cumplir el objetivo. Los puntos son
+  solo de ánimo: el repaso sigue con su peso honesto (regla 9). El gasto de IA pasa al final y a la información del marcador.
