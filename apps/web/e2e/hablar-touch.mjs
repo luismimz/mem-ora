@@ -104,8 +104,12 @@ try {
   check(true, 'deslizando hacia arriba pasa a la siguiente frase (sin botón)');
   await hold(1200);
   await page.waitForSelector('.speak-verdict.ok');
+  const party = await page.evaluate(() => ({ confetti: document.querySelectorAll('.confetti i').length, cheer: document.querySelector('.speak-cheer')?.textContent ?? '', pts: document.querySelector('.feed-xp')?.textContent ?? '' }));
+  check(party.confetti > 0 && /!/.test(party.cheer) && /⭐ \d+/.test(party.pts) && !/⭐ 0$/.test(party.pts), `al acertar, fiesta como en el Arcade: confeti, ánimo («${party.cheer}») y puntos (${party.pts})`);
+  if (shots) await page.screenshot({ path: `${shots}/hablar-fiesta.png` });
   await swipeUp();
   await page.waitForSelector('.speak-end');
+  check(await page.locator('.speak-stars span').count() === 3 && /puntos/.test(await page.textContent('.speak-points')), 'al final: estrellas y puntos');
   check(/1\/2/.test(await page.textContent('.speak-end .end-xp')) && /0,02 €/.test(await page.textContent('.speak-end')), 'al final: aciertos a la primera y el gasto del mes');
   if (shots) await page.screenshot({ path: `${shots}/hablar-final.png` });
 

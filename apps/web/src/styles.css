@@ -1212,3 +1212,18 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .talk-box p { margin: 0; line-height: 1.4; }
 .talk-box.ok { background: rgba(67,214,139,.18); } .talk-box.ko { background: rgba(255,190,90,.16); }
 .talk-mic, .talk-sc, .talk-end-btn, .mic { -webkit-tap-highlight-color: transparent; }
+
+/* ── Fiesta en la ronda de hablar (D-108) ── */
+.speak-verdict { animation: verdict-pop .38s cubic-bezier(.2, 1.4, .4, 1); }
+.speak-verdict.ko { animation: verdict-shake .4s ease; }
+@keyframes verdict-pop { from { transform: scale(.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes verdict-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-8px); } 50% { transform: translateX(7px); } 75% { transform: translateX(-4px); } }
+.speak-cheer { font-size: 1.35rem; font-weight: 950; }
+.speak-verdict.ok .speak-cheer { color: #9ff0c4; }
+.speak-stars { display: flex; gap: .4rem; font-size: 2.6rem; }
+.speak-stars span { filter: grayscale(1) opacity(.35); transform: scale(.6); animation: star-in .45s cubic-bezier(.2, 1.5, .4, 1) forwards; }
+.speak-stars span.on { filter: none; }
+@keyframes star-in { to { transform: scale(1); } }
+.speak-points { margin: 0; font-weight: 800; }
+.talk-cheer { align-self: center; font-weight: 900; padding: .3rem .8rem; border-radius: 99px; background: rgba(255,215,106,.2); color: #ffe39a; animation: verdict-pop .38s cubic-bezier(.2, 1.4, .4, 1); }
+@media (prefers-reduced-motion: reduce) { .speak-verdict, .speak-verdict.ko, .speak-stars span, .talk-cheer { animation: none; transform: none; } }

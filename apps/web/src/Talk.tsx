@@ -10,8 +10,9 @@ import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError } from './offline';
 import { canRecord, listenTurn, openMic, toWavBase64, type Turn } from './recorder';
 import { speak } from './speech';
+import { buzz, Confetti, sfx } from './Feed';
 
-type Msg = { who: 'ai' | 'me'; text: string; info?: Pick<TalkReply, 'selfCorrections' | 'mistakes' | 'recast'> };
+type Msg = { who: 'ai' | 'me' | 'cheer'; text: string; info?: Pick<TalkReply, 'selfCorrections' | 'mistakes' | 'recast'> };
 type Status = 'idle' | 'speaking' | 'listening' | 'hearing' | 'thinking' | 'paused';
 const eur = (n: number) => `${n.toFixed(2).replace('.', ',')} €`;
 const STATUS: Record<Status, string> = { idle: 'Toca para hablar', speaking: 'Te está hablando…', listening: 'Te escucho: habla cuando quieras', hearing: 'Escuchando… (toca para enviar)', thinking: 'Pensando…', paused: 'En pausa · toca para seguir' };
@@ -25,6 +26,9 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
   const [spent, setSpent] = useState(0);
   const [goal, setGoal] = useState(false);
   const [ended, setEnded] = useState(false);
+  const [points, setPoints] = useState(0);
+  const [confetti, setConfetti] = useState(0);
+  const [floater, setFloater] = useState<{ id: number; text: string } | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const turn = useRef<Turn | null>(null);
   const alive = useRef(true);
@@ -73,12 +77,12 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
     setStatus('thinking');
     try {
       const wav = await toWavBase64(blob);
-      const history: TalkLine[] = msgsRef.current.map(({ who, text }) => ({ who, text }));
+      const history: TalkLine[] = msgsRef.current.flatMap((m) => (m.who === 'cheer' ? [] : [{ who: m.who, text: m.text }]));
       const r = await api.talkTurn(course.id, s.key, history, wav.base64);
       if (!alive.current) return;
       setSpent(r.spentEur);
-      if (r.goalDone) setGoal(true);
-      const next: Msg[] = [...msgsRef.current, ...(r.heard ? [{ who: 'me' as const, text: r.heard, info: { selfCorrections: r.selfCorrections, mistakes: r.mistakes, recast: r.recast } }] : []), { who: 'ai', text: r.reply }];
+      const cheers = celebrate(r);
+      const next: Msg[] = [...msgsRef.current, ...(r.heard ? [{ who: 'me' as const, text: r.heard, info: { selfCorrections: r.selfCorrections, mistakes: r.mistakes, recast: r.recast } }] : []), ...cheers, { who: 'ai', text: r.reply }];
       setMsgs(next);
       msgsRef.current = next;
       review(r);
@@ -89,6 +93,19 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
       setError(e instanceof ApiError ? e.message : 'No se ha podido enviar. Toca para intentarlo otra vez.');
       setStatus('paused');
     }
+  }
+
+  /** Celebración como en el Arcade (D-108): puntos por cada turno, extra por corregirte tú solo y fiesta al cumplir el objetivo. */
+  function celebrate(r: TalkReply): Msg[] {
+    if (!r.heard) return [];
+    const out: Msg[] = [];
+    let gain = 10;
+    if (r.selfCorrections.length) { gain += 15; out.push({ who: 'cheer', text: '🔧 ¡Bien visto! Te has corregido tú solo · +15' }); sfx('pop'); buzz(12); }
+    else if (!r.mistakes.length) { gain += 5; sfx('ok'); buzz(12); }
+    if (r.goalDone && !goal) { gain += 50; setGoal(true); out.push({ who: 'cheer', text: '🎯 ¡Objetivo cumplido! · +50' }); setConfetti((c) => c + 1); sfx('party'); buzz([20, 40, 20]); }
+    setPoints((p) => p + gain);
+    setFloater({ id: Date.now(), text: `+${gain}` });
+    return out;
   }
 
   /** Los errores que quedaron, con su unidad, vuelven a los repasos (una vez por conversación; nunca dominio). */
@@ -114,16 +131,18 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
     stream.current?.getTracks().forEach((t) => t.stop());
     setStatus('idle');
     setEnded(true);
+    sfx(goal ? 'party' : 'ok'); buzz(goal ? [20, 40, 20, 40, 60] : 20);
+    if (goal) setConfetti(99);
   }
 
   const head = (
     <header className="feed-top talk-top">
       <button type="button" className="feed-x" aria-label="Salir" onClick={() => { finish(); onExit(); }}>✕</button>
       <b className="talk-title">{sc ? `${sc.emoji} ${sc.title}` : '🎙️ Conversar'}</b>
-      <span className="feed-xp" title="Gasto de IA este mes">{eur(spent)}</span>
+      <span className="feed-xp" title={`Gasto de IA este mes: ${eur(spent)}`}>⭐ {points}</span>
     </header>
   );
-  const frame = (body: React.ReactNode) => <div className="talk" role="application" aria-label="Conversación">{head}{body}</div>;
+  const frame = (body: React.ReactNode) => <div className="talk" role="application" aria-label="Conversación">{head}{body}<Confetti burst={confetti} />{floater && <span key={floater.id} className="floater">{floater.text}</span>}</div>;
 
   if (error && !info) return frame(<div className="talk-pick"><p className="banner">{error}</p><button type="button" className="go wide" onClick={onExit}>Volver</button></div>);
   if (!info) return frame(<div className="talk-pick"><p role="status">Preparando…</p></div>);
@@ -157,13 +176,13 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
     return frame(
       <div className="talk-pick talk-end">
         <h2>{goal ? '🎯 ¡Objetivo cumplido!' : 'Conversación terminada'}</h2>
-        <p className="talk-sub">{mine.length} {mine.length === 1 ? 'respuesta' : 'respuestas'} en inglés · {eur(spent)} de {eur(info.capEur)} este mes</p>
+        <p className="talk-sub">⭐ {points} puntos · {mine.length} {mine.length === 1 ? 'respuesta' : 'respuestas'} en inglés · {eur(spent)} de {eur(info.capEur)} este mes</p>
         {selfs.length > 0 && <section className="talk-box ok"><b>🔧 Te corregiste tú solo {selfs.length === 1 ? '1 vez' : `${selfs.length} veces`}</b>
           {selfs.map((x, i) => <p key={i}><s>{x.from}</s> → {x.to}</p>)}<small>Eso es lo que hace quien habla bien: darse cuenta y arreglarlo.</small></section>}
         {top.length > 0 ? <section className="talk-box ko"><b>Lo que más te conviene repasar</b>
           {top.map(({ m, n }, i) => <p key={i}><s>{m.said}</s> → <b>{m.correct}</b>{n > 1 ? ` · ${n} veces` : ''}<br /><small>{m.why}</small></p>)}<small>Vuelve en tus repasos.</small></section>
           : mine.length > 0 && <section className="talk-box ok"><b>Sin errores que importen. ¡Muy bien!</b></section>}
-        <button type="button" className="go wide" onClick={() => { setSc(null); setMsgs([]); setEnded(false); setGoal(false); setStatus('idle'); alive.current = true; reviewed.current.clear(); }}>Otra conversación</button>
+        <button type="button" className="go wide" onClick={() => { setSc(null); setMsgs([]); setEnded(false); setGoal(false); setPoints(0); setStatus('idle'); alive.current = true; reviewed.current.clear(); }}>Otra conversación</button>
         <button type="button" className="option ghost" onClick={onExit}>Volver a Inicio</button>
       </div>);
   }
@@ -171,7 +190,7 @@ export function Talk({ course, onExit, onWarmup }: { course: Course; onExit: () 
   return frame(<>
     <p className="talk-goal">🎯 {sc.goal}</p>
     <div className="talk-list" ref={list}>
-      {msgs.map((m, i) => (
+      {msgs.map((m, i) => m.who === 'cheer' ? <p key={i} className="talk-cheer" role="status">{m.text}</p> : (
         <div key={i} className={`bubble ${m.who}`}>
           <p>{m.text}{m.who === 'ai' && <button type="button" className="say" aria-label="Escuchar otra vez" onClick={() => void speak(m.text, info.language)}>🔊</button>}</p>
           {m.info?.selfCorrections.map((x, j) => <span key={`s${j}`} className="talk-chip self">🔧 Te has corregido: <s>{x.from}</s> → {x.to} ✓</span>)}

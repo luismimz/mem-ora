@@ -86,6 +86,7 @@ try {
   const miss = await page.textContent('.talk-chip.miss');
   check(/Te has corregido/.test(self) && /is ten years old/.test(self), `la autocorrección se ve en verde, como logro («${self.trim()}»)`);
   check(/I have a dog/.test(miss), 'el error que se quedó, en ámbar y sin cortar la charla');
+  check(/Te has corregido tú solo/.test(await page.textContent('.talk-cheer')), 'corregirse uno mismo se celebra (puntos extra y sonido)');
   check((await page.$$eval('.bubble.ai', (b) => b.map((x) => x.textContent))).some((t) => /What is its name/.test(t)), 'la IA contesta y sigue el hilo con una pregunta');
   check(events.length === 1 && events[0].unitKey === 'have' && events[0].format === 'recall_cued' && events[0].correct === false, 'el error vuelve al repaso de su unidad (recordar con pista)');
   if (shots) await page.screenshot({ path: `${shots}/conversar-chat.png` });
@@ -95,7 +96,10 @@ try {
   await page.waitForTimeout(1200);
   await page.locator('.talk-mic').tap();
   await page.waitForFunction(() => document.querySelectorAll('.bubble.me').length === 2);
-  check(turns[1].history.length === 3, 'el segundo turno lleva toda la conversación anterior');
+  check(turns[1].history.length === 3 && turns[1].history.every((t) => t.who === 'ai' || t.who === 'me'), 'el segundo turno lleva la conversación anterior (sin las celebraciones)');
+  await page.waitForFunction(() => [...document.querySelectorAll('.talk-cheer')].some((e) => /Objetivo cumplido/.test(e.textContent)));
+  check(await page.evaluate(() => document.querySelectorAll('.confetti i').length > 0), 'al cumplir el objetivo: confeti y celebración');
+  if (shots) await page.screenshot({ path: `${shots}/conversar-objetivo.png` });
   check(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'nada se sale por los lados');
   const bar = await page.$eval('.talk-bar', (e) => Math.round(e.getBoundingClientRect().bottom));
   check(bar <= 844, `la barra del micrófono se ve entera (${bar} px)`);
