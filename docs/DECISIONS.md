@@ -1057,3 +1057,18 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   y se desliza para comprobar, sin botones. En el simulacro se marcan varias. En el modelo guiado y en la sesión clásica
   se marcan y se pulsa «Comprobar». El contenido de todas las asignaturas se adapta a este estilo con preguntas propias.
   Los tests públicos (Daypo) se usan solo como referencia de temas, tipos y trampas; nunca se copian.
+
+## D-106 · Ronda de hablar con IA para idiomas (1-nov-2026)
+- **Petición del usuario:** una ronda de *output* en la que, en vez de elegir bloques, se active el micrófono, se diga la
+  frase y una IA (vía OpenRouter) corrija, para ganar fluidez con lo ya aprendido. Solo idiomas por ahora. Quiere que sea
+  útil aunque cueste dinero y poder desactivarla en los ajustes.
+- **Qué:** 5 frases por ronda sacadas SOLO de los ejemplos de unidades ya trabajadas (primero fallos y vencidas). Se ve la
+  frase en español, se mantiene pulsado el micrófono, se habla y se suelta; el audio (WAV 16 kHz mono) va al servidor, que
+  lo manda a un modelo con entrada de audio (Gemini Flash por defecto, `OPENROUTER_SPEAK_MODEL`). Respuesta validada:
+  qué entendió, si está bien, la frase correcta (suena) y UNA corrección. Si falla, se repite bien. Se pasa deslizando.
+- **Encaje con las reglas:** es la excepción de D-078 (guion = frases de sus fichas; salida validada con esquema;
+  proveedores que no guardan datos: `provider.data_collection = deny`; la clave solo en el entorno del servidor). La primera
+  respuesta de cada frase cuenta como «recordar con pista» (P2) de su unidad: refuerza el repaso y nunca marca dominio.
+- **Gasto:** coste real que devuelve OpenRouter (`usage.cost`), apuntado por frase; tope mensual por alumno
+  (`SPEAK_MONTHLY_CAP_EUR`, 5 € por defecto). Al llegar al tope la ronda se para hasta el mes siguiente. Estimación:
+  ≈ 0,001–0,004 $ por frase. Ajustes (perfil): interruptor en el dispositivo y gasto del mes frente al tope.

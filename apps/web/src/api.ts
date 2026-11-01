@@ -186,4 +186,11 @@ export const api = {
   studioRequests: (course: string) => request<StudioRequest[]>('GET', `/memora/studio/requests?course=${encodeURIComponent(course)}`),
   closeRequest: (id: string, status: 'done' | 'dismissed') => request<{ saved: boolean }>('POST', `/memora/studio/requests/${encodeURIComponent(id)}`, { status }),
   clarify: (course: string, unit: string, step: string, note?: string) => request<{ saved: boolean }>('POST', '/memora/clarify', { course, unit, step, ...(note ? { note } : {}) }),
+  /** Ronda de hablar (D-106): frases ya trabajadas, gasto del mes y tope. */
+  speak: (course: string) => request<SpeakRound>('GET', `/memora/speak?course=${encodeURIComponent(course)}`),
+  speakCheck: (course: string, unit: string, reference: string, audio: string) => request<SpeakVerdict>('POST', '/memora/speak/check', { course, unit, reference, audio }),
 };
+
+export interface SpeakItem { unitKey: string; prompt: string; reference: string; skillKey: string | null }
+export interface SpeakRound { available: boolean; reason: 'off' | 'not_language' | 'cap' | null; capEur: number; spentEur: number; language: string; items: SpeakItem[] }
+export interface SpeakVerdict { heard: string; ok: boolean; corrected: string; tip: string; reference: string; spentEur: number; capEur: number }
