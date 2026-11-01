@@ -188,9 +188,17 @@ export const api = {
   clarify: (course: string, unit: string, step: string, note?: string) => request<{ saved: boolean }>('POST', '/memora/clarify', { course, unit, step, ...(note ? { note } : {}) }),
   /** Ronda de hablar (D-106): frases ya trabajadas, gasto del mes y tope. */
   speak: (course: string) => request<SpeakRound>('GET', `/memora/speak?course=${encodeURIComponent(course)}`),
+  talk: (course: string) => request<TalkInfo>('GET', `/memora/talk?course=${encodeURIComponent(course)}`),
+  talkTurn: (course: string, scenario: string, history: TalkLine[], audio: string) => request<TalkReply>('POST', '/memora/talk/turn', { course, scenario, history, audio }),
   speakCheck: (course: string, unit: string, reference: string, audio: string) => request<SpeakVerdict>('POST', '/memora/speak/check', { course, unit, reference, audio }),
 };
 
 export interface SpeakItem { unitKey: string; prompt: string; reference: string; skillKey: string | null }
 export interface SpeakRound { available: boolean; reason: 'off' | 'not_language' | 'cap' | null; capEur: number; spentEur: number; language: string; items: SpeakItem[] }
 export interface SpeakVerdict { heard: string; ok: boolean; corrected: string; tip: string; reference: string; spentEur: number; capEur: number }
+
+export interface Scenario { key: string; title: string; emoji: string; goal: string; opening: string }
+export interface TalkInfo { available: boolean; reason: 'off' | 'not_language' | 'cap' | null; capEur: number; spentEur: number; language: string; scenarios: Scenario[] }
+export interface TalkLine { who: 'ai' | 'me'; text: string }
+export interface TalkMistake { said: string; correct: string; why: string; unitKey: string | null; skillKey: string | null }
+export interface TalkReply { heard: string; reply: string; recast: string | null; selfCorrections: Array<{ from: string; to: string }>; mistakes: TalkMistake[]; goalDone: boolean; spentEur: number; capEur: number }

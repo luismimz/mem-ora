@@ -85,3 +85,48 @@ function bytesToBase64(bytes: Uint8Array): string {
   for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
   return btoa(bin);
 }
+
+/** Micrófono abierto para toda la conversación (D-107): en iPhone se pide una vez, desde un toque. */
+export async function openMic(): Promise<MediaStream> {
+  return navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true, channelCount: 1 } });
+}
+
+export interface Turn { done: Promise<Blob | null>; stop: () => void; cancel: () => void }
+
+/**
+ * Escucha un turno en manos libres: graba y, con un analizador de volumen, detecta cuándo empiezas a hablar y corta
+ * tras `silenceMs` de silencio (o a los `maxMs`). Si no hablas en `waitMs`, termina sin audio (null). `stop()` envía ya.
+ */
+export function listenTurn(stream: MediaStream, opts: { onSpeech?: () => void; silenceMs?: number; maxMs?: number; waitMs?: number } = {}): Turn {
+  const silenceMs = opts.silenceMs ?? 1400, maxMs = opts.maxMs ?? 25_000, waitMs = opts.waitMs ?? 12_000;
+  const rec = new MediaRecorder(stream);
+  const chunks: Blob[] = [];
+  rec.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
+  const Ctx = (window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
+  const ctx = new Ctx();
+  const analyser = ctx.createAnalyser();
+  analyser.fftSize = 1024;
+  ctx.createMediaStreamSource(stream).connect(analyser);
+  const buf = new Float32Array(analyser.fftSize);
+  const started = Date.now();
+  let spokeAt = 0, lastLoud = 0, cancelled = false, timer = 0;
+  let noise = 0.01; // nivel de ruido de fondo, se aprende en el primer medio segundo
+  const done = new Promise<Blob | null>((resolve) => {
+    rec.onstop = () => { window.clearInterval(timer); void ctx.close().catch(() => undefined); resolve(cancelled || !spokeAt || !chunks.length ? null : new Blob(chunks, { type: rec.mimeType || chunks[0]!.type })); };
+  });
+  const end = () => { if (rec.state === 'recording') rec.stop(); };
+  rec.start(250);
+  timer = window.setInterval(() => {
+    analyser.getFloatTimeDomainData(buf);
+    let sum = 0;
+    for (let i = 0; i < buf.length; i++) sum += buf[i]! * buf[i]!;
+    const rms = Math.sqrt(sum / buf.length), now = Date.now();
+    if (now - started < 500) { noise = Math.max(noise, rms); return; }
+    const loud = rms > Math.max(0.02, noise * 2.5);
+    if (loud) { lastLoud = now; if (!spokeAt) { spokeAt = now; opts.onSpeech?.(); } }
+    if (spokeAt && now - lastLoud > silenceMs) end();
+    if (!spokeAt && now - started > waitMs) end();
+    if (now - started > maxMs) end();
+  }, 80);
+  return { done, stop: () => { if (!spokeAt) spokeAt = Date.now(); end(); }, cancel: () => { cancelled = true; end(); } };
+}

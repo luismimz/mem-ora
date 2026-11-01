@@ -1072,3 +1072,18 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - **Gasto:** coste real que devuelve OpenRouter (`usage.cost`), apuntado por frase; tope mensual por alumno
   (`SPEAK_MONTHLY_CAP_EUR`, 5 € por defecto). Al llegar al tope la ronda se para hasta el mes siguiente. Estimación:
   ≈ 0,001–0,004 $ por frase. Ajustes (perfil): interruptor en el dispositivo y gasto del mes frente al tope.
+
+## D-107 · Conversación con IA en una sola pantalla, manos libres (1-nov-2026)
+- **Petición del usuario:** que no haya que deslizar y que todo vaya en la misma ventana, con continuidad, como hablar
+  con un agente. Aprobó: chat en una pantalla, manos libres, corrección suave durante la charla y resumen al final, y
+  situaciones con objetivo (D-078). Pidió además que las **autocorrecciones** («the boy has a 10 yea… is ten years old»)
+  no cuenten como error.
+- **Qué:** se elige charla libre o una situación (restaurante, aeropuerto, entrevista, médico, alquilar un coche). La IA
+  abre con una frase fija (empezar no cuesta), la dice en voz alta y el micrófono escucha solo (detecta el final por el
+  silencio; tocar envía ya). La IA contesta corto, con una pregunta, usando lo que el alumno ya ha trabajado. Debajo de su
+  burbuja: verde si se corrigió él mismo (logro), ámbar si quedó un error. No interrumpe: reformula de pasada.
+- **Resumen:** objetivo cumplido o no, autocorrecciones como logro y los 3 errores que más importan; los que tienen
+  unidad vuelven a su repaso como «recordar con pista» (una vez por conversación; nunca dominio).
+- **Coste y privacidad:** mismo modelo, tope mensual y `data_collection = deny` que D-106. El servidor no guarda la
+  conversación: el cliente manda el texto de los últimos 12 turnos y el audio del turno. La ronda de frases de D-106 se
+  queda como «Calentamiento».

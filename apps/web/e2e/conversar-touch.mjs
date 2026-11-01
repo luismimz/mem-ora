@@ -1,0 +1,115 @@
+// Conversación con IA (D-107) en un móvil emulado (390×844) con TOQUES REALES, micrófono simulado de Chromium y la API
+// simulada: se elige una situación, la IA abre, se contesta (sin mantener pulsado), llega un WAV con el historial, se
+// ven las burbujas con la autocorrección (verde) y el error (ámbar), la conversación sigue sola y el resumen final
+// premia la autocorrección y manda el error al repaso.
+import { fileURLToPath } from 'node:url';
+import { chromium } from 'playwright';
+import { createServer } from 'vite';
+
+const web = fileURLToPath(new URL('..', import.meta.url));
+const server = await createServer({ root: web, configFile: `${web}vite.config.ts`, logLevel: 'error', server: { port: 5196, strictPort: false, host: '127.0.0.1' } });
+await server.listen();
+const url = `${server.resolvedUrls.local[0]}e2e/harness-home.html`;
+const shots = process.env.E2E_SHOTS;
+const results = [];
+const check = (ok, text) => { results.push(ok); console.log(`${ok ? '✓' : '✗'} ${text}`); };
+
+const course = { id: 'c1', key: 'ingles', title: 'Inglés', subject: 'idioma', ui_language: 'es', content_language: 'en', learner_language: 'es', audio_enabled: false, new_per_session: 15, modes: ['flow'] };
+const scenarios = [
+  { key: 'libre', title: 'Charla libre', emoji: '💬', goal: 'Habla de ti.', opening: 'Hi! How was your day today?' },
+  { key: 'restaurante', title: 'En el restaurante', emoji: '🍽️', goal: 'Pide comida y la cuenta.', opening: 'Good evening! Are you ready to order?' },
+];
+const turns = [];
+const events = [];
+let spent = 0.05;
+
+const browser = await chromium.launch({ ...(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {}), args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
+try {
+  const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2, permissions: ['microphone'] });
+  // La voz del sistema no termina nunca en el navegador sin cabeza: se simula una que acaba enseguida.
+  await context.addInitScript(() => {
+    const fake = { speaking: false, pending: false, paused: false, getVoices: () => [], cancel() {}, pause() {}, resume() {}, addEventListener() {}, removeEventListener() {},
+      speak(u) { setTimeout(() => { u.onstart?.(new Event('start')); setTimeout(() => u.onend?.(new Event('end')), 50); }, 10); } };
+    Object.defineProperty(window, 'speechSynthesis', { value: fake, configurable: true });
+  });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (e) => errors.push(String(e)));
+  await page.route('**/audio/**', (r) => r.fulfill({ status: 404, body: '' }));
+  await page.route('**/api/**', (route) => {
+    const u = new URL(route.request().url());
+    const path = u.pathname.replace(/^\/api/, '');
+    const body = route.request().method() === 'POST' ? route.request().postDataJSON() : null;
+    let data;
+    if (path === '/memora/talk/turn') {
+      turns.push(body);
+      spent += 0.004;
+      data = turns.length === 1
+        ? { heard: 'The boy is ten years old and I has a dog', reply: 'Oh, he is ten! And you have a dog? What is its name?', recast: 'The boy is ten years old and I have a dog.',
+            selfCorrections: [{ from: 'has a 10 years old', to: 'is ten years old' }], mistakes: [{ said: 'I has a dog', correct: 'I have a dog', why: 'Con I se usa have.', unitKey: 'have', skillKey: 'have:recall' }], goalDone: false, spentEur: spent, capEur: 5 }
+        : { heard: 'Its name is Rex', reply: 'Rex is a great name!', recast: null, selfCorrections: [], mistakes: [], goalDone: true, spentEur: spent, capEur: 5 };
+    } else if (path === '/memora/events') { events.push(...body.events); data = { accepted: [], duplicates: [], rejected: [] }; }
+    else data = path === '/users/me' ? { id: 'u1', first_name: 'Luis', email: 'luis@example.com' }
+      : path === '/memora/me' ? { staff: false }
+      : path === '/memora/courses' ? [course]
+      : path === '/memora/missions' ? { missions: [{ key: '01', title: 'Misión 1', index: 1, total: 10, worked: 5, learned: 3, due: 0, status: 'active' }], current: '01' }
+      : path === '/memora/progress' ? { streak: 1, bestStreak: 1, shields: 0, todayAttempts: 0, failures: 0, today: { newUnits: 0, goal: 33 }, calendar: Array(84).fill(0), skills: [], units: [], associations: [] }
+      : path === '/memora/talk' ? { available: true, reason: null, capEur: 5, spentEur: spent, language: 'en', scenarios }
+      : path === '/memora/speak' ? { available: true, reason: null, capEur: 5, spentEur: spent, language: 'en', items: [] }
+      : {};
+    return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ data }) });
+  });
+  await page.goto(url);
+  await page.waitForSelector('.speak-btn');
+  check(/Conversar en inglés/.test(await page.textContent('.speak-btn')), 'Inicio de inglés ofrece «Conversar en inglés»');
+  await page.locator('.speak-btn').tap();
+  await page.waitForSelector('.talk-sc');
+  check(page.url().includes('/conversar?curso=c1'), 'la conversación tiene su dirección (/conversar)');
+  const cards = await page.$$eval('.talk-sc', (b) => b.map((x) => Math.round(x.getBoundingClientRect().height)));
+  check(cards.length === 2 && cards.every((h) => h >= 44), `elige situación con un toque (${cards.join(', ')} px)`);
+  check(await page.locator('.talk-warm').count() === 1, 'el calentamiento de frases sueltas sigue disponible');
+  if (shots) await page.screenshot({ path: `${shots}/conversar-elige.png` });
+
+  await page.locator('.talk-sc', { hasText: 'Charla libre' }).tap();
+  await page.waitForSelector('.bubble.ai');
+  check((await page.textContent('.bubble.ai')).includes('How was your day'), 'la IA abre la conversación (frase fija: empezar no cuesta)');
+  await page.waitForSelector('.talk-mic.listening, .talk-mic.hearing', { timeout: 5000 });
+  check(true, 'después de hablar la IA, escucha sola (manos libres, sin mantener pulsado)');
+  await page.waitForTimeout(1500);
+  await page.locator('.talk-mic').tap(); // con el micrófono simulado (un pitido continuo) se envía tocando
+  await page.waitForSelector('.bubble.me');
+  const t1 = turns[0];
+  check(t1 && t1.scenario === 'libre' && t1.history.length === 1 && t1.history[0].who === 'ai', 'envía la situación y el historial (solo texto)');
+  check(t1 && Buffer.from(t1.audio.slice(0, 16), 'base64').toString('latin1').startsWith('RIFF'), 'y el audio del turno en WAV');
+  await page.waitForSelector('.talk-chip.self');
+  const self = await page.textContent('.talk-chip.self');
+  const miss = await page.textContent('.talk-chip.miss');
+  check(/Te has corregido/.test(self) && /is ten years old/.test(self), `la autocorrección se ve en verde, como logro («${self.trim()}»)`);
+  check(/I have a dog/.test(miss), 'el error que se quedó, en ámbar y sin cortar la charla');
+  check((await page.$$eval('.bubble.ai', (b) => b.map((x) => x.textContent))).some((t) => /What is its name/.test(t)), 'la IA contesta y sigue el hilo con una pregunta');
+  check(events.length === 1 && events[0].unitKey === 'have' && events[0].format === 'recall_cued' && events[0].correct === false, 'el error vuelve al repaso de su unidad (recordar con pista)');
+  if (shots) await page.screenshot({ path: `${shots}/conversar-chat.png` });
+
+  await page.waitForSelector('.talk-mic.listening, .talk-mic.hearing', { timeout: 5000 });
+  check(true, 'tras contestar la IA, vuelve a escuchar sola');
+  await page.waitForTimeout(1200);
+  await page.locator('.talk-mic').tap();
+  await page.waitForFunction(() => document.querySelectorAll('.bubble.me').length === 2);
+  check(turns[1].history.length === 3, 'el segundo turno lleva toda la conversación anterior');
+  check(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'nada se sale por los lados');
+  const bar = await page.$eval('.talk-bar', (e) => Math.round(e.getBoundingClientRect().bottom));
+  check(bar <= 844, `la barra del micrófono se ve entera (${bar} px)`);
+
+  await page.locator('.talk-end-btn').tap();
+  await page.waitForSelector('.talk-end');
+  const end = await page.textContent('.talk-end');
+  check(/Objetivo cumplido/.test(end) && /Te corregiste tú solo 1 vez/.test(end) && /I have a dog/.test(end), 'resumen: objetivo, autocorrección como logro y lo que conviene repasar');
+  if (shots) await page.screenshot({ path: `${shots}/conversar-final.png`, fullPage: true });
+  check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
+} finally {
+  await browser.close();
+  await server.close();
+}
+const failed = results.filter((r) => !r).length;
+console.log(failed ? `\n${failed} comprobaciones fallidas` : `\n${results.length} comprobaciones superadas`);
+process.exit(failed ? 1 : 0);

@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Exam } from './Exam';
 import { Guided } from './Guided';
 import { Speak, setSpeakEnabled, speakEnabled } from './Speak';
+import { Talk } from './Talk';
 import { api, type AccessData, ApiError, type Course, type Me, type Mission, type Progress, type SessionPayload } from './api';
 import { AssocSession } from './AssocSession';
 import { Feed } from './Feed';
@@ -24,6 +25,7 @@ type View =
   | { name: 'session'; course: Course; payload: SessionPayload; mission?: string; focus?: 'fallos' }
   | { name: 'exam'; course: Course; guided?: boolean }
   | { name: 'speak'; course: Course }
+  | { name: 'talk'; course: Course }
   | { name: 'preview'; payload: SessionPayload | null; error?: string };
 
 const PREF = 'memora.preferences';
@@ -61,7 +63,7 @@ const shortTitle = (t: string) => cleanTitle(t).replace(/\s*·\s*DAM$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
-type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'speak'; course: string } | { name: 'preview'; unit: string };
+type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'speak'; course: string } | { name: 'talk'; course: string } | { name: 'preview'; unit: string };
 function readRoute(): Route {
   const { pathname, search } = window.location;
   const q = new URLSearchParams(search);
@@ -70,6 +72,7 @@ function readRoute(): Route {
   if (pathname === '/perfil') return { name: 'profile' };
   if (pathname === '/sin-conexion') return { name: 'offline' };
   if (pathname === '/studio') return { name: 'studio' };
+  if (pathname === '/conversar' && q.get('curso')) return { name: 'talk', course: q.get('curso')! };
   if (pathname === '/hablar' && q.get('curso')) return { name: 'speak', course: q.get('curso')! };
   if (pathname === '/simulacro' && q.get('curso')) return { name: 'exam', course: q.get('curso')!, ...(q.get('modo') === 'guiado' ? { guided: true } : {}) };
   if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}), ...(q.get('foco') === 'fallos' ? { focus: 'fallos' as const } : {}) };
@@ -80,12 +83,13 @@ function routePath(r: Route): string {
   if (r.name === 'offline') return '/sin-conexion';
   if (r.name === 'studio') return '/studio';
   if (r.name === 'preview') return `/preview/${r.unit}`;
+  if (r.name === 'talk') return `/conversar?curso=${encodeURIComponent(r.course)}`;
   if (r.name === 'speak') return `/hablar?curso=${encodeURIComponent(r.course)}`;
   if (r.name === 'exam') return `/simulacro?curso=${encodeURIComponent(r.course)}${r.guided ? '&modo=guiado' : ''}`;
   if (r.name === 'session') return `/sesion?curso=${encodeURIComponent(r.course)}${r.mission ? `&mision=${encodeURIComponent(r.mission)}` : ''}${r.focus ? `&foco=${r.focus}` : ''}`;
   return '/';
 }
-const TITLES: Record<string, string> = { offline: 'Sin conexión', offlineSession: 'Sesión sin conexión', home: 'Inicio', profile: 'Tu perfil', studio: 'Studio', session: 'Sesión', exam: 'Simulacro', speak: 'Hablar', preview: 'Vista previa', login: 'Entrar', loading: 'Memora' };
+const TITLES: Record<string, string> = { offline: 'Sin conexión', offlineSession: 'Sesión sin conexión', home: 'Inicio', profile: 'Tu perfil', studio: 'Studio', session: 'Sesión', exam: 'Simulacro', speak: 'Hablar', talk: 'Conversar', preview: 'Vista previa', login: 'Entrar', loading: 'Memora' };
 
 export function App() {
   const [view, setView] = useState<View>({ name: 'loading' });
@@ -128,9 +132,10 @@ export function App() {
       try { setView({ name: 'preview', payload: await api.preview(r.unit) }); } catch (e) { setView({ name: 'preview', payload: null, error: e instanceof Error ? e.message : 'Error' }); }
       return;
     }
-    if (r.name === 'speak') {
+    if (r.name === 'speak' || r.name === 'talk') {
       const c = list.find((x) => x.id === r.course);
-      if (c) { setCourse(c.id); setLanguage(c.ui_language); setAudioEnabled(c.audio_enabled !== false); if (c.audio_enabled !== false) preloadVoice(c.content_language); return setView({ name: 'speak', course: c }); }
+      // La conversación siempre habla (aunque el curso no tenga audio en las fichas).
+      if (c) { setCourse(c.id); setLanguage(c.ui_language); setAudioEnabled(r.name === 'talk' || c.audio_enabled !== false); preloadVoice(c.content_language); return setView(r.name === 'talk' ? { name: 'talk', course: c } : { name: 'speak', course: c }); }
       window.history.replaceState(null, '', '/');
     }
     if (r.name === 'exam') {
@@ -217,6 +222,7 @@ export function App() {
   if (view.name === 'preview') return <div className="app">{view.payload ? <AssocSession payload={view.payload} courseId={view.payload.state.plan.courseId} preview staff={staff} onExit={() => window.close()} onReload={() => void start()} /> : <p className="banner">{view.error}</p>}</div>;
   // Modo Flujo (D-072): pantalla completa propia, sin la estructura de la sesión por escenas.
   if (view.name === 'exam' && view.guided) return <Guided key={`g-${view.course.id}`} course={view.course} onExit={() => go({ name: 'home' })} onExam={() => go({ name: 'exam', course: view.course.id })} onFailures={() => go({ name: 'session', course: view.course.id, focus: 'fallos' })} />;
+  if (view.name === 'talk') return <Talk key={`t-${view.course.id}`} course={view.course} onExit={() => go({ name: 'home' })} onWarmup={() => go({ name: 'speak', course: view.course.id })} />;
   if (view.name === 'speak') return <Speak key={`s-${view.course.id}`} course={view.course} onExit={() => go({ name: 'home' })} />;
   if (view.name === 'exam') return <div className="app"><Exam key={view.course.id} course={view.course} onExit={() => go({ name: 'home' })} onGuided={() => go({ name: 'exam', course: view.course.id, guided: true })} onFailures={() => go({ name: 'session', course: view.course.id, focus: 'fallos' })} /></div>;
   if (view.name === 'session' && (view.payload.state.plan as { mode?: string }).mode === 'flow') return <Feed key={view.payload.state.plan.sessionId} payload={view.payload} courseId={view.course.id} onExit={leaveSession} onAgain={() => void openSession(view.course, view.mission, view.focus)} next={() => api.session(view.course.id)} />;
@@ -292,9 +298,9 @@ export function App() {
                   </button>
                 )}
                 {isLanguage(current) && speakEnabled() && (
-                  <button type="button" className="speak-btn" onClick={() => go({ name: 'speak', course: current.id })}>
+                  <button type="button" className="speak-btn" onClick={() => go({ name: 'talk', course: current.id })}>
                     <span className="fails-n speak-n" aria-hidden="true">🎙️</span>
-                    <span><b>Ronda de hablar</b><small>Di en voz alta frases que ya sabes · te corrige la IA</small></span>
+                    <span><b>Conversar en inglés</b><small>Habla con la IA sin tocar nada · con lo que ya sabes</small></span>
                     <span aria-hidden="true">→</span>
                   </button>
                 )}
@@ -766,8 +772,8 @@ function SpeakSettings({ courses }: { courses: Course[] }) {
   const eur = (n: number) => `${n.toFixed(2).replace('.', ',')} €`;
   return (
     <section className="card-panel">
-      <h2>🎙️ Ronda de hablar</h2>
-      <p className="muted">Dices en voz alta frases que ya has aprendido y una IA te corrige. Usa el micrófono y cuesta unos céntimos por ronda.</p>
+      <h2>🎙️ Conversar y hablar con IA</h2>
+      <p className="muted">Conversas en voz alta con una IA usando lo que ya has aprendido, y te corrige. Usa el micrófono y cuesta unos céntimos por conversación.</p>
       <label className="toggle-row"><input type="checkbox" checked={on} onChange={(e) => { setOn(e.target.checked); setSpeakEnabled(e.target.checked); }} /><span>{on ? 'Activada' : 'Desactivada'}</span></label>
       {info && (info.off
         ? <p className="muted">Aún no está activada en el servidor.</p>

@@ -47,14 +47,17 @@ try {
       : path === '/memora/missions' ? { missions: [{ key: '01', title: 'Misión 1', index: 1, total: 10, worked: 5, learned: 3, due: 0, status: 'active' }], current: '01' }
       : path === '/memora/progress' ? { streak: 1, bestStreak: 1, shields: 0, todayAttempts: 0, failures: 0, today: { newUnits: 0, goal: 33 }, calendar: Array(84).fill(0), skills: [], units: [], associations: [] }
       : path === '/memora/speak' ? { available: true, reason: null, capEur: 5, spentEur: spent, language: 'en', items }
+      : path === '/memora/talk' ? { available: true, reason: null, capEur: 5, spentEur: spent, language: 'en', scenarios: [{ key: 'libre', title: 'Charla libre', emoji: '💬', goal: 'x', opening: 'Hi!' }] }
       : {};
     return route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ data }) });
   });
   await page.goto(url);
   await page.waitForSelector('.speak-btn');
   const btn = await page.$eval('.speak-btn', (e) => ({ h: e.getBoundingClientRect().height, t: e.textContent }));
-  check(btn.h >= 44 && /Ronda de hablar/.test(btn.t), `Inicio de inglés muestra «Ronda de hablar» tocable (${Math.round(btn.h)} px)`);
+  check(btn.h >= 44 && /Conversar/.test(btn.t), `Inicio de inglés muestra «Conversar» tocable (${Math.round(btn.h)} px)`);
   await page.locator('.speak-btn').tap();
+  await page.waitForSelector('.talk-warm');
+  await page.locator('.talk-warm').tap(); // la ronda de frases queda como calentamiento (D-107)
   await page.waitForSelector('.speak-prompt');
   check(page.url().includes('/hablar?curso=c1'), 'la ronda tiene su dirección (/hablar)');
   check((await page.textContent('.speak-prompt')) === 'Tengo un perro.', 'pide decir en inglés una frase ya trabajada');
@@ -112,7 +115,7 @@ try {
   await page.locator('.avatar').first().tap();
   await page.waitForSelector('.toggle-row input');
   const panel = await page.$eval('.toggle-row', (e) => e.closest('section').textContent);
-  check(/Ronda de hablar/.test(panel) && /Activada/.test(panel) && /de 5,00 €/.test(panel), 'en el perfil: interruptor y gasto del mes frente al tope');
+  check(/Conversar y hablar/.test(panel) && /Activada/.test(panel) && /de 5,00 €/.test(panel), 'en el perfil: interruptor y gasto del mes frente al tope');
   if (shots) await page.screenshot({ path: `${shots}/hablar-ajustes.png`, fullPage: true });
   await page.locator('.toggle-row input').tap();
   check(/Desactivada/.test(await page.textContent('.toggle-row')), 'se puede desactivar con un toque');

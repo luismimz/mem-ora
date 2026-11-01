@@ -13,6 +13,8 @@
 //   POST /memora/studio/requests/:id     marcar un aviso como atendido o descartado
 //   GET  /memora/speak?course=…          ronda de hablar: frases ya trabajadas, gasto del mes y tope (D-106)
 //   POST /memora/speak/check             audio de una frase → corrección de la IA (OpenRouter, solo servidor)
+//   GET  /memora/talk?course=…           conversación con IA: situaciones, gasto y tope (D-107)
+//   POST /memora/talk/turn               un turno hablado → respuesta, errores y autocorrecciones (D-107)
 //   GET  /memora/push/key                clave pública para el aviso de repaso en el móvil (D-077)
 //   POST /memora/push/subscribe|unsubscribe|test   suscripción de este dispositivo y aviso de prueba
 //   GET  /memora/push/message            texto del aviso (lo pide el service worker al recibirlo)
@@ -32,6 +34,7 @@ import { assessAssociation, dayOf, dueUnits, dueWords, errorUnits, flowNewUnits,
 import { buildAssociationSession, buildExam, buildFlowSession, FLOW_PLAN_VERSION, FLOW_REVIEW_ARCADE_MAX, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
+import { askPartner, cleanHistory, SCENARIOS, talkMessages, vocabLines } from '../speak/talk';
 import { askCoach, monthSpendEur, pickSpeakItems, SPEAK_MAX_AUDIO_B64, SpeakError, speakConfig, unitPhrases } from '../speak/lib';
 import { ring, vapidFromEnv } from '../push/lib';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
@@ -710,6 +713,54 @@ export default {
           const cost = (e as SpeakError & { costUsd?: number }).costUsd;
           if (cost) await record(cost, null);
           logger.warn(`[memora-api] ronda de hablar: ${e.code}`);
+          throw new HttpError(502, `SPEAK_${e.code}`, e.message);
+        }
+        throw e;
+      }
+    }));
+
+    // Conversación con IA (D-107): una sola pantalla, manos libres; comparte gasto y tope con la ronda de hablar.
+    router.get('/talk', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.query.course, userId);
+      const cfg = speakConfig(process.env);
+      const spentEur = await speakSpend(userId, Date.now());
+      const reason = !cfg ? 'off' : !isLanguageCourse(course) ? 'not_language' : spentEur >= cfg.capEur ? 'cap' : null;
+      return { data: { available: reason === null, reason, capEur: cfg?.capEur ?? 0, spentEur, language: course.content_language,
+        scenarios: SCENARIOS.map(({ role: _r, ...sc }) => sc) } };
+    }));
+    router.post('/talk/turn', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const course = await visibleCourse(req.body?.course, userId);
+      const cfg = speakConfig(process.env);
+      if (!cfg || !isLanguageCourse(course)) throw new HttpError(503, 'SPEAK_OFF', 'La conversación no está activada en el servidor.');
+      const now = Date.now();
+      if ((await speakSpend(userId, now)) >= cfg.capEur) throw new HttpError(429, 'SPEAK_CAP', `Has llegado al tope de ${cfg.capEur} € de este mes.`);
+      const sc = SCENARIOS.find((x) => x.key === req.body?.scenario);
+      if (!sc) throw new HttpError(400, 'BAD_REQUEST', 'Situación no válida.');
+      const audio = typeof req.body?.audio === 'string' ? req.body.audio : '';
+      if (!audio || audio.length > SPEAK_MAX_AUDIO_B64 || !/^[A-Za-z0-9+/=]+$/.test(audio)) throw new HttpError(400, 'BAD_REQUEST', 'Audio no válido.');
+      const history = cleanHistory(req.body?.history);
+      const { units } = await publishedContent(course);
+      const learner = await learnerFor(userId, course.id);
+      const worked = [...new Set(Object.values(learner.skills).filter((x) => x.status !== 'new').map((x) => x.unitId))].reverse();
+      const keys = new Set(worked);
+      const messages = talkMessages(sc, history.length ? history : [{ who: 'ai', text: sc.opening }], vocabLines(units, worked), audio, course.content_language, course.learner_language ?? course.ui_language ?? 'es');
+      const record = async (costUsd: number, ok: boolean | null) => {
+        const id = randomUUID();
+        await db('learning_events').insert({ event_key: createHash('sha256').update(`${userId}:speak:${id}`).digest('hex'), event_id: id, user: userId, course: course.id, kind: 'speak',
+          payload: JSON.stringify({ talk: sc.key, ok, costEur: Math.round(costUsd * cfg.eurPerUsd * 1e6) / 1e6, model: cfg.model, at: now }), device_id: 'server', device_seq: 0, device_time: new Date(now), received_at: new Date(now), schema_version: 1 });
+      };
+      try {
+        const { verdict, costUsd } = await askPartner(cfg, messages, keys);
+        await record(costUsd, verdict.mistakes.length === 0);
+        const mistakes = verdict.mistakes.map((m) => ({ ...m, skillKey: m.unitKey ? units[m.unitKey]?.skills.find((x) => x.kind === 'recall')?.key ?? null : null }));
+        return { data: { ...verdict, mistakes, spentEur: await speakSpend(userId, now), capEur: cfg.capEur } };
+      } catch (e) {
+        if (e instanceof SpeakError) {
+          const cost = (e as SpeakError & { costUsd?: number }).costUsd;
+          if (cost) await record(cost, null);
+          logger.warn(`[memora-api] conversación: ${e.code}`);
           throw new HttpError(502, `SPEAK_${e.code}`, e.message);
         }
         throw e;
