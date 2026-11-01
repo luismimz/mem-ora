@@ -100,7 +100,7 @@ const buzz = (ms: number | number[]) => { try { navigator.vibrate?.(ms); } catch
  * El ratón y el lápiz siguen usando pointer events. Solo cuenta como «siguiente» si el gesto empieza con la ficha ya
  * leída hasta abajo (si no, el deslizar sirve para leerla).
  */
-function Slide({ children, onNext, tone, className = '' }: { children: ReactNode; onNext?: () => void; tone: number; className?: string }) {
+export function Slide({ children, onNext, tone, className = '' }: { children: ReactNode; onNext?: () => void; tone: number; className?: string }) {
   const [dy, setDy] = useState(0);
   const start = useRef<{ x: number; y: number } | null>(null);
   const box = useRef<HTMLElement>(null);

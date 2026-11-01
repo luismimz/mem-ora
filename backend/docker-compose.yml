@@ -41,6 +41,10 @@ services:
       VAPID_PUBLIC_KEY: ${VAPID_PUBLIC_KEY:-}
       VAPID_PRIVATE_KEY: ${VAPID_PRIVATE_KEY:-}
       VAPID_SUBJECT: ${VAPID_SUBJECT:-mailto:hola@luismontalvan.com}
+      # Ronda de hablar (D-106): la clave de OpenRouter solo vive aquí, nunca en la app. Sin clave, la ronda no aparece.
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENROUTER_SPEAK_MODEL: ${OPENROUTER_SPEAK_MODEL:-}
+      SPEAK_MONTHLY_CAP_EUR: ${SPEAK_MONTHLY_CAP_EUR:-5}
       DB_CLIENT: pg
       DB_HOST: db
       DB_PORT: "5432"
