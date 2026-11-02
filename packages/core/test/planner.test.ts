@@ -90,3 +90,29 @@ describe('plan del día', () => {
     expect(plan.items.filter((i) => i.reason === 'new')).toHaveLength(cfg.load.minNewPerDay);
   });
 });
+
+describe('repasos que rotan (D-110)', () => {
+  const cfg = resolveConfig({ load: { newCap: 0, minNewPerDay: 0, reviewCap: 10, totalCap: 10, backlogSuppressNew: 999 } });
+  it('lo que lleva días olvidándose no queda tapado por lo de intervalo corto, ni el orden depende del id', () => {
+    const now = T0 + 30 * DAY;
+    let learner = learn(createLearner('u1'), 40, T0, cfg);
+    const skills = { ...learner.skills };
+    // k0–k19: practicados hoy, intervalo de 1 h y vencidos hace 4 h (llegan al tope de retraso relativo).
+    for (let i = 0; i < 20; i += 1) skills[`k${i}.recall`] = { ...skills[`k${i}.recall`]!, step: 0, dueAt: now - 4 * 3_600_000 };
+    // k20–k39: intervalo de 3 días y vencidos hace 8 días: se están olvidando de verdad.
+    for (let i = 20; i < 40; i += 1) skills[`k${i}.recall`] = { ...skills[`k${i}.recall`]!, step: 3, dueAt: now - 8 * DAY };
+    learner = { ...learner, skills };
+    const reviews = planDay({ catalog: catalogOf(40), learner, now, config: cfg }).items.filter((i) => i.reason === 'review').map((i) => Number(i.unitId.slice(1)));
+    expect(reviews).toHaveLength(10);
+    expect(reviews.every((n) => n >= 20)).toBe(true);
+  });
+  it('a igual prioridad, primero lo que más tiempo lleva esperando', () => {
+    const now = T0 + 30 * DAY;
+    let learner = learn(createLearner('u1'), 12, T0, cfg);
+    const skills = { ...learner.skills };
+    for (let i = 0; i < 12; i += 1) skills[`k${i}.recall`] = { ...skills[`k${i}.recall`]!, step: 0, dueAt: now - (4 + i) * 3_600_000 };
+    learner = { ...learner, skills };
+    const reviews = planDay({ catalog: catalogOf(12), learner, now, config: cfg }).items.filter((i) => i.reason === 'review').map((i) => i.unitId);
+    expect(reviews.slice(0, 3)).toEqual(['k11', 'k10', 'k9']);
+  });
+});

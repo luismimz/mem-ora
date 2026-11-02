@@ -80,9 +80,10 @@ try {
   const auto = await page.waitForSelector('.help-keys .help-key', { timeout: 9000 }).then(() => true).catch(() => false);
   if (!auto) await page.locator('.help-more').tap();
   check(await page.locator('.help-keys .help-key').count() === 2, auto ? 'si te quedas callado, salen solas las palabras clave' : '💡 da las palabras clave (el micrófono simulado contó como voz)');
-  await page.locator('.help-more').tap();
+  // La ayuda también sube sola con el tiempo: se toca 💡 hasta que sale cada escalón.
+  for (let k = 0; k < 3 && !(await page.locator('.help-frame').count()); k++) { await page.locator('.help-more').tap(); await page.waitForTimeout(150); }
   check(/My day was ___/.test(await page.textContent('.help-frame')), '💡 da la frase con huecos');
-  await page.locator('.help-more').tap();
+  for (let k = 0; k < 3 && !(await page.locator('.help-model').count()); k++) { await page.locator('.help-more').tap(); await page.waitForTimeout(150); }
   check(/My day was good/.test(await page.textContent('.help-model')) && await page.locator('.help-more').count() === 0, 'y por último la frase entera para leerla');
   await page.locator('.help-life').tap();
   const lifes = await page.$$eval('.help-key.life', (b) => b.map((x) => ({ t: x.textContent, h: Math.round(x.getBoundingClientRect().height) })));

@@ -40,7 +40,10 @@ export function reviewPriority(state: SkillState, now: number, learner: LearnerS
   const steps = config.scheduler.stepsMs;
   const interval = Math.max(steps[state.step] ?? steps[steps.length - 1] ?? 1, 1);
   const overdue = Math.min(config.load.overdueCapRatio, Math.max(0, (now - (state.dueAt ?? now)) / interval));
-  let priority = overdue;
+  // Retraso absoluto (D-110): sin esto, lo de intervalo corto (1 h, 3 h) llegaba enseguida al tope y siempre ganaba a lo
+  // que lleva días olvidándose (intervalo de días: tarda una semana en llegar al tope). Hasta +1 a las dos semanas.
+  const daysLate = Math.max(0, (now - (state.dueAt ?? now)) / 86_400_000);
+  let priority = overdue + Math.min(1, daysLate / 14);
   if (state.status === 'weakened') priority += config.load.weakenedBonus;
   const association = associationId ? learner.associations[associationId] : undefined;
   if (association && assessAssociation(association, config).trajectory === 'losing') priority += config.load.associationLosingBonus;
@@ -72,7 +75,7 @@ export function planDay(input: { catalog: Catalog; learner: LearnerState; now: n
   const done = learner.activity[String(day)] ?? { introduced: 0, reviews: 0, attempts: 0, correct: 0 };
   const associationOf = new Map(catalog.skills.map((s) => [s.id, s.associationId]));
 
-  // Repasos vencidos (habilidad o su asociación) ordenados por prioridad; desempate estable por id.
+  // Repasos vencidos (habilidad o su asociación) ordenados por prioridad.
   const due = catalog.skills
     .map((def) => ({ def, state: learner.skills[def.id] }))
     .filter((x): x is { def: (typeof x)['def']; state: SkillState } => {
@@ -84,7 +87,9 @@ export function planDay(input: { catalog: Catalog; learner: LearnerState; now: n
     })
     // Lo practicado hoy también vuelve si ya ha vencido (la curva empieza en 1 h y 3 h).
     .map((x) => ({ ...x, priority: reviewPriority(x.state, now, learner, x.def.associationId, config) }))
-    .sort((a, b) => b.priority - a.priority || (a.def.id < b.def.id ? -1 : 1));
+    // Desempate (D-110): primero lo que más tiempo lleva esperando (antes, por id: con muchos repasos salían siempre los
+    // mismos y los de id «tardío» no volvían nunca).
+    .sort((a, b) => b.priority - a.priority || (a.state.dueAt ?? 0) - (b.state.dueAt ?? 0) || (a.def.id < b.def.id ? -1 : 1));
 
   const usedToday = done.introduced + done.reviews;
   const remaining = Math.max(0, load.totalCap - usedToday);
