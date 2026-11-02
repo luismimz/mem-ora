@@ -1104,3 +1104,11 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   sube sola un escalón (hasta las palabras clave). Menos ayuda, más puntos.
 - **Salvavidas:** *Let me think…*, *How do you say…?*, *Can you repeat, please?*… siempre a mano con su audio; nunca son
   error. «¿Cómo se dice X?» en español: la IA da la palabra, queda en el chat (📖 factura = bill) y no penaliza.
+
+## D-110 · Los repasos rotan: lo olvidado de días vuelve (2-nov-2026)
+- **Aviso del usuario:** en inglés «siguen saliendo las mismas y otras no han vuelto a salir».
+- **Causa:** la prioridad de repaso era el retraso relativo a su intervalo, con tope 3. Lo de intervalo corto (1 h, 3 h)
+  llegaba al tope en horas; lo de intervalo de días tardaba una semana. Con más repasos que hueco (25 por ronda), el
+  empate se resolvía por id: siempre las mismas delante y las de id «tardío» sin volver.
+- **Arreglo:** la prioridad suma el retraso absoluto (hasta +1 a las dos semanas) y el empate se resuelve por quién lleva
+  más tiempo esperando. Prueba que reproduce el caso (fallaba con el código anterior).
