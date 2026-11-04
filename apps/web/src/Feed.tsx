@@ -197,7 +197,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
               {ex.lines?.length ? (
                 // Línea a línea: el código y, debajo de cada línea, qué hace y para qué.
                 <>
-                  {!isCode(unit, ex.text) && <p className="learn-text">{ex.text}</p>}
+                  {!ex.lines.some((l) => ex.text.includes(l.code)) && <p className="learn-text">{ex.text}</p>}
                   <ol className="code-lines" lang={unit.language}>{ex.lines.map((l, j) => <li key={j}><code>{l.code}</code><span>{l.note}</span></li>)}</ol>
                 </>
               ) : isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{ex.text} {voice && say(ex.text)}</p>}
