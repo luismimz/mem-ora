@@ -585,10 +585,10 @@
             }
           ],
           "signals": [
-            "by Friday",
-            "by then",
-            "by 2030",
-            "by the time"
+            "by Friday = para el viernes",
+            "by then = para entonces",
+            "by 2030 = para 2030",
+            "by the time = para cuando"
           ],
           "drills": [
             {

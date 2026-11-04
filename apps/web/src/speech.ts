@@ -39,6 +39,24 @@ function indexFor(language: string): Promise<Record<string, string>> {
 /** Pide el índice por adelantado (al entrar en un curso con audio) para que la primera palabra ya suene con Kokoro. */
 export function preloadVoice(language: string): void { void indexFor(language); }
 
+// Audios ya pedidos (para no repetir). En el iPhone, pedir el archivo al hablar daba un retraso visible (4-nov-2026):
+// se descargan antes las locuciones de las próximas tarjetas y al sonar ya están en la caché del navegador.
+const warmed = new Set<string>();
+/** Descarga por adelantado los audios Kokoro de estos textos (los que no tienen audio se ignoran). */
+export function prefetchSpeech(texts: string[], language: string): void {
+  if (!enabled || typeof fetch === 'undefined') return;
+  void indexFor(language).then((index) => {
+    for (const t of texts) {
+      const file = index[norm(t)];
+      if (!file) continue;
+      const src = `/audio/${language}/${file}`;
+      if (warmed.has(src)) continue;
+      warmed.add(src);
+      fetch(src).catch(() => warmed.delete(src));
+    }
+  });
+}
+
 function voiceFor(tag: string): SpeechSynthesisVoice | undefined {
   const voices = synth()?.getVoices() ?? [];
   const base = tag.split('-')[0]!.toLowerCase();

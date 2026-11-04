@@ -40,7 +40,7 @@ import {
 import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
-import { audioEnabled, speak } from './speech';
+import { audioEnabled, prefetchSpeech, speak } from './speech';
 import { enablePush, pushState, type PushState } from './push';
 import { ResultView, TableView, VisualView } from './Visual';
 import { freshDb, gradeSql, SQL_KEYWORDS, tablesOf, type LabVerdict } from './sqlLab';
@@ -224,11 +224,14 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
   const first = (p.examples as Array<{ text: string; mirror?: Mirror }>).find((e) => e.mirror);
   const voice = audioEnabled();
   const say = (text: string) => (voice ? <button type="button" className="say" aria-label={`Escuchar «${text}»`} onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button> : null);
+  const rest = p.examples.filter((e) => e.text !== first?.text).slice(0, 3);
   return (
     <div className="concept-face pattern-face">
       <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🪞'}</div>
       <h2 className="pattern-goal">{p.goal}</h2>
-      {unit.association?.text && <p className="face-story"><Marked text={unit.association.text} /></p>}
+      {/* Orden fijo y sin repetir (usuario 4-nov-2026: «se mezcla todo, agobia y hay redundancias»): la frase en
+          movimiento, la regla, CUÁNDO (línea del tiempo + pistas en un solo bloque), el truco para recordarlo y los
+          ejemplos que NO son la frase de arriba. */}
       {first ? <FlipMirror unit={unit} m={first.mirror!} text={first.text} /> : (
       <div className="mirror" role="list" aria-label="Pieza a pieza">
         {p.pieces.map((x, i) => (
@@ -239,11 +242,16 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
         ))}
       </div>)}
       <p className="pattern-rule">{p.rule}</p>
-      {p.timeline?.length ? <TimeLine marks={p.timeline} {...(p.tense ? { title: p.tense } : {})} /> : p.tense ? <p className="tense-chip">🕰️ {p.tense}</p> : null}
-      {p.signals?.length ? <p className="tense-signals" lang={unit.language}><span>🔎 PISTAS</span>{p.signals.map((t) => <b key={t}>{t}</b>)}</p> : null}
+      {(p.timeline?.length || p.signals?.length) ? (
+        <section className="pattern-when">
+          {p.timeline?.length ? <TimeLine marks={p.timeline} {...(p.tense ? { title: `${p.tense} · cuándo se usa` } : {})} /> : <p className="learn-label">🕰️ {p.tense ?? 'CUÁNDO SE USA'}</p>}
+          {p.signals?.length ? <Signals list={p.signals} language={unit.language} /> : null}
+        </section>
+      ) : p.tense ? <p className="tense-chip">🕰️ {p.tense}</p> : null}
+      {unit.association?.text && <section className="pattern-memo"><p className="learn-label">💡 PARA RECORDARLO</p><p className="face-story small"><Marked text={unit.association.text} /></p></section>}
       <div className="face-learn">
-        <p className="learn-label">{p.examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>
-        {p.examples.slice(0, 4).map((ex, i) => (
+        {rest.length > 0 && <p className="learn-label">{first ? 'MÁS EJEMPLOS' : rest.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>}
+        {rest.map((ex, i) => (
           <div key={i} className="learn-example">
             <p className="learn-text" lang={unit.language}>{ex.text} {say(ex.text)}</p>
             {ex.translation && <p className="learn-note">{ex.translation}</p>}
@@ -1075,6 +1083,12 @@ function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; 
   );
 }
 
+/** Pista de un tiempo verbal: «every day = cada día» (inglés y su traducción, 4-nov-2026). */
+const sig = (t: string) => { const [en, es] = t.split(' = '); return { en: en!.trim(), es: es?.trim() }; };
+function Signals({ list, language, max }: { list: string[]; language: string; max?: number }) {
+  return <p className="tense-signals">{list.slice(0, max).map((t) => { const s = sig(t); return <b key={t}><span lang={language}>{s.en}</span>{s.es && <small>{s.es}</small>}</b>; })}</p>;
+}
+
 /** Tiempo de cada pregunta de la Ráfaga hasta que la tarjeta «toca el suelo». */
 const BURST_MS = 4000;
 
@@ -1134,13 +1148,16 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
       <p className="tag">🎮 {unitText(unit).toUpperCase()} · {Math.min(done + 1, items.length + late.length)}/{items.length}</p>
       <p className="burst-score">✅ {ok} {done - ok > 0 ? `· ❌ ${done - ok}` : ''}</p>
       <div className="burst-sky">
-        <div key={`${current}-${late.includes(current!) ? 'b' : 'a'}`} className={`burst-card ${fb ? 'stop' : ''}`} style={{ animationDuration: `${BURST_MS}ms`, transform: dx ? `translateX(${dx}px) rotate(${dx / 14}deg)` : undefined }}
+        {/* La caída va en una capa aparte y con transform (GPU): con «top» se quedaba quieta en el iPhone. */}
+        <div key={`${current}-${late.includes(current!) ? 'b' : 'a'}`} className={`burst-drop ${fb ? 'stop' : ''}`} style={{ animationDuration: `${BURST_MS}ms` }}>
+        <div className="burst-card" style={{ transform: dx ? `translateX(${dx}px) rotate(${dx / 14}deg)` : undefined }}
           onPointerDown={(e) => { if (two) start.current = e.clientX; }}
           onPointerMove={(e) => { if (start.current !== null) setDx(e.clientX - start.current); }}
           onPointerUp={() => { if (start.current !== null && Math.abs(dx) > 70) answer(dx < 0 ? options[0]! : options[1]!); else setDx(0); start.current = null; }}
           onPointerCancel={() => { start.current = null; setDx(0); }}>
           <span className="burst-prompt">{ex.prompt}</span>
           {fb && <span className="burst-fb">{fb.late ? '⏰ ¡Tarde! Vuelve al final' : fb.ok ? '¡Sí! 🎉' : <>Es <b>{ex.answer}</b>{ex.explanation ? <small>{ex.explanation}</small> : null}</>}</span>}
+        </div>
         </div>
         <div className="burst-floor" />
       </div>
@@ -1400,7 +1417,8 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
     return (
       <Slide tone={hue(unit.key)} className="tense-intro" onNext={() => setI(0)}>
         <p className="tag">🕰️ ¿QUÉ TIEMPO PIDE?</p>
-        <h2 className="ask">Sé detective: la PISTA te dice el tiempo</h2>
+        <h2 className="ask">Cada tiempo tiene sus pistas</h2>
+        <p className="tense-how">Vas a ver frases con un hueco. Busca la <b>pista</b> (every day, yesterday, now…): ella te dice qué tiempo usar. Aquí tienes cada tiempo, cuándo se usa y sus pistas traducidas.</p>
         <div className="tense-cheat">
           {tenses.map((u) => {
             const pp = u.payload as PatternPayload;
@@ -1408,7 +1426,7 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
               <div key={u.key} className="tense-cheat-row">
                 <p className="tense-chip">{tenseOf(u)}</p>
                 {pp.timeline?.length ? <TimeLine marks={pp.timeline} small /> : null}
-                {pp.signals?.length ? <p className="tense-cheat-signals" lang={u.language}>🔎 {pp.signals.slice(0, 5).join(' · ')}</p> : null}
+                {pp.signals?.length ? <Signals list={pp.signals} language={u.language} max={5} /> : null}
               </div>
             );
           })}
@@ -1455,7 +1473,7 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
           {!ok && picked && (() => {
             const other = formTense(picked);
             const op = other?.payload as PatternPayload | undefined;
-            return other && other.key !== q.u.key && op?.signals?.length ? <p className="tense-other">«{picked}» sería <b>{tenseOf(other)}</b>: haría falta una pista como <b lang={other.language}>{op.signals.slice(0, 3).join(', ')}</b>.</p> : null;
+            return other && other.key !== q.u.key && op?.signals?.length ? <p className="tense-other">«{picked}» sería <b>{tenseOf(other)}</b>: haría falta una pista como <b lang={other.language}>{op.signals.slice(0, 3).map((t) => sig(t).en).join(', ')}</b>.</p> : null;
           })()}
         </div>
       )}
@@ -2009,6 +2027,12 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const step = plan.steps[index];
   const unit = step?.unitKey ? units[step.unitKey] : undefined;
   useEffect(() => setUnsure(false), [step?.id, teaching]);
+  // Las voces de esta tarjeta y de las tres siguientes, descargadas antes de que hagan falta (sin retraso al sonar).
+  useEffect(() => {
+    if (!audioEnabled()) return;
+    const ahead = plan.steps.slice(index, index + 4).map((s) => (s.unitKey ? units[s.unitKey] : undefined)).filter((u): u is SessionUnit => Boolean(u));
+    for (const u of ahead) prefetchSpeech([unitText(u), ...((u.payload as { examples?: Array<{ text?: string }> }).examples ?? []).slice(0, 4).map((e) => e.text ?? '')], u.language);
+  }, [index, plan, units]);
   const sessionUnits = useMemo(() => [...new Set(plan.steps.map((s) => s.unitKey).filter(Boolean))].map((k) => units[k]!).filter(Boolean), [plan, units]);
   const pool = (u: SessionUnit) => {
     const same = sessionUnits.filter((x) => x.type === u.type);

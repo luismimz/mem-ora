@@ -317,13 +317,13 @@
             }
           ],
           "signals": [
-            "ever",
-            "never",
-            "already",
-            "yet",
-            "just",
-            "since",
-            "so far"
+            "ever = alguna vez",
+            "never = nunca",
+            "already = ya",
+            "yet = todavía / ya (en preguntas)",
+            "just = acabo de",
+            "since = desde",
+            "so far = hasta ahora"
           ],
           "drills": [
             {

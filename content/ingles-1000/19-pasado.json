@@ -340,12 +340,12 @@
             }
           ],
           "signals": [
-            "yesterday",
-            "last night",
-            "last week",
-            "ago",
-            "in 2020",
-            "when I was a child"
+            "yesterday = ayer",
+            "last night = anoche",
+            "last week = la semana pasada",
+            "ago = hace (tiempo)",
+            "in 2020 = en 2020",
+            "when I was a child = cuando era pequeño"
           ],
           "drills": [
             {

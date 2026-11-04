@@ -409,9 +409,9 @@
             }
           ],
           "signals": [
-            "if + presente",
-            "unless",
-            "as soon as"
+            "if + presente = si + presente",
+            "unless = a menos que",
+            "as soon as = en cuanto"
           ],
           "drills": [
             {

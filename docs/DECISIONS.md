@@ -1137,3 +1137,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   incluidos los de depuración 🐞) y misión 16 nueva (proyecto de principio a fin, inyección SQL y portfolio). En Acceso a
   datos (JPA/JDBC) y SGE (campos de Odoo, almacén de datos) se dibujan las tablas que salen del código. PL/SQL y MongoDB
   no se ejecutan en el móvil: llevan ejemplos del taller, no laboratorios.
+
+## D-113 · Ráfaga que cae siempre, voz sin retraso y trucos de gramática más claros (4-nov-2026)
+
+- La tarjeta de la Ráfaga cae con `transform` en una capa aparte (en el iPhone se quedaba quieta arriba). Cae también
+  con «reducir movimiento»: la caída ES el reloj. Prueba nueva en flow-touch.
+- La voz: se descargan antes los audios de la tarjeta actual y las tres siguientes.
+- Truco de gramática por bloques y sin repetir: frase en movimiento → regla → cuándo se usa (línea + pistas) → para
+  recordarlo → más ejemplos (sin la frase de arriba). Usuario: «se mezcla todo, agobia y hay redundancias».
+- Las pistas de los tiempos llevan traducción («every day = cada día») y el juego «¿Qué tiempo pide?» explica qué hacer.

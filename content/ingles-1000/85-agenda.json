@@ -304,9 +304,9 @@
             }
           ],
           "signals": [
-            "this time tomorrow",
-            "at nine tomorrow",
-            "all day tomorrow"
+            "this time tomorrow = mañana a esta hora",
+            "at nine tomorrow = mañana a las nueve",
+            "all day tomorrow = mañana todo el día"
           ],
           "drills": [
             {
