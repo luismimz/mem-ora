@@ -70,3 +70,24 @@ export function dueWords(items: Array<{ skillId: string; unitId: string; reason:
   }
   return out;
 }
+
+/**
+ * Todas las palabras que tocan repasar (su «recordar» ha vencido), SIN el tope diario del plan, ordenadas para que salgan
+ * primero las MENOS practicadas (menos intentos en total) y, a igualdad, las que más tiempo llevan esperando. Antes el
+ * Repaso rápido salía del plan del día (los 30 repasos de más prioridad) y repetía siempre las mismas palabras
+ * recientes; el resto no llegaba nunca (usuario, 5-nov-2026: «que aparezcan siempre las menos vistas»).
+ */
+export function dueWordsLeastSeen(defs: Array<{ id: string; unitId: string; kind: string }>, skills: Record<string, SkillState>, isWord: (unitId: string) => boolean, now: number): Array<{ unitKey: string; recall: boolean }> {
+  const attempts = new Map<string, number>();
+  for (const s of Object.values(skills)) attempts.set(s.unitId, (attempts.get(s.unitId) ?? 0) + s.attempts);
+  const out: Array<{ unitKey: string; recall: boolean; n: number; due: number }> = [];
+  const seen = new Set<string>();
+  for (const d of defs) {
+    if (d.kind !== 'recall' || seen.has(d.unitId) || !isWord(d.unitId)) continue;
+    const s = skills[d.id];
+    if (!s || s.status === 'new' || s.dueAt === null || s.dueAt > now) continue;
+    seen.add(d.unitId);
+    out.push({ unitKey: d.unitId, recall: (s.step ?? 0) >= MATURE_STEP, n: attempts.get(d.unitId) ?? 0, due: s.dueAt });
+  }
+  return out.sort((a, b) => a.n - b.n || a.due - b.due || (a.unitKey < b.unitKey ? -1 : 1)).map(({ unitKey, recall }) => ({ unitKey, recall }));
+}

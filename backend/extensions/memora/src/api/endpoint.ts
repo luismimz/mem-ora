@@ -31,7 +31,7 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, dueUnits, dueWords, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, dueUnits, dueWords, dueWordsLeastSeen, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
 import { buildAssociationSession, buildExam, buildFlowSession, FLOW_PLAN_VERSION, FLOW_REVIEW_ARCADE_MAX, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
@@ -359,7 +359,8 @@ export default {
       const flowLanguage = modes.includes('flow') && isLanguage;
       const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
       const isWord = (k: string) => units[k]?.type === 'term';
-      const words = flowLanguage ? dueWords(plan.items as PlanItem[], (id) => skillKind.get(id), isWord, learner.skills) : [];
+      // 5-nov-2026: TODAS las palabras vencidas (no solo las del tope diario del plan), las menos practicadas primero.
+      const words = flowLanguage ? dueWordsLeastSeen(catalog.skills, learner.skills, isWord, now) : [];
       // Usuario (4-nov-2026): «siempre salen azul y boy, que son básicas: deben salir las que menos han salido». De lo que
       // toca repasar, primero lo menos practicado (menos intentos); a igualdad, el orden de urgencia de dueWords.
       const seen = new Map<string, number>();
