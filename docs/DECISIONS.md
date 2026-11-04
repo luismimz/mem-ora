@@ -1121,3 +1121,13 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   guardada. Las que se dejan siguen pendientes (con D-110 salen primero las que más esperan). Inicio cuenta palabras.
 - **Fallo:** «Caza el bug» marcaba mal el «;». La comparación quitaba la puntuación y una respuesta de solo símbolos
   quedaba vacía. Ahora, si ambas quedan vacías, se comparan tal cual (sin espacios). Con prueba.
+
+## D-112 · Bases de datos se ve y se hace: tablas, diagramas E/R y SQL de verdad (4-nov-2026)
+
+- Las fichas pueden llevar dibujos en sus ejemplos (`visual`): tablas con 🔑 clave primaria, 🔗 clave ajena con su
+  destino, tipos de dato y filas; y diagramas E/R con rombo, cardinalidad y participación.
+- Las fichas pueden llevar laboratorios (`labs`) que salen en el Taller: «toca en la tabla» (la columna pedida) y
+  «escribe la consulta», que se ejecuta de verdad en el móvil con SQLite (sql.js, sin servidor ni coste). Se corrige por
+  el resultado, no por el texto; se ve el error real del motor y, si sale otra cosa, tu resultado frente al pedido.
+- Un laboratorio SQL resuelto cuenta como «aplicar» (peso muy alto); tocar en la tabla, como reconocimiento.
+- Siguiente fase: rehacer las misiones 1–5 de BBDD con un proyecto hilo (taller de bicis), estos dibujos y laboratorios.
