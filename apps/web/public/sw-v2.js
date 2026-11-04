@@ -45,7 +45,7 @@ self.addEventListener('fetch', (event) => {
     })());
     return;
   }
-  if (url.pathname.startsWith('/audio/') && url.pathname.endsWith('/index.json')) {
+  if ((url.pathname.startsWith('/audio/') || url.pathname.startsWith('/img/')) && url.pathname.endsWith('/index.json')) {
     event.respondWith((async () => {
       const cache = await caches.open(AUDIO);
       try {

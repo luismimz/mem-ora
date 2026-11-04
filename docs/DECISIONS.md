@@ -1146,3 +1146,14 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Truco de gramática por bloques y sin repetir: frase en movimiento → regla → cuándo se usa (línea + pistas) → para
   recordarlo → más ejemplos (sin la frase de arriba). Usuario: «se mezcla todo, agobia y hay redundancias».
 - Las pistas de los tiempos llevan traducción («every day = cada día») y el juego «¿Qué tiempo pide?» explica qué hacer.
+
+## D-114 · Viñetas de cómic con fal para las asociaciones (4-nov-2026)
+
+- Decisión del usuario: la imagen manda sobre el emoji; estilo B, viñeta de cómic exagerada; saldo de 10 € en fal.
+- Se generan FUERA de la lección (regla 10) con FLUX schnell a 512×512 (≈0,0008 $ cada una): `POST /memora/images`
+  (solo administración, tope IMAGES_MONTHLY_CAP_EUR, 8 € por defecto, cada gasto queda anotado) y
+  `tools/images/generate.mjs`, que las guarda como archivos estáticos en `apps/web/public/img/<idioma>/` con su índice,
+  igual que la voz. Una IA de texto convierte la escena en una descripción visual en inglés. Se revisan antes de subirlas.
+- Sustituye al límite anterior de 10 imágenes al día y 2 €/mes de CLAUDE.md para esta generación por lotes.
+- Al construir una frase, si se intercambian dos palabras separadas (on ↔ in), se explica con qué va cada una
+  («on holiday» y «in August»), y la ficha IN/ON/AT añade el truco del tamaño y las expresiones fijas.

@@ -41,6 +41,7 @@ import { api, ApiError, type Mission, type Progress, type ReportReason, type Ses
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
 import { audioEnabled, prefetchSpeech, speak } from './speech';
+import { useImage } from './images';
 import { enablePush, pushState, type PushState } from './push';
 import { ResultView, TableView, VisualView } from './Visual';
 import { freshDb, gradeSql, SQL_KEYWORDS, tablesOf, type LabVerdict } from './sqlLab';
@@ -179,7 +180,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
   const pron = typeof rawPron === 'string' ? rawPron : rawPron?.respelling;
   return (
     <div className="concept-face">
-      <div className="face-emoji" aria-hidden="true">{a?.emoji ?? '✨'}</div>
+      <Pic unit={unit} fallback={a?.emoji ?? '✨'} />
       <h2 lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} />{say(unitText(unit))}</h2>
       {voice && pron && <p className="face-pron">se pronuncia <b>{pron}</b></p>}
       <p className="face-meaning">{unitMeaning(unit)}</p>
@@ -227,7 +228,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
   const rest = p.examples.filter((e) => e.text !== first?.text).slice(0, 3);
   return (
     <div className="concept-face pattern-face">
-      <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '🪞'}</div>
+      <Pic unit={unit} fallback={unit.association?.emoji ?? '🪞'} small />
       <h2 className="pattern-goal">{p.goal}</h2>
       {/* Orden fijo y sin repetir (usuario 4-nov-2026: «se mezcla todo, agobia y hay redundancias»): la frase en
           movimiento, la regla, CUÁNDO (línea del tiempo + pistas en un solo bloque), el truco para recordarlo y los
@@ -362,7 +363,7 @@ function Quick({ unit, reverse, pool, retry, onResult }: { unit: SessionUnit; re
   return (
     <Slide tone={hue(unit.key)} className={picked === null ? '' : choices[picked]!.correct ? 'right' : 'wrong'}>
       <p className="tag">{retry ? 'OTRA VEZ, AHORA AL REVÉS' : 'RELÁMPAGO'}</p>
-      <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '✨'}</div>
+      <Pic unit={unit} fallback={unit.association?.emoji ?? '✨'} small />
       <h3 className="ask">{reverse ? <>¿Qué es <b>{unitText(unit).toUpperCase()}</b>?</> : <>¿Cuál es <b>{unitMeaning(unit)}</b>?</>}</h3>
       <div className="options">
         {choices.map((c, i) => <button type="button" key={c.label} className={`option ${c.label.length > 24 ? 'long' : ''} ${picked !== null && c.correct ? 'is-right' : ''} ${picked === i && !c.correct ? 'is-wrong' : ''}`} onClick={() => pick(i)}>{c.label}</button>)}
@@ -721,7 +722,12 @@ export function buildMistake(answer: string[], words: string[], mirror?: Mirror,
   const put = answer[i]!;
   const should = words[i]!;
   const later = words.findIndex((w, j) => j > i && same(w, put));
-  let reason = later > i
+  // Dos palabras intercambiadas (on ↔ in): no es «cuál va antes», es con QUÉ va cada una (on holiday, in August).
+  const swapped = later > i + 1 && wrong.length === 2 && same(answer[later], should);
+  const chunk = (k: number) => [words[k], words[k + 1]].filter(Boolean).join(' ');
+  let reason = swapped
+    ? `Cada una va con su palabra: «${chunk(i)}» y «${chunk(later)}». Apréndelas como bloques.`
+    : later > i
     ? `Tienes las palabras bien, pero no el orden: «${should}» va antes que «${put}».`
     : `En ese hueco va «${should}», no «${put}».`;
   // D-088: si has puesto el inglés en el orden del español, se dice tal cual, con el trozo que cambia y su regla.
@@ -1081,6 +1087,14 @@ function Train({ unit, example, onNext }: { unit: SessionUnit; example: number; 
       <FlipMirror unit={unit} m={ex.mirror!} text={ex.text} />
     </Slide>
   );
+}
+
+/** La viñeta de la asociación (D-114) si existe; si no, su emoji. */
+function Pic({ unit, fallback, small = false }: { unit: SessionUnit; fallback: string; small?: boolean }) {
+  const src = useImage(unit.key, unit.language);
+  const [broken, setBroken] = useState(false);
+  if (src && !broken) return <div className={`face-pic ${small ? 'small' : ''}`}><img src={src} alt="" loading="eager" decoding="async" onError={() => setBroken(true)} /></div>;
+  return <div className={`face-emoji ${small ? 'small' : ''}`} aria-hidden="true">{fallback}</div>;
 }
 
 /** Pista de un tiempo verbal: «every day = cada día» (inglés y su traducción, 4-nov-2026). */
@@ -1807,7 +1821,7 @@ function Judge({ unit, shown, onResult }: { unit: SessionUnit; shown: SessionUni
         onPointerDown={(e) => { start.current = e.clientX; }}
         onPointerMove={(e) => { if (start.current !== null) setDx(e.clientX - start.current); }}
         onPointerUp={() => { if (start.current !== null && Math.abs(dx) > 80) answer(dx > 0); start.current = null; setDx(0); }}>
-        <div className="face-emoji small" aria-hidden="true">{unit.association?.emoji ?? '✨'}</div>
+        <Pic unit={unit} fallback={unit.association?.emoji ?? '✨'} small />
         <h2 lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} /></h2>
         <p className="judge-eq">=</p>
         <p className="face-meaning">{unitMeaning(shown)}</p>

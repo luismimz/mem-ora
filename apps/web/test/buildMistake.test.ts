@@ -12,4 +12,7 @@ describe('Construye la frase: en qué te has equivocado (D-086, D-088)', () => {
   it('sin espejo, qué pieza va antes', () => {
     expect(buildMistake(['are', 'We', 'here'], ['We', 'are', 'here']).reason).toBe('Tienes las palabras bien, pero no el orden: «We» va antes que «are».');
   });
+  it('dos palabras intercambiadas lejos (on ↔ in): dice con qué va cada una', () => {
+    expect(buildMistake(['Spain', 'goes', 'in', 'holiday', 'on', 'August'], ['Spain', 'goes', 'on', 'holiday', 'in', 'August']).reason).toBe('Cada una va con su palabra: «on holiday» y «in August». Apréndelas como bloques.');
+  });
 });

@@ -12,6 +12,7 @@
 //   GET  /memora/studio/requests?course=… avisos de los alumnos pendientes (errores y «Explícame más»)
 //   POST /memora/studio/requests/:id     marcar un aviso como atendido o descartado
 //   GET  /memora/speak?course=…          ronda de hablar: frases ya trabajadas, gasto del mes y tope (D-106)
+//   POST /memora/images                 viñeta de una asociación con fal (solo administración, fuera de la lección, D-114)
 //   POST /memora/speak/check             audio de una frase → corrección de la IA (OpenRouter, solo servidor)
 //   GET  /memora/talk?course=…           conversación con IA: situaciones, gasto y tope (D-107)
 //   POST /memora/talk/turn               un turno hablado → respuesta, errores y autocorrecciones (D-107)
@@ -35,6 +36,7 @@ import { buildAssociationSession, buildExam, buildFlowSession, FLOW_PLAN_VERSION
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
 import { askPartner, cleanHistory, SCENARIOS, talkMessages, vocabLines } from '../speak/talk';
+import { generateImage, finalPrompt, ImageError, imageConfig, monthImageSpendEur, visualFor } from '../images/lib';
 import { askCoach, monthSpendEur, pickSpeakItems, SPEAK_MAX_AUDIO_B64, SpeakError, speakConfig, unitPhrases } from '../speak/lib';
 import { ring, vapidFromEnv } from '../push/lib';
 import { checkCourseFile, exportCourse, importCourse } from './courseIO';
@@ -687,6 +689,37 @@ export default {
       const items = pickSpeakItems(units, worked, priority).map((it) => ({ ...it, skillKey: units[it.unitKey]?.skills.find((s) => s.kind === 'recall')?.key ?? null }));
       return { data: { ...base, available: spentEur < cfg.capEur, reason: spentEur < cfg.capEur ? null : 'cap', items } };
     }));
+    // Imágenes de las asociaciones (D-114): solo administración, por adelantado, con tope de gasto mensual. Devuelve la
+    // imagen (base64) para guardarla como archivo estático y revisarla; aquí no se guarda nada salvo el gasto.
+    router.post('/images', wrap(async (req) => {
+      if (!req.accountability?.admin) throw new HttpError(403, 'FORBIDDEN', 'Solo administración.');
+      const cfg = imageConfig(process.env);
+      if (!cfg) throw new HttpError(503, 'IMAGES_OFF', 'Falta FAL_KEY en el servidor.');
+      const b = req.body ?? {};
+      const str = (v: unknown, max: number) => (typeof v === 'string' && v.trim() && v.length <= max ? v.trim() : null);
+      const target = str(b.target, 80), meaning = str(b.meaning, 160), scene = str(b.scene, 400), courseKey = str(b.course, 80);
+      if (!target || !meaning || !scene || !courseKey) throw new HttpError(400, 'BAD_REQUEST', 'Faltan target, meaning, scene o course.');
+      const course = await db('courses').where({ key: courseKey }).first();
+      if (!course) throw new HttpError(404, 'NOT_FOUND', 'Curso no encontrado.');
+      const now = Date.now();
+      const rows: Row[] = await db('learning_events').where({ kind: 'image' }).where('device_time', '>=', new Date(now - 32 * 86_400_000)).select('payload');
+      const spent = monthImageSpendEur(rows.map((r) => parse(r.payload)), now);
+      if (spent >= cfg.capEur) throw new HttpError(429, 'IMAGES_CAP', `Tope de imágenes del mes alcanzado (${cfg.capEur} €).`);
+      try {
+        const v = await visualFor(cfg, { target, meaning, scene });
+        const prompt = finalPrompt(str(b.visual, 400) ?? v.visual);
+        const img = await generateImage(cfg, prompt);
+        const costEur = Math.round((img.costUsd + v.costUsd) * cfg.eurPerUsd * 1e6) / 1e6;
+        const id = randomUUID(), userId = req.accountability.user;
+        await db('learning_events').insert({ event_key: createHash('sha256').update(`${userId}:image:${id}`).digest('hex'), event_id: id, user: userId, course: course.id, kind: 'image',
+          payload: JSON.stringify({ target, costEur, model: cfg.model, at: now }), device_id: 'server', device_seq: 0, device_time: new Date(now), received_at: new Date(now), schema_version: 1 });
+        return { data: { b64: img.b64, contentType: img.contentType, prompt, costEur, spentEur: Math.round((spent + costEur) * 1e4) / 1e4, capEur: cfg.capEur } };
+      } catch (e) {
+        if (e instanceof ImageError) throw new HttpError(502, e.code, e.message);
+        throw e;
+      }
+    }));
+
     router.post('/speak/check', wrap(async (req) => {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.body?.course, userId);
