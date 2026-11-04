@@ -934,10 +934,10 @@
             }
           ],
           "signals": [
-            "every day",
-            "usually",
-            "never",
-            "on Sundays"
+            "every day = cada día",
+            "usually = normalmente",
+            "never = nunca",
+            "on Sundays = los domingos"
           ],
           "drills": [
             {

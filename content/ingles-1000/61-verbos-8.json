@@ -300,10 +300,10 @@
             }
           ],
           "signals": [
-            "while",
-            "when + pasado",
-            "at 8 last night",
-            "all evening"
+            "while = mientras",
+            "when + pasado = cuando + pasado",
+            "at 8 last night = anoche a las 8",
+            "all evening = toda la tarde"
           ],
           "drills": [
             {

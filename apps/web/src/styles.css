@@ -582,9 +582,10 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 /* ═══ D-081: Ráfaga — los juegos de los pilares (Toco o Cuento, Semáforos, Chunks) ═══ */
 .burst-score { margin: 0; text-align: center; font-weight: 900; font-size: 1rem; }
 .burst-sky { position: relative; height: 15rem; display: flex; justify-content: center; }
-.burst-card { position: absolute; top: 0; width: min(100%, 20rem); min-height: 6.5rem; padding: 1.1rem 1rem; border-radius: 1.4rem; background: #fff; color: #1d1b18; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem; text-align: center; box-shadow: 0 14px 30px rgba(0,0,0,.35); touch-action: none; animation-name: burst-fall; animation-timing-function: linear; animation-fill-mode: forwards; }
-.burst-card.stop { animation-play-state: paused; }
-@keyframes burst-fall { from { top: 0; } to { top: calc(15rem - 6.5rem); } }
+.burst-drop { position: absolute; top: 0; width: min(100%, 20rem); will-change: transform; animation-name: burst-fall; animation-timing-function: linear; animation-fill-mode: forwards; }
+.burst-drop.stop { animation-play-state: paused; }
+.burst-card { position: relative; width: 100%; min-height: 6.5rem; padding: 1.1rem 1rem; border-radius: 1.4rem; background: #fff; color: #1d1b18; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .3rem; text-align: center; box-shadow: 0 14px 30px rgba(0,0,0,.35); touch-action: none; }
+@keyframes burst-fall { from { transform: translateY(0); } to { transform: translateY(calc(15rem - 6.5rem)); } }
 .burst-prompt { font-size: clamp(1.3rem, 6vw, 1.7rem); font-weight: 900; line-height: 1.15; }
 .burst-fb { font-weight: 800; font-size: 1rem; display: flex; flex-direction: column; gap: .2rem; }
 .burst-fb small { font-weight: 600; font-size: .82rem; opacity: .8; }
@@ -600,7 +601,7 @@ h2 .say { width: 2.5rem; height: 2.5rem; font-size: 1.2rem; }
 .confetti { position: fixed; left: 50%; top: 40%; width: 0; height: 0; pointer-events: none; z-index: 6; }
 .confetti i { position: absolute; width: 9px; height: 14px; border-radius: 2px; animation: confetti .9s cubic-bezier(.2, .7, .3, 1) forwards; }
 @keyframes confetti { 0% { transform: translate(0, 0) rotate(0); opacity: 1; } 60% { opacity: 1; } 100% { transform: translate(var(--x), 45vh) rotate(var(--r)); opacity: 0; } }
-@media (prefers-reduced-motion: reduce) { .burst-card { animation: none; } .confetti { display: none; } }
+@media (prefers-reduced-motion: reduce) { .confetti { display: none; } }
 
 /* Meta diaria (D-081): 35 nuevas al día en idiomas ⇒ 1.000 en 30 días */
 .goal-bar { height: 8px; border-radius: 8px; background: var(--line); overflow: hidden; margin: -.4rem 0 .9rem; }
@@ -1299,3 +1300,14 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .shop-play.lab { justify-content: flex-start; }
 /* En la ficha (fondo claro u oscuro según tarjeta) las tablas heredan el color del texto. */
 .concept-face .vt { color: inherit; }
+
+/* Truco de gramática por bloques (4-nov-2026): cada cosa en su caja, sin mezclarse. */
+.pattern-when, .pattern-memo { margin: .7rem 0 0; padding: .7rem .8rem; border-radius: 1rem; background: rgba(0,0,0,.22); display: grid; gap: .4rem; }
+.pattern-when .tl, .pattern-when figure { margin: 0; background: none; padding: 0; }
+.pattern-when .tense-signals { margin: 0; }
+.face-story.small { font-size: 1rem; line-height: 1.35; margin: 0; }
+
+/* Pistas con su traducción debajo (4-nov-2026). */
+.tense-signals b { display: inline-flex; flex-direction: column; align-items: center; line-height: 1.15; }
+.tense-signals b small { font-weight: 600; font-size: .72rem; opacity: .75; }
+.tense-how { margin: .2rem 0 .6rem; font-size: 1rem; line-height: 1.4; opacity: .9; text-align: center; }

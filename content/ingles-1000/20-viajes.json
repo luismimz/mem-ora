@@ -335,10 +335,10 @@
             }
           ],
           "signals": [
-            "I've decided",
-            "next week",
-            "It's all planned",
-            "Look at those clouds!"
+            "I've decided = he decidido",
+            "next week = la semana que viene",
+            "It's all planned = ya está planeado",
+            "Look at those clouds! = ¡mira esas nubes!"
           ],
           "drills": [
             {

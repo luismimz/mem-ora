@@ -879,11 +879,11 @@
             }
           ],
           "signals": [
-            "now",
-            "right now",
-            "at the moment",
-            "Look!",
-            "Listen!"
+            "now = ahora",
+            "right now = ahora mismo",
+            "at the moment = en este momento",
+            "Look! = ¡mira!",
+            "Listen! = ¡escucha!"
           ],
           "drills": [
             {

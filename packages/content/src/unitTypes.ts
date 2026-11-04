@@ -110,7 +110,7 @@ export interface TenseDrill {
   /** Traducción de la frase completa. */
   es?: string;
 }
-export const TENSE_LIMITS = { maxMarks: 4, label: 22, maxSignals: 8, signal: 30, maxDrills: 8, drillText: 120, form: 30, maxWrong: 3 } as const;
+export const TENSE_LIMITS = { maxMarks: 4, label: 22, maxSignals: 8, signal: 60, maxDrills: 8, drillText: 120, form: 30, maxWrong: 3 } as const;
 
 export function tenseIssues(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];

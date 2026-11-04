@@ -336,11 +336,11 @@
             }
           ],
           "signals": [
-            "I think",
-            "probably",
-            "tomorrow",
-            "I promise",
-            "OK, I…"
+            "I think = creo que",
+            "probably = probablemente",
+            "tomorrow = mañana",
+            "I promise = te lo prometo",
+            "OK, I… = vale, yo…"
           ],
           "drills": [
             {

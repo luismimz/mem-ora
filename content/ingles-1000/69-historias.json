@@ -367,10 +367,10 @@
             }
           ],
           "signals": [
-            "when I arrived",
-            "by the time",
-            "before",
-            "already (en pasado)"
+            "when I arrived = cuando llegué",
+            "by the time = para cuando",
+            "before = antes",
+            "already (en pasado) = ya, en pasado"
           ],
           "drills": [
             {

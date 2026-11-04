@@ -227,6 +227,12 @@ try {
         if (!prompt) { await en.waitForTimeout(300); continue; }
         const ex = u.payload.exercises.find((e) => e.prompt === prompt);
         if (!ex) { if (process.env.E2E_DEBUG) console.log('  ? prompt', JSON.stringify(prompt), u.key, u.payload.exercises.map((e) => e.prompt)); await en.waitForTimeout(300); continue; }
+        if (!seen.has('rafaga-cae')) {
+          // La tarjeta CAE mientras corre el tiempo (en el iPhone se quedó quieta arriba: 4-nov-2026).
+          const y0 = (await en.locator('.burst-card').boundingBox()).y; await en.waitForTimeout(900);
+          const y1 = (await en.locator('.burst-card').boundingBox()).y;
+          check(y1 - y0 > 15, `Ráfaga: la tarjeta va cayendo (${Math.round(y0)} → ${Math.round(y1)} px)`); seen.add('rafaga-cae');
+        }
         if (two) {
           const box = await en.locator('.burst-card').boundingBox();
           const left = ex.answer === u.payload.exercises[0].answer;

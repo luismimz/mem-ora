@@ -38,10 +38,11 @@ try {
   const reel = plan.findIndex((s) => s.kind === 'reel' && s.unitKey === 'g-present-continuous');
   const game = plan.findIndex((s) => s.kind === 'tense');
   check(reel >= 0 && game > reel, `el juego llega después de la ficha del tiempo (ficha ${reel + 1}.ª, juego ${game + 1}.ª)`);
-  const face = await page.evaluate(() => ({ svg: Boolean(document.querySelector('.timeline svg')), now: [...document.querySelectorAll('.tl-zone')].map((t) => t.textContent).join(' '), bar: document.querySelectorAll('.tl-action').length, label: document.querySelector('.tl-label')?.textContent, cap: document.querySelector('.timeline figcaption')?.textContent, signals: [...document.querySelectorAll('.tense-signals b')].map((b) => b.textContent) }));
+  const face = await page.evaluate(() => ({ svg: Boolean(document.querySelector('.timeline svg')), now: [...document.querySelectorAll('.tl-zone')].map((t) => t.textContent).join(' '), bar: document.querySelectorAll('.tl-action').length, label: document.querySelector('.tl-label')?.textContent, cap: document.querySelector('.timeline figcaption')?.textContent, signals: [...document.querySelectorAll('.tense-signals b [lang]')].map((b) => b.textContent), es: [...document.querySelectorAll('.tense-signals b small')].map((b) => b.textContent) }));
   check(face.svg && face.now === 'ANTES AHORA DESPUÉS' && face.bar === 1, `la ficha dibuja la línea del tiempo (${face.now}) con su barra «${face.label}»`);
   check(/Presente continuo/.test(face.cap ?? ''), `y dice qué tiempo es («${face.cap}»)`);
   check(face.signals.includes('now') && face.signals.includes('Look!'), `con sus pistas: ${face.signals.join(' · ')}`);
+  check(face.es.length === face.signals.length && face.es.includes('ahora'), `y cada pista con su traducción (${face.es.join(' · ')})`);
   const box = await page.evaluate(() => { const t = document.querySelector('.timeline').getBoundingClientRect(); const labels = [...document.querySelectorAll('.tl-label')].map((l) => l.getBoundingClientRect()); return { w: Math.round(t.width), inside: labels.every((l) => l.left >= t.left - 1 && l.right <= t.right + 1) }; });
   check(box.w >= 280 && box.inside, `la línea se lee bien en el móvil (${box.w}px de ancho, etiquetas dentro)`);
   check(!(await fits(page)).overflowX, 'la ficha no se sale de la pantalla');
@@ -50,7 +51,7 @@ try {
 
   // 1b. El ejemplo animado (espejo) empieza cuando se VE: si la tarjeta lo deja fuera de pantalla, espera.
   {
-    const small = await browser.newContext({ viewport: { width: 390, height: 320 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
+    const small = await browser.newContext({ viewport: { width: 390, height: 200 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
     const p = await small.newPage();
     await p.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
     await p.goto(`${server.resolvedUrls.local[0]}e2e/harness-escena.html?k=g-adjective-order&solo=reel`);
@@ -90,7 +91,7 @@ try {
     await cdp.send('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     await page.waitForTimeout(300);
   };
-  const cheat = await page.evaluate(() => [...document.querySelectorAll('.tense-cheat-row')].map((r) => ({ name: r.querySelector('.tense-chip')?.textContent ?? '', line: Boolean(r.querySelector('.timeline svg')), signals: r.querySelector('.tense-cheat-signals')?.textContent ?? '' })));
+  const cheat = await page.evaluate(() => [...document.querySelectorAll('.tense-cheat-row')].map((r) => ({ name: r.querySelector('.tense-chip')?.textContent ?? '', line: Boolean(r.querySelector('.timeline svg')), signals: r.querySelector('.tense-signals')?.textContent ?? '' })));
   check(cheat.length >= 2 && cheat.some((c) => /Presente simple/i.test(c.name)) && cheat.every((c) => c.line && c.signals.length > 3), `chuleta: cada tiempo con su nombre, línea y pistas (${cheat.map((c) => c.name).join(' · ')})`);
   check(await page.locator('.slide button.arcade-go').count() === 0, 'sin botón: se empieza deslizando');
   await swipeUp();

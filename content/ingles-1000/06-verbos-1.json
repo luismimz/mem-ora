@@ -948,12 +948,12 @@
             }
           ],
           "signals": [
-            "every day",
-            "always",
-            "usually",
-            "often",
-            "never",
-            "on Mondays"
+            "every day = cada día",
+            "always = siempre",
+            "usually = normalmente",
+            "often = a menudo",
+            "never = nunca",
+            "on Mondays = los lunes"
           ],
           "drills": [
             {
