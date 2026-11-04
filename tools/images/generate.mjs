@@ -21,7 +21,7 @@ if (!B || !T) throw new Error('Faltan DIRECTUS_URL o ADMIN_TOKEN en el entorno.'
 
 const units = [];
 for (const f of readdirSync(join(contentDir, course)).filter((x) => x.endsWith('.json')).sort()) {
-  const d = JSON.parse(readFileSync(join(ROOT, 'content', course, f), 'utf8'));
+  const d = JSON.parse(readFileSync(join(contentDir, course, f), 'utf8'));
   for (const m of d.modules) for (const u of m.units) {
     const scene = u.association?.scene;
     if (!scene || (only && !only.has(u.key))) continue;

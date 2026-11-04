@@ -37,7 +37,7 @@ export function imageConfig(env: Record<string, string | undefined>): ImageConfi
 }
 
 /** Estilo elegido por el usuario (4-nov-2026): opción B, viñeta de cómic exagerada. */
-export const STYLE = 'exaggerated comic book panel, bold black ink outlines, vibrant flat colors, dramatic funny facial expressions, absurd and memorable, one single clear scene, centered subject, plain simple background, no text, no letters, no words, no speech bubbles';
+export const STYLE = 'all characters fully clothed, exaggerated comic book panel, bold black ink outlines, vibrant flat colors, dramatic funny facial expressions, absurd and memorable, one single clear scene, centered subject, plain simple background, no text, no letters, no words, no speech bubbles';
 
 export interface ImageRequest {
   /** La palabra o estructura que se aprende («cold»). */
@@ -51,7 +51,7 @@ export interface ImageRequest {
 /** Instrucciones para que la IA de texto convierta la escena en una descripción visual corta en inglés. */
 export function promptMessages(r: ImageRequest): Array<{ role: 'system' | 'user'; content: string }> {
   return [
-    { role: 'system', content: 'You turn a memory-trick scene into ONE short visual description in English for an image model (max 45 words). Describe only what is seen: characters, action, objects, exaggerated emotion. The viewer ("you") is the protagonist: show a young man. Never include text, letters or the word itself as writing. Reply with the description only.' },
+    { role: 'system', content: 'You turn a memory-trick scene into ONE short visual description in English for an image model (max 45 words). Describe only what is seen: characters, action, objects, exaggerated emotion. The viewer ("you") is the protagonist: show a young adult man. Every character is an adult and fully clothed, unless the word itself is about babies or children (then show them in an ordinary, wholesome everyday situation). Never include text, letters or the word itself as writing. Reply with the description only.' },
     { role: 'user', content: `Word to remember: "${r.target}" (meaning: ${r.meaning}).\nScene: ${r.scene}` },
   ];
 }
