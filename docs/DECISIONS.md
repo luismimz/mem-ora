@@ -1112,3 +1112,12 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   empate se resolvía por id: siempre las mismas delante y las de id «tardío» sin volver.
 - **Arreglo:** la prioridad suma el retraso absoluto (hasta +1 a las dos semanas) y el empate se resuelve por quién lleva
   más tiempo esperando. Prueba que reproduce el caso (fallaba con el código anterior).
+
+## D-111 · El alumno elige cuántas palabras repasar; respuestas de solo símbolos (2-nov-2026)
+- **Petición del usuario:** con más repasos que una ronda (25), elegir al empezar cuántos hacer («así es decisión del
+  usuario y me parece divertido»), para que no se queden atrás.
+- **Qué:** si en un curso de idioma con Flujo hay más de 25 palabras por repasar, «Seguir aprendiendo» abre una hoja:
+  ⚡ 25 · 🔥 50 (si hay más de 50) · 🏆 Todas (N) · 🆕 Solo lo nuevo. La ronda se pide con `repaso=` y no se retoma la
+  guardada. Las que se dejan siguen pendientes (con D-110 salen primero las que más esperan). Inicio cuenta palabras.
+- **Fallo:** «Caza el bug» marcaba mal el «;». La comparación quitaba la puntuación y una respuesta de solo símbolos
+  quedaba vacía. Ahora, si ambas quedan vacías, se comparan tal cual (sin espacios). Con prueba.

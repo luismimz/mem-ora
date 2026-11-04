@@ -292,6 +292,9 @@ export default {
       const course = await visibleCourse(req.query.course, userId);
       const wanted = typeof req.query.mission === 'string' && req.query.mission ? req.query.mission : null;
       const wantFailures = req.query.focus === 'fallos';
+      // D-111: cuántas palabras repasar en esta ronda (lo elige el alumno: un número, «todas» o 0 = solo lo nuevo).
+      const rq = req.query.repaso;
+      const reviewMax = rq === 'todas' ? 500 : typeof rq === 'string' && /^\d{1,3}$/.test(rq) ? Math.min(500, Number(rq)) : null;
       const { units, catalog, missions, changedAt } = await publishedContent(course);
       if (wanted && !missions.some((m) => m.key === wanted)) throw new HttpError(404, 'NOT_FOUND', 'Misión no disponible.');
       const now = Date.now();
@@ -305,7 +308,7 @@ export default {
       const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations')
         // D-099: una ronda armada con un planificador anterior no se retoma (si no, se seguía con la ronda vieja).
         && (!modes.includes('flow') || (savedState?.plan as { version?: number } | undefined)?.version === FLOW_PLAN_VERSION);
-      if (savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
+      if (reviewMax === null && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
@@ -355,7 +358,7 @@ export default {
       const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
       const isWord = (k: string) => units[k]?.type === 'term';
       const words = flowLanguage ? dueWords(plan.items as PlanItem[], (id) => skillKind.get(id), isWord, learner.skills) : [];
-      const roundWords = words.slice(0, FLOW_REVIEW_ARCADE_MAX);
+      const roundWords = words.slice(0, reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
       // D-099: de los trucos que tocan, como mucho LANGUAGE_PATTERN_REVIEWS por ronda (los más urgentes) y en repaso ligero
       // (una frase nueva, sin volver a enseñarlos enteros); antes, diez por ronda con todos sus pasos tapaban lo nuevo.
       const patternDue = flowLanguage ? [...new Set((plan.items as PlanItem[]).filter((i) => i.reason === 'review' && !isWord(i.unitId)).map((i) => i.unitId))].slice(0, LANGUAGE_PATTERN_REVIEWS) : [];
@@ -382,7 +385,7 @@ export default {
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: flowNew,
             errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits,
-            ...(roundWords.length ? { reviewArcade: roundWords } : {}), ...(flowLanguage ? { lightReviews: true } : {}) })
+            ...(roundWords.length ? { reviewArcade: roundWords, reviewMax: roundWords.length } : {}), ...(flowLanguage ? { lightReviews: true } : {}) })
         : buildAssociationSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: plan.items as PlanItem[], units, knownUnits, refreshUnits: staleUnits(changedAt, learner), reviewHelp: reviewHelp(learner), maxNewUnits: newUnitsFor(learner.activity, Math.max(1, Number(course.new_per_session) || 15)) });
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };

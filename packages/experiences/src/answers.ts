@@ -13,7 +13,14 @@ export function normalizeAnswer(text: string): string {
     .trim();
 }
 
-export const sameAnswer = (given: string, expected: string): boolean => normalizeAnswer(given) !== '' && normalizeAnswer(given) === normalizeAnswer(expected);
+export const sameAnswer = (given: string, expected: string): boolean => {
+  const g = normalizeAnswer(given), e = normalizeAnswer(expected);
+  if (g || e) return g !== '' && g === e;
+  // Respuestas que son solo símbolos («;», «==», «{}»): la normalización las dejaba vacías y nunca se acertaban
+  // (usuario, 2-nov-2026: «Caza el bug» marcaba mal el «;»). Se comparan tal cual, sin espacios.
+  const raw = (t: string) => t.replace(/\s+/g, '');
+  return raw(given) !== '' && raw(given) === raw(expected);
+};
 
 /** ¿Aparece `piece` como secuencia de palabras completas dentro de `text`? */
 export function containsPhrase(text: string, piece: string): boolean {

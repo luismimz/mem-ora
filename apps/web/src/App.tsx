@@ -1,7 +1,7 @@
 import { Studio } from './Studio';
 import { RetosHome } from './Retos';
 import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pendingCount, sessionProgress, type OfflineBundle, type OfflineSession } from './offline';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Exam } from './Exam';
 import { Guided } from './Guided';
 import { Speak, setSpeakEnabled, speakEnabled } from './Speak';
@@ -106,6 +106,7 @@ export function App() {
   const [prog, setProg] = useState<Progress | null>(null);
   const [missions, setMissions] = useState<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number } | null>(null);
   const [nudge, setNudge] = useState<Mode | null>(null);
+  const [reviewAsk, setReviewAsk] = useState<number | null>(null);
 
   useEffect(() => { document.title = `${TITLES[view.name] ?? 'Memora'} · Memora`; }, [view.name]);
 
@@ -117,13 +118,17 @@ export function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courses]);
 
+  /** D-111: cuántas palabras repasar en la próxima ronda (lo elige el alumno en Inicio). Se usa una vez. */
+  const pendingReview = useRef<number | 'todas' | undefined>(undefined);
   async function openSession(c: Course, mission?: string, focus?: 'fallos') {
+    const repaso = pendingReview.current;
+    pendingReview.current = undefined;
     setLanguage(c.ui_language);
     setAudioEnabled(c.audio_enabled !== false);
     if (c.audio_enabled !== false) preloadVoice(c.content_language);
     setError(null);
     setNotice(null);
-    try { setView({ name: 'session', course: c, payload: await api.session(c.id, mission, focus), ...(mission ? { mission } : {}), ...(focus ? { focus } : {}) }); }
+    try { setView({ name: 'session', course: c, payload: await api.session(c.id, mission, focus, repaso), ...(mission ? { mission } : {}), ...(focus ? { focus } : {}) }); }
     catch (e) { setError(e instanceof ApiError ? e.message : 'Algo ha fallado.'); window.history.replaceState(null, '', '/'); setView({ name: 'home' }); }
   }
 
@@ -251,6 +256,9 @@ export function App() {
   const isMem = Boolean(current?.modes.includes('memory'));
   // Repasos vencidos ahora; el total del curso sale de las misiones (el progreso solo lista lo ya practicado).
   const due = prog ? prog.skills.filter((s) => s.dueAt !== null && s.dueAt <= Date.now()).length : null;
+  // D-111: palabras por repasar (una por palabra, su habilidad de recordar). Con más de una ronda, se pregunta cuántas.
+  const dueWords = prog && isLanguage(current) ? new Set(prog.skills.filter((s) => s.kind === 'recall' && s.dueAt !== null && s.dueAt <= Date.now()).map((s) => s.unit)).size : 0;
+  const startReview = (n: number | 'todas') => { pendingReview.current = n; setReviewAsk(null); open(has(mode) ? mode : 'associations'); };
   const worked = missions?.missions.length
     ? missions.missions.reduce((a, m) => ({ done: a.done + m.worked, total: a.total + m.total }), { done: 0, total: 0 })
     : { done: ms?.words ?? 0, total: ms?.total ?? 0 };
@@ -267,6 +275,7 @@ export function App() {
               {courses.length > 1 && <span className="switcher-go">Cambiar <span aria-hidden="true">▾</span></span>}
             </button>
           )}
+          {reviewAsk !== null && <ReviewPicker due={reviewAsk} onPick={startReview} onClose={() => setReviewAsk(null)} />}
           {picking && <CoursePicker courses={courses} current={course} onPick={(id) => { setCourse(id); writePrefs({ course: id }); setPicking(false); }} onClose={() => setPicking(false)} />}
           <p className="eyebrow">{isMem ? 'TU AVENTURA' : 'HOY'}</p>
           <h1>{isMem ? 'La historia sigue contigo.' : me?.first_name ? `Hola, ${me.first_name}.` : 'Hola.'}</h1>
@@ -277,7 +286,7 @@ export function App() {
                 {enabled.length > 1 && <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>}
                 <ul className="today" aria-label="Tu día">
                   <li><b>{prog?.streak ?? '—'}</b><span>🔥 {prog?.streak === 1 ? 'día' : 'días'} de racha</span></li>
-                  <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>
+                  <li><b>{flowCourse && isLanguage(current) && prog ? dueWords : due ?? '—'}</b><span>🔁 {flowCourse && isLanguage(current) ? (dueWords === 1 ? 'palabra' : 'palabras') + ' por repasar' : `${due === 1 ? 'repaso' : 'repasos'} pendientes`}</span></li>
                   <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>
                 </ul>
                 {prog?.today && <div className="goal-bar" aria-label={`Meta de hoy: ${prog.today.newUnits} de ${prog.today.goal}`}><i style={{ width: `${Math.min(100, Math.round((prog.today.newUnits / Math.max(1, prog.today.goal)) * 100))}%` }} /></div>}
@@ -289,7 +298,7 @@ export function App() {
                     <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}.</p>
                   </>
                 ) : <p>Desliza para aprender. Los repasos vuelven solos, justo antes de que se te olviden.</p>}
-                <button type="button" className="primary" onClick={() => open(has(mode) ? mode : 'associations')}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
+                <button type="button" className="primary" onClick={() => (flowCourse && dueWords > REVIEW_ROUND ? setReviewAsk(dueWords) : open(has(mode) ? mode : 'associations'))}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
                 {(current.modes as string[]).includes('flow') && (prog?.failures ?? 0) > 0 && (
                   <button type="button" className="fails-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'fallos' })}>
                     <span className="fails-n">{prog!.failures}</span>
@@ -780,5 +789,33 @@ function SpeakSettings({ courses }: { courses: Course[] }) {
         : <><p className="muted">Gasto de este mes: <b>{eur(info.spentEur)}</b> de {eur(info.capEur)}. Al llegar al tope se para sola hasta el mes siguiente.</p>
           <i className="mission-bar"><i style={{ width: `${Math.min(100, (info.spentEur / Math.max(0.01, info.capEur)) * 100)}%` }} /></i></>)}
     </section>
+  );
+}
+
+/** Tamaño de la ronda de «Repaso rápido» por defecto (igual que FLOW_REVIEW_ARCADE_MAX en el servidor). */
+const REVIEW_ROUND = 25;
+/**
+ * D-111: con más palabras por repasar que una ronda, el alumno elige cuántas hace ahora (las demás no se pierden:
+ * siguen pendientes y salen en la ronda siguiente, primero las que más esperan).
+ */
+function ReviewPicker({ due, onPick, onClose }: { due: number; onPick: (n: number | 'todas') => void; onClose: () => void }) {
+  const opts: Array<{ v: number | 'todas'; label: string; small: string }> = [
+    { v: 25, label: '⚡ 25', small: 'Una ronda rápida' },
+    ...(due > 50 ? [{ v: 50 as const, label: '🔥 50', small: 'Ronda doble' }] : []),
+    { v: 'todas', label: `🏆 Todas (${due})`, small: 'Vacía la lista de hoy' },
+    { v: 0, label: '🆕 Solo lo nuevo', small: 'Los repasos esperan a la siguiente' },
+  ];
+  return (
+    <div className="sheet-back" role="presentation" onClick={onClose}>
+      <div className="sheet review-sheet" role="dialog" aria-modal="true" aria-label="¿Cuántas repasamos?" onClick={(e) => e.stopPropagation()}>
+        <span className="sheet-grip" aria-hidden="true" />
+        <p className="eyebrow">REPASO</p>
+        <h2 className="h2">Tienes {due} palabras por repasar</h2>
+        <p className="muted">¿Cuántas hacemos ahora? Las que dejes no se pierden: salen en la siguiente ronda, primero las que más esperan.</p>
+        <div className="review-opts">
+          {opts.map((o) => <button key={String(o.v)} type="button" className="review-opt" onClick={() => onPick(o.v)}><b>{o.label}</b><small>{o.small}</small></button>)}
+        </div>
+      </div>
+    </div>
   );
 }

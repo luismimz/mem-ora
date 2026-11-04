@@ -208,6 +208,8 @@ export function buildFlowSession(input: {
    * Arcade y sin ficha; `recall` = ya madura, se recuerda del español al inglés. Si hay repaso, no hay Arcade sorpresa.
    */
   reviewArcade?: Array<{ unitKey: string; recall: boolean }>;
+  /** Cuántas palabras entran en el «Repaso rápido» (D-111: lo elige el alumno; por defecto FLOW_REVIEW_ARCADE_MAX). */
+  reviewMax?: number;
   /**
    * Repaso ligero de los trucos (D-099, idiomas): un truco que toca repasar no vuelve a enseñarse entero (ficha, piezas,
    * construir…): se construye UNA frase nueva suya. Si se falla, vuelve la ficha. Antes, diez trucos de repaso por ronda
@@ -448,7 +450,7 @@ export function buildFlowSession(input: {
   // 4b. Arcade sorpresa (D-087): de vez en cuando, en un punto al azar, una ráfaga contrarreloj SOLO de lo ya aprendido
   // (todo enseñado antes). Pesa como reconocer y un fallo no corta el juego: vuelve en su repaso.
   const arcadePool = (input.arcadeUnits ?? []).filter((k) => has(k) && arcadeable(units[k]!));
-  const review = (input.reviewArcade ?? []).filter((r) => has(r.unitKey)).slice(0, FLOW_REVIEW_ARCADE_MAX);
+  const review = (input.reviewArcade ?? []).filter((r) => has(r.unitKey)).slice(0, input.reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
   if (review.length) {
     const recall = review.filter((r) => r.recall).map((r) => r.unitKey);
     steps.unshift({ kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: review.map((r) => r.unitKey), arcadeReview: true, ...(recall.length ? { arcadeRecall: recall } : {}), id: '0-repaso' });
