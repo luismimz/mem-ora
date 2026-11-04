@@ -17,6 +17,7 @@ const check = (ok, text) => { results.push(ok); console.log(`${ok ? '✓' : '✗
 const esc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 const browser = await chromium.launch(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {});
+const CLASSIC = 'extends,bucle-for,nullpointer,constructor,combobox,slider,borderpane,checkbox,swing-libreria';
 try {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2 });
   const errors = [];
@@ -24,7 +25,8 @@ try {
     const page = await context.newPage();
     page.on('pageerror', (e) => errors.push(String(e)));
     await page.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
-    await page.goto(`${base}?${query}`);
+    // Sin las fichas con laboratorios (los prueba lab-touch.mjs): así las semillas de siempre siguen valiendo.
+    await page.goto(`${base}?${/(^|&)k=/.test(query) ? query : `k=${CLASSIC}&${query}`}`);
     await page.waitForSelector('.slide');
     return page;
   };

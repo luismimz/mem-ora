@@ -4,3 +4,4 @@ export * from './issues';
 export * from './unitTypes';
 export * from './workflow';
 export * from './courseFile';
+export * from './visual';

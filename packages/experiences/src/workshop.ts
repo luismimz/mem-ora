@@ -11,7 +11,9 @@ export type WorkshopItem =
   | { kind: 'code'; unitKey: string; exercise: number }
   | { kind: 'widget'; unitKey: string; options: string[] }
   /** «¿Dónde está?»: una ventana con varios componentes dibujados (el pedido y otros) y se toca el pedido. */
-  | { kind: 'where'; unitKey: string; options: string[] };
+  | { kind: 'where'; unitKey: string; options: string[] }
+  /** D-112: laboratorio de la ficha (SQL que se ejecuta de verdad, tocar la columna en una tabla). */
+  | { kind: 'lab'; unitKey: string; lab: number };
 
 /** Retos por Taller, opciones de «¿Qué es esto?» y fichas enseñadas (las que se ven en la ficha del concepto). */
 export const WORKSHOP_SIZE = 5;
@@ -55,6 +57,9 @@ export function codeExercises(u: SessionUnit): number[] {
   });
 }
 
+/** Laboratorios de una ficha (D-112). */
+export const labsOf = (u: SessionUnit) => (u.type === 'concept' ? (u.payload as ConceptPayload).labs ?? [] : []);
+
 export const widgetOf = (u: SessionUnit) => (u.type === 'concept' ? (u.payload as ConceptPayload).widget : undefined);
 
 /** Controles que caben juntos en una ventana de ejemplo (los contenedores y los diálogos se reconocen solos). */
@@ -96,6 +101,9 @@ export function buildWorkshop(block: string[], pool: string[], units: Record<str
       const options = optionsFor(u, widgets);
       if (options) return { kind: 'widget', unitKey: u, options };
     }
+    // D-112: con laboratorios, casi siempre se hace (escribir la consulta o tocar en la tabla): se aprende haciendo.
+    const labs = labsOf(unit);
+    if (labs.length && rand() < 0.8) return { kind: 'lab', unitKey: u, lab: Math.floor(rand() * labs.length) };
     const code = codeExercises(unit);
     const rec = recognizables(unit);
     const useCode = code.length && (!rec.length || rand() < 0.55);

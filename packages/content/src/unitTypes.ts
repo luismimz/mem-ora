@@ -5,6 +5,7 @@
 // `translation`, en el del alumno.
 import type { SkillKind } from '@memora/core';
 import { checkChoice, checkText, checkUnknownFields, isRecord, issue, type ContentIssue } from './issues';
+import { checkLabs, checkVisual, type Lab, type Visual } from './visual';
 
 export const UNIT_TYPES = ['term', 'pattern', 'concept', 'memory_challenge'] as const;
 export type UnitType = (typeof UNIT_TYPES)[number];
@@ -299,6 +300,8 @@ export interface ConceptExample {
   /** Qué muestra el ejemplo (opcional: un concepto no tiene «traducción»). */
   explanation?: string;
   source?: string;
+  /** D-112: dibujo del ejemplo (tablas con sus claves o diagrama E/R). */
+  visual?: Visual;
 }
 
 /**
@@ -355,6 +358,8 @@ export interface ConceptPayload {
   /** Otras respuestas que se dan por buenas al recordar el nombre («clase», «Class»). */
   answers?: string[];
   examples: ConceptExample[];
+  /** D-112: laboratorios (SQL que se ejecuta de verdad, tocar la columna en una tabla). */
+  labs?: Lab[];
   /** Con qué no confundirlo («≠ objeto: el objeto es lo que sale del molde»). */
   contrast?: string;
   notes?: string;
@@ -476,7 +481,8 @@ function validatePattern(p: Record<string, unknown>): ContentIssue[] {
 
 function validateConcept(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes', 'exercises', 'cases', 'widget']);
+  checkUnknownFields(issues, p, '', ['name', 'gist', 'definition', 'answers', 'examples', 'contrast', 'notes', 'exercises', 'cases', 'widget', 'labs']);
+  if (p.labs !== undefined) checkLabs(issues, p.labs);
   if (p.widget !== undefined) checkChoice(issues, p.widget, 'widget', WIDGETS);
   if (p.cases !== undefined) {
     if (!Array.isArray(p.cases)) issues.push(issue('not_list', 'cases'));
@@ -507,7 +513,8 @@ function validateConcept(p: Record<string, unknown>): ContentIssue[] {
     p.examples.forEach((ex, i) => {
       const path = `examples.${i}`;
       if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-      checkUnknownFields(issues, ex, path, ['text', 'explanation', 'source']);
+      checkUnknownFields(issues, ex, path, ['text', 'explanation', 'source', 'visual']);
+      if (ex.visual !== undefined) checkVisual(issues, ex.visual, `${path}.visual`);
       checkText(issues, ex.text, `${path}.text`, { max: 600 });
       checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 200 });
       checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });

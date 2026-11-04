@@ -5,9 +5,10 @@
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { createPortal } from 'react-dom';
 import type { HintLevel } from '@memora/core';
-import type { ConceptExercise, ConceptPayload, Mirror, PatternPayload, StageActor, TimelineMark, Widget } from '@memora/content';
+import type { ConceptExercise, ConceptPayload, Lab, Visual, Mirror, PatternPayload, StageActor, TimelineMark, Widget } from '@memora/content';
 import {
   buildTiles,
+  labsOf,
   burstOptions,
   challengeChoices,
   chantOf,
@@ -41,6 +42,8 @@ import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
 import { audioEnabled, speak } from './speech';
 import { enablePush, pushState, type PushState } from './push';
+import { ResultView, TableView, VisualView } from './Visual';
+import { freshDb, gradeSql, SQL_KEYWORDS, tablesOf, type LabVerdict } from './sqlLab';
 
 interface Outcome { correct: boolean; hint: number }
 interface Props { payload: SessionPayload; courseId: string; offline?: boolean; onExit: () => void; onAgain: () => void; next?: () => Promise<SessionPayload> }
@@ -147,7 +150,7 @@ export function Slide({ children, onNext, tone, className = '' }: { children: Re
   );
 }
 
-type Example = { text: string; explanation?: string; translation?: string };
+type Example = { text: string; explanation?: string; translation?: string; visual?: Visual };
 // Código: contenido que no es español y parece código (en inglés, una frase normal se queda como texto).
 const isCode = (unit: SessionUnit, text: string) => unit.language !== 'es' && /[;{}()=<>\[\]]|\w+\.\w+|^\s*(docker|mongo|sqlite|pg_|cp |npm|git |-)/m.test(text);
 
@@ -191,6 +194,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
           {examples.map((ex, i) => (
             <div key={i} className="learn-example">
               {isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{ex.text} {voice && say(ex.text)}</p>}
+              {ex.visual && <VisualView v={ex.visual} />}
               {(ex.explanation || ex.translation) && <p className="learn-note">{ex.explanation ?? ex.translation}</p>}
             </div>
           ))}
@@ -1541,7 +1545,7 @@ function WhereWindow({ options, all, target, picked, onPick }: { options: string
   );
 }
 
-const WORKSHOP_TAG = { whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?', where: '📍 ¿DÓNDE ESTÁ?' } as const;
+const WORKSHOP_TAG = { lab: '🧪 LABORATORIO', whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?', where: '📍 ¿DÓNDE ESTÁ?' } as const;
 
 /**
  * El Taller (D-090): saber USAR lo aprendido. Retos mezclados de conceptos ya enseñados: reconocer un ejemplo o un
@@ -1570,10 +1574,10 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
   const options = useMemo(() => {
     if (!it || !u) return [];
     if (it.kind === 'code') return stableOrder([ex!.answer!, ...(ex!.distractors ?? [])], `${seed}-${i}`);
-    if (it.kind === 'where') return [];
+    if (it.kind === 'where' || it.kind === 'lab') return [] as string[];
     return it.options.map((k) => unitText(all[k]!));
   }, [it, u, ex, i, seed, all]);
-  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : it.kind === 'where' ? u.key : unitText(u);
+  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : it.kind === 'where' ? u.key : it.kind === 'lab' ? '' : unitText(u);
   const ok = picked !== null && (it?.kind === 'code' && !tapLine ? gradeChallenge(ex!, picked, false).correct : picked === answer);
   function pick(o: string) {
     if (!it || !u || picked !== null) return;
@@ -1610,6 +1614,14 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
         {failed.current.length > 0 && <p className="arcade-rules muted">Ahora repasas lo que se te resistió.</p>}
         <Confetti burst={stars === 3 ? 99 : 0} />
       </Slide>
+    );
+  }
+  if (it.kind === 'lab') {
+    const lab = labsOf(u)[it.lab]!;
+    return (
+      <LabPlay key={`${i}-${it.lab}`} unit={u} lab={lab} tag={`${lab.kind === 'sql' ? '⌨️ ESCRIBE LA CONSULTA' : '👆 TOCA EN LA TABLA'} · ${i + 1}/${list.length}`} right={right}
+        onResult={(good) => { if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); sfx('party'); } else { failed.current.push(u.key); sfx('ko'); } onAnswer(u, good, Math.round(performance.now() - t0.current), it); }}
+        onNext={() => next()} confetti={confetti} />
     );
   }
   const p = u.payload as ConceptPayload;
@@ -1653,6 +1665,103 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
           {it.kind !== 'code' && <p className="tense-why"><b>{unitText(u)}</b>: {p.gist}</p>}
           {tapLine && (kind === 'spot_part' ? <p className="tense-why">👆 Es <b>{ex!.answer}</b></p> : <p className="tense-why">Arreglo: <code>{ex!.answer}</code></p>)}
           {(ex?.explanation || shownNote) && <p className="tense-es">{ex?.explanation ?? shownNote}</p>}
+        </div>
+      )}
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
+/**
+ * Laboratorio (D-112). SQL: se ven las tablas de partida, se escribe la consulta (con atajos para el móvil), se ejecuta DE
+ * VERDAD y se compara su resultado con el de la solución. Cuenta el primer intento; se puede seguir probando, y tras dos
+ * fallos se puede ver la solución. Tocar: se toca la columna pedida en las tablas dibujadas. Después, deslizar.
+ */
+function LabPlay({ unit, lab, tag, right, onResult, onNext, confetti }: { unit: SessionUnit; lab: Lab; tag: string; right: number; onResult: (ok: boolean) => void; onNext: () => void; confetti: number }) {
+  const [first, setFirst] = useState<boolean | null>(null);
+  const [picked, setPicked] = useState<string | null>(null);
+  const [sql, setSql] = useState('');
+  const [tables, setTables] = useState<Array<{ name: string; columns: string[]; rows: string[][] }> | null>(null);
+  const [verdict, setVerdict] = useState<LabVerdict | null>(null);
+  const [tries, setTries] = useState(0);
+  const [running, setRunning] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+  const [solved, setSolved] = useState(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const area = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    if (lab.kind !== 'sql') return;
+    let db: Awaited<ReturnType<typeof freshDb>> | null = null;
+    freshDb(lab.setup).then((d) => { db = d; setTables(tablesOf(d)); }).catch(() => setLoadError('No se ha podido cargar la base de datos de práctica.'));
+    return () => db?.close();
+  }, [lab]);
+  const record = (ok: boolean) => { if (first === null) { setFirst(ok); onResult(ok); } };
+  const done = lab.kind === 'tap' ? picked !== null : solved || tries >= 2;
+
+  if (lab.kind === 'tap') {
+    const ok = picked !== null && lab.target.includes(picked);
+    return (
+      <Slide tone={hue(unit.key)} className={`shop-play lab ${picked === null ? '' : ok ? 'right' : 'wrong'}`} {...(picked !== null ? { onNext } : {})}>
+        <div className="arcade-head"><p className="tag">{tag}</p><span className="arcade-pts">✅ {right}</span></div>
+        <h3 className="ask shop-ask">{lab.prompt}</h3>
+        <div className="vt-group">{lab.visual.tables.map((t) => <TableView key={t.name} t={{ ...t, mark: [], bad: [] }} picked={picked} right={lab.target} onTap={(c) => { if (picked !== null) return; setPicked(c); record(lab.target.includes(c)); }} />)}</div>
+        {picked === null ? <p className="shop-hint">👆 Toca el nombre de la columna</p> : (
+          <div className="tense-after" aria-live="polite">
+            <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : <>Era <b>{lab.target.join(' y ')}</b></>}</p>
+            {lab.explanation && <p className="tense-es">{lab.explanation}</p>}
+          </div>
+        )}
+        <Confetti burst={confetti} />
+      </Slide>
+    );
+  }
+
+  const words = [...new Set([...(tables ?? []).flatMap((t) => [t.name, ...t.columns]), ...SQL_KEYWORDS])];
+  const insert = (w: string) => {
+    const el = area.current;
+    const at = el?.selectionStart ?? sql.length;
+    const before = sql.slice(0, at), after = sql.slice(el?.selectionEnd ?? at);
+    const pad = before && !/[\s(]$/.test(before) && !/^[),;]/.test(w) ? ' ' : '';
+    const next = `${before}${pad}${w}${/[(']$/.test(w) ? '' : ' '}`;
+    setSql(next + after);
+    requestAnimationFrame(() => { if (el) { el.focus(); el.setSelectionRange(next.length, next.length); } });
+  };
+  async function runIt() {
+    if (!sql.trim() || running || solved) return;
+    setRunning(true);
+    try {
+      const v = await gradeSql(lab as Extract<Lab, { kind: 'sql' }>, sql);
+      setVerdict(v);
+      setTries((t) => t + 1);
+      record(v.correct);
+      if (v.correct) setSolved(true);
+    } finally { setRunning(false); }
+  }
+  const got = verdict?.got.ok ? verdict.got.result : null;
+  return (
+    <Slide tone={hue(unit.key)} className={`shop-play lab sql ${!verdict ? '' : verdict.correct ? 'right' : 'wrong'}`} {...(done ? { onNext } : {})}>
+      <div className="arcade-head"><p className="tag">{tag}</p><span className="arcade-pts">✅ {right}</span></div>
+      <h3 className="ask shop-ask">{lab.prompt}</h3>
+      {loadError && <p className="banner">{loadError}</p>}
+      {!tables && !loadError && <p className="shop-hint" role="status">Preparando la base de datos…</p>}
+      {tables && <div className="vt-group">{tables.map((t) => <ResultView key={t.name} title={t.name} columns={t.columns} rows={t.rows} />)}</div>}
+      <textarea ref={area} className="sql-input" value={sql} onChange={(e) => setSql(e.target.value)} placeholder="Escribe aquí tu consulta…" spellCheck={false} autoCapitalize="off" autoCorrect="off" rows={3} disabled={solved} aria-label="Tu consulta SQL" />
+      {!solved && <div className="sql-chips" aria-label="Atajos">{words.map((w) => <button type="button" key={w} className="sql-chip" onClick={() => insert(w)}>{w}</button>)}</div>}
+      {!solved && <div className="sql-row">
+        <button type="button" className="go sql-run" disabled={!sql.trim() || running || !tables} onClick={() => void runIt()}>{running ? 'Ejecutando…' : '▶ Ejecutar'}</button>
+        {sql && <button type="button" className="sql-clear" onClick={() => setSql('')}>Borrar</button>}
+        {lab.hint && !showHint && <button type="button" className="sql-clear" onClick={() => setShowHint(true)}>💡 Pista</button>}
+      </div>}
+      {showHint && lab.hint && <p className="tense-es">💡 {lab.hint}</p>}
+      {verdict && (
+        <div className="tense-after" aria-live="polite">
+          <p className={`tense-verdict ${verdict.correct ? 'ok' : 'ko'}`}>{verdict.correct ? '¡Funciona! 🎉' : verdict.error ? 'El motor da un error' : 'Se ejecuta, pero no sale lo pedido'}</p>
+          {verdict.error && <pre className="sql-error"><code>{verdict.error}</code></pre>}
+          {got && <ResultView title="Tu resultado" columns={got.columns} rows={got.rows} />}
+          {!verdict.correct && verdict.want && tries >= 1 && <ResultView title="Tenía que salir" columns={verdict.want.columns} rows={verdict.want.rows} />}
+          {(solved || tries >= 2) && <><p className="learn-label">{solved ? 'OTRA FORMA DE ESCRIBIRLA' : 'UNA SOLUCIÓN'}</p><pre className="learn-code"><code>{lab.answer}</code></pre></>}
+          {(solved || tries >= 2) && lab.explanation && <p className="tense-es">{lab.explanation}</p>}
+          {!solved && tries < 2 && <p className="shop-hint">Corrígela y vuelve a ejecutarla.</p>}
         </div>
       )}
       <Confetti burst={confetti} />
@@ -2016,7 +2125,13 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
   else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units}
-    onAnswer={(u, ok, ms, it) => { const k = (it.kind === 'code' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : ''}` })); scored(ok, 12); }}
+    onAnswer={(u, ok, ms, it) => {
+      // D-112: escribir SQL que funciona es aplicar (peso muy alto); tocar en la tabla, reconocer.
+      const sqlLab = it.kind === 'lab' && labsOf(u)[it.lab]?.kind === 'sql';
+      const k = (it.kind === 'code' || it.kind === 'lab' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u);
+      if (k) queue.current.push(event(u, k, { format: sqlLab ? 'application' : 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : it.kind === 'lab' ? `-${it.lab}` : ''}` }));
+      scored(ok, sqlLab ? 30 : 12);
+    }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su ficha y sus ejemplos: así lo reconocerás y lo usarás la próxima vez.' }); else void advance({ correct: true, hint: 0 }); }} />;
   else if (step.kind === 'pieces' && unit && step.example !== undefined) card = <Pieces key={step.id} unit={unit} all={units} example={step.example} seed={step.id} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#piezas-${step.example}`, 15, step.skillKey, 'recognition_choice', 0, note || undefined)} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;

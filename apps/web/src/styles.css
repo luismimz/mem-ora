@@ -1254,3 +1254,48 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .review-opt { display: grid; gap: .15rem; text-align: left; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 1rem; padding: .75rem .85rem; font: inherit; min-height: 64px; -webkit-tap-highlight-color: transparent; }
 .review-opt b { font-size: 1.05rem; } .review-opt small { color: var(--muted); }
 .review-opt:active { transform: scale(.98); }
+
+/* ── Dibujos de tablas y diagramas E/R; laboratorio de SQL (D-112) ── */
+.visual { margin: .5rem 0; display: grid; gap: .4rem; }
+.vt-group { display: grid; gap: .55rem; width: 100%; }
+.vt { margin: 0; border-radius: .8rem; overflow: hidden; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18); text-align: left; }
+.vt-name { font-weight: 900; font-size: .82rem; letter-spacing: .06em; padding: .35rem .6rem; background: rgba(255,255,255,.12); }
+.vt-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.vt table { border-collapse: collapse; width: 100%; font-size: .86rem; }
+.vt th, .vt td { padding: .32rem .55rem; border-top: 1px solid rgba(255,255,255,.1); white-space: nowrap; vertical-align: top; }
+.vt th { text-align: left; font-weight: 800; }
+.vt-col { display: flex; align-items: center; gap: .2rem; }
+.vt-col i { font-style: normal; font-size: .8rem; }
+.vt-type, .vt-fk { display: block; font-weight: 600; font-size: .7rem; opacity: .7; font-family: ui-monospace, Menlo, monospace; }
+.vt-fk { color: #8fd3ff; opacity: 1; }
+.vt th.pk { color: #ffd76a; } .vt th.fk { color: #8fd3ff; }
+.vt .mark { background: rgba(255,215,106,.18); }
+.vt .bad { background: rgba(255,107,91,.2); text-decoration: line-through; text-decoration-color: #ff6b5b; }
+.vt td.null { opacity: .55; font-style: italic; }
+.vt-tap { all: unset; display: block; cursor: pointer; padding: .25rem .1rem; min-height: 36px; border-radius: .4rem; -webkit-tap-highlight-color: transparent; }
+.vt th:has(.vt-tap) { background: rgba(255,255,255,.06); }
+.vt th.is-right { background: rgba(67,214,139,.35); } .vt th.is-wrong { background: rgba(255,107,91,.35); }
+.vt-result { border-style: dashed; }
+.visual-cap, .visual-key { margin: 0; font-size: .8rem; opacity: .8; }
+.ver { width: 100%; height: auto; max-height: 70vh; }
+.ver-ent rect { fill: rgba(255,255,255,.1); stroke: #fff; stroke-width: 1.5; }
+.ver-ent.weak rect.inner { fill: none; stroke: #fff; stroke-width: 1; }
+.ver-name { fill: #ffd76a; font-weight: 900; font-size: 13px; text-anchor: middle; letter-spacing: .04em; }
+.ver-attr { fill: #fff; font-size: 11.5px; }
+.ver-attr.pk { text-decoration: underline; font-weight: 800; }
+.ver-rel line { stroke: rgba(255,255,255,.75); stroke-width: 1.5; }
+.ver-rel polygon { fill: #3b2a5c; stroke: #c88bff; stroke-width: 1.5; }
+.ver-relname { fill: #fff; font-size: 10.5px; font-weight: 800; text-anchor: middle; }
+.ver-card { fill: #8fd3ff; font-size: 12px; font-weight: 900; }
+.ver-relattr { fill: #fff; opacity: .8; font-size: 10px; text-anchor: middle; }
+.sql-input { width: 100%; min-height: 4.5rem; border-radius: .8rem; border: 1.5px solid rgba(255,255,255,.3); background: rgba(0,0,0,.35); color: #fff; font: 600 .95rem/1.4 ui-monospace, Menlo, monospace; padding: .6rem .7rem; resize: vertical; }
+.sql-input:focus { outline: 2px solid #ffd76a; }
+.sql-chips { display: flex; gap: .3rem; overflow-x: auto; padding-bottom: .2rem; -webkit-overflow-scrolling: touch; }
+.sql-chip { flex: none; border: 0; border-radius: .5rem; padding: .45rem .6rem; background: rgba(255,255,255,.14); color: #fff; font: 700 .82rem ui-monospace, Menlo, monospace; min-height: 36px; -webkit-tap-highlight-color: transparent; }
+.sql-row { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; }
+.sql-run { flex: 1; min-width: 9rem; }
+.sql-clear { border: 1px solid rgba(255,255,255,.3); background: none; color: #fff; border-radius: 99px; padding: .45rem .8rem; font: inherit; font-weight: 700; min-height: 40px; }
+.sql-error { margin: 0; padding: .5rem .7rem; border-radius: .6rem; background: rgba(255,107,91,.2); color: #ffd1c9; white-space: pre-wrap; font-size: .82rem; }
+.shop-play.lab { justify-content: flex-start; }
+/* En la ficha (fondo claro u oscuro según tarjeta) las tablas heredan el color del texto. */
+.concept-face .vt { color: inherit; }
