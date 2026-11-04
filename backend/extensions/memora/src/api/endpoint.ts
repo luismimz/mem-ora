@@ -360,7 +360,12 @@ export default {
       const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
       const isWord = (k: string) => units[k]?.type === 'term';
       const words = flowLanguage ? dueWords(plan.items as PlanItem[], (id) => skillKind.get(id), isWord, learner.skills) : [];
-      const roundWords = words.slice(0, reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
+      // Usuario (4-nov-2026): «siempre salen azul y boy, que son básicas: deben salir las que menos han salido». De lo que
+      // toca repasar, primero lo menos practicado (menos intentos); a igualdad, el orden de urgencia de dueWords.
+      const seen = new Map<string, number>();
+      for (const sk of Object.values(learner.skills)) seen.set(sk.unitId, (seen.get(sk.unitId) ?? 0) + sk.attempts);
+      const leastSeen = <T,>(list: T[], key: (x: T) => string) => list.map((x, i) => ({ x, i, n: seen.get(key(x)) ?? 0 })).sort((a, b) => a.n - b.n || a.i - b.i).map((o) => o.x);
+      const roundWords = leastSeen(words, (w) => w.unitKey).slice(0, reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
       // D-099: de los trucos que tocan, como mucho LANGUAGE_PATTERN_REVIEWS por ronda (los más urgentes) y en repaso ligero
       // (una frase nueva, sin volver a enseñarlos enteros); antes, diez por ronda con todos sus pasos tapaban lo nuevo.
       const patternDue = flowLanguage ? [...new Set((plan.items as PlanItem[]).filter((i) => i.reason === 'review' && !isWord(i.unitId)).map((i) => i.unitId))].slice(0, LANGUAGE_PATTERN_REVIEWS) : [];
@@ -383,7 +388,7 @@ export default {
       const nothingElse = !roundWords.length && !items.some((i) => i.reason === 'new') && !errors.length;
       const practice = flowLanguage && !nothingElse ? [] : weakFresh.length >= 2 ? weakFresh : weakAll;
       // Arcade sorpresa (D-087): solo lo ya aprendido (practicado y más allá de «presentado»), si el curso tiene Arcade.
-      const learnedUnits = !modes.includes('arcade') ? [] : [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]);
+      const learnedUnits = !modes.includes('arcade') ? [] : leastSeen([...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]), (k) => k);
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: flowNew,
             errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits,
