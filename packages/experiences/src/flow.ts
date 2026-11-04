@@ -393,7 +393,10 @@ export function buildFlowSession(input: {
     if (sentence) base.push(sentence);
     const concepts = pair.filter((u) => units[u]!.type === 'concept');
     block.push(...concepts); taughtConcepts.push(...concepts);
-    if (block.length >= WORKSHOP_EVERY || (i + 2 >= order.length && block.length >= 2)) { const w = workshop(); if (w) base.push(w); }
+    // Idiomas (usuario 4-nov-2026: «no quiero que se repasen conceptos»): sin Taller de «¿qué concepto es?»; los trucos
+    // de inglés se practican usándolos (Ráfaga, frases), no nombrándolos.
+    if (input.lightReviews) block = [];
+    else if (block.length >= WORKSHOP_EVERY || (i + 2 >= order.length && block.length >= 2)) { const w = workshop(); if (w) base.push(w); }
   }
 
   // 2. Repesca intercalada: tras cada pregunta, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).
