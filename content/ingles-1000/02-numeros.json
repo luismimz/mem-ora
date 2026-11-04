@@ -330,10 +330,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "Un pulpo de OCHO brazos se enrosca como un 8.",
-            "sceneTarget": "An EIGHT-armed octopus curls into an 8.",
-            "emoji": "8️⃣🐙"
+            "cue": "HEIDI",
+            "scene": "HEIDI cuenta OCHO cabras saltando la valla.",
+            "sceneTarget": "HEIDI counts EIGHT goats jumping the fence.",
+            "emoji": "👧🐐"
           }
         },
         {

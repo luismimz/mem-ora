@@ -183,7 +183,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
       <Pic unit={unit} fallback={a?.emoji ?? '✨'} />
       <h2 lang={unit.language}><Breakable text={unitText(unit).toUpperCase()} />{say(unitText(unit))}</h2>
       {voice && pron && <p className="face-pron">se pronuncia <b>{pron}</b></p>}
-      <p className="face-meaning">{unitMeaning(unit)}</p>
+      <p className="face-meaning"><span className="face-meaning-tag">ES</span>{unitMeaning(unit)}</p>
       {a?.cue && <p className="face-cue">{a.technique === 'analogy' ? 'como' : 'suena a'} <b>{a.cue}</b></p>}
       {a?.text && <p className="face-story"><Marked text={a.text} /></p>}
       {voice && a?.sceneTarget && <p className="face-target" lang={unit.language}>{a.sceneTarget} {say(a.sceneTarget)}</p>}

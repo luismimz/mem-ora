@@ -117,10 +117,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "Un caracol con prisa te pregunta: ¿QUÉ TAL VA?",
-            "sceneTarget": "A snail in a hurry asks you: HOW'S IT GOING?",
-            "emoji": "🐌💨"
+            "cue": "JAULA",
+            "scene": "Desde su JAULA, un loro te pregunta: ¿QUÉ TAL VA?",
+            "sceneTarget": "From its cage, a parrot asks you: HOW'S IT GOING?",
+            "emoji": "🦜"
           }
         },
         {
@@ -363,10 +363,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "Rompes el jarrón; el abuelo sonríe: TRANQUILO, NO PASA NADA.",
-            "sceneTarget": "You break the vase and grandpa smiles: NO WORRIES.",
-            "emoji": "🏺😊"
+            "cue": "NO, GUAPO",
+            "scene": "Rompes el jarrón; el abuelo: «NO, GUAPO, NO PASA NADA».",
+            "sceneTarget": "You break the vase; grandpa says: NO WORRIES.",
+            "emoji": "🏺👴"
           }
         },
         {
@@ -505,7 +505,7 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
+            "cue": "DEPENDE",
             "scene": "¿Pastel? DEPENDE de si el pastel te muerde antes.",
             "sceneTarget": "Cake? IT DEPENDS on whether the cake bites you first.",
             "emoji": "🎂😬"
@@ -705,10 +705,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "El sol se despide del mar: HASTA LUEGO.",
-            "sceneTarget": "The sun says goodbye to the sea: SEE YOU LATER.",
-            "emoji": "🌅👋"
+            "cue": "SIU",
+            "scene": "Cristiano grita «¡SIUUU!» y se despide: HASTA LUEGO.",
+            "sceneTarget": "He shouts and says goodbye: SEE YOU LATER.",
+            "emoji": "⚽👋"
           }
         },
         {

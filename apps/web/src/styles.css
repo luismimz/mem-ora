@@ -1316,3 +1316,7 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .face-pic { display: flex; justify-content: center; margin: .2rem 0 .6rem; }
 .face-pic img { width: min(72vw, 15rem); aspect-ratio: 1; object-fit: cover; border-radius: 1.2rem; border: 3px solid #111; box-shadow: 0 10px 24px rgba(0,0,0,.35); background: #fff; }
 .face-pic.small img { width: min(46vw, 9.5rem); border-radius: .9rem; }
+
+/* La traducción, bien visible (usuario 4-nov-2026): en su propia pastilla clara, debajo de la palabra. */
+.concept-face .face-meaning { display: inline-flex; align-items: center; gap: .5rem; margin: .35rem 0 .2rem; padding: .45rem .9rem; border-radius: 99px; background: #fff; color: #1d1b18; font-size: 1.2rem; font-weight: 800; opacity: 1; max-width: 32ch; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
+.face-meaning-tag { font-size: .68rem; font-weight: 900; letter-spacing: .08em; padding: .15rem .4rem; border-radius: .4rem; background: #ffd76a; color: #1d1b18; }

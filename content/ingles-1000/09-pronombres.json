@@ -363,10 +363,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "CADA niño recibe su globo, uno a uno, sin repetir.",
-            "sceneTarget": "EACH child gets a balloon, one by one.",
-            "emoji": "🎈👧"
+            "cue": "ICH",
+            "scene": "«¡ICH!», dices al oler CADA calcetín, uno a uno.",
+            "sceneTarget": "\"Ugh!\", you say as you smell EACH sock, one by one.",
+            "emoji": "🧦🤢"
           }
         },
         {
@@ -658,10 +658,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "TODO EL MUNDO aplaude y se cae el techo.",
-            "sceneTarget": "EVERYONE claps and the roof falls in.",
-            "emoji": "👏🏚️"
+            "cue": "EVA Y JUAN",
+            "scene": "EVA y JUAN invitan a TODO EL MUNDO a bailar.",
+            "sceneTarget": "Eva and Juan invite EVERYONE to their wedding.",
+            "emoji": "👰🤵"
           }
         },
         {
