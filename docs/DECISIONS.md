@@ -1157,3 +1157,10 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Sustituye al límite anterior de 10 imágenes al día y 2 €/mes de CLAUDE.md para esta generación por lotes.
 - Al construir una frase, si se intercambian dos palabras separadas (on ↔ in), se explica con qué va cada una
   («on holiday» y «in August»), y la ficha IN/ON/AT añade el truco del tamaño y las expresiones fijas.
+
+## D-115 · El repaso de palabras sale de TODAS las vencidas, las menos vistas primero (5-nov-2026)
+
+- Causa de que siempre salieran las mismas: el Repaso rápido tomaba las palabras del plan del día, que solo lleva los 30
+  repasos de más prioridad; las recién aprendidas vuelven a vencer enseguida (1 h, 3 h…) y ocupaban siempre esos huecos.
+  Las demás no llegaban nunca. Además, «Todas» no podía dar más de lo que dejaba ese tope.
+- Ahora: todas las palabras cuyo «recordar» ha vencido, ordenadas por menos intentos y, a igualdad, por la que más espera.

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dueUnits, dueWords, MATURE_STEP, errorUnits, pendingFailures, streakOf, weakUnits, type SkillState } from '../src';
+import { dueUnits, dueWords, dueWordsLeastSeen, MATURE_STEP, errorUnits, pendingFailures, streakOf, weakUnits, type SkillState } from '../src';
 
 const skill = (unitId: string, over: Partial<SkillState> = {}): SkillState => ({
   skillId: `${unitId}-r`, unitId, status: 'learning', evidence: 0, retrievalSuccesses: 0, deferredSuccesses: 0, consecutiveFailures: 0,
@@ -79,5 +79,17 @@ describe('dueWords (D-094): repaso por palabra según su curva', () => {
   });
   it('lo maduro se repasa recordando; lo joven, reconociendo', () => {
     expect(words).toEqual([{ unitKey: 'nine', recall: true }, { unitKey: 'boy', recall: false }]);
+  });
+});
+
+describe('dueWordsLeastSeen (5-nov-2026): todas las vencidas, las menos vistas primero', () => {
+  const st = (unitId: string, attempts: number, dueAt: number | null, step = 1) => ({ unitId, status: 'learning', attempts, dueAt, step } as unknown as SkillState);
+  const defs = ['blue', 'boy', 'cat', 'dog', 'g1'].flatMap((u) => [{ id: `${u}.recall`, unitId: u, kind: 'recall' }, { id: `${u}.recognize`, unitId: u, kind: 'recognize' }]);
+  const skills = { 'blue.recall': st('blue', 40, 50), 'boy.recall': st('boy', 35, 10), 'cat.recall': st('cat', 3, 90), 'dog.recall': st('dog', 3, 20, 4), 'g1.recall': st('g1', 0, 5), 'blue.recognize': st('blue', 9, null) };
+  it('las menos practicadas primero; a igualdad, la que más espera; sin las no vencidas ni la gramática', () => {
+    const w = dueWordsLeastSeen(defs, skills, (u) => u !== 'g1', 100);
+    expect(w.map((x) => x.unitKey)).toEqual(['dog', 'cat', 'boy', 'blue']);
+    expect(w[0]!.recall).toBe(true);
+    expect(dueWordsLeastSeen(defs, skills, (u) => u !== 'g1', 30).map((x) => x.unitKey)).toEqual(['dog', 'boy']);
   });
 });
