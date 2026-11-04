@@ -1131,3 +1131,4 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   el resultado, no por el texto; se ve el error real del motor y, si sale otra cosa, tu resultado frente al pedido.
 - Un laboratorio SQL resuelto cuenta como «aplicar» (peso muy alto); tocar en la tabla, como reconocimiento.
 - Siguiente fase: rehacer las misiones 1–5 de BBDD con un proyecto hilo (taller de bicis), estos dibujos y laboratorios.
+- (4-nov) Los archivos de curso también llevan `labs` (antes se perdían al pasar del archivo al payload).

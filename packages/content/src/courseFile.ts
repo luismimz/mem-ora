@@ -40,6 +40,7 @@ export interface UnitEntry {
   // concept
   cases?: ConceptPayload['examples'];
   widget?: ConceptPayload['widget'];
+  labs?: ConceptPayload['labs'];
   name?: string;
   gist?: string;
   definition?: string;
@@ -92,7 +93,7 @@ export function unitPayload(u: UnitEntry): TermPayload | PatternPayload | Concep
     return {
       name: u.name ?? '', gist: u.gist ?? '', definition: u.definition ?? '', examples: (u.examples ?? []) as ConceptPayload['examples'],
       ...(u.answers ? { answers: u.answers } : {}), ...(u.contrast ? { contrast: u.contrast } : {}), ...(u.notes ? { notes: u.notes } : {}),
-      ...(u.exercises ? { exercises: u.exercises } : {}), ...(u.cases ? { cases: u.cases } : {}), ...(u.widget ? { widget: u.widget } : {}),
+      ...(u.exercises ? { exercises: u.exercises } : {}), ...(u.cases ? { cases: u.cases } : {}), ...(u.widget ? { widget: u.widget } : {}), ...(u.labs ? { labs: u.labs } : {}),
     };
   }
   if (u.type === 'pattern') {
@@ -156,7 +157,7 @@ export function validateCourseFile(data: unknown): ContentIssue[] {
     m.units.forEach((u, ui) => {
       const up = `${mp}.units.${ui}`;
       if (!isRecord(u)) return void issues.push(issue('not_object', up));
-      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills', 'practice', 'cases', 'widget', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'title', 'words', 'emojis', 'decoys', 'scenes', 'seconds', 'examples', 'association', 'license', 'sources']);
+      checkUnknownFields(issues, u, up, ['key', 'type', 'form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'notes', 'goal', 'rule', 'pieces', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills', 'practice', 'cases', 'widget', 'labs', 'name', 'gist', 'definition', 'answers', 'contrast', 'exercises', 'title', 'words', 'emojis', 'decoys', 'scenes', 'seconds', 'examples', 'association', 'license', 'sources']);
       if (typeof u.key !== 'string' || !KEY.test(u.key)) issues.push(issue('key_format', `${up}.key`));
       else if (unitKeys.has(u.key)) issues.push(issue('key_taken', `${up}.key`, { key: u.key }));
       else unitKeys.add(u.key);
