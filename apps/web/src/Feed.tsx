@@ -151,7 +151,7 @@ export function Slide({ children, onNext, tone, className = '' }: { children: Re
   );
 }
 
-type Example = { text: string; explanation?: string; translation?: string; visual?: Visual };
+type Example = { text: string; explanation?: string; translation?: string; visual?: Visual; lines?: Array<{ code: string; note: string }> };
 // Código: contenido que no es español y parece código (en inglés, una frase normal se queda como texto).
 const isCode = (unit: SessionUnit, text: string) => unit.language !== 'es' && /[;{}()=<>\[\]]|\w+\.\w+|^\s*(docker|mongo|sqlite|pg_|cp |npm|git |-)/m.test(text);
 
@@ -194,7 +194,13 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
           {examples.length > 0 && <p className="learn-label">{examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>}
           {examples.map((ex, i) => (
             <div key={i} className="learn-example">
-              {isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{ex.text} {voice && say(ex.text)}</p>}
+              {ex.lines?.length ? (
+                // Línea a línea: el código y, debajo de cada línea, qué hace y para qué.
+                <>
+                  {!isCode(unit, ex.text) && <p className="learn-text">{ex.text}</p>}
+                  <ol className="code-lines" lang={unit.language}>{ex.lines.map((l, j) => <li key={j}><code>{l.code}</code><span>{l.note}</span></li>)}</ol>
+                </>
+              ) : isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{ex.text} {voice && say(ex.text)}</p>}
               {ex.visual && <VisualView v={ex.visual} />}
               {(ex.explanation || ex.translation) && <p className="learn-note">{ex.explanation ?? ex.translation}</p>}
             </div>

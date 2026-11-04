@@ -1320,3 +1320,9 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 /* La traducción, bien visible (usuario 4-nov-2026): en su propia pastilla clara, debajo de la palabra. */
 .concept-face .face-meaning { display: inline-flex; align-items: center; gap: .5rem; margin: .35rem 0 .2rem; padding: .45rem .9rem; border-radius: 99px; background: #fff; color: #1d1b18; font-size: 1.2rem; font-weight: 800; opacity: 1; max-width: 32ch; box-shadow: 0 6px 16px rgba(0,0,0,.25); }
 .face-meaning-tag { font-size: .68rem; font-weight: 900; letter-spacing: .08em; padding: .15rem .4rem; border-radius: .4rem; background: #ffd76a; color: #1d1b18; }
+
+/* Código línea a línea (5-nov-2026): cada línea con lo que hace debajo. */
+.code-lines { list-style: none; margin: .3rem 0; padding: 0; display: grid; gap: .45rem; text-align: left; }
+.code-lines li { display: grid; gap: .2rem; padding: .5rem .65rem; border-radius: .7rem; background: rgba(0,0,0,.35); border-left: 3px solid #ffd76a; }
+.code-lines code { font-family: ui-monospace, Menlo, monospace; font-size: .86rem; white-space: pre-wrap; overflow-wrap: anywhere; color: #fff; }
+.code-lines span { font-size: .9rem; line-height: 1.35; opacity: .9; }

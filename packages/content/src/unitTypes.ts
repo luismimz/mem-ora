@@ -302,6 +302,8 @@ export interface ConceptExample {
   source?: string;
   /** D-112: dibujo del ejemplo (tablas con sus claves o diagrama E/R). */
   visual?: Visual;
+  /** Código explicado línea a línea: qué hace cada línea y para qué (5-nov-2026). */
+  lines?: Array<{ code: string; note: string }>;
 }
 
 /**
@@ -513,8 +515,21 @@ function validateConcept(p: Record<string, unknown>): ContentIssue[] {
     p.examples.forEach((ex, i) => {
       const path = `examples.${i}`;
       if (!isRecord(ex)) return void issues.push(issue('not_object', path));
-      checkUnknownFields(issues, ex, path, ['text', 'explanation', 'source', 'visual']);
+      checkUnknownFields(issues, ex, path, ['text', 'explanation', 'source', 'visual', 'lines']);
       if (ex.visual !== undefined) checkVisual(issues, ex.visual, `${path}.visual`);
+      // Línea a línea (5-nov-2026): cada línea de código con lo que HACE y para qué, en palabras normales.
+      if (ex.lines !== undefined) {
+        if (!Array.isArray(ex.lines)) issues.push(issue('not_list', `${path}.lines`));
+        else {
+          if (ex.lines.length < 1 || ex.lines.length > 12) issues.push(issue(ex.lines.length < 1 ? 'min_items' : 'max_items', `${path}.lines`, { min: 1, max: 12, count: ex.lines.length }));
+          ex.lines.forEach((l, j) => {
+            if (!isRecord(l)) return void issues.push(issue('not_object', `${path}.lines.${j}`));
+            checkUnknownFields(issues, l, `${path}.lines.${j}`, ['code', 'note']);
+            checkText(issues, l.code, `${path}.lines.${j}.code`, { max: 200 });
+            checkText(issues, l.note, `${path}.lines.${j}.note`, { max: 220 });
+          });
+        }
+      }
       checkText(issues, ex.text, `${path}.text`, { max: 600 });
       checkText(issues, ex.explanation, `${path}.explanation`, { required: false, max: 200 });
       checkText(issues, ex.source, `${path}.source`, { required: false, max: 300 });
