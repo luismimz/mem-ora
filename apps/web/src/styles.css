@@ -1248,3 +1248,9 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .help-more { border-color: #ffd76a; color: #ffe39a; }
 .help-life.on { background: rgba(106,199,255,.18); }
 .help-key, .help-more, .help-life, .talk-mode button { -webkit-tap-highlight-color: transparent; }
+
+/* ── Elegir cuántas repasar (D-111) ── */
+.review-opts { display: grid; grid-template-columns: 1fr 1fr; gap: .55rem; margin-top: .8rem; }
+.review-opt { display: grid; gap: .15rem; text-align: left; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 1rem; padding: .75rem .85rem; font: inherit; min-height: 64px; -webkit-tap-highlight-color: transparent; }
+.review-opt b { font-size: 1.05rem; } .review-opt small { color: var(--muted); }
+.review-opt:active { transform: scale(.98); }

@@ -2,6 +2,9 @@
 // simulada: se elige una situación, la IA abre, se contesta (sin mantener pulsado), llega un WAV con el historial, se
 // ven las burbujas con la autocorrección (verde) y el error (ámbar), la conversación sigue sola y el resumen final
 // premia la autocorrección y manda el error al repaso.
+import { mkdtempSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { createServer } from 'vite';
@@ -23,7 +26,11 @@ const turns = [];
 const events = [];
 let spent = 0.05;
 
-const browser = await chromium.launch({ ...(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {}), args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream'] });
+// Micrófono simulado EN SILENCIO (un WAV de 3 s sin sonido): así el turno solo se envía al tocar y la ayuda que sube
+// sola se puede comprobar sin carreras (con el pitido por defecto, a veces contaba como voz y enviaba a destiempo).
+const silent = join(mkdtempSync(join(tmpdir(), 'memora-mic-')), 'silencio.wav');
+{ const rate = 16000, n = rate * 3, b = Buffer.alloc(44 + n * 2); b.write('RIFF', 0); b.writeUInt32LE(36 + n * 2, 4); b.write('WAVE', 8); b.write('fmt ', 12); b.writeUInt32LE(16, 16); b.writeUInt16LE(1, 20); b.writeUInt16LE(1, 22); b.writeUInt32LE(rate, 24); b.writeUInt32LE(rate * 2, 28); b.writeUInt16LE(2, 32); b.writeUInt16LE(16, 34); b.write('data', 36); b.writeUInt32LE(n * 2, 40); writeFileSync(silent, b); }
+const browser = await chromium.launch({ ...(process.env.PW_CHROMIUM ? { executablePath: process.env.PW_CHROMIUM } : {}), args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', `--use-file-for-fake-audio-capture=${silent}`] });
 try {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true, deviceScaleFactor: 2, permissions: ['microphone'] });
   // La voz del sistema no termina nunca en el navegador sin cabeza: se simula una que acaba enseguida.

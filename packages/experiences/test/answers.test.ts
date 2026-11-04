@@ -27,3 +27,18 @@ describe('corrección de respuestas', () => {
     expect(firstLetterHint('run out of')).toBe('r _ _   o _ _   o _');
   });
 });
+
+describe('respuestas que son solo símbolos (usuario, 2-nov-2026)', () => {
+  it('«;» acierta y no se confunde con otros símbolos', () => {
+    expect(sameAnswer(';', ';')).toBe(true);
+    expect(sameAnswer(' ; ', ';')).toBe(true);
+    expect(sameAnswer(')', ';')).toBe(false);
+    expect(sameAnswer('==', '!=')).toBe(false);
+    expect(sameAnswer('{ }', '{}')).toBe(true);
+    expect(sameAnswer('', ';')).toBe(false);
+  });
+  it('lo normal sigue igual: sin mayúsculas ni puntuación de más', () => {
+    expect(sameAnswer('Hola.', 'hola')).toBe(true);
+    expect(sameAnswer(';', 'hola')).toBe(false);
+  });
+});
