@@ -396,10 +396,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "SI la CONDICIÓN se cumple, la puerta te deja pasar.",
-            "sceneTarget": "IF the condition is met, the door lets you in.",
-            "emoji": "🚪✅"
+            "cue": "HIFI",
+            "scene": "La cadena HIFI solo suena SI le das un beso.",
+            "sceneTarget": "The hi-fi only plays IF you kiss it.",
+            "emoji": "📻💋"
           }
         },
         {
@@ -455,10 +455,10 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "No sales A MENOS QUE el perro firme el permiso.",
-            "sceneTarget": "You can't go out UNLESS the dog signs the permit.",
-            "emoji": "🐕✍️"
+            "cue": "ANA LES",
+            "scene": "ANA LES dice: no salís A MENOS QUE recojáis.",
+            "sceneTarget": "Ana tells them: you can't go out UNLESS you tidy up.",
+            "emoji": "👩🧹"
           }
         },
         {
@@ -709,9 +709,9 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "En LUGAR de llaves, abres la puerta con un pepino.",
-            "sceneTarget": "INSTEAD of keys, you open the door with a cucumber.",
+            "cue": "EN ESTE",
+            "scene": "EN ESTE hotel, en LUGAR de llave, usas un pepino.",
+            "sceneTarget": "In this hotel, INSTEAD of a key, you open the door with a cucumber.",
             "emoji": "🥒🚪"
           }
         },
@@ -791,8 +791,8 @@
           ],
           "association": {
             "technique": "absurd_scene",
-            "cue": null,
-            "scene": "Llueve a cántaros; DE TODAS FORMAS, sales en bañador.",
+            "cue": "ANDA, GÜEY",
+            "scene": "«¡ANDA, GÜEY!», llueve; DE TODAS FORMAS sales en bañador.",
             "sceneTarget": "It's pouring; ANYWAY, you go out in your swimsuit.",
             "emoji": "🌧️🩱"
           }
