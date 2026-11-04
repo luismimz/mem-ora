@@ -306,6 +306,15 @@ describe('Arcade sorpresa en el Flujo (D-087)', () => {
       expect(new Set(r.steps.map((s) => s.id)).size).toBe(r.steps.length);
     }
   });
+  it('elige de lo MENOS practicado: arcadeUnits llega ordenado y las últimas (las más vistas) no salen', () => {
+    const many = Object.fromEntries(Array.from({ length: 30 }, (_, i) => [`p${i}`, w(`p${i}`, `t${i}`, `s${i}`)]));
+    const units = { ...many, ...fresh };
+    for (const id of ['r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10']) {
+      const r = buildFlowSession({ ...base, sessionId: id, units, items: Object.keys(fresh).map((k) => item(k, 'new')), arcadeUnits: Object.keys(many) });
+      const a = r.steps.find((s) => s.kind === 'arcade');
+      if (a) for (const k of a.arcadeUnits!) expect(Number(k.slice(1))).toBeLessThan(15);
+    }
+  });
   it('con menos de 6 cosas aprendidas no sale', () => {
     for (const id of ['r1', 'r2', 'r3', 'r4', 'r5', 'r6']) expect(round(id, Object.keys(pool).slice(0, 5)).steps.some((s) => s.kind === 'arcade')).toBe(false);
   });

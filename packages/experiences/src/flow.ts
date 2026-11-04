@@ -457,7 +457,10 @@ export function buildFlowSession(input: {
   } else if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
     const judge = shuffle((input.arcadeUnits ?? []).filter(has).flatMap((k) => judgeableExamples(units[k]!).map((example) => ({ unitKey: k, example }))), rand)
       .slice(0, FLOW_ARCADE_GRAMMAR).map((g) => ({ ...g, wrong: rand() < 0.5 }));
-    const pick = shuffle([...arcadePool], rand).slice(0, FLOW_ARCADE_SIZE - judge.length);
+    // arcadeUnits llega ordenado de menos a más practicado: se baraja solo la parte menos vista (antes salían siempre
+    // las mismas palabras básicas).
+    const size = FLOW_ARCADE_SIZE - judge.length;
+    const pick = shuffle(arcadePool.slice(0, Math.max(size, Math.ceil(size * 1.5))), rand).slice(0, size);
     const at = FLOW_ARCADE_AFTER - 1 + Math.floor(rand() * (steps.length - FLOW_ARCADE_AFTER + 1));
     steps.splice(at, 0, { kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: pick, ...(judge.length ? { arcadeGrammar: judge } : {}), id: `${steps.length + 1}-arcade-x` });
   }

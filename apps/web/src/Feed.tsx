@@ -1119,6 +1119,9 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
   const [late, setLate] = useState<number[]>([]);
   const [ok, setOk] = useState(0);
   const [done, setDone] = useState(0);
+  // Las que se pasan de tiempo dos veces no cuentan para aprobar: ser lento no es no saberlo (antes, con la tarjeta
+  // quieta en el iPhone, se suspendía el juego y volvía una y otra vez con su ficha, usuario 4-nov-2026).
+  const slow = useRef(0);
   const [fb, setFb] = useState<{ ok: boolean; late?: boolean } | null>(null);
   const [confetti, setConfetti] = useState(0);
   const [dx, setDx] = useState(0);
@@ -1136,13 +1139,14 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
   }
   useEffect(() => {
     if (current !== undefined || !items.length) return;
-    const ratio = ok / Math.max(1, done);
+    const ratio = ok / Math.max(1, done - slow.current);
     onResult(ratio >= 0.8, Math.round(performance.now() - t0.current), 4 * ok, `Has acertado ${ok} de ${done}. Repasa la regla y vuelve a intentarlo.`);
   }, [current]); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (current === undefined || fb) return;
     const timer = setTimeout(() => {
       if (!late.includes(current)) { setLate((l) => [...l, current]); setFb({ ok: false, late: true }); sfx('ko'); setTimeout(() => { setFb(null); setQueue((q) => [...q.slice(1), current]); }, 700); return; }
+      slow.current += 1;
       answer(null);
     }, BURST_MS);
     return () => clearTimeout(timer);
