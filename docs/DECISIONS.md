@@ -1132,3 +1132,8 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
 - Un laboratorio SQL resuelto cuenta como «aplicar» (peso muy alto); tocar en la tabla, como reconocimiento.
 - Siguiente fase: rehacer las misiones 1–5 de BBDD con un proyecto hilo (taller de bicis), estos dibujos y laboratorios.
 - (4-nov) Los archivos de curso también llevan `labs` (antes se perdían al pasar del archivo al payload).
+- (4-nov) Contenido (privado) con dibujos y laboratorios, todo sobre el taller de bicis de Corralejo: BBDD misiones 1–13
+  (mapa «estás aquí», palacio de la memoria con una sala por misión, tipos de datos con su porqué, 66 laboratorios,
+  incluidos los de depuración 🐞) y misión 16 nueva (proyecto de principio a fin, inyección SQL y portfolio). En Acceso a
+  datos (JPA/JDBC) y SGE (campos de Odoo, almacén de datos) se dibujan las tablas que salen del código. PL/SQL y MongoDB
+  no se ejecutan en el móvil: llevan ejemplos del taller, no laboratorios.
