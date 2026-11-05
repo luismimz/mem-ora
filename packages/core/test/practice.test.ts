@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dueUnits, dueWords, dueWordsLeastSeen, MATURE_STEP, errorUnits, pendingFailures, streakOf, weakUnits, type SkillState } from '../src';
+import { dueUnits, dueWords, dueWordsLeastSeen, wordsLeastPracticed, MATURE_STEP, errorUnits, pendingFailures, streakOf, weakUnits, type SkillState } from '../src';
 
 const skill = (unitId: string, over: Partial<SkillState> = {}): SkillState => ({
   skillId: `${unitId}-r`, unitId, status: 'learning', evidence: 0, retrievalSuccesses: 0, deferredSuccesses: 0, consecutiveFailures: 0,
@@ -101,5 +101,14 @@ describe('dueWordsLeastSeen con dayStart (6-nov-2026): lo practicado hoy espera 
     const defs = Object.values(skills).map((s) => ({ id: s.skillId, unitId: s.unitId, kind: 'recall' }));
     expect(dueWordsLeastSeen(defs, skills, () => true, 100, 80).map((x) => x.unitKey)).toEqual(['mal', 'neck', 'viejo']);
     expect(dueWordsLeastSeen(defs, skills, () => true, 100).map((x) => x.unitKey)).toEqual(['hoy', 'mal', 'neck', 'viejo']);
+  });
+});
+
+describe('wordsLeastPracticed (usuario, 6-nov-2026): de menos a más, sin mirar las horas', () => {
+  it('lo de ayer con 1 intento sale antes que lo de hoy con 4, aunque no «toque»', () => {
+    const mk = (unitId: string, attempts: number, last: number, dueAt: number | null, status = 'learning') => ({ skillId: `${unitId}.recall`, unitId, status, evidence: 1, retrievalSuccesses: 1, deferredSuccesses: 0, consecutiveFailures: 0, lapses: 0, attempts, accuracy: 0.7, step: 1, dueAt, presentedAt: 0, lastExposureAt: 0, lastAttemptAt: last, unaidedFormats: [], contexts: [] }) as SkillState;
+    const skills = { 'hoy.recall': mk('hoy', 4, 90, 95), 'ayer.recall': mk('ayer', 1, 50, 10_000), 'neck.recall': mk('neck', 1, 20, 10_000), 'nueva.recall': mk('nueva', 0, 0, null, 'new') };
+    const defs = Object.values(skills).map((x) => ({ id: x.skillId, unitId: x.unitId, kind: 'recall' }));
+    expect(wordsLeastPracticed(defs, skills, () => true).map((x) => x.unitKey)).toEqual(['neck', 'ayer', 'hoy']);
   });
 });
