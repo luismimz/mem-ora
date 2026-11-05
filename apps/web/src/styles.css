@@ -1357,3 +1357,13 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .tense-formula.small { font-size: .92rem; margin: .1rem auto .3rem; opacity: .95; }
 .near-miss { margin: .4rem auto 0; padding: .45rem .7rem; border-radius: 12px; background: rgba(255, 196, 0, .18); font-size: .95rem; max-width: 30rem; }
 .near-miss span { display: block; opacity: .8; font-size: .85rem; }
+
+/* Trucos de gramática en las frases (5-nov-2026) */
+mark.trick { background: none; color: inherit; font-weight: 800; border-bottom: 3px solid var(--trick, #f5b301); padding: 0 .05em; }
+.trick-will, .trick-going { --trick: #3aa0ff; }
+.trick-would, .trick-if { --trick: #b26bff; }
+.trick-have, .trick-had, .trick-part { --trick: #20c997; }
+.trick-past, .trick-did, .trick-was { --trick: #ff7a45; }
+.trick-do, .trick-modal { --trick: #f5b301; }
+.trick-legend { display: flex; flex-direction: column; gap: .15rem; margin-top: .35rem; font-size: .8rem; font-weight: 400; text-align: left; }
+.trick-why { border-left: 3px solid var(--trick, #f5b301); padding-left: .4rem; opacity: .92; }
