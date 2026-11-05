@@ -115,6 +115,7 @@ export const TENSE_LIMITS = { maxMarks: 4, label: 22, maxSignals: 8, signal: 60,
 export function tenseIssues(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
   if (p.tense !== undefined) checkText(issues, p.tense, 'tense', { max: 40 });
+  if (p.formula !== undefined) checkText(issues, p.formula, 'formula', { max: 90 });
   if (p.timeline !== undefined) {
     if (!Array.isArray(p.timeline)) issues.push(issue('not_list', 'timeline'));
     else {
@@ -253,6 +254,8 @@ export interface PatternPayload {
   chant?: ChantVerse[];
   /** Los tiempos verbales (D-089): nombre corto del tiempo, su línea del tiempo, sus pistas y el juego. */
   tense?: string;
+  /** Cómo se forma, en una línea («he/she/it + verbo-S», 5-nov-2026). */
+  formula?: string;
   timeline?: TimelineMark[];
   signals?: string[];
   drills?: TenseDrill[];
@@ -453,7 +456,7 @@ function validateTerm(p: Record<string, unknown>): ContentIssue[] {
 
 function validatePattern(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant', 'tense', 'timeline', 'signals', 'drills', 'practice']);
+  checkUnknownFields(issues, p, '', ['goal', 'rule', 'pieces', 'examples', 'pitfalls', 'chant', 'tense', 'formula', 'timeline', 'signals', 'drills', 'practice']);
   if (p.chant !== undefined) issues.push(...chantIssues(p.chant));
   issues.push(...practiceIssues(p));
   issues.push(...tenseIssues(p));

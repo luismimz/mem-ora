@@ -354,6 +354,7 @@
             "emoji": "⏮️"
           },
           "tense": "Pasado perfecto",
+          "formula": "had + participio · the train had left",
           "timeline": [
             {
               "kind": "event",

@@ -249,9 +249,10 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
         ))}
       </div>)}
       <p className="pattern-rule">{p.rule}</p>
-      {(p.timeline?.length || p.signals?.length) ? (
+      {(p.timeline?.length || p.signals?.length || p.formula) ? (
         <section className="pattern-when">
           {p.timeline?.length ? <TimeLine marks={p.timeline} {...(p.tense ? { title: `${p.tense} · cuándo se usa` } : {})} /> : <p className="learn-label">🕰️ {p.tense ?? 'CUÁNDO SE USA'}</p>}
+          {p.formula && <p className="tense-formula" lang={unit.language}><span>🧩 SE FORMA</span>{p.formula}</p>}
           {p.signals?.length ? <Signals list={p.signals} language={unit.language} /> : null}
         </section>
       ) : p.tense ? <p className="tense-chip">🕰️ {p.tense}</p> : null}
@@ -1449,6 +1450,7 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
             return (
               <div key={u.key} className="tense-cheat-row">
                 <p className="tense-chip">{tenseOf(u)}</p>
+                {pp.formula && <p className="tense-formula" lang={u.language}><span>🧩 SE FORMA</span>{pp.formula}</p>}
                 {pp.timeline?.length ? <TimeLine marks={pp.timeline} small /> : null}
                 {pp.signals?.length ? <Signals list={pp.signals} language={u.language} max={5} /> : null}
               </div>

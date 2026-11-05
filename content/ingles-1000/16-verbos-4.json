@@ -245,6 +245,7 @@
             "emoji": "⏱️"
           },
           "tense": "Presente simple o continuo",
+          "formula": "costumbre: I work · ahora mismo: I am working",
           "timeline": [
             {
               "kind": "habit",
