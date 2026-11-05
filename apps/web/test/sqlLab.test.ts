@@ -40,4 +40,10 @@ describe('laboratorio de SQL: se corrige por el resultado (D-112)', () => {
   it('compara sin mayúsculas ni espacios y con números iguales', () => {
     expect(sameResult({ columns: ['a'], rows: [['Ana ']] }, { columns: ['x'], rows: [['ana']] }, false)).toBe(true);
   });
+  it('entiende el MySQL del libro: CREATE DATABASE, USE, AUTO_INCREMENT y ENGINE (5-nov-2026)', async () => {
+    const lab = { setup: '', answer: "CREATE DATABASE taller; USE taller; CREATE TABLE bici (id INT AUTO_INCREMENT PRIMARY KEY, modelo VARCHAR(30) NOT NULL) ENGINE=InnoDB; INSERT INTO bici (modelo) VALUES ('Orbea'); SELECT id, modelo FROM bici;" };
+    const v = await gradeSql(lab, lab.answer);
+    expect(v.correct).toBe(true);
+    expect(v.want?.rows).toEqual([['1', 'Orbea']]);
+  });
 });

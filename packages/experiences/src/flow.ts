@@ -388,8 +388,11 @@ export function buildFlowSession(input: {
       // …y si tiene código explicado línea a línea, «Construye la consulta» con uno de sus ejemplos.
       const labs = labsOf(units[u]!);
       const ord = orderableExamples(units[u]!);
-      const direct = [...(ord.length ? [{ kind: 'order' as const, unitKey: u, example: ord[Math.floor(rand() * ord.length)]! }] : []), ...labs.slice(0, 2).map((_, lab) => ({ kind: 'lab' as const, unitKey: u, lab }))];
-      if (direct.length) base.push({ kind: 'workshop', unitKey: '', scene: -4, direct: true, workshop: direct });
+      // Escalera (5-nov-2026): de más ayuda a menos. 1) completar el hueco (solo la pieza nueva), 2) ordenar la orden
+      // entera, 3) escribirla tú (laboratorio que se ejecuta).
+      const gaps = exercisesOf(units[u]!).flatMap((e, ex) => (e.kind === 'fill_gap' && e.code?.includes('___') ? [ex] : [])).slice(0, 1);
+      const direct = [...gaps.map((exercise) => ({ kind: 'code' as const, unitKey: u, exercise })), ...(ord.length ? [{ kind: 'order' as const, unitKey: u, example: ord[Math.floor(rand() * ord.length)]! }] : []), ...labs.slice(0, 2).map((_, lab) => ({ kind: 'lab' as const, unitKey: u, lab }))];
+      if (direct.length && !input.lightReviews) base.push({ kind: 'workshop', unitKey: '', scene: -4, direct: true, workshop: direct });
     });
     // Idiomas (D-079): tras cada pareja de palabras, una frase que construir con una de ellas.
     const terms = pair.filter((u) => units[u]!.type === 'term');

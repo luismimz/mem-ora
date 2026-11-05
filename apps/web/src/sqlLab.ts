@@ -17,10 +17,24 @@ export function loadSql(): Promise<SqlJsStatic> {
 
 const cell = (v: unknown): string => (v === null || v === undefined ? 'NULL' : typeof v === 'number' ? String(Number.isInteger(v) ? v : Math.round(v * 1e6) / 1e6) : v instanceof Uint8Array ? '[BLOB]' : String(v));
 
+/**
+ * MySQL → SQLite (5-nov-2026: el libro de BBDD B usa MySQL). Lo que SQLite no entiende pero no cambia el resultado:
+ * CREATE DATABASE y USE (aquí solo hay una base), ENGINE/CHARSET y AUTO_INCREMENT (INTEGER PRIMARY KEY ya numera solo).
+ */
+export function fromMySQL(sql: string): string {
+  return sql
+    .replace(/\bCREATE\s+(DATABASE|SCHEMA)\s+(IF\s+NOT\s+EXISTS\s+)?[\w`]+[^;]*;?/gi, '')
+    .replace(/(^|;)\s*USE\s+[\w`]+\s*;?/gi, '$1')
+    .replace(/\)\s*(ENGINE\s*=\s*\w+|DEFAULT\s+CHARSET\s*=\s*\w+|CHARSET\s*=\s*\w+|\s)+;/gi, ');')
+    .replace(/\bINT(EGER)?(\s+UNSIGNED)?(\s+NOT\s+NULL)?\s+AUTO_INCREMENT(\s+PRIMARY\s+KEY)/gi, 'INTEGER$3$4')
+    .replace(/\s+AUTO_INCREMENT\b/gi, '')
+    .replace(/`/g, '"');
+}
+
 /** Ejecuta SQL (una o varias sentencias) sobre la base y devuelve el ÚLTIMO resultado con filas. */
 export function run(db: Database, sql: string): RunResult {
   try {
-    const out = db.exec(sql);
+    const out = db.exec(fromMySQL(sql));
     const last = out[out.length - 1];
     return { ok: true, result: last ? { columns: last.columns, rows: last.values.map((r) => r.map(cell)) } : null, changes: db.getRowsModified() };
   } catch (e) {
@@ -33,7 +47,7 @@ export async function freshDb(setup: string): Promise<Database> {
   const SQL = await loadSql();
   const db = new SQL.Database();
   db.exec('PRAGMA foreign_keys = ON;');
-  db.exec(setup);
+  db.exec(fromMySQL(setup));
   return db;
 }
 
