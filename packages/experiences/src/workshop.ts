@@ -13,7 +13,9 @@ export type WorkshopItem =
   /** «¿Dónde está?»: una ventana con varios componentes dibujados (el pedido y otros) y se toca el pedido. */
   | { kind: 'where'; unitKey: string; options: string[] }
   /** D-112: laboratorio de la ficha (SQL que se ejecuta de verdad, tocar la columna en una tabla). */
-  | { kind: 'lab'; unitKey: string; lab: number };
+  | { kind: 'lab'; unitKey: string; lab: number }
+  /** «Construye la consulta» (5-nov-2026): ordenar las piezas de un ejemplo de código explicado línea a línea. */
+  | { kind: 'order'; unitKey: string; example: number };
 
 /** Retos por Taller, opciones de «¿Qué es esto?» y fichas enseñadas (las que se ven en la ficha del concepto). */
 export const WORKSHOP_SIZE = 5;
@@ -122,4 +124,19 @@ export function buildWorkshop(block: string[], pool: string[], units: Record<str
     if (it) items.push(it);
   }
   return items.length >= 3 ? shuffle(items.slice(0, WORKSHOP_SIZE), rand) : null;
+}
+
+/**
+ * «Construye la consulta» (5-nov-2026, usuario: «la única forma de no aburrirse es hacer pensar»): un ejemplo de código
+ * de la ficha explicado línea a línea (`lines`) se parte en sus líneas y se pide ordenarlas. Solo ejemplos con 3 a 7
+ * piezas de código (las líneas «→» son el resultado, no piezas) y entre los 4 que enseña la ficha.
+ */
+export function orderPieces(u: SessionUnit, example: number): Array<{ code: string; note: string }> {
+  const ex = (u.payload as ConceptPayload).examples?.[example] as (ConceptExample & { lines?: Array<{ code: string; note: string }> }) | undefined;
+  return (ex?.lines ?? []).filter((l) => !l.code.startsWith('→') && l.code.trim().length > 1);
+}
+export function orderableExamples(u: SessionUnit): number[] {
+  if (u.type !== 'concept') return [];
+  const n = Math.min(WORKSHOP_TAUGHT_EXAMPLES, (u.payload as ConceptPayload).examples?.length ?? 0);
+  return Array.from({ length: n }, (_, i) => i).filter((i) => { const p = orderPieces(u, i); return p.length >= 3 && p.length <= 7 && new Set(p.map((x) => x.code)).size === p.length; });
 }

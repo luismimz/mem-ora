@@ -13,7 +13,7 @@ import type { PlanItem } from '@memora/core';
 import { exercisesOf, seeded, shuffle, unitMeaning, unitText, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
 import type { SessionUnit } from './session';
 import { orderRule, spanishOrderCalque, type OrderMirror } from './order';
-import { buildWorkshop, labsOf, WORKSHOP_EVERY } from './workshop';
+import { buildWorkshop, labsOf, orderableExamples, WORKSHOP_EVERY } from './workshop';
 
 /** Tarjetas entre una pregunta fallada y su repesca. */
 export const FLOW_RETRY_GAP = 3;
@@ -385,8 +385,11 @@ export function buildFlowSession(input: {
       base.push(burst(u) ?? levelUp(u) ?? (j === 0 ? (listen(u) ?? quick(u)) : judge(u)));
       // 5-nov-2026 (usuario: «después de las explicaciones debe haber una interacción»): si el concepto tiene
       // laboratorios (SQL de verdad, tocar en la tabla), se hacen justo después de su ficha, no solo en el Taller.
+      // …y si tiene código explicado línea a línea, «Construye la consulta» con uno de sus ejemplos.
       const labs = labsOf(units[u]!);
-      if (labs.length) base.push({ kind: 'workshop', unitKey: '', scene: -4, direct: true, workshop: labs.slice(0, 2).map((_, lab) => ({ kind: 'lab' as const, unitKey: u, lab })) });
+      const ord = orderableExamples(units[u]!);
+      const direct = [...(ord.length ? [{ kind: 'order' as const, unitKey: u, example: ord[Math.floor(rand() * ord.length)]! }] : []), ...labs.slice(0, 2).map((_, lab) => ({ kind: 'lab' as const, unitKey: u, lab }))];
+      if (direct.length) base.push({ kind: 'workshop', unitKey: '', scene: -4, direct: true, workshop: direct });
     });
     // Idiomas (D-079): tras cada pareja de palabras, una frase que construir con una de ellas.
     const terms = pair.filter((u) => units[u]!.type === 'term');

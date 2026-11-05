@@ -9,6 +9,7 @@ import type { ConceptExercise, ConceptPayload, Lab, Visual, Mirror, PatternPaylo
 import {
   buildTiles,
   labsOf,
+  orderPieces,
   burstOptions,
   challengeChoices,
   chantOf,
@@ -1589,7 +1590,7 @@ function WhereWindow({ options, all, target, picked, onPick }: { options: string
   );
 }
 
-const WORKSHOP_TAG = { lab: '🧪 LABORATORIO', whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?', where: '📍 ¿DÓNDE ESTÁ?' } as const;
+const WORKSHOP_TAG = { order: '🧩 CONSTRUYE LA CONSULTA', lab: '🧪 LABORATORIO', whatis: '🕵️ ¿QUÉ ES ESTO?', fill_gap: '🧩 COMPLETA EL CÓDIGO', predict_output: '▶️ ¿QUÉ IMPRIME?', find_bug: '🐛 CAZA EL BUG', spot_part: '👆 SEÑALA LA PARTE', widget: '🖥️ ¿QUÉ COMPONENTE ES?', where: '📍 ¿DÓNDE ESTÁ?' } as const;
 
 /**
  * El Taller (D-090): saber USAR lo aprendido. Retos mezclados de conceptos ya enseñados: reconocer un ejemplo o un
@@ -1619,10 +1620,10 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
   const options = useMemo(() => {
     if (!it || !u) return [];
     if (it.kind === 'code') return stableOrder([ex!.answer!, ...(ex!.distractors ?? [])], `${seed}-${i}`);
-    if (it.kind === 'where' || it.kind === 'lab') return [] as string[];
+    if (it.kind === 'where' || it.kind === 'lab' || it.kind === 'order') return [] as string[];
     return it.options.map((k) => unitText(all[k]!));
   }, [it, u, ex, i, seed, all]);
-  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : it.kind === 'where' ? u.key : it.kind === 'lab' ? '' : unitText(u);
+  const answer = !it || !u ? '' : it.kind === 'code' ? (tapLine ? String(target) : ex!.answer!) : it.kind === 'where' ? u.key : it.kind === 'lab' || it.kind === 'order' ? '' : unitText(u);
   const ok = picked !== null && (it?.kind === 'code' && !tapLine ? gradeChallenge(ex!, picked, false).correct : picked === answer);
   function pick(o: string) {
     if (!it || !u || picked !== null) return;
@@ -1662,6 +1663,13 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
         {failed.current.length > 0 && <p className="arcade-rules muted">Ahora repasas lo que se te resistió.</p>}
         <Confetti burst={stars === 3 ? 99 : 0} />
       </Slide>
+    );
+  }
+  if (it.kind === 'order') {
+    return (
+      <OrderPlay key={`${i}-o`} unit={u} example={it.example} seed={`${seed}-${i}`} tag={`🧩 CONSTRUYE LA CONSULTA · ${i + 1}/${list.length}`} right={right}
+        onResult={(good) => { if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); sfx('party'); } else { failed.current.push(u.key); sfx('ko'); } onAnswer(u, good, Math.round(performance.now() - t0.current), it); }}
+        onNext={() => next()} confetti={confetti} />
     );
   }
   if (it.kind === 'lab') {
@@ -1725,6 +1733,52 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
  * VERDAD y se compara su resultado con el de la solución. Cuenta el primer intento; se puede seguir probando, y tras dos
  * fallos se puede ver la solución. Tocar: se toca la columna pedida en las tablas dibujadas. Después, deslizar.
  */
+/**
+ * «Construye la consulta» (5-nov-2026): las líneas de un ejemplo de la ficha, desordenadas; se tocan en orden. Al
+ * acabar se ve si está bien y, debajo de cada línea, qué hace (lo que explicaba la ficha).
+ */
+function OrderPlay({ unit, example, seed, tag, right, onResult, onNext, confetti }: { unit: SessionUnit; example: number; seed: string; tag: string; right: number; onResult: (ok: boolean) => void; onNext: () => void; confetti: number }) {
+  const pieces = useMemo(() => orderPieces(unit, example), [unit, example]);
+  const ex = (unit.payload as ConceptPayload).examples[example] as Example;
+  const bank = useMemo(() => {
+    let h = 0; for (const ch of seed) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    const idx = pieces.map((_, k) => k);
+    for (let k = idx.length - 1; k > 0; k--) { h = (h * 1103515245 + 12345) >>> 0; const j = h % (k + 1); [idx[k], idx[j]] = [idx[j]!, idx[k]!]; }
+    if (idx.every((v, k) => v === k)) idx.reverse();
+    return idx;
+  }, [pieces, seed]);
+  const [placed, setPlaced] = useState<number[]>([]);
+  const done = placed.length === pieces.length;
+  const ok = done && placed.every((v, k) => pieces[v]!.code === pieces[k]!.code);
+  const sent = useRef(false);
+  useEffect(() => { if (done && !sent.current) { sent.current = true; onResult(ok); } }, [done]); // eslint-disable-line react-hooks/exhaustive-deps
+  const goal = (ex.explanation ?? '').replace(/^(Oracle|MySQL|SQLite) · /, '');
+  return (
+    <Slide tone={hue(unit.key)} className={`shop-play order ${done ? (ok ? 'right' : 'wrong') : ''}`} {...(done ? { onNext } : {})}>
+      <div className="arcade-head"><p className="tag">{tag}</p><span className="arcade-pts">✅ {right}</span></div>
+      <h3 className="ask shop-ask">Ordena las piezas{goal ? <>: <span className="order-goal">{goal}</span></> : ''}</h3>
+      <ol className="order-slots" lang={unit.language}>
+        {pieces.map((_, k) => {
+          const v = placed[k];
+          const good = done && v !== undefined && pieces[v]!.code === pieces[k]!.code;
+          return <li key={k} className={`${v === undefined ? 'empty' : ''} ${done ? (good ? 'is-right' : 'is-wrong') : ''}`}>
+            {v === undefined ? <span className="order-n">{k + 1}</span> : <button type="button" disabled={done} onClick={() => setPlaced((p) => p.filter((_, j) => j !== k))}><code>{pieces[v]!.code}</code></button>}
+          </li>;
+        })}
+      </ol>
+      {!done ? (
+        <div className="order-bank" lang={unit.language}>{bank.filter((b) => !placed.includes(b)).map((b) => <button type="button" key={b} className="order-piece" onClick={() => setPlaced((p) => [...p, b])}><code>{pieces[b]!.code}</code></button>)}</div>
+      ) : (
+        <div className="tense-after" aria-live="polite">
+          <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien construida! 🎉' : 'Así va el orden:'}</p>
+          <ol className="code-lines">{pieces.map((l, k) => <li key={k}><code>{l.code}</code><span>{l.note}</span></li>)}</ol>
+        </div>
+      )}
+      <Confetti burst={confetti} />
+    </Slide>
+  );
+}
+
 function LabPlay({ unit, lab, tag, right, onResult, onNext, confetti }: { unit: SessionUnit; lab: Lab; tag: string; right: number; onResult: (ok: boolean) => void; onNext: () => void; confetti: number }) {
   const [first, setFirst] = useState<boolean | null>(null);
   const [picked, setPicked] = useState<string | null>(null);
@@ -2183,7 +2237,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
       // D-112: escribir SQL que funciona es aplicar (peso muy alto); tocar en la tabla, reconocer.
       const sqlLab = it.kind === 'lab' && labsOf(u)[it.lab]?.kind === 'sql';
       const k = (it.kind === 'code' || it.kind === 'lab' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u);
-      if (k) queue.current.push(event(u, k, { format: sqlLab ? 'application' : 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : it.kind === 'lab' ? `-${it.lab}` : ''}` }));
+      if (k) queue.current.push(event(u, k, { format: sqlLab ? 'application' : it.kind === 'order' ? 'recall_cued' : 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : it.kind === 'lab' ? `-${it.lab}` : it.kind === 'order' ? `-${it.example}` : ''}` }));
       scored(ok, sqlLab ? 30 : 12);
     }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su ficha y sus ejemplos: así lo reconocerás y lo usarás la próxima vez.' }); else void advance({ correct: true, hint: 0 }); }} />;
