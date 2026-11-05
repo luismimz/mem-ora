@@ -94,6 +94,8 @@ const REPORT_REASONS = ['asociacion', 'significado', 'respuesta', 'audio', 'otro
 
 /** Fallos por ronda de «Vacía tus fallos»: corta, para vaciarlos en tandas. */
 const FAILURES_PER_ROUND = 8;
+/** Conceptos por ronda de «Repasa lo que se te está olvidando» (DAM, 5-nov-2026). */
+const REVIEW_PER_ROUND = 10;
 
 export interface MissionRef {
   key: string;
@@ -109,7 +111,7 @@ export interface SessionState {
   /** Misión de la sesión: solo entra contenido nuevo de ella (los repasos vencidos, de todo el curso). */
   mission?: MissionRef;
   /** Ronda especial: «fallos» = solo los fallos pendientes («Vacía tus fallos»). */
-  focus?: 'fallos';
+  focus?: 'fallos' | 'repaso';
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -205,8 +207,12 @@ export default {
       const list = missions.map((m, i) => {
         const learned = m.units.filter((u) => ['learned', 'stable', 'mastered'].includes(unitLevel(u, catalog, learner.skills, config).level)).length;
         const done = m.units.filter((u) => worked.has(u)).length;
-        return { key: m.key, title: m.title, index: i + 1, total: m.units.length, worked: done, learned, due: m.units.filter((u) => dueNow.has(u)).length, status: done === 0 ? 'pending' : done === m.units.length ? 'done' : 'active' };
+        return { key: m.key, title: m.title, index: i + 1, total: m.units.length, worked: done, learned, due: m.units.filter((u) => dueNow.has(u)).length, status: done === 0 ? 'pending' : done === m.units.length ? 'done' : 'active' as string };
       });
+      // 5-nov-2026: el modelo guiado y el simulacro preguntan un concepto de cada misión; eso marcaba como «empezadas»
+      // misiones que el alumno no ha estudiado. Por detrás de la misión actual, con 1 solo concepto, sigue pendiente.
+      const first = list.findIndex((m) => m.status !== 'done');
+      list.forEach((m, i) => { if (first >= 0 && i > first && m.status === 'active' && m.worked <= 1) m.status = 'pending'; });
       const current = list.find((m) => m.status !== 'done') ?? list[list.length - 1] ?? null;
       return { list, current, worked };
     }
@@ -294,6 +300,7 @@ export default {
       const course = await visibleCourse(req.query.course, userId);
       const wanted = typeof req.query.mission === 'string' && req.query.mission ? req.query.mission : null;
       const wantFailures = req.query.focus === 'fallos';
+      const wantReview = req.query.focus === 'repaso';
       // D-111: cuántas palabras repasar en esta ronda (lo elige el alumno: un número, «todas» o 0 = solo lo nuevo).
       const rq = req.query.repaso;
       const reviewMax = rq === 'todas' ? 500 : typeof rq === 'string' && /^\d{1,3}$/.test(rq) ? Math.min(500, Number(rq)) : null;
@@ -304,7 +311,7 @@ export default {
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first();
       const savedState: SessionState | null = saved ? parse(saved.state) : null;
       // «Continuar aventura» (sin misión) retoma la sesión empezada; elegir una misión la retoma solo si es la misma.
-      const sameMission = (!wanted || savedState?.mission?.key === wanted) && (savedState?.focus === 'fallos') === wantFailures;
+      const sameMission = (!wanted || savedState?.mission?.key === wanted) && (savedState?.focus === 'fallos') === wantFailures && (savedState?.focus === 'repaso') === wantReview;
       const modes: string[] = (typeof course.modes === 'string' ? JSON.parse(course.modes) : course.modes) ?? ['associations', 'grammar', 'arcade', 'chat'];
       // D-075: si el curso cambió de experiencia (escenas ↔ Flujo), la sesión guardada no se retoma: se crea una nueva.
       const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations')
@@ -320,6 +327,17 @@ export default {
         const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items: [], units, maxNewUnits: 0,
           errorUnits: failed, practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguageCourse(course) });
         const state: SessionState = { plan: session, focus: 'fallos', index: 0, outcomes: {}, finished: session.steps.length === 0 };
+        await savePosition(userId, course.id, state, null);
+        return { data: { state, units, resumed: false } };
+      }
+      // «Repasa lo que se te está olvidando» (DAM, 5-nov-2026): solo repasos, de TODO lo vencido (sin el tope diario del
+      // plan, que dejaba 205 pendientes sin forma de entrar), los menos vistos primero, de REVIEW_PER_ROUND en REVIEW_PER_ROUND.
+      if (wantReview && modes.includes('flow')) {
+        const pick = dueWordsLeastSeen(catalog.skills, learner.skills, (k) => Boolean(units[k]), now).slice(0, REVIEW_PER_ROUND).map((w) => w.unitKey);
+        const items: PlanItem[] = pick.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k && learner.skills[sk.id]).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
+        const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: 0,
+          errorUnits: [], practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguageCourse(course) });
+        const state: SessionState = { plan: session, focus: 'repaso', index: 0, outcomes: {}, finished: session.steps.length === 0 };
         await savePosition(userId, course.id, state, null);
         return { data: { state, units, resumed: false } };
       }

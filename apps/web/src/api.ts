@@ -86,7 +86,7 @@ export interface SessionState {
   plan: AssocPlan;
   mission?: MissionRef;
   /** Ronda especial «Vacía tus fallos». */
-  focus?: 'fallos';
+  focus?: 'fallos' | 'repaso';
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -159,7 +159,7 @@ export const api = {
   /** D-091: qué asignaturas ve cada alumno (solo administración). */
   access: () => request<AccessData>('GET', '/memora/access'),
   setAccess: (course: string, change: { visibility?: 'public' | 'private'; email?: string; on?: boolean }) => request<{ visibility: 'public' | 'private'; visibleTo: string[] }>('POST', '/memora/access', { course, ...change }),
-  session: (course: string, mission?: string, focus?: 'fallos', repaso?: number | 'todas') => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}${focus ? `&focus=${focus}` : ''}${repaso !== undefined ? `&repaso=${repaso}` : ''}`),
+  session: (course: string, mission?: string, focus?: 'fallos' | 'repaso', repaso?: number | 'todas') => request<SessionPayload>('GET', `/memora/session?course=${encodeURIComponent(course)}${mission ? `&mission=${encodeURIComponent(mission)}` : ''}${focus ? `&focus=${focus}` : ''}${repaso !== undefined ? `&repaso=${repaso}` : ''}`),
   missions: (course: string) => request<{ missions: Mission[]; current: string | null; newToday?: number; newTarget?: number }>('GET', `/memora/missions?course=${encodeURIComponent(course)}`),
   studioMissions: (course: string) => request<StudioMission[]>('GET', `/memora/studio/missions?course=${encodeURIComponent(course)}`),
   retos: (course: string) => request<{ retos: Reto[] }>('GET', `/memora/retos?course=${encodeURIComponent(course)}`),

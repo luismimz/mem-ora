@@ -1330,3 +1330,7 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 /* Cómo se forma cada tiempo (5-nov-2026): la fórmula, entre la línea del tiempo y las pistas. */
 .tense-formula { margin: .35rem auto; display: flex; flex-direction: column; align-items: center; gap: .15rem; font-weight: 800; font-size: 1.02rem; color: #fff; text-align: center; }
 .tense-formula span { font-size: .68rem; letter-spacing: .1em; color: #ffd76a; }
+
+/* Repasar lo pendiente en DAM (5-nov-2026): azul, para no confundirlo con los fallos (rojo). */
+.fails-btn.review-btn { border-color: #3b6fd8; background: #e6eefc; }
+.fails-btn.review-btn .review-n { background: #3b6fd8; }
