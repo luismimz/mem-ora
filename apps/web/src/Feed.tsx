@@ -37,6 +37,7 @@ import {
   type ClientEvent,
   type SessionUnit,
   type WorkshopItem, nearMiss } from '@memora/experiences';
+import { TrickText } from './tricks';
 import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
@@ -200,7 +201,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
                   {!ex.lines.some((l) => ex.text.includes(l.code)) && <p className="learn-text">{ex.text}</p>}
                   <ol className="code-lines" lang={unit.language}>{ex.lines.map((l, j) => <li key={j}><code>{l.code}</code><span>{l.note}</span></li>)}</ol>
                 </>
-              ) : isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{ex.text} {voice && say(ex.text)}</p>}
+              ) : isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{voice ? <TrickText text={ex.text} lang={unit.language} after={<> {say(ex.text)}</>} /> : ex.text}</p>}
               {ex.visual && <VisualView v={ex.visual} />}
               {(ex.explanation || ex.translation) && <p className="learn-note">{ex.explanation ?? ex.translation}</p>}
             </div>
@@ -261,7 +262,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
         {rest.length > 0 && <p className="learn-label">{first ? 'MÁS EJEMPLOS' : rest.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>}
         {rest.map((ex, i) => (
           <div key={i} className="learn-example">
-            <p className="learn-text" lang={unit.language}>{ex.text} {say(ex.text)}</p>
+            <p className="learn-text" lang={unit.language}><TrickText text={ex.text} lang={unit.language} after={<> {say(ex.text)}</>} /></p>
             {ex.translation && <p className="learn-note">{ex.translation}</p>}
           </div>
         ))}
@@ -348,7 +349,7 @@ function Teach({ unit, note, scene, courseId, onNext }: { unit: SessionUnit; not
       {shown && (
         <div className="teach-scene">
           <Stage actors={shown.stage!} size="small" label={shown.text} />
-          <p><b lang={unit.language}>{shown.text}</b><br /><span>{shown.translation}</span></p>
+          <p><b lang={unit.language}><TrickText text={shown.text} lang={unit.language} legend={false} /></b><br /><span>{shown.translation}</span></p>
         </div>
       )}
       {unit.type === 'pattern' ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="teach" />}
@@ -1077,7 +1078,7 @@ function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Re
           <div className="pieces-after">
             <p className={`tense-verdict ${checked ? 'ok' : 'ko'}`}>{checked ? '¡Perfecto! 🎉' : spanishOrder ? 'Has seguido el orden del español' : 'Casi…'}</p>
             {!checked && <div className="pieces-row good" lang={unit.language}>{order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${moved.includes(i) ? 'jumped' : ''}`}>{chip(i)}</span>)}</div>}
-            <p className="train-final" lang={unit.language}>{ex.text}</p>
+            <p className="train-final" lang={unit.language}><TrickText text={ex.text} lang={unit.language} /></p>
             {rule && jumps && <p className="why">📏 {rule}</p>}
           </div>
         )}
@@ -2143,7 +2144,13 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   const sessionUnits = useMemo(() => [...new Set(plan.steps.map((s) => s.unitKey).filter(Boolean))].map((k) => units[k]!).filter(Boolean), [plan, units]);
   const pool = (u: SessionUnit) => {
     const same = sessionUnits.filter((x) => x.type === u.type);
-    return same.length >= 4 ? same : [...same, ...Object.values(units).filter((x) => x.type === u.type && !same.includes(x)).slice(0, 6)];
+    if (same.length >= 4) return same;
+    // 5-nov-2026: antes, las 6 PRIMERAS del curso (blue, red…) eran siempre las opciones falsas: «blue sale 20 veces».
+    // Ahora rotan según la palabra preguntada.
+    const others = Object.values(units).filter((x) => x.type === u.type && !same.includes(x));
+    let h = 0; for (const ch of u.key) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+    const start = others.length ? h % others.length : 0;
+    return [...same, ...[...others.slice(start), ...others.slice(0, start)].slice(0, 6)];
   };
 
   // Pendiente de repesca: lo que se falló y aún no se ha vuelto a acertar en la sesión. En cuanto se acierta, las demás

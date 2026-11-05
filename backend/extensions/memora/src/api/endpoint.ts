@@ -66,12 +66,12 @@ function courseConfig(course: Row) {
   return resolveConfig({ load: { newCap: perSession * 3 * 3, minNewPerDay: Math.min(perSession * 3, 9), reviewCap: 120, totalCap: perSession * 3 * 3 + 120 } });
 }
 
-/** Meta diaria en idiomas (D-081): ≈ 1.000 palabras en 30 días ⇒ 35 nuevas al día. */
-export const DAILY_GOAL_LANGUAGE = 33;
+/** Meta diaria en idiomas: usuario, 5-nov-2026: «1.000 palabras en 20 días» ⇒ 50 nuevas al día (antes 33, D-081). */
+export const DAILY_GOAL_LANGUAGE = 50;
 /** Idiomas (D-094): nuevas por ronda (3 rondas ≈ la meta del día; se puede seguir después) y, con muchos repasos acumulados, menos. */
-export const LANGUAGE_NEW_PER_ROUND = 11;
+export const LANGUAGE_NEW_PER_ROUND = 17;
 export const LANGUAGE_BACKLOG_ROUNDS = 6;
-export const LANGUAGE_NEW_BACKLOG = 8;
+export const LANGUAGE_NEW_BACKLOG = 12;
 /** Trucos de gramática que se repasan por ronda (en repaso ligero). */
 export const LANGUAGE_PATTERN_REVIEWS = 3;
 const isLanguageCourse = (course: Row) => Boolean(course.content_language) && course.content_language !== (course.learner_language ?? course.ui_language);
