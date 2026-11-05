@@ -31,7 +31,7 @@
 //   GET  /memora/studio/courses          cursos de cualquier estado, para exportar (autoría)
 import { createHash, randomUUID } from 'node:crypto';
 import { describeContentIssue, validateUnitPayload } from '@memora/content';
-import { assessAssociation, dayOf, dueUnits, dueWords, dueWordsLeastSeen, errorUnits, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
+import { assessAssociation, dayOf, dueUnits, dueWords, dueWordsLeastSeen, errorUnits, wordsLeastPracticed, flowNewUnits, focusCatalog, newUnitsFor, pendingFailures, planDay, resolveConfig, streakOf, unitLevel, weakUnits, type PlanItem } from '@memora/core';
 import { buildAssociationSession, buildExam, buildFlowSession, FLOW_PLAN_VERSION, FLOW_REVIEW_ARCADE_MAX, EXAM_GUIDED_SIZE, EXAM_MIN_QUESTIONS, EXAM_MINUTES, EXAM_PASS, examGrade, type AssocPlan, type SessionPlan, type SessionUnit } from '@memora/experiences';
 import { buildCatalog } from '../catalog';
 import { reminderForUser } from '../push/data';
@@ -339,7 +339,8 @@ export default {
         const lang = isLanguageCourse(course);
         const isWordKey = (k: string) => units[k]?.type === 'term';
         const due = dueWordsLeastSeen(catalog.skills, learner.skills, (k) => Boolean(units[k]), now);
-        const words = lang ? due.filter((w) => isWordKey(w.unitKey)) : [];
+        // Idiomas (usuario, 6-nov-2026): todas las palabras aprendidas, de menos a más practicadas, sin mirar las horas.
+        const words = lang ? wordsLeastPracticed(catalog.skills, learner.skills, isWordKey) : [];
         const rest = (lang ? due.filter((w) => !isWordKey(w.unitKey)) : due).slice(0, REVIEW_MAX_ALL).map((w) => w.unitKey);
         const items: PlanItem[] = rest.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k && learner.skills[sk.id]).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
         const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: 0,
@@ -386,7 +387,8 @@ export default {
       const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
       const isWord = (k: string) => units[k]?.type === 'term';
       // 5-nov-2026: TODAS las palabras vencidas (no solo las del tope diario del plan), las menos practicadas primero.
-      const words = flowLanguage ? dueWordsLeastSeen(catalog.skills, learner.skills, isWord, now, dayStart) : [];
+      // Usuario (6-nov-2026): de menos a más practicadas, sin mirar las horas (lo de ayer con 1 vez antes que lo de hoy con 4).
+      const words = flowLanguage ? wordsLeastPracticed(catalog.skills, learner.skills, isWord) : [];
       // Usuario (4-nov-2026): «siempre salen azul y boy, que son básicas: deben salir las que menos han salido». De lo que
       // toca repasar, primero lo menos practicado (menos intentos); a igualdad, el orden de urgencia de dueWords.
       const seen = new Map<string, number>();
@@ -399,7 +401,8 @@ export default {
       const items = flowLanguage ? (plan.items as PlanItem[]).filter((i) => i.reason !== 'review' || (!isWord(i.unitId) && patternDue.includes(i.unitId))) : (plan.items as PlanItem[]);
       // D-099: lo nuevo no se frena por los repasos acumulados (el Repaso rápido los despacha deprisa); solo con muchísimos
       // (más de LANGUAGE_BACKLOG_ROUNDS rondas llenas), algo menos. Antes bajaba a 4 y no se avanzaba.
-      const perRound = flowLanguage ? (words.length > FLOW_REVIEW_ARCADE_MAX * LANGUAGE_BACKLOG_ROUNDS ? LANGUAGE_NEW_BACKLOG : LANGUAGE_NEW_PER_ROUND) : newMax;
+      // 6-nov-2026: el repaso ya no «se acumula» (sale lo menos practicado de todo), así que no frena lo nuevo.
+      const perRound = flowLanguage ? LANGUAGE_NEW_PER_ROUND : newMax;
       const flowNew = flowNewUnits({ perRound, newToday, dailyRounds: isLanguage ? null : 3,
         ...(prevRound ? { lastRound: { answered: prevOutcomes.length, correct: prevOutcomes.filter((o) => o.correct).length } } : {}) });
       const reviewKeys = [...items.filter((i) => i.reason === 'review').map((i) => i.unitId), ...roundWords.map((w) => w.unitKey)];

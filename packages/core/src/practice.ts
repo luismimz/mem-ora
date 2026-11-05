@@ -101,3 +101,27 @@ export function dueWordsLeastSeen(defs: Array<{ id: string; unitId: string; kind
   }
   return out.sort((a, b) => a.n - b.n || a.due - b.due || (a.unitKey < b.unitKey ? -1 : 1)).map(({ unitKey, recall }) => ({ unitKey, recall }));
 }
+
+/**
+ * Decisión del usuario (6-nov-2026): en idiomas, el repaso no depende de las horas. Sale TODO lo ya aprendido, de menos
+ * a más veces practicado (a igualdad, lo que hace más tiempo que no se practica). Así, si ayer una palabra salió 1 vez y
+ * hoy otra 4, la de ayer vuelve antes. El estado honesto de cada palabra (regla 9) se sigue calculando igual.
+ */
+export function wordsLeastPracticed(defs: Array<{ id: string; unitId: string; kind: string }>, skills: Record<string, SkillState>, isWord: (unitId: string) => boolean): Array<{ unitKey: string; recall: boolean }> {
+  const attempts = new Map<string, number>();
+  const last = new Map<string, number>();
+  for (const s of Object.values(skills)) {
+    attempts.set(s.unitId, (attempts.get(s.unitId) ?? 0) + s.attempts);
+    last.set(s.unitId, Math.max(last.get(s.unitId) ?? 0, s.lastAttemptAt ?? s.lastExposureAt ?? 0));
+  }
+  const out: Array<{ unitKey: string; recall: boolean; n: number; at: number }> = [];
+  const seen = new Set<string>();
+  for (const d of defs) {
+    if (d.kind !== 'recall' || seen.has(d.unitId) || !isWord(d.unitId)) continue;
+    const s = skills[d.id];
+    if (!s || s.status === 'new') continue;
+    seen.add(d.unitId);
+    out.push({ unitKey: d.unitId, recall: (s.step ?? 0) >= MATURE_STEP, n: attempts.get(d.unitId) ?? 0, at: last.get(d.unitId) ?? 0 });
+  }
+  return out.sort((a, b) => a.n - b.n || a.at - b.at || (a.unitKey < b.unitKey ? -1 : 1)).map(({ unitKey, recall }) => ({ unitKey, recall }));
+}
