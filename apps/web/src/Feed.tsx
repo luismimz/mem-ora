@@ -1596,12 +1596,13 @@ const WORKSHOP_TAG = { lab: '🧪 LABORATORIO', whatis: '🕵️ ¿QUÉ ES ESTO?
  * caso, completar código con fichas, predecir lo que imprime, tocar la línea del bug y reconocer componentes dibujados.
  * Sin reloj; cada respuesta se explica y, si fallas alguno, se vuelve a enseñar ese concepto.
  */
-function Workshop({ items, all, seed, onAnswer, onDone }: {
-  items: WorkshopItem[]; all: Record<string, SessionUnit>; seed: string;
+function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
+  items: WorkshopItem[]; all: Record<string, SessionUnit>; seed: string; direct?: boolean;
   onAnswer: (u: SessionUnit, ok: boolean, ms: number, item: WorkshopItem) => void; onDone: (failed: string | null) => void;
 }) {
   const list = useMemo(() => items.filter((it) => all[it.unitKey] && (it.kind !== 'code' || exercisesOf(all[it.unitKey]!)[it.exercise])), [items, all]);
-  const [i, setI] = useState(-1);
+  // Directo (laboratorio justo tras su ficha): sin portada.
+  const [i, setI] = useState(direct ? 0 : -1);
   const [picked, setPicked] = useState<string | null>(null);
   const [right, setRight] = useState(0);
   const [confetti, setConfetti] = useState(0);
@@ -1636,6 +1637,8 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
   const nextRef = useRef(next);
   nextRef.current = next;
   const finish = () => onDone(failed.current[0] ?? null);
+  // Directo: al acabar los laboratorios se sigue con el Flujo, sin pantalla de Taller terminado.
+  useEffect(() => { if (direct && i >= list.length) finish(); }, [direct, i, list.length]); // eslint-disable-line react-hooks/exhaustive-deps
   if (i < 0) {
     const kinds = [...new Set(list.map((x) => (x.kind === 'code' ? exercisesOf(all[x.unitKey]!)[x.exercise]!.kind : x.kind)))] as Array<keyof typeof WORKSHOP_TAG>;
     return (
@@ -1648,6 +1651,7 @@ function Workshop({ items, all, seed, onAnswer, onDone }: {
       </Slide>
     );
   }
+  if (direct && (!it || !u)) return null;
   if (!it || !u) {
     const stars = right === list.length ? 3 : right >= list.length * 0.6 ? 2 : right > 0 ? 1 : 0;
     return (
@@ -2174,7 +2178,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
-  else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units}
+  else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units} direct={Boolean(step.direct)}
     onAnswer={(u, ok, ms, it) => {
       // D-112: escribir SQL que funciona es aplicar (peso muy alto); tocar en la tabla, reconocer.
       const sqlLab = it.kind === 'lab' && labsOf(u)[it.lab]?.kind === 'sql';
