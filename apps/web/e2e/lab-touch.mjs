@@ -66,8 +66,9 @@ try {
       await page.locator('.sql-chip', { hasText: /^SELECT$/ }).first().tap();
       await page.locator('.sql-input').fill('SELECT nombr FROM cliente');
       await page.locator('.sql-run').tap();
-      await page.waitForSelector('.sql-error');
-      check(/no such column: nombr/.test(await page.textContent('.sql-error')), 'un error se ve tal cual lo da el motor (no such column)');
+      // Puede quedar en pantalla el error del laboratorio anterior: se espera al de esta consulta.
+      const shown = await page.waitForFunction(() => [...document.querySelectorAll('.sql-error')].some((e) => /no such column: nombr/.test(e.textContent ?? '')), null, { timeout: 5000 }).then(() => true, () => false);
+      check(shown, 'un error se ve tal cual lo da el motor (no such column)');
       if (/Corralejo/.test(prompt)) {
         await page.locator('.sql-input').fill('SELECT nombre FROM cliente');
         await page.locator('.sql-run').tap();
