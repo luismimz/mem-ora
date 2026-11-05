@@ -93,3 +93,13 @@ describe('dueWordsLeastSeen (5-nov-2026): todas las vencidas, las menos vistas p
     expect(dueWordsLeastSeen(defs, skills, (u) => u !== 'g1', 30).map((x) => x.unitKey)).toEqual(['dog', 'boy']);
   });
 });
+
+describe('dueWordsLeastSeen con dayStart (6-nov-2026): lo practicado hoy espera a mañana', () => {
+  it('quita lo ya practicado hoy sin fallo; deja lo fallado hoy y lo de otros días', () => {
+    const mk = (unitId: string, last: number, fails = 0, attempts = 3) => ({ skillId: `${unitId}.recall`, unitId, status: 'learning', evidence: 1, retrievalSuccesses: 1, deferredSuccesses: 0, consecutiveFailures: fails, lapses: 0, attempts, accuracy: 0.7, step: 1, dueAt: 50, presentedAt: 0, lastExposureAt: 0, lastAttemptAt: last, unaidedFormats: [], contexts: [] }) as SkillState;
+    const skills = { 'hoy.recall': mk('hoy', 90, 0, 1), 'mal.recall': mk('mal', 95, 1, 1), 'viejo.recall': mk('viejo', 10, 0, 9), 'neck.recall': mk('neck', 10, 0, 2) };
+    const defs = Object.values(skills).map((s) => ({ id: s.skillId, unitId: s.unitId, kind: 'recall' }));
+    expect(dueWordsLeastSeen(defs, skills, () => true, 100, 80).map((x) => x.unitKey)).toEqual(['mal', 'neck', 'viejo']);
+    expect(dueWordsLeastSeen(defs, skills, () => true, 100).map((x) => x.unitKey)).toEqual(['hoy', 'mal', 'neck', 'viejo']);
+  });
+});

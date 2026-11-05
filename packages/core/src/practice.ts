@@ -77,15 +77,25 @@ export function dueWords(items: Array<{ skillId: string; unitId: string; reason:
  * Repaso rápido salía del plan del día (los 30 repasos de más prioridad) y repetía siempre las mismas palabras
  * recientes; el resto no llegaba nunca (usuario, 5-nov-2026: «que aparezcan siempre las menos vistas»).
  */
-export function dueWordsLeastSeen(defs: Array<{ id: string; unitId: string; kind: string }>, skills: Record<string, SkillState>, isWord: (unitId: string) => boolean, now: number): Array<{ unitKey: string; recall: boolean }> {
+export function dueWordsLeastSeen(defs: Array<{ id: string; unitId: string; kind: string }>, skills: Record<string, SkillState>, isWord: (unitId: string) => boolean, now: number, dayStart?: number): Array<{ unitKey: string; recall: boolean }> {
   const attempts = new Map<string, number>();
-  for (const s of Object.values(skills)) attempts.set(s.unitId, (attempts.get(s.unitId) ?? 0) + s.attempts);
+  // Usuario (6-nov-2026): «siempre las mismas». Lo aprendido HOY volvía a la hora y a las 3 horas y, como tenía menos
+  // intentos que lo antiguo, se ponía delante y tapaba lo de días atrás. Con `dayStart`, lo ya practicado hoy sin fallo
+  // espera a mañana; el repaso se llena con lo de otros días, de menos a más veces practicado.
+  const today = new Set<string>();
+  const failing = new Set<string>();
+  for (const s of Object.values(skills)) {
+    attempts.set(s.unitId, (attempts.get(s.unitId) ?? 0) + s.attempts);
+    if (dayStart !== undefined && (s.lastAttemptAt ?? 0) >= dayStart) today.add(s.unitId);
+    if (s.consecutiveFailures > 0) failing.add(s.unitId);
+  }
   const out: Array<{ unitKey: string; recall: boolean; n: number; due: number }> = [];
   const seen = new Set<string>();
   for (const d of defs) {
     if (d.kind !== 'recall' || seen.has(d.unitId) || !isWord(d.unitId)) continue;
     const s = skills[d.id];
     if (!s || s.status === 'new' || s.dueAt === null || s.dueAt > now) continue;
+    if (today.has(d.unitId) && !failing.has(d.unitId)) continue;
     seen.add(d.unitId);
     out.push({ unitKey: d.unitId, recall: (s.step ?? 0) >= MATURE_STEP, n: attempts.get(d.unitId) ?? 0, due: s.dueAt });
   }

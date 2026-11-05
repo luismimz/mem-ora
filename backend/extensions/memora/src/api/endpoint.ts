@@ -386,7 +386,7 @@ export default {
       const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
       const isWord = (k: string) => units[k]?.type === 'term';
       // 5-nov-2026: TODAS las palabras vencidas (no solo las del tope diario del plan), las menos practicadas primero.
-      const words = flowLanguage ? dueWordsLeastSeen(catalog.skills, learner.skills, isWord, now) : [];
+      const words = flowLanguage ? dueWordsLeastSeen(catalog.skills, learner.skills, isWord, now, dayStart) : [];
       // Usuario (4-nov-2026): «siempre salen azul y boy, que son básicas: deben salir las que menos han salido». De lo que
       // toca repasar, primero lo menos practicado (menos intentos); a igualdad, el orden de urgencia de dueWords.
       const seen = new Map<string, number>();
@@ -415,7 +415,11 @@ export default {
       const nothingElse = !roundWords.length && !items.some((i) => i.reason === 'new') && !errors.length;
       const practice = flowLanguage && !nothingElse ? [] : weakFresh.length >= 2 ? weakFresh : weakAll;
       // Arcade sorpresa (D-087): solo lo ya aprendido (practicado y más allá de «presentado»), si el curso tiene Arcade.
-      const learnedUnits = !modes.includes('arcade') ? [] : leastSeen([...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]), (k) => k);
+      // 6-nov-2026: el Arcade sorpresa tampoco repite lo ya practicado hoy (si queda algo de otros días).
+      const practicedToday = new Set(Object.values(learner.skills).filter((x) => (x.lastAttemptAt ?? 0) >= dayStart).map((x) => x.unitId));
+      const learnedAll = !modes.includes('arcade') ? [] : leastSeen([...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]), (k) => k);
+      const learnedOld = learnedAll.filter((k) => !practicedToday.has(k));
+      const learnedUnits = learnedOld.length >= 8 ? learnedOld : learnedAll;
       const session = modes.includes('flow')
         ? buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: flowNew,
             errorUnits: errors, practiceUnits: practice, levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguage, arcadeUnits: learnedUnits,
