@@ -37,7 +37,7 @@ import {
   type ClientEvent,
   type SessionUnit,
   type WorkshopItem, nearMiss } from '@memora/experiences';
-import { TrickText } from './tricks';
+import { hasTrick, TrickSentence } from './tricks';
 import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
@@ -176,6 +176,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
   const extra = Boolean(a?.analogy || a?.trace?.length);
   // Idiomas (D-078): 🔊 para oír la palabra, sus ejemplos y la escena en el idioma que se aprende.
   const voice = unit.type === 'term' && audioEnabled();
+  const firstTrick = voice ? examples.findIndex((e) => !e.lines?.length && hasTrick(e.text, e.translation, unit.language)) : -1;
   const say = (text: string) => (voice ? <button type="button" className="say" aria-label={`Escuchar «${text}»`} onClick={(e) => { e.stopPropagation(); speak(text, unit.language); }}>🔊</button> : null);
   const rawPron = (unit.payload as { pronunciation?: string | { respelling?: string } }).pronunciation;
   const pron = typeof rawPron === 'string' ? rawPron : rawPron?.respelling;
@@ -193,6 +194,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
           {p.definition && <><p className="learn-label">QUÉ ES</p><p className="learn-text">{p.definition}</p></>}
           {p.contrast && <p className="learn-contrast">{p.contrast}</p>}
           {examples.length > 0 && <p className="learn-label">{examples.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>}
+          {/* 5-nov-2026: la tarjeta del truco (palabra española partida → inglés) solo en el primer ejemplo que tenga uno. */}
           {examples.map((ex, i) => (
             <div key={i} className="learn-example">
               {ex.lines?.length ? (
@@ -201,7 +203,7 @@ function Concept({ unit, full = true, courseId, step }: { unit: SessionUnit; ful
                   {!ex.lines.some((l) => ex.text.includes(l.code)) && <p className="learn-text">{ex.text}</p>}
                   <ol className="code-lines" lang={unit.language}>{ex.lines.map((l, j) => <li key={j}><code>{l.code}</code><span>{l.note}</span></li>)}</ol>
                 </>
-              ) : isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{voice ? <TrickText text={ex.text} lang={unit.language} after={<> {say(ex.text)}</>} /> : ex.text}</p>}
+              ) : isCode(unit, ex.text) ? <pre className="learn-code" lang={unit.language}><code>{ex.text}</code></pre> : <p className="learn-text" lang={voice ? unit.language : undefined}>{voice ? <TrickSentence text={ex.text} translation={ex.translation} lang={unit.language} full={i === firstTrick} after={<> {say(ex.text)}</>} /> : ex.text}</p>}
               {ex.visual && <VisualView v={ex.visual} />}
               {(ex.explanation || ex.translation) && <p className="learn-note">{ex.explanation ?? ex.translation}</p>}
             </div>
@@ -262,7 +264,7 @@ function PatternFace({ unit }: { unit: SessionUnit }) {
         {rest.length > 0 && <p className="learn-label">{first ? 'MÁS EJEMPLOS' : rest.length > 1 ? 'EJEMPLOS' : 'EJEMPLO'}</p>}
         {rest.map((ex, i) => (
           <div key={i} className="learn-example">
-            <p className="learn-text" lang={unit.language}><TrickText text={ex.text} lang={unit.language} after={<> {say(ex.text)}</>} /></p>
+            <p className="learn-text" lang={unit.language}><TrickSentence text={ex.text} translation={ex.translation} lang={unit.language} after={<> {say(ex.text)}</>} /></p>
             {ex.translation && <p className="learn-note">{ex.translation}</p>}
           </div>
         ))}
@@ -349,7 +351,7 @@ function Teach({ unit, note, scene, courseId, onNext }: { unit: SessionUnit; not
       {shown && (
         <div className="teach-scene">
           <Stage actors={shown.stage!} size="small" label={shown.text} />
-          <p><b lang={unit.language}><TrickText text={shown.text} lang={unit.language} legend={false} /></b><br /><span>{shown.translation}</span></p>
+          <p><b lang={unit.language}><TrickSentence text={shown.text} translation={shown.translation} lang={unit.language} /></b><br /><span>{shown.translation}</span></p>
         </div>
       )}
       {unit.type === 'pattern' ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="teach" />}
@@ -1078,7 +1080,7 @@ function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Re
           <div className="pieces-after">
             <p className={`tense-verdict ${checked ? 'ok' : 'ko'}`}>{checked ? '¡Perfecto! 🎉' : spanishOrder ? 'Has seguido el orden del español' : 'Casi…'}</p>
             {!checked && <div className="pieces-row good" lang={unit.language}>{order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${moved.includes(i) ? 'jumped' : ''}`}>{chip(i)}</span>)}</div>}
-            <p className="train-final" lang={unit.language}><TrickText text={ex.text} lang={unit.language} /></p>
+            <p className="train-final" lang={unit.language}><TrickSentence text={ex.text} translation={ex.translation} lang={unit.language} /></p>
             {rule && jumps && <p className="why">📏 {rule}</p>}
           </div>
         )}
