@@ -67,6 +67,11 @@ function courseConfig(course: Row) {
 }
 
 /** Meta diaria en idiomas: usuario, 5-nov-2026: «1.000 palabras en 20 días» ⇒ 50 nuevas al día (antes 33, D-081). */
+/** ¿La ronda guardada está parada en un Repaso rápido? Entonces no se retoma: se rehace (6-nov-2026). */
+export function atReviewStep(state: { index: number; plan: { steps: unknown[] } } | null | undefined): boolean {
+  return Boolean(state && (state.plan.steps[state.index] as { arcadeReview?: boolean } | undefined)?.arcadeReview);
+}
+
 export const DAILY_GOAL_LANGUAGE = 50;
 /** Idiomas (D-094): nuevas por ronda (3 rondas ≈ la meta del día; se puede seguir después) y, con muchos repasos acumulados, menos. */
 export const LANGUAGE_NEW_PER_ROUND = 17;
@@ -318,7 +323,11 @@ export default {
         // D-099: una ronda armada con un planificador anterior no se retoma (si no, se seguía con la ronda vieja).
         && (!modes.includes('flow') || (savedState?.plan as { version?: number } | undefined)?.version === FLOW_PLAN_VERSION);
       // «Repasar ahora» nunca retoma: se rehace con lo que sigue vencido (lo ya respondido ya no sale).
-      if (reviewMax === null && !wantReview && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
+      // 6-nov-2026 (usuario: «el repaso se inicia siempre con las mismas palabras»): una ronda guardada que está en un
+      // Repaso rápido NO se retoma; se rehace con el orden de menos a más practicado. Antes se reabría la misma lista una
+      // y otra vez (el índice no avanza hasta acabar la ráfaga).
+      const atReview = atReviewStep(savedState);
+      if (reviewMax === null && !wantReview && !atReview && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
