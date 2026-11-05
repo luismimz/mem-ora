@@ -94,8 +94,8 @@ const REPORT_REASONS = ['asociacion', 'significado', 'respuesta', 'audio', 'otro
 
 /** Fallos por ronda de «Vacía tus fallos»: corta, para vaciarlos en tandas. */
 const FAILURES_PER_ROUND = 8;
-/** Conceptos por ronda de «Repasa lo que se te está olvidando» (DAM, 5-nov-2026). */
-const REVIEW_PER_ROUND = 10;
+/** Tope de seguridad de «repasar todo» (5-nov-2026: el alumno quiere todo lo acumulado, no de 10 en 10). */
+const REVIEW_MAX_ALL = 400;
 
 export interface MissionRef {
   key: string;
@@ -333,10 +333,17 @@ export default {
       // «Repasa lo que se te está olvidando» (DAM, 5-nov-2026): solo repasos, de TODO lo vencido (sin el tope diario del
       // plan, que dejaba 205 pendientes sin forma de entrar), los menos vistos primero, de REVIEW_PER_ROUND en REVIEW_PER_ROUND.
       if (wantReview && modes.includes('flow')) {
-        const pick = dueWordsLeastSeen(catalog.skills, learner.skills, (k) => Boolean(units[k]), now).slice(0, REVIEW_PER_ROUND).map((w) => w.unitKey);
-        const items: PlanItem[] = pick.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k && learner.skills[sk.id]).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
+        // Repasar a voluntad (5-nov-2026, todas las asignaturas): TODO lo acumulado de una vez, lo menos visto primero.
+        // Idiomas: las palabras en el Repaso rápido (Arcade) y los trucos en repaso ligero; DAM: cada concepto con su reto.
+        const lang = isLanguageCourse(course);
+        const isWordKey = (k: string) => units[k]?.type === 'term';
+        const due = dueWordsLeastSeen(catalog.skills, learner.skills, (k) => Boolean(units[k]), now);
+        const words = lang ? due.filter((w) => isWordKey(w.unitKey)) : [];
+        const rest = (lang ? due.filter((w) => !isWordKey(w.unitKey)) : due).slice(0, REVIEW_MAX_ALL).map((w) => w.unitKey);
+        const items: PlanItem[] = rest.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k && learner.skills[sk.id]).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
         const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: 0,
-          errorUnits: [], practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguageCourse(course) });
+          errorUnits: [], practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && lang,
+          ...(words.length ? { reviewArcade: words, reviewMax: words.length } : {}), ...(lang ? { lightReviews: true } : {}) });
         const state: SessionState = { plan: session, focus: 'repaso', index: 0, outcomes: {}, finished: session.steps.length === 0 };
         await savePosition(userId, course.id, state, null);
         return { data: { state, units, resumed: false } };

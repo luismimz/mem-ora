@@ -288,7 +288,12 @@ export function App() {
                 {enabled.length > 1 && <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>}
                 <ul className="today" aria-label="Tu día">
                   <li><b>{prog?.streak ?? '—'}</b><span>🔥 {prog?.streak === 1 ? 'día' : 'días'} de racha</span></li>
-                  <li><b>{flowCourse && isLanguage(current) && prog ? dueWords : flowCourse && prog ? dueUnits : due ?? '—'}</b><span>🔁 {flowCourse && isLanguage(current) ? (dueWords === 1 ? 'palabra' : 'palabras') + ' por repasar' : flowCourse ? `${dueUnits === 1 ? 'concepto' : 'conceptos'} por repasar` : `${due === 1 ? 'repaso' : 'repasos'} pendientes`}</span></li>
+                  {flowCourse && prog ? (
+                    // Repasar a voluntad (5-nov-2026): el contador se toca y abre una ronda con TODO lo acumulado.
+                    <li className="today-tap"><button type="button" disabled={(isLanguage(current) ? dueWords : dueUnits) === 0} onClick={() => go({ name: 'session', course: current.id, focus: 'repaso' })}>
+                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? (dueWords === 1 ? 'palabra' : 'palabras') : dueUnits === 1 ? 'concepto' : 'conceptos'} por repasar</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>Repasar ahora →</em>}
+                    </button></li>
+                  ) : <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>}
                   <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>
                 </ul>
                 {prog?.today && <div className="goal-bar" aria-label={`Meta de hoy: ${prog.today.newUnits} de ${prog.today.goal}`}><i style={{ width: `${Math.min(100, Math.round((prog.today.newUnits / Math.max(1, prog.today.goal)) * 100))}%` }} /></div>}
@@ -300,15 +305,7 @@ export function App() {
                     <p>{currentMission.worked}/{currentMission.total} {words} · {currentMission.status === 'pending' ? 'empiezas aquí' : 'sigues por donde lo dejaste'}.</p>
                   </>
                 ) : <p>Desliza para aprender. Los repasos vuelven solos, justo antes de que se te olviden.</p>}
-                <button type="button" className="primary" onClick={() => (flowCourse && dueWords > REVIEW_ROUND ? setReviewAsk(dueWords) : open(has(mode) ? mode : 'associations'))}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
-                {(current.modes as string[]).includes('flow') && !isLanguage(current) && dueUnits > 0 && (
-                  // 5-nov-2026: en DAM los repasos pendientes no tenían por dónde entrar (el plan diario solo deja 30).
-                  <button type="button" className="fails-btn review-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'repaso' })}>
-                    <span className="fails-n review-n">{dueUnits}</span>
-                    <span><b>Repasa lo que se te está olvidando</b><small>{dueUnits === 1 ? '1 concepto' : `${dueUnits} conceptos`}{dueUnits > REVIEW_DAM_ROUND ? ` · de ${REVIEW_DAM_ROUND} en ${REVIEW_DAM_ROUND}, los menos vistos primero` : ''}</small></span>
-                    <span aria-hidden="true">→</span>
-                  </button>
-                )}
+                <button type="button" className="primary" onClick={() => open(has(mode) ? mode : 'associations')}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
                 {(current.modes as string[]).includes('flow') && (prog?.failures ?? 0) > 0 && (
                   <button type="button" className="fails-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'fallos' })}>
                     <span className="fails-n">{prog!.failures}</span>

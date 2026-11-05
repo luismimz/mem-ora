@@ -46,40 +46,32 @@ try {
     return { page, asked };
   };
 
-  // Con 63 palabras por repasar: pregunta.
+  // 5-nov-2026: el contador de Inicio se TOCA y abre una ronda con TODO lo acumulado (sin preguntar cuántas).
   const { page, asked } = await run(63);
-  await page.locator('.hero .primary').tap();
-  await page.waitForSelector('.review-sheet');
-  const sheet = await page.textContent('.review-sheet');
-  check(/63 palabras por repasar/.test(sheet), 'cuenta una vez cada palabra (no cada habilidad): 63');
-  check(/63\s*🔁 palabras por repasar/.test(await page.textContent('.today')), 'Inicio cuenta lo mismo: 63 palabras por repasar');
-  const opts = await page.$$eval('.review-opt', (b) => b.map((x) => ({ t: x.textContent, h: Math.round(x.getBoundingClientRect().height) })));
-  check(opts.length === 4 && opts.every((o) => o.h >= 44) && /Todas \(63\)/.test(opts.map((o) => o.t).join()), `elige 25, 50, todas o solo lo nuevo con un toque (${opts.map((o) => o.h).join(', ')} px)`);
-  check(/no se pierden/.test(sheet), 'explica que las que dejes no se pierden');
+  const tile = page.locator('.today-tap button');
+  check(/63\s*🔁 palabras por repasar/.test(await tile.textContent()), 'Inicio cuenta una vez cada palabra (no cada habilidad): 63');
+  check(Math.round((await tile.boundingBox()).height) >= 44 && /Repasar ahora/.test(await tile.textContent()), 'el contador es un botón grande que dice «Repasar ahora»');
+  check(await page.locator('.review-btn').count() === 0, 'sin banner repetido debajo');
   check(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'nada se sale por los lados');
-  if (shots) await page.screenshot({ path: `${shots}/repasos-elige.png` });
-  await page.locator('.review-opt', { hasText: 'Todas' }).tap();
+  if (shots) await page.screenshot({ path: `${shots}/repasos-contador.png` });
+  await tile.tap();
   await page.waitForURL(/\/sesion/);
   await page.waitForTimeout(400);
-  check(asked.some((q) => q.includes('repaso=todas')), 'pide la ronda con todas las palabras');
+  check(asked.some((q) => q.includes('focus=repaso')), 'pide la ronda de repasar todo (focus=repaso)');
   await page.close();
 
-  // Solo lo nuevo.
-  const b = await run(63);
-  await b.page.locator('.hero .primary').tap();
-  await b.page.locator('.review-opt', { hasText: 'Solo lo nuevo' }).tap();
-  await b.page.waitForURL(/\/sesion/);
-  await b.page.waitForTimeout(400);
-  check(b.asked.some((q) => q.includes('repaso=0')), '«Solo lo nuevo» pide la ronda sin repaso');
-  await b.page.close();
-
-  // Con pocas (10): no pregunta y la ronda va como siempre.
-  const c = await run(10);
+  // «Seguir aprendiendo» ya no pregunta: sigue con lo nuevo y lo que toca.
+  const c = await run(63);
   await c.page.locator('.hero .primary').tap();
   await c.page.waitForURL(/\/sesion/);
   await c.page.waitForTimeout(400);
-  check(await c.page.locator('.review-sheet').count() === 0 && c.asked.length > 0 && !c.asked.some((q) => q.includes('repaso=')), 'con pocas palabras no pregunta');
+  check(!(await c.page.locator('.review-sheet').count()) && c.asked.every((q) => !q.includes('focus=repaso')), '«Seguir aprendiendo» abre la ronda normal sin preguntar');
   await c.page.close();
+
+  // Sin nada que repasar, el contador no se puede tocar.
+  const d = await run(0);
+  check(await d.page.locator('.today-tap button').isDisabled(), 'con 0 por repasar el contador no abre nada');
+  await d.page.close();
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();
