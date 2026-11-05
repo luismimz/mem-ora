@@ -1358,12 +1358,36 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .near-miss { margin: .4rem auto 0; padding: .45rem .7rem; border-radius: 12px; background: rgba(255, 196, 0, .18); font-size: .95rem; max-width: 30rem; }
 .near-miss span { display: block; opacity: .8; font-size: .85rem; }
 
-/* Trucos de gramática en las frases (5-nov-2026) */
-mark.trick { background: none; color: inherit; font-weight: 800; border-bottom: 3px solid var(--trick, #f5b301); padding: 0 .05em; }
-.trick-will, .trick-going { --trick: #3aa0ff; }
-.trick-would, .trick-if { --trick: #b26bff; }
-.trick-have, .trick-had, .trick-part { --trick: #20c997; }
-.trick-past, .trick-did, .trick-was { --trick: #ff7a45; }
-.trick-do, .trick-modal { --trick: #f5b301; }
-.trick-legend { display: flex; flex-direction: column; gap: .15rem; margin-top: .35rem; font-size: .8rem; font-weight: 400; text-align: left; }
-.trick-why { border-left: 3px solid var(--trick, #f5b301); padding-left: .4rem; opacity: .92; }
+
+/* Truco de la frase (5-nov-2026): la palabra española se parte y la terminación vuela al inglés */
+.trk-would { --trk: #b26bff; } .trk-will { --trk: #3aa0ff; } .trk-going { --trk: #2ec4b6; } .trk-have { --trk: #20c997; }
+.trk-past, .trk-irregular, .trk-did { --trk: #ff7a45; } .trk-ing { --trk: #ffd166; } .trk-s { --trk: #ff5d8f; }
+.trk-modal, .trk-do { --trk: #f5b301; }
+.trk-inline .trk-on b, .trk-inline .trk-tail { color: inherit; font-weight: 800; border-bottom: 3px solid var(--trk); }
+.trk-inline .trk-form { display: none; }
+.trk-inline .trk-w { display: inline; } .trk-inline .trk-w + .trk-w::before { content: ' '; }
+.trk-card { display: flex; flex-direction: column; gap: .45rem; padding: .75rem; margin: .2rem 0; border-radius: 14px; background: color-mix(in srgb, var(--trk) 14%, transparent); border: 1px solid color-mix(in srgb, var(--trk) 45%, transparent); text-align: left; }
+.trk-name { font-size: .75rem; letter-spacing: .08em; font-weight: 800; color: var(--trk); }
+.trk-es, .trk-en { display: flex; flex-wrap: wrap; gap: .3rem; align-items: flex-start; }
+.trk-card .trk-w { display: inline-flex; flex-direction: column; align-items: center; padding: .2rem .4rem; border-radius: 9px; background: rgba(255, 255, 255, .07); }
+.trk-card .trk-txt { font-size: 1.05rem; white-space: nowrap; }
+.trk-card .trk-on { background: var(--trk); color: #111; }
+.trk-card .trk-on b { font-weight: 800; }
+.trk-tail { color: var(--trk); font-weight: 800; }
+.trk-card .trk-on .trk-tail { color: #111; text-decoration: underline; }
+.trk-form { font-size: .66rem; opacity: .85; margin-top: .1rem; white-space: nowrap; }
+.trk-end { transition: margin .45s ease, color .45s ease, background .45s ease; border-radius: 6px; }
+.trk-split .trk-txt { display: inline-flex; align-items: flex-start; }
+.trk-root, .trk-end { display: inline-flex; flex-direction: column; align-items: center; }
+.trk-split.is-split .trk-end { margin-left: .35rem; padding: 0 .25rem; background: var(--trk); color: #111; }
+.trk-split.is-split .trk-root { padding: 0 .2rem; border-radius: 6px; background: rgba(255, 255, 255, .12); }
+.trk-end .trk-form { font-weight: 600; }
+.trk-arrow { font-size: .75rem; opacity: 0; transition: opacity .4s; color: var(--trk); font-weight: 700; }
+.trk-arrow.on { opacity: 1; }
+.trk-enwrap { opacity: 0; transform: translateY(-6px); transition: opacity .45s, transform .45s; }
+.trk-enwrap.on { opacity: 1; transform: none; }
+.trk-jump { animation: trk-jump .9s cubic-bezier(.3, 1.4, .5, 1) both; }
+@keyframes trk-jump { 0% { transform: translate(140px, -46px) scale(.9); opacity: .2; } 100% { transform: none; opacity: 1; } }
+.trk-formula { font-size: .9rem; font-weight: 700; }
+.trk-hook { font-size: .85rem; opacity: .92; }
+@media (prefers-reduced-motion: reduce) { .trk-jump { animation: none; } .trk-enwrap, .trk-end { transition: none; } }
