@@ -32,6 +32,8 @@ export interface AssocStep {
   tenseRoute?: string[];
   /** El Taller (D-090): los retos de «saber usarlo». */
   workshop?: import('./workshop').WorkshopItem[];
+  /** Taller directo (5-nov-2026): sin portada, justo después de la ficha (laboratorios del concepto recién visto). */
+  direct?: boolean;
   /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
   exercise?: number;
   typed?: boolean;

@@ -403,6 +403,15 @@ describe('el Taller: saber usarlo (D-090)', () => {
     expect(rev.steps.filter((st) => st.unitKey).length).toBeGreaterThan(0);
     for (const k of keys) expect(['k0', 'k1', 'k2']).toContain(k);
   });
+  it('un concepto con laboratorios los trae justo después de su ficha, sin portada (5-nov-2026)', () => {
+    const lab = { kind: 'tap', prompt: 'Toca', visual: { kind: 'tables', tables: [{ name: 'T', columns: [{ name: 'a' }] }] }, target: ['T.a'] };
+    const units = { ...all, k0: c('k0', { labs: [lab] }) };
+    const plan = buildFlowSession({ ...base, units, items: ['k0', 'k1'].map((k) => item(k, 'new')) });
+    const reel = plan.steps.findIndex((st) => st.kind === 'reel' && st.unitKey === 'k0');
+    const direct = plan.steps.findIndex((st) => st.kind === 'workshop' && st.direct);
+    expect(direct).toBeGreaterThan(reel);
+    expect(plan.steps[direct]!.workshop).toEqual([{ kind: 'lab', unitKey: 'k0', lab: 0 }]);
+  });
   it('cada 4 conceptos (y al acabar) llega un Taller, siempre DESPUÉS de enseñarlos', () => {
     expect(shops.length).toBe(2);
     for (const s of shops) {
