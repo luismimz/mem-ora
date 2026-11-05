@@ -2189,7 +2189,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     }
   }
   /**
-   * 5-nov-2026: las respuestas se envían ya (cada 5 y al salir), no solo al acabar el paso. En un repaso largo, salir a
+   * 5-nov-2026: las respuestas se envían ya (cada una y al salir), no solo al acabar el paso. En un repaso largo, salir a
    * medias perdía todas las respuestas y volvían las mismas palabras.
    */
   function flushEvents() {
@@ -2276,7 +2276,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
   else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} all={units} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))} {...(step.arcadeGrammar ? { grammar: step.arcadeGrammar } : {})} review={Boolean(step.arcadeReview)} recall={step.arcadeRecall ?? []}
-    onAnswer={(u, ok, ms, context, format) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format, correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); if (queue.current.length >= 5) void flushEvents(); scored(ok, 6); }} onDone={() => void advance()} />;
+    onAnswer={(u, ok, ms, context, format) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format, correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); void flushEvents(); scored(ok, 6); }} onDone={() => void advance()} />;
   else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
