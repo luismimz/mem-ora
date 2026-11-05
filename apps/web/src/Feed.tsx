@@ -36,8 +36,7 @@ import {
   type AssocStep,
   type ClientEvent,
   type SessionUnit,
-  type WorkshopItem,
-} from '@memora/experiences';
+  type WorkshopItem, nearMiss } from '@memora/experiences';
 import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
 import { enqueue, isNetworkError, saveSessionProgress } from './offline';
@@ -1107,6 +1106,16 @@ function Pic({ unit, fallback, small = false }: { unit: SessionUnit; fallback: s
   return <div className={`face-emoji ${small ? 'small' : ''}`} aria-hidden="true">{fallback}</div>;
 }
 
+/** Respuesta buena; si casi acertaste, qué falló (se cuenta como fallo y vuelve a salir). */
+function NearTruth({ near, answer, lang }: { near: string | null; answer: string; lang?: string }) {
+  return (
+    <>
+      {near && <p className="near-miss">😅 <b>¡Casi!</b> {near} <span>Te lo vuelvo a preguntar luego.</span></p>}
+      <p className="judge-truth">Es <b lang={lang}>{answer}</b></p>
+    </>
+  );
+}
+
 /** La fórmula del truco (5-nov-2026: «que salga cómo se forman las frases para reforzar los trucos»). */
 function Formula({ unit }: { unit: SessionUnit }) {
   const f = unit.type === 'pattern' ? (unit.payload as PatternPayload).formula : undefined;
@@ -1982,15 +1991,18 @@ function BossSingle({ unit, step, onResult }: { unit: SessionUnit; step: AssocSt
 function Complete({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep; onResult: (ok: boolean, ms: number, format: ClientEvent['format'], note?: string) => void }) {
   const exercise = exercisesOf(unit)[step.exercise ?? 0]!;
   const view = exerciseView(exercise);
+  const [near, setNear] = useState<string | null>(null);
   const [text, setText] = useState('');
   const [done, setDone] = useState<boolean | null>(null);
   const t0 = useRef(performance.now());
   function check() {
     if (done !== null || !text.trim()) return;
     const r = gradeChallenge(exercise, text, true);
+    const n = r.correct || !exercise.answer ? null : nearMiss(text, exercise.answer);
+    setNear(n);
     setDone(r.correct);
     const ms = Math.round(performance.now() - t0.current);
-    setTimeout(() => onResult(r.correct, ms, r.format, `La respuesta es «${exercise.answer}».${exercise.explanation ? ` ${exercise.explanation}` : ''}`), r.correct ? 600 : 1300);
+    setTimeout(() => onResult(r.correct, ms, r.format, `${n ? `Casi. ${n} ` : ''}La respuesta es «${exercise.answer}».${exercise.explanation ? ` ${exercise.explanation}` : ''}`), r.correct ? 600 : n ? 3200 : 1300);
   }
   return (
     <Slide tone={hue(unit.key)} className={done === null ? '' : done ? 'right' : 'wrong'}>
@@ -2001,7 +2013,7 @@ function Complete({ unit, step, onResult }: { unit: SessionUnit; step: AssocStep
         <input className="write" autoFocus value={text} onChange={(e) => setText(e.target.value)} enterKeyHint="done" autoCapitalize="none" autoCorrect="off" spellCheck={false} disabled={done !== null} aria-label="Tu respuesta" />
         {done === null && <button type="submit" className="go" disabled={!text.trim()} aria-label="Comprobar">✓</button>}
       </form>
-      {done === false && <p className="judge-truth">Es <b>{exercise.answer}</b></p>}
+      {done === false && <NearTruth near={near} answer={exercise.answer ?? ''} />}
     </Slide>
   );
 }
@@ -2013,10 +2025,13 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
   const [done, setDone] = useState<boolean | null>(null);
   const t0 = useRef(performance.now());
   const hints = reviewHints(unit);
+  const [near, setNear] = useState<string | null>(null);
   function check(reveal = false) {
     const r = gradeReview(unit, text, 0, hint, reveal);
+    const near = r.correct || reveal ? null : nearMiss(text, unitText(unit));
+    setNear(near);
     setDone(r.correct);
-    setTimeout(() => onResult(r.correct, Math.round(performance.now() - t0.current), r.hint, r.format), r.correct ? 500 : 1400);
+    setTimeout(() => onResult(r.correct, Math.round(performance.now() - t0.current), r.hint, r.format), r.correct ? 500 : near ? 3200 : 1400);
   }
   return (
     <Slide tone={hue(unit.key)} className={done === null ? '' : done ? 'right' : 'wrong'}>
@@ -2028,7 +2043,7 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
         {done === null && <button type="submit" className="go wide" disabled={!text.trim()}>Comprobar</button>}
       </form>
       {done === null && <div className="judge-buttons"><button type="button" className="option" disabled={hint >= 4} onClick={() => setHint((h) => Math.min(4, h + 1) as HintLevel)}>💡 Pista</button><button type="button" className="option" onClick={() => check(true)}>Ver</button></div>}
-      {done === false && <p className="judge-truth">Es <b>{unitText(unit)}</b></p>}
+      {done === false && <NearTruth near={near} answer={unitText(unit)} lang={unit.language} />}
     </Slide>
   );
 }
