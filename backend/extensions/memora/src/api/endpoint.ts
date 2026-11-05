@@ -349,7 +349,7 @@ export default {
         const isWordKey = (k: string) => units[k]?.type === 'term';
         const due = dueWordsLeastSeen(catalog.skills, learner.skills, (k) => Boolean(units[k]), now);
         // Idiomas (usuario, 6-nov-2026): todas las palabras aprendidas, de menos a más practicadas, sin mirar las horas.
-        const words = lang ? wordsLeastPracticed(catalog.skills, learner.skills, isWordKey) : [];
+        const words = lang ? wordsLeastPracticed(catalog.skills, learner.skills, isWordKey, Math.random) : [];
         const rest = (lang ? due.filter((w) => !isWordKey(w.unitKey)) : due).slice(0, REVIEW_MAX_ALL).map((w) => w.unitKey);
         const items: PlanItem[] = rest.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k && learner.skills[sk.id]).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
         const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: 0,
@@ -402,7 +402,9 @@ export default {
       // toca repasar, primero lo menos practicado (menos intentos); a igualdad, el orden de urgencia de dueWords.
       const seen = new Map<string, number>();
       for (const sk of Object.values(learner.skills)) seen.set(sk.unitId, (seen.get(sk.unitId) ?? 0) + sk.attempts);
-      const leastSeen = <T,>(list: T[], key: (x: T) => string) => list.map((x, i) => ({ x, i, n: seen.get(key(x)) ?? 0 })).sort((a, b) => a.n - b.n || a.i - b.i).map((o) => o.x);
+      // 6-nov-2026: a igualdad de intentos, al azar (antes, siempre el mismo orden: las mismas palabras abrían cada repaso).
+      const tie = new Map<string, number>();
+      const leastSeen = <T,>(list: T[], key: (x: T) => string) => list.map((x) => { const k = key(x); if (!tie.has(k)) tie.set(k, Math.random()); return { x, n: seen.get(k) ?? 0, r: tie.get(k)! }; }).sort((a, b) => a.n - b.n || a.r - b.r).map((o) => o.x);
       const roundWords = leastSeen(words, (w) => w.unitKey).slice(0, reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
       // D-099: de los trucos que tocan, como mucho LANGUAGE_PATTERN_REVIEWS por ronda (los más urgentes) y en repaso ligero
       // (una frase nueva, sin volver a enseñarlos enteros); antes, diez por ronda con todos sus pasos tapaban lo nuevo.
