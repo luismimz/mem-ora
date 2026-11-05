@@ -49,7 +49,7 @@ try {
   // 5-nov-2026: el contador de Inicio se TOCA y abre una ronda con TODO lo acumulado (sin preguntar cuántas).
   const { page, asked } = await run(63);
   const tile = page.locator('.today-tap button');
-  check(/63\s*🔁 palabras por repasar/.test(await tile.textContent()), 'Inicio cuenta una vez cada palabra (no cada habilidad): 63');
+  check(/63\s*🔁 palabras y trucos por repasar/.test(await tile.textContent()), 'Inicio cuenta una vez cada palabra (no cada habilidad): 63');
   check(Math.round((await tile.boundingBox()).height) >= 44 && /Repasar ahora/.test(await tile.textContent()), 'el contador es un botón grande que dice «Repasar ahora»');
   check(await page.locator('.review-btn').count() === 0, 'sin banner repetido debajo');
   check(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'nada se sale por los lados');

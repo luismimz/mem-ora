@@ -466,7 +466,15 @@ export function buildFlowSession(input: {
   const review = (input.reviewArcade ?? []).filter((r) => has(r.unitKey)).slice(0, input.reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
   if (review.length) {
     const recall = review.filter((r) => r.recall).map((r) => r.unitKey);
-    steps.unshift({ kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: review.map((r) => r.unitKey), arcadeReview: true, ...(recall.length ? { arcadeRecall: recall } : {}), id: '0-repaso' });
+    // 5-nov-2026: con muchas palabras, varias tandas de FLOW_REVIEW_ARCADE_MAX: cada tanda acabada se guarda (antes, una
+    // sola ráfaga de 57; al salir a medias no se guardaba nada y volvían las mismas).
+    const chunks: string[][] = [];
+    for (let k = 0; k < review.length; k += FLOW_REVIEW_ARCADE_MAX) chunks.push(review.slice(k, k + FLOW_REVIEW_ARCADE_MAX).map((r) => r.unitKey));
+    chunks.reverse().forEach((c, j) => {
+      const mine = recall.filter((k) => c.includes(k));
+      const n = chunks.length - j;
+      steps.unshift({ kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: c, arcadeReview: true, ...(mine.length ? { arcadeRecall: mine } : {}), id: n === 1 ? '0-repaso' : `0-repaso-${n}` });
+    });
   } else if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
     const judge = shuffle((input.arcadeUnits ?? []).filter(has).flatMap((k) => judgeableExamples(units[k]!).map((example) => ({ unitKey: k, example }))), rand)
       .slice(0, FLOW_ARCADE_GRAMMAR).map((g) => ({ ...g, wrong: rand() < 0.5 }));

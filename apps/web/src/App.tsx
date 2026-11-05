@@ -291,7 +291,7 @@ export function App() {
                   {flowCourse && prog ? (
                     // Repasar a voluntad (5-nov-2026): el contador se toca y abre una ronda con TODO lo acumulado.
                     <li className="today-tap"><button type="button" disabled={(isLanguage(current) ? dueWords : dueUnits) === 0} onClick={() => go({ name: 'session', course: current.id, focus: 'repaso' })}>
-                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? (dueWords === 1 ? 'palabra' : 'palabras') : dueUnits === 1 ? 'concepto' : 'conceptos'} por repasar</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>Repasar ahora →</em>}
+                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? 'palabras y trucos' : dueUnits === 1 ? 'concepto' : 'conceptos'} por repasar</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>Repasar ahora →</em>}
                     </button></li>
                   ) : <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>}
                   <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>

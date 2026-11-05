@@ -688,6 +688,7 @@ function Build({ unit, example, onResult }: { unit: SessionUnit; example: number
     <Slide tone={hue(unit.key)} className={`build ${done === null ? '' : done ? 'right' : 'wrong'}`} {...(done === false ? { onNext: failNext } : {})}>
       <p className="tag">🧩 CONSTRUYE LA FRASE</p>
       <h3 className="ask build-es">«{ex.translation}»</h3>
+      <Formula unit={unit} />
       {ex.mirror && done === null && (help
         ? <MirrorAnim unit={unit} m={ex.mirror} text={ex.text} compact />
         : <button type="button" className="train-help" onClick={() => setHelp(true)}>🪞 ¿Cómo se construye?</button>)}
@@ -1061,6 +1062,7 @@ function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Re
       <div className="pieces-body">
         <p className="tag">🧩 DILO EN INGLÉS</p>
         <h3 className="ask pieces-es">{m.say}</h3>
+        <Formula unit={unit} />
         <div className={`pieces-slots ${checked === null ? '' : checked ? 'ok' : 'ko'}`} lang={unit.language} aria-label="Tu frase en inglés">
           {order.map((_, k) => {
             const i = placed[k];
@@ -1103,6 +1105,12 @@ function Pic({ unit, fallback, small = false }: { unit: SessionUnit; fallback: s
   const [broken, setBroken] = useState(false);
   if (src && !broken) return <div className={`face-pic ${small ? 'small' : ''}`}><img src={src} alt="" loading="eager" decoding="async" onError={() => setBroken(true)} /></div>;
   return <div className={`face-emoji ${small ? 'small' : ''}`} aria-hidden="true">{fallback}</div>;
+}
+
+/** La fórmula del truco (5-nov-2026: «que salga cómo se forman las frases para reforzar los trucos»). */
+function Formula({ unit }: { unit: SessionUnit }) {
+  const f = unit.type === 'pattern' ? (unit.payload as PatternPayload).formula : undefined;
+  return f ? <p className="tense-formula small" lang={unit.language}><span>🧩 SE FORMA</span>{f}</p> : null;
 }
 
 /** Pista de un tiempo verbal: «every day = cada día» (inglés y su traducción, 4-nov-2026). */
@@ -2156,6 +2164,22 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
       if (e instanceof ApiError && e.code === 'SESSION_CHANGED') onAgain();
     }
   }
+  /**
+   * 5-nov-2026: las respuestas se envían ya (cada 5 y al salir), no solo al acabar el paso. En un repaso largo, salir a
+   * medias perdía todas las respuestas y volvían las mismas palabras.
+   */
+  function flushEvents() {
+    const batchEvents = queue.current.splice(0);
+    if (!batchEvents.length) return saving.current;
+    if (offline) { enqueue(courseId, batchEvents); return saving.current; }
+    saving.current = saving.current.then(() => api.events(courseId, batchEvents).then(() => undefined, (e) => { if (isNetworkError(e)) enqueue(courseId, batchEvents); else queue.current.unshift(...batchEvents); }));
+    return saving.current;
+  }
+  useEffect(() => {
+    const hide = () => { if (document.visibilityState === 'hidden') void flushEvents(); };
+    document.addEventListener('visibilitychange', hide);
+    return () => document.removeEventListener('visibilitychange', hide);
+  }); // eslint-disable-line react-hooks/exhaustive-deps
   function save(nextIndex: number, nextOutcomes: Record<string, Outcome>) {
     saving.current = saving.current.then(() => persist(nextIndex, nextOutcomes));
     return saving.current;
@@ -2228,7 +2252,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
   else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} all={units} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))} {...(step.arcadeGrammar ? { grammar: step.arcadeGrammar } : {})} review={Boolean(step.arcadeReview)} recall={step.arcadeRecall ?? []}
-    onAnswer={(u, ok, ms, context, format) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format, correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); scored(ok, 6); }} onDone={() => void advance()} />;
+    onAnswer={(u, ok, ms, context, format) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format, correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); if (queue.current.length >= 5) void flushEvents(); scored(ok, 6); }} onDone={() => void advance()} />;
   else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
@@ -2309,7 +2333,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   return (
     <div className="feed" role="application" aria-label="Sesión en modo Flujo">
       <header className="feed-top">
-        <button type="button" className="feed-x" aria-label="Salir" onClick={onExit}>✕</button>
+        <button type="button" className="feed-x" aria-label="Salir" onClick={() => { void flushEvents().finally(onExit); }}>✕</button>
         <div className="feed-bar" aria-label={`Progreso ${pct} %`}><i style={{ width: `${pct}%` }} /></div>
         <span className="feed-xp">{xp} XP</span>
         <span className={`feed-combo ${combo >= 3 ? 'hot' : ''}`}>🔥{combo}</span>

@@ -1353,3 +1353,5 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .order-bank { display: grid; gap: .45rem; margin-top: .4rem; }
 .order-piece { min-height: 2.9rem; border-radius: .7rem; background: #fff; box-shadow: 0 4px 0 rgba(0,0,0,.25); }
 .order-piece code { color: #1d1b18; }
+
+.tense-formula.small { font-size: .92rem; margin: .1rem auto .3rem; opacity: .95; }

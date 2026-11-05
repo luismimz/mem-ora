@@ -531,6 +531,15 @@ describe('repaso rápido por curva (D-094)', () => {
     const p = buildFlowSession({ ...base, units: Object.fromEntries(many.map((k) => [k, w(k)])), items: [], reviewArcade: many.map((unitKey) => ({ unitKey, recall: false })), sessionId: 'm' });
     expect(p.steps[0]!.arcadeUnits!.length).toBe(FLOW_REVIEW_ARCADE_MAX);
   });
+  it('«repasar todo» con 57 palabras: tandas de FLOW_REVIEW_ARCADE_MAX, cada una se guarda al acabar (5-nov-2026)', () => {
+    const many = Array.from({ length: 57 }, (_, i) => `w${i}`);
+    const p = buildFlowSession({ ...base, units: Object.fromEntries(many.map((k) => [k, w(k)])), items: [], reviewMax: 400, reviewArcade: many.map((unitKey, i) => ({ unitKey, recall: i === 30 })), sessionId: 'm' });
+    const rounds = p.steps.filter((s) => s.arcadeReview);
+    expect(rounds.map((s) => s.arcadeUnits!.length)).toEqual([25, 25, 7]);
+    expect(rounds.flatMap((s) => s.arcadeUnits)).toEqual(many);
+    expect(rounds[1]!.arcadeRecall).toEqual(['w30']);
+    expect(new Set(rounds.map((s) => s.id)).size).toBe(3);
+  });
 });
 
 describe('sin repetir la misma frase (usuario, 29-oct-2026)', () => {

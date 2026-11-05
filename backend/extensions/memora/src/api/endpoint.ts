@@ -317,7 +317,8 @@ export default {
       const sameMode = ((savedState?.plan as { mode?: string } | undefined)?.mode ?? 'associations') === (modes.includes('flow') ? 'flow' : 'associations')
         // D-099: una ronda armada con un planificador anterior no se retoma (si no, se seguía con la ronda vieja).
         && (!modes.includes('flow') || (savedState?.plan as { version?: number } | undefined)?.version === FLOW_PLAN_VERSION);
-      if (reviewMax === null && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
+      // «Repasar ahora» nunca retoma: se rehace con lo que sigue vencido (lo ya respondido ya no sale).
+      if (reviewMax === null && !wantReview && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true } };
       }
       const learner = await learnerFor(userId, course.id);
