@@ -22,7 +22,7 @@ type View =
   | { name: 'offline' }
   | { name: 'offlineSession'; bundle: OfflineBundle; session: OfflineSession }
   | { name: 'studio' }
-  | { name: 'session'; course: Course; payload: SessionPayload; mission?: string; focus?: 'fallos' }
+  | { name: 'session'; course: Course; payload: SessionPayload; mission?: string; focus?: 'fallos' | 'repaso' }
   | { name: 'exam'; course: Course; guided?: boolean }
   | { name: 'speak'; course: Course }
   | { name: 'talk'; course: Course }
@@ -63,7 +63,7 @@ const shortTitle = (t: string) => cleanTitle(t).replace(/\s*·\s*DAM$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
-type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'speak'; course: string } | { name: 'talk'; course: string } | { name: 'preview'; unit: string };
+type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' | 'repaso' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'speak'; course: string } | { name: 'talk'; course: string } | { name: 'preview'; unit: string };
 function readRoute(): Route {
   const { pathname, search } = window.location;
   const q = new URLSearchParams(search);
@@ -75,7 +75,7 @@ function readRoute(): Route {
   if (pathname === '/conversar' && q.get('curso')) return { name: 'talk', course: q.get('curso')! };
   if (pathname === '/hablar' && q.get('curso')) return { name: 'speak', course: q.get('curso')! };
   if (pathname === '/simulacro' && q.get('curso')) return { name: 'exam', course: q.get('curso')!, ...(q.get('modo') === 'guiado' ? { guided: true } : {}) };
-  if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}), ...(q.get('foco') === 'fallos' ? { focus: 'fallos' as const } : {}) };
+  if (pathname === '/sesion' && q.get('curso')) return { name: 'session', course: q.get('curso')!, ...(q.get('mision') ? { mission: q.get('mision')! } : {}), ...(q.get('foco') === 'fallos' || q.get('foco') === 'repaso' ? { focus: q.get('foco') as 'fallos' | 'repaso' } : {}) };
   return { name: 'home' };
 }
 function routePath(r: Route): string {
@@ -120,7 +120,7 @@ export function App() {
 
   /** D-111: cuántas palabras repasar en la próxima ronda (lo elige el alumno en Inicio). Se usa una vez. */
   const pendingReview = useRef<number | 'todas' | undefined>(undefined);
-  async function openSession(c: Course, mission?: string, focus?: 'fallos') {
+  async function openSession(c: Course, mission?: string, focus?: 'fallos' | 'repaso') {
     const repaso = pendingReview.current;
     pendingReview.current = undefined;
     setLanguage(c.ui_language);
@@ -258,6 +258,8 @@ export function App() {
   const due = prog ? prog.skills.filter((s) => s.dueAt !== null && s.dueAt <= Date.now()).length : null;
   // D-111: palabras por repasar (una por palabra, su habilidad de recordar). Con más de una ronda, se pregunta cuántas.
   const dueWords = prog && isLanguage(current) ? new Set(prog.skills.filter((s) => s.kind === 'recall' && s.dueAt !== null && s.dueAt <= Date.now()).map((s) => s.unit)).size : 0;
+  // Conceptos por repasar (no habilidades: una ficha tiene varias y el número asustaba).
+  const dueUnits = prog ? new Set(prog.skills.filter((s) => s.dueAt !== null && s.dueAt <= Date.now()).map((s) => s.unit)).size : 0;
   const startReview = (n: number | 'todas') => { pendingReview.current = n; setReviewAsk(null); open(has(mode) ? mode : 'associations'); };
   const worked = missions?.missions.length
     ? missions.missions.reduce((a, m) => ({ done: a.done + m.worked, total: a.total + m.total }), { done: 0, total: 0 })
@@ -286,7 +288,7 @@ export function App() {
                 {enabled.length > 1 && <p className="eyebrow">MODO {(enabled.find((m) => m.id === mode) ?? enabled[0] ?? MODES[0]!).title.toUpperCase()}</p>}
                 <ul className="today" aria-label="Tu día">
                   <li><b>{prog?.streak ?? '—'}</b><span>🔥 {prog?.streak === 1 ? 'día' : 'días'} de racha</span></li>
-                  <li><b>{flowCourse && isLanguage(current) && prog ? dueWords : due ?? '—'}</b><span>🔁 {flowCourse && isLanguage(current) ? (dueWords === 1 ? 'palabra' : 'palabras') + ' por repasar' : `${due === 1 ? 'repaso' : 'repasos'} pendientes`}</span></li>
+                  <li><b>{flowCourse && isLanguage(current) && prog ? dueWords : flowCourse && prog ? dueUnits : due ?? '—'}</b><span>🔁 {flowCourse && isLanguage(current) ? (dueWords === 1 ? 'palabra' : 'palabras') + ' por repasar' : flowCourse ? `${dueUnits === 1 ? 'concepto' : 'conceptos'} por repasar` : `${due === 1 ? 'repaso' : 'repasos'} pendientes`}</span></li>
                   <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>
                 </ul>
                 {prog?.today && <div className="goal-bar" aria-label={`Meta de hoy: ${prog.today.newUnits} de ${prog.today.goal}`}><i style={{ width: `${Math.min(100, Math.round((prog.today.newUnits / Math.max(1, prog.today.goal)) * 100))}%` }} /></div>}
@@ -299,6 +301,14 @@ export function App() {
                   </>
                 ) : <p>Desliza para aprender. Los repasos vuelven solos, justo antes de que se te olviden.</p>}
                 <button type="button" className="primary" onClick={() => (flowCourse && dueWords > REVIEW_ROUND ? setReviewAsk(dueWords) : open(has(mode) ? mode : 'associations'))}>{currentMission?.status === 'pending' && currentMission.index === 1 ? 'Empezar →' : 'Seguir aprendiendo →'}</button>
+                {(current.modes as string[]).includes('flow') && !isLanguage(current) && dueUnits > 0 && (
+                  // 5-nov-2026: en DAM los repasos pendientes no tenían por dónde entrar (el plan diario solo deja 30).
+                  <button type="button" className="fails-btn review-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'repaso' })}>
+                    <span className="fails-n review-n">{dueUnits}</span>
+                    <span><b>Repasa lo que se te está olvidando</b><small>{dueUnits === 1 ? '1 concepto' : `${dueUnits} conceptos`}{dueUnits > REVIEW_DAM_ROUND ? ` · de ${REVIEW_DAM_ROUND} en ${REVIEW_DAM_ROUND}, los menos vistos primero` : ''}</small></span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                )}
                 {(current.modes as string[]).includes('flow') && (prog?.failures ?? 0) > 0 && (
                   <button type="button" className="fails-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'fallos' })}>
                     <span className="fails-n">{prog!.failures}</span>
@@ -794,6 +804,8 @@ function SpeakSettings({ courses }: { courses: Course[] }) {
 
 /** Tamaño de la ronda de «Repaso rápido» por defecto (igual que FLOW_REVIEW_ARCADE_MAX en el servidor). */
 const REVIEW_ROUND = 25;
+/** Conceptos por ronda de «Repasa lo que se te está olvidando» (DAM). */
+const REVIEW_DAM_ROUND = 10;
 /**
  * D-111: con más palabras por repasar que una ronda, el alumno elige cuántas hace ahora (las demás no se pierden:
  * siguen pendientes y salen en la ronda siguiente, primero las que más esperan).

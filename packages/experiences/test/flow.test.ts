@@ -397,6 +397,12 @@ describe('el Taller: saber usarlo (D-090)', () => {
     const lang = buildFlowSession({ ...base, units: all, items: ['k0', 'k1', 'k2', 'k3', 'k4', 'k5'].map((k) => item(k, 'new')), arcadeUnits: ['old1', 'old2'], lightReviews: true });
     expect(lang.steps.some((s) => s.kind === 'workshop')).toBe(false);
   });
+  it('una ronda solo de repasos (DAM, 5-nov-2026) tiene pasos y no trae nada nuevo', () => {
+    const rev = buildFlowSession({ ...base, units: all, items: ['k0', 'k1', 'k2'].map((k) => item(k, 'review')), maxNewUnits: 0 });
+    const keys = new Set(rev.steps.map((st) => st.unitKey).filter(Boolean));
+    expect(rev.steps.filter((st) => st.unitKey).length).toBeGreaterThan(0);
+    for (const k of keys) expect(['k0', 'k1', 'k2']).toContain(k);
+  });
   it('cada 4 conceptos (y al acabar) llega un Taller, siempre DESPUÉS de enseñarlos', () => {
     expect(shops.length).toBe(2);
     for (const s of shops) {
