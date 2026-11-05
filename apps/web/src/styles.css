@@ -1326,3 +1326,7 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .code-lines li { display: grid; gap: .2rem; padding: .5rem .65rem; border-radius: .7rem; background: rgba(0,0,0,.35); border-left: 3px solid #ffd76a; }
 .code-lines code { font-family: ui-monospace, Menlo, monospace; font-size: .86rem; white-space: pre-wrap; overflow-wrap: anywhere; color: #fff; }
 .code-lines span { font-size: .9rem; line-height: 1.35; opacity: .9; }
+
+/* Cómo se forma cada tiempo (5-nov-2026): la fórmula, entre la línea del tiempo y las pistas. */
+.tense-formula { margin: .35rem auto; display: flex; flex-direction: column; align-items: center; gap: .15rem; font-weight: 800; font-size: 1.02rem; color: #fff; text-align: center; }
+.tense-formula span { font-size: .68rem; letter-spacing: .1em; color: #ffd76a; }

@@ -401,6 +401,7 @@
             "emoji": "☔"
           },
           "tense": "Primer condicional",
+          "formula": "If + presente, will + verbo · If it rains, I'll stay",
           "timeline": [
             {
               "kind": "event",

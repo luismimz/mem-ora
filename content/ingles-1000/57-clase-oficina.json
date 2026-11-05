@@ -602,6 +602,7 @@
             "emoji": "💡"
           },
           "tense": "Condicional cero",
+          "formula": "If + presente, presente · If you heat ice, it melts",
           "timeline": [
             {
               "kind": "habit",
