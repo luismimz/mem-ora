@@ -320,7 +320,13 @@
               "text": "What's up with you?",
               "translation": "¿Qué te pasa?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUATSAP",
+            "scene": "¿QUÉ PASA? te escribe en GUATSAP.",
+            "emoji": "💬"
+          }
         },
         {
           "key": "by-the-way",
@@ -365,7 +371,13 @@
               "text": "Oh, by the way, Ana called.",
               "translation": "Ah, por cierto, llamó Ana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAI",
+            "scene": "POR CIERTO, BAI-BAI, me voy.",
+            "emoji": "👋"
+          }
         },
         {
           "key": "i-think-so",
@@ -405,7 +417,13 @@
               "text": "I don't think so.",
               "translation": "Creo que no."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SINK",
+            "scene": "CREO QUE SÍ, dice el fregadero (SINK).",
+            "emoji": "🤔"
+          }
         },
         {
           "key": "let-me-see",
@@ -449,7 +467,13 @@
               "text": "Let me see... Tuesday is fine.",
               "translation": "A ver... el martes me va bien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LETRA",
+            "scene": "A VER, déjame ver esa LETRA.",
+            "emoji": "🔍"
+          }
         },
         {
           "key": "thats-right",
@@ -494,7 +518,13 @@
               "text": "Yes, that's right.",
               "translation": "Sí, correcto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RAIT",
+            "scene": "ESO ES, RAIT a la primera.",
+            "emoji": "✅"
+          }
         },
         {
           "key": "really",
@@ -552,7 +582,13 @@
               "text": "I really like it.",
               "translation": "Me gusta muchísimo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RIALITY",
+            "scene": "¿EN SERIO? Eso parece un REALITY.",
+            "emoji": "😮"
+          }
         },
         {
           "key": "me-too",
@@ -592,7 +628,13 @@
               "text": "I love pizza. Me too.",
               "translation": "Me encanta la pizza. A mí también."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MI TÚ",
+            "scene": "YO TAMBIÉN, dices, MI TÚ y yo.",
+            "emoji": "🙋"
+          }
         },
         {
           "key": "me-neither",
@@ -642,7 +684,13 @@
               "text": "I can't swim. Me neither.",
               "translation": "No sé nadar. Yo tampoco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NAIDER",
+            "scene": "YO TAMPOCO, NADIE (NAIDER) quiere ir.",
+            "emoji": "🙅"
+          }
         },
         {
           "key": "youre-welcome",
@@ -674,7 +722,13 @@
               "text": "You're welcome to stay.",
               "translation": "Puedes quedarte cuando quieras."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BIENVENIDO",
+            "scene": "DE NADA: eres BIENVENIDO (welcome).",
+            "emoji": "🙂"
+          }
         },
         {
           "key": "good-luck",
@@ -707,7 +761,13 @@
               "text": "Wish me luck!",
               "translation": "¡Deséame suerte!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAKE",
+            "scene": "BUENA SUERTE: lanzas una moneda al LAGO.",
+            "emoji": "🍀"
+          }
         },
         {
           "key": "take-care",
@@ -739,7 +799,13 @@
               "text": "Take care of your sister.",
               "translation": "Cuida de tu hermana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEIK",
+            "scene": "CUÍDATE: TEIK-KER, llévate cuidado.",
+            "emoji": "🫶"
+          }
         },
         {
           "key": "hurry-up",
@@ -778,7 +844,13 @@
               "text": "Don't hurry.",
               "translation": "No te des prisa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JARI",
+            "scene": "DATE PRISA, JARI, que perdemos el bus.",
+            "emoji": "🏃"
+          }
         },
         {
           "key": "be-careful",
@@ -819,7 +891,13 @@
               "text": "Be careful with the dog.",
               "translation": "Cuidado con el perro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "KERFUL",
+            "scene": "TEN CUIDADO: CARE-FULL, lleno de cuidado.",
+            "emoji": "⚠️"
+          }
         },
         {
           "key": "well-done",
@@ -858,7 +936,13 @@
               "text": "A well-done steak.",
               "translation": "Un filete muy hecho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DAN",
+            "scene": "BIEN HECHO, DAN te aplaude.",
+            "emoji": "👏"
+          }
         },
         {
           "key": "no-way",
@@ -896,7 +980,13 @@
               "text": "No way, I'm not going.",
               "translation": "Ni hablar, no voy."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NO GÜEY",
+            "scene": "¡NI HABLAR, NO, GÜEY!",
+            "emoji": "🙅‍♂️"
+          }
         }
       ]
     }

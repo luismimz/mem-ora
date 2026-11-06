@@ -325,7 +325,13 @@
               "text": "The menu of the day.",
               "translation": "El menú del día."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MENÚ",
+            "scene": "La CARTA es el MENÚ.",
+            "emoji": "📜"
+          }
         },
         {
           "key": "bill",
@@ -375,7 +381,13 @@
               "translation": "La factura de la luz."
             }
           ],
-          "notes": "En EE. UU., la cuenta del restaurante es the check."
+          "notes": "En EE. UU., la cuenta del restaurante es the check.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BILLETE",
+            "scene": "La CUENTA se paga con BILLETES.",
+            "emoji": "🧾"
+          }
         },
         {
           "key": "tip",
@@ -414,7 +426,13 @@
               "text": "A useful tip.",
               "translation": "Un consejo útil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TIP",
+            "scene": "La PROPINA: un TIP para el camarero.",
+            "emoji": "💰"
+          }
         },
         {
           "key": "starter",
@@ -458,7 +476,13 @@
               "text": "Two starters to share.",
               "translation": "Dos entrantes para compartir."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "STARTER",
+            "scene": "El ENTRANTE: el START de la comida.",
+            "emoji": "🥟"
+          }
         },
         {
           "key": "dessert",
@@ -508,7 +532,13 @@
               "translation": "Sin postre, gracias."
             }
           ],
-          "notes": "Dessert (postre) lleva dos s; desert es desierto."
+          "notes": "Dessert (postre) lleva dos s; desert es desierto.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESIERTO",
+            "scene": "El POSTRE en el DESIERTO.",
+            "emoji": "🍨🏜️"
+          }
         },
         {
           "key": "main-course",
@@ -541,7 +571,13 @@
               "text": "The main course was delicious.",
               "translation": "El segundo estaba buenísimo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRINCIPAL",
+            "scene": "SEGUNDO PLATO: el curso PRINCIPAL (MAIN).",
+            "emoji": "🍖"
+          }
         },
         {
           "key": "napkin",
@@ -585,7 +621,13 @@
               "text": "Paper napkins.",
               "translation": "Servilletas de papel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NAPA",
+            "scene": "La SERVILLETA de NAPA.",
+            "emoji": "🧻"
+          }
         },
         {
           "key": "bottle",
@@ -622,7 +664,13 @@
               "text": "An empty bottle.",
               "translation": "Una botella vacía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOTELLA",
+            "scene": "BOTELLA: BÓ-tel.",
+            "emoji": "🍾"
+          }
         },
         {
           "key": "steak",
@@ -674,7 +722,13 @@
               "translation": "Filete con patatas."
             }
           ],
-          "notes": "Se dice STÉIK, no STIIK."
+          "notes": "Se dice STÉIK, no STIIK.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTACA",
+            "scene": "Un FILETE clavado en una ESTACA.",
+            "emoji": "🥩"
+          }
         },
         {
           "key": "pasta",
@@ -716,7 +770,13 @@
               "text": "Pasta with tomato sauce.",
               "translation": "Pasta con tomate."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PASTA",
+            "scene": "PASTA: igual.",
+            "emoji": "🍝"
+          }
         },
         {
           "key": "pepper",
@@ -753,7 +813,13 @@
               "text": "A red pepper.",
               "translation": "Un pimiento rojo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PEPPER",
+            "scene": "PIMIENTA y PIMIENTO: Dr. PEPPER.",
+            "emoji": "🌶️"
+          }
         },
         {
           "key": "vinegar",
@@ -790,7 +856,13 @@
               "text": "Add a little vinegar.",
               "translation": "Añade un poco de vinagre."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VINAGRE",
+            "scene": "VINAGRE: VÍ-negar.",
+            "emoji": "🫙"
+          }
         },
         {
           "key": "spicy",
@@ -831,7 +903,13 @@
               "text": "I love spicy food.",
               "translation": "Me encanta la comida picante."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPAISI",
+            "scene": "PICANTE: SPICE (especia).",
+            "emoji": "🌶️🔥"
+          }
         },
         {
           "key": "rare",
@@ -884,7 +962,13 @@
               "translation": "Un pájaro poco común."
             }
           ],
-          "notes": "Al punto: medium. Muy hecho: well done."
+          "notes": "Al punto: medium. Muy hecho: well done.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RARO",
+            "scene": "POCO HECHO… y RARO.",
+            "emoji": "🥩"
+          }
         },
         {
           "key": "vegetarian",
@@ -916,7 +1000,13 @@
               "text": "Do you have a vegetarian menu?",
               "translation": "¿Tienen menú vegetariano?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VEGETARIANO",
+            "scene": "VEGETARIANO: ve-ye-TÉ-rian.",
+            "emoji": "🥗"
+          }
         }
       ]
     }

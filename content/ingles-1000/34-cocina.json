@@ -284,7 +284,13 @@
               "text": "I cut my finger.",
               "translation": "Me corté el dedo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CATANA",
+            "scene": "CORTAR con una CATANA.",
+            "emoji": "🔪"
+          }
         },
         {
           "key": "boil",
@@ -326,7 +332,13 @@
               "text": "The water is boiling.",
               "translation": "El agua está hirviendo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOIL",
+            "scene": "HERVIR: la olla hace BOIL-BOIL.",
+            "emoji": "🫕"
+          }
         },
         {
           "key": "fry",
@@ -363,7 +375,13 @@
               "text": "Fried fish.",
               "translation": "Pescado frito."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FREÍR",
+            "scene": "FREÍR: FRÁI, freír sin el «e».",
+            "emoji": "🍳"
+          }
         },
         {
           "key": "bake",
@@ -408,7 +426,13 @@
               "text": "Bake it for twenty minutes.",
               "translation": "Hornéalo veinte minutos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BEICON",
+            "scene": "HORNEAR un pan de BEICON.",
+            "emoji": "🍞"
+          }
         },
         {
           "key": "mix",
@@ -450,7 +474,13 @@
               "text": "Mix well.",
               "translation": "Mézclalo bien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MIX",
+            "scene": "MEZCLAR: haces un MIX.",
+            "emoji": "🥣"
+          }
         },
         {
           "key": "add",
@@ -487,7 +517,13 @@
               "text": "Don't add salt.",
               "translation": "No le eches sal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AD",
+            "scene": "AÑADIR: ¡AD, AD!, echas sal.",
+            "emoji": "🧂"
+          }
         },
         {
           "key": "oven",
@@ -525,7 +561,13 @@
               "text": "The oven is very hot.",
               "translation": "El horno está muy caliente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HORNO",
+            "scene": "El HORNO es como un ÁVEN con fuego.",
+            "emoji": "🔥"
+          }
         },
         {
           "key": "pan",
@@ -563,7 +605,13 @@
               "translation": "Una sartén grande."
             }
           ],
-          "notes": "Ojo: pan es sartén; el pan es bread."
+          "notes": "Ojo: pan es sartén; el pan es bread.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PAN",
+            "scene": "En la SARTÉN fríes PAN.",
+            "emoji": "🍳🍞"
+          }
         },
         {
           "key": "knife",
@@ -597,7 +645,13 @@
               "translation": "Un cuchillo afilado."
             }
           ],
-          "notes": "La k no suena: NÁIF."
+          "notes": "La k no suena: NÁIF.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NAIFE",
+            "scene": "Un CUCHILLO NAIF corta flores.",
+            "emoji": "🔪"
+          }
         },
         {
           "key": "fork",
@@ -653,7 +707,13 @@
               "text": "A knife and fork.",
               "translation": "Cuchillo y tenedor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORCA",
+            "scene": "El TENEDOR es una HORCA pequeña.",
+            "emoji": "🍴"
+          }
         },
         {
           "key": "spoon",
@@ -696,7 +756,13 @@
               "text": "A spoon of sugar.",
               "translation": "Una cucharada de azúcar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPUMA",
+            "scene": "Una CUCHARA llena de ESPUMA.",
+            "emoji": "🥄"
+          }
         },
         {
           "key": "plate",
@@ -733,7 +799,13 @@
               "text": "A plate of pasta.",
               "translation": "Un plato de pasta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLATO",
+            "scene": "PLATO: PLÉIT, plato con A.",
+            "emoji": "🍽️"
+          }
         },
         {
           "key": "glass",
@@ -765,7 +837,13 @@
               "text": "The glass is broken.",
               "translation": "El vaso está roto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GLASS",
+            "scene": "Un VASO de cristal, GLASS.",
+            "emoji": "🥛"
+          }
         },
         {
           "key": "salt",
@@ -809,7 +887,13 @@
               "text": "Too much salt.",
               "translation": "Demasiada sal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SALTO",
+            "scene": "La SAL da un SALTO.",
+            "emoji": "🧂"
+          }
         },
         {
           "key": "sugar",
@@ -846,7 +930,13 @@
               "text": "Do you take sugar?",
               "translation": "¿Tomas azúcar?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHUGAR",
+            "scene": "El AZÚCAR, SHÚ-gar, azúcar casi igual.",
+            "emoji": "🍬"
+          }
         }
       ]
     }

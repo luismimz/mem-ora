@@ -367,7 +367,13 @@
               "text": "A long winter.",
               "translation": "Un invierno largo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜINTER",
+            "scene": "En INVIERNO, un PINTOR pinta nieve.",
+            "emoji": "❄️"
+          }
         },
         {
           "key": "birthday",
@@ -404,7 +410,13 @@
               "text": "I had a party for my birthday.",
               "translation": "Hice una fiesta por mi cumpleaños."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BERTA",
+            "scene": "Es el CUMPLEAÑOS de BERTA.",
+            "emoji": "🎂"
+          }
         },
         {
           "key": "date",

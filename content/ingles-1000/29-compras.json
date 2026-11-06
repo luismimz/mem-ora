@@ -732,7 +732,13 @@
               "text": "Twenty per cent discount.",
               "translation": "Veinte por ciento de descuento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESCUENTO",
+            "scene": "Un DESCUENTO: casi igual, DÍS-kaunt.",
+            "emoji": "🏷️"
+          }
         },
         {
           "key": "sale",
@@ -880,7 +886,13 @@
               "text": "Is there a supermarket near here?",
               "translation": "¿Hay un supermercado cerca?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUPERMERCADO",
+            "scene": "SUPERMERCADO: SUPER + MARKET (mercado).",
+            "emoji": "🛒"
+          }
         },
         {
           "key": "gift",

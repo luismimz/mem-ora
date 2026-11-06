@@ -342,7 +342,13 @@
               "text": "Don't argue with me.",
               "translation": "No discutas conmigo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARGÜIR",
+            "scene": "DISCUTIR: ARGÜIR a gritos.",
+            "emoji": "🗯️"
+          }
         },
         {
           "key": "apologise",
@@ -381,7 +387,13 @@
               "translation": "Disculpe el retraso."
             }
           ],
-          "notes": "En EE. UU. se escribe apologize."
+          "notes": "En EE. UU. se escribe apologize.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APOLOGÍA",
+            "scene": "PEDIR PERDÓN con una APOLOGÍA.",
+            "emoji": "🙇"
+          }
         },
         {
           "key": "complain",
@@ -415,7 +427,13 @@
               "text": "I want to complain about the noise.",
               "translation": "Quiero quejarme del ruido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUEJA",
+            "scene": "QUEJARSE: COMPLAIN, poner una QUEJA.",
+            "emoji": "😤"
+          }
         },
         {
           "key": "describe",
@@ -466,7 +484,13 @@
               "text": "Describe your house.",
               "translation": "Describe tu casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESCRIBIR",
+            "scene": "DESCRIBIR: dis-KRÁIB.",
+            "emoji": "📝"
+          }
         },
         {
           "key": "discuss",
@@ -511,7 +535,13 @@
               "translation": "Hablamos del proyecto."
             }
           ],
-          "notes": "Discuss es hablar de algo; pelearse es argue."
+          "notes": "Discuss es hablar de algo; pelearse es argue.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DISCUTIR",
+            "scene": "HABLAR DE un tema, sin DISCUTIR.",
+            "emoji": "💬"
+          }
         },
         {
           "key": "expect",
@@ -559,7 +589,13 @@
               "translation": "Estoy esperando una llamada."
             }
           ],
-          "notes": "Esperar a alguien: wait. Que pase algo: expect. Desear: hope."
+          "notes": "Esperar a alguien: wait. Que pase algo: expect. Desear: hope.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXPECTATIVA",
+            "scene": "ESPERAR con EXPECTATIVA.",
+            "emoji": "⏳"
+          }
         },
         {
           "key": "include",
@@ -598,7 +634,13 @@
               "text": "The price includes tax.",
               "translation": "El precio incluye impuestos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INCLUIR",
+            "scene": "INCLUIR: in-KLÚUD.",
+            "emoji": "➕"
+          }
         },
         {
           "key": "increase",
@@ -638,7 +680,13 @@
               "text": "A price increase.",
               "translation": "Una subida de precios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INCREMENTO",
+            "scene": "AUMENTAR: un INCREMENTO.",
+            "emoji": "📈"
+          }
         },
         {
           "key": "measure",
@@ -670,7 +718,13 @@
               "text": "A tape measure.",
               "translation": "Una cinta métrica."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MESURA",
+            "scene": "MEDIR con MESURA.",
+            "emoji": "📏"
+          }
         },
         {
           "key": "prepare",
@@ -708,7 +762,13 @@
               "text": "Prepare the salad.",
               "translation": "Prepara la ensalada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PREPARAR",
+            "scene": "PREPARAR: pri-PÉR.",
+            "emoji": "🧑‍🍳"
+          }
         },
         {
           "key": "protect",
@@ -748,7 +808,13 @@
               "text": "Protect your password.",
               "translation": "Protege tu contraseña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROTEGER",
+            "scene": "PROTEGER: pro-TÉKT.",
+            "emoji": "🛡️"
+          }
         },
         {
           "key": "provide",
@@ -798,7 +864,13 @@
               "text": "Food is provided.",
               "translation": "La comida está incluida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROVEER",
+            "scene": "PROPORCIONAR: PROVEER.",
+            "emoji": "📦"
+          }
         },
         {
           "key": "recommend",
@@ -849,7 +921,13 @@
               "text": "I recommend the fish.",
               "translation": "Le recomiendo el pescado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RECOMENDAR",
+            "scene": "RECOMENDAR: re-ko-MÉND.",
+            "emoji": "👍"
+          }
         },
         {
           "key": "reduce",
@@ -881,7 +959,13 @@
               "text": "Reduce, reuse, recycle.",
               "translation": "Reduce, reutiliza, recicla."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REDUCIR",
+            "scene": "REDUCIR: ri-DIÚS.",
+            "emoji": "📉"
+          }
         },
         {
           "key": "replace",
@@ -927,7 +1011,13 @@
               "text": "Nobody can replace you.",
               "translation": "Nadie puede sustituirte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REEMPLAZAR",
+            "scene": "SUSTITUIR: REEMPLAZAR.",
+            "emoji": "🔄"
+          }
         }
       ]
     }

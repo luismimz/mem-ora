@@ -719,7 +719,13 @@
               "text": "An elephant is very big.",
               "translation": "Un elefante es muy grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ELEFANTE",
+            "scene": "El ELEFANTE: casi igual, É-le-fant.",
+            "emoji": "🐘"
+          }
         },
         {
           "key": "lion",
@@ -756,7 +762,13 @@
               "text": "A lion at the zoo.",
               "translation": "Un león en el zoo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEÓN",
+            "scene": "El LEÓN: LÁI-on, ruge igual.",
+            "emoji": "🦁"
+          }
         },
         {
           "key": "monkey",

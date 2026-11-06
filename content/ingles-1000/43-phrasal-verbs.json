@@ -286,7 +286,13 @@
               "text": "Get up, it's late!",
               "translation": "¡Levántate, que es tarde!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARRIBA",
+            "scene": "LEVANTARSE: ¡GET UP, ARRIBA!",
+            "emoji": "🛏️"
+          }
         },
         {
           "key": "wake-up",
@@ -325,7 +331,13 @@
               "text": "Wake up!",
               "translation": "¡Despierta!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜEIK",
+            "scene": "DESPERTARSE con un ¡GÜEIK! del gallo.",
+            "emoji": "⏰"
+          }
         },
         {
           "key": "turn-on",
@@ -362,7 +374,13 @@
               "text": "Turn it on.",
               "translation": "Enciéndelo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ON",
+            "scene": "ENCENDER: ON, el botón de la luz.",
+            "emoji": "🔛"
+          }
         },
         {
           "key": "turn-off",
@@ -396,7 +414,13 @@
               "text": "Did you turn off the oven?",
               "translation": "¿Apagaste el horno?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OFF",
+            "scene": "APAGAR: OFF, el botón de la luz.",
+            "emoji": "📴"
+          }
         },
         {
           "key": "put-on",
@@ -431,7 +455,13 @@
               "text": "She put on her glasses.",
               "translation": "Se puso las gafas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PUT ON",
+            "scene": "PONERSE el abrigo: PUT ON.",
+            "emoji": "🧥"
+          }
         },
         {
           "key": "take-off",
@@ -471,7 +501,13 @@
               "text": "The plane takes off at ten.",
               "translation": "El avión despega a las diez."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEIK OF",
+            "scene": "QUITARSE el abrigo… y el avión DESPEGA.",
+            "emoji": "🛫"
+          }
         },
         {
           "key": "give-up",
@@ -511,7 +547,13 @@
               "text": "Never give up.",
               "translation": "Nunca te rindas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUIV",
+            "scene": "RENDIRSE: GIVE UP, levantas la bandera.",
+            "emoji": "🏳️"
+          }
         },
         {
           "key": "find-out",
@@ -550,7 +592,13 @@
               "text": "Let's find out.",
               "translation": "Vamos a averiguarlo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAIND",
+            "scene": "ENTERARSE: FIND OUT, sale a la luz.",
+            "emoji": "🕵️"
+          }
         },
         {
           "key": "go-out",
@@ -598,7 +646,13 @@
               "text": "We go out on Fridays.",
               "translation": "Salimos los viernes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOU AUT",
+            "scene": "SALIR de fiesta: GO OUT.",
+            "emoji": "🎉"
+          }
         },
         {
           "key": "come-back",
@@ -630,7 +684,13 @@
               "text": "When are you coming back?",
               "translation": "¿Cuándo vuelves?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMBACK",
+            "scene": "VOLVER: COME BACK, como un bumerán.",
+            "emoji": "🪃"
+          }
         },
         {
           "key": "pick-up",
@@ -681,7 +741,13 @@
               "text": "I'll pick you up at eight.",
               "translation": "Te recojo a las ocho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PICAR",
+            "scene": "RECOGER con un PICO.",
+            "emoji": "📦"
+          }
         },
         {
           "key": "run-out",
@@ -722,7 +788,13 @@
               "text": "Time is running out.",
               "translation": "Se acaba el tiempo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RAN",
+            "scene": "QUEDARSE SIN gasolina: RAN OUT.",
+            "emoji": "⛽"
+          }
         },
         {
           "key": "fill-in",
@@ -759,7 +831,13 @@
               "text": "Fill in the gaps.",
               "translation": "Completa los huecos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FILA",
+            "scene": "RELLENAR el formulario en la FILA.",
+            "emoji": "📝"
+          }
         },
         {
           "key": "check-in",
@@ -803,7 +881,13 @@
               "text": "Where do I check in?",
               "translation": "¿Dónde se factura?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHEQUIN",
+            "scene": "REGISTRARSE en el hotel: CHECK-IN.",
+            "emoji": "🛎️"
+          }
         },
         {
           "key": "calm-down",
@@ -838,7 +922,13 @@
               "text": "Please calm down.",
               "translation": "Cálmate, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CALMA",
+            "scene": "CALMARSE: CALM DOWN, con CALMA.",
+            "emoji": "😮‍💨"
+          }
         }
       ]
     }

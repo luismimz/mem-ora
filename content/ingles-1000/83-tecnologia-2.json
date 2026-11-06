@@ -407,7 +407,13 @@
               "text": "A mobile device.",
               "translation": "Un dispositivo móvil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DISPOSITIVO",
+            "scene": "DISPOSITIVO: di-VÁIS.",
+            "emoji": "📱"
+          }
         },
         {
           "key": "privacy",
@@ -445,7 +451,13 @@
               "text": "Privacy settings.",
               "translation": "Ajustes de privacidad."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRIVACIDAD",
+            "scene": "PRIVACIDAD: PRÁI-vasi.",
+            "emoji": "🔒"
+          }
         },
         {
           "key": "notification",
@@ -480,7 +492,13 @@
               "text": "A new notification.",
               "translation": "Una notificación nueva."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOTIFICACIÓN",
+            "scene": "NOTIFICACIÓN: nou-ti-fi-KÉI-shon.",
+            "emoji": "🔔"
+          }
         },
         {
           "key": "storage",
@@ -519,7 +537,13 @@
               "text": "Cloud storage.",
               "translation": "Almacenamiento en la nube."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTÓRAGO",
+            "scene": "ALMACENAMIENTO: STORE (guardar).",
+            "emoji": "💾"
+          }
         },
         {
           "key": "backup",
@@ -557,7 +581,13 @@
               "translation": "Haz copia del móvil."
             }
           ],
-          "notes": "El verbo se escribe separado: back up."
+          "notes": "El verbo se escribe separado: back up.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BACK",
+            "scene": "COPIA DE SEGURIDAD: guardas atrás (BACK UP).",
+            "emoji": "🗄️"
+          }
         },
         {
           "key": "browser",
@@ -590,7 +620,13 @@
               "text": "Clear the browser history.",
               "translation": "Borra el historial del navegador."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BROWSER",
+            "scene": "El NAVEGADOR: BROWSE (curiosear).",
+            "emoji": "🌐"
+          }
         },
         {
           "key": "settings",
@@ -622,7 +658,13 @@
               "text": "Change the settings.",
               "translation": "Cambia la configuración."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SETTINGS",
+            "scene": "AJUSTES: SET (poner) + TINGS.",
+            "emoji": "⚙️"
+          }
         },
         {
           "key": "signal",
@@ -666,7 +708,13 @@
               "text": "A traffic signal.",
               "translation": "Una señal de tráfico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEÑAL",
+            "scene": "SEÑAL: SÍG-nal.",
+            "emoji": "📶"
+          }
         },
         {
           "key": "hack",
@@ -706,7 +754,13 @@
               "text": "A useful life hack.",
               "translation": "Un truco útil para el día a día."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JACK",
+            "scene": "HACKEAR como JACK el pirata.",
+            "emoji": "🏴‍☠️"
+          }
         },
         {
           "key": "screenshot",
@@ -741,7 +795,13 @@
               "text": "Send me a screenshot.",
               "translation": "Mándame una captura."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SCREEN",
+            "scene": "CAPTURA DE PANTALLA: SCREEN + SHOT (disparo).",
+            "emoji": "📸"
+          }
         },
         {
           "key": "subscribe",
@@ -774,7 +834,13 @@
               "text": "Cancel your subscription.",
               "translation": "Cancela tu suscripción."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUSCRIBIRSE",
+            "scene": "SUSCRIBIRSE: sab-SKRÁIB.",
+            "emoji": "🔔"
+          }
         },
         {
           "key": "scroll",
@@ -807,7 +873,13 @@
               "text": "I spend hours scrolling.",
               "translation": "Me paso horas mirando el móvil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCROL",
+            "scene": "DESPLAZARSE por la pantalla como un pergamino.",
+            "emoji": "📜"
+          }
         },
         {
           "key": "offline",
@@ -844,7 +916,13 @@
               "text": "I'm offline.",
               "translation": "Estoy desconectado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OFF",
+            "scene": "SIN CONEXIÓN: OFF de la línea (LINE).",
+            "emoji": "📵"
+          }
         },
         {
           "key": "cable",
@@ -882,7 +960,13 @@
               "translation": "Un cable USB."
             }
           ],
-          "notes": "Se dice KÉIbol."
+          "notes": "Se dice KÉIbol.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CABLE",
+            "scene": "CABLE: KÉI-bol.",
+            "emoji": "🔌"
+          }
         },
         {
           "key": "plug",
@@ -921,7 +1005,13 @@
               "text": "Where is the plug?",
               "translation": "¿Dónde está el enchufe?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLAGA",
+            "scene": "Una PLAGA de ENCHUFES.",
+            "emoji": "🔌"
+          }
         }
       ]
     }

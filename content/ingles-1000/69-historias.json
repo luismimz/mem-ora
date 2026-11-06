@@ -454,7 +454,13 @@
               "translation": "No me di cuenta de que era tan tarde."
             }
           ],
-          "notes": "Falso amigo: realizar es carry out o do. En EE. UU. se escribe realize."
+          "notes": "Falso amigo: realizar es carry out o do. En EE. UU. se escribe realize.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REALIZAR",
+            "scene": "DARSE CUENTA: ¡RIAL! al REALIZAR.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "notice",
@@ -504,7 +510,13 @@
               "text": "Read the notice.",
               "translation": "Lee el aviso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOTICIA",
+            "scene": "NOTAR una NOTICIA rara.",
+            "emoji": "👀"
+          }
         },
         {
           "key": "discover",
@@ -559,7 +571,13 @@
               "text": "Discover new places.",
               "translation": "Descubre sitios nuevos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESCUBRIR",
+            "scene": "DESCUBRIR: quitar la tapa (COVER).",
+            "emoji": "🔍"
+          }
         },
         {
           "key": "event",
@@ -597,7 +615,13 @@
               "text": "A sports event.",
               "translation": "Un evento deportivo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EVENTO",
+            "scene": "EVENTO: i-VÉNT.",
+            "emoji": "🎪"
+          }
         },
         {
           "key": "accident",
@@ -640,7 +664,13 @@
               "text": "By accident.",
               "translation": "Sin querer."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ACCIDENTE",
+            "scene": "ACCIDENTE: ÁK-sident.",
+            "emoji": "💥"
+          }
         },
         {
           "key": "escape",
@@ -679,7 +709,13 @@
               "text": "There was no escape.",
               "translation": "No había escapatoria."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCAPAR",
+            "scene": "ESCAPAR: es-KÉIP.",
+            "emoji": "🏃‍♂️"
+          }
         },
         {
           "key": "survive",
@@ -719,7 +755,13 @@
               "translation": "¿Cómo sobreviviste?"
             }
           ],
-          "notes": "Everyone va con el verbo en singular: everyone is…"
+          "notes": "Everyone va con el verbo en singular: everyone is…",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOBREVIVIR",
+            "scene": "SOBREVIVIR: ser-VÁIV.",
+            "emoji": "🛟"
+          }
         },
         {
           "key": "appear",
@@ -758,7 +800,13 @@
               "text": "She appears to be happy.",
               "translation": "Parece que está contenta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APARECER",
+            "scene": "APARECER: a-PÍER.",
+            "emoji": "✨"
+          }
         },
         {
           "key": "disappear",
@@ -795,7 +843,13 @@
               "text": "The sun disappeared.",
               "translation": "El sol desapareció."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESAPARECER",
+            "scene": "DESAPARECER: dis-a-PÍER.",
+            "emoji": "🫥"
+          }
         },
         {
           "key": "scream",
@@ -833,7 +887,13 @@
               "translation": "Un grito fuerte."
             }
           ],
-          "notes": "Shout es gritar para que te oigan; scream, de miedo o dolor."
+          "notes": "Shout es gritar para que te oigan; scream, de miedo o dolor.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCRIMA",
+            "scene": "GRITAR de miedo en ESCRIMA.",
+            "emoji": "😱"
+          }
         },
         {
           "key": "afterwards",
@@ -894,7 +954,13 @@
               "text": "Call me afterwards.",
               "translation": "Llámame luego."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AFTER",
+            "scene": "DESPUÉS, en el AFTER.",
+            "emoji": "🌙"
+          }
         },
         {
           "key": "meanwhile",
@@ -939,7 +1005,13 @@
               "text": "Meanwhile, back at home…",
               "translation": "Mientras tanto, en casa…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MIENTRAS",
+            "scene": "MIENTRAS TANTO, en otro sitio…",
+            "emoji": "⏸️"
+          }
         },
         {
           "key": "eventually",
@@ -983,7 +1055,13 @@
               "translation": "Tarde o temprano pasará."
             }
           ],
-          "notes": "Falso amigo: eventualmente es maybe u occasionally."
+          "notes": "Falso amigo: eventualmente es maybe u occasionally.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EVENTUALMENTE",
+            "scene": "AL FINAL, no EVENTUALMENTE, ¡ojo!",
+            "emoji": "🏁"
+          }
         },
         {
           "key": "story",
@@ -1024,7 +1102,13 @@
               "translation": "Es una larga historia."
             }
           ],
-          "notes": "La asignatura de Historia es history."
+          "notes": "La asignatura de Historia es history.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HISTORIA",
+            "scene": "HISTORIA: STÓ-ri, sin HI.",
+            "emoji": "📖"
+          }
         },
         {
           "key": "chase",
@@ -1063,7 +1147,13 @@
               "text": "A car chase.",
               "translation": "Una persecución de coches."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHEIS",
+            "scene": "PERSEGUIR un CHEQUE que vuela.",
+            "emoji": "🏃💸"
+          }
         }
       ]
     }

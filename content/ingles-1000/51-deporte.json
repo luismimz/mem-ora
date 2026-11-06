@@ -353,7 +353,13 @@
               "text": "He is a basketball player.",
               "translation": "Es jugador de baloncesto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BASKET",
+            "scene": "BALONCESTO: el BASKET de siempre.",
+            "emoji": "🏀"
+          }
         },
         {
           "key": "swimming",
@@ -400,7 +406,13 @@
               "text": "Swimming is good for you.",
               "translation": "Nadar es bueno para ti."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUIMIN",
+            "scene": "NATACIÓN: SWIM (nadar) + ING.",
+            "emoji": "🏊"
+          }
         },
         {
           "key": "running",
@@ -450,7 +462,13 @@
               "text": "I go running in the park.",
               "translation": "Salgo a correr al parque."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RUNNING",
+            "scene": "CORRER: el RUNNING del parque.",
+            "emoji": "🏃"
+          }
         },
         {
           "key": "cycling",
@@ -487,7 +505,13 @@
               "text": "Cycling is popular in Holland.",
               "translation": "El ciclismo es popular en Holanda."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CICLISMO",
+            "scene": "CICLISMO: SÁI-kling.",
+            "emoji": "🚴"
+          }
         },
         {
           "key": "skiing",
@@ -532,7 +556,13 @@
               "text": "Skiing is expensive.",
               "translation": "Esquiar es caro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESQUÍ",
+            "scene": "ESQUÍ: SKÍ-ing.",
+            "emoji": "⛷️"
+          }
         },
         {
           "key": "player",
@@ -577,7 +607,13 @@
               "text": "She is a tennis player.",
               "translation": "Es tenista."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLAY",
+            "scene": "El JUGADOR: PLAY (jugar) + ER.",
+            "emoji": "🎮"
+          }
         },
         {
           "key": "goal",
@@ -610,7 +646,13 @@
               "text": "My goal is to speak English.",
               "translation": "Mi objetivo es hablar inglés."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOL",
+            "scene": "GOL: GÓUL, y también OBJETIVO.",
+            "emoji": "🥅"
+          }
         },
         {
           "key": "coach",
@@ -647,7 +689,13 @@
               "text": "She is my tennis coach.",
               "translation": "Es mi entrenadora de tenis."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COCHE",
+            "scene": "El ENTRENADOR llega en COCHE (COACH).",
+            "emoji": "🧢"
+          }
         },
         {
           "key": "score",
@@ -682,7 +730,13 @@
               "text": "He scored two goals.",
               "translation": "Marcó dos goles."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCOBA",
+            "scene": "MARCAR con una ESCOBA.",
+            "emoji": "🧹⚽"
+          }
         },
         {
           "key": "race",
@@ -720,7 +774,13 @@
               "text": "A horse race.",
               "translation": "Una carrera de caballos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REIS",
+            "scene": "La CARRERA de los REYES (REIS).",
+            "emoji": "🏁"
+          }
         },
         {
           "key": "ball",
@@ -759,7 +819,13 @@
               "text": "The ball is out.",
               "translation": "La pelota está fuera."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOL",
+            "scene": "El BALÓN cae en un BOL.",
+            "emoji": "⚽"
+          }
         },
         {
           "key": "fan",
@@ -797,7 +863,13 @@
               "text": "Turn on the fan.",
               "translation": "Enciende el ventilador."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAN",
+            "scene": "El FAN es AFICIONADO… y un VENTILADOR.",
+            "emoji": "🪭"
+          }
         },
         {
           "key": "stadium",
@@ -835,7 +907,13 @@
               "translation": "Un estadio de fútbol."
             }
           ],
-          "notes": "Ojo a la pronunciación: STÉIdium."
+          "notes": "Ojo a la pronunciación: STÉIdium.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTADIO",
+            "scene": "ESTADIO: STÉI-dium.",
+            "emoji": "🏟️"
+          }
         },
         {
           "key": "referee",
@@ -872,7 +950,13 @@
               "text": "Listen to the referee.",
               "translation": "Escucha al árbitro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REFERÍ",
+            "scene": "El ÁRBITRO es el REFERÍ.",
+            "emoji": "🧑‍⚖️"
+          }
         },
         {
           "key": "champion",
@@ -904,7 +988,13 @@
               "text": "The world champion.",
               "translation": "El campeón del mundo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMPEÓN",
+            "scene": "CAMPEÓN: CHÁM-pion.",
+            "emoji": "🏆"
+          }
         }
       ]
     }

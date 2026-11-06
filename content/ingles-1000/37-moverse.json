@@ -550,7 +550,13 @@
               "text": "Can you drive a car?",
               "translation": "¿Sabes conducir un coche?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARRO",
+            "scene": "El COCHE es un CARRO moderno.",
+            "emoji": "🚗"
+          }
         },
         {
           "key": "bus",
@@ -594,7 +600,13 @@
               "text": "I take the bus to work.",
               "translation": "Cojo el autobús para ir al trabajo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BUS",
+            "scene": "El AUTOBÚS: el BUS de siempre.",
+            "emoji": "🚌"
+          }
         },
         {
           "key": "bike",
@@ -637,7 +649,13 @@
               "text": "Can you ride a bike?",
               "translation": "¿Sabes montar en bici?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAICA",
+            "scene": "Tu BICI hace «BAI-CA» al frenar.",
+            "emoji": "🚲"
+          }
         },
         {
           "key": "taxi",
@@ -669,7 +687,13 @@
               "text": "Call a taxi, please.",
               "translation": "Llama a un taxi, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TAXI",
+            "scene": "TAXI: igual, con acento en la A.",
+            "emoji": "🚕"
+          }
         },
         {
           "key": "underground",
@@ -709,7 +733,13 @@
               "translation": "Coge el metro hasta el centro."
             }
           ],
-          "notes": "En Londres: the Tube. En EE. UU.: the subway."
+          "notes": "En Londres: the Tube. En EE. UU.: the subway.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANDÉN",
+            "scene": "El METRO va por debajo del ANDÉN.",
+            "emoji": "🚇"
+          }
         },
         {
           "key": "traffic",
@@ -751,7 +781,13 @@
               "text": "I was stuck in traffic.",
               "translation": "Me quedé atascado en el tráfico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRÁFICO",
+            "scene": "TRÁFICO: casi igual, TRÁ-fik.",
+            "emoji": "🚦"
+          }
         },
         {
           "key": "road",
@@ -783,7 +819,13 @@
               "text": "This road goes to the beach.",
               "translation": "Esta carretera va a la playa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ROTO",
+            "scene": "La CARRETERA tiene un ROTO enorme.",
+            "emoji": "🛣️"
+          }
         },
         {
           "key": "driver",
@@ -831,7 +873,13 @@
               "text": "A taxi driver.",
               "translation": "Un taxista."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRIVER",
+            "scene": "El CONDUCTOR es el DRIVER.",
+            "emoji": "🧑‍✈️"
+          }
         },
         {
           "key": "corner",
@@ -868,7 +916,13 @@
               "text": "Turn left at the corner.",
               "translation": "Gira a la izquierda en la esquina."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CÓRNER",
+            "scene": "En la ESQUINA se saca el CÓRNER.",
+            "emoji": "⚽"
+          }
         },
         {
           "key": "left",
@@ -905,7 +959,13 @@
               "text": "My left hand.",
               "translation": "Mi mano izquierda."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEFT",
+            "scene": "IZQUIERDA: la mano izquierda forma la L de LEFT.",
+            "emoji": "👈"
+          }
         },
         {
           "key": "right",
@@ -944,7 +1004,13 @@
               "text": "You're right.",
               "translation": "Tienes razón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RAÍZ",
+            "scene": "A la DERECHA crece una RAÍZ.",
+            "emoji": "👉"
+          }
         },
         {
           "key": "straight",
@@ -976,7 +1042,13 @@
               "text": "Straight hair.",
               "translation": "Pelo liso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTRECHO",
+            "scene": "Sigue RECTO por el ESTRECHO.",
+            "emoji": "⬆️"
+          }
         },
         {
           "key": "parking",
@@ -1014,7 +1086,13 @@
               "text": "Parking is expensive here.",
               "translation": "Aquí aparcar es caro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PARKING",
+            "scene": "El APARCAMIENTO es el PARKING.",
+            "emoji": "🅿️"
+          }
         },
         {
           "key": "petrol",
@@ -1053,7 +1131,13 @@
               "translation": "Una gasolinera."
             }
           ],
-          "notes": "En EE. UU. se dice gas."
+          "notes": "En EE. UU. se dice gas.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PETRÓLEO",
+            "scene": "La GASOLINA sale del PETRÓLEO.",
+            "emoji": "⛽"
+          }
         },
         {
           "key": "crossing",
@@ -1086,7 +1170,13 @@
               "text": "There is a crossing here.",
               "translation": "Aquí hay un paso de peatones."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CRUCE",
+            "scene": "El PASO DE PEATONES es un CRUCE.",
+            "emoji": "🚸"
+          }
         }
       ]
     }

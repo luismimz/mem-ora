@@ -405,7 +405,13 @@
               "text": "You can achieve anything.",
               "translation": "Puedes conseguir lo que te propongas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ACHIS",
+            "scene": "LOGRAR la meta… y ¡ACHÍS!",
+            "emoji": "🏆"
+          }
         },
         {
           "key": "succeed",
@@ -457,7 +463,13 @@
               "translation": "¡Éxito!"
             }
           ],
-          "notes": "El nombre es success."
+          "notes": "El nombre es success.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUCESO",
+            "scene": "TENER ÉXITO: un SUCESO feliz.",
+            "emoji": "🥇"
+          }
         },
         {
           "key": "attempt",
@@ -496,7 +508,13 @@
               "text": "Don't attempt it alone.",
               "translation": "No lo intentes solo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ATENTO",
+            "scene": "INTENTO ATENTO.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "career",
@@ -540,7 +558,13 @@
               "translation": "Una carrera profesional en informática."
             }
           ],
-          "notes": "Falso amigo: la carrera universitaria es degree."
+          "notes": "Falso amigo: la carrera universitaria es degree.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARRERA",
+            "scene": "CARRERA profesional: ka-RÍER.",
+            "emoji": "💼"
+          }
         },
         {
           "key": "graduate",
@@ -581,7 +605,13 @@
               "text": "I'll graduate in June.",
               "translation": "Me graduaré en junio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRADUARSE",
+            "scene": "GRADUARSE: GRÁ-yueit.",
+            "emoji": "🎓"
+          }
         },
         {
           "key": "award",
@@ -623,7 +653,13 @@
               "text": "An award ceremony.",
               "translation": "Una entrega de premios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AGUARDA",
+            "scene": "El PREMIO te AGUARDA.",
+            "emoji": "🏅"
+          }
         },
         {
           "key": "opportunity",
@@ -660,7 +696,13 @@
               "text": "A great opportunity.",
               "translation": "Una gran oportunidad."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OPORTUNIDAD",
+            "scene": "OPORTUNIDAD: o-po-TIÚ-niti.",
+            "emoji": "🚪"
+          }
         },
         {
           "key": "adventure",
@@ -694,7 +736,13 @@
               "text": "An adventure film.",
               "translation": "Una película de aventuras."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AVENTURA",
+            "scene": "AVENTURA: ad-VÉN-cher.",
+            "emoji": "🗺️"
+          }
         },
         {
           "key": "challenge",
@@ -733,7 +781,13 @@
               "text": "I love a challenge.",
               "translation": "Me encantan los retos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHALECO",
+            "scene": "El RETO: correr con CHALECO de plomo.",
+            "emoji": "🏋️"
+          }
         },
         {
           "key": "recently",
@@ -784,7 +838,13 @@
               "text": "I've recently moved.",
               "translation": "Me he mudado hace poco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RECIENTEMENTE",
+            "scene": "ÚLTIMAMENTE: RECIENTEMENTE.",
+            "emoji": "🆕"
+          }
         },
         {
           "key": "lifetime",
@@ -823,7 +883,13 @@
               "text": "Once in a lifetime.",
               "translation": "Una vez en la vida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LIFE",
+            "scene": "TODA UNA VIDA: LIFE + TIME.",
+            "emoji": "⌛"
+          }
         },
         {
           "key": "dream",
@@ -877,7 +943,13 @@
               "translation": "Tuve un sueño raro."
             }
           ],
-          "notes": "Dormir es sleep; lo que sueñas, dream."
+          "notes": "Dormir es sleep; lo que sueñas, dream.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRIM",
+            "scene": "SOÑAR con un DRIM-team.",
+            "emoji": "💤"
+          }
         },
         {
           "key": "retire",
@@ -917,7 +989,13 @@
               "translation": "¿Cuándo te jubilarás?"
             }
           ],
-          "notes": "Falso amigo: retirar dinero es withdraw."
+          "notes": "Falso amigo: retirar dinero es withdraw.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RETIRARSE",
+            "scene": "JUBILARSE: RETIRARSE.",
+            "emoji": "🏖️"
+          }
         },
         {
           "key": "progress",
@@ -953,7 +1031,13 @@
               "translation": "Mira tu progreso."
             }
           ],
-          "notes": "No se cuenta: a lot of progress, nunca «progresses»."
+          "notes": "No se cuenta: a lot of progress, nunca «progresses».",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROGRESO",
+            "scene": "PROGRESO: PRÓ-gres.",
+            "emoji": "📈"
+          }
         },
         {
           "key": "ambition",
@@ -997,7 +1081,13 @@
               "text": "She has big ambitions.",
               "translation": "Tiene grandes ambiciones."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AMBICIÓN",
+            "scene": "AMBICIÓN: am-BÍ-shon.",
+            "emoji": "🚀"
+          }
         }
       ]
     }

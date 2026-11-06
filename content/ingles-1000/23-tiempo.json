@@ -331,7 +331,13 @@
               "translation": "¿Qué tiempo hace?"
             }
           ],
-          "notes": "Ojo: weather es el tiempo que hace; el tiempo del reloj es time."
+          "notes": "Ojo: weather es el tiempo que hace; el tiempo del reloj es time.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜERO",
+            "scene": "El TIEMPO cambia: un GÜERO con paraguas.",
+            "emoji": "🌦️"
+          }
         },
         {
           "key": "sun",
@@ -707,7 +713,13 @@
               "text": "Wear a warm coat.",
               "translation": "Ponte un abrigo calentito."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HORNO",
+            "scene": "TEMPLADO como un HORNO apagado.",
+            "emoji": "♨️"
+          }
         },
         {
           "key": "sunny",
@@ -756,7 +768,13 @@
               "text": "Is it sunny in Madrid?",
               "translation": "¿Hace sol en Madrid?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOL",
+            "scene": "Día SOLEADO: el SOL sonríe, SÁ-NI.",
+            "emoji": "☀️"
+          }
         },
         {
           "key": "cloudy",
@@ -798,7 +816,13 @@
               "text": "A cloudy morning.",
               "translation": "Una mañana nublada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLAUDIA",
+            "scene": "CLAUDIA vive en un cielo NUBLADO.",
+            "emoji": "☁️"
+          }
         },
         {
           "key": "storm",
@@ -926,7 +950,13 @@
               "text": "Check the temperature.",
               "translation": "Mira la temperatura."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEMPERATURA",
+            "scene": "La TEMPERATURA: igual, solo cambia el final.",
+            "emoji": "🌡️"
+          }
         },
         {
           "key": "season",

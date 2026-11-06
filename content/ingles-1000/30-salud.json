@@ -344,7 +344,13 @@
               "text": "Go to the doctor.",
               "translation": "Ve al médico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DOCTOR",
+            "scene": "El MÉDICO es el DOCTOR.",
+            "emoji": "👨‍⚕️"
+          }
         },
         {
           "key": "sick",
@@ -385,7 +391,13 @@
               "text": "She is sick today.",
               "translation": "Hoy está enferma."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIC",
+            "scene": "ENFERMO dices «SIC, SIC» con fiebre.",
+            "emoji": "🤒"
+          }
         },
         {
           "key": "pain",
@@ -479,7 +491,13 @@
               "text": "Do you have something for a headache?",
               "translation": "¿Tiene algo para el dolor de cabeza?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JEDI",
+            "scene": "Un JEDI con DOLOR DE CABEZA.",
+            "emoji": "🤕"
+          }
         },
         {
           "key": "fever",
@@ -536,7 +554,13 @@
               "text": "Do you have a fever?",
               "translation": "¿Tienes fiebre?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIEBRE",
+            "scene": "FIEBRE: FÍIver, suena a fiebre.",
+            "emoji": "🌡️"
+          }
         },
         {
           "key": "medicine",
@@ -573,7 +597,13 @@
               "text": "I study medicine.",
               "translation": "Estudio medicina."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MEDICINA",
+            "scene": "La MEDICINA: casi igual, MÉD-sin.",
+            "emoji": "💊"
+          }
         },
         {
           "key": "pharmacy",
@@ -611,7 +641,13 @@
               "text": "The pharmacy is closed.",
               "translation": "La farmacia está cerrada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FARMACIA",
+            "scene": "La FARMACIA: igual, FÁR-ma-si.",
+            "emoji": "⚕️"
+          }
         },
         {
           "key": "appointment",
@@ -764,7 +800,13 @@
               "text": "Did you hurt yourself?",
               "translation": "¿Te has hecho daño?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JERGA",
+            "scene": "Te DUELE la JERGA de tu jefe.",
+            "emoji": "🤕"
+          }
         },
         {
           "key": "healthy",
@@ -849,7 +891,13 @@
               "text": "Ask the nurse.",
               "translation": "Pregunta a la enfermera."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NERVIO",
+            "scene": "La ENFERMERA calma tu NERVIO.",
+            "emoji": "👩‍⚕️"
+          }
         },
         {
           "key": "dentist",
@@ -898,7 +946,13 @@
               "text": "I hate going to the dentist.",
               "translation": "Odio ir al dentista."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DENTISTA",
+            "scene": "El DENTISTA: igual, sin la A.",
+            "emoji": "🦷"
+          }
         },
         {
           "key": "ambulance",
@@ -932,7 +986,13 @@
               "text": "The ambulance is coming.",
               "translation": "Viene la ambulancia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AMBULANCIA",
+            "scene": "La AMBULANCIA: casi igual, ÁM-biu-lans.",
+            "emoji": "🚑"
+          }
         },
         {
           "key": "better",
@@ -982,7 +1042,13 @@
               "text": "Get better soon!",
               "translation": "¡Que te mejores!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BETÚN",
+            "scene": "MEJOR con BETÚN en los zapatos.",
+            "emoji": "👞"
+          }
         }
       ]
     }

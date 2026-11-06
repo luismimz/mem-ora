@@ -286,7 +286,13 @@
               "text": "Happy birthday!",
               "translation": "¡Feliz cumpleaños!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HAPPY",
+            "scene": "FELIZ como un HAPPY birthday.",
+            "emoji": "😄"
+          }
         },
         {
           "key": "sad",
@@ -326,7 +332,13 @@
               "text": "It's a sad story.",
               "translation": "Es una historia triste."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SED",
+            "scene": "TRISTE porque tienes SED.",
+            "emoji": "😢"
+          }
         },
         {
           "key": "angry",
@@ -466,7 +478,13 @@
               "text": "I'm worried about the exam.",
               "translation": "Estoy preocupado por el examen."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜIRO",
+            "scene": "PREOCUPADO tocas el GÜIRO sin parar.",
+            "emoji": "😟"
+          }
         },
         {
           "key": "scared",
@@ -507,7 +525,13 @@
               "text": "Don't be scared.",
               "translation": "No tengas miedo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCARCHA",
+            "scene": "ASUSTADO, te congelas como ESCARCHA.",
+            "emoji": "😱"
+          }
         },
         {
           "key": "excited",
@@ -546,7 +570,13 @@
               "translation": "Me hace mucha ilusión el viaje."
             }
           ],
-          "notes": "Ojo: excited no es «excitado»: es ilusionado, emocionado."
+          "notes": "Ojo: excited no es «excitado»: es ilusionado, emocionado.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXCITADO",
+            "scene": "ILUSIONADO, das saltos por la tele.",
+            "emoji": "🤩"
+          }
         },
         {
           "key": "nervous",
@@ -584,7 +614,13 @@
               "text": "Don't be nervous.",
               "translation": "No te pongas nervioso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NERVIOSO",
+            "scene": "NERVIOSO: casi igual, NÉR-vus.",
+            "emoji": "😬"
+          }
         },
         {
           "key": "bored",
@@ -674,7 +710,13 @@
               "text": "She looked surprised.",
               "translation": "Parecía sorprendida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SORPRESA",
+            "scene": "SORPRENDIDO por una SORPRESA con globos.",
+            "emoji": "😲"
+          }
         },
         {
           "key": "proud",
@@ -752,7 +794,13 @@
               "text": "The sea is calm today.",
               "translation": "Hoy el mar está tranquilo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CALMA",
+            "scene": "TRANQUILO: con CALMA, la L no suena.",
+            "emoji": "😌"
+          }
         },
         {
           "key": "lonely",

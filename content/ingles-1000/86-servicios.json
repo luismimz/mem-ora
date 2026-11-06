@@ -657,7 +657,13 @@
               "text": "My hairdresser is great.",
               "translation": "Mi peluquera es genial."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PELUQUERO",
+            "scene": "PELUQUERO: viste (DRESS) el pelo (HAIR).",
+            "emoji": "💇"
+          }
         },
         {
           "key": "barber",
@@ -700,7 +706,13 @@
               "text": "A barber's shop.",
               "translation": "Una barbería."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BARBERO",
+            "scene": "BARBERO: BÁR-ber.",
+            "emoji": "💈"
+          }
         },
         {
           "key": "haircut",
@@ -733,7 +745,13 @@
               "text": "I need a haircut.",
               "translation": "Necesito cortarme el pelo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CORTE",
+            "scene": "CORTE DE PELO: HAIR + CUT.",
+            "emoji": "✂️"
+          }
         },
         {
           "key": "repair",
@@ -779,7 +797,13 @@
               "text": "Closed for repairs.",
               "translation": "Cerrado por reformas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REPARAR",
+            "scene": "REPARAR: ri-PÉR.",
+            "emoji": "🔧"
+          }
         },
         {
           "key": "plumber",
@@ -814,7 +838,13 @@
               "translation": "El fontanero arregló la fuga."
             }
           ],
-          "notes": "La b no suena: PLÁmer."
+          "notes": "La b no suena: PLÁmer.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLOMO",
+            "scene": "El FONTANERO arregla tuberías de PLOMO.",
+            "emoji": "🪠"
+          }
         },
         {
           "key": "electrician",
@@ -852,7 +882,13 @@
               "text": "A qualified electrician.",
               "translation": "Un electricista titulado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ELECTRICISTA",
+            "scene": "ELECTRICISTA: e-lek-TRÍ-shan.",
+            "emoji": "⚡"
+          }
         },
         {
           "key": "tailor",
@@ -891,7 +927,13 @@
               "text": "Tailor-made.",
               "translation": "Hecho a medida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TALLA",
+            "scene": "El SASTRE ajusta tu TALLA.",
+            "emoji": "🧵"
+          }
         },
         {
           "key": "cleaner",
@@ -931,7 +973,13 @@
               "text": "Glass cleaner.",
               "translation": "Limpiacristales."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLIN",
+            "scene": "LIMPIADOR: CLEAN (limpio).",
+            "emoji": "🧽"
+          }
         },
         {
           "key": "install",
@@ -982,7 +1030,13 @@
               "text": "Install the app.",
               "translation": "Instala la app."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INSTALAR",
+            "scene": "INSTALAR: in-STÓL.",
+            "emoji": "⬇️"
+          }
         },
         {
           "key": "service",
@@ -1028,7 +1082,13 @@
               "text": "The service was excellent.",
               "translation": "El servicio fue excelente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SERVICIO",
+            "scene": "SERVICIO: SÉR-vis.",
+            "emoji": "🛠️"
+          }
         },
         {
           "key": "painter",
@@ -1071,7 +1131,13 @@
               "text": "A famous painter.",
               "translation": "Un pintor famoso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PINTOR",
+            "scene": "PINTOR: PÉIN-ter.",
+            "emoji": "🖌️"
+          }
         },
         {
           "key": "decorate",
@@ -1110,7 +1176,13 @@
               "text": "Decorate the tree.",
               "translation": "Decora el árbol."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DECORAR",
+            "scene": "DECORAR: DÉ-koreit.",
+            "emoji": "🎀"
+          }
         },
         {
           "key": "check-up",
@@ -1156,7 +1228,13 @@
               "text": "A dental check-up.",
               "translation": "Una revisión del dentista."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHEQUEO",
+            "scene": "REVISIÓN médica: un CHEQUEO.",
+            "emoji": "🩺"
+          }
         },
         {
           "key": "quote",
@@ -1200,7 +1278,13 @@
               "text": "A famous quote.",
               "translation": "Una cita famosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUOTA",
+            "scene": "PRESUPUESTO con su CUOTA.",
+            "emoji": "💬"
+          }
         },
         {
           "key": "optician",
@@ -1235,7 +1319,13 @@
               "text": "The optician tested my eyes.",
               "translation": "El óptico me revisó la vista."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÓPTICO",
+            "scene": "ÓPTICO: op-TÍ-shan.",
+            "emoji": "👓"
+          }
         }
       ]
     }

@@ -320,7 +320,13 @@
               "translation": "Siempre llevo paraguas."
             }
           ],
-          "notes": "Llevar en la mano es carry; llevar puesto es wear."
+          "notes": "Llevar en la mano es carry; llevar puesto es wear.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARRITO",
+            "scene": "LLEVAR las cosas en un CARRITO.",
+            "emoji": "🛒"
+          }
         },
         {
           "key": "throw",
@@ -359,7 +365,13 @@
               "text": "Don't throw it away.",
               "translation": "No lo tires."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TROMPO",
+            "scene": "LANZAR un TROMPO.",
+            "emoji": "🪀"
+          }
         },
         {
           "key": "catch",
@@ -391,7 +403,13 @@
               "text": "I caught a cold.",
               "translation": "Me he resfriado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CACHAR",
+            "scene": "ATRAPAR: CACHAR la pelota.",
+            "emoji": "🧤"
+          }
         },
         {
           "key": "hold",
@@ -426,7 +444,13 @@
               "text": "Hold on a minute.",
               "translation": "Espera un momento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JOL",
+            "scene": "SOSTENER el JOLGORIO entre manos.",
+            "emoji": "✋"
+          }
         },
         {
           "key": "drop",
@@ -466,7 +490,13 @@
               "text": "I dropped my phone.",
               "translation": "Se me cayó el móvil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOTA",
+            "scene": "SUELTAS una GOTA: DROP, como en «dropper».",
+            "emoji": "💧"
+          }
         },
         {
           "key": "hide",
@@ -516,7 +546,13 @@
               "text": "The cat is hiding.",
               "translation": "El gato se está escondiendo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAIDE",
+            "scene": "ESCONDERSE detrás de HEIDI.",
+            "emoji": "🙈"
+          }
         },
         {
           "key": "cry",
@@ -548,7 +584,13 @@
               "text": "The baby is crying.",
               "translation": "El bebé está llorando."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CRAI",
+            "scene": "LLORAR: «CRAI, CRAI», hace el bebé.",
+            "emoji": "😭"
+          }
         },
         {
           "key": "laugh",
@@ -582,7 +624,13 @@
               "translation": "¡No te rías de mí!"
             }
           ],
-          "notes": "La gh suena como F: LAF."
+          "notes": "La gh suena como F: LAF.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAFF",
+            "scene": "REÍR: «¡LAF, LAF!».",
+            "emoji": "😆"
+          }
         },
         {
           "key": "smile",
@@ -614,7 +662,13 @@
               "text": "She has a beautiful smile.",
               "translation": "Tiene una sonrisa preciosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESMALTE",
+            "scene": "SONREÍR con ESMALTE en los dientes.",
+            "emoji": "😁"
+          }
         },
         {
           "key": "shout",
@@ -664,7 +718,13 @@
               "text": "Stop shouting!",
               "translation": "¡Deja de gritar!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHAUT",
+            "scene": "GRITAR: ¡CHAUT!",
+            "emoji": "📢"
+          }
         },
         {
           "key": "kiss",
@@ -703,7 +763,13 @@
               "text": "They kissed goodbye.",
               "translation": "Se despidieron con un beso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "KISS",
+            "scene": "Un BESO con los labios pintados de KISS.",
+            "emoji": "💋"
+          }
         },
         {
           "key": "hug",
@@ -748,7 +814,13 @@
               "text": "She hugged her mother.",
               "translation": "Abrazó a su madre."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAGUAR",
+            "scene": "Un JAGUAR te da un ABRAZO.",
+            "emoji": "🐆🤗"
+          }
         },
         {
           "key": "touch",
@@ -787,7 +859,13 @@
               "text": "Keep in touch!",
               "translation": "¡Seguimos en contacto!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TACHA",
+            "scene": "TOCAS la pantalla y TACHAS la tarea.",
+            "emoji": "👆"
+          }
         },
         {
           "key": "smell",
@@ -819,7 +897,13 @@
               "text": "It smells like coffee.",
               "translation": "Huele a café."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESMALTE",
+            "scene": "El ESMALTE de uñas HUELE fatal.",
+            "emoji": "👃"
+          }
         },
         {
           "key": "taste",
@@ -862,7 +946,13 @@
               "text": "It tastes like chicken.",
               "translation": "Sabe a pollo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEST",
+            "scene": "PRUEBAS la sopa: TEST de sabor.",
+            "emoji": "👅"
+          }
         }
       ]
     }

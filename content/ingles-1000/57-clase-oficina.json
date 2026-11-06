@@ -693,7 +693,13 @@
               "text": "Write it in pen.",
               "translation": "Escríbelo a boli."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PENA",
+            "scene": "Da PENA perder el BOLI.",
+            "emoji": "🖊️"
+          }
         },
         {
           "key": "pencil",
@@ -741,7 +747,13 @@
               "text": "A pencil case.",
               "translation": "Un estuche."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PINCEL",
+            "scene": "El LÁPIZ es un PINCEL de grafito.",
+            "emoji": "✏️"
+          }
         },
         {
           "key": "notebook",
@@ -780,7 +792,13 @@
               "text": "My new notebook is very light.",
               "translation": "Mi portátil nuevo pesa muy poco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOTA",
+            "scene": "CUADERNO: libro (BOOK) de NOTAS.",
+            "emoji": "📓"
+          }
         },
         {
           "key": "desk",
@@ -819,7 +837,13 @@
               "text": "The front desk.",
               "translation": "La recepción."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESCO",
+            "scene": "La MESA de trabajo DESCOnectada.",
+            "emoji": "🖥️"
+          }
         },
         {
           "key": "whiteboard",
@@ -851,7 +875,13 @@
               "text": "Write it on the whiteboard.",
               "translation": "Escríbelo en la pizarra."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BLANCA",
+            "scene": "PIZARRA BLANCA: WHITE + BOARD.",
+            "emoji": "⬜"
+          }
         },
         {
           "key": "rubber",
@@ -895,7 +925,13 @@
               "translation": "Mi goma está en la mochila."
             }
           ],
-          "notes": "En EE. UU. se dice eraser."
+          "notes": "En EE. UU. se dice eraser.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RÁBANO",
+            "scene": "La GOMA DE BORRAR tiene forma de RÁBANO.",
+            "emoji": "🧽"
+          }
         },
         {
           "key": "ruler",
@@ -934,7 +970,13 @@
               "text": "A 30 cm ruler.",
               "translation": "Una regla de 30 cm."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RULETA",
+            "scene": "La REGLA gira en la RULETA.",
+            "emoji": "📏"
+          }
         },
         {
           "key": "stapler",
@@ -971,7 +1013,13 @@
               "text": "Staple these pages.",
               "translation": "Grapa estas hojas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTAPLER",
+            "scene": "La GRAPADORA hace «STAP».",
+            "emoji": "📎"
+          }
         },
         {
           "key": "printer",
@@ -1010,7 +1058,13 @@
               "text": "The printer is out of paper.",
               "translation": "La impresora no tiene papel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRINT",
+            "scene": "La IMPRESORA: PRINT, imprimir.",
+            "emoji": "🖨️"
+          }
         },
         {
           "key": "lunch-break",
@@ -1049,7 +1103,13 @@
               "text": "I'm on my lunch break.",
               "translation": "Estoy en la pausa de la comida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LANCHA",
+            "scene": "PAUSA PARA COMER en la LANCHA.",
+            "emoji": "🥪⛵"
+          }
         },
         {
           "key": "grade",
@@ -1095,7 +1155,13 @@
               "translation": "Está en quinto."
             }
           ],
-          "notes": "En el Reino Unido, la nota también es mark."
+          "notes": "En el Reino Unido, la nota también es mark.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRADO",
+            "scene": "La NOTA del GRADO.",
+            "emoji": "🅰️"
+          }
         },
         {
           "key": "timetable",
@@ -1128,7 +1194,13 @@
               "text": "The train timetable.",
               "translation": "El horario de trenes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TIME",
+            "scene": "HORARIO: tabla (TABLE) del tiempo (TIME).",
+            "emoji": "🗓️"
+          }
         },
         {
           "key": "classroom",
@@ -1167,7 +1239,13 @@
               "text": "An empty classroom.",
               "translation": "Un aula vacía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLASE",
+            "scene": "AULA: habitación (ROOM) de CLASE.",
+            "emoji": "🏫"
+          }
         },
         {
           "key": "classmate",
@@ -1205,7 +1283,13 @@
               "text": "A classmate made a website.",
               "translation": "Un compañero hizo una web."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLASE",
+            "scene": "COMPAÑERO DE CLASE: tu MATE de CLASS.",
+            "emoji": "🧑‍🤝‍🧑"
+          }
         },
         {
           "key": "scissors",
@@ -1245,7 +1329,13 @@
               "translation": "Unas tijeras."
             }
           ],
-          "notes": "Siempre en plural: the scissors are…"
+          "notes": "Siempre en plural: the scissors are…",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SÍSERS",
+            "scene": "Las TIJERAS hacen «SIS-SIS».",
+            "emoji": "✂️"
+          }
         }
       ]
     }

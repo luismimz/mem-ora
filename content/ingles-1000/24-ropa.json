@@ -670,7 +670,13 @@
               "text": "Blue jeans.",
               "translation": "Vaqueros azules."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YIN",
+            "scene": "Tus VAQUEROS hacen YIN-YANG.",
+            "emoji": "👖"
+          }
         },
         {
           "key": "skirt",
@@ -725,7 +731,13 @@
               "text": "This skirt is too short.",
               "translation": "Esta falda es demasiado corta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESQUÍ",
+            "scene": "Bajas en ESQUÍ con FALDA.",
+            "emoji": "⛷️"
+          }
         },
         {
           "key": "hat",
@@ -760,7 +772,13 @@
               "text": "A big black hat.",
               "translation": "Un sombrero negro grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAT",
+            "scene": "Con el SOMBRERO, ¡JAT!, estornudas.",
+            "emoji": "🎩"
+          }
         },
         {
           "key": "socks",
@@ -888,7 +906,13 @@
               "text": "What are you wearing?",
               "translation": "¿Qué llevas puesto?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜERA",
+            "scene": "LLEVAR PUESTO: la GÜERA lleva tu abrigo.",
+            "emoji": "🧥"
+          }
         },
         {
           "key": "size",
@@ -991,7 +1015,13 @@
               "text": "Try it on!",
               "translation": "¡Pruébatelo!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRAJE",
+            "scene": "PROBARSE un TRAJE de astronauta.",
+            "emoji": "👨‍🚀"
+          }
         },
         {
           "key": "fit",
@@ -1039,7 +1069,13 @@
               "text": "Does it fit?",
               "translation": "¿Te queda bien?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIT",
+            "scene": "Te QUEDA BIEN: estás FIT.",
+            "emoji": "👕"
+          }
         }
       ]
     }

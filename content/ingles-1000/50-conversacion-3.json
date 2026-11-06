@@ -312,7 +312,13 @@
               "text": "How about Saturday?",
               "translation": "¿Qué tal el sábado?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAU",
+            "scene": "¿QUÉ TAL…? JAU, JAU, propone el perro.",
+            "emoji": "🐕"
+          }
         },
         {
           "key": "what-about-you",
@@ -349,7 +355,13 @@
               "text": "I love it. What about you?",
               "translation": "Me encanta. ¿Y a ti?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YU",
+            "scene": "¿Y TÚ? —ABOUT YOU, sobre ti.",
+            "emoji": "👉"
+          }
         },
         {
           "key": "i-dont-mind",
@@ -394,7 +406,13 @@
               "text": "Do you mind if I sit here?",
               "translation": "¿Te importa si me siento aquí?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MAIND",
+            "scene": "ME DA IGUAL: no me importa (DON'T MIND).",
+            "emoji": "🤷"
+          }
         },
         {
           "key": "it-doesnt-matter",
@@ -445,7 +463,13 @@
               "text": "Money doesn't matter.",
               "translation": "El dinero da igual."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MATER",
+            "scene": "NO IMPORTA: no es MATERIA de nadie.",
+            "emoji": "🤷‍♂️"
+          }
         },
         {
           "key": "im-afraid-not",
@@ -495,7 +519,13 @@
               "text": "I'm afraid I can't come.",
               "translation": "Me temo que no puedo ir."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AFRAID",
+            "scene": "ME TEMO QUE NO: AFRAID = con miedo.",
+            "emoji": "😬"
+          }
         },
         {
           "key": "id-love-to",
@@ -540,7 +570,13 @@
               "text": "I'd love to visit Japan.",
               "translation": "Me encantaría visitar Japón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LOVE",
+            "scene": "ME ENCANTARÍA: con LOVE en los ojos.",
+            "emoji": "😍"
+          }
         },
         {
           "key": "sorry-to-hear-that",
@@ -583,7 +619,13 @@
               "text": "I'm so sorry to hear that.",
               "translation": "Cuánto lo siento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SORRY",
+            "scene": "LO SIENTO: SORRY al oír (HEAR) lo malo.",
+            "emoji": "😔"
+          }
         },
         {
           "key": "congratulations",
@@ -638,7 +680,13 @@
               "text": "Congratulations, you passed!",
               "translation": "¡Felicidades, has aprobado!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONGRATULACIONES",
+            "scene": "¡ENHORABUENA!: CONGRATULACIONES con confeti.",
+            "emoji": "🎉"
+          }
         },
         {
           "key": "cheers",
@@ -670,7 +718,13 @@
               "text": "Cheers, mate!",
               "translation": "¡Gracias, tío!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHIRRÍAN",
+            "scene": "¡SALUD! y las copas CHIRRÍAN.",
+            "emoji": "🥂"
+          }
         },
         {
           "key": "bless-you",
@@ -702,7 +756,13 @@
               "text": "Bless you, and thank you.",
               "translation": "Dios te bendiga, y gracias."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BLES",
+            "scene": "¡JESÚS!, tras el estornudo: BLESS YOU.",
+            "emoji": "🤧"
+          }
         },
         {
           "key": "have-fun",
@@ -734,7 +794,13 @@
               "text": "We had a lot of fun.",
               "translation": "Nos lo pasamos genial."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAN",
+            "scene": "¡PÁSALO BIEN! con tu FAN.",
+            "emoji": "🎈"
+          }
         },
         {
           "key": "enjoy-your-meal",
@@ -773,7 +839,13 @@
               "text": "Enjoy!",
               "translation": "¡Que lo disfrutes!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENJOY",
+            "scene": "¡QUE APROVECHE! ENJOY la comida (MEAL).",
+            "emoji": "🍝"
+          }
         },
         {
           "key": "get-well-soon",
@@ -806,7 +878,13 @@
               "text": "I hope you get well soon.",
               "translation": "Espero que te mejores pronto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUN",
+            "scene": "¡QUE TE MEJORES! pronto (SOON), con SOL.",
+            "emoji": "🌞🤒"
+          }
         },
         {
           "key": "happy-to-help",
@@ -843,7 +921,13 @@
               "text": "We're always happy to help.",
               "translation": "Siempre estamos encantados de ayudar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JELP",
+            "scene": "UN PLACER AYUDAR: HELP, ayuda.",
+            "emoji": "🙌"
+          }
         },
         {
           "key": "just-a-moment",
@@ -876,7 +960,13 @@
               "text": "Wait just a moment.",
               "translation": "Espera un momentito."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MOMENTO",
+            "scene": "UN MOMENTO: JUST A MOMENT.",
+            "emoji": "⏳"
+          }
         }
       ]
     }

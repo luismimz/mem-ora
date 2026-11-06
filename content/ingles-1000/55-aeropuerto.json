@@ -417,7 +417,13 @@
               "translation": "Mi equipaje se ha perdido."
             }
           ],
-          "notes": "No se cuenta: much luggage, nunca «luggages»."
+          "notes": "No se cuenta: much luggage, nunca «luggages».",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LÁGRIMA",
+            "scene": "EQUIPAJE lleno de LÁGRIMAS.",
+            "emoji": "🧳"
+          }
         },
         {
           "key": "platform",
@@ -461,7 +467,13 @@
               "text": "Wait on the platform.",
               "translation": "Espera en el andén."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLATAFORMA",
+            "scene": "El ANDÉN es una PLATAFORMA.",
+            "emoji": "🚉"
+          }
         },
         {
           "key": "boarding-pass",
@@ -501,7 +513,13 @@
               "text": "I printed my boarding pass.",
               "translation": "He imprimido la tarjeta de embarque."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BORDO",
+            "scene": "TARJETA DE EMBARQUE: pasas a BORDO.",
+            "emoji": "🎫"
+          }
         },
         {
           "key": "gate",
@@ -540,7 +558,13 @@
               "text": "The gate is closed.",
               "translation": "La puerta está cerrada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GATO",
+            "scene": "En la PUERTA DE EMBARQUE espera un GATO.",
+            "emoji": "🚪🐈"
+          }
         },
         {
           "key": "seat",
@@ -582,7 +606,13 @@
               "text": "Take a seat.",
               "translation": "Siéntate."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SITIO",
+            "scene": "Tu ASIENTO es tu SITIO.",
+            "emoji": "💺"
+          }
         },
         {
           "key": "aisle",
@@ -631,7 +661,13 @@
               "translation": "La leche está en el pasillo 5."
             }
           ],
-          "notes": "La s no suena: ÁIL."
+          "notes": "La s no suena: ÁIL.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AISLADO",
+            "scene": "El PASILLO está AISLADO.",
+            "emoji": "🚶"
+          }
         },
         {
           "key": "departure",
@@ -680,7 +716,13 @@
               "text": "Departures are upstairs.",
               "translation": "Las salidas están arriba."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DEPARTIR",
+            "scene": "La SALIDA: hora de DEPARTIR.",
+            "emoji": "🛫"
+          }
         },
         {
           "key": "arrival",
@@ -719,7 +761,13 @@
               "text": "The arrival time is 6 pm.",
               "translation": "La hora de llegada es a las 6 de la tarde."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARRIBAR",
+            "scene": "La LLEGADA: el barco ARRIBA.",
+            "emoji": "🛬"
+          }
         },
         {
           "key": "customs",
@@ -759,7 +807,13 @@
               "text": "Customs officers.",
               "translation": "Agentes de aduanas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COSTUMBRES",
+            "scene": "En la ADUANA revisan tus COSTUMBRES.",
+            "emoji": "🛃"
+          }
         },
         {
           "key": "journey",
@@ -800,7 +854,13 @@
               "translation": "Un trayecto largo."
             }
           ],
-          "notes": "Journey es el trayecto; trip, el viaje entero."
+          "notes": "Journey es el trayecto; trip, el viaje entero.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JORNADA",
+            "scene": "El VIAJE dura una JORNADA.",
+            "emoji": "🛤️"
+          }
         },
         {
           "key": "backpack",
@@ -834,7 +894,13 @@
               "text": "Travelling with a backpack.",
               "translation": "Viajar con mochila."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BACK",
+            "scene": "MOCHILA: paquete (PACK) a la espalda (BACK).",
+            "emoji": "🎒"
+          }
         },
         {
           "key": "hostel",
@@ -873,7 +939,13 @@
               "text": "Hostels are cheap.",
               "translation": "Los albergues son baratos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HOSTAL",
+            "scene": "El ALBERGUE es un HOSTAL.",
+            "emoji": "🛏️"
+          }
         },
         {
           "key": "passenger",
@@ -918,7 +990,13 @@
               "text": "The bus has 40 passengers.",
               "translation": "El autobús lleva 40 pasajeros."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PASAJERO",
+            "scene": "PASAJERO: PÁ-sen-yer.",
+            "emoji": "🧍"
+          }
         },
         {
           "key": "land",
@@ -956,7 +1034,13 @@
               "text": "The plane landed safely.",
               "translation": "El avión aterrizó sin problemas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LANDA",
+            "scene": "ATERRIZAR en la LANDA (tierra).",
+            "emoji": "🛬"
+          }
         },
         {
           "key": "return-ticket",
@@ -1010,7 +1094,13 @@
               "text": "A single or a return?",
               "translation": "¿Solo ida o ida y vuelta?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RETORNO",
+            "scene": "BILLETE DE IDA Y VUELTA: con RETORNO.",
+            "emoji": "🔁🎫"
+          }
         }
       ]
     }

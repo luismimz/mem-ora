@@ -419,7 +419,13 @@
               "text": "I hope so.",
               "translation": "Eso espero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JOPE",
+            "scene": "¡JOPE!, ESPERO que salga bien.",
+            "emoji": "🤞"
+          }
         },
         {
           "key": "believe",
@@ -468,7 +474,13 @@
               "text": "Believe me.",
               "translation": "Créeme."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BELIEVE",
+            "scene": "CREER: «I BELIEVE I can fly».",
+            "emoji": "🕊️"
+          }
         },
         {
           "key": "mean",
@@ -518,7 +530,13 @@
               "text": "I didn't mean it.",
               "translation": "No lo decía en serio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MIN",
+            "scene": "¿Qué SIGNIFICA «MIN»?",
+            "emoji": "❓"
+          }
         },
         {
           "key": "happen",
@@ -550,7 +568,13 @@
               "text": "It happens a lot.",
               "translation": "Pasa mucho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JÁPEN",
+            "scene": "¿Qué PASA? Un JAPONÉS lo sabe.",
+            "emoji": "⁉️"
+          }
         },
         {
           "key": "follow",
@@ -584,7 +608,13 @@
               "text": "I follow her on Instagram.",
               "translation": "La sigo en Instagram."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FOLLÓN",
+            "scene": "SEGUIR al FOLLÓN de la calle.",
+            "emoji": "👣"
+          }
         },
         {
           "key": "choose",
@@ -627,7 +657,13 @@
               "text": "I chose the red one.",
               "translation": "Elegí el rojo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHUS",
+            "scene": "CHUS ELIGE el pastel más grande.",
+            "emoji": "🎂"
+          }
         },
         {
           "key": "break",
@@ -664,7 +700,13 @@
               "text": "Let's take a break.",
               "translation": "Hagamos un descanso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRECHA",
+            "scene": "ROMPES el muro y abres una BRECHA.",
+            "emoji": "🧱"
+          }
         },
         {
           "key": "build",
@@ -718,7 +760,13 @@
               "text": "Build your own app.",
               "translation": "Construye tu propia app."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BILDU",
+            "scene": "CONSTRUIR un castillo de BILLETES.",
+            "emoji": "🏰"
+          }
         },
         {
           "key": "check",
@@ -751,7 +799,13 @@
               "text": "Can I check the price?",
               "translation": "¿Puedo mirar el precio?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHEQUE",
+            "scene": "REVISAR el CHEQUE dos veces.",
+            "emoji": "🧾"
+          }
         },
         {
           "key": "plan",
@@ -802,7 +856,13 @@
               "text": "We planned everything.",
               "translation": "Lo planeamos todo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLAN",
+            "scene": "Un PLAN: igual en los dos idiomas.",
+            "emoji": "🗺️"
+          }
         },
         {
           "key": "share",
@@ -834,7 +894,13 @@
               "text": "Share it with your friends.",
               "translation": "Compártelo con tus amigos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHÉRIF",
+            "scene": "El SHERIFF COMPARTE su bocadillo.",
+            "emoji": "🤠🥪"
+          }
         },
         {
           "key": "borrow",
@@ -885,7 +951,13 @@
               "text": "I borrowed a book from the library.",
               "translation": "Saqué un libro de la biblioteca."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BORRO",
+            "scene": "PIDES PRESTADA la goma: «¿te BORRO esto?».",
+            "emoji": "✏️"
+          }
         },
         {
           "key": "lend",
@@ -942,7 +1014,13 @@
               "translation": "Le presté mi coche."
             }
           ],
-          "notes": "Borrow: pides prestado. Lend: prestas tú."
+          "notes": "Borrow: pides prestado. Lend: prestas tú.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LENTEJA",
+            "scene": "Te PRESTO una LENTEJA gigante.",
+            "emoji": "🫘"
+          }
         },
         {
           "key": "push",
@@ -974,7 +1052,13 @@
               "text": "Don't push me!",
               "translation": "¡No me empujes!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PUSH",
+            "scene": "EMPUJAR: PUSH, como en las puertas.",
+            "emoji": "🚪"
+          }
         },
         {
           "key": "pull",
@@ -1018,7 +1102,13 @@
               "text": "Push or pull?",
               "translation": "¿Empujar o tirar?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PULPO",
+            "scene": "Un PULPO TIRA de la cuerda.",
+            "emoji": "🐙"
+          }
         }
       ]
     }

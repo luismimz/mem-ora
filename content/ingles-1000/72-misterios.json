@@ -370,7 +370,13 @@
               "text": "I can't possibly finish today.",
               "translation": "Es imposible que acabe hoy."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POSIBLEMENTE",
+            "scene": "POSIBLEMENTE: PÓ-sibli.",
+            "emoji": "🤔"
+          }
         },
         {
           "key": "certainly",
@@ -419,7 +425,13 @@
               "text": "It's certainly true.",
               "translation": "Desde luego, es verdad."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CIERTAMENTE",
+            "scene": "DESDE LUEGO: CIERTAMENTE.",
+            "emoji": "✅"
+          }
         },
         {
           "key": "definitely",
@@ -464,7 +476,13 @@
               "translation": "¡Ni de broma!"
             }
           ],
-          "notes": "Falso amigo: definitivamente es for good o finally."
+          "notes": "Falso amigo: definitivamente es for good o finally.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DEFINITIVAMENTE",
+            "scene": "SIN DUDA: DEFINITIVAMENTE.",
+            "emoji": "💯"
+          }
         },
         {
           "key": "obviously",
@@ -508,7 +526,13 @@
               "text": "It was obviously a mistake.",
               "translation": "Estaba claro que era un error."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OBVIAMENTE",
+            "scene": "OBVIAMENTE: ÓB-viosli.",
+            "emoji": "🙄"
+          }
         },
         {
           "key": "evidence",
@@ -543,7 +567,13 @@
               "translation": "Pruebas sólidas."
             }
           ],
-          "notes": "Falso amigo: evidente es obvious."
+          "notes": "Falso amigo: evidente es obvious.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EVIDENCIA",
+            "scene": "PRUEBAS: la EVIDENCIA.",
+            "emoji": "🧾"
+          }
         },
         {
           "key": "clue",
@@ -580,7 +610,13 @@
               "text": "I haven't got a clue.",
               "translation": "No tengo ni idea."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLAVO",
+            "scene": "La PISTA: un CLAVO en la pared.",
+            "emoji": "🔎"
+          }
         },
         {
           "key": "mystery",
@@ -623,7 +659,13 @@
               "text": "A mystery novel.",
               "translation": "Una novela de misterio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MISTERIO",
+            "scene": "MISTERIO: MÍS-teri.",
+            "emoji": "❓"
+          }
         },
         {
           "key": "suspect",
@@ -663,7 +705,13 @@
               "translation": "Sospecho que miente."
             }
           ],
-          "notes": "Nombre: SÁSpekt; verbo: sasPÉKT."
+          "notes": "Nombre: SÁSpekt; verbo: sasPÉKT.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOSPECHOSO",
+            "scene": "SOSPECHOSO: SÁS-pekt.",
+            "emoji": "🕵️"
+          }
         },
         {
           "key": "witness",
@@ -696,7 +744,13 @@
               "text": "A key witness.",
               "translation": "Un testigo clave."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜITNES",
+            "scene": "El TESTIGO lo vio todo.",
+            "emoji": "👁️"
+          }
         },
         {
           "key": "detective",
@@ -750,7 +804,13 @@
               "text": "A private detective.",
               "translation": "Un detective privado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DETECTIVE",
+            "scene": "DETECTIVE: di-TÉK-tiv.",
+            "emoji": "🕵️‍♂️"
+          }
         },
         {
           "key": "prove",
@@ -801,7 +861,13 @@
               "text": "Prove me wrong.",
               "translation": "Demuéstrame que me equivoco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRUEBA",
+            "scene": "DEMOSTRAR con una PRUEBA.",
+            "emoji": "🧪"
+          }
         },
         {
           "key": "solve",
@@ -839,7 +905,13 @@
               "text": "Solve the puzzle.",
               "translation": "Resuelve el puzle."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOLVENTAR",
+            "scene": "RESOLVER: SOLVENTAR el problema.",
+            "emoji": "🧩"
+          }
         },
         {
           "key": "thief",
@@ -880,7 +952,13 @@
               "translation": "¡Al ladrón!"
             }
           ],
-          "notes": "Plural: thieves."
+          "notes": "Plural: thieves.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZIF",
+            "scene": "El LADRÓN huye en ZIGZAG.",
+            "emoji": "🦹"
+          }
         },
         {
           "key": "burglar",
@@ -918,7 +996,13 @@
               "text": "Burglar alarm.",
               "translation": "Alarma antirrobo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BURLAR",
+            "scene": "El LADRÓN te BURLA y entra en casa.",
+            "emoji": "🏠🦹"
+          }
         },
         {
           "key": "investigate",
@@ -962,7 +1046,13 @@
               "text": "Investigate the error.",
               "translation": "Investiga el error."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INVESTIGAR",
+            "scene": "INVESTIGAR: in-VÉS-tigueit.",
+            "emoji": "🔍"
+          }
         }
       ]
     }

@@ -328,7 +328,13 @@
               "text": "Apple trees.",
               "translation": "Manzanos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRES",
+            "scene": "Un ÁRBOL con TRES ramas.",
+            "emoji": "🌳"
+          }
         },
         {
           "key": "flower",
@@ -365,7 +371,13 @@
               "text": "She loves flowers.",
               "translation": "Le encantan las flores."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FLOR",
+            "scene": "Una FLOR que dice FLÁ-UER.",
+            "emoji": "🌸"
+          }
         },
         {
           "key": "river",
@@ -402,7 +414,13 @@
               "text": "We swam in the river.",
               "translation": "Nadamos en el río."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RÍVER",
+            "scene": "En el RÍO juega el RIVER Plate.",
+            "emoji": "🏞️"
+          }
         },
         {
           "key": "sea",
@@ -440,7 +458,13 @@
               "text": "The sea is cold today.",
               "translation": "Hoy el mar está frío."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SÍ",
+            "scene": "El MAR dice «SÍ» con cada ola.",
+            "emoji": "🌊"
+          }
         },
         {
           "key": "mountain",
@@ -495,7 +519,13 @@
               "text": "I love the mountains.",
               "translation": "Me encanta la montaña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MONTAÑA",
+            "scene": "MONTAÑA: casi igual, MÁUN-ten.",
+            "emoji": "⛰️"
+          }
         },
         {
           "key": "lake",
@@ -532,7 +562,13 @@
               "text": "A beautiful lake.",
               "translation": "Un lago precioso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAIC",
+            "scene": "Un LAGO de LECHE (milk-lake).",
+            "emoji": "🏞️🥛"
+          }
         },
         {
           "key": "forest",
@@ -569,7 +605,13 @@
               "text": "A dark forest.",
               "translation": "Un bosque oscuro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORESTAL",
+            "scene": "Un BOSQUE con guardia FORESTAL.",
+            "emoji": "🌲"
+          }
         },
         {
           "key": "island",
@@ -624,7 +666,13 @@
               "translation": "Vivimos en una isla."
             }
           ],
-          "notes": "La s no suena: ÁIland."
+          "notes": "La s no suena: ÁIland.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ISLA",
+            "scene": "ISLA: ÁI-land, isla con tierra (land).",
+            "emoji": "🏝️"
+          }
         },
         {
           "key": "sky",
@@ -672,7 +720,13 @@
               "text": "Look at the sky!",
               "translation": "¡Mira el cielo!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESQUÍ",
+            "scene": "ESQUÍAS por el CIELO.",
+            "emoji": "⛷️☁️"
+          }
         },
         {
           "key": "star",
@@ -716,7 +770,13 @@
               "text": "A film star.",
               "translation": "Una estrella de cine."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTAR",
+            "scene": "Una ESTRELLA quiere ESTAR en el cielo.",
+            "emoji": "⭐"
+          }
         },
         {
           "key": "moon",
@@ -766,7 +826,13 @@
               "text": "A trip to the moon.",
               "translation": "Un viaje a la luna."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MUN",
+            "scene": "La LUNA dice «MUUU» como una vaca.",
+            "emoji": "🌙🐄"
+          }
         },
         {
           "key": "world",
@@ -809,7 +875,13 @@
               "text": "The best in the world.",
               "translation": "El mejor del mundo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜERLD",
+            "scene": "El MUNDO gira como un GUERRERO.",
+            "emoji": "🌍"
+          }
         },
         {
           "key": "field",
@@ -846,7 +918,13 @@
               "text": "A football field.",
               "translation": "Un campo de fútbol."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIL",
+            "scene": "En el CAMPO, un FILETE crece.",
+            "emoji": "🌾"
+          }
         },
         {
           "key": "grass",
@@ -886,7 +964,13 @@
               "text": "The grass is wet.",
               "translation": "La hierba está mojada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRASA",
+            "scene": "La HIERBA tiene GRASA verde.",
+            "emoji": "🌱"
+          }
         },
         {
           "key": "sunset",
@@ -928,7 +1012,13 @@
               "text": "We watched the sunset.",
               "translation": "Vimos la puesta de sol."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOL",
+            "scene": "PUESTA DE SOL: el SUN (sol) se SIENTA (set).",
+            "emoji": "🌇"
+          }
         }
       ]
     }

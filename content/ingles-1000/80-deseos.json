@@ -663,7 +663,13 @@
               "text": "Best wishes.",
               "translation": "Un saludo cordial."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜISKI",
+            "scene": "DESEO: un GÜISKI mágico.",
+            "emoji": "🧞"
+          }
         },
         {
           "key": "regret",
@@ -709,7 +715,13 @@
               "text": "No regrets.",
               "translation": "Sin arrepentimientos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REGRESAR",
+            "scene": "ARREPENTIRSE y querer REGRESAR.",
+            "emoji": "😔"
+          }
         },
         {
           "key": "envy",
@@ -752,7 +764,13 @@
               "text": "Green with envy.",
               "translation": "Muerto de envidia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENVIDIA",
+            "scene": "ENVIDIA: ÉN-vi.",
+            "emoji": "😒"
+          }
         },
         {
           "key": "lottery",
@@ -792,7 +810,13 @@
               "text": "A lottery ticket.",
               "translation": "Un billete de lotería."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LOTERÍA",
+            "scene": "LOTERÍA: LÓ-teri.",
+            "emoji": "🎟️"
+          }
         },
         {
           "key": "fortune",
@@ -831,7 +855,13 @@
               "text": "Good fortune.",
               "translation": "Buena suerte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORTUNA",
+            "scene": "FORTUNA: FÓR-chun.",
+            "emoji": "💰"
+          }
         },
         {
           "key": "rich",
@@ -870,7 +900,13 @@
               "translation": "Rico y famoso."
             }
           ],
-          "notes": "Rico de sabor es delicious o tasty."
+          "notes": "Rico de sabor es delicious o tasty.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RICO",
+            "scene": "RICO: RICH.",
+            "emoji": "🤑"
+          }
         },
         {
           "key": "poor",
@@ -919,7 +955,13 @@
               "text": "A poor country.",
               "translation": "Un país pobre."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POBRE",
+            "scene": "POBRE: PUR, casi.",
+            "emoji": "🪫"
+          }
         },
         {
           "key": "fame",
@@ -963,7 +1005,13 @@
               "text": "Fame and fortune.",
               "translation": "Fama y fortuna."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAMA",
+            "scene": "FAMA: FÉIM.",
+            "emoji": "🌟"
+          }
         },
         {
           "key": "freedom",
@@ -1002,7 +1050,13 @@
               "text": "Freedom of speech.",
               "translation": "Libertad de expresión."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FREE",
+            "scene": "LIBERTAD: ser LIBRE (FREE).",
+            "emoji": "🕊️"
+          }
         },
         {
           "key": "mansion",
@@ -1040,7 +1094,13 @@
               "text": "A huge mansion.",
               "translation": "Una mansión enorme."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANSIÓN",
+            "scene": "MANSIÓN: MÁN-shon.",
+            "emoji": "🏰"
+          }
         },
         {
           "key": "wealthy",
@@ -1082,7 +1142,13 @@
               "text": "Wealth is not everything.",
               "translation": "El dinero no lo es todo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜELZI",
+            "scene": "ADINERADO: con WEALTH (riqueza).",
+            "emoji": "💎"
+          }
         },
         {
           "key": "desire",
@@ -1129,7 +1195,13 @@
               "text": "A strong desire.",
               "translation": "Un deseo fuerte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESEO",
+            "scene": "DESEO fuerte: di-SÁIER.",
+            "emoji": "🔥"
+          }
         },
         {
           "key": "if-only",
@@ -1169,7 +1241,13 @@
               "text": "If only I knew.",
               "translation": "Si yo lo supiera."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OJALÁ",
+            "scene": "OJALÁ: IF ONLY, si tan solo…",
+            "emoji": "🙏"
+          }
         },
         {
           "key": "pity",
@@ -1213,7 +1291,13 @@
               "text": "What a pity!",
               "translation": "¡Qué pena!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PITI",
+            "scene": "¡QUÉ PENA!: se apagó el PITILLO.",
+            "emoji": "😢"
+          }
         },
         {
           "key": "secret",
@@ -1263,7 +1347,13 @@
               "text": "It's a secret.",
               "translation": "Es un secreto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SECRETO",
+            "scene": "SECRETO: SÍI-kret.",
+            "emoji": "🤫"
+          }
         }
       ]
     }

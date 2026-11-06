@@ -368,7 +368,13 @@
               "text": "A two-bedroom flat.",
               "translation": "Un piso de dos habitaciones."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BED",
+            "scene": "DORMITORIO: BED (cama) + ROOM (habitación).",
+            "emoji": "🛏️"
+          }
         },
         {
           "key": "living-room",
@@ -400,7 +406,13 @@
               "text": "The TV is in the living room.",
               "translation": "La tele está en el salón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LIVING",
+            "scene": "El SALÓN es el LIVING.",
+            "emoji": "🛋️"
+          }
         },
         {
           "key": "roof",
@@ -437,7 +449,13 @@
               "text": "The roof is broken.",
               "translation": "El tejado está roto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RUFO",
+            "scene": "RUFO el gato duerme en el TEJADO.",
+            "emoji": "🐈🏠"
+          }
         },
         {
           "key": "shower",
@@ -470,7 +488,13 @@
               "translation": "Me ducho cada mañana."
             }
           ],
-          "notes": "Ducharse: have a shower (o take a shower)."
+          "notes": "Ducharse: have a shower (o take a shower).",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHAU",
+            "scene": "En la DUCHA dices «¡CHAU!» al agua fría.",
+            "emoji": "🚿"
+          }
         },
         {
           "key": "curtain",
@@ -507,7 +531,13 @@
               "text": "Blue curtains.",
               "translation": "Cortinas azules."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CORTINA",
+            "scene": "CORTINA: KÉR-ten.",
+            "emoji": "🪟"
+          }
         },
         {
           "key": "carpet",
@@ -544,7 +574,13 @@
               "text": "Take off your shoes on the carpet.",
               "translation": "Quítate los zapatos en la alfombra."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARPETA",
+            "scene": "Una CARPETA sobre la ALFOMBRA.",
+            "emoji": "🧶"
+          }
         },
         {
           "key": "bath",
@@ -599,7 +635,13 @@
               "text": "The baby is in the bath.",
               "translation": "El bebé está en la bañera."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAZ",
+            "scene": "En la BAÑERA flota un BARCO.",
+            "emoji": "🛁"
+          }
         },
         {
           "key": "drawer",
@@ -648,7 +690,13 @@
               "text": "Open the drawer.",
               "translation": "Abre el cajón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DROR",
+            "scene": "El CAJÓN donde guardas tus DIBUJOS (DRAW).",
+            "emoji": "🗄️"
+          }
         },
         {
           "key": "sink",
@@ -685,7 +733,13 @@
               "text": "Wash your hands in the sink.",
               "translation": "Lávate las manos en el lavabo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZINC",
+            "scene": "El FREGADERO es de ZINC.",
+            "emoji": "🚰"
+          }
         },
         {
           "key": "toilet",
@@ -723,7 +777,13 @@
               "translation": "¿Puedo usar el baño?"
             }
           ],
-          "notes": "En EE. UU. se dice bathroom o restroom."
+          "notes": "En EE. UU. se dice bathroom o restroom.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TOILETTE",
+            "scene": "El VÁTER: la TOILETTE.",
+            "emoji": "🚽"
+          }
         },
         {
           "key": "dishwasher",
@@ -761,7 +821,13 @@
               "text": "The dishwasher is broken.",
               "translation": "El lavavajillas está roto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DISCO",
+            "scene": "LAVAVAJILLAS: lava (WASH) platos (DISH).",
+            "emoji": "🍽️"
+          }
         },
         {
           "key": "garage",
@@ -798,7 +864,13 @@
               "text": "A garage sale.",
               "translation": "Un mercadillo en casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GARAJE",
+            "scene": "GARAJE: GÁ-raach.",
+            "emoji": "🚗"
+          }
         },
         {
           "key": "balcony",
@@ -832,7 +904,13 @@
               "text": "A flat with a balcony.",
               "translation": "Un piso con balcón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BALCÓN",
+            "scene": "BALCÓN: BÁL-koni.",
+            "emoji": "🌇"
+          }
         },
         {
           "key": "cupboard",
@@ -870,7 +948,13 @@
               "translation": "Cierra el armario."
             }
           ],
-          "notes": "La p no suena: KÁberd."
+          "notes": "La p no suena: KÁberd.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUBO",
+            "scene": "En el ARMARIO de la cocina hay un CUBO.",
+            "emoji": "🗄️"
+          }
         },
         {
           "key": "bin",
@@ -910,7 +994,13 @@
               "text": "Take out the bin.",
               "translation": "Saca la basura."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BIN",
+            "scene": "El CUBO DE LA BASURA hace «BIN» al cerrar.",
+            "emoji": "🗑️"
+          }
         }
       ]
     }

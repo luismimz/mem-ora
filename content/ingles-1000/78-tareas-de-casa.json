@@ -672,7 +672,13 @@
               "text": "Household chores.",
               "translation": "Tareas domésticas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHORRADAS",
+            "scene": "Las TAREAS DE CASA no son CHORRADAS.",
+            "emoji": "🧹"
+          }
         },
         {
           "key": "laundry",
@@ -717,7 +723,13 @@
               "text": "A laundry basket.",
               "translation": "Un cesto de la ropa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAVANDERÍA",
+            "scene": "La COLADA va a la LAVANDERÍA.",
+            "emoji": "🧺"
+          }
         },
         {
           "key": "vacuum",
@@ -767,7 +779,13 @@
               "text": "A vacuum cleaner.",
               "translation": "Una aspiradora."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VACÍO",
+            "scene": "La ASPIRADORA hace el VACÍO.",
+            "emoji": "🧹"
+          }
         },
         {
           "key": "dust",
@@ -810,7 +828,13 @@
               "text": "Dust the furniture.",
               "translation": "Quita el polvo a los muebles."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DOS",
+            "scene": "El POLVO se acumula en DOS días.",
+            "emoji": "🌫️"
+          }
         },
         {
           "key": "sweep",
@@ -848,7 +872,13 @@
               "translation": "Barrí la cocina."
             }
           ],
-          "notes": "Pasado: swept."
+          "notes": "Pasado: swept.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUIP",
+            "scene": "BARRER: ¡SUIP, SUIP!, hace la escoba.",
+            "emoji": "🧹"
+          }
         },
         {
           "key": "tidy",
@@ -880,7 +910,13 @@
               "text": "A tidy desk.",
               "translation": "Una mesa ordenada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TAIDI",
+            "scene": "ORDENADO como TEDDY el oso.",
+            "emoji": "🧸"
+          }
         },
         {
           "key": "mess",
@@ -913,7 +949,13 @@
               "text": "Don't make a mess.",
               "translation": "No lo dejes todo patas arriba."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MESA",
+            "scene": "Un DESORDEN sobre la MESA.",
+            "emoji": "🌀"
+          }
         },
         {
           "key": "mop",
@@ -961,7 +1003,13 @@
               "text": "Where is the mop?",
               "translation": "¿Dónde está la fregona?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MOPA",
+            "scene": "La FREGONA es una MOPA.",
+            "emoji": "🧽"
+          }
         },
         {
           "key": "dishes",
@@ -1001,7 +1049,13 @@
               "text": "Dirty dishes.",
               "translation": "Platos sucios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DISCOS",
+            "scene": "Los PLATOS parecen DISCOS.",
+            "emoji": "🍽️"
+          }
         },
         {
           "key": "polish",
@@ -1036,7 +1090,13 @@
               "translation": "Esmalte de uñas."
             }
           ],
-          "notes": "Polish con mayúscula es polaco."
+          "notes": "Polish con mayúscula es polaco.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POLACO",
+            "scene": "Un POLACO SACA BRILLO a tus zapatos.",
+            "emoji": "✨"
+          }
         },
         {
           "key": "scrub",
@@ -1068,7 +1128,13 @@
               "text": "Scrub it hard.",
               "translation": "Frótalo fuerte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCRUPULOSO",
+            "scene": "FROTAR de forma ESCRUPULOSA.",
+            "emoji": "🧽"
+          }
         },
         {
           "key": "bucket",
@@ -1107,7 +1173,13 @@
               "text": "A bucket of ice.",
               "translation": "Un cubo de hielo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAQUETA",
+            "scene": "Tocas el CUBO con una BAQUETA.",
+            "emoji": "🪣"
+          }
         },
         {
           "key": "broom",
@@ -1144,7 +1216,13 @@
               "text": "A witch on a broom.",
               "translation": "Una bruja en una escoba."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRUMA",
+            "scene": "Una ESCOBA barre la BRUMA.",
+            "emoji": "🧹"
+          }
         },
         {
           "key": "sponge",
@@ -1183,7 +1261,13 @@
               "text": "A sponge cake.",
               "translation": "Un bizcocho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPONJA",
+            "scene": "ESPONJA: SPANCH.",
+            "emoji": "🧽"
+          }
         },
         {
           "key": "detergent",
@@ -1224,7 +1308,13 @@
               "text": "Washing-up liquid.",
               "translation": "Lavavajillas (líquido)."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DETERGENTE",
+            "scene": "DETERGENTE: di-TÉR-yent.",
+            "emoji": "🧴"
+          }
         }
       ]
     }

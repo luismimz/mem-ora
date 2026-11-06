@@ -342,7 +342,13 @@
               "text": "A famous painting.",
               "translation": "Un cuadro famoso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PINTURA",
+            "scene": "Un CUADRO: PAINT (pintar).",
+            "emoji": "🖼️"
+          }
         },
         {
           "key": "drawing",
@@ -386,7 +392,13 @@
               "text": "I'm good at drawing.",
               "translation": "Se me da bien dibujar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRO",
+            "scene": "Un DIBUJO de un DRAGÓN.",
+            "emoji": "✏️"
+          }
         },
         {
           "key": "photography",
@@ -429,7 +441,13 @@
               "translation": "Un curso de fotografía."
             }
           ],
-          "notes": "Cada foto es a photo; la afición, photography."
+          "notes": "Cada foto es a photo; la afición, photography.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FOTOGRAFÍA",
+            "scene": "FOTOGRAFÍA: fo-TÓ-grafi.",
+            "emoji": "📸"
+          }
         },
         {
           "key": "chess",
@@ -463,7 +481,13 @@
               "text": "A chess player.",
               "translation": "Un jugador de ajedrez."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHES",
+            "scene": "En el AJEDREZ, el rey dice «¡CHES!».",
+            "emoji": "♟️"
+          }
         },
         {
           "key": "cards",
@@ -508,7 +532,13 @@
               "text": "A pack of cards.",
               "translation": "Una baraja."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARTAS",
+            "scene": "CARTAS: KARDS, las tarjetas.",
+            "emoji": "🃏"
+          }
         },
         {
           "key": "camping",
@@ -559,7 +589,13 @@
               "text": "A camping trip.",
               "translation": "Una excursión de acampada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMPING",
+            "scene": "ACAMPADA: el CAMPING.",
+            "emoji": "🏕️"
+          }
         },
         {
           "key": "fishing",
@@ -600,7 +636,13 @@
               "text": "Let's go fishing.",
               "translation": "Vamos a pescar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FISHING",
+            "scene": "PESCA: FISH (pez) + ING.",
+            "emoji": "🎣"
+          }
         },
         {
           "key": "hiking",
@@ -646,7 +688,13 @@
               "text": "Hiking boots.",
               "translation": "Botas de montaña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAIKU",
+            "scene": "SENDERISMO recitando un HAIKU.",
+            "emoji": "🥾"
+          }
         },
         {
           "key": "concert",
@@ -691,7 +739,13 @@
               "text": "A rock concert.",
               "translation": "Un concierto de rock."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONCIERTO",
+            "scene": "CONCIERTO: KÓN-sert.",
+            "emoji": "🎸"
+          }
         },
         {
           "key": "festival",
@@ -730,7 +784,13 @@
               "text": "A music festival.",
               "translation": "Un festival de música."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FESTIVAL",
+            "scene": "FESTIVAL: igual, FÉS-tival.",
+            "emoji": "🎪"
+          }
         },
         {
           "key": "theatre",
@@ -768,7 +828,13 @@
               "translation": "Una entrada de teatro."
             }
           ],
-          "notes": "En EE. UU. se escribe theater."
+          "notes": "En EE. UU. se escribe theater.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEATRO",
+            "scene": "TEATRO: ZÍ-ater.",
+            "emoji": "🎭"
+          }
         },
         {
           "key": "gallery",
@@ -812,7 +878,13 @@
               "text": "An art gallery.",
               "translation": "Una galería de arte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GALERÍA",
+            "scene": "GALERÍA: GÁ-leri.",
+            "emoji": "🖼️"
+          }
         },
         {
           "key": "guitar",
@@ -852,7 +924,13 @@
               "text": "An electric guitar.",
               "translation": "Una guitarra eléctrica."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUITARRA",
+            "scene": "GUITARRA: gui-TÁR.",
+            "emoji": "🎸"
+          }
         },
         {
           "key": "piano",
@@ -895,7 +973,13 @@
               "text": "Piano lessons.",
               "translation": "Clases de piano."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PIANO",
+            "scene": "PIANO: igual, pi-Á-nou.",
+            "emoji": "🎹"
+          }
         },
         {
           "key": "board-game",
@@ -928,7 +1012,13 @@
               "text": "Chess is a board game.",
               "translation": "El ajedrez es un juego de mesa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BORDE",
+            "scene": "JUEGO DE MESA: el tablero (BOARD) tiene BORDE.",
+            "emoji": "🎲"
+          }
         }
       ]
     }

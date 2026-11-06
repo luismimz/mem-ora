@@ -420,7 +420,13 @@
               "text": "Ten candidates applied.",
               "translation": "Se presentaron diez candidatos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CANDIDATO",
+            "scene": "CANDIDATO: KÁN-dideit.",
+            "emoji": "🙋"
+          }
         },
         {
           "key": "application",
@@ -459,7 +465,13 @@
               "text": "A mobile application.",
               "translation": "Una aplicación para el móvil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APLICACIÓN",
+            "scene": "SOLICITUD y APLICACIÓN: a-pli-KÉI-shon.",
+            "emoji": "📄"
+          }
         },
         {
           "key": "contract",
@@ -503,7 +515,13 @@
               "text": "A one-year contract.",
               "translation": "Un contrato de un año."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONTRATO",
+            "scene": "CONTRATO: KÓN-trakt.",
+            "emoji": "✍️"
+          }
         },
         {
           "key": "employer",
@@ -541,7 +559,13 @@
               "translation": "Una buena empresa para trabajar."
             }
           ],
-          "notes": "Employer contrata; employee es quien trabaja."
+          "notes": "Employer contrata; employee es quien trabaja.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EMPLEADOR",
+            "scene": "La EMPRESA que contrata: el EMPLEADOR.",
+            "emoji": "🏢"
+          }
         },
         {
           "key": "employee",
@@ -578,7 +602,13 @@
               "text": "Employee of the month.",
               "translation": "Empleado del mes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EMPLEADO",
+            "scene": "EMPLEADO: em-plo-ÍI.",
+            "emoji": "👷"
+          }
         },
         {
           "key": "promotion",
@@ -613,7 +643,13 @@
               "text": "A special promotion.",
               "translation": "Una promoción especial."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROMOCIÓN",
+            "scene": "ASCENSO: una PROMOCIÓN.",
+            "emoji": "⬆️"
+          }
         },
         {
           "key": "qualification",
@@ -657,7 +693,13 @@
               "text": "A professional qualification.",
               "translation": "Una titulación profesional."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUALIFICACIÓN",
+            "scene": "TÍTULO: tu CUALIFICACIÓN.",
+            "emoji": "📜"
+          }
         },
         {
           "key": "responsible",
@@ -697,7 +739,13 @@
               "text": "A responsible person.",
               "translation": "Una persona responsable."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RESPONSABLE",
+            "scene": "RESPONSABLE: ris-PÓN-sibol.",
+            "emoji": "🫡"
+          }
         },
         {
           "key": "shift",
@@ -753,7 +801,13 @@
               "text": "A twelve-hour shift.",
               "translation": "Un turno de doce horas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHIFLA",
+            "scene": "El TURNO de noche te CHIFLA.",
+            "emoji": "🕗"
+          }
         },
         {
           "key": "overtime",
@@ -797,7 +851,13 @@
               "text": "Overtime pay.",
               "translation": "Pago de horas extra."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OVER",
+            "scene": "HORAS EXTRA: tiempo (TIME) de más (OVER).",
+            "emoji": "⏰"
+          }
         },
         {
           "key": "unemployed",
@@ -841,7 +901,13 @@
               "text": "Unemployment is falling.",
               "translation": "El paro está bajando."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESEMPLEADO",
+            "scene": "EN PARO: DESEMPLEADO.",
+            "emoji": "📉"
+          }
         },
         {
           "key": "hire",
@@ -892,7 +958,13 @@
               "text": "Hire a car.",
               "translation": "Alquilar un coche."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JAIRE",
+            "scene": "CONTRATAR: te JALAN al equipo.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "resign",
@@ -934,7 +1006,13 @@
               "translation": "Dimitió de su puesto."
             }
           ],
-          "notes": "Falso amigo: resignarse es accept."
+          "notes": "Falso amigo: resignarse es accept.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RESIGNAR",
+            "scene": "DIMITIR, RESIGNADO.",
+            "emoji": "🚪"
+          }
         },
         {
           "key": "part-time",
@@ -972,7 +1050,13 @@
               "text": "A part-time job.",
               "translation": "Un trabajo a tiempo parcial."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PARTE",
+            "scene": "MEDIA JORNADA: PARTE del tiempo (TIME).",
+            "emoji": "🕐"
+          }
         },
         {
           "key": "full-time",
@@ -1021,7 +1105,13 @@
               "text": "She studies full-time.",
               "translation": "Estudia a tiempo completo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FULL",
+            "scene": "JORNADA COMPLETA: FULL TIME.",
+            "emoji": "🕘"
+          }
         }
       ]
     }

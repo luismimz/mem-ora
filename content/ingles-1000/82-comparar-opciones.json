@@ -306,7 +306,13 @@
               "text": "A good option.",
               "translation": "Una buena opción."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OPCIÓN",
+            "scene": "OPCIÓN: ÓP-shon.",
+            "emoji": "🔘"
+          }
         },
         {
           "key": "choice",
@@ -346,7 +352,13 @@
               "translation": "¡Buena elección!"
             }
           ],
-          "notes": "El verbo es choose."
+          "notes": "El verbo es choose.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHOIS",
+            "scene": "ELECCIÓN: CHOOSE (elegir).",
+            "emoji": "☑️"
+          }
         },
         {
           "key": "advantage",
@@ -384,7 +396,13 @@
               "text": "Take advantage of it.",
               "translation": "Aprovéchalo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VENTAJA",
+            "scene": "VENTAJA: ad-VÁN-tich, va delante.",
+            "emoji": "⬆️"
+          }
         },
         {
           "key": "disadvantage",
@@ -421,7 +439,13 @@
               "text": "Advantages and disadvantages.",
               "translation": "Ventajas y desventajas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESVENTAJA",
+            "scene": "DESVENTAJA: DIS + ADVANTAGE.",
+            "emoji": "⬇️"
+          }
         },
         {
           "key": "compare",
@@ -453,7 +477,13 @@
               "text": "Don't compare yourself to others.",
               "translation": "No te compares con los demás."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COMPARAR",
+            "scene": "COMPARAR: kom-PÉR.",
+            "emoji": "⚖️"
+          }
         },
         {
           "key": "similar",
@@ -492,7 +522,13 @@
               "text": "Very similar.",
               "translation": "Muy parecido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIMILAR",
+            "scene": "PARECIDO: SIMILAR.",
+            "emoji": "👯"
+          }
         },
         {
           "key": "alternative",
@@ -525,7 +561,13 @@
               "text": "An alternative plan.",
               "translation": "Un plan alternativo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ALTERNATIVA",
+            "scene": "ALTERNATIVA: ol-TÉR-nativ.",
+            "emoji": "🔀"
+          }
         },
         {
           "key": "decision",
@@ -575,7 +617,13 @@
               "translation": "Toma una decisión."
             }
           ],
-          "notes": "Tomar una decisión es MAKE a decision."
+          "notes": "Tomar una decisión es MAKE a decision.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DECISIÓN",
+            "scene": "DECISIÓN: di-SÍ-yon.",
+            "emoji": "✅"
+          }
         },
         {
           "key": "worth",
@@ -615,7 +663,13 @@
               "text": "It's not worth the money.",
               "translation": "No vale lo que cuesta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜERZ",
+            "scene": "QUE VALE LA PENA: vale su peso en oro.",
+            "emoji": "💎"
+          }
         },
         {
           "key": "quality",
@@ -651,7 +705,13 @@
               "text": "Quality over quantity.",
               "translation": "Calidad antes que cantidad."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CALIDAD",
+            "scene": "CALIDAD: KUÓ-liti.",
+            "emoji": "⭐"
+          }
         },
         {
           "key": "brand",
@@ -690,7 +750,13 @@
               "text": "A famous brand.",
               "translation": "Una marca famosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRANDY",
+            "scene": "MARCA de BRANDY.",
+            "emoji": "🏷️"
+          }
         },
         {
           "key": "value",
@@ -724,7 +790,13 @@
               "text": "Family values.",
               "translation": "Valores familiares."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VALOR",
+            "scene": "VALOR: VÁ-liu.",
+            "emoji": "💲"
+          }
         },
         {
           "key": "feature",
@@ -772,7 +844,13 @@
               "text": "A new feature.",
               "translation": "Una función nueva."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FUTURO",
+            "scene": "CARACTERÍSTICA del FUTURO.",
+            "emoji": "✨"
+          }
         },
         {
           "key": "pros-and-cons",
@@ -806,7 +884,13 @@
               "text": "Weigh up the pros and cons.",
               "translation": "Sopesa los pros y los contras."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROS",
+            "scene": "PROS Y CONTRAS: PROS AND CONS.",
+            "emoji": "⚖️"
+          }
         },
         {
           "key": "depend",
@@ -846,7 +930,13 @@
               "text": "You can depend on me.",
               "translation": "Puedes contar conmigo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DEPENDER",
+            "scene": "DEPENDER: di-PÉND.",
+            "emoji": "🔗"
+          }
         }
       ]
     }

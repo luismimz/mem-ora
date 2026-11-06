@@ -310,7 +310,13 @@
               "text": "We all agree.",
               "translation": "Todos estamos de acuerdo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AGRADO",
+            "scene": "ESTAR DE ACUERDO con AGRADO.",
+            "emoji": "👍"
+          }
         },
         {
           "key": "disagree",
@@ -349,7 +355,13 @@
               "text": "Sorry, I disagree.",
               "translation": "Lo siento, pero no estoy de acuerdo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESAGRADO",
+            "scene": "NO ESTAR DE ACUERDO con DESAGRADO.",
+            "emoji": "👎"
+          }
         },
         {
           "key": "opinion",
@@ -384,7 +396,13 @@
               "text": "In my opinion, it's fine.",
               "translation": "En mi opinión, está bien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OPINIÓN",
+            "scene": "OPINIÓN: casi igual, o-PÍ-nion.",
+            "emoji": "💭"
+          }
         },
         {
           "key": "idea",
@@ -432,7 +450,13 @@
               "text": "I have no idea.",
               "translation": "Ni idea."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "IDEA",
+            "scene": "IDEA: igual, ai-DÍ-a.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "true",
@@ -475,7 +499,13 @@
               "text": "It's true.",
               "translation": "Es cierto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRUCO",
+            "scene": "¿VERDAD o TRUCO?",
+            "emoji": "✔️"
+          }
         },
         {
           "key": "wrong",
@@ -510,7 +540,13 @@
               "text": "What's wrong?",
               "translation": "¿Qué pasa?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RONCA",
+            "scene": "EQUIVOCADO: el que RONCA no oye.",
+            "emoji": "✖️"
+          }
         },
         {
           "key": "maybe",
@@ -542,7 +578,13 @@
               "text": "Maybe you're right.",
               "translation": "Quizás tengas razón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MEIBI",
+            "scene": "QUIZÁS, MEIBI sí, MEIBI no.",
+            "emoji": "🤷"
+          }
         },
         {
           "key": "probably",
@@ -593,7 +635,13 @@
               "text": "He's probably at home.",
               "translation": "Seguramente está en casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROBABLEMENTE",
+            "scene": "PROBABLEMENTE: casi igual, PRÓ-babli.",
+            "emoji": "🎲"
+          }
         },
         {
           "key": "important",
@@ -630,7 +678,13 @@
               "text": "Family is important to me.",
               "translation": "La familia es importante para mí."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "IMPORTANTE",
+            "scene": "IMPORTANTE: casi igual, im-PÓR-tant.",
+            "emoji": "❗"
+          }
         },
         {
           "key": "interesting",
@@ -672,7 +726,13 @@
               "text": "That's interesting.",
               "translation": "Qué interesante."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INTERESANTE",
+            "scene": "INTERESANTE: ÍN-tres-ting.",
+            "emoji": "🤔"
+          }
         },
         {
           "key": "boring",
@@ -709,7 +769,13 @@
               "text": "Maths is boring.",
               "translation": "Las matemáticas son aburridas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BORREGO",
+            "scene": "ABURRIDO como un BORREGO contando ovejas.",
+            "emoji": "🐑"
+          }
         },
         {
           "key": "amazing",
@@ -750,7 +816,13 @@
               "text": "You're amazing.",
               "translation": "Eres increíble."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AMÉN",
+            "scene": "ALUCINANTE: todos dicen AMÉN.",
+            "emoji": "🤯"
+          }
         },
         {
           "key": "terrible",
@@ -788,7 +860,13 @@
               "text": "I feel terrible.",
               "translation": "Me encuentro fatal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TERRIBLE",
+            "scene": "HORRIBLE: TERRIBLE, igual.",
+            "emoji": "😖"
+          }
         },
         {
           "key": "perfect",
@@ -825,7 +903,13 @@
               "text": "Perfect, see you then.",
               "translation": "Perfecto, nos vemos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PERFECTO",
+            "scene": "PERFECTO sin la O.",
+            "emoji": "👌"
+          }
         },
         {
           "key": "prefer",
@@ -871,7 +955,13 @@
               "text": "Which one do you prefer?",
               "translation": "¿Cuál prefieres?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PREFERIR",
+            "scene": "PREFERIR: pri-FÉR.",
+            "emoji": "❤️"
+          }
         }
       ]
     }

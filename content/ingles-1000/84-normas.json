@@ -321,7 +321,13 @@
               "text": "As a rule…",
               "translation": "Por norma general…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REGLA",
+            "scene": "NORMA: una REGLA (RULER).",
+            "emoji": "📏"
+          }
         },
         {
           "key": "forbidden",
@@ -366,7 +372,13 @@
               "text": "Forbidden fruit.",
               "translation": "Fruta prohibida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORBIDO",
+            "scene": "PROHIBIDO pasar: FORBIDDEN.",
+            "emoji": "⛔"
+          }
         },
         {
           "key": "permit",
@@ -421,7 +433,13 @@
               "text": "A parking permit.",
               "translation": "Una tarjeta de aparcamiento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PERMISO",
+            "scene": "PERMISO: PÉR-mit.",
+            "emoji": "🪪"
+          }
         },
         {
           "key": "safety",
@@ -457,7 +475,13 @@
               "translation": "Por su seguridad."
             }
           ],
-          "notes": "Safety es estar a salvo; security, protección contra robos o ataques."
+          "notes": "Safety es estar a salvo; security, protección contra robos o ataques.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEGURIDAD",
+            "scene": "SEGURIDAD: SAFE (a salvo).",
+            "emoji": "🦺"
+          }
         },
         {
           "key": "emergency",
@@ -496,7 +520,13 @@
               "text": "Emergency exit.",
               "translation": "Salida de emergencia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EMERGENCIA",
+            "scene": "EMERGENCIA: i-MÉR-yensi.",
+            "emoji": "🚨"
+          }
         },
         {
           "key": "seatbelt",
@@ -530,7 +560,13 @@
               "text": "Wear a seatbelt.",
               "translation": "Ponte el cinturón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CINTURÓN",
+            "scene": "CINTURÓN DE SEGURIDAD: SEAT + BELT.",
+            "emoji": "🚗"
+          }
         },
         {
           "key": "helmet",
@@ -575,7 +611,13 @@
               "text": "A bike helmet.",
               "translation": "Un casco de bici."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YELMO",
+            "scene": "El CASCO es un YELMO.",
+            "emoji": "⛑️"
+          }
         },
         {
           "key": "licence",
@@ -621,7 +663,13 @@
               "translation": "Una licencia de pesca."
             }
           ],
-          "notes": "En EE. UU. se escribe license."
+          "notes": "En EE. UU. se escribe license.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LICENCIA",
+            "scene": "CARNÉ: LICENCIA.",
+            "emoji": "🪪"
+          }
         },
         {
           "key": "obey",
@@ -665,7 +713,13 @@
               "text": "The dog obeys me.",
               "translation": "El perro me obedece."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OBEDECER",
+            "scene": "OBEDECER: o-BÉI.",
+            "emoji": "🫡"
+          }
         },
         {
           "key": "ban",
@@ -716,7 +770,13 @@
               "text": "A smoking ban.",
               "translation": "Una prohibición de fumar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BANDA",
+            "scene": "PROHIBIR la BANDA.",
+            "emoji": "🚫"
+          }
         },
         {
           "key": "penalty",
@@ -755,7 +815,13 @@
               "text": "He scored a penalty.",
               "translation": "Marcó un penalti."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PENALTI",
+            "scene": "SANCIÓN… y PENALTI.",
+            "emoji": "⚽"
+          }
         },
         {
           "key": "sign",
@@ -793,7 +859,13 @@
               "translation": "Lee el cartel."
             }
           ],
-          "notes": "La g no suena: SÁIN."
+          "notes": "La g no suena: SÁIN.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIGNO",
+            "scene": "FIRMAR con un SIGNO.",
+            "emoji": "✍️"
+          }
         },
         {
           "key": "exit",
@@ -830,7 +902,13 @@
               "text": "Fire exit.",
               "translation": "Salida de incendios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÉXITO",
+            "scene": "SALIDA hacia el ÉXITO (ojo: ÉXITO = success).",
+            "emoji": "🚪"
+          }
         },
         {
           "key": "procedure",
@@ -878,7 +956,13 @@
               "text": "A simple procedure.",
               "translation": "Un trámite sencillo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROCEDIMIENTO",
+            "scene": "PROCEDIMIENTO: pro-SÍI-yer.",
+            "emoji": "📋"
+          }
         },
         {
           "key": "respect",
@@ -912,7 +996,13 @@
               "text": "With respect…",
               "translation": "Con todo respeto…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RESPETO",
+            "scene": "RESPETO: ris-PÉKT.",
+            "emoji": "🙇"
+          }
         }
       ]
     }
