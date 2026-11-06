@@ -57,6 +57,14 @@ try {
   const cnt = await page.locator('.slide .reel-count').first().textContent().catch(() => '');
   check(/1 · Conócelo/.test(ph ?? '') && /respondido 6 veces · 4 bien/.test(cnt ?? ''), `la ficha dice su fase y cuántas veces la has respondido («${ph}», «${cnt}»)`);
   await page.screenshot({ path: process.env.SHOT_D ?? '/tmp/fase.png', clip: { x: 0, y: 0, width: 390, height: 360 } });
+  // Vida real: la Ráfaga con frases enteras cabe y da más tiempo.
+  await page.goto(`${url}?vr`);
+  await page.waitForSelector('.slide');
+  for (let n = 0; n < 4 && !(await page.locator('.burst-drop').count()); n++) await swipeUp();
+  const vrOk = await page.locator('.burst-drop').count();
+  const dur = vrOk ? await page.locator('.burst-drop').first().evaluate((e) => parseFloat(getComputedStyle(e).animationDuration)) : 0;
+  await page.screenshot({ path: process.env.SHOT_E ?? '/tmp/vr.png' });
+  check(vrOk > 0 && dur > 4.5 && !(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), `vida real: Ráfaga con frases, ${dur}s para leer y sin desbordes`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors[0]}` : ''}`);
 } finally {
   await browser.close();

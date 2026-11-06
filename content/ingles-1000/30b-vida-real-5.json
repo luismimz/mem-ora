@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "30b-vida-real-5",
+      "title": "Vida real 5 · En el médico",
+      "units": [
+        {
+          "key": "vr-medico",
+          "type": "concept",
+          "name": "En el médico",
+          "gist": "decir qué te pasa",
+          "definition": "Te pones malo de vacaciones. Las frases: «I have a headache» = me duele la cabeza · «I have a fever» = tengo fiebre · «My back hurts» = me duele la espalda · «I need an appointment» = necesito una cita.",
+          "examples": [
+            {
+              "text": "I have a headache",
+              "explanation": "me duele la cabeza"
+            },
+            {
+              "text": "I have a fever",
+              "explanation": "tengo fiebre"
+            },
+            {
+              "text": "My back hurts",
+              "explanation": "me duele la espalda"
+            },
+            {
+              "text": "I need an appointment",
+              "explanation": "necesito una cita"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🤕 Te duele la cabeza:",
+              "answer": "I have a headache",
+              "distractors": [
+                "I have a fever",
+                "My back hurts",
+                "I need an appointment"
+              ],
+              "explanation": "have + dolor."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🌡️ El termómetro marca 39:",
+              "answer": "I have a fever",
+              "distractors": [
+                "I have a headache",
+                "My back hurts",
+                "I need an appointment"
+              ],
+              "explanation": "Tengo fiebre."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🏋️ Te duele la espalda tras el gimnasio:",
+              "answer": "My back hurts",
+              "distractors": [
+                "I have a headache",
+                "I have a fever",
+                "I need an appointment"
+              ],
+              "explanation": "Algo + hurts = me duele."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "📞 Llamas al centro de salud:",
+              "answer": "I need an appointment",
+              "distractors": [
+                "I have a headache",
+                "I have a fever",
+                "My back hurts"
+              ],
+              "explanation": "Necesito una cita."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🧠 Llevas todo el día con dolor de cabeza:",
+              "answer": "I have a headache",
+              "distractors": [
+                "I have a fever",
+                "My back hurts",
+                "I need an appointment"
+              ],
+              "explanation": "Dolor de cabeza."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🥵 Estás ardiendo y tiritas:",
+              "answer": "I have a fever",
+              "distractors": [
+                "I have a headache",
+                "My back hurts",
+                "I need an appointment"
+              ],
+              "explanation": "Fiebre."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

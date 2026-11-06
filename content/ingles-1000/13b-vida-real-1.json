@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "13b-vida-real-1",
+      "title": "Vida real 1 · Hablar con gente",
+      "units": [
+        {
+          "key": "vr-conocer",
+          "type": "concept",
+          "name": "Conocer a alguien",
+          "gist": "saludar, presentarte y despedirte",
+          "definition": "En una fiesta en Corralejo conoces a una inglesa. Las frases: «Nice to meet you» = encantado de conocerte · «How's it going?» = ¿qué tal va? · «See you later» = hasta luego · «Thanks a lot» = muchas gracias.",
+          "examples": [
+            {
+              "text": "Nice to meet you",
+              "explanation": "encantado de conocerte"
+            },
+            {
+              "text": "How's it going?",
+              "explanation": "¿qué tal va?"
+            },
+            {
+              "text": "See you later",
+              "explanation": "hasta luego"
+            },
+            {
+              "text": "Thanks a lot",
+              "explanation": "muchas gracias"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🤝 Te presentan a Kate. Le dices:",
+              "answer": "Nice to meet you",
+              "distractors": [
+                "How's it going?",
+                "See you later",
+                "Thanks a lot"
+              ],
+              "explanation": "Al conocer a alguien."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "👋 Ves a tu vecino por la calle. Le preguntas:",
+              "answer": "How's it going?",
+              "distractors": [
+                "Nice to meet you",
+                "See you later",
+                "Thanks a lot"
+              ],
+              "explanation": "Saludo informal."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚪 Te vas de la fiesta. Dices:",
+              "answer": "See you later",
+              "distractors": [
+                "Nice to meet you",
+                "How's it going?",
+                "Thanks a lot"
+              ],
+              "explanation": "Despedida."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🍹 Kate te trae una bebida. Dices:",
+              "answer": "Thanks a lot",
+              "distractors": [
+                "Nice to meet you",
+                "How's it going?",
+                "See you later"
+              ],
+              "explanation": "Para agradecer."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "☕ Un amigo te invita a un café. Respondes:",
+              "answer": "Thanks a lot",
+              "distractors": [
+                "Nice to meet you",
+                "How's it going?",
+                "See you later"
+              ],
+              "explanation": "Agradecer."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🧍 Saludas a un compañero el lunes:",
+              "answer": "How's it going?",
+              "distractors": [
+                "Nice to meet you",
+                "See you later",
+                "Thanks a lot"
+              ],
+              "explanation": "¿Qué tal va?"
+            }
+          ]
+        },
+        {
+          "key": "vr-no-entiendo",
+          "type": "concept",
+          "name": "Cuando no entiendes",
+          "gist": "pedir que repitan o aclaren",
+          "definition": "Un inglés habla muy rápido en el bar. Las frases: «I don't understand» = no entiendo · «Could you repeat that?» = ¿puedes repetirlo? · «What do you mean?» = ¿qué quieres decir? · «Never mind» = no importa, déjalo.",
+          "examples": [
+            {
+              "text": "I don't understand",
+              "explanation": "no entiendo"
+            },
+            {
+              "text": "Could you repeat that?",
+              "explanation": "¿puedes repetirlo?"
+            },
+            {
+              "text": "What do you mean?",
+              "explanation": "¿qué quieres decir?"
+            },
+            {
+              "text": "Never mind",
+              "explanation": "no importa, déjalo"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "😵 No has entendido nada:",
+              "answer": "I don't understand",
+              "distractors": [
+                "Could you repeat that?",
+                "What do you mean?",
+                "Never mind"
+              ],
+              "explanation": "Lo dices tal cual."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🔁 Has oído a medias y quieres oírlo otra vez:",
+              "answer": "Could you repeat that?",
+              "distractors": [
+                "I don't understand",
+                "What do you mean?",
+                "Never mind"
+              ],
+              "explanation": "Pides que lo repita."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🤔 Entiendes las palabras pero no la idea:",
+              "answer": "What do you mean?",
+              "distractors": [
+                "I don't understand",
+                "Could you repeat that?",
+                "Never mind"
+              ],
+              "explanation": "Pides que lo aclare."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🙅 Ya da igual, no hace falta explicarlo:",
+              "answer": "Never mind",
+              "distractors": [
+                "I don't understand",
+                "Could you repeat that?",
+                "What do you mean?"
+              ],
+              "explanation": "Déjalo."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "📞 Por teléfono se corta la frase:",
+              "answer": "Could you repeat that?",
+              "distractors": [
+                "I don't understand",
+                "What do you mean?",
+                "Never mind"
+              ],
+              "explanation": "Que lo repita."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🗺️ Te explica un camino rarísimo:",
+              "answer": "What do you mean?",
+              "distractors": [
+                "I don't understand",
+                "Could you repeat that?",
+                "Never mind"
+              ],
+              "explanation": "Aclarar."
+            }
+          ]
+        },
+        {
+          "key": "vr-perdon",
+          "type": "concept",
+          "name": "Perdón y gracias",
+          "gist": "disculparte, pasar y agradecer",
+          "definition": "En el autobús lleno, camino del trabajo. Las frases: «Excuse me» = perdone, con permiso · «I'm sorry» = lo siento · «No worries» = tranquilo, no pasa nada · «Thanks a lot» = muchas gracias.",
+          "examples": [
+            {
+              "text": "Excuse me",
+              "explanation": "perdone, con permiso"
+            },
+            {
+              "text": "I'm sorry",
+              "explanation": "lo siento"
+            },
+            {
+              "text": "No worries",
+              "explanation": "tranquilo, no pasa nada"
+            },
+            {
+              "text": "Thanks a lot",
+              "explanation": "muchas gracias"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🚌 Quieres pasar hacia la puerta:",
+              "answer": "Excuse me",
+              "distractors": [
+                "I'm sorry",
+                "No worries",
+                "Thanks a lot"
+              ],
+              "explanation": "Para pedir paso."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🦶 Pisas a alguien sin querer:",
+              "answer": "I'm sorry",
+              "distractors": [
+                "Excuse me",
+                "No worries",
+                "Thanks a lot"
+              ],
+              "explanation": "Disculparte."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🙏 Te piden perdón a ti:",
+              "answer": "No worries",
+              "distractors": [
+                "Excuse me",
+                "I'm sorry",
+                "Thanks a lot"
+              ],
+              "explanation": "No pasa nada."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "💺 Alguien te deja su asiento:",
+              "answer": "Thanks a lot",
+              "distractors": [
+                "Excuse me",
+                "I'm sorry",
+                "No worries"
+              ],
+              "explanation": "Agradecer."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "❓ Quieres preguntar algo a un desconocido:",
+              "answer": "Excuse me",
+              "distractors": [
+                "I'm sorry",
+                "No worries",
+                "Thanks a lot"
+              ],
+              "explanation": "Para llamar su atención."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "☕ Tiras el café de otro:",
+              "answer": "I'm sorry",
+              "distractors": [
+                "Excuse me",
+                "No worries",
+                "Thanks a lot"
+              ],
+              "explanation": "Lo sientes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

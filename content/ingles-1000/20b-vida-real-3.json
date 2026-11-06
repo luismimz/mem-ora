@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "20b-vida-real-3",
+      "title": "Vida real 3 · De viaje",
+      "units": [
+        {
+          "key": "vr-aeropuerto",
+          "type": "concept",
+          "name": "En el aeropuerto",
+          "gist": "facturar, preguntar y no perder el vuelo",
+          "definition": "Vuelas de Fuerteventura a Londres. Las frases: «Here is my passport» = aquí tiene mi pasaporte · «Where is gate 12?» = ¿dónde está la puerta 12? · «Is the flight on time?» = ¿el vuelo va a la hora? · «I'm going to visit my friend» = voy a visitar a mi amigo.",
+          "examples": [
+            {
+              "text": "Here is my passport",
+              "explanation": "aquí tiene mi pasaporte"
+            },
+            {
+              "text": "Where is gate 12?",
+              "explanation": "¿dónde está la puerta 12?"
+            },
+            {
+              "text": "Is the flight on time?",
+              "explanation": "¿el vuelo va a la hora?"
+            },
+            {
+              "text": "I'm going to visit my friend",
+              "explanation": "voy a visitar a mi amigo"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🛂 En el control te piden la documentación:",
+              "answer": "Here is my passport",
+              "distractors": [
+                "Where is gate 12?",
+                "Is the flight on time?",
+                "I'm going to visit my friend"
+              ],
+              "explanation": "Aquí tiene…"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🚪 Buscas tu puerta de embarque:",
+              "answer": "Where is gate 12?",
+              "distractors": [
+                "Here is my passport",
+                "Is the flight on time?",
+                "I'm going to visit my friend"
+              ],
+              "explanation": "¿Dónde está…?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "⏰ Miras la pantalla y no sabes si hay retraso:",
+              "answer": "Is the flight on time?",
+              "distractors": [
+                "Here is my passport",
+                "Where is gate 12?",
+                "I'm going to visit my friend"
+              ],
+              "explanation": "¿Va a la hora?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🧳 Te preguntan el motivo del viaje (un plan):",
+              "answer": "I'm going to visit my friend",
+              "distractors": [
+                "Here is my passport",
+                "Where is gate 12?",
+                "Is the flight on time?"
+              ],
+              "explanation": "going to = plan."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🗺️ El aeropuerto es enorme y no ves la 12:",
+              "answer": "Where is gate 12?",
+              "distractors": [
+                "Here is my passport",
+                "Is the flight on time?",
+                "I'm going to visit my friend"
+              ],
+              "explanation": "Preguntar dónde."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "👮 El agente alarga la mano:",
+              "answer": "Here is my passport",
+              "distractors": [
+                "Where is gate 12?",
+                "Is the flight on time?",
+                "I'm going to visit my friend"
+              ],
+              "explanation": "Le das el pasaporte."
+            }
+          ]
+        },
+        {
+          "key": "vr-hotel",
+          "type": "concept",
+          "name": "En el hotel",
+          "gist": "llegar, preguntar y pedir ayuda",
+          "definition": "Llegas al hotel en Londres. Las frases: «I have a booking» = tengo una reserva · «What time is breakfast?» = ¿a qué hora es el desayuno? · «The wifi doesn't work» = el wifi no funciona · «Can I leave my suitcase here?» = ¿puedo dejar la maleta aquí?.",
+          "examples": [
+            {
+              "text": "I have a booking",
+              "explanation": "tengo una reserva"
+            },
+            {
+              "text": "What time is breakfast?",
+              "explanation": "¿a qué hora es el desayuno?"
+            },
+            {
+              "text": "The wifi doesn't work",
+              "explanation": "el wifi no funciona"
+            },
+            {
+              "text": "Can I leave my suitcase here?",
+              "explanation": "¿puedo dejar la maleta aquí?"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🛎️ Llegas a recepción:",
+              "answer": "I have a booking",
+              "distractors": [
+                "What time is breakfast?",
+                "The wifi doesn't work",
+                "Can I leave my suitcase here?"
+              ],
+              "explanation": "Tengo una reserva (se toca/cuenta → HAVE)."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🍳 Quieres saber cuándo desayunar:",
+              "answer": "What time is breakfast?",
+              "distractors": [
+                "I have a booking",
+                "The wifi doesn't work",
+                "Can I leave my suitcase here?"
+              ],
+              "explanation": "What time = a qué hora."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "📶 No puedes conectarte en la habitación:",
+              "answer": "The wifi doesn't work",
+              "distractors": [
+                "I have a booking",
+                "What time is breakfast?",
+                "Can I leave my suitcase here?"
+              ],
+              "explanation": "doesn't: tercera persona."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🧳 Sales del hotel pero tu vuelo es por la noche:",
+              "answer": "Can I leave my suitcase here?",
+              "distractors": [
+                "I have a booking",
+                "What time is breakfast?",
+                "The wifi doesn't work"
+              ],
+              "explanation": "Can I…? pedir permiso."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🕖 Mañana madrugas y preguntas por el desayuno:",
+              "answer": "What time is breakfast?",
+              "distractors": [
+                "I have a booking",
+                "The wifi doesn't work",
+                "Can I leave my suitcase here?"
+              ],
+              "explanation": "¿A qué hora?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🏨 Das tu nombre al llegar:",
+              "answer": "I have a booking",
+              "distractors": [
+                "What time is breakfast?",
+                "The wifi doesn't work",
+                "Can I leave my suitcase here?"
+              ],
+              "explanation": "Tengo una reserva."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
