@@ -24,6 +24,8 @@ export interface SkillState {
   consecutiveFailures: number;
   lapses: number;
   attempts: number;
+  /** Aciertos (cualquier formato). Lo usa el repaso de idiomas: menos aciertos = sale antes (6-nov-2026). */
+  successes?: number;
   /** Precisión reciente ponderada (0–1). */
   accuracy: number;
   step: number;
@@ -88,6 +90,7 @@ export function applySkillAttempt(state: SkillState, attempt: Attempt, scheduler
   let next: SkillState = {
     ...state,
     attempts: state.attempts + 1,
+    successes: (state.successes ?? 0) + (correct ? 1 : 0),
     accuracy: state.accuracy * (1 - alpha) + signal * alpha,
     lastAttemptAt: Math.max(state.lastAttemptAt ?? attempt.at, attempt.at),
     lastExposureAt: Math.max(state.lastExposureAt ?? attempt.at, attempt.at),

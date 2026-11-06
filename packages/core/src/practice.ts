@@ -103,16 +103,19 @@ export function dueWordsLeastSeen(defs: Array<{ id: string; unitId: string; kind
 }
 
 /**
- * Decisión del usuario (6-nov-2026): en idiomas, el repaso no depende de las horas. Sale TODO lo ya aprendido, de menos
- * a más veces practicado (a igualdad, lo que hace más tiempo que no se practica). Así, si ayer una palabra salió 1 vez y
- * hoy otra 4, la de ayer vuelve antes. El estado honesto de cada palabra (regla 9) se sigue calculando igual.
+ * Repaso de idiomas (decisión del usuario, 6-nov-2026): sin curva del olvido para elegir. Sale TODO lo aprendido:
+ *  1. primero lo que menos veces has ACERTADO (lo poco visto y lo muy fallado quedan con pocos aciertos);
+ *  2. a igualdad, la palabra más ANTIGUA (la que conociste antes) primero.
+ * Así, cuando todas lleguen a 3 aciertos, vuelven de la más antigua a la más nueva, y nunca se queda atrás ninguna.
+ * El estado honesto de cada palabra (vista → aprendida → dominada, regla 9) se sigue calculando aparte.
  */
-export function wordsLeastPracticed(defs: Array<{ id: string; unitId: string; kind: string }>, skills: Record<string, SkillState>, isWord: (unitId: string) => boolean, rand?: () => number): Array<{ unitKey: string; recall: boolean }> {
-  const attempts = new Map<string, number>();
-  const last = new Map<string, number>();
+export function wordsLeastPracticed(defs: Array<{ id: string; unitId: string; kind: string }>, skills: Record<string, SkillState>, isWord: (unitId: string) => boolean): Array<{ unitKey: string; recall: boolean }> {
+  const hits = new Map<string, number>();
+  const first = new Map<string, number>();
   for (const s of Object.values(skills)) {
-    attempts.set(s.unitId, (attempts.get(s.unitId) ?? 0) + s.attempts);
-    last.set(s.unitId, Math.max(last.get(s.unitId) ?? 0, s.lastAttemptAt ?? s.lastExposureAt ?? 0));
+    hits.set(s.unitId, (hits.get(s.unitId) ?? 0) + (s.successes ?? 0));
+    const at = s.presentedAt ?? s.lastExposureAt ?? s.lastAttemptAt;
+    if (at !== null && at !== undefined) first.set(s.unitId, Math.min(first.get(s.unitId) ?? at, at));
   }
   const out: Array<{ unitKey: string; recall: boolean; n: number; at: number }> = [];
   const seen = new Set<string>();
@@ -121,8 +124,7 @@ export function wordsLeastPracticed(defs: Array<{ id: string; unitId: string; ki
     const s = skills[d.id];
     if (!s || s.status === 'new') continue;
     seen.add(d.unitId);
-    // Con `rand`, a igualdad de intentos el orden es al azar (cada repaso empieza distinto).
-    out.push({ unitKey: d.unitId, recall: (s.step ?? 0) >= MATURE_STEP, n: attempts.get(d.unitId) ?? 0, at: rand ? rand() : last.get(d.unitId) ?? 0 });
+    out.push({ unitKey: d.unitId, recall: (s.step ?? 0) >= MATURE_STEP, n: hits.get(d.unitId) ?? 0, at: first.get(d.unitId) ?? 0 });
   }
   return out.sort((a, b) => a.n - b.n || a.at - b.at || (a.unitKey < b.unitKey ? -1 : 1)).map(({ unitKey, recall }) => ({ unitKey, recall }));
 }

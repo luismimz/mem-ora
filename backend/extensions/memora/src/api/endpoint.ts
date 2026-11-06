@@ -349,7 +349,7 @@ export default {
         const isWordKey = (k: string) => units[k]?.type === 'term';
         const due = dueWordsLeastSeen(catalog.skills, learner.skills, (k) => Boolean(units[k]), now);
         // Idiomas (usuario, 6-nov-2026): todas las palabras aprendidas, de menos a más practicadas, sin mirar las horas.
-        const words = lang ? wordsLeastPracticed(catalog.skills, learner.skills, isWordKey, Math.random) : [];
+        const words = lang ? wordsLeastPracticed(catalog.skills, learner.skills, isWordKey) : [];
         const rest = (lang ? due.filter((w) => !isWordKey(w.unitKey)) : due).slice(0, REVIEW_MAX_ALL).map((w) => w.unitKey);
         const items: PlanItem[] = rest.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k && learner.skills[sk.id]).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'review' as const, priority: 1, recommendedHint: 0 as const })));
         const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: 0,
@@ -396,16 +396,10 @@ export default {
       const skillKind = new Map(catalog.skills.map((sk) => [sk.id, sk.kind as string]));
       const isWord = (k: string) => units[k]?.type === 'term';
       // 5-nov-2026: TODAS las palabras vencidas (no solo las del tope diario del plan), las menos practicadas primero.
-      // Usuario (6-nov-2026): de menos a más practicadas, sin mirar las horas (lo de ayer con 1 vez antes que lo de hoy con 4).
+      // Usuario (6-nov-2026): sin curva del olvido: menos aciertos primero y, a igualdad, la más antigua (wordsLeastPracticed).
       const words = flowLanguage ? wordsLeastPracticed(catalog.skills, learner.skills, isWord) : [];
-      // Usuario (4-nov-2026): «siempre salen azul y boy, que son básicas: deben salir las que menos han salido». De lo que
-      // toca repasar, primero lo menos practicado (menos intentos); a igualdad, el orden de urgencia de dueWords.
-      const seen = new Map<string, number>();
-      for (const sk of Object.values(learner.skills)) seen.set(sk.unitId, (seen.get(sk.unitId) ?? 0) + sk.attempts);
-      // 6-nov-2026: a igualdad de intentos, al azar (antes, siempre el mismo orden: las mismas palabras abrían cada repaso).
-      const tie = new Map<string, number>();
-      const leastSeen = <T,>(list: T[], key: (x: T) => string) => list.map((x) => { const k = key(x); if (!tie.has(k)) tie.set(k, Math.random()); return { x, n: seen.get(k) ?? 0, r: tie.get(k)! }; }).sort((a, b) => a.n - b.n || a.r - b.r).map((o) => o.x);
-      const roundWords = leastSeen(words, (w) => w.unitKey).slice(0, reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
+      // El orden ya viene decidido (menos aciertos, y a igualdad la más antigua); no se reordena.
+      const roundWords = words.slice(0, reviewMax ?? FLOW_REVIEW_ARCADE_MAX);
       // D-099: de los trucos que tocan, como mucho LANGUAGE_PATTERN_REVIEWS por ronda (los más urgentes) y en repaso ligero
       // (una frase nueva, sin volver a enseñarlos enteros); antes, diez por ronda con todos sus pasos tapaban lo nuevo.
       const patternDue = flowLanguage ? [...new Set((plan.items as PlanItem[]).filter((i) => i.reason === 'review' && !isWord(i.unitId)).map((i) => i.unitId))].slice(0, LANGUAGE_PATTERN_REVIEWS) : [];
@@ -431,7 +425,9 @@ export default {
       // Arcade sorpresa (D-087): solo lo ya aprendido (practicado y más allá de «presentado»), si el curso tiene Arcade.
       // 6-nov-2026: el Arcade sorpresa tampoco repite lo ya practicado hoy (si queda algo de otros días).
       const practicedToday = new Set(Object.values(learner.skills).filter((x) => (x.lastAttemptAt ?? 0) >= dayStart).map((x) => x.unitId));
-      const learnedAll = !modes.includes('arcade') ? [] : leastSeen([...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]), (k) => k);
+      const learnedSet = [...new Set(Object.values(learner.skills).filter((x) => x.attempts > 0 && !['new', 'presented'].includes(x.status)).map((x) => x.unitId))].filter((k) => units[k]);
+      const wordOrder = new Map(words.map((w, i) => [w.unitKey, i]));
+      const learnedAll = !modes.includes('arcade') ? [] : learnedSet.sort((a, b) => (wordOrder.get(a) ?? 1e9) - (wordOrder.get(b) ?? 1e9));
       const learnedOld = learnedAll.filter((k) => !practicedToday.has(k));
       const learnedUnits = learnedOld.length >= 8 ? learnedOld : learnedAll;
       const session = modes.includes('flow')
