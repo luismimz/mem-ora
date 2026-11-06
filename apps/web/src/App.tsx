@@ -257,7 +257,16 @@ export function App() {
   // Repasos vencidos ahora; el total del curso sale de las misiones (el progreso solo lista lo ya practicado).
   const due = prog ? prog.skills.filter((s) => s.dueAt !== null && s.dueAt <= Date.now()).length : null;
   // D-111: palabras por repasar (una por palabra, su habilidad de recordar). Con más de una ronda, se pregunta cuántas.
-  const dueWords = prog && isLanguage(current) ? new Set(prog.skills.filter((s) => s.kind === 'recall' && s.dueAt !== null && s.dueAt <= Date.now()).map((s) => s.unit)).size : 0;
+  const dueWords = prog && isLanguage(current) ? new Set(prog.skills.filter((s) => s.kind === 'recall' && s.status !== 'new').map((s) => s.unit)).size : 0;
+  // 6-nov-2026: el repaso de idiomas no va por horas, va de menos a más aciertos: por dónde empieza.
+  const wordTier = (() => {
+    if (!prog || !isLanguage(current)) return null;
+    const learned = new Set(prog.skills.filter((s) => s.kind === 'recall' && s.status !== 'new').map((s) => s.unit));
+    const hits = prog.units.filter((u) => learned.has(u.key)).map((u) => u.hits ?? 0);
+    if (!hits.length) return null;
+    const min = Math.min(...hits);
+    return { min, count: hits.filter((h) => h === min).length };
+  })();
   // Conceptos por repasar (no habilidades: una ficha tiene varias y el número asustaba).
   const dueUnits = prog ? new Set(prog.skills.filter((s) => s.dueAt !== null && s.dueAt <= Date.now()).map((s) => s.unit)).size : 0;
   const startReview = (n: number | 'todas') => { pendingReview.current = n; setReviewAsk(null); open(has(mode) ? mode : 'associations'); };
@@ -291,11 +300,12 @@ export function App() {
                   {flowCourse && prog ? (
                     // Repasar a voluntad (5-nov-2026): el contador se toca y abre una ronda con TODO lo acumulado.
                     <li className="today-tap"><button type="button" disabled={(isLanguage(current) ? dueWords : dueUnits) === 0} onClick={() => go({ name: 'session', course: current.id, focus: 'repaso' })}>
-                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? 'palabras y trucos' : dueUnits === 1 ? 'concepto' : 'conceptos'} por repasar</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>Repasar ahora →</em>}
+                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? (dueWords === 1 ? 'palabra para repasar' : 'palabras para repasar') : dueUnits === 1 ? 'concepto por repasar' : 'conceptos por repasar'}</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>{wordTier ? `Empieza por las ${wordTier.count} con ${wordTier.min} ${wordTier.min === 1 ? 'acierto' : 'aciertos'} →` : 'Repasar ahora →'}</em>}
                     </button></li>
                   ) : <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>}
                   <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>
                 </ul>
+                {prog && <MemoryMap units={prog.units} words={isLanguage(current)} />}
                 {prog?.today && <div className="goal-bar" aria-label={`Meta de hoy: ${prog.today.newUnits} de ${prog.today.goal}`}><i style={{ width: `${Math.min(100, Math.round((prog.today.newUnits / Math.max(1, prog.today.goal)) * 100))}%` }} /></div>}
                 {!missions ? (
                   <><h3 className="hero-mission skeleton-text">&nbsp;</h3><p className="skeleton-text">&nbsp;<br />&nbsp;</p></>
@@ -826,5 +836,30 @@ function ReviewPicker({ due, onPick, onClose }: { due: number; onPick: (n: numbe
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * Tu memoria (usuario, 6-nov-2026: «marcar bien el proceso»): cuántas unidades hay en cada estado honesto (regla 9).
+ * Vista = ya la has trabajado; aprendida = la sacaste sola otro día; estable = varios días seguidos; dominada = en
+ * contextos distintos durante semanas.
+ */
+function MemoryMap({ units, words }: { units: Array<{ key: string; level: string; attempts?: number }>; words: boolean }) {
+  const worked = units.filter((u) => (u.attempts ?? 0) > 0 || u.level !== 'none');
+  if (!worked.length) return null;
+  const n = (l: string) => worked.filter((u) => u.level === l).length;
+  const cells = [
+    { k: 'vista', label: 'Vistas', v: n('none'), why: 'ya trabajadas' },
+    { k: 'learned', label: 'Aprendidas', v: n('learned'), why: 'las sacaste solo otro día' },
+    { k: 'stable', label: 'Estables', v: n('stable'), why: 'aguantan varios días' },
+    { k: 'mastered', label: 'Dominadas', v: n('mastered'), why: 'en contextos distintos' },
+  ];
+  return (
+    <section className="memory-map" aria-label="Tu memoria">
+      <p className="memory-map-title">🧠 Tu memoria · {worked.length} {words ? 'palabras y trucos' : 'conceptos'}</p>
+      <div className="memory-map-row">
+        {cells.map((c) => <div key={c.k} className={`memory-cell m-${c.k}`}><b>{c.v}</b><span>{c.label}</span><small>{c.why}</small></div>)}
+      </div>
+    </section>
   );
 }

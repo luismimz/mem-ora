@@ -322,7 +322,7 @@ export function TimeLine({ marks, title, small = false }: { marks: TimelineMark[
 
 const FOCUS_TAG = { errors: 'TUS ERRORES · RECUÉRDALO', practice: 'REFUERZO · LO QUE MÁS TE CUESTA' } as const;
 
-function Reel({ unit, focus, courseId, onNext }: { unit: SessionUnit; focus?: AssocStep['focus']; courseId: string; onNext: () => void }) {
+function Reel({ unit, focus, courseId, stats, onNext }: { unit: SessionUnit; focus?: AssocStep['focus']; courseId: string; stats?: { attempts: number; hits: number }; onNext: () => void }) {
   const isPattern = unit.type === 'pattern';
   useEffect(() => {
     if (!audioEnabled()) return;
@@ -331,7 +331,8 @@ function Reel({ unit, focus, courseId, onNext }: { unit: SessionUnit; focus?: As
   }, [unit, isPattern]);
   return (
     <Slide tone={hue(unit.key)} onNext={onNext} className={`reel ${isPattern ? 'grammar' : ''}`}>
-      <p className={`tag ${focus === 'errors' ? 'ko' : ''}`}>{focus ? FOCUS_TAG[focus] : isPattern ? '🪞 TRUCO DE GRAMÁTICA' : 'NUEVO PARA TU MEMORIA'}</p>
+      <p className={`tag ${focus === 'errors' ? 'ko' : ''}`}>{focus ? FOCUS_TAG[focus] : isPattern ? '🪞 TRUCO DE GRAMÁTICA' : stats?.attempts ? 'OTRA VEZ PARA TU MEMORIA' : 'NUEVO PARA TU MEMORIA'}</p>
+      {stats && <p className="reel-count">{stats.attempts ? `👁️ La has respondido ${stats.attempts} ${stats.attempts === 1 ? 'vez' : 'veces'} · ${stats.hits} bien` : '✨ Primera vez'}</p>}
       {isPattern ? <PatternFace unit={unit} /> : <Concept unit={unit} courseId={courseId} step="reel" />}
     </Slide>
   );
@@ -2079,6 +2080,24 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
   );
 }
 
+/** Las fases del proceso (ver «Cómo funciona Memora»): conocer → sacarlo de tu cabeza → repasar → usarlo. */
+const PHASES = {
+  pre: { n: 0, label: '🤔 ¿Qué crees?' },
+  know: { n: 1, label: '1 · Conócelo' },
+  again: { n: 1, label: '1 · Míralo otra vez' },
+  recall: { n: 2, label: '2 · Sácalo de tu cabeza' },
+  review: { n: 3, label: '3 · Repaso' },
+  use: { n: 4, label: '4 · Úsalo' },
+} as const;
+function phaseOf(step: AssocStep): (typeof PHASES)[keyof typeof PHASES] | null {
+  if (step.kind === 'summary') return null;
+  if (step.pre) return PHASES.pre;
+  if (step.kind === 'reel' || step.kind === 'watch' || step.kind === 'chant') return PHASES.know;
+  if (step.kind === 'arcade' || step.kind === 'review' || step.closing) return PHASES.review;
+  if (step.kind === 'build' || step.kind === 'pieces' || step.kind === 'workshop' || step.kind === 'tense' || step.kind === 'train' || step.kind === 'challenge') return PHASES.use;
+  return PHASES.recall;
+}
+
 /** En el hito (D-077): ofrecer el aviso de repaso una sola vez; nunca tapa nada y se puede ignorar deslizando. */
 function PushOptIn() {
   const [state, setState] = useState<PushState | 'busy' | null>(null);
@@ -2299,7 +2318,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   let card: ReactNode = null;
   if (teaching && units[teaching.key]) card = <Teach key={`teach-${step?.id}`} unit={units[teaching.key]!} {...(teaching.note ? { note: teaching.note } : {})} {...(teaching.scene !== undefined ? { scene: teaching.scene } : {})} courseId={courseId} onNext={() => { setTeaching(null); void advance({ correct: false, hint: 0 }); }} />;
   else if (!step || skip) card = null;
-  else if (step.kind === 'reel' && unit) card = <Reel key={step.id} unit={unit} focus={step.focus} courseId={courseId} onNext={() => { for (const s of unit.skills) queue.current.push(event(unit, s.key, { kind: 'exposure' })); void advance(); }} />;
+  else if (step.kind === 'reel' && unit) card = <Reel key={step.id} unit={unit} focus={step.focus} courseId={courseId} {...(batch.unitStats ? { stats: batch.unitStats[unit.key] ?? { attempts: 0, hits: 0 } } : {})} onNext={() => { for (const s of unit.skills) queue.current.push(event(unit, s.key, { kind: 'exposure' })); void advance(); }} />;
   else if (step.kind === 'quick' && unit) card = <Quick key={step.id} unit={unit} reverse={Boolean(step.reverse)} retry={Boolean(step.retry)} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#quick${step.reverse ? '-inv' : ''}`, 10)} />;
   else if (step.kind === 'train' && unit && step.example !== undefined) card = <Train key={step.id} unit={unit} example={step.example} onNext={() => void advance()} />;
   else if (step.kind === 'burst' && unit) card = <Burst key={step.id} unit={unit} onResult={(ok, ms, points, note) => answered(unit, ok, ms, `${unit.key}#burst`, points, step.skillKey, 'recognition_choice', 0, note)} />;
@@ -2386,11 +2405,14 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     );
   }
 
+  // 6-nov-2026 (usuario: «marcar bien el proceso de Memora»): en qué fase de la memoria está cada tarjeta.
+  const phase = teaching ? PHASES.again : step ? phaseOf(step) : null;
   return (
     <div className="feed" role="application" aria-label="Sesión en modo Flujo">
       <header className="feed-top">
         <button type="button" className="feed-x" aria-label="Salir" onClick={() => { void flushEvents().finally(onExit); }}>✕</button>
         <div className="feed-bar" aria-label={`Progreso ${pct} %`}><i style={{ width: `${pct}%` }} /></div>
+        {phase && <span className={`feed-phase ph-${phase.n}`}>{phase.label}</span>}
         <span className="feed-xp">{xp} XP</span>
         <span className={`feed-combo ${combo >= 3 ? 'hot' : ''}`}>🔥{combo}</span>
         {!offline && unit && <button type="button" className="feed-flag" aria-label="Reportar un error en esta tarjeta" onClick={() => setReporting(unit.key)}>⚑</button>}

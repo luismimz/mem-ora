@@ -70,6 +70,21 @@ function courseConfig(course: Row) {
 /** Contenido publicado por curso, con su huella (ver `publishedContent`). */
 const contentCache = new Map<string, { fp: string; value: unknown }>();
 
+/**
+ * Cuántas veces se ha respondido y acertado cada unidad de la ronda (6-nov-2026, «proceso visible»): la ficha lo enseña
+ * («la has respondido 6 veces, 4 bien»).
+ */
+export function unitStatsOf(learner: { skills: Record<string, { unitId: string; attempts: number; successes?: number }> }, steps: Array<{ unitKey?: string }>): Record<string, { attempts: number; hits: number }> {
+  const wanted = new Set(steps.map((s) => s.unitKey).filter(Boolean) as string[]);
+  const out: Record<string, { attempts: number; hits: number }> = {};
+  for (const st of Object.values(learner.skills)) {
+    if (!wanted.has(st.unitId)) continue;
+    const c = (out[st.unitId] ??= { attempts: 0, hits: 0 });
+    c.attempts += st.attempts; c.hits += st.successes ?? 0;
+  }
+  return out;
+}
+
 /** ¿La ronda guardada está parada en un Repaso rápido? Entonces no se retoma: se rehace (6-nov-2026). */
 export function atReviewStep(state: { index: number; plan: { steps: unknown[] } } | null | undefined): boolean {
   return Boolean(state && (state.plan.steps[state.index] as { arcadeReview?: boolean } | undefined)?.arcadeReview);
@@ -364,7 +379,7 @@ export default {
       // y otra vez (el índice no avanza hasta acabar la ráfaga).
       const atReview = atReviewStep(savedState);
       if (reviewMax === null && !wantReview && !atReview && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
-        return { data: { state: savedState, units, resumed: true } };
+        return { data: { state: savedState, units, resumed: true, unitStats: unitStatsOf(await learnerFor(userId, course.id), savedState.plan.steps) } };
       }
       const learner = await learnerFor(userId, course.id);
       // «Vacía tus fallos»: una ronda solo con los fallos pendientes (sin nuevas ni repasos). Al acertarlos, salen.
@@ -374,7 +389,7 @@ export default {
           errorUnits: failed, practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && isLanguageCourse(course) });
         const state: SessionState = { plan: session, focus: 'fallos', index: 0, outcomes: {}, finished: session.steps.length === 0 };
         await savePosition(userId, course.id, state, null);
-        return { data: { state, units, resumed: false } };
+        return { data: { state, units, resumed: false, unitStats: unitStatsOf(learner, state.plan.steps) } };
       }
       // «Repasa lo que se te está olvidando» (DAM, 5-nov-2026): solo repasos, de TODO lo vencido (sin el tope diario del
       // plan, que dejaba 205 pendientes sin forma de entrar), los menos vistos primero, de REVIEW_PER_ROUND en REVIEW_PER_ROUND.
@@ -393,7 +408,7 @@ export default {
           ...(words.length ? { reviewArcade: words, reviewMax: words.length } : {}), ...(lang ? { lightReviews: true } : {}) });
         const state: SessionState = { plan: session, focus: 'repaso', index: 0, outcomes: {}, finished: session.steps.length === 0 };
         await savePosition(userId, course.id, state, null);
-        return { data: { state, units, resumed: false } };
+        return { data: { state, units, resumed: false, unitStats: unitStatsOf(learner, state.plan.steps) } };
       }
       const progress = missionProgress(missions, catalog, learner);
       const target = wanted ?? progress.current?.key ?? null;
@@ -474,7 +489,7 @@ export default {
       const mission = target ? missionRef(missions, target) : undefined;
       const state: SessionState = { plan: session, ...(mission ? { mission } : {}), index: 0, outcomes: {}, finished: session.steps.length === 0 };
       await savePosition(userId, course.id, state, null);
-      return { data: { state, units, resumed: false, stats: plan.stats } };
+      return { data: { state, units, resumed: false, stats: plan.stats, unitStats: unitStatsOf(learner, state.plan.steps) } };
     }));
 
     // Paquete sin conexión (H2.2b mínimo, D-054): sesiones ya construidas para jugar en el móvil sin red. Los eventos se
@@ -639,6 +654,8 @@ export default {
       // Racha con protector (D-072, D-077): días seguidos con alguna respuesta; cada 7 días se gana un protector que
       // salva un día perdido. Hoy, mientras no acabe, no rompe la racha.
       const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
+      const counts = new Map<string, { attempts: number; hits: number }>();
+      for (const st of Object.values(learner.skills)) { const c = counts.get(st.unitId) ?? { attempts: 0, hits: 0 }; c.attempts += st.attempts; c.hits += st.successes ?? 0; counts.set(st.unitId, c); }
       const streak = streakOf(learner.activity, today);
       return {
         data: {
@@ -656,7 +673,10 @@ export default {
           skills: catalog.skills.map((s) => ({ key: s.id, unit: s.unitId, kind: s.kind, status: learner.skills[s.id]?.status ?? 'new', dueAt: learner.skills[s.id]?.dueAt ?? null })),
           units: catalog.units.map((u) => {
             const r = unitLevel(u.id, catalog, learner.skills, config);
-            return { key: u.id, level: r.level, missing: r.missing };
+            // 6-nov-2026 (proceso visible): cuántas veces se ha respondido y acertado la unidad (todas sus habilidades).
+            const c = counts.get(u.id);
+            const attempts = c?.attempts ?? 0; const hits = c?.hits ?? 0;
+            return { key: u.id, level: r.level, missing: r.missing, attempts, hits };
           }),
           associations: Object.values(learner.associations).map((a) => ({ id: a.associationId, hintLevel: a.hintLevel, dueAt: a.dueAt, status: a.status, ...assessAssociation(a, config) })),
         },

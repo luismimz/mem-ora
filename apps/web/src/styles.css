@@ -1399,3 +1399,20 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .tense-signal-head { margin: 0 0 .25rem; font-size: .8rem; opacity: .85; }
 .tense-signal-head b { font-size: 1rem; opacity: 1; }
 .tense-signal-group .tense-signals { margin: 0; }
+
+/* Tu memoria en Inicio (6-nov-2026) */
+.memory-map { margin: .7rem 0 .2rem; }
+.memory-map-title { margin: 0 0 .35rem; font-size: .8rem; font-weight: 700; opacity: .85; }
+.memory-map-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; }
+.memory-cell { display: flex; flex-direction: column; align-items: center; text-align: center; padding: .45rem .2rem; border-radius: 12px; background: rgba(255, 255, 255, .06); border-top: 3px solid #8a8fa8; }
+.memory-cell b { font-size: 1.15rem; }
+.memory-cell span { font-size: .72rem; font-weight: 700; }
+.memory-cell small { font-size: .6rem; opacity: .7; line-height: 1.15; }
+.memory-cell.m-learned { border-top-color: #3aa0ff; }
+.memory-cell.m-stable { border-top-color: #ffd166; }
+.memory-cell.m-mastered { border-top-color: #20c997; }
+
+/* Fase de la tarjeta, sobre la barra de progreso (6-nov-2026) */
+.feed-phase { position: absolute; left: 50%; transform: translateX(-50%); top: calc(100% - 2px); z-index: 3; font-size: .68rem; font-weight: 800; letter-spacing: .03em; white-space: nowrap; padding: .05rem .45rem; border-radius: 99px; background: rgba(0, 0, 0, .35); color: #fff; }
+.feed-phase.ph-0 { color: #ffd166; } .feed-phase.ph-1 { color: #8ab4ff; } .feed-phase.ph-2 { color: #ff9f6b; } .feed-phase.ph-3 { color: #b26bff; } .feed-phase.ph-4 { color: #20c997; }
+.reel-count { margin: -.2rem auto .3rem; font-size: .78rem; opacity: .85; }

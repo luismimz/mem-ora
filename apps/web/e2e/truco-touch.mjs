@@ -51,6 +51,12 @@ try {
   if (groups) { await page.locator('.slide .tense-signal-groups').first().scrollIntoViewIfNeeded(); await page.screenshot({ path: process.env.SHOT_C ?? '/tmp/pistas.png' }); }
   const heads = await page.locator('.slide .tense-signal-head').allTextContents();
   check(groups === 2 && /I work/.test(heads[0] ?? '') && /I'm working/.test(heads[1] ?? ''), `las pistas salen en dos grupos: ${heads.join(' | ')}`);
+  await page.goto(url);
+  await page.waitForSelector('.slide');
+  const ph = await page.locator('.feed-phase').textContent();
+  const cnt = await page.locator('.slide .reel-count').first().textContent().catch(() => '');
+  check(/1 · Conócelo/.test(ph ?? '') && /respondido 6 veces · 4 bien/.test(cnt ?? ''), `la ficha dice su fase y cuántas veces la has respondido («${ph}», «${cnt}»)`);
+  await page.screenshot({ path: process.env.SHOT_D ?? '/tmp/fase.png', clip: { x: 0, y: 0, width: 390, height: 360 } });
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors[0]}` : ''}`);
 } finally {
   await browser.close();

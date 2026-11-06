@@ -56,7 +56,7 @@ units.semaforos = game('semaforos', 'Los semáforos', [['¿Comes?', 'DO', ['DID'
 const order = location.search.includes('pistas') ? ['present-continuous', ...Object.keys(units).filter((k) => k !== 'present-continuous')] : Object.keys(units);
 const items = order.map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 const plan = buildFlowSession({ sessionId: 'e2e-ingles', courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true });
-const payload = { state: { plan, index: 0, outcomes: {}, finished: false }, units } as unknown as SessionPayload;
+const payload = { state: { plan, index: 0, outcomes: {}, finished: false }, units, unitStats: { dog: { attempts: 6, hits: 4 } } } as unknown as SessionPayload;
 const w = window as unknown as { __flowLog: string[]; __plan: unknown; __units: unknown };
 w.__flowLog = []; w.__plan = plan; w.__units = units;
 createRoot(document.getElementById('root')!).render(<Feed payload={payload} courseId="e2e" offline onExit={() => w.__flowLog.push('exit')} onAgain={() => w.__flowLog.push('again')} />);
