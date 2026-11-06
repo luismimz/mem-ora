@@ -1,3 +1,4 @@
+import { SqlConsole } from './SqlConsole';
 import { Studio } from './Studio';
 import { RetosHome } from './Retos';
 import { bundles, cacheMe, cachedMe, downloadBundle, flush, isNetworkError, pendingCount, sessionProgress, type OfflineBundle, type OfflineSession } from './offline';
@@ -22,6 +23,7 @@ type View =
   | { name: 'offline' }
   | { name: 'offlineSession'; bundle: OfflineBundle; session: OfflineSession }
   | { name: 'studio' }
+  | { name: 'sql' }
   | { name: 'session'; course: Course; payload: SessionPayload; mission?: string; focus?: 'fallos' | 'repaso' }
   | { name: 'exam'; course: Course; guided?: boolean }
   | { name: 'speak'; course: Course }
@@ -63,13 +65,14 @@ const shortTitle = (t: string) => cleanTitle(t).replace(/\s*·\s*DAM$/, '');
 const cleanMission = (t: string) => t.replace(/^Misión \d+ · /, '');
 
 // ─── Direcciones: cada pantalla tiene la suya, así «atrás» del navegador funciona y nunca te saca de la app ───
-type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' | 'repaso' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'speak'; course: string } | { name: 'talk'; course: string } | { name: 'preview'; unit: string };
+type Route = { name: 'home' } | { name: 'offline' } | { name: 'profile' } | { name: 'studio' } | { name: 'session'; course: string; mission?: string; focus?: 'fallos' | 'repaso' } | { name: 'exam'; course: string; guided?: boolean } | { name: 'speak'; course: string } | { name: 'talk'; course: string } | { name: 'preview'; unit: string } | { name: 'sql' };
 function readRoute(): Route {
   const { pathname, search } = window.location;
   const q = new URLSearchParams(search);
   const preview = pathname.match(/^\/preview\/([\w-]+)/);
   if (preview) return { name: 'preview', unit: preview[1]! };
   if (pathname === '/perfil') return { name: 'profile' };
+  if (pathname === '/mi-base-de-datos') return { name: 'sql' };
   if (pathname === '/sin-conexion') return { name: 'offline' };
   if (pathname === '/studio') return { name: 'studio' };
   if (pathname === '/conversar' && q.get('curso')) return { name: 'talk', course: q.get('curso')! };
@@ -80,6 +83,7 @@ function readRoute(): Route {
 }
 function routePath(r: Route): string {
   if (r.name === 'profile') return '/perfil';
+  if (r.name === 'sql') return '/mi-base-de-datos';
   if (r.name === 'offline') return '/sin-conexion';
   if (r.name === 'studio') return '/studio';
   if (r.name === 'preview') return `/preview/${r.unit}`;
@@ -242,6 +246,7 @@ export function App() {
   const bar = <TopBar me={me} staff={staff} active={view.name} onNav={(name) => go({ name })} />;
   if (view.name === 'offline') return <div className="app">{bar}<OfflineHome online={navigator.onLine} onPlay={(bundle, session) => setView({ name: 'offlineSession', bundle, session })} /></div>;
   if (view.name === 'studio') return <div className="app">{bar}<Studio /></div>;
+  if (view.name === 'sql') return <SqlConsole onExit={() => go({ name: 'home' })} />;
   if (view.name === 'profile') return <div className="app">{bar}<Profile me={me} courses={courses} course={course} mode={mode} staff={staff} admin={admin} onCoursesChanged={() => void api.courses().then(setCourses).catch(() => undefined)}
     onCourse={(id) => { setCourse(id); writePrefs({ course: id }); }} onMode={(m) => { setMode(m); writePrefs({ mode: m }); }} onLogout={() => void logout()} /></div>;
 
@@ -320,6 +325,13 @@ export function App() {
                   <button type="button" className="fails-btn" onClick={() => go({ name: 'session', course: current.id, focus: 'fallos' })}>
                     <span className="fails-n">{prog!.failures}</span>
                     <span><b>Vacía tus fallos</b><small>{prog!.failures === 1 ? 'Te queda 1 por acertar' : `Te quedan ${prog!.failures} por acertar`}{prog!.failures! > 8 ? ' · de 8 en 8' : ''}</small></span>
+                    <span aria-hidden="true">→</span>
+                  </button>
+                )}
+                {/\bbases? de datos\b/i.test(current.title) && (
+                  <button type="button" className="speak-btn" onClick={() => go({ name: 'sql' })}>
+                    <span className="fails-n speak-n" aria-hidden="true">🗄️</span>
+                    <span><b>Tu base de datos</b><small>Practica SQL por tu cuenta · lo que creas se queda guardado</small></span>
                     <span aria-hidden="true">→</span>
                   </button>
                 )}

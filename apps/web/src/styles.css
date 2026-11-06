@@ -1416,3 +1416,19 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .feed-phase { position: absolute; left: 50%; transform: translateX(-50%); top: calc(100% - 2px); z-index: 3; font-size: .68rem; font-weight: 800; letter-spacing: .03em; white-space: nowrap; padding: .05rem .45rem; border-radius: 99px; background: rgba(0, 0, 0, .35); color: #fff; }
 .feed-phase.ph-0 { color: #ffd166; } .feed-phase.ph-1 { color: #8ab4ff; } .feed-phase.ph-2 { color: #ff9f6b; } .feed-phase.ph-3 { color: #b26bff; } .feed-phase.ph-4 { color: #20c997; }
 .reel-count { margin: -.2rem auto .3rem; font-size: .78rem; opacity: .85; }
+
+/* Tu base de datos (6-nov-2026) */
+.sql-console { padding: 1rem; max-width: 46rem; margin: 0 auto; }
+.sql-head h1 { margin: .4rem 0 .2rem; }
+.sql-input { width: 100%; min-height: 8rem; font-family: ui-monospace, Menlo, monospace; font-size: 16px; }
+.sql-actions { display: flex; gap: .5rem; margin: .5rem 0; flex-wrap: wrap; }
+.sql-out { margin: .5rem 0; } .sql-out.ko { color: #c0392b; }
+.sql-sub { font-size: 1rem; margin: 1rem 0 .3rem; }
+.sql-table h3 { font-size: .9rem; margin: .5rem 0 .2rem; font-family: ui-monospace, Menlo, monospace; }
+.lab-table-wrap { overflow-x: auto; max-width: 100%; }
+.lab-table { border-collapse: collapse; font-size: .85rem; font-family: ui-monospace, Menlo, monospace; }
+.lab-table th, .lab-table td { border: 1px solid rgba(128, 128, 128, .35); padding: .2rem .45rem; text-align: left; white-space: nowrap; }
+.lab-table th { background: rgba(128, 128, 128, .15); }
+.sql-console .sql-input { background: #fff; color: #222; border: 1px solid rgba(0, 0, 0, .2); border-radius: 12px; padding: .7rem; }
+.sql-reset { align-self: center; }
+@media (prefers-color-scheme: dark) { .sql-console .sql-input { background: #1e1e1e; color: #eee; border-color: rgba(255, 255, 255, .2); } }
