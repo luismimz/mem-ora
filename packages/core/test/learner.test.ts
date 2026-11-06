@@ -53,3 +53,26 @@ describe('serialización', () => {
     expect(() => deserializeLearner(JSON.stringify({ schemaVersion: 2, userId: 'u1' }))).toThrow(/incompleto/);
   });
 });
+
+describe('recalcular muchos eventos (6-nov-2026: Inicio tardaba ~4 s)', () => {
+  const many = Array.from({ length: 6000 }, (_, i) => (i % 3 === 0
+    ? { kind: 'exposure' as const, event: exposure({ id: `e${i}`, at: T0 + i * 60_000, skillId: `s${i % 900}`, unitId: `u${i % 900}` }) }
+    : { kind: 'attempt' as const, event: attempt({ id: `a${i}`, at: T0 + i * 60_000, skillId: `s${i % 900}`, unitId: `u${i % 900}`, correct: i % 5 !== 0 }) }));
+  it('da lo mismo que aplicar uno a uno, sin tocar el estado de partida', () => {
+    const start = createLearner('u1');
+    const before = serializeLearner(start);
+    const fast = applyEvents(start, many.slice(0, 600), config);
+    const slow = many.slice(0, 600).reduce((l, it) => (it.kind === 'exposure' ? applyExposure(l, it.event, config) : applyAttempt(l, it.event, config).learner), createLearner('u1'));
+    expect(serializeLearner(fast)).toBe(serializeLearner(slow));
+    expect(serializeLearner(start)).toBe(before);
+    // Lo devuelto es inmutable: aplicar algo después no cambia el resultado anterior.
+    const snap = serializeLearner(fast);
+    applyAttempt(fast, attempt({ id: 'luego', at: T0 + 9e9, skillId: 's1', unitId: 'u1' }), config);
+    expect(serializeLearner(fast)).toBe(snap);
+  });
+  it('6.000 eventos en menos de medio segundo', () => {
+    const t = performance.now();
+    applyEvents(createLearner('u1'), many, config);
+    expect(performance.now() - t).toBeLessThan(500);
+  });
+});
