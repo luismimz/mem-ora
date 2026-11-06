@@ -266,13 +266,17 @@ export default {
       return rows.map((r: Row) => ({ event_id: r.event_id, kind: r.kind, payload: parse(r.payload), device_time: new Date(r.device_time).getTime() }));
     }
 
-    async function learnerFor(userId: string, courseId: string) {
-      const { learner, skipped } = recompute(userId, await storedEvents(userId, courseId), config);
+    async function learnerFor(userId: string, courseId: string, mark?: (name: string) => void) {
+      const events = await storedEvents(userId, courseId);
+      mark?.('eventos');
+      const { learner, skipped } = recompute(userId, events, config);
+      mark?.('recalculo');
       if (skipped.length) logger.warn(`[memora-api] ${skipped.length} eventos ignorados al recalcular (${userId})`);
       const snapshot = JSON.stringify(learner);
       const existing = await db('learner_states').where({ user: userId, course: courseId }).first('id');
       if (existing) await db('learner_states').where({ id: existing.id }).update({ snapshot, date_updated: new Date() });
       else await db('learner_states').insert({ id: randomUUID(), user: userId, course: courseId, snapshot, date_updated: new Date() });
+      mark?.('guardar');
       return learner;
     }
 
@@ -552,7 +556,7 @@ export default {
       req.mark('curso');
       const { catalog, missions } = await publishedContent(course);
       req.mark('contenido');
-      const learner = await learnerFor(userId, course.id);
+      const learner = await learnerFor(userId, course.id, req.mark);
       req.mark('alumno');
       const { list, current } = missionProgress(missions, catalog, learner);
       // Si hay una sesión empezada hoy, «Continuar aventura» la retoma: esa es la misión actual para el alumno.
@@ -630,7 +634,7 @@ export default {
       req.mark('curso');
       const { catalog } = await publishedContent(course);
       req.mark('contenido');
-      const learner = await learnerFor(userId, course.id);
+      const learner = await learnerFor(userId, course.id, req.mark);
       req.mark('alumno');
       // Racha con protector (D-072, D-077): días seguidos con alguna respuesta; cada 7 días se gana un protector que
       // salva un día perdido. Hoy, mientras no acabe, no rompe la racha.
