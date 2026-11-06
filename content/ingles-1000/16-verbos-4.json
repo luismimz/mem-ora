@@ -261,11 +261,11 @@
             }
           ],
           "signals": [
-            "every Sunday = cada domingo",
-            "usually = normalmente",
-            "now = ahora",
-            "Shh! = ¡chis!",
-            "at the moment = en este momento"
+            "every Sunday = cada domingo → I work",
+            "usually = normalmente → I work",
+            "now = ahora → I'm working",
+            "Shh! = ¡chis! → I'm working",
+            "at the moment = en este momento → I'm working"
           ],
           "drills": [
             {

@@ -1126,9 +1126,23 @@ function Formula({ unit }: { unit: SessionUnit }) {
 }
 
 /** Pista de un tiempo verbal: «every day = cada día» (inglés y su traducción, 4-nov-2026). */
-const sig = (t: string) => { const [en, es] = t.split(' = '); return { en: en!.trim(), es: es?.trim() }; };
+/** Pista «en = es» y, si compara dos tiempos, a cuál lleva: «now = ahora → I'm working» (usuario, 6-nov-2026). */
+const sig = (t: string) => { const [pair, group] = t.split(' → '); const [en, es] = pair!.split(' = '); return { en: en!.trim(), es: es?.trim(), group: group?.trim() }; };
 function Signals({ list, language, max }: { list: string[]; language: string; max?: number }) {
-  return <p className="tense-signals">{list.slice(0, max).map((t) => { const s = sig(t); return <b key={t}><span lang={language}>{s.en}</span>{s.es && <small>{s.es}</small>}</b>; })}</p>;
+  const items = list.slice(0, max).map((t) => ({ t, ...sig(t) }));
+  const chip = (s: (typeof items)[number]) => <b key={s.t}><span lang={language}>{s.en}</span>{s.es && <small>{s.es}</small>}</b>;
+  const groups = [...new Set(items.map((s) => s.group).filter(Boolean))] as string[];
+  if (!groups.length) return <p className="tense-signals">{items.map(chip)}</p>;
+  return (
+    <div className="tense-signal-groups">
+      {groups.map((g, i) => (
+        <div key={g} className={`tense-signal-group g${i}`}>
+          <p className="tense-signal-head">si oyes… <b lang={language}>→ {g}</b></p>
+          <p className="tense-signals">{items.filter((s) => s.group === g).map(chip)}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 /** Tiempo de cada pregunta de la Ráfaga hasta que la tarjeta «toca el suelo». */

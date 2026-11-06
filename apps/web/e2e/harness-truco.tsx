@@ -20,7 +20,7 @@ const units: Record<string, SessionUnit> = {
   'present-continuous': {
     key: 'present-continuous', type: 'pattern', language: 'en', version: 1,
     payload: {
-      goal: 'Decir lo que estás haciendo ahora', rule: 'am / is / are + verbo con -ing',
+      goal: 'Decir lo que estás haciendo ahora', rule: 'am / is / are + verbo con -ing', tense: 'Presente simple o continuo', signals: ['every Sunday = cada domingo → I work', 'usually = normalmente → I work', "now = ahora → I'm working", "Shh! = ¡chis! → I'm working", "at the moment = en este momento → I'm working"],
       pieces: [{ text: 'I', role: 'fixed', hint: 'YO' }, { text: 'am', role: 'fixed', hint: 'estoy' }, { text: 'read', role: 'slot', hint: 'le' }, { text: '-ing', role: 'fixed', hint: '-yendo' }],
       examples: [{ text: 'I am reading a book.', translation: 'Estoy leyendo un libro.' }, { text: 'She is cooking now.', translation: 'Ella está cocinando ahora.' }],
       pitfalls: ['En inglés el sujeto nunca se omite: «Am reading» está mal; es «I am reading».'],
@@ -52,7 +52,9 @@ const game = (key: string, name: string, items: Array<[string, string, string[]]
 } as unknown as SessionUnit);
 units.toco = game('toco', 'Toco o cuento', [['Tengo un gato', 'I HAVE', ['I AM']], ['Tengo hambre', 'I AM', ['I HAVE']], ['Tengo dinero', 'I HAVE', ['I AM']], ['Tengo frío', 'I AM', ['I HAVE']]]);
 units.semaforos = game('semaforos', 'Los semáforos', [['¿Comes?', 'DO', ['DID', 'WILL']], ['¿Fuiste?', 'DID', ['DO', 'WILL']], ['¿Irás?', 'WILL', ['DO', 'DID']], ['¿Vives aquí?', 'DO', ['DID', 'WILL']]]);
-const items = Object.keys(units).map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
+// ?pistas: el truco de gramática primero (para ver sus pistas agrupadas sin recorrer las palabras).
+const order = location.search.includes('pistas') ? ['present-continuous', ...Object.keys(units).filter((k) => k !== 'present-continuous')] : Object.keys(units);
+const items = order.map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 const plan = buildFlowSession({ sessionId: 'e2e-ingles', courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true });
 const payload = { state: { plan, index: 0, outcomes: {}, finished: false }, units } as unknown as SessionPayload;
 const w = window as unknown as { __flowLog: string[]; __plan: unknown; __units: unknown };
