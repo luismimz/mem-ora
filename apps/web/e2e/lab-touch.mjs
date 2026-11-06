@@ -64,7 +64,17 @@ try {
       check((await page.locator('.slide .vt-result').count()) >= 2, 'el laboratorio enseña las tablas de partida con sus datos');
       // Error real del motor, escrito con los atajos (sin teclado).
       await page.locator('.sql-chip', { hasText: /^SELECT$/ }).first().tap();
-      await page.locator('.sql-input').fill('SELECT nombr FROM cliente');
+      // Causa de la inestabilidad (6-nov-2026): el atajo escribe «SELECT » un instante DESPUÉS del toque; si se rellenaba
+      // antes, quedaba «SELECT SELECT nombr…» (error de sintaxis, no «no such column»). Se espera a que el atajo escriba.
+      await page.waitForFunction(() => [...document.querySelectorAll('.sql-input')].some((e) => /SELECT/.test(e.value)));
+      // La consulta errónea usa una tabla que existe en este laboratorio.
+      const table = ((await page.locator('.slide .vt-result .vt-name').first().textContent()) ?? 'cliente').trim().split(/\s/)[0];
+      // El atajo puede reescribir el campo justo después: se rellena hasta que quede exactamente la consulta.
+      for (let k = 0; k < 6; k++) {
+        await page.locator('.sql-input').fill(`SELECT nombr FROM ${table}`);
+        await page.waitForTimeout(150);
+        if (await page.evaluate((t) => [...document.querySelectorAll('.sql-input')].some((e) => e.value === `SELECT nombr FROM ${t}`), table)) break;
+      }
       await page.locator('.sql-run').tap();
       // Puede quedar en pantalla el error del laboratorio anterior: se espera al de esta consulta.
       const shown = await page.waitForFunction(() => [...document.querySelectorAll('.sql-error')].some((e) => /no such column: nombr/.test(e.textContent ?? '')), null, { timeout: 5000 }).then(() => true, () => false);
