@@ -967,7 +967,11 @@
             "cue": "RÁBANO",
             "scene": "La BASURA está llena de RÁBANOS.",
             "emoji": "🗑️"
-          }
+          },
+          "answers": [
+            "garbage",
+            "trash"
+          ]
         },
         {
           "key": "light",

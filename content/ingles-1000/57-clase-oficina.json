@@ -931,7 +931,10 @@
             "cue": "RÁBANO",
             "scene": "La GOMA DE BORRAR tiene forma de RÁBANO.",
             "emoji": "🧽"
-          }
+          },
+          "answers": [
+            "eraser"
+          ]
         },
         {
           "key": "ruler",
@@ -1200,7 +1203,10 @@
             "cue": "TIME",
             "scene": "HORARIO: tabla (TABLE) del tiempo (TIME).",
             "emoji": "🗓️"
-          }
+          },
+          "answers": [
+            "schedule"
+          ]
         },
         {
           "key": "classroom",

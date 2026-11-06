@@ -386,7 +386,10 @@
             "cue": "FÚTBOL",
             "scene": "FÚTBOL: FOOT (pie) + BALL (pelota).",
             "emoji": "⚽"
-          }
+          },
+          "answers": [
+            "soccer"
+          ]
         },
         {
           "key": "tennis",
@@ -774,7 +777,10 @@
             "cue": "FILM",
             "scene": "Una PELÍCULA es un FILM.",
             "emoji": "🎬"
-          }
+          },
+          "answers": [
+            "movie"
+          ]
         },
         {
           "key": "book",

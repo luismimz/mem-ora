@@ -842,7 +842,10 @@
             "cue": "SHAT",
             "scene": "CERRAR la puerta: ¡SHAT!",
             "emoji": "🚪"
-          }
+          },
+          "answers": [
+            "close"
+          ]
         },
         {
           "key": "spill",

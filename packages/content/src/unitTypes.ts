@@ -232,6 +232,8 @@ export interface TermPayload {
   pronunciation?: { ipa?: string; respelling?: string };
   examples: Example[];
   notes?: string;
+  /** Otras respuestas igual de buenas («thanks very much» para «thanks a lot»; usuario, 6-nov-2026). */
+  answers?: string[];
 }
 
 export interface PatternPiece {
@@ -436,7 +438,8 @@ function checkExamples(issues: ContentIssue[], value: unknown, min: number): voi
 
 function validateTerm(p: Record<string, unknown>): ContentIssue[] {
   const issues: ContentIssue[] = [];
-  checkUnknownFields(issues, p, '', ['form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'examples', 'notes']);
+  checkUnknownFields(issues, p, '', ['form', 'text', 'meaning', 'partOfSpeech', 'pronunciation', 'examples', 'notes', 'answers']);
+  checkTextList(issues, p.answers, 'answers', 0, PAYLOAD_LIMITS.termText);
   checkChoice(issues, p.form, 'form', TERM_FORMS);
   checkText(issues, p.text, 'text', { max: PAYLOAD_LIMITS.termText });
   checkText(issues, p.meaning, 'meaning', { max: PAYLOAD_LIMITS.meaning });

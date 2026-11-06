@@ -387,7 +387,10 @@
             "cue": "BILLETE",
             "scene": "La CUENTA se paga con BILLETES.",
             "emoji": "🧾"
-          }
+          },
+          "answers": [
+            "check"
+          ]
         },
         {
           "key": "tip",
@@ -482,7 +485,11 @@
             "cue": "STARTER",
             "scene": "El ENTRANTE: el START de la comida.",
             "emoji": "🥟"
-          }
+          },
+          "answers": [
+            "appetizer",
+            "first course"
+          ]
         },
         {
           "key": "dessert",
@@ -577,7 +584,11 @@
             "cue": "PRINCIPAL",
             "scene": "SEGUNDO PLATO: el curso PRINCIPAL (MAIN).",
             "emoji": "🍖"
-          }
+          },
+          "answers": [
+            "main dish",
+            "main"
+          ]
         },
         {
           "key": "napkin",

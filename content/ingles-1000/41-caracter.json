@@ -389,7 +389,10 @@
             "cue": "KINDER",
             "scene": "AMABLE como una profe de KINDER.",
             "emoji": "🤗"
-          }
+          },
+          "answers": [
+            "nice"
+          ]
         },
         {
           "key": "shy",
@@ -525,7 +528,11 @@
             "cue": "CLAVE",
             "scene": "LISTO: sabe la CLAVE.",
             "emoji": "🧠"
-          }
+          },
+          "answers": [
+            "smart",
+            "intelligent"
+          ]
         },
         {
           "key": "honest",
@@ -899,7 +906,11 @@
             "cue": "NAIS",
             "scene": "MAJO como un NAIS-NAIS de bebé.",
             "emoji": "🙂"
-          }
+          },
+          "answers": [
+            "kind",
+            "lovely"
+          ]
         },
         {
           "key": "smart",
@@ -956,7 +967,11 @@
             "cue": "SMART",
             "scene": "LISTO como un SMARTphone.",
             "emoji": "📱"
-          }
+          },
+          "answers": [
+            "clever",
+            "intelligent"
+          ]
         }
       ]
     }

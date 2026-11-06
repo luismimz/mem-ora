@@ -870,7 +870,10 @@
             "scene": "¡JOLÍN, por fin VACACIONES!",
             "sceneTarget": "Gosh, HOLIDAYS at last!",
             "emoji": "🎉🌴"
-          }
+          },
+          "answers": [
+            "vacation"
+          ]
         },
         {
           "key": "flight",

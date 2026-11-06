@@ -397,7 +397,10 @@
             "cue": "SIC",
             "scene": "ENFERMO dices «SIC, SIC» con fiebre.",
             "emoji": "🤒"
-          }
+          },
+          "answers": [
+            "ill"
+          ]
         },
         {
           "key": "pain",

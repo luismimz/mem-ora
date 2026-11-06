@@ -847,7 +847,10 @@
             "cue": "POR CIENTO",
             "scene": "POR CIENTO: PER CENT.",
             "emoji": "💯"
-          }
+          },
+          "answers": [
+            "percent"
+          ]
         },
         {
           "key": "total",

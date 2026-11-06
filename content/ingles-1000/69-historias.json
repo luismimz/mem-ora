@@ -960,7 +960,11 @@
             "cue": "AFTER",
             "scene": "DESPUÉS, en el AFTER.",
             "emoji": "🌙"
-          }
+          },
+          "answers": [
+            "later",
+            "after that"
+          ]
         },
         {
           "key": "meanwhile",
@@ -1061,7 +1065,11 @@
             "cue": "EVENTUALMENTE",
             "scene": "AL FINAL, no EVENTUALMENTE, ¡ojo!",
             "emoji": "🏁"
-          }
+          },
+          "answers": [
+            "finally",
+            "in the end"
+          ]
         },
         {
           "key": "story",

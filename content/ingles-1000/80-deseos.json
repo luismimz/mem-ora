@@ -1247,7 +1247,10 @@
             "cue": "OJALÁ",
             "scene": "OJALÁ: IF ONLY, si tan solo…",
             "emoji": "🙏"
-          }
+          },
+          "answers": [
+            "I wish"
+          ]
         },
         {
           "key": "pity",

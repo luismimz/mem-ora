@@ -621,7 +621,10 @@
             "scene": "PANTALONES tan apretados que te dan TRAUMA.",
             "sceneTarget": "TROUSERS so tight they give you trauma.",
             "emoji": "👖😱"
-          }
+          },
+          "answers": [
+            "pants"
+          ]
         },
         {
           "key": "jeans",

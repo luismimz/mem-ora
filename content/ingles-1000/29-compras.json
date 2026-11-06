@@ -841,7 +841,10 @@
             "scene": "Una COLA enorme en el QUIOSCO.",
             "sceneTarget": "A huge QUEUE at the kiosk.",
             "emoji": "🧍🗞️"
-          }
+          },
+          "answers": [
+            "line"
+          ]
         },
         {
           "key": "supermarket",

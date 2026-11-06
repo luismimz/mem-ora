@@ -739,7 +739,12 @@
             "cue": "ANDÉN",
             "scene": "El METRO va por debajo del ANDÉN.",
             "emoji": "🚇"
-          }
+          },
+          "answers": [
+            "subway",
+            "tube",
+            "metro"
+          ]
         },
         {
           "key": "traffic",
@@ -1137,7 +1142,11 @@
             "cue": "PETRÓLEO",
             "scene": "La GASOLINA sale del PETRÓLEO.",
             "emoji": "⛽"
-          }
+          },
+          "answers": [
+            "gas",
+            "gasoline"
+          ]
         },
         {
           "key": "crossing",

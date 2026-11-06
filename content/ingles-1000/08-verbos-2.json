@@ -587,7 +587,10 @@
             "scene": "Para EMPEZAR la fiesta, pones una GUINDA en cada nariz.",
             "sceneTarget": "To BEGIN the party, you put a cherry on every nose.",
             "emoji": "🍒🎉"
-          }
+          },
+          "answers": [
+            "start"
+          ]
         },
         {
           "key": "seem",

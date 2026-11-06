@@ -338,7 +338,11 @@
             "cue": "CHUR",
             "scene": "¡CLARO!, dice el CHURRERO.",
             "emoji": "👍"
-          }
+          },
+          "answers": [
+            "of course",
+            "certainly"
+          ]
         },
         {
           "key": "no-problem",
@@ -378,7 +382,11 @@
             "cue": "PROBLEMA",
             "scene": "NO HAY PROBLEMA: NO PROBLEM.",
             "emoji": "😎"
-          }
+          },
+          "answers": [
+            "no worries",
+            "you're welcome"
+          ]
         },
         {
           "key": "i-see",
@@ -570,7 +578,10 @@
             "cue": "GOU",
             "scene": "¡VAMOS!: LET'S GO.",
             "emoji": "🚀"
-          }
+          },
+          "answers": [
+            "let us go"
+          ]
         },
         {
           "key": "come-on",
@@ -614,7 +625,10 @@
             "cue": "CAMÓN",
             "scene": "¡VENGA!, ¡CAMÓN!, anima el entrenador.",
             "emoji": "📣"
-          }
+          },
+          "answers": [
+            "let's go"
+          ]
         },
         {
           "key": "fair-enough",
@@ -798,7 +812,12 @@
             "cue": "IDEA",
             "scene": "NI IDEA: NO IDEA.",
             "emoji": "🤷"
-          }
+          },
+          "answers": [
+            "I have no idea",
+            "I've no idea",
+            "no clue"
+          ]
         },
         {
           "key": "not-really",
@@ -857,7 +876,10 @@
             "cue": "RIALI",
             "scene": "NO MUCHO, LA VERDAD: NOT REALLY.",
             "emoji": "😕"
-          }
+          },
+          "answers": [
+            "not much"
+          ]
         },
         {
           "key": "same-here",
@@ -902,7 +924,10 @@
             "cue": "SAME",
             "scene": "YO TAMBIÉN: lo MISMO (SAME) aquí (HERE).",
             "emoji": "🙋"
-          }
+          },
+          "answers": [
+            "me too"
+          ]
         },
         {
           "key": "go-ahead",
@@ -969,7 +994,10 @@
             "cue": "AJED",
             "scene": "ADELANTE: ve (GO) a la cabeza (AHEAD).",
             "emoji": "➡️"
-          }
+          },
+          "answers": [
+            "go on"
+          ]
         },
         {
           "key": "my-pleasure",
@@ -1008,7 +1036,11 @@
             "cue": "PLACER",
             "scene": "UN PLACER: MY PLEASURE.",
             "emoji": "😊"
-          }
+          },
+          "answers": [
+            "you're welcome",
+            "no problem"
+          ]
         }
       ]
     }

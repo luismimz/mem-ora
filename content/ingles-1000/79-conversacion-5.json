@@ -377,7 +377,10 @@
             "cue": "HONESTO",
             "scene": "PARA SER SINCERO: ser HONESTO.",
             "emoji": "🤝"
-          }
+          },
+          "answers": [
+            "honestly"
+          ]
         },
         {
           "key": "on-the-other-hand",
@@ -483,7 +486,11 @@
             "cue": "HECHO",
             "scene": "DE HECHO: es un HECHO (FACT).",
             "emoji": "📌"
-          }
+          },
+          "answers": [
+            "actually",
+            "as a matter of fact"
+          ]
         },
         {
           "key": "at-least",
@@ -588,7 +595,10 @@
             "cue": "AFTER",
             "scene": "AL FIN Y AL CABO, después (AFTER) de todo (ALL).",
             "emoji": "🔚"
-          }
+          },
+          "answers": [
+            "in the end"
+          ]
         },
         {
           "key": "as-far-as-i-know",
@@ -637,7 +647,10 @@
             "cue": "SÉ",
             "scene": "QUE YO SEPA: hasta donde (FAR) yo SÉ (KNOW).",
             "emoji": "🤷"
-          }
+          },
+          "answers": [
+            "as far as I'm aware"
+          ]
         },
         {
           "key": "apparently",

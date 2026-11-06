@@ -569,7 +569,10 @@
             "cue": "PAVIMENTO",
             "scene": "La ACERA de PAVIMENTO.",
             "emoji": "🚶"
-          }
+          },
+          "answers": [
+            "sidewalk"
+          ]
         },
         {
           "key": "neighbourhood",
@@ -1120,7 +1123,11 @@
             "cue": "PARQUE",
             "scene": "APARCAMIENTO: el PARQUE de los coches (CAR).",
             "emoji": "🅿️"
-          }
+          },
+          "answers": [
+            "parking",
+            "parking lot"
+          ]
         },
         {
           "key": "roundabout",
