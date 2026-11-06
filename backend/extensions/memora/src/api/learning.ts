@@ -87,16 +87,9 @@ export function recompute(userId: string, events: StoredEvent[], config: CoreCon
       : ({ kind: 'attempt', event: toAttempt(row.payload, userId, row.device_time) } as const),
   );
   const skipped: string[] = [];
-  let learner = createLearner(userId);
-  // applyEvents ordena y deduplica; aplicamos de uno en uno para que un evento malo no tire todo el recálculo.
-  const sorted = [...items].sort((a, b) => a.event.at - b.event.at || (a.event.id < b.event.id ? -1 : 1));
-  for (const item of sorted) {
-    try {
-      learner = applyEvents(learner, [item], config);
-    } catch {
-      skipped.push(item.event.id);
-    }
-  }
+  // Una sola pasada (6-nov-2026: de uno en uno copiaba al alumno entero en cada evento, ~3,5 s); un evento malo se
+  // salta y se informa, sin tirar el recálculo.
+  const learner = applyEvents(createLearner(userId), items, config, undefined, (id) => skipped.push(id));
   return { learner, skipped };
 }
 

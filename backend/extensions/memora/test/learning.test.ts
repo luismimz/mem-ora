@@ -72,6 +72,18 @@ describe('hora y recálculo', () => {
     expect(skipped).toEqual(['evt-00000003']);
   });
 
+  it('recalcula 6.000 eventos de una pasada y deprisa (6-nov-2026: Inicio tardaba ~4 s)', () => {
+    const stored: StoredEvent[] = Array.from({ length: 6000 }, (_, i) => {
+      const id = `evt-${String(i).padStart(8, '0')}`;
+      return { event_id: id, kind: 'attempt' as const, device_time: 1000 + i * 1000, payload: event({ id, at: 1000 + i * 1000, ...(i === 10 ? { format: 'recall_cued', hint: 0 } : {}) }) };
+    });
+    const t = performance.now();
+    const { learner, skipped } = recompute('u', stored, config);
+    expect(performance.now() - t).toBeLessThan(800);
+    expect(skipped).toEqual(['evt-00000010']);
+    expect(learner.skills['borrow.recall']?.attempts).toBe(5999);
+  });
+
   it('«No estoy seguro» llega al núcleo: el acierto dudoso no saca la palabra de tus fallos', () => {
     const stored: StoredEvent[] = [
       { event_id: 'evt-00000011', kind: 'attempt', device_time: 1000, payload: event({ id: 'evt-00000011', at: 1000, correct: false }) },

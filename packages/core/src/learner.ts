@@ -129,16 +129,19 @@ export function applyEvents(
   events: Array<{ kind: 'exposure'; event: Exposure } | { kind: 'attempt'; event: Attempt }>,
   config: CoreConfig,
   scheduler: Scheduler = adaptiveScheduler,
+  /** Si se da, un evento inválido se salta (y se avisa) en vez de detener todo el recálculo. */
+  onError?: (id: string, error: unknown) => void,
 ): LearnerState {
   const sorted = [...events].sort((a, b) => a.event.at - b.event.at || (a.event.id < b.event.id ? -1 : a.event.id > b.event.id ? 1 : 0));
   const maps = [{ ...learner.skills }, { ...learner.associations }, { ...learner.applied }, { ...learner.activity }] as const;
   for (const m of maps) owned.add(m);
   const work: LearnerState = { ...learner, skills: maps[0], associations: maps[1], applied: maps[2], activity: maps[3] };
   try {
-    return sorted.reduce(
-      (state, item) => (item.kind === 'exposure' ? applyExposure(state, item.event, config, scheduler) : applyAttempt(state, item.event, config, scheduler).learner),
-      work,
-    );
+    const step = (state: LearnerState, item: (typeof sorted)[number]) => (item.kind === 'exposure' ? applyExposure(state, item.event, config, scheduler) : applyAttempt(state, item.event, config, scheduler).learner);
+    return sorted.reduce((state, item) => {
+      if (!onError) return step(state, item);
+      try { return step(state, item); } catch (e) { onError(item.event.id, e); return state; }
+    }, work);
   } finally {
     // Lo devuelto vuelve a ser inmutable para quien lo reciba.
     for (const m of maps) owned.delete(m);
