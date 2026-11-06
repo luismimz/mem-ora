@@ -43,6 +43,14 @@ try {
   check(t.en === 'would' && t.form === 'base', 'en inglés «would» va marcado y el verbo dice «base»');
   check(/would \+ verbo base/.test(t.formula ?? ''), 'enseña la fórmula');
   check(t.w <= 390 && !(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'nada se sale por los lados');
+  // Pistas agrupadas por tiempo (usuario, 6-nov-2026: «no me queda claro cuáles van con simple y cuáles con continuo»).
+  await page.goto(`${url}?pistas`);
+  await page.waitForSelector('.slide');
+  let groups = 0;
+  for (let n = 0; n < 4 && !groups; n++) { groups = await page.locator('.slide .tense-signal-group').count(); if (!groups) await swipeUp(); }
+  if (groups) { await page.locator('.slide .tense-signal-groups').first().scrollIntoViewIfNeeded(); await page.screenshot({ path: process.env.SHOT_C ?? '/tmp/pistas.png' }); }
+  const heads = await page.locator('.slide .tense-signal-head').allTextContents();
+  check(groups === 2 && /I work/.test(heads[0] ?? '') && /I'm working/.test(heads[1] ?? ''), `las pistas salen en dos grupos: ${heads.join(' | ')}`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors[0]}` : ''}`);
 } finally {
   await browser.close();

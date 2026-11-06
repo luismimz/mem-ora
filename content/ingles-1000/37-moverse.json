@@ -479,11 +479,11 @@
           "tense": "Will o going to",
           "formula": "decides ahora: I'll… · ya planeado: I'm going to…",
           "signals": [
-            "I've decided = he decidido",
-            "It's on my list = lo tengo apuntado",
-            "Careful! = ¡cuidado!",
-            "OK, I… = vale, yo…",
-            "I think = creo que"
+            "I've decided = he decidido → I'm going to…",
+            "It's on my list = lo tengo apuntado → I'm going to…",
+            "Careful! = ¡cuidado! → I'm going to…",
+            "OK, I… = vale, yo… → I'll…",
+            "I think = creo que → I'll…"
           ],
           "drills": [
             {
