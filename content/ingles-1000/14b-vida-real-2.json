@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "14b-vida-real-2",
+      "title": "Vida real 2 · En el bar",
+      "units": [
+        {
+          "key": "vr-pedir",
+          "type": "concept",
+          "name": "Pedir en el bar",
+          "gist": "pedir con educación",
+          "definition": "En un bar de Londres, a la hora de comer. Las frases: «I'd like a coffee, please» = quisiera un café, por favor · «Can I have some water?» = ¿me pone agua? · «How much is it?» = ¿cuánto es? · «The bill, please» = la cuenta, por favor.",
+          "examples": [
+            {
+              "text": "I'd like a coffee, please",
+              "explanation": "quisiera un café, por favor"
+            },
+            {
+              "text": "Can I have some water?",
+              "explanation": "¿me pone agua?"
+            },
+            {
+              "text": "How much is it?",
+              "explanation": "¿cuánto es?"
+            },
+            {
+              "text": "The bill, please",
+              "explanation": "la cuenta, por favor"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "☕ Quieres un café:",
+              "answer": "I'd like a coffee, please",
+              "distractors": [
+                "Can I have some water?",
+                "How much is it?",
+                "The bill, please"
+              ],
+              "explanation": "I'd like = me gustaría (educado)."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "💧 Tienes sed y pides agua:",
+              "answer": "Can I have some water?",
+              "distractors": [
+                "I'd like a coffee, please",
+                "How much is it?",
+                "The bill, please"
+              ],
+              "explanation": "Can I have…? para pedir."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "💶 Quieres saber el precio:",
+              "answer": "How much is it?",
+              "distractors": [
+                "I'd like a coffee, please",
+                "Can I have some water?",
+                "The bill, please"
+              ],
+              "explanation": "¿Cuánto es?"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🧾 Has terminado y quieres pagar:",
+              "answer": "The bill, please",
+              "distractors": [
+                "I'd like a coffee, please",
+                "Can I have some water?",
+                "How much is it?"
+              ],
+              "explanation": "La cuenta."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🍞 Pides con educación un café para llevar:",
+              "answer": "I'd like a coffee, please",
+              "distractors": [
+                "Can I have some water?",
+                "How much is it?",
+                "The bill, please"
+              ],
+              "explanation": "Quisiera…"
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🥤 El camarero pregunta qué bebes; quieres agua:",
+              "answer": "Can I have some water?",
+              "distractors": [
+                "I'd like a coffee, please",
+                "How much is it?",
+                "The bill, please"
+              ],
+              "explanation": "Pedir agua."
+            }
+          ]
+        },
+        {
+          "key": "vr-comida",
+          "type": "concept",
+          "name": "En la mesa",
+          "gist": "decir qué te apetece y qué no",
+          "definition": "Comes con compañeros del trabajo. Las frases: «I'm hungry» = tengo hambre · «I don't eat meat» = no como carne · «It's delicious» = está buenísimo · «I'm full» = estoy lleno.",
+          "examples": [
+            {
+              "text": "I'm hungry",
+              "explanation": "tengo hambre"
+            },
+            {
+              "text": "I don't eat meat",
+              "explanation": "no como carne"
+            },
+            {
+              "text": "It's delicious",
+              "explanation": "está buenísimo"
+            },
+            {
+              "text": "I'm full",
+              "explanation": "estoy lleno"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🍽️ Llevas sin comer desde el desayuno:",
+              "answer": "I'm hungry",
+              "distractors": [
+                "I don't eat meat",
+                "It's delicious",
+                "I'm full"
+              ],
+              "explanation": "Hambre = I AM (se siente)."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🥗 Eres vegetariano y te ofrecen jamón:",
+              "answer": "I don't eat meat",
+              "distractors": [
+                "I'm hungry",
+                "It's delicious",
+                "I'm full"
+              ],
+              "explanation": "don't + verbo base."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "😋 El pescado está buenísimo:",
+              "answer": "It's delicious",
+              "distractors": [
+                "I'm hungry",
+                "I don't eat meat",
+                "I'm full"
+              ],
+              "explanation": "Está buenísimo."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🫃 Te ofrecen postre y no puedes más:",
+              "answer": "I'm full",
+              "distractors": [
+                "I'm hungry",
+                "I don't eat meat",
+                "It's delicious"
+              ],
+              "explanation": "Estoy lleno."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🍳 Huele a huevos fritos y te ruge el estómago:",
+              "answer": "I'm hungry",
+              "distractors": [
+                "I don't eat meat",
+                "It's delicious",
+                "I'm full"
+              ],
+              "explanation": "Tienes hambre."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🍖 Te sirven un filete:",
+              "answer": "I don't eat meat",
+              "distractors": [
+                "I'm hungry",
+                "It's delicious",
+                "I'm full"
+              ],
+              "explanation": "No como carne."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

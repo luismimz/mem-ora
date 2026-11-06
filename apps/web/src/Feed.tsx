@@ -1024,10 +1024,14 @@ function scrambled<T>(items: T[], seed: string): T[] {
  * adelanta?» / «¿cuál falta?») y mucho texto encima: «mucha información y no se sabe qué hacer» (usuario, 29-oct).
  * Al acertar, suena la frase y pasa sola; al fallar, se ve el orden bueno con la pieza que salta marcada y la regla.
  */
-function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Record<string, SessionUnit>; example: number; seed: string; onResult: (ok: boolean, ms: number, note: string) => void }) {
+/**
+ * «Las piezas». `back` (juego del espejo de vuelta, 6-nov-2026): la frase inglesa y las piezas en ESPAÑOL, para ver el
+ * cambio de orden en los dos sentidos; las piezas fantasma (el «YO» que el español calla) no salen.
+ */
+function Pieces({ unit, example, seed, back = false, onResult }: { unit: SessionUnit; all?: Record<string, SessionUnit>; example: number; seed: string; back?: boolean; onResult: (ok: boolean, ms: number, note: string) => void }) {
   const ex = (sentencesOf(unit) as Array<{ text: string; translation?: string; mirror?: Mirror }>)[example]!;
   const m = ex.mirror!;
-  const order = useMemo(() => m.order ?? m.pieces.map((_, i) => i), [m]);
+  const order = useMemo(() => (back ? m.pieces.map((_, i) => i).filter((i) => !m.pieces[i]!.ghost) : m.order ?? m.pieces.map((_, i) => i)), [m, back]);
   const moved = movedPieces(m);
   const tiles = useMemo(() => scrambled(order, `${seed}-t`), [order, seed]);
   const [placed, setPlaced] = useState<number[]>([]);
@@ -1042,29 +1046,30 @@ function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Re
     setPlaced(next);
     sfx('pop');
     if (next.length === order.length) {
-      const good = next.every((x, k) => m.pieces[x]!.en === m.pieces[order[k]!]!.en);
+      const good = next.every((x, k) => (back ? m.pieces[x]!.es === m.pieces[order[k]!]!.es : m.pieces[x]!.en === m.pieces[order[k]!]!.en));
       setChecked(good);
-      if (good) { setConfetti((c) => c + 1); sfx('party'); if (audioEnabled()) speak(ex.text, unit.language); window.setTimeout(() => finishRef.current(), 1800); } else sfx('ko');
+      if (good) { setConfetti((c) => c + 1); sfx('party'); if (audioEnabled() && !back) speak(ex.text, unit.language); window.setTimeout(() => finishRef.current(), 1800); } else sfx('ko');
     }
   }
-  const spanishOrder = placed.length === order.length && placed.every((x, k) => x === k) && jumps;
+  const spanishOrder = !back && placed.length === order.length && placed.every((x, k) => x === k) && jumps;
   const sent = useRef(false);
   const finish = () => {
     if (sent.current) return;
     sent.current = true;
-    onResult(Boolean(checked), Math.round(performance.now() - t0.current), checked ? '' : `${spanishOrder ? 'Has seguido el orden del español. ' : ''}En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}`);
+    onResult(Boolean(checked), Math.round(performance.now() - t0.current), checked ? '' : back ? `En español: «${ex.translation ?? m.say}». En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}` : `${spanishOrder ? 'Has seguido el orden del español. ' : ''}En inglés: «${ex.text}».${rule ? ` ${rule}` : ''}`);
   };
   const finishRef = useRef(finish);
   finishRef.current = finish;
   const chip = (i: number) => {
     const p = m.pieces[i]!;
+    if (back) return <><b>{p.es}</b><small lang={unit.language}>{p.en}</small></>;
     return <><b lang={unit.language}>{p.role === 'signal' ? `🚦 ${p.en}` : p.en}</b><small>{p.role === 'signal' ? 'semáforo' : p.es}</small></>;
   };
   return (
     <Slide tone={hue(unit.key)} className={`pieces ${checked === null ? '' : checked ? 'right' : 'wrong'}`} {...(checked !== null ? { onNext: finish } : {})}>
       <div className="pieces-body">
-        <p className="tag">🧩 DILO EN INGLÉS</p>
-        <h3 className="ask pieces-es">{m.say}</h3>
+        <p className="tag">{back ? '🪞 DE VUELTA · DILO EN ESPAÑOL' : '🧩 DILO EN INGLÉS'}</p>
+        <h3 className="ask pieces-es" {...(back ? { lang: unit.language } : {})}>{back ? ex.text : m.say}</h3>
         <Formula unit={unit} />
         <div className={`pieces-slots ${checked === null ? '' : checked ? 'ok' : 'ko'}`} lang={unit.language} aria-label="Tu frase en inglés">
           {order.map((_, k) => {
@@ -1075,12 +1080,13 @@ function Pieces({ unit, example, seed, onResult }: { unit: SessionUnit; all?: Re
         {checked === null ? (
           <>
             <div className="pieces-row">{tiles.map((i) => <button type="button" key={i} className={`ptile role-${m.pieces[i]!.role} ${placed.includes(i) ? 'used' : ''}`} disabled={placed.includes(i)} onClick={() => place(i)}>{chip(i)}</button>)}</div>
-            <p className="pieces-q">👆 Toca las piezas en el orden del <b>inglés</b></p>
+            <p className="pieces-q">👆 Toca las piezas en el orden del <b>{back ? 'español' : 'inglés'}</b>{back && m.pieces.some((p) => p.ghost) ? ' (el «yo» del inglés, en español se calla)' : ''}</p>
           </>
         ) : (
           <div className="pieces-after">
             <p className={`tense-verdict ${checked ? 'ok' : 'ko'}`}>{checked ? '¡Perfecto! 🎉' : spanishOrder ? 'Has seguido el orden del español' : 'Casi…'}</p>
             {!checked && <div className="pieces-row good" lang={unit.language}>{order.map((i) => <span key={i} className={`ptile static role-${m.pieces[i]!.role} ${moved.includes(i) ? 'jumped' : ''}`}>{chip(i)}</span>)}</div>}
+            {back && <p className="train-final">{ex.translation ?? m.say}</p>}
             <p className="train-final" lang={unit.language}><TrickSentence text={ex.text} translation={ex.translation} lang={unit.language} /></p>
             {rule && jumps && <p className="why">📏 {rule}</p>}
           </div>
@@ -1173,6 +1179,8 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
   const current = queue[0];
   const ex = current === undefined ? undefined : items[current];
   const two = options.length === 2;
+  // Vida real (6-nov-2026): con frases enteras hay que leer más: el tiempo crece con lo que se lee (4 s a 10 s).
+  const limitMs = Math.min(10000, BURST_MS + Math.max(0, options.join(' ').length + (ex?.prompt.length ?? 0) - 40) * 45);
 
   function next(after: number) {
     setTimeout(() => {
@@ -1191,7 +1199,7 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
       if (!late.includes(current)) { setLate((l) => [...l, current]); setFb({ ok: false, late: true }); sfx('ko'); setTimeout(() => { setFb(null); setQueue((q) => [...q.slice(1), current]); }, 700); return; }
       slow.current += 1;
       answer(null);
-    }, BURST_MS);
+    }, limitMs);
     return () => clearTimeout(timer);
   }, [current, fb]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -1210,7 +1218,7 @@ function Burst({ unit, onResult }: { unit: SessionUnit; onResult: (ok: boolean, 
       <p className="burst-score">✅ {ok} {done - ok > 0 ? `· ❌ ${done - ok}` : ''}</p>
       <div className="burst-sky">
         {/* La caída va en una capa aparte y con transform (GPU): con «top» se quedaba quieta en el iPhone. */}
-        <div key={`${current}-${late.includes(current!) ? 'b' : 'a'}`} className={`burst-drop ${fb ? 'stop' : ''}`} style={{ animationDuration: `${BURST_MS}ms` }}>
+        <div key={`${current}-${late.includes(current!) ? 'b' : 'a'}`} className={`burst-drop ${fb ? 'stop' : ''}`} style={{ animationDuration: `${limitMs}ms` }}>
         <div className="burst-card" style={{ transform: dx ? `translateX(${dx}px) rotate(${dx / 14}deg)` : undefined }}
           onPointerDown={(e) => { if (two) start.current = e.clientX; }}
           onPointerMove={(e) => { if (start.current !== null) setDx(e.clientX - start.current); }}
@@ -2083,6 +2091,16 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
   );
 }
 
+/** El espejo de vuelta: 1 de cada 3 «Las piezas» cuyo orden cambia de idioma a idioma se juega del inglés al español. */
+function piecesBack(id: string, unit: SessionUnit, example: number): boolean {
+  const m = (sentencesOf(unit) as Array<{ mirror?: Mirror }>)[example]?.mirror;
+  if (!m?.order || !m.order.some((v, k) => v !== k)) return false;
+  const force = (globalThis as { __memoraPiecesBack?: boolean }).__memoraPiecesBack; // solo pruebas e2e
+  if (force !== undefined) return force;
+  let h = 0; for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return h % 3 === 0;
+}
+
 /** Las fases del proceso (ver «Cómo funciona Memora»): conocer → sacarlo de tu cabeza → repasar → usarlo. */
 const PHASES = {
   pre: { n: 0, label: '🤔 ¿Qué crees?' },
@@ -2097,6 +2115,7 @@ function phaseOf(step: AssocStep): (typeof PHASES)[keyof typeof PHASES] | null {
   if (step.pre) return PHASES.pre;
   if (step.kind === 'reel' || step.kind === 'watch' || step.kind === 'chant') return PHASES.know;
   if (step.kind === 'arcade' || step.kind === 'review' || step.closing) return PHASES.review;
+  if (step.kind === 'burst' && step.unitKey.startsWith('vr-')) return PHASES.use;
   if (step.kind === 'build' || step.kind === 'pieces' || step.kind === 'workshop' || step.kind === 'tense' || step.kind === 'train' || step.kind === 'challenge') return PHASES.use;
   return PHASES.recall;
 }
@@ -2343,7 +2362,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
       scored(ok, sqlLab ? 30 : 12);
     }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su ficha y sus ejemplos: así lo reconocerás y lo usarás la próxima vez.' }); else void advance({ correct: true, hint: 0 }); }} />;
-  else if (step.kind === 'pieces' && unit && step.example !== undefined) card = <Pieces key={step.id} unit={unit} all={units} example={step.example} seed={step.id} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#piezas-${step.example}`, 15, step.skillKey, 'recognition_choice', 0, note || undefined)} />;
+  else if (step.kind === 'pieces' && unit && step.example !== undefined) card = <Pieces key={step.id} unit={unit} all={units} example={step.example} seed={step.id} back={piecesBack(step.id, unit, step.example)} onResult={(ok, ms, note) => answered(unit, ok, ms, `${unit.key}#piezas-${step.example}`, 15, step.skillKey, 'recognition_choice', 0, note || undefined)} />;
   else if (step.kind === 'chant' && unit) card = <Chant key={step.id} unit={unit} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#chant`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'spot' && unit && step.example !== undefined) card = <Spot key={step.id} unit={unit} example={step.example} reverse={Boolean(step.reverse)} onResult={(ok, ms) => { answered(unit, ok, ms, `${unit.key}#spot-${step.example}${step.reverse ? '-inv' : ''}`, 12, step.skillKey, step.reverse ? 'recognition_choice' : 'recognition_listening'); if (!ok) setTeaching({ key: unit.key, scene: step.example! }); }} />;
   else if (step.kind === 'build' && unit && step.example !== undefined) card = <Build key={step.id} unit={unit} example={step.example} onResult={(ok, ms, note, hint) => answered(unit, ok, ms, `${unit.key}#build-${step.example}`, hint > 1 ? 12 : 20, step.skillKey, 'production', hint, note)} />;

@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "origin": "ai",
+  "course": {
+    "key": "ingles-1000",
+    "title": "Inglés · 1.000 palabras (A1→B1)",
+    "subject": "idioma",
+    "contentLanguage": "en",
+    "learnerLanguage": "es",
+    "newPerSession": 15,
+    "audio": true,
+    "modes": [
+      "flow",
+      "arcade"
+    ],
+    "visibility": "public",
+    "license": "proprietary-own",
+    "sources": [
+      {
+        "title": "Selección propia de vocabulario frecuente A1–B1 (referencia: niveles del MCER)"
+      },
+      {
+        "title": "Cambridge Dictionary (pronunciación de referencia)",
+        "url": "https://dictionary.cambridge.org/"
+      }
+    ],
+    "description": "Las palabras más frecuentes del inglés por situaciones, con puente de sonido, escena absurda y ejemplo."
+  },
+  "modules": [
+    {
+      "key": "29b-vida-real-4",
+      "title": "Vida real 4 · De compras",
+      "units": [
+        {
+          "key": "vr-tienda",
+          "type": "concept",
+          "name": "En la tienda de ropa",
+          "gist": "preguntar precio, talla y pagar",
+          "definition": "Compras una chaqueta en Oxford Street. Las frases: «How much is this jacket?» = ¿cuánto cuesta esta chaqueta? · «Can I try it on?» = ¿me la puedo probar? · «Can I pay by card?» = ¿puedo pagar con tarjeta? · «I'll take it» = me la llevo.",
+          "examples": [
+            {
+              "text": "How much is this jacket?",
+              "explanation": "¿cuánto cuesta esta chaqueta?"
+            },
+            {
+              "text": "Can I try it on?",
+              "explanation": "¿me la puedo probar?"
+            },
+            {
+              "text": "Can I pay by card?",
+              "explanation": "¿puedo pagar con tarjeta?"
+            },
+            {
+              "text": "I'll take it",
+              "explanation": "me la llevo"
+            }
+          ],
+          "exercises": [
+            {
+              "kind": "apply_case",
+              "prompt": "🏷️ No ves la etiqueta del precio:",
+              "answer": "How much is this jacket?",
+              "distractors": [
+                "Can I try it on?",
+                "Can I pay by card?",
+                "I'll take it"
+              ],
+              "explanation": "How much = cuánto (precio)."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "🪞 Quieres ver cómo te queda:",
+              "answer": "Can I try it on?",
+              "distractors": [
+                "How much is this jacket?",
+                "Can I pay by card?",
+                "I'll take it"
+              ],
+              "explanation": "try on = probarse."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "💳 No llevas efectivo:",
+              "answer": "Can I pay by card?",
+              "distractors": [
+                "How much is this jacket?",
+                "Can I try it on?",
+                "I'll take it"
+              ],
+              "explanation": "Pagar con tarjeta."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "✅ Te queda perfecta y la compras:",
+              "answer": "I'll take it",
+              "distractors": [
+                "How much is this jacket?",
+                "Can I try it on?",
+                "Can I pay by card?"
+              ],
+              "explanation": "I'll = decides ahora."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "👕 Vas al probador con una camiseta:",
+              "answer": "Can I try it on?",
+              "distractors": [
+                "How much is this jacket?",
+                "Can I pay by card?",
+                "I'll take it"
+              ],
+              "explanation": "Probártela."
+            },
+            {
+              "kind": "apply_case",
+              "prompt": "💶 Antes de decidir, preguntas el precio:",
+              "answer": "How much is this jacket?",
+              "distractors": [
+                "Can I try it on?",
+                "Can I pay by card?",
+                "I'll take it"
+              ],
+              "explanation": "¿Cuánto cuesta?"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

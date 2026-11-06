@@ -124,6 +124,23 @@ try {
   check(await page.locator('.slide.pieces').count() === 0, 'y se sigue deslizando');
   await page.close();
 
+  // Espejo de vuelta (6-nov-2026): del inglés al español, sin el «yo» fantasma.
+  {
+    const p = await context.newPage();
+    p.on('pageerror', (e) => errors.push(String(e)));
+    await p.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); window.__memoraPiecesBack = true; });
+    await p.goto(`${root}?k=g-adjective-order`);
+    await p.waitForSelector('.slide');
+    for (let n = 0; n < 8 && !(await p.locator('.slide .pieces-row').count()); n++) await swipe(p);
+    const tag = await p.locator('.slide .tag').first().textContent();
+    const ask = await p.locator('.slide .pieces-es').textContent();
+    check(/DE VUELTA/.test(tag ?? '') && /[a-z]/i.test(ask ?? '') && /orden del español/.test((await p.locator('.pieces-q').textContent()) ?? ''), `de vuelta: frase en inglés («${ask}») y piezas para ordenar en español`);
+    const tiles = await p.evaluate(() => [...document.querySelectorAll('.pieces-row .ptile b')].map((b) => b.textContent));
+    check(tiles.length >= 2, `piezas en español: ${tiles.join(' · ')}`);
+    if (shots) await p.screenshot({ path: `${shots}/espejo-vuelta.png` });
+    check(await fits(p), 'de vuelta: nada se sale de la pantalla');
+    await p.close();
+  }
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

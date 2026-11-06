@@ -52,8 +52,13 @@ const game = (key: string, name: string, items: Array<[string, string, string[]]
 } as unknown as SessionUnit);
 units.toco = game('toco', 'Toco o cuento', [['Tengo un gato', 'I HAVE', ['I AM']], ['Tengo hambre', 'I AM', ['I HAVE']], ['Tengo dinero', 'I HAVE', ['I AM']], ['Tengo frío', 'I AM', ['I HAVE']]]);
 units.semaforos = game('semaforos', 'Los semáforos', [['¿Comes?', 'DO', ['DID', 'WILL']], ['¿Fuiste?', 'DID', ['DO', 'WILL']], ['¿Irás?', 'WILL', ['DO', 'DID']], ['¿Vives aquí?', 'DO', ['DID', 'WILL']]]);
+// ?vr: una situación de vida real (Ráfaga con frases enteras).
+import vr from '../../../content/ingles-1000/14b-vida-real-2.json';
+{ const u = (vr as { modules: Array<{ units: Array<Record<string, unknown> & { key: string }> }> }).modules[0]!.units[0]!; const { key, type: _t, ...payload } = u;
+  units.vr = { key: 'vr', type: 'concept', language: 'en', version: 1, payload, skills: [{ key: 'vr.recall', kind: 'recall' }, { key: 'vr.apply', kind: 'apply' }], association: null } as unknown as SessionUnit; void key; }
 // ?pistas: el truco de gramática primero (para ver sus pistas agrupadas sin recorrer las palabras).
-const order = location.search.includes('pistas') ? ['present-continuous', ...Object.keys(units).filter((k) => k !== 'present-continuous')] : Object.keys(units);
+const first = location.search.includes('pistas') ? 'present-continuous' : location.search.includes('vr') ? 'vr' : null;
+const order = first ? [first, ...Object.keys(units).filter((k) => k !== first)] : Object.keys(units).filter((k) => k !== 'vr');
 const items = order.map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 const plan = buildFlowSession({ sessionId: 'e2e-ingles', courseId: 'e2e', day: 1, createdAt: 0, items, units, audio: true });
 const payload = { state: { plan, index: 0, outcomes: {}, finished: false }, units, unitStats: { dog: { attempts: 6, hits: 4 } } } as unknown as SessionPayload;
