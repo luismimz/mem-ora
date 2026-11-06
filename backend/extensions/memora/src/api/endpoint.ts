@@ -134,7 +134,14 @@ export default {
     const wrap = (fn: (req: any) => Promise<unknown>) => async (req: any, res: any) => {
       try {
         if (!req.accountability?.user) throw new HttpError(401, 'UNAUTHENTICATED', 'Inicia sesión.');
-        res.json(await fn(req));
+        // 6-nov-2026: medir dónde se va el tiempo (cabecera Server-Timing; sin datos personales).
+        const t0 = performance.now();
+        req.timing = [] as Array<[string, number]>;
+        req.mark = (name: string) => { req.timing.push([name, performance.now() - t0]); };
+        const body = await fn(req);
+        req.mark('total');
+        res.setHeader('Server-Timing', (req.timing as Array<[string, number]>).map(([n, ms]) => `${n};dur=${ms.toFixed(0)}`).join(', '));
+        res.json(body);
       } catch (e) {
         const err = e instanceof HttpError ? e : new HttpError(500, 'INTERNAL', 'Error interno.');
         if (!(e instanceof HttpError)) logger.error(e, '[memora-api]');
@@ -542,8 +549,11 @@ export default {
     router.get('/missions', wrap(async (req) => {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
+      req.mark('curso');
       const { catalog, missions } = await publishedContent(course);
+      req.mark('contenido');
       const learner = await learnerFor(userId, course.id);
+      req.mark('alumno');
       const { list, current } = missionProgress(missions, catalog, learner);
       // Si hay una sesión empezada hoy, «Continuar aventura» la retoma: esa es la misión actual para el alumno.
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first('state');
@@ -617,8 +627,11 @@ export default {
     router.get('/progress', wrap(async (req) => {
       const userId = req.accountability.user;
       const course = await visibleCourse(req.query.course, userId);
+      req.mark('curso');
       const { catalog } = await publishedContent(course);
+      req.mark('contenido');
       const learner = await learnerFor(userId, course.id);
+      req.mark('alumno');
       // Racha con protector (D-072, D-077): días seguidos con alguna respuesta; cada 7 días se gana un protector que
       // salva un día perdido. Hoy, mientras no acabe, no rompe la racha.
       const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
