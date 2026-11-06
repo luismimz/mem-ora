@@ -37,18 +37,27 @@ export function createLearner(userId: Id): LearnerState {
 
 const emptyDay = (): DayActivity => ({ introduced: 0, reviews: 0, attempts: 0, correct: 0 });
 
+/**
+ * 6-nov-2026 (Inicio tardaba ~4 s): cada evento copiaba los mapas enteros del alumno (habilidades, aplicados…), y
+ * recalcular desde miles de eventos era cuadrático (~3,5 s). `applyEvents` trabaja sobre copias PROPIAS que se pueden
+ * modificar en el sitio; fuera de él, las funciones siguen sin tocar lo que reciben.
+ */
+const owned = new WeakSet<object>();
+function put<T>(map: Record<string, T>, key: string, value: T): Record<string, T> {
+  if (owned.has(map)) { map[key] = value; return map; }
+  return { ...map, [key]: value };
+}
+const editable = <T,>(map: Record<string, T>): Record<string, T> => (owned.has(map) ? map : { ...map });
+
 function bumpDay(learner: LearnerState, at: number, config: CoreConfig, patch: Partial<DayActivity>): Record<string, DayActivity> {
   const key = String(dayOf(at, config.load.dayOriginMs, config.load.dayLengthMs));
   const day = learner.activity[key] ?? emptyDay();
-  return {
-    ...learner.activity,
-    [key]: {
-      introduced: day.introduced + (patch.introduced ?? 0),
-      reviews: day.reviews + (patch.reviews ?? 0),
-      attempts: day.attempts + (patch.attempts ?? 0),
-      correct: day.correct + (patch.correct ?? 0),
-    },
-  };
+  return put(learner.activity, key, {
+    introduced: day.introduced + (patch.introduced ?? 0),
+    reviews: day.reviews + (patch.reviews ?? 0),
+    attempts: day.attempts + (patch.attempts ?? 0),
+    correct: day.correct + (patch.correct ?? 0),
+  });
 }
 
 function checkOwner(learner: LearnerState, userId: Id): void {
@@ -60,16 +69,16 @@ export function applyExposure(learner: LearnerState, exposure: Exposure, config:
   if (learner.applied[exposure.id] !== undefined) return learner;
   const before = learner.skills[exposure.skillId] ?? newSkillState(exposure.skillId, exposure.unitId, config);
   const skill = exposeSkill(before, exposure.at, scheduler, config);
-  const associations = { ...learner.associations };
+  const associations = editable(learner.associations);
   if (exposure.associationId) {
     const a = associations[exposure.associationId] ?? newAssociationState(exposure.associationId);
     associations[exposure.associationId] = presentAssociation(a, exposure.at, config);
   }
   return {
     ...learner,
-    skills: { ...learner.skills, [skill.skillId]: skill },
+    skills: put(learner.skills, skill.skillId, skill),
     associations,
-    applied: { ...learner.applied, [exposure.id]: exposure.at },
+    applied: put(learner.applied, exposure.id, exposure.at),
     activity: before.status === 'new' ? bumpDay(learner, exposure.at, config, { introduced: 1 }) : learner.activity,
   };
 }
@@ -90,7 +99,7 @@ export function applyAttempt(learner: LearnerState, attempt: Attempt, config: Co
   const before = learner.skills[attempt.skillId] ?? newSkillState(attempt.skillId, attempt.unitId, config);
   const { state: skill, weight, deferredSuccess } = applySkillAttempt(before, attempt, scheduler, config);
 
-  const associations = { ...learner.associations };
+  const associations = editable(learner.associations);
   if (attempt.associationId) {
     const a = associations[attempt.associationId] ?? newAssociationState(attempt.associationId);
     associations[attempt.associationId] = applyAssociationAttempt(a, attempt, config).state;
@@ -103,9 +112,9 @@ export function applyAttempt(learner: LearnerState, attempt: Attempt, config: Co
   return {
     learner: {
       ...learner,
-      skills: { ...learner.skills, [skill.skillId]: skill },
+      skills: put(learner.skills, skill.skillId, skill),
       associations,
-      applied: { ...learner.applied, [attempt.id]: attempt.at },
+      applied: put(learner.applied, attempt.id, attempt.at),
       activity: bumpDay(learner, attempt.at, config, { attempts: 1, correct: correct ? 1 : 0, reviews: isReview ? 1 : 0 }),
     },
     applied: true,
@@ -122,10 +131,18 @@ export function applyEvents(
   scheduler: Scheduler = adaptiveScheduler,
 ): LearnerState {
   const sorted = [...events].sort((a, b) => a.event.at - b.event.at || (a.event.id < b.event.id ? -1 : a.event.id > b.event.id ? 1 : 0));
-  return sorted.reduce(
-    (state, item) => (item.kind === 'exposure' ? applyExposure(state, item.event, config, scheduler) : applyAttempt(state, item.event, config, scheduler).learner),
-    learner,
-  );
+  const maps = [{ ...learner.skills }, { ...learner.associations }, { ...learner.applied }, { ...learner.activity }] as const;
+  for (const m of maps) owned.add(m);
+  const work: LearnerState = { ...learner, skills: maps[0], associations: maps[1], applied: maps[2], activity: maps[3] };
+  try {
+    return sorted.reduce(
+      (state, item) => (item.kind === 'exposure' ? applyExposure(state, item.event, config, scheduler) : applyAttempt(state, item.event, config, scheduler).learner),
+      work,
+    );
+  } finally {
+    // Lo devuelto vuelve a ser inmutable para quien lo reciba.
+    for (const m of maps) owned.delete(m);
+  }
 }
 
 /** JSON con claves ordenadas: el mismo estado produce siempre el mismo texto. */
