@@ -67,6 +67,9 @@ function courseConfig(course: Row) {
 }
 
 /** Meta diaria en idiomas: usuario, 5-nov-2026: «1.000 palabras en 20 días» ⇒ 50 nuevas al día (antes 33, D-081). */
+/** Contenido publicado por curso, con su huella (ver `publishedContent`). */
+const contentCache = new Map<string, { fp: string; value: unknown }>();
+
 /** ¿La ronda guardada está parada en un Repaso rápido? Entonces no se retoma: se rehace (6-nov-2026). */
 export function atReviewStep(state: { index: number; plan: { steps: unknown[] } } | null | undefined): boolean {
   return Boolean(state && (state.plan.steps[state.index] as { arcadeReview?: boolean } | undefined)?.arcadeReview);
@@ -147,7 +150,29 @@ export default {
       return course;
     }
 
+    /**
+     * 6-nov-2026 (usuario: «la carga en Inicio es lenta»): el contenido publicado de un curso se montaba en CADA petición
+     * (inglés: 1.400 unidades ⇒ ~4 s por llamada, y Inicio hace varias a la vez: el servidor respondía «Under pressure»).
+     * Se guarda en memoria y se rehace solo si cambia algo (huella: nº y última fecha de unidades, habilidades y asociaciones).
+     */
+    async function contentFingerprint(courseId: string): Promise<string> {
+      const u = await db('units').where({ course: courseId }).count('* as n').max('date_updated as d').sum('sort as so').first();
+      const m = await db('units').where({ course: courseId }).countDistinct('module as n').first();
+      const s = await db('skills').join('units', 'skills.unit', 'units.id').where({ 'units.course': courseId }).count('skills.id as n').count('skills.association as a').first();
+      const a = await db('associations').join('units', 'associations.unit', 'units.id').where({ 'units.course': courseId }).count('associations.id as n').max('associations.date_updated as d').first();
+      const p = await db('prerequisites').where({ course: courseId }).count('* as n').first();
+      const st = await db('units').where({ course: courseId, status: 'published' }).count('* as n').first();
+      return JSON.stringify([u, m, s, a, p, st]);
+    }
     async function publishedContent(course: Row) {
+      const fp = await contentFingerprint(course.id);
+      const hit = contentCache.get(course.id);
+      if (hit && hit.fp === fp) return hit.value as Awaited<ReturnType<typeof buildPublishedContent>>;
+      const value = await buildPublishedContent(course);
+      contentCache.set(course.id, { fp, value });
+      return value;
+    }
+    async function buildPublishedContent(course: Row) {
       const units: UnitRow[] = await db('units')
         .leftJoin('modules', 'units.module', 'modules.id')
         .where({ 'units.course': course.id, 'units.status': 'published' })
