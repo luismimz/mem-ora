@@ -361,7 +361,13 @@
               "text": "They live in London.",
               "translation": "Viven en Londres."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LIBRE",
+            "scene": "VIVIR LIBRE en el campo.",
+            "emoji": "🏡"
+          }
         },
         {
           "key": "start",
@@ -398,7 +404,13 @@
               "text": "Let's start!",
               "translation": "¡Empecemos!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTART",
+            "scene": "EMPEZAR: START, como en la salida.",
+            "emoji": "🏁"
+          }
         },
         {
           "key": "finish",
@@ -449,7 +461,13 @@
               "text": "The class finishes at two.",
               "translation": "La clase termina a las dos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FINISH",
+            "scene": "TERMINAR: la meta, FINISH.",
+            "emoji": "🏁"
+          }
         },
         {
           "key": "try",
@@ -483,7 +501,13 @@
               "text": "Try this cake.",
               "translation": "Prueba este pastel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRAI",
+            "scene": "INTENTAR: TRAI-TRAI, lo vuelves a intentar.",
+            "emoji": "🔁"
+          }
         },
         {
           "key": "ask",
@@ -540,7 +564,13 @@
               "text": "Ask the teacher.",
               "translation": "Pregunta al profesor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ASCO",
+            "scene": "PREGUNTAR con ASCO: «¿qué es esto?».",
+            "emoji": "🤢"
+          }
         },
         {
           "key": "answer",
@@ -580,7 +610,13 @@
               "translation": "¿Cuál es la respuesta?"
             }
           ],
-          "notes": "La w no suena: ÁNser."
+          "notes": "La w no suena: ÁNser.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANSIA",
+            "scene": "RESPONDER con ANSIA.",
+            "emoji": "💬"
+          }
         },
         {
           "key": "show",
@@ -619,7 +655,13 @@
               "text": "A TV show.",
               "translation": "Un programa de tele."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHOW",
+            "scene": "ENSEÑAR: montas un SHOW.",
+            "emoji": "🎭"
+          }
         },
         {
           "key": "hear",
@@ -671,7 +713,13 @@
               "text": "Did you hear that?",
               "translation": "¿Has oído eso?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JIRAFA",
+            "scene": "Una JIRAFA OYE todo.",
+            "emoji": "🦒👂"
+          }
         },
         {
           "key": "watch",
@@ -715,7 +763,13 @@
               "text": "My watch is slow.",
               "translation": "Mi reloj va atrasado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUACHO",
+            "scene": "VER la tele con un GUACHO.",
+            "emoji": "📺"
+          }
         },
         {
           "key": "send",
@@ -754,7 +808,13 @@
               "text": "I sent you a message.",
               "translation": "Te mandé un mensaje."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SENDA",
+            "scene": "ENVIAR una carta por la SENDA.",
+            "emoji": "✉️"
+          }
         },
         {
           "key": "meet",
@@ -788,7 +848,13 @@
               "text": "Nice to meet you.",
               "translation": "Encantado de conocerte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MITIN",
+            "scene": "QUEDAR en un MITIN.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "remember",
@@ -833,7 +899,13 @@
               "text": "Remember to call me.",
               "translation": "Acuérdate de llamarme."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REMEMBER",
+            "scene": "RECORDAR: REMEMBER, como la canción.",
+            "emoji": "🧠"
+          }
         },
         {
           "key": "forget",
@@ -872,7 +944,13 @@
               "text": "I forgot!",
               "translation": "¡Se me olvidó!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORJA",
+            "scene": "OLVIDAR la llave en la FORJA.",
+            "emoji": "🔑"
+          }
         },
         {
           "key": "teach",
@@ -911,7 +989,13 @@
               "translation": "¿Me enseñas?"
             }
           ],
-          "notes": "Enseñar una materia es teach; enseñar algo para que lo veas es show."
+          "notes": "Enseñar una materia es teach; enseñar algo para que lo veas es show.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TÍCHER",
+            "scene": "ENSEÑAR: el TÍCHER explica.",
+            "emoji": "👩‍🏫"
+          }
         },
         {
           "key": "explain",
@@ -968,7 +1052,13 @@
               "text": "Let me explain.",
               "translation": "Déjame que te explique."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXPLICAR",
+            "scene": "EXPLICAR: casi igual, ek-SPLÉIN.",
+            "emoji": "🗣️"
+          }
         }
       ]
     }

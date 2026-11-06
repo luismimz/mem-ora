@@ -691,7 +691,13 @@
               "text": "Young people.",
               "translation": "Los jóvenes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YUNQUE",
+            "scene": "Un JOVEN levanta un YUNQUE.",
+            "emoji": "💪"
+          }
         },
         {
           "key": "new",
@@ -746,7 +752,13 @@
               "text": "What's new?",
               "translation": "¿Qué hay de nuevo?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÑU",
+            "scene": "Un ÑU estrena zapatos NUEVOS.",
+            "emoji": "🦬👟"
+          }
         },
         {
           "key": "cheap",
@@ -827,7 +839,13 @@
               "text": "An expensive watch.",
               "translation": "Un reloj caro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXPENDEDOR",
+            "scene": "El EXPENDEDOR es CARÍSIMO.",
+            "emoji": "💸"
+          }
         },
         {
           "key": "easy",
@@ -866,7 +884,13 @@
               "text": "Take it easy.",
               "translation": "Tómatelo con calma."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ISI",
+            "scene": "FÁCIL: ISI-ISI, sin esfuerzo.",
+            "emoji": "👌"
+          }
         },
         {
           "key": "difficult",
@@ -903,7 +927,13 @@
               "text": "It's difficult to say.",
               "translation": "Es difícil de decir."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DIFÍCIL",
+            "scene": "DIFÍCIL: casi igual, DÍ-fi-kalt.",
+            "emoji": "🧗"
+          }
         },
         {
           "key": "fast",
@@ -988,7 +1018,13 @@
               "text": "Can you speak slower, please?",
               "translation": "¿Puedes hablar más despacio, por favor?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SLOW",
+            "scene": "LENTO como un caracol en SLOW motion.",
+            "emoji": "🐌"
+          }
         },
         {
           "key": "beautiful",
@@ -1030,7 +1066,13 @@
               "text": "She is beautiful.",
               "translation": "Es guapísima."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BIUTI",
+            "scene": "PRECIOSO: un salón de BIUTI.",
+            "emoji": "💅"
+          }
         },
         {
           "key": "ugly",

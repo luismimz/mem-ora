@@ -491,7 +491,13 @@
               "text": "I lost my ticket.",
               "translation": "He perdido el billete."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TIQUE",
+            "scene": "El TIQUE es tu BILLETE de entrada.",
+            "emoji": "🎫"
+          }
         },
         {
           "key": "plane",
@@ -574,7 +580,13 @@
               "text": "I go to work by train.",
               "translation": "Voy al trabajo en tren."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TREN",
+            "scene": "El TREN suena TREIN, TREIN al pasar.",
+            "emoji": "🚆"
+          }
         },
         {
           "key": "airport",
@@ -618,7 +630,13 @@
               "text": "The airport is far from the city.",
               "translation": "El aeropuerto está lejos de la ciudad."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AIRE",
+            "scene": "En el AEROPUERTO, el AIRE tiene puerto.",
+            "emoji": "✈️"
+          }
         },
         {
           "key": "passport",
@@ -667,7 +685,13 @@
               "text": "Don't forget your passport.",
               "translation": "No olvides el pasaporte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PASAPORTE",
+            "scene": "Tu PASAPORTE: PASA-PORT, pasa por la puerta.",
+            "emoji": "🛂"
+          }
         },
         {
           "key": "suitcase",
@@ -752,7 +776,13 @@
               "text": "Look at the map.",
               "translation": "Mira el mapa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MAPA",
+            "scene": "El MAPA perdió la A final.",
+            "emoji": "🗺️"
+          }
         },
         {
           "key": "beach",
@@ -1048,7 +1078,13 @@
               "text": "Come and visit us!",
               "translation": "¡Ven a vernos!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VISITA",
+            "scene": "VISITAR: haces una VISITA sorpresa.",
+            "emoji": "🚪"
+          }
         }
       ]
     }

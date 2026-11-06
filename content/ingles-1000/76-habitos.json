@@ -338,7 +338,13 @@
               "text": "Enjoy yourself!",
               "translation": "¡Pásalo bien!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENYOI",
+            "scene": "DISFRUTAR: ENJOY el momento.",
+            "emoji": "😋"
+          }
         },
         {
           "key": "avoid",
@@ -383,7 +389,13 @@
               "text": "Avoid the traffic.",
               "translation": "Evita el tráfico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AVOID",
+            "scene": "EVITAR el VOID (vacío).",
+            "emoji": "🚫"
+          }
         },
         {
           "key": "quit",
@@ -432,7 +444,13 @@
               "translation": "¡Lo dejo!"
             }
           ],
-          "notes": "No cambia: quit, quit, quit."
+          "notes": "No cambia: quit, quit, quit.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUITAR",
+            "scene": "DEJAR un hábito: QUITARLO.",
+            "emoji": "🚭"
+          }
         },
         {
           "key": "practise",
@@ -474,7 +492,13 @@
               "translation": "La práctica hace al maestro."
             }
           ],
-          "notes": "El nombre es practice; en EE. UU. el verbo también."
+          "notes": "El nombre es practice; en EE. UU. el verbo también.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRACTICAR",
+            "scene": "PRACTICAR: PRÁK-tis.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "consider",
@@ -520,7 +544,13 @@
               "text": "Consider it done.",
               "translation": "Dalo por hecho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONSIDERAR",
+            "scene": "CONSIDERAR: kon-SÍ-der.",
+            "emoji": "🤔"
+          }
         },
         {
           "key": "imagine",
@@ -561,7 +591,13 @@
               "text": "I can't imagine it.",
               "translation": "No me lo imagino."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "IMAGINAR",
+            "scene": "IMAGINAR: i-MÁ-yin.",
+            "emoji": "🌈"
+          }
         },
         {
           "key": "risk",
@@ -607,7 +643,13 @@
               "text": "It's not worth the risk.",
               "translation": "No merece la pena el riesgo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RIESGO",
+            "scene": "RIESGO: RISK, como el juego.",
+            "emoji": "🎲"
+          }
         },
         {
           "key": "postpone",
@@ -645,7 +687,13 @@
               "text": "Don't postpone it.",
               "translation": "No lo dejes para luego."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POSPONER",
+            "scene": "APLAZAR: POSPONER.",
+            "emoji": "⏭️"
+          }
         },
         {
           "key": "intend",
@@ -691,7 +739,13 @@
               "text": "I didn't intend to hurt you.",
               "translation": "No quería hacerte daño."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INTENTAR",
+            "scene": "TENER INTENCIÓN de INTENTARLO.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "hesitate",
@@ -736,7 +790,13 @@
               "text": "She hesitated for a moment.",
               "translation": "Dudó un momento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JESUITA",
+            "scene": "DUDAR como un JESUITA.",
+            "emoji": "🤨"
+          }
         },
         {
           "key": "mind",
@@ -783,7 +843,13 @@
               "text": "Change your mind.",
               "translation": "Cambia de opinión."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MENTE",
+            "scene": "IMPORTAR… y la MENTE (MIND).",
+            "emoji": "🧠"
+          }
         },
         {
           "key": "routine",
@@ -839,7 +905,13 @@
               "text": "A daily routine.",
               "translation": "Una rutina diaria."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RUTINA",
+            "scene": "RUTINA: ru-TÍIN.",
+            "emoji": "🔁"
+          }
         },
         {
           "key": "habit",
@@ -873,7 +945,13 @@
               "text": "Old habits die hard.",
               "translation": "Las costumbres cuestan de quitar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HÁBITO",
+            "scene": "HÁBITO: JÁ-bit.",
+            "emoji": "🔁"
+          }
         },
         {
           "key": "cant-stand",
@@ -918,7 +996,13 @@
               "text": "She can't stand waiting.",
               "translation": "No soporta esperar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "STAND",
+            "scene": "NO SOPORTAR: no aguantas (STAND) de pie.",
+            "emoji": "😖"
+          }
         },
         {
           "key": "look-forward-to",
@@ -964,7 +1048,13 @@
               "text": "I look forward to your reply.",
               "translation": "Quedo a la espera de su respuesta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORWARD",
+            "scene": "TENER GANAS: miras (LOOK) hacia delante (FORWARD).",
+            "emoji": "🤩"
+          }
         }
       ]
     }

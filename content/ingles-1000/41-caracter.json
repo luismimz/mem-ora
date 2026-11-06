@@ -294,7 +294,13 @@
               "text": "A friendly dog.",
               "translation": "Un perro cariñoso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FRIENDLY",
+            "scene": "SIMPÁTICO como un FRIEND (amigo).",
+            "emoji": "😊"
+          }
         },
         {
           "key": "funny",
@@ -333,7 +339,13 @@
               "text": "He's very funny.",
               "translation": "Es muy gracioso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FANI",
+            "scene": "FANI es GRACIOSA.",
+            "emoji": "😂"
+          }
         },
         {
           "key": "kind",
@@ -371,7 +383,13 @@
               "text": "She's always kind to everyone.",
               "translation": "Siempre es amable con todos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "KINDER",
+            "scene": "AMABLE como una profe de KINDER.",
+            "emoji": "🤗"
+          }
         },
         {
           "key": "shy",
@@ -408,7 +426,13 @@
               "text": "He's a bit shy.",
               "translation": "Es un poco tímido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHAI",
+            "scene": "TÍMIDO, se esconde: ¡SHH, AI!",
+            "emoji": "🙈"
+          }
         },
         {
           "key": "lazy",
@@ -452,7 +476,13 @@
               "text": "A lazy cat.",
               "translation": "Un gato perezoso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEISI",
+            "scene": "VAGO: LEISI en el sofá.",
+            "emoji": "🦥"
+          }
         },
         {
           "key": "clever",
@@ -489,7 +519,13 @@
               "text": "That's a clever idea.",
               "translation": "Es una idea ingeniosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLAVE",
+            "scene": "LISTO: sabe la CLAVE.",
+            "emoji": "🧠"
+          }
         },
         {
           "key": "honest",
@@ -542,7 +578,13 @@
               "translation": "Es un hombre honrado."
             }
           ],
-          "notes": "La h no suena: Ónest. Por eso: AN honest man."
+          "notes": "La h no suena: Ónest. Por eso: AN honest man.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HONESTO",
+            "scene": "SINCERO es HONESTO.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "polite",
@@ -579,7 +621,13 @@
               "text": "It's not polite to shout.",
               "translation": "Gritar no es de buena educación."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POLÍTICO",
+            "scene": "EDUCADO como un POLÍTICO en campaña.",
+            "emoji": "🎩"
+          }
         },
         {
           "key": "rude",
@@ -616,7 +664,13 @@
               "text": "That was very rude.",
               "translation": "Eso fue muy grosero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RUDO",
+            "scene": "MALEDUCADO y RUDO.",
+            "emoji": "😠"
+          }
         },
         {
           "key": "quiet",
@@ -650,7 +704,13 @@
               "text": "A quiet street.",
               "translation": "Una calle tranquila."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUIETO",
+            "scene": "TRANQUILO y QUIETO.",
+            "emoji": "🤫"
+          }
         },
         {
           "key": "generous",
@@ -687,7 +747,13 @@
               "text": "A generous tip.",
               "translation": "Una propina generosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GENEROSO",
+            "scene": "GENEROSO: casi igual, YÉ-ne-rus.",
+            "emoji": "🎁"
+          }
         },
         {
           "key": "patient",
@@ -733,7 +799,13 @@
               "text": "The doctor has a lot of patients.",
               "translation": "El médico tiene muchos pacientes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PACIENTE",
+            "scene": "PACIENTE: casi igual, PÉI-shent.",
+            "emoji": "⏳"
+          }
         },
         {
           "key": "serious",
@@ -778,7 +850,13 @@
               "text": "A serious problem.",
               "translation": "Un problema serio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SERIO",
+            "scene": "SERIO: SÍ-rius, casi igual.",
+            "emoji": "😐"
+          }
         },
         {
           "key": "nice",
@@ -815,7 +893,13 @@
               "text": "Have a nice day!",
               "translation": "¡Que tengas un buen día!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NAIS",
+            "scene": "MAJO como un NAIS-NAIS de bebé.",
+            "emoji": "🙂"
+          }
         },
         {
           "key": "smart",
@@ -866,7 +950,13 @@
               "text": "A smart phone.",
               "translation": "Un teléfono inteligente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SMART",
+            "scene": "LISTO como un SMARTphone.",
+            "emoji": "📱"
+          }
         }
       ]
     }

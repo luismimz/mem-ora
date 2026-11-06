@@ -374,7 +374,13 @@
               "text": "Despite everything.",
               "translation": "A pesar de todo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESPITE",
+            "scene": "A PESAR DE: DESPITE, ¡pese a todo!",
+            "emoji": "💪"
+          }
         },
         {
           "key": "whereas",
@@ -436,7 +442,13 @@
               "text": "Some agree, whereas others don't.",
               "translation": "Unos están de acuerdo, mientras que otros no."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜERAS",
+            "scene": "MIENTRAS QUE una es rubia (GÜERA), la otra no.",
+            "emoji": "↔️"
+          }
         },
         {
           "key": "therefore",
@@ -481,7 +493,13 @@
               "text": "It's late; therefore, we should go.",
               "translation": "Es tarde; por lo tanto, deberíamos irnos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZER",
+            "scene": "POR LO TANTO: ahí (THERE) por (FOR) eso.",
+            "emoji": "➡️"
+          }
         },
         {
           "key": "moreover",
@@ -522,7 +540,13 @@
               "translation": "Además, el informe dice…"
             }
           ],
-          "notes": "Muy formal; al hablar se usa also o besides."
+          "notes": "Muy formal; al hablar se usa also o besides.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MORE",
+            "scene": "ADEMÁS: MORE (más) OVER (encima).",
+            "emoji": "➕"
+          }
         },
         {
           "key": "furthermore",
@@ -566,7 +590,13 @@
               "text": "Furthermore, it is free.",
               "translation": "Además, es gratis."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FURTHER",
+            "scene": "ADEMÁS: más lejos (FURTHER) y más (MORE).",
+            "emoji": "➕"
+          }
         },
         {
           "key": "otherwise",
@@ -616,7 +646,13 @@
               "text": "Otherwise, everything is fine.",
               "translation": "Por lo demás, todo bien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OTRO",
+            "scene": "SI NO, de OTRA (OTHER) forma.",
+            "emoji": "↩️"
+          }
         },
         {
           "key": "nevertheless",
@@ -666,7 +702,13 @@
               "text": "Nevertheless, thank you.",
               "translation": "Aun así, gracias."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NUNCA",
+            "scene": "NO OBSTANTE: NUNCA (NEVER) menos (LESS).",
+            "emoji": "🤷"
+          }
         },
         {
           "key": "as-a-result",
@@ -714,7 +756,13 @@
               "text": "As a result of the strike…",
               "translation": "Como consecuencia de la huelga…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RESULTADO",
+            "scene": "COMO RESULTADO: AS A RESULT.",
+            "emoji": "📊"
+          }
         },
         {
           "key": "in-addition",
@@ -759,7 +807,13 @@
               "text": "In addition to English, I speak French.",
               "translation": "Además de inglés, hablo francés."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ADICIÓN",
+            "scene": "ADEMÁS: en ADICIÓN.",
+            "emoji": "➕"
+          }
         },
         {
           "key": "so-that",
@@ -808,7 +862,13 @@
               "text": "Save money so that you can travel.",
               "translation": "Ahorra para poder viajar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOU",
+            "scene": "PARA QUE: SO THAT, así que eso.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "in-order-to",
@@ -875,7 +935,13 @@
               "text": "In order to win, you must train.",
               "translation": "Para ganar, tienes que entrenar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ORDEN",
+            "scene": "PARA (+ verbo): en ORDEN A.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "due-to",
@@ -921,7 +987,13 @@
               "text": "Due to the rain…",
               "translation": "Debido a la lluvia…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DEBIDO",
+            "scene": "DEBIDO A: DUE TO.",
+            "emoji": "↪️"
+          }
         },
         {
           "key": "even-though",
@@ -984,7 +1056,13 @@
               "translation": "Aunque lo intenté, fallé."
             }
           ],
-          "notes": "Más fuerte que although."
+          "notes": "Más fuerte que although.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AUNQUE",
+            "scene": "AUNQUE: EVEN (incluso) THOUGH.",
+            "emoji": "🤔"
+          }
         },
         {
           "key": "in-spite-of",
@@ -1029,7 +1107,13 @@
               "text": "In spite of everything.",
               "translation": "A pesar de todo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESPECHO",
+            "scene": "A PESAR DE: a DESPECHO (SPITE) de.",
+            "emoji": "😤"
+          }
         },
         {
           "key": "on-the-contrary",
@@ -1078,7 +1162,13 @@
               "text": "Quite the contrary.",
               "translation": "Todo lo contrario."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONTRARIO",
+            "scene": "AL CONTRARIO: ON THE CONTRARY.",
+            "emoji": "🔄"
+          }
         }
       ]
     }

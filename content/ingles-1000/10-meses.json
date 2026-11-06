@@ -106,7 +106,13 @@
               "translation": "Llueve mucho en abril."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: April."
+          "notes": "Los meses se escriben con mayúscula en inglés: April.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ABRIL",
+            "scene": "En ABRIL, una ÉPICA lluvia de paraguas.",
+            "emoji": "☔"
+          }
         },
         {
           "key": "may",
@@ -120,7 +126,13 @@
               "translation": "Viajamos en mayo."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: May."
+          "notes": "Los meses se escriben con mayúscula en inglés: May.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MEI",
+            "scene": "En MAYO, MEI la vaca planta flores.",
+            "emoji": "🐄🌸"
+          }
         },
         {
           "key": "june",
@@ -155,7 +167,13 @@
               "translation": "Julio es muy caluroso aquí."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: July."
+          "notes": "Los meses se escriben con mayúscula en inglés: July.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JULIO",
+            "scene": "En JULIO, YU-LAI-LAI cantas en la playa.",
+            "emoji": "🏖️🎶"
+          }
         },
         {
           "key": "august",
@@ -190,7 +208,13 @@
               "translation": "Las clases empiezan en septiembre."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: September."
+          "notes": "Los meses se escriben con mayúscula en inglés: September.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEPTIEMBRE",
+            "scene": "En SEPTIEMBRE vuelves al cole con TEMBLOR.",
+            "emoji": "🎒"
+          }
         },
         {
           "key": "october",
@@ -204,7 +228,13 @@
               "translation": "Octubre es mi mes favorito."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: October."
+          "notes": "Los meses se escriben con mayúscula en inglés: October.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OCTUBRE",
+            "scene": "En OCTUBRE, un OCTÓPODO recoge hojas secas.",
+            "emoji": "🐙🍂"
+          }
         },
         {
           "key": "november",
@@ -218,7 +248,13 @@
               "translation": "En noviembre anochece pronto."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: November."
+          "notes": "Los meses se escriben con mayúscula en inglés: November.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOVIEMBRE",
+            "scene": "En NOVIEMBRE, una NOVIA baila bajo la lluvia.",
+            "emoji": "👰🌧️"
+          }
         },
         {
           "key": "december",
@@ -232,7 +268,13 @@
               "translation": "La Navidad es en diciembre."
             }
           ],
-          "notes": "Los meses se escriben con mayúscula en inglés: December."
+          "notes": "Los meses se escriben con mayúscula en inglés: December.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DICIEMBRE",
+            "scene": "En DICIEMBRE, DIEZ SEMBRADORES plantan árboles de Navidad.",
+            "emoji": "🎄"
+          }
         }
       ]
     }

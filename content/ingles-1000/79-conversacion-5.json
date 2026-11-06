@@ -313,7 +313,13 @@
               "text": "That's just my opinion.",
               "translation": "Es solo mi opinión."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OPINIÓN",
+            "scene": "EN MI OPINIÓN: IN MY OPINION.",
+            "emoji": "💭"
+          }
         },
         {
           "key": "to-be-honest",
@@ -365,7 +371,13 @@
               "translation": "Si te soy sincero…"
             }
           ],
-          "notes": "La h no suena: Ónest."
+          "notes": "La h no suena: Ónest.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HONESTO",
+            "scene": "PARA SER SINCERO: ser HONESTO.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "on-the-other-hand",
@@ -414,7 +426,13 @@
               "text": "On the one hand…",
               "translation": "Por un lado…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MANO",
+            "scene": "POR OTRO LADO: en la otra MANO (HAND).",
+            "emoji": "🤲"
+          }
         },
         {
           "key": "in-fact",
@@ -459,7 +477,13 @@
               "text": "It's a fact.",
               "translation": "Es un hecho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HECHO",
+            "scene": "DE HECHO: es un HECHO (FACT).",
+            "emoji": "📌"
+          }
         },
         {
           "key": "at-least",
@@ -502,7 +526,13 @@
               "text": "At least two hours.",
               "translation": "Al menos dos horas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LISTA",
+            "scene": "AL MENOS uno de la LISTA.",
+            "emoji": "☝️"
+          }
         },
         {
           "key": "after-all",
@@ -552,7 +582,13 @@
               "text": "He came after all.",
               "translation": "Al final vino."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AFTER",
+            "scene": "AL FIN Y AL CABO, después (AFTER) de todo (ALL).",
+            "emoji": "🔚"
+          }
         },
         {
           "key": "as-far-as-i-know",
@@ -595,7 +631,13 @@
               "text": "Not as far as I know.",
               "translation": "Que yo sepa, no."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SÉ",
+            "scene": "QUE YO SEPA: hasta donde (FAR) yo SÉ (KNOW).",
+            "emoji": "🤷"
+          }
         },
         {
           "key": "apparently",
@@ -634,7 +676,13 @@
               "translation": "Parece que no."
             }
           ],
-          "notes": "Ojo: apparently es «por lo visto», no «aparentemente»."
+          "notes": "Ojo: apparently es «por lo visto», no «aparentemente».",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APARENTEMENTE",
+            "scene": "POR LO VISTO: APARENTEMENTE.",
+            "emoji": "👀"
+          }
         },
         {
           "key": "basically",
@@ -677,7 +725,13 @@
               "text": "That's basically it.",
               "translation": "En resumen, eso es todo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BÁSICAMENTE",
+            "scene": "BÁSICAMENTE: BÉI-sikli.",
+            "emoji": "🧱"
+          }
         },
         {
           "key": "generally",
@@ -726,7 +780,13 @@
               "text": "Generally speaking…",
               "translation": "En general…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GENERALMENTE",
+            "scene": "POR LO GENERAL: GENERALMENTE.",
+            "emoji": "📊"
+          }
         },
         {
           "key": "personally",
@@ -769,7 +829,13 @@
               "text": "Don't take it personally.",
               "translation": "No te lo tomes como algo personal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PERSONALMENTE",
+            "scene": "PERSONALMENTE: PÉR-sonali.",
+            "emoji": "🙋"
+          }
         },
         {
           "key": "seriously",
@@ -819,7 +885,13 @@
               "text": "Take it seriously.",
               "translation": "Tómatelo en serio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SERIO",
+            "scene": "EN SERIO: SÍ-riosli.",
+            "emoji": "😐"
+          }
         },
         {
           "key": "it-makes-sense",
@@ -864,7 +936,13 @@
               "text": "It doesn't make sense.",
               "translation": "No tiene sentido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SENTIDO",
+            "scene": "TIENE SENTIDO: hace (MAKES) SENTIDO (SENSE).",
+            "emoji": "💡"
+          }
         },
         {
           "key": "no-wonder",
@@ -903,7 +981,13 @@
               "text": "No wonder!",
               "translation": "¡Normal!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MARAVILLA",
+            "scene": "NO ME EXTRAÑA: no es ninguna MARAVILLA (WONDER).",
+            "emoji": "🙂"
+          }
         },
         {
           "key": "either-way",
@@ -953,7 +1037,13 @@
               "text": "Either way is fine.",
               "translation": "Cualquiera de las dos vale."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMINO",
+            "scene": "EN CUALQUIER CASO: por un CAMINO (WAY) u otro.",
+            "emoji": "🔀"
+          }
         }
       ]
     }

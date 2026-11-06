@@ -346,7 +346,13 @@
               "text": "A great invention.",
               "translation": "Un gran invento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INVENTAR",
+            "scene": "INVENTAR: in-VÉNT.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "century",
@@ -390,7 +396,13 @@
               "text": "A century ago.",
               "translation": "Hace un siglo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CENTURIA",
+            "scene": "SIGLO: una CENTURIA de años.",
+            "emoji": "💯"
+          }
         },
         {
           "key": "ancient",
@@ -424,7 +436,13 @@
               "text": "An ancient tradition.",
               "translation": "Una tradición muy antigua."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANCIANO",
+            "scene": "ANTIGUO como un ANCIANO.",
+            "emoji": "🏺"
+          }
         },
         {
           "key": "empire",
@@ -478,7 +496,13 @@
               "text": "Build an empire.",
               "translation": "Construir un imperio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "IMPERIO",
+            "scene": "IMPERIO: ÉM-paier.",
+            "emoji": "👑"
+          }
         },
         {
           "key": "war",
@@ -516,7 +540,13 @@
               "translation": "Después de la guerra."
             }
           ],
-          "notes": "Se dice UÓR, no UAR."
+          "notes": "Se dice UÓR, no UAR.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUERRA",
+            "scene": "GUERRA: UÓR, guerra corta.",
+            "emoji": "⚔️"
+          }
         },
         {
           "key": "peace",
@@ -554,7 +584,13 @@
               "text": "Leave me in peace.",
               "translation": "Déjame en paz."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PIS",
+            "scene": "En PAZ, haces PIS tranquilo.",
+            "emoji": "🕊️"
+          }
         },
         {
           "key": "king",
@@ -591,7 +627,13 @@
               "text": "The King of Spain.",
               "translation": "El rey de España."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "KING",
+            "scene": "El REY es el KING.",
+            "emoji": "🤴"
+          }
         },
         {
           "key": "queen",
@@ -628,7 +670,13 @@
               "text": "A queen and her people.",
               "translation": "Una reina y su pueblo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUINA",
+            "scene": "La REINA bebe QUINA.",
+            "emoji": "👸"
+          }
         },
         {
           "key": "government",
@@ -670,7 +718,13 @@
               "text": "A new government.",
               "translation": "Un gobierno nuevo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOBIERNO",
+            "scene": "GOBIERNO: GÁ-vernment.",
+            "emoji": "🏛️"
+          }
         },
         {
           "key": "monument",
@@ -715,7 +769,13 @@
               "text": "A national monument.",
               "translation": "Un monumento nacional."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MONUMENTO",
+            "scene": "MONUMENTO: MÓ-niument.",
+            "emoji": "🗽"
+          }
         },
         {
           "key": "destroy",
@@ -752,7 +812,13 @@
               "text": "Completely destroyed.",
               "translation": "Totalmente destruido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESTRUIR",
+            "scene": "DESTRUIR: dis-TRÓI.",
+            "emoji": "💣"
+          }
         },
         {
           "key": "palace",
@@ -796,7 +862,13 @@
               "text": "The Royal Palace.",
               "translation": "El Palacio Real."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PALACIO",
+            "scene": "PALACIO: PÁ-las.",
+            "emoji": "🏯"
+          }
         },
         {
           "key": "statue",
@@ -830,7 +902,13 @@
               "text": "A bronze statue.",
               "translation": "Una estatua de bronce."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTATUA",
+            "scene": "ESTATUA: STÁ-chu.",
+            "emoji": "🗿"
+          }
         },
         {
           "key": "population",
@@ -867,7 +945,13 @@
               "text": "A small population.",
               "translation": "Una población pequeña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POBLACIÓN",
+            "scene": "POBLACIÓN: po-piu-LÉI-shon.",
+            "emoji": "👥"
+          }
         },
         {
           "key": "revolution",
@@ -921,7 +1005,13 @@
               "text": "A technological revolution.",
               "translation": "Una revolución tecnológica."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REVOLUCIÓN",
+            "scene": "REVOLUCIÓN: re-vo-LÚ-shon.",
+            "emoji": "✊"
+          }
         }
       ]
     }

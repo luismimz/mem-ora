@@ -369,7 +369,13 @@
               "text": "I guess so.",
               "translation": "Supongo que sí."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜES",
+            "scene": "ADIVINAR: ¿GÜES qué es?",
+            "emoji": "🔮"
+          }
         },
         {
           "key": "hang",
@@ -408,7 +414,13 @@
               "text": "Hang on!",
               "translation": "¡Espera!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HANGAR",
+            "scene": "COLGAR la ropa en el HANGAR.",
+            "emoji": "🧥"
+          }
         },
         {
           "key": "hit",
@@ -452,7 +464,13 @@
               "translation": "Se dio en la cabeza."
             }
           ],
-          "notes": "No cambia: hit, hit, hit."
+          "notes": "No cambia: hit, hit, hit.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JIT",
+            "scene": "GOLPEAR: ¡JIT!, un HIT.",
+            "emoji": "👊"
+          }
         },
         {
           "key": "kick",
@@ -485,7 +503,13 @@
               "text": "Don't kick the door.",
               "translation": "No des patadas a la puerta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "KICK",
+            "scene": "DAR UNA PATADA: KICK, como en kickboxing.",
+            "emoji": "🦵"
+          }
         },
         {
           "key": "knock",
@@ -530,7 +554,13 @@
               "translation": "¡Toc, toc!"
             }
           ],
-          "notes": "La k no suena: NOK."
+          "notes": "La k no suena: NOK.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOC",
+            "scene": "LLAMAR a la puerta: ¡NOC, NOC!",
+            "emoji": "🚪"
+          }
         },
         {
           "key": "miss",
@@ -573,7 +603,13 @@
               "text": "Hurry or we'll miss the bus!",
               "translation": "¡Corre o perdemos el bus!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MISS",
+            "scene": "ECHAR DE MENOS a MISS España.",
+            "emoji": "💭"
+          }
         },
         {
           "key": "pick",
@@ -605,7 +641,13 @@
               "text": "I'll pick you up at eight.",
               "translation": "Te recojo a las ocho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PICO",
+            "scene": "ELEGIR con el PICO la mejor uva.",
+            "emoji": "🍇"
+          }
         },
         {
           "key": "pour",
@@ -643,7 +685,13 @@
               "text": "It's pouring!",
               "translation": "¡Está diluviando!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POR",
+            "scene": "ECHAR agua POR el embudo.",
+            "emoji": "🫗"
+          }
         },
         {
           "key": "reach",
@@ -706,7 +754,13 @@
               "text": "We reached the hotel at midnight.",
               "translation": "Llegamos al hotel a medianoche."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RICH",
+            "scene": "LLEGAR a ser RICH.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "shake",
@@ -738,7 +792,13 @@
               "text": "Let's shake hands.",
               "translation": "Démonos la mano."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHAKE",
+            "scene": "AGITAR un milkSHAKE.",
+            "emoji": "🥤"
+          }
         },
         {
           "key": "shut",
@@ -776,7 +836,13 @@
               "translation": "¡Cállate!"
             }
           ],
-          "notes": "Como close, pero más tajante."
+          "notes": "Como close, pero más tajante.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SHAT",
+            "scene": "CERRAR la puerta: ¡SHAT!",
+            "emoji": "🚪"
+          }
         },
         {
           "key": "spill",
@@ -822,7 +888,13 @@
               "text": "Don't spill it!",
               "translation": "¡Que no se te caiga!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPÍA",
+            "scene": "Un ESPÍA DERRAMA el café.",
+            "emoji": "☕"
+          }
         },
         {
           "key": "wave",
@@ -861,7 +933,13 @@
               "text": "A big wave.",
               "translation": "Una ola grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜEIV",
+            "scene": "SALUDAR CON LA MANO desde la OLA.",
+            "emoji": "👋🌊"
+          }
         },
         {
           "key": "whisper",
@@ -898,7 +976,13 @@
               "text": "She whispered something.",
               "translation": "Susurró algo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜISPER",
+            "scene": "SUSURRAR como una AVISPA (WHISP).",
+            "emoji": "🤫"
+          }
         },
         {
           "key": "bite",
@@ -943,7 +1027,13 @@
               "text": "Can I have a bite?",
               "translation": "¿Me das un mordisco?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAIT",
+            "scene": "MORDER el cebo (BAIT).",
+            "emoji": "🦈"
+          }
         }
       ]
     }

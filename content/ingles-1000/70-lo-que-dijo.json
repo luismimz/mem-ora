@@ -387,7 +387,13 @@
               "text": "Baggage claim.",
               "translation": "Recogida de equipajes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLAMAR",
+            "scene": "AFIRMAR a CLAMOR.",
+            "emoji": "📢"
+          }
         },
         {
           "key": "admit",
@@ -434,7 +440,13 @@
               "text": "I admit it.",
               "translation": "Lo reconozco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ADMITIR",
+            "scene": "ADMITIR: ad-MÍT.",
+            "emoji": "🙋"
+          }
         },
         {
           "key": "deny",
@@ -473,7 +485,13 @@
               "text": "Don't deny it.",
               "translation": "No lo niegues."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DENEGAR",
+            "scene": "NEGAR: DENEGAR.",
+            "emoji": "🙅"
+          }
         },
         {
           "key": "warn",
@@ -517,7 +535,13 @@
               "translation": "Nos avisaron de la tormenta."
             }
           ],
-          "notes": "La a suena O: UÓRN."
+          "notes": "La a suena O: UÓRN.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜÓRN",
+            "scene": "AVISAR con una BOCINA.",
+            "emoji": "⚠️"
+          }
         },
         {
           "key": "suggest",
@@ -563,7 +587,13 @@
               "text": "Any suggestions?",
               "translation": "¿Alguna sugerencia?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUGERIR",
+            "scene": "SUGERIR: sa-YÉST.",
+            "emoji": "💭"
+          }
         },
         {
           "key": "announce",
@@ -601,7 +631,13 @@
               "text": "An important announcement.",
               "translation": "Un anuncio importante."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANUNCIAR",
+            "scene": "ANUNCIAR: a-NÁUNS.",
+            "emoji": "📣"
+          }
         },
         {
           "key": "insist",
@@ -648,7 +684,13 @@
               "text": "If you insist.",
               "translation": "Si insistes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INSISTIR",
+            "scene": "INSISTIR: in-SÍST.",
+            "emoji": "🔁"
+          }
         },
         {
           "key": "rumour",
@@ -687,7 +729,13 @@
               "translation": "Los rumores corren rápido."
             }
           ],
-          "notes": "En EE. UU. se escribe rumor."
+          "notes": "En EE. UU. se escribe rumor.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RUMOR",
+            "scene": "RUMOR: RÚ-mor.",
+            "emoji": "🗣️"
+          }
         },
         {
           "key": "gossip",
@@ -721,7 +769,13 @@
               "text": "Office gossip.",
               "translation": "Cotilleos de oficina."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOSIP",
+            "scene": "COTILLEO: el GOSSIP de la oficina.",
+            "emoji": "🤭"
+          }
         },
         {
           "key": "conversation",
@@ -776,7 +830,13 @@
               "text": "An English conversation class.",
               "translation": "Una clase de conversación en inglés."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONVERSACIÓN",
+            "scene": "CONVERSACIÓN: kon-ver-SÉI-shon.",
+            "emoji": "💬"
+          }
         },
         {
           "key": "argument",
@@ -816,7 +876,13 @@
               "text": "That's a good argument.",
               "translation": "Es un buen argumento."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARGUMENTO",
+            "scene": "Una DISCUSIÓN… no un ARGUMENTO, ¡ojo!",
+            "emoji": "🗯️"
+          }
         },
         {
           "key": "advice",
@@ -876,7 +942,13 @@
               "translation": "Gracias por el consejo."
             }
           ],
-          "notes": "El verbo es advise, con s."
+          "notes": "El verbo es advise, con s.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AVISO",
+            "scene": "CONSEJO: un AVISO de amigo.",
+            "emoji": "🧭"
+          }
         },
         {
           "key": "news",
@@ -910,7 +982,13 @@
               "translation": "Están dando las noticias."
             }
           ],
-          "notes": "Va en singular: the news IS."
+          "notes": "Va en singular: the news IS.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NIUS",
+            "scene": "NOTICIAS: lo NUEVO (NEW).",
+            "emoji": "📰"
+          }
         },
         {
           "key": "persuade",
@@ -960,7 +1038,13 @@
               "text": "Try to persuade him.",
               "translation": "Intenta convencerlo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PERSUADIR",
+            "scene": "CONVENCER: PERSUADIR.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "remind",
@@ -1008,7 +1092,13 @@
               "translation": "Me recuerdas a mi hermana."
             }
           ],
-          "notes": "Acordarte tú es remember; que otro se acuerde, remind."
+          "notes": "Acordarte tú es remember; que otro se acuerde, remind.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RECORDAR",
+            "scene": "RECORDAR a alguien: RE + MIND (mente).",
+            "emoji": "🔔"
+          }
         }
       ]
     }

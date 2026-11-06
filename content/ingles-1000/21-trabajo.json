@@ -582,7 +582,13 @@
               "text": "I'm at the office.",
               "translation": "Estoy en la oficina."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OFICIO",
+            "scene": "En la OFICINA aprendes tu OFICIO.",
+            "emoji": "🏢"
+          }
         },
         {
           "key": "meeting",
@@ -625,7 +631,13 @@
               "text": "The meeting was very long.",
               "translation": "La reunión fue muy larga."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MITIN",
+            "scene": "La REUNIÓN parece un MITIN con megáfono.",
+            "emoji": "📣"
+          }
         },
         {
           "key": "email",
@@ -664,7 +676,13 @@
               "text": "I have fifty emails.",
               "translation": "Tengo cincuenta correos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EMAIL",
+            "scene": "El CORREO ELECTRÓNICO: el EMAIL de siempre.",
+            "emoji": "📧"
+          }
         },
         {
           "key": "colleague",
@@ -702,7 +720,13 @@
               "text": "I have lunch with my colleagues.",
               "translation": "Como con mis compañeros."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COLEGA",
+            "scene": "Tu COMPAÑERO DE TRABAJO es tu COLEGA.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "company",
@@ -763,7 +787,13 @@
               "text": "The company has two hundred workers.",
               "translation": "La empresa tiene doscientos trabajadores."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COMPAÑÍA",
+            "scene": "La EMPRESA es tu COMPAÑÍA.",
+            "emoji": "🏢"
+          }
         },
         {
           "key": "customer",
@@ -926,7 +956,13 @@
               "text": "The project is finished.",
               "translation": "El proyecto está terminado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROYECTO",
+            "scene": "Tu PROYECTO: casi igual, sin la O final.",
+            "emoji": "📋"
+          }
         },
         {
           "key": "interview",
@@ -987,7 +1023,13 @@
               "text": "How was the interview?",
               "translation": "¿Qué tal la entrevista?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INTERVIÚ",
+            "scene": "La ENTREVISTA: una INTERVIÚ con focos.",
+            "emoji": "🎙️"
+          }
         },
         {
           "key": "salary",
@@ -1024,7 +1066,13 @@
               "text": "I want a higher salary.",
               "translation": "Quiero un sueldo más alto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SALARIO",
+            "scene": "Tu SUELDO es tu SALARIO.",
+            "emoji": "💶"
+          }
         },
         {
           "key": "busy",

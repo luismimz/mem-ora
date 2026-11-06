@@ -429,7 +429,13 @@
               "text": "I almost forgot!",
               "translation": "¡Casi se me olvida!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ALMOSTRADOR",
+            "scene": "CASI llegas al MOSTRADOR.",
+            "emoji": "🤏"
+          }
         },
         {
           "key": "quite",
@@ -480,7 +486,13 @@
               "translation": "Bastante bien."
             }
           ],
-          "notes": "No confundir con quiet (tranquilo)."
+          "notes": "No confundir con quiet (tranquilo).",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUAIT",
+            "scene": "BASTANTE QUIETO, ni se mueve.",
+            "emoji": "🧍"
+          }
         },
         {
           "key": "enough",
@@ -530,7 +542,13 @@
               "translation": "¡Ya basta!"
             }
           ],
-          "notes": "Con adjetivos va detrás: old enough."
+          "notes": "Con adjetivos va detrás: old enough.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENUF",
+            "scene": "¡SUFICIENTE! ¡ENUF!, gritas lleno.",
+            "emoji": "✋"
+          }
         },
         {
           "key": "together",
@@ -569,7 +587,13 @@
               "text": "We live together.",
               "translation": "Vivimos juntos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TUGUEDER",
+            "scene": "JUNTOS, TOGETHER, en el mismo TÉ.",
+            "emoji": "🫂"
+          }
         },
         {
           "key": "alone",
@@ -607,7 +631,13 @@
               "text": "Leave me alone!",
               "translation": "¡Déjame en paz!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ALONSO",
+            "scene": "ALONSO corre SOLO.",
+            "emoji": "🏎️"
+          }
         },
         {
           "key": "suddenly",
@@ -640,7 +670,13 @@
               "text": "He suddenly stopped.",
               "translation": "Se paró de repente."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SÁDEN",
+            "scene": "DE REPENTE, un SATÉN cae del cielo.",
+            "emoji": "⚡"
+          }
         },
         {
           "key": "finally",
@@ -683,7 +719,13 @@
               "text": "Finally, add the salt.",
               "translation": "Por último, añade la sal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FINAL",
+            "scene": "POR FIN llega el FINAL.",
+            "emoji": "🏁"
+          }
         },
         {
           "key": "especially",
@@ -737,7 +779,13 @@
               "text": "Especially for you.",
               "translation": "Especialmente para ti."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPECIALMENTE",
+            "scene": "SOBRE TODO: ESPECIALMENTE.",
+            "emoji": "⭐"
+          }
         },
         {
           "key": "exactly",
@@ -786,7 +834,13 @@
               "text": "Exactly!",
               "translation": "¡Exacto!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXACTO",
+            "scene": "¡EXACTO!: EXACTAMENTE.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "hardly",
@@ -838,7 +892,13 @@
               "translation": "Apenas lo conozco."
             }
           ],
-          "notes": "Falso amigo: hardly NO es «duramente»."
+          "notes": "Falso amigo: hardly NO es «duramente».",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JARDÍN",
+            "scene": "APENAS crece nada en el JARDÍN.",
+            "emoji": "🌵"
+          }
         },
         {
           "key": "else",
@@ -870,7 +930,13 @@
               "text": "Someone else.",
               "translation": "Otra persona."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ELSE",
+            "scene": "¿Algo MÁS? ¿Something ELSE?",
+            "emoji": "➕"
+          }
         },
         {
           "key": "early",
@@ -909,7 +975,13 @@
               "text": "An early flight.",
               "translation": "Un vuelo a primera hora."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ERLI",
+            "scene": "TEMPRANO, el gallo canta «¡ERLI!».",
+            "emoji": "🌅"
+          }
         },
         {
           "key": "late",
@@ -948,7 +1020,13 @@
               "text": "It's late.",
               "translation": "Es tarde."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEIT",
+            "scene": "TARDE: el LATE del reloj.",
+            "emoji": "🕰️"
+          }
         },
         {
           "key": "slowly",
@@ -1003,7 +1081,13 @@
               "text": "Drive slowly.",
               "translation": "Conduce despacio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SLOU",
+            "scene": "DESPACIO, como en SLOW motion.",
+            "emoji": "🐢"
+          }
         },
         {
           "key": "everywhere",
@@ -1040,7 +1124,13 @@
               "text": "There are people everywhere.",
               "translation": "Hay gente por todas partes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EVERY",
+            "scene": "POR TODAS PARTES: EVERY + WHERE.",
+            "emoji": "🌐"
+          }
         }
       ]
     }

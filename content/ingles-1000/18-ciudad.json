@@ -560,7 +560,13 @@
               "text": "I need to go to the bank.",
               "translation": "Tengo que ir al banco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BANCO",
+            "scene": "Un BANCO de parque guarda tu dinero.",
+            "emoji": "🏦"
+          }
         },
         {
           "key": "station",
@@ -597,7 +603,13 @@
               "text": "I'm at the train station.",
               "translation": "Estoy en la estación de tren."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTACIÓN",
+            "scene": "La ESTACIÓN de tren baila en cada STÉIshon.",
+            "emoji": "🚉"
+          }
         },
         {
           "key": "hospital",
@@ -635,7 +647,13 @@
               "text": "Take me to the hospital!",
               "translation": "¡Llévame al hospital!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HOSPITAL",
+            "scene": "El HOSPITAL: igual, pero sin la H muda.",
+            "emoji": "🏥"
+          }
         },
         {
           "key": "school",
@@ -674,7 +692,13 @@
               "text": "The school is next to the park.",
               "translation": "El colegio está al lado del parque."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESCUELA",
+            "scene": "En la ESCUELA, un SKÚTER entra por la puerta.",
+            "emoji": "🛴🏫"
+          }
         },
         {
           "key": "park",
@@ -712,7 +736,13 @@
               "text": "The park is very green.",
               "translation": "El parque está muy verde."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PARQUE",
+            "scene": "En el PARQUE aparcas (PARK) un columpio.",
+            "emoji": "🛝"
+          }
         },
         {
           "key": "restaurant",
@@ -746,7 +776,13 @@
               "text": "This restaurant is expensive.",
               "translation": "Este restaurante es caro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RESTAURANTE",
+            "scene": "El RESTAURANTE: casi igual, se come la E final.",
+            "emoji": "🍽️"
+          }
         },
         {
           "key": "hotel",
@@ -783,7 +819,13 @@
               "text": "I booked a hotel.",
               "translation": "He reservado un hotel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HOTEL",
+            "scene": "El HOTEL: igual, pero con J: JOU-TEL.",
+            "emoji": "🏨"
+          }
         },
         {
           "key": "museum",
@@ -827,7 +869,13 @@
               "text": "We visited the museum.",
               "translation": "Visitamos el museo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MUSEO",
+            "scene": "En el MUSEO, una MUSA te saluda.",
+            "emoji": "🖼️"
+          }
         },
         {
           "key": "bridge",

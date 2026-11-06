@@ -370,7 +370,13 @@
               "text": "An empty bottle.",
               "translation": "Una botella vacía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EMPATE",
+            "scene": "VACÍO como el marcador del EMPATE.",
+            "emoji": "🫙"
+          }
         },
         {
           "key": "full",
@@ -407,7 +413,13 @@
               "text": "The bus is full.",
               "translation": "El autobús va lleno."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FUL",
+            "scene": "LLENO hasta arriba: FULL.",
+            "emoji": "🍽️"
+          }
         },
         {
           "key": "loud",
@@ -444,7 +456,13 @@
               "text": "Speak louder, please.",
               "translation": "Habla más alto, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAUD",
+            "scene": "Un LAÚD suena muy FUERTE.",
+            "emoji": "🔊"
+          }
         },
         {
           "key": "dirty",
@@ -484,7 +502,13 @@
               "text": "Dirty clothes.",
               "translation": "Ropa sucia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DERTI",
+            "scene": "SUCIO de barro: DERTI.",
+            "emoji": "🐷"
+          }
         },
         {
           "key": "wet",
@@ -524,7 +548,13 @@
               "text": "Wet paint!",
               "translation": "¡Recién pintado!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜET",
+            "scene": "MOJADO: ¡GÜET!, salpica el charco.",
+            "emoji": "💦"
+          }
         },
         {
           "key": "dry",
@@ -564,7 +594,13 @@
               "text": "Dry your hands.",
               "translation": "Sécate las manos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRAI",
+            "scene": "SECO como un DRY martini.",
+            "emoji": "🏜️"
+          }
         },
         {
           "key": "heavy",
@@ -598,7 +634,13 @@
               "text": "Heavy rain.",
               "translation": "Lluvia fuerte."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JEVI",
+            "scene": "PESADO como el HEAVY metal.",
+            "emoji": "🎸"
+          }
         },
         {
           "key": "soft",
@@ -636,7 +678,13 @@
               "text": "A soft voice.",
               "translation": "Una voz suave."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOFT",
+            "scene": "BLANDO como el SOFTware.",
+            "emoji": "🧸"
+          }
         },
         {
           "key": "hard",
@@ -673,7 +721,13 @@
               "text": "Work hard!",
               "translation": "¡Trabaja duro!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JARD",
+            "scene": "DURO como el HARDware.",
+            "emoji": "🪨"
+          }
         },
         {
           "key": "deep",
@@ -716,7 +770,13 @@
               "text": "Take a deep breath.",
               "translation": "Respira hondo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DIP",
+            "scene": "PROFUNDO: el DIP del océano.",
+            "emoji": "🌊"
+          }
         },
         {
           "key": "narrow",
@@ -753,7 +813,13 @@
               "text": "A narrow bridge.",
               "translation": "Un puente estrecho."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NARRÓ",
+            "scene": "El ESTRECHO te NARRÓ su historia.",
+            "emoji": "↔️"
+          }
         },
         {
           "key": "strange",
@@ -791,7 +857,13 @@
               "translation": "Un ruido raro."
             }
           ],
-          "notes": "Un desconocido es a stranger."
+          "notes": "Un desconocido es a stranger.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXTRAÑO",
+            "scene": "RARO, EXTRAÑO: STRÉINCH.",
+            "emoji": "👽"
+          }
         },
         {
           "key": "famous",
@@ -846,7 +918,13 @@
               "text": "Spain is famous for its food.",
               "translation": "España es famosa por su comida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FAMOSO",
+            "scene": "FAMOSO: FÉI-mos.",
+            "emoji": "🌟"
+          }
         },
         {
           "key": "useful",
@@ -883,7 +961,13 @@
               "text": "Useful phrases.",
               "translation": "Frases útiles."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ÚTIL",
+            "scene": "ÚTIL: lleno (FULL) de uso (USE).",
+            "emoji": "🧰"
+          }
         },
         {
           "key": "dangerous",
@@ -926,7 +1010,13 @@
               "text": "A dangerous road.",
               "translation": "Una carretera peligrosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DANGER",
+            "scene": "PELIGROSO: DANGER, peligro.",
+            "emoji": "☠️"
+          }
         }
       ]
     }

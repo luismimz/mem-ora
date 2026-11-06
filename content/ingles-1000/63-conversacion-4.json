@@ -332,7 +332,13 @@
               "text": "Sure! Why not?",
               "translation": "¡Claro! ¿Por qué no?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHUR",
+            "scene": "¡CLARO!, dice el CHURRERO.",
+            "emoji": "👍"
+          }
         },
         {
           "key": "no-problem",
@@ -366,7 +372,13 @@
               "text": "No problem, I'll do it.",
               "translation": "Sin problema, lo hago yo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROBLEMA",
+            "scene": "NO HAY PROBLEMA: NO PROBLEM.",
+            "emoji": "😎"
+          }
         },
         {
           "key": "i-see",
@@ -411,7 +423,13 @@
               "text": "I see what you mean.",
               "translation": "Entiendo lo que dices."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SÍ",
+            "scene": "YA VEO: I SEE, sí, sí.",
+            "emoji": "👀"
+          }
         },
         {
           "key": "what-a-pity",
@@ -454,7 +472,13 @@
               "text": "It's a pity you're leaving.",
               "translation": "Es una pena que te vayas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PITI",
+            "scene": "¡QUÉ PENA!, se apaga el PITILLO.",
+            "emoji": "😞"
+          }
         },
         {
           "key": "good-idea",
@@ -491,7 +515,13 @@
               "text": "That's a good idea.",
               "translation": "Es una buena idea."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "IDEA",
+            "scene": "¡BUENA IDEA!: GOOD IDEA.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "lets-go",
@@ -534,7 +564,13 @@
               "text": "Let's go home.",
               "translation": "Vámonos a casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GOU",
+            "scene": "¡VAMOS!: LET'S GO.",
+            "emoji": "🚀"
+          }
         },
         {
           "key": "come-on",
@@ -572,7 +608,13 @@
               "text": "Oh, come on!",
               "translation": "¡Anda ya!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAMÓN",
+            "scene": "¡VENGA!, ¡CAMÓN!, anima el entrenador.",
+            "emoji": "📣"
+          }
         },
         {
           "key": "fair-enough",
@@ -607,7 +649,13 @@
               "text": "Fair enough, you win.",
               "translation": "Vale, ganas tú."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FERIA",
+            "scene": "VALE, ME PARECE JUSTO, como en la FERIA.",
+            "emoji": "🤝"
+          }
         },
         {
           "key": "i-hope-so",
@@ -650,7 +698,13 @@
               "text": "I hope not.",
               "translation": "Espero que no."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JOPE",
+            "scene": "ESO ESPERO, ¡JOPE!",
+            "emoji": "🤞"
+          }
         },
         {
           "key": "you-know",
@@ -689,7 +743,13 @@
               "text": "You know what? I agree.",
               "translation": "¿Sabes qué? Estoy de acuerdo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NOU",
+            "scene": "YA SABES, YOU KNOW.",
+            "emoji": "😉"
+          }
         },
         {
           "key": "no-idea",
@@ -732,7 +792,13 @@
               "text": "I've got no idea.",
               "translation": "No tengo ni idea."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "IDEA",
+            "scene": "NI IDEA: NO IDEA.",
+            "emoji": "🤷"
+          }
         },
         {
           "key": "not-really",
@@ -785,7 +851,13 @@
               "text": "I'm not really hungry.",
               "translation": "No tengo mucha hambre."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RIALI",
+            "scene": "NO MUCHO, LA VERDAD: NOT REALLY.",
+            "emoji": "😕"
+          }
         },
         {
           "key": "same-here",
@@ -824,7 +896,13 @@
               "text": "Same here, I love it.",
               "translation": "A mí también me encanta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAME",
+            "scene": "YO TAMBIÉN: lo MISMO (SAME) aquí (HERE).",
+            "emoji": "🙋"
+          }
         },
         {
           "key": "go-ahead",
@@ -885,7 +963,13 @@
               "text": "Go ahead, start without me.",
               "translation": "Adelante, empezad sin mí."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AJED",
+            "scene": "ADELANTE: ve (GO) a la cabeza (AHEAD).",
+            "emoji": "➡️"
+          }
         },
         {
           "key": "my-pleasure",
@@ -918,7 +1002,13 @@
               "text": "It was my pleasure.",
               "translation": "Fue un placer."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLACER",
+            "scene": "UN PLACER: MY PLEASURE.",
+            "emoji": "😊"
+          }
         }
       ]
     }

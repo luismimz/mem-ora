@@ -317,7 +317,13 @@
               "text": "Engineers build bridges.",
               "translation": "Los ingenieros construyen puentes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INGENIERO",
+            "scene": "INGENIERO: en-yi-NÍER.",
+            "emoji": "👷"
+          }
         },
         {
           "key": "lawyer",
@@ -355,7 +361,13 @@
               "text": "She wants to be a lawyer.",
               "translation": "Quiere ser abogada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LOIRO",
+            "scene": "El ABOGADO tiene un LORO.",
+            "emoji": "⚖️🦜"
+          }
         },
         {
           "key": "waiter",
@@ -387,7 +399,13 @@
               "text": "He works as a waiter.",
               "translation": "Trabaja de camarero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜEITER",
+            "scene": "El CAMARERO espera (WAIT) tu pedido.",
+            "emoji": "🧑‍🍳"
+          }
         },
         {
           "key": "chef",
@@ -424,7 +442,13 @@
               "text": "A great chef.",
               "translation": "Un gran chef."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHEF",
+            "scene": "El COCINERO es el CHEF.",
+            "emoji": "👨‍🍳"
+          }
         },
         {
           "key": "farmer",
@@ -463,7 +487,13 @@
               "text": "Farmers work very hard.",
               "translation": "Los agricultores trabajan muchísimo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FARMACIA",
+            "scene": "El GRANJERO compra en la FARMACIA.",
+            "emoji": "👨‍🌾"
+          }
         },
         {
           "key": "police-officer",
@@ -497,7 +527,13 @@
               "text": "Call the police!",
               "translation": "¡Llama a la policía!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POLICÍA",
+            "scene": "POLICÍA: po-LÍIS + oficial.",
+            "emoji": "👮"
+          }
         },
         {
           "key": "firefighter",
@@ -536,7 +572,13 @@
               "text": "He wants to be a firefighter.",
               "translation": "Quiere ser bombero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FUEGO",
+            "scene": "BOMBERO: lucha (FIGHT) contra el fuego (FIRE).",
+            "emoji": "🚒"
+          }
         },
         {
           "key": "mechanic",
@@ -573,7 +615,13 @@
               "text": "Take it to a mechanic.",
               "translation": "Llévalo a un mecánico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MECÁNICO",
+            "scene": "MECÁNICO: me-KÁ-nik.",
+            "emoji": "🔧"
+          }
         },
         {
           "key": "builder",
@@ -610,7 +658,13 @@
               "text": "A good builder.",
               "translation": "Un buen albañil."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BILDER",
+            "scene": "El ALBAÑIL construye (BUILD) muros.",
+            "emoji": "🧱"
+          }
         },
         {
           "key": "shop-assistant",
@@ -644,7 +698,13 @@
               "text": "She works as a shop assistant.",
               "translation": "Trabaja de dependienta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ASISTENTE",
+            "scene": "DEPENDIENTE: ASISTENTE de la tienda (SHOP).",
+            "emoji": "🛍️"
+          }
         },
         {
           "key": "programmer",
@@ -689,7 +749,13 @@
               "text": "Programmers write code.",
               "translation": "Los programadores escriben código."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROGRAMADOR",
+            "scene": "PROGRAMADOR: PRÓU-gramer.",
+            "emoji": "👨‍💻"
+          }
         },
         {
           "key": "designer",
@@ -744,7 +810,13 @@
               "text": "A fashion designer.",
               "translation": "Un diseñador de moda."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DISEÑADOR",
+            "scene": "DISEÑADOR: di-SÁI-ner.",
+            "emoji": "🎨"
+          }
         },
         {
           "key": "scientist",
@@ -784,7 +856,13 @@
               "text": "A famous scientist.",
               "translation": "Un científico famoso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CIENTÍFICO",
+            "scene": "CIENTÍFICO: SÁI-en-tist.",
+            "emoji": "🔬"
+          }
         },
         {
           "key": "journalist",
@@ -823,7 +901,13 @@
               "text": "She is a journalist.",
               "translation": "Es periodista."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JORNAL",
+            "scene": "El PERIODISTA escribe el JOURNAL.",
+            "emoji": "📰"
+          }
         },
         {
           "key": "vet",
@@ -862,7 +946,13 @@
               "text": "The vet is very kind.",
               "translation": "El veterinario es muy amable."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VET",
+            "scene": "El VETERINARIO: VET, la abreviatura.",
+            "emoji": "🐶🩺"
+          }
         }
       ]
     }

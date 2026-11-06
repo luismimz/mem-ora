@@ -68,7 +68,13 @@
               "text": "Turn off the computer.",
               "translation": "Apaga el ordenador."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COMPUTADORA",
+            "scene": "Tu ORDENADOR es una COMPUTADORA con bigote.",
+            "emoji": "💻"
+          }
         },
         {
           "key": "file",
@@ -508,7 +514,13 @@
               "text": "The test failed.",
               "translation": "La prueba ha fallado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEST",
+            "scene": "PROBAR la sopa: haces un TEST con la cuchara.",
+            "emoji": "🥄"
+          }
         },
         {
           "key": "deploy",
@@ -553,7 +565,13 @@
               "text": "Don't deploy on a Friday!",
               "translation": "¡No despliegues un viernes!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESPLIEGA",
+            "scene": "DESPLEGAR: el servidor DESPLIEGA alas y PUBLICA tu app.",
+            "emoji": "🚀"
+          }
         },
         {
           "key": "branch",
@@ -683,7 +701,13 @@
               "text": "We release a new version every month.",
               "translation": "Publicamos una versión nueva cada mes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RELLENO",
+            "scene": "PUBLICAR la VERSIÓN: sale con RELLENO de crema.",
+            "emoji": "🧁"
+          }
         }
       ]
     }

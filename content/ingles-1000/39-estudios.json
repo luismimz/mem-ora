@@ -334,7 +334,13 @@
               "text": "Ask your teacher.",
               "translation": "Pregúntale a tu profesor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TÍCHER",
+            "scene": "El PROFESOR es TÍCHER, el que TEACH (enseña).",
+            "emoji": "👩‍🏫"
+          }
         },
         {
           "key": "student",
@@ -368,7 +374,13 @@
               "text": "There are twenty students in my class.",
               "translation": "Hay veinte alumnos en mi clase."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTUDIANTE",
+            "scene": "ESTUDIANTE: casi igual, STIÚ-dent.",
+            "emoji": "🧑‍🎓"
+          }
         },
         {
           "key": "class",
@@ -423,7 +435,13 @@
               "text": "We're in the same class.",
               "translation": "Estamos en la misma clase."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLASE",
+            "scene": "La CLASE: igual, sin la E final.",
+            "emoji": "🏫"
+          }
         },
         {
           "key": "lesson",
@@ -475,7 +493,13 @@
               "text": "Driving lessons.",
               "translation": "Clases de conducir."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LECCIÓN",
+            "scene": "La LECCIÓN: LÉ-son, casi igual.",
+            "emoji": "📚"
+          }
         },
         {
           "key": "homework",
@@ -522,7 +546,13 @@
               "translation": "Tengo muchos deberes."
             }
           ],
-          "notes": "Homework no tiene plural: a lot of homework."
+          "notes": "Homework no tiene plural: a lot of homework.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HOME",
+            "scene": "DEBERES: WORK (trabajo) en HOME (casa).",
+            "emoji": "🏠📝"
+          }
         },
         {
           "key": "exam",
@@ -567,7 +597,13 @@
               "text": "I passed the exam!",
               "translation": "¡Aprobé el examen!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EXAMEN",
+            "scene": "EXAMEN sin la N final.",
+            "emoji": "📝"
+          }
         },
         {
           "key": "pass",
@@ -613,7 +649,13 @@
               "text": "Pass me the salt.",
               "translation": "Pásame la sal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PASA",
+            "scene": "APROBAR: PASAS el examen.",
+            "emoji": "✅"
+          }
         },
         {
           "key": "fail",
@@ -651,7 +693,13 @@
               "text": "Don't be afraid to fail.",
               "translation": "No tengas miedo de fallar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FALLO",
+            "scene": "SUSPENDER: un FALLO, FÉIL.",
+            "emoji": "❌"
+          }
         },
         {
           "key": "subject",
@@ -705,7 +753,13 @@
               "text": "What subjects do you study?",
               "translation": "¿Qué asignaturas estudias?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUJETO",
+            "scene": "La ASIGNATURA tiene un SUJETO raro.",
+            "emoji": "📘"
+          }
         },
         {
           "key": "mark",
@@ -745,7 +799,13 @@
               "translation": "¿Qué nota sacaste?"
             }
           ],
-          "notes": "En EE. UU. se dice grade."
+          "notes": "En EE. UU. se dice grade.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MARCA",
+            "scene": "Tu NOTA es la MARCA del examen.",
+            "emoji": "💯"
+          }
         },
         {
           "key": "mistake",
@@ -784,7 +844,13 @@
               "text": "Sorry, my mistake.",
               "translation": "Perdón, fue culpa mía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MISTERIO",
+            "scene": "Un ERROR es un MISTERIO sin resolver.",
+            "emoji": "🔎"
+          }
         },
         {
           "key": "practice",
@@ -825,7 +891,13 @@
               "translation": "Practico todos los días."
             }
           ],
-          "notes": "En Reino Unido: practice (nombre) y practise (verbo)."
+          "notes": "En Reino Unido: practice (nombre) y practise (verbo).",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRÁCTICA",
+            "scene": "PRÁCTICA: casi igual, PRÁK-tis.",
+            "emoji": "🎯"
+          }
         },
         {
           "key": "dictionary",
@@ -863,7 +935,13 @@
               "text": "Look it up in the dictionary.",
               "translation": "Búscalo en el diccionario."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DICCIONARIO",
+            "scene": "DICCIONARIO: casi igual, DÍK-sho-nari.",
+            "emoji": "📕"
+          }
         },
         {
           "key": "university",
@@ -904,7 +982,13 @@
               "translation": "Un título universitario."
             }
           ],
-          "notes": "Se dice A university (suena «iu»), no «an»."
+          "notes": "Se dice A university (suena «iu»), no «an».",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "UNIVERSIDAD",
+            "scene": "UNIVERSIDAD: casi igual, iuni-VÉR-siti.",
+            "emoji": "🎓"
+          }
         },
         {
           "key": "question",
@@ -955,7 +1039,13 @@
               "text": "That's a good question.",
               "translation": "Buena pregunta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUESTIÓN",
+            "scene": "Una PREGUNTA es una CUESTIÓN.",
+            "emoji": "❓"
+          }
         }
       ]
     }

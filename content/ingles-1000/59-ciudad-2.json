@@ -484,7 +484,13 @@
               "text": "The traffic light is red.",
               "translation": "El semáforo está en rojo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRÁFICO",
+            "scene": "El SEMÁFORO: la luz (LIGHT) del TRÁFICO.",
+            "emoji": "🚦"
+          }
         },
         {
           "key": "crossroads",
@@ -516,7 +522,13 @@
               "text": "I'm at a crossroads in my life.",
               "translation": "Estoy en una encrucijada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CRUZ",
+            "scene": "Un CRUCE de caminos en forma de CRUZ.",
+            "emoji": "✖️"
+          }
         },
         {
           "key": "pavement",
@@ -551,7 +563,13 @@
               "translation": "La acera está mojada."
             }
           ],
-          "notes": "En EE. UU. se dice sidewalk."
+          "notes": "En EE. UU. se dice sidewalk.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PAVIMENTO",
+            "scene": "La ACERA de PAVIMENTO.",
+            "emoji": "🚶"
+          }
         },
         {
           "key": "neighbourhood",
@@ -607,7 +625,13 @@
               "translation": "Un barrio agradable."
             }
           ],
-          "notes": "En EE. UU. se escribe neighborhood."
+          "notes": "En EE. UU. se escribe neighborhood.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NEIBOR",
+            "scene": "El BARRIO de tus vecinos (NEIGHBOURS).",
+            "emoji": "🏘️"
+          }
         },
         {
           "key": "village",
@@ -661,7 +685,13 @@
               "text": "Village life.",
               "translation": "La vida de pueblo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VILLA",
+            "scene": "Un PUEBLO es una VILLA pequeña.",
+            "emoji": "🏡"
+          }
         },
         {
           "key": "town",
@@ -695,7 +725,13 @@
               "text": "A small town.",
               "translation": "Una ciudad pequeña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TAUN",
+            "scene": "Una CIUDAD PEQUEÑA con TALLER.",
+            "emoji": "🏙️"
+          }
         },
         {
           "key": "city-centre",
@@ -734,7 +770,13 @@
               "translation": "¿Cómo llego al centro?"
             }
           ],
-          "notes": "En EE. UU. se dice downtown."
+          "notes": "En EE. UU. se dice downtown.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CENTRO",
+            "scene": "CENTRO DE LA CIUDAD: CITY CENTRE.",
+            "emoji": "🏛️"
+          }
         },
         {
           "key": "building",
@@ -784,7 +826,13 @@
               "text": "An old building.",
               "translation": "Un edificio antiguo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BILDING",
+            "scene": "Un EDIFICIO: lo que se construye (BUILD).",
+            "emoji": "🏢"
+          }
         },
         {
           "key": "tower",
@@ -835,7 +883,13 @@
               "text": "The Eiffel Tower.",
               "translation": "La torre Eiffel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TORRE",
+            "scene": "TORRE: TÁU-er.",
+            "emoji": "🗼"
+          }
         },
         {
           "key": "church",
@@ -889,7 +943,13 @@
               "text": "An old church.",
               "translation": "Una iglesia antigua."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHURRO",
+            "scene": "Comes un CHURRO a la puerta de la IGLESIA.",
+            "emoji": "⛪"
+          }
         },
         {
           "key": "castle",
@@ -928,7 +988,13 @@
               "translation": "Un castillo de arena."
             }
           ],
-          "notes": "La t no suena: KÁsel."
+          "notes": "La t no suena: KÁsel.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CASTILLO",
+            "scene": "CASTILLO: KÁ-sel, sin la T.",
+            "emoji": "🏰"
+          }
         },
         {
           "key": "post-office",
@@ -966,7 +1032,13 @@
               "text": "The post office closes at two.",
               "translation": "Correos cierra a las dos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POSTAL",
+            "scene": "OFICINA DE CORREOS: envías una POSTAL.",
+            "emoji": "🏤"
+          }
         },
         {
           "key": "police-station",
@@ -998,7 +1070,13 @@
               "text": "The police station is near here.",
               "translation": "La comisaría está cerca de aquí."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POLICÍA",
+            "scene": "COMISARÍA: estación (STATION) de POLICÍA.",
+            "emoji": "🚓"
+          }
         },
         {
           "key": "car-park",
@@ -1036,7 +1114,13 @@
               "translation": "Aparcar es gratis los domingos."
             }
           ],
-          "notes": "En EE. UU. se dice parking lot."
+          "notes": "En EE. UU. se dice parking lot.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PARQUE",
+            "scene": "APARCAMIENTO: el PARQUE de los coches (CAR).",
+            "emoji": "🅿️"
+          }
         },
         {
           "key": "roundabout",
@@ -1078,7 +1162,13 @@
               "text": "A big roundabout.",
               "translation": "Una rotonda grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REDONDO",
+            "scene": "ROTONDA: das vueltas en REDONDO (ROUND).",
+            "emoji": "🔄"
+          }
         }
       ]
     }

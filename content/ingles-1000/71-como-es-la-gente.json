@@ -390,7 +390,13 @@
               "text": "A reliable car.",
               "translation": "Un coche fiable."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RELOJ",
+            "scene": "FIABLE como un RELOJ suizo.",
+            "emoji": "⌚"
+          }
         },
         {
           "key": "selfish",
@@ -427,7 +433,13 @@
               "text": "A selfish decision.",
               "translation": "Una decisión egoísta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SELFIE",
+            "scene": "El EGOÍSTA solo hace SELFIES.",
+            "emoji": "🤳"
+          }
         },
         {
           "key": "ambitious",
@@ -482,7 +494,13 @@
               "text": "An ambitious plan.",
               "translation": "Un plan ambicioso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AMBICIOSO",
+            "scene": "AMBICIOSO: am-BÍ-shos.",
+            "emoji": "🚀"
+          }
         },
         {
           "key": "stubborn",
@@ -519,7 +537,13 @@
               "text": "As stubborn as a mule.",
               "translation": "Más terco que una mula."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTRIBOR",
+            "scene": "El CABEZOTA gira siempre a ESTRIBOR.",
+            "emoji": "🐐"
+          }
         },
         {
           "key": "sensitive",
@@ -558,7 +582,13 @@
               "translation": "Piel sensible."
             }
           ],
-          "notes": "Falso amigo: sensato es sensible; sensible es sensitive."
+          "notes": "Falso amigo: sensato es sensible; sensible es sensitive.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SENSIBLE",
+            "scene": "SENSIBLE: SÉN-sitiv (ojo: sensible = SENSIBLE).",
+            "emoji": "🥺"
+          }
         },
         {
           "key": "hard-working",
@@ -608,7 +638,13 @@
               "text": "A hard-working team.",
               "translation": "Un equipo trabajador."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JARD",
+            "scene": "TRABAJADOR: trabaja (WORK) duro (HARD).",
+            "emoji": "💪"
+          }
         },
         {
           "key": "cheerful",
@@ -657,7 +693,13 @@
               "text": "A cheerful song.",
               "translation": "Una canción alegre."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHIRRÍA",
+            "scene": "ALEGRE: la puerta CHIRRÍA de alegría.",
+            "emoji": "😄"
+          }
         },
         {
           "key": "creative",
@@ -689,7 +731,13 @@
               "text": "Creative writing.",
               "translation": "Escritura creativa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CREATIVO",
+            "scene": "CREATIVO: kri-ÉI-tiv.",
+            "emoji": "🎨"
+          }
         },
         {
           "key": "loyal",
@@ -739,7 +787,13 @@
               "text": "A loyal friend.",
               "translation": "Un amigo leal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LEAL",
+            "scene": "LEAL: LÓI-al, casi igual.",
+            "emoji": "🐕"
+          }
         },
         {
           "key": "modest",
@@ -779,7 +833,13 @@
               "text": "A modest house.",
               "translation": "Una casa modesta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MODESTO",
+            "scene": "MODESTO: MÓ-dest.",
+            "emoji": "🙇"
+          }
         },
         {
           "key": "careless",
@@ -830,7 +890,13 @@
               "translation": "¡Ten cuidado!"
             }
           ],
-          "notes": "Lo contrario es careful (cuidadoso)."
+          "notes": "Lo contrario es careful (cuidadoso).",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARE",
+            "scene": "DESCUIDADO: sin (LESS) cuidado (CARE).",
+            "emoji": "🙃"
+          }
         },
         {
           "key": "bossy",
@@ -868,7 +934,13 @@
               "text": "Don't be bossy.",
               "translation": "No seas mandón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOSS",
+            "scene": "MANDÓN como un BOSS.",
+            "emoji": "👔"
+          }
         },
         {
           "key": "moody",
@@ -912,7 +984,13 @@
               "text": "Teenagers can be moody.",
               "translation": "Los adolescentes pueden ser muy cambiantes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MUDO",
+            "scene": "DE MAL HUMOR, se queda MUDO.",
+            "emoji": "😒"
+          }
         },
         {
           "key": "sociable",
@@ -944,7 +1022,13 @@
               "text": "A sociable person.",
               "translation": "Una persona sociable."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOCIABLE",
+            "scene": "SOCIABLE: SÓU-shabol.",
+            "emoji": "🥳"
+          }
         },
         {
           "key": "brave",
@@ -983,7 +1067,13 @@
               "text": "Be brave!",
               "translation": "¡Sé valiente!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BRAVO",
+            "scene": "VALIENTE: ¡BRAVO!",
+            "emoji": "🦸"
+          }
         }
       ]
     }

@@ -307,7 +307,13 @@
               "text": "A two-euro coin.",
               "translation": "Una moneda de dos euros."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COIN",
+            "scene": "Una MONEDA: COIN, como bitCOIN.",
+            "emoji": "🪙"
+          }
         },
         {
           "key": "banknote",
@@ -350,7 +356,13 @@
               "translation": "Solo llevo billetes."
             }
           ],
-          "notes": "También se dice note; en EE. UU., bill."
+          "notes": "También se dice note; en EE. UU., bill.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BANCO",
+            "scene": "BILLETE: la nota (NOTE) del BANCO.",
+            "emoji": "💵"
+          }
         },
         {
           "key": "cash-machine",
@@ -389,7 +401,13 @@
               "translation": "El cajero se ha tragado la tarjeta."
             }
           ],
-          "notes": "También se dice ATM."
+          "notes": "También se dice ATM.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CASH",
+            "scene": "CAJERO AUTOMÁTICO: máquina de CASH.",
+            "emoji": "🏧"
+          }
         },
         {
           "key": "loan",
@@ -441,7 +459,13 @@
               "text": "A student loan.",
               "translation": "Un préstamo de estudios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LOAN",
+            "scene": "PRÉSTAMO: el LOAN del banco.",
+            "emoji": "🏦"
+          }
         },
         {
           "key": "tax",
@@ -485,7 +509,13 @@
               "text": "We pay a lot of tax.",
               "translation": "Pagamos muchos impuestos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TAXI",
+            "scene": "El TAXI paga IMPUESTO.",
+            "emoji": "🧾"
+          }
         },
         {
           "key": "wallet",
@@ -532,7 +562,13 @@
               "text": "A leather wallet.",
               "translation": "Una cartera de piel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOLETO",
+            "scene": "La CARTERA guarda tu BOLETO.",
+            "emoji": "👛"
+          }
         },
         {
           "key": "purse",
@@ -572,7 +608,13 @@
               "translation": "Un monedero pequeño."
             }
           ],
-          "notes": "En EE. UU., purse es el bolso."
+          "notes": "En EE. UU., purse es el bolso.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PERSA",
+            "scene": "El MONEDERO de un gato PERSA.",
+            "emoji": "👛🐈"
+          }
         },
         {
           "key": "budget",
@@ -604,7 +646,13 @@
               "text": "We're on a tight budget.",
               "translation": "Vamos justos de dinero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BAYETA",
+            "scene": "El PRESUPUESTO solo da para una BAYETA.",
+            "emoji": "💸"
+          }
         },
         {
           "key": "owe",
@@ -653,7 +701,13 @@
               "text": "How much do I owe you?",
               "translation": "¿Cuánto te debo?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OU",
+            "scene": "DEBER dinero: «OU, OU, te debo».",
+            "emoji": "💳"
+          }
         },
         {
           "key": "waste",
@@ -692,7 +746,13 @@
               "text": "It's a waste of time.",
               "translation": "Es una pérdida de tiempo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜEIST",
+            "scene": "MALGASTAR: tirar a la basura.",
+            "emoji": "🗑️"
+          }
         },
         {
           "key": "bargain",
@@ -726,7 +786,13 @@
               "text": "I love a good bargain.",
               "translation": "Me encantan los chollos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BARGANÍA",
+            "scene": "Una GANGA en el BAZAR.",
+            "emoji": "🏷️"
+          }
         },
         {
           "key": "fee",
@@ -759,7 +825,13 @@
               "text": "University fees are high.",
               "translation": "Las tasas de la universidad son altas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FI",
+            "scene": "La TARIFA: FÍ… FEE.",
+            "emoji": "💳"
+          }
         },
         {
           "key": "pocket-money",
@@ -804,7 +876,13 @@
               "text": "She saves her pocket money.",
               "translation": "Ahorra su paga."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POCKET",
+            "scene": "La PAGA en el bolsillo (POCKET).",
+            "emoji": "👖💶"
+          }
         },
         {
           "key": "credit-card",
@@ -849,7 +927,13 @@
               "text": "My credit card was declined.",
               "translation": "Me han rechazado la tarjeta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CRÉDITO",
+            "scene": "TARJETA DE CRÉDITO: CREDIT CARD.",
+            "emoji": "💳"
+          }
         },
         {
           "key": "broke",
@@ -900,7 +984,13 @@
               "translation": "A final de mes siempre estoy pelado."
             }
           ],
-          "notes": "Es coloquial; también es el pasado de break."
+          "notes": "Es coloquial; también es el pasado de break.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BROKE",
+            "scene": "SIN BLANCA: tu hucha está ROTA.",
+            "emoji": "🐷💔"
+          }
         }
       ]
     }

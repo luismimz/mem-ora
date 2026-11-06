@@ -403,7 +403,13 @@
               "text": "We decided to stay.",
               "translation": "Decidimos quedarnos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DECIDIR",
+            "scene": "DECIDIR: di-SÁID.",
+            "emoji": "⚖️"
+          }
         },
         {
           "key": "promise",
@@ -454,7 +460,13 @@
               "text": "That's a promise.",
               "translation": "Es una promesa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PROMESA",
+            "scene": "PROMETER: una PROMESA.",
+            "emoji": "🤞"
+          }
         },
         {
           "key": "save",
@@ -497,7 +509,13 @@
               "text": "Don't forget to save the file.",
               "translation": "No olvides guardar el archivo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SALVA",
+            "scene": "AHORRAR: SALVAS tu dinero.",
+            "emoji": "🐷"
+          }
         },
         {
           "key": "fill",
@@ -536,7 +554,13 @@
               "text": "Fill in the form.",
               "translation": "Rellena el formulario."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FILA",
+            "scene": "LLENAR la FILA de vasos.",
+            "emoji": "🥛"
+          }
         },
         {
           "key": "offer",
@@ -592,7 +616,13 @@
               "text": "A special offer.",
               "translation": "Una oferta especial."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OFERTA",
+            "scene": "OFRECER una OFERTA.",
+            "emoji": "🏷️"
+          }
         },
         {
           "key": "refuse",
@@ -630,7 +660,13 @@
               "text": "I refuse to answer.",
               "translation": "Me niego a contestar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REHUSAR",
+            "scene": "NEGARSE: REHUSAR.",
+            "emoji": "✋"
+          }
         },
         {
           "key": "pretend",
@@ -674,7 +710,13 @@
               "translation": "Hizo como que dormía."
             }
           ],
-          "notes": "Falso amigo: pretender es intend o try."
+          "notes": "Falso amigo: pretender es intend o try.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PRETENDER",
+            "scene": "FINGIR: PRETENDER que no pasa nada.",
+            "emoji": "🎭"
+          }
         },
         {
           "key": "allow",
@@ -725,7 +767,13 @@
               "text": "My parents allow me to go out.",
               "translation": "Mis padres me dejan salir."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ALÓ",
+            "scene": "PERMITIR: «¿ALÓ? Sí, puedes pasar».",
+            "emoji": "✅"
+          }
         },
         {
           "key": "invite",
@@ -775,7 +823,13 @@
               "translation": "Gracias por invitarme."
             }
           ],
-          "notes": "Para invitar a pagar: it's on me (no «I invite you»)."
+          "notes": "Para invitar a pagar: it's on me (no «I invite you»).",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INVITAR",
+            "scene": "INVITAR: in-VÁIT.",
+            "emoji": "💌"
+          }
         },
         {
           "key": "deliver",
@@ -818,7 +872,13 @@
               "text": "The package was delivered.",
               "translation": "Entregaron el paquete."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DELIVERY",
+            "scene": "ENTREGAR: el DELIVERY trae la pizza.",
+            "emoji": "🛵"
+          }
         },
         {
           "key": "grow",
@@ -858,7 +918,13 @@
               "text": "We grow tomatoes.",
               "translation": "Cultivamos tomates."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRÚA",
+            "scene": "CRECER tanto como una GRÚA.",
+            "emoji": "🌱"
+          }
         },
         {
           "key": "steal",
@@ -899,7 +965,13 @@
               "translation": "Roban móviles."
             }
           ],
-          "notes": "Irregular: steal, stole, stolen."
+          "notes": "Irregular: steal, stole, stolen.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTILO",
+            "scene": "ROBAR con mucho ESTILO.",
+            "emoji": "🦹"
+          }
         },
         {
           "key": "mention",
@@ -937,7 +1009,13 @@
               "text": "Thanks! Don't mention it.",
               "translation": "¡Gracias! De nada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MENCIONAR",
+            "scene": "MENCIONAR: MÉN-shon.",
+            "emoji": "🗨️"
+          }
         },
         {
           "key": "wash",
@@ -972,7 +1050,13 @@
               "text": "I need to wash my car.",
               "translation": "Tengo que lavar el coche."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUASA",
+            "scene": "LAVAR el coche con GUASA.",
+            "emoji": "🧽"
+          }
         },
         {
           "key": "iron",
@@ -1018,7 +1102,13 @@
               "translation": "La plancha está caliente."
             }
           ],
-          "notes": "La r no suena: ÁIern."
+          "notes": "La r no suena: ÁIern.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HIERRO",
+            "scene": "PLANCHAR: la plancha es de HIERRO (IRON).",
+            "emoji": "🧺"
+          }
         }
       ]
     }

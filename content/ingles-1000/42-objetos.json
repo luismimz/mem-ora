@@ -461,7 +461,13 @@
               "text": "A comfortable sofa.",
               "translation": "Un sofá cómodo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOFÁ",
+            "scene": "SOFÁ: igual, SÓU-fa.",
+            "emoji": "🛋️"
+          }
         },
         {
           "key": "lamp",
@@ -493,7 +499,13 @@
               "text": "A new lamp for the living room.",
               "translation": "Una lámpara nueva para el salón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LÁMPARA",
+            "scene": "LÁMPARA sin el final: LAMP.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "mirror",
@@ -526,7 +538,13 @@
               "text": "The mirror is broken.",
               "translation": "El espejo está roto."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MIRAR",
+            "scene": "El ESPEJO te deja MIRAR.",
+            "emoji": "🪞"
+          }
         },
         {
           "key": "shelf",
@@ -565,7 +583,13 @@
               "translation": "La balda de arriba."
             }
           ],
-          "notes": "Plural: shelves."
+          "notes": "Plural: shelves.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHELFI",
+            "scene": "En el ESTANTE, un ELFO duerme.",
+            "emoji": "📚🧝"
+          }
         },
         {
           "key": "towel",
@@ -627,7 +651,13 @@
               "text": "A beach towel.",
               "translation": "Una toalla de playa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TAUEL",
+            "scene": "La TOALLA hace «TAU-EL» al sacudirla.",
+            "emoji": "🧺"
+          }
         },
         {
           "key": "soap",
@@ -667,7 +697,13 @@
               "text": "There's no soap.",
               "translation": "No hay jabón."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOPA",
+            "scene": "El JABÓN cae en la SOPA.",
+            "emoji": "🧼"
+          }
         },
         {
           "key": "toothbrush",
@@ -707,7 +743,13 @@
               "text": "A new toothbrush.",
               "translation": "Un cepillo de dientes nuevo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TUZ",
+            "scene": "CEPILLO DE DIENTES: TOOTH (diente) + BRUSH (cepillo).",
+            "emoji": "🪥"
+          }
         },
         {
           "key": "pillow",
@@ -744,7 +786,13 @@
               "text": "Two pillows, please.",
               "translation": "Dos almohadas, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PILLO",
+            "scene": "El PILLO esconde la ALMOHADA.",
+            "emoji": "🛏️"
+          }
         },
         {
           "key": "blanket",
@@ -782,7 +830,13 @@
               "text": "A warm blanket.",
               "translation": "Una manta calentita."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BLANCA",
+            "scene": "La MANTA BLANCA.",
+            "emoji": "🛌"
+          }
         },
         {
           "key": "fridge",
@@ -820,7 +874,13 @@
               "text": "The fridge is empty.",
               "translation": "La nevera está vacía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FRÍO",
+            "scene": "La NEVERA da FRÍO.",
+            "emoji": "🧊"
+          }
         },
         {
           "key": "washing-machine",
@@ -857,7 +917,13 @@
               "text": "Put the clothes in the washing machine.",
               "translation": "Mete la ropa en la lavadora."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MÁQUINA",
+            "scene": "La LAVADORA: MÁQUINA de WASH (lavar).",
+            "emoji": "🧺"
+          }
         },
         {
           "key": "rubbish",
@@ -895,7 +961,13 @@
               "translation": "No tires basura al suelo."
             }
           ],
-          "notes": "En EE. UU. se dice trash o garbage."
+          "notes": "En EE. UU. se dice trash o garbage.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RÁBANO",
+            "scene": "La BASURA está llena de RÁBANOS.",
+            "emoji": "🗑️"
+          }
         },
         {
           "key": "light",
@@ -927,7 +999,13 @@
               "text": "There's a lot of light in this room.",
               "translation": "Esta habitación tiene mucha luz."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LUZ",
+            "scene": "La LUZ: LÁIT, como LIGHT.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "stairs",
@@ -961,7 +1039,13 @@
               "text": "Be careful on the stairs.",
               "translation": "Cuidado en las escaleras."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTRELLAS",
+            "scene": "Unas ESCALERAS llegan a las ESTRELLAS.",
+            "emoji": "🪜"
+          }
         },
         {
           "key": "box",
@@ -998,7 +1082,13 @@
               "text": "A big box.",
               "translation": "Una caja grande."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOXEO",
+            "scene": "Una CAJA hace BOXEO.",
+            "emoji": "📦🥊"
+          }
         }
       ]
     }

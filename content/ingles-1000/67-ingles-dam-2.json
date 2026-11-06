@@ -369,7 +369,13 @@
               "text": "Debug the code step by step.",
               "translation": "Depura el código paso a paso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BICHO",
+            "scene": "DEPURAR: quitar el BICHO (BUG).",
+            "emoji": "🐛"
+          }
         },
         {
           "key": "server",
@@ -406,7 +412,13 @@
               "text": "Restart the server.",
               "translation": "Reinicia el servidor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SERVIDOR",
+            "scene": "SERVIDOR: SÉR-ver.",
+            "emoji": "🖥️"
+          }
         },
         {
           "key": "database",
@@ -452,7 +464,13 @@
               "translation": "Una base de datos SQL."
             }
           ],
-          "notes": "Data suele ir en singular: the data is…"
+          "notes": "Data suele ir en singular: the data is…",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DATA",
+            "scene": "BASE DE DATOS: DATA + BASE.",
+            "emoji": "🗃️"
+          }
         },
         {
           "key": "query",
@@ -489,7 +507,13 @@
               "text": "Write a query to get all the users.",
               "translation": "Escribe una consulta que saque todos los usuarios."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUERY",
+            "scene": "CONSULTA: ¿QUÉ hay? (QUERY).",
+            "emoji": "🔍"
+          }
         },
         {
           "key": "loop",
@@ -534,7 +558,13 @@
               "text": "A for loop.",
               "translation": "Un bucle for."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LUPA",
+            "scene": "Un BUCLE que da vueltas a una LUPA.",
+            "emoji": "🔁"
+          }
         },
         {
           "key": "variable",
@@ -576,7 +606,13 @@
               "text": "A global variable.",
               "translation": "Una variable global."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VARIABLE",
+            "scene": "VARIABLE: igual, VÉ-riabol.",
+            "emoji": "🔣"
+          }
         },
         {
           "key": "function",
@@ -613,7 +649,13 @@
               "text": "Call the function.",
               "translation": "Llama a la función."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FUNCIÓN",
+            "scene": "FUNCIÓN: FÁNK-shon.",
+            "emoji": "ƒ"
+          }
         },
         {
           "key": "array",
@@ -650,7 +692,13 @@
               "text": "Loop through the array.",
               "translation": "Recorre el array."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARRAY",
+            "scene": "Un ARRAY es una fila de cajas.",
+            "emoji": "📦📦"
+          }
         },
         {
           "key": "string",
@@ -689,7 +737,13 @@
               "text": "An empty string.",
               "translation": "Una cadena vacía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTRÍNGIDO",
+            "scene": "Una CADENA de letras ensartadas.",
+            "emoji": "🔤"
+          }
         },
         {
           "key": "boolean",
@@ -736,7 +790,13 @@
               "text": "Return a boolean.",
               "translation": "Devuelve un booleano."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BOOLEANO",
+            "scene": "BOOLEANO: verdadero o falso.",
+            "emoji": "🔘"
+          }
         },
         {
           "key": "object",
@@ -784,7 +844,13 @@
               "text": "Object-oriented programming.",
               "translation": "Programación orientada a objetos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OBJETO",
+            "scene": "OBJETO: ÓB-yekt.",
+            "emoji": "🧊"
+          }
         },
         {
           "key": "method",
@@ -824,7 +890,13 @@
               "text": "A static method.",
               "translation": "Un método estático."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MÉTODO",
+            "scene": "MÉTODO: MÉ-zod.",
+            "emoji": "⚙️"
+          }
         },
         {
           "key": "compile",
@@ -863,7 +935,13 @@
               "text": "Compile and run.",
               "translation": "Compila y ejecuta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COMPILAR",
+            "scene": "COMPILAR: kom-PÁIL.",
+            "emoji": "🛠️"
+          }
         },
         {
           "key": "repository",
@@ -896,7 +974,13 @@
               "translation": "Un repositorio público."
             }
           ],
-          "notes": "Abreviado: repo."
+          "notes": "Abreviado: repo.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REPOSITORIO",
+            "scene": "REPOSITORIO: ri-PÓ-sitori.",
+            "emoji": "📚"
+          }
         },
         {
           "key": "framework",
@@ -950,7 +1034,13 @@
               "text": "Which framework do you use?",
               "translation": "¿Qué framework usas?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MARCO",
+            "scene": "MARCO DE TRABAJO: FRAME (marco) + WORK.",
+            "emoji": "🖼️"
+          }
         }
       ]
     }

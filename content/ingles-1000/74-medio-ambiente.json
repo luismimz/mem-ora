@@ -501,7 +501,13 @@
               "text": "A good work environment.",
               "translation": "Un buen ambiente de trabajo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENTORNO",
+            "scene": "MEDIO AMBIENTE: tu ENTORNO.",
+            "emoji": "🌿"
+          }
         },
         {
           "key": "pollution",
@@ -540,7 +546,13 @@
               "text": "Air pollution.",
               "translation": "Contaminación del aire."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POLUCIÓN",
+            "scene": "CONTAMINACIÓN: la POLUCIÓN.",
+            "emoji": "🏭"
+          }
         },
         {
           "key": "recycle",
@@ -578,7 +590,13 @@
               "text": "The recycling bin.",
               "translation": "El contenedor de reciclaje."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RECICLAR",
+            "scene": "RECICLAR: ri-SÁI-kol.",
+            "emoji": "♻️"
+          }
         },
         {
           "key": "climate",
@@ -616,7 +634,13 @@
               "translation": "El cambio climático."
             }
           ],
-          "notes": "El tiempo de hoy es weather; el clima, climate."
+          "notes": "El tiempo de hoy es weather; el clima, climate.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLIMA",
+            "scene": "CLIMA: KLÁI-mit.",
+            "emoji": "🌦️"
+          }
         },
         {
           "key": "plastic",
@@ -660,7 +684,13 @@
               "text": "A plastic bottle.",
               "translation": "Una botella de plástico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLÁSTICO",
+            "scene": "PLÁSTICO: PLÁS-tik.",
+            "emoji": "🥤"
+          }
         },
         {
           "key": "energy",
@@ -702,7 +732,13 @@
               "text": "I've got no energy today.",
               "translation": "Hoy no tengo energía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENERGÍA",
+            "scene": "ENERGÍA: É-ner-yi.",
+            "emoji": "⚡"
+          }
         },
         {
           "key": "planet",
@@ -751,7 +787,13 @@
               "text": "Planet Earth.",
               "translation": "El planeta Tierra."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLANETA",
+            "scene": "PLANETA: PLÁ-net.",
+            "emoji": "🪐"
+          }
         },
         {
           "key": "species",
@@ -789,7 +831,13 @@
               "translation": "Una especie rara."
             }
           ],
-          "notes": "Igual en singular y plural: one species, two species."
+          "notes": "Igual en singular y plural: one species, two species.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPECIES",
+            "scene": "ESPECIE: SPÍ-shiis.",
+            "emoji": "🦋"
+          }
         },
         {
           "key": "wildlife",
@@ -832,7 +880,13 @@
               "text": "Protect wildlife.",
               "translation": "Protege la fauna."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SALVAJE",
+            "scene": "FAUNA: vida (LIFE) salvaje (WILD).",
+            "emoji": "🦁"
+          }
         },
         {
           "key": "global-warming",
@@ -871,7 +925,13 @@
               "text": "The effects of global warming.",
               "translation": "Los efectos del calentamiento global."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GLOBAL",
+            "scene": "CALENTAMIENTO GLOBAL: WARM = templado.",
+            "emoji": "🌡️🌍"
+          }
         },
         {
           "key": "disaster",
@@ -922,7 +982,13 @@
               "text": "What a disaster!",
               "translation": "¡Qué desastre!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESASTRE",
+            "scene": "DESASTRE: di-SÁS-ter.",
+            "emoji": "🌪️"
+          }
         },
         {
           "key": "flood",
@@ -960,7 +1026,13 @@
               "translation": "El río se desbordó."
             }
           ],
-          "notes": "Se dice FLAD, no FLUUD."
+          "notes": "Se dice FLAD, no FLUUD.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FLOTAR",
+            "scene": "En la INUNDACIÓN todo FLOTA.",
+            "emoji": "🌊"
+          }
         },
         {
           "key": "drought",
@@ -1003,7 +1075,13 @@
               "translation": "Una sequía grave."
             }
           ],
-          "notes": "La ough suena AU: DRÁUT."
+          "notes": "La ough suena AU: DRÁUT.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRAUT",
+            "scene": "SEQUÍA: la tierra se agrieta.",
+            "emoji": "🏜️"
+          }
         },
         {
           "key": "renewable",
@@ -1043,7 +1121,13 @@
               "text": "Renewable sources.",
               "translation": "Fuentes renovables."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RENOVABLE",
+            "scene": "RENOVABLE: ri-NIÚ-abol.",
+            "emoji": "🔆"
+          }
         },
         {
           "key": "fuel",
@@ -1081,7 +1165,13 @@
               "text": "Fossil fuels.",
               "translation": "Combustibles fósiles."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FUEL",
+            "scene": "COMBUSTIBLE: FUEL, como el fueloil.",
+            "emoji": "⛽"
+          }
         }
       ]
     }

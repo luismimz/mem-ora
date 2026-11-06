@@ -358,7 +358,13 @@
               "translation": "Me caí de rodillas."
             }
           ],
-          "notes": "La k no suena: NII."
+          "notes": "La k no suena: NII.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NIÑO",
+            "scene": "Un NIÑO sentado en tu RODILLA.",
+            "emoji": "🦵"
+          }
         },
         {
           "key": "elbow",
@@ -399,7 +405,13 @@
               "text": "Elbows off the table!",
               "translation": "¡Los codos fuera de la mesa!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ELBO",
+            "scene": "El CODO del ELFO.",
+            "emoji": "💪"
+          }
         },
         {
           "key": "shoulder",
@@ -438,7 +450,13 @@
               "text": "You can cry on my shoulder.",
               "translation": "Puedes llorar en mi hombro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOLDADO",
+            "scene": "Un SOLDADO al HOMBRO.",
+            "emoji": "🎖️"
+          }
         },
         {
           "key": "stomach",
@@ -474,7 +492,13 @@
               "translation": "Con el estómago vacío."
             }
           ],
-          "notes": "La ch suena K: STÁmak."
+          "notes": "La ch suena K: STÁmak.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTÓMAGO",
+            "scene": "ESTÓMAGO: STÁ-mak.",
+            "emoji": "🫃"
+          }
         },
         {
           "key": "throat",
@@ -509,7 +533,13 @@
               "text": "Clear your throat.",
               "translation": "Aclárate la garganta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TROTE",
+            "scene": "Al TROTE, te duele la GARGANTA.",
+            "emoji": "🗣️"
+          }
         },
         {
           "key": "chest",
@@ -554,7 +584,13 @@
               "text": "A treasure chest.",
               "translation": "Un cofre del tesoro."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHISTE",
+            "scene": "Un CHISTE en el PECHO de la camiseta.",
+            "emoji": "👕"
+          }
         },
         {
           "key": "finger",
@@ -595,7 +631,13 @@
               "text": "Keep your fingers crossed.",
               "translation": "Cruza los dedos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FINGIR",
+            "scene": "FINGES que te duele el DEDO.",
+            "emoji": "☝️"
+          }
         },
         {
           "key": "toe",
@@ -637,7 +679,13 @@
               "translation": "Diez dedos del pie."
             }
           ],
-          "notes": "Dedo de la mano: finger. Del pie: toe."
+          "notes": "Dedo de la mano: finger. Del pie: toe.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TÓU",
+            "scene": "El DEDO DEL PIE dice «¡TÓU!».",
+            "emoji": "🦶"
+          }
         },
         {
           "key": "skin",
@@ -688,7 +736,13 @@
               "text": "Use sun cream to protect your skin.",
               "translation": "Ponte crema para proteger la piel."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESQUÍ",
+            "scene": "La PIEL quemada tras el ESQUÍ.",
+            "emoji": "🧴"
+          }
         },
         {
           "key": "blood",
@@ -726,7 +780,13 @@
               "translation": "Un análisis de sangre."
             }
           ],
-          "notes": "Se dice BLAD, no BLUUD."
+          "notes": "Se dice BLAD, no BLUUD.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BLAD",
+            "scene": "La SANGRE de un VAMPIRO, BLAD.",
+            "emoji": "🩸🧛"
+          }
         },
         {
           "key": "bone",
@@ -763,7 +823,13 @@
               "text": "He broke a bone.",
               "translation": "Se rompió un hueso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BONO",
+            "scene": "El perro canjea un BONO por un HUESO.",
+            "emoji": "🦴"
+          }
         },
         {
           "key": "sneeze",
@@ -813,7 +879,13 @@
               "text": "Cover your mouth when you sneeze.",
               "translation": "Tápate la boca al estornudar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SNIS",
+            "scene": "ESTORNUDAR: ¡ATCHÍS, SNIIS!",
+            "emoji": "🤧"
+          }
         },
         {
           "key": "pill",
@@ -851,7 +923,13 @@
               "text": "Sleeping pills.",
               "translation": "Pastillas para dormir."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PÍLDORA",
+            "scene": "Una PASTILLA es una PÍLDORA.",
+            "emoji": "💊"
+          }
         },
         {
           "key": "sore",
@@ -891,7 +969,13 @@
               "text": "A sore throat.",
               "translation": "Dolor de garganta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SORDO",
+            "scene": "DOLORIDO y medio SORDO.",
+            "emoji": "🤕"
+          }
         },
         {
           "key": "ankle",
@@ -932,7 +1016,13 @@
               "text": "My ankle is swollen.",
               "translation": "Tengo el tobillo hinchado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANCLA",
+            "scene": "Un ANCLA atada al TOBILLO.",
+            "emoji": "⚓"
+          }
         }
       ]
     }

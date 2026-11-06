@@ -379,7 +379,13 @@
               "translation": "Tienen dos hijos."
             }
           ],
-          "notes": "Son suena igual que sun: SAN."
+          "notes": "Son suena igual que sun: SAN.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SAN",
+            "scene": "Tu HIJO es SAN Pedrito.",
+            "emoji": "👦"
+          }
         },
         {
           "key": "daughter",
@@ -417,7 +423,13 @@
               "translation": "Tengo una hija."
             }
           ],
-          "notes": "La gh no suena: DÓOter."
+          "notes": "La gh no suena: DÓOter.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DÓTER",
+            "scene": "Tu HIJA DÓTER de un gran DOTE.",
+            "emoji": "👧"
+          }
         },
         {
           "key": "husband",
@@ -456,7 +468,13 @@
               "text": "My husband and I.",
               "translation": "Mi marido y yo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JASBAN",
+            "scene": "El MARIDO toca en una BANDA de jazz.",
+            "emoji": "🎷"
+          }
         },
         {
           "key": "wife",
@@ -498,7 +516,13 @@
               "text": "His wife works at home.",
               "translation": "Su mujer trabaja en casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜAIFAI",
+            "scene": "Tu ESPOSA tiene el WIFI.",
+            "emoji": "📶"
+          }
         },
         {
           "key": "parents",
@@ -536,7 +560,13 @@
               "translation": "Llamo a mis padres todos los días."
             }
           ],
-          "notes": "Parents son padre y madre. «Parientes» se dice relatives."
+          "notes": "Parents son padre y madre. «Parientes» se dice relatives.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PARIENTES",
+            "scene": "Tus PADRES son tus PARIENTES favoritos.",
+            "emoji": "👨‍👩"
+          }
         },
         {
           "key": "grandmother",
@@ -576,7 +606,13 @@
               "text": "I visit my grandmother on Sundays.",
               "translation": "Visito a mi abuela los domingos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRAN MADRE",
+            "scene": "La ABUELA es la GRAN MADRE.",
+            "emoji": "👵"
+          }
         },
         {
           "key": "grandfather",
@@ -624,7 +660,13 @@
               "text": "My grandparents live in a village.",
               "translation": "Mis abuelos viven en un pueblo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRAN PADRE",
+            "scene": "El ABUELO es el GRAN PADRE.",
+            "emoji": "👴"
+          }
         },
         {
           "key": "uncle",
@@ -661,7 +703,13 @@
               "text": "Uncle Tom.",
               "translation": "El tío Tom."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANCLA",
+            "scene": "Tu TÍO lleva un ANCLA al cuello.",
+            "emoji": "⚓"
+          }
         },
         {
           "key": "aunt",
@@ -698,7 +746,13 @@
               "text": "Say hello to your aunt.",
               "translation": "Saluda a tu tía."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ANT",
+            "scene": "Tu TÍA cuida una hormiga, ANT.",
+            "emoji": "🐜"
+          }
         },
         {
           "key": "cousin",
@@ -735,7 +789,13 @@
               "text": "I have ten cousins.",
               "translation": "Tengo diez primos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COCINA",
+            "scene": "Tu PRIMO vive en la COCINA.",
+            "emoji": "🍳"
+          }
         },
         {
           "key": "nephew",
@@ -772,7 +832,13 @@
               "text": "Nephews and nieces.",
               "translation": "Sobrinos y sobrinas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NEVERA",
+            "scene": "Tu SOBRINO se esconde en la NEVERA.",
+            "emoji": "🧊"
+          }
         },
         {
           "key": "niece",
@@ -816,7 +882,13 @@
               "text": "She is my niece.",
               "translation": "Es mi sobrina."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NIÑA",
+            "scene": "Tu SOBRINA es una NIÑA traviesa.",
+            "emoji": "👧"
+          }
         },
         {
           "key": "married",
@@ -859,7 +931,13 @@
               "text": "They got married last year.",
               "translation": "Se casaron el año pasado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MARIDO",
+            "scene": "CASADO: tiene MARIDO o mujer.",
+            "emoji": "💍"
+          }
         },
         {
           "key": "single",
@@ -891,7 +969,13 @@
               "text": "A single room, please.",
               "translation": "Una habitación individual, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SINGLE",
+            "scene": "SOLTERO: canta un SINGLE solo.",
+            "emoji": "🎤"
+          }
         },
         {
           "key": "wedding",
@@ -949,7 +1033,13 @@
               "text": "A beautiful wedding.",
               "translation": "Una boda preciosa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜEDIN",
+            "scene": "En la BODA, una BOLA de nieve.",
+            "emoji": "💒"
+          }
         }
       ]
     }

@@ -971,7 +971,13 @@
               "text": "She gave the book to Ana.",
               "translation": "Le dio el libro a Ana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GUEI",
+            "scene": "Ayer te DI un GUEPARDO de regalo.",
+            "emoji": "🎁🐆"
+          }
         },
         {
           "key": "knew",

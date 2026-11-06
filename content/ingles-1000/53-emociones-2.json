@@ -396,7 +396,13 @@
               "text": "She is jealous of her sister.",
               "translation": "Tiene celos de su hermana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YELO",
+            "scene": "CELOSO, te quedas de HIELO.",
+            "emoji": "😒"
+          }
         },
         {
           "key": "embarrassed",
@@ -443,7 +449,13 @@
               "translation": "¡Embarazada, no avergonzada!"
             }
           ],
-          "notes": "Falso amigo: embarazada es pregnant."
+          "notes": "Falso amigo: embarazada es pregnant.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EMBARAZADA",
+            "scene": "AVERGONZADO: no es EMBARAZADA, ¡ojo!",
+            "emoji": "😳"
+          }
         },
         {
           "key": "relaxed",
@@ -493,7 +505,13 @@
               "text": "A relaxed atmosphere.",
               "translation": "Un ambiente relajado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RELAJADO",
+            "scene": "RELAJADO: ri-LÁKST.",
+            "emoji": "😌"
+          }
         },
         {
           "key": "grateful",
@@ -525,7 +543,13 @@
               "text": "We are grateful for your help.",
               "translation": "Te agradecemos la ayuda."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GRATITUD",
+            "scene": "AGRADECIDO, lleno (FULL) de GRATITUD.",
+            "emoji": "🙏"
+          }
         },
         {
           "key": "disappointed",
@@ -562,7 +586,13 @@
               "text": "Don't be disappointed.",
               "translation": "No te desanimes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESAPUNTADO",
+            "scene": "DECEPCIONADO: no te apuntaron.",
+            "emoji": "😞"
+          }
         },
         {
           "key": "confident",
@@ -603,7 +633,13 @@
               "text": "I'm confident we can win.",
               "translation": "Confío en que podemos ganar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONFIDENTE",
+            "scene": "SEGURO DE SÍ como un CONFIDENTE.",
+            "emoji": "😎"
+          }
         },
         {
           "key": "annoyed",
@@ -640,7 +676,13 @@
               "text": "The noise annoys me.",
               "translation": "El ruido me molesta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ENOJADO",
+            "scene": "MOLESTO, casi ENOJADO.",
+            "emoji": "😤"
+          }
         },
         {
           "key": "amazed",
@@ -679,7 +721,13 @@
               "text": "You'll be amazed.",
               "translation": "Te vas a quedar alucinado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AMÉN",
+            "scene": "ASOMBRADO, dices AMÉN.",
+            "emoji": "😮"
+          }
         },
         {
           "key": "stressed",
@@ -718,7 +766,13 @@
               "text": "I'm stressed out.",
               "translation": "Estoy muy agobiado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTRESADO",
+            "scene": "ESTRESADO: STREST.",
+            "emoji": "😫"
+          }
         },
         {
           "key": "hopeful",
@@ -758,7 +812,13 @@
               "text": "A hopeful sign.",
               "translation": "Una buena señal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "JOPE",
+            "scene": "ESPERANZADO: lleno (FULL) de HOPE.",
+            "emoji": "🌈"
+          }
         },
         {
           "key": "curious",
@@ -799,7 +859,13 @@
               "text": "Cats are curious.",
               "translation": "Los gatos son curiosos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CURIOSO",
+            "scene": "CURIOSO: KIÚ-rios.",
+            "emoji": "🧐"
+          }
         },
         {
           "key": "fed-up",
@@ -838,7 +904,13 @@
               "text": "She is fed up.",
               "translation": "Está harta."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FED",
+            "scene": "HARTO, como ALIMENTADO (FED) hasta arriba (UP).",
+            "emoji": "😩"
+          }
         },
         {
           "key": "homesick",
@@ -879,7 +951,13 @@
               "text": "Students often get homesick.",
               "translation": "Los estudiantes suelen tener morriña."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HOME",
+            "scene": "MORRIÑA: enfermo (SICK) de casa (HOME).",
+            "emoji": "🏠😢"
+          }
         },
         {
           "key": "thrilled",
@@ -933,7 +1011,13 @@
               "text": "She was thrilled.",
               "translation": "Estaba emocionadísima."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRILLÓN",
+            "scene": "ENCANTADÍSIMO: ganas un TRILLÓN.",
+            "emoji": "🤩"
+          }
         },
         {
           "key": "lucky",
@@ -979,7 +1063,13 @@
               "text": "Good luck!",
               "translation": "¡Buena suerte!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LUCKY",
+            "scene": "AFORTUNADO como LUCKY Luke.",
+            "emoji": "🍀"
+          }
         }
       ]
     }

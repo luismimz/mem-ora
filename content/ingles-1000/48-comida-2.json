@@ -342,7 +342,13 @@
               "text": "Fruit juice.",
               "translation": "Zumo de frutas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FRUTA",
+            "scene": "FRUTA: FRUUT, sin la A.",
+            "emoji": "🍎"
+          }
         },
         {
           "key": "vegetables",
@@ -377,7 +383,13 @@
               "text": "Fresh vegetables.",
               "translation": "Verduras frescas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VEGETALES",
+            "scene": "VERDURAS: VEGETALES de la huerta.",
+            "emoji": "🥦"
+          }
         },
         {
           "key": "potato",
@@ -429,7 +441,13 @@
               "text": "A baked potato.",
               "translation": "Una patata asada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PATATA",
+            "scene": "PATATA: po-TÉI-tou.",
+            "emoji": "🥔"
+          }
         },
         {
           "key": "tomato",
@@ -462,7 +480,13 @@
               "translation": "Salsa de tomate."
             }
           ],
-          "notes": "En EE. UU. se dice toMÉItou."
+          "notes": "En EE. UU. se dice toMÉItou.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TOMATE",
+            "scene": "TOMATE: to-MÁ-tou.",
+            "emoji": "🍅"
+          }
         },
         {
           "key": "onion",
@@ -508,7 +532,13 @@
               "text": "Onions make me cry.",
               "translation": "La cebolla me hace llorar."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "UÑÓN",
+            "scene": "La CEBOLLA tiene un UÑÓN que llora.",
+            "emoji": "🧅"
+          }
         },
         {
           "key": "carrot",
@@ -549,7 +579,13 @@
               "text": "Carrot cake.",
               "translation": "Tarta de zanahoria."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CARRO",
+            "scene": "Un CARRO tirado por una ZANAHORIA.",
+            "emoji": "🥕"
+          }
         },
         {
           "key": "banana",
@@ -581,7 +617,13 @@
               "text": "Green bananas.",
               "translation": "Plátanos verdes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BANANA",
+            "scene": "El PLÁTANO es la BANANA.",
+            "emoji": "🍌"
+          }
         },
         {
           "key": "soup",
@@ -618,7 +660,13 @@
               "text": "Chicken soup.",
               "translation": "Sopa de pollo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SOPA",
+            "scene": "SOPA: SUUP, sin la A.",
+            "emoji": "🍲"
+          }
         },
         {
           "key": "salad",
@@ -666,7 +714,13 @@
               "text": "I'll have a salad.",
               "translation": "Tomaré una ensalada."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SALADA",
+            "scene": "La ENSALADA está muy SALADA.",
+            "emoji": "🥗"
+          }
         },
         {
           "key": "sandwich",
@@ -722,7 +776,13 @@
               "text": "A sandwich for lunch.",
               "translation": "Un sándwich para comer."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SÁNDWICH",
+            "scene": "BOCADILLO: el SÁNDWICH de siempre.",
+            "emoji": "🥪"
+          }
         },
         {
           "key": "chicken",
@@ -764,7 +824,13 @@
               "text": "The chickens are on the farm.",
               "translation": "Las gallinas están en la granja."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHIQUITO",
+            "scene": "Un POLLO CHIQUITO pía.",
+            "emoji": "🐔"
+          }
         },
         {
           "key": "butter",
@@ -803,7 +869,13 @@
               "text": "No butter, please.",
               "translation": "Sin mantequilla, por favor."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BATIR",
+            "scene": "MANTEQUILLA: hay que BATIR la nata.",
+            "emoji": "🧈"
+          }
         },
         {
           "key": "oil",
@@ -853,7 +925,13 @@
               "text": "Check the oil in the car.",
               "translation": "Revisa el aceite del coche."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OIL",
+            "scene": "El ACEITE: OIL, como el de motor.",
+            "emoji": "🫒"
+          }
         },
         {
           "key": "juice",
@@ -901,7 +979,13 @@
               "text": "Fresh juice.",
               "translation": "Zumo natural."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YUS",
+            "scene": "ZUMO de JÚPITER.",
+            "emoji": "🧃"
+          }
         },
         {
           "key": "cake",
@@ -939,7 +1023,13 @@
               "text": "It's a piece of cake.",
               "translation": "Está chupado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUEQUE",
+            "scene": "Un PASTEL es un QUEQUE.",
+            "emoji": "🍰"
+          }
         }
       ]
     }

@@ -328,7 +328,13 @@
               "text": "I do sport every day.",
               "translation": "Hago deporte todos los días."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESPORT",
+            "scene": "El DEPORTE: casi igual, sin la E.",
+            "emoji": "🏅"
+          }
         },
         {
           "key": "football",
@@ -374,7 +380,13 @@
               "text": "A football match.",
               "translation": "Un partido de fútbol."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FÚTBOL",
+            "scene": "FÚTBOL: FOOT (pie) + BALL (pelota).",
+            "emoji": "⚽"
+          }
         },
         {
           "key": "tennis",
@@ -418,7 +430,13 @@
               "text": "Tennis is my favourite sport.",
               "translation": "El tenis es mi deporte favorito."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TENIS",
+            "scene": "TENIS: igual, con dos N.",
+            "emoji": "🎾"
+          }
         },
         {
           "key": "gym",
@@ -461,7 +479,13 @@
               "text": "The gym is closed.",
               "translation": "El gimnasio está cerrado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "YIM",
+            "scene": "En el GIMNASIO, JIM levanta pesas.",
+            "emoji": "🏋️"
+          }
         },
         {
           "key": "match",
@@ -506,7 +530,13 @@
               "text": "We won the match.",
               "translation": "Ganamos el partido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MACHO",
+            "scene": "En el PARTIDO, un MACHO cabrío marca gol.",
+            "emoji": "🐐⚽"
+          }
         },
         {
           "key": "win",
@@ -552,7 +582,13 @@
               "text": "Who won?",
               "translation": "¿Quién ganó?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "GÜIN",
+            "scene": "GANAR: ¡GÜIN, GÜIN!, suena el premio.",
+            "emoji": "🏆"
+          }
         },
         {
           "key": "lose",
@@ -591,7 +627,13 @@
               "text": "We lost two to one.",
               "translation": "Perdimos dos a uno."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LUZ",
+            "scene": "PERDER la LUZ en pleno partido.",
+            "emoji": "💡"
+          }
         },
         {
           "key": "hobby",
@@ -630,7 +672,13 @@
               "text": "What are your hobbies?",
               "translation": "¿Cuáles son tus aficiones?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "HOBBY",
+            "scene": "Tu AFICIÓN es tu HOBBY.",
+            "emoji": "🎨"
+          }
         },
         {
           "key": "music",
@@ -676,7 +724,13 @@
               "text": "What music do you like?",
               "translation": "¿Qué música te gusta?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MÚSICA",
+            "scene": "MÚSICA: casi igual, MIÚ-sik.",
+            "emoji": "🎵"
+          }
         },
         {
           "key": "film",
@@ -714,7 +768,13 @@
               "translation": "La película fue aburrida."
             }
           ],
-          "notes": "En EE. UU. se dice movie."
+          "notes": "En EE. UU. se dice movie.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FILM",
+            "scene": "Una PELÍCULA es un FILM.",
+            "emoji": "🎬"
+          }
         },
         {
           "key": "book",
@@ -751,7 +811,13 @@
               "text": "Can I borrow your book?",
               "translation": "¿Me prestas tu libro?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BUCO",
+            "scene": "Un LIBRO abre su BUCO (boca) y habla.",
+            "emoji": "📖"
+          }
         },
         {
           "key": "dance",
@@ -794,7 +860,13 @@
               "text": "She dances very well.",
               "translation": "Baila muy bien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DANZA",
+            "scene": "BAILAR una DANZA loca.",
+            "emoji": "💃"
+          }
         },
         {
           "key": "sing",
@@ -832,7 +904,13 @@
               "text": "Can you sing?",
               "translation": "¿Sabes cantar?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SIN",
+            "scene": "CANTAR SIN parar en la ducha.",
+            "emoji": "🎤"
+          }
         },
         {
           "key": "draw",
@@ -869,7 +947,13 @@
               "text": "Draw a house.",
               "translation": "Dibuja una casa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DRO",
+            "scene": "DIBUJAR un DRAGÓN.",
+            "emoji": "✏️🐉"
+          }
         },
         {
           "key": "relax",
@@ -910,7 +994,13 @@
               "text": "Relax, everything is fine.",
               "translation": "Tranquilo, todo va bien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RELAJARSE",
+            "scene": "RELAJARSE: casi igual, ri-LÁKS.",
+            "emoji": "🧘"
+          }
         }
       ]
     }

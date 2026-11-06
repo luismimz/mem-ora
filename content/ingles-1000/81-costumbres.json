@@ -318,7 +318,13 @@
               "text": "Animals adapt to the climate.",
               "translation": "Los animales se adaptan al clima."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ADAPTAR",
+            "scene": "ADAPTARSE: a-DÁPT.",
+            "emoji": "🦎"
+          }
         },
         {
           "key": "custom",
@@ -369,7 +375,13 @@
               "translation": "Costumbres antiguas."
             }
           ],
-          "notes": "Customs (con s) es la aduana."
+          "notes": "Customs (con s) es la aduana.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COSTUMBRE",
+            "scene": "COSTUMBRE del lugar: KÁS-tom.",
+            "emoji": "🎎"
+          }
         },
         {
           "key": "culture",
@@ -422,7 +434,13 @@
               "text": "Culture shock.",
               "translation": "Choque cultural."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CULTURA",
+            "scene": "CULTURA: KÁL-cher.",
+            "emoji": "🏛️"
+          }
         },
         {
           "key": "tradition",
@@ -471,7 +489,13 @@
               "text": "By tradition.",
               "translation": "Por tradición."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TRADICIÓN",
+            "scene": "TRADICIÓN: tra-DÍ-shon.",
+            "emoji": "🎉"
+          }
         },
         {
           "key": "foreigner",
@@ -514,7 +538,13 @@
               "translation": "Me siento extranjero."
             }
           ],
-          "notes": "Ir al extranjero es go abroad."
+          "notes": "Ir al extranjero es go abroad.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORÁNEO",
+            "scene": "El EXTRANJERO es FORÁNEO.",
+            "emoji": "🧳"
+          }
         },
         {
           "key": "local",
@@ -548,7 +578,13 @@
               "text": "The local market.",
               "translation": "El mercado del barrio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LOCAL",
+            "scene": "LOCAL: LÓU-kal.",
+            "emoji": "📍"
+          }
         },
         {
           "key": "accent",
@@ -604,7 +640,13 @@
               "text": "A strong accent.",
               "translation": "Un acento muy marcado."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ACENTO",
+            "scene": "ACENTO: ÁK-sent.",
+            "emoji": "🗣️"
+          }
         },
         {
           "key": "typical",
@@ -660,7 +702,13 @@
               "text": "That's typical of him!",
               "translation": "¡Típico de él!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TÍPICO",
+            "scene": "TÍPICO: TÍ-pikal.",
+            "emoji": "🥘"
+          }
         },
         {
           "key": "behaviour",
@@ -698,7 +746,13 @@
               "translation": "Buen comportamiento."
             }
           ],
-          "notes": "En EE. UU. se escribe behavior. El verbo es behave."
+          "notes": "En EE. UU. se escribe behavior. El verbo es behave.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COMPORTAMIENTO",
+            "scene": "COMPORTAMIENTO: BE (ser) + HAVIOUR.",
+            "emoji": "🙇"
+          }
         },
         {
           "key": "adjust",
@@ -730,7 +784,13 @@
               "text": "I'm adjusting to the new job.",
               "translation": "Me estoy adaptando al nuevo trabajo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AJUSTAR",
+            "scene": "AJUSTAR: a-YÁST.",
+            "emoji": "🔧"
+          }
         },
         {
           "key": "settle-in",
@@ -770,7 +830,13 @@
               "text": "It takes time to settle in.",
               "translation": "Lleva tiempo adaptarse."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SILLA",
+            "scene": "INSTALARSE: te SIENTAS en tu SILLA nueva.",
+            "emoji": "🪑"
+          }
         },
         {
           "key": "neighbour",
@@ -808,7 +874,13 @@
               "translation": "Mi vecino de al lado."
             }
           ],
-          "notes": "En EE. UU. se escribe neighbor."
+          "notes": "En EE. UU. se escribe neighbor.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NEIBOR",
+            "scene": "Tu VECINO, NEIBOR, toca la puerta.",
+            "emoji": "🏘️"
+          }
         },
         {
           "key": "celebrate",
@@ -846,7 +918,13 @@
               "text": "Let's celebrate!",
               "translation": "¡Vamos a celebrarlo!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CELEBRAR",
+            "scene": "CELEBRAR: SÉ-lebreit.",
+            "emoji": "🎊"
+          }
         },
         {
           "key": "ceremony",
@@ -883,7 +961,13 @@
               "text": "A wedding ceremony.",
               "translation": "Una ceremonia de boda."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CEREMONIA",
+            "scene": "CEREMONIA: SÉ-remoni.",
+            "emoji": "💒"
+          }
         },
         {
           "key": "lifestyle",
@@ -925,7 +1009,13 @@
               "text": "Change your lifestyle.",
               "translation": "Cambia tu estilo de vida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTILO",
+            "scene": "ESTILO DE VIDA: LIFE + STYLE.",
+            "emoji": "🧘"
+          }
         }
       ]
     }

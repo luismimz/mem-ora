@@ -327,7 +327,13 @@
               "text": "The fourth of July.",
               "translation": "El 4 de julio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FORO",
+            "scene": "El CUARTO del FORO (4.º).",
+            "emoji": "4️⃣"
+          }
         },
         {
           "key": "fifth",
@@ -364,7 +370,13 @@
               "text": "On the fifth of May.",
               "translation": "El 5 de mayo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FIFA",
+            "scene": "El QUINTO de la FIFA (5.º).",
+            "emoji": "5️⃣"
+          }
         },
         {
           "key": "sixth",
@@ -407,7 +419,13 @@
               "text": "The sixth day.",
               "translation": "El sexto día."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SEXTO",
+            "scene": "SEXTO: SIX + TH (6.º).",
+            "emoji": "6️⃣"
+          }
         },
         {
           "key": "tenth",
@@ -444,7 +462,13 @@
               "text": "On the tenth of June.",
               "translation": "El 10 de junio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TEN",
+            "scene": "DÉCIMO: TEN + TH (10.º).",
+            "emoji": "🔟"
+          }
         },
         {
           "key": "twentieth",
@@ -480,7 +504,13 @@
               "text": "On the twentieth of March.",
               "translation": "El 20 de marzo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TWENTY",
+            "scene": "VIGÉSIMO: TWENTY + TH (20.º).",
+            "emoji": "🏁"
+          }
         },
         {
           "key": "quarter",
@@ -532,7 +562,13 @@
               "text": "A quarter of an hour.",
               "translation": "Un cuarto de hora."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUARTO",
+            "scene": "Un CUARTO: KUÓR-ter.",
+            "emoji": "🕒"
+          }
         },
         {
           "key": "once",
@@ -575,7 +611,13 @@
               "text": "Once upon a time…",
               "translation": "Érase una vez…"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "UANS",
+            "scene": "UNA VEZ: UAN (one), una.",
+            "emoji": "1️⃣"
+          }
         },
         {
           "key": "twice",
@@ -619,7 +661,13 @@
               "text": "Twice a day.",
               "translation": "Dos veces al día."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TUAIS",
+            "scene": "DOS VECES: TWO (dos).",
+            "emoji": "2️⃣"
+          }
         },
         {
           "key": "double",
@@ -667,7 +715,13 @@
               "text": "Double the price.",
               "translation": "El doble de precio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DOBLE",
+            "scene": "DOBLE: casi igual, DÁ-bol.",
+            "emoji": "✌️"
+          }
         },
         {
           "key": "euro",
@@ -705,7 +759,13 @@
               "text": "Do you accept euros?",
               "translation": "¿Aceptan euros?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "EURO",
+            "scene": "EURO: IÚ-rou.",
+            "emoji": "💶"
+          }
         },
         {
           "key": "cent",
@@ -737,7 +797,13 @@
               "text": "It's one euro and twenty cents.",
               "translation": "Es un euro con veinte céntimos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CÉNTIMO",
+            "scene": "CÉNTIMO: CENT, de cien.",
+            "emoji": "🪙"
+          }
         },
         {
           "key": "percent",
@@ -775,7 +841,13 @@
               "text": "I'm a hundred per cent sure.",
               "translation": "Estoy seguro al cien por cien."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "POR CIENTO",
+            "scene": "POR CIENTO: PER CENT.",
+            "emoji": "💯"
+          }
         },
         {
           "key": "total",
@@ -809,7 +881,13 @@
               "text": "In total, thirty euros.",
               "translation": "En total, treinta euros."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TOTAL",
+            "scene": "TOTAL: igual, TÓU-tal.",
+            "emoji": "🧮"
+          }
         },
         {
           "key": "plus",
@@ -858,7 +936,13 @@
               "text": "Thirty euros plus tax.",
               "translation": "Treinta euros más impuestos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "PLUS",
+            "scene": "MÁS: un PLUS extra.",
+            "emoji": "➕"
+          }
         },
         {
           "key": "zero",
@@ -901,7 +985,13 @@
               "text": "My number starts with zero.",
               "translation": "Mi número empieza por cero."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CERO",
+            "scene": "CERO: SÍ-rou.",
+            "emoji": "0️⃣"
+          }
         }
       ]
     }

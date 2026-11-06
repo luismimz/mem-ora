@@ -379,7 +379,13 @@
               "text": "A wall calendar.",
               "translation": "Un calendario de pared."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CALENDARIO",
+            "scene": "CALENDARIO: KÁ-lendar.",
+            "emoji": "📅"
+          }
         },
         {
           "key": "reminder",
@@ -411,7 +417,13 @@
               "text": "Just a quick reminder.",
               "translation": "Solo un recordatorio rápido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RECORDAR",
+            "scene": "RECORDATORIO: RE + MIND (mente).",
+            "emoji": "⏰"
+          }
         },
         {
           "key": "arrange",
@@ -443,7 +455,13 @@
               "text": "I've arranged to meet Ana.",
               "translation": "He quedado con Ana."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ARREGLAR",
+            "scene": "ORGANIZAR y ARREGLAR la cita.",
+            "emoji": "🗓️"
+          }
         },
         {
           "key": "confirm",
@@ -488,7 +506,13 @@
               "text": "I can confirm that.",
               "translation": "Lo confirmo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONFIRMAR",
+            "scene": "CONFIRMAR: kon-FÉRM.",
+            "emoji": "✔️"
+          }
         },
         {
           "key": "reschedule",
@@ -538,7 +562,13 @@
               "text": "The match was rescheduled.",
               "translation": "Cambiaron el partido de fecha."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RE",
+            "scene": "CAMBIAR DE FECHA: RE + SCHEDULE (horario).",
+            "emoji": "🔁📅"
+          }
         },
         {
           "key": "conference",
@@ -578,7 +608,13 @@
               "text": "A video conference.",
               "translation": "Una videoconferencia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONFERENCIA",
+            "scene": "CONGRESO: CONFERENCIA.",
+            "emoji": "🎤"
+          }
         },
         {
           "key": "agenda",
@@ -613,7 +649,13 @@
               "translation": "El primer punto del orden del día."
             }
           ],
-          "notes": "Falso amigo: la agenda donde apuntas es a diary o a planner."
+          "notes": "Falso amigo: la agenda donde apuntas es a diary o a planner.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AGENDA",
+            "scene": "ORDEN DEL DÍA: la AGENDA (ojo).",
+            "emoji": "📋"
+          }
         },
         {
           "key": "by-then",
@@ -657,7 +699,13 @@
               "text": "By then it was too late.",
               "translation": "Para entonces ya era tarde."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ZEN",
+            "scene": "PARA ENTONCES, ZEN total.",
+            "emoji": "🧘"
+          }
         },
         {
           "key": "in-advance",
@@ -689,7 +737,13 @@
               "text": "Thanks in advance.",
               "translation": "Gracias de antemano."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "AVANCE",
+            "scene": "CON ANTELACIÓN: por ADELANTADO.",
+            "emoji": "⏩"
+          }
         },
         {
           "key": "on-time",
@@ -729,7 +783,13 @@
               "translation": "Por favor, sé puntual."
             }
           ],
-          "notes": "On time es a la hora exacta; in time, con tiempo."
+          "notes": "On time es a la hora exacta; in time, con tiempo.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TIME",
+            "scene": "PUNTUAL: ON TIME, en el tiempo exacto.",
+            "emoji": "⏱️"
+          }
         },
         {
           "key": "in-time",
@@ -772,7 +832,13 @@
               "text": "In time for dinner.",
               "translation": "A tiempo para la cena."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "TIEMPO",
+            "scene": "A TIEMPO, justo antes.",
+            "emoji": "🏃⏰"
+          }
         },
         {
           "key": "cancel",
@@ -818,7 +884,13 @@
               "text": "Cancel my order.",
               "translation": "Cancela mi pedido."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CANCELAR",
+            "scene": "CANCELAR: KÁN-sel.",
+            "emoji": "❌"
+          }
         },
         {
           "key": "upcoming",
@@ -850,7 +922,13 @@
               "text": "The upcoming exam.",
               "translation": "El examen que viene."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "UP",
+            "scene": "PRÓXIMO: viene (COMING) hacia arriba (UP).",
+            "emoji": "🔜"
+          }
         },
         {
           "key": "flexible",
@@ -890,7 +968,13 @@
               "text": "Be flexible.",
               "translation": "Sé flexible."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FLEXIBLE",
+            "scene": "FLEXIBLE: FLÉK-sibol.",
+            "emoji": "🤸"
+          }
         },
         {
           "key": "diary",
@@ -936,7 +1020,13 @@
               "text": "She keeps a diary.",
               "translation": "Escribe un diario."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DIARIO",
+            "scene": "AGENDA y DIARIO: DÁI-ari.",
+            "emoji": "📔"
+          }
         }
       ]
     }

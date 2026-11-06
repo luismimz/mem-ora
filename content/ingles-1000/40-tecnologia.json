@@ -302,7 +302,13 @@
               "text": "Answer your phone!",
               "translation": "¡Contesta el móvil!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FONO",
+            "scene": "El MÓVIL es un TELÉFONO: FÓUN.",
+            "emoji": "📱"
+          }
         },
         {
           "key": "message",
@@ -351,7 +357,13 @@
               "text": "Did you get my message?",
               "translation": "¿Te llegó mi mensaje?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "MENSAJE",
+            "scene": "MENSAJE: casi igual, MÉ-sich.",
+            "emoji": "💬"
+          }
         },
         {
           "key": "app",
@@ -384,7 +396,13 @@
               "text": "This app is free.",
               "translation": "Esta app es gratis."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "APP",
+            "scene": "La APLICACIÓN es la APP.",
+            "emoji": "📲"
+          }
         },
         {
           "key": "internet",
@@ -428,7 +446,13 @@
               "text": "I read it on the internet.",
               "translation": "Lo leí en internet."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "INTERNET",
+            "scene": "INTERNET: igual en los dos idiomas.",
+            "emoji": "🌐"
+          }
         },
         {
           "key": "wifi",
@@ -471,7 +495,13 @@
               "text": "There's no wifi here.",
               "translation": "Aquí no hay wifi."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "WIFI",
+            "scene": "WIFI: igual, se dice UÁI-fai.",
+            "emoji": "📶"
+          }
         },
         {
           "key": "battery",
@@ -511,7 +541,13 @@
               "text": "The battery lasts all day.",
               "translation": "La batería dura todo el día."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BATERÍA",
+            "scene": "BATERÍA: casi igual, BÁ-teri.",
+            "emoji": "🔋"
+          }
         },
         {
           "key": "charger",
@@ -562,7 +598,13 @@
               "text": "I forgot my charger.",
               "translation": "Me he dejado el cargador."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CHARCO",
+            "scene": "El CARGADOR se cae al CHARCO.",
+            "emoji": "🔌"
+          }
         },
         {
           "key": "photo",
@@ -620,7 +662,13 @@
               "text": "Nice photo!",
               "translation": "¡Qué foto tan bonita!"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "FOTO",
+            "scene": "FOTO: igual, FÓU-tou.",
+            "emoji": "📷"
+          }
         },
         {
           "key": "video",
@@ -659,7 +707,13 @@
               "text": "A funny video.",
               "translation": "Un vídeo gracioso."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VÍDEO",
+            "scene": "VÍDEO: igual, VÍ-diou.",
+            "emoji": "🎥"
+          }
         },
         {
           "key": "link",
@@ -691,7 +745,13 @@
               "text": "Send me the link.",
               "translation": "Pásame el enlace."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LINK",
+            "scene": "Un ENLACE es un LINK.",
+            "emoji": "🔗"
+          }
         },
         {
           "key": "account",
@@ -723,7 +783,13 @@
               "text": "My bank account.",
               "translation": "Mi cuenta del banco."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CUENTA",
+            "scene": "La CUENTA: aCOUNT, contar.",
+            "emoji": "👤"
+          }
         },
         {
           "key": "online",
@@ -766,7 +832,13 @@
               "text": "Are you online?",
               "translation": "¿Estás conectado?"
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ONLINE",
+            "scene": "CONECTADO: estás ONLINE.",
+            "emoji": "🟢"
+          }
         },
         {
           "key": "search",
@@ -805,7 +877,13 @@
               "text": "A quick search.",
               "translation": "Una búsqueda rápida."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SERCHO",
+            "scene": "BUSCAR con SERCHO… un sacacorchos.",
+            "emoji": "🔎"
+          }
         },
         {
           "key": "click",
@@ -842,7 +920,13 @@
               "text": "Double click.",
               "translation": "Doble clic."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CLIC",
+            "scene": "HACER CLIC: igual, CLIC.",
+            "emoji": "🖱️"
+          }
         },
         {
           "key": "keyboard",
@@ -881,7 +965,13 @@
               "text": "A Spanish keyboard has ñ.",
               "translation": "Un teclado español tiene ñ."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "QUIBORD",
+            "scene": "El TECLADO: KEY (tecla) + BOARD (tabla).",
+            "emoji": "⌨️"
+          }
         }
       ]
     }

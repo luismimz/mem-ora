@@ -549,7 +549,13 @@
               "text": "Seven continents.",
               "translation": "Siete continentes."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CONTINENTE",
+            "scene": "CONTINENTE: KÓN-tinent.",
+            "emoji": "🗺️"
+          }
         },
         {
           "key": "ocean",
@@ -603,7 +609,13 @@
               "text": "The Atlantic Ocean.",
               "translation": "El océano Atlántico."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OCÉANO",
+            "scene": "OCÉANO: ÓU-shan.",
+            "emoji": "🌊"
+          }
         },
         {
           "key": "desert",
@@ -658,7 +670,13 @@
               "translation": "En mitad del desierto."
             }
           ],
-          "notes": "Desert (desierto) lleva una s; dessert (postre), dos."
+          "notes": "Desert (desierto) lleva una s; dessert (postre), dos.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "DESIERTO",
+            "scene": "DESIERTO: DÉ-sert (ojo: DESSERT = postre).",
+            "emoji": "🏜️"
+          }
         },
         {
           "key": "coast",
@@ -698,7 +716,13 @@
               "text": "The east coast.",
               "translation": "La costa este."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "COSTA",
+            "scene": "COSTA: KÓUST.",
+            "emoji": "🏖️"
+          }
         },
         {
           "key": "border",
@@ -736,7 +760,13 @@
               "text": "Near the French border.",
               "translation": "Cerca de la frontera francesa."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "BORDE",
+            "scene": "La FRONTERA es el BORDE del país.",
+            "emoji": "🛂"
+          }
         },
         {
           "key": "north",
@@ -774,7 +804,13 @@
               "text": "North America.",
               "translation": "Norteamérica."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "NORTE",
+            "scene": "NORTE: NORZ.",
+            "emoji": "⬆️"
+          }
         },
         {
           "key": "south",
@@ -820,7 +856,13 @@
               "text": "The south of France.",
               "translation": "El sur de Francia."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "SUR",
+            "scene": "SUR: SÁUZ.",
+            "emoji": "⬇️"
+          }
         },
         {
           "key": "east",
@@ -858,7 +900,13 @@
               "text": "The Middle East.",
               "translation": "Oriente Medio."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "ESTE",
+            "scene": "ESTE: IIST.",
+            "emoji": "➡️"
+          }
         },
         {
           "key": "west",
@@ -896,7 +944,13 @@
               "text": "West of the city.",
               "translation": "Al oeste de la ciudad."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "OESTE",
+            "scene": "OESTE: UEST.",
+            "emoji": "⬅️"
+          }
         },
         {
           "key": "valley",
@@ -944,7 +998,13 @@
               "text": "A deep valley.",
               "translation": "Un valle profundo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VALLE",
+            "scene": "VALLE: VÁ-li.",
+            "emoji": "🏞️"
+          }
         },
         {
           "key": "volcano",
@@ -982,7 +1042,13 @@
               "text": "An active volcano.",
               "translation": "Un volcán activo."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "VOLCÁN",
+            "scene": "VOLCÁN: vol-KÉI-nou.",
+            "emoji": "🌋"
+          }
         },
         {
           "key": "record",
@@ -1039,7 +1105,13 @@
               "translation": "Graba un vídeo."
             }
           ],
-          "notes": "Nombre: RÉkord; verbo (grabar): riKÓRD."
+          "notes": "Nombre: RÉkord; verbo (grabar): riKÓRD.",
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "RÉCORD",
+            "scene": "RÉCORD… y GRABAR (RECORD).",
+            "emoji": "🏅"
+          }
         },
         {
           "key": "landscape",
@@ -1083,7 +1155,13 @@
               "text": "Landscape mode.",
               "translation": "Modo horizontal."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "LAND",
+            "scene": "PAISAJE: la tierra (LAND) que ves.",
+            "emoji": "🏔️"
+          }
         },
         {
           "key": "region",
@@ -1133,7 +1211,13 @@
               "text": "A wine region.",
               "translation": "Una zona de vinos."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "REGIÓN",
+            "scene": "REGIÓN: RÍI-yon.",
+            "emoji": "🗺️"
+          }
         },
         {
           "key": "capital",
@@ -1175,7 +1259,13 @@
               "text": "Write it in capital letters.",
               "translation": "Escríbelo en mayúsculas."
             }
-          ]
+          ],
+          "association": {
+            "technique": "absurd_scene",
+            "cue": "CAPITAL",
+            "scene": "CAPITAL… y MAYÚSCULA.",
+            "emoji": "🏙️"
+          }
         }
       ]
     }
