@@ -4,7 +4,7 @@ import { mkdtempSync, writeFileSync, readdirSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { fileProblems, stable, syncCourse } from '../src/content/sync';
+import { fileProblems, linkAssociations, stable, syncCourse } from '../src/content/sync';
 
 type Row = Record<string, any>;
 let seq = 0;
@@ -134,6 +134,16 @@ describe('contenido desde git (D-080)', () => {
     expect(tables.courses).toHaveLength(0);
   });
 
+  it('engancha la asociación a la habilidad que la lleva si quedó suelta (SLEEP, 6-nov-2026)', async () => {
+    const { db, tables } = fakeDb();
+    tables.units.push({ id: 'u1', course: 'c1', key: 'sleep', type: 'term' });
+    tables.associations.push({ id: 'a1', unit: 'u1', status: 'published' });
+    tables.skills.push({ id: 's1', unit: 'u1', key: 'sleep.listen', association: null }, { id: 's2', unit: 'u1', key: 'sleep.recall', association: null });
+    expect(await linkAssociations(db, 'c1')).toBe(1);
+    expect(tables.skills.find((x) => x.key === 'sleep.recall')!.association).toBe('a1');
+    expect(tables.skills.find((x) => x.key === 'sleep.listen')!.association).toBeNull();
+    expect(await linkAssociations(db, 'c1')).toBe(0);
+  });
   it('stable compara contenido sin importar el orden de las claves', () => {
     expect(stable({ a: 1, b: [{ y: 2, x: 1 }] })).toBe(stable({ b: [{ x: 1, y: 2 }], a: 1 }));
   });

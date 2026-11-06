@@ -174,14 +174,19 @@ export async function syncAll(ctx: { db: any; services: any; getSchema: () => Pr
 
 /** Engancha cada asociación viva a la habilidad que la lleva, si esa habilidad aún no tiene ninguna. Devuelve cuántas. */
 export async function linkAssociations(db: any, courseId: string): Promise<number> {
-  const rows: Row[] = await db('associations').join('units', 'associations.unit', 'units.id')
-    .where({ 'units.course': courseId }).whereNot({ 'associations.status': 'rejected' })
-    .select('associations.id as id', 'units.id as unit', 'units.key as key', 'units.type as type');
+  const units: Row[] = await db('units').where({ course: courseId }).select('id', 'key', 'type');
+  if (!units.length) return 0;
+  const byId = new Map(units.map((u) => [u.id, u]));
+  const assocs: Row[] = await db('associations').whereIn('unit', units.map((u) => u.id)).whereNot({ status: 'rejected' }).select('id', 'unit');
   let linked = 0;
-  for (const r of rows) {
-    const suffix = DEFAULT_SKILLS[r.type as keyof typeof DEFAULT_SKILLS]?.find((t: { carriesAssociation?: boolean }) => t.carriesAssociation)?.suffix;
-    if (!suffix) continue;
-    linked += Number(await db('skills').where({ unit: r.unit, key: `${r.key}.${suffix}` }).whereNull('association').update({ association: r.id })) || 0;
+  for (const a of assocs) {
+    const u = byId.get(a.unit);
+    const suffix = DEFAULT_SKILLS[u?.type as keyof typeof DEFAULT_SKILLS]?.find((t: { carriesAssociation?: boolean }) => t.carriesAssociation)?.suffix;
+    if (!u || !suffix) continue;
+    const skill: Row | undefined = await db('skills').where({ unit: u.id, key: `${u.key}.${suffix}` }).first('id', 'association');
+    if (!skill || skill.association) continue;
+    await db('skills').where({ id: skill.id }).update({ association: a.id });
+    linked += 1;
   }
   return linked;
 }
