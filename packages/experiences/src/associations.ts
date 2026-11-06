@@ -34,6 +34,9 @@ export interface AssocStep {
   workshop?: import('./workshop').WorkshopItem[];
   /** Taller directo (5-nov-2026): sin portada, justo después de la ficha (laboratorios del concepto recién visto). */
   direct?: boolean;
+  /** Retención (6-nov-2026): pregunta ANTES de la ficha (no cuenta: solo despierta la curiosidad) y repaso al cerrar. */
+  pre?: boolean;
+  closing?: boolean;
   /** Reto de aplicación (conceptos con ejercicios): qué ejercicio y si se responde escribiendo (repaso) o con opciones. */
   exercise?: number;
   typed?: boolean;

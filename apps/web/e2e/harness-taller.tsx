@@ -19,7 +19,7 @@ for (const w of wanted) {
 const items = wanted.map((k) => ({ skillId: `${k}.recall`, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const }));
 const plan = buildFlowSession({ sessionId: q.get('s') ?? 'e2e-taller', courseId: 'e2e', day: 1, createdAt: 0, items, units, ...(q.get('a') ? { arcadeUnits: wanted } : {}) });
 // solo=workshop: los Talleres de siempre (los retos «directos» tras cada ficha tienen su propia prueba, orden-touch).
-if (q.get('solo')) plan.steps = plan.steps.filter((x) => (x.kind === q.get('solo') && !(x as { direct?: boolean }).direct) || x.kind === 'summary');
+if (q.get('solo')) plan.steps = plan.steps.filter((x) => (x.kind === q.get('solo') && !(x as { direct?: boolean }).direct && !(x as { closing?: boolean }).closing) || x.kind === 'summary');
 const w = window as unknown as { __plan: unknown; __units: unknown };
 w.__plan = plan; w.__units = units;
 createRoot(document.getElementById('root')!).render(<Feed payload={{ state: { plan, index: 0, outcomes: {}, finished: false }, units } as unknown as SessionPayload} courseId="e2e" offline onExit={() => undefined} onAgain={() => undefined} />);

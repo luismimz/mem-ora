@@ -36,7 +36,7 @@ try {
   let page = await open('s=t1');
   const order = await page.evaluate(() => {
     const steps = window.__plan.steps;
-    return steps.flatMap((s, i) => (s.kind === 'workshop' ? s.workshop.map((it) => ({ it: it.unitKey, after: steps.slice(0, i).some((x) => x.kind === 'reel' && x.unitKey === it.unitKey) })) : []));
+    return steps.flatMap((s, i) => (s.kind === 'workshop' && !s.pre ? s.workshop.map((it) => ({ it: it.unitKey, after: steps.slice(0, i).some((x) => x.kind === 'reel' && x.unitKey === it.unitKey) })) : []));
   });
   check(order.length >= 6 && order.every((o) => o.after), `el Taller llega después de enseñar cada concepto (${order.length} retos)`);
   await page.close();
@@ -46,7 +46,7 @@ try {
   let seed = null;
   for (let k = 1; k <= 120 && !seed; k++) {
     const p = await open(`s=t${k}`);
-    const kinds = await p.evaluate(() => [...new Set(window.__plan.steps.filter((s) => s.kind === 'workshop').flatMap((s) => s.workshop.map((it) => (it.kind === 'code' ? window.__units[it.unitKey].payload.exercises[it.exercise].kind : it.kind))))]);
+    const kinds = await p.evaluate(() => [...new Set(window.__plan.steps.filter((s) => s.kind === 'workshop' && !s.direct && !s.closing).flatMap((s) => s.workshop.map((it) => (it.kind === 'code' ? window.__units[it.unitKey].payload.exercises[it.exercise].kind : it.kind))))]);
     if (kinds.length === 7) seed = `t${k}`;
     await p.close();
   }
