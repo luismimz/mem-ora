@@ -104,11 +104,16 @@ describe('dueWordsLeastSeen con dayStart (6-nov-2026): lo practicado hoy espera 
   });
 });
 
-describe('wordsLeastPracticed (usuario, 6-nov-2026): de menos a más, sin mirar las horas', () => {
-  it('lo de ayer con 1 intento sale antes que lo de hoy con 4, aunque no «toque»', () => {
-    const mk = (unitId: string, attempts: number, last: number, dueAt: number | null, status = 'learning') => ({ skillId: `${unitId}.recall`, unitId, status, evidence: 1, retrievalSuccesses: 1, deferredSuccesses: 0, consecutiveFailures: 0, lapses: 0, attempts, accuracy: 0.7, step: 1, dueAt, presentedAt: 0, lastExposureAt: 0, lastAttemptAt: last, unaidedFormats: [], contexts: [] }) as SkillState;
-    const skills = { 'hoy.recall': mk('hoy', 4, 90, 95), 'ayer.recall': mk('ayer', 1, 50, 10_000), 'neck.recall': mk('neck', 1, 20, 10_000), 'nueva.recall': mk('nueva', 0, 0, null, 'new') };
-    const defs = Object.values(skills).map((x) => ({ id: x.skillId, unitId: x.unitId, kind: 'recall' }));
-    expect(wordsLeastPracticed(defs, skills, () => true).map((x) => x.unitKey)).toEqual(['neck', 'ayer', 'hoy']);
+describe('wordsLeastPracticed (usuario, 6-nov-2026): menos aciertos primero; a igualdad, la más antigua', () => {
+  const mk = (unitId: string, successes: number, presentedAt: number, status = 'learning') => ({ skillId: `${unitId}.recall`, unitId, status, evidence: 1, retrievalSuccesses: 1, deferredSuccesses: 0, consecutiveFailures: 0, lapses: 0, attempts: successes + 1, successes, accuracy: 0.7, step: 1, dueAt: 10_000, presentedAt, lastExposureAt: presentedAt, lastAttemptAt: presentedAt, unaidedFormats: [], contexts: [] }) as SkillState;
+  const order = (sk: Record<string, SkillState>) => wordsLeastPracticed(Object.values(sk).map((x) => ({ id: x.skillId, unitId: x.unitId, kind: 'recall' })), sk, () => true).map((x) => x.unitKey);
+  it('lo del lunes con 1 acierto y lo de ayer con 2 salen antes que lo de hoy con 3, sin mirar si «toca»', () => {
+    expect(order({ 'hoy.recall': mk('hoy', 3, 90), 'ayer.recall': mk('ayer', 2, 50), 'lunes.recall': mk('lunes', 1, 10), 'nueva.recall': mk('nueva', 0, 0, 'new') })).toEqual(['lunes', 'ayer', 'hoy']);
+  });
+  it('lo muy fallado (pocos aciertos) sale antes que lo acertado', () => {
+    expect(order({ 'fallada.recall': { ...mk('fallada', 1, 80), attempts: 9 }, 'acertada.recall': mk('acertada', 4, 10) })).toEqual(['fallada', 'acertada']);
+  });
+  it('si todas tienen los mismos aciertos: de la más antigua a la más nueva', () => {
+    expect(order({ 'c.recall': mk('c', 3, 30), 'a.recall': mk('a', 3, 10), 'b.recall': mk('b', 3, 20) })).toEqual(['a', 'b', 'c']);
   });
 });
