@@ -21,6 +21,11 @@ try {
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
   await page.addInitScript(() => { Object.defineProperty(window, 'speechSynthesis', { value: undefined }); });
+  // 6-nov-2026: lo que el repaso envía al servidor debe ser válido (antes, del español al inglés iba con pista 0 y el
+  // servidor lo rechazaba en silencio).
+  const sent = [];
+  await page.route('**/memora/events', async (route) => { const b = route.request().postDataJSON(); sent.push(...(b?.events ?? [])); await route.fulfill({ json: { data: { accepted: (b?.events ?? []).map((e) => e.id), duplicates: [], rejected: [] } } }); });
+  await page.route('**/memora/position', (route) => route.fulfill({ json: { data: { ok: true } } }));
   await page.goto(url);
   await page.waitForSelector('.slide');
   const plan = await page.evaluate(() => window.__plan.steps.map((s) => s.kind));
@@ -65,6 +70,11 @@ try {
   if (shots) await page.screenshot({ path: `${shots}/repaso-fin.png` });
   const fits = await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth);
   check(fits, 'nada se sale por los lados');
+  await page.waitForTimeout(600);
+  // El banco de pruebas va sin conexión: lo enviado queda en la cola local, con el mismo formato que va al servidor.
+  sent.push(...(await page.evaluate(() => { try { return Object.values(JSON.parse(localStorage.getItem('memora.offline.outbox') ?? '{}')).flat(); } catch { return []; } })));
+  const cued = sent.filter((e) => e.format === 'recall_cued');
+  check(sent.length > 0 && cued.length > 0 && cued.every((e) => e.hint >= 1) && sent.every((e) => e.format !== 'recall_cued' || e.hint !== 0), `cada respuesta se envía y «del español al inglés» lleva pista 1 (${sent.length} enviadas, ${cued.length} recall_cued)`);
   check(errors.length === 0, `sin errores en la página${errors.length ? `: ${errors.join(' | ')}` : ''}`);
 } finally {
   await browser.close();

@@ -2180,7 +2180,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     const finished = nextIndex >= plan.steps.length - 1;
     if (offline) { enqueue(courseId, batchEvents); saveSessionProgress(plan.sessionId, { index: nextIndex, outcomes: nextOutcomes, finished }); return; }
     try {
-      if (batchEvents.length) await api.events(courseId, batchEvents);
+      if (batchEvents.length) { const r = await api.events(courseId, batchEvents); if (r.rejected.length) console.error("[memora] respuestas rechazadas", r.rejected); }
       await api.position(courseId, { sessionId: plan.sessionId, index: nextIndex, outcomes: nextOutcomes, finished, deviceId: deviceId() });
     } catch (e) {
       if (isNetworkError(e)) { enqueue(courseId, batchEvents); return; }
@@ -2189,6 +2189,8 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     }
   }
   /**
+   * 6-nov-2026: «recall_cued» exige pista ≥ 1 (elegir entre opciones ES la pista). Con pista 0 el servidor RECHAZABA la
+   * respuesta en silencio: las palabras maduras del repaso (del español al inglés) nunca sumaban y salían siempre.
    * 5-nov-2026: las respuestas se envían ya (cada una y al salir), no solo al acabar el paso. En un repaso largo, salir a
    * medias perdía todas las respuestas y volvían las mismas palabras.
    */
@@ -2196,7 +2198,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
     const batchEvents = queue.current.splice(0);
     if (!batchEvents.length) return saving.current;
     if (offline) { enqueue(courseId, batchEvents); return saving.current; }
-    saving.current = saving.current.then(() => api.events(courseId, batchEvents).then(() => undefined, (e) => { if (isNetworkError(e)) enqueue(courseId, batchEvents); else queue.current.unshift(...batchEvents); }));
+    saving.current = saving.current.then(() => api.events(courseId, batchEvents).then((r) => { if (r.rejected.length) console.error('[memora] respuestas rechazadas', r.rejected); }, (e) => { if (isNetworkError(e)) enqueue(courseId, batchEvents); else queue.current.unshift(...batchEvents); }));
     return saving.current;
   }
   useEffect(() => {
@@ -2276,7 +2278,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'listen' && unit) card = <Listen key={step.id} unit={unit} pool={pool(unit)} onResult={(ok, ms) => answered(unit, ok, ms, `${unit.key}#listen`, 12, step.skillKey, 'recognition_listening')} />;
   else if (step.kind === 'watch' && unit) card = <Watch key={step.id} unit={unit} onNext={() => void advance()} />;
   else if (step.kind === 'arcade' && step.arcadeUnits?.length) card = <FlowArcade key={step.id} seed={step.id} all={units} units={step.arcadeUnits.map((k) => units[k]).filter((x): x is SessionUnit => Boolean(x))} {...(step.arcadeGrammar ? { grammar: step.arcadeGrammar } : {})} review={Boolean(step.arcadeReview)} recall={step.arcadeRecall ?? []}
-    onAnswer={(u, ok, ms, context, format) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format, correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#${context}` })); void flushEvents(); scored(ok, 6); }} onDone={() => void advance()} />;
+    onAnswer={(u, ok, ms, context, format) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format, correct: ok, hint: format === 'recall_cued' ? 1 : 0, timeMs: ms, contextId: `${u.key}#${context}` })); void flushEvents(); scored(ok, 6); }} onDone={() => void advance()} />;
   else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
@@ -2285,7 +2287,7 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
       // D-112: escribir SQL que funciona es aplicar (peso muy alto); tocar en la tabla, reconocer.
       const sqlLab = it.kind === 'lab' && labsOf(u)[it.lab]?.kind === 'sql';
       const k = (it.kind === 'code' || it.kind === 'lab' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u);
-      if (k) queue.current.push(event(u, k, { format: sqlLab ? 'application' : it.kind === 'order' ? 'recall_cued' : 'recognition_choice', correct: ok, hint: 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : it.kind === 'lab' ? `-${it.lab}` : it.kind === 'order' ? `-${it.example}` : ''}` }));
+      if (k) queue.current.push(event(u, k, { format: sqlLab ? 'application' : it.kind === 'order' ? 'recall_cued' : 'recognition_choice', correct: ok, hint: it.kind === 'order' && !sqlLab ? 1 : 0, timeMs: ms, contextId: `${u.key}#taller-${it.kind}${it.kind === 'code' ? `-${it.exercise}` : it.kind === 'lab' ? `-${it.lab}` : it.kind === 'order' ? `-${it.example}` : ''}` }));
       scored(ok, sqlLab ? 30 : 12);
     }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su ficha y sus ejemplos: así lo reconocerás y lo usarás la próxima vez.' }); else void advance({ correct: true, hint: 0 }); }} />;
