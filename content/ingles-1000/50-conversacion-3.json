@@ -361,7 +361,11 @@
             "cue": "YU",
             "scene": "¿Y TÚ? —ABOUT YOU, sobre ti.",
             "emoji": "👉"
-          }
+          },
+          "answers": [
+            "and you",
+            "how about you"
+          ]
         },
         {
           "key": "i-dont-mind",
@@ -412,7 +416,10 @@
             "cue": "MAIND",
             "scene": "ME DA IGUAL: no me importa (DON'T MIND).",
             "emoji": "🤷"
-          }
+          },
+          "answers": [
+            "I do not mind"
+          ]
         },
         {
           "key": "it-doesnt-matter",
@@ -469,7 +476,11 @@
             "cue": "MATER",
             "scene": "NO IMPORTA: no es MATERIA de nadie.",
             "emoji": "🤷‍♂️"
-          }
+          },
+          "answers": [
+            "never mind",
+            "it does not matter"
+          ]
         },
         {
           "key": "im-afraid-not",
@@ -576,7 +587,10 @@
             "cue": "LOVE",
             "scene": "ME ENCANTARÍA: con LOVE en los ojos.",
             "emoji": "😍"
-          }
+          },
+          "answers": [
+            "I would love to"
+          ]
         },
         {
           "key": "sorry-to-hear-that",
@@ -845,7 +859,11 @@
             "cue": "ENJOY",
             "scene": "¡QUE APROVECHE! ENJOY la comida (MEAL).",
             "emoji": "🍝"
-          }
+          },
+          "answers": [
+            "bon appétit",
+            "bon appetit"
+          ]
         },
         {
           "key": "get-well-soon",
@@ -966,7 +984,12 @@
             "cue": "MOMENTO",
             "scene": "UN MOMENTO: JUST A MOMENT.",
             "emoji": "⏳"
-          }
+          },
+          "answers": [
+            "one moment",
+            "just a minute",
+            "wait a moment"
+          ]
         }
       ]
     }

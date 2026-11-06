@@ -412,7 +412,11 @@
             "cue": "LIVING",
             "scene": "El SALÓN es el LIVING.",
             "emoji": "🛋️"
-          }
+          },
+          "answers": [
+            "lounge",
+            "sitting room"
+          ]
         },
         {
           "key": "roof",
@@ -954,7 +958,10 @@
             "cue": "CUBO",
             "scene": "En el ARMARIO de la cocina hay un CUBO.",
             "emoji": "🗄️"
-          }
+          },
+          "answers": [
+            "cabinet"
+          ]
         },
         {
           "key": "bin",
@@ -1000,7 +1007,12 @@
             "cue": "BIN",
             "scene": "El CUBO DE LA BASURA hace «BIN» al cerrar.",
             "emoji": "🗑️"
-          }
+          },
+          "answers": [
+            "rubbish bin",
+            "trash can",
+            "dustbin"
+          ]
         }
       ]
     }

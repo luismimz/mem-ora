@@ -410,7 +410,10 @@
             "cue": "ESTART",
             "scene": "EMPEZAR: START, como en la salida.",
             "emoji": "🏁"
-          }
+          },
+          "answers": [
+            "begin"
+          ]
         },
         {
           "key": "finish",
@@ -467,7 +470,10 @@
             "cue": "FINISH",
             "scene": "TERMINAR: la meta, FINISH.",
             "emoji": "🏁"
-          }
+          },
+          "answers": [
+            "end"
+          ]
         },
         {
           "key": "try",

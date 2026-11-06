@@ -308,7 +308,12 @@
             "cue": "FONO",
             "scene": "El MÓVIL es un TELÉFONO: FÓUN.",
             "emoji": "📱"
-          }
+          },
+          "answers": [
+            "mobile",
+            "mobile phone",
+            "telephone"
+          ]
         },
         {
           "key": "message",

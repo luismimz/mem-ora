@@ -603,7 +603,10 @@
             "scene": "Un cartel gigante, «CLAUSURADO»: CIERRAN la tienda.",
             "sceneTarget": "A giant sign, «closed»: they CLOSE the shop.",
             "emoji": "🚫🏪"
-          }
+          },
+          "answers": [
+            "shut"
+          ]
         },
         {
           "key": "clean",

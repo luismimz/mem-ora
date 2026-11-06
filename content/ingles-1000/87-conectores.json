@@ -380,7 +380,10 @@
             "cue": "DESPITE",
             "scene": "A PESAR DE: DESPITE, ¡pese a todo!",
             "emoji": "💪"
-          }
+          },
+          "answers": [
+            "in spite of"
+          ]
         },
         {
           "key": "whereas",
@@ -499,7 +502,11 @@
             "cue": "ZER",
             "scene": "POR LO TANTO: ahí (THERE) por (FOR) eso.",
             "emoji": "➡️"
-          }
+          },
+          "answers": [
+            "so",
+            "thus"
+          ]
         },
         {
           "key": "moreover",
@@ -546,7 +553,11 @@
             "cue": "MORE",
             "scene": "ADEMÁS: MORE (más) OVER (encima).",
             "emoji": "➕"
-          }
+          },
+          "answers": [
+            "furthermore",
+            "in addition"
+          ]
         },
         {
           "key": "furthermore",
@@ -596,7 +607,11 @@
             "cue": "FURTHER",
             "scene": "ADEMÁS: más lejos (FURTHER) y más (MORE).",
             "emoji": "➕"
-          }
+          },
+          "answers": [
+            "moreover",
+            "in addition"
+          ]
         },
         {
           "key": "otherwise",
@@ -813,7 +828,12 @@
             "cue": "ADICIÓN",
             "scene": "ADEMÁS: en ADICIÓN.",
             "emoji": "➕"
-          }
+          },
+          "answers": [
+            "moreover",
+            "furthermore",
+            "besides"
+          ]
         },
         {
           "key": "so-that",
@@ -941,7 +961,11 @@
             "cue": "ORDEN",
             "scene": "PARA (+ verbo): en ORDEN A.",
             "emoji": "🎯"
-          }
+          },
+          "answers": [
+            "to",
+            "so as to"
+          ]
         },
         {
           "key": "due-to",
@@ -993,7 +1017,10 @@
             "cue": "DEBIDO",
             "scene": "DEBIDO A: DUE TO.",
             "emoji": "↪️"
-          }
+          },
+          "answers": [
+            "because of"
+          ]
         },
         {
           "key": "even-though",
@@ -1062,7 +1089,11 @@
             "cue": "AUNQUE",
             "scene": "AUNQUE: EVEN (incluso) THOUGH.",
             "emoji": "🤔"
-          }
+          },
+          "answers": [
+            "although",
+            "though"
+          ]
         },
         {
           "key": "in-spite-of",
@@ -1113,7 +1144,10 @@
             "cue": "DESPECHO",
             "scene": "A PESAR DE: a DESPECHO (SPITE) de.",
             "emoji": "😤"
-          }
+          },
+          "answers": [
+            "despite"
+          ]
         },
         {
           "key": "on-the-contrary",

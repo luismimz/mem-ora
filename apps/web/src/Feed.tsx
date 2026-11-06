@@ -36,7 +36,7 @@ import {
   type AssocStep,
   type ClientEvent,
   type SessionUnit,
-  type WorkshopItem, nearMiss } from '@memora/experiences';
+  type WorkshopItem, nearMiss, acceptedAnswers, sameAnswer } from '@memora/experiences';
 import { hasTrick, TrickSentence } from './tricks';
 import { api, ApiError, type Mission, type Progress, type ReportReason, type SessionPayload } from './api';
 import { deviceId, nextSeq } from './device';
@@ -2058,6 +2058,7 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
   const t0 = useRef(performance.now());
   const hints = reviewHints(unit);
   const [near, setNear] = useState<string | null>(null);
+  const alts = acceptedAnswers(unit).slice(1);
   function check(reveal = false) {
     const r = gradeReview(unit, text, 0, hint, reveal);
     const near = r.correct || reveal ? null : nearMiss(text, unitText(unit));
@@ -2076,6 +2077,8 @@ function Write({ unit, levelUp = false, onResult }: { unit: SessionUnit; levelUp
       </form>
       {done === null && <div className="judge-buttons"><button type="button" className="option" disabled={hint >= 4} onClick={() => setHint((h) => Math.min(4, h + 1) as HintLevel)}>💡 Pista</button><button type="button" className="option" onClick={() => check(true)}>Ver</button></div>}
       {done === false && <NearTruth near={near} answer={unitText(unit)} lang={unit.language} />}
+      {done === false && alts.length > 0 && <p className="tense-why">También vale: {alts.map((a, n) => <b key={a} lang={unit.language}>{n ? ' · ' : ''}{a}</b>)}</p>}
+      {done === true && !sameAnswer(text, unitText(unit)) && <p className="judge-truth">✅ ¡Vale! También se dice <b lang={unit.language}>{unitText(unit)}</b></p>}
     </Slide>
   );
 }

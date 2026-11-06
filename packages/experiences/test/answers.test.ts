@@ -70,3 +70,13 @@ describe('contracciones (usuario, 5-nov-2026)', () => {
     expect(sameAnswer("Tom's car", 'Tom is car')).toBe(false);
   });
 });
+
+describe('respuestas alternativas (usuario, 6-nov-2026: «thanks a lot» y «thanks very much»)', () => {
+  it('una palabra acepta sus alternativas al escribirla', async () => {
+    const { gradeReview } = await import('../src');
+    const u = { key: 'thanks-a-lot', type: 'term', language: 'en', payload: { form: 'expression', text: 'thanks a lot', meaning: 'muchas gracias', examples: [], answers: ['thanks very much', 'thank you very much'] }, skills: [], association: null } as never;
+    expect(gradeReview(u, 'Thanks very much!', 0, 0, false).correct).toBe(true);
+    expect(gradeReview(u, 'thanks a lot', 0, 0, false).correct).toBe(true);
+    expect(gradeReview(u, 'thanks a bit', 0, 0, false).correct).toBe(false);
+  });
+});

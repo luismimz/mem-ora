@@ -86,7 +86,12 @@
             "scene": "ENCANTADO de conocerte, dice el político en su MITIN.",
             "sceneTarget": "NICE TO MEET YOU, says the politician at his rally.",
             "emoji": "🤝🎤"
-          }
+          },
+          "answers": [
+            "nice to meet you too",
+            "pleased to meet you",
+            "good to meet you"
+          ]
         },
         {
           "key": "hows-it-going",
@@ -121,7 +126,11 @@
             "scene": "Desde su JAULA, un loro te pregunta: ¿QUÉ TAL VA?",
             "sceneTarget": "From its cage, a parrot asks you: HOW'S IT GOING?",
             "emoji": "🦜"
-          }
+          },
+          "answers": [
+            "how are you",
+            "how are things"
+          ]
         },
         {
           "key": "i-dont-understand",
@@ -229,7 +238,13 @@
             "scene": "Un árbitro toca el PITO: ¿PUEDES REPETIRLO, por favor?",
             "sceneTarget": "A referee blows the whistle: COULD YOU REPEAT THAT?",
             "emoji": "🧑‍⚖️📣"
-          }
+          },
+          "answers": [
+            "could you repeat",
+            "can you repeat that",
+            "can you say that again",
+            "could you say that again"
+          ]
         },
         {
           "key": "what-do-you-mean",
@@ -320,7 +335,10 @@
             "scene": "NO IMPORTA, dice la NEVERA, y se come el MAÍZ.",
             "sceneTarget": "NEVER MIND, says the fridge, and eats the corn.",
             "emoji": "🧊🌽"
-          }
+          },
+          "answers": [
+            "forget it"
+          ]
         },
         {
           "key": "no-worries",
@@ -367,7 +385,11 @@
             "scene": "Rompes el jarrón; el abuelo: «NO, GUAPO, NO PASA NADA».",
             "sceneTarget": "You break the vase; grandpa says: NO WORRIES.",
             "emoji": "🏺👴"
-          }
+          },
+          "answers": [
+            "don't worry",
+            "no problem"
+          ]
         },
         {
           "key": "sounds-good",
@@ -415,7 +437,11 @@
             "scene": "¿Vamos a la SAUNA en pijama? —ME PARECE BIEN.",
             "sceneTarget": "Sauna in pyjamas? SOUNDS GOOD.",
             "emoji": "🧖👍"
-          }
+          },
+          "answers": [
+            "sounds great",
+            "that sounds good"
+          ]
         },
         {
           "key": "im-not-sure",
@@ -468,7 +494,10 @@
             "scene": "¿Es un CHURRO o una serpiente? NO ESTOY SEGURO.",
             "sceneTarget": "Is it a churro or a snake? I'M NOT SURE.",
             "emoji": "🥖🐍"
-          }
+          },
+          "answers": [
+            "I am not sure"
+          ]
         },
         {
           "key": "it-depends",
@@ -550,7 +579,11 @@
             "scene": "¿Me llevas? —CLARO, dice el CORZO, ¡sube!",
             "sceneTarget": "Can you take me? OF COURSE, says the deer. Hop on!",
             "emoji": "🦌🎒"
-          }
+          },
+          "answers": [
+            "sure",
+            "of course!"
+          ]
         },
         {
           "key": "excuse-me",
@@ -595,7 +628,10 @@
             "scene": "PERDONE, dice el ESQUÍ al chocar con tu nariz.",
             "sceneTarget": "EXCUSE ME, says the ski as it hits your nose.",
             "emoji": "🎿👃"
-          }
+          },
+          "answers": [
+            "sorry"
+          ]
         },
         {
           "key": "im-sorry",
@@ -637,7 +673,11 @@
             "scene": "LO SIENTO, llora un muñeco de nieve de SORIA.",
             "sceneTarget": "I'M SORRY, cries a snowman from Soria.",
             "emoji": "⛄😢"
-          }
+          },
+          "answers": [
+            "I am sorry",
+            "sorry"
+          ]
         },
         {
           "key": "thanks-a-lot",
@@ -672,7 +712,14 @@
             "scene": "Desde unos ZANCOS gigantes gritas: ¡MUCHAS GRACIAS!",
             "sceneTarget": "From giant stilts you shout: THANKS A LOT!",
             "emoji": "🦿🙏"
-          }
+          },
+          "answers": [
+            "thanks very much",
+            "thank you very much",
+            "many thanks",
+            "thank you so much",
+            "thanks so much"
+          ]
         },
         {
           "key": "see-you-later",
@@ -709,7 +756,12 @@
             "scene": "Cristiano grita «¡SIUUU!» y se despide: HASTA LUEGO.",
             "sceneTarget": "He shouts and says goodbye: SEE YOU LATER.",
             "emoji": "⚽👋"
-          }
+          },
+          "answers": [
+            "I'll see you later",
+            "see you",
+            "see you soon"
+          ]
         },
         {
           "key": "g-polite-requests",

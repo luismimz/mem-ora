@@ -326,7 +326,11 @@
             "cue": "GUATSAP",
             "scene": "¿QUÉ PASA? te escribe en GUATSAP.",
             "emoji": "💬"
-          }
+          },
+          "answers": [
+            "what's going on",
+            "how's it going"
+          ]
         },
         {
           "key": "by-the-way",
@@ -377,7 +381,10 @@
             "cue": "BAI",
             "scene": "POR CIERTO, BAI-BAI, me voy.",
             "emoji": "👋"
-          }
+          },
+          "answers": [
+            "btw"
+          ]
         },
         {
           "key": "i-think-so",
@@ -524,7 +531,11 @@
             "cue": "RAIT",
             "scene": "ESO ES, RAIT a la primera.",
             "emoji": "✅"
-          }
+          },
+          "answers": [
+            "that's correct",
+            "exactly"
+          ]
         },
         {
           "key": "really",
@@ -588,7 +599,10 @@
             "cue": "RIALITY",
             "scene": "¿EN SERIO? Eso parece un REALITY.",
             "emoji": "😮"
-          }
+          },
+          "answers": [
+            "seriously"
+          ]
         },
         {
           "key": "me-too",
@@ -634,7 +648,10 @@
             "cue": "MI TÚ",
             "scene": "YO TAMBIÉN, dices, MI TÚ y yo.",
             "emoji": "🙋"
-          }
+          },
+          "answers": [
+            "so do I"
+          ]
         },
         {
           "key": "me-neither",
@@ -690,7 +707,11 @@
             "cue": "NAIDER",
             "scene": "YO TAMPOCO, NADIE (NAIDER) quiere ir.",
             "emoji": "🙅"
-          }
+          },
+          "answers": [
+            "neither do I",
+            "nor do I"
+          ]
         },
         {
           "key": "youre-welcome",
@@ -728,7 +749,12 @@
             "cue": "BIENVENIDO",
             "scene": "DE NADA: eres BIENVENIDO (welcome).",
             "emoji": "🙂"
-          }
+          },
+          "answers": [
+            "no problem",
+            "my pleasure",
+            "you are welcome"
+          ]
         },
         {
           "key": "good-luck",
@@ -805,7 +831,10 @@
             "cue": "TEIK",
             "scene": "CUÍDATE: TEIK-KER, llévate cuidado.",
             "emoji": "🫶"
-          }
+          },
+          "answers": [
+            "look after yourself"
+          ]
         },
         {
           "key": "hurry-up",
@@ -850,7 +879,10 @@
             "cue": "JARI",
             "scene": "DATE PRISA, JARI, que perdemos el bus.",
             "emoji": "🏃"
-          }
+          },
+          "answers": [
+            "be quick"
+          ]
         },
         {
           "key": "be-careful",
@@ -897,7 +929,11 @@
             "cue": "KERFUL",
             "scene": "TEN CUIDADO: CARE-FULL, lleno de cuidado.",
             "emoji": "⚠️"
-          }
+          },
+          "answers": [
+            "watch out",
+            "take care"
+          ]
         },
         {
           "key": "well-done",
@@ -942,7 +978,11 @@
             "cue": "DAN",
             "scene": "BIEN HECHO, DAN te aplaude.",
             "emoji": "👏"
-          }
+          },
+          "answers": [
+            "good job",
+            "great job"
+          ]
         },
         {
           "key": "no-way",
@@ -986,7 +1026,10 @@
             "cue": "NO GÜEY",
             "scene": "¡NI HABLAR, NO, GÜEY!",
             "emoji": "🙅‍♂️"
-          }
+          },
+          "answers": [
+            "no chance"
+          ]
         }
       ]
     }

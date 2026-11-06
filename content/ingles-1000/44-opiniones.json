@@ -584,7 +584,10 @@
             "cue": "MEIBI",
             "scene": "QUIZÁS, MEIBI sí, MEIBI no.",
             "emoji": "🤷"
-          }
+          },
+          "answers": [
+            "perhaps"
+          ]
         },
         {
           "key": "probably",
@@ -641,7 +644,10 @@
             "cue": "PROBABLEMENTE",
             "scene": "PROBABLEMENTE: casi igual, PRÓ-babli.",
             "emoji": "🎲"
-          }
+          },
+          "answers": [
+            "likely"
+          ]
         },
         {
           "key": "important",

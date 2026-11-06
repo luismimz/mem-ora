@@ -407,7 +407,11 @@
             "cue": "CASH",
             "scene": "CAJERO AUTOMÁTICO: máquina de CASH.",
             "emoji": "🏧"
-          }
+          },
+          "answers": [
+            "ATM",
+            "cashpoint"
+          ]
         },
         {
           "key": "loan",

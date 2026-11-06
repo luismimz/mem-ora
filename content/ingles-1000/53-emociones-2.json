@@ -910,7 +910,10 @@
             "cue": "FED",
             "scene": "HARTO, como ALIMENTADO (FED) hasta arriba (UP).",
             "emoji": "😩"
-          }
+          },
+          "answers": [
+            "fed up with"
+          ]
         },
         {
           "key": "homesick",

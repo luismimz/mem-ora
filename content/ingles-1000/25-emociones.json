@@ -394,7 +394,11 @@
             "scene": "Los ANGRY BIRDS están ENFADADOS con los cerdos.",
             "sceneTarget": "The Angry Birds are ANGRY with the pigs.",
             "emoji": "😠🐦"
-          }
+          },
+          "answers": [
+            "mad",
+            "annoyed"
+          ]
         },
         {
           "key": "tired",

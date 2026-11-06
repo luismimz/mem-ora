@@ -110,6 +110,7 @@ export function unitPayload(u: UnitEntry): TermPayload | PatternPayload | Concep
     examples: (u.examples ?? []) as TermPayload['examples'],
     ...(u.partOfSpeech ? { partOfSpeech: u.partOfSpeech } : {}),
     ...(pronunciation ? { pronunciation } : {}),
+    ...(u.answers ? { answers: u.answers } : {}),
     ...(u.notes ? { notes: u.notes } : {}),
   };
 }

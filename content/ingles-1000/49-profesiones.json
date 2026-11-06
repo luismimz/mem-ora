@@ -533,7 +533,11 @@
             "cue": "POLICÍA",
             "scene": "POLICÍA: po-LÍIS + oficial.",
             "emoji": "👮"
-          }
+          },
+          "answers": [
+            "policeman",
+            "policewoman"
+          ]
         },
         {
           "key": "firefighter",
@@ -704,7 +708,10 @@
             "cue": "ASISTENTE",
             "scene": "DEPENDIENTE: ASISTENTE de la tienda (SHOP).",
             "emoji": "🛍️"
-          }
+          },
+          "answers": [
+            "sales assistant"
+          ]
         },
         {
           "key": "programmer",

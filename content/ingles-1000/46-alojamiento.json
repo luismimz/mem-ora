@@ -424,7 +424,10 @@
             "cue": "LIFTING",
             "scene": "El ASCENSOR te hace un LIFTING.",
             "emoji": "🛗"
-          }
+          },
+          "answers": [
+            "elevator"
+          ]
         },
         {
           "key": "view",

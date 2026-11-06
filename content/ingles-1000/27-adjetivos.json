@@ -426,7 +426,10 @@
             "scene": "Un BIGOTE GRANDE como una escoba.",
             "sceneTarget": "A BIG moustache like a broom.",
             "emoji": "🥸🧹"
-          }
+          },
+          "answers": [
+            "large"
+          ]
         },
         {
           "key": "small",
@@ -488,7 +491,10 @@
             "scene": "Un bote de ESMALTE PEQUEÑO, diminuto.",
             "sceneTarget": "A tiny SMALL bottle of nail polish.",
             "emoji": "💅🔬"
-          }
+          },
+          "answers": [
+            "little"
+          ]
         },
         {
           "key": "tall",
@@ -978,7 +984,10 @@
             "scene": "Qué FASTIDIO, va demasiado RÁPIDO.",
             "sceneTarget": "How annoying, it’s too FAST.",
             "emoji": "🏎️😩"
-          }
+          },
+          "answers": [
+            "quick"
+          ]
         },
         {
           "key": "slow",
@@ -1072,7 +1081,11 @@
             "cue": "BIUTI",
             "scene": "PRECIOSO: un salón de BIUTI.",
             "emoji": "💅"
-          }
+          },
+          "answers": [
+            "pretty",
+            "lovely"
+          ]
         },
         {
           "key": "ugly",

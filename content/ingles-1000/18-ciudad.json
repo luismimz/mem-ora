@@ -1082,7 +1082,10 @@
             "scene": "El NIDO está CERCA, a un salto.",
             "sceneTarget": "The nest is NEAR, one jump away.",
             "emoji": "🪺🦘"
-          }
+          },
+          "answers": [
+            "close"
+          ]
         }
       ]
     }

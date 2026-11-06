@@ -435,7 +435,10 @@
             "cue": "ALMOSTRADOR",
             "scene": "CASI llegas al MOSTRADOR.",
             "emoji": "🤏"
-          }
+          },
+          "answers": [
+            "nearly"
+          ]
         },
         {
           "key": "quite",
@@ -548,7 +551,10 @@
             "cue": "ENUF",
             "scene": "¡SUFICIENTE! ¡ENUF!, gritas lleno.",
             "emoji": "✋"
-          }
+          },
+          "answers": [
+            "sufficient"
+          ]
         },
         {
           "key": "together",
@@ -725,7 +731,11 @@
             "cue": "FINAL",
             "scene": "POR FIN llega el FINAL.",
             "emoji": "🏁"
-          }
+          },
+          "answers": [
+            "at last",
+            "in the end"
+          ]
         },
         {
           "key": "especially",

@@ -209,7 +209,7 @@ export function unitExample(u: SessionUnit): { text: string; translation?: strin
 }
 /** Respuestas que se dan por buenas al recordar la unidad (el nombre y, en conceptos, sus alternativas). */
 export function acceptedAnswers(u: SessionUnit): string[] {
-  return [unitText(u), ...(u.type === 'concept' ? ((u.payload as ConceptPayload).answers ?? []) : [])];
+  return [unitText(u), ...(u.type === 'concept' || u.type === 'term' ? ((u.payload as { answers?: string[] }).answers ?? []) : [])];
 }
 
 export interface Choice {
