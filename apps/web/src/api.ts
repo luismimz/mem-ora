@@ -95,6 +95,8 @@ export interface SessionPayload {
   state: SessionState;
   units: Record<string, SessionUnit>;
   resumed?: boolean;
+  /** Veces respondida y acertada cada unidad de la ronda (6-nov-2026). */
+  unitStats?: Record<string, { attempts: number; hits: number }>;
   preview?: boolean;
   status?: string;
   /** Vista previa: si el curso tiene audio. */
@@ -117,7 +119,7 @@ export interface Progress {
   /** Meta del día (D-081): unidades nuevas de hoy y la meta del curso (en idiomas, 35 ⇒ 1.000 en 30 días). */
   today?: { newUnits: number; goal: number };
   skills: Array<{ key: string; unit: string; kind: string; status: string; dueAt: number | null }>;
-  units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[] }>;
+  units: Array<{ key: string; level: 'none' | 'learned' | 'stable' | 'mastered'; missing: string[]; attempts?: number; hits?: number }>;
 }
 
 /** Resultado de un simulacro guardado en el servidor. */

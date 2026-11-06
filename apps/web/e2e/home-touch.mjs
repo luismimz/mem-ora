@@ -50,7 +50,7 @@ try {
       : path === '/memora/courses' ? [course]
       : path === '/memora/missions' ? { missions, current: '02', newToday: 15, newTarget: 15 }
       : path === '/memora/progress' ? { streak: 3, bestStreak: 8, shields: 0, todayAttempts: 12, failures, today: { newUnits: 10, goal: 35 }, calendar: Array.from({ length: 84 }, (_, i) => (i % 3 === 0 ? 0 : (i * 7) % 70)), skills: [],
-          units: Array.from({ length: 20 }, (_, i) => ({ key: `u${i}`, level: i < 12 ? 'learned' : 'none', missing: [] })), associations: [] }
+          units: Array.from({ length: 20 }, (_, i) => ({ key: `u${i}`, level: i < 2 ? 'stable' : i < 12 ? 'learned' : 'none', missing: [], attempts: i < 16 ? 3 : 0 })), associations: [] }
       : path === '/memora/session' ? failSession
       : path === '/memora/session/position' ? { saved: true }
       : path === '/memora/events' ? { accepted: [], duplicates: [], rejected: [] }
@@ -90,6 +90,9 @@ try {
   check(stale.modes === 0 && !/Arcade|Chat|truco/.test(stale.meters), `curso con Flujo: sin modos bloqueados ni sus contadores (${stale.modes} modos; ${stale.meters})`);
   await page.screenshot({ path: process.env.E2E_SHOTS ? `${process.env.E2E_SHOTS}/barra.png` : '/dev/null', clip: { x: 0, y: 0, width: 390, height: 120 } }).catch(() => undefined);
 
+  // Tu memoria (6-nov-2026): vistas / aprendidas / estables / dominadas de lo ya trabajado (16 de 20).
+  const map = await page.$$eval('.memory-cell', (els) => els.map((e) => `${e.querySelector('span')?.textContent}:${e.querySelector('b')?.textContent}`));
+  check(map.join(' ') === 'Vistas:4 Aprendidas:10 Estables:2 Dominadas:0', `Inicio enseña tu memoria por estados (${map.join(' ')})`);
   const btn = await page.$eval('.fails-btn', (e) => ({ text: e.textContent ?? '', w: e.getBoundingClientRect().width, h: e.getBoundingClientRect().height }));
   check(btn.text.includes('5') && btn.text.includes('Vacía tus fallos') && btn.h >= 44, `«Vacía tus fallos» muestra cuántos quedan y se puede tocar con el dedo (${Math.round(btn.h)}px de alto)`);
   check(!(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth)), 'Inicio: nada se sale por los lados');
