@@ -9,7 +9,7 @@
 // - Nunca borra nada. Material de ILERNA: nunca va en `content/` (regla 13), solo en `private/`.
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { unitPayload, validateCourseFile, describeContentIssue, type CourseFile, type UnitEntry } from '@memora/content';
+import { DEFAULT_SKILLS, unitPayload, validateCourseFile, describeContentIssue, type CourseFile, type UnitEntry } from '@memora/content';
 import { validateAssociation } from '@memora/techniques';
 import { importCourse } from '../api/courseIO';
 
@@ -47,7 +47,7 @@ export function courseFiles(dir: string): string[] {
 
 const PATH: Record<string, string[]> = { draft: ['needs_review', 'approved', 'published'], needs_review: ['approved', 'published'], approved: ['published'] };
 
-export interface SyncReport { course: string; imported: string[]; updatedUnits: number; movedUnits: number; updatedAssociations: number; createdUnits: number; published: number; problems: string[] }
+export interface SyncReport { course: string; imported: string[]; updatedUnits: number; movedUnits: number; updatedAssociations: number; createdUnits: number; published: number; linkedAssociations?: number; problems: string[] }
 
 /** Vuelca un curso (una carpeta de `content/`) a la base de datos. Escribe como sistema (sin `accountability`). */
 export async function syncCourse(dir: string, ctx: { db: any; services: any; schema: any }): Promise<SyncReport> {
@@ -141,6 +141,9 @@ export async function syncCourse(dir: string, ctx: { db: any; services: any; sch
       }
     }
   }
+  // 6-nov-2026 (SLEEP sin su escena): la asociación de una unidad NUEVA se creaba antes que sus habilidades y no se
+  // enganchaba a la que la lleva (`recall` en palabras); la ficha salía sin puente ni escena. Se repara en cada sync.
+  if (course) report.linkedAssociations = await linkAssociations(db, course.id);
   return report;
 }
 
@@ -167,4 +170,18 @@ export async function syncAll(ctx: { db: any; services: any; getSchema: () => Pr
     }
   }
   return reports;
+}
+
+/** Engancha cada asociación viva a la habilidad que la lleva, si esa habilidad aún no tiene ninguna. Devuelve cuántas. */
+export async function linkAssociations(db: any, courseId: string): Promise<number> {
+  const rows: Row[] = await db('associations').join('units', 'associations.unit', 'units.id')
+    .where({ 'units.course': courseId }).whereNot({ 'associations.status': 'rejected' })
+    .select('associations.id as id', 'units.id as unit', 'units.key as key', 'units.type as type');
+  let linked = 0;
+  for (const r of rows) {
+    const suffix = DEFAULT_SKILLS[r.type as keyof typeof DEFAULT_SKILLS]?.find((t: { carriesAssociation?: boolean }) => t.carriesAssociation)?.suffix;
+    if (!suffix) continue;
+    linked += Number(await db('skills').where({ unit: r.unit, key: `${r.key}.${suffix}` }).whereNull('association').update({ association: r.id })) || 0;
+  }
+  return linked;
 }
