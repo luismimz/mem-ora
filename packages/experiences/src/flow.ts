@@ -13,7 +13,7 @@ import type { PlanItem } from '@memora/core';
 import { exercisesOf, seeded, shuffle, unitMeaning, unitText, MAX_REVIEW_UNITS, type AssocPlan, type AssocStep } from './associations';
 import type { SessionUnit } from './session';
 import { orderRule, spanishOrderCalque, type OrderMirror } from './order';
-import { buildWorkshop, labsOf, orderableExamples, WORKSHOP_EVERY } from './workshop';
+import { buildWorkshop, labsOf, orderableExamples, WORKSHOP_EVERY, type WorkshopItem } from './workshop';
 
 /** Tarjetas entre una pregunta fallada y su repesca. */
 export const FLOW_RETRY_GAP = 3;
@@ -350,6 +350,7 @@ export function buildFlowSession(input: {
     const options = pieceExamples(units[u]!).filter((n) => n !== avoid);
     return skill && options.length ? { kind: 'pieces', unitKey: u, scene: -4, skillKey: skill.key, example: options[Math.floor(rand() * options.length)]!, ...tag(u) } : null;
   };
+  const gapOf = (u: string) => { const i = exercisesOf(units[u]!).findIndex((e) => e.kind === 'fill_gap' && e.code?.includes('___')); return i >= 0 ? i : undefined; };
   const order: string[] = [];
   const rv = shuffle([...reviews, ...errors, ...practice], rand);
   const nw = [...fresh];
@@ -357,7 +358,14 @@ export function buildFlowSession(input: {
   for (let i = 0; i < order.length; i += 2) {
     const pair = order.slice(i, i + 2);
     const light = (u: string) => Boolean(input.lightReviews) && reviews.includes(u) && units[u]!.type === 'pattern';
-    for (const u of pair) { if (!light(u)) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) }); learnWords(u); }
+    for (const u of pair) {
+      // Retención (usuario, 6-nov-2026): antes de la ficha de un concepto NUEVO, su pregunta del hueco «¿qué crees?».
+      // No cuenta como fallo; intentar responder antes de aprenderlo hace que la explicación se fije mejor.
+      const preGap = fresh.includes(u) && units[u]!.type === 'concept' && !input.lightReviews ? gapOf(u) : undefined;
+      if (preGap !== undefined) base.push({ kind: 'workshop', unitKey: '', scene: -4, direct: true, pre: true, workshop: [{ kind: 'code', unitKey: u, exercise: preGap }] });
+      if (!light(u)) base.push({ kind: 'reel', unitKey: u, scene: -4, ...tag(u) });
+      learnWords(u);
+    }
     // Variedad: la primera de la pareja, escucha (idiomas) o relámpago; la segunda, ¿verdad o mentira?; lo dominado,
     // escribiendo. La gramática se practica construyendo una de sus frases.
     pair.forEach((u, j) => {
@@ -407,6 +415,19 @@ export function buildFlowSession(input: {
     // de inglés se practican usándolos (Ráfaga, frases), no nombrándolos.
     if (input.lightReviews) block = [];
     else if (block.length >= WORKSHOP_EVERY || (i + 2 >= order.length && block.length >= 2)) { const w = workshop(); if (w) base.push(w); }
+  }
+
+  // Retención (usuario, 6-nov-2026): «1 minuto antes de irte», sin la ficha delante: cada concepto nuevo de la ronda
+  // se reconstruye otra vez (ordenar la orden si se puede; si no, su hueco). Mañana vuelve en el repaso espaciado.
+  const learnedNow = fresh.filter((u) => units[u]?.type === 'concept').slice(0, 5);
+  if (!input.lightReviews && learnedNow.length) {
+    const closing = learnedNow.flatMap((u): WorkshopItem[] => {
+      const ord = orderableExamples(units[u]!);
+      if (ord.length) return [{ kind: 'order' as const, unitKey: u, example: ord[Math.floor(rand() * ord.length)]! }];
+      const g = gapOf(u);
+      return g !== undefined ? [{ kind: 'code' as const, unitKey: u, exercise: g }] : [];
+    });
+    if (closing.length) base.push({ kind: 'workshop', unitKey: '', scene: -4, closing: true, workshop: closing });
   }
 
   // 2. Repesca intercalada: tras cada pregunta, su repetición FLOW_RETRY_GAP tarjetas después (se salta si se acertó).

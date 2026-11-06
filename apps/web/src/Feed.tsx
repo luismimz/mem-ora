@@ -1631,11 +1631,23 @@ const WORKSHOP_TAG = { order: '🧩 CONSTRUYE LA CONSULTA', lab: '🧪 LABORATOR
  * caso, completar código con fichas, predecir lo que imprime, tocar la línea del bug y reconocer componentes dibujados.
  * Sin reloj; cada respuesta se explica y, si fallas alguno, se vuelve a enseñar ese concepto.
  */
-function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
-  items: WorkshopItem[]; all: Record<string, SessionUnit>; seed: string; direct?: boolean;
+/**
+ * Retención (usuario, 6-nov-2026):
+ *  - `pre`: la pregunta ANTES de la ficha («¿qué crees?»); no cuenta como fallo ni manda a repasar.
+ *  - `closing`: «antes de irte», rehacer lo de hoy sin mirar.
+ *  - directo (tras la ficha): lo fallado se repite al final (hasta 2 veces) — no se avanza sin haberlo sacado.
+ */
+const MAX_GATE_RETRIES = 2;
+function Workshop({ items, all, seed, direct = false, mode, onAnswer, onDone }: {
+  items: WorkshopItem[]; all: Record<string, SessionUnit>; seed: string; direct?: boolean; mode?: 'pre' | 'closing';
   onAnswer: (u: SessionUnit, ok: boolean, ms: number, item: WorkshopItem) => void; onDone: (failed: string | null) => void;
 }) {
-  const list = useMemo(() => items.filter((it) => all[it.unitKey] && (it.kind !== 'code' || exercisesOf(all[it.unitKey]!)[it.exercise])), [items, all]);
+  const base = useMemo(() => items.filter((it) => all[it.unitKey] && (it.kind !== 'code' || exercisesOf(all[it.unitKey]!)[it.exercise])), [items, all]);
+  const [again, setAgain] = useState<WorkshopItem[]>([]);
+  const list = useMemo(() => [...base, ...again], [base, again]);
+  const gate = direct && mode !== 'pre';
+  const retryLater = (it: WorkshopItem) => { if (gate && again.filter((x) => x === it).length < MAX_GATE_RETRIES) setAgain((a) => [...a, it]); };
+  const head = mode === 'pre' ? '🤔 ANTES DE VERLO · ' : mode === 'closing' ? '🧠 ANTES DE IRTE · ' : '';
   // Directo (laboratorio justo tras su ficha): sin portada.
   const [i, setI] = useState(direct ? 0 : -1);
   const [picked, setPicked] = useState<string | null>(null);
@@ -1663,7 +1675,7 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
     if (!it || !u || picked !== null) return;
     const good = it.kind === 'code' && !tapLine ? gradeChallenge(ex!, o, false).correct : o === answer;
     setPicked(o);
-    if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); } else failed.current.push(u.key);
+    if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); if (gate) failed.current = failed.current.filter((k) => k !== u.key); } else { if (mode !== 'pre') failed.current.push(u.key); retryLater(it); }
     onAnswer(u, good, Math.round(performance.now() - t0.current), it);
     // Sin botones: al acertar pasa solo; al fallar se queda para leer la explicación y se desliza.
     if (good) { const at = i; window.setTimeout(() => nextRef.current(at), SHOP_AUTO_MS); }
@@ -1678,10 +1690,10 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
     const kinds = [...new Set(list.map((x) => (x.kind === 'code' ? exercisesOf(all[x.unitKey]!)[x.exercise]!.kind : x.kind)))] as Array<keyof typeof WORKSHOP_TAG>;
     return (
       <Slide tone={200} className="shop-intro" onNext={() => setI(0)}>
-        <p className="tag">🛠️ TALLER</p>
-        <div className="arcade-big" aria-hidden="true">🧰</div>
-        <h2 className="ask">Recordarlo está bien. Ahora, ¡a usarlo!</h2>
-        <p className="arcade-rules">{list.length} retos con lo que ya has visto:</p>
+        <p className="tag">{mode === 'closing' ? '🧠 ANTES DE IRTE' : '🛠️ TALLER'}</p>
+        <div className="arcade-big" aria-hidden="true">{mode === 'closing' ? '🧠' : '🧰'}</div>
+        <h2 className="ask">{mode === 'closing' ? '1 minuto: rehaz lo de hoy sin mirar' : 'Recordarlo está bien. Ahora, ¡a usarlo!'}</h2>
+        <p className="arcade-rules">{mode === 'closing' ? `${list.length} retos. Sacarlo de tu cabeza ahora es lo que hace que mañana lo recuerdes.` : `${list.length} retos con lo que ya has visto:`}</p>
         <div className="shop-kinds">{kinds.map((k) => <span key={k}>{WORKSHOP_TAG[k]}</span>)}</div>
       </Slide>
     );
@@ -1701,16 +1713,16 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
   }
   if (it.kind === 'order') {
     return (
-      <OrderPlay key={`${i}-o`} unit={u} example={it.example} seed={`${seed}-${i}`} tag={`🧩 CONSTRUYE LA CONSULTA · ${i + 1}/${list.length}`} right={right}
-        onResult={(good) => { if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); sfx('party'); } else { failed.current.push(u.key); sfx('ko'); } onAnswer(u, good, Math.round(performance.now() - t0.current), it); }}
+      <OrderPlay key={`${i}-o`} unit={u} example={it.example} seed={`${seed}-${i}`} tag={`${head}🧩 CONSTRUYE LA CONSULTA · ${i + 1}/${list.length}`} right={right}
+        onResult={(good) => { if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); sfx('party'); if (gate) failed.current = failed.current.filter((k) => k !== u.key); } else { if (mode !== 'pre') failed.current.push(u.key); retryLater(it); sfx('ko'); } onAnswer(u, good, Math.round(performance.now() - t0.current), it); }}
         onNext={() => next()} confetti={confetti} />
     );
   }
   if (it.kind === 'lab') {
     const lab = labsOf(u)[it.lab]!;
     return (
-      <LabPlay key={`${i}-${it.lab}`} unit={u} lab={lab} tag={`${lab.kind === 'sql' ? '⌨️ ESCRIBE LA CONSULTA' : '👆 TOCA EN LA TABLA'} · ${i + 1}/${list.length}`} right={right}
-        onResult={(good) => { if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); sfx('party'); } else { failed.current.push(u.key); sfx('ko'); } onAnswer(u, good, Math.round(performance.now() - t0.current), it); }}
+      <LabPlay key={`${i}-${it.lab}`} unit={u} lab={lab} tag={`${head}${lab.kind === 'sql' ? '⌨️ ESCRIBE LA CONSULTA' : '👆 TOCA EN LA TABLA'} · ${i + 1}/${list.length}`} right={right}
+        onResult={(good) => { if (good) { setRight((r) => r + 1); setConfetti((c) => c + 1); sfx('party'); if (gate) failed.current = failed.current.filter((k) => k !== u.key); } else { if (mode !== 'pre') failed.current.push(u.key); retryLater(it); sfx('ko'); } onAnswer(u, good, Math.round(performance.now() - t0.current), it); }}
         onNext={() => next()} confetti={confetti} />
     );
   }
@@ -1722,7 +1734,7 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
   return (
     <Slide tone={hue(u.key)} className={`shop-play ${kind} ${picked === null ? '' : ok ? 'right' : 'wrong'}`} {...(picked !== null ? { onNext: () => next() } : {})}>
       <div className="arcade-head">
-        <p className="tag">{WORKSHOP_TAG[kind!]} · {i + 1}/{list.length}</p>
+        <p className="tag">{head}{WORKSHOP_TAG[kind!]} · {i + 1}/{list.length}</p>
         <span className="arcade-pts">✅ {right}</span>
       </div>
       {it.kind === 'whatis' && <>
@@ -1751,6 +1763,8 @@ function Workshop({ items, all, seed, direct = false, onAnswer, onDone }: {
       ) : (
         <div className="tense-after" aria-live="polite">
           {it.kind !== 'code' && it.kind !== 'where' && !tapLine && <div className="options shop-done">{options.map((o) => <span key={o} className={`option ${state(o)}`}>{o}</span>)}</div>}
+          {mode === 'pre' && !ok && <p className="tense-why">🤔 Normal si no lo sabías: ahora lo vas a ver. Fíjate en esta pieza.</p>}
+          {gate && !ok && <p className="tense-why">🔁 Te lo vuelvo a pedir al final: no avanzas hasta sacarlo.</p>}
           <p className={`tense-verdict ${ok ? 'ok' : 'ko'}`}>{ok ? '¡Bien visto! 🎉' : it.kind === 'where' ? <>Estaba aquí: el marcado en verde</> : kind === 'spot_part' ? <>Era la línea {target! + 1}</> : tapLine ? <>El error está en la línea {target! + 1}</> : <>Era <b>{it.kind === 'code' ? ex!.answer : unitText(u)}</b></>}</p>
           {it.kind !== 'code' && <p className="tense-why"><b>{unitText(u)}</b>: {p.gist}</p>}
           {tapLine && (kind === 'spot_part' ? <p className="tense-why">👆 Es <b>{ex!.answer}</b></p> : <p className="tense-why">Arreglo: <code>{ex!.answer}</code></p>)}
@@ -2296,8 +2310,10 @@ export function Feed({ payload, courseId, offline = false, onExit, onAgain, next
   else if (step.kind === 'tense' && unit && step.tenseDrills?.length) card = <TenseGame key={step.id} seed={step.id} unit={unit} all={units} drills={step.tenseDrills} route={step.tenseRoute ?? [unit.key]}
     onAnswer={(u, ok, ms, n, clue) => { const k = recallKey(u); if (k) queue.current.push(event(u, k, { format: 'recognition_choice', correct: ok, hint: (clue ? 1 : 0) as HintLevel, timeMs: ms, contextId: `${u.key}#tense-${n}` })); scored(ok, clue ? 5 : 10); }}
     onDone={(failed) => { if (failed) setTeaching({ key: failed, note: 'Mira otra vez su línea del tiempo y sus pistas: son las que deciden la forma del verbo.' }); else void advance({ correct: true, hint: 0 }); }} />;
-  else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units} direct={Boolean(step.direct)}
+  else if (step.kind === 'workshop' && step.workshop?.length) card = <Workshop key={step.id} seed={step.id} items={step.workshop} all={units} direct={Boolean(step.direct)} {...(step.pre ? { mode: 'pre' as const } : step.closing ? { mode: 'closing' as const } : {})}
     onAnswer={(u, ok, ms, it) => {
+      // La pregunta previa no es evidencia: aún no se ha enseñado (regla 9).
+      if (step.pre) return;
       // D-112: escribir SQL que funciona es aplicar (peso muy alto); tocar en la tabla, reconocer.
       const sqlLab = it.kind === 'lab' && labsOf(u)[it.lab]?.kind === 'sql';
       const k = (it.kind === 'code' || it.kind === 'lab' ? u.skills.find((x) => x.kind === 'apply')?.key : undefined) ?? recallKey(u);

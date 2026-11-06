@@ -391,7 +391,7 @@ describe('el Taller: saber usarlo (D-090)', () => {
   const code = { exercises: [{ kind: 'fill_gap', prompt: 'Completa', code: 'class A ___ B {}', answer: 'extends', distractors: ['implements', 'super'] }] };
   const all = Object.fromEntries([c('k0', code), c('k1'), c('k2', { cases: [{ text: 'Un caso nuevo donde aparece Nombrek2 sin decirlo.' }] }), c('k3', code), c('k4'), c('k5'), c('old1'), c('old2')].map((u) => [u.key, u]));
   const plan = buildFlowSession({ ...base, units: all, items: ['k0', 'k1', 'k2', 'k3', 'k4', 'k5'].map((k) => item(k, 'new')), arcadeUnits: ['old1', 'old2'] });
-  const shops = plan.steps.filter((s) => s.kind === 'workshop' && !s.direct);
+  const shops = plan.steps.filter((s) => s.kind === 'workshop' && !s.direct && !s.closing);
 
   it('en idiomas no hay Taller: los conceptos no se repasan nombrándolos (usuario, 4-nov-2026)', () => {
     const lang = buildFlowSession({ ...base, units: all, items: ['k0', 'k1', 'k2', 'k3', 'k4', 'k5'].map((k) => item(k, 'new')), arcadeUnits: ['old1', 'old2'], lightReviews: true });
@@ -420,6 +420,21 @@ describe('el Taller: saber usarlo (D-090)', () => {
         const taughtHere = plan.steps.slice(0, at).some((x) => x.kind === 'reel' && x.unitKey === it.unitKey);
         expect(taughtHere || ['old1', 'old2'].includes(it.unitKey)).toBe(true);
       }
+    }
+  });
+  it('retención (6-nov-2026): pregunta previa antes de la ficha de un concepto nuevo con hueco, y repaso al cerrar', () => {
+    const pres = plan.steps.filter((x) => x.pre);
+    expect(pres.length).toBeGreaterThan(0);
+    expect(plan.steps.filter((x) => x.closing).length).toBe(1);
+    for (const p of pres) {
+      const u = p.workshop![0]!.unitKey;
+      expect(plan.steps.indexOf(p)).toBeLessThan(plan.steps.findIndex((x) => x.kind === 'reel' && x.unitKey === u));
+    }
+    const closing = plan.steps.filter((x) => x.closing);
+    expect(closing.length).toBeLessThanOrEqual(1);
+    if (closing.length) {
+      const at = plan.steps.indexOf(closing[0]!);
+      for (const it of closing[0]!.workshop!) expect(plan.steps.slice(0, at).some((x) => x.kind === 'reel' && x.unitKey === it.unitKey)).toBe(true);
     }
   });
   it('mezcla retos: código si lo hay, ¿qué es esto? con opciones distintas y sin la respuesta a la vista', () => {
