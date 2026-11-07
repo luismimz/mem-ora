@@ -100,7 +100,9 @@ lo dice en el título («cambia el estándar» / «cambia las reglas») y no se 
   todos los archivos de `content/` antes de fusionar. Nunca entra ahí material de ILERNA (regla 13).
 - **Cursos DAM (basados en ILERNA):** sus JSON siguen en `private/dam/` del Mac (fuera de git). Los revisores
   `private/dam/audit.py` (historias) y `private/dam/taught.py` («se evalúa lo que se enseña») deben quedar a **0 avisos**
-  en el curso tocado, y **los publica el usuario** (`private/dam/fixpub.sh` o `pnpm prod:content`).
+  en el curso tocado. **Los publica Claude** en cuanto pasan los revisores (decisión del usuario, 7-nov-2026):
+  `private/dam/fixpub.sh` por misión (conserva ids y progreso); desde el Mac enlazado, con `NODE_USE_ENV_PROXY=1`.
+  Solo se publican fichas y preguntas; los libros de ILERNA nunca (regla 13).
 - Técnica por tipo de contenido y límites de longitud: `docs/ESTANDAR.md` §4. Si no hay una asociación defendible, no
   se inventa: se enseña con definición, ejemplo y contraste (D-060). **Una asociación mala es peor que ninguna.**
 - Toda pregunta tiene su respuesta enseñada y con ejemplo en la ficha de su unidad (ESTANDAR §3).
