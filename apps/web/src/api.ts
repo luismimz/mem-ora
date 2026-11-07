@@ -86,7 +86,7 @@ export interface SessionState {
   plan: AssocPlan;
   mission?: MissionRef;
   /** Ronda especial «Vacía tus fallos». */
-  focus?: 'fallos' | 'repaso';
+  focus?: 'fallos' | 'repaso' | 'mision';
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
