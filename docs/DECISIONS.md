@@ -1164,3 +1164,5 @@ inventario (`docs/INVENTARIO.md`, sección 9; el número entre corchetes es el d
   repasos de más prioridad; las recién aprendidas vuelven a vencer enseguida (1 h, 3 h…) y ocupaban siempre esos huecos.
   Las demás no llegaban nunca. Además, «Todas» no podía dar más de lo que dejaba ese tope.
 - Ahora: todas las palabras cuyo «recordar» ha vencido, ordenadas por menos intentos y, a igualdad, por la que más espera.
+
+- **7-nov-2026 · Publicar DAM.** El usuario autoriza a Claude a publicar en producción el contenido DAM ya revisado (0 avisos), sin esperarle. Los libros siguen sin copiarse.
