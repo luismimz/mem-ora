@@ -1444,3 +1444,4 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .week-facts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .45rem; }
 .week-facts li { display: grid; grid-template-columns: auto 1fr; column-gap: .5rem; align-items: baseline; }
 .week-facts small { grid-column: 2; opacity: .75; }
+.memory-map-hint { margin: .4rem 0 0; font-size: .75rem; opacity: .8; }

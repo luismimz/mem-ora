@@ -554,6 +554,11 @@ describe('repaso rápido por curva (D-094)', () => {
     expect(rounds.flatMap((s) => s.arcadeUnits)).toEqual(many);
     expect(rounds[1]!.arcadeRecall).toEqual(['w30']);
     expect(new Set(rounds.map((s) => s.id)).size).toBe(3);
+    // 7-nov-2026: tras cada tanda, 5 de sus palabras se escriben sin pistas (para poder llegar a «aprendida»).
+    const writes = p.steps.filter((s) => s.kind === 'review' && s.id.startsWith('0-escribe'));
+    expect(writes.length).toBe(5 + 5 + 5);
+    expect(p.steps.indexOf(writes[0]!)).toBeGreaterThan(p.steps.indexOf(rounds[0]!));
+    expect(p.steps.indexOf(writes[0]!)).toBeLessThan(p.steps.indexOf(rounds[1]!));
   });
 });
 

@@ -134,7 +134,8 @@ export interface SessionState {
   /** Misión de la sesión: solo entra contenido nuevo de ella (los repasos vencidos, de todo el curso). */
   mission?: MissionRef;
   /** Ronda especial: «fallos» = solo los fallos pendientes («Vacía tus fallos»). */
-  focus?: 'fallos' | 'repaso';
+  /** 'mision': repaso de una misión ya hecha (7-nov-2026); nunca se retoma ni cuenta como «dónde sigues». */
+  focus?: 'fallos' | 'repaso' | 'mision';
   index: number;
   outcomes: Record<string, { correct: boolean; hint: number; expected?: string }>;
   finished: boolean;
@@ -378,7 +379,14 @@ export default {
       // Repaso rápido NO se retoma; se rehace con el orden de menos a más practicado. Antes se reabría la misma lista una
       // y otra vez (el índice no avanza hasta acabar la ráfaga).
       const atReview = atReviewStep(savedState);
-      if (reviewMax === null && !wantReview && !atReview && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
+      // 7-nov-2026: «Seguir aprendiendo» no retoma una ronda de una misión ya completada (salía «Primeros pasos»).
+      const savedMissionDone = !wanted && savedState?.mission ? await (async () => {
+        const m = missions.find((x) => x.key === savedState.mission!.key);
+        if (!m) return false;
+        const p = missionProgress(missions, catalog, await learnerFor(userId, course.id));
+        return m.units.every((u) => p.worked.has(u));
+      })() : false;
+      if (reviewMax === null && !wantReview && !atReview && !savedMissionDone && savedState?.focus !== 'mision' && savedState && sameMission && sameMode && savedState.plan.day === today && !savedState.finished && savedState.plan.steps.every((s: { unitKey: string }) => !s.unitKey || units[s.unitKey])) {
         return { data: { state: savedState, units, resumed: true, unitStats: unitStatsOf(await learnerFor(userId, course.id), savedState.plan.steps) } };
       }
       const learner = await learnerFor(userId, course.id);
@@ -420,7 +428,7 @@ export default {
         const lang = isLanguageCourse(course);
         const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: keys.length,
           errorUnits: [], practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && lang });
-        const state: SessionState = { plan: session, mission: missionRef(missions, chosen.key)!, index: 0, outcomes: {}, finished: session.steps.length === 0 };
+        const state: SessionState = { plan: session, mission: missionRef(missions, chosen.key)!, focus: 'mision', index: 0, outcomes: {}, finished: session.steps.length === 0 };
         await savePosition(userId, course.id, state, null);
         return { data: { state, units, resumed: false, unitStats: unitStatsOf(learner, state.plan.steps) } };
       }
@@ -591,7 +599,7 @@ export default {
       const saved = await db('session_positions').where({ user: userId, course: course.id }).first('state');
       const state: SessionState | null = saved ? parse(saved.state) : null;
       const today = dayOf(Date.now(), config.load.dayOriginMs, config.load.dayLengthMs);
-      const resume = state && !state.finished && state.plan.day === today && state.mission && list.some((m) => m.key === state.mission!.key) ? state.mission.key : null;
+      const resume = state && !state.finished && state.focus !== 'mision' && state.plan.day === today && state.mission && list.some((m) => m.key === state.mission!.key && m.status !== 'done') ? state.mission.key : null;
       // Cuántas nuevas trae la sesión de hoy (rampa D-057): la ya empezada manda; si no, la rampa según los aciertos.
       const target = Math.max(1, Number(course.new_per_session) || 15);
       const startedNew = resume && state ? new Set(state.plan.steps.filter((x: { kind: string; unitKey: string }) => x.kind === 'card' && x.unitKey).map((x: { unitKey: string }) => x.unitKey)).size : 0;

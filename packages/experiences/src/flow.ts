@@ -168,6 +168,8 @@ export const FLOW_ARCADE_MIN = 6;
 export const FLOW_PLAN_VERSION = 99;
 /** Repaso rápido (D-094): como mucho estas palabras por ronda; las demás vencidas, en la siguiente. */
 export const FLOW_REVIEW_ARCADE_MAX = 25;
+/** Palabras de cada tanda de repaso que se escriben sin pistas (7-nov-2026). */
+export const FLOW_REVIEW_WRITE = 5;
 export const FLOW_ARCADE_CHANCE = 0.5;
 /** No sale antes de esta tarjeta de la ronda (primero se aprende algo). */
 export const FLOW_ARCADE_AFTER = 4;
@@ -491,11 +493,20 @@ export function buildFlowSession(input: {
     // sola ráfaga de 57; al salir a medias no se guardaba nada y volvían las mismas).
     const chunks: string[][] = [];
     for (let k = 0; k < review.length; k += FLOW_REVIEW_ARCADE_MAX) chunks.push(review.slice(k, k + FLOW_REVIEW_ARCADE_MAX).map((r) => r.unitKey));
-    chunks.reverse().forEach((c, j) => {
+    // 7-nov-2026 (usuario: «0 aprendidas» con 300 palabras): elegir entre opciones nunca demuestra recordar SIN AYUDA,
+    // así que ninguna palabra llegaba a «aprendida» (regla 9). Tras cada tanda, FLOW_REVIEW_WRITE de sus palabras se
+    // escriben sin pistas: eso sí cuenta (y, hecho otro día, las sube a aprendidas).
+    const front: AssocStep[] = [];
+    chunks.forEach((c, j) => {
       const mine = recall.filter((k) => c.includes(k));
-      const n = chunks.length - j;
-      steps.unshift({ kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: c, arcadeReview: true, ...(mine.length ? { arcadeRecall: mine } : {}), id: n === 1 ? '0-repaso' : `0-repaso-${n}` });
+      const n = j + 1;
+      front.push({ kind: 'arcade', unitKey: '', scene: -4, arcadeUnits: c, arcadeReview: true, ...(mine.length ? { arcadeRecall: mine } : {}), id: n === 1 ? '0-repaso' : `0-repaso-${n}` });
+      c.filter((k) => units[k]!.type === 'term').slice(0, FLOW_REVIEW_WRITE).forEach((k, i) => {
+        const rc = units[k]!.skills.find((x) => x.kind === 'recall');
+        if (rc) front.push({ kind: 'review', unitKey: k, scene: -4, skillKey: rc.key, startHint: 0, id: `0-escribe-${n}-${i}` });
+      });
     });
+    steps.unshift(...front);
   } else if (arcadePool.length >= FLOW_ARCADE_MIN && steps.length >= FLOW_ARCADE_AFTER && rand() < FLOW_ARCADE_CHANCE) {
     const judge = shuffle((input.arcadeUnits ?? []).filter(has).flatMap((k) => judgeableExamples(units[k]!).map((example) => ({ unitKey: k, example }))), rand)
       .slice(0, FLOW_ARCADE_GRAMMAR).map((g) => ({ ...g, wrong: rand() < 0.5 }));

@@ -305,7 +305,7 @@ export function App() {
                   {flowCourse && prog ? (
                     // Repasar a voluntad (5-nov-2026): el contador se toca y abre una ronda con TODO lo acumulado.
                     <li className="today-tap"><button type="button" disabled={(isLanguage(current) ? dueWords : dueUnits) === 0} onClick={() => go({ name: 'session', course: current.id, focus: 'repaso' })}>
-                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? (dueWords === 1 ? 'palabra para repasar' : 'palabras para repasar') : dueUnits === 1 ? 'concepto por repasar' : 'conceptos por repasar'}</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>{wordTier ? `Empieza por las ${wordTier.count} con ${wordTier.min} ${wordTier.min === 1 ? 'acierto' : 'aciertos'} →` : 'Repasar ahora →'}</em>}
+                      <b>{isLanguage(current) ? dueWords : dueUnits}</b><span>🔁 {isLanguage(current) ? (dueWords === 1 ? 'palabra para repasar' : 'palabras para repasar') : dueUnits === 1 ? 'concepto por repasar' : 'conceptos por repasar'}</span>{(isLanguage(current) ? dueWords : dueUnits) > 0 && <em>{wordTier ? (wordTier.count === 1 ? `Empieza por la que tiene ${wordTier.min} ${wordTier.min === 1 ? 'acierto' : 'aciertos'} →` : `Empieza por las ${wordTier.count} con ${wordTier.min} ${wordTier.min === 1 ? 'acierto' : 'aciertos'} →`) : 'Repasar ahora →'}</em>}
                     </button></li>
                   ) : <li><b>{due ?? '—'}</b><span>🔁 {due === 1 ? 'repaso' : 'repasos'} pendientes</span></li>}
                   <li className={prog?.today && prog.today.newUnits >= prog.today.goal ? 'goal-done' : ''}><b>{prog?.today ? `${prog.today.newUnits}/${prog.today.goal}` : '—'}</b><span>🎯 meta de hoy</span></li>
@@ -850,6 +850,7 @@ function MemoryMap({ units, words }: { units: Array<{ key: string; level: string
       <div className="memory-map-row">
         {cells.map((c) => <div key={c.k} className={`memory-cell m-${c.k}`}><b>{c.v}</b><span>{c.label}</span><small>{c.why}</small></div>)}
       </div>
+      {n('none') > 0 && n('learned') + n('stable') + n('mastered') === 0 && <p className="memory-map-hint">💡 Una palabra pasa a <b>aprendida</b> cuando la escribes bien sin ayuda un día distinto al que la conociste. En cada repaso te pido escribir 5.</p>}
     </section>
   );
 }
