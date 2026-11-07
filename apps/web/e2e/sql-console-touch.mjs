@@ -15,6 +15,12 @@ try {
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(String(e)));
+  // La cuenta (servidor) simulada: lo que se guarda con PUT es lo que devuelve GET.
+  let stored = null; let puts = 0;
+  await page.route('**/memora/sandbox', async (route) => {
+    if (route.request().method() === 'PUT') { stored = route.request().postDataJSON().b64; puts++; return route.fulfill({ json: { data: { saved: true } } }); }
+    return route.fulfill({ json: { data: { b64: stored } } });
+  });
   await page.goto(url);
   await page.waitForSelector('.sql-input');
   await page.waitForFunction(() => !document.querySelector('.sql-actions .option')?.hasAttribute('disabled'));
@@ -24,11 +30,13 @@ try {
   await page.waitForTimeout(300);
   const out = await page.locator('.sql-out').textContent();
   check(/Orbea/.test(out ?? '') && /Trek/.test(out ?? ''), `ejecuta MySQL de verdad: ${out?.slice(0, 40)}`);
+  check(puts > 0, `se guarda en tu cuenta (${puts} guardados)`);
+  await page.evaluate(() => localStorage.clear());
   await page.reload();
   await page.waitForSelector('.sql-table h3');
   const tabla = await page.locator('.sql-table h3').first().textContent();
   const filas = await page.locator('.sql-table tbody tr').count();
-  check(tabla === 'bici' && filas === 2, `al volver, tu tabla sigue ahí (${tabla}, ${filas} filas)`);
+  check(tabla === 'bici' && filas === 2, `al volver (sin nada en el móvil), tu tabla sigue ahí: viene de tu cuenta (${tabla}, ${filas} filas)`);
   await page.locator('.sql-input').tap();
   await page.keyboard.insertText('SELECT * FROM moto;');
   await page.locator('.sql-actions .primary').tap();

@@ -411,6 +411,19 @@ export default {
         return { data: { state, units, resumed: false, unitStats: unitStatsOf(learner, state.plan.steps) } };
       }
       const progress = missionProgress(missions, catalog, learner);
+      // 7-nov-2026 (usuario: «si quiero repasar una misión en concreto, me salta la última»): elegir una misión YA
+      // trabajada vuelve a abrir SU contenido (fichas y retos de sus unidades, en su orden), en vez de una ronda general.
+      const chosen = wanted ? missions.find((m) => m.key === wanted) : undefined;
+      if (chosen && modes.includes('flow') && chosen.units.every((u) => progress.worked.has(u))) {
+        const keys = chosen.units.filter((k) => units[k]);
+        const items: PlanItem[] = keys.flatMap((k) => catalog.skills.filter((sk) => sk.unitId === k).map((sk) => ({ skillId: sk.id, unitId: k, reason: 'new' as const, priority: 0, recommendedHint: 0 as const })));
+        const lang = isLanguageCourse(course);
+        const session = buildFlowSession({ sessionId: randomUUID(), courseId: course.id, day: today, createdAt: now, items, units, maxNewUnits: keys.length,
+          errorUnits: [], practiceUnits: [], levels: reviewHelp(learner), audio: course.audio_enabled !== false && lang });
+        const state: SessionState = { plan: session, mission: missionRef(missions, chosen.key)!, index: 0, outcomes: {}, finished: session.steps.length === 0 };
+        await savePosition(userId, course.id, state, null);
+        return { data: { state, units, resumed: false, unitStats: unitStatsOf(learner, state.plan.steps) } };
+      }
       const target = wanted ?? progress.current?.key ?? null;
       const focus = missions.find((m) => m.key === target);
       // Solo entra contenido nuevo de la misión; los repasos vencidos llegan de todo lo ya trabajado.
@@ -699,6 +712,35 @@ export default {
       const r = await resetProgress(db, userId, course.id, saveBackup);
       logger.info(`[memora-api] empezar de cero: ${course.key}, ${r.events} eventos (copia ${r.backup})`);
       return { data: { events: r.events } };
+    }));
+
+    // «Tu base de datos» (7-nov-2026, usuario: «¿por qué se guarda en el móvil? Yo no he dicho que sea así»): la base
+    // SQLite del alumno se guarda en su cuenta, como un archivo privado en Directus (sin cambiar el esquema). Solo la lee
+    // y la escribe su dueño (la API filtra por su id; los archivos no son públicos).
+    const SANDBOX_MAX_B64 = 700_000;
+    const sandboxTitle = (userId: string) => `memora-sandbox:${userId}`;
+    router.get('/sandbox', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const row = await db('directus_files').where({ title: sandboxTitle(userId) }).orderBy('uploaded_on', 'desc').first('id');
+      if (!row) return { data: { b64: null } };
+      const assets = new services.AssetsService({ schema: await getSchema() });
+      const { stream } = await assets.getAsset(row.id, { transformationParams: {} });
+      const chunks: Buffer[] = [];
+      for await (const c of stream) chunks.push(Buffer.from(c));
+      const parsed = JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}');
+      return { data: { b64: typeof parsed.b64 === 'string' ? parsed.b64 : null } };
+    }));
+    router.put('/sandbox', wrap(async (req) => {
+      const userId = req.accountability.user;
+      const b64 = req.body?.b64;
+      if (typeof b64 !== 'string' || b64.length > SANDBOX_MAX_B64 || !/^[A-Za-z0-9+/=]*$/.test(b64)) throw new HttpError(400, 'BAD_REQUEST', 'Base de datos no válida o demasiado grande.');
+      const { Readable } = await import('node:stream');
+      const files = new services.FilesService({ schema: await getSchema() });
+      const row = await db('directus_files').where({ title: sandboxTitle(userId) }).first('id');
+      const data = { title: sandboxTitle(userId), filename_download: `mi-base-de-datos-${userId}.json`, type: 'application/json', storage: 'local' };
+      const body = Readable.from([JSON.stringify({ b64, savedAt: Date.now() })]);
+      if (row) await files.uploadOne(body, data, row.id); else await files.uploadOne(body, data);
+      return { data: { saved: true } };
     }));
 
     // «Explícame más» (D-077): el alumno pide más explicación de una ficha; queda anotado para ampliarla en Studio.

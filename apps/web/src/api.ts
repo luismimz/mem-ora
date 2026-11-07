@@ -177,6 +177,9 @@ export const api = {
     request<{ saved: boolean }>('PUT', '/memora/session/position', { course, ...body }),
   progress: (course: string) => request<Progress>('GET', `/memora/progress?course=${encodeURIComponent(course)}`),
   /** Empezar de cero en un curso (D-082): borra el progreso del alumno en ese curso, con copia previa. */
+  /** «Tu base de datos» (7-nov-2026): se guarda en tu cuenta. */
+  sandbox: () => request<{ b64: string | null }>('GET', '/memora/sandbox'),
+  saveSandbox: (b64: string) => request<{ saved: boolean }>('PUT', '/memora/sandbox', { b64 }),
   resetProgress: (course: string, confirm: string) => request<{ events: number }>('POST', '/memora/reset', { course, confirm }),
   pushKey: () => request<{ publicKey: string | null }>('GET', '/memora/push/key'),
   pushSubscribe: (subscription: unknown, deviceId: string) => request<{ saved: boolean }>('POST', '/memora/push/subscribe', { subscription, deviceId }),

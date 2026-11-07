@@ -63,24 +63,19 @@ try {
   await page.waitForSelector('.fails-btn');
 
   const states = await page.$$eval('.mission', (els) => els.map((e) => ({ cls: e.className, state: e.querySelector('.mission-state')?.textContent ?? '' })));
-  check(states[0].cls.includes('fading') && states[0].state.startsWith('REPASAR · 4'), `la misión completada que se olvida sale «por repasar» (${states[0].state})`);
-  check(states[1].state.includes('CONTINUAR') && !states[1].cls.includes('fading'), 'la misión actual dice «continuar»');
+  // 7-nov-2026: sin «por repasar» (confundía); una completada dice «REPASARLA →» y se puede abrir.
+  check(states[0].cls.includes('done') && states[0].state.startsWith('REPASARLA'), `la misión completada se puede repasar (${states[0].state})`);
+  check(states[1].state.includes('CONTINUAR'), 'la misión actual dice «continuar»');
   check(states[2].cls.includes('pending') && states[2].state === 'PENDIENTE', 'la misión sin empezar sale pendiente');
   const legend = await page.$eval('.missions-legend', (e) => e.textContent ?? '');
-  check(legend.includes('1 por repasar') && legend.includes('1 completada') && !legend.includes('1 completadas'), `la leyenda cuenta lo que hay que repasar (${legend})`);
+  check(!legend.includes('por repasar') && legend.includes('1 completada') && !legend.includes('1 completadas'), `la leyenda: completadas, en curso y pendientes (${legend})`);
 
-  // Tu constancia: 84 días en 12 columnas de semana, hoy en su fila, y logros honestos (memoria, mejor racha, misiones).
-  const cons = await page.$eval('.constancy', (e) => {
-    const cells = [...e.querySelectorAll('.cal i')];
-    const today = e.querySelector('.cal .cal-today');
-    const row = Math.round((today.getBoundingClientRect().top - cells[0].getBoundingClientRect().top) / (cells[1].getBoundingClientRect().top - cells[0].getBoundingClientRect().top));
-    return { days: e.querySelectorAll('.cal i:not(.cal-pad)').length, row, right: Math.round(e.getBoundingClientRect().right), tracks: [...e.querySelectorAll('.tracks li')].map((l) => l.textContent) };
-  });
-  const wd = (new Date().getDay() + 6) % 7;
-  check(cons.days === 84 && cons.row === wd && cons.right <= 390, `el calendario tiene 12 semanas y hoy cae en su día de la semana (fila ${cons.row}, esperado ${wd})`);
-  check(cons.tracks[0].includes('10 palabras en tu memoria') && cons.tracks[0].includes('faltan 38') && cons.tracks[0].includes('1/6'), `memoria: cuenta solo lo aprendido (12 de 20) → ${cons.tracks[0]}`);
-  check(cons.tracks[1].includes('7 días seguidos') && cons.tracks[1].includes('2/5') && cons.tracks[1].includes('faltan 11'), `racha: el logro con la mejor (8); lo que falta, desde la actual (3) → ${cons.tracks[1]}`);
-  check(cons.tracks[2].includes('1 misión completada'), `misiones → ${cons.tracks[2]}`);
+  // Tu semana: 7 días (L…D) con hoy marcado, la racha (actual y mejor) y las misiones completadas.
+  const cons = await page.$eval('.constancy', (e) => ({ days: [...e.querySelectorAll('.wday small')].map((d) => d.textContent).join(''), today: e.querySelectorAll('.wday.today').length, right: Math.round(e.getBoundingClientRect().right), facts: [...e.querySelectorAll('.week-facts li')].map((l) => l.textContent) }));
+  check(cons.days === 'LMXJVSD' && cons.today === 1 && cons.right <= 390, `tu semana: ${cons.days}, hoy marcado`);
+  check(/3 días seguidos/.test(cons.facts[0] ?? '') && /mejor racha: 8/.test(cons.facts[0] ?? ''), `racha: ${cons.facts[0]}`);
+  check(/1 misión completada/.test(cons.facts[1] ?? ''), `misiones: ${cons.facts[1]}`);
+  check(await page.locator('.flight-card, .card-panel:has-text("Sin conexión")').count() === 0, 'Inicio sin el bloque «Sin conexión»');
 
   // Barra superior y modos: con Studio (cuenta de autoría) todo cabe en una línea; en un curso con Flujo no hay
   // selector de modos ni contadores de modos bloqueados (Arcade, Chat, truco).
