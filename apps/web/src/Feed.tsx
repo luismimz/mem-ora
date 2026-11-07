@@ -1458,6 +1458,13 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
   // Los tiempos de esta partida, con su línea y sus pistas: así se sabe QUÉ es «presente simple» antes de pedirlo
   // (usuario, 29-oct: «es raro haber enseñado el presente simple sin saber que lo era»).
   const tenses = useMemo(() => [...new Map(items.map((it) => [it.u.key, it.u])).values()], [items]);
+  // 7-nov-2026 (usuario: «me confunde que mezcles continuo y simple o continuo»): si sale una tarjeta que COMPARA dos
+  // tiempos («Presente simple o continuo»), no se repite aparte uno de esos tiempos («Presente continuo»).
+  const cheat = useMemo(() => {
+    const words = (u: SessionUnit) => tenseOf(u).toLowerCase().split(/\s+/).filter((w) => w.length > 1);
+    const contrasts = tenses.filter((u) => / o /i.test(tenseOf(u)));
+    return tenses.filter((u) => contrasts.includes(u) || !contrasts.some((c) => words(u).every((w) => words(c).includes(w))));
+  }, [tenses]);
   // Al fallar: qué tiempo sería la forma elegida y qué pista haría falta (si es la respuesta de otra frase del juego).
   // Si la forma no es respuesta de ninguna frase, se deduce por su forma («rains» → presente simple, «played» → pasado).
   const shapeKey = (form: string) => {
@@ -1489,7 +1496,7 @@ function TenseGame({ unit, all, drills, route, seed, onAnswer, onDone }: {
         <h2 className="ask">Cada tiempo tiene sus pistas</h2>
         <p className="tense-how">Vas a ver frases con un hueco. Busca la <b>pista</b> (every day, yesterday, now…): ella te dice qué tiempo usar. Aquí tienes cada tiempo, cuándo se usa y sus pistas traducidas.</p>
         <div className="tense-cheat">
-          {tenses.map((u) => {
+          {cheat.map((u) => {
             const pp = u.payload as PatternPayload;
             return (
               <div key={u.key} className="tense-cheat-row">

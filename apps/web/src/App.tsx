@@ -373,7 +373,6 @@ export function App() {
           </div>
           </>}
           {current && !isMem && !isLanguage(current) && (current.modes as string[]).includes('flow') && <ExamCard stats={prog?.exam} onOpen={(guided) => go({ name: 'exam', course: current.id, ...(guided ? { guided: true } : {}) })} />}
-          {current && !isMem && <FlightCard course={current} onOpen={() => go({ name: 'offline' })} />}
           {enabled.length > 1 && <p className="hint">Puedes cambiar el modo por defecto en <button type="button" className="link" onClick={() => go({ name: 'profile' })}>tu perfil</button>.</p>}
         </section>
       </div>
@@ -396,7 +395,6 @@ function TopBar({ me, staff, active, onNav }: { me: Me | null; staff: boolean; a
       <button type="button" className="logo" aria-label="Memora · ir a Inicio" onClick={() => onNav('home')}>M</button>
       <nav aria-label="Principal" className="nav">
         {link('home', 'Inicio')}
-        {link('offline', 'Sin conexión')}
         {staff && link('studio', 'Studio')}
       </nav>
       <button type="button" className={`avatar ${active === 'profile' ? 'on' : ''}`} aria-current={active === 'profile' ? 'page' : undefined} aria-label={`Tu perfil (${name})`} onClick={() => onNav('profile')}>
@@ -587,8 +585,6 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
   const done = list.filter((m) => m.status === 'done').length;
   const active = list.filter((m) => m.status === 'active').length;
   const pending = list.length - done - active;
-  // Cuarto estado: lo ya trabajado que se está olvidando («conviene repasar»).
-  const review = list.filter((m) => m.status !== 'pending' && (m.due ?? 0) > 0).length;
   const clean = (t: string) => t.replace(/^Misión \d+ · /, '');
   return (
     <section className="missions" aria-label="Misiones">
@@ -598,7 +594,6 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
           <li className="done">{done} {done === 1 ? 'completada' : 'completadas'}</li>
           <li className="active">{active} en curso</li>
           <li className="pending">{pending} {pending === 1 ? 'pendiente' : 'pendientes'}</li>
-          {review > 0 && <li className="review">{review} por repasar</li>}
         </ul>
       </div>
       <i className="missions-total" aria-hidden="true"><i style={{ width: `${(done / list.length) * 100}%` }} /></i>
@@ -606,14 +601,16 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
         {list.map((m) => {
           const isCurrent = m.key === current;
           const pct = m.total ? Math.round((m.worked / m.total) * 100) : 0;
-          const fading = m.status !== 'pending' && (m.due ?? 0) > 0;
+          // 7-nov-2026: sin cuarto estado «por repasar» (confundía: las completadas también salían «por repasar»). Una
+          // completada se toca para volver a ver su contenido.
+          const fading = false;
           return (
             <li key={m.key}>
               <button type="button" className={`mission ${m.status} ${fading ? 'fading' : ''} ${isCurrent ? 'current' : ''}`} onClick={() => onOpen(m.key)}
-                aria-label={`Misión ${m.index}: ${clean(m.title)}. ${m.status === 'done' ? 'Completada' : m.status === 'active' ? `En curso, ${m.worked} de ${m.total}` : 'Pendiente'}${fading ? `. Conviene repasar ${m.due}` : ''}`}>
+                aria-label={`Misión ${m.index}: ${clean(m.title)}. ${m.status === 'done' ? 'Completada; tócala para repasar su contenido' : m.status === 'active' ? `En curso, ${m.worked} de ${m.total}` : 'Pendiente'}`}>
                 <span className="mission-top">
                   <span className="mission-n">{m.status === 'done' ? '✓' : m.index}</span>
-                  <span className="mission-state">{isCurrent ? 'CONTINUAR →' : fading ? `REPASAR · ${m.due}` : m.status === 'done' ? 'COMPLETADA' : m.status === 'active' ? 'EN CURSO' : 'PENDIENTE'}</span>
+                  <span className="mission-state">{isCurrent ? 'CONTINUAR →' : m.status === 'done' ? 'REPASARLA →' : m.status === 'active' ? 'EN CURSO' : 'PENDIENTE'}</span>
                 </span>
                 <b>{clean(m.title)}</b>
                 <span className="mission-foot">
@@ -634,49 +631,30 @@ function Missions({ list, current, onOpen }: { list: Mission[]; current: string 
  * memoria cuentan solo lo que ya está en tu memoria a largo plazo (aprendido o más), no lo visto ni lo acertado al
  * elegir; los de racha usan tu mejor racha, para que no se pierdan si un día fallas.
  */
-const TRACKS: Array<{ id: string; ico: string; steps: number[]; label: (n: number, words: string) => string }> = [
-  { id: 'memory', ico: '🧠', steps: [10, 50, 100, 250, 500, 1000], label: (n, w) => `${n} ${w} en tu memoria` },
-  { id: 'streak', ico: '🔥', steps: [3, 7, 14, 30, 60], label: (n) => `${n} días seguidos` },
-  { id: 'missions', ico: '🗺️', steps: [1, 3, 5, 10, 17], label: (n) => `${n} ${n === 1 ? 'misión completada' : 'misiones completadas'}` },
-];
-function Constancy({ prog, missionsDone, words }: { prog: Progress; missionsDone: number; words: string }) {
+/**
+ * Tu semana (7-nov-2026, usuario: «no se entiende muy bien»): antes, un calendario de 12 semanas casi vacío y tres
+ * caminos de logros (uno decía «0/6 · faltan 10» porque «en tu memoria» exige recordarla sola otro día). Ahora: los 7
+ * días de esta semana, la racha y las misiones. Lo que hay en tu memoria ya lo cuenta «Tu memoria», arriba.
+ */
+const STREAK_STEPS = [3, 7, 14, 30, 60, 100];
+const DAYS = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+function Constancy({ prog, missionsDone }: { prog: Progress; missionsDone: number; words: string }) {
   const cal = prog.calendar ?? [];
-  const studied = cal.filter((n) => n > 0).length;
-  // Lunes = 0 … domingo = 6; la última celda (hoy) cae en su fila y las semanas van en columnas.
-  const today = (new Date().getDay() + 6) % 7;
-  const pad = (today - ((cal.length - 1) % 7) + 7) % 7;
-  const level = (n: number) => (n === 0 ? 0 : n < 10 ? 1 : n < 30 ? 2 : n < 60 ? 3 : 4);
-  // Logro conseguido: con la mejor racha. Lo que falta para el siguiente: con la racha de ahora (hay que encadenar días).
-  const value: Record<string, number> = { memory: prog.units.filter((u) => u.level !== 'none').length, streak: Math.max(prog.bestStreak ?? 0, prog.streak ?? 0), missions: missionsDone };
-  const now: Record<string, number> = { ...value, streak: prog.streak ?? 0 };
+  const today = (new Date().getDay() + 6) % 7; // lunes = 0
+  const week = DAYS.map((d, k) => ({ d, n: k <= today ? cal[cal.length - 1 - (today - k)] ?? 0 : null, today: k === today }));
+  const studied = week.filter((w) => (w.n ?? 0) > 0).length;
+  const streak = prog.streak ?? 0;
+  const best = Math.max(prog.bestStreak ?? 0, streak);
+  const next = STREAK_STEPS.find((x) => streak < x);
   return (
-    <section className="constancy" aria-label="Tu constancia">
-      <div className="constancy-head"><p className="eyebrow">TU CONSTANCIA</p><small>{studied} {studied === 1 ? 'día' : 'días'} estudiando en 12 semanas</small></div>
-      {cal.length > 0 && (
-        <div className="cal" role="img" aria-label={`Calendario: ${studied} días con estudio en las últimas 12 semanas`}>
-          {Array.from({ length: pad }, (_, i) => <i key={`p${i}`} className="cal-pad" />)}
-          {cal.map((n, i) => <i key={i} className={`cal-${level(n)} ${i === cal.length - 1 ? 'cal-today' : ''}`} title={`${n} respuestas`} />)}
-        </div>
-      )}
-      <ul className="tracks">
-        {TRACKS.map((t) => {
-          const v = value[t.id] ?? 0;
-          const got = t.steps.filter((x) => v >= x);
-          const next = t.steps.find((x) => v < x);
-          const prev = got[got.length - 1] ?? 0;
-          const cur = now[t.id] ?? v;
-          const base = t.id === 'streak' ? 0 : prev;
-          return (
-            <li key={t.id} className={got.length ? 'earned' : ''}>
-              <span className="track-ico" aria-hidden="true">{t.ico}</span>
-              <span className="track-body">
-                <b>{got.length ? t.label(prev, words) : `Primer logro: ${t.label(t.steps[0]!, words)}`}</b>
-                {next ? <><i className="track-bar"><i style={{ width: `${Math.round((Math.max(0, cur - base) / (next - base)) * 100)}%` }} /></i><small>{got.length ? `Siguiente logro: ${t.label(next, words)} · ` : ''}faltan {next - cur}</small></> : <small>¡Todos los logros de este camino! 🏆</small>}
-              </span>
-              <span className="track-n" aria-label={`${got.length} de ${t.steps.length} logros`}>{got.length}/{t.steps.length}</span>
-            </li>
-          );
-        })}
+    <section className="constancy" aria-label="Tu semana">
+      <div className="constancy-head"><p className="eyebrow">TU SEMANA</p><small>{studied} de {today + 1} {today ? 'días' : 'día'}</small></div>
+      <div className="week" role="img" aria-label={`Esta semana has estudiado ${studied} días`}>
+        {week.map((w) => <span key={w.d} className={`wday ${w.n === null ? 'future' : w.n > 0 ? 'on' : 'off'} ${w.today ? 'today' : ''}`}><b>{w.n === null ? '' : w.n > 0 ? '✓' : '·'}</b><small>{w.d}</small></span>)}
+      </div>
+      <ul className="week-facts">
+        <li>🔥 <b>{streak} {streak === 1 ? 'día' : 'días'} seguidos</b><small>{next ? `te faltan ${next - streak} para ${next}` : '¡increíble!'} · tu mejor racha: {best}</small></li>
+        <li>🗺️ <b>{missionsDone} {missionsDone === 1 ? 'misión completada' : 'misiones completadas'}</b><small>tócalas abajo para repasarlas</small></li>
       </ul>
     </section>
   );

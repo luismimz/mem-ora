@@ -1432,3 +1432,15 @@ button.mchip { border: 0; background: none; padding: 0; color: inherit; font: in
 .sql-console .sql-input { background: #fff; color: #222; border: 1px solid rgba(0, 0, 0, .2); border-radius: 12px; padding: .7rem; }
 .sql-reset { align-self: center; }
 @media (prefers-color-scheme: dark) { .sql-console .sql-input { background: #1e1e1e; color: #eee; border-color: rgba(255, 255, 255, .2); } }
+
+/* Tu semana (7-nov-2026) */
+.week { display: grid; grid-template-columns: repeat(7, 1fr); gap: .35rem; margin: .5rem 0 .7rem; }
+.wday { display: flex; flex-direction: column; align-items: center; gap: .15rem; padding: .45rem 0; border-radius: 12px; background: rgba(0, 0, 0, .05); }
+.wday b { font-size: 1.05rem; line-height: 1; min-height: 1.05rem; }
+.wday small { font-size: .7rem; opacity: .7; font-weight: 700; }
+.wday.on { background: #2f6b5b; color: #fff; }
+.wday.today { outline: 2px solid #8a5a3b; outline-offset: 1px; }
+.wday.future { opacity: .45; }
+.week-facts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .45rem; }
+.week-facts li { display: grid; grid-template-columns: auto 1fr; column-gap: .5rem; align-items: baseline; }
+.week-facts small { grid-column: 2; opacity: .75; }
